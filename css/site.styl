@@ -1,0 +1,210 @@
+@import "resets"
+@import "novara"
+
+
+// HEADER
+
+#header
+  background-image: url(../img/working/marble-cropped.jpg)
+
+#logo-nm
+  height: 55px
+  width: 55px
+
+
+// INDEX
+
+.post-title-index
+  margin-top: 0.5em
+  margin-bottom: 0.5em
+  width: 100%
+
+#pagination
+  margin: $margin-basic 0
+
+
+// HOME
+
+.home-wire
+  padding: $margin-basic 0
+  margin: $margin-basic 0
+
+.logo-wire
+  width: 90px
+  height: 2em
+  vertical-align: top
+
+.home-wire-post-grid
+  margin-top: $margin-basic
+
+
+// SINGLE POST
+
+.single-post-title
+  margin-bottom: $margin-small
+  width: 100%
+
+.single-post-sidebar-item
+  padding-bottom: $margin-small
+  margin-bottom: $margin-small
+
+.attachment-col8-related
+  margin-bottom: $margin-small
+
+.twitter-button-fix
+  vertical-align: top
+
+
+// PAGE
+
+.page_item
+  font-size: 2em
+  line-height: 1.35em
+  &:before
+    content: '\219D'
+    margin: 0 .5em
+
+// YOUTUBE EMBED
+
+.video-holder
+  position: relative
+  padding-top: 26px
+  padding-bottom: 56.25%
+  height: 0
+  overflow: hidden
+
+.youtube-player
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+// MEDIA QUERIES
+@media screen and (max-width: ($col * $cols)+($gutter * $cols))
+
+  $gutter = 16px
+  $margin-tiny = ($gutter/2)
+  $margin-small = $gutter
+  $margin-basic = ($gutter*3)
+  $margin-large = ($gutter*5)
+
+  #pagination
+    margin: $margin-basic 0
+
+  // HOME
+
+  .home-wire
+    padding: $margin-basic 0
+    margin: $margin-basic 0
+
+  .home-wire-post-grid
+    margin-top: $margin-basic
+
+  // SINGLE POST
+
+  .single-post-title
+    margin-bottom: $margin-small
+
+  .single-post-sidebar-item
+    padding-bottom: $margin-small
+    margin-bottom: $margin-small
+
+  .attachment-col8-related
+    margin-bottom: $margin-small
+
+@media screen and (max-width: 1152px)
+
+  $gutter = 12px
+  $margin-tiny = ($gutter/2)
+  $margin-small = $gutter
+  $margin-basic = ($gutter*3)
+  $margin-large = ($gutter*5)
+
+ #pagination
+    margin: $margin-basic 0
+
+  // HOME
+
+  .home-wire
+    padding: $margin-basic 0
+    margin: $margin-basic 0
+
+  .home-wire-post-grid
+    margin-top: $margin-basic
+
+  // SINGLE POST
+
+  .single-post-title
+    margin-bottom: $margin-small
+
+  .single-post-sidebar-item
+    padding-bottom: $margin-small
+    margin-bottom: $margin-small
+
+  .attachment-col8-related
+    margin-bottom: $margin-small
+
+@media screen and (max-width: 912px)
+
+  $gutter = 8px
+  $margin-tiny = ($gutter/2)
+  $margin-small = $gutter
+  $margin-basic = ($gutter*3)
+  $margin-large = ($gutter*5)
+
+  #pagination
+    margin: $margin-basic 0
+
+  // HOME
+
+  .home-wire
+    padding: $margin-basic 0
+    margin: $margin-basic 0
+
+  .home-wire-post-grid
+    margin-top: $margin-basic
+
+  // SINGLE POST
+
+  .single-post-title
+    margin-bottom: $margin-small
+
+  .single-post-sidebar-item
+    padding-bottom: $margin-small
+    margin-bottom: $margin-small
+
+  .attachment-col8-related
+    margin-bottom: $margin-small
+
+  .twitter-button-fix
+    margin-top: $margin-tiny
+
+@media screen and (max-width: 696px)
+
+  $gutter = 8px
+  $margin-tiny = ($gutter/2)
+  $margin-small = $gutter
+  $margin-basic = ($gutter*3)
+  $margin-large = ($gutter*5)
+
+  // HOME
+
+  .home-wire .container
+    max-width: 355px
+
+  .home-wire-header
+    margin-top: $margin-basic
+
+  .home-wire-post-grid
+    margin-top: $margin-basic
+
+  #single-post-related-posts
+    max-width: 366px
+    margin: 0 auto
+
+  .related-post
+    max-width: 366px
+
+  .twitter-button-fix
+    margin-top: 0
