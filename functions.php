@@ -1,15 +1,11 @@
 <?php
 function my_scripts_method() {
-
     $templateuri = get_template_directory_uri() . '/js/';
-
     $jslib = $templateuri."lib.js";
     wp_enqueue_script( 'jslib', $jslib,'','',true);
     $myscripts = $templateuri."my.min.js";
     wp_enqueue_script( 'myscripts', $myscripts,'','',true);
-
     wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/css/site.css' );
-
 }
 add_action('wp_enqueue_scripts', 'my_scripts_method');
 
