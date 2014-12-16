@@ -9,7 +9,7 @@
           <li><a href="<?php echo home_url('index/'); ?>">Index</a></li>
           <li><a href="https://twitter.com/novaramedia">Twitter</a></li>
           <li><a href="https://www.facebook.com/pages/NovaraMedia/404716342902872">Facebook</a></li>
-          <li><a href="https://www.youtube.com/channel/UCOzMAa6IhV6uwYQATYG_2kg">Youtube</a></li>
+          <li><a href="https://www.youtube.com/channel/UCOzMAa6IhV6uwYQATYG_2kg">YouTube</a></li>
           <li><a href="http://novaramedia.tumblr.com/">Tumblr</a></li>
           <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
           <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
