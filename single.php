@@ -3,7 +3,7 @@ $meta = get_post_meta($post->ID);
 $cats = get_the_category();
 $cat = array_shift($cats);
 $type = $cat->slug;
-if($type === 'txt') {
+if($type == 'txt') {
   header("HTTP/1.1 301 Moved Permanently");
   header("Location: ".$meta['_cmb_redirect'][0]);
 }
@@ -52,6 +52,14 @@ if (!empty($meta['_cmb_sc'][0])) {
     				</div>
 <?php
   }
+}
+
+if($type == 'txt') {
+?>
+            <div class="font-serif font-readable">
+              <?php the_content(); ?>
+            </div>
+<?php
 }
 ?>
         </div>
@@ -149,7 +157,11 @@ if (!empty($meta['_cmb_utube_2'][0])) {
 ?>
 
           <div class="single-post-sidebar-item">
-            <?php the_content(); ?>
+            <?php
+              if($type != 'txt') {
+                the_content();
+              }
+            ?>
           </div>
 
         </div>
