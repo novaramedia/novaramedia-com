@@ -7,6 +7,10 @@ if($type === 'txt') {
   header("HTTP/1.1 301 Moved Permanently");
   header("Location: ".$meta['_cmb_redirect'][0]);
 }
+if(!empty($meta['_cmb_redirect'][0])) {
+  header("HTTP/1.1 301 Moved Permanently");
+  header("Location: ".$meta['_cmb_redirect'][0]);
+}
 get_header();
 ?>
 
