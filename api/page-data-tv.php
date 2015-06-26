@@ -13,8 +13,11 @@ $page_raw = $_GET['page'];
   if (is_numeric($page_raw)) {
   	$page = filter_var($page_raw, FILTER_SANITIZE_NUMBER_INT);
   } else {
-  	header("Content-type: application/json");
-  	die(json_encode(array('error' => 'badly formed request')));
+  	header('content-type: application/json; charset=utf-8');
+  	$json = json_encode(array('error' => 'badly formed request'));
+  	echo isset($_GET['callback'])
+      ? "{$_GET['callback']}($json)"
+      : $json;
   }
 
 }
@@ -36,15 +39,18 @@ $args = array(
 $the_query = new WP_Query($args);
 
 if ($the_query->post_count === 0) {
-	header("Content-type: application/json");
 	$output = array(
 		'site_url' => site_url(),
-		'media' => 'tv',
+		'channel' => 'tv',
 		'page' => $page,
 		'error' => true,
 		'posts' => 'no posts'
 		);
-	die(json_encode($output));
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode($output);
+  echo isset($_GET['callback'])
+    ? "{$_GET['callback']}($json)"
+    : $json;
 } else {
 
   $posts = array();

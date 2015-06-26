@@ -19,15 +19,19 @@ $args = array(
 $the_query = new WP_Query($args);
 
 if ($the_query->post_count === 0) {
-	header("Content-type: application/json");
 	$output = array(
 		'site_url' => site_url(),
-		'media' => 'fm',
+		'channel' => 'fm',
 		'page' => $page,
 		'error' => true,
 		'posts' => 'no posts'
 		);
-	die(json_encode($output));
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode($output);
+  echo isset($_GET['callback'])
+    ? "{$_GET['callback']}($json)"
+    : $json;
+
 } else {
 
   $posts = array();

@@ -13,8 +13,11 @@ if (!empty($_GET['id'])) {
 	if (is_numeric($id_raw)) {
 		$id = filter_var($id_raw, FILTER_SANITIZE_NUMBER_INT);
 	} else {
-		header("Content-type: application/json");
-		die(json_encode(array('error' => 'badly formed request')));
+  	header('content-type: application/json; charset=utf-8');
+  	$json = json_encode(array('error' => 'badly formed request'));
+  	echo isset($_GET['callback'])
+      ? "{$_GET['callback']}($json)"
+      : $json;
 	}
 
 } else if (!empty($_GET['permalink'])) {
@@ -24,15 +27,21 @@ if (!empty($_GET['id'])) {
 
 } else {
 
-	header("Content-type: application/json");
-	die(json_encode(array('error' => 'badly formed request')));
+	header('content-type: application/json; charset=utf-8');
+	$json = json_encode(array('error' => 'badly formed request'));
+	echo isset($_GET['callback'])
+    ? "{$_GET['callback']}($json)"
+    : $json;
 
 }
 
 if (empty($id)) {
 
-	header("Content-type: application/json");
-	die(json_encode(array('error' => 'badly formed request')));
+	header('content-type: application/json; charset=utf-8');
+	$json = json_encode(array('error' => 'badly formed request'));
+	echo isset($_GET['callback'])
+    ? "{$_GET['callback']}($json)"
+    : $json;
 
 }
 
@@ -98,8 +107,11 @@ if ($reqpost) {
 
 } else {
 
-	header("Content-type: application/json");
-	die(json_encode(array('error' => 'post not found')));
+	header('content-type: application/json; charset=utf-8');
+	$json = json_encode(array('error' => 'post not found'));
+	echo isset($_GET['callback'])
+    ? "{$_GET['callback']}($json)"
+    : $json;
 
 }
 
