@@ -119,7 +119,6 @@
         <ul class="u-inline-list">
           <li><a href="http://podcast.novaramedia.com" target="_blank">Podcast</a></li>
           <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
-          <li><a href="http://fm.novaramedia.com">ArchiveFM</a></li>
           <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
         </ul>
       </div>
