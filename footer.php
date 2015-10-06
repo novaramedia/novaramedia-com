@@ -7,6 +7,7 @@
           <li><a href="<?php echo home_url('category/fm/'); ?>">Novara FM</a></li>
           <li><a href="http://wire.novaramedia.com">Novara Wire</a></li>
           <li><a href="<?php echo home_url('index/'); ?>">Index</a></li>
+          <li><a href="http://support.novaramedia.com">Support Us</a></li>
           <li><a href="https://twitter.com/novaramedia">Twitter</a></li>
           <li><a href="https://www.facebook.com/pages/NovaraMedia/404716342902872">Facebook</a></li>
           <li><a href="https://www.youtube.com/channel/UCOzMAa6IhV6uwYQATYG_2kg">YouTube</a></li>
