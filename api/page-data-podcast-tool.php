@@ -40,8 +40,25 @@ if ($the_query->post_count === 0) {
   	$id = $the_query->post->ID;
   	$meta = get_post_meta($id);
 
+  	if (!empty($meta['_cmb_short-desc'][0])) {
+    	$description = $meta['_cmb_short-desc'][0];
+  	} else {
+    	$description = '';
+  	}
+
+  	if (!empty($meta['_cmb_sc'][0])) {
+    	$soundcloud = $meta['_cmb_sc'][0];
+  	} else {
+    	$soundcloud = '';
+  	}
+
     $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-large' );
     $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-medium' );
+
+    $path = $thumb[0];
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
   	$tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
@@ -49,9 +66,10 @@ if ($the_query->post_count === 0) {
   		'id' => $id,
   		'title' => $the_query->post->post_title,
   		'permalink' => get_permalink($id),
-  		'short_desc' => $meta['_cmb_short-desc'][0],
-  		'soundcloud_url' => $meta['_cmb_sc'][0],
+  		'short_desc' => $description,
+  		'soundcloud_url' => $soundcloud,
       'thumb_large' => $thumb[0],
+      'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
   		'tags' => $tags
   		));

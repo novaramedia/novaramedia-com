@@ -57,31 +57,57 @@ if ($reqpost) {
   $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-large' );
   $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-medium' );
 
+  $path = $thumb[0];
+  $type = pathinfo($path, PATHINFO_EXTENSION);
+  $data = file_get_contents($path);
+  $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
   $tags = wp_get_post_tags($reqpost->ID, array( 'fields' => 'names' ) );
 
+  if (!empty($meta['_cmb_short-desc'][0])) {
+  	$description = $meta['_cmb_short-desc'][0];
+	} else {
+  	$description = '';
+	}
+
   if($type === 'tv') {
+
+  	if (!empty($meta['_cmb_utube'][0])) {
+    	$utube = $meta['_cmb_utube'][0];
+  	} else {
+    	$utube = '';
+  	}
+
 
   	$output = array(
   		'id' => $reqpost->ID,
   		'title' => $reqpost->post_title,
   		'permalink' => get_permalink($reqpost->ID),
-  		'youtube_id' => $meta['_cmb_utube'][0],
+  		'youtube_id' => $utube,
       'thumb_large' => $thumb[0],
+      'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
-      'short_desc' => $meta['_cmb_short-desc'][0],
+      'short_desc' => $description,
       'tags' => $tags
   	);
 
   } else if($type === 'fm') {
 
+  	if (!empty($meta['_cmb_sc'][0])) {
+    	$soundcloud = $meta['_cmb_sc'][0];
+  	} else {
+    	$soundcloud = '';
+  	}
+
   	$output = array(
   		'id' => $reqpost->ID,
   		'title' => $reqpost->post_title,
   		'permalink' => get_permalink($reqpost->ID),
-  		'soundcloud_url' => $meta['_cmb_sc'][0],
+  		'soundcloud_url' => $soundcloud,
       'thumb_large' => $thumb[0],
+      'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
-      'short_desc' => $meta['_cmb_short-desc'][0],
+      'short_desc' => $description,
       'tags' => $tags
   	);
 
@@ -92,8 +118,9 @@ if ($reqpost) {
   		'title' => $reqpost->post_title,
   		'permalink' => get_permalink($reqpost->ID),
       'thumb_large' => $thumb[0],
+      'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
-      'short_desc' => $meta['_cmb_short-desc'][0],
+      'short_desc' => $description,
       'tags' => $tags
   	);
 
