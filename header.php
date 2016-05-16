@@ -56,7 +56,16 @@
   <section id="main-container">
 
   <!-- start content -->
-  <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
-<?php get_search_form(); ?>
+  <header id="header" class="container">
+    <div class="row">
+      <div class="col col12">
+        Menu toggle / Search icon
+      </div>
+      <div class="col col12">
+        <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+      </div>
   </header>
+
+  <section id="search">
+    <?php get_search_form(); ?>
+  </section>

@@ -7,15 +7,15 @@ get_header();
 <main id="main-content">
 
   <!-- main posts loop -->
-  <section id="posts">
-
+  <section id="posts" class="container">
+    <div class="row">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
 
-    <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+    <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
 
       <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
 
@@ -30,11 +30,15 @@ if( have_posts() ) {
     <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>
+    </div>
+    <div class="row">
+      <div class="col col24">
+        <?php get_template_part('partials/pagination'); ?>
+      </div>
+    </div>
 
   <!-- end posts -->
   </section>
-
-  <?php get_template_part('partials/pagination'); ?>
 
 <!-- end main-content -->
 
