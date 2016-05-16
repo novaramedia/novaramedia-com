@@ -1,210 +1,283 @@
-@import "resets"
-@import "novara"
+@import "kouto-swiss"
+@import "helpers"
 
+// ******************************************************
 
-// HEADER
+// FONTS
 
-#header
-  background-image: url(../img/working/marble-cropped.jpg)
+// ******************************************************
 
-#logo-nm
-  height: 55px
-  width: 55px
+// ICONS FONTS
 
+// ** https://genericons.com WP icon font set
+// @import "fonts/icons/genericons"
 
-// INDEX
+// ** minimal version of Google Materialize UI icons. check the styl for usage
+@import "fonts/icons/materialize-min"
 
-.post-title-index
-  margin-top: 0.5em
-  margin-bottom: 0.5em
-  width: 100%
+// ** full set of Google Materialize. https://design.google.com/icons/
+// @import "fonts/icons/materialize"
 
-#pagination
-  margin: $margin-basic 0
+// ******************************************************
 
+meyer-reset()
+box-sizing-reset()
+normalize()
 
-// HOME
+// ******************************************************
 
-.home-wire
-  padding: $margin-basic 0
-  margin: $margin-basic 0
+// GRID
 
-.logo-wire
-  width: 90px
-  height: 2em
-  vertical-align: top
+$cols = 12
+$col = 90px
+$gutter = 16px
 
-.home-wire-post-grid
+.container
+  margin: 0 auto
+  width: ($col * $cols)+($gutter * $cols)
+
+.row
+  clearfix()
+
+.col
+  float: left
+  margin-left: ($gutter/2)
+  margin-right: ($gutter/2)
+  min-height: 1px
+
+for col in 1..$cols
+  .col-{col}
+    width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+
+    // FLUID COLS
+
+.percent-col
+  float: left
+  box-sizing: border-box
+
+$pcols = 10
+
+for pcol in 1..$pcols
+  .s-into-{pcol}
+    width: ( 100% / pcol )
+
+@media screen and (min-width: 601px)
+
+  for pcol in 1..$pcols
+    .m-into-{pcol}
+      width: ( 100% / pcol )
+
+@media screen and (min-width: 993px)
+
+  for pcol in 1..$pcols
+    .l-into-{pcol}
+      width: ( 100% / pcol )
+
+// ******************************************************
+
+// VARIABLES
+
+$golden-ratio = 1.61803398875
+
+$margin-small = ($gutter)
+$margin-tiny = ($gutter / 2)
+$margin-micro = ($gutter / (2 * $golden-ratio))
+$margin-basic = ($gutter * 2)
+$margin-mid = ($gutter * 3.5)
+$margin-large = ($gutter * 5)
+
+$font-size-basic = 15px
+$font-size-larger = 1.3rem
+$font-size-h3 = golden-ratio(1rem , 1)
+$font-size-h2 = golden-ratio(1rem , 1.5)
+$font-size-h1 = golden-ratio(1rem , 2)
+
+$font-leading-basic = 1.35
+$font-leading-tighter = 1.15
+$font-leading-larger = 1.45
+
+$font-tracking-basic = 0.001em
+$font-tracking-wider = 0.05em
+
+$color-black-soft = rgb(14, 14, 14)
+$color-white-soft = rgb(253, 253, 253)
+
+// ******************************************************
+
+// TYPOGRAPHY
+
+html
+  font-family: font-stack('Helvetica')
+  font-size: $font-size-basic
+  letter-spacing: $font-tracking-basic
+
+body
+  line-height: $font-leading-basic
+
+  // HTML ELEMENT STYLING
+
+h1
+  font-size: $font-size-h1
+  line-height: $font-leading-tighter
+
+h2
+  font-size: $font-size-h2
+  line-height: $font-leading-tighter
+
+h3
+  font-size: $font-size-h3
+
+p
+  margin-bottom: 1rem
+
+  // FONT RULES
+
+.font-italic
+  font-style: italic
+
+.font-bold
+  font-weight: bold
+
+.font-small-caps
+  font-size: 0.85em
+  text-transform: uppercase
+
+.font-capitalize
+  text-transform: capitalize
+
+  // TEXT RULES
+
+.text-overflow-ellipsis
+  overflow: ellipsis
+
+.text-align-left
+  text-align: left
+
+.text-align-right
+  text-align: right
+
+.text-align-center
+  text-align: center
+
+  // LINKS
+
+a,
+a:active,
+a:visited
+  color: inherit
+  text-decoration: none
+
+// ******************************************************
+
+// BASIC
+
+html
+  background-color: $color-white-soft
+  color: $color-black-soft
+
+img
+  max-width: 100%
+  height: auto
+
+// ******************************************************
+
+// MARGINS AND PADDING
+
+  // MARGIN TOP
+
+.margin-top-micro
+  margin-top: $margin-micro
+
+.margin-top-tiny
+  margin-top: $margin-tiny
+
+.margin-top-small
+  margin-top: $margin-small
+
+.margin-top-basic
   margin-top: $margin-basic
 
+.margin-top-mid
+  margin-top: $margin-mid
 
-// SINGLE POST
+.margin-top-large
+  margin-top: $margin-large
 
-.single-post-title
+  // MARGIN BOTTOM
+
+.margin-bottom-micro
+  margin-bottom: $margin-micro
+
+.margin-bottom-tiny
+  margin-bottom: $margin-tiny
+
+.margin-bottom-small
   margin-bottom: $margin-small
-  width: 100%
 
-.single-post-sidebar-item
+.margin-bottom-basic
+  margin-bottom: $margin-basic
+
+.margin-bottom-mid
+  margin-bottom: $margin-mid
+
+.margin-bottom-large
+  margin-bottom: $margin-large
+
+  // PADDING TOP
+
+.padding-top-micro
+  padding-top: $margin-micro
+
+.padding-top-tiny
+  padding-top: $margin-tiny
+
+.padding-top-small
+  padding-top: $margin-small
+
+.padding-top-basic
+  padding-top: $margin-basic
+
+.padding-top-mid
+  padding-top: $margin-mid
+
+.padding-top-large
+  padding-top: $margin-large
+
+  // PADDING BOTTOM
+
+.padding-bottom-micro
+  padding-bottom: $margin-micro
+
+.padding-bottom-tiny
+  padding-bottom: $margin-tiny
+
+.padding-bottom-small
   padding-bottom: $margin-small
-  margin-bottom: $margin-small
 
-.attachment-col8-related
-  margin-bottom: $margin-small
+.padding-bottom-basic
+  padding-bottom: $margin-basic
 
-.twitter-button-fix
-  vertical-align: top
+.padding-bottom-mid
+  padding-bottom: $margin-mid
+
+.padding-bottom-large
+  padding-bottom: $margin-large
+
+// ******************************************************
 
 
-// PAGE
 
-.page_item
-  font-size: 2em
-  line-height: 1.35em
-  &:before
-    content: '\219D'
-    margin: 0 .5em
 
-// YOUTUBE EMBED
 
-.video-holder
-  position: relative
-  padding-top: 26px
-  padding-bottom: 56.25%
-  height: 0
-  overflow: hidden
 
-.youtube-player
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
+// ******************************************************
 
 // MEDIA QUERIES
+
 @media screen and (max-width: ($col * $cols)+($gutter * $cols))
 
-  $gutter = 16px
-  $margin-tiny = ($gutter/2)
-  $margin-small = $gutter
-  $margin-basic = ($gutter*3)
-  $margin-large = ($gutter*5)
+  @import "responsive/desktop-mid"
 
-  #pagination
-    margin: $margin-basic 0
+@media screen and (max-width: 601px)
 
-  // HOME
-
-  .home-wire
-    padding: $margin-basic 0
-    margin: $margin-basic 0
-
-  .home-wire-post-grid
-    margin-top: $margin-basic
-
-  // SINGLE POST
-
-  .single-post-title
-    margin-bottom: $margin-small
-
-  .single-post-sidebar-item
-    padding-bottom: $margin-small
-    margin-bottom: $margin-small
-
-  .attachment-col8-related
-    margin-bottom: $margin-small
-
-@media screen and (max-width: 1152px)
-
-  $gutter = 12px
-  $margin-tiny = ($gutter/2)
-  $margin-small = $gutter
-  $margin-basic = ($gutter*3)
-  $margin-large = ($gutter*5)
-
- #pagination
-    margin: $margin-basic 0
-
-  // HOME
-
-  .home-wire
-    padding: $margin-basic 0
-    margin: $margin-basic 0
-
-  .home-wire-post-grid
-    margin-top: $margin-basic
-
-  // SINGLE POST
-
-  .single-post-title
-    margin-bottom: $margin-small
-
-  .single-post-sidebar-item
-    padding-bottom: $margin-small
-    margin-bottom: $margin-small
-
-  .attachment-col8-related
-    margin-bottom: $margin-small
-
-@media screen and (max-width: 912px)
-
-  $gutter = 8px
-  $margin-tiny = ($gutter/2)
-  $margin-small = $gutter
-  $margin-basic = ($gutter*3)
-  $margin-large = ($gutter*5)
-
-  #pagination
-    margin: $margin-basic 0
-
-  // HOME
-
-  .home-wire
-    padding: $margin-basic 0
-    margin: $margin-basic 0
-
-  .home-wire-post-grid
-    margin-top: $margin-basic
-
-  // SINGLE POST
-
-  .single-post-title
-    margin-bottom: $margin-small
-
-  .single-post-sidebar-item
-    padding-bottom: $margin-small
-    margin-bottom: $margin-small
-
-  .attachment-col8-related
-    margin-bottom: $margin-small
-
-  .twitter-button-fix
-    margin-top: $margin-tiny
-
-@media screen and (max-width: 696px)
-
-  $gutter = 8px
-  $margin-tiny = ($gutter/2)
-  $margin-small = $gutter
-  $margin-basic = ($gutter*3)
-  $margin-large = ($gutter*5)
-
-  // HOME
-
-  .home-wire .container
-    max-width: 355px
-
-  .home-wire-header
-    margin-top: $margin-basic
-
-  .home-wire-post-grid
-    margin-top: $margin-basic
-
-  #single-post-related-posts
-    max-width: 366px
-    margin: 0 auto
-
-  .related-post
-    max-width: 366px
-
-  .twitter-button-fix
-    margin-top: 0
+  @import "responsive/mobile"
