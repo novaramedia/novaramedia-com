@@ -1,2 +1,8 @@
 config.codekit
 .DS_Store
+/node_modules
+/css/site.min.css
+/js/*.min.js
+/js/*.min.js.map
+
+/css/site.css

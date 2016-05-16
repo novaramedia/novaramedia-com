@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2016 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="arrow-left" unicode="&#xe800;" d="M834 391v-82h-508l233-234-59-59-334 334 334 334 59-59-233-234h508z" horiz-adv-x="1000" />
+
+<glyph glyph-name="arrow-down" unicode="&#xe801;" d="M834 350l-334-334-334 334 61 59 232-233v508h82v-508l234 233z" horiz-adv-x="1000" />
+
+<glyph glyph-name="arrow-right" unicode="&#xe802;" d="M500 684l334-334-334-334-59 59 233 234h-508v82h508l-233 234z" horiz-adv-x="1000" />
+
+<glyph glyph-name="arrow-up" unicode="&#xe803;" d="M166 350l334 334 334-334-61-59-232 233v-508h-82v508l-234-233z" horiz-adv-x="1000" />
+
+<glyph glyph-name="menu" unicode="&#xe804;" d="M84 622h832v-84h-832v84z m0-209h832v-84h-832v84z m0-209h832v-82h-832v82z" horiz-adv-x="1000" />
+
+<glyph glyph-name="chevron-down" unicode="&#xe805;" d="M309 524l191-192 191 192 59-59-250-250-250 250z" horiz-adv-x="1000" />
+
+<glyph glyph-name="chevron-left" unicode="&#xe806;" d="M643 180l-59-58-250 250 250 250 59-59-192-191z" horiz-adv-x="1000" />
+
+<glyph glyph-name="chevron-right" unicode="&#xe807;" d="M357 168l192 192-192 191 59 59 250-250-250-250z" horiz-adv-x="1000" />
+
+<glyph glyph-name="chevron-up" unicode="&#xe808;" d="M309 207l-59 59 250 250 250-250-59-59-191 192z" horiz-adv-x="1000" />
+
+<glyph glyph-name="tick" unicode="&#xe80a;" d="M375 174l441 444 59-59-500-500-232 232 56 59z" horiz-adv-x="1000" />
+
+<glyph glyph-name="close" unicode="&#xe80b;" d="M791 582l-232-232 232-232-59-59-232 232-232-232-59 59 232 232-232 232 59 59 232-232 232 232z" horiz-adv-x="1000" />
+
+<glyph glyph-name="mail" unicode="&#xe80c;" d="M500 391l334 209h-668z m334-291v416l-334-207-334 207v-416h668z m0 584c45 0 82-39 82-84v-500c0-45-37-84-82-84h-668c-45 0-82 39-82 84v500c0 45 37 84 82 84h668z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

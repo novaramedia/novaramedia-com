@@ -1,14 +1,15 @@
-<?php get_header(); ?>
+<?php
+get_header();
+?>
 
-    <!-- main content -->
+<!-- main content -->
 
-  <section id="main-content">
+<section id="main-content">
+  <h1>Not found</h1>
+  <p>:(</p>
+<!-- end main-content -->
+</section>
 
-    <h1>Not found</h1>
-       <p><span frown>:(</span></p>
-
-  <!-- end main-content -->
-
-  </section>
-
-<?php get_footer(); ?>
+<?php
+get_footer();
+?>

@@ -1,69 +1,45 @@
-<?php get_header(); ?>
+<?php
+get_header();
+?>
 
-	<!-- main content -->
+<!-- main content -->
 
-  <section id="main-content" class="container">
+<main id="main-content">
 
-    <!-- main posts loop -->
-    <section id="posts" class="row masonry">
+  <!-- main posts loop -->
+  <section id="posts">
 
-    <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-      $meta = get_post_meta($post->ID);
-      $cats = get_the_category();
-      $cat = array_shift($cats);
-      $type = $cat->slug;
-      $thumb = 'col12-' . $type;
-    ?>
+<?php
+if( have_posts() ) {
+  while( have_posts() ) {
+    the_post();
+?>
 
-      <article <?php post_class('col col12 ' . $type); ?> id="post-<?php the_ID(); ?>">
+    <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-        <a href="<?php the_permalink() ?>">
-          <?php the_post_thumbnail($thumb); ?>
-        </a>
+      <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
 
-        <a href="<?php the_permalink() ?>">
-          <h2 class="post-title-index underline"><?php the_title(); ?></h2>
-        </a>
+      <?php the_content(); ?>
 
-        <?php
-          if (!empty($meta['_cmb_short-desc'][0])) {
-            echo wpautop($meta['_cmb_short-desc'][0]);
-          } else {
-            the_content();
-          } ?>
+    </article>
 
-      </article>
+<?php
+  }
+} else {
+?>
+    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+<?php
+} ?>
 
-    <?php endwhile; else: ?>
-      <p><?php _e('Sorry, no posts matched your criteria :{'); ?></p>
-    <?php endif; ?>
-
-    <!-- end posts -->
-    </section>
-
-    <?php if (get_next_posts_link() || get_previous_posts_link()) { ?>
-    <!-- post pagination -->
-    <nav id="pagination" class="row">
-      <div class="col col24 u-align-center">
-        <h3><?php
-              $previous = get_previous_posts_link('Newer');
-              $next = get_next_posts_link('Older');
-              if ($previous) {
-                echo '<span class="pagination-button">' . $previous . '</span>';
-              }
-              if ($previous && $next) {
-                echo ' &mdash; ';
-              }
-              if ($next) {
-                echo '<span class="pagination-button">' . $next . '</span>';
-              }
-        ?></h3>
-      </div>
-    </nav>
-    <?php } ?>
-
-  <!-- end main-content -->
-
+  <!-- end posts -->
   </section>
 
-<?php get_footer(); ?>
+  <?php get_template_part('partials/pagination'); ?>
+
+<!-- end main-content -->
+
+</main>
+
+<?php
+get_footer();
+?>
