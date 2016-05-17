@@ -95,9 +95,9 @@
 
             <div class="col col8">
               <ul class="header-menu u-inline-list">
-                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
-                <li><a href="http://support.novaramedia.com">Support Us</a></li>
-                <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
+                <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
+                <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
+                <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
               </ul>
             </div>
 
