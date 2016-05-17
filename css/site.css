@@ -124,40 +124,43 @@ ul.u-inline-list li {
 /* Uncomment for 3D effect */
 /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
-.icon-arrow-left:before {
+.icon-arrow-right:before {
   content: '\e800';
 }
-.icon-arrow-down:before {
+.icon-arrow-up:before {
   content: '\e801';
 }
-.icon-arrow-right:before {
+.icon-menu:before {
   content: '\e802';
 }
-.icon-arrow-up:before {
+.icon-chevron-down:before {
   content: '\e803';
 }
-.icon-menu:before {
+.icon-chevron-left:before {
   content: '\e804';
 }
-.icon-chevron-down:before {
+.icon-chevron-right:before {
   content: '\e805';
 }
-.icon-chevron-left:before {
+.icon-chevron-up:before {
   content: '\e806';
 }
-.icon-chevron-right:before {
+.icon-tick:before {
   content: '\e807';
 }
-.icon-chevron-up:before {
+.icon-close:before {
   content: '\e808';
 }
-.icon-tick:before {
+.icon-mail:before {
+  content: '\e809';
+}
+.icon-arrow-left:before {
   content: '\e80a';
 }
-.icon-close:before {
+.icon-arrow-down:before {
   content: '\e80b';
 }
-.icon-mail:before {
+.icon-search:before {
   content: '\e80c';
 }
 html,
