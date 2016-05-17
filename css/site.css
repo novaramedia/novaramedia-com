@@ -116,8 +116,6 @@ ul.u-inline-list li {
   line-height: 1em;
 /* Animation center compensation - margins should be symmetric */
 /* remove if not needed */
-/* you can be more comfortable with increased icons size */
-  font-size: 120%;
 /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -677,6 +675,10 @@ h2 {
 h3 {
   font-size: 1.618rem;
 }
+h4 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
 p {
   margin-bottom: 1rem;
 }
@@ -692,6 +694,15 @@ p {
 }
 .font-capitalize {
   text-transform: capitalize;
+}
+.font-uppercase {
+  text-transform: uppercase;
+}
+.font-color-white {
+  color: #fdfdfd;
+}
+.font-color-black {
+  color: #0e0e0e;
 }
 .text-overflow-ellipsis {
   white-space: nowrap;
@@ -713,6 +724,21 @@ a:visited {
   color: inherit;
   text-decoration: none;
 }
+.background-black {
+  background-color: #0e0e0e;
+}
+.background-white {
+  background-color: #fdfdfd;
+}
+.background-gray {
+  background-color: #969696;
+}
+.background-light-gray {
+  background-color: #bebebe;
+}
+.icon-large:before {
+  font-size: 1.618rem;
+}
 html {
   background-color: #fdfdfd;
   color: #0e0e0e;
@@ -720,6 +746,24 @@ html {
 img {
   max-width: 100%;
   height: auto;
+}
+.margin-micro {
+  margin: 4.944271909998838px;
+}
+.margin-tiny {
+  margin: 8px;
+}
+.margin-small {
+  margin: 16px;
+}
+.margin-basic {
+  margin: 32px;
+}
+.margin-mid {
+  margin: 56px;
+}
+.margin-large {
+  margin: 80px;
 }
 .margin-top-micro {
   margin-top: 4.944271909998838px;
@@ -757,6 +801,24 @@ img {
 .margin-bottom-large {
   margin-bottom: 80px;
 }
+.padding-micro {
+  padding: 4.944271909998838px;
+}
+.padding-tiny {
+  padding: 8px;
+}
+.padding-small {
+  padding: 16px;
+}
+.padding-basic {
+  padding: 32px;
+}
+.padding-mid {
+  padding: 56px;
+}
+.padding-large {
+  padding: 80px;
+}
 .padding-top-micro {
   padding-top: 4.944271909998838px;
 }
@@ -792,6 +854,46 @@ img {
 }
 .padding-bottom-large {
   padding-bottom: 80px;
+}
+#header-main-wrapper {
+  background-image: url("../img/dist/novara-marble-black-cropped.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+.header-menu li {
+  padding-right: 8px;
+}
+#header-sub {
+  display: none;
+}
+#header-search {
+  display: none;
+}
+.search #header-search {
+  display: block;
+}
+#search-form {
+  border: 2px solid #fdfdfd;
+}
+#search-input,
+#search-submit {
+  font-size: 1.618rem;
+  border: 0;
+}
+#search-input:focus,
+#search-submit:focus {
+  outline: 0;
+}
+#search-input {
+  float: left;
+  width: 70%;
+  background-color: transparent;
+  color: #fdfdfd;
+}
+#search-submit {
+  width: 8%;
+  min-width: 25px;
+  float: right;
 }
 #tag-suggestions {
   display: none;

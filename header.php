@@ -62,12 +62,12 @@
           <div class="row">
             <div class="col col12">
               <ul class="u-inline-list">
-                <li id="menu-toggle" class="u-pointer"><i class="icon-menu"></i></li>
-                <li id="search-toggle" class="u-pointer"><i class="icon-search"></i></li>
+                <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
+                <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
               </ul>
             </div>
             <div class="col col12 text-align-right">
-              <h4 class="font-uppercase"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h4>
+              <h4 class="font-uppercase font-bold"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h4>
             </div>
           </div>
         </div>

@@ -102,6 +102,11 @@ $font-tracking-wider = 0.05em
 $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
 
+$color-gray = rgb(150,150,150)
+$color-gray-light = rgb(190,190,190)
+
+$border-width = 2px
+
 // ******************************************************
 
 // TYPOGRAPHY
@@ -127,6 +132,10 @@ h2
 h3
   font-size: $font-size-h3
 
+h4
+  text-transform: uppercase
+  font-weight: bold
+
 p
   margin-bottom: 1rem
 
@@ -144,6 +153,17 @@ p
 
 .font-capitalize
   text-transform: capitalize
+
+.font-uppercase
+  text-transform: uppercase
+
+  // COLOR RULES
+
+.font-color-white
+  color: $color-white-soft
+
+.font-color-black
+  color: $color-black-soft
 
   // TEXT RULES
 
@@ -169,6 +189,29 @@ a:visited
 
 // ******************************************************
 
+// BACKGROUNDS
+
+.background-black
+  background-color: $color-black-soft
+
+.background-white
+  background-color: $color-white-soft
+
+.background-gray
+  background-color: $color-gray
+
+.background-light-gray
+  background-color: $color-gray-light
+
+// ******************************************************
+
+// UI ELEMENTS
+
+.icon-large:before
+  font-size: $font-size-h3
+
+// ******************************************************
+
 // BASIC
 
 html
@@ -182,6 +225,26 @@ img
 // ******************************************************
 
 // MARGINS AND PADDING
+
+  // MARGIN
+
+.margin-micro
+  margin: $margin-micro
+
+.margin-tiny
+  margin: $margin-tiny
+
+.margin-small
+  margin: $margin-small
+
+.margin-basic
+  margin: $margin-basic
+
+.margin-mid
+  margin: $margin-mid
+
+.margin-large
+  margin: $margin-large
 
   // MARGIN TOP
 
@@ -222,6 +285,26 @@ img
 
 .margin-bottom-large
   margin-bottom: $margin-large
+
+  // PADDING
+
+.padding-micro
+  padding: $margin-micro
+
+.padding-tiny
+  padding: $margin-tiny
+
+.padding-small
+  padding: $margin-small
+
+.padding-basic
+  padding: $margin-basic
+
+.padding-mid
+  padding: $margin-mid
+
+.padding-large
+  padding: $margin-large
 
   // PADDING TOP
 
@@ -265,7 +348,49 @@ img
 
 // ******************************************************
 
-// Search tag suggestions
+// HEADER
+
+#header-main-wrapper
+  background-image: url('../img/dist/novara-marble-black-cropped.jpg')
+  background-size: cover
+  background-position: center center
+
+.header-menu
+  li
+    padding-right: $margin-tiny
+
+#header-sub
+  display: none
+
+// SEARCH
+
+#header-search
+  display: none
+
+.search
+  #header-search
+    display: block
+
+#search-form
+  border: $border-width solid $color-white-soft
+
+#search-input, #search-submit
+  font-size: $font-size-h3
+  border: 0
+  &:focus
+    outline: 0
+
+#search-input
+  float: left
+  width: 70%
+  background-color: transparent
+  color: $color-white-soft
+
+#search-submit
+  width: 8%
+  min-width: 25px
+  float right
+
 #tag-suggestions
   display: none
 
