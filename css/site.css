@@ -662,7 +662,7 @@ html {
   letter-spacing: 0.001em;
 }
 body {
-  line-height: 1.35;
+  line-height: 1.4;
 }
 h1 {
   font-size: 2.617924rem;
@@ -697,6 +697,9 @@ p {
 }
 .font-uppercase {
   text-transform: uppercase;
+}
+.font-leading-wider {
+  line-height: 1.55;
 }
 .font-color-white {
   color: #fdfdfd;

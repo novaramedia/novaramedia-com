@@ -1,4 +1,4 @@
-    <footer id="footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase font-bold">
+    <footer id="footer" class="background-black font-color-white margin-top-basic padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
       <div class="container">
         <div class="row">
           <div class="col col6">
