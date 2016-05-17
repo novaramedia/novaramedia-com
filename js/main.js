@@ -10,6 +10,7 @@ Site = {
       _this.onResize();
     });
 
+    _this.Header.init();
     Site.search.init();
 
   },
@@ -26,6 +27,27 @@ Site = {
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
     });
+  },
+};
+
+Site.Header = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+
+  },
+
+  bind: function() {
+
+    $('#menu-toggle').click(function() {
+      $('#header-sub').toggle();
+    });
+
+    $('#search-toggle').click(function() {
+      $('#header-search').toggle();
+    });
+
   },
 };
 
@@ -58,7 +80,7 @@ Site.search = {
       _this.tags.hide();
 
       // If matching tags, show them
-      if( $suggested.length !== 0 ) { 
+      if( $suggested.length !== 0 ) {
         $suggested.show();
         _this.tagsList.show();
       } else {
