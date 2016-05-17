@@ -55,17 +55,58 @@
 
   <section id="main-container">
 
-  <!-- start content -->
-  <header id="header" class="container">
-    <div class="row">
-      <div class="col col12">
-        Menu toggle / Search icon
-      </div>
-      <div class="col col12">
-        <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
-      </div>
-  </header>
+    <header id="header" class="margin-bottom-basic">
 
-  <section id="search">
-    <?php get_search_form(); ?>
-  </section>
+      <div id="header-main-wrapper">
+        <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
+          <div class="row">
+            <div class="col col12">
+              <ul class="u-inline-list">
+                <li id="menu-toggle" class="u-pointer"><i class="icon-menu"></i></li>
+                <li id="search-toggle" class="u-pointer"><i class="icon-search"></i></li>
+              </ul>
+            </div>
+            <div class="col col12 text-align-right">
+              <h4 class="font-uppercase"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="header-sub" class="background-gray">
+        <div class="container font-color-white padding-top-small padding-bottom-small">
+          <div class="row">
+            <div class="col col8">
+              <ul class="header-menu u-inline-list">
+                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
+                <li><a href="http://support.novaramedia.com">Support Us</a></li>
+                <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
+              </ul>
+            </div>
+
+            <div class="col col8">
+              <ul class="header-menu u-inline-list">
+                <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
+                <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
+                <li><a href="https://www.youtube.com/channel/UCOzMAa6IhV6uwYQATYG_2kg" target="_blank">YouTube</a></li>
+                <li><a href="http://novaramedia.tumblr.com/" target="_blank">Tumblr</a></li>
+              </ul>
+            </div>
+
+            <div class="col col8">
+              <ul class="header-menu u-inline-list">
+                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
+                <li><a href="http://support.novaramedia.com">Support Us</a></li>
+                <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <section id="header-search">
+        <?php get_search_form(); ?>
+      </section>
+
+    </header>
