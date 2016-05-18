@@ -102,6 +102,30 @@ function igv_cmb_metaboxes() {
     'type' => 'text',
   ) );
 
+  // Wire
+
+	$wire_metabox = new_cmb2_box( array (
+		'id'         => 'wire_metabox',
+		'title'      => __( 'Wire Meta', 'cmb' ),
+		'object_types'      => array( 'post' ), // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_names' => true, // Show field names on the left
+  ) );
+
+  $wire_metabox->add_field( array(
+    'name' => __( 'Author', 'cmb' ),
+    'id'   => $prefix . 'author',
+    'type' => 'text',
+  ) );
+
+  $wire_metabox->add_field( array(
+    'name' => __( 'Author Twitter', 'cmb' ),
+    'desc' => __( 'Optional. No @', 'cmb' ),
+    'id'   => $prefix . 'author_twitter',
+    'type' => 'text',
+  ) );
+
   // Resources
 
 	$resources_metabox = new_cmb2_box( array(
