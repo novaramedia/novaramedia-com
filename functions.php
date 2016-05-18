@@ -6,11 +6,10 @@ function scripts_and_styles_method() {
 
   $templateuri = get_template_directory_uri() . '/js/';
 
-  // library.js is to bundle plugins. my.js is your scripts. enqueue more files as needed
   $jslib = $templateuri . 'library.js';
   wp_enqueue_script( 'jslib', $jslib,'','',true);
 
-  $myscripts = WP_DEBUG ? $templateuri . "main.js" : $templateuri . "main.min.js";
+  $myscripts = $templateuri . 'main.js';
   wp_register_script( 'myscripts', $myscripts );
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
@@ -23,7 +22,6 @@ function scripts_and_styles_method() {
   wp_localize_script( 'myscripts', 'WP', $jsVars );
   wp_enqueue_script( 'myscripts', $myscripts,'','',true);
 
-  // enqueue stylesheet here. file does not exist until stylus file is processed
   wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/css/site.css' );
 
   // dashicons for admin
