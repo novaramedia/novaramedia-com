@@ -24,7 +24,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
   		array(
 				'name'    => __( 'Short description', 'cmb' ),
 				'desc'    => __( '...', 'cmb' ),
-				'id'      => $prefix . 'short-desc',
+				'id'      => $prefix . 'short_desc',
 				'type'    => 'wysiwyg',
 				'options' => array( 'textarea_rows' => 5, ),
 			),
