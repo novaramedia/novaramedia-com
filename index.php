@@ -8,22 +8,41 @@ get_header();
 
   <!-- main posts loop -->
   <section id="posts" class="container">
-    <div class="row">
+    <div class="row margin-bottom-basic">
 <?php
 if( have_posts() ) {
+  $i = 0;
   while( have_posts() ) {
     the_post();
+    $description = get_post_meta($post->ID, '_cmb_short_desc');
+
+    if ($i % 3 === 0 && $i !== 0) {
+      echo "</div>\n<div class=\"row margin-bottom-basic\">";
+    }
 ?>
 
-    <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
+    <a href="<?php the_permalink() ?>">
+      <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
 
-      <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+        <?php the_post_thumbnail('col8-16to9', array('class' => 'index-post-thumbnail')); ?>
 
-      <?php the_content(); ?>
+        <h5 class="index-post-title margin-top-tiny margin-bottom-tiny js-fix-widows"><?php the_title(); ?></h5>
 
-    </article>
+        <div class="index-post-description">
+          <?php
+            if (!empty($description)) {
+              echo $description[0];
+            } else {
+              the_excerpt();
+            }
+          ?>
+        </div>
+
+      </article>
+    </a>
 
 <?php
+    $i++;
   }
 } else {
 ?>
