@@ -10,6 +10,8 @@ Site = {
       _this.onResize();
     });
 
+    _this.fixWidows();
+
     _this.Header.init();
     Site.search.init();
 
