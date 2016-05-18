@@ -34,7 +34,7 @@ function igv_cmb_metaboxes() {
   $prefix = '_cmb_';
 
 
-	$meta_boxes = new_cmb2_box( array ( 
+	$meta_boxes = new_cmb2_box( array (
 		'id'         => 'post_metabox',
 		'title'      => __( 'Post Meta', 'cmb' ),
 		'object_types'      => array( 'post' ), // Post type
@@ -59,14 +59,8 @@ function igv_cmb_metaboxes() {
     'type' => 'file',
   ) );
 
-  $meta_boxes->add_field( array(
-    'name' => __( 'Redirect', 'cmb' ),
-    'desc' => __( 'For TXT posts to new Wire reposts', 'cmb' ),
-    'id'   => $prefix . 'redirect',
-    'type' => 'text_url',
-  ) );
-
   // FM
+
 	$fm_metabox = new_cmb2_box( array (
 		'id'         => 'fm_metabox',
 		'title'      => __( 'FM Meta', 'cmb' ),
@@ -91,6 +85,7 @@ function igv_cmb_metaboxes() {
   ) );
 
   // TV
+
 	$tv_metabox = new_cmb2_box( array (
 		'id'         => 'tv_metabox',
 		'title'      => __( 'TV Meta', 'cmb' ),
@@ -104,13 +99,6 @@ function igv_cmb_metaboxes() {
     'name' => __( 'YouTube ID', 'cmb' ),
     'desc' => __( 'Id of youtube video. for example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the Id is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
     'id'   => $prefix . 'utube',
-    'type' => 'text',
-  ) );
-
-  $tv_metabox->add_field( array(
-    'name' => __( 'Secondary YouTube ID', 'cmb' ),
-    'desc' => __( 'For extended interviews etc', 'cmb' ),
-    'id'   => $prefix . 'utube_2',
     'type' => 'text',
   ) );
 
