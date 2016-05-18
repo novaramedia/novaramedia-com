@@ -34,13 +34,13 @@ function igv_cmb_metaboxes() {
   $prefix = '_cmb_';
 
 
-	$meta_boxes = new_cmb2_box( array (
-		'id'         => 'post_metabox',
-		'title'      => __( 'Post Meta', 'cmb' ),
-		'object_types'      => array( 'post' ), // Post type
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true, // Show field names on the left
+  $meta_boxes = new_cmb2_box( array (
+    'id'         => 'post_metabox',
+    'title'      => __( 'Post Meta', 'cmb' ),
+    'object_types'      => array( 'post' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
   ) );
 
 
@@ -61,13 +61,13 @@ function igv_cmb_metaboxes() {
 
   // FM
 
-	$fm_metabox = new_cmb2_box( array (
-		'id'         => 'fm_metabox',
-		'title'      => __( 'FM Meta', 'cmb' ),
-		'object_types'      => array( 'post' ), // Post type
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true, // Show field names on the left
+  $fm_metabox = new_cmb2_box( array (
+    'id'         => 'fm_metabox',
+    'title'      => __( 'FM Meta', 'cmb' ),
+    'object_types'      => array( 'post' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
   ) );
 
   $fm_metabox->add_field( array(
@@ -86,13 +86,13 @@ function igv_cmb_metaboxes() {
 
   // TV
 
-	$tv_metabox = new_cmb2_box( array (
-		'id'         => 'tv_metabox',
-		'title'      => __( 'TV Meta', 'cmb' ),
-		'object_types'      => array( 'post' ), // Post type
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true, // Show field names on the left
+  $tv_metabox = new_cmb2_box( array (
+    'id'         => 'tv_metabox',
+    'title'      => __( 'TV Meta', 'cmb' ),
+    'object_types'      => array( 'post' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
   ) );
 
   $tv_metabox->add_field( array(
@@ -104,13 +104,13 @@ function igv_cmb_metaboxes() {
 
   // Wire
 
-	$wire_metabox = new_cmb2_box( array (
-		'id'         => 'wire_metabox',
-		'title'      => __( 'Wire Meta', 'cmb' ),
-		'object_types'      => array( 'post' ), // Post type
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true, // Show field names on the left
+  $wire_metabox = new_cmb2_box( array (
+    'id'         => 'wire_metabox',
+    'title'      => __( 'Wire Meta', 'cmb' ),
+    'object_types'      => array( 'post' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
   ) );
 
   $wire_metabox->add_field( array(
@@ -128,13 +128,13 @@ function igv_cmb_metaboxes() {
 
   // Resources
 
-	$resources_metabox = new_cmb2_box( array(
-		'id'         => 'resources_metabox',
-		'title'      => __( 'Post Resources', 'cmb' ),
-		'object_types' => array( 'post' ),
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true,
+  $resources_metabox = new_cmb2_box( array(
+    'id'         => 'resources_metabox',
+    'title'      => __( 'Post Resources', 'cmb' ),
+    'object_types' => array( 'post' ),
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true,
   ) );
 
   $resources_group_field = $resources_metabox->add_field( array(
