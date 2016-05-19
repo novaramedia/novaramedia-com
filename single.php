@@ -15,13 +15,7 @@ if( have_posts() ) {
 
     $categories = get_the_category();
 
-    function onlyTopLevel($var) {
-      if ($var->category_parent == 0) {
-        return true;
-      }
-    }
-
-    $topLevelCategory = array_filter($categories, 'onlyTopLevel');
+    $topLevelCategory = array_filter($categories, 'onlyTopLevelCategoryFilter');
     $topLevelCategory = array_values($topLevelCategory);
     $topLevelCategory = $topLevelCategory[0]->slug;
 
