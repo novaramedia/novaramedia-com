@@ -12,7 +12,6 @@ get_header();
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-    $meta = get_post_meta($post->ID);
 
     $categories = get_the_category();
 
@@ -39,9 +38,11 @@ if( have_posts() ) {
       get_template_part('partials/singles/single-post-tv');
 
     } else {
-
-      // handle error here :/
-
+?>
+      <div class="row">
+        <article class="col col24">Error with post. Someone did something wrong :/</article>
+      </div>
+<?php
     }
 
   }
@@ -55,9 +56,7 @@ if( have_posts() ) {
   <!-- end post -->
   </section>
 
-  <section id="single-support">
-    // support section here
-  </section>
+  <?php get_template_part('partials/support-section'); ?>
 
   <section id="single-related" class="container margin-top-large margin-bottom-large">
     <div class="row">
