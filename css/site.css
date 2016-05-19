@@ -63,6 +63,9 @@ ul.u-inline-list li {
 .u-pointer:hover {
   cursor: pointer;
 }
+.u-position-relative {
+  position: relative;
+}
 .u-holder {
   display: table;
   width: 100%;
