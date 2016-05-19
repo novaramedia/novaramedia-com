@@ -78,6 +78,13 @@ function igv_cmb_metaboxes() {
   ) );
 
   $fm_metabox->add_field( array(
+    'name' => __( 'Is a Resonance show?', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'is_resonance',
+    'type' => 'checkbox',
+  ) );
+
+  $fm_metabox->add_field( array(
     'name' => __( 'Download URL', 'cmb' ),
     'desc' => __( 'Enter a URL.', 'cmb' ),
     'id'   => $prefix . 'dl_mp3',
