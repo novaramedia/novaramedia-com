@@ -14,6 +14,7 @@ Site = {
 
     _this.Header.init();
     Site.search.init();
+    _this.Support.init();
 
   },
 
@@ -91,6 +92,21 @@ Site.search = {
 
     });
   }
+};
+
+Site.Support = {
+  init: function() {
+    if ($('.support-section').length) {
+      this.bind();
+    }
+  },
+
+  bind: function() {
+    $('.support-form-slider').on('input', function() {
+      var target = $(this).closest('.support-form').find('.support-form-value');
+      target.html(this.value);
+    });
+  },
 };
 
 jQuery(document).ready(function () {
