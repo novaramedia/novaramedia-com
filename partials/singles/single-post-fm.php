@@ -33,12 +33,14 @@
         <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="200" scrolling="no" frameborder="no"></iframe>
 
       <?php
-        if ($meta['_cmb_is_resonance'][0]) {
+        if (!empty($meta['_cmb_is_resonance'])) {
+          if ($meta['_cmb_is_resonance'][0]) {
       ?>
         <div class="font-mono font-smaller">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
+          }
         }
       } else {
         echo 'Someone messed up :/';
