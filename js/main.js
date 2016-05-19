@@ -13,7 +13,7 @@ Site = {
     _this.fixWidows();
 
     _this.Header.init();
-    Site.search.init();
+    _this.Search.init();
 
   },
 
@@ -53,24 +53,26 @@ Site.Header = {
   },
 };
 
-Site.search = {
+Site.Search = {
   init: function() {
     var _this = this;
 
     _this.form = $('#search-input');
-
     _this.tags = $('.suggested-tag');
-
     _this.tagsList = $('#tag-suggestions');
 
     _this.bind();
+
+     if ($('body').hasClass('error404')) {
+      _this.fourzerofour();
+    }
 
   },
 
   bind: function() {
     var _this = this;
 
-    _this.form.on('change keyup input paste', function(event) {
+    _this.form.on('change keyup input paste focus', function(event) {
 
       // Get Input Value
       var term = $(this).val();
@@ -90,7 +92,22 @@ Site.search = {
       }
 
     });
-  }
+  },
+
+  fourzerofour: function() {
+    var href = window.location.href
+    // remove url before WP
+    var request = href.replace(WP.siteUrl, '');
+    // get last part of url
+    request = request.split('/');
+    request = request[request.length-1];
+    // remove any dashes [in the case of a real permalink slug]
+    request = request.replace(/-/g, ' ');
+
+    if (request) {
+      $('#search-input').val(request).focus();
+    }
+  },
 };
 
 jQuery(document).ready(function () {
