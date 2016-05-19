@@ -46,7 +46,7 @@ register_nav_menus( array(
 */
 
 get_template_part( 'lib/custom-gallery' );
-get_template_part( 'lib/post-types' );
+get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/theme-options' );
 
