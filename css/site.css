@@ -670,13 +670,16 @@ body {
 h1 {
   font-size: 2.617924rem;
   line-height: 1.15;
+  font-weight: bold;
 }
 h2 {
   font-size: 2.058106176075472rem;
   line-height: 1.15;
+  font-weight: bold;
 }
 h3 {
   font-size: 1.618rem;
+  font-weight: bold;
 }
 h4 {
   text-transform: uppercase;
@@ -881,7 +884,8 @@ img {
 #header-search {
   display: none;
 }
-.search #header-search {
+.search #header-search,
+.error404 #header-search {
   display: block;
 }
 #search-form {
