@@ -14,6 +14,7 @@ Site = {
 
     _this.Header.init();
     _this.Search.init();
+    _this.Support.init();
 
   },
 
@@ -95,11 +96,11 @@ Site.Search = {
   },
 
   fourzerofour: function() {
-    var href = window.location.href
+    var href = window.location.href;
     // remove url before WP
     var request = href.split('/');
     // get last part of url
-    
+
     // If trailing /
     if( request[request.length - 1] === "" ) {
       // Remove last element from the array
@@ -113,6 +114,21 @@ Site.Search = {
     if (request) {
       $('#search-input').val(request).focus();
     }
+  },
+};
+
+Site.Support = {
+  init: function() {
+    if ($('.support-section').length) {
+      this.bind();
+    }
+  },
+
+  bind: function() {
+    $('.support-form-slider').on('input', function() {
+      var target = $(this).closest('.support-form').find('.support-form-value');
+      target.html(this.value);
+    });
   },
 };
 

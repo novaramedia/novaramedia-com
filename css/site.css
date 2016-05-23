@@ -63,6 +63,9 @@ ul.u-inline-list li {
 .u-pointer:hover {
   cursor: pointer;
 }
+.u-position-relative {
+  position: relative;
+}
 .u-holder {
   display: table;
   width: 100%;
@@ -745,6 +748,9 @@ a:visited {
 .background-light-gray {
   background-color: #bebebe;
 }
+.background-red {
+  background-color: #f00;
+}
 .icon-large:before {
   font-size: 1.618rem;
 }
@@ -907,6 +913,25 @@ img {
 }
 #tag-suggestions {
   display: none;
+}
+.support-form-holder {
+  min-height: 5rem;
+  padding: 16px;
+  text-align: center;
+  border: 2px solid #fff;
+}
+.support-form-slider {
+  width: 70%;
+  margin-right: 2%;
+}
+.support-form-submit {
+  width: 12%;
+  margin-left: 2%;
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #f00;
+  font-weight: bold;
+  border: 0;
 }
 @media screen and (max-width: 601px) {
   .container {
