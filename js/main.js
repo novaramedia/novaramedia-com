@@ -97,9 +97,15 @@ Site.Search = {
   fourzerofour: function() {
     var href = window.location.href
     // remove url before WP
-    var request = href.replace(WP.siteUrl, '');
+    var request = href.split('/');
     // get last part of url
-    request = request.split('/');
+    
+    // If trailing /
+    if( request[request.length - 1] === "" ) {
+      // Remove last element from the array
+      request.pop();
+    }
+
     request = request[request.length-1];
     // remove any dashes [in the case of a real permalink slug]
     request = request.replace(/-/g, ' ');
