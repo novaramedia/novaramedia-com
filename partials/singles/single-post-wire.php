@@ -3,18 +3,21 @@
 
   $thumbnail_id = get_post_thumbnail_id($post->ID);
   $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
+
+  $category_id = get_cat_ID('Wire');
+  $category_link = get_category_link( $category_id );
 ?>
 
-<div class="row">
+<div class="row margin-bottom-basic">
   <div class="col col24">
-    <h4>Wire</h4>
+    <h4><a href="<?php echo $category_link; ?>">Wire</a></h4>
   </div>
 </div>
 
 <div class="row">
   <div class="col col24 text-align-center u-position-relative">
     <?php the_post_thumbnail('col24-wire-crop'); ?>
-    <div id="single-wire-photo-caption">
+    <div id="single-wire-photo-caption" class="font-smaller">
       <?php
         if (!empty($thumbnail_image[0]->post_excerpt)) {
           echo $thumbnail_image[0]->post_excerpt;
@@ -34,9 +37,9 @@
 <div class="row">
   <div class="col col3"></div>
   <div class="col col14">
-    <h5>by <?php
+    <h3>by <?php
       if (!empty($meta['_cmb_author_twitter'])) {
-        echo '<a href="https://twitter.com' . $meta['_cmb_author_twitter'][0] . '">';
+        echo '<a target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
       }
 
       if (!empty($meta['_cmb_author'])) {
@@ -48,17 +51,17 @@
       if (!empty($meta['_cmb_author_twitter'])) {
         echo '</a>';
       }
-    ?></h5>
+    ?></h3>
   </div>
   <div class="col col4">
-    // social sharing
+    <?php get_template_part('partials/social-sharing'); ?>
   </div>
 </div>
 
 <div class="row">
   <div class="col col4"></div>
   <div class="col col16">
-    <div id="single-wire-copy" class="margin-bottom-basic">
+    <div id="single-wire-copy" class="text-copy margin-top-basic margin-bottom-basic">
       <?php the_content(); ?>
     </div>
 

@@ -10,7 +10,7 @@ if( function_exists( 'add_image_size' ) ) {
 
   add_image_size( 'col8-16to9', 432, 243, true );
 
-  add_image_size( 'col24-wire-crop', 1328, 359, true );
+  add_image_size( 'col24-wire-crop', 1328, 400, true );
 
   add_image_size( 'blank', 432, 243, true );
 

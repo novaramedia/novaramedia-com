@@ -669,12 +669,10 @@ body {
 }
 h1 {
   font-size: 2.617924rem;
-  line-height: 1.15;
   font-weight: bold;
 }
 h2 {
   font-size: 2.058106176075472rem;
-  line-height: 1.15;
   font-weight: bold;
 }
 h3 {
@@ -691,10 +689,14 @@ h5 {
 p {
   margin-bottom: 1rem;
 }
-.font-italic {
+.font-italic,
+em,
+i {
   font-style: italic;
 }
-.font-bold {
+.font-bold,
+strong,
+b {
   font-weight: bold;
 }
 .font-small-caps {
@@ -709,6 +711,9 @@ p {
 }
 .font-leading-wider {
   line-height: 1.55;
+}
+.font-smaller {
+  font-size: 0.8rem;
 }
 .font-color-white {
   color: #fdfdfd;
@@ -729,6 +734,30 @@ p {
 }
 .text-align-center {
   text-align: center;
+}
+.text-copy p {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 1.3rem;
+  line-height: 1.55;
+}
+.text-copy blockquote {
+  margin: 3rem;
+}
+.text-copy h1,
+.text-copy h2,
+.text-copy h3,
+.text-copy h4,
+.text-copy h5,
+.text-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.text-copy a {
+  color: #5490eb;
+}
+.text-copy img {
+  display: block;
+  margin: 2.5rem auto;
 }
 a,
 a:active,
@@ -932,6 +961,15 @@ img {
   color: #f00;
   font-weight: bold;
   border: 0;
+}
+#single-wire-photo-caption {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  -webkit-writing-mode: vertical-rl;
+      -ms-writing-mode: tb-rl;
+          writing-mode: vertical-rl;
+  padding: 4.944271909998838px;
 }
 @media screen and (max-width: 601px) {
   .container {

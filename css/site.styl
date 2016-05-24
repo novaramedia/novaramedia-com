@@ -106,6 +106,7 @@ $color-gray = rgb(150,150,150)
 $color-gray-light = rgb(190,190,190)
 
 $color-red = red
+$color-blue = rgb(84,144,235)
 
 $border-width = 2px
 
@@ -125,12 +126,10 @@ body
 
 h1
   font-size: $font-size-h1
-  line-height: $font-leading-tighter
   font-weight: bold
 
 h2
   font-size: $font-size-h2
-  line-height: $font-leading-tighter
   font-weight: bold
 
 h3
@@ -149,10 +148,10 @@ p
 
   // FONT RULES
 
-.font-italic
+.font-italic, em, i
   font-style: italic
 
-.font-bold
+.font-bold, strong, b
   font-weight: bold
 
 .font-small-caps
@@ -167,6 +166,9 @@ p
 
 .font-leading-wider
   line-height: $font-leading-larger
+
+.font-smaller
+  font-size: 0.8rem
 
   // COLOR RULES
 
@@ -189,6 +191,22 @@ p
 
 .text-align-center
   text-align: center
+
+.text-copy
+  p
+    font-family: font-stack('Georgia')
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+  blockquote
+    margin: 3rem
+  h1,h2,h3,h4,h5,h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: $color-blue
+  img
+    display: block
+    margin: 2.5rem auto
 
   // LINKS
 
@@ -431,6 +449,19 @@ img
   color: $color-red
   font-weight: bold
   border: 0
+
+// ******************************************************
+
+// SINGLE
+
+  // WIRE
+
+#single-wire-photo-caption
+  position: absolute
+  top: 0
+  right: ($gutter / 2)
+  writing-mode: vertical-rl
+  padding: $margin-micro
 
 
 // ******************************************************
