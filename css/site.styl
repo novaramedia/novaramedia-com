@@ -110,6 +110,8 @@ $color-blue = rgb(84,144,235)
 
 $border-width = 2px
 
+$basic-animation-speed = .5s
+
 // ******************************************************
 
 // TYPOGRAPHY
@@ -382,6 +384,14 @@ img
 
 // HEADER
 
+#header
+  position: fixed
+  width: 100%
+  z-index: 1000
+
+#main-content
+  padding-top: 57px + $margin-basic
+
 #header-main-wrapper
   background-image: url('../img/dist/novara-marble-black-cropped.jpg')
   background-size: cover
@@ -453,6 +463,11 @@ img
 // ******************************************************
 
 // SINGLE
+
+#header-page-title
+  opacity: 0
+  transition: opacity $basic-animation-speed
+  margin-bottom: -1px
 
   // WIRE
 

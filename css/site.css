@@ -899,6 +899,14 @@ img {
 .padding-bottom-large {
   padding-bottom: 80px;
 }
+#header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+#main-content {
+  padding-top: 89px;
+}
 #header-main-wrapper {
   background-image: url("../img/dist/novara-marble-black-cropped.jpg");
   background-size: cover;
@@ -961,6 +969,14 @@ img {
   color: #f00;
   font-weight: bold;
   border: 0;
+}
+#header-page-title {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  margin-bottom: -1px;
 }
 #single-wire-photo-caption {
   position: absolute;

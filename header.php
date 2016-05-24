@@ -61,10 +61,17 @@
         <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
             <div class="col col12">
-              <ul class="u-inline-list">
+              <ul class="u-inline-list u-inline-block">
                 <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
                 <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
               </ul>
+              <?php
+                if (is_single()) {
+              ?>
+              <span id="header-page-title" class="text-overflow-ellipsis u-inline-block"><?php the_title(); ?></span>
+              <?php
+                }
+              ?>
             </div>
             <div class="col col12 text-align-right">
               <h4 class="font-uppercase font-bold"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h4>
