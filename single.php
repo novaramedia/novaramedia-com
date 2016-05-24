@@ -53,11 +53,7 @@ if( have_posts() ) {
   <?php get_template_part('partials/support-section'); ?>
 
   <section id="single-related" class="container margin-top-large margin-bottom-large">
-    <div class="row">
-      <div class="col col24">
-        <h4>Related</h4>
-      </div>
-    </div>
+    <?php get_template_part('partials/singles/single-related'); ?>
   </section>
 
 <!-- end main-content -->
