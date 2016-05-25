@@ -6,7 +6,7 @@
 ?>
 
 <div class="row">
-  <div class="col col24">
+  <div class="col col24 margin-bottom-basic">
     <h4><a href="<?php echo $category_link; ?>">FM</a></h4>
   </div>
 </div>
