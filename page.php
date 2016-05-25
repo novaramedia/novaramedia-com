@@ -14,9 +14,9 @@ if( have_posts() ) {
 ?>
   <!-- main posts loop -->
   <section id="page" class="container margin-bottom-large">
-    <div class="row">
+    <div class="row margin-bottom-basic">
       <div class="col col24">
-        <h4 class="margin-bottom-basic"><?php the_title(); ?></h4>
+        <h4><?php the_title(); ?></h4>
       </div>
     </div>
     <div class="row margin-bottom-basic">
