@@ -39,9 +39,14 @@ Site.Header = {
 
     _this.bind();
 
+    if ($('body').hasClass('single')) {
+      _this.showSinglePostTitle();
+    }
+
   },
 
   bind: function() {
+    var _this = this;
 
     $('#menu-toggle').click(function() {
       $('#header-sub').toggle();
@@ -52,6 +57,28 @@ Site.Header = {
     });
 
   },
+
+  showSinglePostTitle: function(e) {
+    var _this = this;
+
+    _this.headerHeight = $('#header-main-wrapper').height();
+    _this.$headerSinglePostTitle = $('#header-page-title')
+
+    $(window).scroll(function() {
+
+      if ($(window).scrollTop() > _this.headerHeight) {
+
+        _this.$headerSinglePostTitle.css('opacity', 1);
+
+      } else {
+
+        _this.$headerSinglePostTitle.css('opacity', 0);
+
+      }
+
+    });
+
+  }
 };
 
 Site.Search = {
