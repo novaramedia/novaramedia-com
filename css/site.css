@@ -906,6 +906,7 @@ img {
 }
 #main-content {
   padding-top: 89px;
+  min-height: 75vh;
 }
 #header-main-wrapper {
   background-image: url("../img/dist/novara-marble-black-cropped.jpg");
