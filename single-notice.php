@@ -12,7 +12,8 @@ get_header();
       <div class="col col24">
         <h4 class="margin-bottom-basic">Notices</h4>
       </div>
-      <div class="row">
+    </div>
+    <div class="row">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
