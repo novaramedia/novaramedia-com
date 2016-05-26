@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row margin-top-small margin-bottom-small">
   <div class="col col2"></div>
   <div class="col col20">
     <h1 class="js-fix-widows"><?php the_title(); ?></h1>
