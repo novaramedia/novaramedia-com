@@ -206,7 +206,7 @@ function igv_cmb_metaboxes() {
 
   $people_meta_boxes->add_field( array(
     'name'    => __( 'Twitter handle', 'cmb' ),
-    'desc'    => __( '(optional)', 'cmb' ),
+    'desc'    => __( 'Include the @ (optional)', 'cmb' ),
     'id'      => $prefix . 'twitter',
     'type'    => 'text',
   ) );
