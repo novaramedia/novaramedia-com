@@ -36,23 +36,28 @@ if( have_posts() ) {
       </div>
     </div>
     <div class="row margin-bottom-mid">
-<?php
-    $people = get_posts(array('post_type' => 'person', 'posts_per_page' => -1, 'order' => 'ASC'));
-    if ($people) {
+    <?php
+    $people = new WP_Query(array(
+      'post_type' => 'person', 
+      'posts_per_page' => -1,
+      'order' => 'ASC'
+    ));
+    if ( $people->have_posts() ) {
       $i = 0;
-      foreach ($people as $person) {
+      while( $people->have_posts() ) {
+        $people->the_post();
 
         if ($i % 2 === 0 && $i !== 0) {
           echo "</div>\n<div class=\"row margin-bottom-mid\">";
         }
-        $meta = get_post_meta($person->ID);
+        $meta = get_post_meta($post->ID);
 ?>
       <div class="col col4">
-        <?php echo wp_get_attachment_image(get_post_thumbnail_id($person->ID), 'col4'); ?>
+        <?php the_post_thumbnail($post->ID, 'col4'); ?>
       </div>
       <div class="col col8">
         <div class="margin-bottom-small">
-          <h6><span class="font-bold"><?php echo $person->post_title; ?>,</span>
+        <h6><span class="font-bold"><?php the_title(); ?></span>
           <?php if (!empty($meta['_cmb_title'][0])) {echo $meta['_cmb_title'][0];} ?>
           </h6>
 <?php
@@ -69,7 +74,7 @@ if( have_posts() ) {
         }
 ?>
         </div>
-        <?php echo apply_filters('the_content', $person->post_content); ?>
+        <?php the_content(); ?>
       </div>
 <?php
       $i++;
@@ -81,6 +86,7 @@ if( have_posts() ) {
   </section>
 <?php
   }
+  wp_reset_postdata();
 } else {
 ?>
   <div class="container">
