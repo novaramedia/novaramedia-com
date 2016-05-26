@@ -167,5 +167,56 @@ function igv_cmb_metaboxes() {
     'type' => 'text_url',
   ) );
 
+  // Page
+
+  $page_meta_boxes = new_cmb2_box( array (
+    'id'         => 'page_metabox',
+    'title'      => __( 'Page Meta', 'cmb' ),
+    'object_types'      => array( 'page' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
+  ) );
+
+  $page_meta_boxes->add_field( array(
+    'name'    => __( '2nd Column', 'cmb' ),
+    'desc'    => __( '(optional)', 'cmb' ),
+    'id'      => $prefix . 'page_extra',
+    'type'    => 'wysiwyg',
+    'options' => array( 'textarea_rows' => 5, ),
+  ) );
+
+  // People
+
+  $people_meta_boxes = new_cmb2_box( array (
+    'id'         => 'people_metabox',
+    'title'      => __( 'Page Meta', 'cmb' ),
+    'object_types'      => array( 'person' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
+  ) );
+
+  $people_meta_boxes->add_field( array(
+    'name'    => __( 'Title', 'cmb' ),
+    'desc'    => __( '(optional)', 'cmb' ),
+    'id'      => $prefix . 'title',
+    'type'    => 'text',
+  ) );
+
+  $people_meta_boxes->add_field( array(
+    'name'    => __( 'Twitter handle', 'cmb' ),
+    'desc'    => __( 'Include the @ (optional)', 'cmb' ),
+    'id'      => $prefix . 'twitter',
+    'type'    => 'text',
+  ) );
+
+  $people_meta_boxes->add_field( array(
+    'name'    => __( 'Email', 'cmb' ),
+    'desc'    => __( '(optional)', 'cmb' ),
+    'id'      => $prefix . 'email',
+    'type'    => 'text',
+  ) );
+
 }
 ?>
