@@ -1,31 +1,40 @@
 <?php
   $meta = get_post_meta($post->ID);
+
+  $category_id = get_cat_ID('FM');
+  $category_link = get_category_link( $category_id );
 ?>
 
 <div class="row">
-  <div class="col col24">
-    <h4>FM</h4>
+  <div class="col col24 margin-bottom-basic">
+    <h4><a href="<?php echo $category_link; ?>">FM</a></h4>
   </div>
 </div>
 
-<div class="row">
+<header class="row margin-bottom-basic">
   <div class="col col12">
     <h1 class="js-fix-widows"><?php the_title(); ?></h1>
-    // social sharing
-    <?php
-      if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<a href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a>';
-      }
-    ?>
-    <p>Published <?php the_time('jS F Y'); ?></p>
   </div>
 
-  <div class="col col12">
+  <div class="col col12 padding-top-micro">
     <?php the_content(); ?>
+  </div>
+</header>
+
+<div class="row margin-bottom-basic font-smaller">
+  <div class="col col4">
+    Published <?php the_time('jS F Y'); ?>
+  </div>
+  <div class="col col4">
+    <?php
+      if (!empty($meta['_cmb_dl_mp3'])) {
+        echo '<a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a>';
+      }
+    ?>
   </div>
 </div>
 
-<div class="row">
+<div class="row margin-bottom-large">
   <div class="col col24">
     <?php
       if (!empty($meta['_cmb_sc'][0])) {
