@@ -1,26 +1,37 @@
 <?php
   $meta = get_post_meta($post->ID);
+
+  $category_id = get_cat_ID('TV');
+  $category_link = get_category_link( $category_id );
+
 ?>
 
 <div class="row">
-  <div class="col col24">
-    <h4>TV</h4>
+  <div class="col col24 margin-bottom-basic">
+    <h4><a href="<?php echo $category_link; ?>">TV</a></h4>
   </div>
 </div>
 
-<div class="row">
+<header class="row margin-bottom-small">
   <div class="col col12">
     <h1 class="js-fix-widows"><?php the_title(); ?></h1>
-    // social sharing
-    <p>Published <?php the_time('jS F Y'); ?></p>
   </div>
 
-  <div class="col col12">
+  <div class="col col12 text-copy font-italic padding-top-micro">
     <?php the_content(); ?>
+  </div>
+</header>
+
+<div class="row margin-bottom-basic font-smaller">
+  <div class="col col4">
+    Published <?php the_time('jS F Y'); ?>
+  </div>
+  <div class="col col4">
+
   </div>
 </div>
 
-<div class="row">
+<div class="row margin-bottom-large">
   <div class="col col20">
     <?php
       if (!empty($meta['_cmb_utube'])) {
@@ -35,9 +46,28 @@
     ?>
   </div>
   <div class="col col4">
-    <h4>Related TV</h4>
-    <div id="single-tv-related-tv">
-      // related tv goes here
+    <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More TV</a></h4>
+    <div id="single-tv-related-tv" class="font-smaller">
+      <?php
+        $related_tv = get_related_posts(null, 'TV', 3);
+
+        if ($related_tv->have_posts()) {
+          while ($related_tv->have_posts()) {
+            $related_tv->the_post();
+      ?>
+      <a href="<?php the_permalink(); ?>">
+        <div class="single-tv-related-tv margin-bottom-small">
+          <?php the_post_thumbnail('col4-16to9'); ?>
+          <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+        </div>
+      </a>
+
+
+      <?php
+          }
+        }
+        wp_reset_postdata();
+      ?>
     </div>
   </div>
 </div>
