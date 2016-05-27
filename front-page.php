@@ -65,9 +65,7 @@ get_header();
           'category_name' => 'TV'
         ));
 
-        if ($latest_tv->have_posts()) {
-          pr($latest_tv->posts[0]);
-        }
+        render_tv_query($latest_tv);
       ?>
     </div>
   </section>
@@ -180,11 +178,38 @@ get_header();
     </div>
   </section>
 
+<?php
+  $show_imo = IGV_get_option('_igv_show_imo');
+
+  if ($show_imo) {
+?>
   <section id="home-imo-posts" class="container margin-bottom-large">
+    <?php
+      $category_id = get_cat_ID('imobastani');
+      $category_link = get_category_link( $category_id );
+    ?>
+
     <div class="row">
-      #imo?!
+      <div class="col col24 margin-bottom-small">
+        <h4><a href="<?php echo $category_link; ?>">#IMOBastani</a></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <?php
+        $latest_tv = new WP_Query(array(
+          'posts_per_page' => 4,
+          'category_name' => 'imobastani'
+        ));
+
+        render_tv_query($latest_tv);
+      ?>
     </div>
   </section>
+<?php
+  }
+?>
+
 
 <!-- end main-content -->
 </main>

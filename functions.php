@@ -63,6 +63,7 @@ function cmb_initialize_cmb_meta_boxes() {
 
 // Add custom functions
 
+get_template_part( 'lib/renderers' );
 get_template_part( 'lib/functions-misc' );
 get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
