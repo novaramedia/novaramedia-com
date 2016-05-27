@@ -16,6 +16,10 @@ Site = {
     _this.Search.init();
     _this.Support.init();
 
+    $('.js-select').click(function() {
+      $(this).selectText();
+    });
+
   },
 
   onResize: function() {
