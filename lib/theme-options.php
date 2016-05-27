@@ -101,6 +101,31 @@ class IGV_Admin {
       ),
     ) );
 
+    // FRONT PAGE OPTIONS
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Front Page Options', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $this->prefix . 'home_title',
+      'type' => 'title',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Home Focus', 'IGV' ),
+      'desc' => __( 'a Focus to show (optional)', 'IGV' ),
+      'id'   => $this->prefix . 'home_focus',
+      'type' => 'select',
+      'options_cb' => 'home_focus_list',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Show #IMO on home', 'IGV' ),
+      'desc' => __( '...', 'IGV' ),
+      'id'   => $this->prefix . 'show_imo',
+      'type' => 'checkbox',
+    ) );
+
+
     // SOCIAL MEDIA OPTIONS
 
     $options_metabox->add_field( array(
@@ -159,31 +184,6 @@ class IGV_Admin {
       'desc' => __( '(optional)', 'IGV' ),
       'id'   => $this->prefix . 'og_fb_app_id',
       'type' => 'text',
-    ) );
-
-    // BOILER
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Title for options section', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
-      'id'   => $this->prefix . 'general_title',
-      'type' => 'title',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Test Text', 'IGV' ),
-      'desc' => __( 'field description (optional)', 'IGV' ),
-      'id'   => $this->prefix . 'test_text',
-      'type' => 'text',
-      'default' => 'Default Text',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name'    => __( 'Test Color Picker', 'IGV' ),
-      'desc'    => __( 'field description (optional)', 'IGV' ),
-      'id'      => $this->prefix . 'test_colorpicker',
-      'type'    => 'colorpicker',
-      'default' => '#bada55',
     ) );
 
   }
