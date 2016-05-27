@@ -8,10 +8,12 @@ function onlyTopLevelCategoryFilter($var) {
 }
 
 // obviously it gets related posts and returns a WP Query
-function get_related_posts($excludedIdsArray = null) {
+function get_related_posts($excluded_ids_array = null, $category_name = null, $number_of_posts = 4) {
+
   // Check if we are on a single page, if not, return false
-  if ( !is_single() )
+  if (!is_single())  {
     return false;
+  }
 
   // Get the current post id
   $post_id = get_queried_object_id();
@@ -21,8 +23,18 @@ function get_related_posts($excludedIdsArray = null) {
 
   // Exlude this post and possibly others if parsed as variable
   $posts_not_in[] = $post_id;
-  if ($excludedIdsArray) {
-    $posts_not_in = array_merge($posts_not_in, $excludedIdsArray);
+
+  if ($excluded_ids_array) {
+    $posts_not_in = array_merge($posts_not_in, $excluded_ids_array);
+  }
+
+  $args = array(
+    'post__not_in' => $posts_not_in,
+    'posts_per_page' => $number_of_posts,
+  );
+
+  if ($category_name) {
+    $args['category_name'] = $category_name;
   }
 
   if ($tags) {
@@ -35,18 +47,13 @@ function get_related_posts($excludedIdsArray = null) {
     }
 
     //args for the query which will get the related posts
-    $args = array(
+    $args = array_merge($args, array(
       'tag__in' => $tag_ids,
-      'post__not_in' => $posts_not_in,
-      'posts_per_page' => 4,
       'order' => 'DESC',
       'orderby' => 'post_date',
-    );
-  } else {
-    $args = array (
-      'posts_per_page' => 4,
-      'post__not_in'   => $posts_not_in,
-    );
+    ));
+
   }
+
   return new WP_Query($args);
 }
