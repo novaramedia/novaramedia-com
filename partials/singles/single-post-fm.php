@@ -11,12 +11,12 @@
   </div>
 </div>
 
-<header class="row margin-bottom-basic">
+<header class="row margin-bottom-small">
   <div class="col col12">
     <h1 class="js-fix-widows"><?php the_title(); ?></h1>
   </div>
 
-  <div class="col col12 padding-top-micro">
+  <div class="col col12 text-copy font-italic padding-top-micro">
     <?php the_content(); ?>
   </div>
 </header>

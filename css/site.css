@@ -720,6 +720,12 @@ b {
 .font-mono {
   font-family: monospace;
 }
+.font-serif {
+  font-family: Georgia, Times, "Times New Roman", serif;
+}
+.font-larger {
+  font-size: 1.3rem;
+}
 .font-color-white {
   color: #fdfdfd;
 }
