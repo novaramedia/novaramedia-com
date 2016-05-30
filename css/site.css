@@ -982,6 +982,15 @@ img {
   font-weight: bold;
   border: 0;
 }
+.post-col12-image {
+  position: relative;
+}
+.post-col12-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 24px;
+}
 #header-page-title {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);

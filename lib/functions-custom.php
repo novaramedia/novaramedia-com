@@ -1,7 +1,7 @@
 <?php
 
-// for array_filter
-function onlyTopLevelCategoryFilter($var) {
+// for array_filter s
+function only_top_level_category_filter($var) {
   if ($var->category_parent == 0) {
     return true;
   }
@@ -56,4 +56,26 @@ function get_related_posts($excluded_ids_array = null, $category_name = null, $n
   }
 
   return new WP_Query($args);
+}
+
+// for site options. Returns array for select
+function home_focus_list() {
+
+  $focuses = array(
+    null => 'No Focus Shown',
+  );
+
+  $focus_terms = get_terms(array(
+    'taxonomy' => 'focus',
+  ));
+
+  if ($focus_terms) {
+    foreach($focus_terms as $term) {
+      $focuses[$term->term_id] = $term->name;
+    }
+
+  }
+
+  return $focuses;
+
 }
