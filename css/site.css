@@ -1012,6 +1012,7 @@ img {
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
   margin-bottom: -1px;
+  max-width: 864px;
 }
 #single-wire-photo-caption {
   position: absolute;

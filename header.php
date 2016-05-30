@@ -67,8 +67,14 @@
               </ul>
               <?php
                 if (is_single()) {
+                  $author = get_post_meta($post->ID, '_cmb_author', true);
               ?>
-              <span id="header-page-title" class="text-overflow-ellipsis u-inline-block"><?php the_title(); ?></span>
+              <span id="header-page-title" class="text-overflow-ellipsis u-inline-block"><?php
+                the_title();
+                if (!empty($author)) {
+                  echo ' by ' . $author;
+                }
+              ?></span>
               <?php
                 }
               ?>
