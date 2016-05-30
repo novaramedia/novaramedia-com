@@ -927,6 +927,20 @@ img {
 .header-menu li {
   padding-right: 8px;
 }
+#menu-logo {
+  margin-right: 14px;
+}
+#menu-logo svg {
+  height: 20px;
+  width: 24px;
+  vertical-align: text-bottom;
+  margin-bottom: -2px;
+}
+#header-logotype svg {
+  height: 17px;
+  width: 232px;
+  vertical-align: text-bottom;
+}
 #header-sub {
   display: none;
 }

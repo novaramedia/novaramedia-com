@@ -60,7 +60,7 @@
       <div id="header-main-wrapper">
         <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
-            <div class="col col12">
+            <div class="col col18">
               <ul class="u-inline-list u-inline-block">
                 <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
                 <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
@@ -73,9 +73,12 @@
                 }
               ?>
             </div>
-            <div class="col col12 text-align-right">
-              <h4 class="font-uppercase font-bold"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h4>
-            </div>
+            <a href="<?php echo home_url(); ?>">
+              <div class="col col6 text-align-right">
+                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/NM-logomark-white.svg'); ?></nav>
+                <nav id="header-logotype" class="u-inline-block"<a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/logotype-basic-idea-3.svg'); ?></div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
