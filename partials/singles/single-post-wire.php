@@ -28,14 +28,14 @@
   </div>
 </div>
 
-<div class="row margin-top-small margin-bottom-small">
+<div class="row margin-top-small margin-bottom-basic">
   <div class="col col2"></div>
   <div class="col col20">
     <h1 id="single-wire-title" class="js-fix-widows"><?php the_title(); ?></h1>
   </div>
 </div>
 
-<div class="row">
+<div class="row margin-bottom-small">
   <div class="col col3"></div>
   <div class="col col13">
     <h3>by <?php
@@ -53,6 +53,13 @@
         echo '</a>';
       }
     ?></h3>
+    <?php
+      if (!empty($meta['_cmb_author'])) {
+        echo '<a target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
+        echo '<h5>@' . $meta['_cmb_author_twitter'][0] . '</h5>';
+        echo '</a>';
+      }
+    ?>
   </div>
   <div class="col col3 font-smaller">
     <?php
