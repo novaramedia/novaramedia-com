@@ -97,7 +97,7 @@ $font-leading-tighter = 1.15
 $font-leading-larger = 1.55
 
 $font-tracking-basic = 0.001em
-$font-tracking-wider = 0.05em
+$font-tracking-wider = 0.025em
 
 $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
@@ -130,11 +130,13 @@ h1
   font-size: $font-size-h1
   font-weight: bold
   margin: 0
+  letter-spacing: $font-tracking-wider
 
 h2
   font-size: $font-size-h2
   font-weight: bold
   margin: 0
+  letter-spacing: $font-tracking-wider
 
 h3
   font-size: $font-size-h3
@@ -170,6 +172,9 @@ p
 
 .font-leading-wider
   line-height: $font-leading-larger
+
+.font-tracking-wider
+  letter-spacing: $font-tracking-wider
 
 .font-smaller
   font-size: 0.8rem
@@ -485,6 +490,22 @@ img
   color: $color-red
   font-weight: bold
   border: 0
+
+// ******************************************************
+
+// FRONT PAGE
+
+#featured-post
+  position: relative
+
+#featured-post-title
+  position: absolute
+  top: 0
+  height: 100%
+  width: 100%
+  z-index: 100
+  padding: $margin-large
+  font-size: golden-ratio(1rem , 2.5)
 
 // ******************************************************
 
