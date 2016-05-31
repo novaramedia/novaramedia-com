@@ -125,6 +125,14 @@ class IGV_Admin {
       'type' => 'checkbox',
     ) );
 
+    $options_metabox->add_field( array(
+      'name' => __( 'Front Page Featured', 'IGV' ),
+      'desc' => __( '...', 'IGV' ),
+      'id'   => $this->prefix . 'front_feature',
+      'type' => 'post_search_text',
+      'post_type'   => 'post',
+      'select_behavior' => 'replace',
+    ) );
 
     // SOCIAL MEDIA OPTIONS
 
