@@ -31,7 +31,10 @@
   <div class="col col4">
     Published <?php the_time('jS F Y'); ?>
   </div>
-  <div class="col col8">
+  <div class="col col4">
+    <a href="http://podcast.novaramedia.com" target="_blank">Subscribe to Podcast</a>
+  </div>
+  <div class="col col4">
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
         echo '<a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a>';
