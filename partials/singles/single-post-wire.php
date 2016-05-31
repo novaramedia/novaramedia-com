@@ -7,6 +7,12 @@
 
   $category_id = get_cat_ID('Wire');
   $category_link = get_category_link( $category_id );
+
+  if (!empty($meta['bitly_url'])) {
+    $share_url = $meta['bitly_url'][0];
+  } else {
+    $share_url = get_the_permalink($post->ID);
+  }
 ?>
 
 <div class="row margin-bottom-basic">
@@ -37,7 +43,7 @@
 
 <div class="row margin-bottom-small">
   <div class="col col3"></div>
-  <div class="col col13">
+  <div class="col col10">
     <h3>by <?php
       if (!empty($meta['_cmb_author_twitter'])) {
         echo '<a id="single-wire-author" target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
@@ -61,6 +67,11 @@
       }
     ?>
   </div>
+  <div class="col col2 font-smaller">
+    <?php
+      render_tweet_link($share_url, $post->post_title, 'Tweet Article');
+    ?>
+  </div>
   <div class="col col3 font-smaller">
     <?php
       if (!empty($meta['_igv_reading_time'])) {
@@ -73,8 +84,6 @@
         echo '</span></span> ';
       }
     ?>
-
-    <?php get_template_part('partials/social-sharing'); ?>
   </div>
   <div class="col col3 font-smaller">
     <div class="kindleWidget" style="display:inline-block;cursor:pointer;white-space:nowrap;">Send to Kindle</div>

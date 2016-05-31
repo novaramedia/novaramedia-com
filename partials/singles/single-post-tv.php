@@ -4,6 +4,11 @@
   $category_id = get_cat_ID('TV');
   $category_link = get_category_link( $category_id );
 
+  if (!empty($meta['bitly_url'])) {
+    $share_url = $meta['bitly_url'][0];
+  } else {
+    $share_url = get_the_permalink($post->ID);
+  }
 ?>
 
 <div class="row">
@@ -23,11 +28,11 @@
 </header>
 
 <div class="row margin-bottom-basic font-smaller">
-  <div class="col col4">
+  <div class="col col12">
     Published <?php the_time('jS F Y'); ?>
   </div>
-  <div class="col col4">
-
+  <div class="col col3">
+    <?php render_tweet_link($share_url, $post->post_title); ?>
   </div>
 </div>
 
