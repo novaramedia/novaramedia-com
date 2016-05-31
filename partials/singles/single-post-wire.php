@@ -67,11 +67,6 @@
       }
     ?>
   </div>
-  <div class="col col2 font-smaller">
-    <?php
-      render_tweet_link($share_url, $post->post_title, 'Tweet Article');
-    ?>
-  </div>
   <div class="col col3 font-smaller">
     <?php
       if (!empty($meta['_igv_reading_time'])) {
@@ -84,6 +79,14 @@
         echo '</span></span> ';
       }
     ?>
+  </div>
+  <div class="col col2 font-smaller">
+    <?php
+      render_tweet_link($share_url, $post->post_title, 'Tweet Article');
+    ?>
+  </div>
+  <div class="col col2 font-smaller">
+    <?php render_facebook_share_link($share_url); ?>
   </div>
   <div class="col col3 font-smaller">
     <div class="kindleWidget" style="display:inline-block;cursor:pointer;white-space:nowrap;">Send to Kindle</div>

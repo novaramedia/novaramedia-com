@@ -59,3 +59,15 @@ function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag =
 
   echo '<a href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
+
+function render_facebook_share_link($url, $link_text = 'Facebook Share') {
+  $facebook_url = 'https://www.facebook.com/sharer/sharer.php?';
+
+  $facebook_url .= '&u=' . urlencode($url);
+
+  echo '<a href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+}
+
+
+
+

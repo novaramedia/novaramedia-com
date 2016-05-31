@@ -31,8 +31,12 @@
   <div class="col col12">
     Published <?php the_time('jS F Y'); ?>
   </div>
+
+  <div class="col col2">
+    <?php render_tweet_link($share_url, $post->post_title, 'Tweet Episode'); ?>
+  </div>
   <div class="col col3">
-    <?php render_tweet_link($share_url, $post->post_title); ?>
+    <?php render_facebook_share_link($share_url); ?>
   </div>
 </div>
 
