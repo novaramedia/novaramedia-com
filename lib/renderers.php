@@ -43,3 +43,31 @@ function render_tv_query($query) {
 <?php
   }
 }
+
+function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
+  $twitter_url = 'https://twitter.com/intent/tweet?via=novaramedia';
+
+  if ($hashtag) {
+    $twitter_url .= '&hashtags=' . $hashtag;
+  }
+
+  if ($title) {
+    $twitter_url .= '&text=' . $title;
+  }
+
+  $twitter_url .= '&url=' . urlencode($url);
+
+  echo '<a href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
+}
+
+function render_facebook_share_link($url, $link_text = 'Facebook Share') {
+  $facebook_url = 'https://www.facebook.com/sharer/sharer.php?';
+
+  $facebook_url .= '&u=' . urlencode($url);
+
+  echo '<a href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+}
+
+
+
+

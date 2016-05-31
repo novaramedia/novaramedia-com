@@ -3,6 +3,12 @@
 
   $category_id = get_cat_ID('FM');
   $category_link = get_category_link( $category_id );
+
+  if (!empty($meta['bitly_url'])) {
+    $share_url = $meta['bitly_url'][0];
+  } else {
+    $share_url = get_the_permalink($post->ID);
+  }
 ?>
 
 <div class="row">
@@ -26,11 +32,22 @@
     Published <?php the_time('jS F Y'); ?>
   </div>
   <div class="col col4">
+    <a href="http://podcast.novaramedia.com" target="_blank">Subscribe to Podcast</a>
+  </div>
+  <div class="col col4">
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
         echo '<a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a>';
+      } else {
+        echo ' ';
       }
     ?>
+  </div>
+  <div class="col col2">
+    <?php render_tweet_link($share_url, $post->post_title, 'Tweet Episode'); ?>
+  </div>
+  <div class="col col3">
+    <?php render_facebook_share_link($share_url); ?>
   </div>
 </div>
 
