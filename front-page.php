@@ -16,6 +16,8 @@ get_header();
     $post = get_post($home_featured_ids[0]);
 
     setup_postdata($post);
+
+    $alt_thumb = get_post_meta($post->ID, '_cmb_alt_thumb_id');
 ?>
   <section id="home-featured" class="container margin-bottom-large">
     <div class="row">
@@ -26,7 +28,13 @@ get_header();
     <div class="row">
       <a href="<?php the_permalink(); ?>">
         <article id="featured-post" class="col col24">
-          <?php the_post_thumbnail('col24-featured-crop', array('id' => 'featured-post-thumbnail')); ?>
+          <?php
+            if (!empty($alt_thumb)) {
+              echo wp_get_attachment_image($alt_thumb[0], 'col24-featured-crop', array('id' => 'featured-post-thumbnail'));
+            } else {
+              the_post_thumbnail('col24-featured-crop', array('id' => 'featured-post-thumbnail'));
+            }
+          ?>
           <h1 id="featured-post-title" class="text-align-center font-color-white u-flex-center js-fix-widows"><?php the_title(); ?></h1>
         </article>
       </a>
