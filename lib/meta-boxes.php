@@ -111,7 +111,7 @@ function igv_cmb_metaboxes() {
 
   $tv_metabox->add_field( array(
     'name' => __( 'Alternate thumbnail', 'cmb' ),
-    'desc' => __( 'Without and text. Just an image', 'cmb' ),
+    'desc' => __( 'Without any text. Just an image', 'cmb' ),
     'id'   => $prefix . 'alt_thumb',
     'type' => 'file',
   ) );
