@@ -18,4 +18,5 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'col12-1to2point3', 664, 288, true );
 
   add_image_size( 'col24-wire-crop', 1304, 400, true );
+  add_image_size( 'col24-featured-crop', 1304, 550, true );
 }

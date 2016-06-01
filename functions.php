@@ -58,6 +58,7 @@ add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 9999 );
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'lib/CMB2/init.php';
+    require_once 'lib/CMB2-Post-Search-field/lib/init.php';
   }
 }
 
