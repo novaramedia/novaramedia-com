@@ -990,6 +990,8 @@ img {
   bottom: 0;
   left: 0;
   padding: 24px;
+  background-image: -webkit-linear-gradient(top,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
+  background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
 }
 #header-page-title {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
