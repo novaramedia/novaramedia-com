@@ -39,7 +39,7 @@
   if (isset($focusIds)) {
     $related = get_related_posts($focusIds);
   } else {
-    $related = get_related_posts();
+    $related = get_related_posts(null, null, 8);
   }
 
   if ($related->have_posts()) {
@@ -49,11 +49,19 @@
     <h4>Related</h4>
   </div>
 </div>
-<div class="row">
+<div class="row margin-bottom-basic">
 <?php
+    $i = 0;
     while ($related->have_posts()) {
       $related->the_post();
+
+      if ($i % 4 === 0 && $i !== 0) {
+        echo "</div>\n<div class=\"row margin-bottom-basic\">";
+      }
+
       get_template_part('partials/post-layouts/post-col6');
+
+      $i++;
     }
 ?>
 </div>
