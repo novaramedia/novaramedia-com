@@ -109,6 +109,13 @@ function igv_cmb_metaboxes() {
     'type' => 'text',
   ) );
 
+  $tv_metabox->add_field( array(
+    'name' => __( 'Alternate thumbnail', 'cmb' ),
+    'desc' => __( 'Without any text. Just an image', 'cmb' ),
+    'id'   => $prefix . 'alt_thumb',
+    'type' => 'file',
+  ) );
+
   // Wire
 
   $wire_metabox = new_cmb2_box( array (
