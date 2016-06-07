@@ -807,6 +807,10 @@ img {
   max-width: 100%;
   height: auto;
 }
+.inline-action-list li {
+  display: inline-block;
+  margin-right: 16px;
+}
 .margin-micro {
   margin: 4.944271909998838px;
 }

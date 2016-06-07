@@ -60,36 +60,30 @@
       }
     ?></h3>
     <?php
-      if (!empty($meta['_cmb_author'])) {
+      if (!empty($meta['_cmb_author_twitter'])) {
         echo '<a target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
         echo '<h5>@' . $meta['_cmb_author_twitter'][0] . '</h5>';
         echo '</a>';
       }
     ?>
   </div>
-  <div class="col col3 font-smaller">
+  <div class="col col10 font-smaller">
+    <ul class="inline-action-list">
     <?php
       if (!empty($meta['_igv_reading_time'])) {
-        echo '<span>Estimated read time: ';
+        echo '<li>Estimated read time: ';
         if ($meta['_igv_reading_time'][0] > 1) {
           echo $meta['_igv_reading_time'][0] . 'mins';
         } else {
           echo $meta['_igv_reading_time'][0] . 'min';
         }
-        echo '</span></span> ';
+        echo '</li> ';
       }
     ?>
-  </div>
-  <div class="col col2 font-smaller">
-    <?php
-      render_tweet_link($share_url, $post->post_title, 'Tweet Article');
-    ?>
-  </div>
-  <div class="col col2 font-smaller">
-    <?php render_facebook_share_link($share_url); ?>
-  </div>
-  <div class="col col3 font-smaller">
-    <div class="kindleWidget" style="display:inline-block;cursor:pointer;white-space:nowrap;">Send to Kindle</div>
+      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet Article'); ?></li>
+      <li><?php render_facebook_share_link($share_url); ?></li>
+      <li><div class="kindleWidget" style="display:inline-block;cursor:pointer;white-space:nowrap;">Send to Kindle</div></li>
+    </ul>
   </div>
 </div>
 

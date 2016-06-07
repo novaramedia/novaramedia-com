@@ -28,26 +28,22 @@
 </header>
 
 <div class="row margin-bottom-basic font-smaller">
-  <div class="col col4">
-    Published <?php the_time('jS F Y'); ?>
-  </div>
-  <div class="col col4">
-    <a href="http://podcast.novaramedia.com" target="_blank">Subscribe to Podcast</a>
-  </div>
-  <div class="col col4">
+  <div class="col col12">
+    <ul class="inline-action-list">
+      <li>Published <?php the_time('jS F Y'); ?></li>
+      <li><a href="http://podcast.novaramedia.com" target="_blank">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a>';
-      } else {
-        echo ' ';
+        echo '<li><a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
       }
     ?>
+    </ul>
   </div>
-  <div class="col col2">
-    <?php render_tweet_link($share_url, $post->post_title, 'Tweet Episode'); ?>
-  </div>
-  <div class="col col3">
-    <?php render_facebook_share_link($share_url); ?>
+  <div class="col col12">
+    <ul class="inline-action-list">
+      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet Episode'); ?></li>
+      <li><?php render_facebook_share_link($share_url); ?></li>
+    </ul>
   </div>
 </div>
 
