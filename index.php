@@ -8,6 +8,29 @@ get_header();
 
   <!-- main posts loop -->
   <section id="posts" class="container">
+
+<?php
+if (is_search()) {
+?>
+    <div class="row margin-bottom-basic">
+      <div class="col col24">
+        <h4>Search Results for: <?php echo get_search_query(); ?></h4>
+      </div>
+    </div>
+<?php
+} else if (is_tag()) {
+?>
+    <div class="row margin-bottom-basic">
+      <div class="col col24">
+        <h4><?php single_tag_title('Tag: '); ?></h4>
+      </div>
+    </div>
+<?php
+}
+?>
+
+
+
     <div class="row margin-bottom-basic">
 <?php
 if( have_posts() ) {
