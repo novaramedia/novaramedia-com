@@ -1,4 +1,48 @@
 <?php
+
+function render_home_focus($focus) {
+  $focus_object = get_term($focus);
+  $focus_link = get_term_link($focus_object);
+?>
+  <section id="home-focus-posts" class="container margin-bottom-large">
+    <div class="row">
+      <div class="col col24 margin-bottom-small">
+        <h4><a href="<?php echo $focus_link; ?>">Focus on <?php echo $focus_object->name; ?></a></h4>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-small">
+<?php
+      $focusPosts = new WP_Query(array(
+        'posts_per_page' => -1,
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'focus',
+            'field' => 'term_id',
+            'terms' => $focus
+          ),
+        ),
+      ));
+      if ($focusPosts->have_posts()) {
+        $i = 0;
+        while ($focusPosts->have_posts()) {
+          $focusPosts->the_post();
+
+          if ($i % 3 === 0 && $i !== 0) {
+            echo "</div>\n<div class=\"row margin-bottom-small\">";
+          }
+
+          get_template_part('partials/post-layouts/home-focus-post-col8');
+
+          $i++;
+        }
+      }
+?>
+    </div>
+  </section>
+ <?php
+}
+
 function render_tv_query($query) {
   global $post;
 
@@ -67,7 +111,3 @@ function render_facebook_share_link($url, $link_text = 'Facebook Share') {
 
   echo '<a href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
-
-
-
-

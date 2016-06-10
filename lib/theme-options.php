@@ -119,6 +119,13 @@ class IGV_Admin {
     ) );
 
     $options_metabox->add_field( array(
+      'name' => __( 'Show home Focus at the top', 'IGV' ),
+      'desc' => __( 'but under a featured post if one is set', 'IGV' ),
+      'id'   => $this->prefix . 'home_focus_at_top',
+      'type' => 'checkbox',
+    ) );
+
+    $options_metabox->add_field( array(
       'name' => __( 'Show #IMO on home', 'IGV' ),
       'desc' => __( '...', 'IGV' ),
       'id'   => $this->prefix . 'show_imo',
