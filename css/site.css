@@ -956,7 +956,6 @@ img {
 #header-search {
   display: none;
 }
-.search #header-search,
 .error404 #header-search {
   display: block;
 }
