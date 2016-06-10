@@ -29,8 +29,6 @@ if (is_search()) {
 }
 ?>
 
-
-
     <div class="row margin-bottom-basic">
 <?php
 if( have_posts() ) {
