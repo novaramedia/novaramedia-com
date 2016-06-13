@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
   <div class="container">
-    <div class="row margin-top-basic margin-bottom-basic">
+    <div class="row margin-top-large margin-bottom-basic">
       <div class="col col4"></div>
       <div class="col col16">
         <h2 class="margin-bottom-basic">404 !</h2>

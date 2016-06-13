@@ -959,10 +959,6 @@ img {
 #header-search {
   display: none;
 }
-.search #header-search,
-.error404 #header-search {
-  display: block;
-}
 #search-form {
   border: 2px solid #fdfdfd;
 }
@@ -988,6 +984,9 @@ img {
 }
 #tag-suggestions {
   display: none;
+}
+.error404 #header-search {
+  display: block;
 }
 .support-form-holder {
   min-height: 5rem;
