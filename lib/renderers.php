@@ -19,6 +19,9 @@ function render_tv_query($query) {
       echo 'Someone messed up :/';
     }
     ?>
+    <a href="<?php the_permalink(); ?>">
+      <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+    </a>
   </div>
   <div class="col col4">
     <?php
