@@ -1,13 +1,19 @@
 <?php
 get_header();
+
+$home_featured = IGV_get_option('_igv_front_feature');
+
+$focus = IGV_get_option('_igv_home_focus');
+$focus_at_top = IGV_get_option('_igv_home_focus_at_top');
+
+$show_imo = IGV_get_option('_igv_show_imo');
+
 ?>
 
 <!-- main content -->
 <main id="main-content">
 
 <?php
-  $home_featured = IGV_get_option('_igv_front_feature');
-
   if (!empty($home_featured)) {
 
     global $post;
@@ -43,7 +49,10 @@ get_header();
 <?php
   }
 
-?>
+  if ($focus && $focus_at_top) {
+    render_home_focus($focus);
+  }
+  ?>
 
   <section id="home-wire-posts" class="container margin-bottom-large">
     <?php
@@ -142,50 +151,8 @@ get_header();
   <?php get_template_part('partials/support-section'); ?>
 
   <?php
-    $focus = IGV_get_option('_igv_home_focus');
-
-    if ($focus) {
-
-      $focus_object = get_term($focus);
-      $focus_link = get_term_link($focus_object);
-?>
-  <section id="home-focus-posts" class="container margin-bottom-large">
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $focus_link; ?>">Focus on <?php echo $focus_object->name; ?></a></h4>
-      </div>
-    </div>
-
-    <div class="row margin-bottom-small">
-<?php
-      $focusPosts = new WP_Query(array(
-        'posts_per_page' => -1,
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'focus',
-            'field' => 'term_id',
-            'terms' => $focus
-          ),
-        ),
-      ));
-      if ($focusPosts->have_posts()) {
-        $i = 0;
-        while ($focusPosts->have_posts()) {
-          $focusPosts->the_post();
-
-          if ($i % 3 === 0 && $i !== 0) {
-            echo "</div>\n<div class=\"row margin-bottom-small\">";
-          }
-
-          get_template_part('partials/post-layouts/home-focus-post-col8');
-
-          $i++;
-        }
-      }
-?>
-    </div>
-  </section>
- <?php
+    if ($focus && !$focus_at_top) {
+      render_home_focus($focus);
     }
   ?>
 
@@ -219,8 +186,6 @@ get_header();
   </section>
 
 <?php
-  $show_imo = IGV_get_option('_igv_show_imo');
-
   if ($show_imo) {
 ?>
   <section id="home-imo-posts" class="container margin-bottom-large">

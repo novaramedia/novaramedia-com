@@ -10,7 +10,7 @@
 <?php
     if (!empty($meta['_cmb_author'])) {
 ?>
-    <h5>by <?php echo $meta['_cmb_author'][0]; ?></h5>
+    <h6>by <?php echo $meta['_cmb_author'][0]; ?></h6>
 <?php
     }
 ?>

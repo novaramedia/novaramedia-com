@@ -51,6 +51,9 @@
 html {
   overflow-y: scroll;
 }
+.u-display-block {
+  display: block;
+}
 .u-inline-block {
   display: inline-block;
 }
