@@ -19,17 +19,17 @@ if( have_posts() ) {
     $topLevelCategory = array_values($topLevelCategory);
     $topLevelCategory = $topLevelCategory[0]->slug;
 
-    if ($topLevelCategory === 'wire') {
+    if ($topLevelCategory === 'article') {
 
       get_template_part('partials/singles/single-post-wire');
 
-    } else if ($topLevelCategory === 'fm') {
+    } else if ($topLevelCategory === 'audio') {
 
-      get_template_part('partials/singles/single-post-fm');
+      get_template_part('partials/singles/single-post-audio');
 
-    } else if ($topLevelCategory === 'tv') {
+    } else if ($topLevelCategory === 'video') {
 
-      get_template_part('partials/singles/single-post-tv');
+      get_template_part('partials/singles/single-post-video');
 
     } else {
 ?>

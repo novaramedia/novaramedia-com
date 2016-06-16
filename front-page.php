@@ -56,13 +56,13 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
   <section id="home-wire-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('Wire');
+      $category_id = get_cat_ID('Article');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Wire</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Article</a></h4>
       </div>
     </div>
 
@@ -70,7 +70,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
       <?php
         $latest_wire = new WP_Query(array(
           'posts_per_page' => 7,
-          'category_name' => 'Wire'
+          'category_name' => 'Article'
         ));
 
         if ($latest_wire->have_posts()) {
@@ -97,13 +97,13 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
   <section id="home-tv-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('TV');
+      $category_id = get_cat_ID('Video');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">TV</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
       </div>
     </div>
 
@@ -111,7 +111,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
       <?php
         $latest_tv = new WP_Query(array(
           'posts_per_page' => 4,
-          'category_name' => 'TV'
+          'category_name' => 'Video'
         ));
 
         render_tv_query($latest_tv);
@@ -121,13 +121,13 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
   <section id="home-fm-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('FM');
+      $category_id = get_cat_ID('Audio');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">FM</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
       </div>
     </div>
 
@@ -135,7 +135,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
       <?php
         $latest_fm = new WP_Query(array(
           'posts_per_page' => 4,
-          'category_name' => 'FM'
+          'category_name' => 'Audio'
         ));
 
         if ($latest_fm->have_posts()) {
