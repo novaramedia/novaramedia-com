@@ -92,7 +92,14 @@
       <div id="header-sub" class="background-gray">
         <div class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
-            <div class="col col8">
+            <div class="col col6">
+              <ul class="header-menu u-inline-list">
+                <li><a href="<?php echo get_category_link(get_category_by_slug('article')); ?>">Articles</a></li>
+                <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
+                <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
+              </ul>
+            </div>
+            <div class="col col6">
               <ul class="header-menu u-inline-list">
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="http://support.novaramedia.com">Support Us</a></li>
@@ -100,7 +107,7 @@
               </ul>
             </div>
 
-            <div class="col col8">
+            <div class="col col6">
               <ul class="header-menu u-inline-list">
                 <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
                 <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
@@ -109,7 +116,7 @@
               </ul>
             </div>
 
-            <div class="col col8">
+            <div class="col col6">
               <ul class="header-menu u-inline-list">
                 <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
                 <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
