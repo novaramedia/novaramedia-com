@@ -141,6 +141,26 @@ class IGV_Admin {
       'select_behavior' => 'replace',
     ) );
 
+    // MENU OPTIONS
+
+/*
+    $options_metabox->add_field( array(
+      'name' => __( 'Menu Options', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $this->prefix . 'menu_title',
+      'type' => 'title',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Tags shown in menu', 'IGV' ),
+      'desc' => __( 'a Focus to show (optional)', 'IGV' ),
+      'id'   => $this->prefix . 'menu_tags',
+      'type' => 'select',
+      'repeatable' => true,
+      'options_cb' => 'menu_tags_list',
+    ) );
+*/
+
     // SOCIAL MEDIA OPTIONS
 
     $options_metabox->add_field( array(

@@ -79,3 +79,22 @@ function home_focus_list() {
   return $focuses;
 
 }
+
+function menu_tags_list() {
+
+  $tags = array();
+
+  $tags_all = get_terms(array(
+    'taxonomy' => 'post_tag',
+  ));
+
+  if ($tags_all) {
+    foreach($tags_all as $tag) {
+      $tags[$tag->term_id] = $tag->name;
+    }
+
+  }
+
+  return $tags;
+
+}
