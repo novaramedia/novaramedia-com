@@ -50,7 +50,7 @@ if( have_posts() ) {
         if ($i % 2 === 0 && $i !== 0) {
           echo "</div>\n<div class=\"row margin-bottom-mid\">";
         }
-        $meta = get_post_meta($post->ID);
+        $person_meta = get_post_meta($post->ID);
 ?>
       <div class="col col4">
         <?php the_post_thumbnail('col4'); ?>
@@ -58,18 +58,18 @@ if( have_posts() ) {
       <div class="col col8">
         <div class="margin-bottom-small">
         <h6><span class="font-bold"><?php the_title(); ?></span>
-          <?php if (!empty($meta['_cmb_title'][0])) {echo $meta['_cmb_title'][0];} ?>
+          <?php if (!empty($person_meta['_cmb_title'][0])) {echo $person_meta['_cmb_title'][0];} ?>
           </h6>
 <?php
-        if (!empty($meta['_cmb_twitter'][0])) {
+        if (!empty($person_meta['_cmb_twitter'][0])) {
 ?>
-          <h6><a target="_blank" href="https://twitter.com/<?php echo $meta['_cmb_twitter'][0]; ?>"><?php echo $meta['_cmb_twitter'][0]; ?></a></h6>
+          <h6><a target="_blank" href="https://twitter.com/<?php echo $person_meta['_cmb_twitter'][0]; ?>"><?php echo $person_meta['_cmb_twitter'][0]; ?></a></h6>
 <?php
         }
 
-        if (!empty($meta['_cmb_email'][0])) {
+        if (!empty($person_meta['_cmb_email'][0])) {
 ?>
-          <h6><a target="_blank" href="mailto:<?php echo $meta['_cmb_email'][0]; ?>"><?php echo $meta['_cmb_email'][0]; ?></a></h6>
+          <h6><a target="_blank" href="mailto:<?php echo $person_meta['_cmb_email'][0]; ?>"><?php echo $person_meta['_cmb_email'][0]; ?></a></h6>
 <?php
         }
 ?>
@@ -82,6 +82,26 @@ if( have_posts() ) {
     }
 ?>
     </div>
+<?php
+    if (!empty($meta['_cmb_page_extra_section'])) {
+      if (!empty($meta['_cmb_page_extra_section_title'])) {
+?>
+    <div class="row margin-top-large margin-bottom-basic">
+      <div class="col col24">
+        <h5><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
+      </div>
+    </div>
+<?php
+      }
+?>
+    <div class="row margin-bottom-mid">
+      <div class="col col10">
+        <?php echo apply_filters('the_content', $meta['_cmb_page_extra_section'][0]); ?>
+      </div>
+    </div>
+<?php
+    }
+?>
   <!-- end post -->
   </section>
 <?php

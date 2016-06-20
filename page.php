@@ -30,6 +30,26 @@ if( have_posts() ) {
         } ?>
       </div>
     </div>
+<?php
+    if (!empty($meta['_cmb_page_extra_section'])) {
+      if (!empty($meta['_cmb_page_extra_section_title'])) {
+?>
+    <div class="row margin-top-large margin-bottom-basic">
+      <div class="col col24">
+        <h5><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
+      </div>
+    </div>
+<?php
+      }
+?>
+    <div class="row margin-bottom-mid">
+      <div class="col col10">
+        <?php echo apply_filters('the_content', $meta['_cmb_page_extra_section'][0]); ?>
+      </div>
+    </div>
+<?php
+    }
+?>
   <!-- end post -->
   </section>
 <?php

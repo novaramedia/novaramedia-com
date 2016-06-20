@@ -193,6 +193,21 @@ function igv_cmb_metaboxes() {
     'options' => array( 'textarea_rows' => 5, ),
   ) );
 
+  $page_meta_boxes->add_field( array(
+    'name'    => __( 'Extra Section Title', 'cmb' ),
+    'desc'    => __( '(for About page)', 'cmb' ),
+    'id'      => $prefix . 'page_extra_section_title',
+    'type'    => 'text',
+  ) );
+
+  $page_meta_boxes->add_field( array(
+    'name'    => __( 'Extra Section', 'cmb' ),
+    'desc'    => __( '(for About page)', 'cmb' ),
+    'id'      => $prefix . 'page_extra_section',
+    'type'    => 'wysiwyg',
+    'options' => array( 'textarea_rows' => 5, ),
+  ) );
+
   // People
 
   $people_meta_boxes = new_cmb2_box( array (
