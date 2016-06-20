@@ -19,9 +19,9 @@ if( have_posts() ) {
     $topLevelCategory = array_values($topLevelCategory);
     $topLevelCategory = $topLevelCategory[0]->slug;
 
-    if ($topLevelCategory === 'article') {
+    if ($topLevelCategory === 'articles') {
 
-      get_template_part('partials/singles/single-post-wire');
+      get_template_part('partials/singles/single-post-articles');
 
     } else if ($topLevelCategory === 'audio') {
 

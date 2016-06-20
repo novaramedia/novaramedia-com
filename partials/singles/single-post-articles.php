@@ -5,7 +5,7 @@
   $thumbnail_id = get_post_thumbnail_id($post->ID);
   $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
 
-  $category_id = get_cat_ID('Wire');
+  $category_id = get_cat_ID('Articles');
   $category_link = get_category_link( $category_id );
 
   if (!empty($meta['bitly_url'])) {
@@ -17,14 +17,14 @@
 
 <div class="row margin-bottom-basic">
   <div class="col col24">
-    <h4><a href="<?php echo $category_link; ?>">Wire</a></h4>
+    <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
   </div>
 </div>
 
 <div class="row">
   <div class="col col24 text-align-center u-position-relative">
-    <?php the_post_thumbnail('col24-wire-crop'); ?>
-    <div id="single-wire-photo-caption" class="font-smaller">
+    <?php the_post_thumbnail('col24-widescreen-crop'); ?>
+    <div id="single-article-photo-caption" class="font-smaller">
       <?php
         if (!empty($thumbnail_image[0]->post_excerpt)) {
           echo $thumbnail_image[0]->post_excerpt;
@@ -37,7 +37,7 @@
 <div class="row margin-top-small margin-bottom-basic">
   <div class="col col2"></div>
   <div class="col col20">
-    <h1 id="single-wire-title" class="js-fix-widows"><?php the_title(); ?></h1>
+    <h1 id="single-articles-title" class="js-fix-widows"><?php the_title(); ?></h1>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
   <div class="col col10">
     <h3>by <?php
       if (!empty($meta['_cmb_author_twitter'])) {
-        echo '<a id="single-wire-author" target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
+        echo '<a id="single-articles-author" target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
       }
 
       if (!empty($meta['_cmb_author'])) {
@@ -90,17 +90,17 @@
 <div class="row">
   <div class="col col4"></div>
   <div class="col col16">
-    <div id="single-wire-copy" class="text-copy margin-top-basic margin-bottom-basic">
+    <div id="single-articles-copy" class="text-copy margin-top-basic margin-bottom-basic">
       <?php the_content(); ?>
     </div>
 
-    <div id="single-wire-meta" class="font-smaller">
+    <div id="single-articles-meta" class="font-smaller">
       <?php
       if (!empty($meta['bitly_url'])) {
         echo '<p>Share URL: <span class="u-pointer js-select">' . $meta['bitly_url'][0] . '</span></p> ';
       }
       ?>
-      <p id="single-wire-publication-date">Published <?php the_time('jS F Y'); ?></p>
+      <p id="single-articles-publication-date">Published <?php the_time('jS F Y'); ?></p>
       <p>This work by Novara Media is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License</p>
     </div>
   </div>

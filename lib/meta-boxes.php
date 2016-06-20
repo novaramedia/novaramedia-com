@@ -61,30 +61,30 @@ function igv_cmb_metaboxes() {
 
   // FM
 
-  $fm_metabox = new_cmb2_box( array (
+  $audio_metabox = new_cmb2_box( array (
     'id'         => 'fm_metabox',
-    'title'      => __( 'FM Meta', 'cmb' ),
+    'title'      => __( 'Audio Meta', 'cmb' ),
     'object_types'      => array( 'post' ), // Post type
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
   ) );
 
-  $fm_metabox->add_field( array(
+  $audio_metabox->add_field( array(
     'name' => __( 'Soundcloud URL', 'cmb' ),
     'desc' => __( 'Enter a URL.', 'cmb' ),
     'id'   => $prefix . 'sc',
     'type' => 'text_url',
   ) );
 
-  $fm_metabox->add_field( array(
+  $audio_metabox->add_field( array(
     'name' => __( 'Is a Resonance show?', 'cmb' ),
     'desc' => __( '', 'cmb' ),
     'id'   => $prefix . 'is_resonance',
     'type' => 'checkbox',
   ) );
 
-  $fm_metabox->add_field( array(
+  $audio_metabox->add_field( array(
     'name' => __( 'Download URL', 'cmb' ),
     'desc' => __( 'Enter a URL.', 'cmb' ),
     'id'   => $prefix . 'dl_mp3',
@@ -93,47 +93,47 @@ function igv_cmb_metaboxes() {
 
   // TV
 
-  $tv_metabox = new_cmb2_box( array (
-    'id'         => 'tv_metabox',
-    'title'      => __( 'TV Meta', 'cmb' ),
+  $video_metabox = new_cmb2_box( array (
+    'id'         => 'video_metabox',
+    'title'      => __( 'Video Meta', 'cmb' ),
     'object_types'      => array( 'post' ), // Post type
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
   ) );
 
-  $tv_metabox->add_field( array(
+  $video_metabox->add_field( array(
     'name' => __( 'YouTube ID', 'cmb' ),
     'desc' => __( 'Id of youtube video. for example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the Id is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
     'id'   => $prefix . 'utube',
     'type' => 'text',
   ) );
 
-  $tv_metabox->add_field( array(
+  $video_metabox->add_field( array(
     'name' => __( 'Alternate thumbnail', 'cmb' ),
     'desc' => __( 'Without any text. Just an image', 'cmb' ),
     'id'   => $prefix . 'alt_thumb',
     'type' => 'file',
   ) );
 
-  // Wire
+  // Articles
 
-  $wire_metabox = new_cmb2_box( array (
-    'id'         => 'wire_metabox',
-    'title'      => __( 'Wire Meta', 'cmb' ),
+  $articles_metabox = new_cmb2_box( array (
+    'id'         => 'articles_metabox',
+    'title'      => __( 'Articles Meta', 'cmb' ),
     'object_types'      => array( 'post' ), // Post type
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
   ) );
 
-  $wire_metabox->add_field( array(
+  $articles_metabox->add_field( array(
     'name' => __( 'Author', 'cmb' ),
     'id'   => $prefix . 'author',
     'type' => 'text',
   ) );
 
-  $wire_metabox->add_field( array(
+  $articles_metabox->add_field( array(
     'name' => __( 'Author Twitter', 'cmb' ),
     'desc' => __( 'Optional. No @', 'cmb' ),
     'id'   => $prefix . 'author_twitter',
