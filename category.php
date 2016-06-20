@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
 <?php
-  $tv = get_category_by_slug('tv');
+  $video = get_category_by_slug('video');
   $category = get_category(get_query_var('cat'));
 ?>
 
@@ -21,7 +21,7 @@ get_header();
     </div>
 
 <?php
-  if ($tv->term_id === $category->term_id || $tv->term_id === $category->category_parent) {
+  if ($video->term_id === $category->term_id || $video->term_id === $category->category_parent) {
 
     if (have_posts()) {
       $i = 0;

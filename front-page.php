@@ -54,34 +54,34 @@ $show_imo = IGV_get_option('_igv_show_imo');
   }
   ?>
 
-  <section id="home-wire-posts" class="container margin-bottom-large">
+  <section id="home-articles-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('Wire');
+      $category_id = get_cat_ID('Articles');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Wire</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
       </div>
     </div>
 
     <div class="row margin-bottom-small">
       <?php
-        $latest_wire = new WP_Query(array(
+        $latest_articles = new WP_Query(array(
           'posts_per_page' => 7,
-          'category_name' => 'Wire'
+          'category_name' => 'Articles'
         ));
 
-        if ($latest_wire->have_posts()) {
+        if ($latest_articles->have_posts()) {
           $i = 0;
-          while ($latest_wire->have_posts()) {
-            $latest_wire->the_post();
+          while ($latest_articles->have_posts()) {
+            $latest_articles->the_post();
 
             if ($i === 0) {
               get_template_part('partials/post-layouts/post-col12');
             } else {
-              get_template_part('partials/post-layouts/home-wire-post-col6');
+              get_template_part('partials/post-layouts/home-articles-post-col6');
             }
 
             if ($i === 2) {
@@ -95,39 +95,39 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 
-  <section id="home-tv-posts" class="container margin-bottom-large">
+  <section id="home-video-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('TV');
+      $category_id = get_cat_ID('Video');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">TV</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
       </div>
     </div>
 
     <div class="row">
       <?php
-        $latest_tv = new WP_Query(array(
+        $latest_video = new WP_Query(array(
           'posts_per_page' => 4,
-          'category_name' => 'TV'
+          'category_name' => 'Video'
         ));
 
-        render_tv_query($latest_tv);
+        render_video_query($latest_video);
       ?>
     </div>
   </section>
 
   <section id="home-fm-posts" class="container margin-bottom-large">
     <?php
-      $category_id = get_cat_ID('FM');
+      $category_id = get_cat_ID('Audio');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">FM</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
       </div>
     </div>
 
@@ -135,7 +135,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
       <?php
         $latest_fm = new WP_Query(array(
           'posts_per_page' => 4,
-          'category_name' => 'FM'
+          'category_name' => 'Audio'
         ));
 
         if ($latest_fm->have_posts()) {
@@ -202,12 +202,12 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
     <div class="row">
       <?php
-        $latest_tv = new WP_Query(array(
+        $latest_imo = new WP_Query(array(
           'posts_per_page' => 4,
           'category_name' => 'imobastani'
         ));
 
-        render_tv_query($latest_tv);
+        render_video_query($latest_imo);
       ?>
     </div>
   </section>

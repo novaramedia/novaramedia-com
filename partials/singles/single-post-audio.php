@@ -1,7 +1,7 @@
 <?php
   $meta = get_post_meta($post->ID);
 
-  $category_id = get_cat_ID('FM');
+  $category_id = get_cat_ID('Audio');
   $category_link = get_category_link( $category_id );
 
   if (!empty($meta['bitly_url'])) {
@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col col24 margin-bottom-basic">
-    <h4><a href="<?php echo $category_link; ?>">FM</a></h4>
+    <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
   </div>
 </div>
 

@@ -43,7 +43,7 @@ function render_home_focus($focus) {
  <?php
 }
 
-function render_tv_query($query) {
+function render_video_query($query) {
   global $post;
 
   // First large video
@@ -76,7 +76,7 @@ function render_tv_query($query) {
         $query->the_post();
     ?>
     <a href="<?php the_permalink(); ?>">
-     <div class="single-tv-related-tv margin-bottom-small">
+     <div class="single-video-related-video margin-bottom-small">
        <?php the_post_thumbnail('col4-16to9'); ?>
        <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
      </div>
