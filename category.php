@@ -14,9 +14,10 @@ get_header();
   <!-- main posts loop -->
   <section id="posts" class="container">
 
-    <div class="row">
-      <div class="col col24 margin-bottom-basic">
-        <h4><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
+    <div class="row margin-bottom-basic">
+      <div class="col col24">
+        <h4 class="margin-bottom-tiny"><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
+        <?php echo category_description(); ?>
       </div>
     </div>
 
