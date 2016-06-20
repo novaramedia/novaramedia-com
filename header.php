@@ -94,7 +94,7 @@
           <div class="row">
             <div class="col col6">
               <ul class="header-menu u-inline-list">
-                <li><a href="<?php echo get_category_link(get_category_by_slug('article')); ?>">Articles</a></li>
+                <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
               </ul>
