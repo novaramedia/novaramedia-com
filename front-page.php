@@ -95,7 +95,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 
-  <section id="home-tv-posts" class="container margin-bottom-large">
+  <section id="home-video-posts" class="container margin-bottom-large">
     <?php
       $category_id = get_cat_ID('Video');
       $category_link = get_category_link( $category_id );
@@ -109,12 +109,12 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
     <div class="row">
       <?php
-        $latest_tv = new WP_Query(array(
+        $latest_video = new WP_Query(array(
           'posts_per_page' => 4,
           'category_name' => 'Video'
         ));
 
-        render_tv_query($latest_tv);
+        render_video_query($latest_video);
       ?>
     </div>
   </section>
@@ -202,12 +202,12 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
     <div class="row">
       <?php
-        $latest_tv = new WP_Query(array(
+        $latest_imo = new WP_Query(array(
           'posts_per_page' => 4,
           'category_name' => 'imobastani'
         ));
 
-        render_tv_query($latest_tv);
+        render_video_query($latest_imo);
       ?>
     </div>
   </section>

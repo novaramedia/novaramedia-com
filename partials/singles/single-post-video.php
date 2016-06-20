@@ -1,7 +1,7 @@
 <?php
   $meta = get_post_meta($post->ID);
 
-  $category_id = get_cat_ID('TV');
+  $category_id = get_cat_ID('Video');
   $category_link = get_category_link( $category_id );
 
   if (!empty($meta['bitly_url'])) {
@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col col24 margin-bottom-basic">
-    <h4><a href="<?php echo $category_link; ?>">TV</a></h4>
+    <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
   </div>
 </div>
 
@@ -57,17 +57,17 @@
     ?>
   </div>
   <div class="col col4">
-    <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More TV</a></h4>
-    <div id="single-tv-related-tv" class="font-smaller">
+    <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More Video</a></h4>
+    <div id="single-video-related-video" class="font-smaller">
       <?php
-        $related_tv = get_related_posts(null, 'TV', 3);
+        $related_video = get_related_posts(null, 'Video', 3);
 
-        if ($related_tv->have_posts()) {
-          while ($related_tv->have_posts()) {
-            $related_tv->the_post();
+        if ($related_video->have_posts()) {
+          while ($related_video->have_posts()) {
+            $related_video->the_post();
       ?>
       <a href="<?php the_permalink(); ?>">
-        <div class="single-tv-related-tv margin-bottom-small">
+        <div class="single-video-related-video margin-bottom-small">
           <?php the_post_thumbnail('col4-16to9'); ?>
           <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
         </div>
