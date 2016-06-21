@@ -716,6 +716,9 @@ b {
 .font-uppercase {
   text-transform: uppercase;
 }
+.font-underline {
+  text-decoration: underline;
+}
 .font-leading-wider {
   line-height: 1.55;
 }
@@ -1038,6 +1041,9 @@ img {
   transition: opacity 0.5s;
   margin-bottom: -1px;
   max-width: 864px;
+}
+#single-resources-section {
+  display: none;
 }
 #single-article-photo-caption {
   position: absolute;

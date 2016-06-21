@@ -1,5 +1,6 @@
 <?php
   $meta = get_post_meta($post->ID);
+  $resources = get_post_meta($post->ID, '_cmb_resources', true);
 
   $category_id = get_cat_ID('Video');
   $category_link = get_category_link( $category_id );
@@ -31,6 +32,11 @@
   <div class="col col12">
     <ul class="inline-action-list">
       <li>Published <?php the_time('jS F Y'); ?></li>
+      <?php
+        if (!empty($resources)) {
+          echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
+        }
+      ?>
       <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">Subscribe on YouTube</a></li>
     </ul>
   </div>
@@ -41,6 +47,12 @@
     </ul>
   </div>
 </div>
+
+<?php
+  if (!empty($resources)) {
+    render_resources_row($resources);
+  }
+?>
 
 <div class="row margin-bottom-large">
   <div class="col col20">

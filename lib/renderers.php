@@ -91,6 +91,24 @@ function render_video_query($query) {
   }
 }
 
+function render_resources_row($resources) {
+?>
+<div id="single-resources-section" class="row margin-bottom-basic">
+  <div class="col col24">
+    <ul class="inline-action-list">
+      <?php
+        foreach($resources as $resource) {
+          if (!empty($resource['title']) && !empty($resource['link'])) {
+            echo '<li><a target="_black" href="' . $resource['link'] . '">' . $resource['title'] . '</a><li>';
+          }
+        }
+      ?>
+    </ul>
+  </div>
+</div>
+<?php
+}
+
 function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
   $twitter_url = 'https://twitter.com/intent/tweet?via=novaramedia';
 

@@ -16,6 +16,10 @@ Site = {
     _this.Search.init();
     _this.Support.init();
 
+    if ($('#single-resources-section').length) {
+      _this.bindResourcesToggle();
+    }
+
     $('.js-select').click(function() {
       $(this).selectText();
     });
@@ -34,6 +38,16 @@ Site = {
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
     });
+  },
+
+  bindResourcesToggle: function() {
+    var _this = this;
+    var $resources = $('#single-resources-section');
+
+    $('#js-resources-toggle').click(function() {
+      $resources.toggle();
+    });
+
   },
 };
 
