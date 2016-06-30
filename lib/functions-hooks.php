@@ -15,3 +15,44 @@ function save_reading_time_meta( $post_id, $post, $update ) {
 
 }
 add_action('save_post', 'save_reading_time_meta', 10, 3);
+
+
+// Custom editor button to find replace all links in the_content and make target _blank
+
+if ( is_admin() ) {
+  add_action( 'init', 'extlink_setup_tinymce_plugin' );
+}
+
+function extlink_setup_tinymce_plugin() {
+
+  // Check if the logged in WordPress User can edit Posts or Pages
+  // If not, don't register our TinyMCE plugin
+  if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+    return;
+  }
+
+  // Check if the logged in WordPress User has the Visual Editor enabled
+  // If not, don't register our TinyMCE plugin
+  if ( get_user_option( 'rich_editing' ) !== 'true' ) {
+    return;
+  }
+
+  // Setup some filters
+  add_filter( 'mce_external_plugins', 'extlink_add_tinymce_plugin' );
+  add_filter( 'mce_buttons', 'extlink_add_tinymce_toolbar_button' );
+
+}
+
+function extlink_add_tinymce_plugin( $plugin_array ) {
+
+  $plugin_array['extlinks'] = get_template_directory_uri() . '/lib/tinyMCE/extlink-tinymce.js';
+  return $plugin_array;
+
+}
+
+function extlink_add_tinymce_toolbar_button( $buttons ) {
+
+  array_push( $buttons, 'extlinks' );
+  return $buttons;
+
+}
