@@ -15,6 +15,7 @@ Site = {
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
+    _this.RadioPlayer.init();
 
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
@@ -177,9 +178,73 @@ Site.Support = {
   },
 };
 
+Site.RadioPlayer = {
+  $radioPlayer: $('#radio-player'),
+
+  init: function() {
+    var _this = this;
+
+    $.getScript('http://tools.novaramedia.com/tool/novara_live/schedule.min.js', function() {
+      if (isLive()) {
+        _this.live();
+      }
+
+      setInterval((function() {
+        if (isLive()) {
+          _this.live();
+        } else {
+          _this.offline();
+        }
+      }), 15000);
+    });
+
+  },
+
+  live: function() {
+    var _this = this;
+
+    _this.initPlayer();
+    _this.$radioPlayer.show();
+  },
+
+  offline: function() {
+    var _this = this;
+
+    _this.$jPlayer.jPlayer('stop');
+    _this.$radioPlayer.hide();
+  },
+
+  initPlayer: function() {
+    var _this = this;
+
+    _this.$jPlayer = $('#jplayer').jPlayer({
+      ready: function () {
+        $(this).jPlayer('setMedia', {
+          title: 'resonancefm',
+          mp3: 'http://54.77.136.103:8000/resonance',
+        });
+      },
+      cssSelectorAncestor: '#jp_container_1',
+      swfPath: '/js',
+      supplied: 'mp3',
+      useStateClassSkin: true,
+      autoBlur: false,
+      smoothPlayBar: true,
+      keyEnabled: true,
+    }).bind($.jPlayer.event.play, function() {
+      $('.jp-play').hide();
+      $('.jp-stop').show();
+    }).bind($.jPlayer.event.pause, function() {
+      $('.jp-stop').hide();
+      $('.jp-play').show();
+    });
+  }
+}
+
 jQuery(document).ready(function () {
   'use strict';
 
   Site.init();
 
 });
+
