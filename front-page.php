@@ -1,6 +1,8 @@
 <?php
 get_header();
 
+$home_radio = IGV_get_option('_igv_home_radio');
+
 $home_featured = IGV_get_option('_igv_front_feature');
 
 $focus = IGV_get_option('_igv_home_focus');
@@ -12,7 +14,6 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
 <!-- main content -->
 <main id="main-content">
-
 <?php
   if (!empty($home_featured)) {
 
@@ -47,6 +48,10 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 <?php
+  }
+
+  if ($home_radio) {
+    get_template_part('partials/radio-player');
   }
 
   if ($focus && $focus_at_top) {

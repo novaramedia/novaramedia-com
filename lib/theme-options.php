@@ -111,6 +111,13 @@ class IGV_Admin {
     ) );
 
     $options_metabox->add_field( array(
+      'name' => __( 'Show radio player when FM show is live', 'IGV' ),
+      'desc' => __( '...', 'IGV' ),
+      'id'   => $this->prefix . 'home_radio',
+      'type' => 'checkbox',
+    ) );
+
+    $options_metabox->add_field( array(
       'name' => __( 'Home Focus', 'IGV' ),
       'desc' => __( 'a Focus to show (optional)', 'IGV' ),
       'id'   => $this->prefix . 'home_focus',
