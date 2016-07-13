@@ -282,6 +282,8 @@ Site.RadioPlayer = {
 
   checkBST: function() {
     var d = new Date();
+    var lSoM;
+    var lSoO;
 
     for (var i = 31; i > 0; i--) {
       var tmp = new Date(d.getFullYear(), 2, i);
