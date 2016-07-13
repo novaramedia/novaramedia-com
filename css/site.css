@@ -1054,6 +1054,15 @@ img {
           writing-mode: vertical-rl;
   padding: 4.944271909998838px;
 }
+.text-copy .liveblog-update-heading {
+  border-top: 1px solid #0e0e0e;
+  padding-top: 32px;
+  margin-top: 56px;
+  margin-bottom: 16px;
+}
+.text-copy .liveblog-update-heading:first-of-type {
+  margin-top: 32px;
+}
 @media screen and (max-width: 601px) {
   .container {
     width: 96%;
