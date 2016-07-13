@@ -1,4 +1,6 @@
 <?php
+  $meta = get_post_meta($post->ID);
+
   if (!empty($meta['bitly_url'])) {
     $share_url = $meta['bitly_url'][0];
   } else {
