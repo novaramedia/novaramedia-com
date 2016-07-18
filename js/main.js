@@ -15,6 +15,7 @@ Site = {
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
+    _this.RadioPlayer.init();
 
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
@@ -80,7 +81,7 @@ Site.Header = {
     var _this = this;
 
     _this.headerHeight = $('#header-main-wrapper').height();
-    _this.$headerSinglePostTitle = $('#header-page-title')
+    _this.$headerSinglePostTitle = $('#header-page-title');
 
     $(window).scroll(function() {
 
@@ -177,9 +178,147 @@ Site.Support = {
   },
 };
 
+Site.RadioPlayer = {
+  $radioPlayer: $('#radio-player'),
+  playerIsInitialized: false,
+
+  init: function() {
+    var _this = this;
+
+    // saves boolean for British Summer Time or not
+    _this.isBST = _this.checkBST();
+
+    if ($('body').hasClass('home')) {
+
+      // checks if radio show is live in the schedule
+      if (_this.isSchedule()) {
+        _this.goLive();
+      }
+
+      setInterval((function() {
+        if (_this.isSchedule()) {
+          _this.goLive();
+        } else {
+          _this.goOffline();
+        }
+      }), 15000);
+
+    }
+
+  },
+
+  goLive: function() {
+    var _this = this;
+
+    if (!_this.playerIsInitialized) {
+      _this.initPlayer();
+    }
+
+    _this.$radioPlayer.show();
+  },
+
+  goOffline: function() {
+    var _this = this;
+
+    if (_this.playerIsInitialized) {
+      _this.$jPlayer.jPlayer('stop');
+    }
+
+    _this.$radioPlayer.hide();
+  },
+
+  initPlayer: function() {
+    var _this = this;
+
+    _this.$jPlayer = $('#jplayer').jPlayer({
+      ready: function () {
+        $(this).jPlayer('setMedia', {
+          title: 'resonancefm',
+          mp3: 'http://54.77.136.103:8000/resonance',
+        });
+      },
+      cssSelectorAncestor: '#jp_container_1',
+      swfPath: '/js',
+      supplied: 'mp3',
+      useStateClassSkin: true,
+      autoBlur: false,
+      smoothPlayBar: true,
+      keyEnabled: true,
+    }).bind($.jPlayer.event.play, function() {
+      $('.jp-play').hide();
+      $('.jp-stop').show();
+    }).bind($.jPlayer.event.pause, function() {
+      $('.jp-stop').hide();
+      $('.jp-play').show();
+    });
+
+    _this.playerIsInitialized = true;
+  },
+
+  isSchedule: function() {
+    var _this = this;
+
+    var utc = new Date();
+    var now;
+
+    if (_this.isBST) {
+      now = new Date(utc.getUTCFullYear(), utc.getUTCMonth(), utc.getUTCDate(), (utc.getUTCHours() + 1), utc.getUTCMinutes(), utc.getUTCSeconds());
+    } else {
+      now = new Date(utc.getUTCFullYear(), utc.getUTCMonth(), utc.getUTCDate(), utc.getUTCHours(), utc.getUTCMinutes(), utc.getUTCSeconds());
+    }
+
+    var day = now.getDay();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var dayminutes = (hours * 60) + minutes;
+
+    // checking if time is Monday between 7am and 8am with a little in and out flexibility
+    // if not  checking if time is Friday between 1pm and 2pm with a little in and out flexibility
+    if (day === 1 && dayminutes > 418 && dayminutes < 482) {
+      return true;
+    } else if (day === 5 && dayminutes > 778 && dayminutes < 842) {
+      return true;
+    }
+
+    return false;
+
+  },
+
+  checkBST: function() {
+    var d = new Date();
+    var lSoM;
+    var lSoO;
+
+    // code from forgotton source. it checking against a pattern if date is in summer time or not
+    for (var i = 31; i > 0; i--) {
+      var tmp = new Date(d.getFullYear(), 2, i);
+      if (tmp.getDay() === 0) {
+        lSoM = tmp;
+        break;
+      }
+    }
+
+    for (var k = 31; k > 0; k--) {
+      var tmpk = new Date(d.getFullYear(), 9, k);
+      if (tmpk.getDay() === 0) {
+        lSoO = tmpk;
+        break;
+      }
+    }
+
+    if (d < lSoM || d > lSoO) {
+      return false;
+    }
+
+    return true;
+  },
+
+};
+
 jQuery(document).ready(function () {
   'use strict';
 
   Site.init();
 
 });
+

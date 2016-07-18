@@ -79,6 +79,7 @@ ul.u-inline-list li {
   vertical-align: middle;
 }
 .u-flex-center {
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1009,6 +1010,37 @@ img {
   color: #f00;
   font-weight: bold;
   border: 0;
+}
+#radio-player {
+  display: none;
+}
+.jp-controls-holder {
+  margin-right: 8px;
+}
+.jp-block {
+  display: block;
+  height: 32px;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #fdfdfd;
+}
+.jp-button {
+  text-align: center;
+}
+.jp-stop {
+  display: none;
+}
+.jp-volume-bar {
+  position: relative;
+}
+.jp-button:hover,
+.jp-volume-bar:hover {
+  cursor: pointer;
+}
+.jp-volume-bar-value {
+  background-color: #fff;
+  position: relative;
+  height: 100%;
 }
 #featured-post {
   position: relative;
