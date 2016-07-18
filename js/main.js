@@ -185,10 +185,12 @@ Site.RadioPlayer = {
   init: function() {
     var _this = this;
 
+    // saves boolean for British Summer Time or not
     _this.isBST = _this.checkBST();
 
     if ($('body').hasClass('home')) {
 
+      // checks if radio show is live in the schedule
       if (_this.isSchedule()) {
         _this.goLive();
       }
@@ -270,6 +272,8 @@ Site.RadioPlayer = {
     var minutes = now.getMinutes();
     var dayminutes = (hours * 60) + minutes;
 
+    // checking if time is Monday between 7am and 8am with a little in and out flexibility
+    // if not  checking if time is Friday between 1pm and 2pm with a little in and out flexibility
     if (day === 1 && dayminutes > 418 && dayminutes < 482) {
       return true;
     } else if (day === 5 && dayminutes > 778 && dayminutes < 842) {
@@ -285,6 +289,7 @@ Site.RadioPlayer = {
     var lSoM;
     var lSoO;
 
+    // code from forgotton source. it checking against a pattern if date is in summer time or not
     for (var i = 31; i > 0; i--) {
       var tmp = new Date(d.getFullYear(), 2, i);
       if (tmp.getDay() === 0) {
