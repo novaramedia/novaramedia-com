@@ -116,24 +116,9 @@ p
 
   // FONT RULES
 
-.font-italic, em, i
-  font-style: italic
-
-.font-bold, strong, b
-  font-weight: bold
-
 .font-small-caps
   font-size: 0.85em
   text-transform: uppercase
-
-.font-capitalize
-  text-transform: capitalize
-
-.font-uppercase
-  text-transform: uppercase
-
-.font-underline
-  text-decoration: underline
 
 .font-leading-wider
   line-height: $font-leading-larger
@@ -172,14 +157,6 @@ p
 // ******************************************************
 
 // BASIC
-
-html
-  background-color: $color-white-soft
-  color: $color-black-soft
-
-img
-  max-width: 100%
-  height: auto
 
 .inline-action-list
   li
@@ -333,7 +310,7 @@ img
     padding-right: $margin-tiny
 
 #menu-logo
-  margin-right: 14px
+  margin-right: 10px
   svg
     height: 20px
     width: 24px
@@ -343,7 +320,7 @@ img
 #header-logotype
   svg
     height: 17px
-    width: 173px
+    width: 140px
     vertical-align: text-bottom
 
 #header-sub
@@ -479,9 +456,6 @@ img
 // SINGLE
 
 #header-page-title
-  opacity: 0
-  transition: opacity $basic-animation-speed
-  margin-bottom: -1px
   max-width: ( 16 * $col ) + ( 15 * $gutter )
 
 #single-resources-section

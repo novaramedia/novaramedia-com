@@ -1563,12 +1563,6 @@ img {
     background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
   }
   #header-page-title {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-    margin-bottom: -1px;
     max-width: 722px;
   }
   #single-resources-section {
@@ -1804,28 +1798,9 @@ img {
   p {
     margin-bottom: 1rem;
   }
-  .font-italic,
-  em,
-  i {
-    font-style: italic;
-  }
-  .font-bold,
-  strong,
-  b {
-    font-weight: bold;
-  }
   .font-small-caps {
     font-size: 0.85em;
     text-transform: uppercase;
-  }
-  .font-capitalize {
-    text-transform: capitalize;
-  }
-  .font-uppercase {
-    text-transform: uppercase;
-  }
-  .font-underline {
-    text-decoration: underline;
   }
   .font-leading-wider {
     line-height: 1.55;
@@ -1864,14 +1839,6 @@ img {
   }
   .icon-large:before {
     font-size: 1.618rem;
-  }
-  html {
-    background-color: #fdfdfd;
-    color: #0e0e0e;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
   }
   .inline-action-list li {
     display: inline-block;
@@ -2003,7 +1970,7 @@ img {
     padding-right: 6px;
   }
   #menu-logo {
-    margin-right: 14px;
+    margin-right: 10px;
   }
   #menu-logo svg {
     height: 20px;
@@ -2013,7 +1980,7 @@ img {
   }
   #header-logotype svg {
     height: 17px;
-    width: 173px;
+    width: 140px;
     vertical-align: text-bottom;
   }
   #header-sub {
@@ -2125,12 +2092,6 @@ img {
     background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
   }
   #header-page-title {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-    margin-bottom: -1px;
     max-width: 580px;
   }
   #single-resources-section {
@@ -2565,7 +2526,7 @@ img {
     padding-right: 6px;
   }
   #menu-logo {
-    margin-right: 14px;
+    margin-right: 10px;
   }
   #menu-logo svg {
     height: 20px;
@@ -2575,7 +2536,7 @@ img {
   }
   #header-logotype svg {
     height: 17px;
-    width: 173px;
+    width: 125px;
     vertical-align: text-bottom;
   }
   #header-sub {
@@ -2687,13 +2648,7 @@ img {
     background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
   }
   #header-page-title {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-    margin-bottom: -1px;
-    max-width: 484px;
+    max-width: 70%;
   }
   #single-resources-section {
     display: none;
@@ -3014,27 +2969,27 @@ img {
     padding-top: 81px;
     min-height: 75vh;
   }
-  #header-main-wrapper {
-    background-image: url("../img/dist/novara-marble-black-cropped.jpg");
-    background-size: cover;
-    background-position: center center;
-  }
   .header-menu li {
     padding-right: 6px;
   }
+  #header-main .col {
+    float: left;
+  }
+  #header-main .col18 {
+    width: 80%;
+  }
+  #header-main .col6 {
+    width: 20%;
+  }
   #menu-logo {
-    margin-right: 14px;
+    margin-right: 2px;
   }
   #menu-logo svg {
     height: 20px;
     width: 24px;
-    vertical-align: text-bottom;
-    margin-bottom: -2px;
   }
-  #header-logotype svg {
-    height: 17px;
-    width: 173px;
-    vertical-align: text-bottom;
+  #header-logotype {
+    display: none;
   }
   #header-sub {
     display: none;
@@ -3145,13 +3100,7 @@ img {
     background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
   }
   #header-page-title {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-    margin-bottom: -1px;
-    max-width: 804px;
+    max-width: 70%;
   }
   #single-resources-section {
     display: none;

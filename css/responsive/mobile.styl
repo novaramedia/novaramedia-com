@@ -296,28 +296,26 @@ img
   padding-top: 57px + $margin-basic
   min-height: 75vh
 
-#header-main-wrapper
-  background-image: url('../img/dist/novara-marble-black-cropped.jpg')
-  background-size: cover
-  background-position: center center
-
 .header-menu
   li
     padding-right: $margin-tiny
 
+#header-main
+  .col
+    float: left
+  .col18
+    width: 80%
+  .col6
+    width: 20%
+
 #menu-logo
-  margin-right: 14px
+  margin-right: 2px
   svg
     height: 20px
     width: 24px
-    vertical-align: text-bottom
-    margin-bottom: -2px
 
 #header-logotype
-  svg
-    height: 17px
-    width: 173px
-    vertical-align: text-bottom
+  display: none
 
 #header-sub
   display: none
@@ -452,10 +450,7 @@ img
 // SINGLE
 
 #header-page-title
-  opacity: 0
-  transition: opacity $basic-animation-speed
-  margin-bottom: -1px
-  max-width: ( 16 * $col ) + ( 15 * $gutter )
+  max-width: 70%
 
 #single-resources-section
   display: none
