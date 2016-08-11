@@ -458,17 +458,28 @@ p
 #header-page-title
   max-width: ( 16 * $col ) + ( 15 * $gutter )
 
-#single-resources-section
-  display: none
-
   // ARTICLE
 
 #single-article-photo-caption
-  position: absolute
-  top: 0
   right: ($gutter / 2)
-  writing-mode: vertical-rl
   padding: $margin-micro
+
+#single-articles-title-row
+  .col2
+    display: none
+  .col20
+    width: 100%
+    float: none
+
+#single-articles-copy-row
+  .col4
+    display: none
+  .col16
+    width: 100%
+    max-width: 722px
+    float: none
+    margin-left: auto
+    margin-right: auto
 
   // LIVEBLOG
 

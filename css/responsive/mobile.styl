@@ -22,11 +22,11 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 14px
+$font-size-basic = 13px
 $font-size-larger = 1.3rem
 $font-size-h3 = golden-ratio(1rem , 1)
 $font-size-h2 = golden-ratio(1rem , 1.1)
-$font-size-h1 = golden-ratio(1rem , 1.3)
+$font-size-h1 = golden-ratio(1rem , 1.2)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -159,6 +159,12 @@ img
     display: inline-block
     margin-right: $margin-small
 
+.only-mobile
+  display: initial
+
+.only-desktop
+  display: none
+
 // ******************************************************
 
 // MARGINS AND PADDING
@@ -283,6 +289,26 @@ img
 .padding-bottom-large
   padding-bottom: $margin-large
 
+// MOBILE ONLY
+
+.mobile-margin-bottom-micro
+  margin-bottom: $margin-micro
+
+.mobile-margin-bottom-tiny
+  margin-bottom: $margin-tiny
+
+.mobile-margin-bottom-small
+  margin-bottom: $margin-small
+
+.mobile-margin-bottom-basic
+  margin-bottom: $margin-basic
+
+.mobile-margin-bottom-mid
+  margin-bottom: $margin-mid
+
+.mobile-margin-bottom-large
+  margin-bottom: $margin-large
+
 // ******************************************************
 
 // HEADER
@@ -293,7 +319,7 @@ img
   z-index: 1000
 
 #main-content
-  padding-top: 57px + $margin-basic
+  padding-top: 47px + $margin-small
   min-height: 75vh
 
 .header-menu
@@ -474,3 +500,7 @@ img
     margin-bottom: $margin-small
     &:first-of-type
       margin-top: $margin-basic
+
+#single-related
+  .post
+    margin-bottom: $margin-basic

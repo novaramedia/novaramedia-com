@@ -818,6 +818,9 @@ img {
   display: inline-block;
   margin-right: 16px;
 }
+.only-mobile {
+  display: none;
+}
 .margin-micro {
   margin: 4.944271909998838px;
 }
@@ -2094,17 +2097,26 @@ img {
   #header-page-title {
     max-width: 580px;
   }
-  #single-resources-section {
+  #single-article-photo-caption {
+    right: 6px;
+    padding: 3.708203932499128px;
+  }
+  #single-articles-title-row .col2 {
     display: none;
   }
-  #single-article-photo-caption {
-    position: absolute;
-    top: 0;
-    right: 6px;
-    -webkit-writing-mode: vertical-rl;
-        -ms-writing-mode: tb-rl;
-            writing-mode: vertical-rl;
-    padding: 3.708203932499128px;
+  #single-articles-title-row .col20 {
+    width: 100%;
+    float: none;
+  }
+  #single-articles-copy-row .col4 {
+    display: none;
+  }
+  #single-articles-copy-row .col16 {
+    width: 100%;
+    max-width: 722px;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;
@@ -2747,14 +2759,14 @@ img {
     margin-right: 0;
   }
   html {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.001em;
   }
   body {
     line-height: 1.4;
   }
   h1 {
-    font-size: 1.869270156846977rem;
+    font-size: 1.781452392364234rem;
     font-weight: bold;
     margin: 0;
     letter-spacing: 0.025em;
@@ -2851,6 +2863,12 @@ img {
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
+  }
+  .only-mobile {
+    display: initial;
+  }
+  .only-desktop {
+    display: none;
   }
   .margin-micro {
     margin: 3.708203932499128px;
@@ -2960,13 +2978,31 @@ img {
   .padding-bottom-large {
     padding-bottom: 60px;
   }
+  .mobile-margin-bottom-micro {
+    margin-bottom: 3.708203932499128px;
+  }
+  .mobile-margin-bottom-tiny {
+    margin-bottom: 6px;
+  }
+  .mobile-margin-bottom-small {
+    margin-bottom: 12px;
+  }
+  .mobile-margin-bottom-basic {
+    margin-bottom: 24px;
+  }
+  .mobile-margin-bottom-mid {
+    margin-bottom: 42px;
+  }
+  .mobile-margin-bottom-large {
+    margin-bottom: 60px;
+  }
   #header {
     position: fixed;
     width: 100%;
     z-index: 1000;
   }
   #main-content {
-    padding-top: 81px;
+    padding-top: 59px;
     min-height: 75vh;
   }
   .header-menu li {
@@ -3122,5 +3158,8 @@ img {
   }
   .text-copy .liveblog-update-heading:first-of-type {
     margin-top: 24px;
+  }
+  #single-related .post {
+    margin-bottom: 24px;
   }
 }
