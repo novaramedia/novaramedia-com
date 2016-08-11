@@ -35,7 +35,7 @@ if( have_posts() ) {
         <h5>Editorial Team</h5>
       </div>
     </div>
-    <div class="row margin-bottom-mid">
+    <div class="row margin-bottom-mid mobile-margin-bottom-none">
     <?php
     $people = new WP_Query(array(
       'post_type' => 'person',
@@ -48,14 +48,15 @@ if( have_posts() ) {
         $people->the_post();
 
         if ($i % 2 === 0 && $i !== 0) {
-          echo "</div>\n<div class=\"row margin-bottom-mid\">";
+          echo "</div>\n<div class=\"row margin-bottom-mid mobile-margin-bottom-none\">";
         }
         $person_meta = get_post_meta($post->ID);
 ?>
       <div class="col col4">
-        <?php the_post_thumbnail('col4'); ?>
+        <?php the_post_thumbnail('col4', array('class' => 'only-desktop')); ?>
+        <?php the_post_thumbnail('mobile-16to9', array('class' => 'only-mobile')); ?>
       </div>
-      <div class="col col8">
+      <div class="col col8 mobile-margin-bottom-basic">
         <div class="margin-bottom-small">
         <h6><span class="font-bold"><?php the_title(); ?></span>
           <?php if (!empty($person_meta['_cmb_title'][0])) {echo $person_meta['_cmb_title'][0];} ?>

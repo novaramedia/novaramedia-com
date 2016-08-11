@@ -8,6 +8,7 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'admin-thumb', 150, 150, false );
   add_image_size( 'opengraph', 1200, 630, true );
 
+  add_image_size( 'mobile-16to9', 715, 402, true );
   add_image_size( 'mobile-21to9', 715, 306, true );
 
   add_image_size( 'col4', 204, 9999, false );

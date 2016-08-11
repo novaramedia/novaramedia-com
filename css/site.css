@@ -2960,6 +2960,9 @@ img {
   .padding-bottom-large {
     padding-bottom: 60px;
   }
+  .mobile-margin-bottom-none {
+    margin-bottom: 0px;
+  }
   .mobile-margin-bottom-micro {
     margin-bottom: 3.708203932499128px;
   }
