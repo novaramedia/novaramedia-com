@@ -13,7 +13,7 @@
 ?>
 
 <div class="row">
-  <div class="col col24 margin-bottom-basic">
+  <div class="col col24 margin-bottom-basic mobile-margin-bottom-small">
     <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
   </div>
 </div>
