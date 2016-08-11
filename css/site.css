@@ -3015,6 +3015,9 @@ img {
   #header-sub {
     display: none;
   }
+  #header-sub .col {
+    margin-bottom: 6px;
+  }
   #header-search {
     display: none;
   }
