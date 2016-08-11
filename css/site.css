@@ -3162,4 +3162,24 @@ img {
   #single-related .post {
     margin-bottom: 24px;
   }
+  #single-video-related-video-holder {
+    margin-top: 24px;
+  }
+  #single-video-related-video:before,
+  #single-video-related-video:after {
+    content: " ";
+    display: table;
+  }
+  #single-video-related-video:after {
+    clear: both;
+  }
+  .single-video-related-video {
+    width: calc(33.333333333333336%);
+    float: left;
+  }
+  .single-video-related-video .wp-post-image {
+    display: block;
+    width: 100%;
+    padding: 1px;
+  }
 }

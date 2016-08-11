@@ -68,7 +68,7 @@
       }
     ?>
   </div>
-  <div class="col col4">
+  <div id="single-video-related-video-holder" class="col col4">
     <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More Video</a></h4>
     <div id="single-video-related-video" class="font-smaller">
       <?php
