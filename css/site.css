@@ -1495,21 +1495,15 @@ img {
   .support-form-holder {
     min-height: 5rem;
     padding: 14px;
-    text-align: center;
-    border: 2px solid #fff;
   }
   .support-form-slider {
-    width: 70%;
+    width: 60%;
     margin-right: 2%;
   }
   .support-form-submit {
-    width: 12%;
+    width: 15%;
     margin-left: 2%;
     padding: 7px 14px;
-    background-color: #fff;
-    color: #f00;
-    font-weight: bold;
-    border: 0;
   }
   #radio-player {
     display: none;
@@ -2024,21 +2018,15 @@ img {
   .support-form-holder {
     min-height: 5rem;
     padding: 12px;
-    text-align: center;
-    border: 2px solid #fff;
   }
   .support-form-slider {
-    width: 70%;
+    width: 60%;
     margin-right: 2%;
   }
   .support-form-submit {
-    width: 12%;
+    width: 20%;
     margin-left: 2%;
     padding: 6px 12px;
-    background-color: #fff;
-    color: #f00;
-    font-weight: bold;
-    border: 0;
   }
   #radio-player {
     display: none;
@@ -2589,21 +2577,15 @@ img {
   .support-form-holder {
     min-height: 5rem;
     padding: 12px;
-    text-align: center;
-    border: 2px solid #fff;
   }
   .support-form-slider {
-    width: 70%;
+    width: 55%;
     margin-right: 2%;
   }
   .support-form-submit {
-    width: 12%;
+    width: 23%;
     margin-left: 2%;
     padding: 6px 12px;
-    background-color: #fff;
-    color: #f00;
-    font-weight: bold;
-    border: 0;
   }
   #radio-player {
     display: none;
@@ -3062,24 +3044,30 @@ img {
   .error404 #header-search {
     display: block;
   }
+  .support-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
   .support-form-holder {
     min-height: 5rem;
     padding: 12px;
-    text-align: center;
-    border: 2px solid #fff;
-  }
-  .support-form-slider {
-    width: 70%;
-    margin-right: 2%;
   }
   .support-form-submit {
-    width: 12%;
-    margin-left: 2%;
+    width: auto;
+    margin-left: 12px;
+    padding: 6px 12px;
+    height: 28px;
+  }
+  input[type=number] {
+    width: auto;
+    margin-right: 12px;
     padding: 6px 12px;
     background-color: #fff;
     color: #f00;
-    font-weight: bold;
     border: 0;
+    height: 28px;
   }
   #radio-player {
     display: none;
