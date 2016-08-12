@@ -1,7 +1,7 @@
 // GRID
 
-$col = 32px
-$gutter = 14px
+$col = 19px
+$gutter = 12px
 
 .container
   width: ($col * $cols)+($gutter * $cols)
@@ -25,11 +25,11 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 15px
+$font-size-basic = 14px
 $font-size-larger = 1.3rem
 $font-size-h3 = golden-ratio(1rem , 1)
-$font-size-h2 = golden-ratio(1rem , 1.5)
-$font-size-h1 = golden-ratio(1rem , 2)
+$font-size-h2 = golden-ratio(1rem , 1.2)
+$font-size-h1 = golden-ratio(1rem , 1.5)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -98,6 +98,7 @@ p
   a
     color: $color-blue
   img
+    display: block
     margin: 2.5rem auto
 
 // ******************************************************
@@ -253,7 +254,7 @@ p
     padding-right: $margin-tiny
 
 #menu-logo
-  margin-right: 14px
+  margin-right: 10px
   svg
     height: 20px
     width: 24px
@@ -263,7 +264,7 @@ p
 #header-logotype
   svg
     height: 17px
-    width: 173px
+    width: 125px
     vertical-align: text-bottom
 
 // SEARCH
@@ -290,11 +291,11 @@ p
   padding: $margin-small
 
 .support-form-slider
-  width: 60%
+  width: 55%
   margin-right: 2%
 
 .support-form-submit
-  width: 15%
+  width: 23%
   margin-left: 2%
   padding: $margin-tiny $margin-small
 
@@ -330,12 +331,13 @@ p
 // SINGLE
 
 #header-page-title
-  max-width: ( 16 * $col ) + ( 15 * $gutter )
+  max-width: 70%
 
   // ARTICLE
 
 #single-article-photo-caption
   right: ($gutter / 2)
+  writing-mode: vertical-rl
   padding: $margin-micro
 
   // LIVEBLOG

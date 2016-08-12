@@ -10,7 +10,7 @@
   $category_link = get_category_link( $category_id );
 ?>
 
-<div class="row margin-bottom-basic">
+<div class="row margin-bottom-basic mobile-margin-bottom-small">
   <div class="col col24">
     <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
   </div>
@@ -37,7 +37,7 @@
   }
 ?>
 
-<div class="row">
+<div id="single-articles-copy-row" class="row">
   <div class="col col4"></div>
   <div class="col col16">
     <div id="single-articles-copy" class="text-copy margin-top-basic margin-bottom-basic">

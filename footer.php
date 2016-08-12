@@ -1,7 +1,7 @@
     <footer id="footer" class="background-black font-color-white margin-top-basic padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
       <div class="container">
         <div class="row">
-          <div class="col col6">
+          <div class="col col6 mobile-margin-bottom-basic">
             <ul>
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="http://support.novaramedia.com">Support Us</a></li>
@@ -11,7 +11,7 @@
               <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
             </ul>
           </div>
-          <div class="col col6">
+          <div class="col col6 mobile-margin-bottom-basic">
             <ul>
             <?php
               // Outputs only the top level categories

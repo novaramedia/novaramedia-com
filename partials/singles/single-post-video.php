@@ -13,7 +13,7 @@
 ?>
 
 <div class="row">
-  <div class="col col24 margin-bottom-basic">
+  <div class="col col24 margin-bottom-basic mobile-margin-bottom-small">
     <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
   </div>
 </div>
@@ -68,7 +68,7 @@
       }
     ?>
   </div>
-  <div class="col col4">
+  <div id="single-video-related-video-holder" class="col col4">
     <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More Video</a></h4>
     <div id="single-video-related-video" class="font-smaller">
       <?php

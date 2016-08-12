@@ -8,7 +8,7 @@
   }
 ?>
 
-<div class="row margin-top-small margin-bottom-basic">
+<div id="single-articles-title-row" class="row margin-top-small margin-bottom-basic mobile-margin-bottom-small">
   <div class="col col2"></div>
   <div class="col col20">
     <h1 id="single-articles-title" class="js-fix-widows"><?php the_title(); ?></h1>
@@ -17,7 +17,7 @@
 
 <div class="row margin-bottom-small">
   <div class="col col3"></div>
-  <div class="col col10">
+  <div class="col col10 mobile-margin-bottom-tiny">
     <h3>by <?php
       if (!empty($meta['_cmb_author_twitter'])) {
         echo '<a id="single-articles-author" target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
