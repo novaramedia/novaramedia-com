@@ -14,30 +14,6 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-    // FLUID COLS
-
-.percent-col
-  float: left
-  box-sizing: border-box
-
-$pcols = 10
-
-for pcol in 1..$pcols
-  .s-into-{pcol}
-    width: ( 100% / pcol )
-
-@media screen and (min-width: 601px)
-
-  for pcol in 1..$pcols
-    .m-into-{pcol}
-      width: ( 100% / pcol )
-
-@media screen and (min-width: 993px)
-
-  for pcol in 1..$pcols
-    .l-into-{pcol}
-      width: ( 100% / pcol )
-
 // ******************************************************
 
 // VARIABLES
@@ -62,15 +38,6 @@ $font-leading-larger = 1.55
 $font-tracking-basic = 0.001em
 $font-tracking-wider = 0.025em
 
-$color-black-soft = rgb(14, 14, 14)
-$color-white-soft = rgb(253, 253, 253)
-
-$color-gray = rgb(150,150,150)
-$color-gray-light = rgb(190,190,190)
-
-$color-red = red
-$color-blue = rgb(84,144,235)
-
 $border-width = 2px
 
 $basic-animation-speed = .5s
@@ -90,50 +57,22 @@ body
 
 h1
   font-size: $font-size-h1
-  font-weight: bold
-  margin: 0
   letter-spacing: $font-tracking-wider
 
 h2
   font-size: $font-size-h2
-  font-weight: bold
-  margin: 0
   letter-spacing: $font-tracking-wider
 
 h3
   font-size: $font-size-h3
-  font-weight: bold
-
-h4
-  text-transform: uppercase
-  font-weight: bold
-
-h5
-  font-weight: bold
 
 p
   margin-bottom: 1rem
 
   // FONT RULES
 
-.font-italic, em, i
-  font-style: italic
-
-.font-bold, strong, b
-  font-weight: bold
-
 .font-small-caps
   font-size: 0.85em
-  text-transform: uppercase
-
-.font-capitalize
-  text-transform: capitalize
-
-.font-uppercase
-  text-transform: uppercase
-
-.font-underline
-  text-decoration: underline
 
 .font-leading-wider
   line-height: $font-leading-larger
@@ -159,7 +98,6 @@ p
   a
     color: $color-blue
   img
-    display: block
     margin: 2.5rem auto
 
 // ******************************************************
@@ -172,14 +110,6 @@ p
 // ******************************************************
 
 // BASIC
-
-html
-  background-color: $color-white-soft
-  color: $color-black-soft
-
-img
-  max-width: 100%
-  height: auto
 
 .inline-action-list
   li
@@ -314,19 +244,9 @@ img
 
 // HEADER
 
-#header
-  position: fixed
-  width: 100%
-  z-index: 1000
-
 #main-content
   padding-top: 57px + $margin-basic
   min-height: 75vh
-
-#header-main-wrapper
-  background-image: url('../img/dist/novara-marble-black-cropped.jpg')
-  background-size: cover
-  background-position: center center
 
 .header-menu
   li
@@ -346,44 +266,20 @@ img
     width: 173px
     vertical-align: text-bottom
 
-#header-sub
-  display: none
-
 // SEARCH
-
-#header-search
-  display: none
 
 #search-form
   border: $border-width solid $color-white-soft
 
 #search-input, #search-submit
   font-size: $font-size-h3
-  border: 0
-  &:focus
-    outline: 0
 
 #search-input
-  float: left
   width: 70%
-  background-color: transparent
-  color: $color-white-soft
 
 #search-submit
   width: 8%
   min-width: 25px
-  float right
-
-#tag-suggestions
-  display: none
-
-// ******************************************************
-
-// 404
-
-.error404
-  #header-search
-    display: block
 
 // ******************************************************
 
@@ -406,50 +302,18 @@ img
 
 // RADIO PLAYER
 
-#radio-player
-  display: none
-
 .jp-controls-holder
   margin-right: $margin-tiny
 
 .jp-block
-  display: block
   height: $margin-basic
-  width: 100%
-  text-align: center
   border: 2px solid $color-white-soft
-
-.jp-button
-  text-align: center
-
-.jp-stop
-  display: none
-
-.jp-volume-bar
-  position: relative
-
-.jp-button, .jp-volume-bar
-  &:hover
-    cursor: pointer
-
-.jp-volume-bar-value
-  background-color: white
-  position:relative
-  height: 100%
 
 // ******************************************************
 
 // FRONT PAGE
 
-#featured-post
-  position: relative
-
 #featured-post-title
-  position: absolute
-  top: 0
-  height: 100%
-  width: 100%
-  z-index: 100
   padding: $margin-large
   font-size: golden-ratio(1rem , 2.5)
 
@@ -457,15 +321,8 @@ img
 
 // INDEXES
 
-.post-col12-image
-  position: relative
-
 .post-col12-text
-  position: absolute
-  bottom: 0
-  left: 0
   padding: $margin-small + $margin-tiny
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%);
 
 
 // ******************************************************
@@ -475,16 +332,10 @@ img
 #header-page-title
   max-width: ( 16 * $col ) + ( 15 * $gutter )
 
-#single-resources-section
-  display: none
-
   // ARTICLE
 
 #single-article-photo-caption
-  position: absolute
-  top: 0
   right: ($gutter / 2)
-  writing-mode: vertical-rl
   padding: $margin-micro
 
   // LIVEBLOG
