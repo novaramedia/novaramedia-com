@@ -25,7 +25,7 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 14px
+$font-size-basic = 13px
 $font-size-larger = 1.3rem
 $font-size-h3 = golden-ratio(1rem , 1)
 $font-size-h2 = golden-ratio(1rem , 1.2)
@@ -323,8 +323,11 @@ p
 // INDEXES
 
 .post-col12-text
-  padding: $margin-small + $margin-tiny
-
+  padding: $margin-small
+  h2
+    font-size: $font-size-larger
+  h3
+    font-size: $font-size-basic
 
 // ******************************************************
 

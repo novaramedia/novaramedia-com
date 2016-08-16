@@ -26,7 +26,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
     $alt_thumb = get_post_meta($post->ID, '_cmb_alt_thumb_id');
 ?>
-  <section id="home-featured" class="container margin-bottom-large">
+  <section id="home-featured" class="container margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
        <div class="col col24 margin-bottom-small">
         <h4><a href="<?php the_permalink(); ?>">Featured</a></h4>
@@ -37,9 +37,11 @@ $show_imo = IGV_get_option('_igv_show_imo');
         <article id="featured-post" class="col col24">
           <?php
             if (!empty($alt_thumb)) {
-              echo wp_get_attachment_image($alt_thumb[0], 'col24-featured-crop', array('id' => 'featured-post-thumbnail'));
+              echo wp_get_attachment_image($alt_thumb[0], 'col24-featured-crop', null, array('class' => 'featured-post-thumbnail only-desktop'));
+              echo wp_get_attachment_image($alt_thumb[0], 'col24-mobile-featured-crop', null, array('class' => 'featured-post-thumbnail only-mobile'));
             } else {
-              the_post_thumbnail('col24-featured-crop', array('id' => 'featured-post-thumbnail'));
+              the_post_thumbnail('col24-featured-crop', array('class' => 'featured-post-thumbnail only-desktop'));
+              the_post_thumbnail('col24-mobile-featured-crop', array('class' => 'featured-post-thumbnail only-mobile'));
             }
           ?>
           <h1 id="featured-post-title" class="text-align-center font-color-white u-flex-center js-fix-widows"><?php the_title(); ?></h1>
@@ -59,7 +61,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
   }
   ?>
 
-  <section id="home-articles-posts" class="container margin-bottom-large">
+  <section id="home-articles-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Articles');
       $category_link = get_category_link( $category_id );
@@ -71,7 +73,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
       </div>
     </div>
 
-    <div class="row margin-bottom-small">
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
       <?php
         $latest_articles = new WP_Query(array(
           'posts_per_page' => 7,
@@ -90,7 +92,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
             }
 
             if ($i === 2) {
-              echo '</div><div class="row margin-bottom-small">';
+              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
             }
 
             $i++;
@@ -100,7 +102,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 
-  <section id="home-video-posts" class="container margin-bottom-large">
+  <section id="home-video-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Video');
       $category_link = get_category_link( $category_id );
@@ -124,7 +126,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 
-  <section id="home-fm-posts" class="container margin-bottom-large">
+  <section id="home-fm-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Audio');
       $category_link = get_category_link( $category_id );
@@ -161,7 +163,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     }
   ?>
 
-  <section id="home-long-read-posts" class="container margin-bottom-large">
+  <section id="home-long-read-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Long Read');
       $category_link = get_category_link( $category_id );
@@ -193,7 +195,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
 <?php
   if ($show_imo) {
 ?>
-  <section id="home-imo-posts" class="container margin-bottom-large">
+  <section id="home-imo-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('imobastani');
       $category_link = get_category_link( $category_id );

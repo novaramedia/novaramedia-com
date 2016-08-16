@@ -4,14 +4,14 @@ function render_home_focus($focus) {
   $focus_object = get_term($focus);
   $focus_link = get_term_link($focus_object);
 ?>
-  <section id="home-focus-posts" class="container margin-bottom-large">
+  <section id="home-focus-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
       <div class="col col24 margin-bottom-small">
         <h4><a href="<?php echo $focus_link; ?>">Focus on <?php echo $focus_object->name; ?></a></h4>
       </div>
     </div>
 
-    <div class="row margin-bottom-small">
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
 <?php
       $focusPosts = new WP_Query(array(
         'posts_per_page' => -1,
@@ -29,7 +29,7 @@ function render_home_focus($focus) {
           $focusPosts->the_post();
 
           if ($i % 3 === 0 && $i !== 0) {
-            echo "</div>\n<div class=\"row margin-bottom-small\">";
+            echo "</div>\n<div class=\"row margin-bottom-small mobile-margin-bottom-none\">";
           }
 
           get_template_part('partials/post-layouts/home-focus-post-col8');
@@ -50,7 +50,7 @@ function render_video_query($query) {
   if ($query->have_posts()) {
     $query->the_post();
   ?>
-  <div class="col col20">
+  <div class="col col20 video-block-main-video">
     <?php
     $meta = get_post_meta($post->ID);
     if (!empty($meta['_cmb_utube'])) {
@@ -76,8 +76,9 @@ function render_video_query($query) {
         $query->the_post();
     ?>
     <a href="<?php the_permalink(); ?>">
-     <div class="single-video-related-video margin-bottom-small">
-       <?php the_post_thumbnail('col4-16to9'); ?>
+     <div class="video-related-video margin-bottom-small">
+       <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
+       <?php the_post_thumbnail('col6-16to9', array('class' => 'only-mobile')); ?>
        <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
      </div>
    </a>

@@ -4,6 +4,7 @@ $gutter = 12px
 
 .container
   width: 96%
+  max-width: 460px
 
 .col
   width: 100%
@@ -361,16 +362,50 @@ input[type=number]
 // FRONT PAGE
 
 #featured-post-title
-  padding: $margin-large
-  font-size: golden-ratio(1rem , 2.5)
+  padding: $margin-small + $margin-tiny
+  font-size: golden-ratio(1rem , 1.2)
+
+#home-articles-posts, #home-fm-posts, #home-focus-posts, #home-long-read-posts
+  .col
+    margin-bottom: $margin-small
+
+// ******************************************************
+
+// VIDEO BLOCK
+
+.video-block-main-video
+  margin-bottom: $margin-small
+
+.video-related-video
+  width: 100%
+  clearfix()
+  .wp-post-image
+    width: 50%
+    float: left
+    padding-right: $margin-tiny
+  h6
+    width: 50%
+    float: left
+    padding-left: $margin-tiny
+    font-size: 1rem
 
 // ******************************************************
 
 // INDEXES
 
-.post-col12-text
-  padding: $margin-small + $margin-tiny
+.post-col12-image
+  position: relative
 
+.post-col12-text
+  position: relative
+  padding: 0
+  margin-top: $margin-tiny
+  background: none
+  color: $color-black-soft
+  h2
+    font-size: $font-size-larger
+  h3
+    font-size: $font-size-basic
 
 // ******************************************************
 
