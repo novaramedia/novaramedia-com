@@ -79,8 +79,9 @@
             $related_video->the_post();
       ?>
       <a href="<?php the_permalink(); ?>">
-        <div class="single-video-related-video margin-bottom-small">
-          <?php the_post_thumbnail('col4-16to9'); ?>
+        <div class="video-related-video margin-bottom-small">
+         <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
+         <?php the_post_thumbnail('col6-16to9', array('class' => 'only-mobile')); ?>
           <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
         </div>
       </a>

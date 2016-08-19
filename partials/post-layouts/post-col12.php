@@ -6,10 +6,11 @@
   <article <?php post_class('col col12'); ?> id="post-<?php the_ID(); ?>">
 
     <div class="post-col12-image">
-    <?php the_post_thumbnail('col12-1to2point3', array('class' => 'u-display-block')); ?>
+    <?php the_post_thumbnail('col12-1to2point3', array('class' => 'u-display-block only-desktop')); ?>
+    <?php the_post_thumbnail('mobile-16to9', array('class' => 'only-mobile')); ?>
 
       <div class="post-col12-text font-color-white">
-        <h2 class="js-fix-widows"><?php the_title(); ?></h2>
+        <h2 class="js-fix-widows mobile-margin-bottom-micro"><?php the_title(); ?></h2>
     <?php
         if (!empty($meta['_cmb_author'])) {
     ?>

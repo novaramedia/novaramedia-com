@@ -1742,7 +1742,13 @@ img {
     font-size: 3.330015792890114rem;
   }
   .post-col12-text {
-    padding: 18px;
+    padding: 12px;
+  }
+  .post-col12-text h2 {
+    font-size: 1.618rem;
+  }
+  .post-col12-text h3 {
+    font-size: 14px;
   }
   #header-page-title {
     max-width: 580px;
@@ -1859,7 +1865,7 @@ img {
     width: 732px;
   }
   html {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.001em;
   }
   body {
@@ -2092,7 +2098,13 @@ img {
     font-size: 3.330015792890114rem;
   }
   .post-col12-text {
-    padding: 18px;
+    padding: 12px;
+  }
+  .post-col12-text h2 {
+    font-size: 1.3rem;
+  }
+  .post-col12-text h3 {
+    font-size: 13px;
   }
   #header-page-title {
     max-width: 70%;
@@ -2114,9 +2126,10 @@ img {
     margin-top: 24px;
   }
 }
-@media screen and (max-width: 744px) {
+@media screen and (max-width: 755px) {
   .container {
     width: 96%;
+    max-width: 460px;
   }
   .col {
     width: 100%;
@@ -2404,11 +2417,55 @@ img {
     border: 2px solid #fdfdfd;
   }
   #featured-post-title {
-    padding: 60px;
-    font-size: 3.330015792890114rem;
+    padding: 18px;
+    font-size: 1.781452392364234rem;
+  }
+  #home-articles-posts .col,
+  #home-fm-posts .col,
+  #home-focus-posts .col,
+  #home-long-read-posts .col {
+    margin-bottom: 12px;
+  }
+  .video-block-main-video {
+    margin-bottom: 12px;
+  }
+  .video-related-video {
+    width: 100%;
+  }
+  .video-related-video:before,
+  .video-related-video:after {
+    content: " ";
+    display: table;
+  }
+  .video-related-video:after {
+    clear: both;
+  }
+  .video-related-video .wp-post-image {
+    width: 50%;
+    float: left;
+    padding-right: 6px;
+  }
+  .video-related-video h6 {
+    width: 50%;
+    float: left;
+    padding-left: 6px;
+    font-size: 1rem;
+  }
+  .post-col12-image {
+    position: relative;
   }
   .post-col12-text {
-    padding: 18px;
+    position: relative;
+    padding: 0;
+    margin-top: 6px;
+    background: none;
+    color: #0e0e0e;
+  }
+  .post-col12-text h2 {
+    font-size: 1.3rem;
+  }
+  .post-col12-text h3 {
+    font-size: 13px;
   }
   #header-page-title {
     max-width: 70%;
