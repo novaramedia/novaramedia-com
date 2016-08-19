@@ -50,7 +50,7 @@ function render_video_query($query) {
   if ($query->have_posts()) {
     $query->the_post();
   ?>
-  <div class="col col20 video-block-main-video">
+  <div class="col col20 video-block-main-video mobile-margin-bottom-basic">
     <?php
     $meta = get_post_meta($post->ID);
     if (!empty($meta['_cmb_utube'])) {
