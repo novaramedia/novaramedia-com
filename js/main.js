@@ -1,25 +1,15 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Site, Modernizr */
+/* global $, jQuery, document, Site */
 
 Site = {
-  mobileThreshold: 601,
   init: function() {
     var _this = this;
 
+    _this.Utilities.init();
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
     _this.RadioPlayer.init();
-
-    if ($('#single-resources-section').length) {
-      _this.bindResourcesToggle();
-    }
-
-    _this.fixWidows();
-
-    $('.js-select').click(function() {
-      $(this).selectText();
-    });
 
     $(window).resize(function(){
       _this.onResize();
@@ -32,13 +22,29 @@ Site = {
 
   },
 
-  fixWidows: function() {
-    // utility class mainly for use on headines to avoid widows [single words on a new line]
-    $('.js-fix-widows').each(function(){
-      var string = $(this).html();
-      string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
-      $(this).html(string);
+};
+
+Site.Utilities = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+    _this.fixWidows();
+
+  },
+
+  bind: function() {
+    var _this = this;
+    var $resources = $('#single-resources-section');
+
+    if ($('#single-resources-section').length) {
+      _this.bindResourcesToggle();
+    }
+
+    $('.js-select').click(function() {
+      $(this).selectText();
     });
+
   },
 
   bindResourcesToggle: function() {
@@ -50,6 +56,16 @@ Site = {
     });
 
   },
+
+  fixWidows: function() {
+    // utility class mainly for use on headines to avoid widows [single words on a new line]
+    $('.js-fix-widows').each(function(){
+      var string = $(this).html();
+      string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
+      $(this).html(string);
+    });
+  },
+
 };
 
 Site.Header = {
