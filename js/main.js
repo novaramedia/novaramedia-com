@@ -25,7 +25,6 @@ Site.Utilities = {
 
   bind: function() {
     var _this = this;
-    var $resources = $('#single-resources-section');
 
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
@@ -38,7 +37,6 @@ Site.Utilities = {
   },
 
   bindResourcesToggle: function() {
-    var _this = this;
     var $resources = $('#single-resources-section');
 
     $('#js-resources-toggle').click(function() {
@@ -62,6 +60,12 @@ Site.Header = {
   init: function() {
     var _this = this;
 
+    _this.$menuToggle = $('#menu-toggle');
+    _this.$headerSub = $('#header-sub');
+    _this.$searchToggle = $('#search-toggle');
+    _this.$headerSearch = $('#header-search');
+    _this.$searchInput = $('#search-input');
+
     _this.bind();
 
     if ($('body').hasClass('single')) {
@@ -73,13 +77,13 @@ Site.Header = {
   bind: function() {
     var _this = this;
 
-    $('#menu-toggle').click(function() {
-      $('#header-sub').toggle();
+    _this.$menuToggle.click(function() {
+      _this.$headerSub.toggle();
     });
 
-    $('#search-toggle').click(function() {
-      $('#header-search').toggle();
-      $('#search-input').focus();
+    _this.$searchToggle.click(function() {
+      _this.$headerSearch.toggle();
+       _this.$searchInput.focus();
     });
 
   },
