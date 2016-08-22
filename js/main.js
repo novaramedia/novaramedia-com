@@ -11,17 +11,7 @@ Site = {
     _this.Support.init();
     _this.RadioPlayer.init();
 
-    $(window).resize(function(){
-      _this.onResize();
-    });
-
-  },
-
-  onResize: function() {
-    var _this = this;
-
-  },
-
+  }
 };
 
 Site.Utilities = {
