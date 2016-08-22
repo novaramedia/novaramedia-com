@@ -73,6 +73,7 @@ Site.Header = {
 
     $('#search-toggle').click(function() {
       $('#header-search').toggle();
+      $('#search-input').focus();
     });
 
   },
