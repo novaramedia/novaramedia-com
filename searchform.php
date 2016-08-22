@@ -21,7 +21,7 @@ if ( ! empty( $tags ) ) {
 <div id="tag-suggestions" class="background-light-gray font-color-white padding-top-basic padding-bottom-basic">
   <div class="container">
     <div class="row">
-      <div class="col col6">
+      <div class="col col6 mobile-margin-bottom-small">
         <h4>Tag suggestions</h4>
       </div>
       <div class="col col18">
