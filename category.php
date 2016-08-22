@@ -28,7 +28,7 @@ get_header();
       $i = 0;
       the_post();
     ?>
-    <div class="row margin-bottom-large">
+    <div class="row margin-bottom-large only-desktop">
       <div class="col col16">
         <?php
         $meta = get_post_meta($post->ID);
