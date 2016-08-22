@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Site */
+/* global $, Site */
 
 Site = {
   init: function() {
@@ -88,7 +88,7 @@ Site.Header = {
 
   },
 
-  showSinglePostTitle: function(e) {
+  showSinglePostTitle: function() {
     var _this = this;
 
     _this.headerHeight = $('#header-main-wrapper').height();
@@ -130,7 +130,7 @@ Site.Search = {
   bind: function() {
     var _this = this;
 
-    _this.form.on('change keyup input paste focus', function(event) {
+    _this.form.on('change keyup input paste focus', function() {
 
       // Get Input Value
       var term = $(this).val();
