@@ -6,12 +6,6 @@ Site = {
   init: function() {
     var _this = this;
 
-    $(window).resize(function(){
-      _this.onResize();
-    });
-
-    _this.fixWidows();
-
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
@@ -21,8 +15,14 @@ Site = {
       _this.bindResourcesToggle();
     }
 
+    _this.fixWidows();
+
     $('.js-select').click(function() {
       $(this).selectText();
+    });
+
+    $(window).resize(function(){
+      _this.onResize();
     });
 
   },
@@ -315,10 +315,4 @@ Site.RadioPlayer = {
 
 };
 
-jQuery(document).ready(function () {
-  'use strict';
-
-  Site.init();
-
-});
-
+Site.init();
