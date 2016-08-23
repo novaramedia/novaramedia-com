@@ -2451,6 +2451,12 @@ img {
     padding-left: 6px;
     font-size: 1rem;
   }
+  #posts .row {
+    margin-bottom: 0;
+  }
+  #posts .col {
+    margin-bottom: 12px;
+  }
   .post-col12-image {
     position: relative;
   }
