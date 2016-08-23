@@ -1,21 +1,30 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Site, Modernizr */
+/* global $, Site */
 
 Site = {
-  mobileThreshold: 601,
   init: function() {
     var _this = this;
 
-    $(window).resize(function(){
-      _this.onResize();
-    });
-
-    _this.fixWidows();
-
+    _this.Utilities.init();
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
     _this.RadioPlayer.init();
+
+  }
+};
+
+Site.Utilities = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+    _this.fixWidows();
+
+  },
+
+  bind: function() {
+    var _this = this;
 
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
@@ -27,8 +36,12 @@ Site = {
 
   },
 
-  onResize: function() {
-    var _this = this;
+  bindResourcesToggle: function() {
+    var $resources = $('#single-resources-section');
+
+    $('#js-resources-toggle').click(function() {
+      $resources.toggle();
+    });
 
   },
 
@@ -41,20 +54,17 @@ Site = {
     });
   },
 
-  bindResourcesToggle: function() {
-    var _this = this;
-    var $resources = $('#single-resources-section');
-
-    $('#js-resources-toggle').click(function() {
-      $resources.toggle();
-    });
-
-  },
 };
 
 Site.Header = {
   init: function() {
     var _this = this;
+
+    _this.$menuToggle = $('#menu-toggle');
+    _this.$headerSub = $('#header-sub');
+    _this.$searchToggle = $('#search-toggle');
+    _this.$headerSearch = $('#header-search');
+    _this.$searchInput = $('#search-input');
 
     _this.bind();
 
@@ -67,17 +77,18 @@ Site.Header = {
   bind: function() {
     var _this = this;
 
-    $('#menu-toggle').click(function() {
-      $('#header-sub').toggle();
+    _this.$menuToggle.click(function() {
+      _this.$headerSub.toggle();
     });
 
-    $('#search-toggle').click(function() {
-      $('#header-search').toggle();
+    _this.$searchToggle.click(function() {
+      _this.$headerSearch.toggle();
+       _this.$searchInput.focus();
     });
 
   },
 
-  showSinglePostTitle: function(e) {
+  showSinglePostTitle: function() {
     var _this = this;
 
     _this.headerHeight = $('#header-main-wrapper').height();
@@ -119,7 +130,7 @@ Site.Search = {
   bind: function() {
     var _this = this;
 
-    _this.form.on('change keyup input paste focus', function(event) {
+    _this.form.on('change keyup input paste focus', function() {
 
       // Get Input Value
       var term = $(this).val();
@@ -315,10 +326,4 @@ Site.RadioPlayer = {
 
 };
 
-jQuery(document).ready(function () {
-  'use strict';
-
-  Site.init();
-
-});
-
+Site.init();
