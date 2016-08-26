@@ -33,7 +33,7 @@ function notices_post_type() {
 		'label'                 => 'Notice',
 		'description'           => 'Simple notices with no archive',
 		'labels'                => $labels,
-		'supports'              => array( ),
+		'supports'              => array( 'title', 'editor', 'thumbnail'),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
