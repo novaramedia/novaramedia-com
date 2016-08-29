@@ -26,9 +26,7 @@ function add_lazysize_on_srcset($attr) {
     $attr['data-src'] = $attr['src'];
   }
 
-  // Remove default src
-  unset($attr['src']);
-
+  // Set default to white blank
   $attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
   return $attr;
