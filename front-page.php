@@ -19,11 +19,12 @@ $show_imo = IGV_get_option('_igv_show_imo');
     $home_featured_ids = explode(', ', $home_featured);
     $post_id = $home_featured_ids[0];
 
-    $thumb_id = get_post_thumbnail_id($post_id);
-    $alt_thumb = get_post_meta($post_id, '_cmb_alt_thumb_id', true);
+    // Check for alt_thumb first
+    $thumb_id = get_post_meta($post_id, '_cmb_alt_thumb_id', true);
 
-    if (!empty($alt_thumb)) {
-      $thumb_id = $alt_thumb;
+    // If alt_thumb is empty, fallback to default thumb
+    if (empty($thumb_id)) {
+      $thumb_id = get_post_thumbnail_id($post_id);
     }
 ?>
   <section id="home-featured" class="container margin-bottom-large mobile-margin-bottom-basic">
