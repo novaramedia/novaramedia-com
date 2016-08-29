@@ -16,15 +16,16 @@ $show_imo = IGV_get_option('_igv_show_imo');
 <main id="main-content">
 <?php
   if (!empty($home_featured)) {
-
-    global $post;
-
     $home_featured_ids = explode(', ', $home_featured);
-    $post = get_post($home_featured_ids[0]);
+    $post_id = $home_featured_ids[0];
 
-    setup_postdata($post);
+    // Check for alt_thumb first
+    $thumb_id = get_post_meta($post_id, '_cmb_alt_thumb_id', true);
 
-    $alt_thumb = get_post_meta($post->ID, '_cmb_alt_thumb_id');
+    // If alt_thumb is empty, fallback to default thumb
+    if (empty($thumb_id)) {
+      $thumb_id = get_post_thumbnail_id($post_id);
+    }
 ?>
   <section id="home-featured" class="container margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
@@ -36,15 +37,10 @@ $show_imo = IGV_get_option('_igv_show_imo');
       <a href="<?php the_permalink(); ?>">
         <article id="featured-post" class="col col24">
           <?php
-            if (!empty($alt_thumb)) {
-              echo wp_get_attachment_image($alt_thumb[0], 'col24-featured-crop', null, array('class' => 'featured-post-thumbnail only-desktop'));
-              echo wp_get_attachment_image($alt_thumb[0], 'col24-mobile-featured-crop', null, array('class' => 'featured-post-thumbnail only-mobile'));
-            } else {
-              the_post_thumbnail('col24-featured-crop', array('class' => 'featured-post-thumbnail only-desktop'));
-              the_post_thumbnail('col24-mobile-featured-crop', array('class' => 'featured-post-thumbnail only-mobile'));
-            }
+            echo wp_get_attachment_image($thumb_id, 'col24-featured-crop', null, array('class' => 'featured-post-thumbnail only-desktop'));
+            echo wp_get_attachment_image($thumb_id, 'col24-mobile-featured-crop', null, array('class' => 'featured-post-thumbnail only-mobile'));
           ?>
-          <h1 id="featured-post-title" class="text-align-center font-color-white u-flex-center js-fix-widows"><?php the_title(); ?></h1>
+          <h1 id="featured-post-title" class="text-align-center font-color-white u-flex-center js-fix-widows"><?php echo get_the_title($post_id); ?></h1>
         </article>
       </a>
     </div>
