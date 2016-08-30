@@ -24,7 +24,7 @@ if (is_home()) {
 ?>
   <meta property="og:image" content="<?php echo $open_graph_image; ?>" />
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
-  <meta property="og:title" content="<?php bloginfo('name'); ?>" />
+  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
   <meta property="og:type" content="website" />
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
@@ -44,7 +44,7 @@ if (is_home()) {
 ?>
   <meta property="og:image" content="<?php echo $thumb[0]; ?>" />
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
-  <meta property="og:title" content="<?php the_title(); ?>" />
+  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
   <meta property="og:description" content="<?php echo $excerpt; ?>" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
@@ -60,7 +60,7 @@ if (is_home()) {
 ?>
   <meta property="og:image" content="<?php echo $open_graph_image; ?>" />
   <meta property="og:url" content="<?php the_permalink() ?>"/>
-  <meta property="og:title" content="<?php the_title(); ?>" />
+  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
   <meta property="og:type" content="website" />
