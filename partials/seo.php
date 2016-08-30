@@ -40,14 +40,23 @@ if (is_home()) {
 <?php
 } else if (is_single()) {
   global $post;
-  // trim post content by 600 chars
-  $excerpt = substr($post->post_content, 0, 600);
-  // strip html tags
-  $excerpt = strip_tags($excerpt);
-  // add ... to end
-  $excerpt = $excerpt . '...';
+
+  $description = get_post_meta($post->ID, '_cmb_short_desc', true);
+
+  if ($description) {
+    $excerpt = $description;
+  } else {
+    // trim post content by 600 chars
+    $excerpt = substr($post->post_content, 0, 600);
+    // strip html tags
+    $excerpt = strip_tags($excerpt);
+    // add ... to end
+    $excerpt = $excerpt . '...';
+  }
+
   // clean special cars
   $excerpt = htmlspecialchars($excerpt);
+
 ?>
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:description" content="<?php echo $excerpt; ?>" />
