@@ -30,11 +30,11 @@ $show_imo = IGV_get_option('_igv_show_imo');
   <section id="home-featured" class="container margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
        <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php the_permalink(); ?>">Featured</a></h4>
+        <h4><a href="<?php echo get_permalink($post_id); ?>">Featured</a></h4>
       </div>
     </div>
     <div class="row">
-      <a href="<?php the_permalink(); ?>">
+      <a href="<?php echo get_permalink($post_id); ?>">
         <article id="featured-post" class="col col24">
           <?php
             echo wp_get_attachment_image($thumb_id, 'col24-featured-crop', null, array('class' => 'featured-post-thumbnail only-desktop'));
