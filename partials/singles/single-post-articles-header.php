@@ -36,7 +36,7 @@
     <?php
       if (!empty($meta['_cmb_author_twitter'])) {
         echo '<a target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
-        echo '<h5>@' . $meta['_cmb_author_twitter'][0] . '</h5>';
+        echo '<h5>@' . ltrim($meta['_cmb_author_twitter'][0], '@') . '</h5>';
         echo '</a>';
       }
     ?>
