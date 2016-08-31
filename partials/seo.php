@@ -11,58 +11,63 @@ if ($fbAppId) {
   echo '<meta name="fb:app_id" value="' . $fbAppId . '">';
 }
 
-$og_image_id = IGV_get_option('_igv_og_image_id');
+?>
+  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
+  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+<?php
+global $post;
 
-if (!empty($og_image_id)) {
-  $thumb = wp_get_attachment_image_src($og_image_id, 'opengraph');
-  $open_graph_image = $thumb[0];
+if (has_post_thumbnail($post)) {
+  $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'opengraph');
+}
+
+$ogImage = wp_get_attachment_image_src(IGV_get_option('_igv_og_image_id'), 'opengraph');
+
+if (!empty($thumb) && is_single()) {
+  echo '<meta property="og:image" content="' . $thumb[0] . '" />';
+} else if (!empty($ogImage)) {
+  echo '<meta property="og:image" content="' . $ogImage[0] . '" />';
 } else {
-  $open_graph_image = get_stylesheet_directory_uri() . '/img/dist/favicon.png';
+  echo '<meta property="og:image" content="' . get_stylesheet_directory_uri() . '/img/dist/favicon.png" />';
 }
 
 if (is_home()) {
 ?>
-  <meta property="og:image" content="<?php echo $open_graph_image; ?>" />
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
-  <meta property="og:title" content="<?php bloginfo('name'); ?>" />
-  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
-  <meta property="og:type" content="website" />
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
   <meta name="twitter:card" value="<?php bloginfo('description'); ?>">
+  <meta property="og:type" content="website" />
 <?php
-} elseif (is_single()) {
-    global $post;
-    $meta = get_post_meta($post->ID);
-    $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'opengraph');
+} else if (is_single()) {
+  global $post;
 
-    if (!empty($meta['_cmb_short_desc'])) {
-      $excerpt = htmlspecialchars($meta['_cmb_short_desc'][0]);
-    } else {
-      $excerpt = htmlspecialchars(apply_filters('the_excerpt', get_post_field('post_excerpt', $post->ID)));
-    }
+  $description = get_post_meta($post->ID, '_cmb_short_desc', true);
 
-?>
-  <meta property="og:image" content="<?php echo $thumb[0]; ?>" />
-  <meta property="og:url" content="<?php the_permalink(); ?>"/>
-  <meta property="og:title" content="<?php the_title(); ?>" />
-  <meta property="og:description" content="<?php echo $excerpt; ?>" />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
-  <meta property="og:article:published_time" content="<?php echo get_the_time('c', $post->ID); ?>" />
-<?php
-  if (!empty($meta['_cmb_author'])) {
-?>
-  <meta property="og:article:author" content="<?php echo $meta['_cmb_author'][0]; ?>" />
-<?php
+  if ($description) {
+    $excerpt = $description;
+  } else {
+    // trim post content by 600 chars
+    $excerpt = substr($post->post_content, 0, 600);
+    // strip html tags
+    $excerpt = strip_tags($excerpt);
+    // add ... to end
+    $excerpt = $excerpt . '...';
   }
 
+  // clean special cars
+  $excerpt = htmlspecialchars($excerpt);
+
+?>
+  <meta property="og:url" content="<?php the_permalink(); ?>"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>" />
+  <meta name="twitter:card" value="<?php echo $excerpt; ?>">
+  <meta property="og:type" content="article" />
+<?php
 } else {
 ?>
-  <meta property="og:image" content="<?php echo $open_graph_image; ?>" />
   <meta property="og:url" content="<?php the_permalink() ?>"/>
-  <meta property="og:title" content="<?php the_title(); ?>" />
-  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+  <meta name="twitter:card" value="<?php bloginfo('description'); ?>">
   <meta property="og:type" content="website" />
 <?php
 }
