@@ -130,13 +130,13 @@ Site.Search = {
   bind: function() {
     var _this = this;
 
-    _this.form.on('change keyup input paste focus', function() {
+    _this.form.on('change keyup input paste', $.debounce( 500, function() {
 
       // Get Input Value
-      var term = $(this).val();
+      var term = _this.slugify($(this).val());
 
       // Get matching tags
-      var $suggested = _this.tags.siblings('.suggested-tag[data-tag^="' + term + '"]');
+      var $suggested = _this.tags.siblings('[data-tag*="' + term + '"]');
 
       // Hide all tags
       _this.tags.hide();
@@ -148,8 +148,16 @@ Site.Search = {
       } else {
         _this.tagsList.hide();
       }
+    }));
+  },
 
-    });
+  slugify: function(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');  
   },
 
   fourzerofour: function() {
