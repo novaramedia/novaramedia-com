@@ -75,7 +75,7 @@ if ($the_query->post_count === 0) {
   		'permalink' => get_permalink($id),
   		'thumb_large' => $thumb[0],
   		'thumb_medium' => $thumbmedium[0],
-  		'short_desc' => $meta['_cmb_short-desc'][0],
+  		'short_desc' => $meta['_cmb_short_desc'][0],
       'tags' => $tags
   	));
   endwhile;

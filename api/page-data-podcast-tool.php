@@ -12,7 +12,7 @@ if (!empty($page)) {
 
 $args = array(
 	'posts_per_page' 	=> 1,
-	'category_name' 	=> 'fm',
+	'category_name' 	=> 'audio',
 	'post_status'		=> 'draft'
 );
 
@@ -40,8 +40,8 @@ if ($the_query->post_count === 0) {
   	$id = $the_query->post->ID;
   	$meta = get_post_meta($id);
 
-  	if (!empty($meta['_cmb_short-desc'][0])) {
-    	$description = $meta['_cmb_short-desc'][0];
+  	if (!empty($meta['_cmb_short_desc'][0])) {
+    	$description = $meta['_cmb_short_desc'][0];
   	} else {
     	$description = '';
   	}

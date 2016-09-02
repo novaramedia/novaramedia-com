@@ -64,13 +64,13 @@ if ($reqpost) {
 
   $tags = wp_get_post_tags($reqpost->ID, array( 'fields' => 'names' ) );
 
-  if (!empty($meta['_cmb_short-desc'][0])) {
-  	$description = $meta['_cmb_short-desc'][0];
+  if (!empty($meta['_cmb_short_desc'][0])) {
+  	$description = $meta['_cmb_short_desc'][0];
 	} else {
   	$description = '';
 	}
 
-  if($type === 'tv') {
+  if($type === 'video') {
 
   	if (!empty($meta['_cmb_utube'][0])) {
     	$utube = $meta['_cmb_utube'][0];
@@ -91,7 +91,7 @@ if ($reqpost) {
       'tags' => $tags
   	);
 
-  } else if($type === 'fm') {
+  } else if($type === 'audio') {
 
   	if (!empty($meta['_cmb_sc'][0])) {
     	$soundcloud = $meta['_cmb_sc'][0];

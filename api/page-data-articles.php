@@ -1,10 +1,10 @@
 <?php
 /*
-Template Name: Data - TV
+Template Name: Data - FM
 */
 
 include('lib/stathat.php');
-stathat_ez_count('patrickbest@patrickbest.com', 'novaramedia.com: api-data-tv', 1);
+stathat_ez_count('patrickbest@patrickbest.com', 'novaramedia.com: api-data-fm', 1);
 
 if (!empty($_GET['page'])) {
 
@@ -31,7 +31,7 @@ if (!empty($page)) {
 
 $args = array(
 	'posts_per_page' 	=> 10,
-	'category_name' 	=> 'tv',
+	'category_name' 	=> 'audio',
 	'post_status'		=> 'publish',
 	'offset'			=> $offset
 );
@@ -41,7 +41,7 @@ $the_query = new WP_Query($args);
 if ($the_query->post_count === 0) {
 	$output = array(
 		'site_url' => site_url(),
-		'channel' => 'tv',
+		'channel' => 'fm',
 		'page' => $page,
 		'error' => true,
 		'posts' => 'no posts'
@@ -51,6 +51,7 @@ if ($the_query->post_count === 0) {
   echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
+
 } else {
 
   $posts = array();
@@ -68,19 +69,19 @@ if ($the_query->post_count === 0) {
   		'id' => $id,
   		'title' => $the_query->post->post_title,
   		'permalink' => get_permalink($id),
-  		'short_desc' => $meta['_cmb_short-desc'][0],
-  		'youtube_id' => $meta['_cmb_utube'][0],
+  		'short_desc' => $meta['_cmb_short_desc'][0],
+  		'soundcloud_url' => $meta['_cmb_sc'][0],
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
   		'tags' => $tags
-  	));
+  		));
   endwhile;
 
   wp_reset_postdata();
 
   $output = array(
     'site_url' => site_url(),
-    'channel' => 'tv',
+    'channel' => 'audio',
     'page' => $page,
     'posts' => $posts
   );
