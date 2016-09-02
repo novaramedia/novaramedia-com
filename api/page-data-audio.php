@@ -55,7 +55,7 @@ if ($the_query->post_count === 0) {
 } else {
 
   $posts = array();
-  while ( $the_query->have_posts() ) :
+  while ( $the_query->have_posts() ) {
     $the_query->the_post();
     $id = $the_query->post->ID;
     $meta = get_post_meta($id);
@@ -73,8 +73,8 @@ if ($the_query->post_count === 0) {
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
       'tags' => $tags
-      ));
-  endwhile;
+    ));
+  }
 
   wp_reset_postdata();
 
