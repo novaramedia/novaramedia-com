@@ -54,8 +54,8 @@ if ($reqpost) {
   $cat = array_shift($cats);
   $type = $cat->slug;
 
-  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-large' );
-  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-medium' );
+  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col12-16to9' );
+  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col6-16to9' );
 
   $path = $thumb[0];
   $type = pathinfo($path, PATHINFO_EXTENSION);

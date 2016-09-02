@@ -52,8 +52,8 @@ if ($the_query->post_count === 0) {
     	$soundcloud = '';
   	}
 
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-large' );
-    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-medium' );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
     $path = $thumb[0];
     $type = pathinfo($path, PATHINFO_EXTENSION);

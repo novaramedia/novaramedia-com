@@ -63,8 +63,8 @@ if ($the_query->post_count === 0) {
     $cat = array_shift($cats);
     $type = $cat->slug;
 
-  	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-large' );
-  	$thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'api-medium' );
+  	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+  	$thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
   	$tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
