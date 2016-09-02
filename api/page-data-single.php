@@ -10,26 +10,26 @@ if (!empty($_GET['id'])) {
 
   $id_raw = $_GET['id'];
 
-	if (is_numeric($id_raw)) {
-		$id = filter_var($id_raw, FILTER_SANITIZE_NUMBER_INT);
-	} else {
-  	header('content-type: application/json; charset=utf-8');
-  	$json = json_encode(array('error' => 'badly formed request'));
-  	echo isset($_GET['callback'])
+  if (is_numeric($id_raw)) {
+    $id = filter_var($id_raw, FILTER_SANITIZE_NUMBER_INT);
+  } else {
+    header('content-type: application/json; charset=utf-8');
+    $json = json_encode(array('error' => 'badly formed request'));
+    echo isset($_GET['callback'])
       ? "{$_GET['callback']}($json)"
       : $json;
-	}
+  }
 
 } else if (!empty($_GET['permalink'])) {
 
   $perma_raw = $_GET['permalink'];
-	$id = url_to_postid($perma_raw);
+  $id = url_to_postid($perma_raw);
 
 } else {
 
-	header('content-type: application/json; charset=utf-8');
-	$json = json_encode(array('error' => 'badly formed request'));
-	echo isset($_GET['callback'])
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode(array('error' => 'badly formed request'));
+  echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
 
@@ -37,9 +37,9 @@ if (!empty($_GET['id'])) {
 
 if (empty($id)) {
 
-	header('content-type: application/json; charset=utf-8');
-	$json = json_encode(array('error' => 'badly formed request'));
-	echo isset($_GET['callback'])
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode(array('error' => 'badly formed request'));
+  echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
 
@@ -48,14 +48,14 @@ if (empty($id)) {
 $reqpost = get_post($id);
 
 if ($reqpost) {
-	$meta = get_post_meta($reqpost->ID);
+  $meta = get_post_meta($reqpost->ID);
 
   $cats = get_the_category($reqpost->ID);
   $cat = array_shift($cats);
   $type = $cat->slug;
 
-  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-large' );
-  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'api-medium' );
+  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col12-16to9' );
+  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col6-16to9' );
 
   $path = $thumb[0];
   $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -64,79 +64,79 @@ if ($reqpost) {
 
   $tags = wp_get_post_tags($reqpost->ID, array( 'fields' => 'names' ) );
 
-  if (!empty($meta['_cmb_short-desc'][0])) {
-  	$description = $meta['_cmb_short-desc'][0];
-	} else {
-  	$description = '';
-	}
+  if (!empty($meta['_cmb_short_desc'][0])) {
+    $description = $meta['_cmb_short_desc'][0];
+  } else {
+    $description = '';
+  }
 
-  if($type === 'tv') {
+  if($type === 'video') {
 
-  	if (!empty($meta['_cmb_utube'][0])) {
-    	$utube = $meta['_cmb_utube'][0];
-  	} else {
-    	$utube = '';
-  	}
+    if (!empty($meta['_cmb_utube'][0])) {
+      $utube = $meta['_cmb_utube'][0];
+    } else {
+      $utube = '';
+    }
 
 
-  	$output = array(
-  		'id' => $reqpost->ID,
-  		'title' => $reqpost->post_title,
-  		'permalink' => get_permalink($reqpost->ID),
-  		'youtube_id' => $utube,
+    $output = array(
+      'id' => $reqpost->ID,
+      'title' => $reqpost->post_title,
+      'permalink' => get_permalink($reqpost->ID),
+      'youtube_id' => $utube,
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
       'short_desc' => $description,
       'tags' => $tags
-  	);
+    );
 
-  } else if($type === 'fm') {
+  } else if($type === 'audio') {
 
-  	if (!empty($meta['_cmb_sc'][0])) {
-    	$soundcloud = $meta['_cmb_sc'][0];
-  	} else {
-    	$soundcloud = '';
-  	}
+    if (!empty($meta['_cmb_sc'][0])) {
+      $soundcloud = $meta['_cmb_sc'][0];
+    } else {
+      $soundcloud = '';
+    }
 
-  	$output = array(
-  		'id' => $reqpost->ID,
-  		'title' => $reqpost->post_title,
-  		'permalink' => get_permalink($reqpost->ID),
-  		'soundcloud_url' => $soundcloud,
+    $output = array(
+      'id' => $reqpost->ID,
+      'title' => $reqpost->post_title,
+      'permalink' => get_permalink($reqpost->ID),
+      'soundcloud_url' => $soundcloud,
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
       'short_desc' => $description,
       'tags' => $tags
-  	);
+    );
 
   } else {
 
-  	$output = array(
-  		'id' => $reqpost->ID,
-  		'title' => $reqpost->post_title,
-  		'permalink' => get_permalink($reqpost->ID),
+    $output = array(
+      'id' => $reqpost->ID,
+      'title' => $reqpost->post_title,
+      'permalink' => get_permalink($reqpost->ID),
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
       'short_desc' => $description,
       'tags' => $tags
-  	);
+    );
 
   }
 
-	header('content-type: application/json; charset=utf-8');
-	$json = json_encode($output);
-	echo isset($_GET['callback'])
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode($output);
+  echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
 
 } else {
 
-	header('content-type: application/json; charset=utf-8');
-	$json = json_encode(array('error' => 'post not found'));
-	echo isset($_GET['callback'])
+  header('content-type: application/json; charset=utf-8');
+  $json = json_encode(array('error' => 'post not found'));
+  echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
 

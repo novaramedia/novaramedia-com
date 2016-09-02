@@ -1,10 +1,10 @@
 <?php
 /*
-Template Name: Data - All
+Template Name: Data - FM
 */
 
 include('lib/stathat.php');
-stathat_ez_count('patrickbest@patrickbest.com', 'novaramedia.com: api-data-all', 1);
+stathat_ez_count('patrickbest@patrickbest.com', 'novaramedia.com: api-data-fm', 1);
 
 if (!empty($_GET['page'])) {
 
@@ -31,6 +31,7 @@ if (!empty($page)) {
 
 $args = array(
   'posts_per_page'   => 10,
+  'category_name'   => 'audio',
   'post_status'    => 'publish',
   'offset'      => $offset
 );
@@ -40,7 +41,7 @@ $the_query = new WP_Query($args);
 if ($the_query->post_count === 0) {
   $output = array(
     'site_url' => site_url(),
-    'channel' => 'all',
+    'channel' => 'audio',
     'page' => $page,
     'error' => true,
     'posts' => 'no posts'
@@ -50,18 +51,14 @@ if ($the_query->post_count === 0) {
   echo isset($_GET['callback'])
     ? "{$_GET['callback']}($json)"
     : $json;
+
 } else {
 
   $posts = array();
-  // The Loop
-  while ( $the_query->have_posts() ) :
+  while ( $the_query->have_posts() ) {
     $the_query->the_post();
     $id = $the_query->post->ID;
     $meta = get_post_meta($id);
-
-    $cats = get_the_category();
-    $cat = array_shift($cats);
-    $type = $cat->slug;
 
     $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
     $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
@@ -71,23 +68,22 @@ if ($the_query->post_count === 0) {
     array_push($posts, array(
       'id' => $id,
       'title' => $the_query->post->post_title,
-      'channel' => $type,
       'permalink' => get_permalink($id),
+      'short_desc' => $meta['_cmb_short_desc'][0],
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
-      'short_desc' => $meta['_cmb_short_desc'][0],
       'tags' => $tags
     ));
-  endwhile;
+  }
 
   wp_reset_postdata();
 
   $output = array(
-      'site_url' => site_url(),
-      'media' => 'all',
-      'page' => $page,
-      'posts' => $posts
-      );
+    'site_url' => site_url(),
+    'channel' => 'audio',
+    'page' => $page,
+    'posts' => $posts
+  );
 
   header('content-type: application/json; charset=utf-8');
   $json = json_encode($output);
