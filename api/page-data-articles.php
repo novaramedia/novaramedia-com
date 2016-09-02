@@ -31,7 +31,7 @@ if (!empty($page)) {
 
 $args = array(
 	'posts_per_page' 	=> 10,
-	'category_name' 	=> 'audio',
+	'category_name' 	=> 'articles',
 	'post_status'		=> 'publish',
 	'offset'			=> $offset
 );
@@ -41,7 +41,7 @@ $the_query = new WP_Query($args);
 if ($the_query->post_count === 0) {
 	$output = array(
 		'site_url' => site_url(),
-		'channel' => 'fm',
+		'channel' => 'articles',
 		'page' => $page,
 		'error' => true,
 		'posts' => 'no posts'
@@ -81,7 +81,7 @@ if ($the_query->post_count === 0) {
 
   $output = array(
     'site_url' => site_url(),
-    'channel' => 'audio',
+    'channel' => 'articles',
     'page' => $page,
     'posts' => $posts
   );
