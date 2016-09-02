@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Data - TV
+Template Name: Data - Video
 */
 
 include('lib/stathat.php');

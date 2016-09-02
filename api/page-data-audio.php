@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Data - FM
+Template Name: Data - Audio
 */
 
 include('lib/stathat.php');

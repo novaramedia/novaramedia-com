@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Data - FM
+Template Name: Data - Articles
 */
 
 include('lib/stathat.php');
