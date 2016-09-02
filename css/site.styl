@@ -112,12 +112,15 @@ $border-width = 2px
 
 $basic-animation-speed = .5s
 
+$font-serif = font-stack('Georgia');
+$font-sans = font-stack('Helvetica');
+
 // ******************************************************
 
 // TYPOGRAPHY
 
 html
-  font-family: font-stack('Helvetica')
+  font-family: $font-sans
   font-size: $font-size-basic
   letter-spacing: $font-tracking-basic
 
@@ -186,7 +189,7 @@ p
   font-family: monospace
 
 .font-serif
-  font-family: font-stack('Georgia')
+  font-family: $font-serif
 
 .font-larger
   font-size: $font-size-larger
@@ -215,7 +218,7 @@ p
 
 .text-copy
   p
-    font-family: font-stack('Georgia')
+    font-family: $font-serif
     font-size: $font-size-larger
     line-height: $font-leading-larger
   blockquote
@@ -228,6 +231,18 @@ p
   img
     display: block
     margin: 2.5rem auto
+  ul, ol
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+    margin-left: 1rem
+  ul
+    li
+      list-style: disc inside
+  ol
+    li
+      list-style: decimal inside
 
   // LINKS
 
