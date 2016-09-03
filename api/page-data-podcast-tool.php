@@ -52,8 +52,9 @@ if ($the_query->post_count === 0) {
       $soundcloud = '';
     }
 
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
-    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col24-16to9' );
+    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+    $thumbsmall = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
     $path = $thumb[0];
     $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -66,11 +67,12 @@ if ($the_query->post_count === 0) {
       'id' => $id,
       'title' => $the_query->post->post_title,
       'permalink' => get_permalink($id),
-      'short_desc' => $description,
-      'soundcloud_url' => $soundcloud,
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
+      'short_desc' => $description,
+      'soundcloud_url' => $soundcloud,
       'tags' => $tags
     ));
   }

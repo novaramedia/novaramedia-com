@@ -63,8 +63,9 @@ if ($the_query->post_count === 0) {
     $cat = array_shift($cats);
     $type = $cat->slug;
 
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
-    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col24-16to9' );
+    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+    $thumbsmall = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
     $tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
@@ -75,6 +76,7 @@ if ($the_query->post_count === 0) {
       'permalink' => get_permalink($id),
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
       'short_desc' => $meta['_cmb_short_desc'][0],
       'tags' => $tags
     ));

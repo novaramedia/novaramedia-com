@@ -60,8 +60,9 @@ if ($the_query->post_count === 0) {
     $id = $the_query->post->ID;
     $meta = get_post_meta($id);
 
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
-    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col24-16to9' );
+    $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+    $thumbsmall = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
     $tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
@@ -69,10 +70,10 @@ if ($the_query->post_count === 0) {
       'id' => $id,
       'title' => $the_query->post->post_title,
       'permalink' => get_permalink($id),
-      'short_desc' => $meta['_cmb_short_desc'][0],
-      'soundcloud_url' => $meta['_cmb_sc'][0],
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
+      'short_desc' => $meta['_cmb_short_desc'][0],
       'tags' => $tags
       ));
   endwhile;

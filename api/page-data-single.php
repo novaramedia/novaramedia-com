@@ -54,8 +54,9 @@ if ($reqpost) {
   $cat = array_shift($cats);
   $type = $cat->slug;
 
-  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col12-16to9' );
-  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id($reqpost->ID), 'col6-16to9' );
+  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col24-16to9' );
+  $thumbmedium = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col12-16to9' );
+  $thumbsmall = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'col6-16to9' );
 
   $path = $thumb[0];
   $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -83,11 +84,12 @@ if ($reqpost) {
       'id' => $reqpost->ID,
       'title' => $reqpost->post_title,
       'permalink' => get_permalink($reqpost->ID),
-      'youtube_id' => $utube,
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
       'short_desc' => $description,
+      'youtube_id' => $utube,
       'tags' => $tags
     );
 
@@ -103,11 +105,12 @@ if ($reqpost) {
       'id' => $reqpost->ID,
       'title' => $reqpost->post_title,
       'permalink' => get_permalink($reqpost->ID),
-      'soundcloud_url' => $soundcloud,
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
       'short_desc' => $description,
+      'soundcloud_url' => $soundcloud,
       'tags' => $tags
     );
 
@@ -120,6 +123,7 @@ if ($reqpost) {
       'thumb_large' => $thumb[0],
       'thumb_base64' => $base64,
       'thumb_medium' => $thumbmedium[0],
+      'thumb_small' => $thumbsmall[0],
       'short_desc' => $description,
       'tags' => $tags
     );
