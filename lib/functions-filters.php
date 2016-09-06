@@ -29,7 +29,7 @@ function add_lazysize_on_srcset($attr) {
     }
 
     // Set default to white blank
-    $attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    $attr['src'] = 'data:image/png;iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAQAAABTNcdGAAAAC0lEQVR42mNkgAIAABIAAmXG3J8AAAAASUVORK5CYII=';
 
   }
 
