@@ -51,7 +51,7 @@
       }
       ?>
       <p id="single-articles-publication-date">Published <?php the_time('jS F Y'); ?></p>
-      <p>This work by Novara Media is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License</p>
+      <p>This work by Novara Media is licenced under a Creative Commons Attribution-ShareAlike 4.0 International Licence</p>
     </div>
   </div>
 </div>
