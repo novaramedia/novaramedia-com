@@ -19,13 +19,13 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
-      <div class="col col10">
+      <article class="col col10">
         <header class="margin-bottom-small">
           <h5><?php the_title(); ?></h5>
           <h5><?php the_time('jS F Y'); ?></h5>
         </header>
         <?php the_content(); ?>
-      </div>
+      </article>
 <?php
   }
 } else {
