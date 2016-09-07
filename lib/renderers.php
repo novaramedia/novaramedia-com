@@ -7,7 +7,7 @@ function render_home_focus($focus) {
   <section id="home-focus-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $focus_link; ?>">Focus on <?php echo $focus_object->name; ?></a></h4>
+        <h4><a href="<?php echo $focus_link; ?>">Focus: <?php echo $focus_object->name; ?></a></h4>
       </div>
     </div>
 
