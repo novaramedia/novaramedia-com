@@ -9,10 +9,8 @@
   <?php get_template_part('partials/seo'); ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
-  <link rel="icon" href="<?php bloginfo('stylesheet_directory'); ?>/img/dist/favicon.png">
-  <link rel="shortcut" href="<?php bloginfo('stylesheet_directory'); ?>/img/dist/favicon.ico">
-  <link rel="apple-touch-icon" href="<?php bloginfo('stylesheet_directory'); ?>/img/dist/favicon-touch.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('stylesheet_directory'); ?>/img/dist/favicon.png">
+
+  <?php get_template_part('partials/favicon'); ?>
 
   <script type="text/javascript">
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD Build: http://modernizr.com/download/#-shiv-mq-cssclasses-teststyles-load */
