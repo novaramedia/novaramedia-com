@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
   <!-- main posts loop -->
-  <section id="post" class="container margin-bottom-basic">
+  <article id="post" class="container margin-bottom-basic">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -48,7 +48,7 @@ if( have_posts() ) {
 <?php
 } ?>
   <!-- end post -->
-  </section>
+  </article>
 
   <?php get_template_part('partials/support-section'); ?>
 

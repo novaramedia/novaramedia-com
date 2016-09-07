@@ -758,6 +758,18 @@ b {
 .text-align-center {
   text-align: center;
 }
+article ul,
+article ol {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+}
+article ul li {
+  list-style: disc inside;
+}
+article ol li {
+  list-style: decimal inside;
+}
 .text-copy p {
   font-family: Georgia, Times, "Times New Roman", serif;
   font-size: 1.3rem;
@@ -786,15 +798,6 @@ b {
 .text-copy ol {
   font-size: 1.3rem;
   line-height: 1.55;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  margin-left: 1rem;
-}
-.text-copy ul li {
-  list-style: disc inside;
-}
-.text-copy ol li {
-  list-style: decimal inside;
 }
 a,
 a:active,
