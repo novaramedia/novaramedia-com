@@ -14,6 +14,7 @@ if ($fbAppId) {
 ?>
   <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+  <meta name="twitter:card" value="summary_large_image">
 <?php
 global $post;
 
@@ -35,11 +36,16 @@ if (is_home()) {
 ?>
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
-  <meta name="twitter:card" value="<?php bloginfo('description'); ?>">
   <meta property="og:type" content="website" />
 <?php
 } else if (is_single()) {
   global $post;
+
+  $twitterAuthor = get_post_meta($post->ID, '_cmb_author_twitter', true);
+
+  if ($twitterAuthor) {
+    echo '<meta name="twitter:creator" value="' . $twitterAuthor . '">';
+  }
 
   $description = get_post_meta($post->ID, '_cmb_short_desc', true);
 
@@ -60,14 +66,12 @@ if (is_home()) {
 ?>
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:description" content="<?php echo $excerpt; ?>" />
-  <meta name="twitter:card" value="<?php echo $excerpt; ?>">
   <meta property="og:type" content="article" />
 <?php
 } else {
 ?>
   <meta property="og:url" content="<?php the_permalink() ?>"/>
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
-  <meta name="twitter:card" value="<?php bloginfo('description'); ?>">
   <meta property="og:type" content="website" />
 <?php
 }
