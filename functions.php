@@ -9,7 +9,7 @@ function scripts_and_styles_method() {
   $jslib = $templateuri . 'library.js';
   wp_enqueue_script( 'jslib', $jslib,'','',true);
 
-  $myscripts = $templateuri . 'main.js';
+  $myscripts = $templateuri . 'main.min.js';
   wp_register_script( 'myscripts', $myscripts );
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
@@ -22,7 +22,7 @@ function scripts_and_styles_method() {
   wp_localize_script( 'myscripts', 'WP', $jsVars );
   wp_enqueue_script( 'myscripts', $myscripts,'','',true);
 
-  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/css/site.css' );
+  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/css/site.min.css' );
 
   // dashicons for admin
   if(is_admin()){
