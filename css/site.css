@@ -831,6 +831,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+.inline-action-list {
+  margin: 0;
+}
 .inline-action-list li {
   display: inline-block;
   margin-right: 16px;
