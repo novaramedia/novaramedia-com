@@ -16,19 +16,6 @@
         echo '"logo": "' . $logo . '",';
       }
     ?>
-<!--
-    "contactPoint" : [
-      { "@type" : "ContactPoint",
-        "telephone" : "+1-877-746-0909",
-        "contactType" : "customer service",
-        "contactOption" : "TollFree",
-        "areaServed" : "US"
-      } , {
-        "@type" : "ContactPoint",
-        "telephone" : "+1-505-998-3793",
-        "contactType" : "customer service"
-      } ],
--->
     "sameAs" : [
       <?php
         if (!empty($facebook)) {
