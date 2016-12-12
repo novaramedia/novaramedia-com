@@ -49,7 +49,7 @@
             <a href="<?php echo home_url(); ?>">
               <div class="col col6 text-align-right">
                 <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/NM-logomark-white.svg'); ?></nav>
-                <nav id="header-logotype" class="u-inline-block"<a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/nm-logomark-dev1.svg'); ?></div>
+                <nav id="header-logotype" class="u-inline-block"<a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/nm-logotype-dev1.svg'); ?></div>
               </div>
             </a>
           </div>
