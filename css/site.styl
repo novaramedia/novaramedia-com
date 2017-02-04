@@ -88,6 +88,7 @@ $margin-large = ($gutter * 5)
 
 $font-size-basic = 15px
 $font-size-larger = 1.3rem
+$font-size-smaller = .8rem
 $font-size-h3 = golden-ratio(1rem , 1)
 $font-size-h2 = golden-ratio(1rem , 1.5)
 $font-size-h1 = golden-ratio(1rem , 2)
@@ -183,7 +184,7 @@ p
   letter-spacing: $font-tracking-wider
 
 .font-smaller
-  font-size: 0.8rem
+  font-size: $font-size-smaller
 
 .font-mono
   font-family: monospace
@@ -246,6 +247,17 @@ article
   ul, ol
     font-size: $font-size-larger
     line-height: $font-leading-larger
+  .wp-caption
+    width: auto !important
+    &.alignnone
+      text-align: center
+    img
+      margin: 0
+    .wp-caption-text
+      text-align: left
+      font-family: $font-sans
+      font-size: $font-size-smaller
+      margin-top: $margin-tiny
 
   // LINKS
 

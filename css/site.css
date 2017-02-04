@@ -799,6 +799,21 @@ article ol li {
   font-size: 1.3rem;
   line-height: 1.55;
 }
+.text-copy .wp-caption {
+  width: auto !important;
+}
+.text-copy .wp-caption.alignnone {
+  text-align: center;
+}
+.text-copy .wp-caption img {
+  margin: 0;
+}
+.text-copy .wp-caption .wp-caption-text {
+  text-align: left;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
 a,
 a:active,
 a:visited {
@@ -1263,6 +1278,9 @@ img {
   .text-copy img {
     margin: 2.5rem auto;
   }
+  .text-copy .wp-caption .wp-caption-text {
+    margin-top: 7px;
+  }
   .icon-large:before {
     font-size: 1.618rem;
   }
@@ -1594,6 +1612,9 @@ img {
   }
   .text-copy img {
     margin: 2.5rem auto;
+  }
+  .text-copy .wp-caption .wp-caption-text {
+    margin-top: 6px;
   }
   .icon-large:before {
     font-size: 1.618rem;
@@ -1950,6 +1971,9 @@ img {
     display: block;
     margin: 2.5rem auto;
   }
+  .text-copy .wp-caption .wp-caption-text {
+    margin-top: 6px;
+  }
   .icon-large:before {
     font-size: 1.618rem;
   }
@@ -2222,6 +2246,9 @@ img {
   .text-copy img {
     display: block;
     margin: 2.5rem auto;
+  }
+  .text-copy .wp-caption .wp-caption-text {
+    margin-top: 6px;
   }
   .icon-large:before {
     font-size: 1.618rem;
