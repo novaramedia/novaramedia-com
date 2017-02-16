@@ -26,7 +26,7 @@
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="1" min="1" max="25" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="1" min="1" max="40" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -40,7 +40,7 @@
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="5" min="1" max="250" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="5" min="1" max="400" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -49,7 +49,7 @@
       <form class="support-form only-mobile" action="https://payment.novaramedia.com/subscription">
         <div class="col">
           <div class="support-form-holder u-flex-center mobile-margin-bottom-small">
-            <input type="number" value="1" min="1" max="25" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
+            <input type="number" value="1" min="1" max="40" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -58,7 +58,7 @@
       <form class="support-form only-mobile" action="https://payment.novaramedia.com/oneoff">
         <div class="col">
           <div class="support-form-holder u-flex-center">
-            <input type="number" value="5" min="1" max="250" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
+            <input type="number" value="5" min="1" max="400" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
