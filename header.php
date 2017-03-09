@@ -2,9 +2,12 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title><?php wp_title('|',true,'right'); bloginfo('name'); ?></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+  <link rel="dns-prefetch" href="//www.google-analytics.com"/>
 
   <?php get_template_part('partials/seo'); ?>
 
