@@ -50,7 +50,11 @@ if( have_posts() ) {
   <!-- end post -->
   </article>
 
-  <?php get_template_part('partials/support-section'); ?>
+  <?php
+    get_template_part('partials/announcement');
+
+    get_template_part('partials/support-section');
+  ?>
 
   <section id="single-related" class="container margin-top-large margin-bottom-large">
     <?php get_template_part('partials/singles/single-related'); ?>
