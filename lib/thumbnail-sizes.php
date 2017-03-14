@@ -12,6 +12,7 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'mobile-21to9', 460, 197, true );
 
   add_image_size( 'col4', 204, 9999, false );
+  add_image_size( 'col4-square', 204, 204, true );
   add_image_size( 'col4-16to9', 204, 114, true );
 
   add_image_size( 'col6-16to9', 314, 176, true );
