@@ -671,13 +671,15 @@ html {
 body {
   line-height: 1.4;
 }
-h1 {
+h1,
+.font-size-h1 {
   font-size: 2.617924rem;
   font-weight: bold;
   margin: 0;
   letter-spacing: 0.025em;
 }
-h2 {
+h2,
+.font-size-h2 {
   font-size: 2.058106176075472rem;
   font-weight: bold;
   margin: 0;
@@ -1227,11 +1229,13 @@ img {
   body {
     line-height: 1.4;
   }
-  h1 {
+  h1,
+  .font-size-h1 {
     font-size: 2.617924rem;
     letter-spacing: 0.025em;
   }
-  h2 {
+  h2,
+  .font-size-h2 {
     font-size: 2.058106176075472rem;
     letter-spacing: 0.025em;
   }
@@ -1562,11 +1566,13 @@ img {
   body {
     line-height: 1.4;
   }
-  h1 {
+  h1,
+  .font-size-h1 {
     font-size: 2.058106176075472rem;
     letter-spacing: 0.025em;
   }
-  h2 {
+  h2,
+  .font-size-h2 {
     font-size: 1.781452392364234rem;
     letter-spacing: 0.025em;
   }
@@ -1919,11 +1925,13 @@ img {
   body {
     line-height: 1.4;
   }
-  h1 {
+  h1,
+  .font-size-h1 {
     font-size: 2.058106176075472rem;
     letter-spacing: 0.025em;
   }
-  h2 {
+  h2,
+  .font-size-h2 {
     font-size: 1.781452392364234rem;
     letter-spacing: 0.025em;
   }
@@ -2195,11 +2203,13 @@ img {
   body {
     line-height: 1.4;
   }
-  h1 {
+  h1,
+  .font-size-h1 {
     font-size: 1.781452392364234rem;
     letter-spacing: 0.025em;
   }
-  h2 {
+  h2,
+  .font-size-h2 {
     font-size: 1.697760280736162rem;
     letter-spacing: 0.025em;
   }
