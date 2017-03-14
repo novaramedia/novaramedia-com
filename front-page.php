@@ -159,7 +159,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     }
   ?>
 
-  <section id="home-long-read-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
+  <section id="home-long-read-posts" class="container margin-top-large margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Long Read');
       $category_link = get_category_link( $category_id );
