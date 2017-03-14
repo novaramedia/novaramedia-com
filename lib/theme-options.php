@@ -148,25 +148,46 @@ class IGV_Admin {
       'select_behavior' => 'replace',
     ) );
 
-    // MENU OPTIONS
+    // ANNOUNCEMENT OPTIONS
 
-/*
     $options_metabox->add_field( array(
-      'name' => __( 'Menu Options', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
-      'id'   => $this->prefix . 'menu_title',
+      'name' => __( 'Announcement Options', 'cmb2' ),
+      'id'   => $this->prefix . 'announcement_title',
       'type' => 'title',
     ) );
 
     $options_metabox->add_field( array(
-      'name' => __( 'Tags shown in menu', 'IGV' ),
-      'desc' => __( 'a Focus to show (optional)', 'IGV' ),
-      'id'   => $this->prefix . 'menu_tags',
-      'type' => 'select',
-      'repeatable' => true,
-      'options_cb' => 'menu_tags_list',
+      'name' => __( 'Expiration time', 'IGV' ),
+      'desc' => __( 'Announcement will show if this value is set and in the future', 'IGV' ),
+      'id'   => $this->prefix . 'announcement_time',
+      'type' => 'text_datetime_timestamp',
     ) );
-*/
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Internal link', 'IGV' ),
+      'id'   => $this->prefix . 'announcement_link',
+      'type' => 'post_search_text',
+      'post_type'   => array('post', 'page', 'event', 'notice'),
+      'select_behavior' => 'replace',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'External link', 'IGV' ),
+      'id'   => $this->prefix . 'announcement_link_ext',
+      'type' => 'text_url',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Text', 'IGV' ),
+      'id'   => $this->prefix . 'announcement_text',
+      'type' => 'wysiwyg',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Image', 'IGV' ),
+      'id'   => $this->prefix . 'announcement_image',
+      'type' => 'file',
+    ) );
 
     // SOCIAL MEDIA OPTIONS
 
