@@ -1,0 +1,14 @@
+{
+  "name": "novaramedia/novaramedia-com",
+  "authors": [
+    {
+      "name": "interglobal.vision",
+      "email": "globie@interglobal.vision"
+    }
+  ],
+  "require": {
+    "webdevstudios/cmb2": "*",
+    "webdevstudios/cmb2-post-search-field": "*",
+    "fightbulc/moment": "*"
+  }
+}
