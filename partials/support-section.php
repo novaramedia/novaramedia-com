@@ -1,4 +1,4 @@
-<div class="support-section background-red font-color-white margin-top-basic margin-bottom-basic padding-top-mid padding-bottom-mid">
+<div class="support-section background-red font-color-white padding-top-mid padding-bottom-mid">
   <div class="container">
     <div class="row margin-bottom-small">
       <div class="col col24">
