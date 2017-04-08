@@ -35,7 +35,7 @@ function event_post_type() {
 		'label'                 => 'Event',
 		'description'           => 'IRL Events',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'trackbacks', ),
+		'supports'              => array( 'title', 'editor', 'thumbnail', ),
 		'taxonomies'            => array( 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
