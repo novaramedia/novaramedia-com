@@ -1,4 +1,61 @@
 <?php
+// Register Custom Post Type
+function event_post_type() {
+
+	$labels = array(
+		'name'                  => 'Events',
+		'singular_name'         => 'Event',
+		'menu_name'             => 'Events',
+		'name_admin_bar'        => 'Event',
+		'archives'              => 'Event Archives',
+		'attributes'            => 'Event Attributes',
+		'parent_item_colon'     => 'Parent Event:',
+		'all_items'             => 'All Events',
+		'add_new_item'          => 'Add New Event',
+		'add_new'               => 'Add New',
+		'new_item'              => 'New Event',
+		'edit_item'             => 'Edit Event',
+		'update_item'           => 'Update Event',
+		'view_item'             => 'View Event',
+		'view_items'            => 'View Events',
+		'search_items'          => 'Search Event',
+		'not_found'             => 'Not found',
+		'not_found_in_trash'    => 'Not found in Trash',
+		'featured_image'        => 'Featured Image',
+		'set_featured_image'    => 'Set featured image',
+		'remove_featured_image' => 'Remove featured image',
+		'use_featured_image'    => 'Use as featured image',
+		'insert_into_item'      => 'Insert into item',
+		'uploaded_to_this_item' => 'Uploaded to this item',
+		'items_list'            => 'Items list',
+		'items_list_navigation' => 'Items list navigation',
+		'filter_items_list'     => 'Filter items list',
+	);
+	$args = array(
+		'label'                 => 'Event',
+		'description'           => 'IRL Events',
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'trackbacks', ),
+		'taxonomies'            => array( 'post_tag' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+		'show_in_rest'          => true,
+	);
+	register_post_type( 'event', $args );
+
+}
+add_action( 'init', 'event_post_type', 0 );
+
 // Register Notices
 function notices_post_type() {
 
@@ -46,6 +103,7 @@ function notices_post_type() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
+		'show_in_rest'          => true,
 	);
 	register_post_type( 'notice', $args );
 
