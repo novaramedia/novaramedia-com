@@ -840,6 +840,13 @@ a:visited {
 .icon-large:before {
   font-size: 1.618rem;
 }
+.button {
+  display: inline-block;
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  border: 2px solid #0e0e0e;
+}
 html {
   background-color: #fdfdfd;
   color: #0e0e0e;
@@ -1288,6 +1295,9 @@ img {
   .icon-large:before {
     font-size: 1.618rem;
   }
+  .button {
+    padding: 14px;
+  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 14px;
@@ -1624,6 +1634,9 @@ img {
   }
   .icon-large:before {
     font-size: 1.618rem;
+  }
+  .button {
+    padding: 12px;
   }
   .inline-action-list li {
     margin-right: 12px;
@@ -1985,6 +1998,9 @@ img {
   .icon-large:before {
     font-size: 1.618rem;
   }
+  .button {
+    padding: 12px;
+  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
@@ -2262,6 +2278,9 @@ img {
   }
   .icon-large:before {
     font-size: 1.618rem;
+  }
+  .button {
+    padding: 12px;
   }
   .inline-action-list li {
     display: inline-block;
