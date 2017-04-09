@@ -19,6 +19,7 @@ if( function_exists( 'add_image_size' ) ) {
 
   add_image_size( 'col8-16to9', 424, 238, true );
 
+  add_image_size( 'col12', 664, 9999, false );
   add_image_size( 'col12-1to2point3', 664, 288, true );
   add_image_size( 'col12-16to9', 664, 373, true );
 
