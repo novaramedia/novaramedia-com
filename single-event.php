@@ -141,8 +141,8 @@ if( have_posts() ) {
         if (!$is_sold_out && $tickets_url) {
       ?>
       <div class="row margin-bottom-basic">
-        <div class="col col2"></div>
-        <div class="col col20">
+        <div class="col col4"></div>
+        <div class="col col16">
           <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="button"><h4>Buy Tickets</h4></a>
         </div>
       </div>
