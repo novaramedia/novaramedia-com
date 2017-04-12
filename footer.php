@@ -1,4 +1,4 @@
-    <footer id="footer" class="background-black font-color-white margin-top-basic padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
+    <footer id="footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
       <div class="container">
         <div class="row">
           <div class="col col6 mobile-margin-bottom-basic">
@@ -24,6 +24,7 @@
                 echo '<li><a href="' . get_category_link($category) . '">' . $category->name . '</a></li>';
               }
             ?>
+              <li><a href="<?php echo get_post_type_archive_link('event'); ?>">Events</a></li>
             </ul>
           </div>
           <div class="col col6">
