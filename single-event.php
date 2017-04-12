@@ -29,7 +29,6 @@ if( have_posts() ) {
     $tickets_url = get_post_meta( $post->ID, '_cmb_tickets', true );
 
     $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
-
 ?>
   <article id="event">
     <div class="container margin-bottom-large">
@@ -132,20 +131,26 @@ if( have_posts() ) {
       ?>
     </div>
 
+    <?php
+      if ($gallery) {
+    ?>
     <div class="background-black font-color-white padding-top-mid padding-bottom-mid">
       <div class="container">
         <div class="row margin-bottom-basic">
           <div class="col col24">
-            <h4>Gallery: {x/x}</h4>
+            <h4>Gallery: <span id="gallery-pagination"></span></h4>
           </div>
         </div>
         <div class="row margin-bottom-basic">
           <div class="col col24">
-            {gallery}
+            <?php echo do_shortcode($gallery); ?>
           </div>
         </div>
       </div>
     </div>
+    <?php
+      }
+    ?>
   </article>
 <?php
   }

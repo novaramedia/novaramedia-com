@@ -11,6 +11,9 @@ Site = {
     _this.Support.init();
     _this.RadioPlayer.init();
 
+    $(document).ready(function() {
+      _this.Gallery.init();
+    });
   }
 };
 
@@ -111,6 +114,39 @@ Site.Header = {
   }
 };
 
+Site.Gallery = {
+  galleryInstances: [],
+
+  init: function() {
+    var _this = this;
+
+    if ($('.swiper-container').length) {
+      _this.initSwiperInstances();
+    }
+  },
+
+  initSwiperInstances: function() {
+    var _this = this;
+
+    $('.swiper-container').each(function(index, item) {
+
+      console.log(item);
+
+      _this.galleryInstances[index] = new Swiper(item, {
+        loop: true,
+        pagination: '#gallery-pagination',
+        paginationType: 'fraction',
+        paginationFractionRender: function (swiper, currentClassName, totalClassName) {
+          return '<span class="' + currentClassName + '"></span>/<span class="' + totalClassName + '"></span>';
+        },
+        onTap: function(swiper, event) {
+          swiper.slideNext();
+        },
+      });
+    });
+  }
+};
+
 Site.Search = {
   init: function() {
     var _this = this;
@@ -157,7 +193,7 @@ Site.Search = {
       .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
       .replace(/\-\-+/g, '-')         // Replace multiple - with single -
       .replace(/^-+/, '')             // Trim - from start of text
-      .replace(/-+$/, '');  
+      .replace(/-+$/, '');
   },
 
   fourzerofour: function() {
