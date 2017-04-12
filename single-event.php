@@ -28,6 +28,8 @@ if( have_posts() ) {
     $is_sold_out = get_post_meta( $post->ID, '_cmb_tickets_sold_out', true );
     $tickets_url = get_post_meta( $post->ID, '_cmb_tickets', true );
 
+    $youtube = get_post_meta( $post->ID, '_cmb_youtube', true );
+
     $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
 ?>
   <article id="event">
@@ -43,10 +45,28 @@ if( have_posts() ) {
         </div>
       </div>
       <div class="row margin-bottom-basic">
+        <?php
+          if ($youtube) {
+        ?>
+        <div class="col col13">
+          <div class="u-video-embed-container">
+            <iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/<?php echo $youtube; ?>?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
+          </div>
+        </div>
+        <div class="col col1"></div>
+        <div class="col col10 only-desktop">
+          <?php the_post_thumbnail('col12'); ?>
+        </div>
+        <?php
+          } else {
+        ?>
         <div class="col col6"></div>
         <div class="col col12">
           <?php the_post_thumbnail('col12'); ?>
         </div>
+        <?php
+          }
+        ?>
       </div>
       <div class="row margin-bottom-basic">
         <div class="col col2"></div>

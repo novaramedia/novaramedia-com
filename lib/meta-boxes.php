@@ -236,6 +236,13 @@ function igv_cmb_metaboxes() {
   ) );
 
   $meta_boxes->add_field( array(
+    'name' => __( 'YouTube recording', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'youtube',
+    'type' => 'text',
+  ) );
+
+  $meta_boxes->add_field( array(
     'name' => __( 'Gallery', 'cmb' ),
     'desc' => __( '', 'cmb' ),
     'id'   => $prefix . 'gallery',
