@@ -14,11 +14,12 @@
 
 <a href="<?php the_permalink(); ?>">
   <div class="row margin-bottom-mid">
+    <div class="col col1"></div>
     <div class="col col9">
       <?php the_post_thumbnail('col12'); ?>
     </div>
     <div class="col col1"></div>
-    <div class="col col14">
+    <div class="col col13">
       <h3 class="margin-bottom-tiny"><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?>:</h3>
       <h2 class="margin-bottom-tiny"><?php the_title(); ?></h2>
       <?php
