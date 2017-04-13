@@ -56,3 +56,15 @@ function extlink_add_tinymce_toolbar_button( $buttons ) {
   return $buttons;
 
 }
+
+function order_events_by_meta( $query ) {
+
+  if ( ! is_admin() && $query->is_main_query() && $query->is_post_type_archive()) {
+    if ($query->query['post_type'] === 'event') {
+      $query->set('orderby', 'meta_value');
+      $query->set('meta_key', '_cmb_time');
+    }
+  }
+}
+
+add_action( 'pre_get_posts', 'order_events_by_meta' );

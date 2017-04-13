@@ -174,6 +174,81 @@ function igv_cmb_metaboxes() {
     'type' => 'text_url',
   ) );
 
+  // Event
+
+  $meta_boxes = new_cmb2_box( array (
+    'id'         => 'event_metabox',
+    'title'      => __( 'Event Meta', 'cmb' ),
+    'object_types'      => array( 'event' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Event time', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'time',
+    'type' => 'text_datetime_timestamp',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Venue name', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'venue_name',
+    'type' => 'text',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Venue postcode', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'venue_postcode',
+    'type' => 'text',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Speakers', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'speakers',
+    'type' => 'text',
+    'repeatable' => true,
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Host', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'host',
+    'type' => 'text',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Tickets link', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'tickets',
+    'type' => 'text_url',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Sold out', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'tickets_sold_out',
+    'type' => 'checkbox',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'YouTube recording', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'youtube',
+    'type' => 'text',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name' => __( 'Gallery', 'cmb' ),
+    'desc' => __( '', 'cmb' ),
+    'id'   => $prefix . 'gallery',
+    'type' => 'wysiwyg',
+  ) );
+
   // Page
 
   $page_meta_boxes = new_cmb2_box( array (

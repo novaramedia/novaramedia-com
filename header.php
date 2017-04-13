@@ -67,6 +67,7 @@
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
+                <li><a href="<?php echo get_post_type_archive_link('event'); ?>">IRL</a></li>
               </ul>
             </div>
             <div class="col col6">
