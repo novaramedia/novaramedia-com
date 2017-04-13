@@ -130,8 +130,6 @@ Site.Gallery = {
 
     $('.swiper-container').each(function(index, item) {
 
-      console.log(item);
-
       _this.galleryInstances[index] = new Swiper(item, {
         loop: true,
         pagination: '#gallery-pagination',
