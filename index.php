@@ -60,7 +60,7 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="row">
+    <div class="row margin-bottom-basic">
       <div class="col col24">
         <?php get_template_part('partials/pagination'); ?>
       </div>
