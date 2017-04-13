@@ -24,7 +24,7 @@
                 echo '<li><a href="' . get_category_link($category) . '">' . $category->name . '</a></li>';
               }
             ?>
-              <li><a href="<?php echo get_post_type_archive_link('event'); ?>">Events</a></li>
+              <li><a href="<?php echo get_post_type_archive_link('event'); ?>">IRL</a></li>
             </ul>
           </div>
           <div class="col col6">
