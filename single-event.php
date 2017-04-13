@@ -19,6 +19,8 @@ if( have_posts() ) {
       $time = new \Moment\Moment('@' . get_the_time('U'));
     }
 
+    $fromEvent = $time->fromNow();
+
     $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
     $venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
 
@@ -138,7 +140,7 @@ if( have_posts() ) {
         </div>
       </div>
       <?php
-        if (!$is_sold_out && $tickets_url) {
+        if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
       ?>
       <div class="row margin-bottom-basic">
         <div class="col col4"></div>
