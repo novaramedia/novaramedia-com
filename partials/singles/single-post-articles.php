@@ -19,7 +19,7 @@
 <div class="row">
   <div class="col col24 text-align-center u-position-relative">
     <?php the_post_thumbnail('col24-widescreen-crop'); ?>
-    <div id="single-article-photo-caption" class="font-smaller">
+    <div id="single-article-photo-caption" class="text-shadow-white">
       <?php
         if (!empty($thumbnail_image[0]->post_excerpt)) {
           echo $thumbnail_image[0]->post_excerpt;
