@@ -103,9 +103,11 @@ $font-tracking-wider = 0.025em
 
 $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
+$color-white-soft-transparent = rgba(253, 253, 253, .5)
 
 $color-gray = rgb(150,150,150)
 $color-gray-light = rgb(190,190,190)
+$color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = red
 $color-blue = rgb(84,144,235)
@@ -203,6 +205,14 @@ p
 
 .font-color-black
   color: $color-black-soft
+
+  // SHADOWS
+
+.text-shadow-white
+  text-shadow: 0 0 20px $color-white-soft-transparent
+
+.text-shadow-light-gray
+  text-shadow: 0 0 20px $color-gray-light-transparent
 
   // TEXT RULES
 

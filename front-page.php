@@ -40,7 +40,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
             echo wp_get_attachment_image($thumb_id, 'col24-featured-crop', null, array('class' => 'featured-post-thumbnail only-desktop'));
             echo wp_get_attachment_image($thumb_id, 'col24-mobile-featured-crop', null, array('class' => 'featured-post-thumbnail only-mobile'));
           ?>
-          <h1 id="featured-post-title" class="text-align-center font-color-white u-flex-center js-fix-widows"><?php echo get_the_title($post_id); ?></h1>
+          <h1 id="featured-post-title" class="text-align-center font-color-white text-shadow-light-gray u-flex-center js-fix-widows"><?php echo get_the_title($post_id); ?></h1>
         </article>
       </a>
     </div>
