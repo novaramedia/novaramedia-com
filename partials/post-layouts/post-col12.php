@@ -7,15 +7,15 @@
 
     <div class="post-col12-image">
     <?php the_post_thumbnail('col12-1to2point3', array('class' => 'u-display-block only-desktop')); ?>
-    <?php the_post_thumbnail('mobile-16to9', array('class' => 'only-mobile')); ?>
+    <?php the_post_thumbnail('mobile-21to9', array('class' => 'only-mobile')); ?>
 
       <div class="post-col12-image-overlay only-desktop"></div>
       <div class="post-col12-text font-color-white">
-        <h2 class="js-fix-widows mobile-margin-bottom-micro"><?php the_title(); ?></h2>
+        <h3 class="js-fix-widows mobile-margin-bottom-micro"><?php the_title(); ?></h3>
     <?php
         if (!empty($meta['_cmb_author'])) {
     ?>
-        <h3>by <?php echo $meta['_cmb_author'][0]; ?></h3>
+        <h5 class="margin-top-tiny">by <?php echo $meta['_cmb_author'][0]; ?></h5>
     <?php
         }
     ?>

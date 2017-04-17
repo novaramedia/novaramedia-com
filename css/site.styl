@@ -103,9 +103,11 @@ $font-tracking-wider = 0.025em
 
 $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
+$color-white-soft-transparent = rgba(253, 253, 253, .5)
 
 $color-gray = rgb(150,150,150)
 $color-gray-light = rgb(190,190,190)
+$color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = red
 $color-blue = rgb(84,144,235)
@@ -203,6 +205,14 @@ p
 
 .font-color-black
   color: $color-black-soft
+
+  // SHADOWS
+
+.text-shadow-white
+  text-shadow: 0 0 20px $color-white-soft-transparent
+
+.text-shadow-light-gray
+  text-shadow: 0 0 20px $color-gray-light-transparent
 
   // TEXT RULES
 
@@ -608,13 +618,16 @@ img
   left: 0
   top: 0
   right: 0
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 100%)
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%)
 
 .post-col12-text
   position: absolute
   bottom: 0
   left: 0
   padding: $margin-small + $margin-tiny
+  max-width: 550px
+  h3
+    font-size: $font-size-h2
 
 // ******************************************************
 

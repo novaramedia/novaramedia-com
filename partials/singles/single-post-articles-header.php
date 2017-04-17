@@ -41,7 +41,7 @@
       }
     ?>
   </div>
-  <div class="col col10 font-smaller">
+  <div class="col col10 margin-top-micro font-smaller">
     <ul class="inline-action-list">
     <?php
       if (!empty($meta['_igv_reading_time'])) {
