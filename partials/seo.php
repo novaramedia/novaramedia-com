@@ -50,19 +50,23 @@ if (is_home()) {
   $description = get_post_meta($post->ID, '_cmb_short_desc', true);
 
   if ($description) {
-    $excerpt = $description;
-  } else {
-    // trim post content by 600 chars
-    $excerpt = substr($post->post_content, 0, 600);
+    // strip shortcodes from short_desc
+    $excerpt = strip_shortcodes($description);
     // strip html tags
-    $excerpt = strip_tags($excerpt);
+    $excerpt = strip_tags(html_entity_decode($excerpt));
+  } else {
+    // strip shortcodes from post_content
+    $excerpt = strip_shortcodes($post->post_content);
+    // strip html tags
+    $excerpt = strip_tags(html_entity_decode($excerpt));
+    // trim post content by 600 chars
+    $excerpt = substr($excerpt, 0, 600);
     // add ... to end
-    $excerpt = $excerpt . '...';
+    $excerpt = $excerpt . '…';
   }
 
   // clean special cars
   $excerpt = htmlspecialchars($excerpt);
-
 ?>
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:description" content="<?php echo $excerpt; ?>" />
