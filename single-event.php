@@ -50,14 +50,11 @@ if( have_posts() ) {
         <?php
           if ($youtube) {
         ?>
-        <div class="col col13">
+        <div class="col col4"></div>
+        <div class="col col16">
           <div class="u-video-embed-container">
             <iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/<?php echo $youtube; ?>?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
           </div>
-        </div>
-        <div class="col col1"></div>
-        <div class="col col10 only-desktop">
-          <?php the_post_thumbnail('col12'); ?>
         </div>
         <?php
           } else {
