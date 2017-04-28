@@ -1,8 +1,23 @@
+<?php
+  $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
+  $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
+?>
+
 <div class="support-section background-red font-color-white padding-top-mid padding-bottom-mid">
   <div class="container">
     <div class="row margin-bottom-small">
       <div class="col col24">
+<?php
+    if ($fundraiser_expiration > time() && $fundraiser_form_text) {
+?>
+        <p class="font-size-h2"><?php echo $fundraiser_form_text; ?></p>
+<?php
+    } else {
+?>
         <h4>Support Us</h4>
+<?php
+    }
+?>
       </div>
     </div>
 
