@@ -3,6 +3,8 @@ get_header();
 
 $home_radio = IGV_get_option('_igv_home_radio');
 
+$fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
+
 $home_featured = IGV_get_option('_igv_front_feature');
 
 $focus = IGV_get_option('_igv_home_focus');
@@ -15,7 +17,11 @@ $show_imo = IGV_get_option('_igv_show_imo');
 <!-- main content -->
 <main id="main-content">
 <?php
-  if (!empty($home_featured)) {
+  if ($fundraiser_expiration > time()) {
+
+    get_template_part('partials/home-fundraiser');
+
+  } else if (!empty($home_featured)) {
     $home_featured_ids = explode(', ', $home_featured);
     $post_id = $home_featured_ids[0];
 
@@ -57,7 +63,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
   }
   ?>
 
-  <section id="home-articles-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
+  <section id="home-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $category_id = get_cat_ID('Articles');
       $category_link = get_category_link( $category_id );

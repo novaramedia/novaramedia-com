@@ -189,6 +189,35 @@ class IGV_Admin {
       'type' => 'file',
     ) );
 
+    // FUNDRAISER OPTIONS
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Fundraiser Options', 'cmb2' ),
+      'id'   => $this->prefix . 'fundraiser_title',
+      'type' => 'title',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Expiration time', 'IGV' ),
+      'desc' => __( 'Fundraiser will show if this value is set and in the future', 'IGV' ),
+      'id'   => $this->prefix . 'fundraiser_end_time',
+      'type' => 'text_datetime_timestamp',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Youtube ID', 'IGV' ),
+      'desc' => __( 'ID of Youtube video to show on home', 'IGV' ),
+      'id'   => $this->prefix . 'fundraiser_youtube_id',
+      'type' => 'text',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Support section override text', 'IGV' ),
+      'desc' => __( 'Shows in place of Support Us on the support section sidewide', 'IGV' ),
+      'id'   => $this->prefix . 'fundraiser_form_text',
+      'type' => 'text',
+    ) );
+
     // SOCIAL MEDIA OPTIONS
 
     $options_metabox->add_field( array(
