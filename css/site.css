@@ -1365,6 +1365,10 @@ article ol li {
   font-size: 0.8rem;
   margin-top: 8px;
 }
+.text-copy-max-width {
+  max-width: 974px;
+  margin: 0 auto;
+}
 a,
 a:active,
 a:visited {
