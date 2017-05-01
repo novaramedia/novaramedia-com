@@ -24,7 +24,7 @@ if( have_posts() ) {
     </div>
   <?php
     if (!empty($meta['_cmb_support_youtube']) || $fundraiser_youtube_id) {
-      $youtube_id = $meta['_cmb_support_youtube'];
+      $youtube_id = $meta['_cmb_support_youtube'][0];
       if ($fundraiser_youtube_id) {
         $youtube_id= $fundraiser_youtube_id;
       }
