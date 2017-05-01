@@ -9,31 +9,31 @@
  * @return bool display metabox
  */
 function be_metabox_show_on_slug( $display, $meta_box ) {
-	if ( ! isset( $meta_box['show_on']['key'], $meta_box['show_on']['value'] ) ) {
-		return $display;
-	}
+  if ( ! isset( $meta_box['show_on']['key'], $meta_box['show_on']['value'] ) ) {
+    return $display;
+  }
 
-	if ( 'slug' !== $meta_box['show_on']['key'] ) {
-		return $display;
-	}
+  if ( 'slug' !== $meta_box['show_on']['key'] ) {
+    return $display;
+  }
 
-	$post_id = 0;
+  $post_id = 0;
 
-	// If we're showing it based on ID, get the current ID
-	if ( isset( $_GET['post'] ) ) {
-		$post_id = $_GET['post'];
-	} elseif ( isset( $_POST['post_ID'] ) ) {
-		$post_id = $_POST['post_ID'];
-	}
+  // If we're showing it based on ID, get the current ID
+  if ( isset( $_GET['post'] ) ) {
+    $post_id = $_GET['post'];
+  } elseif ( isset( $_POST['post_ID'] ) ) {
+    $post_id = $_POST['post_ID'];
+  }
 
-	if ( ! $post_id ) {
-		return $display;
-	}
+  if ( ! $post_id ) {
+    return $display;
+  }
 
-	$slug = get_post( $post_id )->post_name;
+  $slug = get_post( $post_id )->post_name;
 
-	// See if there's a match
-	return in_array( $slug, (array) $meta_box['show_on']['value']);
+  // See if there's a match
+  return in_array( $slug, (array) $meta_box['show_on']['value']);
 }
 add_filter( 'cmb2_show_on', 'be_metabox_show_on_slug', 10, 2 );
 
