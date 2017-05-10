@@ -31,7 +31,7 @@ if (!empty($page)) {
 
 $args = array(
   'posts_per_page'   => 10,
-  'category_name'   => 'tv',
+  'category_name'   => 'video',
   'post_status'    => 'publish',
   'offset'      => $offset
 );

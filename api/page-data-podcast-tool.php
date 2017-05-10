@@ -21,7 +21,7 @@ $the_query = new WP_Query($args);
 if ($the_query->post_count === 0) {
   $output = array(
     'site_url' => site_url(),
-    'channel' => 'fm',
+    'channel' => 'audio',
     'page' => $page,
     'error' => true,
     'posts' => 'no posts'
