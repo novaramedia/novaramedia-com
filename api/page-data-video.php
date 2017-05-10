@@ -71,6 +71,12 @@ if ($the_query->post_count === 0) {
       $short_desc = $meta['_cmb_short_desc'][0];
     }
 
+    $youtube_id = '';
+
+    if (!empty($meta['_cmb_utube'])) {
+      $youtube_id = $meta['_cmb_utube'][0];
+    }
+
     array_push($posts, array(
       'id' => $id,
       'title' => $the_query->post->post_title,
@@ -79,7 +85,7 @@ if ($the_query->post_count === 0) {
       'thumb_medium' => $thumbmedium[0],
       'thumb_small' => $thumbsmall[0],
       'short_desc' => $short_desc,
-      'youtube_id' => $meta['_cmb_utube'][0],
+      'youtube_id' => $youtube_id,
       'tags' => $tags
     ));
   endwhile;
