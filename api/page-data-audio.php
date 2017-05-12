@@ -66,6 +66,18 @@ if ($the_query->post_count === 0) {
 
     $tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
+    $short_desc = '';
+
+    if (!empty($meta['_cmb_short_desc'])) {
+      $short_desc = $meta['_cmb_short_desc'][0];
+    }
+
+    $soundcloud_url = null;
+
+    if (!empty($meta['_cmb_sc'])) {
+      $soundcloud_url = $meta['_cmb_sc'][0];
+    }
+
     array_push($posts, array(
       'id' => $id,
       'title' => $the_query->post->post_title,
@@ -73,8 +85,8 @@ if ($the_query->post_count === 0) {
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
       'thumb_small' => $thumbsmall[0],
-      'short_desc' => $meta['_cmb_short_desc'][0],
-      'soundcloud_url' => $meta['_cmb_sc'][0],
+      'short_desc' => $short_desc,
+      'soundcloud_url' => $soundcloud_url,
       'tags' => $tags
     ));
   }

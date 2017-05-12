@@ -31,7 +31,7 @@ if (!empty($page)) {
 
 $args = array(
   'posts_per_page'   => 10,
-  'category_name'   => 'tv',
+  'category_name'   => 'video',
   'post_status'    => 'publish',
   'offset'      => $offset
 );
@@ -65,6 +65,18 @@ if ($the_query->post_count === 0) {
 
     $tags = wp_get_post_tags( $id, array( 'fields' => 'names' ) );
 
+    $short_desc = '';
+
+    if (!empty($meta['_cmb_short_desc'])) {
+      $short_desc = $meta['_cmb_short_desc'][0];
+    }
+
+    $youtube_id = '';
+
+    if (!empty($meta['_cmb_utube'])) {
+      $youtube_id = $meta['_cmb_utube'][0];
+    }
+
     array_push($posts, array(
       'id' => $id,
       'title' => $the_query->post->post_title,
@@ -72,8 +84,8 @@ if ($the_query->post_count === 0) {
       'thumb_large' => $thumb[0],
       'thumb_medium' => $thumbmedium[0],
       'thumb_small' => $thumbsmall[0],
-      'short_desc' => $meta['_cmb_short_desc'][0],
-      'youtube_id' => $meta['_cmb_utube'][0],
+      'short_desc' => $short_desc,
+      'youtube_id' => $youtube_id,
       'tags' => $tags
     ));
   endwhile;
