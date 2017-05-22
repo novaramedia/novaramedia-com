@@ -254,10 +254,26 @@ Site.Support = {
 
         $('#progress-bar-row').slideDown(1250, function() {
           _this.$progressBar.css('width', (percent * 100) + '%');
+
+          _this.displayProgressText(data);
         });
       }
 
     }, 'json');
+  },
+
+  displayProgressText: function(data) {
+    var _this = this;
+
+    var total = data.total / data.percent;
+    var text = ': £' + _this.numberWithCommas(data.total) + ' of £' + _this.numberWithCommas(total);
+
+    $('#progress-text').text(text);
+  },
+
+  numberWithCommas: function(x) {
+    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
 };
 

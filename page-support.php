@@ -18,15 +18,23 @@ if( have_posts() ) {
   <!-- main posts loop -->
   <article id="page">
     <div class="container">
+  <?php if ($is_fundraiser) { ?>
       <div class="row margin-bottom-small">
         <div class="col col24">
-          <h4><?php the_title(); ?></h4>
+          <h4>Fundraiser<span id="progress-text"></span></h4>
         </div>
       </div>
-  <?php if ($is_fundraiser) { ?>
       <div id="progress-bar-row" class="row margin-bottom-small">
         <div id="progress-bar-holder" class="col col24">
           <div id="progress-bar"></div>
+        </div>
+      </div>
+  <?php
+        } else {
+  ?>
+      <div class="row margin-bottom-small">
+        <div class="col col24">
+          <h4><?php the_title(); ?></h4>
         </div>
       </div>
   <?php
