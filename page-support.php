@@ -11,7 +11,9 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
+    $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $fundraiser_youtube_id = IGV_get_option('_igv_fundraiser_youtube_id');
+    $is_fundraiser = $fundraiser_expiration > time();
 ?>
   <!-- main posts loop -->
   <article id="page">
@@ -21,11 +23,20 @@ if( have_posts() ) {
           <h4><?php the_title(); ?></h4>
         </div>
       </div>
+  <?php if ($is_fundraiser) { ?>
+      <div id="progress-bar-row" class="row margin-bottom-small">
+        <div id="progress-bar-holder" class="col col24">
+          <div id="progress-bar"></div>
+        </div>
+      </div>
+  <?php
+        }
+  ?>
     </div>
   <?php
     if (!empty($meta['_cmb_support_youtube']) || $fundraiser_youtube_id) {
       $youtube_id = $meta['_cmb_support_youtube'][0];
-      if ($fundraiser_youtube_id) {
+      if ($fundraiser_youtube_id && $is_fundraiser) {
         $youtube_id= $fundraiser_youtube_id;
       }
   ?>
