@@ -2,6 +2,7 @@
   $special = IGV_get_option('_igv_front_special');
 
   if (!empty($special)) {
+    $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 ?>
 <section id="home-special" class="container margin-bottom-basic mobile-margin-bottom-basic">
   <div class="row">
@@ -18,5 +19,8 @@
   </div>
 </section>
 <?php
+    if ($fundraiser_expiration > time()) {
+      get_template_part('partials/support-section');
+    }
   }
 ?>
