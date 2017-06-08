@@ -148,6 +148,20 @@ class IGV_Admin {
       'select_behavior' => 'replace',
     ) );
 
+    $options_metabox->add_field( array(
+      'name' => __( 'Show Special Embed', 'IGV' ),
+      'desc' => __( 'Shows the special embed on the homepage', 'IGV' ),
+      'id'   => $this->prefix . 'show_special',
+      'type' => 'checkbox',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Front Page Special Embed', 'IGV' ),
+      'desc' => __( 'This is an embed code that takes over the home. For things like a Facebook livestream. Generally not to be used', 'IGV' ),
+      'id'   => $this->prefix . 'front_special',
+      'type' => 'textarea_code',
+    ) );
+
     // ANNOUNCEMENT OPTIONS
 
     $options_metabox->add_field( array(
