@@ -1,6 +1,8 @@
 <?php
 get_header();
 
+$show_special = IGV_get_option('_igv_show_special');
+
 $home_radio = IGV_get_option('_igv_home_radio');
 
 $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
@@ -17,7 +19,11 @@ $show_imo = IGV_get_option('_igv_show_imo');
 <!-- main content -->
 <main id="main-content">
 <?php
-  if ($fundraiser_expiration > time()) {
+  if ($show_special) {
+
+    get_template_part('partials/home-special');
+
+  } else if ($fundraiser_expiration > time()) {
 
     get_template_part('partials/home-fundraiser');
 
