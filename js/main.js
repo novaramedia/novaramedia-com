@@ -218,8 +218,16 @@ Site.Search = {
 
 Site.Support = {
   init: function() {
+    var _this = this;
+
     if ($('.support-section').length) {
-      this.bind();
+      _this.bind();
+    }
+
+    _this.$progressBar = $('#progress-bar');
+
+    if (_this.$progressBar) {
+      _this.initProgressBar();
     }
   },
 
@@ -228,6 +236,44 @@ Site.Support = {
       var target = $(this).closest('.support-form').find('.support-form-value');
       target.html(this.value);
     });
+  },
+
+  initProgressBar: function() {
+    var _this = this;
+
+    _this.$progressBar.css('width', '0%');
+
+    $.get('https://payment.novaramedia.com/api/goal', null, function(data, textStatus) {
+
+      if (textStatus === 'success') {
+        var percent = data.percent;
+
+        if (percent > 1) {
+          percent = 1;
+        }
+
+        $('#progress-bar-row').slideDown(1250, function() {
+          _this.$progressBar.css('width', (percent * 100) + '%');
+
+          _this.displayProgressText(data);
+        });
+      }
+
+    }, 'json');
+  },
+
+  displayProgressText: function(data) {
+    var _this = this;
+
+    var total = data.total / data.percent;
+    var text = ': £' + _this.numberWithCommas(data.total) + ' of £' + _this.numberWithCommas(total);
+
+    $('#progress-text').text(text);
+  },
+
+  numberWithCommas: function(x) {
+    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
 };
 
