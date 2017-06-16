@@ -19,6 +19,10 @@ $show_imo = IGV_get_option('_igv_show_imo');
 <!-- main content -->
 <main id="main-content">
 <?php
+  if ($home_radio) {
+    get_template_part('partials/radio-player');
+  }
+
   if ($show_special) {
 
     get_template_part('partials/home-special');
@@ -58,10 +62,6 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 <?php
-  }
-
-  if ($home_radio) {
-    get_template_part('partials/radio-player');
   }
 
   if ($focus && $focus_at_top) {
