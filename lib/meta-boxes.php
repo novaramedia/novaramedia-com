@@ -64,7 +64,7 @@ function get_post_objects( $query_args ) {
  * Hook in and add metaboxes. Can only happen on the 'cmb2_init' hook.
  */
 
-add_action( 'cmb2_admin_init', 'igv_cmb_metaboxes' );
+add_action( 'cmb2_init', 'igv_cmb_metaboxes' );
 
 function igv_cmb_metaboxes() {
   // Start with an underscore to hide fields from custom fields list
@@ -78,6 +78,7 @@ function igv_cmb_metaboxes() {
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
+    'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
 
@@ -105,6 +106,7 @@ function igv_cmb_metaboxes() {
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
+    'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
   $audio_metabox->add_field( array(
@@ -137,6 +139,7 @@ function igv_cmb_metaboxes() {
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
+    'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
   $video_metabox->add_field( array(
@@ -162,6 +165,7 @@ function igv_cmb_metaboxes() {
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left
+    'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
   $articles_metabox->add_field( array(
@@ -186,6 +190,7 @@ function igv_cmb_metaboxes() {
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true,
+    'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
   $resources_group_field = $resources_metabox->add_field( array(
@@ -196,7 +201,7 @@ function igv_cmb_metaboxes() {
       'add_button'    => __( 'Add Another Resource', 'cmb' ),
       'remove_button' => __( 'Remove Resource', 'cmb' ),
       'sortable'      => true,
-    )
+    ),
   ) );
 
   $resources_metabox->add_group_field( $resources_group_field, array(
