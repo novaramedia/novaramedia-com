@@ -20,11 +20,11 @@ if( have_posts() ) {
       </div>
     </div>
     <div class="row margin-bottom-basic">
-      <div class="col col10">
+      <div class="col col10 page-copy">
         <?php the_content(); ?>
       </div>
       <div class="col col2"></div>
-      <div class="col col10">
+      <div class="col col10 page-copy">
         <?php if (!empty($meta['_cmb_page_extra'])) {
           echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
         } ?>
@@ -43,7 +43,7 @@ if( have_posts() ) {
       }
 ?>
     <div class="row margin-bottom-mid">
-      <div class="col col10">
+      <div class="col col10 page-copy">
         <?php echo apply_filters('the_content', $meta['_cmb_page_extra_section'][0]); ?>
       </div>
     </div>

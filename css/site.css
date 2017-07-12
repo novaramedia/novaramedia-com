@@ -1369,6 +1369,40 @@ article ol li {
   max-width: 974px;
   margin: 0 auto;
 }
+.page-copy blockquote {
+  margin: 3rem;
+}
+.page-copy h1,
+.page-copy h2,
+.page-copy h3,
+.page-copy h4,
+.page-copy h5,
+.page-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.page-copy a {
+  color: #5490eb;
+}
+.page-copy img {
+  display: block;
+  margin: 2.5rem auto;
+}
+.page-copy .wp-caption {
+  width: auto !important;
+}
+.page-copy .wp-caption.alignnone {
+  text-align: center;
+}
+.page-copy .wp-caption img {
+  margin: 0;
+}
+.page-copy .wp-caption .wp-caption-text {
+  text-align: left;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
 a,
 a:active,
 a:visited {

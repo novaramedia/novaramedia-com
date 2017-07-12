@@ -274,6 +274,29 @@ article
   max-width: ( 18 * $col ) + ( 17  * $gutter )
   margin: 0 auto
 
+.page-copy
+  blockquote
+    margin: 3rem
+  h1,h2,h3,h4,h5,h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: $color-blue
+  img
+    display: block
+    margin: 2.5rem auto
+  .wp-caption
+    width: auto !important
+    &.alignnone
+      text-align: center
+    img
+      margin: 0
+    .wp-caption-text
+      text-align: left
+      font-family: $font-sans
+      font-size: $font-size-smaller
+      margin-top: $margin-tiny
+
   // LINKS
 
 a,
