@@ -36,12 +36,12 @@
       <form class="support-form only-desktop" action="https://payment.novaramedia.com/subscription">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value">1</span> /month
+            £<span class="support-form-value">2</span> /month
           </div>
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="1" min="1" max="40" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="2" min="1" max="40" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -64,7 +64,7 @@
       <form class="support-form only-mobile" action="https://payment.novaramedia.com/subscription">
         <div class="col">
           <div class="support-form-holder u-flex-center mobile-margin-bottom-small">
-            <input type="number" value="1" min="1" max="40" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
+            <input type="number" value="2" min="1" max="40" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
