@@ -14,7 +14,7 @@ function render_home_focus($focus) {
     <div class="row margin-bottom-small mobile-margin-bottom-none">
 <?php
       $focusPosts = new WP_Query(array(
-        'posts_per_page' => -1,
+        'posts_per_page' => 3,
         'tax_query' => array(
           array(
             'taxonomy' => 'focus',
