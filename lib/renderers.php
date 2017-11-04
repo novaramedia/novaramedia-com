@@ -1,10 +1,10 @@
 <?php
 
-function render_home_focus($focus) {
+function render_home_focus($focus, $classes) {
   $focus_object = get_term($focus);
   $focus_link = get_term_link($focus_object);
 ?>
-  <section id="home-focus-posts" class="container margin-top-large margin-bottom-large mobile-margin-bottom-basic">
+  <section id="home-focus-posts" class="container <?php echo $classes; ?>">
     <div class="row">
       <div class="col col24 margin-bottom-small">
         <h4><a href="<?php echo $focus_link; ?>">Focus: <?php echo $focus_object->name; ?></a></h4>

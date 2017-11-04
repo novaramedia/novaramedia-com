@@ -65,7 +65,14 @@ $show_imo = IGV_get_option('_igv_show_imo');
   }
 
   if ($focus && $focus_at_top) {
-    render_home_focus($focus);
+    $classes = 'margin-top-large margin-bottom-large mobile-margin-bottom-basic';
+
+    // Check if anything is above the focus
+    if ($home_radio || $show_special || $fundraiser_expiration > time() || !empty($home_featured)) {
+      $classes = 'margin-bottom-large mobile-margin-bottom-basic';
+    }
+
+    render_home_focus($focus, $classes);
   }
   ?>
 
@@ -167,7 +174,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
   <?php
     if ($focus && !$focus_at_top) {
-      render_home_focus($focus);
+      render_home_focus($focus, 'margin-top-large margin-bottom-large mobile-margin-bottom-basic');
     }
   ?>
 
