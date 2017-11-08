@@ -73,8 +73,9 @@
             <div class="col col6">
               <ul class="header-menu u-inline-list">
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
-                <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
+                <li><a href="https://shop.novaramedia.com">Shop</a></li>
+                <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
                 <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
               </ul>
             </div>

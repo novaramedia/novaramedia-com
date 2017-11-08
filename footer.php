@@ -4,9 +4,10 @@
           <div class="col col6 mobile-margin-bottom-basic">
             <ul>
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
-              <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
               <li><a href="https://payment.novaramedia.com/profile">Manage subscription</a></li>
+              <li><a href="https://shop.novaramedia.com">Shop</a></li>
+              <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
               <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
               <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
               <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
