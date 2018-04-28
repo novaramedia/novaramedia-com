@@ -56,7 +56,7 @@ function render_video_query($query) {
     if (!empty($meta['_cmb_utube'])) {
     ?>
     <div class="u-video-embed-container">
-      <iframe class="youtube-player" type="text/html" src="https://www.youtube.com/embed/<?php echo $meta['_cmb_utube'][0]; ?>?autohide=2&amp;modestbranding=1&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
+      <iframe class="youtube-player" type="text/html" src="https://www.youtube.com/embed/<?php echo $meta['_cmb_utube'][0]; ?>?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
     </div>
     <?php
     } else {
