@@ -7,6 +7,11 @@ function only_top_level_category_filter($var) {
   }
 }
 
+// create youtube embed url with consistent parameters
+function generate_youtube_embed_url($id) {
+  return 'https://www.youtube.com/embed/' . $id . '?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0';;
+}
+
 // obviously it gets related posts and returns a WP Query
 function get_related_posts($excluded_ids_array = null, $category_name = null, $number_of_posts = 4) {
 
