@@ -12,6 +12,7 @@
               <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
               <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
               <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
+              <li><a href="<?php echo site_url('terms-and-conditions/'); ?>">Terms & Conditions</a></li>
             </ul>
           </div>
           <div class="col col6 mobile-margin-bottom-basic">
