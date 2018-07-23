@@ -1,6 +1,12 @@
 <?php
   $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
+
+  $minDonation = 3;
+  $defaultSubscription = 3;
+  $defaultOneoff = 5;
+  $maxSubscription = 50;
+  $maxOneoff = 500;
 ?>
 
 <div class="support-section background-red font-color-white padding-top-mid padding-bottom-mid">
@@ -36,12 +42,12 @@
       <form class="support-form only-desktop" action="https://payment.novaramedia.com/subscription">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value">2</span> /month
+            £<span class="support-form-value"><?php echo $defaultSubscription; ?></span> /month
           </div>
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="2" min="1" max="40" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -50,12 +56,12 @@
       <form class="support-form only-desktop" action="https://payment.novaramedia.com/oneoff">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value">5</span>
+            £<span class="support-form-value"><?php echo $defaultSubscription; ?></span>
           </div>
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="5" min="1" max="400" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -64,7 +70,7 @@
       <form class="support-form only-mobile" action="https://payment.novaramedia.com/subscription">
         <div class="col">
           <div class="support-form-holder u-flex-center mobile-margin-bottom-small">
-            <input type="number" value="2" min="1" max="40" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
+            <input type="number" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -73,7 +79,7 @@
       <form class="support-form only-mobile" action="https://payment.novaramedia.com/oneoff">
         <div class="col">
           <div class="support-form-holder u-flex-center">
-            <input type="number" value="5" min="1" max="400" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
+            <input type="number" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
