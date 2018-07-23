@@ -35,7 +35,7 @@
               <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
               <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
               <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">YouTube</a></li>
-              <li><a href="http://novaramedia.tumblr.com/" target="_blank">Tumblr</a></li>
+              <li><a href="https://www.instagram.com/novaramedia/" target="_blank">Instagram</a></li>
             </ul>
           </div>
           <div class="col col6">
