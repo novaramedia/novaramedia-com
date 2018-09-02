@@ -45,14 +45,14 @@ if( have_posts() ) {
     if (!empty($meta['_cmb_support_youtube']) || $fundraiser_youtube_id) {
       $youtube_id = $meta['_cmb_support_youtube'][0];
       if ($fundraiser_youtube_id && $is_fundraiser) {
-        $youtube_id= $fundraiser_youtube_id;
+        $youtube_id = $fundraiser_youtube_id;
       }
   ?>
     <div class="container">
       <div class="row margin-bottom-basic">
         <div class="col col24">
           <div class="u-video-embed-container">
-            <iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/<?php echo $youtube_id; ?>?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
+            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
           </div>
         </div>
       </div>
