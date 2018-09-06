@@ -266,7 +266,7 @@ Site.Support = {
     var _this = this;
 
     var total = data.total / data.percent;
-    var text = ': £' + _this.numberWithCommas(data.total) + ' of £' + _this.numberWithCommas(total);
+    var text = ': £' + _this.numberWithCommas(data.total) + ' of £' + _this.numberWithCommas(Math.round(total));
 
     $('#progress-text').text(text);
   },
