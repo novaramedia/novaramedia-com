@@ -6,9 +6,9 @@
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Type_Checkbox extends CMB2_Type_Text {
 
@@ -32,7 +32,7 @@ class CMB2_Type_Checkbox extends CMB2_Type_Text {
 		$this->is_checked = $is_checked;
 	}
 
-	public function render() {
+	public function render( $args = array() ) {
 		$defaults = array(
 			'type'  => 'checkbox',
 			'class' => 'cmb2-option cmb2-list',

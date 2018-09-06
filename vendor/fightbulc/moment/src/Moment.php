@@ -11,6 +11,10 @@ namespace Moment;
  */
 class Moment extends \DateTime
 {
+    const NO_TZ_MYSQL = 'Y-m-d H:i:s';
+    const NO_TZ_NO_SECS = 'Y-m-d H:i';
+    const NO_TIME = 'Y-m-d';
+
     /**
      * @var string
      */
@@ -34,7 +38,7 @@ class Moment extends \DateTime
     /**
      * @param string $locale
      *
-     * @return void
+     * @throws MomentException
      */
     public static function setLocale($locale)
     {
@@ -62,7 +66,7 @@ class Moment extends \DateTime
      */
     public function __construct($dateTime = 'now', $timezone = null, $immutableMode = false)
     {
-        if($timezone === null)
+        if ($timezone === null)
         {
             $timezone = self::$defaultTimezone;
         }
@@ -102,7 +106,13 @@ class Moment extends \DateTime
      */
     public function resetDateTime($dateTime = 'now', $timezone = null)
     {
-        if($timezone === null)
+        // unix timestamp helper
+        if (strlen((int)$dateTime) === 10)
+        {
+            $dateTime = '@' . $dateTime;
+        }
+
+        if ($timezone === null)
         {
             $timezone = self::$defaultTimezone;
         }
@@ -153,10 +163,11 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param null $format
+     * @param null|string $format
      * @param null|FormatsInterface $formatsInterface
      *
      * @return string
+     * @throws MomentException
      */
     public function format($format = null, $formatsInterface = null)
     {
@@ -359,9 +370,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $day
+     * @param int $day
      *
      * @return Moment
+     * @throws MomentException
      */
     public function setDay($day)
     {
@@ -376,9 +388,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $month
+     * @param int $month
      *
      * @return Moment
+     * @throws MomentException
      */
     public function setMonth($month)
     {
@@ -393,9 +406,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $year
+     * @param int $year
      *
      * @return Moment
+     * @throws MomentException
      */
     public function setYear($year)
     {
@@ -411,6 +425,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getDay()
     {
@@ -419,6 +434,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getWeekday()
     {
@@ -427,6 +443,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getWeekdayNameLong()
     {
@@ -435,6 +452,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getWeekdayNameShort()
     {
@@ -443,6 +461,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getWeekOfYear()
     {
@@ -451,6 +470,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getMonth()
     {
@@ -459,6 +479,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getMonthNameLong()
     {
@@ -467,6 +488,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getMonthNameShort()
     {
@@ -475,6 +497,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getQuarter()
     {
@@ -485,6 +508,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getYear()
     {
@@ -511,8 +535,9 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $second
+     * @param int $second
      *
+     * @throws MomentException
      * @return Moment
      */
     public function setSecond($second)
@@ -528,9 +553,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $minute
+     * @param int $minute
      *
      * @return Moment
+     * @throws MomentException
      */
     public function setMinute($minute)
     {
@@ -545,9 +571,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $hour
+     * @param int $hour
      *
      * @return Moment
+     * @throws MomentException
      */
     public function setHour($hour)
     {
@@ -563,6 +590,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getSecond()
     {
@@ -571,6 +599,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getMinute()
     {
@@ -579,6 +608,7 @@ class Moment extends \DateTime
 
     /**
      * @return string
+     * @throws MomentException
      */
     public function getHour()
     {
@@ -631,7 +661,8 @@ class Moment extends \DateTime
             ->setMinutes($this->fromToMinutes($dateDiff))
             ->setHours($this->fromToHours($dateDiff))
             ->setDays($this->fromToDays($dateDiff))
-            ->setWeeks($this->fromToWeeks($dateDiff));
+            ->setWeeks($this->fromToWeeks($dateDiff))
+            ;
     }
 
     /**
@@ -744,13 +775,15 @@ class Moment extends \DateTime
 
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                    ->subtractDays($this->getDaysAfterStartOfWeek())
-                    ->setTime(0, 0, 0);
+                      ->subtractDays($this->getDaysAfterStartOfWeek())
+                      ->setTime(0, 0, 0)
+                ;
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
                     ->addDays(6 - $this->getDaysAfterStartOfWeek())
-                    ->setTime(23, 59, 59);
+                    ->setTime(23, 59, 59)
+                ;
 
                 break;
 
@@ -763,13 +796,15 @@ class Moment extends \DateTime
 
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                    ->subtractDays($currentMonthDay - 1)
-                    ->setTime(0, 0, 0);
+                      ->subtractDays($currentMonthDay - 1)
+                      ->setTime(0, 0, 0)
+                ;
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
                     ->addDays($maxMonthDays - $currentMonthDay)
-                    ->setTime(23, 59, 59);
+                    ->setTime(23, 59, 59)
+                ;
 
                 break;
 
@@ -795,14 +830,16 @@ class Moment extends \DateTime
             ->setRefDate($this)
             ->setInterval($interval)
             ->setStartDate($start)
-            ->setEndDate($end);
+            ->setEndDate($end)
+            ;
     }
 
     /**
      * @param bool $withTime
-     * @param Moment $refMoment
+     * @param Moment|null $refMoment
      *
      * @return string
+     * @throws MomentException
      */
     public function calendar($withTime = true, Moment $refMoment = null)
     {
@@ -862,9 +899,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $period
+     * @param string $period
      *
      * @return Moment
+     * @throws MomentException
      */
     public function startOf($period)
     {
@@ -917,9 +955,10 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $period
+     * @param string $period
      *
      * @return Moment
+     * @throws MomentException
      */
     public function endOf($period)
     {
@@ -1001,6 +1040,7 @@ class Moment extends \DateTime
      * @param int $forUpcomingWeeks
      *
      * @return Moment[]
+     * @throws MomentException
      */
     public function getMomentsByWeekdays(array $weekdayNumbers, $forUpcomingWeeks = 1)
     {
@@ -1045,7 +1085,8 @@ class Moment extends \DateTime
      * @param string|Moment $dateTime
      * @param string $period 'seconds|minute|hour|day|month|year'
      *
-     * @return boolean
+     * @return bool
+     * @throws MomentException
      */
     public function isSame($dateTime, $period = 'seconds')
     {
@@ -1060,7 +1101,8 @@ class Moment extends \DateTime
      * @param string|Moment $dateTime
      * @param string $period 'seconds|minute|hour|day|month|year'
      *
-     * @return boolean
+     * @return bool
+     * @throws MomentException
      */
     public function isBefore($dateTime, $period = 'seconds')
     {
@@ -1076,6 +1118,7 @@ class Moment extends \DateTime
      * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
+     * @throws MomentException
      */
     public function isAfter($dateTime, $period = 'seconds')
     {
@@ -1093,6 +1136,7 @@ class Moment extends \DateTime
      * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
+     * @throws MomentException
      */
     public function isBetween($minDateTime, $maxDateTime, $closed = true, $period = 'seconds')
     {
@@ -1173,6 +1217,7 @@ class Moment extends \DateTime
 
     /**
      * @return int
+     * @throws MomentException
      */
     private function getDaysAfterStartOfWeek()
     {
@@ -1185,6 +1230,7 @@ class Moment extends \DateTime
 
     /**
      * @return bool
+     * @throws MomentException
      */
     private function isValidDate()
     {
@@ -1244,18 +1290,18 @@ class Moment extends \DateTime
             // with seconds
             if (substr_count($rawDateTime, ':') === 2)
             {
-                $momentDateTime = $this->format('Y-m-d H:i:s');
+                $momentDateTime = $this->format(self::NO_TZ_MYSQL);
             }
             else
             {
-                $momentDateTime = $this->format('Y-m-d H:i');
+                $momentDateTime = $this->format(self::NO_TZ_NO_SECS);
             }
         }
 
         // without time
         else
         {
-            $momentDateTime = $this->format('Y-m-d');
+            $momentDateTime = $this->format(self::NO_TIME);
         }
 
         return $rawDateTime === $momentDateTime;
@@ -1284,6 +1330,7 @@ class Moment extends \DateTime
      * @param string $token
      *
      * @return string
+     * @throws MomentException
      */
     private function formatOrdinal($number, $token)
     {

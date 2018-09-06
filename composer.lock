@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "fightbulc/moment",
-            "version": "1.26.2",
+            "version": "1.26.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fightbulc/moment.php.git",
-                "reference": "68f3ddad3feca6d7aae5a333724401355661afbb"
+                "reference": "2fe6607fdbbd45b48708f539c70fde89ca9d10e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/68f3ddad3feca6d7aae5a333724401355661afbb",
-                "reference": "68f3ddad3feca6d7aae5a333724401355661afbb",
+                "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/2fe6607fdbbd45b48708f539c70fde89ca9d10e6",
+                "reference": "2fe6607fdbbd45b48708f539c70fde89ca9d10e6",
                 "shasum": ""
             },
             "require": {
@@ -67,20 +67,20 @@
                 "translation",
                 "validate"
             ],
-            "time": "2017-01-19T07:57:28+00:00"
+            "time": "2017-08-14T05:06:04+00:00"
         },
         {
             "name": "webdevstudios/cmb2",
-            "version": "v2.2.4",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WebDevStudios/CMB2.git",
-                "reference": "badecc7f908781ac14b879c74526f9d055f4a41e"
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "fdcb80985e4b4a4c7118b2ecce090af4a3309958"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/badecc7f908781ac14b879c74526f9d055f4a41e",
-                "reference": "badecc7f908781ac14b879c74526f9d055f4a41e",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/fdcb80985e4b4a4c7118b2ecce090af4a3309958",
+                "reference": "fdcb80985e4b4a4c7118b2ecce090af4a3309958",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
             "type": "wordpress-plugin",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -103,16 +103,28 @@
                     "email": "contact@webdevstudios.com",
                     "homepage": "https://github.com/WebDevStudios",
                     "role": "Developer"
+                },
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Zao",
+                    "email": "office@zao.com",
+                    "homepage": "http://zao.is",
+                    "role": "Developer"
                 }
             ],
             "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-            "homepage": "https://github.com/WebDevStudios/CMB2",
+            "homepage": "https://github.com/CMB2/CMB2",
             "keywords": [
                 "metabox",
                 "plugin",
                 "wordpress"
             ],
-            "time": "2017-02-27T15:05:31+00:00"
+            "time": "2018-05-29T14:23:29+00:00"
         },
         {
             "name": "webdevstudios/cmb2-post-search-field",
