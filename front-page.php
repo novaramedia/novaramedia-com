@@ -178,35 +178,6 @@ $show_imo = IGV_get_option('_igv_show_imo');
     }
   ?>
 
-  <section id="home-long-read-posts" class="container margin-top-large margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $category_id = get_cat_ID('Long Read');
-      $category_link = get_category_link( $category_id );
-    ?>
-
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Long Reads</a></h4>
-      </div>
-    </div>
-
-    <div class="row">
-      <?php
-        $latest_long_reads = new WP_Query(array(
-          'posts_per_page' => 3,
-          'category_name' => 'Long Read'
-        ));
-
-        if ($latest_long_reads->have_posts()) {
-          while ($latest_long_reads->have_posts()) {
-            $latest_long_reads->the_post();
-            get_template_part('partials/post-layouts/post-col8');
-          }
-        }
-      ?>
-    </div>
-  </section>
-
 <?php
   if ($show_imo) {
 ?>
