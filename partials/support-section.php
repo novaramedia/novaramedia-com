@@ -3,10 +3,10 @@
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
 
   $minDonation = 3;
-  $defaultSubscription = 3;
-  $defaultOneoff = 5;
-  $maxSubscription = 50;
-  $maxOneoff = 500;
+  $defaultSubscription = 8;
+  $defaultOneoff = 10;
+  $maxSubscription = 80;
+  $maxOneoff = 800;
 ?>
 
 <div class="support-section background-red font-color-white padding-top-mid padding-bottom-mid">
@@ -29,7 +29,7 @@
 
     <div class="row margin-bottom-tiny font-bold">
       <div class="col col12">
-        <p>Become a subscriber and support Novara Media from £1 per month:</p>
+        <p>Become a subscriber and support Novara Media monthly:</p>
       </div>
       <div class="col col12">
         <p>Or you can give us a one-off donation:</p>
@@ -56,7 +56,7 @@
       <form class="support-form only-desktop" action="https://payment.novaramedia.com/oneoff">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value"><?php echo $defaultSubscription; ?></span>
+            £<span class="support-form-value"><?php echo $defaultOneoff; ?></span>
           </div>
         </div>
         <div class="col col9">
