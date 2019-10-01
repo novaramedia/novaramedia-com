@@ -29,7 +29,7 @@
 
     <div class="row margin-bottom-tiny font-bold">
       <div class="col col12">
-        <p>Become a subscriber and support Novara Media from £<?php echo $minDonation; ?> per month:</p>
+        <p>Become a subscriber and support Novara Media monthly:</p>
       </div>
       <div class="col col12">
         <p>Or you can give us a one-off donation:</p>
