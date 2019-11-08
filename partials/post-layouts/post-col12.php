@@ -11,7 +11,7 @@
 
       <div class="post-col12-image-overlay only-desktop"></div>
       <div class="post-col12-text font-color-white">
-        <h3 class="js-fix-widows mobile-margin-bottom-micro"><?php the_title(); ?></h3>
+        <h3 class="js-fix-widows mobile-margin-bottom-micro"><?php render_post_title($post->ID); ?></h3>
     <?php
         if (!empty($meta['_cmb_author'])) {
     ?>

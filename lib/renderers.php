@@ -92,6 +92,26 @@ function render_video_query($query) {
   }
 }
 
+function render_post_title($postId) {
+  $isArticle = has_category('articles', $postId);
+
+  $title = get_the_title($postId);
+
+  if ($isArticle) {
+    $categories = get_the_category($postId);
+
+    $childCategories = array_filter($categories, 'only_child_category_filter');
+    $childCategories = array_values($childCategories);
+
+    if (isset($childCategories[0])) {
+      $title = '<span class="font-small-caps">' . $childCategories[0]->name . ':</span> ' . $title;
+    }
+
+  }
+
+  echo $title;
+}
+
 function render_resources_row($resources) {
 ?>
 <div id="single-resources-section" class="row margin-bottom-basic">

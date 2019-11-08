@@ -12,7 +12,18 @@
 
 <div class="row margin-bottom-basic mobile-margin-bottom-small">
   <div class="col col24">
-    <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
+    <h4>
+      <a href="<?php echo $category_link; ?>">Articles</a>
+      <?php
+        $categories = get_the_category();
+        $childCategories = array_filter($categories, 'only_child_category_filter');
+        $childCategories = array_values($childCategories);
+
+        if (isset($childCategories[0])) {
+          echo ': <a href="' . get_term_link($childCategories[0]) . '">' . $childCategories[0]->name . '</a>';
+        }
+      ?>
+    </h4>
   </div>
 </div>
 
