@@ -50,24 +50,16 @@ function render_video_query($query) {
   if ($query->have_posts()) {
     $query->the_post();
   ?>
-  <div class="col col20 video-block-main-video mobile-margin-bottom-basic">
-    <?php
-    $meta = get_post_meta($post->ID);
-    if (!empty($meta['_cmb_utube'])) {
-    ?>
-    <div class="u-video-embed-container">
-      <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>"></iframe>
-    </div>
-    <?php
-    } else {
-      echo 'Someone messed up :/';
-    }
-    ?>
+  <div class="col col18 video-block-main-video mobile-margin-bottom-basic">
+    <a href="<?php the_permalink(); ?>">
+      <?php the_post_thumbnail('col18-16to9'); ?>
+    </a>
+
     <a href="<?php the_permalink(); ?>">
       <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
     </a>
   </div>
-  <div class="col col4">
+  <div class="col col6">
     <?php
 
     // Side 3 remaining vids
@@ -77,8 +69,7 @@ function render_video_query($query) {
     ?>
     <a href="<?php the_permalink(); ?>">
      <div class="video-related-video margin-bottom-small">
-       <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
-       <?php the_post_thumbnail('col6-16to9', array('class' => 'only-mobile')); ?>
+       <?php the_post_thumbnail('col6-16to9'); ?>
        <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
      </div>
    </a>

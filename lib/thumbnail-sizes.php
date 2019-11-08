@@ -25,6 +25,8 @@ if( function_exists( 'add_image_size' ) ) {
 
   add_image_size( 'gallery-mid', 664, 373, false );
 
+  add_image_size( 'col18-16to9', 974, 548, true );
+
   add_image_size( 'col24-16to9', 1304, 733, true );
   add_image_size( 'col24-widescreen-crop', 1304, 400, true );
 
