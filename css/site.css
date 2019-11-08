@@ -1403,9 +1403,7 @@ article ol li {
   font-size: 0.8rem;
   margin-top: 8px;
 }
-a,
-a:active,
-a:visited {
+a {
   color: inherit;
   text-decoration: none;
 }
