@@ -1,15 +1,30 @@
 <?php
 
-// for array_filter s
+// for array_filters
+
+// filters an array of post categories for just top level categories
 function only_top_level_category_filter($var) {
   if ($var->category_parent == 0) {
     return true;
   }
 }
 
+// filters an array of post categories for just child categories
+function only_child_category_filter($var) {
+  if ($var->category_parent !== 0) {
+    return true;
+  }
+}
+
 // create youtube embed url with consistent parameters
-function generate_youtube_embed_url($id) {
-  return 'https://www.youtube.com/embed/' . $id . '?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0';;
+function generate_youtube_embed_url($id, $autoplay = false) {
+  $url = 'https://www.youtube.com/embed/' . $id . '?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0';
+
+  if ($autoplay) {
+    $url .= '&amp;autoplay=1';
+  }
+
+  return $url;
 }
 
 // obviously it gets related posts and returns a WP Query

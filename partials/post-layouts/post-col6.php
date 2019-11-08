@@ -7,7 +7,7 @@
     <?php the_post_thumbnail('col6-16to9', array('class' => 'related-post-thumbnail only-desktop')); ?>
     <?php the_post_thumbnail('mobile-21to9', array('class' => 'related-post-thumbnail only-mobile')); ?>
 
-    <h5 class="margin-top-tiny margin-bottom-tiny js-fix-widows"><?php the_title(); ?></h5>
+    <h5 class="margin-top-tiny margin-bottom-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
 
     <div class="post-description">
       <?php

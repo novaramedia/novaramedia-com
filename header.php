@@ -67,7 +67,7 @@
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
-                <li><a href="<?php echo get_post_type_archive_link('event'); ?>">IRL</a></li>
+                <li><a href="<?php echo get_post_type_archive_link('event'); ?>">Events</a></li>
               </ul>
             </div>
             <div class="col col6">
@@ -85,6 +85,7 @@
                 <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
                 <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
                 <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">YouTube</a></li>
+                <li><a href="https://www.instagram.com/novaramedia/" target="_blank">Instagram</a></li>
               </ul>
             </div>
 
