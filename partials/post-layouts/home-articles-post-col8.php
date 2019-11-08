@@ -7,7 +7,7 @@
 
     <?php the_post_thumbnail('col8-16to9', array('class' => 'related-post-thumbnail')); ?>
 
-    <h5 class="margin-top-tiny margin-bottom-micro font-larger js-fix-widows"><?php the_title(); ?></h5>
+    <h5 class="margin-top-tiny margin-bottom-micro font-larger js-fix-widows"><?php render_post_title($post->ID); ?></h5>
 <?php
     if (!empty($meta['_cmb_author'])) {
 ?>

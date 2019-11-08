@@ -1,8 +1,17 @@
 <?php
 
-// for array_filter s
+// for array_filters
+
+// filters an array of post categories for just top level categories
 function only_top_level_category_filter($var) {
   if ($var->category_parent == 0) {
+    return true;
+  }
+}
+
+// filters an array of post categories for just child categories
+function only_child_category_filter($var) {
+  if ($var->category_parent !== 0) {
     return true;
   }
 }
