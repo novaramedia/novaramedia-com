@@ -38,7 +38,7 @@ if( have_posts() ) {
     <div class="container margin-bottom-large">
       <div class="row margin-bottom-basic">
         <div class="col col24">
-          <h4>IRL</h4>
+          <h4>Events</h4>
         </div>
       </div>
       <div class="row margin-bottom-basic">

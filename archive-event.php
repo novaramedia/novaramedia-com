@@ -11,7 +11,7 @@ get_header();
 
     <div class="row margin-bottom-basic">
       <div class="col col24">
-        <h4>IRL</h4>
+        <h4>Events</h4>
       </div>
     </div>
 
