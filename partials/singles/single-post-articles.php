@@ -16,11 +16,11 @@
       <a href="<?php echo $category_link; ?>">Articles</a>
       <?php
         $categories = get_the_category();
-        $childCategories = array_filter($categories, 'only_child_category_filter');
-        $childCategories = array_values($childCategories);
+        $child_categories = array_filter($categories, 'only_child_category_filter');
+        $child_categories = array_values($child_categories);
 
-        if (isset($childCategories[0])) {
-          echo ': <a href="' . get_term_link($childCategories[0]) . '">' . $childCategories[0]->name . '</a>';
+        if (isset($child_categories[0])) {
+          echo ': <a href="' . get_term_link($child_categories[0]) . '">' . $child_categories[0]->name . '</a>';
         }
       ?>
     </h4>

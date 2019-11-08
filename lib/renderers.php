@@ -93,18 +93,18 @@ function render_video_query($query) {
 }
 
 function render_post_title($postId) {
-  $isArticle = has_category('articles', $postId);
+  $is_article = has_category('articles', $postId);
 
   $title = get_the_title($postId);
 
-  if ($isArticle) {
+  if ($is_article) {
     $categories = get_the_category($postId);
 
-    $childCategories = array_filter($categories, 'only_child_category_filter');
-    $childCategories = array_values($childCategories);
+    $child_categories = array_filter($categories, 'only_child_category_filter');
+    $child_categories = array_values($child_categories);
 
-    if (isset($childCategories[0])) {
-      $title = '<span class="font-small-caps">' . $childCategories[0]->name . ':</span> ' . $title;
+    if (isset($child_categories[0])) {
+      $title = '<span class="font-small-caps">' . $child_categories[0]->name . ':</span> ' . $title;
     }
 
   }
