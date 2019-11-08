@@ -106,6 +106,7 @@ $color-white-soft = rgb(253, 253, 253)
 $color-white-soft-transparent = rgba(253, 253, 253, .5)
 
 $color-gray = rgb(150,150,150)
+$color-gray-transparent = rgba(150,150,150, .5)
 $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
@@ -213,6 +214,9 @@ p
 
 .text-shadow-light-gray
   text-shadow: 0 0 20px $color-gray-light-transparent
+
+.text-shadow-gray
+  text-shadow: 0 0 20px $color-gray-transparent
 
   // TEXT RULES
 
@@ -638,7 +642,7 @@ img
 #featured-post
   position: relative
 
-#featured-post-title
+#featured-post-title-holder
   position: absolute
   top: 0
   height: 100%
