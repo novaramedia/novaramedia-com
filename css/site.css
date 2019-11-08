@@ -2736,6 +2736,15 @@ img {
     width: 125px;
     vertical-align: text-bottom;
   }
+  #header-sub {
+    font-size: 2rem;
+    line-height: 1.6;
+    max-height: 80vh;
+    overflow-y: scroll;
+  }
+  #header-sub a {
+    padding: 1rem;
+  }
   #search-form {
     border: 2px solid #fdfdfd;
   }
