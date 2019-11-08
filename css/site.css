@@ -1295,6 +1295,9 @@ b {
 .text-shadow-light-gray {
   text-shadow: 0 0 20px rgba(190,190,190,0.5);
 }
+.text-shadow-gray {
+  text-shadow: 0 0 20px rgba(150,150,150,0.5);
+}
 .text-overflow-ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1693,7 +1696,7 @@ img {
 #featured-post {
   position: relative;
 }
-#featured-post-title {
+#featured-post-title-holder {
   position: absolute;
   top: 0;
   height: 100%;
@@ -2070,7 +2073,7 @@ img {
     height: 28px;
     border: 2px solid #fdfdfd;
   }
-  #featured-post-title {
+  #featured-post-title-holder {
     padding: 70px;
     font-size: 3.330015792890114rem;
   }
@@ -2412,7 +2415,7 @@ img {
     height: 24px;
     border: 2px solid #fdfdfd;
   }
-  #featured-post-title {
+  #featured-post-title-holder {
     padding: 60px;
     font-size: 3.330015792890114rem;
   }
@@ -2779,7 +2782,7 @@ img {
     height: 24px;
     border: 2px solid #fdfdfd;
   }
-  #featured-post-title {
+  #featured-post-title-holder {
     padding: 60px;
     font-size: 3.330015792890114rem;
   }
@@ -2829,16 +2832,16 @@ img {
   }
   h1,
   .font-size-h1 {
-    font-size: 1.781452392364234rem;
+    font-size: 1.697760280736162rem;
     letter-spacing: 0.025em;
   }
   h2,
   .font-size-h2 {
-    font-size: 1.697760280736162rem;
+    font-size: 1.657400414574315rem;
     letter-spacing: 0.025em;
   }
   h3 {
-    font-size: 1.618rem;
+    font-size: 1.3rem;
   }
   p {
     margin-bottom: 1rem;
@@ -2885,7 +2888,7 @@ img {
     margin-top: 6px;
   }
   .icon-large:before {
-    font-size: 1.618rem;
+    font-size: 1.3rem;
   }
   .button {
     padding: 12px;
@@ -3066,7 +3069,7 @@ img {
   }
   #search-input,
   #search-submit {
-    font-size: 1.618rem;
+    font-size: 1.3rem;
   }
   #search-input {
     width: 70%;
@@ -3107,9 +3110,14 @@ img {
     height: 24px;
     border: 2px solid #fdfdfd;
   }
-  #featured-post-title {
+  #featured-post-title-holder {
+    position: relative;
     padding: 18px;
     font-size: 1.781452392364234rem;
+  }
+  #featured-post-title {
+    color: #000;
+    text-shadow: none;
   }
   #home-articles-posts .col,
   #home-fm-posts .col,
