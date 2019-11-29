@@ -34,7 +34,7 @@
             echo render_post_title($post_id);
 
             if ($author) {
-              echo ' by '. $author;
+              echo ' <span class="font-small-caps">by '. $author . '</span>';
             }
 
           ?></h1>

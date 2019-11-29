@@ -15,6 +15,12 @@ function add_lazysize_on_srcset($attr) {
 
   if (!is_admin()) {
 
+    // if image has data-no-lazysizes attribute dont add lazysizes classes
+    if (isset($attr['data-no-lazysizes'])) {
+      unset($attr['data-no-lazysizes']);
+      return $attr;
+    }
+
     // Add lazysize class
     $attr['class'] .= ' lazyload';
 
@@ -37,3 +43,17 @@ function add_lazysize_on_srcset($attr) {
 
 }
 add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
+
+// add image to the RSS feeds
+// https://wordpress.org/plugins/add-featured-image-to-rss-feed/#developers
+function salzano_add_featured_image_to_feed( $content ) {
+  global $post;
+
+  if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ){
+    return get_the_post_thumbnail( $post->ID, apply_filters( 'rss_featured_image_thumbnail_size', 'large' ), 'data-no-lazysizes' ) . $content;
+  }
+  return $content;
+}
+
+add_filter( 'the_excerpt_rss', 'salzano_add_featured_image_to_feed', 1000, 1 );
+add_filter( 'the_content_feed', 'salzano_add_featured_image_to_feed', 1000, 1 );
