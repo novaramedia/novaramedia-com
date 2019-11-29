@@ -165,8 +165,8 @@ class IGV_Admin {
     // FRONT PAGE WEEKLYS SECTION
 
     $options_metabox->add_field( array(
-      'name' => __( 'Front Page Weeklys Signp Options', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
+      'name' => __( 'Front Page Weeklys Signup Options', 'cmb2' ),
+      'desc' => __( 'Up to 4 signup blocks', 'cmb2' ),
       'id'   => $this->prefix . 'home_signups_title',
       'type' => 'title',
     ) );

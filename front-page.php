@@ -146,7 +146,8 @@ $show_imo = IGV_get_option('_igv_show_imo');
   <?php
     get_template_part('partials/home-signups');
 
-    get_template_part('partials/support-section'); ?>
+    get_template_part('partials/support-section');
+  ?>
 
   <?php
     if ($focus && !$focus_at_top) {
