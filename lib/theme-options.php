@@ -162,6 +162,59 @@ class IGV_Admin {
       'type' => 'textarea_code',
     ) );
 
+    // FRONT PAGE WEEKLYS SECTION
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Front Page Weeklys Signp Options', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $this->prefix . 'home_signups_title',
+      'type' => 'title',
+    ) );
+
+    $group_field_id = $options_metabox->add_field( array(
+    	'id'          => 'home_signups',
+    	'type'        => 'group',
+    	'description' => __( 'Signup sections on the homepage', 'cmb2' ),
+    	'options'     => array(
+    		'group_title'       => __( 'Entry {#}', 'cmb2' ),
+    		'add_button'        => __( 'Add Another Entry', 'cmb2' ),
+    		'remove_button'     => __( 'Remove Entry', 'cmb2' ),
+    		'sortable'          => true,
+    	),
+    ) );
+
+    $options_metabox->add_group_field( $group_field_id, array(
+    	'name' => 'Signup Title',
+    	'id'   => 'title',
+    	'type' => 'text',
+    ) );
+
+    $options_metabox->add_group_field( $group_field_id, array(
+    	'name' => 'Link',
+    	'id'   => 'link',
+    	'type' => 'text_url',
+    ) );
+
+    $options_metabox->add_group_field( $group_field_id, array(
+    	'name' => 'Copy',
+    	'description' => 'Short copy',
+    	'id'   => 'description',
+    	'type' => 'wysiwyg',
+    ) );
+
+    $options_metabox->add_group_field( $group_field_id, array(
+    	'name' => 'Alt Signup Text',
+    	'description' => __( 'Default is "Sign up here"', 'cmb2' ),
+    	'id'   => 'signup_text',
+    	'type' => 'text',
+    ) );
+
+    $options_metabox->add_group_field( $group_field_id, array(
+    	'name' => 'Image',
+    	'id'   => 'image',
+    	'type' => 'file',
+    ) );
+
     // ANNOUNCEMENT OPTIONS
 
     $options_metabox->add_field( array(
