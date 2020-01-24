@@ -1757,6 +1757,22 @@ img {
 .text-copy .liveblog-update-heading:first-of-type {
   margin-top: 32px;
 }
+#gdpr {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #0e0e0e;
+  z-index: 100;
+}
+#gdpr .button {
+  color: #fdfdfd;
+  border-color: #fdfdfd;
+}
+#gdpr p a {
+  text-decoration: underline;
+}
 @media screen and (max-width: 1320px) {
   .container {
     width: 1104px;

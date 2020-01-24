@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, Site */
+/* global $, Site, Cookies */
 
 Site = {
   init: function() {
@@ -23,7 +23,7 @@ Site.Utilities = {
 
     _this.bind();
     _this.fixWidows();
-
+    _this.checkGDPRApproval();
   },
 
   bind: function() {
@@ -56,6 +56,19 @@ Site.Utilities = {
       $(this).html(string);
     });
   },
+
+  checkGDPRApproval: function() {
+    var approvalCookie = Cookies.get('gdpr-approval');
+
+    if (approvalCookie !== 'true') {
+      $('#gdpr').show();
+
+      $('#gdpr-accept').click(function() {
+        Cookies.set('gdpr-approval', true);
+        $('#gdpr').hide();
+      });
+    }
+  }
 
 };
 

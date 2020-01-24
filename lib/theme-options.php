@@ -345,6 +345,13 @@ class IGV_Admin {
       'type' => 'text',
     ) );
 
+    $options_metabox->add_field( array(
+      'name' => __( 'Cookies/Privacy notice', 'IGV' ),
+      'desc' => __( 'The copy that goes in the box people have to agree to to allow cookies', 'IGV' ),
+      'id'   => $this->prefix . 'privacy_notice',
+      'type' => 'wysiwyg',
+    ) );
+
   }
 
   /**
