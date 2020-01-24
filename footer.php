@@ -63,6 +63,7 @@
   </section>
 
   <?php
+    get_template_part('partials/gdpr');
     get_template_part('partials/scripts');
     get_template_part('partials/schema-org');
   ?>
