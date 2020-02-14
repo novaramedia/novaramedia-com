@@ -11,11 +11,8 @@
       <div class="col col24 margin-bottom-small font-color-white">
         <?php echo apply_filters('the_content', $copy); ?>
       </div>
-      <div class="col col12 margin-bottom-basic">
+      <div class="col col24 margin-bottom-basic">
         <a id="gdpr-accept" class="gdpr-button button u-pointer">Accept</a>
-      </div>
-      <div class="col col12 margin-bottom-basic">
-        <a class="gdpr-button button" href="https://google.com">Deny</a>
       </div>
     </div>
   </div>
