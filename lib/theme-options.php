@@ -69,7 +69,7 @@ class IGV_Admin {
    * @since 0.1.0
    */
   public function add_options_page() {
-    $this->options_page = add_menu_page( $this->title, $this->title, 'manage_options', $this->key, array( $this, 'admin_page_display' ) );
+    $this->options_page = add_menu_page( $this->title, $this->title, 'edit_posts', $this->key, array( $this, 'admin_page_display' ) );
   }
 
   /**
@@ -342,6 +342,13 @@ class IGV_Admin {
       'name' => __( 'Facebook App ID', 'IGV' ),
       'desc' => __( '(optional)', 'IGV' ),
       'id'   => $this->prefix . 'og_fb_app_id',
+      'type' => 'text',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Google Tag Manager container ID', 'IGV' ),
+      'desc' => __( '(optional)', 'IGV' ),
+      'id'   => $this->prefix . 'gtm_id',
       'type' => 'text',
     ) );
 
