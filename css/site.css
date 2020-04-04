@@ -1208,7 +1208,7 @@ th {
 }
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.001em;
 }
 body {
@@ -1705,6 +1705,22 @@ img {
   padding: 80px;
   font-size: 3.330015792890114rem;
 }
+.front-page-signup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.front-page-signup__image {
+  width: 27%;
+  padding-right: 1.5rem;
+}
+.front-page-signup__text {
+  width: 73%;
+}
 .post-col12-image {
   position: relative;
 }
@@ -1854,7 +1870,7 @@ img {
     width: 1090px;
   }
   html {
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 0.001em;
   }
   body {
@@ -2435,6 +2451,12 @@ img {
     padding: 60px;
     font-size: 3.330015792890114rem;
   }
+  .front-page-signup__image {
+    display: none;
+  }
+  .front-page-signup__text {
+    width: 100%;
+  }
   .post-col12-text {
     padding: 12px;
   }
@@ -2802,6 +2824,9 @@ img {
     padding: 60px;
     font-size: 3.330015792890114rem;
   }
+  #front-page-signups {
+    display: none;
+  }
   .post-col12-text {
     padding: 12px;
   }
@@ -3134,6 +3159,9 @@ img {
   #featured-post-title {
     color: #000;
     text-shadow: none;
+  }
+  #front-page-signups {
+    display: none;
   }
   #home-articles-posts .col,
   #home-fm-posts .col,

@@ -23,30 +23,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     get_template_part('partials/radio-player');
   }
 
-  if ($show_special) {
-
-    get_template_part('partials/home-special');
-
-  } else if ($fundraiser_expiration > time()) {
-
-    get_template_part('partials/home-fundraiser');
-
-  } else if (!empty($home_featured)) {
-
-    get_template_part('partials/home-featured');
-
-  }
-
-  if ($focus && $focus_at_top) {
-    $classes = 'margin-top-large margin-bottom-large mobile-margin-bottom-basic';
-
-    // Check if anything is above the focus
-    if ($home_radio || $show_special || $fundraiser_expiration > time() || !empty($home_featured)) {
-      $classes = 'margin-bottom-large mobile-margin-bottom-basic';
-    }
-
-    render_home_focus($focus, $classes);
-  }
+  get_template_part('partials/front-page/front-page-signups');
   ?>
 
   <section id="home-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
@@ -144,8 +121,6 @@ $show_imo = IGV_get_option('_igv_show_imo');
   </section>
 
   <?php
-    get_template_part('partials/home-signups');
-
     get_template_part('partials/support-section');
   ?>
 

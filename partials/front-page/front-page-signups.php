@@ -11,12 +11,7 @@
 
     $cols = 24 / $number_of_signups;
 ?>
-<section id="home-signups" class="container margin-bottom-large mobile-margin-bottom-basic">
-  <div class="row">
-     <div class="col col24 margin-bottom-small">
-      <h4>Signups</h4>
-    </div>
-  </div>
+<section id="front-page-signups" class="container margin-bottom-basic">
   <div class="row">
     <?php
       $i = 0;
@@ -28,21 +23,19 @@
         $image_id = isset($signups[$i]['image_id']) ? $signups[$i]['image_id'] : false;
     ?>
     <div class="col col<?php echo $cols;?>">
-      <a href="<?php echo $link; ?>" target="_blank" rel="nofollow">
-        <h5 class="margin-bottom-tiny"><?php echo $title; ?></h5>
-        <?php
-          if ($image_id) {
-            echo wp_get_attachment_image($image_id, 'col' . $cols);
-          }
-        ?>
-        <div class="signup-copy">
-          <?php echo apply_filters('the_content', $copy); ?>
+      <a class="front-page-signup" href="<?php echo $link; ?>" target="_blank" rel="nofollow">
+        <div class="front-page-signup__image">
+            <?php
+              if ($image_id) {
+                echo wp_get_attachment_image($image_id, 'col4-square');
+              }
+            ?>
         </div>
-        <button class="button"><?php if (!empty($signup_text)) {
-          echo $signup_text;
-        } else {
-          echo 'Sign up here';
-        }?></button>
+
+        <div class="front-page-signup__text">
+            <h5><?php echo $title; ?></h5>
+            <?php echo apply_filters('the_content', $copy); ?>
+        </div>
       </a>
     </div>
     <?php
