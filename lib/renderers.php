@@ -43,6 +43,42 @@ function render_home_focus($focus, $classes) {
  <?php
 }
 
+function render_front_page_video_block($video_category_slug, $excluded_category_slug = false) {
+  $category = get_term_by('slug', $video_category_slug, 'category');
+
+  if ($category) {
+    $category_link = get_category_link($category->term_id);
+?>
+<div class="row">
+  <div class="col col24 margin-bottom-small">
+    <h4><a href="<?php echo $category_link; ?>"><?php echo $category->name; ?></a></h4>
+  </div>
+</div>
+
+<div class="row">
+  <?php
+    $args = array(
+      'posts_per_page' => 4,
+      'cat' => $category->term_id,
+    );
+
+    if ($excluded_category_slug) {
+      $excluded_category = get_term_by('slug', $excluded_category_slug, 'category');
+
+      if ($excluded_category) {
+        $args['category__not_in'] = array($excluded_category->term_id);
+      }
+    }
+
+    $latest_video = new WP_Query($args);
+
+    render_video_query($latest_video);
+  ?>
+</div>
+<?php
+  }
+}
+
 function render_video_query($query) {
   global $post;
 

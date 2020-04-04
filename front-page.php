@@ -18,81 +18,34 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
 <!-- main content -->
 <main id="main-content">
-<?php
-  if ($home_radio) {
-    get_template_part('partials/radio-player');
-  }
+  <?php
+    if ($home_radio) { // refactor/check this
+      get_template_part('partials/radio-player');
+    }
 
-  get_template_part('partials/front-page/front-page-signups');
+    get_template_part('partials/front-page/front-page-signups');
   ?>
 
-  <section id="home-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+  <?php
+    /*
+      getting the data here
+      - 2 selected featured articles. fallback to most recent if not selected
+      - 5 most recent articles excluding the 2 featured
+      - most recent burner
+      - most recent novarafm
+      - selected sub featured article. if none most recent analysis article excluding existing 7 requested articles
+      - most recent tysky
+    */
+  ?>
+
+  <?php
+    get_template_part('partials/support-section');
+  ?>
+
+  <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
-      $category_id = get_cat_ID('Articles');
-      $category_link = get_category_link( $category_id );
-    ?>
+      // *** EXCLUDE THE BURNER
 
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
-      </div>
-    </div>
-
-    <div class="row margin-bottom-small mobile-margin-bottom-none">
-      <?php
-        $latest_articles = new WP_Query(array(
-          'posts_per_page' => 7,
-          'category_name' => 'Articles'
-        ));
-
-        if ($latest_articles->have_posts()) {
-          $i = 0;
-          while ($latest_articles->have_posts()) {
-            $latest_articles->the_post();
-
-            if ($i === 0) {
-              get_template_part('partials/post-layouts/post-col12');
-            } else {
-              get_template_part('partials/post-layouts/home-articles-post-col6');
-            }
-
-            if ($i === 2) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
-            }
-
-            $i++;
-          }
-        }
-      ?>
-    </div>
-  </section>
-
-  <section id="home-video-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $category_id = get_cat_ID('Video');
-      $category_link = get_category_link( $category_id );
-    ?>
-
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
-      </div>
-    </div>
-
-    <div class="row">
-      <?php
-        $latest_video = new WP_Query(array(
-          'posts_per_page' => 4,
-          'category_name' => 'Video'
-        ));
-
-        render_video_query($latest_video);
-      ?>
-    </div>
-  </section>
-
-  <section id="home-fm-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
-    <?php
       $category_id = get_cat_ID('Audio');
       $category_link = get_category_link( $category_id );
     ?>
@@ -106,7 +59,7 @@ $show_imo = IGV_get_option('_igv_show_imo');
     <div class="row">
       <?php
         $latest_fm = new WP_Query(array(
-          'posts_per_page' => 4,
+          'posts_per_page' => 8,
           'category_name' => 'Audio'
         ));
 
@@ -120,46 +73,67 @@ $show_imo = IGV_get_option('_igv_show_imo');
     </div>
   </section>
 
-  <?php
-    get_template_part('partials/support-section');
-  ?>
+<!-- Tyksy Sour video block -->
 
-  <?php
-    if ($focus && !$focus_at_top) {
-      render_home_focus($focus, 'margin-top-large margin-bottom-large mobile-margin-bottom-basic');
-    }
-  ?>
-
-<?php
-  if ($show_imo) {
-?>
-  <section id="home-imo-posts" class="container margin-bottom-large mobile-margin-bottom-basic">
+  <section id="front-page-tysky-sour-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
-      $category_id = get_cat_ID('imobastani');
+      $video_category_slug = 'tyskysour-video';
+
+      render_front_page_video_block($video_category_slug);
+    ?>
+  </section>
+
+  <section id="front-page-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <?php
+      // *** EXCLUDE ALREADY SHOWN ABOVE
+
+      $category_id = get_cat_ID('Articles');
       $category_link = get_category_link( $category_id );
     ?>
 
     <div class="row">
       <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">#IMOBastani</a></h4>
+        <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
       <?php
-        $latest_imo = new WP_Query(array(
-          'posts_per_page' => 4,
-          'category_name' => 'imobastani'
+        $latest_articles = new WP_Query(array(
+          'posts_per_page' => 8,
+          'category_name' => 'Articles'
         ));
 
-        render_video_query($latest_imo);
+        if ($latest_articles->have_posts()) {
+          $i = 0;
+          while ($latest_articles->have_posts()) {
+            $latest_articles->the_post();
+
+            get_template_part('partials/post-layouts/home-articles-post-col6');
+
+            if ($i === 3) {
+              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+            }
+
+            $i++;
+          }
+        }
       ?>
     </div>
   </section>
-<?php
-  }
-?>
 
+  <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <?php
+      $video_category_slug = 'video';
+      $excluded_category_slug = 'tyskysour-video';
+
+      render_front_page_video_block($video_category_slug, $excluded_category_slug);
+    ?>
+  </section>
+
+  <?php
+    get_template_part('partials/support-section');
+  ?>
 
 <!-- end main-content -->
 </main>
