@@ -44,10 +44,10 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
   <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
-      // *** EXCLUDE THE BURNER
+      $audio_category = get_term_by('slug', 'audio', 'category');
+      $burner_category = get_term_by('slug', 'the-burner', 'category');
 
-      $category_id = get_cat_ID('Audio');
-      $category_link = get_category_link( $category_id );
+      $category_link = get_category_link( $audio_category->term_id );
     ?>
 
     <div class="row">
@@ -58,14 +58,15 @@ $show_imo = IGV_get_option('_igv_show_imo');
 
     <div class="row">
       <?php
-        $latest_fm = new WP_Query(array(
+        $latest_audio = new WP_Query(array(
           'posts_per_page' => 8,
-          'category_name' => 'Audio'
+          'cat' => $audio_category->term_id,
+          'category__not_in' => array($burner_category->term_id)
         ));
 
-        if ($latest_fm->have_posts()) {
-          while ($latest_fm->have_posts()) {
-            $latest_fm->the_post();
+        if ($latest_audio->have_posts()) {
+          while ($latest_audio->have_posts()) {
+            $latest_audio->the_post();
             get_template_part('partials/post-layouts/post-col6');
           }
         }
