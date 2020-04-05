@@ -1,5 +1,5 @@
 <?php
-  $signups = IGV_get_option('home_signups');
+  $signups = NM_get_option('nm_front_page_links_bar', 'nm_front_page_links_bar_options');
 
   if (!empty($signups)) {
     $number_of_signups = count($signups);
