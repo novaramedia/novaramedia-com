@@ -1,19 +1,9 @@
 <?php
 get_header();
 
-$show_special = IGV_get_option('_igv_show_special');
-
-$home_radio = IGV_get_option('_igv_home_radio');
+$home_radio = NM_get_option('nm_front_page_home_radio_boolean');
 
 $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
-
-$home_featured = IGV_get_option('_igv_front_feature');
-
-$focus = IGV_get_option('_igv_home_focus');
-$focus_at_top = IGV_get_option('_igv_home_focus_at_top');
-
-$show_imo = IGV_get_option('_igv_show_imo');
-
 ?>
 
 <!-- main content -->
@@ -24,19 +14,175 @@ $show_imo = IGV_get_option('_igv_show_imo');
     }
 
     get_template_part('partials/front-page/front-page-signups');
+
+    // **************
+    // ABOVE THE FOLD
+    // **************
+
+    // *******************
+    // get the 2 selected featured articles. fallback to most recent if not selected
+
+    // setup basic args to get 2 article post ids
+    $featured_args = array(
+      'category_name' => 'articles',
+      'posts_per_page' => 2,
+      'fields' => 'ids',
+    );
+
+    // get fallback most recent posts
+    $featured_fallback = new WP_Query($featured_args);
+
+    // set fallback ids in array
+    $featured_articles_ids = $featured_fallback->posts;
+
+    // get set featured articles values
+    $featured_main = NM_get_option('nm_front_page_main_featured_articles');
+
+    if ($featured_main) {
+      // if set parse ids and query for article ids
+      $featured_args['post__in'] = explode(', ', $featured_main);
+      $featured_articles = new WP_Query($featured_args);
+
+      // if featured articles exist put them in front of the fallback ids
+      if ($featured_articles->have_posts()) {
+        $featured_articles_ids = array_merge($featured_articles->posts, $featured_articles_ids);
+      }
+    }
+
+    // trim array to leave only 2 ids left and get full posts
+    $featured_articles_ids = array_slice($featured_articles_ids, 0, 2);
+
+    $featured_display = new WP_Query(array(
+      'post__in' => $featured_articles_ids,
+    ));
+
+    // *******************
+    // get 5 most recent articles excluding the 2 featured
+
+    $recent_articles = new WP_Query(array(
+      'category_name' => 'articles',
+      'posts_per_page' => 5,
+      'post__not_in' => $featured_articles_ids
+    ));
+
+    function nm_filter_query_ids($post) {
+      return $post->ID;
+    }
+
+    // map the query return to get the IDs for other queries
+    $recent_articles_ids = array_map('nm_filter_query_ids', $recent_articles->posts);
+
+    // *******************
+    // most recent burner
+
+    $recent_burner = new WP_Query(array(
+      'category_name' => 'the-burner',
+      'posts_per_page' => 1,
+    ));
+
+    // *******************
+    // most recent novarafm
+
+    $recent_novara_fm = new WP_Query(array(
+      'category_name' => 'novarafm',
+      'posts_per_page' => 1,
+    ));
+
+    // *******************
+    // selected sub featured article. if none most recent analysis article excluding existing 7 requested articles
+
+    $sub_featured_args = array(
+      'posts_per_page' => 1
+    );
+
+    $featured_sub = NM_get_option('nm_front_page_sub_featured_article');
+
+    if ($featured_sub) {
+      // if sub featured is set get it
+      $sub_featured_args['post__in'] = explode(', ', $featured_sub);
+
+      $sub_featured = new WP_Query($sub_featured_args);
+    } else {
+      // get fallback most recent analysis post that isn't already shown
+      $sub_featured_args['category_name'] = 'analysis';
+      $sub_featured_args['post__not_in'] = array_merge($featured_articles_ids, $recent_articles_ids);
+
+      $sub_featured = new WP_Query($sub_featured_args);
+    }
+
+    // *******************
+    // most recent tysky
+
+    $recent_tysky = new WP_Query(array(
+      'category_name' => 'tyskysour-video',
+      'posts_per_page' => 1,
+    ));
   ?>
 
-  <?php
-    /*
-      getting the data here
-      - 2 selected featured articles. fallback to most recent if not selected
-      - 5 most recent articles excluding the 2 featured
-      - most recent burner
-      - most recent novarafm
-      - selected sub featured article. if none most recent analysis article excluding existing 7 requested articles
-      - most recent tysky
-    */
-  ?>
+  <section id="front-page-above-the-fold" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <div class="row">
+      <div class="col col6">
+      <?php
+        // render 5 recent articles
+        if ($recent_articles->have_posts()) {
+          while ($recent_articles->have_posts()) {
+            $recent_articles->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      </div>
+      <div class="col col12">
+      <?php
+        // render 2 featured articles
+        if ($featured_display->have_posts()) {
+          while ($featured_display->have_posts()) {
+            $featured_display->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      </div>
+      <div class="col col6">
+      <?php
+        // render recent burner
+        if ($recent_burner->have_posts()) {
+          while ($recent_burner->have_posts()) {
+            $recent_burner->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      <?php
+        // render recent #novarafm
+        if ($recent_novara_fm->have_posts()) {
+          while ($recent_novara_fm->have_posts()) {
+            $recent_novara_fm->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      <?php
+        // render sub featured or analysis article
+        if ($sub_featured->have_posts()) {
+          while ($sub_featured->have_posts()) {
+            $sub_featured->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      <?php
+        // render recent tysky sour
+        if ($recent_tysky->have_posts()) {
+          while ($recent_tysky->have_posts()) {
+            $recent_tysky->the_post();
+            get_template_part('partials/post-layouts/front-page-featured-main');
+          }
+        }
+      ?>
+      </div>
+    </div>
+  </section>
 
   <?php
     get_template_part('partials/support-section');

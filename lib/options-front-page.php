@@ -60,14 +60,24 @@ function nm_register_front_page_options_metabox() {
 
 	$main_options->add_field( array(
 		'name'    => 'Main featured articles',
-		'desc'    => '...',
+		'desc'    => 'Select the articles here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown and only the chronological first 2 of the selected posts will be shown.',
 		'id'      => $prefix . 'front_page_main_featured_articles',
 		'type'    => 'post_search_text',
 		'post_type'   => 'post',
     // Default is 'checkbox', used in the modal view to select the post type
     // 'select_type' => 'radio',
     // Will replace any selection with selection from modal. Default is 'add'
-    // 'select_behavior' => 'replace',
+    'select_behavior' => 'replace',
+	) );
+
+	$main_options->add_field( array(
+		'name'    => 'Sub featured article',
+		'desc'    => 'Select the article shown in the sub feature section on the homepage. If not selected the most recent Analysis type post will be shown.',
+		'id'      => $prefix . 'front_page_sub_featured_article',
+		'type'    => 'post_search_text',
+		'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
 	) );
 
 	/**
