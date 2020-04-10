@@ -130,6 +130,13 @@ function igv_cmb_metaboxes() {
     'type' => 'text_url',
   ) );
 
+  $audio_metabox->add_field( array(
+    'name' => __( 'Transcript', 'cmb' ),
+    'desc' => __( '...', 'cmb' ),
+    'id'   => $prefix . 'transcript',
+    'type' => 'wysiwyg',
+  ) );
+
   // TV
 
   $video_metabox = new_cmb2_box( array (
