@@ -212,7 +212,7 @@ Site.Support = {
 
     _this.$progressBar = $('#progress-bar');
 
-    if (_this.$progressBar) {
+    if (_this.$progressBar.length) {
       _this.initProgressBar();
     }
   },
