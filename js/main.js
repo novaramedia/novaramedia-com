@@ -23,6 +23,7 @@ Site.Utilities = {
 
     _this.bind();
     _this.fixWidows();
+    _this.displayTimeSince();
     _this.checkGDPRApproval();
   },
 
@@ -54,6 +55,18 @@ Site.Utilities = {
       var string = $(this).html();
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
+    });
+  },
+
+  displayTimeSince: function() {
+    $('.js-time-since').each(function() {
+      var $element = $(this);
+      var timestamp = $element.data('timestamp');
+      var m = moment(timestamp);
+
+      if (m.isAfter(moment().subtract(5, 'hours'))) {
+        $element.text('| ' + m.fromNow());
+      }
     });
   },
 

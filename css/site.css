@@ -1208,7 +1208,7 @@ th {
 }
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.001em;
 }
 body {
@@ -1693,17 +1693,26 @@ img {
   position: relative;
   height: 100%;
 }
-#featured-post {
-  position: relative;
+.front-page-signup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
-#featured-post-title-holder {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-  padding: 80px;
-  font-size: 3.330015792890114rem;
+.front-page-signup__image {
+  width: 27%;
+  padding-right: 1.5rem;
+  max-width: 100px;
+}
+.front-page-signup__text {
+  width: 73%;
+}
+.front-page-above-the-fold__column .col {
+  margin-left: 0;
+  margin-right: 0;
 }
 .post-col12-image {
   position: relative;
@@ -1854,7 +1863,7 @@ img {
     width: 1090px;
   }
   html {
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 0.001em;
   }
   body {
@@ -2435,6 +2444,12 @@ img {
     padding: 60px;
     font-size: 3.330015792890114rem;
   }
+  .front-page-signup__image {
+    display: none;
+  }
+  .front-page-signup__text {
+    width: 100%;
+  }
   .post-col12-text {
     padding: 12px;
   }
@@ -2801,6 +2816,9 @@ img {
   #featured-post-title-holder {
     padding: 60px;
     font-size: 3.330015792890114rem;
+  }
+  #front-page-signups {
+    display: none;
   }
   .post-col12-text {
     padding: 12px;

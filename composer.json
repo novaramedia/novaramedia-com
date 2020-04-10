@@ -7,8 +7,8 @@
     }
   ],
   "require": {
-    "webdevstudios/cmb2": "*",
-    "webdevstudios/cmb2-post-search-field": "*",
-    "fightbulc/moment": "*"
+    "fightbulc/moment": "*",
+    "cmb2/cmb2": "^2.7",
+    "webdevstudios/cmb2-post-search-field": "^0.2.5"
   }
 }

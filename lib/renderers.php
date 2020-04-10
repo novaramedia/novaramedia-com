@@ -43,6 +43,42 @@ function render_home_focus($focus, $classes) {
  <?php
 }
 
+function render_front_page_video_block($video_category_slug, $excluded_category_slug = false) {
+  $category = get_term_by('slug', $video_category_slug, 'category');
+
+  if ($category) {
+    $category_link = get_category_link($category->term_id);
+?>
+<div class="row">
+  <div class="col col24 margin-bottom-small">
+    <h4><a href="<?php echo $category_link; ?>"><?php echo $category->name; ?></a></h4>
+  </div>
+</div>
+
+<div class="row">
+  <?php
+    $args = array(
+      'posts_per_page' => 4,
+      'cat' => $category->term_id,
+    );
+
+    if ($excluded_category_slug) {
+      $excluded_category = get_term_by('slug', $excluded_category_slug, 'category');
+
+      if ($excluded_category) {
+        $args['category__not_in'] = array($excluded_category->term_id);
+      }
+    }
+
+    $latest_video = new WP_Query($args);
+
+    render_video_query($latest_video);
+  ?>
+</div>
+<?php
+  }
+}
+
 function render_video_query($query) {
   global $post;
 
@@ -89,15 +125,11 @@ function render_post_title($postId) {
   $title = get_the_title($postId);
 
   if ($is_article) {
-    $categories = get_the_category($postId);
+    $sub_category = get_the_sub_category($postId);
 
-    $child_categories = array_filter($categories, 'only_child_category_filter');
-    $child_categories = array_values($child_categories);
-
-    if (isset($child_categories[0])) {
-      $title = '<span class="font-small-caps">' . $child_categories[0]->name . ':</span> ' . $title;
+    if ($sub_category) {
+      $title = '<span class="font-small-caps">' . $sub_category . ':</span> ' . $title;
     }
-
   }
 
   echo $title;
