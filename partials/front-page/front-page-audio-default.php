@@ -3,7 +3,7 @@
 ?>
 <a href="<?php the_permalink() ?>">
   <article <?php post_class('col col6 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
-    <?php the_post_thumbnail('col6-1to4', array('class' => 'margin-bottom-micro only-desktop')); ?>
+    <?php the_post_thumbnail('col6-16to9', array('class' => 'margin-bottom-micro only-desktop')); ?>
     <?php the_post_thumbnail('mobile-21to9', array('class' => 'only-mobile')); ?>
 
     <?php

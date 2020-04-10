@@ -132,9 +132,15 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         <?php
           // render 5 recent articles
           if ($recent_articles->have_posts()) {
+            $i = 0;
             while ($recent_articles->have_posts()) {
+              $i++;
               $recent_articles->the_post();
-              get_template_part('partials/front-page/front-page-article-default');
+              if ($i <= 3) {
+                get_template_part('partials/front-page/front-page-article-default');
+              } else {
+                get_template_part('partials/front-page/front-page-article-slim');
+              }
             }
           }
         ?>
@@ -218,9 +224,16 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         ));
 
         if ($latest_audio->have_posts()) {
+          $i = 0;
           while ($latest_audio->have_posts()) {
             $latest_audio->the_post();
-            get_template_part('partials/post-layouts/post-col6');
+            get_template_part('partials/front-page/front-page-audio-default');
+
+            if ($i === 3) {
+              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+            }
+
+            $i++;
           }
         }
       ?>
