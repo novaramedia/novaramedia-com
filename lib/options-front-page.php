@@ -20,7 +20,7 @@ function nm_register_front_page_options_metabox() {
 		 */
 
 		'option_key'      => 'nm_front_page_options', // The option key and admin menu page slug.
-		'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
+		'icon_url'        => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
 		// 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
 		// 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
 		'capability'      => 'edit_posts', // Cap required to view options-page.
