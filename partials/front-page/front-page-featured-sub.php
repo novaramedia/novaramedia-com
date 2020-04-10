@@ -16,11 +16,11 @@
     <?php
       }
     ?>
-    <h3 class="js-fix-widows"><?php the_title(); ?></h3>
+    <h5 class="font-larger js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if (!empty($meta['_cmb_author'])) {
     ?>
-      <h5>by <?php echo $meta['_cmb_author'][0]; ?></h5>
+      <h6>by <?php echo $meta['_cmb_author'][0]; ?></h6>
     <?php
       }
 

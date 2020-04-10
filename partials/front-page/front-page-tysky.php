@@ -16,6 +16,6 @@
     <?php
       }
     ?>
-    <h3 class="js-fix-widows"><?php the_title(); ?></h3>
+    <h5 class="js-fix-widows"><?php the_title(); ?></h5>
   </article>
 </a>

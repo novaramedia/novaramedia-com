@@ -4,7 +4,7 @@
 ?>
 
 <a href="<?php the_permalink() ?>">
-  <article <?php post_class('margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
+  <article <?php post_class('front-page-featured margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
     <?php the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-micro')); ?>
 
     <?php
@@ -12,12 +12,12 @@
 
       if ($sub_category) {
     ?>
-    <h4 class="font-small-caps"><?php echo $sub_category; ?> <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></h4>
+    <h4 class="front-page-featured__meta font-small-caps"><?php echo $sub_category; ?> <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></h4>
     <?php
       }
     ?>
-    <h3 class="js-fix-widows"><?php the_title(); ?></h3>
-    <?php if (!empty($meta['_cmb_author'])) { ?><h5>by <?php echo $meta['_cmb_author'][0]; ?></h5><?php } ?>
+    <h3 class="front-page-featured__title js-fix-widows"><?php the_title(); ?></h3>
+    <?php if (!empty($meta['_cmb_author'])) { ?><h6 class="front-page-featured__author font-larger">by <?php echo $meta['_cmb_author'][0]; ?></h6><?php } ?>
 
     <?php
       if (!empty($meta['_cmb_short_desc'])) {
