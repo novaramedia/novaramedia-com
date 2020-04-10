@@ -10,8 +10,6 @@ if( function_exists( 'add_image_size' ) ) {
 
   add_image_size( 'mobile-16to9', 460, 259, true );
   add_image_size( 'mobile-21to9', 460, 197, true );
-  add_image_size( 'mobile-5to4', 460, 368, true );
-  add_image_size( 'mobile-5to4-retina', 920, 736, true );
 
   add_image_size( 'col4', 204, 9999, false );
   add_image_size( 'col4-square', 204, 204, true );
