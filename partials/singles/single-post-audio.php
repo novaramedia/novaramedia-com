@@ -1,6 +1,7 @@
 <?php
   $meta = get_post_meta($post->ID);
   $resources = get_post_meta($post->ID, '_cmb_resources', true);
+  $transcript = get_post_meta($post->ID, '_cmb_transcript', true);
 
   $category_id = get_cat_ID('Audio');
   $category_link = get_category_link( $category_id );
@@ -59,7 +60,7 @@
   }
 ?>
 
-<div class="row margin-bottom-large">
+<div class="row <?php if (empty($transcript)) { echo 'margin-bottom-large'; } else { echo 'margin-bottom-basic'; } ?>">
   <div class="col col24">
     <?php
       if (!empty($meta['_cmb_sc'][0])) {
@@ -80,3 +81,22 @@
     ?>
   </div>
 </div>
+
+<?php
+  if (!empty($transcript)) {
+?>
+<div class="row margin-bottom-large">
+  <div class="col col24 margin-bottom-small">
+    <h4>Transcript</h4>
+  </div>
+
+<!--   <div class="col col4"></div> -->
+  <div class="col col16">
+    <div class="text-copy margin-bottom-basic">
+      <?php echo apply_filters('the_content', $transcript); ?>
+    </div>
+  </div>
+</div>
+<?php
+  }
+?>

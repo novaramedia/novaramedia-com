@@ -91,20 +91,6 @@ function igv_cmb_metaboxes() {
   ) );
 
   $meta_boxes->add_field( array(
-    'name'    => __( 'Tweet copy', 'cmb' ),
-    'desc'    => __( 'This is the copy used for the auto scheduled Tweet. Ideal Tweets are ~100 characters (optional)', 'cmb' ),
-    'id'      => $prefix . 'tweet',
-    'type'    => 'textarea_small',
-  ) );
-
-  $meta_boxes->add_field( array(
-    'name'    => __( 'Facebook post copy', 'cmb' ),
-    'desc'    => __( 'This is the copy used for the auto scheduled Facebook post.', 'cmb' ),
-    'id'      => $prefix . 'facebook_post',
-    'type'    => 'textarea_small',
-  ) );
-
-  $meta_boxes->add_field( array(
     'name' => __( 'Misc download', 'cmb' ),
     'desc' => __( 'Upload an file or enter a URL.', 'cmb' ),
     'id'   => $prefix . 'dl',
@@ -142,6 +128,13 @@ function igv_cmb_metaboxes() {
     'desc' => __( 'Enter a URL.', 'cmb' ),
     'id'   => $prefix . 'dl_mp3',
     'type' => 'text_url',
+  ) );
+
+  $audio_metabox->add_field( array(
+    'name' => __( 'Transcript', 'cmb' ),
+    'desc' => __( '...', 'cmb' ),
+    'id'   => $prefix . 'transcript',
+    'type' => 'wysiwyg',
   ) );
 
   // TV

@@ -262,7 +262,8 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       <?php
         $latest_articles = new WP_Query(array(
           'posts_per_page' => 8,
-          'category_name' => 'Articles'
+          'category_name' => 'Articles',
+          'post__not_in' => array_merge($featured_articles_ids, $recent_articles_ids)
         ));
 
         if ($latest_articles->have_posts()) {
