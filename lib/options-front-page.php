@@ -45,13 +45,6 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   $main_options->add_field( array(
-    'name' => 'Show radio player when FM show is live',
-    'desc' => 'According to the programmed schedule choose if to show the radio player when #NovaraFM is live on ResonanceFM',
-    'id'   => $prefix . 'front_page_home_radio_boolean',
-    'type' => 'checkbox',
-  ) );
-
-  $main_options->add_field( array(
     'name'    => 'Articles Curation',
     'desc'    => 'This is where articles can be curated to be displayed out of chronology',
     'id'      => $prefix . 'front_page_settings_articles_title',

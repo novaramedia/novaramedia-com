@@ -1,18 +1,12 @@
 <?php
 get_header();
 
-$home_radio = NM_get_option('nm_front_page_home_radio_boolean');
-
 $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 ?>
 
 <!-- main content -->
 <main id="main-content">
   <?php
-    if ($home_radio) { // refactor/check this
-      get_template_part('partials/radio-player');
-    }
-
     get_template_part('partials/front-page/front-page-signups');
 
     // **************
