@@ -87,7 +87,7 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 15px
+$font-size-basic = 14px
 $font-size-larger = 1.3rem
 $font-size-smaller = .8rem
 $font-size-h3 = golden-ratio(1rem , 1)
@@ -639,17 +639,26 @@ img
 
 // FRONT PAGE
 
-#featured-post
-  position: relative
+// SIGNUPS
 
-#featured-post-title-holder
-  position: absolute
-  top: 0
-  height: 100%
-  width: 100%
-  z-index: 100
-  padding: $margin-large
-  font-size: golden-ratio(1rem , 2.5)
+.front-page-signup
+  display: flex
+  align-items: center
+
+.front-page-signup__image
+  width: 27%
+  padding-right: 1.5rem
+  max-width: 100px
+
+.front-page-signup__text
+  width: 73%
+
+// ABOVE THE FOLD
+
+.front-page-above-the-fold__column
+  .col
+    margin-left: 0
+    margin-right: 0
 
 // ******************************************************
 

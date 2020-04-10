@@ -1,6 +1,24 @@
 <?php
+// get and return the first sub category assigned to the post
+function get_the_sub_category($postId) {
+  $categories = get_the_category($postId);
+
+  $child_categories = array_filter($categories, 'only_child_category_filter');
+  $child_categories = array_values($child_categories);
+
+  if (isset($child_categories[0])) {
+    return $child_categories[0]->name;
+  } else {
+    return false;
+  }
+}
 
 // for array_filters
+
+// returns the id from a post object from a WP query
+function nm_filter_query_ids($post) {
+  return $post->ID;
+}
 
 // filters an array of post categories for just top level categories
 function only_top_level_category_filter($var) {

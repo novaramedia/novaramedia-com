@@ -6,14 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-  <link rel="dns-prefetch" href="//www.google-analytics.com"/>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <link rel="dns-prefetch" href="https://googletagmanager.com"/>
 
-  <?php get_template_part('partials/seo'); ?>
+  <?php get_template_part('partials/header/google-tag-manager'); ?>
+  <?php get_template_part('partials/header/seo'); ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 
-  <?php get_template_part('partials/favicon'); ?>
+  <?php get_template_part('partials/header/favicon'); ?>
 
   <?php if (is_singular() && pings_open(get_queried_object())) { ?>
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
