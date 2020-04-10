@@ -65,10 +65,6 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       'post__not_in' => $featured_articles_ids
     ));
 
-    function nm_filter_query_ids($post) {
-      return $post->ID;
-    }
-
     // map the query return to get the IDs for other queries
     $recent_articles_ids = array_map('nm_filter_query_ids', $recent_articles->posts);
 
@@ -121,35 +117,35 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 
   <section id="front-page-above-the-fold" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
-      <div class="col col6">
+      <div class="front-page-above-the-fold__column col col6">
       <?php
         // render 5 recent articles
         if ($recent_articles->have_posts()) {
           while ($recent_articles->have_posts()) {
             $recent_articles->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-article-default');
           }
         }
       ?>
       </div>
-      <div class="col col12">
+      <div class="front-page-above-the-fold__column col col12">
       <?php
         // render 2 featured articles
         if ($featured_display->have_posts()) {
           while ($featured_display->have_posts()) {
             $featured_display->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-featured-main');
           }
         }
       ?>
       </div>
-      <div class="col col6">
+      <div class="front-page-above-the-fold__column col col6">
       <?php
         // render recent burner
         if ($recent_burner->have_posts()) {
           while ($recent_burner->have_posts()) {
             $recent_burner->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-audio-slim');
           }
         }
       ?>
@@ -158,7 +154,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         if ($recent_novara_fm->have_posts()) {
           while ($recent_novara_fm->have_posts()) {
             $recent_novara_fm->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-audio-slim');
           }
         }
       ?>
@@ -167,7 +163,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         if ($sub_featured->have_posts()) {
           while ($sub_featured->have_posts()) {
             $sub_featured->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-featured-sub');
           }
         }
       ?>
@@ -176,7 +172,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         if ($recent_tysky->have_posts()) {
           while ($recent_tysky->have_posts()) {
             $recent_tysky->the_post();
-            get_template_part('partials/post-layouts/front-page-featured-main');
+            get_template_part('partials/front-page/front-page-tysky');
           }
         }
       ?>
@@ -256,7 +252,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
           while ($latest_articles->have_posts()) {
             $latest_articles->the_post();
 
-            get_template_part('partials/post-layouts/home-articles-post-col6');
+            get_template_part('partials/front-page/front-page-article-default');
 
             if ($i === 3) {
               echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';

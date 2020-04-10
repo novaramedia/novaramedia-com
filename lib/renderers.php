@@ -125,15 +125,11 @@ function render_post_title($postId) {
   $title = get_the_title($postId);
 
   if ($is_article) {
-    $categories = get_the_category($postId);
+    $sub_category = get_the_sub_category($postId);
 
-    $child_categories = array_filter($categories, 'only_child_category_filter');
-    $child_categories = array_values($child_categories);
-
-    if (isset($child_categories[0])) {
-      $title = '<span class="font-small-caps">' . $child_categories[0]->name . ':</span> ' . $title;
+    if ($sub_category) {
+      $title = '<span class="font-small-caps">' . $sub_category . ':</span> ' . $title;
     }
-
   }
 
   echo $title;
