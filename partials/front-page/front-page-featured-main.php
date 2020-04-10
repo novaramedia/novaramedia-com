@@ -1,5 +1,6 @@
 <?php
   $meta = get_post_meta($post->ID);
+  $timestamp = get_post_time('c');
 ?>
 
 <a href="<?php the_permalink() ?>">
@@ -11,7 +12,7 @@
 
       if ($sub_category) {
     ?>
-    <h4 class="font-small-caps"><?php echo $sub_category; ?></h4>
+    <h4 class="font-small-caps"><?php echo $sub_category; ?> <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></h4>
     <?php
       }
     ?>
