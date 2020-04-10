@@ -175,49 +175,10 @@ Site.Search = {
   init: function() {
     var _this = this;
 
-    _this.form = $('#search-input');
-    _this.tags = $('.suggested-tag');
-    _this.tagsList = $('#tag-suggestions');
-
-    _this.bind();
-
      if ($('body').hasClass('error404')) {
       _this.fourzerofour();
     }
 
-  },
-
-  bind: function() {
-    var _this = this;
-
-    _this.form.on('change keyup input paste', $.debounce( 500, function() {
-
-      // Get Input Value
-      var term = _this.slugify($(this).val());
-
-      // Get matching tags
-      var $suggested = _this.tags.siblings('[data-tag*="' + term + '"]');
-
-      // Hide all tags
-      _this.tags.hide();
-
-      // If matching tags, show them
-      if( $suggested.length !== 0 ) {
-        $suggested.show();
-        _this.tagsList.show();
-      } else {
-        _this.tagsList.hide();
-      }
-    }));
-  },
-
-  slugify: function(text) {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')           // Replace spaces with -
-      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-      .replace(/^-+/, '')             // Trim - from start of text
-      .replace(/-+$/, '');
   },
 
   fourzerofour: function() {
