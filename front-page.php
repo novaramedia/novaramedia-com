@@ -117,65 +117,76 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 
   <section id="front-page-above-the-fold" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <div class="row">
-      <div class="front-page-above-the-fold__column col col6">
-      <?php
-        // render 5 recent articles
-        if ($recent_articles->have_posts()) {
-          while ($recent_articles->have_posts()) {
-            $recent_articles->the_post();
-            get_template_part('partials/front-page/front-page-article-default');
+      <div class="front-page-above-the-fold__column col only-mobile">
+        <?php
+          // render 2 featured articles
+          if ($featured_display->have_posts()) {
+            while ($featured_display->have_posts()) {
+              $featured_display->the_post();
+              get_template_part('partials/front-page/front-page-featured-main');
+            }
           }
-        }
-      ?>
-      </div>
-      <div class="front-page-above-the-fold__column col col12">
-      <?php
-        // render 2 featured articles
-        if ($featured_display->have_posts()) {
-          while ($featured_display->have_posts()) {
-            $featured_display->the_post();
-            get_template_part('partials/front-page/front-page-featured-main');
-          }
-        }
-      ?>
+        ?>
       </div>
       <div class="front-page-above-the-fold__column col col6">
-      <?php
-        // render recent burner
-        if ($recent_burner->have_posts()) {
-          while ($recent_burner->have_posts()) {
-            $recent_burner->the_post();
-            get_template_part('partials/front-page/front-page-audio-slim');
+        <?php
+          // render 5 recent articles
+          if ($recent_articles->have_posts()) {
+            while ($recent_articles->have_posts()) {
+              $recent_articles->the_post();
+              get_template_part('partials/front-page/front-page-article-default');
+            }
           }
-        }
-      ?>
-      <?php
-        // render recent #novarafm
-        if ($recent_novara_fm->have_posts()) {
-          while ($recent_novara_fm->have_posts()) {
-            $recent_novara_fm->the_post();
-            get_template_part('partials/front-page/front-page-audio-slim');
+        ?>
+      </div>
+      <div class="front-page-above-the-fold__column col col12 only-desktop">
+        <?php
+          // render 2 featured articles
+          if ($featured_display->have_posts()) {
+            while ($featured_display->have_posts()) {
+              $featured_display->the_post();
+              get_template_part('partials/front-page/front-page-featured-main');
+            }
           }
-        }
-      ?>
-      <?php
-        // render sub featured or analysis article
-        if ($sub_featured->have_posts()) {
-          while ($sub_featured->have_posts()) {
-            $sub_featured->the_post();
-            get_template_part('partials/front-page/front-page-featured-sub');
+        ?>
+      </div>
+      <div class="front-page-above-the-fold__column col col6">
+        <?php
+          // render recent burner
+          if ($recent_burner->have_posts()) {
+            while ($recent_burner->have_posts()) {
+              $recent_burner->the_post();
+              get_template_part('partials/front-page/front-page-audio-slim');
+            }
           }
-        }
-      ?>
-      <?php
-        // render recent tysky sour
-        if ($recent_tysky->have_posts()) {
-          while ($recent_tysky->have_posts()) {
-            $recent_tysky->the_post();
-            get_template_part('partials/front-page/front-page-tysky');
+        ?>
+        <?php
+          // render recent #novarafm
+          if ($recent_novara_fm->have_posts()) {
+            while ($recent_novara_fm->have_posts()) {
+              $recent_novara_fm->the_post();
+              get_template_part('partials/front-page/front-page-audio-slim');
+            }
           }
-        }
-      ?>
+        ?>
+        <?php
+          // render sub featured or analysis article
+          if ($sub_featured->have_posts()) {
+            while ($sub_featured->have_posts()) {
+              $sub_featured->the_post();
+              get_template_part('partials/front-page/front-page-featured-sub');
+            }
+          }
+        ?>
+        <?php
+          // render recent tysky sour
+          if ($recent_tysky->have_posts()) {
+            while ($recent_tysky->have_posts()) {
+              $recent_tysky->the_post();
+              get_template_part('partials/front-page/front-page-tysky');
+            }
+          }
+        ?>
       </div>
     </div>
   </section>

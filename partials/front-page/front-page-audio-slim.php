@@ -3,7 +3,7 @@
 ?>
 <a href="<?php the_permalink() ?>">
   <article <?php post_class('col col6 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
-    <?php the_post_thumbnail('col6-1to4', array('class' => 'margin-bottom-micro')); ?>
+    <?php the_post_thumbnail('col6-1to4', array('class' => 'margin-bottom-micro only-desktop')); ?>
 
     <?php
       $sub_category = get_the_sub_category($post->ID);

@@ -1721,6 +1721,10 @@ img {
 .front-page-signup__text {
   width: 73%;
 }
+.front-page-above-the-fold__column .col {
+  margin-left: 0;
+  margin-right: 0;
+}
 .post-col12-image {
   position: relative;
 }
@@ -3159,9 +3163,6 @@ img {
   #featured-post-title {
     color: #000;
     text-shadow: none;
-  }
-  #front-page-signups {
-    display: none;
   }
   #home-articles-posts .col,
   #home-fm-posts .col,
