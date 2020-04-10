@@ -1693,18 +1693,6 @@ img {
   position: relative;
   height: 100%;
 }
-#featured-post {
-  position: relative;
-}
-#featured-post-title-holder {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-  padding: 80px;
-  font-size: 3.330015792890114rem;
-}
 .front-page-signup {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1717,6 +1705,7 @@ img {
 .front-page-signup__image {
   width: 27%;
   padding-right: 1.5rem;
+  max-width: 100px;
 }
 .front-page-signup__text {
   width: 73%;

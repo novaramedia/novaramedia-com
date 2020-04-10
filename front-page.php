@@ -115,7 +115,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     ));
   ?>
 
-  <section id="front-page-above-the-fold" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+  <section id="front-page-above-the-fold" class="container margin-top-basic margin-bottom-mid mobile-margin-bottom-basic">
     <div class="row">
       <div class="front-page-above-the-fold__column col only-mobile">
         <?php
