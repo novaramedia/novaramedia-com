@@ -122,8 +122,9 @@ Site.Header = {
     _this.headerHeight = $('#header-main-wrapper').height();
     _this.$headerSinglePostTitle = $('#header-page-title');
 
-    $(window).scroll(function() {
+    _this.setSinglePostTitleWidth();
 
+    $(window).scroll(function() {
       if ($(window).scrollTop() > _this.headerHeight) {
 
         _this.$headerSinglePostTitle.css('opacity', 1);
@@ -133,9 +134,21 @@ Site.Header = {
         _this.$headerSinglePostTitle.css('opacity', 0);
 
       }
-
     });
 
+    $(window).resize(function() {
+      _this.setSinglePostTitleWidth();
+    });
+
+  },
+
+  setSinglePostTitleWidth: function() {
+    var _this = this;
+
+    totalWidth = $('.col18').innerWidth();
+    navsWidth = $('#header-navs').innerWidth();
+
+    _this.$headerSinglePostTitle.css('max-width', (totalWidth - navsWidth - 10) + 'px');
   }
 };
 

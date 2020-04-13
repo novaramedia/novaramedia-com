@@ -32,7 +32,7 @@
         <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
             <div class="col col18">
-              <ul class="u-inline-list u-inline-block">
+              <ul id="header-navs" class="u-inline-list u-inline-block">
                 <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
                 <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
               </ul>

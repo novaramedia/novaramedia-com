@@ -30,11 +30,15 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $featured_articles_ids = $featured_fallback->posts;
 
     // get set featured articles values
-    $featured_main = NM_get_option('nm_front_page_main_featured_articles');
+    $featured_main_1 = NM_get_option('nm_front_page_main_featured_article_1');
+    $featured_main_2 = NM_get_option('nm_front_page_main_featured_article_2');
 
-    if ($featured_main) {
+    if ($featured_main_1 || $featured_main_2) {
+      $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
+
       // if set parse ids and query for article ids
-      $featured_args['post__in'] = explode(', ', $featured_main);
+      $featured_args['post__in'] = $featured_main_ids;
+      $featured_args['orderby'] = 'post__in';
       $featured_articles = new WP_Query($featured_args);
 
       // if featured articles exist put them in front of the fallback ids
@@ -48,6 +52,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 
     $featured_display = new WP_Query(array(
       'post__in' => $featured_articles_ids,
+      'orderby'=> 'post__in'
     ));
 
     // *******************
@@ -109,7 +114,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     ));
   ?>
 
-  <section id="front-page-above-the-fold" class="container margin-top-basic margin-bottom-mid mobile-margin-bottom-basic">
+  <section id="front-page-above-the-fold" class="container margin-bottom-mid mobile-margin-bottom-basic">
     <div class="row">
       <div class="front-page-above-the-fold__column col only-mobile">
         <?php

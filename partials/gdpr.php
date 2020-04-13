@@ -6,13 +6,13 @@
   }
 ?>
 <div id="gdpr">
-  <div class="container margin-top-basic">
+  <div class="container margin-top-small">
     <div class="row">
-      <div class="col col24 margin-bottom-small font-color-white">
+      <div class="col col24 font-color-white">
         <?php echo apply_filters('the_content', $copy); ?>
       </div>
-      <div class="col col24 margin-bottom-basic">
-        <a id="gdpr-accept" class="gdpr-button button u-pointer">Accept</a>
+      <div class="col col24 margin-bottom-small">
+        <a id="gdpr-accept" class="gdpr-button button button-small u-pointer">Accept</a>
       </div>
     </div>
   </div>

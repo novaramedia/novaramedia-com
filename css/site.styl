@@ -339,6 +339,8 @@ a
   padding: $margin-small
   text-align: center
   border: 2px solid $color-black-soft
+  &.button-small
+    padding: $margin-tiny
 
 // ******************************************************
 
@@ -502,6 +504,9 @@ img
   background-image: url('../img/dist/marble-dark-banner.jpg')
   background-size: cover
   background-position: center center
+
+#header-navs
+  vertical-align: middle
 
 .header-menu
   li
@@ -691,7 +696,8 @@ img
 #header-page-title
   opacity: 0
   transition: opacity $basic-animation-speed
-  margin-bottom: -1px
+  vertical-align: middle;
+  height: 23px
   max-width: ( 16 * $col ) + ( 15 * $gutter )
 
 #single-resources-section

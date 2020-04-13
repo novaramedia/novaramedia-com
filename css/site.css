@@ -1435,6 +1435,9 @@ a {
   text-align: center;
   border: 2px solid #0e0e0e;
 }
+.button.button-small {
+  padding: 8px;
+}
 html {
   background-color: #fdfdfd;
   color: #0e0e0e;
@@ -1574,6 +1577,9 @@ img {
   background-image: url("../img/dist/marble-dark-banner.jpg");
   background-size: cover;
   background-position: center center;
+}
+#header-navs {
+  vertical-align: middle;
 }
 .header-menu li {
   padding-right: 8px;
@@ -1742,7 +1748,8 @@ img {
   opacity: 0;
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  margin-bottom: -1px;
+  vertical-align: middle;
+  height: 23px;
   max-width: 864px;
 }
 #single-resources-section {
@@ -2750,7 +2757,7 @@ img {
     padding-bottom: 60px;
   }
   #main-content {
-    padding-top: 81px;
+    padding-top: 64px;
     min-height: 75vh;
   }
   .header-menu li {
@@ -2827,6 +2834,7 @@ img {
     font-size: 1.3rem;
   }
   #header-page-title {
+    height: 22px;
     max-width: 70%;
   }
   #single-article-photo-caption {
@@ -3208,6 +3216,7 @@ img {
     font-weight: normal;
   }
   #header-page-title {
+    height: 18px;
     max-width: 70%;
   }
   #single-article-photo-caption {
