@@ -1435,6 +1435,9 @@ a {
   text-align: center;
   border: 2px solid #0e0e0e;
 }
+.button.button-small {
+  padding: 8px;
+}
 html {
   background-color: #fdfdfd;
   color: #0e0e0e;
