@@ -53,12 +53,24 @@ function nm_register_front_page_options_metabox() {
 
   $main_options->add_field( array(
     'name'    => 'Main featured articles',
-    'desc'    => 'Select the articles here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown and only the chronological first 2 of the selected posts will be shown.',
-    'id'      => $prefix . 'front_page_main_featured_articles',
+    'desc'    => 'Select the articles here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown.',
+    'id'      => $prefix . 'front_page_main_featured_article_1',
     'type'    => 'post_search_text',
     'post_type'   => 'post',
     // Default is 'checkbox', used in the modal view to select the post type
-    // 'select_type' => 'radio',
+    'select_type' => 'radio',
+    // Will replace any selection with selection from modal. Default is 'add'
+    'select_behavior' => 'replace',
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Main featured article 2',
+    'desc'    => 'Select the article here to be shown as the second main featured articles on the homepage. Only Articles category posts will be shown.',
+    'id'      => $prefix . 'front_page_main_featured_article_2',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    // Default is 'checkbox', used in the modal view to select the post type
+    'select_type' => 'radio',
     // Will replace any selection with selection from modal. Default is 'add'
     'select_behavior' => 'replace',
   ) );
