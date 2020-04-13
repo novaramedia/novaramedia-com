@@ -1578,6 +1578,9 @@ img {
   background-size: cover;
   background-position: center center;
 }
+#header-navs {
+  vertical-align: middle;
+}
 .header-menu li {
   padding-right: 8px;
 }
@@ -1745,7 +1748,8 @@ img {
   opacity: 0;
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  margin-bottom: -1px;
+  vertical-align: middle;
+  height: 23px;
   max-width: 864px;
 }
 #single-resources-section {
@@ -2830,6 +2834,7 @@ img {
     font-size: 1.3rem;
   }
   #header-page-title {
+    height: 22px;
     max-width: 70%;
   }
   #single-article-photo-caption {
@@ -3211,6 +3216,7 @@ img {
     font-weight: normal;
   }
   #header-page-title {
+    height: 18px;
     max-width: 70%;
   }
   #single-article-photo-caption {
