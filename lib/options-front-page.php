@@ -53,7 +53,7 @@ function nm_register_front_page_options_metabox() {
 
   $main_options->add_field( array(
     'name'    => 'Main featured articles',
-    'desc'    => 'Select the articles here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown.',
+    'desc'    => 'Select the article here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown.',
     'id'      => $prefix . 'front_page_main_featured_article_1',
     'type'    => 'post_search_text',
     'post_type'   => 'post',
