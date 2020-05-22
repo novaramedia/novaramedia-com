@@ -87,9 +87,32 @@ if( have_posts() ) {
     </div>
 <?php
         get_template_part('partials/support-section');
-
       }
 ?>
+    <div class="container">
+      <div class="row margin-top-basic margin-bottom-basic">
+        <div class="col col24">
+          <h4>Other Donation Methods</h4>
+        </div>
+      </div>
+      <div class="row margin-top-mid margin-bottom-basic">
+        <div class="col col24">
+          <div class="text-copy text-copy-max-width">
+            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have PayPal or UK Direct Debit via GoCardless if you prefer.</p>
+            <h3>PayPal</h3>
+            <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="nofollow">Click here to donate to us via PayPal.</a> You can set a recurring donation or just give a one-off for any amount.</p>
+            <h3>GoCardless (UK Direct Debit)</h3>
+            <p>With GoCardless you can setup and manage a monthly Direct Debit. If you would like to donate a specific amount per month please email us at: <a href="mailto:donations@novaramedia.com?subject=GoCardless custom amount">donations@novaramedia.com</a> and we can set that up for you</p>
+            <ul>
+              <li><a href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="nofollow">£5 per month</a></li>
+              <li><a href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="nofollow">£10 per month</a></li>
+              <li><a href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="nofollow">£20 per month</a></li>
+              <li><a href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="nofollow">£50 per month</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   <!-- end post -->
   </article>
 <?php
