@@ -17,45 +17,44 @@
             </ul>
           </div>
           <div class="col col6 mobile-margin-bottom-basic">
-            <ul>
             <?php
-              // Outputs only the top level categories
-              $categories = get_categories(array(
-                'orderby' => 'name',
-                'parent'  => 0
-              ));
-              foreach ($categories as $category) {
-                echo '<li><a href="' . get_category_link($category) . '">' . $category->name . '</a></li>';
-              }
+              wp_nav_menu(
+                array(
+                  'theme_location' => 'footer-2',
+                  'fallback_cb' => false,
+                )
+              );
             ?>
-              <li><a href="<?php echo get_post_type_archive_link('event'); ?>">Events</a></li>
-            </ul>
           </div>
           <div class="col col6">
-            <ul>
-              <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
-              <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
-              <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">YouTube</a></li>
-              <li><a href="https://www.instagram.com/novaramedia/" target="_blank">Instagram</a></li>
-            </ul>
+            <?php
+              function footerMenuFallback() {
+            ?><ul>
+                <li><a href="https://twitter.com/novaramedia" target="_blank" rel="noopener">Twitter</a></li>
+                <li><a href="https://www.facebook.com/novaramedia/" target="_blank" rel="noopener">Facebook</a></li>
+                <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="noopener">YouTube</a></li>
+                <li><a href="https://www.instagram.com/novaramedia/" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://t.me/novaramedia" target="_blank" rel="noopener">Telegram</a></li>
+              </ul>
+            <?php }
+
+              wp_nav_menu(
+                array(
+                  'theme_location' => 'footer-3',
+                  'fallback_cb' => 'footerMenuFallback',
+                )
+              );
+            ?>
           </div>
           <div class="col col6">
-            <ul>
             <?php
-              // Outputs only the child categories of all the top level categories
-              foreach ($categories as $category) {
-                $children = get_categories(array(
-                  'orderby' => 'name',
-                  'parent'  => $category->term_id
-                ));
-                if ($children) {
-                  foreach($children as $child) {
-                    echo '<li><a href="' . get_category_link($child) . '">' . $child->name . '</a></li>';
-                  }
-                }
-              }
+              wp_nav_menu(
+                array(
+                  'theme_location' => 'footer-4',
+                  'fallback_cb' => false,
+                )
+              );
             ?>
-            </ul>
           </div>
         </div>
       </div>
