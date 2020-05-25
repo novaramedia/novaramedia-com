@@ -36,6 +36,12 @@
     "gulp-watch": "~4.3.5",
     "jshint": "^2.9.4",
     "jshint-stylish": "~2.1.0",
-    "kouto-swiss": "~0.12.0"
+    "kouto-swiss": "~0.12.0",
+    "stringstream": "0.0.6",
+    "concat-with-sourcemaps": "1.1.0",
+    "deap": "1.0.1",
+    "fstream": "1.0.12",
+    "marked": "0.3.19",
+    "sshpk": "1.16.1"
   }
 }
