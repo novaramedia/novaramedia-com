@@ -1,7 +1,16 @@
 <?php
 
-// Custom filters (like pre_get_posts etc)
-
+// Register nav menus
+function nm_register_menus() {
+  register_nav_menus(
+    array(
+      'footer-2' => __( 'Footer (2nd)' ),
+      'footer-3' => __( 'Footer (3rd)' ),
+      'footer-4' => __( 'Footer (4th)' ),
+     )
+   );
+ }
+add_action( 'init', 'nm_register_menus' );
 
 // Add classes to oembed elements
 function my_embed_oembed_html($html, $url, $attr, $post_id) {

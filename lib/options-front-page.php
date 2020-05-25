@@ -94,6 +94,7 @@ function nm_register_front_page_options_metabox() {
     'object_types' => array( 'options-page' ),
     'option_key'   => 'nm_front_page_links_bar_options',
     'parent_slug'  => 'nm_front_page_options',
+    'capability'      => 'edit_posts',
   ) );
 
   $secondary_options->add_field( array(
