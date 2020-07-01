@@ -68,18 +68,23 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $recent_articles_ids = array_map('nm_filter_query_ids', $recent_articles->posts);
 
     // *******************
-    // most recent burner
+    // get featured audio shows
+    $featured_audio_1 = NM_get_option('nm_front_page_featured_audio_1');
+    $featured_audio_2 = NM_get_option('nm_front_page_featured_audio_2');
 
-    $recent_burner = new WP_Query(array(
-      'category_name' => 'the-burner',
+    // *******************
+    // most recent top audio show
+
+    $recent_audio_1 = new WP_Query(array(
+      'category_name' => $featured_audio_1,
       'posts_per_page' => 1,
     ));
 
     // *******************
-    // most recent novarafm
+    // most recent second audio show
 
-    $recent_novara_fm = new WP_Query(array(
-      'category_name' => 'novarafm',
+    $recent_audio_2 = new WP_Query(array(
+      'category_name' => $featured_audio_2,
       'posts_per_page' => 1,
     ));
 
@@ -157,19 +162,19 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       </div>
       <div class="front-page-above-the-fold__column col col6">
         <?php
-          // render recent burner
-          if ($recent_burner->have_posts()) {
-            while ($recent_burner->have_posts()) {
-              $recent_burner->the_post();
+          // render recent top audio
+          if ($recent_audio_1->have_posts()) {
+            while ($recent_audio_1->have_posts()) {
+              $recent_audio_1->the_post();
               get_template_part('partials/front-page/front-page-audio-slim');
             }
           }
         ?>
         <?php
-          // render recent #novarafm
-          if ($recent_novara_fm->have_posts()) {
-            while ($recent_novara_fm->have_posts()) {
-              $recent_novara_fm->the_post();
+          // render recent second audio
+          if ($recent_audio_2->have_posts()) {
+            while ($recent_audio_2->have_posts()) {
+              $recent_audio_2->the_post();
               get_template_part('partials/front-page/front-page-audio-slim');
             }
           }

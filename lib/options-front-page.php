@@ -1,6 +1,31 @@
 <?php
 
 /**
+ * Returns a slug indexed array of all the Audio sub categories for use in select metaboxes
+ */
+function get_audio_categories_metabox_array() {
+  $audio_category = get_category_by_slug('audio');
+
+  if (!$audio_category) {
+    return;
+  }
+
+  $terms = get_terms(array(
+    'taxonomy' => 'category'
+  ), array(
+    'child_of' => $audio_category->term_id
+  )); // get all child categories of Audio
+
+  $return = [];
+
+  foreach($terms as $term) {
+    $return[$term->slug] = $term->name; // created slug indexed array of categories names
+  }
+
+  return $return;
+}
+
+/**
  * Hook in and register a metabox to handle a theme options page and adds a menu item.
  */
 function nm_register_front_page_options_metabox() {
@@ -83,6 +108,31 @@ function nm_register_front_page_options_metabox() {
     'post_type'   => 'post',
     'select_type' => 'radio',
     'select_behavior' => 'replace',
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Audio Curation',
+    'desc'    => 'This is where audio can be curated ',
+    'id'      => $prefix . 'front_page_settings_audio_title',
+    'type'    => 'title',
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'First audio category',
+    'desc'    => 'Select the audio category to take top position in the homepage audio feature',
+    'id'      => $prefix . 'front_page_featured_audio_1',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'options'          => get_audio_categories_metabox_array()
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Second audio category',
+    'desc'    => 'Select the audio category to take second position in the homepage audio feature',
+    'id'      => $prefix . 'front_page_featured_audio_2',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'options'          => get_audio_categories_metabox_array()
   ) );
 
   /**
