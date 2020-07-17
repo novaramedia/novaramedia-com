@@ -13,6 +13,10 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     // ABOVE THE FOLD
     // **************
 
+    $featured_main_1 = NM_get_option('nm_front_page_main_featured_article_1');
+    $featured_main_2 = NM_get_option('nm_front_page_main_featured_article_2');
+    $featured_sub = NM_get_option('nm_front_page_sub_featured_article');
+
     // *******************
     // get the 2 selected featured articles. fallback to most recent if not selected
 
@@ -30,9 +34,6 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $featured_articles_ids = $featured_fallback->posts;
 
     // get set featured articles values
-    $featured_main_1 = NM_get_option('nm_front_page_main_featured_article_1');
-    $featured_main_2 = NM_get_option('nm_front_page_main_featured_article_2');
-
     if ($featured_main_1 || $featured_main_2) {
       $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
 
@@ -58,10 +59,16 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     // *******************
     // get 5 most recent articles excluding the 2 featured
 
+    $exluded_articles_ids = $featured_articles_ids;
+
+    if ($featured_sub) {
+      $exluded_articles_ids = array_merge($featured_articles_ids, array($featured_sub));
+    }
+
     $recent_articles = new WP_Query(array(
       'category_name' => 'articles',
       'posts_per_page' => 5,
-      'post__not_in' => $featured_articles_ids
+      'post__not_in' => $exluded_articles_ids
     ));
 
     // map the query return to get the IDs for other queries
@@ -94,8 +101,6 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $sub_featured_args = array(
       'posts_per_page' => 1
     );
-
-    $featured_sub = NM_get_option('nm_front_page_sub_featured_article');
 
     if ($featured_sub) {
       // if sub featured is set get it
