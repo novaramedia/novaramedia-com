@@ -61,7 +61,7 @@
         echo '<p>Share URL: <span class="u-pointer js-select">' . $meta['bitly_url'][0] . '</span></p> ';
       }
       ?>
-      <p id="single-articles-publication-date">Published <?php the_time('jS F Y'); ?></p>
+      <p id="single-articles-publication-date">Published <?php the_time('j F Y'); ?></p>
     </div>
   </div>
 </div>

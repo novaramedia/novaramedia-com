@@ -40,7 +40,7 @@
         echo '</a>';
       }
     ?>
-    <h6 class="margin-top-micro"><?php the_time('jS F Y'); ?></h6>
+    <h6 class="margin-top-micro"><?php the_time('j F Y'); ?></h6>
   </div>
   <div class="col col9 margin-top-micro font-smaller">
     <ul class="inline-action-list">
