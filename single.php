@@ -14,10 +14,17 @@ if( have_posts() ) {
     the_post();
 
     $categories = get_the_category();
-
     $topLevelCategory = array_filter($categories, 'only_top_level_category_filter');
-    $topLevelCategory = array_values($topLevelCategory);
-    $topLevelCategory = $topLevelCategory[0]->slug;
+
+    if (!$topLevelCategory) { // if there is no top level category set to post
+      if ($categories[0]->parent) { // then check the first category set
+        $topLevelCategory = get_category($categories[0]->parent); // and if there is a parent
+        $topLevelCategory = $topLevelCategory->slug; // get the slug
+      }
+    } else {
+      $topLevelCategory = array_values($topLevelCategory); // if there is a top level category
+      $topLevelCategory = $topLevelCategory[0]->slug; // get the slug from it
+    }
 
     if ($topLevelCategory === 'articles') {
 
@@ -31,14 +38,7 @@ if( have_posts() ) {
 
       get_template_part('partials/singles/single-post-video');
 
-    } else {
-?>
-      <div class="row">
-        <article class="col col24">Error with post. Someone did something wrong :/</article>
-      </div>
-<?php
     }
-
   }
 } else {
 ?>
