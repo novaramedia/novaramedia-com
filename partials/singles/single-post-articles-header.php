@@ -19,25 +19,25 @@
   <div class="col col3"></div>
   <div class="col col9 mobile-margin-bottom-tiny">
     <h3>by <?php
-      if (!empty($meta['_cmb_author_twitter'])) {
-        echo '<a id="single-articles-author" target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
-      }
-
       if (!empty($meta['_cmb_author'])) {
         echo $meta['_cmb_author'][0];
       } else {
         echo 'Novara Reporters';
       }
-
-      if (!empty($meta['_cmb_author_twitter'])) {
-        echo '</a>';
-      }
     ?></h3>
     <?php
-      if (!empty($meta['_cmb_author_twitter'])) {
-        echo '<a target="_blank" href="https://twitter.com/' . $meta['_cmb_author_twitter'][0] . '">';
-        echo '<h5>@' . ltrim($meta['_cmb_author_twitter'][0], '@') . '</h5>';
-        echo '</a>';
+      $author_twitters = get_post_meta($post->ID, '_cmb_author_twitter', true);
+
+      if (!empty($author_twitters)) {
+        if (!is_array($author_twitters)) {
+          $author_twitters = array($author_twitters);
+        }
+
+        foreach($author_twitters as $handle) {
+          echo '<a target="_blank" href="https://twitter.com/' . $handle . '">';
+          echo '<h5>@' . ltrim($handle, '@') . '</h5>';
+          echo '</a>';
+        }
       }
     ?>
     <h6 class="margin-top-micro"><?php the_time('j F Y'); ?></h6>

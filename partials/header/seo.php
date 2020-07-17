@@ -44,7 +44,13 @@ if (is_home()) {
   $twitterAuthor = get_post_meta($post->ID, '_cmb_author_twitter', true);
 
   if ($twitterAuthor) {
-    echo '<meta name="twitter:creator" value="' . $twitterAuthor . '">';
+    if (!is_array($twitterAuthor)) { // if this isn't an array then make into array
+      $twitterAuthor = array($twitterAuthor);
+    }
+
+    if (count($twitterAuthor) === 1) { // if there is only one author then set the twitter creator og tag. tag doesn't support multiple authors
+      echo '<meta name="twitter:creator" value="' . $twitterAuthor . '">';
+    }
   }
 
   $description = get_post_meta($post->ID, '_cmb_short_desc', true);
