@@ -1,21 +1,21 @@
 {
-  "name": "interglobalvision_wp_boil",
-  "version": "0.0.1",
-  "description": "wp_boil -------",
+  "name": "novaramedia-com",
+  "version": "3.1.4",
+  "description": "no future, utopia now",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/interglobalvision/interglobalvision_wp_boil.git"
+    "url": "git://github.com/novaramedia/novaramedia-com.git"
   },
   "author": "interglobalvision",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/interglobalvision/interglobalvision_wp_boil/issues"
+    "url": "https://github.com/novaramedia/novaramedia-com/issues"
   },
-  "homepage": "https://github.com/interglobalvision/interglobalvision_wp_boil",
+  "homepage": "https://github.com/novaramedia/novaramedia-com",
   "devDependencies": {
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "3.1.0",
@@ -36,6 +36,12 @@
     "gulp-watch": "~4.3.5",
     "jshint": "^2.9.4",
     "jshint-stylish": "~2.1.0",
-    "kouto-swiss": "~0.12.0"
+    "kouto-swiss": "~0.12.0",
+    "stringstream": "0.0.6",
+    "concat-with-sourcemaps": "1.1.0",
+    "deap": "1.0.1",
+    "fstream": "1.0.12",
+    "marked": "0.3.19",
+    "sshpk": "1.16.1"
   }
 }

@@ -22,7 +22,7 @@ if( have_posts() ) {
       <article class="col col10">
         <header class="margin-bottom-small">
           <h5><?php the_title(); ?></h5>
-          <h5><?php the_time('jS F Y'); ?></h5>
+          <h5><?php the_time('j F Y'); ?></h5>
         </header>
         <?php the_content(); ?>
       </article>

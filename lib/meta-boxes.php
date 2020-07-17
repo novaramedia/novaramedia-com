@@ -183,9 +183,10 @@ function igv_cmb_metaboxes() {
 
   $articles_metabox->add_field( array(
     'name' => __( 'Author Twitter', 'cmb' ),
-    'desc' => __( 'Optional. No @', 'cmb' ),
+    'desc' => __( 'Optional. No @. For multiple authors add extra rows', 'cmb' ),
     'id'   => $prefix . 'author_twitter',
     'type' => 'text',
+    'repeatable' => true,
   ) );
 
   // Resources

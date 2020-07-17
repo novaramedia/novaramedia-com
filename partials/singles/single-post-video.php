@@ -31,7 +31,7 @@
 <div class="row margin-bottom-basic font-smaller">
   <div class="col col12">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('jS F Y'); ?></li>
+      <li>Published <?php the_time('j F Y'); ?></li>
       <?php
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';

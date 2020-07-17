@@ -43,7 +43,7 @@ if( have_posts() ) {
       </div>
       <div class="row margin-bottom-basic">
         <div class="col col24 text-align-center">
-          <h1><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?>: <?php the_title(); ?></h1>
+          <h1><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
         </div>
       </div>
       <div class="row margin-bottom-basic">
