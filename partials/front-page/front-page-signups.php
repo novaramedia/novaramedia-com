@@ -11,7 +11,7 @@
 
     $cols = 24 / $number_of_signups;
 ?>
-<section id="front-page-signups" class="container margin-bottom-basic">
+<section id="front-page-signups" class="container margin-bottom-small">
   <div class="row">
     <?php
       $i = 0;
@@ -32,7 +32,7 @@
             ?>
         </div>
 
-        <div class="front-page-signup__text">
+        <div class="front-page-signup__text font-smaller font-tracking-medium">
             <h5><?php echo $title; ?></h5>
             <?php echo apply_filters('the_content', $copy); ?>
         </div>

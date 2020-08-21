@@ -1268,6 +1268,9 @@ b {
 .font-leading-wider {
   line-height: 1.55;
 }
+.font-tracking-medium {
+  letter-spacing: 0.0075rem;
+}
 .font-tracking-wider {
   letter-spacing: 0.025em;
 }
@@ -1709,12 +1712,18 @@ img {
       align-items: center;
 }
 .front-page-signup__image {
-  width: 27%;
-  padding-right: 1.5rem;
-  max-width: 100px;
+  width: 25%;
+  padding-right: 1.25rem;
+  max-width: 80px;
+}
+.front-page-signup__image img {
+  display: block;
 }
 .front-page-signup__text {
   width: 73%;
+}
+.front-page-signup__text p {
+  margin-bottom: 0;
 }
 .front-page-above-the-fold__column .col {
   margin-left: 0;

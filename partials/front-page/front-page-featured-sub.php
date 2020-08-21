@@ -20,7 +20,7 @@
     <?php
       if (!empty($meta['_cmb_author'])) {
     ?>
-      <h6>by <?php echo $meta['_cmb_author'][0]; ?></h6>
+      <h6 class="margin-top-micro">by <?php echo $meta['_cmb_author'][0]; ?></h6>
     <?php
       }
 
