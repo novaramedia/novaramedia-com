@@ -49,7 +49,7 @@
     <h4>Related</h4>
   </div>
 </div>
-<div class="row margin-bottom-basic">
+<div class="related-posts row margin-bottom-basic">
 <?php
     $i = 0;
     while ($related->have_posts()) {

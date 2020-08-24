@@ -47,7 +47,7 @@
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" data-target="subscription" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
@@ -61,7 +61,7 @@
         </div>
         <div class="col col9">
           <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" /> £££ <input class="support-form-submit" type="submit" value="Go" />
+            <input class="support-form-slider" type="range" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" data-target="oneoff" /> £££ <input class="support-form-submit" type="submit" value="Go" />
           </div>
         </div>
       </form>
