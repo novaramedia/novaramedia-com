@@ -49,7 +49,7 @@ if (is_home()) {
     }
 
     if (count($twitterAuthor) === 1) { // if there is only one author then set the twitter creator og tag. tag doesn't support multiple authors
-      echo '<meta name="twitter:creator" value="' . $twitterAuthor . '">';
+      echo '<meta name="twitter:creator" value="' . $twitterAuthor[0] . '">';
     }
   }
 
