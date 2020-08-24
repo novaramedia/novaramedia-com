@@ -37,7 +37,7 @@ gulp.task('javascript', function() {
   .pipe(uglify())
   .on('error', errorNotify)
   .pipe(rename({suffix: '.min'}))
-  .pipe(sourcemaps.write('/'))
+  .pipe(sourcemaps.write())
   .on('error', errorNotify)
   .pipe(gulp.dest('js'))
   .pipe(notify({ message: 'Javascript task complete' }));
