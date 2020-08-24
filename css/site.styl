@@ -99,6 +99,7 @@ $font-leading-tighter = 1.15
 $font-leading-larger = 1.55
 
 $font-tracking-basic = 0.001em
+$font-tracking-medium = 0.0075rem
 $font-tracking-wider = 0.025em
 
 $color-black-soft = rgb(14, 14, 14)
@@ -183,6 +184,9 @@ p
 
 .font-leading-wider
   line-height: $font-leading-larger
+
+.font-tracking-medium
+  letter-spacing: $font-tracking-medium
 
 .font-tracking-wider
   letter-spacing: $font-tracking-wider
@@ -497,7 +501,7 @@ img
   z-index: 1000
 
 #main-content
-  padding-top: 57px + $margin-basic
+  padding-top: 57px + $margin-small
   min-height: 75vh
 
 #header-main-wrapper
@@ -528,6 +532,10 @@ img
 
 #header-sub
   display: none
+  a
+    font-size: 1.5rem
+    line-height: 1.6
+    padding-right: .66rem
 
 // SEARCH
 
@@ -651,12 +659,16 @@ img
   align-items: center
 
 .front-page-signup__image
-  width: 27%
-  padding-right: 1.5rem
-  max-width: 100px
+  width: 25%
+  padding-right: 1.25rem
+  max-width: 80px
+  img
+    display: block
 
 .front-page-signup__text
   width: 73%
+  p
+    margin-bottom: 0
 
 // ABOVE THE FOLD
 

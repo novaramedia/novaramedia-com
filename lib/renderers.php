@@ -102,12 +102,19 @@ function render_video_query($query) {
     if ($query->have_posts()) {
       while($query->have_posts()) {
         $query->the_post();
+        $meta = get_post_meta($post->ID);
     ?>
     <a href="<?php the_permalink(); ?>">
-     <div class="video-related-video margin-bottom-small">
-       <?php the_post_thumbnail('col6-16to9'); ?>
-       <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
-     </div>
+      <div class="video-related-video margin-bottom-small">
+        <?php
+          if (!empty($meta['_cmb_alt_thumb_id'])) {
+            echo wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], 'col6-16to9');
+          } else {
+            the_post_thumbnail('col6-16to9');
+          }
+        ?>
+        <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+      </div>
    </a>
     <?php
       }

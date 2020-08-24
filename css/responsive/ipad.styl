@@ -255,9 +255,10 @@ p
   padding-top: 52px + $margin-small
   min-height: 75vh
 
-.header-menu
+.header-menu.u-inline-list
   li
-    padding-right: $margin-tiny
+    display: block
+    padding-right: 0
 
 #menu-logo
   margin-right: 10px
@@ -276,12 +277,12 @@ p
 // OPEN MENU
 
 #header-sub
-  font-size: 2rem
-  line-height: 1.6
   max-height: 80vh
-  overflow-y: scroll
+  overflow-y: auto
   a
-    padding: 1rem
+    font-size: 2rem
+    padding: .33rem 1rem
+    display: block
 
 // SEARCH
 

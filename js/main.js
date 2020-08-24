@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, Site, Cookies */
+/* global $, Site, Cookies, dataLayer, Swiper, moment */
 
 Site = {
   init: function() {
@@ -9,6 +9,7 @@ Site = {
     _this.Header.init();
     _this.Search.init();
     _this.Support.init();
+    _this.Analytics.init();
 
     $(document).ready(function() {
       _this.Gallery.init();
@@ -273,6 +274,56 @@ Site.Support = {
   numberWithCommas: function(x) {
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+};
+
+Site.Analytics = {
+  init: function() {
+    var _this = this;
+
+    if (dataLayer) {
+      _this.bind();
+    }
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.support-form-slider').on('input', _this.debounce(function() {
+      dataLayer.push({
+        'event': 'sliderChanged',
+        'target': $(this).data('target'),
+        'amount': this.value,
+      });
+    }, 250));
+
+    Site.Header.$menuToggle.click(function() { // bind hamburger click
+      dataLayer.push({
+        'event': 'headerToggled'
+      });
+    });
+
+    $('.related-posts .post').click(function() {
+      dataLayer.push({
+        'event': 'relatedPostClicked'
+      });
+    });
+
+  },
+
+  debounce: function(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
   },
 };
 

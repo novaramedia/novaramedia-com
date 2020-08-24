@@ -63,41 +63,17 @@
       <div id="header-sub" class="background-gray">
         <div class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
-            <div class="col col6">
-              <ul class="header-menu u-inline-list">
+            <div class="col col24">
+              <ul class="header-menu u-inline-list font-tracking-medium">
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
-                <li><a href="<?php echo get_post_type_archive_link('event'); ?>">Events</a></li>
-              </ul>
-            </div>
-            <div class="col col6">
-              <ul class="header-menu u-inline-list">
-                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
+                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="https://shop.novaramedia.com">Shop</a></li>
-                <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
-                <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
+                <li><a href="https://payment.novaramedia.com/login">Log In</a></li>
               </ul>
             </div>
-
-            <div class="col col6">
-              <ul class="header-menu u-inline-list">
-                <li><a href="https://twitter.com/novaramedia" target="_blank">Twitter</a></li>
-                <li><a href="https://www.facebook.com/novaramedia/" target="_blank">Facebook</a></li>
-                <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">YouTube</a></li>
-                <li><a href="https://www.instagram.com/novaramedia/" target="_blank">Instagram</a></li>
-              </ul>
-            </div>
-
-            <div class="col col6">
-              <ul class="header-menu u-inline-list">
-                <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
-                <li><a href="itpc://feeds.feedburner.com/NovaraMediaPodcast">Subscribe in iTunes</a></li>
-                <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
-              </ul>
-            </div>
-
           </div>
         </div>
       </div>
