@@ -55,7 +55,7 @@ add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
 
 // add image to the RSS feeds
 // https://wordpress.org/plugins/add-featured-image-to-rss-feed/#developers
-function salzano_add_featured_image_to_feed( $content ) {
+function add_featured_image_to_feed( $content ) {
   global $post;
 
   if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ){
@@ -64,5 +64,19 @@ function salzano_add_featured_image_to_feed( $content ) {
   return $content;
 }
 
-add_filter( 'the_excerpt_rss', 'salzano_add_featured_image_to_feed', 1000, 1 );
-add_filter( 'the_content_feed', 'salzano_add_featured_image_to_feed', 1000, 1 );
+add_filter( 'the_excerpt_rss', 'add_featured_image_to_feed', 1000, 1 );
+add_filter( 'the_content_feed', 'add_featured_image_to_feed', 1000, 1 );
+
+function feed_author($name) { // return the value of the author meta field (this is just for feed readers as author tag is not used in the theme)
+  if (is_feed()) {
+    global $post;
+    $meta = get_post_meta($post->ID);
+
+    if (!empty($meta['_cmb_author'])) {
+      return $meta['_cmb_author'][0];
+    } else {
+      return 'Novara Media';
+    }
+  }
+}
+add_filter( 'the_author', 'feed_author' );
