@@ -1,11 +1,23 @@
 <?php
   $meta = get_post_meta($post->ID);
   $timestamp = get_post_time('c');
+
+
 ?>
 
 <a href="<?php the_permalink() ?>">
   <article <?php post_class('front-page-featured margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
-    <?php the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-micro')); ?>
+    <?php
+      if (!empty($meta['_cmb_utube'])) {
+    ?>
+      <div class="u-video-embed-container margin-bottom-tiny">
+        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>"></iframe>
+      </div>
+    <?php
+      } else {
+        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block'));
+      }
+    ?>
 
     <?php
       $sub_category = get_the_sub_category($post->ID);
