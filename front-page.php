@@ -18,51 +18,51 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     $featured_sub = NM_get_option('nm_front_page_sub_featured_article');
 
     // *******************
-    // get the 2 selected featured articles. fallback to most recent if not selected
+    // get the 2 selected featured posts. fallback to most recent articles if not selected
+    // note: some variable names refer to articles in the context of these posts. this was built first for articles but changed to all posts to support occational special video embeds on the homepage
 
-    // setup basic args to get 2 article post ids
+    // setup basic args
     $featured_args = array(
-      'category_name' => 'articles',
       'posts_per_page' => 2,
       'fields' => 'ids',
     );
 
-    // get fallback most recent posts
-    $featured_fallback = new WP_Query($featured_args);
+    // get fallback most recent article posts
+    $featured_fallback = new WP_Query(array_merge($featured_args, array('category_name' => 'articles')));
 
     // set fallback ids in array
-    $featured_articles_ids = $featured_fallback->posts;
+    $featured_posts_ids = $featured_fallback->posts;
 
-    // get set featured articles values
+    // get set featured post values
     if ($featured_main_1 || $featured_main_2) {
       $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
 
-      // if set parse ids and query for article ids
+      // if set parse ids and query for post ids
       $featured_args['post__in'] = $featured_main_ids;
       $featured_args['orderby'] = 'post__in';
-      $featured_articles = new WP_Query($featured_args);
+      $featured_posts = new WP_Query($featured_args);
 
-      // if featured articles exist put them in front of the fallback ids
-      if ($featured_articles->have_posts()) {
-        $featured_articles_ids = array_merge($featured_articles->posts, $featured_articles_ids);
+      // if featured post exist put them in front of the fallback ids
+      if ($featured_posts->have_posts()) {
+        $featured_posts_ids = array_merge($featured_posts->posts, $featured_posts_ids);
       }
     }
 
     // trim array to leave only 2 ids left and get full posts
-    $featured_articles_ids = array_slice($featured_articles_ids, 0, 2);
+    $featured_posts_ids = array_slice($featured_posts_ids, 0, 2);
 
     $featured_display = new WP_Query(array(
-      'post__in' => $featured_articles_ids,
+      'post__in' => $featured_posts_ids,
       'orderby'=> 'post__in'
     ));
 
     // *******************
     // get 5 most recent articles excluding the 2 featured
 
-    $exluded_articles_ids = $featured_articles_ids;
+    $exluded_articles_ids = $featured_posts_ids;
 
     if ($featured_sub) {
-      $exluded_articles_ids = array_merge($featured_articles_ids, array($featured_sub));
+      $exluded_articles_ids = array_merge($featured_posts_ids, array($featured_sub));
     }
 
     $recent_articles = new WP_Query(array(
@@ -110,7 +110,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     } else {
       // get fallback most recent analysis post that isn't already shown
       $sub_featured_args['category_name'] = 'analysis';
-      $sub_featured_args['post__not_in'] = array_merge($featured_articles_ids, $recent_articles_ids);
+      $sub_featured_args['post__not_in'] = array_merge($featured_posts_ids, $recent_articles_ids);
 
       $sub_featured = new WP_Query($sub_featured_args);
     }
@@ -278,7 +278,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         $latest_articles = new WP_Query(array(
           'posts_per_page' => 8,
           'category_name' => 'Articles',
-          'post__not_in' => array_merge($featured_articles_ids, $recent_articles_ids)
+          'post__not_in' => array_merge($featured_posts_ids, $recent_articles_ids)
         ));
 
         if ($latest_articles->have_posts()) {

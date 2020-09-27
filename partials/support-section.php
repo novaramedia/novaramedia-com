@@ -1,4 +1,8 @@
 <?php
+  $support_section_text = IGV_get_option('_igv_support_section_text');
+  $support_section_regular_donor_text = IGV_get_option('_igv_support_section_regular_donor_text');
+  $support_section_oneoff_donor_text = IGV_get_option('_igv_support_section_oneoff_donor_text');
+
   $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
 
@@ -26,13 +30,24 @@
 ?>
       </div>
     </div>
+    <?php
+      if ($support_section_text) {
+    ?>
+    <div class="row margin-bottom-tiny font-bold">
+      <div class="col col24">
+        <?php echo apply_filters('the_content', $support_section_text); ?>
+      </div>
+    </div>
+    <?php
+      }
+    ?>
 
     <div class="row margin-bottom-tiny font-bold">
       <div class="col col12">
-        <p>Become a subscriber and support Novara Media monthly:</p>
+        <p><?php if ($support_section_regular_donor_text) { echo $support_section_regular_donor_text; } ?></p>
       </div>
       <div class="col col12">
-        <p>Or you can give us a one-off donation:</p>
+        <p><?php if ($support_section_oneoff_donor_text) { echo $support_section_oneoff_donor_text; } ?></p>
       </div>
     </div>
 

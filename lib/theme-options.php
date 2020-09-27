@@ -110,10 +110,39 @@ class IGV_Admin {
       'type' => 'title',
     ) );
 
+    // FUNDING COPY OPTIONS
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Funding Copy', 'cmb2' ),
+      'id'   => $this->prefix . 'funding_title',
+      'type' => 'title',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Support section text', 'IGV' ),
+      'desc' => __( 'If set this will be the text shown in the red sitewide support section', 'IGV' ),
+      'id'   => $this->prefix . 'support_section_text',
+      'type' => 'textarea_small',
+    ) );
+
+    $options_metabox->add_field( array(
+      'name' => __( 'Regular donor text', 'IGV' ),
+      'id'   => $this->prefix . 'support_section_regular_donor_text',
+      'type' => 'text',
+      'default' => 'Become a regular donor and support Novara Media monthly:',
+    ) );
+
+      $options_metabox->add_field( array(
+      'name' => __( 'One off text', 'IGV' ),
+      'id'   => $this->prefix . 'support_section_oneoff_donor_text',
+      'type' => 'text',
+      'default' => 'Or you can give us a one-off donation:',
+    ) );
     // ANNOUNCEMENT OPTIONS
 
     $options_metabox->add_field( array(
       'name' => __( 'Announcement Options', 'cmb2' ),
+      'desc' => __( 'The announcement is a section that sits above the support section on single post views. It has large bold text and an optional image. It has a "find out more" link that can be an internal or external link', 'IGV' ),
       'id'   => $this->prefix . 'announcement_title',
       'type' => 'title',
     ) );
@@ -142,7 +171,7 @@ class IGV_Admin {
     $options_metabox->add_field( array(
       'name' => __( 'Text', 'IGV' ),
       'id'   => $this->prefix . 'announcement_text',
-      'type' => 'wysiwyg',
+      'type' => 'textarea_small',
     ) );
 
     $options_metabox->add_field( array(
