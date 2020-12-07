@@ -17,6 +17,7 @@ function get_audio_categories_metabox_array() {
   )); // get all child categories of Audio
 
   $return = [];
+  $return['none'] = 'None';
 
   foreach($terms as $term) {
     $return[$term->slug] = $term->name; // created slug indexed array of categories names

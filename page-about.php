@@ -11,99 +11,161 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
+          
+    $team_1 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-1', true);    
+    $team_2 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-2', true);
+    $team_3 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-3', true);    
+    $team_4 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-4', true);
+
+    $associates_1 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-1', true);
+    $associates_2 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-2', true);
+
+    $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
+    $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
 ?>
   <!-- main posts loop -->
   <article id="page" class="container margin-bottom-large">
-    <div class="row margin-bottom-basic">
+    <div class="row margin-bottom-small">
       <div class="col col24">
         <h4><?php the_title(); ?></h4>
       </div>
     </div>
-    <div class="row margin-bottom-mid">
+    
+    <div class="row margin-bottom-small">
       <div class="col col10 page-copy">
         <?php the_content(); ?>
       </div>
-      <div class="col col2"></div>
-      <div class="col col10 page-copy">
-        <?php if (!empty($meta['_cmb_page_extra'])) {
-          echo apply_filters('the_content', $meta['_cmb_page_extra'][0]);
-        } ?>
-      </div>
     </div>
-    <div class="row margin-bottom-basic">
+    
+    <div class="row margin-bottom-small">
       <div class="col col24">
-        <h5>Editorial Team</h5>
+        <h4>Team</h4>
       </div>
     </div>
-    <div class="row margin-bottom-mid mobile-margin-bottom-none">
-    <?php
-    $people = new WP_Query(array(
-      'post_type' => 'person',
-      'posts_per_page' => -1,
-      'order' => 'ASC'
-    ));
-    if ( $people->have_posts() ) {
-      $i = 0;
-      while( $people->have_posts() ) {
-        $people->the_post();
-
-        if ($i % 2 === 0 && $i !== 0) {
-          echo "</div>\n<div class=\"row margin-bottom-mid mobile-margin-bottom-none\">";
-        }
-        $person_meta = get_post_meta($post->ID);
-?>
-      <div class="col col4">
-        <?php the_post_thumbnail('col4', array('class' => 'only-desktop')); ?>
-        <?php the_post_thumbnail('mobile-16to9', array('class' => 'only-mobile')); ?>
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
+      <div class="col col6">
+        <?php render_about_group_field($team_1); ?>
       </div>
-      <div class="col col8 mobile-margin-bottom-basic">
-        <div class="margin-bottom-small">
-        <h6><span class="font-bold"><?php the_title(); ?></span>
-          <?php if (!empty($person_meta['_cmb_title'][0])) {echo $person_meta['_cmb_title'][0];} ?>
-          </h6>
-<?php
-        if (!empty($person_meta['_cmb_twitter'][0])) {
-?>
-          <h6><a target="_blank" href="https://twitter.com/<?php echo $person_meta['_cmb_twitter'][0]; ?>"><?php echo $person_meta['_cmb_twitter'][0]; ?></a></h6>
-<?php
-        }
-
-        if (!empty($person_meta['_cmb_email'][0])) {
-?>
-          <h6><a target="_blank" href="mailto:<?php echo $person_meta['_cmb_email'][0]; ?>"><?php echo $person_meta['_cmb_email'][0]; ?></a></h6>
-<?php
-        }
-?>
-        </div>
-        <?php the_content(); ?>
+      <div class="col col6">
+        <?php render_about_group_field($team_2); ?>
       </div>
-<?php
-      $i++;
-      }
-    }
-?>
+      <div class="col col6">
+        <?php render_about_group_field($team_3); ?>
+      </div>
+      <div class="col col6">
+        <?php render_about_group_field($team_4); ?>
+      </div>
     </div>
-<?php
-    if (!empty($meta['_cmb_page_extra_section'])) {
-      if (!empty($meta['_cmb_page_extra_section_title'])) {
-?>
-    <div class="row margin-top-large margin-bottom-basic">
+
+    <div class="row margin-bottom-small">
       <div class="col col24">
-        <h5><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
+        <h4>Associates</h4>
+      </div>
+    </div>
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
+      <div class="col col6">
+        <?php render_about_group_field($associates_1); ?>
+      </div>
+      <div class="col col6">
+        <?php render_about_group_field($associates_2); ?>
       </div>
     </div>
 <?php
-      }
+    if ($contact) {
 ?>
-    <div class="row margin-bottom-mid">
-      <div class="col col10 page-copy">
-        <?php echo apply_filters('the_content', $meta['_cmb_page_extra_section'][0]); ?>
+    <div class="row margin-bottom-small">
+      <div class="col col24">
+        <h4>Contact and information</h4>
+      </div>
+    </div>
+    <div class="row margin-bottom-small">
+      <div class="col col10">
+        <ul>
+<?php
+        foreach($contact as $contact_entry) {         
+         $link = get_permalink($contact_entry['link']);
+         
+         if (!empty($contact_entry['email'])) {
+           $link = 'mailto:' . $contact_entry['email'];
+         }         
+?>
+          <li><a href="<?php echo $link; ?>"><?php echo $contact_entry['title']; ?></a></li>
+<?php
+        }
+?>
+        </ul>
       </div>
     </div>
 <?php
     }
 ?>
-  <!-- end post -->
+<?php  
+    if (!empty($meta['_cmb_about_funding'])) {
+?>
+    <div class="row margin-bottom-small">
+      <div class="col col24">
+        <h4>Funding</h4>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-small">
+      <div class="col col10 page-copy">
+        <?php echo apply_filters('the_content', $meta['_cmb_about_funding'][0]); ?>
+      </div>
+    </div>
+<?php
+      if ($funding) {
+?>
+    <div class="row margin-bottom-small">
+      <div class="col col10">
+<?php
+        foreach($funding as $fund) {
+?>
+        <div class="margin-bottom-tiny">
+          <p><?php echo $fund['text']; ?></p>
+          <?php echo wp_get_attachment_image($fund['image_id'], 'col4'); ?>
+        </div>          
+<?php
+        }
+?>
+      </div>
+    </div>
+<?php
+      }
+    }
+
+    if (!empty($meta['_cmb_about_regulation'])) {
+?>
+    <div class="row margin-bottom-small">
+      <div class="col col24">
+        <h4>Regulation</h4>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-small">
+      <div class="col col10 page-copy">
+        <?php echo apply_filters('the_content', $meta['_cmb_about_regulation'][0]); ?>
+      </div>
+    </div>
+<?php
+    }
+    
+    if (!empty($meta['_cmb_about_legal'])) {
+?>
+    <div class="row margin-bottom-small">
+      <div class="col col24">
+        <h4>Legal</h4>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-small">
+      <div class="col col10 page-copy">
+        <?php echo apply_filters('the_content', $meta['_cmb_about_legal'][0]); ?>
+      </div>
+    </div>
+<?php
+    }
+?>
   </article>
 <?php
   }

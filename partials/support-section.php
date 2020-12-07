@@ -54,7 +54,7 @@
     <div class="row">
 
 <!--  desktop monthly form -->
-      <form class="support-form only-desktop" action="https://payment.novaramedia.com/subscription">
+      <form class="support-form support-form-regular only-desktop" action="https://payment.novaramedia.com/regular">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
             £<span class="support-form-value"><?php echo $defaultSubscription; ?></span> /month
@@ -68,7 +68,7 @@
       </form>
 
 <!--  desktop oneoff form -->
-      <form class="support-form only-desktop" action="https://payment.novaramedia.com/oneoff">
+      <form class="support-form support-form-oneoff only-desktop" action="https://payment.novaramedia.com/oneoff">
         <div class="col col3">
           <div class="support-form-holder u-flex-center">
             £<span class="support-form-value"><?php echo $defaultOneoff; ?></span>
@@ -82,7 +82,7 @@
       </form>
 
 <!--  mobile monthly form -->
-      <form class="support-form only-mobile" action="https://payment.novaramedia.com/subscription">
+      <form class="support-form support-form-regular only-mobile" action="https://payment.novaramedia.com/regular">
         <div class="col">
           <div class="support-form-holder u-flex-center mobile-margin-bottom-small">
             <input type="number" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
@@ -91,7 +91,7 @@
       </form>
 
 <!--  mobile oneoff form -->
-      <form class="support-form only-mobile" action="https://payment.novaramedia.com/oneoff">
+      <form class="support-form support-form-oneoff only-mobile" action="https://payment.novaramedia.com/oneoff">
         <div class="col">
           <div class="support-form-holder u-flex-center">
             <input type="number" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
