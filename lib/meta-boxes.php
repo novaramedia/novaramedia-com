@@ -63,7 +63,7 @@ function get_post_objects( $query_args ) {
 function createAboutColumnGroupFields($cmbInstance, $numberOfGroups, $title, $label) {
   for ($i = 0; $i < $numberOfGroups; $i++) {
     $group_field = $cmbInstance->add_field( array(
-      'id'          => 'about_page_team_group_' . sanitize_title($title) . ($i + 1),
+      'id'          => 'about_page_team_group_' . sanitize_title($title) . '-' . ($i + 1),
       'type'        => 'group',
       'name'        => $title . ' (column ' . ($i + 1) . ')',
       'description' => __( $label, 'cmb2' ),

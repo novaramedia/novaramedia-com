@@ -12,13 +12,13 @@ if( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
           
-    $team_1 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members1', true);    
-    $team_2 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members2', true);
-    $team_3 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members3', true);    
-    $team_4 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members4', true);
+    $team_1 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-1', true);    
+    $team_2 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-2', true);
+    $team_3 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-3', true);    
+    $team_4 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-4', true);
 
-    $associates_1 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names1', true);
-    $associates_2 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names2', true);
+    $associates_1 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-1', true);
+    $associates_2 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-2', true);
 
     $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
     $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
