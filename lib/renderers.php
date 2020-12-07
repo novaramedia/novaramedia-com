@@ -183,3 +183,29 @@ function render_facebook_share_link($url, $link_text = 'Facebook Share') {
 
   echo '<a href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
+
+/**
+* Renders a CMB2 meta field for the About page containing an array of roles and persons in those roles.
+*
+* @param array $data The return value of get_meta_field with single true.
+*/
+function render_about_group_field($data) {
+  if (!$data) {
+    return;
+  }
+  
+  foreach($data as $person) {
+?>
+  <div class="margin-bottom-small">
+    <h6 class="font-small-caps"><?php echo $person['title']; ?></h6>
+<?php 
+    foreach($person['name'] as $name) {
+?>
+      <div><?php echo $name; ?></div>
+<?php
+    }
+  ?>
+  </div>
+<?php
+  }
+}
