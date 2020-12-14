@@ -18,7 +18,7 @@ class Site {
 		this.search = new Search();
 		this.support = new Support();
 		this.utilties = new Utilities();
-  	
+
 		$(document).ready(this.onReady.bind(this));
 	}
 
