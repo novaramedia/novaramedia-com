@@ -1,0 +1,356 @@
+// GRID
+
+$col = 32px
+$gutter = 14px
+
+.container
+  width: ($col * $cols)+($gutter * $cols)
+
+.col
+  margin-left: ($gutter/2)
+  margin-right: ($gutter/2)
+
+for col in 1..$cols
+  .col{col}
+    width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+
+// ******************************************************
+
+// VARIABLES
+
+$margin-small = ($gutter)
+$margin-tiny = ($gutter / 2)
+$margin-micro = ($gutter / (2 * $golden-ratio))
+$margin-basic = ($gutter * 2)
+$margin-mid = ($gutter * 3.5)
+$margin-large = ($gutter * 5)
+
+$font-size-basic = 14px
+$font-size-larger = 1.3rem
+$font-size-h3 = golden-ratio(1rem , 1)
+$font-size-h2 = golden-ratio(1rem , 1.5)
+$font-size-h1 = golden-ratio(1rem , 2)
+
+$font-leading-basic = 1.4
+$font-leading-tighter = 1.15
+$font-leading-larger = 1.55
+
+$font-tracking-basic = 0.001em
+$font-tracking-wider = 0.025em
+
+$border-width = 2px
+
+$basic-animation-speed = .5s
+
+// ******************************************************
+
+// TYPOGRAPHY
+
+html
+  font-size: $font-size-basic
+  letter-spacing: $font-tracking-basic
+
+body
+  line-height: $font-leading-basic
+
+  // HTML ELEMENT STYLING
+
+h1, .font-size-h1
+  font-size: $font-size-h1
+  letter-spacing: $font-tracking-wider
+
+h2, .font-size-h2
+  font-size: $font-size-h2
+  letter-spacing: $font-tracking-wider
+
+h3
+  font-size: $font-size-h3
+
+p
+  margin-bottom: 1rem
+
+  // FONT RULES
+
+.font-small-caps
+  font-size: 0.85em
+
+.font-leading-wider
+  line-height: $font-leading-larger
+
+.font-tracking-wider
+  letter-spacing: $font-tracking-wider
+
+.font-smaller
+  font-size: 0.8rem
+
+.font-larger
+  font-size: $font-size-larger
+
+.text-copy
+  p
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+  blockquote
+    margin: 3rem
+  h1,h2,h3,h4,h5,h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: $color-blue
+  img
+    margin: 2.5rem auto
+  .wp-caption
+    .wp-caption-text
+      margin-top: $margin-tiny
+
+// ******************************************************
+
+// UI ELEMENTS
+
+.icon-large:before
+  font-size: $font-size-h3
+
+.button
+  padding: $margin-small
+
+// ******************************************************
+
+// BASIC
+
+.inline-action-list
+  li
+    display: inline-block
+    margin-right: $margin-small
+
+// ******************************************************
+
+// MARGINS AND PADDING
+
+  // MARGIN
+
+.margin-micro
+  margin: $margin-micro
+
+.margin-tiny
+  margin: $margin-tiny
+
+.margin-small
+  margin: $margin-small
+
+.margin-basic
+  margin: $margin-basic
+
+.margin-mid
+  margin: $margin-mid
+
+.margin-large
+  margin: $margin-large
+
+  // MARGIN TOP
+
+.margin-top-micro
+  margin-top: $margin-micro
+
+.margin-top-tiny
+  margin-top: $margin-tiny
+
+.margin-top-small
+  margin-top: $margin-small
+
+.margin-top-basic
+  margin-top: $margin-basic
+
+.margin-top-mid
+  margin-top: $margin-mid
+
+.margin-top-large
+  margin-top: $margin-large
+
+  // MARGIN BOTTOM
+
+.margin-bottom-micro
+  margin-bottom: $margin-micro
+
+.margin-bottom-tiny
+  margin-bottom: $margin-tiny
+
+.margin-bottom-small
+  margin-bottom: $margin-small
+
+.margin-bottom-basic
+  margin-bottom: $margin-basic
+
+.margin-bottom-mid
+  margin-bottom: $margin-mid
+
+.margin-bottom-large
+  margin-bottom: $margin-large
+
+  // PADDING
+
+.padding-micro
+  padding: $margin-micro
+
+.padding-tiny
+  padding: $margin-tiny
+
+.padding-small
+  padding: $margin-small
+
+.padding-basic
+  padding: $margin-basic
+
+.padding-mid
+  padding: $margin-mid
+
+.padding-large
+  padding: $margin-large
+
+  // PADDING TOP
+
+.padding-top-micro
+  padding-top: $margin-micro
+
+.padding-top-tiny
+  padding-top: $margin-tiny
+
+.padding-top-small
+  padding-top: $margin-small
+
+.padding-top-basic
+  padding-top: $margin-basic
+
+.padding-top-mid
+  padding-top: $margin-mid
+
+.padding-top-large
+  padding-top: $margin-large
+
+  // PADDING BOTTOM
+
+.padding-bottom-micro
+  padding-bottom: $margin-micro
+
+.padding-bottom-tiny
+  padding-bottom: $margin-tiny
+
+.padding-bottom-small
+  padding-bottom: $margin-small
+
+.padding-bottom-basic
+  padding-bottom: $margin-basic
+
+.padding-bottom-mid
+  padding-bottom: $margin-mid
+
+.padding-bottom-large
+  padding-bottom: $margin-large
+
+// ******************************************************
+
+// HEADER
+
+#main-content
+  padding-top: 57px + $margin-small
+  min-height: 75vh
+
+.header-menu
+  li
+    padding-right: $margin-tiny
+
+#menu-logo
+  margin-right: 14px
+  svg
+    height: 20px
+    width: 24px
+    vertical-align: text-bottom
+    margin-bottom: -2px
+
+#header-logotype
+  svg
+    width: 173px
+    vertical-align: text-bottom
+
+// SEARCH
+
+#search-form
+  border: $border-width solid $color-white-soft
+
+#search-input, #search-submit
+  font-size: $font-size-h3
+
+#search-input
+  width: 70%
+
+#search-submit
+  width: 8%
+  min-width: 25px
+
+// ******************************************************
+
+// SUPPORT SECTION
+
+.support-form-holder
+  min-height: 5rem
+  padding: $margin-small
+
+.support-form-slider
+  width: 60%
+  margin-right: 2%
+
+.support-form-submit
+  width: 15%
+  margin-left: 2%
+  padding: $margin-tiny $margin-small
+
+// ******************************************************
+
+// RADIO PLAYER
+
+.jp-controls-holder
+  margin-right: $margin-tiny
+
+.jp-block
+  height: $margin-basic
+  border: 2px solid $color-white-soft
+
+// ******************************************************
+
+// FRONT PAGE
+
+#featured-post-title-holder
+  padding: $margin-large
+  font-size: golden-ratio(1rem , 2.5)
+
+// ******************************************************
+
+// INDEXES
+
+.post-col12-text
+  padding: $margin-small + $margin-tiny
+  h3
+    font-size: $font-size-h3
+
+// ******************************************************
+
+// SINGLE
+
+#header-page-title
+  max-width: ( 16 * $col ) + ( 15 * $gutter )
+
+  // ARTICLE
+
+#single-article-photo-caption
+  right: ($gutter / 2)
+  padding: $margin-micro
+
+  // LIVEBLOG
+
+.text-copy
+  .liveblog-update-heading
+    border-top: 1px solid $color-black-soft
+    padding-top: $margin-basic
+    margin-top: $margin-mid
+    margin-bottom: $margin-small
+    &:first-of-type
+      margin-top: $margin-basic

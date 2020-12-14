@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg>
+<metadata>
+Created by FontForge 20120731 at Tue May 17 03:51:41 2016
+ By ,,,
+Copyright (C) 2016 by original authors @ fontello.com
+</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+  <font-face 
+    font-family="fontello"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 5 3 0 0 0 0 0 0"
+    ascent="850"
+    descent="-150"
+    bbox="84 -4 916 725"
+    underline-thickness="0"
+    underline-position="10"
+    unicode-range="U+E800-E80C"
+  />
+<missing-glyph 
+ />
+    <glyph glyph-name=".notdef" 
+ />
+    <glyph glyph-name="arrow-right" unicode="&#xe800;" 
+d="M500 684l334 -334l-334 -334l-59 59l233 234h-508v82h508l-233 234z" />
+    <glyph glyph-name="arrow-up" unicode="&#xe801;" 
+d="M166 350l334 334l334 -334l-61 -59l-232 233v-508h-82v508l-234 -233z" />
+    <glyph glyph-name="menu" unicode="&#xe802;" 
+d="M84 622h832v-84h-832v84zM84 413h832v-84h-832v84zM84 204h832v-82h-832v82z" />
+    <glyph glyph-name="chevron-down" unicode="&#xe803;" 
+d="M309 524l191 -192l191 192l59 -59l-250 -250l-250 250z" />
+    <glyph glyph-name="chevron-left" unicode="&#xe804;" 
+d="M643 180l-59 -58l-250 250l250 250l59 -59l-192 -191z" />
+    <glyph glyph-name="chevron-right" unicode="&#xe805;" 
+d="M357 168l192 192l-192 191l59 59l250 -250l-250 -250z" />
+    <glyph glyph-name="chevron-up" unicode="&#xe806;" 
+d="M309 207l-59 59l250 250l250 -250l-59 -59l-191 192z" />
+    <glyph glyph-name="tick" unicode="&#xe807;" 
+d="M375 174l441 444l59 -59l-500 -500l-232 232l56 59z" />
+    <glyph glyph-name="close" unicode="&#xe808;" 
+d="M791 582l-232 -232l232 -232l-59 -59l-232 232l-232 -232l-59 59l232 232l-232 232l59 59l232 -232l232 232z" />
+    <glyph glyph-name="mail" unicode="&#xe809;" 
+d="M500 391l334 209h-668zM834 100v416l-334 -207l-334 207v-416h668zM834 684q34 0 58 -25t24 -59v-500q0 -34 -24 -59t-58 -25h-668q-34 0 -58 25t-24 59v500q0 34 24 59t58 25h668z" />
+    <glyph glyph-name="arrow-left" unicode="&#xe80a;" 
+d="M834 391v-82h-508l233 -234l-59 -59l-334 334l334 334l59 -59l-233 -234h508z" />
+    <glyph glyph-name="arrow-down" unicode="&#xe80b;" 
+d="M834 350l-334 -334l-334 334l61 59l232 -233v508h82v-508l234 233z" />
+    <glyph glyph-name="search" unicode="&#xe80c;" 
+d="M646 267h-33l-12 11q31 36 48.5 81.5t17.5 94.5q0 74 -37 137q-36 61 -98.5 97.5t-135.5 36.5t-135.5 -36.5t-98.5 -97.5q-37 -63 -37 -137t36.5 -136t98.5 -98.5t136 -36.5q49 0 94.5 17.5t81.5 48.5l11 -12v-33l209 -208l62 62zM396 267q-51 0 -94.5 25t-68.5 68
+t-25 94t25.5 94t68.5 68.5t94 25.5t94 -25t68 -68.5t25 -94.5t-25 -94t-68 -68t-94 -25z" />
+  </font>
+</defs></svg>

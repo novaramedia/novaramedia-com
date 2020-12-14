@@ -4,44 +4,49 @@
   "description": "no future, utopia now",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/novaramedia/novaramedia-com.git"
   },
-  "author": "interglobalvision",
+  "author": "Novara Media",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/novaramedia/novaramedia-com/issues"
   },
   "homepage": "https://github.com/novaramedia/novaramedia-com",
   "devDependencies": {
-    "concat-with-sourcemaps": "1.1.0",
-    "deap": "1.0.1",
-    "fstream": "1.0.12",
-    "gulp": "~3.9.1",
-    "gulp-autoprefixer": "3.1.0",
-    "gulp-cached": "~1.1.0",
-    "gulp-concat": "~2.6.0",
-    "gulp-imagemin": "~2.4.0",
-    "gulp-jscs": "~3.0.2",
-    "gulp-jshint": "~2.0.0",
-    "gulp-minify-css": "~1.2.4",
-    "gulp-notify": "^3.2.0",
-    "gulp-plumber": "~1.1.0",
-    "gulp-rename": "~1.2.0",
-    "gulp-sourcemaps": "~1.5.2",
-    "gulp-stylint": "~3.0.0",
-    "gulp-stylus": "~2.3.1",
-    "gulp-uglify": "~1.5.3",
-    "gulp-util": "~3.0.1",
-    "gulp-watch": "~4.3.5",
-    "jshint": "^2.9.4",
-    "jshint-stylish": "~2.1.0",
-    "kouto-swiss": "~0.12.0",
-    "marked": "0.3.19",
-    "sshpk": "1.16.1",
-    "stringstream": "0.0.6"
+    "@babel/preset-env": "^7.12.10",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^8.2.2",
+    "babel-minify": "^0.5.1",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "babel-preset-babili": "^0.1.4",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.15.0",
+    "eslint-webpack-plugin": "^2.4.1",
+    "file-loader": "^6.2.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "jshint": "^2.9.3",
+    "jshint-loader": "^0.8.4",
+    "jshint-stylish": "~2.2.1",
+    "kouto-swiss": "^1.1.0",
+    "mini-css-extract-plugin": "^1.3.3",
+    "style-loader": "^2.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^4.3.1",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0",
+    "webpack-notifier": "^1.12.0"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "js-cookie": "^2.2.1",
+    "lazysizes": "^5.2.2",
+    "moment": "^2.29.1",
+    "swiper": "^6.4.1"
   }
 }

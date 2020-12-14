@@ -52,8 +52,8 @@
             </div>
             <a href="<?php echo home_url(); ?>">
               <div class="col col6 text-align-right">
-                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/NM-logomark-white.svg'); ?></nav>
-                <nav id="header-logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/nm-logotype-dev1.svg'); ?></nav>
+                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/NM-logomark-white.svg'); ?></nav>
+                <nav id="header-logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/nm-logotype-dev1.svg'); ?></nav>
               </div>
             </a>
           </div>
