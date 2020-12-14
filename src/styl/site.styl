@@ -1,0 +1,777 @@
+@import '~kouto-swiss/index.styl'
+@import "helpers"
+@import "library"
+
+// ******************************************************
+
+// FONTS
+
+// ******************************************************
+
+// ICONS FONTS
+
+// ** https://genericons.com WP icon font set
+// @import "fonts/icons/genericons"
+
+// ** minimal version of Google Materialize UI icons. check the styl for usage
+@import "fonts/icons/materialize-min"
+
+// ** full set of Google Materialize. https://design.google.com/icons/
+// @import "fonts/icons/materialize"
+
+// ******************************************************
+
+meyer-reset()
+box-sizing-reset()
+normalize()
+
+// ******************************************************
+
+// GRID
+
+$cols = 24
+$col = 39px
+$gutter = 16px
+
+.container
+  margin: 0 auto
+  width: ($col * $cols)+($gutter * $cols)
+
+.row
+  clearfix()
+
+.col
+  float: left
+  margin-left: ($gutter/2)
+  margin-right: ($gutter/2)
+  min-height: 1px
+
+for col in 1..$cols
+  .col{col}
+    width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+
+    // FLUID COLS
+
+.percent-col
+  float: left
+  box-sizing: border-box
+
+$pcols = 10
+
+for pcol in 1..$pcols
+  .s-into-{pcol}
+    width: ( 100% / pcol )
+
+@media screen and (min-width: 601px)
+
+  for pcol in 1..$pcols
+    .m-into-{pcol}
+      width: ( 100% / pcol )
+
+@media screen and (min-width: 993px)
+
+  for pcol in 1..$pcols
+    .l-into-{pcol}
+      width: ( 100% / pcol )
+
+// ******************************************************
+
+// VARIABLES
+
+$golden-ratio = 1.61803398875
+
+$margin-small = ($gutter)
+$margin-tiny = ($gutter / 2)
+$margin-micro = ($gutter / (2 * $golden-ratio))
+$margin-basic = ($gutter * 2)
+$margin-mid = ($gutter * 3.5)
+$margin-large = ($gutter * 5)
+
+$font-size-basic = 14px
+$font-size-larger = 1.3rem
+$font-size-smaller = .8rem
+$font-size-h3 = golden-ratio(1rem , 1)
+$font-size-h2 = golden-ratio(1rem , 1.5)
+$font-size-h1 = golden-ratio(1rem , 2)
+
+$font-leading-basic = 1.4
+$font-leading-tighter = 1.15
+$font-leading-larger = 1.55
+
+$font-tracking-basic = 0.001em
+$font-tracking-medium = 0.0075rem
+$font-tracking-wider = 0.025em
+
+$color-black-soft = rgb(14, 14, 14)
+$color-white-soft = rgb(253, 253, 253)
+$color-white-soft-transparent = rgba(253, 253, 253, .5)
+
+$color-gray = rgb(150,150,150)
+$color-gray-transparent = rgba(150,150,150, .5)
+$color-gray-light = rgb(190,190,190)
+$color-gray-light-transparent = rgba(190,190,190, .5)
+
+$color-red = red
+$color-blue = rgb(84,144,235)
+
+$border-width = 2px
+
+$basic-animation-speed = .5s
+
+$font-serif = font-stack('Georgia');
+$font-sans = font-stack('Helvetica');
+
+// ******************************************************
+
+// TYPOGRAPHY
+
+html
+  font-family: $font-sans
+  font-size: $font-size-basic
+  letter-spacing: $font-tracking-basic
+
+body
+  line-height: $font-leading-basic
+
+  // HTML ELEMENT STYLING
+
+h1, .font-size-h1
+  font-size: $font-size-h1
+  font-weight: bold
+  margin: 0
+  letter-spacing: $font-tracking-wider
+
+h2, .font-size-h2
+  font-size: $font-size-h2
+  font-weight: bold
+  margin: 0
+  letter-spacing: $font-tracking-wider
+
+h3
+  font-size: $font-size-h3
+  font-weight: bold
+
+h4
+  text-transform: uppercase
+  font-weight: bold
+
+h5
+  font-weight: bold
+
+p
+  margin-bottom: 1rem
+
+  // FONT RULES
+
+.font-italic, em, i
+  font-style: italic
+
+.font-bold, strong, b
+  font-weight: bold
+
+.font-small-caps
+  font-size: 0.85em
+  text-transform: uppercase
+
+.font-capitalize
+  text-transform: capitalize
+
+.font-uppercase
+  text-transform: uppercase
+
+.font-underline
+  text-decoration: underline
+
+.font-leading-wider
+  line-height: $font-leading-larger
+
+.font-tracking-medium
+  letter-spacing: $font-tracking-medium
+
+.font-tracking-wider
+  letter-spacing: $font-tracking-wider
+
+.font-smaller
+  font-size: $font-size-smaller
+
+.font-mono
+  font-family: monospace
+
+.font-serif
+  font-family: $font-serif
+
+.font-larger
+  font-size: $font-size-larger
+
+  // COLOR RULES
+
+.font-color-white
+  color: $color-white-soft
+
+.font-color-black
+  color: $color-black-soft
+
+  // SHADOWS
+
+.text-shadow-white
+  text-shadow: 0 0 20px $color-white-soft-transparent
+
+.text-shadow-light-gray
+  text-shadow: 0 0 20px $color-gray-light-transparent
+
+.text-shadow-gray
+  text-shadow: 0 0 20px $color-gray-transparent
+
+  // TEXT RULES
+
+.text-overflow-ellipsis
+  overflow: ellipsis
+
+.text-align-left
+  text-align: left
+
+.text-align-right
+  text-align: right
+
+.text-align-center
+  text-align: center
+
+article
+  ul, ol
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+    margin-left: 1rem
+  ul
+    li
+      list-style: disc inside
+  ol
+    li
+      list-style: decimal inside
+
+.text-copy
+  p
+    font-family: $font-serif
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+  blockquote
+    margin: 3rem
+  h1,h2,h3,h4,h5,h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: $color-blue
+  img
+    display: block
+    margin: 2.5rem auto
+  ul, ol
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+  .wp-caption
+    width: auto !important
+    &.alignnone
+      text-align: center
+    img
+      margin: 0
+    .wp-caption-text
+      text-align: left
+      font-family: $font-sans
+      font-size: $font-size-smaller
+      margin-top: $margin-tiny
+
+.text-copy-max-width
+  max-width: ( 18 * $col ) + ( 17  * $gutter )
+  margin: 0 auto
+
+.page-copy
+  blockquote
+    margin: 3rem
+  h1,h2,h3,h4,h5,h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: $color-blue
+  img
+    display: block
+    margin: 2.5rem auto
+  .wp-caption
+    width: auto !important
+    &.alignnone
+      text-align: center
+    img
+      margin: 0
+    .wp-caption-text
+      text-align: left
+      font-family: $font-sans
+      font-size: $font-size-smaller
+      margin-top: $margin-tiny
+
+  // LINKS
+
+a
+  color: inherit
+  text-decoration: none
+
+// ******************************************************
+
+// BACKGROUNDS
+
+.background-black
+  background-color: $color-black-soft
+
+.background-white
+  background-color: $color-white-soft
+
+.background-gray
+  background-color: $color-gray
+
+.background-light-gray
+  background-color: $color-gray-light
+
+.background-red
+  background-color: $color-red
+
+// ******************************************************
+
+// UI ELEMENTS
+
+.icon-large:before
+  font-size: $font-size-h3
+
+.button
+  display: inline-block
+  width: 100%
+  padding: $margin-small
+  text-align: center
+  border: 2px solid $color-black-soft
+  &.button-small
+    padding: $margin-tiny
+
+// ******************************************************
+
+// BASIC
+
+html
+  background-color: $color-white-soft
+  color: $color-black-soft
+
+img
+  max-width: 100%
+  height: auto
+
+.inline-action-list
+  margin: 0
+  li
+    display: inline-block
+    margin-right: $margin-small
+
+.only-mobile
+  display: none
+
+// ******************************************************
+
+// MARGINS AND PADDING
+
+  // MARGIN
+
+.margin-micro
+  margin: $margin-micro
+
+.margin-tiny
+  margin: $margin-tiny
+
+.margin-small
+  margin: $margin-small
+
+.margin-basic
+  margin: $margin-basic
+
+.margin-mid
+  margin: $margin-mid
+
+.margin-large
+  margin: $margin-large
+
+  // MARGIN TOP
+
+.margin-top-micro
+  margin-top: $margin-micro
+
+.margin-top-tiny
+  margin-top: $margin-tiny
+
+.margin-top-small
+  margin-top: $margin-small
+
+.margin-top-basic
+  margin-top: $margin-basic
+
+.margin-top-mid
+  margin-top: $margin-mid
+
+.margin-top-large
+  margin-top: $margin-large
+
+  // MARGIN BOTTOM
+
+.margin-bottom-micro
+  margin-bottom: $margin-micro
+
+.margin-bottom-tiny
+  margin-bottom: $margin-tiny
+
+.margin-bottom-small
+  margin-bottom: $margin-small
+
+.margin-bottom-basic
+  margin-bottom: $margin-basic
+
+.margin-bottom-mid
+  margin-bottom: $margin-mid
+
+.margin-bottom-large
+  margin-bottom: $margin-large
+
+  // PADDING
+
+.padding-micro
+  padding: $margin-micro
+
+.padding-tiny
+  padding: $margin-tiny
+
+.padding-small
+  padding: $margin-small
+
+.padding-basic
+  padding: $margin-basic
+
+.padding-mid
+  padding: $margin-mid
+
+.padding-large
+  padding: $margin-large
+
+  // PADDING TOP
+
+.padding-top-micro
+  padding-top: $margin-micro
+
+.padding-top-tiny
+  padding-top: $margin-tiny
+
+.padding-top-small
+  padding-top: $margin-small
+
+.padding-top-basic
+  padding-top: $margin-basic
+
+.padding-top-mid
+  padding-top: $margin-mid
+
+.padding-top-large
+  padding-top: $margin-large
+
+  // PADDING BOTTOM
+
+.padding-bottom-micro
+  padding-bottom: $margin-micro
+
+.padding-bottom-tiny
+  padding-bottom: $margin-tiny
+
+.padding-bottom-small
+  padding-bottom: $margin-small
+
+.padding-bottom-basic
+  padding-bottom: $margin-basic
+
+.padding-bottom-mid
+  padding-bottom: $margin-mid
+
+.padding-bottom-large
+  padding-bottom: $margin-large
+
+// ******************************************************
+
+// HEADER
+
+#header
+  position: fixed
+  width: 100%
+  z-index: 1000
+
+#main-content
+  padding-top: 57px + $margin-small
+  min-height: 75vh
+
+#header-main-wrapper
+  background-color: black
+  background-image: url('../img/marble-dark-banner.jpg')
+  background-size: cover
+  background-position: center center
+
+#header-navs
+  vertical-align: middle
+
+.header-menu
+  li
+    padding-right: $margin-tiny
+
+#menu-logo
+  margin-right: 14px
+  svg
+    height: 20px
+    width: 24px
+    vertical-align: text-bottom
+    margin-bottom: -2px
+
+#header-logotype
+  svg
+    height: 17px
+    width: 173px
+    vertical-align: text-bottom
+
+#header-sub
+  display: none
+  a
+    font-size: 1.5rem
+    line-height: 1.6
+    padding-right: .66rem
+
+// SEARCH
+
+#header-search
+  display: none
+
+#search-form
+  border: $border-width solid $color-white-soft
+
+#search-input, #search-submit
+  font-size: $font-size-h3
+  border: 0
+  &:focus
+    outline: 0
+
+#search-input
+  float: left
+  width: 70%
+  background-color: transparent
+  color: $color-white-soft
+
+#search-submit
+  width: 8%
+  min-width: 25px
+  float right
+
+#tag-suggestions
+  display: none
+
+// ******************************************************
+
+// 404
+
+.error404
+  #header-search
+    display: block
+
+// ******************************************************
+
+// SUPPORT SECTION
+
+.support-form-holder
+  min-height: 5rem
+  padding: $margin-small
+  text-align: center
+  border: 2px solid white
+
+.support-form-slider
+  width: 70%
+  margin-right: 2%
+
+.support-form-submit
+  width: 12%
+  margin-left: 2%
+  padding: $margin-tiny $margin-small
+  background-color: white
+  color: $color-red
+  font-weight: bold
+  border: 0
+
+// FUNDRAISER PROGRESS BAR
+
+#progress-bar-row
+  display: none
+
+#progress-bar-holder
+  position: relative
+  height: 1.5em
+
+#progress-bar
+  position: absolute
+  left: 0
+  width: 0%
+  transition: width 1s
+  height: 1.5em
+  background-color: $color-red
+
+// ******************************************************
+
+// RADIO PLAYER
+
+#radio-player
+  display: none
+
+.jp-controls-holder
+  margin-right: $margin-tiny
+
+.jp-block
+  display: block
+  height: $margin-basic
+  width: 100%
+  text-align: center
+  border: 2px solid $color-white-soft
+
+.jp-button
+  text-align: center
+
+.jp-stop
+  display: none
+
+.jp-volume-bar
+  position: relative
+
+.jp-button, .jp-volume-bar
+  &:hover
+    cursor: pointer
+
+.jp-volume-bar-value
+  background-color: white
+  position:relative
+  height: 100%
+
+// ******************************************************
+
+// FRONT PAGE
+
+// SIGNUPS
+
+.front-page-signup
+  display: flex
+  align-items: center
+
+.front-page-signup__image
+  width: 25%
+  padding-right: 1.25rem
+  max-width: 80px
+  img
+    display: block
+
+.front-page-signup__text
+  width: 73%
+  p
+    margin-bottom: 0
+
+// ABOVE THE FOLD
+
+.front-page-above-the-fold__column
+  .col
+    margin-left: 0
+    margin-right: 0
+
+// ******************************************************
+
+// INDEXES
+
+.post-col12-image
+  position: relative
+
+.post-col12-image-overlay
+  position: absolute
+  bottom: 0
+  left: 0
+  top: 0
+  right: 0
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%)
+
+.post-col12-text
+  position: absolute
+  bottom: 0
+  left: 0
+  padding: $margin-small + $margin-tiny
+  max-width: 550px
+  h3
+    font-size: $font-size-h2
+
+// ******************************************************
+
+// SINGLE
+
+#header-page-title
+  opacity: 0
+  transition: opacity $basic-animation-speed
+  vertical-align: middle;
+  height: 23px
+  max-width: ( 16 * $col ) + ( 15 * $gutter )
+
+#single-resources-section
+  display: none
+
+  // ARTICLE
+
+#single-article-photo-caption
+  position: absolute
+  top: 0
+  right: ($gutter / 2)
+  writing-mode: vertical-rl
+  padding: $margin-micro
+
+  // LIVEBLOG
+
+.text-copy
+  .liveblog-update-heading
+    border-top: 1px solid $color-black-soft
+    padding-top: $margin-basic
+    margin-top: $margin-mid
+    margin-bottom: $margin-small
+    &:first-of-type
+      margin-top: $margin-basic
+
+// ******************************************************
+
+// GDPR
+
+#gdpr
+  display: none
+  position: fixed
+  bottom: 0
+  left 0
+  width: 100vw
+  background-color: $color-black-soft
+  z-index: 100
+
+  .button
+    color: $color-white-soft
+    border-color: $color-white-soft
+  p
+    a
+      text-decoration: underline
+
+// ******************************************************
+
+// MEDIA QUERIES
+
+@media screen and (max-width: ($col * $cols)+($gutter * $cols))
+
+  @import "responsive/desktop-mid"
+
+@media screen and (max-width: 1104px)
+
+  @import "responsive/desktop-small"
+
+@media screen and (max-width: 888px)
+
+  @import "responsive/ipad"
+
+@media screen and (max-width: 755px)
+
+  @import "responsive/mobile"
