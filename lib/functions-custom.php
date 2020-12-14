@@ -36,10 +36,10 @@ function only_child_category_filter($var) {
 
 // create youtube embed url with consistent parameters
 function generate_youtube_embed_url($id, $autoplay = false) {
-  $url = 'https://www.youtube.com/embed/' . $id . '?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0';
+  $url = 'https://www.youtube.com/embed/' . $id . '?modestbranding=1&rel=0';
 
   if ($autoplay) {
-    $url .= '&amp;autoplay=1';
+    $url .= '&autoplay=1';
   }
 
   return $url;

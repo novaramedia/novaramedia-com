@@ -58,9 +58,15 @@
   <div class="col col20">
     <?php
       if (!empty($meta['_cmb_utube'])) {
+        $autoplay = false;
+
+        // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
+        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
+          $autoplay = true;
+        }
     ?>
       <div class="u-video-embed-container">
-        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>"></iframe>
+        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0], $autoplay); ?>" allow="autoplay" allowfullscreen></iframe>
       </div>
     <?php
       } else {
