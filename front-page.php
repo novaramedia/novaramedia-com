@@ -87,12 +87,15 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       'posts_per_page' => 1,
     ));
 
+    $recent_audio_ids = array_map('nm_filter_query_ids', $recent_audio_category_1->posts);
+
     // *******************
     // most recent second audio show
 
     $recent_audio_category_2 = new WP_Query(array(
       'category_name' => $featured_audio_category_2,
       'posts_per_page' => 1,
+      'post__not_in' => $recent_audio_ids
     ));
 
     // *******************
