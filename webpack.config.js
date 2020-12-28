@@ -6,17 +6,22 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
   entry: './src/js/main.js',
+
   output: {
     path: path.resolve(__dirname, 'dist/js'),
     filename: 'main.js'
   },
+
   resolve: {
     extensions: ['.js', '.css', '.styl', '.svg']
   },
 
+  mode: 'development',
+  
   module: {
     rules: [{
       test: /\.js$/,
@@ -51,6 +56,8 @@ module.exports = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
+    new MomentLocalesPlugin(),
+    new WebpackNotifierPlugin({emoji: true, alwaysNotify: true}),
     // Copy the images folder and optimize all the images
     new CopyPlugin({
       patterns: [
@@ -67,7 +74,6 @@ module.exports = {
       optipng:{optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true},
       svgo:{plugins: [{cleanupIDs: false, removeViewBox: false}]},
     }),
-    new WebpackNotifierPlugin({emoji: true, alwaysNotify: true}),
   ],
 
   stats: {
