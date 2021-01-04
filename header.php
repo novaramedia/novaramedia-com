@@ -62,7 +62,7 @@
                         
             <a href="<?php echo home_url(); ?>">
               <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/NM-logomark-white.svg'); ?></nav>
+                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logomark-white.svg'); ?></nav>
               </div>
             </a>
           </div>
