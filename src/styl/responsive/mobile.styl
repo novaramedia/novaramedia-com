@@ -277,7 +277,7 @@ p
 // ******************************************************
 
 // HEADER
-
+  
 #main-content
   padding-top: 47px + $margin-small
   min-height: 75vh
@@ -289,20 +289,21 @@ p
 #header-main
   .col
     float: left
-  .col18
-    width: 80%
-  .col6
+  .header-main__navigation
+    width: 20%
+  .header-main__middle
+    width: 60%
+  .header-main__logomark
     width: 20%
 
-#menu-logo
-  margin-right: 2px
-  svg
-    height: 20px
-    width: 24px
-
-#header-logotype
+#header-main__logotype
   display: none
 
+#menu-logo
+  svg
+    height: 16px
+    width: 20px
+    
 #header-sub
   display: none
   .col
@@ -351,17 +352,6 @@ input[type=number]
   color: $color-red
   border: 0
   height: 28px
-
-// ******************************************************
-
-// RADIO PLAYER
-
-.jp-controls-holder
-  margin-right: $margin-tiny
-
-.jp-block
-  height: $margin-basic
-  border: 2px solid $color-white-soft
 
 // ******************************************************
 
@@ -428,10 +418,6 @@ input[type=number]
 // ******************************************************
 
 // SINGLE
-
-#header-page-title
-  height: 18px
-  max-width: 70%
 
   // ARTICLE
 

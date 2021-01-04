@@ -2,7 +2,7 @@
 
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
 function scripts_and_styles_method() {
-  $site_js = get_template_directory_uri() . '/dist/js/main.js';
+  $site_js = get_template_directory_uri() . '/dist/main.js';
   
   wp_register_script( 'site-js', $site_js );
   
@@ -15,7 +15,7 @@ function scripts_and_styles_method() {
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
   wp_enqueue_script( 'site-js', $site_js, '', '', true );
 
-  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/css/site.css' );
+  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css' );
 
   if (is_admin()) {
     wp_enqueue_style( 'dashicons' );
