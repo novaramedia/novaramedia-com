@@ -5929,17 +5929,6 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylus-loader@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/stylus-loader/-/stylus-loader-4.3.1.tgz#8b4e749294d9fe0729c2e5e1f04cbf87e1c941aa"
-  integrity sha512-apDYJEM5ZpOAWbWInWcsbtI8gHNr/XYVcSY/tWqOUPt7M5tqhtwXVsAkgyiVjhuvw2Yrjq474a9H+g4d047Ebw==
-  dependencies:
-    fast-glob "^3.2.4"
-    klona "^2.0.4"
-    loader-utils "^2.0.0"
-    normalize-path "^3.0.0"
-    schema-utils "^3.0.0"
-
 stylus-native-loader@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/stylus-native-loader/-/stylus-native-loader-1.4.3.tgz#464e1538477e94276ba0d952cc4e0d21181056c1"

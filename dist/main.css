@@ -1516,10 +1516,26 @@ img {
   vertical-align: text-bottom;
   margin-bottom: -2px;
 }
-#header-logotype svg {
+.header-main__middle {
+  position: relative;
+}
+#header-main__logotype {
+  transition: opacity 0.5s;
+}
+#header-main__logotype svg {
   height: 16px;
   width: 100%;
   vertical-align: text-bottom;
+}
+#header-main__page-title {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  transition: opacity 0.5s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
 }
 #header-sub {
   display: none;
@@ -1669,15 +1685,6 @@ img {
 }
 .post-col12-text h3 {
   font-size: 2.058106176075472rem;
-}
-#header-page-title {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  opacity: 0;
-  transition: opacity 0.5s;
-  vertical-align: middle;
-  height: 23px;
-  max-width: 864px;
 }
 #single-resources-section {
   display: none;
@@ -2036,9 +2043,6 @@ img {
   .post-col12-text h3 {
     font-size: 1.618rem;
   }
-  #header-page-title {
-    max-width: 722px;
-  }
   #single-article-photo-caption {
     right: 7px;
     padding: 4.326237921248983px;
@@ -2368,9 +2372,6 @@ img {
   }
   .post-col12-text {
     padding: 12px;
-  }
-  #header-page-title {
-    max-width: 580px;
   }
   #single-article-photo-caption {
     right: 6px;
@@ -2731,10 +2732,6 @@ img {
   .post-col12-text h3 {
     font-size: 1.3rem;
   }
-  #header-page-title {
-    height: 22px;
-    max-width: 70%;
-  }
   #single-article-photo-caption {
     right: 6px;
     -ms-writing-mode: tb-rl;
@@ -2981,14 +2978,17 @@ img {
   #header-main .col {
     float: left;
   }
-  #header-main .header-main__logotype {
-    display: none;
-  }
   #header-main .header-main__navigation {
-    width: 80%;
+    width: 20%;
+  }
+  #header-main .header-main__middle {
+    width: 60%;
   }
   #header-main .header-main__logomark {
     width: 20%;
+  }
+  #header-main__logotype {
+    display: none;
   }
   #menu-logo {
     margin-right: 2px;
@@ -3108,10 +3108,6 @@ img {
     font-size: 13px;
     font-weight: normal;
   }
-  #header-page-title {
-    height: 18px;
-    max-width: 70%;
-  }
   #single-article-photo-caption {
     right: 6px;
     padding: 3.708203932499128px;
@@ -3150,3 +3146,5 @@ img {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/

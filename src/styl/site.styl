@@ -506,7 +506,7 @@ img
 
 #header-main-wrapper
   background-color: black
-  background-image: url('../img/marble-dark-banner.jpg')
+  background-image: url('./img/marble-dark-banner.jpg')
   background-size: cover
   background-position: center center
 
@@ -518,18 +518,29 @@ img
     padding-right: $margin-tiny
 
 #menu-logo
-  margin-right: 14px
   svg
     height: 20px
     width: 24px
     vertical-align: text-bottom
     margin-bottom: -2px
+    
+.header-main__middle
+  position: relative
 
-#header-logotype
+#header-main__logotype
+  transition: opacity $basic-animation-speed
   svg
-    height: 17px
-    width: 173px
+    height: 16px
+    width: 100%
     vertical-align: text-bottom
+
+#header-main__page-title
+  opacity: 0
+  transition: opacity $basic-animation-speed
+  position: absolute
+  left: 0
+  top: 0
+  max-width: 100%
 
 #header-sub
   display: none
@@ -705,13 +716,6 @@ img
 // ******************************************************
 
 // SINGLE
-
-#header-page-title
-  opacity: 0
-  transition: opacity $basic-animation-speed
-  vertical-align: middle;
-  height: 23px
-  max-width: ( 16 * $col ) + ( 15 * $gutter )
 
 #single-resources-section
   display: none
