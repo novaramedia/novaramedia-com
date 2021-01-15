@@ -6,6 +6,7 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var config = {
   entry: './src/js/main.js',
@@ -24,9 +25,14 @@ var config = {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
       use: {
-        loader: 'babel-loader',
+        loader: 'babel-loader', 
         options: {
-          presets: ['@babel/preset-env']
+          presets: [
+            ['@babel/preset-env', {
+              useBuiltIns: 'entry',
+              corejs: 3.8
+            }]
+          ]
         }
       }
     },  
@@ -98,7 +104,9 @@ module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.devtool = 'source-map';
     config.watch = true;
+  } else {
+    config.plugins.push(new BundleAnalyzerPlugin()); 
   }
-  
+    
   return config;
 };
