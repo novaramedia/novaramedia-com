@@ -4,7 +4,7 @@ import $ from 'jquery';
 import debounce from 'lodash/debounce';
 
 export class Header {
-	constructor() {
+  constructor() {
     const _this = this;
 
     _this.showSinglePostTitle = false;
@@ -14,19 +14,19 @@ export class Header {
     _this.$searchToggle = $('#search-toggle');
     _this.$headerSearch = $('#header-search');
     _this.$searchInput = $('#search-input');
-	}
-	
-	onReady() {
+  }
+  
+  onReady() {
     const _this = this;
 
     if ($('body').hasClass('single')) {
       _this.initSinglePostTitle();
-    }	
+    }  
 
     _this.bind();
   }
 
-	bind() {
+  bind() {
     const _this = this;
 
     _this.$menuToggle.click(function() {
@@ -44,7 +44,7 @@ export class Header {
         resize: debounce(_this.handleResize.bind(_this), 25),
       });
     }
-	}
+  }
 
   initSinglePostTitle() {    
     this.showSinglePostTitle = true;

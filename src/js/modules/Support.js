@@ -3,11 +3,11 @@
 import $ from 'jquery';
 
 export class Support {
-	constructor() {
+  constructor() {
     this.$progressBar = $('#progress-bar');
-	}
+  }
 
-	onReady() {
+  onReady() {
     const _this = this;
 
     if ($('.support-section').length) {
@@ -17,16 +17,16 @@ export class Support {
     if (_this.$progressBar.length) {
       _this.initProgressBar();
     }
-	}
+  }
 
-	bind() {
+  bind() {
     $('.support-form-slider').on('input', function() {
       var target = $(this).closest('.support-form').find('.support-form-value');
       target.html(this.value);
     });
-	}
-	
-	initProgressBar() {
+  }
+  
+  initProgressBar() {
     const _this = this;
 
     _this.$progressBar.css('width', '0%');

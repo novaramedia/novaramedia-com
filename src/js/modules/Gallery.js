@@ -4,19 +4,19 @@ import $ from 'jquery';
 import Swiper from 'swiper';
 
 export class Gallery {
-	constructor() {
+  constructor() {
     this.galleryInstances = [];
-	}
+  }
 
-	onReady() {
+  onReady() {
     var _this = this;
 
     if ($('.swiper-container').length) {
       _this.initSwiperInstances();
     }
-	}
+  }
 
-	initSwiperInstances() {
+  initSwiperInstances() {
     var _this = this;
 
     $('.swiper-container').each(function(index, item) {

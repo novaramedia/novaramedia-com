@@ -5,13 +5,13 @@
 import $ from 'jquery';
 
 export class Analytics {
-	constructor() {
+  constructor() {
     if (typeof dataLayer !== 'undefined') {
       this.bind();
     }
-	}
+  }
 
-	bind() {
+  bind() {
     const _this = this;
 
     $('.support-form-slider').on('input', _this.debounce(function() {
@@ -33,8 +33,8 @@ export class Analytics {
         'event': 'relatedPostClicked'
       });
     });
-	}
-	
+  }
+  
   debounce(func, wait, immediate) {
     var timeout;
     return function() {

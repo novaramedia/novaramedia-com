@@ -12,25 +12,25 @@ import { Support } from './modules/Support.js';
 import { Utilities } from './modules/Utilities.js';
 
 class Site {
-	constructor() {
-		this.analytics = new Analytics();
-		this.header = new Header();
-		this.search = new Search();
-		this.support = new Support();
-		this.utilties = new Utilities();
+  constructor() {
+    this.analytics = new Analytics();
+    this.header = new Header();
+    this.search = new Search();
+    this.support = new Support();
+    this.utilties = new Utilities();
 
-		$(document).ready(this.onReady.bind(this));
-	}
+    $(document).ready(this.onReady.bind(this));
+  }
 
-	onReady() {
+  onReady() {
     lazySizes.init();
     
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
     
-		this.utilties.bind();
-	}
+    this.utilties.bind();
+  }
 }
 
 new Site();

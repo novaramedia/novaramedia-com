@@ -7,13 +7,13 @@ import Cookies from 'js-cookie';
 import selectText from '../functions/selectText.js';
 
 export class Utilities {
-	constructor() {
+  constructor() {
     this.fixWidows();
     this.displayTimeSince();
     this.checkGDPRApproval();
-	}
+  }
 
-	bind() {
+  bind() {
     const _this = this;
 
     if ($('#single-resources-section').length) {
@@ -23,8 +23,8 @@ export class Utilities {
     $('.js-select').click(function() {
       selectText($(this)[0]); // *** need to fix this
     });
-	}
-	
+  }
+  
   bindResourcesToggle() {
     var $resources = $('#single-resources-section');
 

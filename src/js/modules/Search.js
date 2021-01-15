@@ -3,17 +3,17 @@
 import $ from 'jquery';
 
 export class Search {
-	constructor() {
+  constructor() {
 
-	}
+  }
 
-	onReady() {
+  onReady() {
     var _this = this;
 
      if ($('body').hasClass('error404')) {
       _this.fourzerofour();
     }
-	}
+  }
 
   fourzerofour() {
     var href = window.location.href;
