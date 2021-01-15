@@ -24,5 +24,12 @@
       }
     ?>
     <h5 class="js-fix-widows"><?php the_title(); ?></h5>
+    <?php
+      if (!empty($meta['_cmb_short_desc'])) {
+    ?>
+      <div class="margin-top-micro"><?php echo $meta['_cmb_short_desc'][0]; ?></div>
+    <?php
+      }
+    ?>
   </article>
 </a>

@@ -1,4 +1,30 @@
 <?php
+/**
+* Answer the question is this a single post in the articles category?
+*
+* @return Boolean
+*/
+function nm_is_single_article() {
+  if (!is_single()) { // if not single return straight away
+    return false;
+  }
+
+  global $post;
+
+  $categories = get_the_terms($post->ID, 'category'); // get the categories for the post
+
+  $found_in_categories = array_filter($categories,
+    function ($category) {
+      return $category->slug === 'articles';
+    }); // check to see if any of the categories returned match the articles slug
+
+  if (count($found_in_categories) > 0) {
+    return true; // if articles slug was found return true
+  }
+
+  return false;
+}
+
 // get and return the first sub category assigned to the post
 function get_the_sub_category($postId) {
   $categories = get_the_category($postId);
@@ -36,10 +62,10 @@ function only_child_category_filter($var) {
 
 // create youtube embed url with consistent parameters
 function generate_youtube_embed_url($id, $autoplay = false) {
-  $url = 'https://www.youtube.com/embed/' . $id . '?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0';
+  $url = 'https://www.youtube.com/embed/' . $id . '?modestbranding=1&rel=0';
 
   if ($autoplay) {
-    $url .= '&amp;autoplay=1';
+    $url .= '&autoplay=1';
   }
 
   return $url;

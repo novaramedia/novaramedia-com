@@ -31,16 +31,25 @@
       <div id="header-main-wrapper">
         <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
-            <div class="col col18">
+            <div class="header-main__navigation col col4">
               <ul id="header-navs" class="u-inline-list u-inline-block">
                 <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
                 <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
               </ul>
+            </div>
+            
+            <div class="header-main__middle col col16 text-align-center">
+
+              <a href="<?php echo home_url(); ?>">
+                <nav id="header-main__logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logotype-2-white-line.svg'); ?></nav>
+              </a>
+
+              
               <?php
                 if (is_single()) {
                   $author = get_post_meta($post->ID, '_cmb_author', true);
               ?>
-              <span id="header-page-title" class="text-overflow-ellipsis u-inline-block"><?php
+              <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
                 the_title();
                 if (!empty($author)) {
                   echo ' by ' . $author;
@@ -50,10 +59,10 @@
                 }
               ?>
             </div>
+                        
             <a href="<?php echo home_url(); ?>">
-              <div class="col col6 text-align-right">
-                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/NM-logomark-white.svg'); ?></nav>
-                <nav id="header-logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/nm-logotype-dev1.svg'); ?></nav>
+              <div class="header-main__logomark col col4 text-align-right">
+                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logomark-white.svg'); ?></nav>
               </div>
             </a>
           </div>
@@ -64,7 +73,7 @@
         <div class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
             <div class="col col24">
-              <ul class="header-menu u-inline-list font-tracking-medium">
+              <ul class="header-menu u-inline-list text-align-center font-tracking-medium">
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>

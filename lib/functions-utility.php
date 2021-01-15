@@ -3,7 +3,7 @@
 // to replace file_get_contents
 function url_get_contents($Url) {
   if (!function_exists('curl_init')){
-      die('CURL is not installed!');
+    return;
   }
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $Url);
