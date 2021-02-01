@@ -23,7 +23,7 @@
         $image_id = isset($signups[$i]['image_id']) ? $signups[$i]['image_id'] : false;
     ?>
     <div class="col col<?php echo $cols;?>">
-      <a class="front-page-signup" href="<?php echo $link; ?>" target="_blank" rel="nofollow">
+      <a class="front-page-signup" href="<?php echo $link; ?>" <?php if (!strpos($link, 'novaramedia.com/')) {echo 'target="_blank"';} ?> rel="nofollow">
         <div class="front-page-signup__image">
             <?php
               if ($image_id) {
