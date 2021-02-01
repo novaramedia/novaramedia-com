@@ -221,6 +221,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $articles_metabox->add_field( array(
+    'name' => __( 'Standfirst', 'cmb' ),
+    'id'   => $prefix . 'standfirst',
+    'type' => 'textarea',
+  ) );
+  
+  $articles_metabox->add_field( array(
     'name' => __( 'Author', 'cmb' ),
     'id'   => $prefix . 'author',
     'type' => 'text',
@@ -232,6 +238,18 @@ function igv_cmb_metaboxes() {
     'id'   => $prefix . 'author_twitter',
     'type' => 'text',
     'repeatable' => true,
+  ) );
+
+  $articles_metabox->add_field( array(
+    'name' => __( 'Layout', 'cmb' ),
+    'id'   => $prefix . 'article_layout',
+    'type' => 'radio',
+    'show_option_none' => false,
+    'options'          => array(
+      'basic' => __( 'Basic', 'cmb2' ),
+      'basic-no-image'     => __( 'Basic (no image)', 'cmb2' ),
+      'large-image'   => __( 'Large splashed image', 'cmb2' ),
+    ),
   ) );
 
   // Resources
