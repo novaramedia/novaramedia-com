@@ -135,6 +135,13 @@ function igv_cmb_metaboxes() {
     'type' => 'file',
   ) );
 
+  $meta_boxes->add_field( array(
+    'name' => __( 'Alternative social sharing thumbnail', 'cmb' ),
+    'desc' => __( 'This image will override the thumbnail as the image shown on social media when sharing. (optional)', 'cmb' ),
+    'id'   => $prefix . 'alt_social',
+    'type' => 'file',
+  ) );
+
   // FM
 
   $audio_metabox = new_cmb2_box( array (
