@@ -1,13 +1,16 @@
 <?php
   $meta = get_post_meta($post->ID);
-
-  $is_liveblog = get_post_meta( $post->ID, 'novara_live_updates_enabled', true );
-
-  $thumbnail_id = get_post_thumbnail_id($post->ID);
-  $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
-
+  
   $category_id = get_cat_ID('Articles');
   $category_link = get_category_link( $category_id );
+  
+  $layout = 'basic';
+  
+  if (!empty($meta['_cmb_article_layout'][0])) {
+    $layout = $meta['_cmb_article_layout'][0];
+  }
+  
+//   pr($layout);
 ?>
 
 <div class="row margin-bottom-basic mobile-margin-bottom-small">
@@ -20,37 +23,30 @@
         $child_categories = array_values($child_categories);
 
         if (isset($child_categories[0])) {
-          echo ': <a href="' . get_term_link($child_categories[0]) . '">' . $child_categories[0]->name . '</a>';
+          echo '| <a href="' . get_term_link($child_categories[0]) . '">' . $child_categories[0]->name . '</a>';
         }
       ?>
     </h4>
   </div>
 </div>
 
-<div class="row">
-  <div class="col col24 text-align-center u-position-relative">
-    <?php the_post_thumbnail('col24-widescreen-crop'); ?>
-    <div id="single-article-photo-caption" class="text-shadow-white">
-      <?php
-        if (!empty($thumbnail_image[0]->post_excerpt)) {
-          echo $thumbnail_image[0]->post_excerpt;
-        }
-      ?>
-    </div>
-  </div>
-</div>
-
 <?php
-  if ($is_liveblog === 'on') {
-    get_template_part('partials/singles/single-post-articles-liveblog-header');
-  } else {
-    get_template_part('partials/singles/single-post-articles-header');
-  }
+  get_template_part('partials/singles/articles/articles-header-' . $layout);
 ?>
 
-<div id="single-articles-copy-row" class="row">
-  <div class="col col4"></div>
-  <div class="col col16">
+<div id="single-articles-copy-row" class="flex-grid-row margin-bottom-basic">
+  <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-10 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-2 flex-item-xxl-6 flex-offset-xxl-3">
+    
+<?php
+  if (!empty($meta['_cmb_sc'][0])) {
+?>
+    <div class="text-copy margin-top-basic margin-bottom-basic">
+      <p class="font-smaller">Listen to this article as audio:</p>
+      <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
+    </div>
+<?php
+  }
+?>  
     <div id="single-articles-copy" class="text-copy margin-top-basic margin-bottom-basic">
       <?php the_content(); ?>
     </div>

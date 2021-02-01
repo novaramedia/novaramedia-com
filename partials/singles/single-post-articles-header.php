@@ -63,17 +63,3 @@
     </ul>
   </div>
 </div>
-
-<?php
-  if (!empty($meta['_cmb_sc'][0])) {
-?>
-<div class="row margin-top-basic margin-bottom-small">
-  <div class="col col3"></div>
-  <div class="col col18 mobile-margin-bottom-tiny">
-    <p class="font-smaller">Listen to this article as audio:</p>
-    <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
-  </div>
-</div>
-<?php
-  }
-?>
