@@ -1,6 +1,7 @@
 @import '~kouto-swiss/index.styl'
 @import "helpers"
 @import "library"
+@import "grid-functions"
 
 // ******************************************************
 
@@ -32,6 +33,8 @@ normalize()
 $cols = 24
 $col = 39px
 $gutter = 16px
+
+flex-grid-maker(false, $gutter, 'xxl')
 
 .container
   margin: 0 auto
@@ -140,6 +143,7 @@ h1, .font-size-h1
   font-weight: bold
   margin: 0
   letter-spacing: $font-tracking-wider
+  line-height: 1.3
 
 h2, .font-size-h2
   font-size: $font-size-h2
