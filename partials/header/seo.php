@@ -19,7 +19,15 @@ if ($fbAppId) {
 global $post;
 
 if (has_post_thumbnail($post)) {
-  $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'opengraph');
+  $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // get alternative thumbnail meta
+  
+  if (!empty($alt_thumb)) {
+    $thumb_id = $alt_thumb; // if alt thumb is set we use it
+  } else {
+    $thumb_id = get_post_thumbnail_id($post->ID); // otherwise use the default
+  }
+  
+  $thumb = wp_get_attachment_image_src($thumb_id, 'opengraph');
 }
 
 $ogImage = wp_get_attachment_image_src(IGV_get_option('_igv_og_image_id'), 'opengraph');

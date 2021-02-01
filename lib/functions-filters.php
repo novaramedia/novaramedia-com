@@ -1,4 +1,17 @@
 <?php
+  
+// add category nicenames in body class
+function nm_category_id_class($classes) {
+  if (is_single()) {
+    global $post;
+    foreach((get_the_category($post->ID)) as $category)
+      $classes[] = 'category-' . $category->category_nicename;
+  }
+  
+  return $classes;
+}
+ 
+add_filter('body_class', 'nm_category_id_class');
 
 // Register nav menus
 function nm_register_menus() {

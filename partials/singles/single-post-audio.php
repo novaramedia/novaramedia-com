@@ -21,10 +21,11 @@
 
 <header class="row margin-bottom-small">
   <div class="col col12">
-    <h1 class="js-fix-widows"><?php the_title(); ?></h1>
+    <h1 class="js-fix-widows"><?php the_title(); ?></h1>    
+    <?php the_post_thumbnail('col4', ['class' => 'margin-top-small only-desktop']); ?>
   </div>
 
-  <div class="col col12 text-copy font-italic padding-top-micro">
+  <div class="col col12 text-copy padding-top-micro">
     <?php the_content(); ?>
   </div>
 </header>

@@ -39,10 +39,9 @@
             </div>
             
             <div class="header-main__middle col col16 text-align-center">
-
               <a href="<?php echo home_url(); ?>">
+                
                 <nav id="header-main__logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logotype-2-white-line.svg'); ?></nav>
-              </a>
 
               
               <?php
@@ -58,6 +57,8 @@
               <?php
                 }
               ?>
+
+              </a>
             </div>
                         
             <a href="<?php echo home_url(); ?>">
