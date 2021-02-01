@@ -109,6 +109,8 @@ if( have_posts() ) {
               <li><a href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a></li>
               <li><a href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a></li>
             </ul>
+            <h3>Crypto</h3>
+            <p>We accept BTC at this address: 1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
           </div>
         </div>
       </div>
