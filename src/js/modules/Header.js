@@ -19,7 +19,7 @@ export class Header {
   onReady() {
     const _this = this;
 
-    if ($('body').hasClass('single')) {
+    if ($('body').hasClass('single') && $('body').hasClass('category-articles')) {
       _this.initSinglePostTitle();
     }  
 
