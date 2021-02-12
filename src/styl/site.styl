@@ -93,9 +93,9 @@ $margin-large = ($gutter * 5)
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
 $font-size-smaller = .8rem
-$font-size-h3 = golden-ratio(1rem , 1)
-$font-size-h2 = golden-ratio(1rem , 1.5)
-$font-size-h1 = golden-ratio(1rem , 2)
+$font-size-h3 = golden-ratio(1rem , .7)
+$font-size-h2 = golden-ratio(1rem , 1.1)
+$font-size-h1 = golden-ratio(1rem , 2.1)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -242,8 +242,8 @@ p
 
 article
   ul, ol
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
+    margin-top: 2.5rem
+    margin-bottom: 2.5rem
     margin-left: 1rem
   ul
     li
@@ -253,12 +253,17 @@ article
       list-style: decimal inside
 
 .text-copy
+  .twitter-tweet, .instagram-media, .oembed-element
+    margin: 2.5rem auto !important
   p
     font-family: $font-serif
     font-size: $font-size-larger
     line-height: $font-leading-larger
   blockquote
-    margin: 3rem
+    font-family: $font-sans
+    margin: 2.5rem
+    p
+      font-family: $font-sans
   h1,h2,h3,h4,h5,h6
     margin-top: 1.5rem
     margin-bottom: 1.5rem
@@ -286,9 +291,12 @@ article
   max-width: ( 18 * $col ) + ( 17  * $gutter )
   margin: 0 auto
 
-.page-copy
+.page-copy // what is this doing? surely the .text-copy class should be used
   blockquote
-    margin: 3rem
+    font-family: $font-sans
+    margin: 2.5rem
+    p
+      font-family: $font-sans
   h1,h2,h3,h4,h5,h6
     margin-top: 1.5rem
     margin-bottom: 1.5rem
@@ -774,7 +782,7 @@ img
 
   @import "responsive/desktop-small"
 
-@media screen and (max-width: 888px)
+@media screen and (max-width: 910px)
 
   @import "responsive/ipad"
 
