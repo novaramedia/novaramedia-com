@@ -217,6 +217,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
     <?php
       $audio_category = get_term_by('slug', 'audio', 'category');
       $burner_category = get_term_by('slug', 'the-burner', 'category');
+      $burner_category_id = !empty($burner_category) ? array($burner_category->term_id) : array();
 
       $category_link = get_category_link( $audio_category->term_id );
     ?>
@@ -232,7 +233,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
         $latest_audio = new WP_Query(array(
           'posts_per_page' => 8,
           'cat' => $audio_category->term_id,
-          'category__not_in' => array($burner_category->term_id)
+          'category__not_in' => $burner_category_id
         ));
 
         if ($latest_audio->have_posts()) {
