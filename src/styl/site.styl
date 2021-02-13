@@ -149,7 +149,7 @@ h2, .font-size-h2
   font-size: $font-size-h2
   font-weight: bold
   margin: 0
-  letter-spacing: $font-tracking-wider
+  letter-spacing: $font-tracking-basic
 
 h3
   font-size: $font-size-h3
@@ -550,7 +550,7 @@ img
   position: absolute
   left: 0
   top: 0
-  max-width: 100%
+  width: 100%
 
 #header-sub
   display: none
@@ -738,6 +738,10 @@ img
   right: ($gutter / 2)
   writing-mode: vertical-rl
   padding: $margin-micro
+  
+#single-article-support-box
+  border: 1px solid $color-red
+  padding: 1rem
 
   // LIVEBLOG
 
@@ -774,7 +778,7 @@ img
 
 // MEDIA QUERIES
 
-@media screen and (max-width: ($col * $cols)+($gutter * $cols))
+@media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
 
   @import "responsive/desktop-mid"
 
@@ -786,6 +790,6 @@ img
 
   @import "responsive/ipad"
 
-@media screen and (max-width: 755px)
+@media screen and (max-width: 759px)
 
   @import "responsive/mobile"

@@ -1302,7 +1302,7 @@ h2,
   font-size: 1.697760280736162rem;
   font-weight: bold;
   margin: 0;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.001em;
 }
 h3 {
   font-size: 1.400505962399693rem;
@@ -1700,7 +1700,7 @@ img {
   position: absolute;
   left: 0;
   top: 0;
-  max-width: 100%;
+  width: 100%;
 }
 #header-sub {
   display: none;
@@ -1863,6 +1863,10 @@ img {
           writing-mode: vertical-rl;
   padding: 4.944271909998838px;
 }
+#single-article-support-box {
+  border: 1px solid #f00;
+  padding: 1rem;
+}
 .text-copy .liveblog-update-heading {
   border-top: 1px solid #0e0e0e;
   padding-top: 32px;
@@ -1888,7 +1892,7 @@ img {
 #gdpr p a {
   text-decoration: underline;
 }
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 1336px) {
   .container {
     width: 1104px;
   }
@@ -3260,7 +3264,7 @@ img {
     margin-top: 24px;
   }
 }
-@media screen and (max-width: 755px) {
+@media screen and (max-width: 759px) {
   .container {
     width: 96%;
     max-width: 460px;
