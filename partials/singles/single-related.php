@@ -1,71 +1,34 @@
 <?php
-  if (has_term(null, 'focus', $post->ID)) {
-    $terms = get_the_terms($post->ID, 'focus');
-    if ($terms) {
-      $focusPosts = new WP_Query(array(
-        'posts_per_page' => 4,
-        'post__not_in' => array($post->ID),
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'focus',
-            'field' => 'term_id',
-            'terms' => $terms[0]->term_id
-          ),
-        ),
-      ));
-      if ($focusPosts->have_posts()) {
-        $focusIds = [];
+  $meta = get_post_meta($post->ID);
+
+  if (!empty($meta['_cmb_related_posts'])) {    
+    $related_args = array(
+      'posts_per_page' => 3,
+      'post__in' => explode(', ', $meta['_cmb_related_posts'][0])
+    );
+    
+    $related_posts = new WP_Query($related_args);
+
+    if ($related_posts->have_posts()) {
 ?>
-<div class="row margin-bottom-small">
-  <div class="col col24">
-    <h4><a href="<?php echo get_term_link($terms[0]); ?>">More in this Focus on <?php echo $terms[0]->name; ?></a></h4>
+<section id="single-related" class="container margin-top-mid margin-bottom-large">
+  <div class="row margin-bottom-small">
+    <div class="col col24">
+      <h4>Related</h4>
+    </div>
   </div>
-</div>
-<div class="row margin-bottom-basic">
+  <div class="related-posts row">
 <?php
-        while ($focusPosts->have_posts()) {
-          $focusPosts->the_post();
-          $focusIds[] = $post->ID;
-          get_template_part('partials/post-layouts/post-col6');
-        }
-?>
-</div>
-<?php
-      wp_reset_postdata();
+      while ($related_posts->have_posts()) {
+        $related_posts->the_post();
+        get_template_part('partials/post-layouts/post-col8');
       }
-    }
-  }
-
-  if (isset($focusIds)) {
-    $related = get_related_posts($focusIds);
-  } else {
-    $related = get_related_posts(null, null, 8);
-  }
-
-  if ($related->have_posts()) {
 ?>
-<div class="row margin-bottom-small">
-  <div class="col col24">
-    <h4>Related</h4>
   </div>
-</div>
-<div class="related-posts row margin-bottom-basic">
+</section>
 <?php
-    $i = 0;
-    while ($related->have_posts()) {
-      $related->the_post();
-
-      if ($i % 4 === 0 && $i !== 0) {
-        echo "</div>\n<div class=\"row margin-bottom-basic\">";
-      }
-
-      get_template_part('partials/post-layouts/post-col6');
-
-      $i++;
     }
-?>
-</div>
-<?php
-  wp_reset_postdata();
+
+    wp_reset_postdata();
   }
 ?>

@@ -129,6 +129,15 @@ function igv_cmb_metaboxes() {
   ) );
 
   $meta_boxes->add_field( array(
+    'name'    => __( 'Related Posts', 'cmb' ),
+    'desc'    => __( 'If set will show related posts at the bottom of the post. Max 3 shown(optional)', 'cmb' ),
+    'id'      => $prefix . 'related_posts',
+    'type'    => 'post_search_text',
+    'post_type'   => array('post'),
+    'select_behavior' => 'add',
+  ) );
+
+  $meta_boxes->add_field( array(
     'name' => __( 'Misc download', 'cmb' ),
     'desc' => __( 'Upload an file or enter a URL.', 'cmb' ),
     'id'   => $prefix . 'dl',
