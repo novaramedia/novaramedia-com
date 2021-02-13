@@ -101,15 +101,6 @@ class IGV_Admin {
       ),
     ) );
 
-    // FRONT PAGE OPTIONS
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Front Page Options', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
-      'id'   => $this->prefix . 'home_title',
-      'type' => 'title',
-    ) );
-
     // FUNDING COPY OPTIONS
 
     $options_metabox->add_field( array(
@@ -138,6 +129,14 @@ class IGV_Admin {
       'type' => 'text',
       'default' => 'Or you can give us a one-off donation:',
     ) );
+    
+    $options_metabox->add_field( array(
+      'name' => __( 'Article support box text', 'IGV' ),
+      'desc' => __( 'This will be the default text shown in the red outlined box at the top of articles.', 'IGV' ),
+      'id'   => $this->prefix . 'articles_support_box_text',
+      'type' => 'textarea_small',
+    ) );
+    
     // ANNOUNCEMENT OPTIONS
 
     $options_metabox->add_field( array(

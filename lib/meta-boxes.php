@@ -151,6 +151,13 @@ function igv_cmb_metaboxes() {
     'type' => 'file',
   ) );
 
+  $meta_boxes->add_field( array(
+    'name'    => __( 'Support box override', 'cmb' ),
+    'desc'    => __( 'If set this will override any red outlined support boxes on the single post page(optional)', 'cmb' ),
+    'id'      => $prefix . 'support_box_override',
+    'type'    => 'textarea_small',
+  ) );
+
   // FM
 
   $audio_metabox = new_cmb2_box( array (
