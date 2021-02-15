@@ -35,7 +35,7 @@
   get_template_part('partials/singles/articles/articles-header-' . $layout);
 ?>
 
-<div id="single-articles-copy-row" class="flex-grid-row margin-top-mid margin-bottom-basic">
+<div class="flex-grid-row margin-top-mid margin-bottom-basic">
   <div class="flex-grid-item only-desktop flex-item-m-12 flex-item-l-12 flex-item-xl-2 flex-item-xxl-2 margin-bottom-basic">
     <?php
       $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
