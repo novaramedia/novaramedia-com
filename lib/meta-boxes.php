@@ -108,7 +108,6 @@ function igv_cmb_metaboxes() {
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_cmb_';
 
-
   $meta_boxes = new_cmb2_box( array (
     'id'         => 'post_metabox',
     'title'      => __( 'Post Meta', 'cmb' ),
@@ -118,7 +117,6 @@ function igv_cmb_metaboxes() {
     'show_names' => true, // Show field names on the left
     'show_in_rest' => WP_REST_Server::READABLE,
   ) );
-
 
   $meta_boxes->add_field( array(
     'name'    => __( 'Short description', 'cmb' ),
