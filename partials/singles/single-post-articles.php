@@ -8,18 +8,16 @@
   
   $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
+
+  $type_category = get_child_level_child_category($post->ID);
 ?>
 
 <div class="row margin-bottom-basic mobile-margin-bottom-small">
   <div class="col col24">
     <h4>
       <?php
-        $categories = get_the_category();
-        $child_categories = array_filter($categories, 'only_child_category_filter');
-        $child_categories = array_values($child_categories);
-
-        if (isset($child_categories[0])) {
-          echo '<a href="' . get_term_link($child_categories[0]) . '">' . $child_categories[0]->name . '</a>';
+        if ($type_category) {
+          echo '<a href="' . get_term_link($type_category) . '">' . $type_category->name . '</a>';
         } else {
       ?>
         <a href="<?php echo $category_link; ?>">Articles</a>
