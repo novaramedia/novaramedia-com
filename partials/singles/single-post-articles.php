@@ -4,11 +4,10 @@
   $category_id = get_cat_ID('Articles');
   $category_link = get_category_link( $category_id );
   
-  $layout = 'basic';
+  $layout = !empty($meta['_cmb_article_layout'][0]) ? $meta['_cmb_article_layout'][0] : 'basic';
   
-  if (!empty($meta['_cmb_article_layout'][0])) {
-    $layout = $meta['_cmb_article_layout'][0];
-  }
+  $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
+  $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
 ?>
 
 <div class="row margin-bottom-basic mobile-margin-bottom-small">
@@ -37,10 +36,7 @@
 
 <div class="flex-grid-row margin-top-mid margin-bottom-basic">
   <div class="flex-grid-item only-desktop flex-item-m-12 flex-item-l-12 flex-item-xl-2 flex-item-xxl-2 margin-bottom-basic">
-    <?php
-      $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
-      $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
-      
+    <?php      
       if ($articles_support_box_text || $support_box_override_text) {
     ?>    
     <a href="<?php echo home_url('support'); ?>">
