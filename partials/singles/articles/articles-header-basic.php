@@ -1,6 +1,5 @@
 <?php
   $meta = get_post_meta($post->ID);
-//   $is_liveblog = get_post_meta( $post->ID, 'novara_live_updates_enabled', true );
 ?>
 
 <div class="flex-grid-row margin-bottom-basic">
@@ -14,13 +13,7 @@
       }
     ?>
     
-    <h3>by <?php
-      if (!empty($meta['_cmb_author'])) {
-        echo $meta['_cmb_author'][0];
-      } else {
-        echo 'Novara Reporters';
-      } // >>>TODO deal with twitter links
-    ?></h3>
+    <?php get_template_part('partials/singles/articles/components/articles-header-author'); ?>
     <h3><?php the_time('j F Y'); ?></h3>
   </div>
 
