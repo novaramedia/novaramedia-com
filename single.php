@@ -54,11 +54,9 @@ if( have_posts() ) {
     get_template_part('partials/announcement');
 
     get_template_part('partials/support-section');
+  
+    get_template_part('partials/singles/single-related'); 
   ?>
-
-  <section id="single-related" class="container margin-top-large margin-bottom-large">
-    <?php get_template_part('partials/singles/single-related'); ?>
-  </section>
 
 <!-- end main-content -->
 

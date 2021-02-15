@@ -1,6 +1,7 @@
 @import '~kouto-swiss/index.styl'
 @import "helpers"
 @import "library"
+@import "grid-functions"
 
 // ******************************************************
 
@@ -32,6 +33,8 @@ normalize()
 $cols = 24
 $col = 39px
 $gutter = 16px
+
+flex-grid-maker(false, $gutter, 'xxl')
 
 .container
   margin: 0 auto
@@ -90,9 +93,9 @@ $margin-large = ($gutter * 5)
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
 $font-size-smaller = .8rem
-$font-size-h3 = golden-ratio(1rem , 1)
-$font-size-h2 = golden-ratio(1rem , 1.5)
-$font-size-h1 = golden-ratio(1rem , 2)
+$font-size-h3 = golden-ratio(1rem , .7)
+$font-size-h2 = golden-ratio(1rem , 1.1)
+$font-size-h1 = golden-ratio(1rem , 2.1)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -140,12 +143,13 @@ h1, .font-size-h1
   font-weight: bold
   margin: 0
   letter-spacing: $font-tracking-wider
+  line-height: 1.3
 
 h2, .font-size-h2
   font-size: $font-size-h2
   font-weight: bold
   margin: 0
-  letter-spacing: $font-tracking-wider
+  letter-spacing: $font-tracking-basic
 
 h3
   font-size: $font-size-h3
@@ -238,8 +242,8 @@ p
 
 article
   ul, ol
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
+    margin-top: 2.5rem
+    margin-bottom: 2.5rem
     margin-left: 1rem
   ul
     li
@@ -249,12 +253,17 @@ article
       list-style: decimal inside
 
 .text-copy
+  .twitter-tweet, .instagram-media, .oembed-element
+    margin: 2.5rem auto !important
   p
     font-family: $font-serif
     font-size: $font-size-larger
     line-height: $font-leading-larger
   blockquote
-    margin: 3rem
+    font-family: $font-sans
+    margin: 2.5rem
+    p
+      font-family: $font-sans
   h1,h2,h3,h4,h5,h6
     margin-top: 1.5rem
     margin-bottom: 1.5rem
@@ -282,9 +291,12 @@ article
   max-width: ( 18 * $col ) + ( 17  * $gutter )
   margin: 0 auto
 
-.page-copy
+.page-copy // what is this doing? surely the .text-copy class should be used
   blockquote
-    margin: 3rem
+    font-family: $font-sans
+    margin: 2.5rem
+    p
+      font-family: $font-sans
   h1,h2,h3,h4,h5,h6
     margin-top: 1.5rem
     margin-bottom: 1.5rem
@@ -538,7 +550,7 @@ img
   position: absolute
   left: 0
   top: 0
-  max-width: 100%
+  width: 100%
 
 #header-sub
   display: none
@@ -719,13 +731,10 @@ img
   display: none
 
   // ARTICLE
-
-#single-article-photo-caption
-  position: absolute
-  top: 0
-  right: ($gutter / 2)
-  writing-mode: vertical-rl
-  padding: $margin-micro
+  
+#single-article-support-box
+  border: 1px solid $color-red
+  padding: 1rem
 
   // LIVEBLOG
 
@@ -762,7 +771,7 @@ img
 
 // MEDIA QUERIES
 
-@media screen and (max-width: ($col * $cols)+($gutter * $cols))
+@media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
 
   @import "responsive/desktop-mid"
 
@@ -770,10 +779,10 @@ img
 
   @import "responsive/desktop-small"
 
-@media screen and (max-width: 888px)
+@media screen and (max-width: 910px)
 
   @import "responsive/ipad"
 
-@media screen and (max-width: 755px)
+@media screen and (max-width: 759px)
 
   @import "responsive/mobile"
