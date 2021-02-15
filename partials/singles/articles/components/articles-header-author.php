@@ -4,7 +4,7 @@
     
   $twitter_url = false;
   
-  if (!is_array($twitter) || count($twitter) === 1) {
+  if ($twitter &&(!is_array($twitter) || count($twitter) === 1)) { // if twitter is set and it either isn't an array (old support) or it only has 1 value then we can display it
     if (is_array($twitter)) {
       $twitter_url = $twitter[0];
     } else {
