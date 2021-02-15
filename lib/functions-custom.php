@@ -2,7 +2,7 @@
 /**
 * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
 *
-* @return Boolean
+* @return Object/Boolean WP Term object or false if doesn't exist
 */  
 function get_child_level_child_category($post_id) {
   $categories = get_the_category($post_id);
