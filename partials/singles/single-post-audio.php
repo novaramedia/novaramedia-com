@@ -11,11 +11,28 @@
   } else {
     $share_url = get_the_permalink($post->ID);
   }
+  
+  $show_category = get_child_level_child_category($post->ID);
+  
+  if ($show_category && get_term_meta($show_category->term_id, '_nm_podcast_url', true)) {
+    $podcast_url = get_term_meta($show_category->term_id, '_nm_podcast_url', true);
+  } else {
+    $podcast_url = 'https://podcast.novaramedia.com';
+  }
 ?>
 
 <div class="row">
   <div class="col col24 margin-bottom-basic mobile-margin-bottom-small">
-    <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
+    
+    <h4><?php
+      if ($show_category) {
+        echo '<a href="' . get_term_link($show_category) . '">' . $show_category->name . '</a>';
+      } else {
+    ?>
+      <a href="<?php echo $category_link; ?>">Audio</a>
+    <?php
+      }
+    ?></h4>
   </div>
 </div>
 
@@ -39,7 +56,7 @@
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="http://podcast.novaramedia.com" target="_blank">Subscribe to Podcast</a></li>
+      <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
         echo '<li><a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
@@ -71,7 +88,7 @@
       <?php
         if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
       ?>
-        <div class="font-mono font-smaller">
+        <div class="font-mono font-smaller margin-top-micro">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
