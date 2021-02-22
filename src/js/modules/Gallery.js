@@ -28,7 +28,7 @@ export class Gallery {
         paginationFractionRender: function (swiper, currentClassName, totalClassName) {
           return '<span class="' + currentClassName + '"></span>/<span class="' + totalClassName + '"></span>';
         },
-        onTap: function(swiper, event) {
+        onTap: function(swiper) {
           swiper.slideNext();
         },
       });
