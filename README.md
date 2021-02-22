@@ -1,4 +1,4 @@
 novaramedia-com
 ===============
 
-wordpress theme for novaramedia.com
+no future utopia now
