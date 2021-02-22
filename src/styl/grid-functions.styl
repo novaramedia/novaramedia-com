@@ -1,0 +1,40 @@
+.flex-grid-row
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  &.reverse
+    flex-direction: row-reverse
+  &.flex-nowrap
+    flex-wrap: nowrap
+
+.flex-grid-item
+  position: relative
+  flex: 0 1 auto
+  max-width: 100%
+  max-height: 100%
+
+flex-grid-maker($width = false, $gutter = false, $size = false, $cols = 12)
+
+  if $width
+    .container
+      width: $width
+
+  if $gutter
+    .flex-grid-item
+      padding-left: ( $gutter / 2 )
+      padding-right: ( $gutter / 2 )
+
+  // COLUMN SIZES & OFFSETS
+
+  if $gutter and $size
+
+    for offset in 0..($cols - 1)
+      .flex-grid-row
+        .flex-offset-{$size}-{offset}
+          margin-left: ( 100% / $cols ) * offset
+
+    for col in 1..$cols
+      .flex-item-{$size}-{col}
+        flex-basis: ( 100% / $cols ) * col
+      .flex-grid-row > .item-{$size}-{col}
+        max-width: ( 100% / $cols ) * col

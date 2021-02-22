@@ -27,7 +27,7 @@ add_action( 'init', 'nm_register_menus' );
 
 // Add classes to oembed elements
 function my_embed_oembed_html($html, $url, $attr, $post_id) {
-  return '<div class="margin-top-basic margin-bottom-basic"><div class="u-video-embed-container">' . $html . '</div></div>';
+  return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
 }
 add_filter('embed_oembed_html', 'my_embed_oembed_html', 99, 4);
 

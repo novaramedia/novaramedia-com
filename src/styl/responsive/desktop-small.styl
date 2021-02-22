@@ -14,6 +14,8 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
+flex-grid-maker(false, $gutter, 'l')
+
 // ******************************************************
 
 // VARIABLES
@@ -27,9 +29,9 @@ $margin-large = ($gutter * 5)
 
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
-$font-size-h3 = golden-ratio(1rem , 1)
-$font-size-h2 = golden-ratio(1rem , 1.2)
-$font-size-h1 = golden-ratio(1rem , 1.5)
+$font-size-h3 = golden-ratio(1rem , .7)
+$font-size-h2 = golden-ratio(1rem , 1)
+$font-size-h1 = golden-ratio(1rem , 1.8)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -315,29 +317,6 @@ p
 // ******************************************************
 
 // SINGLE
-
-  // ARTICLE
-
-#single-article-photo-caption
-  right: ($gutter / 2)
-  padding: $margin-micro
-
-#single-articles-title-row
-  .col2
-    display: none
-  .col20
-    width: 100%
-    float: none
-
-#single-articles-copy-row
-  .col4
-    display: none
-  .col16
-    width: 100%
-    max-width: 722px
-    float: none
-    margin-left: auto
-    margin-right: auto
 
   // LIVEBLOG
 

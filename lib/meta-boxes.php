@@ -108,7 +108,6 @@ function igv_cmb_metaboxes() {
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_cmb_';
 
-
   $meta_boxes = new_cmb2_box( array (
     'id'         => 'post_metabox',
     'title'      => __( 'Post Meta', 'cmb' ),
@@ -119,13 +118,21 @@ function igv_cmb_metaboxes() {
     'show_in_rest' => WP_REST_Server::READABLE,
   ) );
 
-
   $meta_boxes->add_field( array(
     'name'    => __( 'Short description', 'cmb' ),
     'desc'    => __( '...', 'cmb' ),
     'id'      => $prefix . 'short_desc',
     'type'    => 'wysiwyg',
     'options' => array( 'textarea_rows' => 5, ),
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name'    => __( 'Related Posts', 'cmb' ),
+    'desc'    => __( 'If set will show related posts at the bottom of the post. Max 3 shown(optional)', 'cmb' ),
+    'id'      => $prefix . 'related_posts',
+    'type'    => 'post_search_text',
+    'post_type'   => array('post'),
+    'select_behavior' => 'add',
   ) );
 
   $meta_boxes->add_field( array(
@@ -140,6 +147,13 @@ function igv_cmb_metaboxes() {
     'desc' => __( 'This image will override the thumbnail as the image shown on social media when sharing. (optional)', 'cmb' ),
     'id'   => $prefix . 'alt_social',
     'type' => 'file',
+  ) );
+
+  $meta_boxes->add_field( array(
+    'name'    => __( 'Support box override', 'cmb' ),
+    'desc'    => __( 'If set this will override any red outlined support boxes on the single post page(optional)', 'cmb' ),
+    'id'      => $prefix . 'support_box_override',
+    'type'    => 'textarea_small',
   ) );
 
   // FM
@@ -221,6 +235,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $articles_metabox->add_field( array(
+    'name' => __( 'Standfirst', 'cmb' ),
+    'id'   => $prefix . 'standfirst',
+    'type' => 'textarea',
+  ) );
+  
+  $articles_metabox->add_field( array(
     'name' => __( 'Author', 'cmb' ),
     'id'   => $prefix . 'author',
     'type' => 'text',
@@ -232,6 +252,18 @@ function igv_cmb_metaboxes() {
     'id'   => $prefix . 'author_twitter',
     'type' => 'text',
     'repeatable' => true,
+  ) );
+
+  $articles_metabox->add_field( array(
+    'name' => __( 'Layout', 'cmb' ),
+    'id'   => $prefix . 'article_layout',
+    'type' => 'radio',
+    'show_option_none' => false,
+    'options'          => array(
+      'basic' => __( 'Basic', 'cmb2' ),
+      'basic-no-image'     => __( 'Basic (no image)', 'cmb2' ),
+      'large-image'   => __( 'Large splashed image', 'cmb2' ),
+    ),
   ) );
 
   // Resources

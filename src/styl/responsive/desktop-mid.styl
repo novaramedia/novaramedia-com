@@ -13,6 +13,8 @@ $gutter = 14px
 for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+    
+flex-grid-maker(false, $gutter, 'xl')
 
 // ******************************************************
 
@@ -27,8 +29,8 @@ $margin-large = ($gutter * 5)
 
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
-$font-size-h3 = golden-ratio(1rem , 1)
-$font-size-h2 = golden-ratio(1rem , 1.5)
+$font-size-h3 = golden-ratio(1rem , .7)
+$font-size-h2 = golden-ratio(1rem , 1.1)
 $font-size-h1 = golden-ratio(1rem , 2)
 
 $font-leading-basic = 1.4
@@ -321,12 +323,6 @@ p
 // ******************************************************
 
 // SINGLE
-
-  // ARTICLE
-
-#single-article-photo-caption
-  right: ($gutter / 2)
-  padding: $margin-micro
 
   // LIVEBLOG
 

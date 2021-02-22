@@ -1,5 +1,22 @@
 <?php
 /**
+* Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
+*
+* @return Object/Boolean WP Term object or false if doesn't exist
+*/  
+function get_child_level_child_category($post_id) {
+  $categories = get_the_category($post_id);
+  $child_categories = array_filter($categories, 'only_child_category_filter');
+  $child_categories = array_values($child_categories);
+
+  if (isset($child_categories[0])) {
+    return $child_categories[0];
+  } else {
+    return false;
+  }
+}   
+  
+/**
 * Answer the question is this a single post in the articles category?
 *
 * @return Boolean
