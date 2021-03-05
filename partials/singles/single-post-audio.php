@@ -66,8 +66,9 @@
   </div>
   <div class="col col12">
     <ul class="inline-action-list">
-      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet Episode'); ?></li>
-      <li><?php render_facebook_share_link($share_url); ?></li>
+      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
+      <li><?php render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
+      <li><?php render_email_share_link($share_url, $post->post_title, 'Email this episode');?></li>
     </ul>
   </div>
 </div>

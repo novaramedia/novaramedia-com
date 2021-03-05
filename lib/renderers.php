@@ -161,6 +161,10 @@ function render_resources_row($resources) {
 }
 
 function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
+  if (empty($url)) {
+    return;
+  }  
+  
   $twitter_url = 'https://twitter.com/intent/tweet?via=novaramedia';
 
   if ($hashtag) {
@@ -173,15 +177,29 @@ function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag =
 
   $twitter_url .= '&url=' . urlencode($url);
 
-  echo '<a href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="share-action share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
 
-function render_facebook_share_link($url, $link_text = 'Facebook Share') {
+function render_facebook_share_link($url, $link_text = 'Facebook share') {
+  if (empty($url)) {
+    return;
+  }
+
   $facebook_url = 'https://www.facebook.com/sharer/sharer.php?';
 
   $facebook_url .= '&u=' . urlencode($url);
 
-  echo '<a href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="share-action share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+}
+
+function render_email_share_link($url, $subject = '', $link_text = 'Email') {
+  if (empty($url)) {
+    return;
+  }
+  
+  $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body='. urlencode($url);
+
+  echo '<a class="share-action share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
 /**

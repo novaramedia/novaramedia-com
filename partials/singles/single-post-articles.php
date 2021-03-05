@@ -10,6 +10,12 @@
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
 
   $type_category = get_child_level_child_category($post->ID);
+  
+  if (!empty($meta['bitly_url'])) {
+    $share_url = $meta['bitly_url'][0];
+  } else {
+    $share_url = get_the_permalink($post->ID);
+  }
 ?>
 
 <div class="row margin-bottom-basic mobile-margin-bottom-small">
@@ -67,6 +73,14 @@
 ?>  
     <div id="single-articles-copy" class="text-copy margin-bottom-basic">
       <?php the_content(); ?>
+    </div>
+    
+    <div>
+      <ul class="inline-action-list">
+        <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
+        <li><?php render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
+        <li><?php render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>
+      </ul>
     </div>
   </div>
 </div>
