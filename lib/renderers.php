@@ -108,11 +108,12 @@ function render_video_query($query) {
       <div class="video-related-video margin-bottom-small">
         <?php
           if (!empty($meta['_cmb_alt_thumb_id'])) {
-            echo wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], 'col6-16to9');
+            echo wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], 'col6-16to9 video-related-video__thumbnail');
           } else {
-            the_post_thumbnail('col6-16to9');
+            the_post_thumbnail('col6-16to9 video-related-video__thumbnail');
           }
         ?>
+        
         <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
       </div>
    </a>

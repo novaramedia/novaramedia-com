@@ -129,7 +129,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 
   <section id="front-page-above-the-fold" class="container margin-bottom-mid mobile-margin-bottom-basic">
     <div class="row">
-      <div class="front-page-above-the-fold__column col only-mobile">
+      <div class="front-page-above-the-fold__column front-page-above-the-fold__featured--mobile col only-mobile">
         <?php
           // render 2 featured articles
           if ($featured_display->have_posts()) {
@@ -140,7 +140,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
           }
         ?>
       </div>
-      <div class="front-page-above-the-fold__column col col6">
+      <div class="front-page-above-the-fold__column front-page-above-the-fold__articles col col6">
         <?php
           // render 5 recent articles
           if ($recent_articles->have_posts()) {
@@ -157,7 +157,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
           }
         ?>
       </div>
-      <div class="front-page-above-the-fold__column col col12 only-desktop">
+      <div class="front-page-above-the-fold__column front-page-above-the-fold__featured col col12 only-desktop">
         <?php
           // render 2 featured articles
           if ($featured_display->have_posts()) {
@@ -168,7 +168,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
           }
         ?>
       </div>
-      <div class="front-page-above-the-fold__column col col6">
+      <div class="front-page-above-the-fold__column front-page-above-the-fold__mixed col col6">
         <?php
           // render recent top audio
           if ($recent_audio_category_1->have_posts()) {

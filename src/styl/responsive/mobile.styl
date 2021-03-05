@@ -371,6 +371,18 @@ input[type=number]
 #home-articles-posts, #home-fm-posts, #home-focus-posts, #home-long-read-posts
   .col
     margin-bottom: $margin-small
+    
+.front-page-above-the-fold__articles
+  article
+    clearfix()
+    .wp-post-image
+      float: left
+      width: 'calc(50% - %s)' % $margin-micro
+      padding-right: $margin-micro * 2
+    div
+      float: left
+      width: 'calc(50% - %s)' % $margin-micro
+
 
 // ******************************************************
 
@@ -382,14 +394,13 @@ input[type=number]
 .video-related-video
   width: 100%
   clearfix()
-  .wp-post-image
-    width: 50%
+  .video-related-video__thumbnail
     float: left
-    padding-right: $margin-tiny
+    width: 'calc(50% - %s)' % $margin-micro
+    padding-right: $margin-micro * 2
   h6
-    width: 50%
     float: left
-    padding-left: $margin-tiny
+    width: 'calc(50% - %s)' % $margin-micro
     font-size: 1rem
 
 // ******************************************************

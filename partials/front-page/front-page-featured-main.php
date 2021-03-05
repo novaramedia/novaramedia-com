@@ -1,8 +1,6 @@
 <?php
   $meta = get_post_meta($post->ID);
   $timestamp = get_post_time('c');
-
-
 ?>
 
 <a href="<?php the_permalink() ?>">
