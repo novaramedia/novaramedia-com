@@ -48,6 +48,44 @@
   width: 100%;
   height: 100%;
 }
+.wp-video {
+  margin: 1.5rem 0;
+}
+.wp-video,
+video.wp-video-shortcode,
+.mejs-container,
+.mejs-overlay.load {
+  width: 100% !important;
+  height: 100% !important;
+}
+.mejs-container {
+  padding-top: 56.25%;
+}
+.wp-video,
+video.wp-video-shortcode {
+  max-width: 100% !important;
+}
+video.wp-video-shortcode {
+  position: relative;
+}
+.mejs-mediaelement {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.mejs-controls {
+  display: none;
+}
+.mejs-overlay-play {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto !important;
+  height: auto !important;
+}
 html {
   overflow-y: scroll;
 }
@@ -570,6 +608,8 @@ button.swiper-pagination-bullet {
   flex: 0 1 auto;
   max-width: 100%;
   max-height: 100%;
+  min-width: 0;
+  min-height: 0;
 }
 @font-face {
   font-family: 'fontello';
@@ -3653,6 +3693,23 @@ img {
   #home-long-read-posts .col {
     margin-bottom: 12px;
   }
+  .front-page-above-the-fold__articles article:before,
+  .front-page-above-the-fold__articles article:after {
+    content: " ";
+    display: table;
+  }
+  .front-page-above-the-fold__articles article:after {
+    clear: both;
+  }
+  .front-page-above-the-fold__articles article .wp-post-image {
+    float: left;
+    width: calc(50% - 3.708203932499128px);
+    padding-right: 7.416407864998257px;
+  }
+  .front-page-above-the-fold__articles article div {
+    float: left;
+    width: calc(50% - 3.708203932499128px);
+  }
   .video-block-main-video {
     margin-bottom: 12px;
   }
@@ -3667,15 +3724,14 @@ img {
   .video-related-video:after {
     clear: both;
   }
-  .video-related-video .wp-post-image {
-    width: 50%;
+  .video-related-video .video-related-video__thumbnail {
     float: left;
-    padding-right: 6px;
+    width: calc(50% - 3.708203932499128px);
+    padding-right: 7.416407864998257px;
   }
   .video-related-video h6 {
-    width: 50%;
     float: left;
-    padding-left: 6px;
+    width: calc(50% - 3.708203932499128px);
     font-size: 1rem;
   }
   #posts .row {

@@ -7,7 +7,7 @@
 
     <div class="post-col12-image">
     <?php the_post_thumbnail('col12-1to2point3', array('class' => 'u-display-block only-desktop')); ?>
-    <?php the_post_thumbnail('mobile-21to9', array('class' => 'only-mobile')); ?>
+    <?php the_post_thumbnail('mobile-16to9', array('class' => 'only-mobile')); ?>
 
       <div class="post-col12-image-overlay only-desktop"></div>
       <div class="post-col12-text font-color-white">
