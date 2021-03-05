@@ -25,6 +25,11 @@ function scripts_and_styles_method() {
 }
 add_action('wp_enqueue_scripts', 'scripts_and_styles_method');
 
+// Set max width of main content area for oembed etc
+
+if ( !isset( $content_width ) ) {
+	$content_width = 644;
+}
 
 // Declare thumbnail sizes
 
