@@ -31,10 +31,23 @@ export class Header {
 
     _this.$menuToggle.click(function() {
       _this.$headerSub.toggle();
+      
+      if (_this.$headerSub.is(':visible')) {        
+        _this.$headerSub.find('a').first().focus(); // focus on first link for accessibility
+      }
+
+      $(this).attr('aria-pressed', function(index, attr) {        
+        return attr == 'true' ? false : true;
+      });
     });
 
     _this.$searchToggle.click(function() {
       _this.$headerSearch.toggle();
+
+      $(this).attr('aria-pressed', function(index, attr) {        
+        return attr == 'true' ? false : true;
+      });
+      
       _this.$searchInput.focus();
     });
     

@@ -31,12 +31,12 @@
       <div id="header-main-wrapper">
         <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
-            <div class="header-main__navigation col col4">
+            <nav class="header-main__navigation col col4" role="navigation" aria-label="Main">
               <ul id="header-navs" class="u-inline-list u-inline-block">
-                <li id="menu-toggle" class="u-pointer"><i class="icon-menu icon-large"></i></li>
-                <li id="search-toggle" class="u-pointer"><i class="icon-search icon-large"></i></li>
+                <li id="menu-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Sections Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
+                <li id="search-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
-            </div>
+            </nav>
             
             <div class="header-main__middle col col16 text-align-center">
               <a href="<?php echo home_url(); ?>">
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div id="header-sub" class="background-gray">
+      <nav id="header-sub" class="background-gray" role="navigation" aria-label="Sections">
         <div class="container font-color-white padding-top-small padding-bottom-small">
           <div class="row">
             <div class="col col24">
@@ -86,9 +86,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      <section id="header-search">
+      <section id="header-search" role="dialog" aria-label="Search">
         <?php get_search_form(); ?>
       </section>
 
