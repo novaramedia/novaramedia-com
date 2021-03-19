@@ -1,4 +1,4 @@
-    <footer id="footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
+    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
       <div class="container">
         <div class="row">
           <div class="col col6 mobile-margin-bottom-basic">
