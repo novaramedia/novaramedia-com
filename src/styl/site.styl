@@ -114,8 +114,11 @@ $color-gray-transparent = rgba(150,150,150, .5)
 $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
-$color-red = red
-$color-blue = rgb(84,144,235)
+$color-red = rgb(220, 0, 5) // mine
+// $color-red = rgb(228, 0, 43) // PANTONE  185 C.
+// $color-red = rgb(213, 0, 50) // PANTONE  199 C.
+// $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
+$color-blue = rgb(84, 144, 235)
 
 $border-width = 2px
 
@@ -599,24 +602,35 @@ img
 
 // SUPPORT SECTION
 
+.support-form
+  &.only-desktop
+    font-size: 1.1rem
+  &.only-mobile
+    font-size: 1.3rem
+
 .support-form-holder
   min-height: 5rem
   padding: $margin-small
   text-align: center
   border: 2px solid white
+  border-radius: 2px
+  input
+    border-radius: 2px
+  
 
 .support-form-slider
   width: 70%
-  margin-right: 2%
+  margin-right: 1%
 
 .support-form-submit
-  width: 12%
+  width: 14%
   margin-left: 2%
   padding: $margin-tiny $margin-small
   background-color: white
   color: $color-red
   font-weight: bold
   border: 0
+  border-radius: 2px
 
 // FUNDRAISER PROGRESS BAR
 
