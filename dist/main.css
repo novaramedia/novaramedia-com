@@ -1782,6 +1782,18 @@ img {
 .error404 #header-search {
   display: block;
 }
+.nm-button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
+}
+.nm-button:hover {
+  border-color: #969696;
+  cursor: pointer;
+}
 .support-form.only-desktop {
   font-size: 1.1rem;
 }
@@ -1803,14 +1815,25 @@ img {
   margin-right: 1%;
 }
 .support-form-submit {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
   width: 14%;
   margin-left: 2%;
-  padding: 8px 16px;
   background-color: #fff;
   color: #dc0005;
-  font-weight: bold;
-  border: 0;
-  border-radius: 2px;
+}
+.support-form-submit:hover {
+  border-color: #969696;
+  cursor: pointer;
+}
+.support-form-submit:hover {
+  color: #fdfdfd;
+  background-color: #dc0005;
+  border-color: #fdfdfd;
 }
 #progress-bar-row {
   display: none;
@@ -1826,6 +1849,38 @@ img {
   transition: width 1s;
   height: 1.5em;
   background-color: #dc0005;
+}
+.email-signup label a {
+  text-decoration: underline;
+}
+.email-signup label a:hover {
+  text-decoration: none;
+}
+.email-signup__completion-section {
+  display: flex;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+}
+.email-signup__email-input {
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  font-size: 1.400505962399693rem;
+}
+.email-signup__email-gdpr-group {
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
+.email-signup__email-gdpr-input {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem;
+}
+.email-signup__submit {
+  padding: 1.1rem 1.5rem;
+  font-size: 1.400505962399693rem;
 }
 #radio-player {
   display: none;
@@ -3687,6 +3742,9 @@ img {
     color: #dc0005;
     border: 0;
   }
+  .email-signup__email-input {
+    margin-bottom: 12px;
+  }
   #featured-post-title-holder {
     position: relative;
     padding: 18px;
@@ -3800,3 +3858,5 @@ img {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/

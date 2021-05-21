@@ -600,6 +600,24 @@ img
 
 // ******************************************************
 
+// FORM ELEMENTS
+
+nmButton()
+  padding: $margin-tiny $margin-small
+  font-weight: bold
+  border-width: 1px
+  border-style: solid
+  border-color: transparent
+  border-radius: 3px  
+  &:hover
+    border-color: $color-gray
+    cursor: pointer
+
+.nm-button
+  nmButton()
+
+// ******************************************************
+
 // SUPPORT SECTION
 
 .support-form
@@ -617,20 +635,20 @@ img
   input
     border-radius: 2px
   
-
 .support-form-slider
   width: 70%
   margin-right: 1%
 
 .support-form-submit
+  nmButton()
   width: 14%
   margin-left: 2%
-  padding: $margin-tiny $margin-small
   background-color: white
   color: $color-red
-  font-weight: bold
-  border: 0
-  border-radius: 2px
+  &:hover
+    color: $color-white-soft
+    background-color: $color-red
+    border-color: $color-white-soft
 
 // FUNDRAISER PROGRESS BAR
 
@@ -648,6 +666,40 @@ img
   transition: width 1s
   height: 1.5em
   background-color: $color-red
+  
+// ******************************************************
+
+// EMAIL SIGNUP SECTION
+
+.email-signup
+  label
+    a
+      text-decoration: underline
+      &:hover
+        text-decoration: none
+
+.email-signup__completion-section          
+  display: flex
+  justify-content: space-between
+  align-items: center
+  
+.email-signup__email-input
+  width: 100%
+  padding: 1.1rem 1.5rem 
+  font-size: $font-size-h3
+  
+.email-signup__email-gdpr-group
+  display: flex
+  align-items: center
+    
+.email-signup__email-gdpr-input
+  width: 2rem
+  height: 2rem
+  margin: 0 1rem
+  
+.email-signup__submit
+  padding: 1.1rem 1.5rem 
+  font-size: $font-size-h3
 
 // ******************************************************
 
