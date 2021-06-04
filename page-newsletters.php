@@ -35,13 +35,11 @@ if( have_posts() ) {
     
     <?php
       get_template_part('partials/email-signup', null, array(
-        'netlify' => 'http://localhost:53751/.netlify/functions/mailchimp-signup/',
         'newsletter' => 'The Cortado',
         'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
       ));
 
       get_template_part('partials/email-signup', null, array(
-        'netlify' => 'http://localhost:53751/.netlify/functions/mailchimp-signup/',
         'newsletter' => 'The Pick',
         'copy' => 'Sign up to The Pick–our weekly newsletter selecting the pick of the weeks articles.'
       ));

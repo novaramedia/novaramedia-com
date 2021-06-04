@@ -54,7 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Header_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/Header.js */ "./src/js/modules/Header.js");
 /* harmony import */ var _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Search.js */ "./src/js/modules/Search.js");
 /* harmony import */ var _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Support.js */ "./src/js/modules/Support.js");
-/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
+/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -72,6 +73,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var Site = /*#__PURE__*/function () {
   function Site() {
     _classCallCheck(this, Site);
@@ -80,7 +82,8 @@ var Site = /*#__PURE__*/function () {
     this.header = new _modules_Header_js__WEBPACK_IMPORTED_MODULE_4__.Header();
     this.search = new _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__.Search();
     this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__.Support();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_7__.Utilities();
+    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_7__.MailchimpSignup();
+    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_8__.Utilities();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
   }
 
@@ -326,6 +329,81 @@ var Header = /*#__PURE__*/function () {
   }]);
 
   return Header;
+}();
+
+/***/ }),
+
+/***/ "./src/js/modules/MailchimpSignup.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/MailchimpSignup.js ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MailchimpSignup": function() { return /* binding */ MailchimpSignup; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+/* global */
+
+var MailchimpSignup = /*#__PURE__*/function () {
+  function MailchimpSignup() {
+    _classCallCheck(this, MailchimpSignup);
+
+    this.forms = [];
+    this.bind();
+  }
+
+  _createClass(MailchimpSignup, [{
+    key: "bind",
+    value: function bind() {
+      var _this = this;
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__form').each(function (index, form) {
+        var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form);
+        var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).attr('action');
+        var $formInputs = $form.find('input');
+        var $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
+        $form.on('submit', function (event) {
+          event.preventDefault();
+          var data = $form.serialize();
+          $form.addClass('email-signup__form--processing');
+          $formInputs.prop('disabled', true);
+          $form.removeClass('email-signup__form--failed');
+          _this.forms[index] = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(function (data, textStatus, jqXHR) {
+            $form.removeClass('email-signup__form--processing');
+            $form.addClass('email-signup__form--completed');
+          }).fail(function (jqXHR) {
+            $form.removeClass('email-signup__form--processing');
+            $formInputs.prop('disabled', false);
+            $form.addClass('email-signup__form--failed');
+
+            try {
+              var response = JSON.parse(jqXHR.responseText);
+              $feedbackMessageSpan.text(response.message); // this needs to target child of parent
+            } catch (error) {
+              $feedbackMessageSpan.text('General error');
+            }
+          }).always(function () {
+            $form.removeClass('email-signup__form--processing');
+            $formInputs.prop('disabled', false);
+          });
+        });
+      });
+    }
+  }]);
+
+  return MailchimpSignup;
 }();
 
 /***/ }),

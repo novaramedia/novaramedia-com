@@ -120,6 +120,8 @@ $color-red = rgb(220, 0, 5) // Mine
 // $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
 $color-blue = rgb(84, 144, 235)
 
+$color-blue-light = #CAE5FF
+
 $border-width = 2px
 
 $basic-animation-speed = .5s
@@ -345,6 +347,10 @@ a
 .background-red
   background-color: $color-red
 
+.background-light-blue
+  background-color: $color-blue-light
+
+  
 // ******************************************************
 
 // UI ELEMENTS
@@ -677,6 +683,9 @@ nmButton()
       text-decoration: underline
       &:hover
         text-decoration: none
+        
+.email-signup__form
+  transition: height .5s
 
 .email-signup__completion-section          
   display: flex
@@ -700,7 +709,28 @@ nmButton()
 .email-signup__submit
   padding: 1.1rem 1.5rem 
   font-size: $font-size-h3
-
+  
+.email-signup__feedback-processing
+  padding: 1.1rem 1.5rem 
+  font-size: $font-size-h3
+  
+.email-signup__form
+  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+    display: none
+  &--processing
+    .email-signup__feedback-processing
+      display: block
+    .email-signup__inputs
+      display: none
+  &--failed
+    .email-signup__feedback-failed
+      display: block      
+  &--completed
+    .email-signup__feedback-completed
+      display: block
+    .email-signup__inputs
+      display: none
+      
 // ******************************************************
 
 // RADIO PLAYER
@@ -735,6 +765,51 @@ nmButton()
   background-color: white
   position:relative
   height: 100%
+  
+// ******************************************************
+
+// SPINNER
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  position: relative;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
 
 // ******************************************************
 
