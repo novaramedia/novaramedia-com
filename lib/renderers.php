@@ -203,6 +203,22 @@ function render_email_share_link($url, $subject = '', $link_text = 'Email') {
   echo '<a class="share-action share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
+function render_reddit_share_link($url, $title = null, $link_text = 'Post to Reddit') {
+  if (empty($url)) {
+    return;
+  }
+
+  $reddit_url = 'http://www.reddit.com/submit?';
+  
+  $reddit_url .= '&url=' . urlencode($url);
+  
+  if ($title) {
+    $reddit_url .= '&title=' . urlencode($title);  
+  }
+
+  echo '<a class="share-action share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
+}
+
 /**
 * Renders a CMB2 meta field for the About page containing an array of roles and persons in those roles.
 *
