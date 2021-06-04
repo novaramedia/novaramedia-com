@@ -208,7 +208,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       </div>
     </div>
   </section>
-
+  
   <?php
     get_template_part('partials/support-section');
   ?>
@@ -252,6 +252,13 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       ?>
     </div>
   </section>
+  
+  <?php
+    get_template_part('partials/email-signup', null, array(
+      'newsletter' => 'The Cortado',
+      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
+    ));
+  ?>
 
 <!-- Tyksy Sour video block -->
 
@@ -302,6 +309,13 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
       ?>
     </div>
   </section>
+  
+  <?php
+    get_template_part('partials/email-signup', null, array(
+      'newsletter' => 'The Pick',
+      'copy' => 'Sign up to The Pick—our weekly newsletter selecting the pick of the weeks articles.'
+    ));
+  ?>
 
   <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
