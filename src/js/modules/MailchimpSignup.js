@@ -29,7 +29,7 @@ export class MailchimpSignup {
         $form.removeClass('email-signup__form--failed');
                 
         _this.forms[index] = $.post(url, data)
-          .done(function(data, textStatus, jqXHR) {
+          .done(function() {
             $form.removeClass('email-signup__form--processing');
             $form.addClass('email-signup__form--completed');
           })

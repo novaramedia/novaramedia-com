@@ -380,7 +380,7 @@ var MailchimpSignup = /*#__PURE__*/function () {
           $form.addClass('email-signup__form--processing');
           $formInputs.prop('disabled', true);
           $form.removeClass('email-signup__form--failed');
-          _this.forms[index] = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(function (data, textStatus, jqXHR) {
+          _this.forms[index] = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(function () {
             $form.removeClass('email-signup__form--processing');
             $form.addClass('email-signup__form--completed');
           }).fail(function (jqXHR) {
