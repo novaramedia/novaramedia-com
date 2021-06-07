@@ -78,6 +78,7 @@
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
+                <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="https://shop.novaramedia.com">Shop</a></li>

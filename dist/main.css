@@ -1557,6 +1557,12 @@ a {
 .background-red {
   background-color: #dc0005;
 }
+.background-light-blue {
+  background-color: #cae5ff;
+}
+.background-light-purple {
+  background-color: #b1b1ff;
+}
 .icon-large:before {
   font-size: 1.400505962399693rem;
 }
@@ -1782,6 +1788,18 @@ img {
 .error404 #header-search {
   display: block;
 }
+.nm-button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
+}
+.nm-button:hover {
+  border-color: #969696;
+  cursor: pointer;
+}
 .support-form.only-desktop {
   font-size: 1.1rem;
 }
@@ -1803,14 +1821,25 @@ img {
   margin-right: 1%;
 }
 .support-form-submit {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
   width: 14%;
   margin-left: 2%;
-  padding: 8px 16px;
   background-color: #fff;
   color: #dc0005;
-  font-weight: bold;
-  border: 0;
-  border-radius: 2px;
+}
+.support-form-submit:hover {
+  border-color: #969696;
+  cursor: pointer;
+}
+.support-form-submit:hover {
+  color: #fdfdfd;
+  background-color: #dc0005;
+  border-color: #fdfdfd;
 }
 #progress-bar-row {
   display: none;
@@ -1826,6 +1855,62 @@ img {
   transition: width 1s;
   height: 1.5em;
   background-color: #dc0005;
+}
+.email-signup label a {
+  text-decoration: underline;
+}
+.email-signup label a:hover {
+  text-decoration: none;
+}
+.email-signup__completion-section {
+  display: flex;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+}
+.email-signup__email-input {
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  font-size: 1.400505962399693rem;
+}
+.email-signup__email-gdpr-group {
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
+.email-signup__email-gdpr-input {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem;
+}
+.email-signup__submit {
+  padding: 1.1rem 1.5rem;
+  font-size: 1.400505962399693rem;
+}
+.email-signup__feedback-processing {
+  padding: 1.1rem 1.5rem;
+  font-size: 1.400505962399693rem;
+}
+.email-signup__form .email-signup__feedback-processing,
+.email-signup__form .email-signup__feedback-failed,
+.email-signup__form .email-signup__feedback-completed {
+  display: none;
+}
+.email-signup__form--processing .email-signup__feedback-processing {
+  display: block;
+}
+.email-signup__form--processing .email-signup__inputs {
+  display: none;
+}
+.email-signup__form--failed .email-signup__feedback-failed {
+  display: block;
+}
+.email-signup__form--completed .email-signup__feedback-completed {
+  display: block;
+}
+.email-signup__form--completed .email-signup__inputs {
+  display: none;
 }
 #radio-player {
   display: none;
@@ -1857,6 +1942,29 @@ img {
   background-color: #fff;
   position: relative;
   height: 100%;
+}
+.spinner {
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  position: relative;
+}
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+.double-bounce2 {
+  animation-delay: -1s;
 }
 .front-page-signup {
   display: flex;
@@ -3687,6 +3795,9 @@ img {
     color: #dc0005;
     border: 0;
   }
+  .email-signup__email-input {
+    margin-bottom: 12px;
+  }
   #featured-post-title-holder {
     position: relative;
     padding: 18px;
@@ -3797,6 +3908,18 @@ img {
     display: block;
     width: 100%;
     padding: 1px;
+  }
+}
+@keyframes sk-bounce {
+  0%, 100% {
+    -ms-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 
