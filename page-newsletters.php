@@ -41,7 +41,7 @@ if( have_posts() ) {
 
       get_template_part('partials/email-signup', null, array(
         'newsletter' => 'The Pick',
-        'copy' => 'Sign up to The Pick–our weekly newsletter selecting the pick of the weeks articles.',
+        'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!',
         'background-color' => 'light-purple'
       ));
     ?>

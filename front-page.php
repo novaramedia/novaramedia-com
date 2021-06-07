@@ -313,7 +313,7 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
   <?php
     get_template_part('partials/email-signup', null, array(
       'newsletter' => 'The Pick',
-      'copy' => 'Sign up to The Pick—our weekly newsletter selecting the pick of the weeks articles.'
+      'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!'
     ));
   ?>
 
