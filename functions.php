@@ -4,7 +4,10 @@
 function scripts_and_styles_method() {
   $site_js = get_template_directory_uri() . '/dist/main.js';
   
-  wp_register_script( 'site-js', $site_js );
+  $current_theme = wp_get_theme();
+  $theme_version = $current_theme->get('Version');
+
+  wp_register_script( 'site-js', $site_js, array(), $theme_version );
   
   $global_javascript_variables = array(
   	'siteUrl' => home_url(),
@@ -13,11 +16,10 @@ function scripts_and_styles_method() {
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
-  wp_enqueue_script( 'site-js', $site_js, '', '', true );
   
-  $current_theme = wp_get_theme();
-  
-  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, $current_theme->get('Version') );
+  wp_enqueue_script( 'site-js', $site_js, array(), $theme_version, true );
+    
+  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, $theme_version );
 
   if (is_admin()) {
     wp_enqueue_style( 'dashicons' );
