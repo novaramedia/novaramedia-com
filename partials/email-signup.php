@@ -1,11 +1,17 @@
 <?php
   $newsletter = false;
-  $netlify = 'http://localhost:64396/.netlify/functions/mailchimp-signup/';
+  $netlify = 'http://localhost:50930/.netlify/functions/mailchimp-signup/';
   
   if (!empty($args['newsletter']) && $netlify) {
     $newsletter = $args['newsletter'];
+    
+    $background_color = 'light-blue';
+    
+    if (!empty($args['background-color'])) {
+      $background_color = $args['background-color'];
+    }
 ?>
-<div class="email-signup padding-top-mid padding-bottom-mid background-light-blue">
+<div class="email-signup padding-top-mid padding-bottom-mid background-<?php echo $background_color; ?>">
   <div class="container">
     <div class="row margin-bottom-small">
       <div class="col col24">  
@@ -16,7 +22,7 @@
       if (!empty($args['copy'])) {
     ?>
     <div class="row margin-bottom-tiny">
-      <div class="col col24">
+      <div class="col col12">
           <p><?php echo $args['copy']; ?></p>
       </div>
     </div>
