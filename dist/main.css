@@ -1862,9 +1862,6 @@ img {
 .email-signup label a:hover {
   text-decoration: none;
 }
-.email-signup__form {
-  transition: height 0.5s;
-}
 .email-signup__completion-section {
   display: flex;
   -ms-justify-content: space-between;

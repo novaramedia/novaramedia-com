@@ -1,10 +1,8 @@
 <?php
-  $newsletter = false;
   $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
   
   if (!empty($args['newsletter']) && $netlify) {
     $newsletter = $args['newsletter'];
-    
     $background_color = 'light-blue';
     
     if (!empty($args['background-color'])) {
@@ -41,7 +39,7 @@
         </div>
         <div class="col col8 email-signup__completion-section">  
           <div class="email-signup__email-gdpr-group form-group">
-            <label for="newsletter-gdpr">I agree to the <a target="_blank" rel="noopener" href="https://novaramedia.com/privacy-policy/">Privacy Policy</a></label>
+            <label for="newsletter-gdpr">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
             <input name="gdpr" class="email-signup__email-gdpr-input" id="newsletter-gdpr" type="checkbox" value="accepted" required/>          
           </div>
                                     
