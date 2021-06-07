@@ -1,6 +1,6 @@
 <?php
   $newsletter = false;
-  $netlify = 'http://localhost:50930/.netlify/functions/mailchimp-signup/';
+  $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
   
   if (!empty($args['newsletter']) && $netlify) {
     $newsletter = $args['newsletter'];
