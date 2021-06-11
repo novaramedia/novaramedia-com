@@ -612,8 +612,10 @@ img
 // FORM ELEMENTS
 
 nmButton()
+  display: block
   padding: $margin-tiny $margin-small
   font-weight: bold
+  text-align: center
   border-width: 1px
   border-style: solid
   border-color: transparent
@@ -621,10 +623,17 @@ nmButton()
   &:hover
     border-color: $color-gray
     cursor: pointer
+  &--red
+    background-color: $color-red
+    color: $color-white-soft   
+    &:hover
+      border-color: $color-white-soft 
+  &--gray
+    background-color: $color-gray-light
 
 .nm-button
   nmButton()
-
+  
 // ******************************************************
 
 // SUPPORT SECTION
@@ -863,6 +872,13 @@ nmButton()
   max-width: 550px
   h3
     font-size: $font-size-h2
+    
+// ******************************************************
+    
+// ARCHIVES
+
+.category-archive__logo
+  width: 200px
 
 // ******************************************************
 

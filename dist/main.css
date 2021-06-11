@@ -1789,8 +1789,10 @@ img {
   display: block;
 }
 .nm-button {
+  display: block;
   padding: 8px 16px;
   font-weight: bold;
+  text-align: center;
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
@@ -1799,6 +1801,16 @@ img {
 .nm-button:hover {
   border-color: #969696;
   cursor: pointer;
+}
+.nm-button--red {
+  background-color: #dc0005;
+  color: #fdfdfd;
+}
+.nm-button--red:hover {
+  border-color: #fdfdfd;
+}
+.nm-button--gray {
+  background-color: #bebebe;
 }
 .support-form.only-desktop {
   font-size: 1.1rem;
@@ -1821,8 +1833,10 @@ img {
   margin-right: 1%;
 }
 .support-form-submit {
+  display: block;
   padding: 8px 16px;
   font-weight: bold;
+  text-align: center;
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
@@ -1835,6 +1849,16 @@ img {
 .support-form-submit:hover {
   border-color: #969696;
   cursor: pointer;
+}
+.support-form-submit--red {
+  background-color: #dc0005;
+  color: #fdfdfd;
+}
+.support-form-submit--red:hover {
+  border-color: #fdfdfd;
+}
+.support-form-submit--gray {
+  background-color: #bebebe;
 }
 .support-form-submit:hover {
   color: #fdfdfd;
@@ -2009,6 +2033,9 @@ img {
 }
 .post-col12-text h3 {
   font-size: 1.697760280736162rem;
+}
+.category-archive__logo {
+  width: 200px;
 }
 #single-resources-section {
   display: none;
@@ -3923,3 +3950,5 @@ img {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/
