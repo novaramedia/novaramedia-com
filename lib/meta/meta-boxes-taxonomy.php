@@ -27,3 +27,24 @@ function nm_cmb_taxonomy_metaboxes() {
     'type' => 'text_url',
   ) );
 }
+
+add_action( 'cmb2_init', 'nm_cmb_taxonomy_focus_metaboxes' );
+
+function nm_cmb_taxonomy_focus_metaboxes() {
+  $prefix = '_nm_';
+
+  $cmb_term_focus = new_cmb2_box( array(
+    'id'               => $prefix . 'tax_focus',
+    'title'            => esc_html__( 'Focus Metabox', 'cmb2' ), // Doesn't output for term boxes
+    'object_types'     => array( 'term' ),
+    'taxonomies'       => array( 'focus' ),
+    'new_term_section' => true, // Will display in the "Add New Category" section
+  ) );
+  
+  $cmb_term_focus->add_field( array(
+    'name' => esc_html__( 'Splash image', 'cmb2' ),
+    'desc' => esc_html__( '(optional)', 'cmb2' ),
+    'id'   => $prefix . 'focus_splash',
+    'type' => 'file',
+  ) );
+}
