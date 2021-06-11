@@ -45,20 +45,13 @@ $splash_image_caption = wp_get_attachment_caption($splash_image_id);
       </div>
     </div>
 
-    <div class="row margin-bottom-basic">
+    <div class="flex-grid-row margin-bottom-basic">
 <?php
 if( have_posts() ) {
-  $i = 0;
   while( have_posts() ) {
     the_post();
 
-    if ($i % 3 === 0 && $i !== 0) {
-      echo "</div>\n<div class=\"row margin-bottom-basic\">";
-    }
-
-    get_template_part('partials/post-layouts/post-col8');
-
-    $i++;
+    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
   }
 } else {
 ?>
@@ -66,8 +59,8 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12">
         <?php get_template_part('partials/pagination'); ?>
       </div>
     </div>
