@@ -1344,7 +1344,8 @@ h2,
   margin: 0;
   letter-spacing: 0.001em;
 }
-h3 {
+h3,
+.font-size-h3 {
   font-size: 1.400505962399693rem;
   font-weight: bold;
 }
@@ -3923,3 +3924,5 @@ img {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/
