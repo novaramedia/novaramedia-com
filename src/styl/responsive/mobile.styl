@@ -470,9 +470,11 @@ input[type=number]
   clearfix()
 
 .single-video-related-video
-  width: 'calc(100% / 3))'
+  width: 50%
   float: left
-  .wp-post-image
-    display: block
-    width: 100%
-    padding: 1px
+  &:nth-child(odd)
+    padding-right: 3px
+  &:nth-child(even)
+    padding-left: 3px
+  &:nth-child(3)
+    display: none

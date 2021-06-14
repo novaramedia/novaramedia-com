@@ -3963,13 +3963,17 @@ img {
     clear: both;
   }
   .single-video-related-video {
-    width: 'calc(100% / 3))';
+    width: 50%;
     float: left;
   }
-  .single-video-related-video .wp-post-image {
-    display: block;
-    width: 100%;
-    padding: 1px;
+  .single-video-related-video:nth-child(odd) {
+    padding-right: 3px;
+  }
+  .single-video-related-video:nth-child(even) {
+    padding-left: 3px;
+  }
+  .single-video-related-video:nth-child(3) {
+    display: none;
   }
 }
 @keyframes sk-bounce {
