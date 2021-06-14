@@ -12,36 +12,29 @@ get_header();
 <?php
 if (is_search()) {
 ?>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12">
         <h4>Search Results for: <?php echo get_search_query(); ?></h4>
       </div>
     </div>
 <?php
 } else if (is_tag()) {
 ?>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12">
         <h4><?php single_tag_title('Tag: '); ?></h4>
       </div>
     </div>
 <?php
 }
 ?>
-    <div class="row margin-bottom-basic">
+    <div class="flex-grid-row margin-bottom-basic">
 <?php
 if( have_posts() ) {
-  $i = 0;
   while( have_posts() ) {
     the_post();
-
-    if ($i % 3 === 0 && $i !== 0) {
-      echo "</div>\n<div class=\"row margin-bottom-basic\">";
-    }
-
-    get_template_part('partials/post-layouts/post-col8');
-
-    $i++;
+    
+    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic'));
   }
 } else {
 ?>
@@ -49,8 +42,8 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12">
         <?php get_template_part('partials/pagination'); ?>
       </div>
     </div>

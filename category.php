@@ -22,7 +22,7 @@ get_header();
   
   $is_one_button = $is_video === false || $podcast_url === false ? true : false;
   
-  $button_grid_item_classes = $is_one_button ? 'flex-grid-item flex-offset-m-0 flex-item-s-6 flex-item-l-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-3';
+  $button_grid_item_classes = $is_one_button ? 'flex-grid-item flex-offset-s-0 flex-offset-l-6 flex-item-s-6 flex-item-l-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-3';
 ?>
 
   <!-- main posts loop -->
@@ -123,20 +123,13 @@ get_header();
   }
 ?>
 
-    <div class="row margin-bottom-basic">
+    <div class="flex-grid-row margin-bottom-basic">
 <?php
 if( have_posts() ) {
-  $i = 0;
   while( have_posts() ) {
     the_post();
-
-    if ($i % 3 === 0 && $i !== 0) {
-      echo "</div>\n<div class=\"row margin-bottom-basic\">";
-    }
-
-    get_template_part('partials/post-layouts/post-col8');
-
-    $i++;
+    
+    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic'));
   }
 } else {
 ?>
@@ -144,8 +137,8 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12">
         <?php get_template_part('partials/pagination'); ?>
       </div>
     </div>
