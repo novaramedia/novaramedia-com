@@ -28,6 +28,13 @@ function nm_cmb_taxonomy_metaboxes() {
     'id'   => $prefix . 'category_logo',
     'type' => 'file',
   ) );
+
+  $cmb_term->add_field( array(
+    'name' => esc_html__( 'Open Graph share image', 'cmb2' ),
+    'desc' => esc_html__( 'shown as the image when sharing on socials (optional)', 'cmb2' ),
+    'id'   => $prefix . 'category_og_image',
+    'type' => 'file',
+  ) );
   
   $cmb_term->add_field( array(
     'name' => esc_html__( 'Podcast subscribe link', 'cmb2' ),

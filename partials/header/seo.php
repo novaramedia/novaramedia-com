@@ -33,6 +33,14 @@ if (is_tax('focus')) { // if is focus archive get the splash image
   }
 }
 
+if (is_archive()) { // if is archive get any open graph images
+  $og_image_ig = get_term_meta(get_queried_object_id(), '_nm_category_og_image_id', true);
+  
+  if (!empty($og_image_ig)) {
+    $og_image_url = wp_get_attachment_image_src($og_image_ig, 'opengraph')[0];
+  }
+}
+
 if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single post with a thumbnail get that
   $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // try alternative thumbnail meta
   
