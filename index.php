@@ -26,19 +26,8 @@ if (is_search()) {
       </div>
     </div>
 <?php
-} else if (is_tax('focus')) {
-  $term = $wp_query->get_queried_object();
-  $title = $term->name;
-?>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
-        <h4>Focus: <?php echo $title; ?></h4>
-      </div>
-    </div>
-<?php
 }
 ?>
-
     <div class="row margin-bottom-basic">
 <?php
 if( have_posts() ) {
