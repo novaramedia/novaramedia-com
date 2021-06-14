@@ -50,8 +50,16 @@ $splash_image_caption = wp_get_attachment_caption($splash_image_id);
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-
-    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
+    
+    $content_type = get_the_top_category(get_the_ID());
+    
+    switch ($content_type->category_nicename) {
+      case 'video':
+        get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+        break;
+      default:
+        get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+    }
   }
 } else {
 ?>
