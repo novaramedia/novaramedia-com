@@ -43,14 +43,18 @@ function nm_is_single_article() {
 }
 
 // get and return the first sub category assigned to the post
-function get_the_sub_category($postId) {
+function get_the_sub_category($postId, $object = false) {
   $categories = get_the_category($postId);
 
   $child_categories = array_filter($categories, 'only_child_category_filter');
   $child_categories = array_values($child_categories);
 
   if (isset($child_categories[0])) {
-    return $child_categories[0]->name;
+    if ($object) {
+      return $child_categories[0];     
+    } else {
+      return $child_categories[0]->name;    
+    }
   } else {
     return false;
   }

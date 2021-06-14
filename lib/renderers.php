@@ -128,16 +128,12 @@ function render_video_query($query) {
 }
 
 function render_post_title($postId) {
-  $is_article = has_category('articles', $postId);
-
   $title = get_the_title($postId);
 
-  if ($is_article) {
-    $sub_category = get_the_sub_category($postId);
-
-    if ($sub_category) {
-      $title = '<span class="font-small-caps">' . $sub_category . ':</span> ' . $title;
-    }
+  $sub_category = get_the_sub_category($postId, true);
+  
+  if ($sub_category && !is_category($sub_category->term_id)) {
+    $title = '<span class="font-small-caps">' . $sub_category->name . ':</span> ' . $title;
   }
 
   echo $title;
