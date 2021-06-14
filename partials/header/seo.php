@@ -5,10 +5,10 @@ if ($twitter) {
   echo '<meta name="twitter:site" value="' . $twitter . '">';
 }
 
-$fbAppId = IGV_get_option('_igv_og_fb_app_id');
+$fb_app_id = IGV_get_option('_igv_og_fb_app_id');
 
-if ($fbAppId) {
-  echo '<meta name="fb:app_id" value="' . $fbAppId . '">';
+if ($fb_app_id) {
+  echo '<meta name="fb:app_id" value="' . $fb_app_id . '">';
 }
 
 ?>
@@ -18,8 +18,31 @@ if ($fbAppId) {
 <?php
 global $post;
 
-if (has_post_thumbnail($post)) {
-  $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // get alternative thumbnail meta
+$og_image_url = get_stylesheet_directory_uri() . '/dist/img/favicon-32x32.png'; // fallback to favicon
+$og_image_default_setting = wp_get_attachment_image_src(IGV_get_option('_igv_og_image_id'), 'opengraph');
+
+if (!empty($og_image_default_setting)) { // try settings default
+  $og_image_url = $og_image_default_setting[0];
+}
+
+if (is_tax('focus')) { // if is focus archive get the splash image
+  $splash_image_id = get_term_meta(get_queried_object_id(), '_nm_focus_splash_id', true);
+  
+  if (!empty($splash_image_id)) {
+    $og_image_url = wp_get_attachment_image_src($splash_image_id, 'opengraph')[0];
+  }
+}
+
+if (is_archive()) { // if is archive get any open graph images
+  $og_image_ig = get_term_meta(get_queried_object_id(), '_nm_category_og_image_id', true);
+  
+  if (!empty($og_image_ig)) {
+    $og_image_url = wp_get_attachment_image_src($og_image_ig, 'opengraph')[0];
+  }
+}
+
+if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single post with a thumbnail get that
+  $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // try alternative thumbnail meta
   
   if (!empty($alt_thumb)) {
     $thumb_id = $alt_thumb; // if alt thumb is set we use it
@@ -27,19 +50,11 @@ if (has_post_thumbnail($post)) {
     $thumb_id = get_post_thumbnail_id($post->ID); // otherwise use the default
   }
   
-  $thumb = wp_get_attachment_image_src($thumb_id, 'opengraph');
+  $og_image_url = wp_get_attachment_image_src($thumb_id, 'opengraph')[0];
 }
-
-$ogImage = wp_get_attachment_image_src(IGV_get_option('_igv_og_image_id'), 'opengraph');
-
-if (!empty($thumb) && is_single()) {
-  echo '<meta property="og:image" content="' . $thumb[0] . '" />';
-} else if (!empty($ogImage)) {
-  echo '<meta property="og:image" content="' . $ogImage[0] . '" />';
-} else {
-  echo '<meta property="og:image" content="' . get_stylesheet_directory_uri() . '/img/dist/favicon.png" />';
-}
-
+?>
+  <meta property="og:image" content="<?php echo $og_image_url; ?>" />
+<?php
 if (is_home()) {
 ?>
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>

@@ -157,7 +157,7 @@ h2, .font-size-h2
   margin: 0
   letter-spacing: $font-tracking-basic
 
-h3
+h3, .font-size-h3
   font-size: $font-size-h3
   font-weight: bold
 
@@ -612,19 +612,36 @@ img
 // FORM ELEMENTS
 
 nmButton()
+  display: block
   padding: $margin-tiny $margin-small
   font-weight: bold
+  text-align: center
   border-width: 1px
   border-style: solid
   border-color: transparent
-  border-radius: 3px  
+  border-radius: 3px 
+  transition-property: background-color, color, border-color 
+  transition-duration: 420ms
   &:hover
     border-color: $color-gray
     cursor: pointer
-
+  &--red
+    background-color: $color-red
+    color: $color-white-soft   
+    &:hover
+      background-color: $color-white-soft
+      color: $color-red   
+      border-color: $color-red 
+  &--white
+    border-color: $color-black-soft
+    &:hover
+      background-color: $color-black-soft
+      color: $color-white-soft
+      border-color: $color-black-soft
+      
 .nm-button
   nmButton()
-
+  
 // ******************************************************
 
 // SUPPORT SECTION
@@ -863,6 +880,13 @@ nmButton()
   max-width: 550px
   h3
     font-size: $font-size-h2
+    
+// ******************************************************
+    
+// ARCHIVES
+
+.category-archive__logo
+  width: 220px
 
 // ******************************************************
 

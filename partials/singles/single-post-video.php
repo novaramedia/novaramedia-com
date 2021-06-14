@@ -37,7 +37,6 @@
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank">Subscribe on YouTube</a></li>
     </ul>
   </div>
   <div class="col col12">
@@ -86,20 +85,21 @@
           while ($related_video->have_posts()) {
             $related_video->the_post();
       ?>
-      <a href="<?php the_permalink(); ?>">
-        <div class="video-related-video margin-bottom-small">
+      <div class="single-video-related-video margin-bottom-small">
+        <a href="<?php the_permalink(); ?>">
          <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
          <?php the_post_thumbnail('col6-16to9', array('class' => 'only-mobile')); ?>
           <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
-        </div>
-      </a>
-
-
+        </a>
+      </div>
       <?php
           }
         }
         wp_reset_postdata();
       ?>
     </div>
+    
+    <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe on YouTube</a>
+    
   </div>
 </div>
