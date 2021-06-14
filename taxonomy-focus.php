@@ -4,7 +4,7 @@ get_header();
 $term = $wp_query->get_queried_object();
 
 $splash_image_id = get_term_meta($term->term_id, '_nm_focus_splash_id', true);
-$splash_image_caption = wp_get_attachment_caption($splash_image_id);
+$splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($splash_image_id) : false;
 ?>
 
 <!-- main content -->
@@ -25,15 +25,17 @@ $splash_image_caption = wp_get_attachment_caption($splash_image_id);
         </div>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-8">
-        <?php echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash')); ?>
-
-        <?php        
-          if ($splash_image_caption) {
-        ?>
-        <div class="font-smaller">
-          <?php echo $splash_image_caption; ?>
-        </div>
-        <?php
+        <?php 
+          if ($splash_image_id) {
+            echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
+                   
+            if ($splash_image_caption) {
+          ?>
+          <div class="font-smaller">
+            <?php echo $splash_image_caption; ?>
+          </div>
+          <?php
+            }
           }
         ?>
         <div class="only-mobile">

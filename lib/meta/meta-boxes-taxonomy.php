@@ -4,6 +4,8 @@ add_action( 'cmb2_init', 'nm_cmb_taxonomy_metaboxes' );
 
 function nm_cmb_taxonomy_metaboxes() {
   $prefix = '_nm_';
+  
+  // Category
 
   $cmb_term = new_cmb2_box( array(
     'id'               => $prefix . 'edit',
@@ -26,12 +28,8 @@ function nm_cmb_taxonomy_metaboxes() {
     'id'   => $prefix . 'podcast_url',
     'type' => 'text_url',
   ) );
-}
-
-add_action( 'cmb2_init', 'nm_cmb_taxonomy_focus_metaboxes' );
-
-function nm_cmb_taxonomy_focus_metaboxes() {
-  $prefix = '_nm_';
+  
+  // Focus
 
   $cmb_term_focus = new_cmb2_box( array(
     'id'               => $prefix . 'tax_focus',
