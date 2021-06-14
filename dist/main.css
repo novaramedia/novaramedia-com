@@ -1797,6 +1797,8 @@ img {
   border-style: solid;
   border-color: transparent;
   border-radius: 3px;
+  transition-property: background-color, color, border-color;
+  transition-duration: 420ms;
 }
 .nm-button:hover {
   border-color: #969696;
@@ -1807,10 +1809,17 @@ img {
   color: #fdfdfd;
 }
 .nm-button--red:hover {
-  border-color: #fdfdfd;
+  background-color: #fdfdfd;
+  color: #dc0005;
+  border-color: #dc0005;
 }
-.nm-button--gray {
-  background-color: #bebebe;
+.nm-button--white {
+  border-color: #0e0e0e;
+}
+.nm-button--white:hover {
+  background-color: #0e0e0e;
+  color: #fdfdfd;
+  border-color: #0e0e0e;
 }
 .support-form.only-desktop {
   font-size: 1.1rem;
@@ -1841,6 +1850,8 @@ img {
   border-style: solid;
   border-color: transparent;
   border-radius: 3px;
+  transition-property: background-color, color, border-color;
+  transition-duration: 420ms;
   width: 14%;
   margin-left: 2%;
   background-color: #fff;
@@ -1855,10 +1866,17 @@ img {
   color: #fdfdfd;
 }
 .support-form-submit--red:hover {
-  border-color: #fdfdfd;
+  background-color: #fdfdfd;
+  color: #dc0005;
+  border-color: #dc0005;
 }
-.support-form-submit--gray {
-  background-color: #bebebe;
+.support-form-submit--white {
+  border-color: #0e0e0e;
+}
+.support-form-submit--white:hover {
+  background-color: #0e0e0e;
+  color: #fdfdfd;
+  border-color: #0e0e0e;
 }
 .support-form-submit:hover {
   color: #fdfdfd;
@@ -2035,7 +2053,7 @@ img {
   font-size: 1.697760280736162rem;
 }
 .category-archive__logo {
-  width: 200px;
+  width: 220px;
 }
 #single-resources-section {
   display: none;

@@ -22,14 +22,14 @@ get_header();
   
   $is_one_button = $is_video === false || $podcast_url === false ? true : false;
   
-  $button_grid_item_classes = $is_one_button ? 'flex-grid-item only-desktop flex-offset-m-0 flex-item-m-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item only-desktop flex-item-m-6 flex-item-xxl-3';
+  $button_grid_item_classes = $is_one_button ? 'flex-grid-item flex-offset-m-0 flex-item-s-6 flex-item-l-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-3';
 ?>
 
   <!-- main posts loop -->
   <section id="posts" class="container">
 
     <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-m-6 flex-item-xxl-3">
+      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php
           if (get_term_meta($category->term_id, '_nm_category_logo_id', true)) {
             $logo_id = get_term_meta($category->term_id, '_nm_category_logo_id', true);
@@ -42,7 +42,7 @@ get_header();
           }
         ?>
       </div>
-      <div class="flex-grid-item only-desktop flex-item-m-6 flex-item-xxl-3">
+      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php echo category_description(); ?>
       </div>
       <?php        
@@ -59,7 +59,7 @@ get_header();
           $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
       ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
-        <a class="nm-button nm-button--gray" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+        <a class="nm-button nm-button--white" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
       </div>
       <?php
         }
