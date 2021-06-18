@@ -1329,6 +1329,12 @@ html {
 body {
   line-height: 1.4;
 }
+.font-size-massive {
+  font-size: 4.235801032000001rem;
+  font-weight: bold;
+  letter-spacing: 0.001em;
+  line-height: 1.1;
+}
 h1,
 .font-size-h1 {
   font-size: 2.74697613423111rem;
@@ -3989,3 +3995,5 @@ img {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/
