@@ -1567,6 +1567,9 @@ a {
 .background-light-blue {
   background-color: #cae5ff;
 }
+.background-lilac {
+  background-color: #b1b1ff;
+}
 .background-light-purple {
   background-color: #b1b1ff;
 }
@@ -1828,27 +1831,12 @@ img {
   color: #fdfdfd;
   border-color: #0e0e0e;
 }
-.support-form.only-desktop {
-  font-size: 1.1rem;
+.support-form {
+  display: block;
 }
-.support-form.only-mobile {
-  font-size: 1.3rem;
-}
-.support-form-holder {
-  min-height: 5rem;
-  padding: 16px;
-  text-align: center;
-  border: 2px solid #fff;
-  border-radius: 2px;
-}
-.support-form-holder input {
-  border-radius: 2px;
-}
-.support-form-slider {
-  width: 70%;
-  margin-right: 1%;
-}
-.support-form-submit {
+.support-form__button,
+.support-form__submit,
+.support-form__custom-input {
   display: block;
   padding: 8px 16px;
   font-weight: bold;
@@ -1859,36 +1847,55 @@ img {
   border-radius: 3px;
   transition-property: background-color, color, border-color;
   transition-duration: 420ms;
-  width: 14%;
-  margin-left: 2%;
-  background-color: #fff;
+  display: inline-block;
+  font-weight: normal;
   color: #dc0005;
+  background-color: #fdfdfd;
+  border-color: #fdfdfd;
 }
-.support-form-submit:hover {
+.support-form__button:hover,
+.support-form__submit:hover,
+.support-form__custom-input:hover {
   border-color: #969696;
   cursor: pointer;
 }
-.support-form-submit--red {
+.support-form__button--red,
+.support-form__submit--red,
+.support-form__custom-input--red {
   background-color: #dc0005;
   color: #fdfdfd;
 }
-.support-form-submit--red:hover {
+.support-form__button--red:hover,
+.support-form__submit--red:hover,
+.support-form__custom-input--red:hover {
   background-color: #fdfdfd;
   color: #dc0005;
   border-color: #dc0005;
 }
-.support-form-submit--white {
+.support-form__button--white,
+.support-form__submit--white,
+.support-form__custom-input--white {
   border-color: #0e0e0e;
 }
-.support-form-submit--white:hover {
+.support-form__button--white:hover,
+.support-form__submit--white:hover,
+.support-form__custom-input--white:hover {
   background-color: #0e0e0e;
   color: #fdfdfd;
   border-color: #0e0e0e;
 }
-.support-form-submit:hover {
+.support-form__button:hover,
+.support-form__submit:hover,
+.support-form__custom-input:hover,
+.support-form__button--active,
+.support-form__submit--active,
+.support-form__custom-input--active {
   color: #fdfdfd;
   background-color: #dc0005;
   border-color: #fdfdfd;
+}
+.support-form__submit {
+  width: 100%;
 }
 #progress-bar-row {
   display: none;

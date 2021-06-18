@@ -33,13 +33,12 @@ if( have_posts() ) {
       </div>
     </div>
 
-    <div class="container">      
-      <div class="flex-grid-row margin-bottom-basic">
-        <div class="flex-grid-item flex-item-s-12">
-          New form goes here***
-        </div>
-      </div>
-    </div>
+    <?php
+      get_template_part('partials/support-section', null, array(
+        'show_text' => false,
+        'heading_copy' => 'Choose amount:',
+      ));
+    ?>
 
     <div class="container">      
       <div class="flex-grid-row margin-bottom-basic">

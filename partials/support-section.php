@@ -1,104 +1,61 @@
 <?php
+  $show_text = isset($args['show_text']) ? $args['show_text'] : true;
+  
+  $heading_copy = !empty($args['heading_copy']) ? $args['heading_copy'] : 'Support Us';
+  
   $support_section_text = IGV_get_option('_igv_support_section_text');
-  $support_section_regular_donor_text = IGV_get_option('_igv_support_section_regular_donor_text');
-  $support_section_oneoff_donor_text = IGV_get_option('_igv_support_section_oneoff_donor_text');
-
+  
   $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
 
-  $minDonation = 3;
-  $defaultSubscription = 8;
-  $defaultOneoff = 10;
-  $maxSubscription = 80;
-  $maxOneoff = 800;
+  $default_subscription_value = 8;
 ?>
 
-<div class="support-section background-red font-color-white padding-top-mid padding-bottom-mid">
-  <div class="container">
-    <div class="row margin-bottom-small">
-      <div class="col col24">
-<?php
-    if ($fundraiser_expiration > time() && $fundraiser_form_text) {
-?>
-        <p class="font-size-h2"><?php echo $fundraiser_form_text; ?></p>
-<?php
-    } else {
-?>
-        <h4>Support Us</h4>
-<?php
-    }
-?>
+<div class="support-section background-lilac padding-top-mid padding-bottom-mid margin-bottom-mid">
+  <div class="container">      
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-xxl-12">
+        <h4><?php echo $heading_copy; ?></h4>
       </div>
     </div>
+    
     <?php
-      if ($support_section_text) {
+      if ($show_text && $support_section_text) {
     ?>
-    <div class="row margin-bottom-tiny font-bold">
-      <div class="col col24">
-        <?php echo apply_filters('the_content', $support_section_text); ?>
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-xxl-12">
+         <?php echo apply_filters('the_content', $support_section_text); ?>
       </div>
     </div>
     <?php
       }
     ?>
+        
+    <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-xxl-12">
+        <form 
+          class="support-form" 
+          action="https://payment.novaramedia.com/regular" 
+          data-action-regular="https://payment.novaramedia.com/regular" 
+          data-action-single="https://payment.novaramedia.com/oneoff"
+        >
+          <input class="support-form-slider" type="hidden" value="<?php echo $default_subscription_value; ?>" name="amount" />
+          
+          <div class="margin-bottom-small">
+            <button class="support-form__button" data-action="set-type" data-value="single">One-time</button>
+            <button class="support-form__button support-form__button--active" data-action="set-type" data-value="regular">Monthly</button>
+          </div>
 
-    <div class="row margin-bottom-tiny font-bold">
-      <div class="col col12">
-        <p><?php if ($support_section_regular_donor_text) { echo $support_section_regular_donor_text; } ?></p>
+          <div class="margin-bottom-small">
+            <button class="support-form__button" data-action="set-value" data-value="8">£8</button>
+            <button class="support-form__button" data-action="set-value" data-value="20">£20</button>
+            <button class="support-form__button" data-action="set-value" data-value="20">£50</button>
+            <input class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
+          </div>
+          
+          <input class="support-form__submit" type="submit" value="Go" />
+        </form>
       </div>
-      <div class="col col12">
-        <p><?php if ($support_section_oneoff_donor_text) { echo $support_section_oneoff_donor_text; } ?></p>
-      </div>
-    </div>
-
-    <div class="row">
-
-<!--  desktop monthly form -->
-      <form class="support-form support-form-regular only-desktop" action="https://payment.novaramedia.com/regular">
-        <div class="col col3">
-          <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value"><?php echo $defaultSubscription; ?></span> /month
-          </div>
-        </div>
-        <div class="col col9">
-          <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" data-target="subscription" /> £££ <input class="support-form-submit" type="submit" value="Go" />
-          </div>
-        </div>
-      </form>
-
-<!--  desktop oneoff form -->
-      <form class="support-form support-form-oneoff only-desktop" action="https://payment.novaramedia.com/oneoff">
-        <div class="col col3">
-          <div class="support-form-holder u-flex-center">
-            £<span class="support-form-value"><?php echo $defaultOneoff; ?></span>
-          </div>
-        </div>
-        <div class="col col9">
-          <div class="support-form-holder u-flex-center">
-            <input class="support-form-slider" type="range" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" data-target="oneoff" /> £££ <input class="support-form-submit" type="submit" value="Go" />
-          </div>
-        </div>
-      </form>
-
-<!--  mobile monthly form -->
-      <form class="support-form support-form-regular only-mobile" action="https://payment.novaramedia.com/regular">
-        <div class="col">
-          <div class="support-form-holder u-flex-center mobile-margin-bottom-small">
-            <input type="number" value="<?php echo $defaultSubscription; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxSubscription; ?>" step="1" name="amount" /> £ /month <input class="support-form-submit" type="submit" value="Go" />
-          </div>
-        </div>
-      </form>
-
-<!--  mobile oneoff form -->
-      <form class="support-form support-form-oneoff only-mobile" action="https://payment.novaramedia.com/oneoff">
-        <div class="col">
-          <div class="support-form-holder u-flex-center">
-            <input type="number" value="<?php echo $defaultOneoff; ?>" min="<?php echo $minDonation; ?>" max="<?php echo $maxOneoff; ?>" step="1" name="amount" /> £ one off<input class="support-form-submit" type="submit" value="Go" />
-          </div>
-        </div>
-      </form>
-
     </div>
   </div>
 </div>

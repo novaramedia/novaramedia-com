@@ -120,6 +120,8 @@ $color-red = rgb(220, 0, 5) // Mine
 // $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
 $color-blue = rgb(84, 144, 235)
 
+$color-lilac = #B1B1FF
+
 $color-blue-light = #CAE5FF
 $color-purple-light = #B1B1FF
 
@@ -357,6 +359,9 @@ a
 .background-light-blue
   background-color: $color-blue-light
 
+.background-lilac
+  background-color: $color-lilac
+  
 .background-light-purple
   background-color: $color-purple-light
   
@@ -653,34 +658,22 @@ nmButton()
 // SUPPORT SECTION
 
 .support-form
-  &.only-desktop
-    font-size: 1.1rem
-  &.only-mobile
-    font-size: 1.3rem
+  display: block
 
-.support-form-holder
-  min-height: 5rem
-  padding: $margin-small
-  text-align: center
-  border: 2px solid white
-  border-radius: 2px
-  input
-    border-radius: 2px
-  
-.support-form-slider
-  width: 70%
-  margin-right: 1%
-
-.support-form-submit
+.support-form__button, .support-form__submit, .support-form__custom-input
   nmButton()
-  width: 14%
-  margin-left: 2%
-  background-color: white
+  display: inline-block
+  font-weight: normal
   color: $color-red
-  &:hover
+  background-color: $color-white-soft
+  border-color: $color-white-soft
+  &:hover, &--active
     color: $color-white-soft
     background-color: $color-red
-    border-color: $color-white-soft
+    border-color: $color-white-soft 
+    
+.support-form__submit
+  width: 100%     
 
 // FUNDRAISER PROGRESS BAR
 
