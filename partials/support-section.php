@@ -36,20 +36,18 @@
         <form 
           class="support-form" 
           action="https://payment.novaramedia.com/regular" 
-          data-action-regular="https://payment.novaramedia.com/regular" 
-          data-action-single="https://payment.novaramedia.com/oneoff"
         >
-          <input class="support-form-slider" type="hidden" value="<?php echo $default_subscription_value; ?>" name="amount" />
+          <input class="support-form__value-input" type="hidden" value="<?php echo $default_subscription_value; ?>" name="amount" />
           
           <div class="margin-bottom-small">
-            <button class="support-form__button" data-action="set-type" data-value="single">One-time</button>
-            <button class="support-form__button support-form__button--active" data-action="set-type" data-value="regular">Monthly</button>
+            <button class="support-form__button" data-action="set-type" data-value="https://payment.novaramedia.com/oneoff">One-off</button>
+            <button class="support-form__button support-form__button--active" data-action="set-type" data-value="https://payment.novaramedia.com/regular">Monthly</button>
           </div>
 
           <div class="margin-bottom-small">
             <button class="support-form__button" data-action="set-value" data-value="8">£8</button>
             <button class="support-form__button" data-action="set-value" data-value="20">£20</button>
-            <button class="support-form__button" data-action="set-value" data-value="20">£50</button>
+            <button class="support-form__button" data-action="set-value" data-value="50">£50</button>
             <input class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
           </div>
           

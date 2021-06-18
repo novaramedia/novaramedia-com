@@ -515,9 +515,37 @@ var Support = /*#__PURE__*/function () {
   }, {
     key: "bind",
     value: function bind() {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form-slider').on('input', function () {
-        var target = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.support-form').find('.support-form-value');
-        target.html(this.value);
+      var _this = this;
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form').each(function (index, value) {
+        var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value);
+        var $valueInput = $form.find('.support-form__value-input').first();
+        $form.find('.support-form__button').on({
+          'click': function click(event) {
+            event.preventDefault();
+            var $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+            var data = $button.data();
+
+            if (data.action === 'set-type') {
+              $form.attr('action', data.value);
+              $form.find('.support-form__button[data-action="set-type"]').removeClass('support-form__button--active');
+              $button.addClass('support-form__button--active');
+            } else if (data.action === 'set-value') {
+              $valueInput.val(data.value);
+              $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form__custom-input').removeClass('support-form__button--active');
+              $button.addClass('support-form__button--active');
+            }
+          }
+        });
+        $form.find('.support-form__custom-input').on({
+          'input': function input(event) {
+            event.preventDefault();
+            $valueInput.val(event.target.value);
+            $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('support-form__button--active');
+          }
+        });
       });
     }
   }, {
