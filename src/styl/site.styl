@@ -129,6 +129,8 @@ $border-width = 2px
 
 $basic-animation-speed = .5s
 
+$duration-form-transitions = 420ms
+
 $font-serif = font-stack('Georgia');
 $font-sans = font-stack('Helvetica');
 
@@ -632,7 +634,7 @@ nmButton()
   border-color: transparent
   border-radius: 3px 
   transition-property: background-color, color, border-color 
-  transition-duration: 420ms
+  transition-duration: $duration-form-transitions
   &:hover
     border-color: $color-gray
     cursor: pointer
@@ -671,9 +673,18 @@ nmButton()
     color: $color-white-soft
     background-color: $color-red
     border-color: $color-white-soft 
+
+.support-form__custom-input::placeholder
+  transition: color $duration-form-transitions
+  
+.support-form__custom-input
+  &:hover, &.support-form__button--active
+    &::placeholder
+      color: $color-white-soft
     
 .support-form__submit
   width: 100%     
+
 
 // FUNDRAISER PROGRESS BAR
 

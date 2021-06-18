@@ -1894,6 +1894,27 @@ img {
   background-color: #dc0005;
   border-color: #fdfdfd;
 }
+.support-form__custom-input::-webkit-input-placeholder {
+  -webkit-transition: color 420ms;
+  transition: color 420ms;
+}
+.support-form__custom-input:-ms-input-placeholder {
+  -ms-transition: color 420ms;
+  transition: color 420ms;
+}
+.support-form__custom-input::placeholder {
+  transition: color 420ms;
+}
+.support-form__custom-input:hover::-webkit-input-placeholder, .support-form__custom-input.support-form__button--active::-webkit-input-placeholder {
+  color: #fdfdfd;
+}
+.support-form__custom-input:hover:-ms-input-placeholder, .support-form__custom-input.support-form__button--active:-ms-input-placeholder {
+  color: #fdfdfd;
+}
+.support-form__custom-input:hover::placeholder,
+.support-form__custom-input.support-form__button--active::placeholder {
+  color: #fdfdfd;
+}
 .support-form__submit {
   width: 100%;
 }
