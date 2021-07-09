@@ -61,8 +61,8 @@ export class Support {
           
           $(this).addClass('support-form__button--active');
         }
-      })
-    })
+      });
+    });
   }
   
   initProgressBar() {

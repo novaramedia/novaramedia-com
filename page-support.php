@@ -23,12 +23,19 @@ if( have_posts() ) {
     }
 ?>
   <!-- main posts loop -->
-  <article id="page">
-    <div class="container">
-      <div class="flex-grid-row margin-bottom-basic">
-        <div class="flex-grid-item flex-item-s-12">
-          <h4 class="margin-bottom-tiny">Support Us</h4>
-          <h2 class="font-size-massive">Every single thing we do is funded by you.</h2>
+  <article id="page" class="support-page">
+    <div class="background-cover-image" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
+      <div class="container">
+        <div class="flex-grid-row">
+          <div class="flex-grid-item flex-item-s-12">
+            <h4 class="margin-top-small margin-bottom-tiny">Anniversary Fundraiser</h4>
+          </div>
+        </div>
+        <div class="flex-grid-row padding-top-large padding-bottom-large">
+          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-1">
+            <h2 class="font-size-massive">We're in it for the long&nbsp;haul</h2>
+            <h2 class="font-size-massive font-color-white">Are you with&nbsp;us?</h2>
+          </div>
         </div>
       </div>
     </div>
@@ -36,12 +43,12 @@ if( have_posts() ) {
     <?php
       get_template_part('partials/support-section', null, array(
         'show_text' => false,
-        'heading_copy' => 'Choose amount:',
+        'heading_copy' => 'Donate to Novara Media:',
       ));
     ?>
 
     <div class="container">      
-      <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-row margin-top-basic margin-bottom-basic">
         <?php
           if ($youtube_id) {
         ?>
@@ -52,8 +59,26 @@ if( have_posts() ) {
         </div>
         <?php } ?>
         
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 support-page__content-copy">
           <?php the_content(); ?>
+        </div>
+      </div>    
+    </div>
+    
+    
+    
+    <div class="background-red font-color-white">
+      <div class="container">      
+        <div class="flex-grid-row padding-top-basic padding-bottom-basic margin-bottom-basic">
+          <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
+            <h4>Already a supporter?</h4>
+          </div>
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+            <p>If you can, we’re asking that you increase your donation by a few pounds each month. Just log in to your supporter account, type in the new total amount you want to donate each month, and click ‘edit donation’. Any problems, drop us an email at donations@novaramedia.com.</p>
+          </div>
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
+            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--white">Log in to your account</a></p>
+          </div>
         </div>
       </div>
     </div>
@@ -63,25 +88,31 @@ if( have_posts() ) {
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
           <h4>Other Donation Methods</h4>
         </div>
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-6">
+        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
           <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
         </div>
-      </div>
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-4">
-          <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
-          <p><a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a></p>
-          <p><a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a></p>
-          <p><a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a></p>
-          <p><a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a></p>
-        </div>
         
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-4">
+        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+          <p><strong>PayPay</strong></p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
           <p><a class="nm-button nm-button--red" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
-  
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-4">
+        
+        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+          <p><strong>GoCardless</strong></p>
+          <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
+          <p>
+            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+          </p>
+          <p>
+            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
+          </p>
+        </div>
+          
+        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+          <p><strong>Crypto</strong></p>
           <p>We accept BTC at this address: 1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
         </div>
       </div>

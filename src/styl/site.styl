@@ -367,6 +367,10 @@ a
 .background-light-purple
   background-color: $color-purple-light
   
+.background-cover-image
+  background-size: cover
+  background-position: center
+  
 // ******************************************************
 
 // UI ELEMENTS
@@ -651,6 +655,10 @@ nmButton()
       background-color: $color-black-soft
       color: $color-white-soft
       border-color: $color-black-soft
+  &--inline
+    display: inline-block
+  &--half
+    width: 49%
       
 .nm-button
   nmButton()
@@ -674,18 +682,37 @@ nmButton()
     background-color: $color-red
     border-color: $color-white-soft 
 
+.support-form__value-option
+  width: 32%
+
 .support-form__custom-input::placeholder
+  padding-left: 5px
   transition: color $duration-form-transitions
   
 .support-form__custom-input
+  width: 100%
   &:hover, &.support-form__button--active
     &::placeholder
       color: $color-white-soft
+      
+.support-form__schedule-option
+  width: 49%
     
 .support-form__submit
   width: 100%     
 
+// SUPPORT PAGE
 
+.support-page__content-copy
+  font-family: $font-serif
+  font-size: 18px
+  line-height: $font-leading-larger 
+  h3
+    font-family: $font-sans
+    font-size: 31.5px
+    line-height: 38.46px
+    margin-bottom: 1rem
+  
 // FUNDRAISER PROGRESS BAR
 
 #progress-bar-row

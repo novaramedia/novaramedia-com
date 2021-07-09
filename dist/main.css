@@ -1573,6 +1573,10 @@ a {
 .background-light-purple {
   background-color: #b1b1ff;
 }
+.background-cover-image {
+  background-size: cover;
+  background-position: center;
+}
 .icon-large:before {
   font-size: 1.400505962399693rem;
 }
@@ -1831,6 +1835,12 @@ img {
   color: #fdfdfd;
   border-color: #0e0e0e;
 }
+.nm-button--inline {
+  display: inline-block;
+}
+.nm-button--half {
+  width: 49%;
+}
 .support-form {
   display: block;
 }
@@ -1884,6 +1894,16 @@ img {
   color: #fdfdfd;
   border-color: #0e0e0e;
 }
+.support-form__button--inline,
+.support-form__submit--inline,
+.support-form__custom-input--inline {
+  display: inline-block;
+}
+.support-form__button--half,
+.support-form__submit--half,
+.support-form__custom-input--half {
+  width: 49%;
+}
 .support-form__button:hover,
 .support-form__submit:hover,
 .support-form__custom-input:hover,
@@ -1894,16 +1914,25 @@ img {
   background-color: #dc0005;
   border-color: #fdfdfd;
 }
+.support-form__value-option {
+  width: 32%;
+}
 .support-form__custom-input::-webkit-input-placeholder {
+  padding-left: 5px;
   -webkit-transition: color 420ms;
   transition: color 420ms;
 }
 .support-form__custom-input:-ms-input-placeholder {
+  padding-left: 5px;
   -ms-transition: color 420ms;
   transition: color 420ms;
 }
 .support-form__custom-input::placeholder {
+  padding-left: 5px;
   transition: color 420ms;
+}
+.support-form__custom-input {
+  width: 100%;
 }
 .support-form__custom-input:hover::-webkit-input-placeholder, .support-form__custom-input.support-form__button--active::-webkit-input-placeholder {
   color: #fdfdfd;
@@ -1915,8 +1944,22 @@ img {
 .support-form__custom-input.support-form__button--active::placeholder {
   color: #fdfdfd;
 }
+.support-form__schedule-option {
+  width: 49%;
+}
 .support-form__submit {
   width: 100%;
+}
+.support-page__content-copy {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.support-page__content-copy h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 31.5px;
+  line-height: 38.46px;
+  margin-bottom: 1rem;
 }
 #progress-bar-row {
   display: none;
