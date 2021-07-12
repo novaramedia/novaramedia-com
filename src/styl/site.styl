@@ -115,6 +115,8 @@ $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = rgb(220, 0, 5) // Mine 
+$color-red-dark = #A80003;
+
 // $color-red = rgb(228, 0, 43) // PANTONE  185 C.
 // $color-red = rgb(213, 0, 50) // PANTONE  199 C.
 // $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
@@ -177,6 +179,9 @@ h4
 
 h5
   font-weight: bold
+  
+.font-size-3
+  font-size: 21px
 
 p
   margin-bottom: 1rem
@@ -653,6 +658,13 @@ nmButton()
       background-color: $color-white-soft
       color: $color-red   
       border-color: $color-red 
+  &--red-dark
+    background-color: $color-red-dark
+    color: $color-white-soft   
+    &:hover
+      background-color: $color-white-soft
+      color: $color-red-dark 
+      border-color: $color-red-dark 
   &--white
     border-color: $color-black-soft
     &:hover

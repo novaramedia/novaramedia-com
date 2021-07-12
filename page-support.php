@@ -43,7 +43,8 @@ if( have_posts() ) {
     <?php
       get_template_part('partials/support-section', null, array(
         'show_text' => false,
-        'heading_copy' => 'Donate to Novara Media:',
+        'large_text' => true,
+        'heading_copy' => 'Donate to Novara Media',
       ));
     ?>
 
@@ -52,39 +53,43 @@ if( have_posts() ) {
         <?php
           if ($youtube_id) {
         ?>
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 margin-bottom-small">
           <div class="u-video-embed-container">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
           </div>
         </div>
         <?php } ?>
         
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 support-page__content-copy">
+        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 support-page__content-copy">
           <?php the_content(); ?>
         </div>
       </div>    
     </div>
     
-    
-    
     <div class="background-red font-color-white">
       <div class="container">      
-        <div class="flex-grid-row padding-top-basic padding-bottom-basic margin-bottom-basic">
-          <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
-            <h4>Already a supporter?</h4>
-          </div>
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <div class="flex-grid-row padding-top-mid padding-bottom-mid">
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
+            <h4 class="margin-bottom-small">Already a supporter?</h4>
             <p>If you can, we’re asking that you increase your donation by a few pounds each month. Just log in to your supporter account, type in the new total amount you want to donate each month, and click ‘edit donation’. Any problems, drop us an email at donations@novaramedia.com.</p>
           </div>
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
-            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--white">Log in to your account</a></p>
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-2 margin-top-basic">
+            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--red-dark">Log in to your account</a></p>
           </div>
+
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
+            <h4 class="margin-bottom-small">Not yet a supporter?</h4>
+            <p>Head to the red bar above, select the amount you’d like to donate each month, and hit ‘Go’.</p>
+          </div>
+          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-2 margin-top-basic">
+
+          </div>          
         </div>
       </div>
     </div>
     
     <div id="other-donation-methods" class="container">      
-      <div class="flex-grid-row">
+      <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
           <h4>Other Donation Methods</h4>
         </div>

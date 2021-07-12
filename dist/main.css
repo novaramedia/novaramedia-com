@@ -1362,6 +1362,9 @@ h4 {
 h5 {
   font-weight: bold;
 }
+.font-size-3 {
+  font-size: 21px;
+}
 p {
   margin-bottom: 1rem;
 }
@@ -1829,6 +1832,15 @@ img {
   color: #dc0005;
   border-color: #dc0005;
 }
+.nm-button--red-dark {
+  background-color: #a80003;
+  color: #fdfdfd;
+}
+.nm-button--red-dark:hover {
+  background-color: #fdfdfd;
+  color: #a80003;
+  border-color: #a80003;
+}
 .nm-button--white {
   border-color: #0e0e0e;
 }
@@ -1883,6 +1895,19 @@ img {
   background-color: #fdfdfd;
   color: #dc0005;
   border-color: #dc0005;
+}
+.support-form__button--red-dark,
+.support-form__submit--red-dark,
+.support-form__custom-input--red-dark {
+  background-color: #a80003;
+  color: #fdfdfd;
+}
+.support-form__button--red-dark:hover,
+.support-form__submit--red-dark:hover,
+.support-form__custom-input--red-dark:hover {
+  background-color: #fdfdfd;
+  color: #a80003;
+  border-color: #a80003;
 }
 .support-form__button--white,
 .support-form__submit--white,
@@ -3920,29 +3945,6 @@ img {
   #search-submit {
     width: 8%;
     min-width: 25px;
-  }
-  .support-section {
-    padding-top: 24px;
-    padding-bottom: 24px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-  .support-form-holder {
-    min-height: 5rem;
-    padding: 12px;
-  }
-  .support-form-submit {
-    width: auto;
-    margin-left: 12px;
-    padding: 6px 12px;
-  }
-  input[type=number] {
-    width: auto;
-    margin-right: 12px;
-    padding: 6px 12px;
-    background-color: #fff;
-    color: #dc0005;
-    border: 0;
   }
   .email-signup__email-input {
     margin-bottom: 12px;
