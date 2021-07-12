@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
   <!-- main posts loop -->
-  <section id="posts" class="container">
+  <section id="posts" class="container margin-top-small">
 
     <div class="row margin-bottom-basic">
       <div class="col col24">

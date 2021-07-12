@@ -26,7 +26,7 @@ get_header();
 ?>
 
   <!-- main posts loop -->
-  <section id="posts" class="container">
+  <section id="posts" class="container margin-top-small">
 
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">

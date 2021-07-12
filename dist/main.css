@@ -1722,10 +1722,12 @@ img {
   z-index: 1000;
 }
 #main-content {
-  padding-top: 73px;
+  padding-top: 56px;
   min-height: 75vh;
 }
 #header-main-wrapper {
+  height: 56px;
+  overflow: hidden;
   background-color: #000;
   background-image: url("./img/marble-dark-banner.jpg");
   background-size: cover;
@@ -2551,8 +2553,10 @@ img {
     padding-bottom: 70px;
   }
   #main-content {
-    padding-top: 71px;
-    min-height: 75vh;
+    padding-top: 52px;
+  }
+  #header-main-wrapper {
+    height: 52px;
   }
   .header-menu li {
     padding-right: 7px;
@@ -2996,8 +3000,10 @@ img {
     padding-bottom: 60px;
   }
   #main-content {
-    padding-top: 69px;
-    min-height: 75vh;
+    padding-top: 48px;
+  }
+  #header-main-wrapper {
+    height: 48px;
   }
   .header-menu li {
     padding-right: 6px;
@@ -3439,8 +3445,10 @@ img {
     padding-bottom: 60px;
   }
   #main-content {
-    padding-top: 64px;
-    min-height: 75vh;
+    padding-top: 48px;
+  }
+  #header-main-wrapper {
+    height: 48px;
   }
   .header-menu.u-inline-list li {
     display: block;
@@ -3850,8 +3858,10 @@ img {
     margin-bottom: 60px;
   }
   #main-content {
-    padding-top: 59px;
-    min-height: 75vh;
+    padding-top: 42px;
+  }
+  #header-main-wrapper {
+    height: 42px;
   }
   .header-menu li {
     padding-right: 6px;

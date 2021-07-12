@@ -251,10 +251,14 @@ p
 
 // HEADER
 
-#main-content
-  padding-top: 57px + $margin-small
-  min-height: 75vh
+$header-height = 48px
 
+#main-content
+  padding-top: $header-height 
+
+#header-main-wrapper
+  height: $header-height
+  
 .header-menu
   li
     padding-right: $margin-tiny

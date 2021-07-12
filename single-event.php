@@ -35,7 +35,7 @@ if( have_posts() ) {
     $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
 ?>
   <article id="event">
-    <div class="container margin-bottom-large">
+    <div class="container margin-top-small margin-bottom-large">
       <div class="row margin-bottom-basic">
         <div class="col col24">
           <h4>Events</h4>

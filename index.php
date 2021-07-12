@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
   <!-- main posts loop -->
-  <section id="posts" class="container">
+  <section id="posts" class="container margin-top-small">
 
 <?php
 if (is_search()) {

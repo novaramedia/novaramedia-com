@@ -536,16 +536,20 @@ img
 
 // HEADER
 
+$header-height = 56px
+
 #header
   position: fixed
   width: 100%
   z-index: 1000
 
 #main-content
-  padding-top: 57px + $margin-small
+  padding-top: $header-height
   min-height: 75vh
 
 #header-main-wrapper
+  height: $header-height
+  overflow: hidden
   background-color: black
   background-image: url('./img/marble-dark-banner.jpg')
   background-size: cover
