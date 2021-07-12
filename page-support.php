@@ -98,15 +98,21 @@ if( have_posts() ) {
         </div>
         
         <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
-          <p><strong>PayPay</strong></p>
+          <p>
+            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
+          </p>
+          <p><strong>PayPal</strong></p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
           <p><a class="nm-button nm-button--red" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
         
         <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+          <p>
+            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
+          </p>
           <p><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
-          <p>
+          <p class="margin-bottom-tiny">
             <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
             <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
           </p>
@@ -117,6 +123,9 @@ if( have_posts() ) {
         </div>
           
         <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+          <p>
+            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
+          </p>
           <p><strong>Crypto</strong></p>
           <p>We accept BTC at this address: 1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
         </div>
