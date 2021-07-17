@@ -10,9 +10,11 @@
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
 
   $default_subscription_value = 8;
+  
+  $instance = uniqid('support-form-');
 ?>
 
-<div class="support-section background-red font-color-white padding-top-large padding-bottom-large">
+<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white padding-top-large padding-bottom-large">
   <div class="container">    
     
     <form 
@@ -35,13 +37,13 @@
             if ($support_section_text || $override_text) {
             ?>
           <div class="margin-top-micro font-bold">
-            <?php 
+            <a href="<?php echo home_url('support/'); ?>" class="js-fix-widows"><?php 
               if ($override_text) {
-                echo apply_filters('the_content', $override_text);
+                echo $override_text;
               } else {
-                echo apply_filters('the_content', $support_section_text);
+                echo $support_section_text;
               } 
-            ?>
+            ?></a>
           </div>
             <?php
               }
@@ -60,7 +62,8 @@
               <button class="support-form__button support-form__value-option" data-action="set-value" data-value="50">£50</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <input class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
+              <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
+              <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
             </div>
           </div>
           <div class="flex-grid-row flex-grid--nested-tight">

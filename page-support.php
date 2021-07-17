@@ -33,7 +33,7 @@ if( have_posts() ) {
         </div>
         <div class="flex-grid-row support-page__hero-wrapper">
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-0">
-            <h2 class="font-size-0">We're in it for the long&nbsp;haul.</h2>
+            <h1 class="font-size-0">We're in it for the long&nbsp;haul.</h1>
             <h2 class="font-size-0 font-color-white">Are you with&nbsp;us?</h2>
           </div>
         </div>
