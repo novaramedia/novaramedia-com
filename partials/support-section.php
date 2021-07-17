@@ -1,7 +1,7 @@
 <?php
   $show_text = isset($args['show_text']) ? $args['show_text'] : true;
-  $large_text = isset($args['large_text']) ? $args['large_text'] : true;
-  
+  $override_text = isset($args['override_text']) ? $args['override_text'] : false;
+    
   $heading_copy = !empty($args['heading_copy']) ? $args['heading_copy'] : 'Support Us';
   
   $support_section_text = IGV_get_option('_igv_support_section_text');
@@ -12,7 +12,7 @@
   $default_subscription_value = 8;
 ?>
 
-<div class="support-section background-red font-color-white padding-top-large padding-bottom-large <?php if ($large_text) {echo 'font-size-3';} ?>">
+<div class="support-section background-red font-color-white padding-top-large padding-bottom-large">
   <div class="container">    
     
     <form 
@@ -21,14 +21,27 @@
     >
       <input class="support-form__value-input" type="hidden" value="<?php echo $default_subscription_value; ?>" name="amount" />
             
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-3">
-          <h4><?php echo $heading_copy; ?></h4>
+      <div class="flex-grid-row margin-bottom-small">
+        <div class="flex-grid-item flex-item-m-12">
+          <a href="<?php echo home_url('support/'); ?>">
+            <h4><?php echo $heading_copy; ?></h4>
+          </a>
+        </div>
+      </div>
+
+      <div class="flex-grid-row font-size-3">
+        <div class="flex-grid-item flex-item-m-12 flex-item-l-6 flex-item-xxl-5">      
           <?php
-              if ($show_text && $support_section_text) {
+            if ($support_section_text || $override_text) {
             ?>
-          <div class="margin-top-micro">
-           <?php echo apply_filters('the_content', $support_section_text); ?>
+          <div class="margin-top-micro font-bold">
+            <?php 
+              if ($override_text) {
+                echo apply_filters('the_content', $override_text);
+              } else {
+                echo apply_filters('the_content', $support_section_text);
+              } 
+            ?>
           </div>
             <?php
               }

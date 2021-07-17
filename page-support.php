@@ -31,10 +31,10 @@ if( have_posts() ) {
             <h4 class="margin-top-small margin-bottom-tiny">Anniversary Fundraiser</h4>
           </div>
         </div>
-        <div class="flex-grid-row padding-top-large padding-bottom-large">
-          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-1">
-            <h2 class="font-size-massive">We're in it for the long&nbsp;haul</h2>
-            <h2 class="font-size-massive font-color-white">Are you with&nbsp;us?</h2>
+        <div class="flex-grid-row support-page__hero-wrapper">
+          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-0">
+            <h2 class="font-size-0">We're in it for the long&nbsp;haul.</h2>
+            <h2 class="font-size-0 font-color-white">Are you with&nbsp;us?</h2>
           </div>
         </div>
       </div>
@@ -45,6 +45,7 @@ if( have_posts() ) {
         'show_text' => false,
         'large_text' => true,
         'heading_copy' => 'Donate to Novara Media',
+        'override_text' => 'It’s been 10 years since Novara Media first started. Now, more than ever, we need your support.'
       ));
     ?>
 
@@ -57,6 +58,16 @@ if( have_posts() ) {
           <div class="u-video-embed-container">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
           </div>
+          
+          <ul class="inline-action-list margin-top-small">
+            <?php
+              $share_url = 'https://novaramedia.com/support/';
+            ?>
+            <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet your support'); ?></li>
+            <li><?php render_facebook_share_link($share_url, 'Share this page on Facebook'); ?></li>
+            <li><?php render_email_share_link($share_url, $post->post_title, 'Email to a friend');?></li>
+            <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+          </ul>
         </div>
         <?php } ?>
         
@@ -66,28 +77,28 @@ if( have_posts() ) {
       </div>    
     </div>
     
-    <div class="background-red font-color-white">
-      <div class="container">      
-        <div class="flex-grid-row padding-top-mid padding-bottom-mid">
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
-            <h4 class="margin-bottom-small">Already a supporter?</h4>
+    <div class="background-cover-image font-color-white" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
+      <div class="background-cover-overlay" style="background: linear-gradient(90deg, #B97EFF 0%, rgba(220, 0, 5, 0) 96.11%);"></div>
+      <div class="container padding-top-mid padding-bottom-mid">      
+        <div class="flex-grid-row">
+          <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
+            <h3 class="font-size-3 margin-bottom-small">Already a supporter?</h3>
             <p>If you can, we’re asking that you increase your donation by a few pounds each month. Just log in to your supporter account, type in the new total amount you want to donate each month, and click ‘edit donation’. Any problems, drop us an email at donations@novaramedia.com.</p>
-          </div>
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-2 margin-top-basic">
-            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--red-dark">Log in to your account</a></p>
-          </div>
-
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4">
-            <h4 class="margin-bottom-small">Not yet a supporter?</h4>
-            <p>Head to the red bar above, select the amount you’d like to donate each month, and hit ‘Go’.</p>
-          </div>
-          <div class="flex-grid-item flex-item-s-12 flex-item-xxl-2 margin-top-basic">
-
-          </div>          
+            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
+          </div>   
         </div>
       </div>
     </div>
-    
+
+    <?php
+      get_template_part('partials/support-section', null, array(
+        'show_text' => false,
+        'large_text' => true,
+        'heading_copy' => 'Become a supporter',
+        'override_text' => 'Not yet a supporter? We ask our audience to donate one hour of their wage to us each month'
+      ));
+    ?>
+        
     <div id="other-donation-methods" class="container">      
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">

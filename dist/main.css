@@ -1362,6 +1362,16 @@ h4 {
 h5 {
   font-weight: bold;
 }
+.font-size-0 {
+  font-size: 70px;
+  line-height: 75px;
+  letter-spacing: -0.025rem;
+}
+.font-size-1 {
+  font-size: 47px;
+  line-height: 54px;
+  letter-spacing: -0.025rem;
+}
 .font-size-3 {
   font-size: 21px;
 }
@@ -1577,8 +1587,15 @@ a {
   background-color: #b1b1ff;
 }
 .background-cover-image {
+  position: relative;
   background-size: cover;
   background-position: center;
+}
+.background-cover-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 .icon-large:before {
   font-size: 1.400505962399693rem;
@@ -1746,6 +1763,21 @@ img {
   height: 19px;
   width: 23px;
 }
+.header-main__logomark {
+  position: relative;
+}
+#menu-logo-nm10 {
+  background-color: #dc0005;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: -16px;
+  height: 56px;
+}
+#menu-logo-nm10 svg {
+  height: 35px;
+  width: 78px;
+}
 .header-main__middle {
   position: relative;
 }
@@ -1842,6 +1874,7 @@ img {
   border-color: #a80003;
 }
 .nm-button--white {
+  background-color: #fdfdfd;
   border-color: #0e0e0e;
 }
 .nm-button--white:hover {
@@ -1859,7 +1892,6 @@ img {
   display: block;
 }
 .support-form__button,
-.support-form__submit,
 .support-form__custom-input {
   display: block;
   padding: 8px 16px;
@@ -1878,71 +1910,66 @@ img {
   border-color: #fdfdfd;
 }
 .support-form__button:hover,
-.support-form__submit:hover,
 .support-form__custom-input:hover {
   border-color: #969696;
   cursor: pointer;
 }
 .support-form__button--red,
-.support-form__submit--red,
 .support-form__custom-input--red {
   background-color: #dc0005;
   color: #fdfdfd;
 }
 .support-form__button--red:hover,
-.support-form__submit--red:hover,
 .support-form__custom-input--red:hover {
   background-color: #fdfdfd;
   color: #dc0005;
   border-color: #dc0005;
 }
 .support-form__button--red-dark,
-.support-form__submit--red-dark,
 .support-form__custom-input--red-dark {
   background-color: #a80003;
   color: #fdfdfd;
 }
 .support-form__button--red-dark:hover,
-.support-form__submit--red-dark:hover,
 .support-form__custom-input--red-dark:hover {
   background-color: #fdfdfd;
   color: #a80003;
   border-color: #a80003;
 }
 .support-form__button--white,
-.support-form__submit--white,
 .support-form__custom-input--white {
+  background-color: #fdfdfd;
   border-color: #0e0e0e;
 }
 .support-form__button--white:hover,
-.support-form__submit--white:hover,
 .support-form__custom-input--white:hover {
   background-color: #0e0e0e;
   color: #fdfdfd;
   border-color: #0e0e0e;
 }
 .support-form__button--inline,
-.support-form__submit--inline,
 .support-form__custom-input--inline {
   display: inline-block;
 }
 .support-form__button--half,
-.support-form__submit--half,
 .support-form__custom-input--half {
   width: 49%;
 }
 .support-form__button:hover,
-.support-form__submit:hover,
 .support-form__custom-input:hover,
 .support-form__button--active,
-.support-form__submit--active,
 .support-form__custom-input--active {
   color: #fdfdfd;
-  background-color: #dc0005;
+  background-color: #a80003;
+  border-color: #fdfdfd;
+}
+.support-form__submit {
+  display: inline-block;
+  font-weight: normal;
   border-color: #fdfdfd;
 }
 .support-form__value-option {
-  width: 32%;
+  width: 31%;
 }
 .support-form__custom-input::-webkit-input-placeholder {
   padding-left: 5px;
@@ -1972,10 +1999,13 @@ img {
   color: #fdfdfd;
 }
 .support-form__schedule-option {
-  width: 49%;
+  width: 48%;
 }
 .support-form__submit {
   width: 100%;
+}
+.support-page__hero-wrapper {
+  padding: 120px 0;
 }
 .support-page__content-copy {
   font-family: Georgia, Times, "Times New Roman", serif;
@@ -3519,6 +3549,9 @@ img {
     margin-left: 2%;
     padding: 6px 12px;
   }
+  .support-page__hero-wrapper {
+    padding: 80px 0;
+  }
   #featured-post-title-holder {
     padding: 60px;
     font-size: 3.330015792890114rem;
@@ -3925,6 +3958,18 @@ img {
   }
   #header-main__logotype {
     display: none;
+  }
+  #menu-logo-nm10 {
+    background-color: #dc0005;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 42px;
+  }
+  #menu-logo-nm10 svg {
+    height: 24px;
+    width: 48px;
   }
   #menu-logo svg {
     height: 16px;
