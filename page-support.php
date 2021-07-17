@@ -104,11 +104,11 @@ if( have_posts() ) {
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
           <h4>Other Donation Methods</h4>
         </div>
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-xxl-3 margin-bottom-small">
           <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
         </div>
         
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
           </p>
@@ -117,28 +117,37 @@ if( have_posts() ) {
           <p><a class="nm-button nm-button--red" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
         
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
           </p>
           <p><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
-          <p class="margin-bottom-tiny">
-            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
-            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
-          </p>
-          <p>
-            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
-            <a class="nm-button nm-button--red nm-button--inline nm-button--half" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
-          </p>
+          
+          <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+            <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+            </div>
+          </div>
+          <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
+            </div>
+          </div>
         </div>
           
-        <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
           </p>
           <p><strong>Crypto</strong></p>
-          <p>We accept BTC at this address: 1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
+          <p>We accept BTC at this address: <code class="font-size-smaller">1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i</code> If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
         </div>
       </div>
     </div>

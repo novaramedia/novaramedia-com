@@ -30,7 +30,7 @@
       </div>
 
       <div class="flex-grid-row font-size-3">
-        <div class="flex-grid-item flex-item-m-12 flex-item-l-6 flex-item-xxl-5">      
+        <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-6 flex-item-xxl-5">      
           <?php
             if ($support_section_text || $override_text) {
             ?>
@@ -48,25 +48,33 @@
             ?>
         </div>
 
-        <div class="flex-grid-item flex-item-s-6 flex-offset-s-0 flex-item-m-4 flex-offset-m-2 flex-item-xxl-3">   
-          <div class="margin-bottom-small">       
-            <button class="support-form__button support-form__value-option" data-action="set-value" data-value="8">£8</button>
-            <button class="support-form__button support-form__value-option" data-action="set-value" data-value="20">£20</button>
-            <button class="support-form__button support-form__value-option" data-action="set-value" data-value="50">£50</button>
+        <div class="flex-grid-item flex-item-l-12 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
+          <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="8">£8</button>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="20">£20</button>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="50">£50</button>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+              <input class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
+            </div>
           </div>
-          
-          <button class="support-form__button support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/oneoff">One-off</button>
-          <button class="support-form__button support-form__button--active support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/regular">Monthly</button>
-        </div>
-
-        <div class="flex-grid-item flex-item-s-6 flex-item-m-4 flex-item-xxl-3">
-          <div class="margin-bottom-small">       
-            <input class="support-form__custom-input" type="number" placeholder="£ Custom amount" />
+          <div class="flex-grid-row flex-grid--nested-tight">
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-3">          
+              <button class="support-form__button support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/oneoff">One-off</button>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-3">          
+              <button class="support-form__button support-form__button--active support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/regular">Monthly</button>
+            </div>
+            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+              <input class="support-form__submit nm-button nm-button--red-dark" type="submit" value="Go" />
+            </div>
           </div>
-          
-          <input class="support-form__submit nm-button--red-dark" type="submit" value="Go" />
         </div>
-
       </div>
     </form>      
   </div>

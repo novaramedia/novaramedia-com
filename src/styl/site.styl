@@ -239,6 +239,9 @@ p
 .font-larger
   font-size: $font-size-larger
 
+.font-size-smaller
+  font-size: 0.85em
+
   // COLOR RULES
 
 .font-color-white
@@ -718,43 +721,34 @@ nmButton()
 
 .support-form
   display: block
-
+  
 .support-form__button, .support-form__custom-input
   nmButton()
-  display: inline-block
-  font-weight: normal
   color: $color-red
   background-color: $color-white-soft
-  border-color: $color-white-soft
   &:hover, &--active
     color: $color-white-soft
     background-color: $color-red-dark
     border-color: $color-white-soft 
-    
-.support-form__submit
-  display: inline-block
-  font-weight: normal
-  border-color: $color-white-soft 
-        
-.support-form__value-option
-  width: 31%
 
+.support-form__button, .support-form__custom-input, .support-form__submit
+  width: 100%     
+  font-weight: normal
+  border-color: $color-white-soft
+  &:hover, &--active
+    border-color: $color-white-soft 
+    
 .support-form__custom-input::placeholder
   padding-left: 5px
   transition: color $duration-form-transitions
   
 .support-form__custom-input
-  width: 100%
+  &::placeholder
+    color: $color-red
   &:hover, &.support-form__button--active
     &::placeholder
       color: $color-white-soft
       
-.support-form__schedule-option
-  width: 48%
-    
-.support-form__submit
-  width: 100%     
-
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
