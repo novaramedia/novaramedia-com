@@ -7,6 +7,8 @@ $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 <!-- main content -->
 <main id="main-content">
   <?php
+    get_template_part('partials/front-page/front-page-support-banner');
+
     get_template_part('partials/front-page/front-page-signups');
 
     // **************
