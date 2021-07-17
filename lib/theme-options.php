@@ -115,20 +115,6 @@ class IGV_Admin {
       'id'   => $this->prefix . 'support_section_text',
       'type' => 'textarea_small',
     ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Regular donor text', 'IGV' ),
-      'id'   => $this->prefix . 'support_section_regular_donor_text',
-      'type' => 'text',
-      'default' => 'Become a regular donor and support Novara Media monthly:',
-    ) );
-
-      $options_metabox->add_field( array(
-      'name' => __( 'One off text', 'IGV' ),
-      'id'   => $this->prefix . 'support_section_oneoff_donor_text',
-      'type' => 'text',
-      'default' => 'Or you can give us a one-off donation:',
-    ) );
     
     $options_metabox->add_field( array(
       'name' => __( 'Article support box text', 'IGV' ),
