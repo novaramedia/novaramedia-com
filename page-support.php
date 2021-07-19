@@ -28,7 +28,7 @@ if( have_posts() ) {
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny">Anniversary Fundraiser</h4>
+            <h4 class="margin-top-small margin-bottom-tiny">Tenth anniversary fundraiser</h4>
           </div>
         </div>
         <div class="flex-grid-row support-page__hero-wrapper">
@@ -44,8 +44,8 @@ if( have_posts() ) {
       get_template_part('partials/support-section', null, array(
         'show_text' => false,
         'large_text' => true,
-        'heading_copy' => 'Donate to Novara Media',
-        'override_text' => 'It’s been 10 years since Novara Media first started. Now, more than ever, we need your support.'
+        'heading_copy' => 'Become a supporter',
+        'override_text' => 'It’s been ten years since Novara Media first started. Now, more than ever, we need your support.'
       ));
     ?>
 

@@ -3814,6 +3814,23 @@ img {
   h3 {
     font-size: 1.272006289292628rem;
   }
+  .font-size-0 {
+    font-size: 48px;
+    line-height: 1.07142857;
+    letter-spacing: -0.025rem;
+  }
+  .font-size-1 {
+    font-size: 37.29px;
+    line-height: 46px;
+    letter-spacing: -0.01em;
+  }
+  .font-size-3 {
+    font-size: 16.58px;
+    line-height: 20px;
+  }
+  .mobile-font-size-6 {
+    font-size: 13px;
+  }
   p {
     margin-bottom: 1rem;
   }
@@ -4002,6 +4019,42 @@ img {
   }
   .mobile-margin-bottom-large {
     margin-bottom: 60px;
+  }
+  .mobile-padding-top-micro {
+    padding-top: 3.708203932499128px;
+  }
+  .mobile-padding-top-tiny {
+    padding-top: 6px;
+  }
+  .mobile-padding-top-small {
+    padding-top: 12px;
+  }
+  .mobile-padding-top-basic {
+    padding-top: 24px;
+  }
+  .mobile-padding-top-mid {
+    padding-top: 42px;
+  }
+  .mobile-padding-top-large {
+    padding-top: 60px;
+  }
+  .mobile-padding-bottom-micro {
+    padding-bottom: 3.708203932499128px;
+  }
+  .mobile-padding-bottom-tiny {
+    padding-bottom: 6px;
+  }
+  .mobile-padding-bottom-small {
+    padding-bottom: 12px;
+  }
+  .mobile-padding-bottom-basic {
+    padding-bottom: 24px;
+  }
+  .mobile-padding-bottom-mid {
+    padding-bottom: 42px;
+  }
+  .mobile-padding-bottom-large {
+    padding-bottom: 60px;
   }
   #main-content {
     padding-top: 42px;
@@ -4196,6 +4249,12 @@ img {
   }
   .single-video-related-video:nth-child(3) {
     display: none;
+  }
+  .support-page__hero-wrapper {
+    padding: 42px 0;
+  }
+  .support-page__content-copy {
+    font-size: 16px;
   }
 }
 @keyframes sk-bounce {

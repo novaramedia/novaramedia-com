@@ -14,7 +14,7 @@
   $instance = uniqid('support-form-');
 ?>
 
-<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white padding-top-large padding-bottom-large">
+<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white padding-top-large padding-bottom-large mobile-padding-top-basic mobile-padding-bottom-basic">
   <div class="container">    
     
     <form 
@@ -31,12 +31,12 @@
         </div>
       </div>
 
-      <div class="flex-grid-row font-size-3">
+      <div class="flex-grid-row font-size-3 mobile-font-size-6">
         <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-6 flex-item-xxl-5">      
           <?php
             if ($support_section_text || $override_text) {
             ?>
-          <div class="margin-top-micro font-bold">
+          <div class="margin-top-micro mobile-margin-bottom-small font-bold">
             <a href="<?php echo home_url('support/'); ?>" class="js-fix-widows"><?php 
               if ($override_text) {
                 echo $override_text;
@@ -56,10 +56,10 @@
               <button class="support-form__button support-form__value-option" data-action="set-value" data-value="8">£8</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
-              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="20">£20</button>
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="10">£10</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
-              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="50">£50</button>
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="20">£20</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
               <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
