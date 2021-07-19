@@ -1,4 +1,4 @@
-<div class="background-cover-image" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
+<div class="background-cover-image background-light-blue" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
   <div class="container">
     <div class="flex-grid-row padding-top-mid padding-bottom-mid">
       <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6">
