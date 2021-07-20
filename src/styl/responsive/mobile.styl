@@ -65,6 +65,23 @@ h2, .font-size-h2
 
 h3
   font-size: $font-size-h3
+  
+.font-size-0
+  font-size: 48px
+  line-height: 1.07142857
+  letter-spacing: -0.025rem
+  
+.font-size-1
+  font-size: 37.29px
+  line-height: 46px
+  letter-spacing: -0.01em
+  
+.font-size-3
+  font-size: 16.58px
+  line-height: 20px
+  
+.mobile-font-size-6
+  font-size: $font-size-basic
 
 p
   margin-bottom: 1rem
@@ -275,14 +292,65 @@ p
 
 .mobile-margin-bottom-large
   margin-bottom: $margin-large
+  
+  // PADDING TOP
 
+.mobile-padding-top-micro
+  padding-top: $margin-micro
+
+.mobile-padding-top-tiny
+  padding-top: $margin-tiny
+
+.mobile-padding-top-small
+  padding-top: $margin-small
+
+.mobile-padding-top-basic
+  padding-top: $margin-basic
+
+.mobile-padding-top-mid
+  padding-top: $margin-mid
+
+.mobile-padding-top-large
+  padding-top: $margin-large
+
+  // PADDING BOTTOM
+
+.mobile-padding-bottom-micro
+  padding-bottom: $margin-micro
+
+.mobile-padding-bottom-tiny
+  padding-bottom: $margin-tiny
+
+.mobile-padding-bottom-small
+  padding-bottom: $margin-small
+
+.mobile-padding-bottom-basic
+  padding-bottom: $margin-basic
+
+.mobile-padding-bottom-mid
+  padding-bottom: $margin-mid
+
+.mobile-padding-bottom-large
+  padding-bottom: $margin-large
+
+// ******************************************************
+
+// BACKGROUNDS
+
+.background-cover-image
+  background-size: 160%
+  
 // ******************************************************
 
 // HEADER
   
+$header-height = 42px
+  
 #main-content
-  padding-top: 47px + $margin-small
-  min-height: 75vh
+  padding-top: $header-height
+  
+#header-main-wrapper
+  height: $header-height
 
 .header-menu
   li
@@ -309,6 +377,17 @@ p
 
 #header-main__logotype
   display: none
+  
+#menu-logo-nm10
+  background-color: $color-red
+  padding: 10px
+  position: absolute
+  right: 0
+  top: 0
+  height: $header-height
+  svg
+    height: 23px
+    width: 48px
 
 #menu-logo
   svg
@@ -334,33 +413,6 @@ p
 #search-submit
   width: 8%
   min-width: 25px
-
-// ******************************************************
-
-// SUPPORT SECTION
-
-.support-section
-  padding-top: $margin-basic
-  padding-bottom: $margin-basic
-  margin-top: $margin-basic
-  margin-bottom: $margin-basic
-
-.support-form-holder
-  min-height: 5rem
-  padding: $margin-small
-
-.support-form-submit
-  width: auto
-  margin-left: $margin-small
-  padding: $margin-tiny $margin-small
-
-input[type=number]
-  width: auto
-  margin-right: $margin-small
-  padding: $margin-tiny $margin-small
-  background-color: white
-  color: $color-red
-  border: 0
   
 // ******************************************************
 
@@ -478,3 +530,13 @@ input[type=number]
     padding-left: 3px
   &:nth-child(3)
     display: none
+
+// ******************************************************
+
+// SUPPORT PAGE
+    
+.support-page__hero-wrapper
+  padding: $margin-mid 0
+
+.support-page__content-copy
+  font-size: 16px

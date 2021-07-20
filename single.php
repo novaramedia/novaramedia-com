@@ -7,7 +7,7 @@ get_header();
 <main id="main-content">
 
   <!-- main posts loop -->
-  <article id="post" class="container margin-bottom-basic">
+  <article id="post" class="container margin-top-small margin-bottom-basic">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {

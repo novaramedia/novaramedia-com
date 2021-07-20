@@ -14,7 +14,7 @@ if( have_posts() ) {
 ?>
   <!-- main posts loop -->
   <article id="page">
-    <div class="container margin-bottom-large">
+    <div class="container margin-top-small margin-bottom-large">
       <div class="row margin-bottom-basic">
         <div class="col col24">
           <h4><?php the_title(); ?></h4>

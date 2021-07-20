@@ -115,10 +115,14 @@ $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = rgb(220, 0, 5) // Mine 
+$color-red-dark = #A80003;
+
 // $color-red = rgb(228, 0, 43) // PANTONE  185 C.
 // $color-red = rgb(213, 0, 50) // PANTONE  199 C.
 // $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
 $color-blue = rgb(84, 144, 235)
+
+$color-lilac = #B1B1FF
 
 $color-blue-light = #CAE5FF
 $color-purple-light = #B1B1FF
@@ -126,6 +130,8 @@ $color-purple-light = #B1B1FF
 $border-width = 2px
 
 $basic-animation-speed = .5s
+
+$duration-form-transitions = 420ms
 
 $font-serif = font-stack('Georgia');
 $font-sans = font-stack('Helvetica');
@@ -167,6 +173,19 @@ h4
 
 h5
   font-weight: bold
+  
+.font-size-0
+  font-size: 70px
+  line-height: 75px
+  letter-spacing: -0.025rem
+  
+.font-size-1
+  font-size: 47px
+  line-height: 54px
+  letter-spacing: -0.025rem
+  
+.font-size-3
+  font-size: 21px
 
 p
   margin-bottom: 1rem
@@ -212,6 +231,9 @@ p
 
 .font-larger
   font-size: $font-size-larger
+
+.font-size-smaller
+  font-size: 0.85em
 
   // COLOR RULES
 
@@ -351,8 +373,22 @@ a
 .background-light-blue
   background-color: $color-blue-light
 
+.background-lilac
+  background-color: $color-lilac
+  
 .background-light-purple
   background-color: $color-purple-light
+  
+.background-cover-image
+  position: relative
+  background-size: cover
+  background-position: center
+
+.background-cover-overlay
+  position: absolute
+  top: 0
+  width: 100%
+  height: 100%
   
 // ******************************************************
 
@@ -519,16 +555,20 @@ img
 
 // HEADER
 
+$header-height = 56px
+
 #header
   position: fixed
   width: 100%
   z-index: 1000
 
 #main-content
-  padding-top: 57px + $margin-small
+  padding-top: $header-height
   min-height: 75vh
 
 #header-main-wrapper
+  height: $header-height
+  overflow: hidden
   background-color: black
   background-image: url('./img/marble-dark-banner.jpg')
   background-size: cover
@@ -545,6 +585,20 @@ img
   svg
     height: 19px
     width: 23px
+    
+.header-main__logomark
+  position: relative
+
+#menu-logo-nm10
+  background-color: $color-red
+  padding: 10px
+  position: absolute
+  right: 0
+  top: -($margin-small)
+  height: $header-height
+  svg
+    height: 35px
+    width: 78px
     
 .header-main__middle
   position: relative
@@ -621,7 +675,7 @@ nmButton()
   border-color: transparent
   border-radius: 3px 
   transition-property: background-color, color, border-color 
-  transition-duration: 420ms
+  transition-duration: $duration-form-transitions
   &:hover
     border-color: $color-gray
     cursor: pointer
@@ -632,12 +686,24 @@ nmButton()
       background-color: $color-white-soft
       color: $color-red   
       border-color: $color-red 
+  &--red-dark
+    background-color: $color-red-dark
+    color: $color-white-soft   
+    &:hover
+      background-color: $color-white-soft
+      color: $color-red-dark 
+      border-color: $color-red-dark 
   &--white
+    background-color: $color-white-soft
     border-color: $color-black-soft
     &:hover
       background-color: $color-black-soft
       color: $color-white-soft
       border-color: $color-black-soft
+  &--inline
+    display: inline-block
+  &--half
+    width: 49%
       
 .nm-button
   nmButton()
@@ -647,35 +713,55 @@ nmButton()
 // SUPPORT SECTION
 
 .support-form
-  &.only-desktop
-    font-size: 1.1rem
-  &.only-mobile
-    font-size: 1.3rem
-
-.support-form-holder
-  min-height: 5rem
-  padding: $margin-small
-  text-align: center
-  border: 2px solid white
-  border-radius: 2px
-  input
-    border-radius: 2px
+  display: block
   
-.support-form-slider
-  width: 70%
-  margin-right: 1%
-
-.support-form-submit
+.support-form__button, .support-form__custom-input
   nmButton()
-  width: 14%
-  margin-left: 2%
-  background-color: white
   color: $color-red
-  &:hover
+  background-color: $color-white-soft
+  &:hover, &--active
     color: $color-white-soft
-    background-color: $color-red
-    border-color: $color-white-soft
+    background-color: $color-red-dark
+    border-color: $color-white-soft 
 
+.support-form__button, .support-form__custom-input, .support-form__submit
+  width: 100%     
+  font-weight: normal
+  border-color: $color-white-soft
+  &:hover, &--active
+    border-color: $color-white-soft 
+    
+.support-form__custom-input::placeholder
+  padding-left: 5px
+  transition: color $duration-form-transitions
+  
+.support-form__custom-input
+  &::placeholder
+    color: $color-red
+  &:hover, &.support-form__button--active
+    &::placeholder
+      color: $color-white-soft
+      
+// SUPPORT PAGE
+
+.support-page__hero-wrapper
+  padding: 120px 0
+
+.support-page__content-copy
+  font-family: $font-serif
+  font-size: 18px
+  line-height: $font-leading-larger 
+  h3
+    font-family: $font-sans
+    font-size: 31.5px
+    line-height: 38.46px
+    margin-bottom: 1rem
+
+#other-donation-methods
+  svg
+    height: 2rem
+    width: auto
+  
 // FUNDRAISER PROGRESS BAR
 
 #progress-bar-row
