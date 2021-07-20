@@ -95,7 +95,7 @@ if( have_posts() ) {
         'show_text' => false,
         'large_text' => true,
         'heading_copy' => 'Become a supporter',
-        'override_text' => 'Not yet a supporter? We ask our audience to donate one hour of their wage to us each month'
+        'override_text' => 'Not yet a supporter? We\'re asking that you donate one hour of your wage each month.'
       ));
     ?>
         

@@ -4056,6 +4056,9 @@ img {
   .mobile-padding-bottom-large {
     padding-bottom: 60px;
   }
+  .background-cover-image {
+    background-size: 160%;
+  }
   #main-content {
     padding-top: 42px;
   }

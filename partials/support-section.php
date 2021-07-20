@@ -36,7 +36,7 @@
           <?php
             if ($support_section_text || $override_text) {
             ?>
-          <div class="margin-top-micro mobile-margin-bottom-small font-bold">
+          <div class="margin-top-micro margin-bottom-small font-bold">
             <a href="<?php echo home_url('support/'); ?>" class="js-fix-widows"><?php 
               if ($override_text) {
                 echo $override_text;
