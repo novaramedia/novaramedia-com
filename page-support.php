@@ -42,7 +42,6 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'large_text' => true,
         'heading_copy' => 'Become a supporter',
         'override_text' => 'It’s been ten years since Novara Media first started. Now, more than ever, we need your support.'
       ));
@@ -91,7 +90,6 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'large_text' => true,
         'heading_copy' => 'Become a supporter',
         'override_text' => 'Not yet a supporter? We\'re asking that you donate one hour of your wage each month.'
       ));
