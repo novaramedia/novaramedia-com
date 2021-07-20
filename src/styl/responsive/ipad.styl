@@ -253,9 +253,13 @@ p
 
 // HEADER
 
+$header-height = 48px
+
 #main-content
-  padding-top: 52px + $margin-small
-  min-height: 75vh
+  padding-top: $header-height
+
+#header-main-wrapper
+  height: $header-height
 
 .header-menu.u-inline-list
   li
@@ -303,6 +307,11 @@ p
   width: 23%
   margin-left: 2%
   padding: $margin-tiny $margin-small
+  
+// SUPPORT PAGE
+
+.support-page__hero-wrapper
+  padding: 80px 0
 
 // ******************************************************
 

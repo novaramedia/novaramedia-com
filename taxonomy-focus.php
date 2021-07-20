@@ -14,7 +14,7 @@ $splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($sp
   <!-- main posts loop -->
   <section id="posts" class="container">
     
-    <div class="flex-grid-row margin-bottom-mid">
+    <div class="flex-grid-row margin-top-small margin-bottom-mid">
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
         <h4 class="margin-bottom-micro">Focus</h4>
         <div class="only-desktop">

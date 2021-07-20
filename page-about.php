@@ -24,7 +24,7 @@ if( have_posts() ) {
     $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
 ?>
   <!-- main posts loop -->
-  <article id="page" class="container margin-bottom-large">
+  <article id="page" class="container margin-top-small margin-bottom-large">
     <div class="row margin-bottom-small">
       <div class="col col24">
         <h4><?php the_title(); ?></h4>

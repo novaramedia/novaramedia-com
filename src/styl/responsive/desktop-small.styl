@@ -251,13 +251,25 @@ p
 
 // HEADER
 
-#main-content
-  padding-top: 57px + $margin-small
-  min-height: 75vh
+$header-height = 48px
 
+#main-content
+  padding-top: $header-height 
+
+#header-main-wrapper
+  height: $header-height
+  
 .header-menu
   li
     padding-right: $margin-tiny
+    
+#menu-logo-nm10
+  padding: 10px
+  top: -($margin-small)
+  height: $header-height
+  svg
+    height: 28px
+    width: 58px
 
 // SEARCH
 

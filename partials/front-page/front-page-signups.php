@@ -11,7 +11,7 @@
 
     $cols = 24 / $number_of_signups;
 ?>
-<section id="front-page-signups" class="container margin-bottom-small">
+<section id="front-page-signups" class="container margin-top-small margin-bottom-small">
   <div class="row">
     <?php
       $i = 0;

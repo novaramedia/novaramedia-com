@@ -1,7 +1,7 @@
 // GRID
 
 $col = 32px
-$gutter = 14px
+$gutter = 12px
 
 .container
   width: ($col * $cols)+($gutter * $cols)
@@ -252,13 +252,24 @@ p
 
 // HEADER
 
-#main-content
-  padding-top: 57px + $margin-small
-  min-height: 75vh
+$header-height = 52px
 
+#main-content
+  padding-top: $header-height
+
+#header-main-wrapper
+  height: $header-height
+  
 .header-menu
   li
     padding-right: $margin-tiny
+    
+#menu-logo-nm10
+  top: -($margin-small)
+  height: $header-height
+  svg
+    height: 32px
+    width: 72px
 
 // SEARCH
 

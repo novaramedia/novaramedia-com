@@ -40,30 +40,27 @@
             
             <div class="header-main__middle col col16 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                
                 <nav id="header-main__logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logotype-2-white-line.svg'); ?></nav>
 
-              
-              <?php
-                if (is_single()) {
-                  $author = get_post_meta($post->ID, '_cmb_author', true);
-              ?>
-              <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
-                the_title();
-                if (!empty($author)) {
-                  echo ' by ' . $author;
-                }
-              ?></span>
-              <?php
-                }
-              ?>
-
+                <?php
+                  if (is_single()) {
+                    $author = get_post_meta($post->ID, '_cmb_author', true);
+                ?>
+                <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
+                  the_title();
+                  if (!empty($author)) {
+                    echo ' by ' . $author;
+                  }
+                ?></span>
+                <?php
+                  }
+                ?>
               </a>
             </div>
                         
-            <a href="<?php echo home_url(); ?>">
+            <a href="<?php echo home_url('support/'); ?>">
               <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logo" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logomark-white.svg'); ?></nav>
+                <nav id="menu-logo-nm10" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/nm10-logo.svg'); ?></nav>
               </div>
             </a>
           </div>
@@ -75,6 +72,7 @@
           <div class="row">
             <div class="col col24">
               <ul class="header-menu u-inline-list text-align-center font-tracking-medium">
+                <li><a href="<?php echo site_url(); ?>">Front Page</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>

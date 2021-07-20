@@ -13,7 +13,7 @@ if( have_posts() ) {
     $meta = get_post_meta($post->ID);
 ?>
   <!-- main posts loop -->
-  <article id="page" class="container margin-bottom-large">
+  <article id="page" class="container margin-top-small margin-bottom-large">
     <div class="row margin-bottom-basic">
       <div class="col col24">
         <h4><?php the_title(); ?></h4>
