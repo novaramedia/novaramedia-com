@@ -1,5 +1,4 @@
 <?php
-  $show_text = isset($args['show_text']) ? $args['show_text'] : true;
   $override_text = isset($args['override_text']) ? $args['override_text'] : false;
     
   $heading_copy = !empty($args['heading_copy']) ? $args['heading_copy'] : 'Support Us';
