@@ -1,13 +1,16 @@
 <?php
 get_header();
 
-$fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
+// $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
+$show_support_banner = NM_get_option('nm_front_page_settings_banners_show_support');
 ?>
 
 <!-- main content -->
 <main id="main-content">
   <?php
-    get_template_part('partials/front-page/front-page-support-banner');
+    if ($show_support_banner !== false) {
+      get_template_part('partials/front-page/front-page-support-banner');      
+    }
 
     get_template_part('partials/front-page/front-page-signups');
 

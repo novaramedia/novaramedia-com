@@ -104,7 +104,7 @@ class IGV_Admin {
     // FUNDING COPY OPTIONS
 
     $options_metabox->add_field( array(
-      'name' => __( 'Funding Copy', 'cmb2' ),
+      'name' => __( 'Funding Copy & Options', 'cmb2' ),
       'id'   => $this->prefix . 'funding_title',
       'type' => 'title',
     ) );
@@ -122,77 +122,22 @@ class IGV_Admin {
       'id'   => $this->prefix . 'articles_support_box_text',
       'type' => 'textarea_small',
     ) );
-    
-    // ANNOUNCEMENT OPTIONS
 
     $options_metabox->add_field( array(
-      'name' => __( 'Announcement Options', 'cmb2' ),
-      'desc' => __( 'The announcement is a section that sits above the support section on single post views. It has large bold text and an optional image. It has a "find out more" link that can be an internal or external link', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_title',
-      'type' => 'title',
+      'name' => __( 'Support page title override', 'IGV' ),
+      'desc' => __( 'Replaces "Support Us" at the top of the support page', 'IGV' ),
+      'id'   => $this->prefix . 'support_page_title_override',
+      'type' => 'text',
     ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Expiration time', 'IGV' ),
-      'desc' => __( 'Announcement will show if this value is set and in the future', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_time',
-      'type' => 'text_datetime_timestamp',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Internal link', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_link',
-      'type' => 'post_search_text',
-      'post_type'   => array('post', 'page', 'event', 'notice'),
-      'select_behavior' => 'replace',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'External link', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_link_ext',
-      'type' => 'text_url',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Text', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_text',
-      'type' => 'textarea_small',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Image', 'IGV' ),
-      'id'   => $this->prefix . 'announcement_image',
-      'type' => 'file',
-    ) );
-
-    // FUNDRAISER OPTIONS
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Fundraiser Options', 'cmb2' ),
-      'id'   => $this->prefix . 'fundraiser_title',
-      'type' => 'title',
-    ) );
-
+        
+/*
     $options_metabox->add_field( array(
       'name' => __( 'Expiration time', 'IGV' ),
       'desc' => __( 'Fundraiser will show if this value is set and in the future', 'IGV' ),
       'id'   => $this->prefix . 'fundraiser_end_time',
       'type' => 'text_datetime_timestamp',
     ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Youtube ID', 'IGV' ),
-      'desc' => __( 'ID of Youtube video to show on home', 'IGV' ),
-      'id'   => $this->prefix . 'fundraiser_youtube_id',
-      'type' => 'text',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Support section override text', 'IGV' ),
-      'desc' => __( 'Shows in place of Support Us on the support section sidewide', 'IGV' ),
-      'id'   => $this->prefix . 'fundraiser_form_text',
-      'type' => 'text',
-    ) );
+*/
 
     // SOCIAL MEDIA OPTIONS
 

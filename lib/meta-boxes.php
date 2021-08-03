@@ -389,7 +389,7 @@ function igv_cmb_metaboxes() {
 
   $page_meta_boxes->add_field( array(
     'name'    => __( '2nd Column', 'cmb' ),
-    'desc'    => __( '(optional)', 'cmb' ),
+    'desc'    => __( '(optional) (on Support page this shows under the Already a supporter? heading)', 'cmb' ),
     'id'      => $prefix . 'page_extra',
     'type'    => 'wysiwyg',
     'options' => array( 'textarea_rows' => 5, ),

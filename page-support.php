@@ -1,9 +1,14 @@
 <?php
 get_header();
 
+$override_title = IGV_get_option('_igv_support_page_title_override');
+
+// $override_title = isset($args['override_text']) ? $args['override_text'] : false;
+
+/*
 $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
-$fundraiser_youtube_id = IGV_get_option('_igv_fundraiser_youtube_id');
 $is_fundraiser = $fundraiser_expiration > time();
+*/
 ?>
 
 <!-- main content -->
@@ -17,10 +22,6 @@ if( have_posts() ) {
     $meta = get_post_meta($post->ID);
 
     $youtube_id = !empty($meta['_cmb_support_youtube']) ? $meta['_cmb_support_youtube'][0] : false;
-    
-    if ($fundraiser_youtube_id && $is_fundraiser) {
-      $youtube_id = $fundraiser_youtube_id;
-    }
 ?>
   <!-- main posts loop -->
   <article id="page" class="support-page">
@@ -28,7 +29,13 @@ if( have_posts() ) {
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny">Tenth anniversary fundraiser</h4>
+            <h4 class="margin-top-small margin-bottom-tiny"><?php
+              if (!empty($override_title)) {
+                echo $override_title;
+              } else {
+                echo 'Support Us';
+              }
+            ?></h4>
           </div>
         </div>
         <div class="flex-grid-row support-page__hero-wrapper">
@@ -81,7 +88,9 @@ if( have_posts() ) {
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h3 class="font-size-3 margin-bottom-small">Already a supporter?</h3>
-            <p>If you can, we’re asking that you increase your donation by a few pounds each month. Just log in to your supporter account, type in the new total amount you want to donate each month, and click ‘edit donation’. Any problems, drop us an email at donations@novaramedia.com.</p>
+            <?php if (!empty($meta['_cmb_page_extra'])) {
+              echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
+            } ?>
             <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
           </div>   
         </div>

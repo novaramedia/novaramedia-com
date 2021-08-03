@@ -113,7 +113,7 @@ function nm_register_front_page_options_metabox() {
 
   $main_options->add_field( array(
     'name'    => 'Audio Curation',
-    'desc'    => 'This is where audio can be curated ',
+    'desc'    => 'This is where audio can be curated',
     'id'      => $prefix . 'front_page_settings_audio_title',
     'type'    => 'title',
   ) );
@@ -136,6 +136,18 @@ function nm_register_front_page_options_metabox() {
     'options'          => get_audio_categories_metabox_array()
   ) );
 
+  $main_options->add_field( array(
+    'name'    => 'Adverts and banners',
+    'id'      => $prefix . 'front_page_settings_banners_title',
+    'type'    => 'title',
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Show support banner ad?',
+    'id'      => $prefix . 'front_page_settings_banners_show_support',
+    'type'    => 'checkbox',
+  ) );  
+  
   /**
    * Registers secondary options page, and set main item as parent.
    */
