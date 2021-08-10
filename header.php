@@ -80,7 +80,7 @@
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="https://shop.novaramedia.com">Shop</a></li>
-                <li><a href="https://payment.novaramedia.com/login">Log In</a></li>
+                <li><a href="https://donate.novaramedia.com/login">Log In</a></li>
               </ul>
             </div>
           </div>

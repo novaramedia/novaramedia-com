@@ -91,7 +91,7 @@ if( have_posts() ) {
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
-            <p><a href="https://payment.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
+            <p><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
           </div>   
         </div>
       </div>
