@@ -18,7 +18,7 @@
     
     <form 
       class="support-form" 
-      action="https://payment.novaramedia.com/regular" 
+      action="https://donate.novaramedia.com/regular" 
     >
       <input class="support-form__value-input" type="hidden" value="<?php echo $default_subscription_value; ?>" name="amount" />
             
@@ -67,10 +67,10 @@
           </div>
           <div class="flex-grid-row flex-grid--nested-tight">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-3">          
-              <button class="support-form__button support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/oneoff">One-off</button>
+              <button class="support-form__button support-form__schedule-option" data-action="set-type" data-value="https://donate.novaramedia.com/oneoff">One-off</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-3">          
-              <button class="support-form__button support-form__button--active support-form__schedule-option" data-action="set-type" data-value="https://payment.novaramedia.com/regular">Monthly</button>
+              <button class="support-form__button support-form__button--active support-form__schedule-option" data-action="set-type" data-value="https://donate.novaramedia.com/regular">Monthly</button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
               <input class="support-form__submit nm-button nm-button--red-dark" type="submit" value="Go" />
