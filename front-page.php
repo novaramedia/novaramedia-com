@@ -259,10 +259,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
   
   <?php
-    get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Cortado',
-      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
-    ));
+    get_template_part('partials/specials/banners/focus-breaking-britain');
   ?>
 
 <!-- Tyksy Sour video block -->
@@ -317,8 +314,8 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   
   <?php
     get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Pick',
-      'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!'
+      'newsletter' => 'The Cortado',
+      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
     ));
   ?>
 
