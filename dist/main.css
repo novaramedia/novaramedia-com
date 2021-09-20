@@ -1437,6 +1437,9 @@ b {
 .font-color-black {
   color: #0e0e0e;
 }
+.font-color-blue-neon {
+  color: #0018f0;
+}
 .text-shadow-white {
   text-shadow: 0 0 20px rgba(253,253,253,0.5);
 }

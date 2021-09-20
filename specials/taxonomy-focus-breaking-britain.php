@@ -6,6 +6,46 @@ $term = $wp_query->get_queried_object();
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
 
+<div style="position: absolute; width: 100vw; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
+  <div style="position: absolute; top: 0; left: -400px; animation: breakingbars 13131ms ease-in-out 111ms infinite normal forwards;">
+    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-1.svg'); ?>
+  </div>
+  <div style="position: absolute; top: -250px; left: 27vw; animation: breakingbars 22222ms ease-in-out 707ms infinite normal forwards;">
+    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-2.svg'); ?>
+  </div>
+  <div style="position: absolute; top: -50px; right: -250px; animation: breakingbars 11111ms ease-in-out 420ms infinite normal forwards;">
+    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-3.svg'); ?>
+  </div>
+</div>
+
+<style type="text/css">
+  @keyframes breakingbars {
+  0% {
+    transform: translate(0) rotate(0deg);
+  }
+
+  20% {
+    transform: translate(-10px, 10px) rotate(-2deg);
+  }
+
+  40% {
+    transform: translate(-10px, -10px);
+  }
+
+  60% {
+    transform: translate(10px, 10px) rotate(2deg);
+  }
+
+  80% {
+    transform: translate(10px, -10px);
+  }
+
+  100% {
+    transform: translate(0) rotate(0deg);
+  }
+}
+</style>
+
 <!-- main content -->
 
 <main id="main-content">
