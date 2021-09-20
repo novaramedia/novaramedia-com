@@ -1,5 +1,22 @@
 <?php
+/**
+* Look for custom template in /specials folder when loading Focus archive template
+*
+*/
+function tax_focus_specials_template_path($template) {
+  if (is_tax('focus')) {
+    $term = get_query_var('term');
+    $new_template = locate_template(array('specials/taxonomy-focus-' . $term . '.php'));
+        
+    if ('' != $new_template) {
+      return $new_template;
+    }
+  }
   
+  return $template;
+}
+add_filter( 'template_include', 'tax_focus_specials_template_path', 99 );
+
 // add category nicenames in body class
 function nm_category_id_class($classes) {
   if (is_single()) {
