@@ -3,6 +3,7 @@ get_header();
 
 $term = $wp_query->get_queried_object();
 
+$quotes = get_term_meta($term->term_id, '_nm_focus_quotes', true);
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
 
@@ -63,6 +64,13 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
     </div>
 
     <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic">
+        <?php
+          get_template_part('partials/components/quote', null, $quotes[0]);
+        ?>
+      </div>
+      
+      
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -72,10 +80,14 @@ if( have_posts() ) {
     
     switch ($content_type->category_nicename) {
       case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+        get_template_part('partials/post-layouts/flex-video-embed-post', null, array(
+          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'
+        ));  
         break;
       default:
-        get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+        get_template_part('partials/post-layouts/flex-post', null, array(
+          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'
+        ));  
     }
   }
 } else {

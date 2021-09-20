@@ -2140,6 +2140,15 @@ img {
   position: relative;
   height: 100%;
 }
+.component-quote__image-holder {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -10;
+  width: 50%;
+  max-height: 100%;
+  overflow: hidden;
+}
 .spinner {
   width: 1em;
   height: 1em;
