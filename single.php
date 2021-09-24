@@ -6,14 +6,15 @@ get_header();
 
 <main id="main-content">
 <?php
-  if (get_post_status() === 'draft') {
+  $post_status = get_post_status();
+  if ($post_status === 'draft' || $post_status === 'pending') {
 ?>
   <div class="background-yellow">
     <div class="container">
       <div class="flex-grid-row padding-top-small padding-bottom-small">
         <div class="flex-grid-item flex-item-xxl-12">
-          <h1 class="font-size-3 text-align-center">
-            CAUTION: DRAFT POST
+          <h1 class="font-size-3 text-align-center font-uppercase">
+            Caution: <?php echo $post_status; ?> post
           </h1>
         </div>
       </div>
