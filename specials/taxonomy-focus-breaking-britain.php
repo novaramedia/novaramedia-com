@@ -59,45 +59,73 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
         <h1 class="margin-bottom-micro font-color-blue-neon" style="font-size: 239px;font-weight: 700;line-height: 203px;letter-spacing: -0.04em;margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
       </div>        
       <div class="flex-grid-item flex-item-s-12 flex-item-m-9 flex-item-xxl-5">
-        <div class="font-size-h2">
+        <div class="font-size-h2 font-color-blue-neon">
           <?php echo get_term_field( 'description', $term, null, $context = 'raw' ); // getting like this to avoid the filters that add <p> tags ?>
         </div>
       </div>
     </div>
-
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic">
-        <?php
-          get_template_part('partials/components/quote', null, $quotes[0]);
-        ?>
-      </div>
-      
-      
+ 
 <?php
 if( have_posts() ) {
+  $i = 0;
   while( have_posts() ) {
     the_post();
     
-    $content_type = get_the_top_category(get_the_ID());
+    if ($i === 0) { ?>
+    <div class="flex-grid-row margin-bottom-basic">
+<?php }
+
+    if ($i === 1) { ?>
+      <div class="flex-grid-item flex-item-s-12 flex-item-xl-4 flex-item-xxl-4 margin-bottom-basic">
+<?php }
     
-    switch ($content_type->category_nicename) {
-      case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array(
-          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'
-        ));  
-        break;
-      default:
-        get_template_part('partials/post-layouts/flex-post', null, array(
-          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'
-        ));  
-    }
-  }
-} else {
-?>
-    <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
-} ?>
+    if ($i === 3) { ?>
+      </div>
     </div>
+    <div class="flex-grid-row margin-bottom-basic">
+<?php }
+  
+  if ($i === 4) { ?>
+    <div class="flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic">
+      <?php
+        get_template_part('partials/components/quote', null, $quotes[0]);
+      ?>
+    </div>
+<?php }   
+
+    if ($i === 5 ) { ?>
+    </div>
+    <div class="flex-grid-row margin-top-mid margin-bottom-mid" style="justify-content: center;">
+<?php }
+
+    if ($i === 7) { ?>
+    </div>
+    <div class="flex-grid-row margin-bottom-basic">
+<?php }
+    
+    if ($i === 0) {
+      $post_arguments = array(
+        'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-8 flex-item-xxl-8 margin-bottom-basic',
+        'text-size' => 'large'
+      );
+    } else if ($i === 1 || $i === 2) {
+      $post_arguments = array(
+        'grid-item-classes' => 'margin-bottom-basic'
+      );
+    } else {
+      $post_arguments = array(
+        'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'
+      );
+    }
+    
+    get_template_part('partials/post-layouts/flex-post', null, $post_arguments);
+    
+    $i++;
+  }
+}
+?>   
+    </div>
+    
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12">
         <?php
