@@ -5,7 +5,23 @@ get_header();
 <!-- main content -->
 
 <main id="main-content">
-
+<?php
+  if (get_post_status() === 'draft') {
+?>
+  <div class="background-yellow">
+    <div class="container">
+      <div class="flex-grid-row padding-top-small padding-bottom-small">
+        <div class="flex-grid-item flex-item-xxl-12">
+          <h1 class="font-size-3 text-align-center">
+            CAUTION: DRAFT POST
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php
+   }
+?>
   <!-- main posts loop -->
   <article id="post" class="container margin-top-small margin-bottom-basic">
 <?php
