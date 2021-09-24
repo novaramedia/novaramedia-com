@@ -84,7 +84,7 @@ function createAboutColumnGroupFields($cmbInstance, $numberOfGroups, $title, $la
     $cmbInstance->add_group_field( $group_field, array(
       'name' => 'Name',
       'id'   => 'name',
-      'type' => 'text',
+      'type' => 'textarea_code',
       'repeatable' => true,
     ) );    
   }  
