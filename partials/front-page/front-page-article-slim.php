@@ -11,13 +11,11 @@
 
       if ($sub_category) {
     ?>
-    <div>
-      <h5 class="font-small-caps"><?php echo $sub_category; ?></h5>
-      <?php
-        }
-      ?>
+    <h5 class="font-small-caps"><?php echo $sub_category; ?></h5>
+    <?php
+      }
+    ?>
   
-      <h5 class="js-fix-widows"><?php the_title(); ?></h5>
-    </div>
+    <h5 class="js-fix-widows"><?php the_title(); ?></h5>
   </article>
 </a>
