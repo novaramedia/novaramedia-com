@@ -117,9 +117,6 @@ $color-gray-light-transparent = rgba(190,190,190, .5)
 $color-red = rgb(220, 0, 5) // Mine 
 $color-red-dark = #A80003;
 
-// $color-red = rgb(228, 0, 43) // PANTONE  185 C.
-// $color-red = rgb(213, 0, 50) // PANTONE  199 C.
-// $color-red = rgb(210, 39, 48) // PANTONE  1795 C.
 $color-blue = rgb(84, 144, 235)
 $color-blue-neon = #0018F0;
 
@@ -176,26 +173,50 @@ h4
 h5
   font-weight: bold
 
-.font-size-neg1
-  font-size: 106px
-  line-height: 90px
-  letter-spacing: -0.075rem
-    
-.font-size-0
-  font-size: 70px
-  line-height: 75px
-  letter-spacing: -0.025rem
-  
-.font-size-1
-  font-size: 47px
-  line-height: 54px
-  letter-spacing: -0.025rem
-  
-.font-size-3
-  font-size: 21px
-
 p
   margin-bottom: 1rem
+    
+  // NEW TYPE SCALE 2021
+
+.font-size-0
+  font-size: 12px
+  
+.font-size-1
+  font-size: 14px
+  line-height: 1.4
+    
+.font-size-2
+  font-size: 21px
+  line-height: 1.25
+
+.font-size-3
+  font-size: 32px
+  line-height: 1.1875
+  
+.font-size-4
+  font-size: 47px
+  line-height: 1.14893617
+  letter-spacing: -0.025em
+  
+.font-size-5
+  font-size: 71px
+  line-height: 1.05633803
+  letter-spacing: -0.025em
+  
+.font-size-6
+  font-size: 106px
+  line-height: 0.8490566
+  letter-spacing: -0.025em
+
+.font-size-7
+  font-size: 159px
+  line-height: 0.84937238
+  letter-spacing: -0.02em
+    
+.font-size-8
+  font-size: 239px
+  line-height: 0.84937238
+  letter-spacing: -0.04em
 
   // FONT RULES
 
@@ -1052,16 +1073,16 @@ nmButton()
 
 @media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
 
-  @import "responsive/desktop-mid"
+  @import "responsive/xl"
 
 @media screen and (max-width: 1104px)
 
-  @import "responsive/desktop-small"
+  @import "responsive/l"
 
 @media screen and (max-width: 910px)
 
-  @import "responsive/ipad"
+  @import "responsive/m"
 
 @media screen and (max-width: 759px)
 
-  @import "responsive/mobile"
+  @import "responsive/s"

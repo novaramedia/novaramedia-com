@@ -40,8 +40,8 @@ if( have_posts() ) {
         </div>
         <div class="flex-grid-row support-page__hero-wrapper">
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-0">
-            <h1 class="font-size-0">We're in it for the long&nbsp;haul.</h1>
-            <h2 class="font-size-0 font-color-white">Are you with&nbsp;us?</h2>
+            <h1 class="font-size-5">We're in it for the long&nbsp;haul.</h1>
+            <h2 class="font-size-5 font-color-white">Are you with&nbsp;us?</h2>
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@ if( have_posts() ) {
       <div class="container padding-top-mid padding-bottom-mid">      
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-            <h3 class="font-size-3 margin-bottom-small">Already a supporter?</h3>
+            <h3 class="font-size-2 margin-bottom-small">Already a supporter?</h3>
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>

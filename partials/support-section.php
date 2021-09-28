@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="flex-grid-row font-size-3 mobile-font-size-6">
+      <div class="flex-grid-row font-size-2 font-size-s-1">
         <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-6 flex-item-xxl-5">      
           <?php
             if ($support_section_text || $override_text) {
