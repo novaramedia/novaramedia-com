@@ -215,9 +215,71 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
   
   <?php
+    get_template_part('partials/specials/banners/focus-breaking-britain');
+  ?>
+
+  <!-- Tyksy Sour video block -->
+  <section id="front-page-tysky-sour-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <?php
+      $video_category_slug = 'tyskysour-video';
+
+      render_front_page_video_block($video_category_slug);
+    ?>
+  </section>  
+  
+  <?php
     get_template_part('partials/support-section');
   ?>
 
+  <!-- Below the fold articles block -->
+  <section id="front-page-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <?php
+      // *** EXCLUDE ALREADY SHOWN ABOVE
+
+      $category_id = get_cat_ID('Articles');
+      $category_link = get_category_link( $category_id );
+    ?>
+
+    <div class="row">
+      <div class="col col24 margin-bottom-small">
+        <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-small mobile-margin-bottom-none">
+      <?php
+        $latest_articles = new WP_Query(array(
+          'posts_per_page' => 8,
+          'category_name' => 'Articles',
+          'post__not_in' => array_merge($featured_posts_ids, $recent_articles_ids)
+        ));
+
+        if ($latest_articles->have_posts()) {
+          $i = 0;
+          while ($latest_articles->have_posts()) {
+            $latest_articles->the_post();
+
+            get_template_part('partials/front-page/front-page-article-default');
+
+            if ($i === 3) {
+              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+            }
+
+            $i++;
+          }
+        }
+      ?>
+    </div>
+  </section>
+
+  <?php
+    get_template_part('partials/email-signup', null, array(
+      'newsletter' => 'The Cortado',
+      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
+    ));
+  ?>   
+      
+  <!-- Audio block -->
   <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $audio_category = get_term_by('slug', 'audio', 'category');
@@ -258,67 +320,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
     </div>
   </section>
   
-  <?php
-    get_template_part('partials/specials/banners/focus-breaking-britain');
-  ?>
-
-<!-- Tyksy Sour video block -->
-
-  <section id="front-page-tysky-sour-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $video_category_slug = 'tyskysour-video';
-
-      render_front_page_video_block($video_category_slug);
-    ?>
-  </section>
-
-  <section id="front-page-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      // *** EXCLUDE ALREADY SHOWN ABOVE
-
-      $category_id = get_cat_ID('Articles');
-      $category_link = get_category_link( $category_id );
-    ?>
-
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Articles</a></h4>
-      </div>
-    </div>
-
-    <div class="row margin-bottom-small mobile-margin-bottom-none">
-      <?php
-        $latest_articles = new WP_Query(array(
-          'posts_per_page' => 8,
-          'category_name' => 'Articles',
-          'post__not_in' => array_merge($featured_posts_ids, $recent_articles_ids)
-        ));
-
-        if ($latest_articles->have_posts()) {
-          $i = 0;
-          while ($latest_articles->have_posts()) {
-            $latest_articles->the_post();
-
-            get_template_part('partials/front-page/front-page-article-default');
-
-            if ($i === 3) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
-            }
-
-            $i++;
-          }
-        }
-      ?>
-    </div>
-  </section>
-  
-  <?php
-    get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Cortado',
-      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
-    ));
-  ?>
-
+  <!-- non-TS video block -->
   <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $video_category_slug = 'video';
