@@ -141,17 +141,29 @@ if( have_posts() ) {
   if ($i === 4) { ?>
     <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic mobile-margin-top-mid mobile-margin-bottom-mid font-color-blue-neon">
       <?php
-        get_template_part('partials/components/quote', null, $quotes[0]);
+        if(isset($quotes[0])) {
+          get_template_part('partials/components/quote', null, $quotes[0]);
+        }
       ?>
     </div>
-<?php }   
+<?php }  
+  
+  if ($i === 13) { ?>
+    <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic mobile-margin-top-mid mobile-margin-bottom-mid font-color-blue-neon">
+      <?php
+        if(isset($quotes[1])) {
+          get_template_part('partials/components/quote', null, $quotes[1]);
+        }
+      ?>
+    </div>
+<?php }  
 
-    if ($i === 5 ) { ?>
+    if ($i === 5 || $i === 10) { ?>
     </div>
     <div class="flex-grid-row margin-top-mid margin-bottom-mid mobile-margin-top-none mobile-margin-bottom-none" style="justify-content: center;">
 <?php }
 
-    if ($i === 7) { ?>
+    if ($i === 7|| $i === 12) { ?>
     </div>
     <div class="flex-grid-row">
 <?php }
@@ -183,8 +195,9 @@ if( have_posts() ) {
 ?>   
     </div>
     
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="flex-grid-row margin-top-mid margin-bottom-mid">
+      <div class="flex-grid-item flex-item-s-10 flex-offset-s-1 flex-item-l-7 flex-item-xxl-5 flex-offset-xxl-2">
+        <h6 class="font-size-1 font-bold margin-bottom-tiny">Credits</h6>
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);
