@@ -66,12 +66,48 @@ function nm_cmb_taxonomy_metaboxes() {
     'taxonomies'       => array( 'focus' ),
     'new_term_section' => true, // Will display in the "Add New Category" section
   ) );
-  
+    
   $cmb_term_focus->add_field( array(
-    'name' => esc_html__( 'Splash image', 'cmb2' ),
+    'name' => esc_html__( 'Splash image. Also Open Graph share image', 'cmb2' ),
     'desc' => esc_html__( '(optional)', 'cmb2' ),
     'id'   => $prefix . 'focus_splash',
     'type' => 'file',
   ) );
 
+  $cmb_term_focus_quote_group = $cmb_term_focus->add_field( array(
+      'id'          => $prefix . 'focus_quotes',
+      'type'        => 'group',
+      'options'     => array(
+          'group_title'       => __( 'Quote {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+          'add_button'        => __( 'Add Another Quote', 'cmb2' ),
+          'remove_button'     => __( 'Remove Quote', 'cmb2' ),
+          'sortable'          => true,
+      ),
+  ) );
+  
+  $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
+      'name' => 'Quote copy',
+      'id'   => 'copy',
+      'type' => 'text',
+  ) );
+  
+  $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
+      'name' => 'Quote attribution',
+      'id'   => 'attribution',
+      'type' => 'text',
+  ) );
+  
+  $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
+      'name' => 'Image',
+      'desc' => esc_html__( '(optional)', 'cmb2' ),
+      'id'   => 'image',
+      'type' => 'file',
+  ) );
+  
+  $cmb_term_focus->add_field( array(
+    'name' => esc_html__( 'Credits & footer', 'cmb2' ),
+    'desc' => esc_html__( 'shown below all the content on the focus archive page (optional)', 'cmb2' ),
+    'id'   => $prefix . 'focus_credits',
+    'type' => 'wysiwyg',
+  ) );
 }

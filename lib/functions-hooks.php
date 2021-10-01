@@ -1,10 +1,26 @@
 <?php
 
-// Custom hooks (like excerpt length etc)
+/**
+* Hook pre_get_posts to show all posts on Focus archive pages
+*
+*/
+function focus_pre_get_posts($query) {
+  if ($query->is_admin()) {
+    return;      
+  }
 
+  if ($query->is_archive() && $query->is_tax('focus')) {
+    $query->set('posts_per_page',  -1);
+  }
+}
+add_action( 'pre_get_posts', 'focus_pre_get_posts' );
+
+/**
+* Save estimated reading time in minutes as meta on post
+*
+*/
 function save_reading_time_meta( $post_id, $post, $update ) {
-
-  // [Thanks to https://wordpress.org/plugins/estimated-post-reading-time/]
+  // Thanks to https://wordpress.org/plugins/estimated-post-reading-time/
 
   $words_per_minute = 265;
   $content = strip_tags($post->post_content);
@@ -12,10 +28,8 @@ function save_reading_time_meta( $post_id, $post, $update ) {
   $estimated_minutes = floor($content_words / $words_per_minute);
 
   update_post_meta($post_id, '_igv_reading_time', $estimated_minutes);
-
 }
 add_action('save_post', 'save_reading_time_meta', 10, 3);
-
 
 // Custom editor button to find replace all links in the_content and make target _blank
 
@@ -40,7 +54,6 @@ function extlink_setup_tinymce_plugin() {
   // Setup some filters
   add_filter( 'mce_external_plugins', 'extlink_add_tinymce_plugin' );
   add_filter( 'mce_buttons', 'extlink_add_tinymce_toolbar_button' );
-
 }
 
 function extlink_add_tinymce_plugin( $plugin_array ) {
