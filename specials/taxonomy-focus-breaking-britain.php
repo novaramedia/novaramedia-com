@@ -196,8 +196,7 @@ if( have_posts() ) {
     </div>
     
     <div class="flex-grid-row margin-top-mid margin-bottom-mid">
-      <div class="flex-grid-item flex-item-s-10 flex-offset-s-1 flex-item-l-7 flex-item-xxl-5 flex-offset-xxl-2">
-        <h6 class="font-size-1 font-bold margin-bottom-tiny">Credits</h6>
+      <div class="flex-grid-item flex-item-s-11 flex-item-l-6 flex-item-xxl-5 flex-offset-xxl-1">
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);
