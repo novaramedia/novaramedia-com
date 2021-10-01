@@ -68,7 +68,7 @@ function nm_cmb_taxonomy_metaboxes() {
   ) );
     
   $cmb_term_focus->add_field( array(
-    'name' => esc_html__( 'Splash image', 'cmb2' ),
+    'name' => esc_html__( 'Splash image. Also Open Graph share image', 'cmb2' ),
     'desc' => esc_html__( '(optional)', 'cmb2' ),
     'id'   => $prefix . 'focus_splash',
     'type' => 'file',
