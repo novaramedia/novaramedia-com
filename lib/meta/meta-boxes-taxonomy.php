@@ -66,13 +66,6 @@ function nm_cmb_taxonomy_metaboxes() {
     'taxonomies'       => array( 'focus' ),
     'new_term_section' => true, // Will display in the "Add New Category" section
   ) );
-
-  $cmb_term_focus->add_field( array(
-    'name' => esc_html__( 'Open Graph share image', 'cmb2' ),
-    'desc' => esc_html__( 'shown as the image when sharing on socials (optional)', 'cmb2' ),
-    'id'   => $prefix . 'focus_og_image',
-    'type' => 'file',
-  ) );
     
   $cmb_term_focus->add_field( array(
     'name' => esc_html__( 'Splash image', 'cmb2' ),
