@@ -115,14 +115,16 @@ $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = rgb(220, 0, 5) // Mine 
-$color-red-dark = #A80003;
+$color-red-dark = #A80003
+
+$color-yellow = #EBB800
 
 $color-blue = rgb(84, 144, 235)
 $color-blue-neon = #0018F0;
+$color-blue-light = #CAE5FF
 
 $color-lilac = #B1B1FF
 
-$color-blue-light = #CAE5FF
 $color-purple-light = #B1B1FF
 
 $border-width = 2px
@@ -400,6 +402,9 @@ a
 
 .background-red
   background-color: $color-red
+  
+.background-yellow
+  background-color: $color-yellow
 
 .background-light-blue
   background-color: $color-blue-light
@@ -1022,7 +1027,18 @@ nmButton()
 
 .category-archive__logo
   width: 220px
+    
+// ******************************************************
+    
+// PAGE: ABOUT  
 
+.about-page__person
+  a:after
+    content: '\219D'
+    position: relative
+    top: -.2em
+    left: .2em
+    
 // ******************************************************
 
 // SINGLE

@@ -232,7 +232,7 @@ function render_about_group_field($data) {
 <?php 
     foreach($person['name'] as $name) {
 ?>
-      <div><?php echo $name; ?></div>
+      <div class="about-page__person"><?php echo $name; ?></div>
 <?php
     }
   ?>
