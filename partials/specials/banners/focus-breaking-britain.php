@@ -116,7 +116,7 @@
     </div>
     <div class="flex-grid-row">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 mobile-margin-bottom-small">  
-        <a href="<?php echo $url; ?>"><h3 class="font-size-6" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
+        <a href="<?php echo $url; ?>"><h3 class="font-size-s-7 font-size-m-5 font-size-6" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">  
         <a href="<?php echo $url; ?>"><p class="font-size-2">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
