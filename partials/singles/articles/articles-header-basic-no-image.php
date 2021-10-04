@@ -5,7 +5,7 @@
 
 <div class="flex-grid-row margin-bottom-basic">
   <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-10 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-2 flex-item-xxl-6 flex-offset-xxl-3">
-    <h1 id="single-articles-title" class="margin-bottom-small js-fix-widows"><?php the_title(); ?></h1>
+    <h1 id="single-articles-title" class="margin-bottom-small"><?php the_title(); ?></h1>
     
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
