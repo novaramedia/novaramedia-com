@@ -1,8 +1,14 @@
 <?php
 get_header();
 
-// $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_support');
+
+$banners = array(
+  NM_get_option('nm_front_page_banner_option_1'),
+  NM_get_option('nm_front_page_banner_option_2'),
+  NM_get_option('nm_front_page_banner_option_3'),
+  NM_get_option('nm_front_page_banner_option_4')
+);
 ?>
 
 <!-- main content -->
@@ -215,7 +221,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
   
   <?php
-    get_template_part('partials/specials/banners/focus-breaking-britain');
+    render_front_page_banner($banners[0]);
   ?>
 
   <!-- Tyksy Sour video block -->
@@ -228,7 +234,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>  
   
   <?php
-    get_template_part('partials/support-section');
+    render_front_page_banner($banners[1]);
   ?>
 
   <!-- Below the fold articles block -->
@@ -271,13 +277,10 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
       ?>
     </div>
   </section>
-
+  
   <?php
-    get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Cortado',
-      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
-    ));
-  ?>   
+    render_front_page_banner($banners[2]);
+  ?>
       
   <!-- Audio block -->
   <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
@@ -331,7 +334,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
 
   <?php
-    get_template_part('partials/support-section');
+    render_front_page_banner($banners[3]);
   ?>
 
 <!-- end main-content -->
