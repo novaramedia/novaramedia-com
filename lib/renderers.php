@@ -3,7 +3,7 @@
 /**
 * Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
 *
-* @param string $key The return value of get_meta_field with single true.
+* @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
 */
 function render_front_page_banner($key) {
   switch ($key) {

@@ -154,33 +154,29 @@ function nm_register_front_page_options_metabox() {
     'name'    => 'First banner',
     'desc'    => 'Select the content of the banner.',
     'id'      => $prefix . 'front_page_banner_option_1',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => $banner_options
+    'type'    => 'select',
+    'options' => $banner_options
   ) );
 
   $main_options->add_field( array(
     'name'    => 'Second banner',
     'id'      => $prefix . 'front_page_banner_option_2',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => $banner_options
+    'type'    => 'select',
+    'options' => $banner_options
   ) );
 
   $main_options->add_field( array(
     'name'    => 'Third banner',
     'id'      => $prefix . 'front_page_banner_option_3',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => $banner_options
+    'type'    => 'select',
+    'options' => $banner_options
   ) );
   
   $main_options->add_field( array(
     'name'    => 'Forth banner',
     'id'      => $prefix . 'front_page_banner_option_4',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => $banner_options
+    'type'    => 'select',
+    'options' => $banner_options
   ) );
       
   $main_options->add_field( array(
