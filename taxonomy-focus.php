@@ -72,7 +72,7 @@ if( have_posts() ) {
 } ?>
     </div>
     <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12">
+      <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);
