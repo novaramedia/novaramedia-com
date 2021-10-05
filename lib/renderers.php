@@ -1,4 +1,30 @@
 <?php
+  
+/**
+* Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
+*
+* @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
+*/
+function render_front_page_banner($key) {
+  switch ($key) {
+    case (false || '0'): // if empty or set none
+      break;
+    case 'email-the-cortado': // custom logic for email sign ups with variables
+      get_template_part('partials/email-signup', null, array(
+        'newsletter' => 'The Cortado',
+        'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
+      ));
+      break;
+    case 'email-the-pick':
+      get_template_part('partials/email-signup', null, array(
+        'newsletter' => 'The Pick',
+        'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!'
+      ));
+      break;
+    default: // default behavior to render the template part from path provided
+      get_template_part($key);
+  }
+}
 
 function render_home_focus($focus, $classes) {
   $focus_object = get_term($focus);
