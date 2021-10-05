@@ -31,6 +31,14 @@ function get_audio_categories_metabox_array() {
  */
 function nm_register_front_page_options_metabox() {
   $prefix = 'nm_';
+  
+  $banner_options = array(
+    false => 'None',
+    'partials/support-section' => 'Support section',
+    'email-the-cortado' => 'Email signup: The Cortado',
+    'email-the-pick' => 'Email signup: The Pick',
+    'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
+  );
 
   /**
    * Registers main options page menu item and form.
@@ -143,7 +151,37 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   $main_options->add_field( array(
+    'name'    => 'First banner',
+    'desc'    => 'Select the content of the banner.',
+    'id'      => $prefix . 'front_page_banner_option_1',
+    'type'    => 'select',
+    'options' => $banner_options
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Second banner',
+    'id'      => $prefix . 'front_page_banner_option_2',
+    'type'    => 'select',
+    'options' => $banner_options
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Third banner',
+    'id'      => $prefix . 'front_page_banner_option_3',
+    'type'    => 'select',
+    'options' => $banner_options
+  ) );
+  
+  $main_options->add_field( array(
+    'name'    => 'Forth banner',
+    'id'      => $prefix . 'front_page_banner_option_4',
+    'type'    => 'select',
+    'options' => $banner_options
+  ) );
+      
+  $main_options->add_field( array(
     'name'    => 'Show support banner ad?',
+    'desc'    => 'Shows top of the page support banner (for fundraisers etc)',
     'id'      => $prefix . 'front_page_settings_banners_show_support',
     'type'    => 'checkbox',
   ) );  

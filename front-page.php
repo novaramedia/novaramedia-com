@@ -1,8 +1,14 @@
 <?php
 get_header();
 
-// $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
 $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_support');
+
+$banners = array(
+  NM_get_option('nm_front_page_banner_option_1'),
+  NM_get_option('nm_front_page_banner_option_2'),
+  NM_get_option('nm_front_page_banner_option_3'),
+  NM_get_option('nm_front_page_banner_option_4')
+);
 ?>
 
 <!-- main content -->
@@ -215,66 +221,23 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
   
   <?php
-    get_template_part('partials/support-section');
+    render_front_page_banner($banners[0]);
   ?>
 
-  <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $audio_category = get_term_by('slug', 'audio', 'category');
-      $burner_category = get_term_by('slug', 'the-burner', 'category');
-      $burner_category_id = !empty($burner_category) ? array($burner_category->term_id) : array();
-
-      $category_link = get_category_link( $audio_category->term_id );
-    ?>
-
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
-      </div>
-    </div>
-
-    <div class="row">
-      <?php
-        $latest_audio = new WP_Query(array(
-          'posts_per_page' => 8,
-          'cat' => $audio_category->term_id,
-          'category__not_in' => $burner_category_id
-        ));
-
-        if ($latest_audio->have_posts()) {
-          $i = 0;
-          while ($latest_audio->have_posts()) {
-            $latest_audio->the_post();
-            get_template_part('partials/front-page/front-page-audio-default');
-
-            if ($i === 3) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
-            }
-
-            $i++;
-          }
-        }
-      ?>
-    </div>
-  </section>
-  
-  <?php
-    get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Cortado',
-      'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
-    ));
-  ?>
-
-<!-- Tyksy Sour video block -->
-
+  <!-- Tyksy Sour video block -->
   <section id="front-page-tysky-sour-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $video_category_slug = 'tyskysour-video';
 
       render_front_page_video_block($video_category_slug);
     ?>
-  </section>
+  </section>  
+  
+  <?php
+    render_front_page_banner($banners[1]);
+  ?>
 
+  <!-- Below the fold articles block -->
   <section id="front-page-articles-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       // *** EXCLUDE ALREADY SHOWN ABOVE
@@ -316,12 +279,51 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
   
   <?php
-    get_template_part('partials/email-signup', null, array(
-      'newsletter' => 'The Pick',
-      'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!'
-    ));
+    render_front_page_banner($banners[2]);
   ?>
+      
+  <!-- Audio block -->
+  <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+    <?php
+      $audio_category = get_term_by('slug', 'audio', 'category');
+      $burner_category = get_term_by('slug', 'the-burner', 'category');
+      $burner_category_id = !empty($burner_category) ? array($burner_category->term_id) : array();
 
+      $category_link = get_category_link( $audio_category->term_id );
+    ?>
+
+    <div class="row">
+      <div class="col col24 margin-bottom-small">
+        <h4><a href="<?php echo $category_link; ?>">Audio</a></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <?php
+        $latest_audio = new WP_Query(array(
+          'posts_per_page' => 8,
+          'cat' => $audio_category->term_id,
+          'category__not_in' => $burner_category_id
+        ));
+
+        if ($latest_audio->have_posts()) {
+          $i = 0;
+          while ($latest_audio->have_posts()) {
+            $latest_audio->the_post();
+            get_template_part('partials/front-page/front-page-audio-default');
+
+            if ($i === 3) {
+              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+            }
+
+            $i++;
+          }
+        }
+      ?>
+    </div>
+  </section>
+  
+  <!-- non-TS video block -->
   <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $video_category_slug = 'video';
@@ -332,7 +334,7 @@ $show_support_banner = NM_get_option('nm_front_page_settings_banners_show_suppor
   </section>
 
   <?php
-    get_template_part('partials/support-section');
+    render_front_page_banner($banners[3]);
   ?>
 
 <!-- end main-content -->

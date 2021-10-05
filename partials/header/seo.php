@@ -55,10 +55,12 @@ if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single
 ?>
   <meta property="og:image" content="<?php echo $og_image_url; ?>" />
 <?php
+  
+$og_description = get_bloginfo('description');
+  
 if (is_home()) {
 ?>
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
-  <meta property="og:description" content="<?php bloginfo('description'); ?>" />
   <meta property="og:type" content="website" />
 <?php
 } else if (is_single()) {
@@ -95,17 +97,24 @@ if (is_home()) {
   }
 
   // clean special cars
-  $excerpt = htmlspecialchars($excerpt);
+  $og_description = htmlspecialchars($excerpt);
 ?>
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
-  <meta property="og:description" content="<?php echo $excerpt; ?>" />
   <meta property="og:type" content="article" />
 <?php
 } else {
 ?>
   <meta property="og:url" content="<?php the_permalink() ?>"/>
-  <meta property="og:description" content="<?php bloginfo('description'); ?>" />
   <meta property="og:type" content="website" />
 <?php
 }
+
+if (is_archive()) {
+  $raw_term_description = get_term_field( 'description', get_queried_object_id(), null, $context = 'raw' );
+  
+  if (!empty($raw_term_description)) {
+    $og_description = $raw_term_description;
+  }
+}
 ?>
+  <meta property="og:description" content="<?php echo $og_description; ?>" />
