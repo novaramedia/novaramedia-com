@@ -47,7 +47,7 @@ function nm_cmb_metaboxes_posttype_job() {
   
   $people_meta_boxes->add_field( array(
     'name'    => __( 'NM Living Wage', 'cmb' ),
-    'desc' => esc_html__( 'The hourly rate at time of job posting', 'cmb2' ),
+    'desc' => esc_html__( 'The hourly rate at time of job posting. Or other rate if temp contract etc', 'cmb2' ),
     'id'      => $prefix . 'rate',
     'type' => 'text_money',
      'before_field' => '£', // Replaces default '$'  
