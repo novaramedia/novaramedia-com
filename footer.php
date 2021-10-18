@@ -6,9 +6,9 @@
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
               <li><a href="https://donate.novaramedia.com/profile">Manage Donation</a></li>
-              <li><a href="https://shop.novaramedia.com">Shop</a></li>
+              <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
-              <li><a href="<?php echo site_url('api/'); ?>">API</a></li>
+              <li><a href="<?php echo site_url('jobs/'); ?>">Jobs</a></li>
               <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
               <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
               <li><a href="<?php echo site_url('terms-and-conditions/'); ?>">Terms & Conditions</a></li>

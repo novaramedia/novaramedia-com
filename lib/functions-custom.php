@@ -29,6 +29,10 @@ function nm_is_single_article() {
   global $post;
 
   $categories = get_the_terms($post->ID, 'category'); // get the categories for the post
+    
+  if (!$categories) {
+    return false;
+  }
 
   $found_in_categories = array_filter($categories,
     function ($category) {
