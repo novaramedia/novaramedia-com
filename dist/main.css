@@ -1488,6 +1488,9 @@ b {
 .font-color-blue-neon {
   color: #0018f0;
 }
+.font-color-green-racing {
+  color: #55846b;
+}
 .text-shadow-white {
   text-shadow: 0 0 20px rgba(253,253,253,0.5);
 }
@@ -1638,6 +1641,9 @@ a {
 }
 .background-yellow {
   background-color: #ebb800;
+}
+.background-green-neon {
+  background-color: #cadb2a;
 }
 .background-light-blue {
   background-color: #cae5ff;
