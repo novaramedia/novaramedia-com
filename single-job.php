@@ -12,7 +12,7 @@ if( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
     
-    $email_subject = strtoupper($post->post_title);
+    $email_subject = urlencode(strtoupper($post->post_title));
 ?>
   <!-- main posts loop -->
   <article id="job" class="container margin-top-small margin-bottom-large">

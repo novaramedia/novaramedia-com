@@ -2,9 +2,9 @@
   display: flex
   flex-direction: row
   flex-wrap: wrap
-  &.reverse
-    flex-direction: row-reverse
-  &.flex-nowrap
+  &:--reverse
+    flex-direction: column-reverse
+  &:--nowrap
     flex-wrap: nowrap
 
 .flex-grid-item
@@ -17,10 +17,13 @@
 
 flex-grid-maker($width = false, $gutter = false, $size = false, $cols = 12)
 
+  .flex-grid-row-{$size}--reverse
+    flex-direction: column-reverse
+
   if $width
     .container
       width: $width
-
+      
   if $gutter
     .flex-grid-item
       padding-left: ( $gutter / 2 )

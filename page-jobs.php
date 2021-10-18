@@ -16,11 +16,11 @@ if( have_posts() ) {
       </div>
     </div>
     
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6">
+    <div class="flex-grid-row flex-grid-row-m--reverse margin-bottom-small">
+      <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-7 flex-item-xxl-6">
         <?php the_content(); ?>
       </div>
-      <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6">
+      <div class="flex-grid-item flex-item-m-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-6">
         <?php
           $jobs = get_posts(array(
             	'numberposts'	=> -1,
