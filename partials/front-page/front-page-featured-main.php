@@ -13,7 +13,7 @@
       </div>
     <?php
       } else {
-        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block'));
+        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block', 'data-no-lazysizes' => true));
       }
     ?>
 
