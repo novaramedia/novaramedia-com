@@ -1,12 +1,12 @@
 <?php
 if (is_single() && get_post_type() === 'job') {
   $meta = get_post_meta($post->ID);
-  
+
   $location = !empty($meta['_nm_location'][0]) ? $meta['_nm_location'][0] : false;
   $type = !empty($meta['_nm_contract'][0]) ? $meta['_nm_contract'][0] : '';
   $deadlline = !empty($meta['_nm_deadline'][0]) ? $meta['_nm_deadline'][0] : '';
   $rate = !empty($meta['_nm_rate'][0]) ? $meta['_nm_rate'][0] : '';
-  
+
   $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "JobPosting",
@@ -35,7 +35,7 @@ if (is_single() && get_post_type() === 'job') {
       ),
     ),
   );
-  
+
   $address_london = array(
     "@type" => "Place",
     "address" => array(
@@ -47,7 +47,7 @@ if (is_single() && get_post_type() === 'job') {
       "addressCountry" => "UK",
     ),
   );
-  
+
   $address_leeds = array(
     "@type" => "Place",
     "address" => array(
@@ -59,7 +59,7 @@ if (is_single() && get_post_type() === 'job') {
       "addressCountry" => "UK",
     ),
   );
-  
+
   switch ($location) {
     case 'remote':
       $json_ld['applicantLocationRequirements']= array(
@@ -79,7 +79,7 @@ if (is_single() && get_post_type() === 'job') {
       $json_ld['jobLocation'] = $address_leeds;
       break;
   }
-  
+
 } else if (nm_is_single_article()) {
   $json_ld = array(
     "@context" => "http://schema.org",
@@ -100,7 +100,7 @@ if (is_single() && get_post_type() === 'job') {
   $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "Organization",
-    "sameAs" => home_url(),
+    "url" => home_url(),
   );
 
   if ($logo) {
@@ -109,7 +109,7 @@ if (is_single() && get_post_type() === 'job') {
     $json_ld['logo'] = $image[0];
   }
 
-  $same_as_array = array(home_url());
+  $same_as_array = array();
 
   if ($facebook) {
     $same_as_array[] = $facebook;
