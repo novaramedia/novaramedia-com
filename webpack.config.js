@@ -1,11 +1,15 @@
 const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
+
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 
 var config = {
   entry: './src/js/main.js',
@@ -18,14 +22,15 @@ var config = {
   resolve: {
     extensions: ['.js', '.css', '.styl', '.svg']
   },
-  
+
   module: {
     rules: [{
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
       use: {
-        loader: 'babel-loader', 
+        loader: 'babel-loader',
         options: {
+          cacheDirectory: true,
           presets: [
             ['@babel/preset-env', {
               useBuiltIns: 'entry',
@@ -34,24 +39,19 @@ var config = {
           ]
         }
       }
-    },  
+    },
     {
       test: /\.styl/,
       use: [
         {
-          loader: MiniCssExtractPlugin.loader, 
-/*
-          options: {
-            publicPath: webpackOptions.output
-          }
-*/
-        }, 
+          loader: MiniCssExtractPlugin.loader,
+        },
         {
-          loader: 'css-loader', 
+          loader: 'css-loader',
           options: {
             url: false,
           },
-        }, 
+        },
         {
           loader: 'postcss-loader',
           options: {
@@ -59,9 +59,9 @@ var config = {
               plugins: ['autoprefixer']
             }
           }
-        }, 
+        },
         {
-          loader: 'stylus-native-loader', 
+          loader: 'stylus-native-loader',
         },
       ],
     },
@@ -78,6 +78,11 @@ var config = {
         {
           from: path.resolve(__dirname, 'src/img/'),
           to: path.resolve(__dirname, 'dist/img/'),
+          globOptions: {
+            ignore: [
+              "**/*.DS_Store",
+            ],
+          },
         },
         {
           from: path.resolve(__dirname, 'src/styl/fonts/'),
@@ -94,7 +99,22 @@ var config = {
     }),
   ],
 
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          mangle: false,
+          keep_fnames: true, // if we do decide to mangle still dont do this
+        },
+      }),
+      new CssMinimizerPlugin(),
+    ],
+  },
+
+  performance: {},
+
   stats: {
+    preset: 'normal',
     colors: true
   },
 };
@@ -104,8 +124,10 @@ module.exports = (env, argv) => {
     config.devtool = 'source-map';
     config.watch = true;
   } else {
-    config.plugins.push(new BundleAnalyzerPlugin()); 
+    config.plugins.push(new BundleAnalyzerPlugin());
+    config.performance.hints = 'warning';
+    config.stats.preset = 'detailed';
   }
-    
+
   return config;
 };

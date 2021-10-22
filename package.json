@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "3.2.8",
+  "version": "3.2.9",
   "description": "No future, Utopia now",
   "main": "gulpfile.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "copy-webpack-plugin": "^7.0.0",
     "core-js": "~3.8.0",
     "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^3.1.1",
     "cssnano": "^4.1.10",
     "eslint": "^7.15.0",
     "eslint-webpack-plugin": "^2.4.1",
@@ -42,7 +43,8 @@
     "style-loader": "^2.0.0",
     "stylus": "^0.54.5",
     "stylus-native-loader": "^1.4.3",
-    "webpack": "^5.10.1",
+    "terser-webpack-plugin": "^5.2.4",
+    "webpack": "^5.59.1",
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.2.0",
     "webpack-notifier": "^1.12.0"
