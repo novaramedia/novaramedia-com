@@ -11,7 +11,7 @@ $gutter = 12px
   float: none
   margin-left: 0
   margin-right: 0
-  
+
 flex-grid-maker(false, $gutter, 's')
 
 // ******************************************************
@@ -68,15 +68,15 @@ h3
 
 p
   margin-bottom: 1rem
-  
+
   // NEW TYPE SCALE 2021
 
 .font-size-0
   font-size: 11px
-  
+
 .font-size-1
   font-size: 13px
-    
+
 .font-size-2 // not migrated to mobile scale but live
   font-size: 17px
   line-height: 20px
@@ -84,17 +84,17 @@ p
 .font-size-3
   font-size: 21px
   line-height: 27px
-  
+
 .font-size-4 // not sure if match
   font-size: 26px
   line-height: 30px
   letter-spacing: -0.01em
-  
+
 .font-size-5 // not migrated to mobile scale but live
   font-size: 33px
   line-height: 1.07142857
   letter-spacing: -0.025em
-  
+
 .font-size-6
   font-size: 42px
   line-height: 50px
@@ -104,16 +104,16 @@ p
   font-size: 53px
   line-height: 68px
   letter-spacing: -0.02em
-    
+
 .font-size-8
   font-size: 88px
   line-height: 82px
   letter-spacing: -0.04em
-  
+
 .font-size-s-1
   font-size: 13px
   line-height: 1.4
-  
+
 .font-size-s-5 // not migrated to mobile scale but live
   font-size: 33px
   line-height: 1.05633803
@@ -123,7 +123,7 @@ p
   font-size: 53px
   line-height: 1.04402516
   letter-spacing: -0.02em
-  
+
   // FONT RULES
 
 .font-small-caps
@@ -313,9 +313,15 @@ p
 .mobile-margin-top-none
   margin-top: 0px
 
+.mobile-margin-top-small
+  margin-top: $margin-small
+
+.mobile-margin-top-basic
+  margin-top: $margin-basic
+
 .mobile-margin-top-mid
   margin-bottom: $margin-mid
-    
+
 .mobile-margin-bottom-none
   margin-bottom: 0px
 
@@ -336,7 +342,7 @@ p
 
 .mobile-margin-bottom-large
   margin-bottom: $margin-large
-  
+
   // PADDING TOP
 
 .mobile-padding-top-micro
@@ -383,16 +389,16 @@ p
 
 .background-cover-image
   background-size: 160%
-  
+
 // ******************************************************
 
 // HEADER
-  
+
 $header-height = 42px
-  
+
 #main-content
   padding-top: $header-height
-  
+
 #header-main-wrapper
   height: $header-height
 
@@ -410,18 +416,18 @@ $header-height = 42px
     width: 55%
   .header-main__logomark
     width: 20%
-    
+
 #menu-toggle, #search-toggle, #menu-logo
   padding: 12px 6px
   .icon-menu:before
     margin: 0
-    
+
 #header-main__page-title
   margin-top: 12px
 
 #header-main__logotype
   display: none
-  
+
 #menu-logo-nm10
   background-color: $color-red
   padding: 10px
@@ -437,7 +443,7 @@ $header-height = 42px
   svg
     height: 16px
     width: 20px
-    
+
 #header-sub
   display: none
   .col
@@ -457,11 +463,11 @@ $header-height = 42px
 #search-submit
   width: 8%
   min-width: 25px
-  
+
 // ******************************************************
 
 // EMAIL SIGNUP SECTION
-  
+
 .email-signup__email-input
   margin-bottom: $margin-small
 
@@ -481,7 +487,7 @@ $header-height = 42px
 #home-articles-posts, #home-fm-posts, #home-focus-posts, #home-long-read-posts
   .col
     margin-bottom: $margin-small
-    
+
 .front-page-above-the-fold__articles
   article
     clearfix()
@@ -578,7 +584,7 @@ $header-height = 42px
 // ******************************************************
 
 // SUPPORT PAGE
-    
+
 .support-page__hero-wrapper
   padding: $margin-mid 0
 
