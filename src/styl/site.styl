@@ -114,7 +114,7 @@ $color-gray-transparent = rgba(150,150,150, .5)
 $color-gray-light = rgb(190,190,190)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
-$color-red = rgb(220, 0, 5) // Mine 
+$color-red = rgb(220, 0, 5) // Mine
 $color-red-dark = #A80003
 
 $color-yellow = #EBB800
@@ -180,16 +180,16 @@ h5
 
 p
   margin-bottom: 1rem
-    
+
   // NEW TYPE SCALE 2021
 
 .font-size-0
   font-size: 12px
-  
+
 .font-size-1
   font-size: 14px
   line-height: 1.4
-    
+
 .font-size-2
   font-size: 21px
   line-height: 1.25
@@ -197,17 +197,17 @@ p
 .font-size-3
   font-size: 32px
   line-height: 1.1875
-  
+
 .font-size-4
   font-size: 47px
   line-height: 1.14893617
   letter-spacing: -0.025em
-  
+
 .font-size-5
   font-size: 71px
   line-height: 1.05633803
   letter-spacing: -0.025em
-  
+
 .font-size-6
   font-size: 106px
   line-height: 0.8490566
@@ -217,7 +217,7 @@ p
   font-size: 159px
   line-height: 0.84937238
   letter-spacing: -0.02em
-    
+
 .font-size-8
   font-size: 239px
   line-height: 0.84937238
@@ -281,7 +281,7 @@ p
 
 .font-color-green-racing
   color: $color-green-racing
-    
+
   // SHADOWS
 
 .text-shadow-white
@@ -311,11 +311,11 @@ article
   ul, ol
     margin-top: 2rem
     margin-bottom: 2rem
-    
+
   ul
     li
       list-style: disc inside
-      
+
   ol
     li
       list-style: decimal inside
@@ -385,6 +385,22 @@ article
       font-size: $font-size-smaller
       margin-top: $margin-tiny
 
+// LISTS
+
+.list--links
+  li
+    list-style: none
+    margin-bottom: .5rem
+    &:last-child
+      margin-bottom: 0
+  a
+    text-decoration: underline
+    text-underline-offset: 2px
+    text-decoration-color: $color-red
+    transition: text-decoration-color $duration-form-transitions
+    &:hover
+      text-decoration-color: transparent
+
   // LINKS
 
 a
@@ -409,25 +425,25 @@ a
 
 .background-red
   background-color: $color-red
-  
+
 .background-yellow
   background-color: $color-yellow
 
 .background-green-neon
   background-color: $color-green-neon
-  
+
 .background-light-blue
   background-color: $color-blue-light
 
 .background-neon-blue
   background-color: $color-blue-neon
-  
+
 .background-lilac
   background-color: $color-lilac
-  
+
 .background-light-purple
   background-color: $color-purple-light
-  
+
 .background-cover-image
   position: relative
   background-size: cover
@@ -438,7 +454,7 @@ a
   top: 0
   width: 100%
   height: 100%
-  
+
 // ******************************************************
 
 // UI ELEMENTS
@@ -634,7 +650,7 @@ $header-height = 56px
   svg
     height: 19px
     width: 23px
-    
+
 .header-main__logomark
   position: relative
 
@@ -648,7 +664,7 @@ $header-height = 56px
   svg
     height: 35px
     width: 78px
-    
+
 .header-main__middle
   position: relative
 
@@ -722,26 +738,26 @@ nmButton()
   border-width: 1px
   border-style: solid
   border-color: transparent
-  border-radius: 3px 
-  transition-property: background-color, color, border-color 
+  border-radius: 3px
+  transition-property: background-color, color, border-color
   transition-duration: $duration-form-transitions
   &:hover
     border-color: $color-gray
     cursor: pointer
   &--red
     background-color: $color-red
-    color: $color-white-soft   
+    color: $color-white-soft
     &:hover
       background-color: $color-white-soft
-      color: $color-red   
-      border-color: $color-red 
+      color: $color-red
+      border-color: $color-red
   &--red-dark
     background-color: $color-red-dark
-    color: $color-white-soft   
+    color: $color-white-soft
     &:hover
       background-color: $color-white-soft
-      color: $color-red-dark 
-      border-color: $color-red-dark 
+      color: $color-red-dark
+      border-color: $color-red-dark
   &--white
     background-color: $color-white-soft
     border-color: $color-black-soft
@@ -753,17 +769,17 @@ nmButton()
     display: inline-block
   &--half
     width: 49%
-      
+
 .nm-button
   nmButton()
-  
+
 // ******************************************************
 
 // SUPPORT SECTION
 
 .support-form
   display: block
-  
+
 .support-form__button, .support-form__custom-input
   nmButton()
   color: $color-red
@@ -771,26 +787,26 @@ nmButton()
   &:hover, &--active
     color: $color-white-soft
     background-color: $color-red-dark
-    border-color: $color-white-soft 
+    border-color: $color-white-soft
 
 .support-form__button, .support-form__custom-input, .support-form__submit
-  width: 100%     
+  width: 100%
   font-weight: normal
   border-color: $color-white-soft
   &:hover, &--active
-    border-color: $color-white-soft 
-    
+    border-color: $color-white-soft
+
 .support-form__custom-input::placeholder
   padding-left: 5px
   transition: color $duration-form-transitions
-  
+
 .support-form__custom-input
   &::placeholder
     color: $color-red
   &:hover, &.support-form__button--active
     &::placeholder
       color: $color-white-soft
-      
+
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
@@ -799,7 +815,7 @@ nmButton()
 .support-page__content-copy
   font-family: $font-serif
   font-size: 18px
-  line-height: $font-leading-larger 
+  line-height: $font-leading-larger
   h3
     font-family: $font-sans
     font-size: 31.5px
@@ -810,7 +826,7 @@ nmButton()
   svg
     height: 2rem
     width: auto
-  
+
 // FUNDRAISER PROGRESS BAR
 
 #progress-bar-row
@@ -827,7 +843,7 @@ nmButton()
   transition: width 1s
   height: 1.5em
   background-color: $color-red
-  
+
 // ******************************************************
 
 // EMAIL SIGNUP SECTION
@@ -839,33 +855,33 @@ nmButton()
       &:hover
         text-decoration: none
 
-.email-signup__completion-section          
+.email-signup__completion-section
   display: flex
   justify-content: space-between
   align-items: center
-  
+
 .email-signup__email-input
   width: 100%
-  padding: 1.1rem 1.5rem 
+  padding: 1.1rem 1.5rem
   font-size: $font-size-h3
-  
+
 .email-signup__email-gdpr-group
   display: flex
   align-items: center
-    
+
 .email-signup__email-gdpr-input
   width: 2rem
   height: 2rem
   margin: 0 1rem
-  
+
 .email-signup__submit
-  padding: 1.1rem 1.5rem 
+  padding: 1.1rem 1.5rem
   font-size: $font-size-h3
-  
+
 .email-signup__feedback-processing
-  padding: 1.1rem 1.5rem 
+  padding: 1.1rem 1.5rem
   font-size: $font-size-h3
-  
+
 .email-signup__form
   .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
     display: none
@@ -876,13 +892,13 @@ nmButton()
       display: none
   &--failed
     .email-signup__feedback-failed
-      display: block      
+      display: block
   &--completed
     .email-signup__feedback-completed
       display: block
     .email-signup__inputs
       display: none
-      
+
 // ******************************************************
 
 // RADIO PLAYER
@@ -917,7 +933,7 @@ nmButton()
   background-color: white
   position:relative
   height: 100%
-  
+
 // ******************************************************
 
 // COMPONENTS
@@ -953,7 +969,7 @@ nmButton()
   position: absolute;
   top: 0;
   left: 0;
-  
+
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
@@ -969,10 +985,10 @@ nmButton()
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
+  0%, 100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 50% { 
+  } 50% {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
@@ -1030,17 +1046,17 @@ nmButton()
   max-width: 550px
   h3
     font-size: $font-size-h2
-    
+
 // ******************************************************
-    
+
 // ARCHIVES
 
 .category-archive__logo
   width: 220px
-    
+
 // ******************************************************
-    
-// PAGE: ABOUT  
+
+// PAGE: ABOUT
 
 .about-page__person
   a:after
@@ -1048,7 +1064,7 @@ nmButton()
     position: relative
     top: -.2em
     left: .2em
-    
+
 // ******************************************************
 
 // SINGLE
@@ -1057,7 +1073,7 @@ nmButton()
   display: none
 
   // ARTICLE
-  
+
 #single-article-support-box
   border: 1px solid $color-red
   padding: 1rem
