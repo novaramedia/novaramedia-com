@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "3.2.10",
+  "version": "3.2.11",
   "description": "No future, Utopia now",
   "main": "gulpfile.js",
   "scripts": {
