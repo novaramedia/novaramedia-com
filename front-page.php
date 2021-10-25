@@ -15,7 +15,7 @@ $banners = array(
 <main id="main-content">
   <?php
     if ($show_support_banner !== false) {
-      get_template_part('partials/front-page/front-page-support-banner');      
+      get_template_part('partials/front-page/front-page-support-banner');
     }
 
     get_template_part('partials/front-page/front-page-signups');
@@ -138,7 +138,7 @@ $banners = array(
     ));
   ?>
 
-  <section id="front-page-above-the-fold" class="container margin-bottom-mid mobile-margin-bottom-basic">
+  <section id="front-page-above-the-fold" class="container margin-bottom-mid mobile-margin-top-small mobile-margin-bottom-basic">
     <div class="row">
       <div class="front-page-above-the-fold__column front-page-above-the-fold__featured--mobile col only-mobile">
         <?php
@@ -219,7 +219,7 @@ $banners = array(
       </div>
     </div>
   </section>
-  
+
   <?php
     render_front_page_banner($banners[0]);
   ?>
@@ -231,8 +231,8 @@ $banners = array(
 
       render_front_page_video_block($video_category_slug);
     ?>
-  </section>  
-  
+  </section>
+
   <?php
     render_front_page_banner($banners[1]);
   ?>
@@ -277,11 +277,11 @@ $banners = array(
       ?>
     </div>
   </section>
-  
+
   <?php
     render_front_page_banner($banners[2]);
   ?>
-      
+
   <!-- Audio block -->
   <section id="front-page-audio-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
@@ -322,7 +322,7 @@ $banners = array(
       ?>
     </div>
   </section>
-  
+
   <!-- non-TS video block -->
   <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
