@@ -27,7 +27,7 @@ if (!empty($og_image_default_setting)) { // try settings default
 
 if (is_tax('focus')) { // if is focus archive get the splash image
   $splash_image_id = get_term_meta(get_queried_object_id(), '_nm_focus_splash_id', true);
-  
+
   if (!empty($splash_image_id)) {
     $og_image_url = wp_get_attachment_image_src($splash_image_id, 'opengraph')[0];
   }
@@ -35,7 +35,7 @@ if (is_tax('focus')) { // if is focus archive get the splash image
 
 if (is_archive()) { // if is archive get any open graph images
   $og_image_ig = get_term_meta(get_queried_object_id(), '_nm_category_og_image_id', true);
-  
+
   if (!empty($og_image_ig)) {
     $og_image_url = wp_get_attachment_image_src($og_image_ig, 'opengraph')[0];
   }
@@ -43,21 +43,21 @@ if (is_archive()) { // if is archive get any open graph images
 
 if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single post with a thumbnail get that
   $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // try alternative thumbnail meta
-  
+
   if (!empty($alt_thumb)) {
     $thumb_id = $alt_thumb; // if alt thumb is set we use it
   } else {
     $thumb_id = get_post_thumbnail_id($post->ID); // otherwise use the default
   }
-  
+
   $og_image_url = wp_get_attachment_image_src($thumb_id, 'opengraph')[0];
 }
 ?>
   <meta property="og:image" content="<?php echo $og_image_url; ?>" />
 <?php
-  
+
 $og_description = get_bloginfo('description');
-  
+
 if (is_home()) {
 ?>
   <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
@@ -116,10 +116,11 @@ if (is_home()) {
 
 if (is_archive()) {
   $raw_term_description = get_term_field( 'description', get_queried_object_id(), null, $context = 'raw' );
-  
+
   if (!empty($raw_term_description)) {
     $og_description = $raw_term_description;
   }
 }
 ?>
+  <meta name="description" content="<?php echo $og_description; ?>">
   <meta property="og:description" content="<?php echo $og_description; ?>" />
