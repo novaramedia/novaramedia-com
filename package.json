@@ -1,7 +1,7 @@
 {
   "name": "novaramedia-com",
-  "version": "3.2.11",
-  "description": "No future, Utopia now",
+  "version": "3.2.12",
+  "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

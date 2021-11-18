@@ -31,13 +31,14 @@ function get_audio_categories_metabox_array() {
  */
 function nm_register_front_page_options_metabox() {
   $prefix = 'nm_';
-  
+
   $banner_options = array(
     false => 'None',
     'partials/support-section' => 'Support section',
     'email-the-cortado' => 'Email signup: The Cortado',
     'email-the-pick' => 'Email signup: The Pick',
     'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
+    'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
     'partials/specials/banners/podcast-planet-b' => 'Podcast: Planet B',
   );
 
@@ -172,21 +173,21 @@ function nm_register_front_page_options_metabox() {
     'type'    => 'select',
     'options' => $banner_options
   ) );
-  
+
   $main_options->add_field( array(
     'name'    => 'Forth banner',
     'id'      => $prefix . 'front_page_banner_option_4',
     'type'    => 'select',
     'options' => $banner_options
   ) );
-      
+
   $main_options->add_field( array(
     'name'    => 'Show support banner ad?',
     'desc'    => 'Shows top of the page support banner (for fundraisers etc)',
     'id'      => $prefix . 'front_page_settings_banners_show_support',
     'type'    => 'checkbox',
-  ) );  
-  
+  ) );
+
   /**
    * Registers secondary options page, and set main item as parent.
    */
