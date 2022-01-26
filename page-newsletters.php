@@ -12,9 +12,8 @@ if( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
 ?>
-  <!-- main posts loop -->
   <article id="page">
-    <div class="container margin-top-small margin-bottom-large">
+    <div class="container margin-top-small margin-bottom-basic">
       <div class="flex-grid-row margin-bottom-basic">
         <div class="flex-grid-item flex-item-xxl-12">
           <h4><?php the_title(); ?></h4>
