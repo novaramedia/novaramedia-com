@@ -50,7 +50,7 @@
 
             <a href="<?php echo home_url(); ?>">
               <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logo-nm10" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/nm10-logo.svg'); ?></nav>
+                <nav id="menu-logomark" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logomark-white.svg'); ?></nav>
               </div>
             </a>
           </div>
