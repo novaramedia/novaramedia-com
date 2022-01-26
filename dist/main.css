@@ -2095,6 +2095,7 @@ img {
   -ms-align-items: center;
   align-items: center;
 }
+.email-signup__name-input,
 .email-signup__email-input {
   width: 100%;
   padding: 1.1rem 1.5rem;

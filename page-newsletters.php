@@ -15,24 +15,18 @@ if( have_posts() ) {
   <!-- main posts loop -->
   <article id="page">
     <div class="container margin-top-small margin-bottom-large">
-      <div class="row margin-bottom-basic">
-        <div class="col col24">
+      <div class="flex-grid-row margin-bottom-basic">
+        <div class="flex-grid-item flex-item-xxl-12">
           <h4><?php the_title(); ?></h4>
         </div>
       </div>
-      <div class="row margin-bottom-basic">
-        <div class="col col10 page-copy">
+      <div class="flex-grid-row margin-bottom-basic">
+        <div class="flex-grid-item flex-item-xxl-12 page-copy">
           <?php the_content(); ?>
-        </div>
-        <div class="col col2"></div>
-        <div class="col col10 page-copy">
-          <?php if (!empty($meta['_cmb_page_extra'])) {
-            echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
-          } ?>
         </div>
       </div>
     </div>
-    
+
     <?php
       get_template_part('partials/email-signup', null, array(
         'newsletter' => 'The Cortado',
@@ -45,8 +39,7 @@ if( have_posts() ) {
         'background-color' => 'light-purple'
       ));
     ?>
-  
-    
+
   <!-- end post -->
   </article>
 <?php
