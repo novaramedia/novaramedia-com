@@ -1811,24 +1811,12 @@ img {
 .header-menu li {
   padding-right: 8px;
 }
-#menu-logo svg {
+#menu-logomark svg {
   height: 19px;
   width: 23px;
 }
 .header-main__logomark {
   position: relative;
-}
-#menu-logo-nm10 {
-  background-color: #dc0005;
-  padding: 10px;
-  position: absolute;
-  right: 0;
-  top: -16px;
-  height: 56px;
-}
-#menu-logo-nm10 svg {
-  height: 35px;
-  width: 78px;
 }
 .header-main__middle {
   position: relative;
@@ -2095,6 +2083,7 @@ img {
   -ms-align-items: center;
   align-items: center;
 }
+.email-signup__name-input,
 .email-signup__email-input {
   width: 100%;
   padding: 1.1rem 1.5rem;
@@ -2735,14 +2724,6 @@ img {
   .header-menu li {
     padding-right: 6px;
   }
-  #menu-logo-nm10 {
-    top: -12px;
-    height: 52px;
-  }
-  #menu-logo-nm10 svg {
-    height: 32px;
-    width: 72px;
-  }
   #search-form {
     border: 2px solid #fdfdfd;
   }
@@ -3244,15 +3225,6 @@ img {
   }
   .header-menu li {
     padding-right: 6px;
-  }
-  #menu-logo-nm10 {
-    padding: 10px;
-    top: -12px;
-    height: 48px;
-  }
-  #menu-logo-nm10 svg {
-    height: 28px;
-    width: 58px;
   }
   #search-form {
     border: 2px solid #fdfdfd;
@@ -4320,19 +4292,10 @@ img {
   #header-main__logotype {
     display: none;
   }
-  #menu-logo-nm10 {
-    background-color: #dc0005;
+  #menu-logomark {
     padding: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 42px;
   }
-  #menu-logo-nm10 svg {
-    height: 23px;
-    width: 48px;
-  }
-  #menu-logo svg {
+  #menu-logomark svg {
     height: 16px;
     width: 20px;
   }
