@@ -37,6 +37,7 @@ function nm_register_front_page_options_metabox() {
     'partials/support-section' => 'Support section',
     'email-the-cortado' => 'Email signup: The Cortado',
     'email-the-pick' => 'Email signup: The Pick',
+    'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
     'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
     'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
     'partials/specials/banners/podcast-planet-b' => 'Podcast: Planet B',
