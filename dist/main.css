@@ -1795,7 +1795,7 @@ img {
 }
 #main-content {
   padding-top: 56px;
-  min-height: 75vh;
+  min-height: 55vh;
 }
 #header-main-wrapper {
   height: 56px;
@@ -2083,6 +2083,7 @@ img {
   -ms-align-items: center;
   align-items: center;
 }
+.email-signup__name-input,
 .email-signup__email-input {
   width: 100%;
   padding: 1.1rem 1.5rem;
