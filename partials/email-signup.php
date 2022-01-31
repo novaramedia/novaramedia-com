@@ -1,6 +1,10 @@
 <?php
   $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
+  if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
+    $netlify = 'http://localhost:59392/.netlify/functions/mailchimp-signup';
+  }
+
   if (!empty($args['newsletter']) && $netlify) {
     $newsletter = $args['newsletter'];
     $background_color = 'light-blue';
@@ -33,8 +37,8 @@
       <div class="email-signup__inputs flex-grid-row">
         <div class="flex-grid-item flex-item-s-12 flex-item-m-4 flex-item-xxl-3 margin-bottom-small">
           <div class="form-group">
-            <label class="u-visuallyhidden" for="first-name">First name:</label>
-            <input name="email" class="email-signup__name-input" id="first-name" type="text" autocomplete="given-name" placeholder="First name" />
+            <label class="u-visuallyhidden" for="firstName">First name:</label>
+            <input name="firstName" class="email-signup__name-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-m-8 flex-item-xxl-5 margin-bottom-small">
