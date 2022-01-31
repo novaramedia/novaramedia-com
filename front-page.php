@@ -68,7 +68,7 @@ $banners = array(
     ));
 
     // *******************
-    // get 5 most recent articles excluding the 2 featured
+    // get 4 most recent articles excluding the 2 featured
 
     $exluded_articles_ids = $featured_posts_ids;
 
@@ -78,7 +78,7 @@ $banners = array(
 
     $recent_articles = new WP_Query(array(
       'category_name' => 'articles',
-      'posts_per_page' => 5,
+      'posts_per_page' => 4,
       'post__not_in' => $exluded_articles_ids
     ));
 
@@ -159,11 +159,7 @@ $banners = array(
             while ($recent_articles->have_posts()) {
               $i++;
               $recent_articles->the_post();
-              if ($i <= 3) {
-                get_template_part('partials/front-page/front-page-article-default');
-              } else {
-                get_template_part('partials/front-page/front-page-article-slim');
-              }
+              get_template_part('partials/front-page/front-page-article-default');
             }
           }
         ?>
