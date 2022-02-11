@@ -184,8 +184,6 @@ if( have_posts() ) {
 } ?>
 
   <?php
-    get_template_part('partials/announcement');
-
     get_template_part('partials/support-section');
   ?>
 
