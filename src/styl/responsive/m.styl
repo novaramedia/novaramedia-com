@@ -13,7 +13,7 @@ $gutter = 12px
 for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
-    
+
 flex-grid-maker(false, $gutter, 'm')
 
 // ******************************************************
@@ -59,27 +59,26 @@ body
 
 h1, .font-size-h1
   font-size: $font-size-h1
-  letter-spacing: $font-tracking-wider
+  letter-spacing: -($font-tracking-basic)
 
 h2, .font-size-h2
   font-size: $font-size-h2
-  letter-spacing: $font-tracking-wider
 
 h3
   font-size: $font-size-h3
 
 p
   margin-bottom: 1rem
-  
+
   // NEW TYPE SCALE 2021
 
 .font-size-m-0
   font-size: 12px
-  
+
 .font-size-m-1
   font-size: 14px
   line-height: 1.4
-    
+
 .font-size-m-2
   font-size: 21px
   line-height: 1.25
@@ -87,17 +86,17 @@ p
 .font-size-m-3
   font-size: 32px
   line-height: 1.1875
-  
+
 .font-size-m-4
   font-size: 47px
   line-height: 1.14893617
   letter-spacing: -0.025em
-  
+
 .font-size-m-5
   font-size: 71px
   line-height: 1.05633803
   letter-spacing: -0.025em
-  
+
 .font-size-m-6
   font-size: 106px
   line-height: 0.8490566
@@ -107,7 +106,7 @@ p
   font-size: 159px
   line-height: 0.84937238
   letter-spacing: -0.02em
-    
+
 .font-size-m-8
   font-size: 239px
   line-height: 0.84937238
@@ -349,7 +348,7 @@ $header-height = 48px
   width: 23%
   margin-left: 2%
   padding: $margin-tiny $margin-small
-  
+
 // SUPPORT PAGE
 
 .support-page__hero-wrapper

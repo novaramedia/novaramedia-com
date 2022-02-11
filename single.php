@@ -59,8 +59,8 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <div class="row">
-      <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    <div class="flex-grid-row">
+      <article class="flex-grid-item flex-item-xxl-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
     </div>
 <?php
 } ?>
@@ -68,11 +68,9 @@ if( have_posts() ) {
   </article>
 
   <?php
-    get_template_part('partials/announcement');
-
     get_template_part('partials/support-section');
-  
-    get_template_part('partials/singles/single-related'); 
+
+    get_template_part('partials/singles/single-related');
   ?>
 
 <!-- end main-content -->
