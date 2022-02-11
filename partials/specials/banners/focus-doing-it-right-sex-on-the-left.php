@@ -6,7 +6,7 @@
     $url = get_term_link($term);
     if ($url) {
 ?>
-<div class="doing-it-right-sex-on-the-left__container padding-top-basic padding-bottom-basic margin-bottom-large">
+<div class="doing-it-right-sex-on-the-left__container padding-top-basic padding-bottom-basic">
   <style type="text/css">
     .doing-it-right-sex-on-the-left__container {
       overflow: hidden;

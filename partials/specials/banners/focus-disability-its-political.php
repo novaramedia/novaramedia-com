@@ -5,7 +5,7 @@
     $url = get_term_link($term);
     if ($url) {
 ?>
-<div class="disability-its-political__container padding-top-basic padding-bottom-basic margin-bottom-large">
+<div class="disability-its-political__container padding-top-basic padding-bottom-basic">
   <style type="text/css">
     .disability-its-political__container {
       overflow: hidden;
