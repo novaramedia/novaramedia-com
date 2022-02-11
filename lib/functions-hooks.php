@@ -6,7 +6,7 @@
 */
 function focus_pre_get_posts($query) {
   if ($query->is_admin()) {
-    return;      
+    return;
   }
 
   if ($query->is_archive() && $query->is_tax('focus')) {
@@ -57,10 +57,8 @@ function extlink_setup_tinymce_plugin() {
 }
 
 function extlink_add_tinymce_plugin( $plugin_array ) {
-
   $plugin_array['extlinks'] = get_template_directory_uri() . '/lib/tinyMCE/extlink-tinymce.js';
   return $plugin_array;
-
 }
 
 function extlink_add_tinymce_toolbar_button( $buttons ) {
