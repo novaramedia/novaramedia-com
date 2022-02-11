@@ -11,7 +11,7 @@
     .doing-it-right-sex-on-the-left__container {
       overflow: hidden;
       position: relative;
-      background-color: #EBB800;
+      background-color: #FF7EF6;
       outline: 1px black solid;
     }
 
@@ -19,7 +19,7 @@
       z-index: 20;
     }
 
-    .doing-it-right-sex-on-the-left__typoblobs-container {
+    .doing-it-right-sex-on-the-left__blobs-container {
       position: absolute;
       top: 0;
       left: 0;
@@ -30,52 +30,57 @@
       pointer-events: none;
     }
 
-    .doing-it-right-sex-on-the-left__typoblob-1 {
+    .doing-it-right-sex-on-the-left__blob-1 {
       position: absolute;
-      top: -80px;
+      top: -150px;
       left: -150px;
     }
 
-    .doing-it-right-sex-on-the-left__typoblob-2 {
+    .doing-it-right-sex-on-the-left__blob-2 {
       position: absolute;
-      top: -100px;
-      left: 30vw;
+      top: -150px;
+      left: 33vw;
     }
 
-    .doing-it-right-sex-on-the-left__typoblob-3 {
+    .doing-it-right-sex-on-the-left__blob-3 {
       position: absolute;
-      top: -50px;
-      right: -250px;
+      top: -120px;
+      right: -150px;
     }
 
     @media screen and (max-width: 1336px) {
-      .doing-it-right-sex-on-the-left__typoblobs-container svg {
-        transform: scale(.7)
+      .doing-it-right-sex-on-the-left__blobs-container svg {
+        transform: scale(.9)
       }
 
-      .doing-it-right-sex-on-the-left__typoblob-1 {
-        top: -80px;
+      .doing-it-right-sex-on-the-left__blob-1 {
+        top: -110px;
         left: -150px;
       }
+
+      .doing-it-right-sex-on-the-left__blob-2 {
+        left: 30vw;
+      }
+
     }
 
     @media screen and (max-width: 1104px) {
-      .doing-it-right-sex-on-the-left__typoblob-1 {
-        left: -210px;
-      }
-
-      .doing-it-right-sex-on-the-left__typoblob-2 {
-        display: none;
+      .doing-it-right-sex-on-the-left__blob-1 {
+        left: -180px;
       }
     }
 
     @media screen and (max-width: 910px) {
-      .doing-it-right-sex-on-the-left__typoblobs-container svg {
-        transform: scale(.8)
+      .doing-it-right-sex-on-the-left__blobs-container svg {
+        transform: scale(.9)
       }
 
-      .doing-it-right-sex-on-the-left__typoblob-3 {
-        right: -250px;
+      .doing-it-right-sex-on-the-left__blob-2 {
+        display: none;
+      }
+
+      .doing-it-right-sex-on-the-left__blob-3 {
+        right: -150px;
       }
     }
 
@@ -86,15 +91,15 @@
   </style>
 
   <div class="container">
-    <div class="doing-it-right-sex-on-the-left__typoblobs-container">
-      <div class="doing-it-right-sex-on-the-left__typoblob-1">
-        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-typoblob-1.svg'); ?>
+    <div class="doing-it-right-sex-on-the-left__blobs-container">
+      <div class="doing-it-right-sex-on-the-left__blob-1">
+        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-blob-1.svg'); ?>
       </div>
-      <div class="doing-it-right-sex-on-the-left__typoblob-2">
-        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-typoblob-2.svg'); ?>
+      <div class="doing-it-right-sex-on-the-left__blob-2">
+        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-blob-2.svg'); ?>
       </div>
-      <div class="doing-it-right-sex-on-the-left__typoblob-3">
-        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-typoblob-3.svg'); ?>
+      <div class="doing-it-right-sex-on-the-left__blob-3">
+        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-sex-blob-3.svg'); ?>
       </div>
     </div>
 
