@@ -1,16 +1,16 @@
 <?php
   $meta = get_post_meta($post->ID);
-  
+
   $category_id = get_cat_ID('Articles');
   $category_link = get_category_link( $category_id );
-  
+
   $layout = !empty($meta['_cmb_article_layout'][0]) ? $meta['_cmb_article_layout'][0] : 'basic';
-  
+
   $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
 
   $type_category = get_child_level_child_category($post->ID);
-  
+
   if (!empty($meta['bitly_url'])) {
     $share_url = $meta['bitly_url'][0];
   } else {
@@ -18,8 +18,8 @@
   }
 ?>
 
-<div class="row margin-bottom-basic mobile-margin-bottom-small">
-  <div class="col col24">
+<div class="flex-grid-row margin-bottom-basic mobile-margin-bottom-small">
+  <div class="flex-grid-item flex-item-xxl-12">
     <h4>
       <?php
         if ($type_category) {
@@ -40,16 +40,16 @@
 
 <div class="flex-grid-row margin-top-mid margin-bottom-basic">
   <div class="flex-grid-item only-desktop flex-item-m-12 flex-item-l-12 flex-item-xl-2 flex-item-xxl-2 margin-bottom-basic">
-    <?php      
+    <?php
       if ($articles_support_box_text || $support_box_override_text) {
-    ?>    
+    ?>
     <a href="<?php echo home_url('support'); ?>">
       <div id="single-article-support-box">
-        <?php 
+        <?php
           if ($support_box_override_text) {
             echo $support_box_override_text;
           } else {
-            echo $articles_support_box_text; 
+            echo $articles_support_box_text;
           }
         ?>
       </div>
@@ -60,7 +60,7 @@
   </div>
 
   <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-10 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
-    
+
 <?php
   if (!empty($meta['_cmb_sc'][0])) {
 ?>
@@ -70,11 +70,11 @@
     </div>
 <?php
   }
-?>  
+?>
     <div id="single-articles-copy" class="text-copy margin-bottom-basic">
       <?php the_content(); ?>
     </div>
-    
+
     <div>
       <ul class="inline-action-list">
         <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>

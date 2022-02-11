@@ -12,24 +12,24 @@
   }
 ?>
 
-<div class="row">
-  <div class="col col24 margin-bottom-basic mobile-margin-bottom-small">
+<div class="flex-grid-row">
+  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic mobile-margin-bottom-small">
     <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
   </div>
 </div>
 
-<header class="row margin-bottom-small">
-  <div class="col col12">
+<header class="flex-grid-row margin-bottom-small">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
     <h1 class="js-fix-widows"><?php the_title(); ?></h1>
   </div>
 
-  <div class="col col12 text-copy padding-top-micro">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6 text-copy padding-top-micro">
     <?php the_content(); ?>
   </div>
 </header>
 
-<div class="row margin-bottom-basic font-smaller">
-  <div class="col col12">
+<div class="flex-grid-row margin-bottom-basic font-smaller">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
@@ -39,7 +39,7 @@
       ?>
     </ul>
   </div>
-  <div class="col col12">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6">
     <ul class="inline-action-list">
       <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet video'); ?></li>
       <li><?php render_facebook_share_link($share_url, 'Share this video on Facebook'); ?></li>
@@ -55,8 +55,8 @@
   }
 ?>
 
-<div class="row margin-bottom-large">
-  <div class="col col20">
+<div class="flex-grid-row margin-bottom-large">
+  <div class="flex-grid-item flex-item-s-12 flex-item-xxl-10">
     <?php
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
@@ -75,7 +75,7 @@
       }
     ?>
   </div>
-  <div id="single-video-related-video-holder" class="col col4">
+  <div id="single-video-related-video-holder" class="flex-grid-item flex-item-s-12 flex-item-xxl-2">
     <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More Video</a></h4>
     <div id="single-video-related-video" class="font-smaller">
       <?php
@@ -98,8 +98,8 @@
         wp_reset_postdata();
       ?>
     </div>
-    
+
     <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe on YouTube</a>
-    
+
   </div>
 </div>

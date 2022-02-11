@@ -11,9 +11,9 @@
   } else {
     $share_url = get_the_permalink($post->ID);
   }
-  
+
   $show_category = get_child_level_child_category($post->ID);
-  
+
   if ($show_category && get_term_meta($show_category->term_id, '_nm_podcast_url', true)) {
     $podcast_url = get_term_meta($show_category->term_id, '_nm_podcast_url', true);
   } else {
@@ -21,9 +21,9 @@
   }
 ?>
 
-<div class="row">
-  <div class="col col24 margin-bottom-basic mobile-margin-bottom-small">
-    
+<div class="flex-grid-row">
+  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic mobile-margin-bottom-small">
+
     <h4><?php
       if ($show_category) {
         echo '<a href="' . get_term_link($show_category) . '">' . $show_category->name . '</a>';
@@ -36,19 +36,19 @@
   </div>
 </div>
 
-<header class="row margin-bottom-small">
-  <div class="col col12">
-    <h1 class="js-fix-widows"><?php the_title(); ?></h1>    
+<header class="flex-grid-row margin-bottom-small">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
+    <h1 class="js-fix-widows"><?php the_title(); ?></h1>
     <?php the_post_thumbnail('col4', ['class' => 'margin-top-small only-desktop']); ?>
   </div>
 
-  <div class="col col12 text-copy padding-top-micro">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6 text-copy padding-top-micro">
     <?php the_content(); ?>
   </div>
 </header>
 
-<div class="row margin-bottom-basic font-smaller">
-  <div class="col col12">
+<div class="flex-grid-row margin-bottom-basic font-smaller">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
@@ -64,7 +64,7 @@
     ?>
     </ul>
   </div>
-  <div class="col col12">
+  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6">
     <ul class="inline-action-list">
       <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
       <li><?php render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
@@ -80,8 +80,8 @@
   }
 ?>
 
-<div class="row <?php if (empty($transcript)) { echo 'margin-bottom-large'; } else { echo 'margin-bottom-basic'; } ?>">
-  <div class="col col24">
+<div class="flex-grid-row <?php if (empty($transcript)) { echo 'margin-bottom-large'; } else { echo 'margin-bottom-basic'; } ?>">
+  <div class="flex-grid-item flex-item-xxl-12">
     <?php
       if (!empty($meta['_cmb_sc'][0])) {
     ?>
@@ -105,13 +105,12 @@
 <?php
   if (!empty($transcript)) {
 ?>
-<div class="row margin-bottom-large">
-  <div class="col col24 margin-bottom-small">
+<div class="flex-grid-row margin-bottom-large">
+  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-small">
     <h4>Transcript</h4>
   </div>
 
-<!--   <div class="col col4"></div> -->
-  <div class="col col16">
+  <div class="flex-grid-item flex-item-m-12 flex-item-xxl-9">
     <div class="text-copy margin-bottom-basic">
       <?php echo apply_filters('the_content', $transcript); ?>
     </div>
