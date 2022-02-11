@@ -68,8 +68,6 @@ if( have_posts() ) {
   </article>
 
   <?php
-    get_template_part('partials/announcement');
-
     get_template_part('partials/support-section');
 
     get_template_part('partials/singles/single-related');
