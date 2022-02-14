@@ -1,15 +1,10 @@
 <?php
   $meta = get_post_meta($post->ID);
 
-  $category_id = get_cat_ID('Articles');
-  $category_link = get_category_link( $category_id );
-
   $layout = !empty($meta['_cmb_article_layout'][0]) ? $meta['_cmb_article_layout'][0] : 'basic';
 
   $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
-
-  $type_category = get_child_level_child_category($post->ID);
 
   if (!empty($meta['bitly_url'])) {
     $share_url = $meta['bitly_url'][0];
@@ -17,22 +12,6 @@
     $share_url = get_the_permalink($post->ID);
   }
 ?>
-
-<div class="flex-grid-row margin-bottom-basic mobile-margin-bottom-small">
-  <div class="flex-grid-item flex-item-xxl-12">
-    <h4>
-      <?php
-        if ($type_category) {
-          echo '<a href="' . get_term_link($type_category) . '">' . $type_category->name . '</a>';
-        } else {
-      ?>
-        <a href="<?php echo $category_link; ?>">Articles</a>
-      <?php
-        }
-      ?>
-    </h4>
-  </div>
-</div>
 
 <?php
   get_template_part('partials/singles/articles/articles-header-' . $layout);

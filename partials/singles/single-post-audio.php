@@ -3,9 +3,6 @@
   $resources = get_post_meta($post->ID, '_cmb_resources', true);
   $transcript = get_post_meta($post->ID, '_cmb_transcript', true);
 
-  $category_id = get_cat_ID('Audio');
-  $category_link = get_category_link( $category_id );
-
   if (!empty($meta['bitly_url'])) {
     $share_url = $meta['bitly_url'][0];
   } else {
@@ -20,21 +17,6 @@
     $podcast_url = 'https://podcast.novaramedia.com';
   }
 ?>
-
-<div class="flex-grid-row">
-  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic mobile-margin-bottom-small">
-
-    <h4><?php
-      if ($show_category) {
-        echo '<a href="' . get_term_link($show_category) . '">' . $show_category->name . '</a>';
-      } else {
-    ?>
-      <a href="<?php echo $category_link; ?>">Audio</a>
-    <?php
-      }
-    ?></h4>
-  </div>
-</div>
 
 <header class="flex-grid-row margin-bottom-small">
   <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
