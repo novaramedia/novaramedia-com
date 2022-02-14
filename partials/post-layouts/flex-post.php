@@ -2,9 +2,9 @@
   if (empty($args['grid-item-classes'])) {
     return;
   }
-  
+
   $text_size = 'regular';
-  
+
   if (!empty($args['text-size'])) {
     $text_size = $args['text-size'];
   }
@@ -13,7 +13,6 @@
   $description = !empty($meta['_cmb_short_desc'][0]) ? $meta['_cmb_short_desc'][0] : false;
   $author = !empty($meta['_cmb_author'][0]) ? $meta['_cmb_author'][0] : false;
 ?>
-
 <article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
   <a href="<?php the_permalink() ?>">
     <?php the_post_thumbnail('col24-16to9', array('class' => 'index-post-thumbnail')); ?>
@@ -36,7 +35,7 @@
     </div>
 <?php
         break;
-        
+
       case 'large':
 ?>
     <h3 class="font-size-2 margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h3>
@@ -56,7 +55,5 @@
         break;
     }
 ?>
-    
-
   </a>
 </article>
