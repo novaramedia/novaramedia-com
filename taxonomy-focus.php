@@ -8,14 +8,9 @@ $splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($sp
 
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
-  <!-- main posts loop -->
   <section id="posts" class="container">
-    
+
     <div class="flex-grid-row margin-top-small margin-bottom-mid">
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
         <h4 class="margin-bottom-micro">Focus</h4>
@@ -27,10 +22,10 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
         </div>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-8">
-        <?php 
+        <?php
           if ($splash_image_id) {
             echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
-                   
+
             if ($splash_image_caption) {
           ?>
           <div class="font-smaller">
@@ -54,15 +49,15 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-    
+
     $content_type = get_the_top_category(get_the_ID());
-    
+
     switch ($content_type->category_nicename) {
       case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+        get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
         break;
       default:
-        get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));  
+        get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
     }
   }
 } else {
@@ -71,7 +66,7 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="flex-grid-row margin-bottom-basic">
+    <div class="flex-grid-row margin-bottom-basic font-smaller">
       <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
         <?php
           if (!empty($credits)) {
@@ -80,14 +75,8 @@ if( have_posts() ) {
         ?>
       </div>
     </div>
-
-  <!-- end posts -->
   </section>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>
