@@ -3,7 +3,9 @@ get_header();
 
 $term = $wp_query->get_queried_object();
 
-$splash_image_id = get_term_meta($term->term_id, '_nm_focus_splash_id', true);
+$splash_override_image_id = get_term_meta($term->term_id, '_nm_focus_splash_override_id', true);
+$splash_image_id = !empty($splash_override_image_id) ? $splash_override_image_id : get_term_meta($term->term_id, '_nm_focus_splash_id', true); // if there is an override us it, otherwise get the open graph & splash combo image
+
 $splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($splash_image_id) : false;
 
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
