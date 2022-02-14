@@ -4,7 +4,7 @@ add_action( 'cmb2_init', 'nm_cmb_taxonomy_metaboxes' );
 
 function nm_cmb_taxonomy_metaboxes() {
   $prefix = '_nm_';
-  
+
   // Category
 
   $cmb_term = new_cmb2_box( array(
@@ -35,14 +35,14 @@ function nm_cmb_taxonomy_metaboxes() {
     'id'   => $prefix . 'category_og_image',
     'type' => 'file',
   ) );
-  
+
   $cmb_term->add_field( array(
     'name' => esc_html__( 'Podcast subscribe link', 'cmb2' ),
     'desc' => esc_html__( 'url for signup to podcast (optional)', 'cmb2' ),
     'id'   => $prefix . 'podcast_url',
     'type' => 'text_url',
   ) );
-  
+
   $cmb_term->add_field( array(
     'name' => esc_html__( 'Podcast subscribe copy', 'cmb2' ),
     'desc' => esc_html__( 'override copy for podcast signup links (optional)', 'cmb2' ),
@@ -56,7 +56,7 @@ function nm_cmb_taxonomy_metaboxes() {
     'id'   => $prefix . 'youtube_text',
     'type' => 'text',
   ) );
-  
+
   // Focus
 
   $cmb_term_focus = new_cmb2_box( array(
@@ -66,11 +66,18 @@ function nm_cmb_taxonomy_metaboxes() {
     'taxonomies'       => array( 'focus' ),
     'new_term_section' => true, // Will display in the "Add New Category" section
   ) );
-    
+
   $cmb_term_focus->add_field( array(
     'name' => esc_html__( 'Splash image. Also Open Graph share image', 'cmb2' ),
     'desc' => esc_html__( '(optional)', 'cmb2' ),
     'id'   => $prefix . 'focus_splash',
+    'type' => 'file',
+  ) );
+
+  $cmb_term_focus->add_field( array(
+    'name' => esc_html__( 'Override Splash image', 'cmb2' ),
+    'desc' => esc_html__( 'When the splash wants to differ from the Open Graph image(optional)', 'cmb2' ),
+    'id'   => $prefix . 'focus_splash_override',
     'type' => 'file',
   ) );
 
@@ -84,26 +91,26 @@ function nm_cmb_taxonomy_metaboxes() {
           'sortable'          => true,
       ),
   ) );
-  
+
   $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
       'name' => 'Quote copy',
       'id'   => 'copy',
       'type' => 'text',
   ) );
-  
+
   $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
       'name' => 'Quote attribution',
       'id'   => 'attribution',
       'type' => 'text',
   ) );
-  
+
   $cmb_term_focus->add_group_field( $cmb_term_focus_quote_group, array(
       'name' => 'Image',
       'desc' => esc_html__( '(optional)', 'cmb2' ),
       'id'   => 'image',
       'type' => 'file',
   ) );
-  
+
   $cmb_term_focus->add_field( array(
     'name' => esc_html__( 'Credits & footer', 'cmb2' ),
     'desc' => esc_html__( 'shown below all the content on the focus archive page (optional)', 'cmb2' ),
