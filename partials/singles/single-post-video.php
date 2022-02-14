@@ -2,21 +2,12 @@
   $meta = get_post_meta($post->ID);
   $resources = get_post_meta($post->ID, '_cmb_resources', true);
 
-  $category_id = get_cat_ID('Video');
-  $category_link = get_category_link( $category_id );
-
   if (!empty($meta['bitly_url'])) {
     $share_url = $meta['bitly_url'][0];
   } else {
     $share_url = get_the_permalink($post->ID);
   }
 ?>
-
-<div class="flex-grid-row">
-  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic mobile-margin-bottom-small">
-    <h4><a href="<?php echo $category_link; ?>">Video</a></h4>
-  </div>
-</div>
 
 <header class="flex-grid-row margin-bottom-small">
   <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
