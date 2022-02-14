@@ -1,9 +1,6 @@
 <?php
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
 <?php
   $post_status = get_post_status();
@@ -23,7 +20,6 @@ get_header();
 <?php
    }
 ?>
-  <!-- main posts loop -->
   <article id="post" class="container margin-top-small margin-bottom-basic">
 <?php
 if( have_posts() ) {
@@ -39,14 +35,14 @@ if( have_posts() ) {
       }
     } else {
       $topLevelCategory = array_values($topLevelCategory); // if there is a top level category
-      $topLevelCategory = $topLevelCategory[0]; // get the slug from it
+      $topLevelCategory = $topLevelCategory[0]; // get the first one (because there should only be one)
     }
 
     $category_link = get_category_link($topLevelCategory->term_id);
 
-    $type_category = get_child_level_child_category($post->ID);
+    $type_category = get_child_level_child_category($post->ID); // check for child level category for display
 
-    $focus_terms = wp_get_post_terms($post->ID, 'focus');
+    $focus_terms = wp_get_post_terms($post->ID, 'focus'); // check for focus on the post
     $focus_tax = count($focus_terms) > 0 ? $focus_terms[0] : false;
 ?>
 
@@ -70,17 +66,11 @@ if( have_posts() ) {
 
 <?php
     if ($topLevelCategory->slug === 'articles') {
-
       get_template_part('partials/singles/single-post-articles');
-
     } else if ($topLevelCategory->slug === 'audio') {
-
       get_template_part('partials/singles/single-post-audio');
-
     } else if ($topLevelCategory->slug === 'video') {
-
       get_template_part('partials/singles/single-post-video');
-
     }
   }
 } else {
@@ -90,19 +80,13 @@ if( have_posts() ) {
     </div>
 <?php
 } ?>
-  <!-- end post -->
   </article>
-
   <?php
     get_template_part('partials/support-section');
 
     get_template_part('partials/singles/single-related');
   ?>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>
