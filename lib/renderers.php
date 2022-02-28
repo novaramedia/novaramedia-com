@@ -1,5 +1,5 @@
 <?php
-  
+
 /**
 * Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
 *
@@ -18,7 +18,7 @@ function render_front_page_banner($key) {
     case 'email-the-pick':
       get_template_part('partials/email-signup', null, array(
         'newsletter' => 'The Pick',
-        'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!'
+        'copy' => 'Novara Media’s best articles, every week, straight to your inbox.'
       ));
       break;
     default: // default behavior to render the template part from path provided
@@ -139,7 +139,7 @@ function render_video_query($query) {
             the_post_thumbnail('col6-16to9 video-related-video__thumbnail');
           }
         ?>
-        
+
         <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
       </div>
    </a>
@@ -157,7 +157,7 @@ function render_post_title($postId) {
   $title = get_the_title($postId);
 
   $sub_category = get_the_sub_category($postId, true);
-  
+
   if ($sub_category && !is_category($sub_category->term_id)) {
     $title = '<span class="font-small-caps">' . $sub_category->name . ':</span> ' . $title;
   }
@@ -186,8 +186,8 @@ function render_resources_row($resources) {
 function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
   if (empty($url)) {
     return;
-  }  
-  
+  }
+
   $twitter_url = 'https://twitter.com/intent/tweet?via=novaramedia';
 
   if ($hashtag) {
@@ -219,7 +219,7 @@ function render_email_share_link($url, $subject = '', $link_text = 'Email') {
   if (empty($url)) {
     return;
   }
-  
+
   $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body='. urlencode($url);
 
   echo '<a class="share-action share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
@@ -231,11 +231,11 @@ function render_reddit_share_link($url, $title = null, $link_text = 'Post to Red
   }
 
   $reddit_url = 'http://www.reddit.com/submit?';
-  
+
   $reddit_url .= '&url=' . urlencode($url);
-  
+
   if ($title) {
-    $reddit_url .= '&title=' . urlencode($title);  
+    $reddit_url .= '&title=' . urlencode($title);
   }
 
   echo '<a class="share-action share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
@@ -250,12 +250,12 @@ function render_about_group_field($data) {
   if (!$data) {
     return;
   }
-  
+
   foreach($data as $person) {
 ?>
   <div class="margin-bottom-small">
     <h6 class="font-small-caps"><?php echo $person['title']; ?></h6>
-<?php 
+<?php
     foreach($person['name'] as $name) {
 ?>
       <div class="about-page__person"><?php echo $name; ?></div>
