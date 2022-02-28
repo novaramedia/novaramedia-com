@@ -114,7 +114,7 @@
           Doing It Right:<br/>Sex On The Left</h3></a>
       </div>
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-6">
-        <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">Sex can be disastrous, delightful or extremely okay, but it is always slippery as f***. From bi erasure to ethical ghosting, male circumcision to family abolition, we ask: what does leftist sex look like? And can we ever do it right?</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">Sex can be disastrous, delightful or extremely okay, but it is always slippery as fuck. From bi erasure to ethical ghosting, male circumcision to family abolition, we ask: what does leftist sex look like? And can we ever do it right?</p></a>
         <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
       </div>
     </div>
