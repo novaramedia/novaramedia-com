@@ -227,6 +227,9 @@ p
 .font-italic, em, i
   font-style: italic
 
+.font-semibold
+  font-weight: 500
+
 .font-bold, strong, b
   font-weight: bold
 
@@ -753,6 +756,13 @@ nmButton()
       background-color: $color-black-soft
       color: $color-white-soft
       border-color: $color-black-soft
+  &--black
+    background-color: $color-black-soft
+    color: $color-white-soft
+    border-color: $color-black-soft
+    &:hover
+      background-color: $color-white-soft
+      color: $color-black-soft
   &--inline
     display: inline-block
   &--half
@@ -885,6 +895,48 @@ nmButton()
     .email-signup__feedback-completed
       display: block
     .email-signup__inputs
+      display: none
+
+// ******************************************************
+
+// NEWSLETTER PAGE EMAIL SIGNUP
+
+.newsletter-page-email-signup__inputs
+  justify-content: flex-end
+
+.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input, .newsletter-page-email-signup__submit
+  width: 100%
+  padding: 1.1rem 1.5rem
+  font-size: $font-size-h3
+
+.newsletter-page-email-signup__email-gdpr-group
+  display: flex
+  align-items: center
+
+.newsletter-page-email-signup__email-gdpr-input
+  width: 2rem
+  height: 2rem
+  margin: 0 1rem
+
+.newsletter-page-email-signup__feedback-processing
+  padding: 1.1rem 1.5rem
+  font-size: $font-size-h3
+
+.newsletter-page-email-signup__form
+  .newsletter-page-email-signup__feedback-processing, .newsletter-page-email-signup__feedback-failed, .newsletter-page-email-signup__feedback-completed
+    display: none
+  &--processing
+    .newsletter-page-email-signup__feedback-processing
+      display: block
+    .newsletter-page-email-signup__inputs
+      display: none
+  &--failed
+    .newsletter-page-email-signup__feedback-failed
+      display: block
+  &--completed
+    .newsletter-page-email-signup__feedback-completed
+      display: block
+    .newsletter-page-email-signup__inputs
       display: none
 
 // ******************************************************
