@@ -5,8 +5,6 @@ add_action( 'cmb2_init', 'nm_cmb_page_newsletters_metaboxes' );
 function nm_cmb_page_newsletters_metaboxes() {
   $prefix = '_nm_';
 
-  // Category
-
   $cmb_term = new_cmb2_box( array(
     'id'         => $prefix . 'page_newsletters',
     'title'      => esc_html__( 'Newsletters Metabox', 'cmb2' ),
@@ -25,9 +23,9 @@ function nm_cmb_page_newsletters_metaboxes() {
   ) );
 
   $cmb_term->add_field( array(
-    'name' => esc_html__( 'Youtube subscribe copy', 'cmb2' ),
-    'desc' => esc_html__( 'override copy for Youtube subscribe links (video categories only) (optional)', 'cmb2' ),
-    'id'   => $prefix . 'youtube_text',
-    'type' => 'text',
+    'name' => esc_html__( 'Support section override text', 'cmb2' ),
+    'desc' => esc_html__( 'override copy for the support section below the email signup (optional)', 'cmb2' ),
+    'id'   => $prefix . 'support_text',
+    'type' => 'textarea_small',
   ) );
 }

@@ -1,11 +1,7 @@
 <?php
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -13,6 +9,7 @@ if( have_posts() ) {
     $meta = get_post_meta($post->ID);
 
     $youtube_id = !empty($meta['_nm_youtube_id']) ? $meta['_nm_youtube_id'][0] : false;
+    $support_override = !empty($meta['_nm_support_text']) ? $meta['_nm_support_text'][0] : false;
 ?>
   <article id="page">
     <div class="background-black font-color-white">
@@ -33,7 +30,7 @@ if( have_posts() ) {
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
-          <div class="font-size-3 font-semibold margin-bottom-basic">
+          <div class="font-size-3 font-semibold margin-bottom-mid">
             <?php the_content(); ?>
           </div>
           <?php
@@ -51,13 +48,13 @@ if( have_posts() ) {
             <input type="hidden" name="newsletter" value="The Pick" />
 
             <div class="newsletter-page-email-signup__inputs flex-grid-row flex-grid--nested">
-              <div class="flex-grid-item flex-grid-item--tight flex-item-l-12 flex-item-xxl-4 margin-bottom-small">
+              <div class="flex-grid-item flex-grid-item--tight flex-item-l-12 flex-item-xxl-4 margin-bottom-tiny">
                 <div class="form-group">
                   <label class="u-visuallyhidden" for="firstName">First name:</label>
                   <input name="firstName" class="newsletter-page-email-signup__name-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
                 </div>
               </div>
-              <div class="flex-grid-item flex-grid-item--tight flex-item-l-12 flex-item-xxl-8 margin-bottom-small">
+              <div class="flex-grid-item flex-grid-item--tight flex-item-l-12 flex-item-xxl-8 margin-bottom-tiny">
                 <div class="form-group">
                   <label class="u-visuallyhidden" for="email">Email:</label>
                   <input name="email" class="newsletter-page-email-signup__email-input" id="email" type="email" autocomplete="email" placeholder="Email" required />
@@ -91,28 +88,15 @@ if( have_posts() ) {
         </div>
       </div>
     </div>
-
-<!--
-    <?php
-      get_template_part('partials/newsletter-page-email-signup', null, array(
-        'newsletter' => 'The Pick',
-      ));
-    ?>
--->
-
-  <!-- end post -->
   </article>
 <?php
   }
-} ?>
-<!-- end main-content -->
-
-<?php
-  get_template_part('partials/support-section');
+}
+  get_template_part('partials/support-section', null, array(
+    'override_text' => $support_override,
+  ));
 ?>
-
 </main>
-
 <?php
 get_footer();
 ?>
