@@ -2149,6 +2149,10 @@ img {
 .email-signup__form--completed .email-signup__inputs {
   display: none;
 }
+.email-signup__form--processing .newsletter-page-email-signup__inputs,
+.email-signup__form--completed .newsletter-page-email-signup__inputs {
+  display: none;
+}
 .newsletter-page-email-signup__inputs {
   -ms-justify-content: flex-end;
   justify-content: flex-end;
@@ -2177,30 +2181,6 @@ img {
   width: 2rem;
   height: 2rem;
   margin: 0 1rem;
-}
-.newsletter-page-email-signup__feedback-processing {
-  padding: 8px 16px;
-  font-size: 1.400505962399693rem;
-}
-.newsletter-page-email-signup__form .newsletter-page-email-signup__feedback-processing,
-.newsletter-page-email-signup__form .newsletter-page-email-signup__feedback-failed,
-.newsletter-page-email-signup__form .newsletter-page-email-signup__feedback-completed {
-  display: none;
-}
-.newsletter-page-email-signup__form--processing .newsletter-page-email-signup__feedback-processing {
-  display: block;
-}
-.newsletter-page-email-signup__form--processing .newsletter-page-email-signup__inputs {
-  display: none;
-}
-.newsletter-page-email-signup__form--failed .newsletter-page-email-signup__feedback-failed {
-  display: block;
-}
-.newsletter-page-email-signup__form--completed .newsletter-page-email-signup__feedback-completed {
-  display: block;
-}
-.newsletter-page-email-signup__form--completed .newsletter-page-email-signup__inputs {
-  display: none;
 }
 #radio-player {
   display: none;

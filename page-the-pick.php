@@ -41,10 +41,10 @@ if( have_posts() ) {
             $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
             if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
-              $netlify = 'http://localhost:59392/.netlify/functions/mailchimp-signup';
+              $netlify = 'http://localhost:54008/.netlify/functions/mailchimp-signup';
             }
           ?>
-          <form class="newsletter-page-email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
+          <form class="email-signup__form newsletter-page-email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
             <input type="hidden" name="newsletter" value="The Pick" />
 
             <div class="newsletter-page-email-signup__inputs flex-grid-row flex-grid--nested">
@@ -71,17 +71,17 @@ if( have_posts() ) {
               </div>
             </div>
 
-            <div class="newsletter-page-email-signup__feedback-processing">
+            <div class="email-signup__feedback-processing font-size-3">
               <div class="spinner">
                 <div class="double-bounce1"></div>
                 <div class="double-bounce2"></div>
               </div>
             </div>
 
-            <div class="newsletter-page-email-signup__feedback-failed">
+            <div class="email-signup__feedback-failed">
               <p>Sign up error: <span class="newsletter-page-email-signup__feedback-message"></span>. Maybe try again</p>
             </div>
-            <div class="newsletter-page-email-signup__feedback-completed">
+            <div class="email-signup__feedback-completed">
               <p>Thanks for signing up. &#10003;</p>
             </div>
           </form>
