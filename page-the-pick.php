@@ -17,7 +17,7 @@ if( have_posts() ) {
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-xxl-12">
             <h4>Newsletter</h4>
-            <h1 class="font-size-8 margin-top-basic">The Pick.</h1>
+            <h1 class="font-size-s-7 font-size-m-6 font-size-l-7 font-size-8 margin-top-basic">The Pick.</h1>
           </div>
         </div>
       </div>
@@ -25,12 +25,12 @@ if( have_posts() ) {
     <div class="container">
       <div class="flex-grid-row margin-top-basic margin-bottom-basic">
         <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
-          <div class="u-video-embed-container">
+          <div class="u-video-embed-container margin-bottom-small">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>" allow="autoplay" allowfullscreen></iframe>
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
-          <div class="font-size-3 font-semibold margin-bottom-mid">
+          <div class="font-size-3 font-semibold margin-bottom-small">
             <?php the_content(); ?>
           </div>
           <?php
