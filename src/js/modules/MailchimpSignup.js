@@ -19,6 +19,8 @@ export class MailchimpSignup {
       const $formInputs = $form.find('input');
       const $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
 
+      _this.forms[index] = $form;
+
       $form.on('submit', function(event) {
         event.preventDefault();
 
@@ -28,7 +30,7 @@ export class MailchimpSignup {
         $formInputs.prop('disabled', true);
         $form.removeClass('email-signup__form--failed');
 
-        _this.forms[index] = $.post(url, data)
+        $.post(url, data)
           .done(function() {
             $form.removeClass('email-signup__form--processing');
             $form.addClass('email-signup__form--completed');
@@ -39,9 +41,14 @@ export class MailchimpSignup {
 
             $form.addClass('email-signup__form--failed');
 
+            if (jqXHR.statusText === 'error') {
+              $feedbackMessageSpan.text('General error');
+            }
+
             try {
               const response = JSON.parse(jqXHR.responseText);
-              $feedbackMessageSpan.text(response.message); // this needs to target child of parent
+
+              $feedbackMessageSpan.text(response.message);
             } catch(error) {
               $feedbackMessageSpan.text('General error');
             }
@@ -50,6 +57,14 @@ export class MailchimpSignup {
             $form.removeClass('email-signup__form--processing');
             $formInputs.prop('disabled', false);
           });
+      });
+    });
+
+    $('.email-signup__feedback-failed').each(function(index, element) {
+      const $element = $(element);
+
+      $element.on('click', function() {
+        _this.forms[index].removeClass('email-signup__form--failed');
       });
     });
   }

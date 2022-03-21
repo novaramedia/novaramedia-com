@@ -2149,9 +2149,30 @@ img {
 .email-signup__form--completed .email-signup__inputs {
   display: none;
 }
-.email-signup__form--processing .newsletter-page-email-signup__inputs,
-.email-signup__form--completed .newsletter-page-email-signup__inputs {
-  display: none;
+.newsletter-page-email-signup__form {
+  position: relative;
+}
+.newsletter-page-email-signup__form .email-signup__feedback-processing,
+.newsletter-page-email-signup__form .email-signup__feedback-failed,
+.newsletter-page-email-signup__form .email-signup__feedback-completed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.newsletter-page-email-signup__form.email-signup__form--processing,
+.newsletter-page-email-signup__form.email-signup__form--failed,
+.newsletter-page-email-signup__form.email-signup__form--completed {
+  background-color: #0e0e0e;
+  color: #fdfdfd;
+}
+.newsletter-page-email-signup__form.email-signup__form--processing .newsletter-page-email-signup__inputs,
+.newsletter-page-email-signup__form.email-signup__form--failed .newsletter-page-email-signup__inputs,
+.newsletter-page-email-signup__form.email-signup__form--completed .newsletter-page-email-signup__inputs {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
 }
 .newsletter-page-email-signup__inputs {
   -ms-justify-content: flex-end;
@@ -2181,6 +2202,10 @@ img {
   width: 2rem;
   height: 2rem;
   margin: 0 1rem;
+}
+.email-signup__icon {
+  height: 3rem;
+  fill: #fdfdfd;
 }
 #radio-player {
   display: none;
@@ -2233,7 +2258,7 @@ img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #333;
+  background-color: #0e0e0e;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
   opacity: 0.6;
@@ -2241,6 +2266,10 @@ img {
   top: 0;
   left: 0;
   animation: sk-bounce 2s infinite ease-in-out;
+}
+.spinner--white .double-bounce1,
+.spinner--white .double-bounce2 {
+  background-color: #fdfdfd;
 }
 .double-bounce2 {
   animation-delay: -1s;
@@ -4498,11 +4527,9 @@ img {
 @keyframes sk-bounce {
   0%, 100% {
     transform: scale(0);
-    -webkit-transform: scale(0);
   }
   50% {
     transform: scale(1);
-    -webkit-transform: scale(1);
   }
 }
 

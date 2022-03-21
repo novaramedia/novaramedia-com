@@ -306,13 +306,14 @@ var MailchimpSignup = /*#__PURE__*/function () {
         var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).attr('action');
         var $formInputs = $form.find('input');
         var $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
+        _this.forms[index] = $form;
         $form.on('submit', function (event) {
           event.preventDefault();
           var data = $form.serialize();
           $form.addClass('email-signup__form--processing');
           $formInputs.prop('disabled', true);
           $form.removeClass('email-signup__form--failed');
-          _this.forms[index] = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(function () {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(function () {
             $form.removeClass('email-signup__form--processing');
             $form.addClass('email-signup__form--completed');
           }).fail(function (jqXHR) {
@@ -320,9 +321,13 @@ var MailchimpSignup = /*#__PURE__*/function () {
             $formInputs.prop('disabled', false);
             $form.addClass('email-signup__form--failed');
 
+            if (jqXHR.statusText === 'error') {
+              $feedbackMessageSpan.text('General error');
+            }
+
             try {
               var response = JSON.parse(jqXHR.responseText);
-              $feedbackMessageSpan.text(response.message); // this needs to target child of parent
+              $feedbackMessageSpan.text(response.message);
             } catch (error) {
               $feedbackMessageSpan.text('General error');
             }
@@ -330,6 +335,12 @@ var MailchimpSignup = /*#__PURE__*/function () {
             $form.removeClass('email-signup__form--processing');
             $formInputs.prop('disabled', false);
           });
+        });
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__feedback-failed').each(function (index, element) {
+        var $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
+        $element.on('click', function () {
+          _this.forms[index].removeClass('email-signup__form--failed');
         });
       });
     }
