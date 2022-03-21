@@ -24,12 +24,12 @@ if( have_posts() ) {
     </div>
     <div class="container">
       <div class="flex-grid-row margin-top-basic margin-bottom-basic">
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6">
           <div class="u-video-embed-container margin-bottom-small">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id, true); ?>" allow="autoplay" allowfullscreen></iframe>
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xxl-6">
           <div class="font-size-3 font-semibold margin-bottom-small">
             <?php the_content(); ?>
           </div>
