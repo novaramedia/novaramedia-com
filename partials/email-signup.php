@@ -2,7 +2,7 @@
   $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
   if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
-    $netlify = 'http://localhost:59392/.netlify/functions/mailchimp-signup';
+    $netlify = 'http://localhost:60573/.netlify/functions/mailchimp-signup';
   }
 
   if (!empty($args['newsletter']) && $netlify) {
