@@ -1,17 +1,23 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global */
 
-
 import $ from 'jquery';
 
+/**
+ * MailchimpSignup class follows convention of module classes.
+ * bind() called on construction.
+ */
 export class MailchimpSignup {
   constructor() {
     this.forms = [];
     this.bind();
   }
 
+  /**
+   * Function to bind all event handlers
+   */
   bind() {
-    var _this = this;
+    const _this = this;
 
     $('.email-signup__form').each((index, form) => {
       const $form = $(form);
@@ -68,5 +74,4 @@ export class MailchimpSignup {
       });
     });
   }
-
 }

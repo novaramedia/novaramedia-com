@@ -288,6 +288,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /* global */
 
+/**
+ * MailchimpSignup class follows convention of module classes.
+ * bind() called on construction.
+ */
+
 var MailchimpSignup = /*#__PURE__*/function () {
   function MailchimpSignup() {
     _classCallCheck(this, MailchimpSignup);
@@ -295,6 +300,10 @@ var MailchimpSignup = /*#__PURE__*/function () {
     this.forms = [];
     this.bind();
   }
+  /**
+   * Function to bind all event handlers
+   */
+
 
   _createClass(MailchimpSignup, [{
     key: "bind",
