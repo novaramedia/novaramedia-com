@@ -1,18 +1,18 @@
 <?php
-function topic_taxonomy() {
+function section_taxonomy() {
 
 	$labels = array(
-		'name'                       => 'Topics',
-		'singular_name'              => 'Topic',
-		'menu_name'                  => 'Topics',
-		'all_items'                  => 'All Topics',
-		'parent_item'                => 'Parent Topic',
-		'parent_item_colon'          => 'Parent Topic:',
-		'new_item_name'              => 'New Topic Name',
-		'add_new_item'               => 'Add New Topic',
-		'edit_item'                  => 'Edit Topic',
-		'update_item'                => 'Update Topic',
-		'view_item'                  => 'View Topic',
+		'name'                       => 'Sections',
+		'singular_name'              => 'Section',
+		'menu_name'                  => 'Sections',
+		'all_items'                  => 'All Sections',
+		'parent_item'                => 'Parent Section',
+		'parent_item_colon'          => 'Parent Section:',
+		'new_item_name'              => 'New Section Name',
+		'add_new_item'               => 'Add New Section',
+		'edit_item'                  => 'Edit Section',
+		'update_item'                => 'Update Section',
+		'view_item'                  => 'View Section',
 		'separate_items_with_commas' => 'Separate items with commas',
 		'add_or_remove_items'        => 'Add or remove items',
 		'choose_from_most_used'      => 'Choose from the most used',
@@ -33,10 +33,10 @@ function topic_taxonomy() {
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
 	);
-	register_taxonomy( 'topic', array( 'post' ), $args );
+	register_taxonomy( 'section', array( 'post' ), $args );
 
 }
-add_action( 'init', 'topic_taxonomy', 0 );
+add_action( 'init', 'section_taxonomy', 0 );
 
 function focus_taxonomy() {
 
