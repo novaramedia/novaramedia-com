@@ -13,7 +13,7 @@ export class MailchimpSignup {
   bind() {
     var _this = this;
 
-    $('.email-signup__form').each(function(index, form) {
+    $('.email-signup__form').each((index, form) => {
       const $form = $(form);
       const url = $(form).attr('action');
       const $formInputs = $form.find('input');
@@ -21,7 +21,7 @@ export class MailchimpSignup {
 
       _this.forms[index] = $form;
 
-      $form.on('submit', function(event) {
+      $form.on('submit', (event) => {
         event.preventDefault();
 
         const data = $form.serialize();
@@ -31,11 +31,11 @@ export class MailchimpSignup {
         $form.removeClass('email-signup__form--failed');
 
         $.post(url, data)
-          .done(function() {
+          .done(() => {
             $form.removeClass('email-signup__form--processing');
             $form.addClass('email-signup__form--completed');
           })
-          .fail(function(jqXHR) {
+          .fail((jqXHR) => {
             $form.removeClass('email-signup__form--processing');
             $formInputs.prop('disabled', false);
 
@@ -53,17 +53,17 @@ export class MailchimpSignup {
               $feedbackMessageSpan.text('General error');
             }
           })
-          .always(function() {
+          .always(() => {
             $form.removeClass('email-signup__form--processing');
             $formInputs.prop('disabled', false);
           });
       });
     });
 
-    $('.email-signup__feedback-failed').each(function(index, element) {
+    $('.email-signup__feedback-failed').each((index, element) => {
       const $element = $(element);
 
-      $element.on('click', function() {
+      $element.on('click', () => {
         _this.forms[index].removeClass('email-signup__form--failed');
       });
     });
