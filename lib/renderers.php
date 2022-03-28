@@ -26,49 +26,6 @@ function render_front_page_banner($key) {
   }
 }
 
-function render_home_focus($focus, $classes) {
-  $focus_object = get_term($focus);
-  $focus_link = get_term_link($focus_object);
-?>
-  <section id="home-focus-posts" class="container <?php echo $classes; ?>">
-    <div class="row">
-      <div class="col col24 margin-bottom-small">
-        <h4><a href="<?php echo $focus_link; ?>">Focus: <?php echo $focus_object->name; ?></a></h4>
-      </div>
-    </div>
-
-    <div class="row margin-bottom-small mobile-margin-bottom-none">
-<?php
-      $focusPosts = new WP_Query(array(
-        'posts_per_page' => 3,
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'focus',
-            'field' => 'term_id',
-            'terms' => $focus
-          ),
-        ),
-      ));
-      if ($focusPosts->have_posts()) {
-        $i = 0;
-        while ($focusPosts->have_posts()) {
-          $focusPosts->the_post();
-
-          if ($i % 3 === 0 && $i !== 0) {
-            echo "</div>\n<div class=\"row margin-bottom-small mobile-margin-bottom-none\">";
-          }
-
-          get_template_part('partials/post-layouts/home-focus-post-col8');
-
-          $i++;
-        }
-      }
-?>
-    </div>
-  </section>
- <?php
-}
-
 function render_front_page_video_block($video_category_slug, $excluded_category_slug = false) {
   $category = get_term_by('slug', $video_category_slug, 'category');
 
