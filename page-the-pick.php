@@ -120,9 +120,14 @@ if( have_posts() ) {
 <?php
   }
 }
-  get_template_part('partials/support-section', null, array(
-    'override_text' => $support_override,
-  ));
+
+  if ($support_override) {
+    get_template_part('partials/support-section', null, array(
+      'override_text' => $support_override,
+    ));
+  } else {
+    get_template_part('partials/support-section');
+  }
 ?>
 </main>
 <?php
