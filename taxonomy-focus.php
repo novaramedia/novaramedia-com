@@ -59,7 +59,10 @@ if( have_posts() ) {
         get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
         break;
       default:
-        get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
+        get_template_part('partials/post-layouts/flex-post', null, array(
+          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic',
+          'image-size' => 'col12-16to9',
+        ));
     }
   }
 } else {

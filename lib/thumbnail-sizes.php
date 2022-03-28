@@ -5,7 +5,6 @@ if( function_exists( 'add_theme_support' ) ) {
 }
 
 if( function_exists( 'add_image_size' ) ) {
-  add_image_size( 'admin-thumb', 150, 150, false );
   add_image_size( 'opengraph', 1200, 630, true );
 
   add_image_size( 'mobile-16to9', 460, 259, true );
@@ -20,7 +19,6 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'col8-16to9', 424, 238, true );
 
   add_image_size( 'col12', 664, 9999, false );
-  add_image_size( 'col12-1to2point3', 664, 288, true );
   add_image_size( 'col12-16to9', 664, 373, true );
 
   add_image_size( 'gallery-mid', 664, 373, false );
@@ -28,9 +26,6 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'col18-16to9', 974, 548, true );
 
   add_image_size( 'col24-16to9', 1304, 733, true );
-  add_image_size( 'col24-widescreen-crop', 1304, 400, true );
 
   add_image_size( 'gallery', 1304, 733, false );
-
-  add_image_size( 'col24-featured-crop', 1304, 550, true );
 }

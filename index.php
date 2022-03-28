@@ -33,8 +33,11 @@ if (is_search()) {
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-    
-    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic'));
+
+    get_template_part('partials/post-layouts/flex-post', null, array(
+      'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic'
+      'image-size' => 'col12-16to9',
+    ));
   }
 } else {
 ?>
