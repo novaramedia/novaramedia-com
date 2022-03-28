@@ -227,6 +227,9 @@ p
 .font-italic, em, i
   font-style: italic
 
+.font-semibold
+  font-weight: 500
+
 .font-bold, strong, b
   font-weight: bold
 
@@ -753,6 +756,13 @@ nmButton()
       background-color: $color-black-soft
       color: $color-white-soft
       border-color: $color-black-soft
+  &--black
+    background-color: $color-black-soft
+    color: $color-white-soft
+    border-color: $color-black-soft
+    &:hover
+      background-color: $color-white-soft
+      color: $color-black-soft
   &--inline
     display: inline-block
   &--half
@@ -889,6 +899,52 @@ nmButton()
 
 // ******************************************************
 
+// NEWSLETTER PAGE EMAIL SIGNUP
+
+.newsletter-page-email-signup__form
+  position: relative
+  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+.newsletter-page-email-signup__form.email-signup__form--processing, .newsletter-page-email-signup__form.email-signup__form--failed, .newsletter-page-email-signup__form.email-signup__form--completed
+  background-color: $color-black-soft
+  color: $color-white-soft
+  .newsletter-page-email-signup__inputs
+    opacity: 0
+
+.newsletter-page-email-signup__inputs
+  justify-content: flex-end
+
+.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input, .newsletter-page-email-signup__submit
+  width: 100%
+  padding: 8px 16px
+  font-size: $font-size-h3
+
+.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input
+  border-color: $color-black-soft
+  border-width: 1px
+  border-radius: 3px
+
+.newsletter-page-email-signup__email-gdpr-group
+  display: flex
+  align-items: center
+  justify-content: flex-end
+
+.newsletter-page-email-signup__email-gdpr-input
+  width: 2rem
+  height: 2rem
+  margin: 0 1rem
+
+.email-signup__icon
+  height: 3rem
+  fill: $color-white-soft
+
+// ******************************************************
+
 // RADIO PLAYER
 
 #radio-player
@@ -941,46 +997,35 @@ nmButton()
 
 // SPINNER
 
-.spinner {
-  width: 1em;
-  height: 1em;
-  margin: 0 auto;
-  position: relative;
-}
+.spinner
+  width: 1em
+  height: 1em
+  margin: 0 auto
+  position: relative
 
-.double-bounce1, .double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
+.double-bounce1, .double-bounce2
+  width: 100%
+  height: 100%
+  border-radius: 50%
+  background-color: $color-black-soft
+  opacity: 0.6
+  position: absolute
+  top: 0
+  left: 0
+  animation: sk-bounce 2.0s infinite ease-in-out
 
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
-}
+.spinner--white
+  .double-bounce1, .double-bounce2
+    background-color: $color-white-soft
 
-.double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
-}
+.double-bounce2
+  animation-delay: -1.0s
 
-@-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bounce {
-  0%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
+@keyframes sk-bounce
+  0%, 100%
+    transform: scale(0.0)
+  50%
+    transform: scale(1.0)
 
 // ******************************************************
 

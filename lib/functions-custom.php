@@ -3,7 +3,7 @@
 * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
 *
 * @return Object/Boolean WP Term object or false if doesn't exist
-*/  
+*/
 function get_child_level_child_category($post_id) {
   $categories = get_the_category($post_id);
   $child_categories = array_filter($categories, 'only_child_category_filter');
@@ -14,8 +14,8 @@ function get_child_level_child_category($post_id) {
   } else {
     return false;
   }
-}   
-  
+}
+
 /**
 * Answer the question is this a single post in the articles category?
 *
@@ -29,7 +29,7 @@ function nm_is_single_article() {
   global $post;
 
   $categories = get_the_terms($post->ID, 'category'); // get the categories for the post
-    
+
   if (!$categories) {
     return false;
   }
@@ -58,7 +58,7 @@ function get_the_top_category($postId) {
   $top_categories = array_values($top_categories);
 
   if (isset($top_categories[0])) {
-    return $top_categories[0]; 
+    return $top_categories[0];
   } else {
     return false;
   }
@@ -73,9 +73,9 @@ function get_the_sub_category($postId, $object = false) {
 
   if (isset($child_categories[0])) {
     if ($object) {
-      return $child_categories[0];     
+      return $child_categories[0];
     } else {
-      return $child_categories[0]->name;    
+      return $child_categories[0]->name;
     }
   } else {
     return false;
