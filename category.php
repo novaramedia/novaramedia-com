@@ -9,19 +9,19 @@ get_header();
 <?php
   $video = get_category_by_slug('video');
   $category = get_category(get_query_var('cat'));
-  
+
   $podcast_copy_override = get_term_meta($category->term_id, '_nm_podcast_text', true);
   $youtube_copy_override = get_term_meta($category->term_id, '_nm_youtube_text', true);
-  
+
   $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subscribe to the podcast';
   $youtube_copy = !empty($youtube_copy_override) ? $youtube_copy_override : 'Subscribe to our YouTube channel';
-  
+
   $is_video = $video->term_id === $category->term_id || $video->term_id === $category->category_parent;
-  
+
   $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : false;
-  
+
   $is_one_button = $is_video === false || $podcast_url === false ? true : false;
-  
+
   $button_grid_item_classes = $is_one_button ? 'flex-grid-item flex-offset-s-0 flex-offset-l-6 flex-item-s-6 flex-item-l-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-3';
 ?>
 
@@ -33,7 +33,7 @@ get_header();
         <?php
           if (get_term_meta($category->term_id, '_nm_category_logo_id', true)) {
             $logo_id = get_term_meta($category->term_id, '_nm_category_logo_id', true);
-            
+
             echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
           } else {
         ?>
@@ -45,7 +45,7 @@ get_header();
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php echo category_description(); ?>
       </div>
-      <?php        
+      <?php
         if ($is_video) {
       ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
@@ -54,7 +54,7 @@ get_header();
       <?php
         }
       ?>
-      <?php        
+      <?php
         if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
           $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
       ?>
@@ -128,8 +128,11 @@ get_header();
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-    
-    get_template_part('partials/post-layouts/flex-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic'));
+
+    get_template_part('partials/post-layouts/flex-post', null, array(
+      'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic',
+      'image-size' => 'col12-16to9',
+    ));
   }
 } else {
 ?>
