@@ -75,7 +75,7 @@ function render_video_query($query) {
     </a>
 
     <a href="<?php the_permalink(); ?>">
-      <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+      <h6 class="js-fix-widows font-size-2 font-semibold margin-top-micro"><?php the_title(); ?></h6>
     </a>
   </div>
   <div class="col col6">
@@ -97,7 +97,7 @@ function render_video_query($query) {
           }
         ?>
 
-        <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+        <h6 class="js-fix-widows font-size-1 font-semibold margin-top-micro"><?php the_title(); ?></h6>
       </div>
    </a>
     <?php
