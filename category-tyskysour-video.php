@@ -8,6 +8,8 @@ get_header();
   [x] Do I build the player loading thing for catchup? NO not this time
 */
 
+  $is_front_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
+
   $video = get_category_by_slug('video');
   $category = get_category(get_query_var('cat'));
 
@@ -21,6 +23,8 @@ get_header();
   $youtube_copy_override = get_term_meta($category->term_id, '_nm_youtube_text', true);
 
   $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : 'https://podfollow.com/novaramedia/view';
+
+  if ($is_front_page) {
 ?>
 <div class="background-black font-color-white">
   <section class="container padding-top-small">
@@ -89,10 +93,14 @@ get_header();
 
 <?php get_template_part('partials/support-section'); ?>
 
-  <section id="posts" class="container margin-top-basic mobile-margin-top-small">
+<?php
+  } // end if front page
+?>
+
+  <section id="posts" class="container <?php echo $is_front_page ? 'margin-top-basic mobile-margin-top-small' : 'margin-top-small'; ?>">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
-        <h4>More TyskySour</h4>
+        <h4><?php echo $is_front_page ? 'More TyskySour' : 'TyskySour'; ?></h4>
       </div>
     </div>
     <div class="flex-grid-row margin-bottom-basic">
