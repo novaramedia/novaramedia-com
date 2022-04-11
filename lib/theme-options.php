@@ -6,10 +6,10 @@
  */
 class IGV_Admin
 {
-  /**
-    * Option key, and option page slug
-    * @var string
-    */
+    /**
+      * Option key, and option page slug
+      * @var string
+      */
     private $key = 'IGV_options';
 
     /**

@@ -39,8 +39,8 @@ function nm_is_single_article()
     $found_in_categories = array_filter(
         $categories,
         function ($category) {
-        return $category->slug === 'articles';
-    }
+            return $category->slug === 'articles';
+        }
     ); // check to see if any of the categories returned match the articles slug
 
     if (count($found_in_categories) > 0) {
