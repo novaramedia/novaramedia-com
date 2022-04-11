@@ -313,25 +313,28 @@ article
   ul, ol
     margin-top: 2rem
     margin-bottom: 2rem
-
   ul
     li
       list-style: disc inside
-
   ol
     li
       list-style: decimal inside
 
 .text-copy
-  .twitter-tweet, .instagram-media, .oembed-element
-    margin: 2.5rem auto !important
   p
     font-family: $font-serif
     font-size: $font-size-larger
     line-height: $font-leading-larger
+  ul, ol
+    font-size: $font-size-larger
+    line-height: $font-leading-larger
+
+.text-copy, .page-copy
+  .twitter-tweet, .instagram-media, .oembed-element
+    margin: 2rem auto !important
   blockquote
     font-family: $font-sans
-    margin: 2.5rem
+    margin: 2rem
     p
       font-family: $font-sans
   h1,h2,h3,h4,h5,h6
@@ -339,14 +342,11 @@ article
     margin-bottom: 1.5rem
   a
     color: $color-blue
-  img
-    display: block
-    margin: 2.5rem auto
-  ul, ol
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-  .wp-caption
+  img, figure, .wp-caption
     width: auto !important
+    display: block
+    margin: 2rem auto
+  .wp-caption
     &.alignnone
       text-align: center
     img
@@ -360,32 +360,6 @@ article
 .text-copy-max-width
   max-width: ( 18 * $col ) + ( 17  * $gutter )
   margin: 0 auto
-
-.page-copy // what is this doing? surely the .text-copy class should be used
-  blockquote
-    font-family: $font-sans
-    margin: 2.5rem
-    p
-      font-family: $font-sans
-  h1,h2,h3,h4,h5,h6
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
-  a
-    color: $color-blue
-  img
-    display: block
-    margin: 2.5rem auto
-  .wp-caption
-    width: auto !important
-    &.alignnone
-      text-align: center
-    img
-      margin: 0
-    .wp-caption-text
-      text-align: left
-      font-family: $font-sans
-      font-size: $font-size-smaller
-      margin-top: $margin-tiny
 
 // LISTS
 
