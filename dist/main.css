@@ -1490,54 +1490,72 @@ article ul li {
 article ol li {
   list-style: decimal inside;
 }
-.text-copy .twitter-tweet,
-.text-copy .instagram-media,
-.text-copy .oembed-element {
-  margin: 2.5rem auto !important;
-}
 .text-copy p {
   font-family: Georgia, Times, "Times New Roman", serif;
   font-size: 1.3rem;
   line-height: 1.55;
-}
-.text-copy blockquote {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2.5rem;
-}
-.text-copy blockquote p {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.text-copy h1,
-.text-copy h2,
-.text-copy h3,
-.text-copy h4,
-.text-copy h5,
-.text-copy h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.text-copy a {
-  color: #5490eb;
-}
-.text-copy img {
-  display: block;
-  margin: 2.5rem auto;
 }
 .text-copy ul,
 .text-copy ol {
   font-size: 1.3rem;
   line-height: 1.55;
 }
-.text-copy .wp-caption {
-  width: auto !important;
+.text-copy .twitter-tweet,
+.page-copy .twitter-tweet,
+.text-copy .instagram-media,
+.page-copy .instagram-media,
+.text-copy .oembed-element,
+.page-copy .oembed-element {
+  margin: 2rem auto !important;
 }
-.text-copy .wp-caption.alignnone {
+.text-copy blockquote,
+.page-copy blockquote {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 2rem;
+}
+.text-copy blockquote p,
+.page-copy blockquote p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.text-copy h1,
+.page-copy h1,
+.text-copy h2,
+.page-copy h2,
+.text-copy h3,
+.page-copy h3,
+.text-copy h4,
+.page-copy h4,
+.text-copy h5,
+.page-copy h5,
+.text-copy h6,
+.page-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.text-copy a,
+.page-copy a {
+  color: #5490eb;
+}
+.text-copy img,
+.page-copy img,
+.text-copy figure,
+.page-copy figure,
+.text-copy .wp-caption,
+.page-copy .wp-caption {
+  width: auto !important;
+  display: block;
+  margin: 2rem auto;
+}
+.text-copy .wp-caption.alignnone,
+.page-copy .wp-caption.alignnone {
   text-align: center;
 }
-.text-copy .wp-caption img {
-  margin: 0;
+.text-copy .wp-caption img,
+.page-copy .wp-caption img {
+  margin: 0 auto;
 }
-.text-copy .wp-caption .wp-caption-text {
+.text-copy .wp-caption .wp-caption-text,
+.page-copy .wp-caption .wp-caption-text {
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
@@ -1546,44 +1564,6 @@ article ol li {
 .text-copy-max-width {
   max-width: 974px;
   margin: 0 auto;
-}
-.page-copy blockquote {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2.5rem;
-}
-.page-copy blockquote p {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.page-copy h1,
-.page-copy h2,
-.page-copy h3,
-.page-copy h4,
-.page-copy h5,
-.page-copy h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.page-copy a {
-  color: #5490eb;
-}
-.page-copy img {
-  display: block;
-  margin: 2.5rem auto;
-}
-.page-copy .wp-caption {
-  width: auto !important;
-}
-.page-copy .wp-caption.alignnone {
-  text-align: center;
-}
-.page-copy .wp-caption img {
-  margin: 0;
-}
-.page-copy .wp-caption .wp-caption-text {
-  text-align: left;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.8rem;
-  margin-top: 8px;
 }
 .list--links li {
   list-style: none;
