@@ -204,11 +204,41 @@ $banners = array(
           }
         ?>
         <?php
-          // render recent tysky sour
-          if ($recent_tysky->have_posts()) {
-            while ($recent_tysky->have_posts()) {
-              $recent_tysky->the_post();
-              get_template_part('partials/front-page/front-page-tysky');
+          // if metadata is set render custom link to Tysky archive, otherwise render latest post
+          $ts_term = get_term_by('slug', 'tyskysour-video', 'category');
+          $ts_category_meta = get_term_meta($ts_term->term_id);
+
+          $ts_image = !empty($ts_category_meta['_nm_ts_frontpage_image_id']) ? $ts_category_meta['_nm_ts_frontpage_image_id'][0] : false;
+          $ts_title = !empty($ts_category_meta['_nm_ts_frontpage_title']) ? $ts_category_meta['_nm_ts_frontpage_title'][0] : false;
+          $ts_copy = !empty($ts_category_meta['_nm_ts_frontpage_copy']) ? $ts_category_meta['_nm_ts_frontpage_copy'][0] : false;
+
+          if ($ts_image && $ts_title) {
+            ?>
+<a href="<?php echo get_term_link($ts_term); ?>">
+  <div>
+    <?php
+      echo wp_get_attachment_image($ts_image, 'col6-16to9', false, array('class' => 'margin-bottom-micro only-desktop'));
+      echo wp_get_attachment_image($ts_image, 'mobile-16to9', false, array('class' => 'only-mobile'));
+    ?>
+    <h4 class="font-small-caps"><?php echo $ts_term->name; ?></h4>
+    <h5 class="js-fix-widows"><?php echo $ts_title; ?></h5>
+    <?php
+      if ($ts_copy) {
+    ?>
+      <div class="margin-top-micro"><?php echo $ts_copy; ?></div>
+    <?php
+      }
+    ?>
+  </div>
+</a>
+            <?php
+          } else {
+            // render recent tysky sour
+            if ($recent_tysky->have_posts()) {
+              while ($recent_tysky->have_posts()) {
+                $recent_tysky->the_post();
+                get_template_part('partials/front-page/front-page-tysky');
+              }
             }
           }
         ?>

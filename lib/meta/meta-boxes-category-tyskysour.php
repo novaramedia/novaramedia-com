@@ -1,5 +1,4 @@
 <?php
-
 add_action( 'cmb2_init', 'nm_cmb_tyskysour_metaboxes' );
 
 /**
@@ -30,20 +29,42 @@ function nm_cmb_tyskysour_metaboxes() {
 
   $cmb_category_tyskysour->add_field( array(
     'name'     => esc_html__( 'TyskySour specific meta', 'cmb2' ),
+    'desc'      => esc_html__( 'TS only metadata', 'cmb2' ),
     'id'       => $prefix . 'extra_ts',
     'type'     => 'title',
   ) );
 
   $cmb_category_tyskysour->add_field( array(
     'name' => esc_html__( 'Latest livestream embed ID', 'cmb2' ),
-    'desc' => esc_html__( 'YouTube video ID.', 'cmb2' ),
+    'desc' => esc_html__( 'YouTube video ID. First embed on the TyksySour page', 'cmb2' ),
     'id'   => $prefix . 'ts_latest_youtube_id',
     'type' => 'text',
   ) );
 
   $cmb_category_tyskysour->add_field( array(
+    'name' => esc_html__( 'Front page image', 'cmb2' ),
+    'desc' => esc_html__( 'Displays above the fold on the front page', 'cmb2' ),
+    'id'   => $prefix . 'ts_frontpage_image',
+    'type' => 'file',
+  ) );
+
+  $cmb_category_tyskysour->add_field( array(
+    'name' => esc_html__( 'Front page title', 'cmb2' ),
+    'desc' => esc_html__( 'Displays above the fold on the front page', 'cmb2' ),
+    'id'   => $prefix . 'ts_frontpage_title',
+    'type' => 'text',
+  ) );
+
+  $cmb_category_tyskysour->add_field( array(
+    'name' => esc_html__( 'Front page copy', 'cmb2' ),
+    'desc' => esc_html__( 'Displays above the fold on the front page (optional)', 'cmb2' ),
+    'id'   => $prefix . 'ts_frontpage_copy',
+    'type' => 'textarea_small',
+  ) );
+
+  $cmb_category_tyskysour->add_field( array(
     'name' => esc_html__( 'Team image', 'cmb2' ),
-    'desc' => esc_html__( '...', 'cmb2' ),
+    'desc' => esc_html__( 'Displays on the TyskySour page.', 'cmb2' ),
     'id'   => $prefix . 'ts_team_image',
     'type' => 'file',
   ) );
