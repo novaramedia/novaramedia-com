@@ -6,13 +6,9 @@ exclude_patterns = [
 ]
 
 [[analyzers]]
-name = "php"
-enabled = true
-
-[[analyzers]]
 name = "javascript"
 enabled = true
 
 [[transformers]]
-name = "php-cs-fixer"
+name = "prettier"
 enabled = true
