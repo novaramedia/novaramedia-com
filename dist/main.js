@@ -189,7 +189,7 @@ var Header = /*#__PURE__*/function () {
         }
 
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
-          return attr == 'true' ? false : true;
+          return attr === 'true' ? false : true;
         });
       });
 
@@ -197,7 +197,7 @@ var Header = /*#__PURE__*/function () {
         _this.$headerSearch.toggle();
 
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
-          return attr == 'true' ? false : true;
+          return attr === 'true' ? false : true;
         });
 
         _this.$searchInput.focus();
@@ -18998,7 +18998,7 @@ var Site = /*#__PURE__*/function () {
   return Site;
 }();
 
-new Site();
+var site = new Site();
 }();
 /******/ })()
 ;

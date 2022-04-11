@@ -26,13 +26,13 @@ class Site {
 
   onReady() {
     lazySizes.init();
-    
+
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
-    
+
     this.utilties.bind();
   }
 }
 
-new Site();
+const site = new Site();
