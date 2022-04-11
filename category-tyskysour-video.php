@@ -3,17 +3,10 @@ get_header();
 ?>
 <main id="main-content" class="category-archive tyskysour-archive">
 <?php
-/*
-  [x] Do I care about pagination? YES need to handle this as looks really weird
-  [x] Do I build the player loading thing for catchup? NO not this time
-*/
-
   $is_front_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
 
   $video = get_category_by_slug('video');
   $category = get_category(get_query_var('cat'));
-
-  // pr(get_term_meta($category->term_id));
 
   $embed_id = !empty(get_term_meta($category->term_id, '_nm_ts_latest_youtube_id', true)) ? get_term_meta($category->term_id, '_nm_ts_latest_youtube_id', true) : false;
 

@@ -206,14 +206,14 @@ $banners = array(
         <?php
           // if metadata is set render custom link to Tysky archive, otherwise render latest post
           $ts_term = get_term_by('slug', 'tyskysour-video', 'category');
-          $ts_category_meta = get_term_meta($ts_term->term_id);
+          $ts_category_meta = $ts_term ? get_term_meta($ts_term->term_id) : false;
 
           $ts_image = !empty($ts_category_meta['_nm_ts_frontpage_image_id']) ? $ts_category_meta['_nm_ts_frontpage_image_id'][0] : false;
           $ts_title = !empty($ts_category_meta['_nm_ts_frontpage_title']) ? $ts_category_meta['_nm_ts_frontpage_title'][0] : false;
           $ts_copy = !empty($ts_category_meta['_nm_ts_frontpage_copy']) ? $ts_category_meta['_nm_ts_frontpage_copy'][0] : false;
 
           if ($ts_image && $ts_title) {
-            ?>
+        ?>
 <a href="<?php echo get_term_link($ts_term); ?>">
   <div>
     <?php
@@ -231,7 +231,7 @@ $banners = array(
     ?>
   </div>
 </a>
-            <?php
+        <?php
           } else {
             // render recent tysky sour
             if ($recent_tysky->have_posts()) {
