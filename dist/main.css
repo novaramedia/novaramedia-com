@@ -1490,72 +1490,54 @@ article ul li {
 article ol li {
   list-style: decimal inside;
 }
+.text-copy .twitter-tweet,
+.text-copy .instagram-media,
+.text-copy .oembed-element {
+  margin: 2.5rem auto !important;
+}
 .text-copy p {
   font-family: Georgia, Times, "Times New Roman", serif;
   font-size: 1.3rem;
   line-height: 1.55;
+}
+.text-copy blockquote {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 2.5rem;
+}
+.text-copy blockquote p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.text-copy h1,
+.text-copy h2,
+.text-copy h3,
+.text-copy h4,
+.text-copy h5,
+.text-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.text-copy a {
+  color: #5490eb;
+}
+.text-copy img {
+  display: block;
+  margin: 2.5rem auto;
 }
 .text-copy ul,
 .text-copy ol {
   font-size: 1.3rem;
   line-height: 1.55;
 }
-.text-copy .twitter-tweet,
-.page-copy .twitter-tweet,
-.text-copy .instagram-media,
-.page-copy .instagram-media,
-.text-copy .oembed-element,
-.page-copy .oembed-element {
-  margin: 2rem auto !important;
-}
-.text-copy blockquote,
-.page-copy blockquote {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2rem;
-}
-.text-copy blockquote p,
-.page-copy blockquote p {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.text-copy h1,
-.page-copy h1,
-.text-copy h2,
-.page-copy h2,
-.text-copy h3,
-.page-copy h3,
-.text-copy h4,
-.page-copy h4,
-.text-copy h5,
-.page-copy h5,
-.text-copy h6,
-.page-copy h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.text-copy a,
-.page-copy a {
-  color: #5490eb;
-}
-.text-copy img,
-.page-copy img,
-.text-copy figure,
-.page-copy figure,
-.text-copy .wp-caption,
-.page-copy .wp-caption {
+.text-copy .wp-caption {
   width: auto !important;
-  display: block;
-  margin: 2rem auto;
 }
-.text-copy .wp-caption.alignnone,
-.page-copy .wp-caption.alignnone {
+.text-copy .wp-caption.alignnone {
   text-align: center;
 }
-.text-copy .wp-caption img,
-.page-copy .wp-caption img {
+.text-copy .wp-caption img {
   margin: 0;
 }
-.text-copy .wp-caption .wp-caption-text,
-.page-copy .wp-caption .wp-caption-text {
+.text-copy .wp-caption .wp-caption-text {
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
@@ -1564,6 +1546,44 @@ article ol li {
 .text-copy-max-width {
   max-width: 974px;
   margin: 0 auto;
+}
+.page-copy blockquote {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 2.5rem;
+}
+.page-copy blockquote p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.page-copy h1,
+.page-copy h2,
+.page-copy h3,
+.page-copy h4,
+.page-copy h5,
+.page-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.page-copy a {
+  color: #5490eb;
+}
+.page-copy img {
+  display: block;
+  margin: 2.5rem auto;
+}
+.page-copy .wp-caption {
+  width: auto !important;
+}
+.page-copy .wp-caption.alignnone {
+  text-align: center;
+}
+.page-copy .wp-caption img {
+  margin: 0;
+}
+.page-copy .wp-caption .wp-caption-text {
+  text-align: left;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  margin-top: 8px;
 }
 .list--links li {
   list-style: none;
@@ -1909,7 +1929,7 @@ img {
 .nm-button--black {
   background-color: #0e0e0e;
   color: #fdfdfd;
-  border-color: #0e0e0e;
+  border-color: #fdfdfd;
 }
 .nm-button--black:hover {
   background-color: #fdfdfd;
@@ -1981,7 +2001,7 @@ img {
 .support-form__custom-input--black {
   background-color: #0e0e0e;
   color: #fdfdfd;
-  border-color: #0e0e0e;
+  border-color: #fdfdfd;
 }
 .support-form__button--black:hover,
 .support-form__custom-input--black:hover {
@@ -4025,26 +4045,28 @@ img {
     margin-bottom: 1rem;
   }
   .font-size-0 {
-    font-size: 11px;
+    font-size: 10.27px;
+    line-height: 1.3;
   }
   .font-size-1 {
     font-size: 13px;
+    line-height: 1.3;
   }
   .font-size-2 {
-    font-size: 17px;
+    font-size: 16.5px;
     line-height: 20px;
   }
   .font-size-3 {
-    font-size: 21px;
+    font-size: 20.8px;
     line-height: 27px;
   }
   .font-size-4 {
-    font-size: 26px;
+    font-size: 26.4px;
     line-height: 30px;
     letter-spacing: -0.01em;
   }
   .font-size-5 {
-    font-size: 33px;
+    font-size: 33.4px;
     line-height: 1.07142857;
     letter-spacing: -0.025em;
   }
@@ -4063,19 +4085,46 @@ img {
     line-height: 82px;
     letter-spacing: -0.04em;
   }
+  .font-size-s-0 {
+    font-size: 10.27px;
+    line-height: 1.3;
+  }
   .font-size-s-1 {
     font-size: 13px;
-    line-height: 1.4;
+    line-height: 1.3;
+  }
+  .font-size-s-2 {
+    font-size: 16.5px;
+    line-height: 20px;
+  }
+  .font-size-s-3 {
+    font-size: 20.8px;
+    line-height: 27px;
+  }
+  .font-size-s-4 {
+    font-size: 26.4px;
+    line-height: 30px;
+    letter-spacing: -0.01em;
   }
   .font-size-s-5 {
-    font-size: 33px;
-    line-height: 1.05633803;
+    font-size: 33.4px;
+    line-height: 1.07142857;
+    letter-spacing: -0.025em;
+  }
+  .font-size-s-6 {
+    font-size: 42px;
+    line-height: 50px;
     letter-spacing: -0.025em;
   }
   .font-size-s-7 {
     font-size: 53px;
-    line-height: 1.04402516;
+    line-height: 68px;
     letter-spacing: -0.02em;
+  }
+  .font-size-s-8 {
+    font-size: 88px;
+    line-height: 82px;
+    letter-spacing: -0.04em;
   }
   .font-small-caps {
     font-size: 0.85em;
@@ -4274,6 +4323,9 @@ img {
   }
   .mobile-margin-bottom-large {
     margin-bottom: 60px;
+  }
+  .mobile-padding-top-none {
+    padding-top: 0;
   }
   .mobile-padding-top-micro {
     padding-top: 3.708203932499128px;

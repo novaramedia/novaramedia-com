@@ -59,6 +59,7 @@ get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
+get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 
 get_template_part( 'lib/theme-options' );
