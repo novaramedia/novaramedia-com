@@ -5,7 +5,7 @@ export class Search {
   onReady() {
     const _this = this;
 
-     if ($('body').hasClass('error404')) {
+    if ($('body').hasClass('error404')) {
       _this.fourzerofour();
     }
   }
@@ -17,12 +17,12 @@ export class Search {
     // get last part of url
 
     // If trailing /
-    if( request[request.length - 1] === '' ) {
+    if (request[request.length - 1] === '') {
       // Remove last element from the array
       request.pop();
     }
 
-    request = request[request.length-1];
+    request = request[request.length - 1];
     // remove any dashes [in the case of a real permalink slug]
     request = request.replace(/-/g, ' ');
 
