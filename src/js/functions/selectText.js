@@ -1,6 +1,6 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
-export default function(element) {
+export default function (element) {
   if (!element) {
     return;
   }

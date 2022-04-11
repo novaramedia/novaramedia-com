@@ -1,16 +1,16 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
-import '../styl/site.styl'; // import styl for webpack
+import "../styl/site.styl"; // import styl for webpack
 
-import $ from 'jquery';
-import lazySizes from 'lazysizes';
+import $ from "jquery";
+import lazySizes from "lazysizes";
 
-import { Analytics } from './modules/Analytics.js';
-import { Header } from './modules/Header.js';
-import { Search } from './modules/Search.js';
-import { Support } from './modules/Support.js';
-import { MailchimpSignup } from './modules/MailchimpSignup.js';
-import { Utilities } from './modules/Utilities.js';
+import { Analytics } from "./modules/Analytics.js";
+import { Header } from "./modules/Header.js";
+import { Search } from "./modules/Search.js";
+import { Support } from "./modules/Support.js";
+import { MailchimpSignup } from "./modules/MailchimpSignup.js";
+import { Utilities } from "./modules/Utilities.js";
 
 class Site {
   constructor() {
@@ -26,11 +26,11 @@ class Site {
 
   onReady() {
     lazySizes.init();
-    
+
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
-    
+
     this.utilties.bind();
   }
 }
