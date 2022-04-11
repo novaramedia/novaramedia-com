@@ -35,4 +35,4 @@ class Site {
   }
 }
 
-const site = new Site();
+new Site();

@@ -251,7 +251,7 @@ var Header = /*#__PURE__*/function () {
     value: function setSinglePostTitleWidth() {
       var totalWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.col18').innerWidth();
       var navsWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#header-navs').innerWidth();
-      this.$headerSinglePostTitle.css('max-width', totalWidth - navsWidth - 10 + 'px');
+      this.$headerSinglePostTitle.css('max-width', "".concat(totalWidth - navsWidth - 10, "px"));
     }
   }, {
     key: "setScrollThreshold",
@@ -403,7 +403,7 @@ var Search = /*#__PURE__*/function () {
       var request = href.split('/'); // get last part of url
       // If trailing /
 
-      if (request[request.length - 1] === "") {
+      if (request[request.length - 1] === '') {
         // Remove last element from the array
         request.pop();
       }
@@ -447,8 +447,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Support = /*#__PURE__*/function () {
   function Support() {
     _classCallCheck(this, Support);
-
-    this.$progressBar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#progress-bar');
   }
 
   _createClass(Support, [{
@@ -458,10 +456,6 @@ var Support = /*#__PURE__*/function () {
 
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-section').length) {
         _this.bind();
-      }
-
-      if (_this.$progressBar.length) {
-        _this.initProgressBar();
       }
     }
   }, {
@@ -499,44 +493,10 @@ var Support = /*#__PURE__*/function () {
       });
     }
   }, {
-    key: "initProgressBar",
-    value: function initProgressBar() {
-      var _this = this;
-
-      _this.$progressBar.css('width', '0%');
-
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().get('https://payment.novaramedia.com/api/goal', null, function (data, textStatus) {
-        if (textStatus === 'success') {
-          var percent = data.percent;
-
-          if (percent > 1) {
-            percent = 1;
-          }
-
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#progress-bar-row').slideDown(1250, function () {
-            _this.$progressBar.css('width', percent * 100 + '%');
-
-            _this.displayProgressText(data);
-          });
-        }
-      }, 'json');
-    }
-  }, {
-    key: "displayProgressText",
-    value: function displayProgressText(data) {
-      var _this = this;
-
-      var total = data.total / data.percent;
-
-      var text = ': £' + _this.numberWithCommas(data.total) + ' of £' + _this.numberWithCommas(Math.round(total));
-
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#progress-text').text(text);
-    }
-  }, {
     key: "numberWithCommas",
     value: function numberWithCommas(x) {
       // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }]);
 
@@ -623,7 +583,7 @@ var Utilities = /*#__PURE__*/function () {
         var m = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
 
         if (m.isAfter(moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(5, 'hours'))) {
-          $element.text('| ' + m.fromNow());
+          $element.text("| ".concat(m.fromNow()));
         }
       });
     }
@@ -18998,7 +18958,7 @@ var Site = /*#__PURE__*/function () {
   return Site;
 }();
 
-var site = new Site();
+new Site();
 }();
 /******/ })()
 ;
