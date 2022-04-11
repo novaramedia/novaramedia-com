@@ -3,7 +3,7 @@ get_header();
 ?>
 <main id="main-content" class="category-archive tyskysour-archive">
 <?php
-  $is_front_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
+  $is_first_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
 
   $video = get_category_by_slug('video');
   $category = get_category(get_query_var('cat'));
@@ -17,7 +17,7 @@ get_header();
 
   $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : 'https://podfollow.com/novaramedia/view';
 
-  if ($is_front_page) {
+  if ($is_first_page) {
 ?>
 <div class="background-black font-color-white">
   <section class="container padding-top-small">
@@ -35,7 +35,6 @@ get_header();
         <a class="nm-button nm-button--red font-size-s-0" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
       </div>
     </div>
-
     <div class="tyskysour-archive__liveplayer flex-grid-row">
       <div class="flex-grid-item flex-item-xxl-12">
         <div class="u-video-embed-container">
@@ -43,7 +42,6 @@ get_header();
         </div>
       </div>
     </div>
-
     <div class="flex-grid-row margin-top-basic mobile-margin-top-small">
       <div class="flex-grid-item flex-item-s-12 flex-item-m-9 flex-item-l-6 flex-item-xxl-5 font-size-2 font-size-s-1 padding-top-small mobile-padding-top-none">
         <?php echo category_description(); ?>
@@ -54,7 +52,6 @@ get_header();
     </div>
   </section>
 </div>
-
 <div class="background-yellow">
   <section class="container padding-top-basic padding-bottom-small mobile-padding-top-small">
     <div class="flex-grid-row margin-bottom-basic mobile-margin-bottom-small">
@@ -83,17 +80,14 @@ get_header();
     </div>
   </section>
 </div>
-
 <?php get_template_part('partials/support-section'); ?>
-
 <?php
-  } // end if front page
+  } // end if first page
 ?>
-
-  <section id="posts" class="container <?php echo $is_front_page ? 'margin-top-basic mobile-margin-top-small' : 'margin-top-small'; ?>">
+  <section id="posts" class="container <?php echo $is_first_page ? 'margin-top-basic mobile-margin-top-small' : 'margin-top-small'; ?>">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
-        <h4><?php echo $is_front_page ? 'More TyskySour' : 'TyskySour'; ?></h4>
+        <h4><?php echo $is_first_page ? 'More TyskySour' : 'TyskySour'; ?></h4>
       </div>
     </div>
     <div class="flex-grid-row margin-bottom-basic">
