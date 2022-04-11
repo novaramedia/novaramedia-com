@@ -7,13 +7,13 @@
   <article <?php post_class('front-page-featured margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
     <?php
       if (!empty($meta['_cmb_utube'])) {
-    ?>
+          ?>
       <div class="u-video-embed-container margin-bottom-tiny">
         <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>"></iframe>
       </div>
     <?php
       } else {
-        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block', 'data-no-lazysizes' => true));
+          the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block', 'data-no-lazysizes' => true));
       }
     ?>
 
@@ -21,7 +21,7 @@
       $sub_category = get_the_sub_category($post->ID);
 
       if ($sub_category) {
-    ?>
+          ?>
     <h4 class="front-page-featured__meta font-small-caps"><?php echo $sub_category; ?> <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span></h4>
     <?php
       }
@@ -31,7 +31,7 @@
 
     <?php
       if (!empty($meta['_cmb_short_desc'])) {
-    ?>
+          ?>
       <div class="margin-top-small"><?php echo $meta['_cmb_short_desc'][0]; ?></div>
     <?php
       }

@@ -15,7 +15,7 @@ $banners = array(
 <main id="main-content">
   <?php
     if ($show_support_banner !== false) {
-      get_template_part('partials/front-page/front-page-support-banner');
+        get_template_part('partials/front-page/front-page-support-banner');
     }
 
     get_template_part('partials/front-page/front-page-signups');
@@ -46,17 +46,17 @@ $banners = array(
 
     // get set featured post values
     if ($featured_main_1 || $featured_main_2) {
-      $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
+        $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
 
-      // if set parse ids and query for post ids
-      $featured_args['post__in'] = $featured_main_ids;
-      $featured_args['orderby'] = 'post__in';
-      $featured_posts = new WP_Query($featured_args);
+        // if set parse ids and query for post ids
+        $featured_args['post__in'] = $featured_main_ids;
+        $featured_args['orderby'] = 'post__in';
+        $featured_posts = new WP_Query($featured_args);
 
-      // if featured post exist put them in front of the fallback ids
-      if ($featured_posts->have_posts()) {
-        $featured_posts_ids = array_merge($featured_posts->posts, $featured_posts_ids);
-      }
+        // if featured post exist put them in front of the fallback ids
+        if ($featured_posts->have_posts()) {
+            $featured_posts_ids = array_merge($featured_posts->posts, $featured_posts_ids);
+        }
     }
 
     // trim array to leave only 2 ids left and get full posts
@@ -73,7 +73,7 @@ $banners = array(
     $exluded_articles_ids = $featured_posts_ids;
 
     if ($featured_sub) {
-      $exluded_articles_ids = array_merge($featured_posts_ids, array($featured_sub));
+        $exluded_articles_ids = array_merge($featured_posts_ids, array($featured_sub));
     }
 
     $recent_articles = new WP_Query(array(
@@ -117,16 +117,16 @@ $banners = array(
     );
 
     if ($featured_sub) {
-      // if sub featured is set get it
-      $sub_featured_args['post__in'] = explode(', ', $featured_sub);
+        // if sub featured is set get it
+        $sub_featured_args['post__in'] = explode(', ', $featured_sub);
 
-      $sub_featured = new WP_Query($sub_featured_args);
+        $sub_featured = new WP_Query($sub_featured_args);
     } else {
-      // get fallback most recent analysis post that isn't already shown
-      $sub_featured_args['category_name'] = 'analysis';
-      $sub_featured_args['post__not_in'] = array_merge($featured_posts_ids, $recent_articles_ids);
+        // get fallback most recent analysis post that isn't already shown
+        $sub_featured_args['category_name'] = 'analysis';
+        $sub_featured_args['post__not_in'] = array_merge($featured_posts_ids, $recent_articles_ids);
 
-      $sub_featured = new WP_Query($sub_featured_args);
+        $sub_featured = new WP_Query($sub_featured_args);
     }
 
     // *******************
@@ -144,10 +144,10 @@ $banners = array(
         <?php
           // render 2 featured articles
           if ($featured_display->have_posts()) {
-            while ($featured_display->have_posts()) {
-              $featured_display->the_post();
-              get_template_part('partials/front-page/front-page-featured-main');
-            }
+              while ($featured_display->have_posts()) {
+                  $featured_display->the_post();
+                  get_template_part('partials/front-page/front-page-featured-main');
+              }
           }
         ?>
       </div>
@@ -155,12 +155,12 @@ $banners = array(
         <?php
           // render 5 recent articles
           if ($recent_articles->have_posts()) {
-            $i = 0;
-            while ($recent_articles->have_posts()) {
-              $i++;
-              $recent_articles->the_post();
-              get_template_part('partials/front-page/front-page-article-default');
-            }
+              $i = 0;
+              while ($recent_articles->have_posts()) {
+                  $i++;
+                  $recent_articles->the_post();
+                  get_template_part('partials/front-page/front-page-article-default');
+              }
           }
         ?>
       </div>
@@ -168,10 +168,10 @@ $banners = array(
         <?php
           // render 2 featured articles
           if ($featured_display->have_posts()) {
-            while ($featured_display->have_posts()) {
-              $featured_display->the_post();
-              get_template_part('partials/front-page/front-page-featured-main');
-            }
+              while ($featured_display->have_posts()) {
+                  $featured_display->the_post();
+                  get_template_part('partials/front-page/front-page-featured-main');
+              }
           }
         ?>
       </div>
@@ -179,37 +179,37 @@ $banners = array(
         <?php
           // render recent top audio
           if ($recent_audio_category_1->have_posts()) {
-            while ($recent_audio_category_1->have_posts()) {
-              $recent_audio_category_1->the_post();
-              get_template_part('partials/front-page/front-page-audio-slim');
-            }
+              while ($recent_audio_category_1->have_posts()) {
+                  $recent_audio_category_1->the_post();
+                  get_template_part('partials/front-page/front-page-audio-slim');
+              }
           }
         ?>
         <?php
           // render recent second audio
           if ($recent_audio_category_2->have_posts()) {
-            while ($recent_audio_category_2->have_posts()) {
-              $recent_audio_category_2->the_post();
-              get_template_part('partials/front-page/front-page-audio-slim');
-            }
+              while ($recent_audio_category_2->have_posts()) {
+                  $recent_audio_category_2->the_post();
+                  get_template_part('partials/front-page/front-page-audio-slim');
+              }
           }
         ?>
         <?php
           // render sub featured or analysis article
           if ($sub_featured->have_posts()) {
-            while ($sub_featured->have_posts()) {
-              $sub_featured->the_post();
-              get_template_part('partials/front-page/front-page-featured-sub');
-            }
+              while ($sub_featured->have_posts()) {
+                  $sub_featured->the_post();
+                  get_template_part('partials/front-page/front-page-featured-sub');
+              }
           }
         ?>
         <?php
           // render recent tysky sour
           if ($recent_tysky->have_posts()) {
-            while ($recent_tysky->have_posts()) {
-              $recent_tysky->the_post();
-              get_template_part('partials/front-page/front-page-tysky');
-            }
+              while ($recent_tysky->have_posts()) {
+                  $recent_tysky->the_post();
+                  get_template_part('partials/front-page/front-page-tysky');
+              }
           }
         ?>
       </div>
@@ -239,7 +239,7 @@ $banners = array(
       // *** EXCLUDE ALREADY SHOWN ABOVE
 
       $category_id = get_cat_ID('Articles');
-      $category_link = get_category_link( $category_id );
+      $category_link = get_category_link($category_id);
     ?>
 
     <div class="row">
@@ -257,18 +257,18 @@ $banners = array(
         ));
 
         if ($latest_articles->have_posts()) {
-          $i = 0;
-          while ($latest_articles->have_posts()) {
-            $latest_articles->the_post();
+            $i = 0;
+            while ($latest_articles->have_posts()) {
+                $latest_articles->the_post();
 
-            get_template_part('partials/front-page/front-page-article-default');
+                get_template_part('partials/front-page/front-page-article-default');
 
-            if ($i === 3) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+                if ($i === 3) {
+                    echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+                }
+
+                $i++;
             }
-
-            $i++;
-          }
         }
       ?>
     </div>
@@ -285,7 +285,7 @@ $banners = array(
       $burner_category = get_term_by('slug', 'the-burner', 'category');
       $burner_category_id = !empty($burner_category) ? array($burner_category->term_id) : array();
 
-      $category_link = get_category_link( $audio_category->term_id );
+      $category_link = get_category_link($audio_category->term_id);
     ?>
 
     <div class="row">
@@ -303,17 +303,17 @@ $banners = array(
         ));
 
         if ($latest_audio->have_posts()) {
-          $i = 0;
-          while ($latest_audio->have_posts()) {
-            $latest_audio->the_post();
-            get_template_part('partials/front-page/front-page-audio-default');
+            $i = 0;
+            while ($latest_audio->have_posts()) {
+                $latest_audio->the_post();
+                get_template_part('partials/front-page/front-page-audio-default');
 
-            if ($i === 3) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+                if ($i === 3) {
+                    echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+                }
+
+                $i++;
             }
-
-            $i++;
-          }
         }
       ?>
     </div>

@@ -1,8 +1,9 @@
 <?php
-// Register Custom Post Type
-function event_post_type() {
 
-  $labels = array(
+// Register Custom Post Type
+function event_post_type()
+{
+    $labels = array(
     'name'                  => 'Events',
     'singular_name'         => 'Event',
     'menu_name'             => 'Events',
@@ -31,7 +32,7 @@ function event_post_type() {
     'items_list_navigation' => 'Items list navigation',
     'filter_items_list'     => 'Filter items list',
   );
-  $args = array(
+    $args = array(
     'label'                 => 'Event',
     'description'           => 'IRL Events',
     'labels'                => $labels,
@@ -51,15 +52,14 @@ function event_post_type() {
     'capability_type'       => 'page',
     'show_in_rest'          => true,
   );
-  register_post_type( 'event', $args );
-
+    register_post_type('event', $args);
 }
-add_action( 'init', 'event_post_type', 0 );
+add_action('init', 'event_post_type', 0);
 
 // Register Notices
-function notices_post_type() {
-
-  $labels = array(
+function notices_post_type()
+{
+    $labels = array(
     'name'                  => 'Notices',
     'singular_name'         => 'Notice',
     'menu_name'             => 'Notices',
@@ -86,7 +86,7 @@ function notices_post_type() {
     'items_list_navigation' => 'Items list navigation',
     'filter_items_list'     => 'Filter items list',
   );
-  $args = array(
+    $args = array(
     'label'                 => 'Notice',
     'description'           => 'Simple notices with no archive',
     'labels'                => $labels,
@@ -105,30 +105,30 @@ function notices_post_type() {
     'capability_type'       => 'page',
     'show_in_rest'          => true,
   );
-  register_post_type( 'notice', $args );
-
+    register_post_type('notice', $args);
 }
-add_action( 'init', 'notices_post_type', 0 );
+add_action('init', 'notices_post_type', 0);
 
-function nm_register_post_type_job() {
-  $args = [
-    'label'  => esc_html__( 'Jobs', 'text-domain' ),
+function nm_register_post_type_job()
+{
+    $args = [
+    'label'  => esc_html__('Jobs', 'text-domain'),
     'labels' => [
-      'menu_name'          => esc_html__( 'Jobs', '' ),
-      'name_admin_bar'     => esc_html__( 'Job', '' ),
-      'add_new'            => esc_html__( 'Add Job', '' ),
-      'add_new_item'       => esc_html__( 'Add new Job', '' ),
-      'new_item'           => esc_html__( 'New Job', '' ),
-      'edit_item'          => esc_html__( 'Edit Job', '' ),
-      'view_item'          => esc_html__( 'View Job', '' ),
-      'update_item'        => esc_html__( 'View Job', '' ),
-      'all_items'          => esc_html__( 'All Jobs', '' ),
-      'search_items'       => esc_html__( 'Search Jobs', '' ),
-      'parent_item_colon'  => esc_html__( 'Parent Job', '' ),
-      'not_found'          => esc_html__( 'No Jobs found', '' ),
-      'not_found_in_trash' => esc_html__( 'No Jobs found in Trash', '' ),
-      'name'               => esc_html__( 'Jobs', '' ),
-      'singular_name'      => esc_html__( 'Job', '' ),
+      'menu_name'          => esc_html__('Jobs', ''),
+      'name_admin_bar'     => esc_html__('Job', ''),
+      'add_new'            => esc_html__('Add Job', ''),
+      'add_new_item'       => esc_html__('Add new Job', ''),
+      'new_item'           => esc_html__('New Job', ''),
+      'edit_item'          => esc_html__('Edit Job', ''),
+      'view_item'          => esc_html__('View Job', ''),
+      'update_item'        => esc_html__('View Job', ''),
+      'all_items'          => esc_html__('All Jobs', ''),
+      'search_items'       => esc_html__('Search Jobs', ''),
+      'parent_item_colon'  => esc_html__('Parent Job', ''),
+      'not_found'          => esc_html__('No Jobs found', ''),
+      'not_found_in_trash' => esc_html__('No Jobs found in Trash', ''),
+      'name'               => esc_html__('Jobs', ''),
+      'singular_name'      => esc_html__('Job', ''),
     ],
     'public'              => true,
     'exclude_from_search' => false,
@@ -153,7 +153,6 @@ function nm_register_post_type_job() {
     'rewrite' => true
   ];
 
-  register_post_type( 'job', $args );
+    register_post_type('job', $args);
 }
-add_action( 'init', 'nm_register_post_type_job', 0 );
-?>
+add_action('init', 'nm_register_post_type_job', 0);

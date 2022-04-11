@@ -1,7 +1,7 @@
 <?php
   $fundraiser_youtube_id = IGV_get_option('_igv_fundraiser_youtube_id');
   if ($fundraiser_youtube_id) {
-?>
+      ?>
 
 <section id="home-featured" class="container margin-bottom-basic mobile-margin-bottom-basic">
   <div class="row">
@@ -20,6 +20,5 @@
 <?php
 
   get_template_part('partials/support-section');
-
   }
 ?>

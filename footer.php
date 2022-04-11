@@ -18,27 +18,29 @@
           <div class="col col6 mobile-margin-bottom-basic">
             <?php
               wp_nav_menu(
-                array(
+    array(
                   'theme_location' => 'footer-2',
                   'fallback_cb' => false,
                 )
-              );
+);
             ?>
           </div>
           <div class="col col6">
             <?php
-              function footerMenuFallback() {
-            ?><ul>
+              function footerMenuFallback()
+              {
+                  ?><ul>
                 <li><a href="https://twitter.com/novaramedia" target="_blank" rel="noopener">Twitter</a></li>
                 <li><a href="https://www.facebook.com/novaramedia/" target="_blank" rel="noopener">Facebook</a></li>
                 <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="noopener">YouTube</a></li>
                 <li><a href="https://www.instagram.com/novaramedia/" target="_blank" rel="noopener">Instagram</a></li>
                 <li><a href="https://t.me/novaramedia" target="_blank" rel="noopener">Telegram</a></li>
               </ul>
-            <?php }
+            <?php
+              }
 
               wp_nav_menu(
-                array(
+                  array(
                   'theme_location' => 'footer-3',
                   'fallback_cb' => 'footerMenuFallback',
                 )
@@ -52,7 +54,7 @@
                   'theme_location' => 'footer-4',
                   'fallback_cb' => false,
                 )
-              );
+            );
             ?>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
   if (empty($args['grid-item-classes'])) {
-    return;
+      return;
   }
 
   $meta = get_post_meta($post->ID);
@@ -11,7 +11,7 @@
 <article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
   <?php
     if ($youtube_id) {
-  ?>
+        ?>
     <div class="u-video-embed-container">
       <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>" allow="autoplay" allowfullscreen></iframe>
     </div>
@@ -25,9 +25,9 @@
     <div class="index-post-description margin-top-tiny">
       <?php
         if ($description) {
-          echo $description;
+            echo $description;
         } else {
-          the_excerpt();
+            the_excerpt();
         }
       ?>
     </div>

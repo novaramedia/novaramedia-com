@@ -11,7 +11,7 @@
       $sub_category = get_the_sub_category($post->ID);
 
       if ($sub_category) {
-    ?>
+          ?>
     <h4 class="font-small-caps"><?php echo $sub_category; ?></h4>
     <?php
       }
@@ -19,13 +19,13 @@
     <h5 class="font-larger js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if (!empty($meta['_cmb_author'])) {
-    ?>
+          ?>
       <h6 class="margin-top-micro">by <?php echo $meta['_cmb_author'][0]; ?></h6>
     <?php
       }
 
       if (!empty($meta['_cmb_short_desc'])) {
-    ?>
+          ?>
       <div class="margin-top-micro"><?php echo $meta['_cmb_short_desc'][0]; ?></div>
     <?php
       }

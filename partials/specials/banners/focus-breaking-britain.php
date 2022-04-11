@@ -2,9 +2,9 @@
   $term = get_term_by('slug', 'breaking-britain', 'focus');
 
   if ($term) {
-    $url = get_term_link($term);
-    if ($url) {
-?>
+      $url = get_term_link($term);
+      if ($url) {
+          ?>
 <div class="padding-top-mid padding-bottom-mid background-neon-blue font-color-white" style="overflow: hidden; position: relative">
   <div class="breaking-britain__bars-container" style="position: absolute; top: 0; width: 100%; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
     <div class="breaking-britain__bar-1">
@@ -126,6 +126,6 @@
   </div>
 </div>
 <?php
-    }
+      }
   }
 ?>

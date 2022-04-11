@@ -15,10 +15,9 @@ get_header();
     </div>
     <div class="row">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-?>
+if (have_posts()) {
+    while (have_posts()) {
+        the_post(); ?>
       <article class="col col10">
         <header class="margin-bottom-small">
           <h5><?php the_title(); ?></h5>
@@ -27,9 +26,9 @@ if( have_posts() ) {
         <?php the_content(); ?>
       </article>
 <?php
-  }
+    }
 } else {
-?>
+    ?>
       <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>

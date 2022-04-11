@@ -7,13 +7,12 @@ get_header();
 <main id="main-content">
 
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-    $meta = get_post_meta($post->ID);
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        $meta = get_post_meta($post->ID);
 
-    $email_subject = strtoupper($post->post_title);
-?>
+        $email_subject = strtoupper($post->post_title); ?>
   <!-- main posts loop -->
   <article id="job" class="container margin-top-small margin-bottom-large">
     <div class="row margin-bottom-basic">
@@ -31,9 +30,9 @@ if( have_posts() ) {
   <!-- end post -->
   </article>
 <?php
-  }
+    }
 } else {
-?>
+    ?>
   <div class="container">
     <div class="row">
       <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>

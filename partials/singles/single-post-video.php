@@ -3,9 +3,9 @@
   $resources = get_post_meta($post->ID, '_cmb_resources', true);
 
   if (!empty($meta['bitly_url'])) {
-    $share_url = $meta['bitly_url'][0];
+      $share_url = $meta['bitly_url'][0];
   } else {
-    $share_url = get_the_permalink($post->ID);
+      $share_url = get_the_permalink($post->ID);
   }
 ?>
 
@@ -25,7 +25,7 @@
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
         if (!empty($resources)) {
-          echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
+            echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
     </ul>
@@ -42,7 +42,7 @@
 
 <?php
   if (!empty($resources)) {
-    render_resources_row($resources);
+      render_resources_row($resources);
   }
 ?>
 
@@ -50,19 +50,18 @@
   <div class="flex-grid-item flex-item-s-12 flex-item-xxl-10">
     <?php
       if (!empty($meta['_cmb_utube'])) {
-        $autoplay = false;
+          $autoplay = false;
 
-        // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
-        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
-          $autoplay = true;
-        }
-    ?>
+          // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
+          if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
+              $autoplay = true;
+          } ?>
       <div class="u-video-embed-container">
         <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0], $autoplay); ?>" allow="autoplay" allowfullscreen></iframe>
       </div>
     <?php
       } else {
-        echo 'Someone messed up :/';
+          echo 'Someone messed up :/';
       }
     ?>
   </div>
@@ -73,9 +72,8 @@
         $related_video = get_related_posts(null, 'Video', 3);
 
         if ($related_video->have_posts()) {
-          while ($related_video->have_posts()) {
-            $related_video->the_post();
-      ?>
+            while ($related_video->have_posts()) {
+                $related_video->the_post(); ?>
       <div class="single-video-related-video margin-bottom-small">
         <a href="<?php the_permalink(); ?>">
          <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
@@ -84,7 +82,7 @@
         </a>
       </div>
       <?php
-          }
+            }
         }
         wp_reset_postdata();
       ?>

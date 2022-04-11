@@ -10,7 +10,7 @@
       $sub_category = get_the_sub_category($post->ID);
 
       if ($sub_category) {
-    ?>
+          ?>
     <h5 class="font-small-caps"><?php echo $sub_category; ?></h5>
     <?php
       }
@@ -20,7 +20,7 @@
 
     <?php
       if (!empty($meta['_cmb_short_desc'])) {
-    ?>
+          ?>
       <div class="margin-top-micro"><?php echo $meta['_cmb_short_desc'][0]; ?></div>
     <?php
       }

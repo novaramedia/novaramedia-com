@@ -7,22 +7,21 @@ get_header();
 <main id="main-content">
 
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-    $meta = get_post_meta($post->ID);
-          
-    $team_1 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-1', true);    
-    $team_2 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-2', true);
-    $team_3 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-3', true);    
-    $team_4 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-4', true);
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        $meta = get_post_meta($post->ID);
 
-    $associates_1 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-1', true);
-    $associates_2 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-2', true);
+        $team_1 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-1', true);
+        $team_2 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-2', true);
+        $team_3 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-3', true);
+        $team_4 = get_post_meta($post->ID, 'about_page_team_group_team-roles-and-members-4', true);
 
-    $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
-    $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
-?>
+        $associates_1 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-1', true);
+        $associates_2 = get_post_meta($post->ID, 'about_page_team_group_associates-roles-and-names-2', true);
+
+        $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
+        $funding = get_post_meta($post->ID, 'about_page_funding_group', true); ?>
   <!-- main posts loop -->
   <article id="page" class="container margin-top-small margin-bottom-large">
     <div class="row margin-bottom-small">
@@ -72,7 +71,7 @@ if( have_posts() ) {
     </div>
 <?php
     if ($contact) {
-?>
+        ?>
     <div class="row margin-bottom-small">
       <div class="col col24">
         <h4>Contact and information</h4>
@@ -82,26 +81,23 @@ if( have_posts() ) {
       <div class="col col10">
         <ul>
 <?php
-        foreach($contact as $contact_entry) {         
-         $link = get_permalink($contact_entry['link']);
-         
-         if (!empty($contact_entry['email'])) {
-           $link = 'mailto:' . $contact_entry['email'];
-         }         
-?>
+        foreach ($contact as $contact_entry) {
+            $link = get_permalink($contact_entry['link']);
+
+            if (!empty($contact_entry['email'])) {
+                $link = 'mailto:' . $contact_entry['email'];
+            } ?>
           <li><a href="<?php echo $link; ?>"><?php echo $contact_entry['title']; ?></a></li>
 <?php
-        }
-?>
+        } ?>
         </ul>
       </div>
     </div>
 <?php
-    }
-?>
-<?php  
+    } ?>
+<?php
     if (!empty($meta['_cmb_about_funding'])) {
-?>
+        ?>
     <div class="row margin-bottom-small">
       <div class="col col24">
         <h4>Funding</h4>
@@ -115,27 +111,26 @@ if( have_posts() ) {
     </div>
 <?php
       if ($funding) {
-?>
+          ?>
     <div class="row margin-bottom-small">
       <div class="col col10">
 <?php
-        foreach($funding as $fund) {
-?>
+        foreach ($funding as $fund) {
+            ?>
         <div class="margin-bottom-tiny">
           <p><?php echo $fund['text']; ?></p>
           <?php echo wp_get_attachment_image($fund['image_id'], 'col4'); ?>
         </div>          
 <?php
-        }
-?>
+        } ?>
       </div>
     </div>
 <?php
       }
     }
 
-    if (!empty($meta['_cmb_about_regulation'])) {
-?>
+        if (!empty($meta['_cmb_about_regulation'])) {
+            ?>
     <div class="row margin-bottom-small">
       <div class="col col24">
         <h4>Regulation</h4>
@@ -148,10 +143,10 @@ if( have_posts() ) {
       </div>
     </div>
 <?php
-    }
-    
-    if (!empty($meta['_cmb_about_legal'])) {
-?>
+        }
+
+        if (!empty($meta['_cmb_about_legal'])) {
+            ?>
     <div class="row margin-bottom-small">
       <div class="col col24">
         <h4>Legal</h4>
@@ -164,14 +159,13 @@ if( have_posts() ) {
       </div>
     </div>
 <?php
-    }
-?>
+        } ?>
   </article>
 <?php
-  }
-  wp_reset_postdata();
+    }
+    wp_reset_postdata();
 } else {
-?>
+    ?>
   <div class="container">
     <div class="row">
       <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>

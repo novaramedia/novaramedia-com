@@ -9,7 +9,7 @@
     
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="margin-bottom-small js-fix-widows"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
+          ?><h2 class="margin-bottom-small js-fix-widows"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
     <?php
       }
     ?>

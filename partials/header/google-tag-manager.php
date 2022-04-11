@@ -2,7 +2,7 @@
   $google_tag_manager_id = IGV_get_option('_igv_gtm_id');
 
   if (!empty($google_tag_manager_id)) {
-?>
+      ?>
 <script>
   dataLayer = [];
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

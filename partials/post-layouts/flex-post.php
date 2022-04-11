@@ -1,6 +1,6 @@
 <?php
   if (empty($args['grid-item-classes'])) { // if no classes set for grid item don't render
-    return;
+      return;
   }
 
   $text_size = !empty($args['text-size']) ? $args['text-size'] : 'regular'; // get size size parameter with regular text size as default. string matching descriptive values
@@ -25,9 +25,9 @@
     <div class="index-post-description margin-top-tiny">
       <?php
         if ($description) {
-          echo $description;
+            echo $description;
         } else {
-          the_excerpt();
+            the_excerpt();
         }
       ?>
     </div>
@@ -43,9 +43,9 @@
     <div class="index-post-description margin-top-tiny">
       <?php
         if ($description) {
-          echo $description;
+            echo $description;
         } else {
-          the_excerpt();
+            the_excerpt();
         }
       ?>
     </div>

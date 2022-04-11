@@ -12,9 +12,9 @@
     <div class="post-description">
       <?php
         if (!empty($description)) {
-          echo $description[0];
+            echo $description[0];
         } else {
-          the_excerpt();
+            the_excerpt();
         }
       ?>
     </div>

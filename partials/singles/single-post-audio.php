@@ -4,17 +4,17 @@
   $transcript = get_post_meta($post->ID, '_cmb_transcript', true);
 
   if (!empty($meta['bitly_url'])) {
-    $share_url = $meta['bitly_url'][0];
+      $share_url = $meta['bitly_url'][0];
   } else {
-    $share_url = get_the_permalink($post->ID);
+      $share_url = get_the_permalink($post->ID);
   }
 
   $show_category = get_child_level_child_category($post->ID);
 
   if ($show_category && get_term_meta($show_category->term_id, '_nm_podcast_url', true)) {
-    $podcast_url = get_term_meta($show_category->term_id, '_nm_podcast_url', true);
+      $podcast_url = get_term_meta($show_category->term_id, '_nm_podcast_url', true);
   } else {
-    $podcast_url = 'https://podcast.novaramedia.com';
+      $podcast_url = 'https://podcast.novaramedia.com';
   }
 ?>
 
@@ -35,13 +35,13 @@
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
         if (!empty($resources)) {
-          echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
+            echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
       <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<li><a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
+          echo '<li><a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
       }
     ?>
     </ul>
@@ -58,27 +58,31 @@
 
 <?php
   if (!empty($resources)) {
-    render_resources_row($resources);
+      render_resources_row($resources);
   }
 ?>
 
-<div class="flex-grid-row <?php if (empty($transcript)) { echo 'margin-bottom-large'; } else { echo 'margin-bottom-basic'; } ?>">
+<div class="flex-grid-row <?php if (empty($transcript)) {
+    echo 'margin-bottom-large';
+} else {
+    echo 'margin-bottom-basic';
+} ?>">
   <div class="flex-grid-item flex-item-xxl-12">
     <?php
       if (!empty($meta['_cmb_sc'][0])) {
-    ?>
+          ?>
         <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="200" scrolling="no" frameborder="no"></iframe>
 
       <?php
         if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
-      ?>
+            ?>
         <div class="font-mono font-smaller margin-top-micro">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
         }
       } else {
-        echo 'Someone messed up :/';
+          echo 'Someone messed up :/';
       }
     ?>
   </div>
@@ -86,7 +90,7 @@
 
 <?php
   if (!empty($transcript)) {
-?>
+      ?>
 <div class="flex-grid-row margin-bottom-large">
   <div class="flex-grid-item flex-item-xxl-12 margin-bottom-small">
     <h4>Transcript</h4>

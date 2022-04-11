@@ -16,14 +16,14 @@ get_header();
     </div>
 
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
 
-    get_template_part('partials/post-layouts/archive-event');
-  }
+        get_template_part('partials/post-layouts/archive-event');
+    }
 } else {
-?>
+    ?>
     <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>

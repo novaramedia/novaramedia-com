@@ -7,9 +7,9 @@
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
 
   if (!empty($meta['bitly_url'])) {
-    $share_url = $meta['bitly_url'][0];
+      $share_url = $meta['bitly_url'][0];
   } else {
-    $share_url = get_the_permalink($post->ID);
+      $share_url = get_the_permalink($post->ID);
   }
 ?>
 
@@ -21,16 +21,15 @@
   <div class="flex-grid-item only-desktop flex-item-m-12 flex-item-l-12 flex-item-xl-2 flex-item-xxl-2 margin-bottom-basic">
     <?php
       if ($articles_support_box_text || $support_box_override_text) {
-    ?>
+          ?>
     <a href="<?php echo home_url('support'); ?>">
       <div id="single-article-support-box">
         <?php
           if ($support_box_override_text) {
-            echo $support_box_override_text;
+              echo $support_box_override_text;
           } else {
-            echo $articles_support_box_text;
-          }
-        ?>
+              echo $articles_support_box_text;
+          } ?>
       </div>
     </a>
     <?php
@@ -42,7 +41,7 @@
 
 <?php
   if (!empty($meta['_cmb_sc'][0])) {
-?>
+      ?>
     <div class="text-copy margin-bottom-basic">
       <p class="font-smaller">Listen to this article as audio:</p>
       <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>

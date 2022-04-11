@@ -1,15 +1,15 @@
 <?php
   $override_text = isset($args['override_text']) ? $args['override_text'] : false;
-    
+
   $heading_copy = !empty($args['heading_copy']) ? $args['heading_copy'] : 'Support Us';
-  
+
   $support_section_text = IGV_get_option('_igv_support_section_text');
-  
+
   $fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
   $fundraiser_form_text = IGV_get_option('_igv_fundraiser_form_text');
 
   $default_subscription_value = 8;
-  
+
   $instance = uniqid('support-form-');
 ?>
 
@@ -34,18 +34,17 @@
         <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-6 flex-item-xxl-5">      
           <?php
             if ($support_section_text || $override_text) {
-            ?>
+                ?>
           <div class="margin-top-micro margin-bottom-small font-bold">
-            <a href="<?php echo home_url('support/'); ?>" class="js-fix-widows"><?php 
+            <a href="<?php echo home_url('support/'); ?>" class="js-fix-widows"><?php
               if ($override_text) {
-                echo $override_text;
+                  echo $override_text;
               } else {
-                echo $support_section_text;
-              } 
-            ?></a>
+                  echo $support_section_text;
+              } ?></a>
           </div>
             <?php
-              }
+            }
             ?>
         </div>
 

@@ -2,9 +2,9 @@
   $term = get_term_by('slug', 'planet-b', 'category');
 
   if ($term) {
-    $url = get_term_link($term);
-    if ($url) {
-?>
+      $url = get_term_link($term);
+      if ($url) {
+          ?>
 <div class="padding-top-basic padding-bottom-basic font-color-white" style="overflow: hidden; position: relative">
   <div class="planet-b__background-container background-green-neon" style="position: absolute; top: 0; width: 100%; height: 100%; overflow: hidden; z-index: -10; pointer-events: none; ">
     <img class="planet-b__background-image planet-b__background-image-1" alt="" role="presentation" src="<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/planet-b-banner-background.png'; ?>" />
@@ -93,6 +93,6 @@
   </div>
 </div>
 <?php
-    }
+      }
   }
 ?>

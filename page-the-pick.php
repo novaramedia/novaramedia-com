@@ -3,14 +3,13 @@ get_header();
 ?>
 <main id="main-content">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-    $meta = get_post_meta($post->ID);
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        $meta = get_post_meta($post->ID);
 
-    $youtube_id = !empty($meta['_nm_youtube_id']) ? $meta['_nm_youtube_id'][0] : false;
-    $support_override = !empty($meta['_nm_support_text']) ? $meta['_nm_support_text'][0] : false;
-?>
+        $youtube_id = !empty($meta['_nm_youtube_id']) ? $meta['_nm_youtube_id'][0] : false;
+        $support_override = !empty($meta['_nm_support_text']) ? $meta['_nm_support_text'][0] : false; ?>
   <article id="page">
     <div class="background-black font-color-white">
       <div class="container padding-top-small padding-bottom-large">
@@ -27,15 +26,14 @@ if( have_posts() ) {
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6">
           <?php
             if ($youtube_id) {
-          ?>
+                ?>
           <div class="u-video-embed-container margin-bottom-small">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id, true); ?>" allow="autoplay" allowfullscreen></iframe>
           </div>
           <?php
             } else {
-              the_post_thumbnail('col8');
-            }
-          ?>
+                the_post_thumbnail('col8');
+            } ?>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xxl-6">
           <div class="font-size-3 font-semibold margin-bottom-small">
@@ -48,10 +46,9 @@ if( have_posts() ) {
 
             $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
-            if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
-              $netlify = 'http://localhost:60573/.netlify/functions/mailchimp-signup';
-            }
-          ?>
+        if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
+            $netlify = 'http://localhost:60573/.netlify/functions/mailchimp-signup';
+        } ?>
           <form class="email-signup__form newsletter-page-email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
             <input type="hidden" name="newsletter" value="The Pick" />
 
@@ -118,15 +115,15 @@ if( have_posts() ) {
     </div>
   </article>
 <?php
-  }
+    }
 }
 
   if ($support_override) {
-    get_template_part('partials/support-section', null, array(
+      get_template_part('partials/support-section', null, array(
       'override_text' => $support_override,
     ));
   } else {
-    get_template_part('partials/support-section');
+      get_template_part('partials/support-section');
   }
 ?>
 </main>

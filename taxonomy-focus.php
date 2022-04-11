@@ -26,15 +26,15 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-8">
         <?php
           if ($splash_image_id) {
-            echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
+              echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
 
-            if ($splash_image_caption) {
-          ?>
+              if ($splash_image_caption) {
+                  ?>
           <div class="font-smaller">
             <?php echo $splash_image_caption; ?>
           </div>
           <?php
-            }
+              }
           }
         ?>
         <div class="only-mobile">
@@ -48,13 +48,13 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 
     <div class="flex-grid-row margin-bottom-basic">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
+if (have_posts()) {
+            while (have_posts()) {
+                the_post();
 
-    $content_type = get_the_top_category(get_the_ID());
+                $content_type = get_the_top_category(get_the_ID());
 
-    switch ($content_type->category_nicename) {
+                switch ($content_type->category_nicename) {
       case 'video':
         get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
         break;
@@ -64,18 +64,18 @@ if( have_posts() ) {
           'image-size' => 'col12-16to9',
         ));
     }
-  }
-} else {
-?>
+            }
+        } else {
+            ?>
     <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
-} ?>
+        } ?>
     </div>
     <div class="flex-grid-row margin-bottom-basic font-smaller">
       <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
         <?php
           if (!empty($credits)) {
-            echo apply_filters('the_content', $credits);
+              echo apply_filters('the_content', $credits);
           }
         ?>
       </div>

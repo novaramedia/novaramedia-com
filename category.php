@@ -32,11 +32,11 @@ get_header();
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php
           if (get_term_meta($category->term_id, '_nm_category_logo_id', true)) {
-            $logo_id = get_term_meta($category->term_id, '_nm_category_logo_id', true);
+              $logo_id = get_term_meta($category->term_id, '_nm_category_logo_id', true);
 
-            echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
+              echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
           } else {
-        ?>
+              ?>
         <h4><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
         <?php
           }
@@ -47,7 +47,7 @@ get_header();
       </div>
       <?php
         if ($is_video) {
-      ?>
+            ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
         <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo $youtube_copy; ?></a>
       </div>
@@ -56,8 +56,7 @@ get_header();
       ?>
       <?php
         if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
-          $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
-      ?>
+            $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true); ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
         <a class="nm-button nm-button--white" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
       </div>
@@ -68,17 +67,15 @@ get_header();
 
 <?php
   if ($is_video) {
-
-    if (have_posts()) {
-      $i = 0;
-      the_post();
-    ?>
+      if (have_posts()) {
+          $i = 0;
+          the_post(); ?>
     <div class="row margin-bottom-large only-desktop">
       <div class="col col16">
         <?php
         $meta = get_post_meta($post->ID);
-        if (!empty($meta['_cmb_utube'])) {
-        ?>
+          if (!empty($meta['_cmb_utube'])) {
+              ?>
         <div class="u-video-embed-container">
           <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>"></iframe>
         </div>
@@ -86,17 +83,15 @@ get_header();
           <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
         </a>
         <?php
-        } else {
-          echo 'Someone messed up :/';
-        }
-        ?>
+          } else {
+              echo 'Someone messed up :/';
+          } ?>
       </div>
       <div class="col col4">
         <?php
         if (have_posts()) {
-          while(have_posts() && $i < 6) {
-            the_post();
-        ?>
+            while (have_posts() && $i < 6) {
+                the_post(); ?>
         <a href="<?php the_permalink(); ?>">
          <div class="single-tv-related-tv margin-bottom-small">
            <?php the_post_thumbnail('col4-16to9'); ?>
@@ -105,37 +100,36 @@ get_header();
        </a>
         <?php
           if ($i === 2) {
-            echo '</div><div class="col col4">';
+              echo '</div><div class="col col4">';
           }
 
-          $i++;
-          }
-        }
-        ?>
+                $i++;
+            }
+        } ?>
       </div>
     </div>
   <?php
-    }
+      }
 
-    // reset pointer for have_posts
-    global $wp_query;
-    $wp_query->current_post = -1;
+      // reset pointer for have_posts
+      global $wp_query;
+      $wp_query->current_post = -1;
   }
 ?>
 
     <div class="flex-grid-row margin-bottom-basic">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
 
-    get_template_part('partials/post-layouts/flex-post', null, array(
+        get_template_part('partials/post-layouts/flex-post', null, array(
       'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic',
       'image-size' => 'col12-16to9',
     ));
-  }
+    }
 } else {
-?>
+    ?>
     <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
 } ?>

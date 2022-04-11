@@ -23,16 +23,15 @@ get_header();
     <div class="row margin-bottom-basic">
 <?php
 query_posts('posts_per_page=9');
-if( have_posts() ) {
-  $i = 0;
-  while( have_posts() ) {
-    the_post();
-    $description = get_post_meta($post->ID, '_cmb_short_desc');
+if (have_posts()) {
+    $i = 0;
+    while (have_posts()) {
+        the_post();
+        $description = get_post_meta($post->ID, '_cmb_short_desc');
 
-    if ($i % 3 === 0 && $i !== 0) {
-      echo "</div>\n<div class=\"row margin-bottom-basic\">";
-    }
-?>
+        if ($i % 3 === 0 && $i !== 0) {
+            echo "</div>\n<div class=\"row margin-bottom-basic\">";
+        } ?>
 
     <a href="<?php the_permalink() ?>">
       <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
@@ -44,11 +43,10 @@ if( have_posts() ) {
         <div class="index-post-description">
           <?php
             if (!empty($description)) {
-              echo $description[0];
+                echo $description[0];
             } else {
-              the_excerpt();
-            }
-          ?>
+                the_excerpt();
+            } ?>
         </div>
 
       </article>
@@ -56,9 +54,9 @@ if( have_posts() ) {
 
 <?php
     $i++;
-  }
+    }
 } else {
-?>
+    ?>
     <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>

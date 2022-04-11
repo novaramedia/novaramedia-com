@@ -109,7 +109,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-m-9 flex-item-xl-6 flex-item-xxl-5">
           <div class="font-size-2 font-size-s-1 font-bold font-color-blue-neon margin-top-small">
-            <?php echo get_term_field( 'description', $term, null, $context = 'raw' ); // getting like this to avoid the filters that add <p> tags ?>
+            <?php echo get_term_field('description', $term, null, $context = 'raw'); // getting like this to avoid the filters that add <p> tags?>
           </div>
         </div>
       </div>
@@ -119,82 +119,82 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
   <!-- main posts loop -->
   <section id="posts" class="container">
 <?php
-if( have_posts() ) {
-  $i = 0;
-  while( have_posts() ) {
-    the_post();
+if (have_posts()) {
+    $i = 0;
+    while (have_posts()) {
+        the_post();
 
-    if ($i === 0) { ?>
+        if ($i === 0) { ?>
     <div class="flex-grid-row">
 <?php }
 
-    if ($i === 1) { ?>
+        if ($i === 1) { ?>
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic">
 <?php }
 
-    if ($i === 3) { ?>
+        if ($i === 3) { ?>
       </div>
     </div>
     <div class="flex-grid-row ">
 <?php }
 
-  if ($i === 4) { ?>
+        if ($i === 4) { ?>
     <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic mobile-margin-top-mid mobile-margin-bottom-mid font-color-blue-neon">
       <?php
-        if(isset($quotes[0])) {
-          get_template_part('partials/components/quote', null, $quotes[0]);
+        if (isset($quotes[0])) {
+            get_template_part('partials/components/quote', null, $quotes[0]);
         }
       ?>
     </div>
 <?php }
 
-  if ($i === 13) { ?>
+        if ($i === 13) { ?>
     <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic mobile-margin-top-mid mobile-margin-bottom-mid font-color-blue-neon">
       <?php
-        if(isset($quotes[1])) {
-          get_template_part('partials/components/quote', null, $quotes[1]);
+        if (isset($quotes[1])) {
+            get_template_part('partials/components/quote', null, $quotes[1]);
         }
       ?>
     </div>
 <?php }
 
-    if ($i === 5 || $i === 10) { ?>
+        if ($i === 5 || $i === 10) { ?>
     </div>
     <div class="flex-grid-row margin-top-mid margin-bottom-mid mobile-margin-top-none mobile-margin-bottom-none" style="justify-content: center;">
 <?php }
 
-    if ($i === 7|| $i === 12) { ?>
+        if ($i === 7|| $i === 12) { ?>
     </div>
     <div class="flex-grid-row">
 <?php }
 
-    if ($i === 0) {
-      $post_arguments = array(
+        if ($i === 0) {
+            $post_arguments = array(
         'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xxl-8 margin-bottom-basic',
         'text-size' => 'large',
         'image-size' => 'col18-16to9',
       );
-    } else if ($i === 1 || $i === 2) {
-      $post_arguments = array(
+        } elseif ($i === 1 || $i === 2) {
+            $post_arguments = array(
         'grid-item-classes' => 'margin-bottom-basic',
         'image-size' => 'col12-16to9',
       );
-    } else if ($i === 5 || $i === 6) {
-      $post_arguments = array(
+        } elseif ($i === 5 || $i === 6) {
+            $post_arguments = array(
         'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-5 flex-item-xxl-4 margin-bottom-basic',
         'image-size' => 'col12-16to9',
       );
-    } else {
-      $post_arguments = array(
+        } else {
+            $post_arguments = array(
         'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xxl-4 margin-bottom-basic',
         'image-size' => 'col12-16to9',
       );
+        }
+
+        get_template_part('partials/post-layouts/flex-post', null, $post_arguments);
+
+        $i++;
     }
-
-    get_template_part('partials/post-layouts/flex-post', null, $post_arguments);
-
-    $i++;
-  }
 }
 ?>
     </div>
@@ -203,7 +203,7 @@ if( have_posts() ) {
       <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
         <?php
           if (!empty($credits)) {
-            echo apply_filters('the_content', $credits);
+              echo apply_filters('the_content', $credits);
           }
         ?>
       </div>

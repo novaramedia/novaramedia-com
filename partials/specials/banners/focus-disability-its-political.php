@@ -2,9 +2,9 @@
   $term = get_term_by('slug', 'disability-its-political', 'focus');
 
   if ($term) {
-    $url = get_term_link($term);
-    if ($url) {
-?>
+      $url = get_term_link($term);
+      if ($url) {
+          ?>
 <div class="disability-its-political__container padding-top-basic padding-bottom-basic">
   <style type="text/css">
     .disability-its-political__container {
@@ -106,6 +106,6 @@
   </div>
 </div>
 <?php
-    }
+      }
   }
 ?>

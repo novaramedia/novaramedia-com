@@ -16,13 +16,12 @@ $is_fundraiser = $fundraiser_expiration > time();
 <main id="main-content">
 
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-    $meta = get_post_meta($post->ID);
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        $meta = get_post_meta($post->ID);
 
-    $youtube_id = !empty($meta['_cmb_support_youtube']) ? $meta['_cmb_support_youtube'][0] : false;
-?>
+        $youtube_id = !empty($meta['_cmb_support_youtube']) ? $meta['_cmb_support_youtube'][0] : false; ?>
   <!-- main posts loop -->
   <article id="page" class="support-page">
     <div class="background-cover-image background-light-blue" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
@@ -31,11 +30,10 @@ if( have_posts() ) {
           <div class="flex-grid-item flex-item-s-12">
             <h4 class="margin-top-small margin-bottom-tiny"><?php
               if (!empty($override_title)) {
-                echo $override_title;
+                  echo $override_title;
               } else {
-                echo 'Support Us';
-              }
-            ?></h4>
+                  echo 'Support Us';
+              } ?></h4>
           </div>
         </div>
         <div class="flex-grid-row support-page__hero-wrapper">
@@ -51,14 +49,13 @@ if( have_posts() ) {
       get_template_part('partials/support-section', null, array(
         'heading_copy' => 'Become a supporter',
         'override_text' => 'It’s been ten years since Novara Media first started. Now, more than ever, we need your support.'
-      ));
-    ?>
+      )); ?>
 
     <div class="container">      
       <div class="flex-grid-row margin-top-basic margin-bottom-basic">
         <?php
           if ($youtube_id) {
-        ?>
+              ?>
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 margin-bottom-small">
           <div class="u-video-embed-container">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
@@ -66,15 +63,15 @@ if( have_posts() ) {
           
           <ul class="inline-action-list margin-top-small">
             <?php
-              $share_url = 'https://novaramedia.com/support/';
-            ?>
+              $share_url = 'https://novaramedia.com/support/'; ?>
             <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet your support'); ?></li>
             <li><?php render_facebook_share_link($share_url, 'Share this page on Facebook'); ?></li>
-            <li><?php render_email_share_link($share_url, $post->post_title, 'Email to a friend');?></li>
-            <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+            <li><?php render_email_share_link($share_url, $post->post_title, 'Email to a friend'); ?></li>
+            <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit'); ?></li>
           </ul>
         </div>
-        <?php } ?>
+        <?php
+          } ?>
         
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 support-page__content-copy">
           <?php the_content(); ?>
@@ -89,8 +86,8 @@ if( have_posts() ) {
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h3 class="font-size-2 margin-bottom-small">Already a supporter?</h3>
             <?php if (!empty($meta['_cmb_page_extra'])) {
-              echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
-            } ?>
+              echo apply_filters('the_content', $meta['_cmb_page_extra'][0]);
+          } ?>
             <p><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
           </div>   
         </div>
@@ -101,8 +98,7 @@ if( have_posts() ) {
       get_template_part('partials/support-section', null, array(
         'heading_copy' => 'Become a supporter',
         'override_text' => 'Not yet a supporter? We\'re asking that you donate one hour of your wage each month.'
-      ));
-    ?>
+      )); ?>
         
     <div id="other-donation-methods" class="container">      
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
@@ -159,7 +155,7 @@ if( have_posts() ) {
   <!-- end post -->
   </article>
 <?php
-  }
+    }
 } ?>
 <!-- end main-content -->
 </main>

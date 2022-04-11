@@ -1,15 +1,15 @@
 <?php
-  $timestamp = get_post_meta( $post->ID, '_cmb_time', true );
+  $timestamp = get_post_meta($post->ID, '_cmb_time', true);
 
   if ($timestamp) {
-    $time = new \Moment\Moment('@' . $timestamp);
+      $time = new \Moment\Moment('@' . $timestamp);
   } else {
-    $time = new \Moment\Moment('@' . get_the_time('U'));
+      $time = new \Moment\Moment('@' . get_the_time('U'));
   }
 
-  $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
-  $speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
-  $host = get_post_meta( $post->ID, '_cmb_host', true );
+  $venue_name = get_post_meta($post->ID, '_cmb_venue_name', true);
+  $speakers = get_post_meta($post->ID, '_cmb_speakers', true);
+  $host = get_post_meta($post->ID, '_cmb_host', true);
 ?>
 
 <a href="<?php the_permalink(); ?>">
@@ -24,33 +24,32 @@
       <h2 class="margin-bottom-tiny"><?php the_title(); ?></h2>
       <?php
         if ($venue_name) {
-      ?>
+            ?>
         <h3>At <?php echo $venue_name; ?></h3>
       <?php
         }
       ?>
       <?php
         if ($speakers) {
-      ?>
+            ?>
         <h3>With <?php
           $i = 0;
-          $last = count($speakers) - 1;
-          foreach ($speakers as $speaker) {
-            if ($i === $last) {
-              echo ' & ';
-            } else if ($i > 0) {
-              echo ', ';
-            }
-            echo $speaker;
-            $i++;
-          }
-        ?></h3>
+            $last = count($speakers) - 1;
+            foreach ($speakers as $speaker) {
+                if ($i === $last) {
+                    echo ' & ';
+                } elseif ($i > 0) {
+                    echo ', ';
+                }
+                echo $speaker;
+                $i++;
+            } ?></h3>
       <?php
         }
       ?>
       <?php
         if ($host) {
-      ?>
+            ?>
         <h3>Hosted by <?php echo $host; ?></h3>
       <?php
         }

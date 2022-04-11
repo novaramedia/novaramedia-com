@@ -2,7 +2,7 @@
   $copy = IGV_get_option('_igv_privacy_notice');
 
   if (empty($copy)) {
-    $copy = 'We are always working to improve this website for our users. To do this we use data provided by the cookies and external scripts.';
+      $copy = 'We are always working to improve this website for our users. To do this we use data provided by the cookies and external scripts.';
   }
 ?>
 <div id="gdpr">

@@ -13,7 +13,7 @@
 
 <?php
     if ($author) {
-?>
+        ?>
     <h6 class="margin-top-micro font-bold">by <?php echo $author; ?></h6>
 <?php
     }
@@ -22,9 +22,9 @@
     <div class="index-post-description margin-top-tiny">
       <?php
         if ($description) {
-          echo $description;
+            echo $description;
         } else {
-          the_excerpt();
+            the_excerpt();
         }
       ?>
     </div>

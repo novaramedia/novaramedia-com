@@ -7,33 +7,32 @@ get_header();
 <main id="main-content">
 
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
 
-    $timestamp = get_post_meta( $post->ID, '_cmb_time', true );
+        $timestamp = get_post_meta($post->ID, '_cmb_time', true);
 
-    if ($timestamp) {
-      $time = new \Moment\Moment('@' . $timestamp);
-    } else {
-      $time = new \Moment\Moment('@' . get_the_time('U'));
-    }
+        if ($timestamp) {
+            $time = new \Moment\Moment('@' . $timestamp);
+        } else {
+            $time = new \Moment\Moment('@' . get_the_time('U'));
+        }
 
-    $fromEvent = $time->fromNow();
+        $fromEvent = $time->fromNow();
 
-    $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
-    $venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
+        $venue_name = get_post_meta($post->ID, '_cmb_venue_name', true);
+        $venue_postcode = get_post_meta($post->ID, '_cmb_venue_postcode', true);
 
-    $speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
-    $host = get_post_meta( $post->ID, '_cmb_host', true );
+        $speakers = get_post_meta($post->ID, '_cmb_speakers', true);
+        $host = get_post_meta($post->ID, '_cmb_host', true);
 
-    $is_sold_out = get_post_meta( $post->ID, '_cmb_tickets_sold_out', true );
-    $tickets_url = get_post_meta( $post->ID, '_cmb_tickets', true );
+        $is_sold_out = get_post_meta($post->ID, '_cmb_tickets_sold_out', true);
+        $tickets_url = get_post_meta($post->ID, '_cmb_tickets', true);
 
-    $youtube = get_post_meta( $post->ID, '_cmb_youtube', true );
+        $youtube = get_post_meta($post->ID, '_cmb_youtube', true);
 
-    $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
-?>
+        $gallery = get_post_meta($post->ID, '_cmb_gallery', true); ?>
   <article id="event">
     <div class="container margin-top-small margin-bottom-large">
       <div class="row margin-bottom-basic">
@@ -49,7 +48,7 @@ if( have_posts() ) {
       <div class="row margin-bottom-basic">
         <?php
           if ($youtube) {
-        ?>
+              ?>
         <div class="col col4"></div>
         <div class="col col16">
           <div class="u-video-embed-container">
@@ -58,14 +57,13 @@ if( have_posts() ) {
         </div>
         <?php
           } else {
-        ?>
+              ?>
         <div class="col col6"></div>
         <div class="col col12">
           <?php the_post_thumbnail('col12'); ?>
         </div>
         <?php
-          }
-        ?>
+          } ?>
       </div>
       <div class="row margin-bottom-basic">
         <div class="col col2"></div>
@@ -77,60 +75,54 @@ if( have_posts() ) {
           </div>
         <?php
           if ($venue_name) {
-        ?>
+              ?>
           <div class="margin-bottom-small">
             <h5 class="margin-bottom-small">Venue:</h5>
 
             <h3><?php echo $venue_name; ?></h3>
         <?php
             if ($venue_postcode) {
-        ?>
+                ?>
             <h3><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
         <?php
-            }
-        ?>
+            } ?>
           </div>
         <?php
-          }
-        ?>
+          } ?>
 
         <?php
           if ($speakers) {
-        ?>
+              ?>
           <div class="margin-bottom-small">
             <h5 class="margin-bottom-small">Speakers:</h5>
 
         <?php
           foreach ($speakers as $speaker) {
-        ?>
+              ?>
             <h3><?php echo $speaker; ?></h3>
         <?php
-          }
-        ?>
+          } ?>
           </div>
         <?php
-          }
-        ?>
+          } ?>
 
         <?php
           if ($host) {
-        ?>
+              ?>
           <div class="margin-bottom-small">
             <h5 class="margin-bottom-small">Host:</h5>
 
             <h3><?php echo $host; ?></h3>
           </div>
         <?php
-          }
-        ?>
+          } ?>
 
         <?php
           if ($is_sold_out) {
-        ?>
+              ?>
             <h4>Sold Out!</h4>
         <?php
-          }
-        ?>
+          } ?>
         </div>
         <div class="col col12 text-copy font-italic">
           <?php the_content(); ?>
@@ -138,7 +130,7 @@ if( have_posts() ) {
       </div>
       <?php
         if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
-      ?>
+            ?>
       <div class="row margin-bottom-basic">
         <div class="col col4"></div>
         <div class="col col16">
@@ -146,13 +138,12 @@ if( have_posts() ) {
         </div>
       </div>
       <?php
-        }
-      ?>
+        } ?>
     </div>
 
     <?php
       if ($gallery) {
-    ?>
+          ?>
     <div class="background-black font-color-white padding-top-mid padding-bottom-mid">
       <div class="container">
         <div class="row margin-bottom-basic">
@@ -168,13 +159,12 @@ if( have_posts() ) {
       </div>
     </div>
     <?php
-      }
-    ?>
+      } ?>
   </article>
 <?php
-  }
+    }
 } else {
-?>
+    ?>
   <article id="event" class="container margin-bottom-basic">
     <div class="row">
       <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>

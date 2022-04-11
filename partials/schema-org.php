@@ -1,13 +1,13 @@
 <?php
 if (is_single() && get_post_type() === 'job') {
-  $meta = get_post_meta($post->ID);
+    $meta = get_post_meta($post->ID);
 
-  $location = !empty($meta['_nm_location'][0]) ? $meta['_nm_location'][0] : false;
-  $type = !empty($meta['_nm_contract'][0]) ? $meta['_nm_contract'][0] : '';
-  $deadlline = !empty($meta['_nm_deadline'][0]) ? $meta['_nm_deadline'][0] : '';
-  $rate = !empty($meta['_nm_rate'][0]) ? $meta['_nm_rate'][0] : '';
+    $location = !empty($meta['_nm_location'][0]) ? $meta['_nm_location'][0] : false;
+    $type = !empty($meta['_nm_contract'][0]) ? $meta['_nm_contract'][0] : '';
+    $deadlline = !empty($meta['_nm_deadline'][0]) ? $meta['_nm_deadline'][0] : '';
+    $rate = !empty($meta['_nm_rate'][0]) ? $meta['_nm_rate'][0] : '';
 
-  $json_ld = array(
+    $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "JobPosting",
     "title" => get_the_title(),
@@ -36,7 +36,7 @@ if (is_single() && get_post_type() === 'job') {
     ),
   );
 
-  $address_london = array(
+    $address_london = array(
     "@type" => "Place",
     "address" => array(
       "@type" => "PostalAddress",
@@ -48,7 +48,7 @@ if (is_single() && get_post_type() === 'job') {
     ),
   );
 
-  $address_leeds = array(
+    $address_leeds = array(
     "@type" => "Place",
     "address" => array(
       "@type" => "PostalAddress",
@@ -60,7 +60,7 @@ if (is_single() && get_post_type() === 'job') {
     ),
   );
 
-  switch ($location) {
+    switch ($location) {
     case 'remote':
       $json_ld['applicantLocationRequirements']= array(
         "@type" => "Country",
@@ -79,9 +79,8 @@ if (is_single() && get_post_type() === 'job') {
       $json_ld['jobLocation'] = $address_leeds;
       break;
   }
-
-} else if (nm_is_single_article()) {
-  $json_ld = array(
+} elseif (nm_is_single_article()) {
+    $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "NewsArticle",
     "headline" => get_the_title(),
@@ -91,41 +90,41 @@ if (is_single() && get_post_type() === 'job') {
     )
   );
 } else {
-  $facebook = IGV_get_option('_igv_socialmedia_facebook_url');
-  $twitter = IGV_get_option('_igv_socialmedia_twitter');
-  $instagram = IGV_get_option('_igv_socialmedia_instagram');
+    $facebook = IGV_get_option('_igv_socialmedia_facebook_url');
+    $twitter = IGV_get_option('_igv_socialmedia_twitter');
+    $instagram = IGV_get_option('_igv_socialmedia_instagram');
 
-  $logo = IGV_get_option('_igv_metadata_logo_id');
+    $logo = IGV_get_option('_igv_metadata_logo_id');
 
-  $json_ld = array(
+    $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "Organization",
     "url" => home_url(),
   );
 
-  if ($logo) {
-    $image = wp_get_attachment_image_src($logo, 'opengraph');
+    if ($logo) {
+        $image = wp_get_attachment_image_src($logo, 'opengraph');
 
-    $json_ld['logo'] = $image[0];
-  }
+        $json_ld['logo'] = $image[0];
+    }
 
-  $same_as_array = array();
+    $same_as_array = array();
 
-  if ($facebook) {
-    $same_as_array[] = $facebook;
-  }
+    if ($facebook) {
+        $same_as_array[] = $facebook;
+    }
 
-  if ($twitter) {
-    $same_as_array[] = 'https://twitter.com/' . $twitter;
-  }
+    if ($twitter) {
+        $same_as_array[] = 'https://twitter.com/' . $twitter;
+    }
 
-  if ($instagram) {
-    $same_as_array[] = 'https://instagram.com/' . $instagram;
-  }
+    if ($instagram) {
+        $same_as_array[] = 'https://instagram.com/' . $instagram;
+    }
 
-  if (count($same_as_array) > 0) {
-    $json_ld['sameAs'] = $same_as_array;
-  }
+    if (count($same_as_array) > 0) {
+        $json_ld['sameAs'] = $same_as_array;
+    }
 }
 ?>
 <script type="application/ld+json"><?php echo json_encode($json_ld); ?></script>

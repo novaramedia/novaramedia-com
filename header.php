@@ -2,7 +2,7 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
-  <title><?php wp_title('|',true,'right'); bloginfo('name'); ?></title>
+  <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
@@ -34,14 +34,12 @@
 
                 <?php
                   if (is_single()) {
-                    $author = get_post_meta($post->ID, '_cmb_author', true);
-                ?>
+                      $author = get_post_meta($post->ID, '_cmb_author', true); ?>
                 <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
                   the_title();
-                  if (!empty($author)) {
-                    echo ' by ' . $author;
-                  }
-                ?></span>
+                      if (!empty($author)) {
+                          echo ' by ' . $author;
+                      } ?></span>
                 <?php
                   }
                 ?>

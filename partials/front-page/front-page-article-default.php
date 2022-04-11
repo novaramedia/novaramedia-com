@@ -10,9 +10,9 @@
     <div>
       <?php
         $sub_category = get_the_sub_category($post->ID);
-  
+
         if ($sub_category) {
-      ?>
+            ?>
       <h5 class="font-small-caps"><?php echo $sub_category; ?> <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span></h5>
       <?php
         }
@@ -21,7 +21,7 @@
       <h5 class="js-fix-widows"><?php the_title(); ?></h5>
       <?php
           if (!empty($meta['_cmb_author'])) {
-      ?>
+              ?>
       <h6>by <?php echo $meta['_cmb_author'][0]; ?></h6>
       <?php
           }
