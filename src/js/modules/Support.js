@@ -12,13 +12,13 @@ export class Support {
   }
 
   bind() {
-    $('.support-form').each(function(index, value) {
+    $('.support-form').each(function (index, value) {
       const $form = $(value);
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
       $form.find('.support-form__button').on({
-        'click': function(event) {
+        click: function (event) {
           event.preventDefault();
 
           const $button = $(this);
@@ -27,30 +27,38 @@ export class Support {
           if (data.action === 'set-type') {
             $form.attr('action', data.value);
 
-            $form.find('.support-form__button[data-action="set-type"]').removeClass('support-form__button--active');
+            $form
+              .find('.support-form__button[data-action="set-type"]')
+              .removeClass('support-form__button--active');
 
             $button.addClass('support-form__button--active');
           } else if (data.action === 'set-value') {
             $valueInput.val(data.value);
 
-            $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
-            $('.support-form__custom-input').removeClass('support-form__button--active');
+            $form
+              .find('.support-form__button[data-action="set-value"]')
+              .removeClass('support-form__button--active');
+            $('.support-form__custom-input').removeClass(
+              'support-form__button--active'
+            );
 
             $button.addClass('support-form__button--active');
           }
-        }
+        },
       });
 
       $form.find('.support-form__custom-input').on({
-        'input': function(event) {
+        input: function (event) {
           event.preventDefault();
 
           $valueInput.val(event.target.value);
 
-          $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
+          $form
+            .find('.support-form__button[data-action="set-value"]')
+            .removeClass('support-form__button--active');
 
           $(this).addClass('support-form__button--active');
-        }
+        },
       });
     });
   }
