@@ -64,13 +64,27 @@
               <ul class="header-menu u-inline-list text-align-center font-tracking-medium">
                 <li><a href="<?php echo site_url(); ?>">Front Page</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
+                <?php
+                  $ts_term = get_term_by('slug', 'tyskysour-video', 'category');
+                  if ($ts_term) {
+                ?>
+                <li><a href="<?php echo get_term_link($ts_term); ?>"><?php echo $ts_term->name; ?></a></li>
+                <?php
+                  }
+                ?>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
+                <?php
+                  if (!$ts_term) {
+                ?>
+                <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
+                <?php
+                  }
+                ?>
                 <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="https://shop.novaramedia.com">Shop</a></li>
-                <li><a href="https://donate.novaramedia.com/login">Log In</a></li>
+                <li><a href="https://donate.novaramedia.com/login">Donor Log In</a></li>
               </ul>
             </div>
           </div>
