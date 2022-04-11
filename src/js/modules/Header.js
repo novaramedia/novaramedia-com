@@ -19,7 +19,10 @@ export class Header {
   onReady() {
     const _this = this;
 
-    if ($('body').hasClass('single') && $('body').hasClass('category-articles')) {
+    if (
+      $('body').hasClass('single') &&
+      $('body').hasClass('category-articles')
+    ) {
       _this.initSinglePostTitle();
     }
 
@@ -29,22 +32,22 @@ export class Header {
   bind() {
     const _this = this;
 
-    _this.$menuToggle.click(function() {
+    _this.$menuToggle.click(function () {
       _this.$headerSub.toggle();
 
       if (_this.$headerSub.is(':visible')) {
         _this.$headerSub.find('a').first().focus(); // focus on first link for accessibility
       }
 
-      $(this).attr('aria-pressed', function(index, attr) {
+      $(this).attr('aria-pressed', function (index, attr) {
         return attr === 'true' ? false : true;
       });
     });
 
-    _this.$searchToggle.click(function() {
+    _this.$searchToggle.click(function () {
       _this.$headerSearch.toggle();
 
-      $(this).attr('aria-pressed', function(index, attr) {
+      $(this).attr('aria-pressed', function (index, attr) {
         return attr === 'true' ? false : true;
       });
 
@@ -74,10 +77,12 @@ export class Header {
 
     const scrollTop = $(window).scrollTop();
 
-    if (scrollTop >_this.scrollPosition && scrollTop > _this.scrollThreshold) { // scroll is down
+    if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
+      // scroll is down
       _this.$headerSinglePostTitle.css('opacity', 1);
       _this.$headerLogotype.css('opacity', 0);
-    } else { // scroll is up
+    } else {
+      // scroll is up
       _this.$headerSinglePostTitle.css('opacity', 0);
       _this.$headerLogotype.css('opacity', 1);
     }
@@ -94,10 +99,15 @@ export class Header {
     const totalWidth = $('.col18').innerWidth();
     const navsWidth = $('#header-navs').innerWidth();
 
-    this.$headerSinglePostTitle.css('max-width', (totalWidth - navsWidth - 10) + 'px');
+    this.$headerSinglePostTitle.css(
+      'max-width',
+      totalWidth - navsWidth - 10 + 'px'
+    );
   }
 
   setScrollThreshold() {
-    this.scrollThreshold = $('#single-articles-title').offset().top + $('#single-articles-title').height();
+    this.scrollThreshold =
+      $('#single-articles-title').offset().top +
+      $('#single-articles-title').height();
   }
 }
