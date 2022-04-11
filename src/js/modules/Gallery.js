@@ -19,16 +19,19 @@ export class Gallery {
   initSwiperInstances() {
     var _this = this;
 
-    $('.swiper-container').each(function(index, item) {
-
+    $('.swiper-container').each(function (index, item) {
       _this.galleryInstances[index] = new Swiper(item, {
         loop: true,
         pagination: '#gallery-pagination',
         paginationType: 'fraction',
-        paginationFractionRender: function (swiper, currentClassName, totalClassName) {
+        paginationFractionRender: function (
+          swiper,
+          currentClassName,
+          totalClassName
+        ) {
           return `<span class="${currentClassName}"></span>/<span class="${totalClassName}"></span>`;
         },
-        onTap: function(swiper) {
+        onTap: function (swiper) {
           swiper.slideNext();
         },
       });
