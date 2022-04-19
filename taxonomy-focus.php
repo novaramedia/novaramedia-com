@@ -67,7 +67,7 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
 } ?>
     </div>

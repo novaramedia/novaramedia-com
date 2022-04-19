@@ -24,7 +24,7 @@ export class Utilities {
       selectText($(this)[0]); // *** need to fix this
     });
   }
-  
+
   bindResourcesToggle() {
     var $resources = $('#single-resources-section');
 
@@ -49,7 +49,7 @@ export class Utilities {
       var m = moment(timestamp);
 
       if (m.isAfter(moment().subtract(5, 'hours'))) {
-        $element.text('| ' + m.fromNow());
+        $element.text(`| ${m.fromNow()}`);
       }
     });
   }

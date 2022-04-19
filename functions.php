@@ -1,5 +1,4 @@
 <?php
-
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
 function scripts_and_styles_method() {
   $site_js = get_template_directory_uri() . '/dist/main.js';
@@ -27,6 +26,13 @@ function scripts_and_styles_method() {
 }
 add_action('wp_enqueue_scripts', 'scripts_and_styles_method');
 
+// Theme supports
+
+if( function_exists( 'add_theme_support' ) ) {
+  add_theme_support( 'post-thumbnails' );
+  add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+}
+
 // Set max width of main content area for oembed etc
 
 if ( !isset( $content_width ) ) {
@@ -53,6 +59,7 @@ get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
+get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 
 get_template_part( 'lib/theme-options' );

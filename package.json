@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "3.2.16",
+  "version": "3.2.17",
   "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
@@ -54,7 +54,7 @@
     "js-cookie": "^2.2.1",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
-    "swiper": "^6.4.1"
+    "moment": "^2.29.2",
+    "swiper": "^6.5.1"
   }
 }

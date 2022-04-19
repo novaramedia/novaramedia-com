@@ -1,14 +1,9 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
 import $ from 'jquery';
 
 export class Search {
-  constructor() {
-
-  }
-
   onReady() {
-    var _this = this;
+    const _this = this;
 
      if ($('body').hasClass('error404')) {
       _this.fourzerofour();
@@ -22,7 +17,7 @@ export class Search {
     // get last part of url
 
     // If trailing /
-    if( request[request.length - 1] === "" ) {
+    if( request[request.length - 1] === '' ) {
       // Remove last element from the array
       request.pop();
     }

@@ -22,7 +22,7 @@ function new_display_post_thumbnail_column($col, $id){
   switch($col){
     case 'new_post_thumb':
     if( function_exists('the_post_thumbnail') ) {
-      echo the_post_thumbnail( 'col4-square' );
+      echo the_post_thumbnail( 'col4-square', array('style' => 'max-width:100%;height:auto;') );
       }
     else
     echo 'Not supported in theme';

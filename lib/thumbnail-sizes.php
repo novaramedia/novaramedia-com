@@ -1,9 +1,4 @@
 <?php
-
-if( function_exists( 'add_theme_support' ) ) {
-  add_theme_support( 'post-thumbnails' );
-}
-
 if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'opengraph', 1200, 630, true );
 

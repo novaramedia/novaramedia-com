@@ -1,17 +1,14 @@
 version = 1
 
 exclude_patterns = [
-    "dist/*.js",
-    "vendor/**"
+  "dist/**",
+  "vendor/**"
 ]
 
 [[analyzers]]
 name = "javascript"
 enabled = true
 
-  [analyzers.meta]
-  environment = [
-    "browser",
-    "jquery"
-  ]
-  style_guide = "airbnb"
+[[transformers]]
+name = "prettier"
+enabled = true
