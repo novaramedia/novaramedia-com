@@ -38,7 +38,7 @@ get_header();
     <div class="tyskysour-archive__liveplayer flex-grid-row">
       <div class="flex-grid-item flex-item-xxl-12">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($embed_id); ?>"></iframe>
+          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($embed_id, true); ?>"></iframe>
         </div>
       </div>
     </div>
