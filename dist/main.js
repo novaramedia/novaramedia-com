@@ -465,7 +465,7 @@ var Support = /*#__PURE__*/function () {
         var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value);
         var $valueInput = $form.find('.support-form__value-input').first();
         $form.find('.support-form__button').on({
-          'click': function click(event) {
+          click: function click(event) {
             event.preventDefault();
             var $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
             var data = $button.data();
@@ -483,7 +483,7 @@ var Support = /*#__PURE__*/function () {
           }
         });
         $form.find('.support-form__custom-input').on({
-          'input': function input(event) {
+          input: function input(event) {
             event.preventDefault();
             $valueInput.val(event.target.value);
             $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');

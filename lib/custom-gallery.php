@@ -109,7 +109,7 @@ function my_gallery_shortcode($attr) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='swiper-container gallery galleryid-{$id}'><div class='swiper-wrapper'>";
+  $gallery_div = "<div id='$selector' class='swiper-container gallery gallery-id-{$id} padding-top-small padding-bottom-small'><div class='swiper-wrapper'>";
   $output = $gallery_div;
 
   $i = 0;
@@ -120,13 +120,13 @@ function my_gallery_shortcode($attr) {
 
     $tag = '';
 
-    $img = wp_get_attachment_image($id, $size);
+    $img = wp_get_attachment_image($id, $size, false, array('class' => 'swiper-slide-image', 'style' => 'margin:0'));
 
     // If caption is set make a variable of it
 
     if ( $captiontag && trim($attachment->post_excerpt) ) {
       $tag = "
-        <{$captiontag} class='font-smaller'>
+        <{$captiontag} class='margin-top-tiny font-smaller'>
         " . wptexturize($attachment->post_excerpt) . "
         </{$captiontag}>";
     } else {
