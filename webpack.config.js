@@ -77,24 +77,6 @@ var config = {
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
     new MomentLocalesPlugin(),
-    // Copy the images folder and optimize all the images
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/img/'),
-          to: path.resolve(__dirname, 'dist/img/'),
-          globOptions: {
-            ignore: [
-              "**/*.DS_Store",
-            ],
-          },
-        },
-        {
-          from: path.resolve(__dirname, 'src/styl/fonts/'),
-          to: path.resolve(__dirname, 'dist/fonts/'),
-        },
-      ]
-    }),
   ],
 
   optimization: {
@@ -147,6 +129,23 @@ module.exports = (env, argv) => {
           ],
         },
       },
+    }));
+    config.plugins.push(new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/img/'),
+          to: path.resolve(__dirname, 'dist/img/'),
+          globOptions: {
+            ignore: [
+              "**/*.DS_Store",
+            ],
+          },
+        },
+        {
+          from: path.resolve(__dirname, 'src/styl/fonts/'),
+          to: path.resolve(__dirname, 'dist/fonts/'),
+        },
+      ]
     }));
     config.plugins.push(new BundleAnalyzerPlugin());
     config.performance.hints = 'warning';
