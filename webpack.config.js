@@ -3,8 +3,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
+
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
@@ -65,6 +66,10 @@ var config = {
         },
       ],
     },
+    {
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      type: 'asset/resource',
+    },
     ],
   },
 
@@ -89,13 +94,6 @@ var config = {
           to: path.resolve(__dirname, 'dist/fonts/'),
         },
       ]
-    }),
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      gifsicle:{interlaced: false, optimizationLevel: 1},
-      jpegtran:{progressive: false, arithmetic: false},
-      optipng:{optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true},
-      svgo:{plugins: [{cleanupIDs: false, removeViewBox: false}]},
     }),
   ],
 
@@ -124,6 +122,32 @@ module.exports = (env, argv) => {
     config.devtool = 'source-map';
     config.watch = true;
   } else {
+    config.optimization.minimizer.push(new ImageMinimizerPlugin({
+      minimizer: {
+        implementation: ImageMinimizerPlugin.imageminMinify,
+        options: {
+          plugins: [
+            ['imagemin-gifsicle', { interlaced: false, optimizationLevel: 1 }],
+            ['imagemin-jpegtran', { progressive: false, arithmetic: false }],
+            ['imagemin-optipng', { optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true }],
+            [
+              "imagemin-svgo",
+              {
+                plugins: [{
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      cleanupIDs: false,
+                      removeViewBox: false,
+                    },
+                  },
+                }]
+              },
+            ],
+          ],
+        },
+      },
+    }));
     config.plugins.push(new BundleAnalyzerPlugin());
     config.performance.hints = 'warning';
     config.stats.preset = 'detailed';
