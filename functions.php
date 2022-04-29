@@ -1,4 +1,11 @@
 <?php
+// Support section autovalue options. The array values are first 3 for monthly, last 3 for one-off, default will be lowest monthly
+define('SUPPORT_SECTION_AUTOVALUES', array(
+  'default' => array(8, 10, 20, 10, 20, 40),
+  'code1' => array(3, 8, 15, 10, 25, 50),
+  'code2' => array(1, 3, 10, 5, 10, 30)
+));
+
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
 function scripts_and_styles_method() {
   $site_js = get_template_directory_uri() . '/dist/main.js';
@@ -12,6 +19,7 @@ function scripts_and_styles_method() {
   	'siteUrl' => home_url(),
   	'themeUrl' => get_template_directory_uri(),
   	'isAdmin' => current_user_can('administrator') ? 1 : 0,
+  	'supportSectionAutovalues' => SUPPORT_SECTION_AUTOVALUES
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
@@ -42,7 +50,6 @@ if ( !isset( $content_width ) ) {
 // Declare thumbnail sizes
 
 get_template_part( 'lib/thumbnail-sizes' );
-
 
 // Register Nav Menus
 /*
