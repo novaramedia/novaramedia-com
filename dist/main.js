@@ -464,10 +464,24 @@ var Support = /*#__PURE__*/function () {
         _this.bind();
       }
     }
+    /**
+     * Checks url parameters for valid alternative autovalues codes and uses them if found
+     */
+
   }, {
     key: "setupAutovalues",
     value: function setupAutovalues() {
-      this.autovalues = WP.supportSectionAutovalues['default'];
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlParamSupportCode = urlParams.get('sc');
+      var autovaluesKey = 'default';
+
+      if (urlParamSupportCode !== null) {
+        if (WP.supportSectionAutovalues[urlParamSupportCode] !== undefined && WP.supportSectionAutovalues[urlParamSupportCode].length === 6) {
+          autovaluesKey = urlParamSupportCode;
+        }
+      }
+
+      this.autovalues = WP.supportSectionAutovalues[autovaluesKey];
     }
   }, {
     key: "bind",
@@ -476,6 +490,9 @@ var Support = /*#__PURE__*/function () {
 
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form').each(function (index, value) {
         var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value);
+
+        _this.setAutoValues($form);
+
         var $valueInput = $form.find('.support-form__value-input').first();
         $form.find('.support-form__button').on({
           click: function click(event) {
@@ -513,12 +530,14 @@ var Support = /*#__PURE__*/function () {
      * Switches the quick auto values displayed on the form depending on the type of donation.
      *
      * @param {Object}   $form         jQuery object of the form in question.
-     * @param {String}   donationType  Type of donation. oneoff OR regular
+     * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
      */
 
   }, {
     key: "setAutoValues",
-    value: function setAutoValues($form, donationType) {
+    value: function setAutoValues($form) {
+      var donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
+
       var _this = this;
 
       $form.find('.support-form__value-option').each(function (index, input) {

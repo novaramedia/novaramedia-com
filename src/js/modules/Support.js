@@ -17,8 +17,21 @@ export class Support {
     }
   }
 
+  /**
+   * Checks url parameters for valid alternative autovalues codes and uses them if found
+   */
   setupAutovalues() {
-    this.autovalues = WP.supportSectionAutovalues['default'];
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlParamSupportCode = urlParams.get('sc');
+    let autovaluesKey = 'default';
+
+    if (urlParamSupportCode !== null) {
+      if (WP.supportSectionAutovalues[urlParamSupportCode] !== undefined && WP.supportSectionAutovalues[urlParamSupportCode].length === 6) {
+        autovaluesKey = urlParamSupportCode;
+      }
+    }
+
+    this.autovalues = WP.supportSectionAutovalues[autovaluesKey];
   }
 
   bind() {
@@ -26,6 +39,8 @@ export class Support {
 
     $('.support-form').each(function (index, value) {
       const $form = $(value);
+
+      _this.setAutoValues($form);
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
@@ -82,9 +97,9 @@ export class Support {
    * Switches the quick auto values displayed on the form depending on the type of donation.
    *
    * @param {Object}   $form         jQuery object of the form in question.
-   * @param {String}   donationType  Type of donation. oneoff OR regular
+   * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
    */
-  setAutoValues($form, donationType) {
+  setAutoValues($form, donationType = 'regular') {
     const _this = this;
 
     $form.find('.support-form__value-option').each((index, input) => {
