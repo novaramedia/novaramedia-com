@@ -27,7 +27,7 @@ export class Support {
 
     if (urlParamSupportCode !== null) {
       if (
-        WP.supportSectionAutovalues[urlParamSupportCode] !== undefined &&
+        typeof WP.supportSectionAutovalues[urlParamSupportCode] !== 'undefined' &&
         WP.supportSectionAutovalues[urlParamSupportCode].length === 6
       ) {
         autovaluesKey = urlParamSupportCode;
@@ -40,7 +40,7 @@ export class Support {
   bind() {
     const _this = this;
 
-    $('.support-form').each(function (index, value) {
+    $('.support-form').each((index, value) => {
       const $form = $(value);
 
       _this.setAutoValues($form);
@@ -48,7 +48,7 @@ export class Support {
       const $valueInput = $form.find('.support-form__value-input').first();
 
       $form.find('.support-form__button').on({
-        click: function (event) {
+        click(event) {
           event.preventDefault();
 
           const $button = $(this);
@@ -83,7 +83,7 @@ export class Support {
       });
 
       $form.find('.support-form__custom-input').on({
-        input: function (event) {
+        input(event) {
           event.preventDefault();
 
           $valueInput.val(event.target.value);

@@ -476,7 +476,7 @@ var Support = /*#__PURE__*/function () {
       var autovaluesKey = 'default';
 
       if (urlParamSupportCode !== null) {
-        if (WP.supportSectionAutovalues[urlParamSupportCode] !== undefined && WP.supportSectionAutovalues[urlParamSupportCode].length === 6) {
+        if (typeof WP.supportSectionAutovalues[urlParamSupportCode] !== 'undefined' && WP.supportSectionAutovalues[urlParamSupportCode].length === 6) {
           autovaluesKey = urlParamSupportCode;
         }
       }
