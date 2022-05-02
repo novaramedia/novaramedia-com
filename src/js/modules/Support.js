@@ -26,7 +26,10 @@ export class Support {
     let autovaluesKey = 'default';
 
     if (urlParamSupportCode !== null) {
-      if (WP.supportSectionAutovalues[urlParamSupportCode] !== undefined && WP.supportSectionAutovalues[urlParamSupportCode].length === 6) {
+      if (
+        WP.supportSectionAutovalues[urlParamSupportCode] !== undefined &&
+        WP.supportSectionAutovalues[urlParamSupportCode].length === 6
+      ) {
         autovaluesKey = urlParamSupportCode;
       }
     }
@@ -51,7 +54,8 @@ export class Support {
           const $button = $(this);
           const data = $button.data();
 
-          if (data.action === 'set-type') { // if the button is setting the type of donation
+          if (data.action === 'set-type') {
+            // if the button is setting the type of donation
             _this.setAutoValues($form, data.value);
 
             $form.attr('action', _this.donationAppUrl + data.value);
@@ -61,7 +65,8 @@ export class Support {
               .removeClass('support-form__button--active');
 
             $button.addClass('support-form__button--active');
-          } else if (data.action === 'set-value') { // if the button is setting the donation value
+          } else if (data.action === 'set-value') {
+            // if the button is setting the donation value
             $valueInput.val(data.value);
 
             $form
