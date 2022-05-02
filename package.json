@@ -72,6 +72,9 @@
       "@release-it/keep-a-changelog": {
         "filename": "CHANGELOG.md"
       }
+    },
+    "hooks": {
+      "before:release": "yarn build"
     }
   }
 }

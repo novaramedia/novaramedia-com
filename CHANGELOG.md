@@ -6,13 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.3.0] - 2022-05-02
 
-## [3.3.0] - 2022-05-02
-
 ### Added
 
 - CHANGELOG.md!
 - Support Section optional autovalues loaded via private query param codes.
-
 
 ### Changed
 
