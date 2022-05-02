@@ -472,7 +472,7 @@ var Support = /*#__PURE__*/function () {
     key: "setupAutovalues",
     value: function setupAutovalues() {
       var urlParams = new URLSearchParams(window.location.search);
-      var urlParamSupportCode = urlParams.get('sc');
+      var urlParamSupportCode = urlParams.get('sv');
       var autovaluesKey = 'default';
 
       if (urlParamSupportCode !== null) {
@@ -524,6 +524,7 @@ var Support = /*#__PURE__*/function () {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('support-form__button--active');
           }
         });
+        $form.addClass('support-form--active');
       });
     }
     /**

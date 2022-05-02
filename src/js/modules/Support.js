@@ -22,7 +22,7 @@ export class Support {
    */
   setupAutovalues() {
     const urlParams = new URLSearchParams(window.location.search);
-    const urlParamSupportCode = urlParams.get('sc');
+    const urlParamSupportCode = urlParams.get('sv');
     let autovaluesKey = 'default';
 
     if (urlParamSupportCode !== null) {
@@ -90,6 +90,8 @@ export class Support {
           $(this).addClass('support-form__button--active');
         },
       });
+
+      $form.addClass('support-form--active');
     });
   }
 

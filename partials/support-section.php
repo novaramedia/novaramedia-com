@@ -49,7 +49,7 @@
             ?>
         </div>
 
-        <div class="flex-grid-item flex-item-l-12 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
+        <div class="support-form__inputs flex-grid-item flex-item-l-12 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
           <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
               <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default'][0]; ?>">£<?php echo $support_section_autovalues['default'][0]; ?></button>
