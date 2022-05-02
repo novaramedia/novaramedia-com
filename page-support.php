@@ -25,11 +25,11 @@ if( have_posts() ) {
 ?>
   <!-- main posts loop -->
   <article id="page" class="support-page">
-    <div class="background-cover-image background-light-blue" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
+    <div class="background-cover-image background-red" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2022-texture.svg'; ?>);">
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny"><?php
+            <h4 class="margin-top-small margin-bottom-tiny font-color-white"><?php
               if (!empty($override_title)) {
                 echo $override_title;
               } else {
@@ -38,10 +38,10 @@ if( have_posts() ) {
             ?></h4>
           </div>
         </div>
-        <div class="flex-grid-row support-page__hero-wrapper">
-          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-10 flex-offset-xxl-0">
-            <h1 class="font-size-5">We're in it for the long&nbsp;haul.</h1>
-            <h2 class="font-size-5 font-color-white">Are you with&nbsp;us?</h2>
+        <div class="flex-grid-row support-page__hero-wrapper font-color-white">
+          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-12 flex-offset-xxl-0">
+            <h1 class="font-size-6 font-size-l-5 margin-bottom-tiny">Support independent media with integrity.</h1>
+            <h2 class="font-size-3">Back Novara Media from just £1 per month.</h2>
           </div>
         </div>
       </div>
@@ -50,11 +50,11 @@ if( have_posts() ) {
     <?php
       get_template_part('partials/support-section', null, array(
         'heading_copy' => 'Become a supporter',
-        'override_text' => 'It’s been ten years since Novara Media first started. Now, more than ever, we need your support.'
+        'override_text' => 'Defy the billionaire-backed media and build our supporter base to 10,000-strong. Donate anything you can, from £1 per month.'
       ));
     ?>
 
-    <div class="container">      
+    <div class="container">
       <div class="flex-grid-row margin-top-basic margin-bottom-basic">
         <?php
           if ($youtube_id) {
@@ -63,7 +63,7 @@ if( have_posts() ) {
           <div class="u-video-embed-container">
             <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
           </div>
-          
+
           <ul class="inline-action-list margin-top-small">
             <?php
               $share_url = 'https://novaramedia.com/support/';
@@ -75,16 +75,16 @@ if( have_posts() ) {
           </ul>
         </div>
         <?php } ?>
-        
+
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 support-page__content-copy">
           <?php the_content(); ?>
         </div>
-      </div>    
+      </div>
     </div>
-    
+
     <div class="background-cover-image font-color-white" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
       <div class="background-cover-overlay" style="background: linear-gradient(90deg, #B97EFF 0%, rgba(220, 0, 5, 0) 96.11%);"></div>
-      <div class="container padding-top-mid padding-bottom-mid">      
+      <div class="container padding-top-mid padding-bottom-mid">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h3 class="font-size-2 margin-bottom-small">Already a supporter?</h3>
@@ -92,7 +92,7 @@ if( have_posts() ) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
             <p><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
-          </div>   
+          </div>
         </div>
       </div>
     </div>
@@ -100,11 +100,11 @@ if( have_posts() ) {
     <?php
       get_template_part('partials/support-section', null, array(
         'heading_copy' => 'Become a supporter',
-        'override_text' => 'Not yet a supporter? We\'re asking that you donate one hour of your wage each month.'
+        'override_text' => 'We don’t have billionaire funders. We don’t have advertising partnerships. We have you. Support truly independent media and become a monthly supporter from just £1 per month.'
       ));
     ?>
-        
-    <div id="other-donation-methods" class="container">      
+
+    <div id="other-donation-methods" class="container">
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
           <h4>Other Donation Methods</h4>
@@ -112,7 +112,7 @@ if( have_posts() ) {
         <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-xxl-3 margin-bottom-small">
           <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
         </div>
-        
+
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
@@ -121,14 +121,14 @@ if( have_posts() ) {
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
           <p><a class="nm-button nm-button--red" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
-        
+
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
           </p>
           <p><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
-          
+
           <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
               <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
@@ -146,7 +146,7 @@ if( have_posts() ) {
             </div>
           </div>
         </div>
-          
+
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
