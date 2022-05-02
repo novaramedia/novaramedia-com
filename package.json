@@ -57,6 +57,7 @@
     "webpack-notifier": "^1.12.0"
   },
   "dependencies": {
+    "@release-it/keep-a-changelog": "^3.0.0",
     "jquery": "^3.5.1",
     "js-cookie": "^3.0.1",
     "lazysizes": "^5.2.2",
@@ -66,6 +67,11 @@
   "release-it": {
     "npm": {
       "publish": false
+    },
+    "plugins": {
+      "@release-it/keep-a-changelog": {
+        "filename": "CHANGELOG.md"
+      }
     }
   }
 }
