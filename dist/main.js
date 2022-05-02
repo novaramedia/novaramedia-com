@@ -505,12 +505,17 @@ var Support = /*#__PURE__*/function () {
               _this.setAutoValues($form, data.value);
 
               $form.attr('action', _this.donationAppUrl + data.value);
-              $form.find('.support-form__button[data-action="set-type"]').removeClass('support-form__button--active');
+
+              _this.clearActiveButtonState($form);
+
+              $valueInput.val(1);
               $button.addClass('support-form__button--active');
             } else if (data.action === 'set-value') {
               // if the button is setting the donation value
               $valueInput.val(data.value);
-              $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
+
+              _this.clearActiveButtonState($form, 'set-value');
+
               jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form__custom-input').removeClass('support-form__button--active');
               $button.addClass('support-form__button--active');
             }
@@ -520,12 +525,30 @@ var Support = /*#__PURE__*/function () {
           input: function input(event) {
             event.preventDefault();
             $valueInput.val(event.target.value);
-            $form.find('.support-form__button[data-action="set-value"]').removeClass('support-form__button--active');
+
+            _this.clearActiveButtonState($form, 'set-value');
+
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('support-form__button--active');
           }
         });
         $form.addClass('support-form--active');
       });
+    }
+    /**
+     * Clears the active state from input buttons. Default clears all but optional param clears just one action type of button
+     *
+     * @param {Object}   $form         jQuery object of the form in question.
+     * @param {String}   [actionType]  Action type filter to clear just one type of button. 'set-value' or 'set-type'
+     */
+
+  }, {
+    key: "clearActiveButtonState",
+    value: function clearActiveButtonState($form, actionType) {
+      if (actionType) {
+        $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
+      } else {
+        $form.find('.support-form__button').removeClass('support-form__button--active');
+      }
     }
     /**
      * Switches the quick auto values displayed on the form depending on the type of donation.
