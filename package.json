@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "moment-locales-webpack-plugin": "^1.2.0",
     "postcss": "^8.2.10",
     "postcss-loader": "^6.2.1",
+    "release-it": "^15.0.0",
     "style-loader": "^3.3.1",
     "stylus": "^0.57.0",
     "stylus-native-loader": "^1.4.3",
@@ -60,5 +62,10 @@
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.2"
+  },
+  "release-it": {
+    "npm": {
+      "publish": false
+    }
   }
 }
