@@ -542,24 +542,15 @@ var Support = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "clearActiveButtonState",
-    value: function clearActiveButtonState($form, actionType) {
-      if (actionType) {
-        $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
-      } else {
-        $form.find('.support-form__button').removeClass('support-form__button--active');
-      }
-    }
+    key: "setAutoValues",
+    value:
     /**
      * Switches the quick auto values displayed on the form depending on the type of donation.
      *
      * @param {Object}   $form         jQuery object of the form in question.
      * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
      */
-
-  }, {
-    key: "setAutoValues",
-    value: function setAutoValues($form) {
+    function setAutoValues($form) {
       var donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
 
       var _this = this;
@@ -569,6 +560,15 @@ var Support = /*#__PURE__*/function () {
         var value = _this.autovalues[autovaluesIndex];
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text("\xA3".concat(value));
       });
+    }
+  }], [{
+    key: "clearActiveButtonState",
+    value: function clearActiveButtonState($form, actionType) {
+      if (actionType) {
+        $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
+      } else {
+        $form.find('.support-form__button').removeClass('support-form__button--active');
+      }
     }
   }, {
     key: "numberWithCommas",

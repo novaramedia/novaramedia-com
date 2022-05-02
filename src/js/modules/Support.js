@@ -100,7 +100,7 @@ export class Support {
    * @param {Object}   $form         jQuery object of the form in question.
    * @param {String}   [actionType]  Action type filter to clear just one type of button. 'set-value' or 'set-type'
    */
-  clearActiveButtonState($form, actionType) {
+  static clearActiveButtonState($form, actionType) {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
@@ -128,7 +128,7 @@ export class Support {
     });
   }
 
-  numberWithCommas(x) {
+  static numberWithCommas(x) {
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
