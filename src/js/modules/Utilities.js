@@ -20,7 +20,7 @@ export class Utilities {
       _this.bindResourcesToggle();
     }
 
-    $('.js-select').click(function() {
+    $('.js-select').click(function () {
       selectText($(this)[0]); // *** need to fix this
     });
   }
@@ -28,22 +28,22 @@ export class Utilities {
   bindResourcesToggle() {
     var $resources = $('#single-resources-section');
 
-    $('#js-resources-toggle').click(function() {
+    $('#js-resources-toggle').click(function () {
       $resources.toggle();
     });
   }
 
   fixWidows() {
     // utility class mainly for use on headines to avoid widows [single words on a new line]
-    $('.js-fix-widows').each(function(){
+    $('.js-fix-widows').each(function () {
       var string = $(this).html();
-      string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
+      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
       $(this).html(string);
     });
   }
 
   displayTimeSince() {
-    $('.js-time-since').each(function() {
+    $('.js-time-since').each(function () {
       var $element = $(this);
       var timestamp = $element.data('timestamp');
       var m = moment(timestamp);
@@ -60,7 +60,7 @@ export class Utilities {
     if (approvalCookie !== 'true') {
       $('#gdpr').show();
 
-      $('#gdpr-accept').click(function() {
+      $('#gdpr-accept').click(function () {
         Cookies.set('gdpr-approval', true);
         $('#gdpr').hide();
       });

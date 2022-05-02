@@ -1,6 +1,5 @@
 @import '~kouto-swiss/index.styl'
 @import "helpers"
-@import "library"
 @import "grid-functions"
 
 // ******************************************************
@@ -751,6 +750,12 @@ nmButton()
 
 .support-form
   display: block
+  .support-form__inputs
+    opacity: 0
+    transition: opacity $basic-animation-speed
+  &--active
+    .support-form__inputs
+      opacity: 1
 
 .support-form__button, .support-form__custom-input
   nmButton()

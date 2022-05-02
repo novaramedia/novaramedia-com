@@ -9,7 +9,7 @@ function nm_cmb_page_newsletters_metaboxes() {
     'id'         => $prefix . 'page_newsletters',
     'title'      => esc_html__( 'Newsletters Metabox', 'cmb2' ),
     'object_types' => array( 'page' ), // Post type
-    'show_on'    => array('key' => 'slug', 'value' => 'the-pick'),
+    'show_on'    => array('key' => 'slug', array('the-pick', 'the-cortado')),
     'context'    => 'normal',
     'priority'   => 'high',
     'show_names' => true, // Show field names on the left

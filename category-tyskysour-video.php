@@ -38,7 +38,7 @@ get_header();
     <div class="tyskysour-archive__liveplayer flex-grid-row">
       <div class="flex-grid-item flex-item-xxl-12">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($embed_id); ?>"></iframe>
+          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($embed_id, true); ?>"></iframe>
         </div>
       </div>
     </div>
@@ -69,7 +69,8 @@ get_header();
         <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-small">
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
-            <h6 class="js-fix-widows font-size-2 font-size-s-1 font-semibold margin-top-micro"><?php the_title(); ?></h6>
+            <h6 class="font-size-1 font-size-s-1 font-semibold margin-top-micro"><?php the_time('j F Y'); ?></h6>
+            <h6 class="js-fix-widows font-size-2 font-size-s-1 font-semibold"><?php the_title(); ?></h6>
           <a href="<?php the_permalink(); ?>">
         </div>
         <?php
