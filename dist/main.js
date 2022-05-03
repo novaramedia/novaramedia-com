@@ -542,15 +542,24 @@ var Support = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "setAutoValues",
-    value:
+    key: "clearActiveButtonState",
+    value: function clearActiveButtonState($form, actionType) {
+      if (actionType) {
+        $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
+      } else {
+        $form.find('.support-form__button').removeClass('support-form__button--active');
+      }
+    }
     /**
      * Switches the quick auto values displayed on the form depending on the type of donation.
      *
      * @param {Object}   $form         jQuery object of the form in question.
      * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
      */
-    function setAutoValues($form) {
+
+  }, {
+    key: "setAutoValues",
+    value: function setAutoValues($form) {
       var donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
 
       var _this = this;
@@ -562,15 +571,6 @@ var Support = /*#__PURE__*/function () {
       });
     }
   }], [{
-    key: "clearActiveButtonState",
-    value: function clearActiveButtonState($form, actionType) {
-      if (actionType) {
-        $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
-      } else {
-        $form.find('.support-form__button').removeClass('support-form__button--active');
-      }
-    }
-  }, {
     key: "numberWithCommas",
     value: function numberWithCommas(x) {
       // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
