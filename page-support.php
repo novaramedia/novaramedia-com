@@ -40,8 +40,8 @@ if( have_posts() ) {
         </div>
         <div class="flex-grid-row support-page__hero-wrapper font-color-white">
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-12 flex-offset-xxl-0">
-            <h1 class="font-size-6 font-size-l-5 margin-bottom-tiny">Support independent media with integrity.</h1>
-            <h2 class="font-size-3">Back Novara Media from just £1 per month.</h2>
+            <h1 class="font-size-5 margin-bottom-tiny">Defy billionaire-backed media and build our supporter base to 10,000&nbsp;strong.</h1>
+            <h2 class="font-size-3">Donate anything you can from just £1 per&nbsp;month.</h2>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'heading_copy' => 'Become a supporter',
+        'heading_copy' => 'Join our regular supporters',
         'override_text' => 'Defy the billionaire-backed media and build our supporter base to 10,000-strong. Donate anything you can, from £1 per month.'
       ));
     ?>
