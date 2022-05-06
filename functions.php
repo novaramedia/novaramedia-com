@@ -52,11 +52,19 @@ if ( !isset( $content_width ) ) {
 get_template_part( 'lib/thumbnail-sizes' );
 
 // Register Nav Menus
-/*
-register_nav_menus( array(
-	'menu_location' => 'Location Name',
-) );
-*/
+function nm_register_menus() {
+  register_nav_menus(
+    array(
+      'footer-2' => __( 'Footer (2nd)' ),
+      'footer-3' => __( 'Footer (3rd)' ),
+      'footer-4' => __( 'Footer (4th)' ),
+      'articles-archive-menu' => __( 'Articles archive' ),
+      'audio-archive-menu' => __( 'Audio archive' ),
+      'video-archive-menu' => __( 'Video archive' ),
+     )
+   );
+ }
+add_action( 'init', 'nm_register_menus' );
 
 get_template_part( 'lib/custom-gallery' );
 
