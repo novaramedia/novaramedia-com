@@ -167,7 +167,7 @@ module.exports = (env, argv) => {
         ],
       })
     );
-    config.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}));
+    config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
     config.performance.hints = 'warning';
     config.stats.preset = 'detailed';
   }
