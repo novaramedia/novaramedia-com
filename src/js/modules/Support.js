@@ -103,7 +103,7 @@ export class Support {
    * @param {Object}   $form         jQuery object of the form in question.
    * @param {String}   [actionType]  Action type filter to clear just one type of button. 'set-value' or 'set-type'
    */
-  static clearActiveButtonState($form, actionType) {
+  clearActiveButtonState($form, actionType) {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
