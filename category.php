@@ -17,41 +17,48 @@ $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)
 $is_one_button = $is_video === false || $podcast_url === false ? true : false;
 
 $button_grid_item_classes = $is_one_button ? 'flex-grid-item flex-offset-s-0 flex-offset-l-6 flex-item-s-6 flex-item-l-6 flex-offset-xxl-3 flex-item-xxl-3' : 'flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-3';
+
+if ($category->slug === 'video') {
+  $button_grid_item_classes = 'mobile-margin-top-tiny flex-grid-item flex-item-s-12 flex-offset-l-0 flex-item-l-6 flex-offset-xxl-2 flex-item-xxl-4';
+}
 ?>
 <main id="main-content" class="category-archive">
   <section id="posts" class="container margin-top-small">
     <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12">
+      <?php
+        if (in_array($category->slug, array('articles', 'audio', 'video'))) {
+        ?>
+      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">
+        <span class="font-uppercase font-bold"><?php echo $category->name; ?></span> <?php
+          wp_nav_menu(
+            array(
+              'theme_location' => $category->slug . '-archive-menu',
+              'container' => false,
+              'menu_class' => 'category-archive__submenu',
+              'fallback_cb' => false,
+            )
+          );
+        ?>
+      </div>
+      <?php
+        } else { ?>
+      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php
           if (get_term_meta($category->term_id, '_nm_category_logo_id', true)) {
             $logo_id = get_term_meta($category->term_id, '_nm_category_logo_id', true);
 
             echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
           } else {
-            if (in_array($category->slug, array('articles', 'audio', 'video'))) {
-        ?>
-        <span class="font-uppercase font-bold"><?php echo $category->name; ?></span> <?php
-                wp_nav_menu(
-                  array(
-                    'theme_location' => $category->slug . '-archive-menu',
-                    'container' => false,
-                    'menu_class' => 'category-archive__submenu',
-                    'fallback_cb' => false,
-                  )
-                );
-              ?>
-              <?php
-            } else {
         ?>
         <h4><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
-        <?php
-            }
-          }
-        ?>
+      <?php
+        }
+      ?>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
         <?php echo category_description(); ?>
       </div>
+        <?php } ?>
       <?php
         if ($is_video) {
       ?>

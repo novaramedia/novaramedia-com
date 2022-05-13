@@ -3865,6 +3865,9 @@ img {
   .mobile-margin-top-none {
     margin-top: 0px;
   }
+  .mobile-margin-top-tiny {
+    margin-top: 6px;
+  }
   .mobile-margin-top-small {
     margin-top: 12px;
   }
