@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
@@ -74,7 +74,9 @@
       }
     },
     "hooks": {
-      "before:release": "yarn build"
+      "before:release": "yarn build",
+      "after:release": "echo Successfully released v${version}. The old one was? ${latestVersion}. If they dont match then setup that bash script now!",
+      "_comment script to add": "sed -i 's/${latestVersion}/${version}/' style.css"
     }
   }
 }
