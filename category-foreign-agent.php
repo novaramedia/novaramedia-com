@@ -19,8 +19,8 @@ function renderPodcastCredit($credit) {
   <section class="container padding-top-basic padding-bottom-basic">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-xxl-12 text-align-center">
-        <h3 class="font-size-2 margin-bottom-tiny">Stand first text goes in here</h3>
-        <h1 class="font-size-6">Foreign<br/>Agents</h1>
+        <h3 class="font-size-2 margin-bottom-tiny"> The IRA’s American connection</h3>
+        <h1 class="font-size-6">Foreign<br/>Agent</h1>
         <img src="" width="800" height="250" alt="Illustrative show cover" />
       </div>
     </div>
