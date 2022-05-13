@@ -99,8 +99,8 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'heading_copy' => 'Become a supporter',
-        'override_text' => 'We don’t have billionaire funders. We don’t have advertising partnerships. We have you. Support truly independent media and become a monthly supporter from just £1 per month.'
+        'heading_copy' => 'Join our regular supporters',
+        'override_text' => 'Defy the billionaire-backed media and build our supporter base to 10,000-strong. Donate anything you can, from £1 per month.'
       ));
     ?>
 
