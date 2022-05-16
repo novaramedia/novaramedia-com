@@ -7,12 +7,12 @@ function tax_focus_specials_template_path($template) {
   if (is_tax('focus')) {
     $term = get_query_var('term');
     $new_template = locate_template(array('specials/taxonomy-focus-' . $term . '.php'));
-        
+
     if ('' != $new_template) {
       return $new_template;
     }
   }
-  
+
   return $template;
 }
 add_filter( 'template_include', 'tax_focus_specials_template_path', 99 );
@@ -24,30 +24,17 @@ function nm_category_id_class($classes) {
     foreach((get_the_category($post->ID)) as $category)
       $classes[] = 'category-' . $category->category_nicename;
   }
-  
+
   return $classes;
 }
- 
-add_filter('body_class', 'nm_category_id_class');
 
-// Register nav menus
-function nm_register_menus() {
-  register_nav_menus(
-    array(
-      'footer-2' => __( 'Footer (2nd)' ),
-      'footer-3' => __( 'Footer (3rd)' ),
-      'footer-4' => __( 'Footer (4th)' ),
-     )
-   );
- }
-add_action( 'init', 'nm_register_menus' );
+add_filter('body_class', 'nm_category_id_class');
 
 // Add classes to oembed elements
 function my_embed_oembed_html($html, $url, $attr, $post_id) {
   return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
 }
 add_filter('embed_oembed_html', 'my_embed_oembed_html', 99, 4);
-
 
 // Custom img attributes to be compatible with lazysize
 function add_lazysize_on_srcset($attr) {

@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "3.3.1",
+  "version": "3.4.0",
   "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
@@ -74,7 +74,8 @@
       }
     },
     "hooks": {
-      "before:release": "yarn build"
+      "before:release": "yarn build",
+      "after:release": "sed -i '' 's/${latestVersion}/${version}/' style.css"
     }
   }
 }
