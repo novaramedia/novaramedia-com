@@ -73,13 +73,7 @@
                   }
                 ?>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
-                <?php
-                  if (!$ts_term) {
-                ?>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
-                <?php
-                  }
-                ?>
                 <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>

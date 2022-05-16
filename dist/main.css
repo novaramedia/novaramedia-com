@@ -1885,6 +1885,15 @@ img {
 .category-archive__logo {
   width: 220px;
 }
+.category-archive__submenu {
+  display: inline-block;
+}
+.category-archive__submenu li {
+  display: inline-block;
+}
+.category-archive__submenu li:before {
+  content: '| ';
+}
 .about-page__person a:after {
   content: '\219D';
   position: relative;
@@ -3855,6 +3864,9 @@ img {
   }
   .mobile-margin-top-none {
     margin-top: 0px;
+  }
+  .mobile-margin-top-tiny {
+    margin-top: 6px;
   }
   .mobile-margin-top-small {
     margin-top: 12px;
