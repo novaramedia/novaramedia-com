@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Adds (temp) nav menus registered and rendered for the 3 top level categories and visible on the archive pages.
+### Added
+
+- (temp) Nav menus registered and rendered for the 3 top level categories and visible on the archive pages.
+
+### Changed
+
+- 2022 support page
 
 ## [3.3.1] - 2022-05-11
 
