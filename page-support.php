@@ -82,8 +82,7 @@ if( have_posts() ) {
       </div>
     </div>
 
-    <div class="background-cover-image font-color-white" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/nm10-splash.svg'; ?>);">
-      <div class="background-cover-overlay" style="background: linear-gradient(90deg, #B97EFF 0%, rgba(220, 0, 5, 0) 96.11%);"></div>
+    <div class="background-lilac">
       <div class="container padding-top-mid padding-bottom-mid">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
