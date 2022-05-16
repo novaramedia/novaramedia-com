@@ -1,9 +1,10 @@
 <?php
 // Support section autovalue options. The array values are first 3 for monthly, last 3 for one-off, default will be lowest monthly
 define('SUPPORT_SECTION_AUTOVALUES', array(
-  'default' => array(5, 8, 10, 10, 20, 40),
+  'default' => array(1, 3, 5, 5, 10, 15),
   'F0VUJ2' => array(3, 5, 8, 10, 25, 50),
-  '56R6NI' => array(1, 3, 5, 5, 10, 15)
+  '56R6NI' => array(1, 3, 5, 5, 10, 15),
+  'EO0X91' => array(5, 8, 10, 10, 20, 40),
 ));
 
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
