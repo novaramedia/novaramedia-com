@@ -125,6 +125,8 @@ $color-blue = rgb(84, 144, 235)
 $color-blue-neon = #0018F0
 $color-blue-light = #CAE5FF
 
+$color-teal = #E3FFFF
+
 $color-lilac = #B1B1FF
 
 $color-purple-light = #B1B1FF
@@ -133,7 +135,8 @@ $border-width = 2px
 
 $basic-animation-speed = .5s
 
-$duration-form-transitions = 420ms
+$duration-medium-transitions = 420ms
+$duration-form-transitions = $duration-medium-transitions
 
 $font-serif = font-stack('Georgia')
 $font-sans = font-stack('Helvetica')
@@ -308,6 +311,13 @@ p
 .text-align-center
   text-align: center
 
+.text-links-underlined
+  a
+    text-decoration: underline
+    transition: text-decoration $duration-medium-transitions // doesnt work?
+    &:hover
+      text-decoration: none
+
 article
   ul, ol
     margin-top: 2rem
@@ -413,6 +423,9 @@ a
 .background-neon-blue
   background-color: $color-blue-neon
 
+.background-teal
+  background-color: $color-teal
+
 .background-lilac
   background-color: $color-lilac
 
@@ -423,6 +436,7 @@ a
   position: relative
   background-size: cover
   background-position: center
+  background-repeat: no-repeat
 
 .background-cover-overlay
   position: absolute
@@ -1065,6 +1079,17 @@ nmButton()
 
 .category-archive__logo
   width: 220px
+
+// ******************************************************
+
+// ARCHIVE: FOREIGN AGENT
+
+.foreign-agent-archive__title
+  max-width: 500px
+
+.foreign-agent__serif-large
+  font-size: 27px
+  line-height: 1.25
 
 // ******************************************************
 
