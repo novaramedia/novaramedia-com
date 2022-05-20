@@ -35,6 +35,7 @@ function nm_register_front_page_options_metabox() {
   $banner_options = array(
     false => 'None',
     'partials/support-section' => 'Support section',
+    'partials/specials/banners/support-video' => 'Support Video',
     'email-the-cortado' => 'Email signup: The Cortado',
     'email-the-pick' => 'Email signup: The Pick',
     'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
