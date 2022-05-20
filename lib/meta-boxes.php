@@ -74,20 +74,20 @@ function createAboutColumnGroupFields($cmbInstance, $numberOfGroups, $title, $la
         'sortable'          => true,
       ),
     ) );
-  
+
     $cmbInstance->add_group_field( $group_field, array(
       'name' => 'Role',
       'id'   => 'title',
       'type' => 'text',
     ) );
-    
+
     $cmbInstance->add_group_field( $group_field, array(
       'name' => 'Name',
       'id'   => 'name',
       'type' => 'textarea_code',
       'repeatable' => true,
-    ) );    
-  }  
+    ) );
+  }
 }
 
 /**
@@ -170,7 +170,7 @@ function igv_cmb_metaboxes() {
 
   $audio_metabox->add_field( array(
     'name' => __( 'Soundcloud URL', 'cmb' ),
-    'desc' => __( 'Enter a URL.', 'cmb' ),
+    'desc' => __( 'Required! Enter a full URL.', 'cmb' ),
     'id'   => $prefix . 'sc',
     'type' => 'text_url',
   ) );
@@ -191,7 +191,7 @@ function igv_cmb_metaboxes() {
 
   $audio_metabox->add_field( array(
     'name' => __( 'Transcript', 'cmb' ),
-    'desc' => __( '...', 'cmb' ),
+    'desc' => __( '(optional) Shows below the content', 'cmb' ),
     'id'   => $prefix . 'transcript',
     'type' => 'wysiwyg',
   ) );
@@ -210,7 +210,7 @@ function igv_cmb_metaboxes() {
 
   $video_metabox->add_field( array(
     'name' => __( 'YouTube ID', 'cmb' ),
-    'desc' => __( 'Id of youtube video. for example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the Id is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
+    'desc' => __( 'Required! ID of YouTube video. For example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the ID is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
     'id'   => $prefix . 'utube',
     'type' => 'text',
   ) );
@@ -236,12 +236,14 @@ function igv_cmb_metaboxes() {
 
   $articles_metabox->add_field( array(
     'name' => __( 'Standfirst', 'cmb' ),
+    'desc' => __( 'Required!', 'cmb' ),
     'id'   => $prefix . 'standfirst',
     'type' => 'textarea',
   ) );
-  
+
   $articles_metabox->add_field( array(
     'name' => __( 'Author', 'cmb' ),
+    'desc' => __( 'Required! Full name or multiple names.', 'cmb' ),
     'id'   => $prefix . 'author',
     'type' => 'text',
   ) );
@@ -256,6 +258,7 @@ function igv_cmb_metaboxes() {
 
   $articles_metabox->add_field( array(
     'name' => __( 'Layout', 'cmb' ),
+    'desc' => __( 'Adjusts layout style. Use large splash for features with high quality imagery. Us no image if artwork is repeated in the copy or is incredibly dull.', 'cmb' ),
     'id'   => $prefix . 'article_layout',
     'type' => 'radio',
     'show_option_none' => false,
@@ -446,7 +449,7 @@ function igv_cmb_metaboxes() {
     'id'      => $prefix . 'about_title_memebers',
     'type'    => 'title',
   ) );
-  
+
   createAboutColumnGroupFields($about_page_meta_boxes, 4, 'Team roles and members', 'Use an entry for each role and fill with member names');
 
   createAboutColumnGroupFields($about_page_meta_boxes, 2, 'Associates roles and names', 'Use an entry for each role and fill with associate names');
@@ -456,7 +459,7 @@ function igv_cmb_metaboxes() {
     'id'      => $prefix . 'about_title_contact',
     'type'    => 'title',
   ) );
-  
+
   $contact_group_field = $about_page_meta_boxes->add_field( array(
     'id'          => 'about_page_contact_group',
     'type'        => 'group',
@@ -482,7 +485,7 @@ function igv_cmb_metaboxes() {
     'id'   => 'email',
     'type'    => 'text_email',
   ) );
-  
+
   $about_page_meta_boxes->add_group_field($contact_group_field, array(
     'name' => 'Link',
     'id'   => 'link',
@@ -490,14 +493,14 @@ function igv_cmb_metaboxes() {
     'post_type'   => array('page', 'notice'),
     'select_behavior' => 'replace',
   ) );
-  
+
   $about_page_meta_boxes->add_field( array(
     'name'    => __( 'Funding Section', 'cmb' ),
     'id'      => $prefix . 'about_funding',
     'type'    => 'wysiwyg',
     'options' => array( 'textarea_rows' => 5, ),
   ) );
-    
+
   $funding_group_field = $about_page_meta_boxes->add_field( array(
     'id'          => 'about_page_funding_group',
     'type'        => 'group',
@@ -517,7 +520,7 @@ function igv_cmb_metaboxes() {
     'type'    => 'wysiwyg',
     'options' => array( 'textarea_rows' => 3, ),
   ) );
-  
+
   $about_page_meta_boxes->add_group_field($funding_group_field, array(
     'name' => 'Image',
     'id'   => 'image',
