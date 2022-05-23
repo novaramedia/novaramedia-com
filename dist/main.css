@@ -1898,13 +1898,6 @@ img {
 .category-archive__logo {
   width: 220px;
 }
-.foreign-agent-archive__title {
-  max-width: 500px;
-}
-.foreign-agent__serif-large {
-  font-size: 27px;
-  line-height: 1.25;
-}
 .about-page__person a:after {
   content: '\219D';
   position: relative;
