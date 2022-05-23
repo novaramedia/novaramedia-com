@@ -1,5 +1,13 @@
 <?php
 get_header();
+/*
+TODO
+
+- [x] Conditiionalise the for next ep message
+- [ ] Route single posts to this page via slug ID
+- [ ] Quickly redo the podcast WP theme!
+- [ ] Fix Google Podcasts link!?
+*/
 
 $credits_left = array(
   array('Executive Producer', 'Chal Ravens'),
@@ -173,7 +181,9 @@ if( have_posts() ) {
       </article>
 <?php
   }
-} ?>
+
+  if ($wp_query->found_posts < 8) {
+?>
       <div class="flex-grid-row margin-bottom-large">
         <div class="foreign-agent-archive__episode flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-4 flex-item-xxl-6">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
@@ -181,7 +191,10 @@ if( have_posts() ) {
           </div>
         </div>
       </div>
-
+<?php
+  }
+}
+?>
     </div>
   </section>
 
