@@ -1,13 +1,5 @@
 <?php
 get_header();
-/*
-TODO
-
-- [x] Conditiionalise the for next ep message
-- [ ] Route single posts to this page via slug ID
-- [ ] Quickly redo the podcast WP theme!
-- [ ] Fix Google Podcasts link!?
-*/
 
 $credits_left = array(
   array('Executive Producer', 'Chal Ravens'),
@@ -143,7 +135,7 @@ function renderPodcastCredit($credit) {
         A six-part series starting on 24 May.
       </div>
     </div>
-    <div class="flex-grid-row padding-bottom-basic margin-bottom-large">
+    <div class="flex-grid-row margin-bottom-large">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center font-size-3 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
           Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>, <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
@@ -152,14 +144,14 @@ function renderPodcastCredit($credit) {
     </div>
   </section>
   <section id="posts" class="container">
-    <div class="margin-top-large">
+    <div class="margin-bottom-large">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
 ?>
-      <article class="foreign-agent-archive__episode flex-grid-row margin-bottom-large">
+      <article class="foreign-agent-archive__episode flex-grid-row padding-top-large" id="<?php echo $post->post_name; ?>">
 
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-margin-bottom-small">
           <h4 class="margin-bottom-micro mobile-margin-bottom-none"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>

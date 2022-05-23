@@ -1,4 +1,21 @@
 <?php
+$categories = get_the_category();
+
+function nm_is_serial_podcast_category($category) {
+  return $category->slug === 'foreign-agent' ? true : false;
+}
+
+if ($serial_category_match = array_filter($categories, 'nm_is_serial_podcast_category')) {
+  $serial_category_match = array_values($serial_category_match);
+  $link = get_term_link($serial_category_match[0]);
+
+  if (isset($link) && isset($post->post_name)) {
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $link . '#' . $post->post_name);
+    exit;
+  }
+}
+
 get_header();
 ?>
 <main id="main-content">
