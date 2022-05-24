@@ -1038,9 +1038,6 @@ b {
 }
 .text-links-underlined a {
   text-decoration: underline;
-  transition: -webkit-text-decoration 420ms;
-  transition: text-decoration 420ms;
-  transition: text-decoration 420ms, -webkit-text-decoration 420ms;
 }
 .text-links-underlined a:hover {
   text-decoration: none;

@@ -14,7 +14,7 @@ $credits_right = array(
   array('Social Media Production', 'Luisa Le Voguer Couyet & Jonah Sealey Braverman'),
 );
 
-function renderPodcastCredit($credit) {
+function nm_render_podcast_credit($credit) {
 ?>
 <div class="podcast-credit margin-bottom-tiny">
   <div class="font-small-caps"><?php echo $credit[0]; ?></div>
@@ -94,17 +94,12 @@ function renderPodcastCredit($credit) {
       }
     }
   </style>
-<?php
-  $category = get_category(get_query_var('cat'));
-  $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : false;
-?>
 <div class="background-teal font-color-black background-cover-image" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent-aerial-background.jpg'; ?>);">
   <section class="container padding-top-small padding-bottom-basic">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-xxl-12 margin-bottom-small">
         <h4 style="color: #E3FFFF;"><a href="<?php echo home_url('category/audio/'); ?>">Podcast</a></h4>
       </div>
-
       <div class="flex-grid-item flex-item-xxl-12 text-align-center padding-top-large padding-bottom-large background-cover-image" style="xbackground-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent-background.png'; ?>);">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
         <h3 class="u-visuallyhidden">The IRA’s American connection</h3>
@@ -152,24 +147,19 @@ if( have_posts() ) {
     $meta = get_post_meta($post->ID);
 ?>
       <article class="foreign-agent-archive__episode flex-grid-row padding-top-large mobile-padding-top-basic" id="<?php echo $post->post_name; ?>">
-
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-margin-bottom-small">
           <h4 class="margin-bottom-micro mobile-margin-bottom-none"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
           <h3 class="font-size-3 font-size-l-2 font-semibold js-fix-widows"><?php the_title(); ?></h3>
         </div>
-
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail('col12-16to9', array('class' => 'index-post-thumbnail')); ?>
         </div>
-
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-4 flex-item-xxl-6 margin-top-basic margin-bottom-basic mobile-margin-top-small mobile-margin-bottom-small">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
-
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-4 flex-item-xxl-6 font-serif foreign-agent__serif-medium margin-bottom-small">
           <?php the_content(); ?>
         </div>
-
       </article>
 <?php
   }
@@ -189,53 +179,52 @@ if( have_posts() ) {
 ?>
     </div>
   </section>
-
-<div style="background-color: #FFAB70;">
-  <div class="foreign-agent-archive__credits container padding-top-mid padding-bottom-mid">
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-        <h4>The hosts</h4>
-      </div>
-    </div>
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
-        <div class="foreign-agent-archive__box" style="transform: rotate(-2deg);">
-          <span class="font-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
+  <div style="background-color: #FFAB70;">
+    <div class="foreign-agent-archive__credits container padding-top-mid padding-bottom-mid">
+      <div class="flex-grid-row margin-bottom-basic">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
+          <h4>The hosts</h4>
         </div>
       </div>
-      <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
-        <div class="foreign-agent-archive__box" style="transform: rotate(1deg);">
-          <span class="font-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
+      <div class="flex-grid-row margin-bottom-basic">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
+          <div class="foreign-agent-archive__box" style="transform: rotate(-2deg);">
+            <span class="font-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
+          </div>
+        </div>
+        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
+          <div class="foreign-agent-archive__box" style="transform: rotate(1deg);">
+            <span class="font-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-        <h4>Credits</h4>
-      </div>
-    </div>
-    <div class="flex-grid-row">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-2 flex-item-xxl-3">
-        <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
-          <?php
-            for ($i = 0, $size = count($credits_left); $i < $size; $i++) {
-              renderPodcastCredit($credits_left[$i]);
-            }
-          ?>
+      <div class="flex-grid-row margin-bottom-basic">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
+          <h4>Credits</h4>
         </div>
       </div>
-      <div class="flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-6">
-        <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
-          <?php
-            for ($i = 0, $size = count($credits_right); $i < $size; $i++) {
-              renderPodcastCredit($credits_right[$i]);
-            }
-          ?>
+      <div class="flex-grid-row">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-2 flex-item-xxl-3">
+          <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
+            <?php
+              for ($i = 0, $size = count($credits_left); $i < $size; $i++) {
+                nm_render_podcast_credit($credits_left[$i]);
+              }
+            ?>
+          </div>
+        </div>
+        <div class="flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-6">
+          <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
+            <?php
+              for ($i = 0, $size = count($credits_right); $i < $size; $i++) {
+                nm_render_podcast_credit($credits_right[$i]);
+              }
+            ?>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </main>
 <?php
 get_template_part('partials/support-section', null, array(

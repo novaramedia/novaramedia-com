@@ -1,6 +1,13 @@
 <?php
 $categories = get_the_category();
 
+/**
+ * Checks to see if category matches slug. For array_filter. !Needs to be made to check against an array next time we do a serial podcast
+ *
+ * @param object $category WP Term object to check
+ *
+ * @return Boolean
+ */
 function nm_is_serial_podcast_category($category) {
   return $category->slug === 'foreign-agent' ? true : false;
 }

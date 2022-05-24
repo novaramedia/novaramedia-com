@@ -1,8 +1,10 @@
 <?php
 /**
-* Hook pre_get_posts to show podcast series archive pages in reverse chronology and all posts
-*
-*/
+ * Hook pre_get_posts on category archives that match via slug.
+ * Changes the main query to display reverse chronological and all posts for serial podcasts
+ * !needs to check an array not a string next time we do a serial podcast.
+ *
+ */
 function podcast_series_pre_get_posts($query) {
   if ($query->is_admin()) {
     return;
