@@ -1,9 +1,10 @@
 <?php
 // Support section autovalue options. The array values are first 3 for monthly, last 3 for one-off, default will be lowest monthly
 define('SUPPORT_SECTION_AUTOVALUES', array(
-  'default' => array(8, 10, 20, 10, 20, 40),
-  'F0VUJ2' => array(3, 8, 15, 10, 25, 50),
-  '56R6NI' => array(1, 3, 10, 5, 10, 30)
+  'default' => array(1, 3, 5, 5, 10, 15),
+  'F0VUJ2' => array(3, 5, 8, 10, 25, 50),
+  '56R6NI' => array(1, 3, 5, 5, 10, 15),
+  'EO0X91' => array(5, 8, 10, 10, 20, 40),
 ));
 
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
@@ -52,17 +53,26 @@ if ( !isset( $content_width ) ) {
 get_template_part( 'lib/thumbnail-sizes' );
 
 // Register Nav Menus
-/*
-register_nav_menus( array(
-	'menu_location' => 'Location Name',
-) );
-*/
+function nm_register_menus() {
+  register_nav_menus(
+    array(
+      'footer-2' => __( 'Footer (2nd)' ),
+      'footer-3' => __( 'Footer (3rd)' ),
+      'footer-4' => __( 'Footer (4th)' ),
+      'articles-archive-menu' => __( 'Articles archive' ),
+      'audio-archive-menu' => __( 'Audio archive' ),
+      'video-archive-menu' => __( 'Video archive' ),
+     )
+   );
+ }
+add_action( 'init', 'nm_register_menus' );
 
 get_template_part( 'lib/custom-gallery' );
 
 get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
+get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );

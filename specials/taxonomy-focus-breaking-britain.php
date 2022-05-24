@@ -105,7 +105,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
       <div class="flex-grid-row padding-top-small margin-bottom-mid" style="align-items: flex-end;">
         <div class="flex-grid-item flex-item-s-12 flex-item-m-12 flex-item-xl-6 flex-item-xxl-7">
           <h4 class="margin-bottom-micro">Focus</h4>
-          <h1 class="margin-bottom-micro font-size-s-7 font-size-l-6 font-size-xl-7 font-size-8 font-color-blue-neon" style="margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
+          <h1 class="margin-bottom-micro font-size-s-7 font-size-l-6 font-size-xl-6 font-size-7 font-color-blue-neon" style="margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-m-9 flex-item-xl-6 flex-item-xxl-5">
           <div class="font-size-2 font-size-s-1 font-bold font-color-blue-neon margin-top-small">
@@ -199,7 +199,7 @@ if( have_posts() ) {
 ?>
     </div>
 
-    <div class="flex-grid-row margin-top-mid margin-bottom-mid">
+    <div class="flex-grid-row margin-top-mid margin-bottom-mid font-smaller">
       <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
         <?php
           if (!empty($credits)) {
