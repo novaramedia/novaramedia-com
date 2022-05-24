@@ -38,6 +38,7 @@ function nm_register_front_page_options_metabox() {
     'partials/specials/banners/support-video' => 'Support Video',
     'email-the-cortado' => 'Email signup: The Cortado',
     'email-the-pick' => 'Email signup: The Pick',
+    'partials/specials/banners/podcast-foreign-agent' => 'Podcast: Foreign Agent',
     'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
     'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
     'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
