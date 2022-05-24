@@ -125,15 +125,16 @@ $color-blue = rgb(84, 144, 235)
 $color-blue-neon = #0018F0
 $color-blue-light = #CAE5FF
 
-$color-lilac = #B1B1FF
+$color-teal = #E3FFFF
 
-$color-purple-light = #B1B1FF
+$color-lilac = #B1B1FF
 
 $border-width = 2px
 
 $basic-animation-speed = .5s
 
-$duration-form-transitions = 420ms
+$duration-medium-transitions = 420ms
+$duration-form-transitions = $duration-medium-transitions
 
 $font-serif = font-stack('Georgia')
 $font-sans = font-stack('Helvetica')
@@ -308,6 +309,12 @@ p
 .text-align-center
   text-align: center
 
+.text-links-underlined
+  a
+    text-decoration: underline
+    &:hover
+      text-decoration: none
+
 article
   ul, ol
     margin-top: 2rem
@@ -413,16 +420,20 @@ a
 .background-neon-blue
   background-color: $color-blue-neon
 
+.background-teal
+  background-color: $color-teal
+
 .background-lilac
   background-color: $color-lilac
 
 .background-light-purple
-  background-color: $color-purple-light
+  background-color: $color-lilac
 
 .background-cover-image
   position: relative
   background-size: cover
   background-position: center
+  background-repeat: no-repeat
 
 .background-cover-overlay
   position: absolute

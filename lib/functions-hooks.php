@@ -1,4 +1,21 @@
 <?php
+/**
+ * Hook pre_get_posts on category archives that match via slug.
+ * Changes the main query to display reverse chronological and all posts for serial podcasts
+ * !needs to check an array not a string next time we do a serial podcast.
+ *
+ */
+function podcast_series_pre_get_posts($query) {
+  if ($query->is_admin()) {
+    return;
+  }
+
+  if ($query->is_archive() && $query->is_category('foreign-agent')) {
+    $query->set('posts_per_page',  -1);
+    $query->set('order',  'ASC');
+  }
+}
+add_action( 'pre_get_posts', 'podcast_series_pre_get_posts' );
 
 /**
 * Hook pre_get_posts to show all posts on Focus archive pages
