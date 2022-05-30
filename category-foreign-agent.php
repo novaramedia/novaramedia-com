@@ -156,10 +156,10 @@ if( have_posts() ) {
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail('col12-16to9', array('class' => 'index-post-thumbnail')); ?>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-4 flex-item-xxl-6 margin-top-basic margin-bottom-basic mobile-margin-top-small mobile-margin-bottom-small">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 margin-top-basic margin-bottom-basic mobile-margin-top-small mobile-margin-bottom-small">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-4 flex-item-xxl-6 font-serif foreign-agent__serif-medium margin-bottom-small">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium margin-bottom-small">
           <?php the_content(); ?>
         </div>
       </article>
