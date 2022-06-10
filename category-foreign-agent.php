@@ -1,17 +1,21 @@
 <?php
 get_header();
 
-$credits_left = array(
+$credits_1 = array(
   array('Executive Producer', 'Chal Ravens'),
   array('Commissioning Editors', 'Chal Ravens & Craig Gent'),
   array('Factchecking', 'Steven Methven'),
   array('Legal Advisor', 'Philip Wheeler'),
 );
 
-$credits_right = array(
+$credits_2 = array(
   array('Music', 'Matt Huxley'),
   array('Design & Digital', 'Pietro Garrone, Patrick Best & Max Ryan'),
   array('Social Media Production', 'Luisa Le Voguer Couyet & Jonah Sealey Braverman'),
+);
+
+$credits_thanks = array(
+  array('Thanks', 'Arielle Angel, Colin Archdeacon, Michael Casper, Chelsea Converse, Claire Devoogd, Corey Eastwood, Donal Foreman, Dov Weinryb Grosghal, Sam McBride, Jess MilNeil, Josh Nathan-Kazis, Wilson Sherwin, Peter Smith and Zach Vary'),
 );
 
 function nm_render_podcast_credit($credit) {
@@ -124,7 +128,7 @@ function nm_render_podcast_credit($credit) {
     </div>
     <div class="flex-grid-row margin-top-small margin-bottom-mid">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif foreign-agent__serif-large">
-        <p>In the 1970s, the Provisional IRA was in the early days of its armed campaign to end British rule on Ireland. In the United States, a small group of activists began organising on their behalf. They called themselves the Irish Northern Aid Committee, or Noraid—and they were looking for a fight.</p>
+        <p>In the 1970s, the Provisional IRA was in the early days of its armed campaign to end British rule on the island of Ireland. In the United States, a small group of activists began organising on their behalf. They called themselves the Irish Northern Aid Committee, or Noraid—and they were looking for a fight.</p>
         <p>Hosted by documentary filmmaker Nate Lavey, Foreign Agent is a podcast series about the connection between ordinary Irish Americans and a revolutionary socialist guerrilla group. In six episodes, travelling back and forth across the Atlantic over three decades of conflict, Foreign Agent explores how regular Americans became militant advocates for the cause of Irish freedom.</p>
         <p>It’s a story of guns smuggled in furniture and wild plots to build homemade missiles. But it’s also about the political and material power that the Irish American community wielded, and how the intoxicating spell of nationalism created a movement out of seemingly irreconcilable social and political positions. And at every step of the way, the US government tried to shut them down. This is the story of the Troubles—as seen through American eyes.</p>
       </div>
@@ -206,20 +210,29 @@ if( have_posts() ) {
         </div>
       </div>
       <div class="flex-grid-row">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-2 flex-item-xxl-3">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-3">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
-              for ($i = 0, $size = count($credits_left); $i < $size; $i++) {
-                nm_render_podcast_credit($credits_left[$i]);
+              for ($i = 0, $size = count($credits_1); $i < $size; $i++) {
+                nm_render_podcast_credit($credits_1[$i]);
               }
             ?>
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-l-6 flex-item-xxl-6">
+        <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-4">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
             <?php
-              for ($i = 0, $size = count($credits_right); $i < $size; $i++) {
-                nm_render_podcast_credit($credits_right[$i]);
+              for ($i = 0, $size = count($credits_2); $i < $size; $i++) {
+                nm_render_podcast_credit($credits_2[$i]);
+              }
+            ?>
+          </div>
+        </div>
+        <div class="flex-grid-item flex-offset-s-2 flex-item-s-7 flex-item-l-4 flex-item-xxl-3 mobile-margin-top-basic">
+          <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
+            <?php
+              for ($i = 0, $size = count($credits_thanks); $i < $size; $i++) {
+                nm_render_podcast_credit($credits_thanks[$i]);
               }
             ?>
           </div>
