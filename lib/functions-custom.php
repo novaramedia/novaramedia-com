@@ -1,5 +1,36 @@
 <?php
 /**
+ * Gets contributors on a post and returns an array of post objects, or false if nothing set
+ *
+ * @param integer $post_id Post ID to check for contributors
+ *
+ * @return array/Boolean Array of contributor post objects
+ */
+function get_contributors_array($post_id) {
+  $contributors = get_post_meta($post_id, '_cmb_contributors', true);
+
+  if ($contributors === false) {
+    return false;
+  }
+
+  $contributors_posts_array = [];
+
+  foreach(explode(',', $contributors) as $contributor_id) {
+    $post = get_post($contributor_id);
+
+    if ($post) {
+      array_push($contributors_posts_array, $post);
+    }
+  }
+
+  if (count($contributors_posts_array) === 0) {
+    return false;
+  }
+
+  return $contributors_posts_array;
+}
+
+/**
 * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
 *
 * @return Object/Boolean WP Term object or false if doesn't exist

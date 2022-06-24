@@ -20,4 +20,11 @@ function nm_cmb_metaboxes_posttype_contributor() {
     'type'    => 'text_url',
   ) );
 
+  $contributor_meta_boxes->add_field( array(
+    'name'    => __( 'Short bio', 'cmb' ),
+    'desc'    => 'E.g. for use at the end of an article.',
+    'id'      => $prefix . 'short_bio',
+    'type'    => 'textarea',
+  ) );
+
 }

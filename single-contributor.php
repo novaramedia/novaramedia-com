@@ -2,7 +2,8 @@
 /*
 >>>TODO
 - [ ] Full comment code
-- [ ] Bring contrib description into bottom of single article
+- [x] Bring contrib description into bottom of single article
+- [ ] Fix byline for grid post layouts
 */
 
 $is_full_archive = get_query_var('is_full_archive');

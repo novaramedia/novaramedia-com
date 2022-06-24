@@ -54,6 +54,25 @@
       <?php the_content(); ?>
     </div>
 
+<?php
+    $contributors_posts_array = get_contributors_array($post->ID);
+
+    if ($contributors_posts_array) {
+?>
+    <div class="text-copy font-italic margin-bottom-basic">
+<?php
+      foreach ($contributors_posts_array as $contributor) {
+        $bio = get_post_meta($contributor->ID, '_nm_contributor_short_bio', true);
+
+        if ($bio) {
+          echo apply_filters('the_content', $bio);
+        }
+      }
+?>
+    </div>
+<?php
+  }
+?>
     <div>
       <ul class="inline-action-list">
         <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>

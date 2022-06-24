@@ -2,29 +2,7 @@
   $author = get_post_meta($post->ID, '_cmb_author', true);
   $twitter = get_post_meta($post->ID, '_cmb_author_twitter', true);
 
-  $contributors = get_post_meta($post->ID, '_cmb_contributors', true);
-
-/*
-  Check if there are contributors associated and create an array of valid contributor posts.
-  Set meta variable false if no valid posts are found.
-*/
-
-  if ($contributors) {
-    $contributors_posts_array = [];
-
-    foreach(explode(',', $contributors) as $contributor_id) {
-      $post = get_post($contributor_id);
-
-      if ($post) {
-        array_push($contributors_posts_array, $post);
-      }
-    }
-
-    if (count($contributors_posts_array) === 0) {
-      $contributors = false;
-    }
-  }
-
+  $contributors_posts_array = get_contributors_array($post->ID);
 
   $twitter_url = false;
 
@@ -37,7 +15,7 @@
   }
 ?>
 <h3>by <?php
-  if ($contributors) {
+  if ($contributors_posts_array) {
     $number_of_contributors = count($contributors_posts_array);
 
     foreach($contributors_posts_array as $index => $contributor) {
