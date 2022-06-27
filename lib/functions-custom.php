@@ -106,24 +106,6 @@ function nm_is_single_article() {
   return false;
 }
 
-/**
-* Get the top level category of a post. This will either be Audio, Article, Video and will only be 1
-*
-* @return Object
-*/
-function get_the_top_category($postId) {
-  $categories = get_the_category($postId);
-
-  $top_categories = array_filter($categories, 'only_top_level_category_filter');
-  $top_categories = array_values($top_categories);
-
-  if (isset($top_categories[0])) {
-    return $top_categories[0];
-  } else {
-    return false;
-  }
-}
-
 // get and return the first sub category assigned to the post
 function get_the_sub_category($postId, $object = false) {
   $categories = get_the_category($postId);
