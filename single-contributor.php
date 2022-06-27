@@ -1,14 +1,13 @@
 <?php
-/*
->>>TODO
-- [ ] Full comment code
-- [x] Bring contrib description into bottom of single article
-- [x] Fix byline for grid post layouts
-- [x] Now gotta fix bylines all over the place!
-*/
+$is_full_archive = get_query_var('is_full_archive'); // get query var to see if in archive mode
 
-$is_full_archive = get_query_var('is_full_archive');
-
+/**
+ * Renders a section of posts (on this page only). Depending on number of posts will display differently.
+ *
+ * @param Object  $query WP Query of posts to render
+ * @param string  $title Title of the section
+ * @param Boolean $is_full_archive If displaying in full archive style
+ */
 function render_posts_section($query, $title, $is_full_archive) {
   $post_classes_default = 'flex-grid-item flex-item-m-6 flex-item-l-4 flex-item-xxl-3 margin-bottom-small';
   $post_classes_larger_display = 'flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4 margin-bottom-small';
@@ -73,7 +72,7 @@ if( have_posts() ) {
         <?php the_content(); ?>
         <?php
           if (!empty($link)) {
-            echo '<a href="' . $link . '" target="_blank" ref="nofollow">' . $link . '</a>';
+            echo '<span class="text-links-underlined"><a href="' . $link . '" target="_blank" ref="nofollow">' . $link . '</a></span>';
           }
         ?>
       </div>

@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Renders bylines on a post.
+ *
+ * Checks post metadata for either contributors or authors. Prioritises contributors. Optionally can link the rendered bylines. Reverts to Novara Reporters if nothing found.
+ *
+ * @param integer $post_id   Post ID
+ * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata
+ */
 function render_bylines($post_id, $is_linked = false) {
   $contributors_posts_array = get_contributors_array($post_id);
 

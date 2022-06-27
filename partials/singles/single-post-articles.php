@@ -55,6 +55,10 @@
     </div>
 
 <?php
+/*
+    Get contributors metadata and if set display in italics in a div below the main content.
+    If there are multiple contributors set then each will have their own paragraph
+*/
     $contributors_posts_array = get_contributors_array($post->ID);
 
     if ($contributors_posts_array) {
