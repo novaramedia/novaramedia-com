@@ -9,7 +9,7 @@
 function get_contributors_array($post_id) {
   $contributors = get_post_meta($post_id, '_cmb_contributors', true);
 
-  if ($contributors === false) {
+  if (empty($contributors)) {
     return false;
   }
 
@@ -33,6 +33,8 @@ function get_contributors_array($post_id) {
 /**
 * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
 *
+* @param integer $post_id Post ID
+*
 * @return Object/Boolean WP Term object or false if doesn't exist
 */
 function get_child_level_child_category($post_id) {
@@ -42,6 +44,33 @@ function get_child_level_child_category($post_id) {
 
   if (isset($child_categories[0])) {
     return $child_categories[0];
+  } else {
+    return false;
+  }
+}
+
+/**
+* Get the category at the top level. Should be either Articles, Audio or Video
+*
+* @param integer $post_id Post ID
+*
+* @return Object/Boolean WP Term object or false if isnt set
+*/
+function get_the_top_level_category($post_id) {
+  $categories = get_the_category($post_id);
+  $top_level_category = array_filter($categories, 'only_top_level_category_filter');
+
+  if (!$top_level_category) { // if there is no top level category set to post
+    if ($categories[0]->parent) { // then check the first category set
+      $top_level_category = get_category($categories[0]->parent); // and if there is a parent
+    }
+  } else {
+    $top_level_category = array_values($top_level_category); // if there is a top level category
+    $top_level_category = $top_level_category[0]; // get the first one (because there should only be one)
+  }
+
+  if (!empty($top_level_category)) {
+    return $top_level_category;
   } else {
     return false;
   }

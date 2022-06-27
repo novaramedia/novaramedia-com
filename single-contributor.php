@@ -3,7 +3,8 @@
 >>>TODO
 - [ ] Full comment code
 - [x] Bring contrib description into bottom of single article
-- [ ] Fix byline for grid post layouts
+- [x] Fix byline for grid post layouts
+- [x] Now gotta fix bylines all over the place!
 */
 
 $is_full_archive = get_query_var('is_full_archive');
