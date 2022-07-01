@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Contributors post type and association to posts
+- Auto short bio on articles with associated contributor
+
 ### Changed
 
 - Foreign Agent archive copy changes
