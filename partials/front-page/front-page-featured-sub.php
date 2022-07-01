@@ -1,4 +1,7 @@
 <?php
+  $content_type = get_the_top_level_category(get_the_ID()); // get top level catergory for content type
+  $is_article = $content_type->category_nicename === 'articles' ? true : false; // check if is article for display layout
+
   $meta = get_post_meta($post->ID);
 ?>
 
@@ -18,9 +21,9 @@
     ?>
     <h5 class="font-larger js-fix-widows"><?php the_title(); ?></h5>
     <?php
-      if (!empty($meta['_cmb_author'])) {
+      if ($is_article) {
     ?>
-      <h6 class="margin-top-micro">by <?php echo $meta['_cmb_author'][0]; ?></h6>
+      <h6 class="margin-top-micro">by <?php render_bylines($post->ID, false); ?></h6>
     <?php
       }
 

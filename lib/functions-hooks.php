@@ -6,11 +6,15 @@
  *
  */
 function podcast_series_pre_get_posts($query) {
-  if ($query->is_admin()) {
+  if ($query->is_admin()) { // ignore admin queries
     return;
   }
 
   if ($query->is_archive() && $query->is_category('foreign-agent')) {
+    if (array_key_exists('posts_per_page', $query->query_vars) && $query->query_vars['posts_per_page'] === 1) { // ignore if we are trying to do something specific
+      return;
+    }
+
     $query->set('posts_per_page',  -1);
     $query->set('order',  'ASC');
   }

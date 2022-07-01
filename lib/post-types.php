@@ -1,5 +1,53 @@
 <?php
-// Register Custom Post Type
+function nm_register_post_type_contributor() {
+  $args = [
+    'label'  => esc_html__( 'Contributors', 'text-domain' ),
+    'labels' => [
+      'menu_name'          => esc_html__( 'Contributors', '' ),
+      'name_admin_bar'     => esc_html__( 'Contributor', '' ),
+      'add_new'            => esc_html__( 'Add Contributor', '' ),
+      'add_new_item'       => esc_html__( 'Add new Contributor', '' ),
+      'new_item'           => esc_html__( 'New Contributor', '' ),
+      'edit_item'          => esc_html__( 'Edit Contributor', '' ),
+      'view_item'          => esc_html__( 'View Contributor', '' ),
+      'update_item'        => esc_html__( 'View Contributor', '' ),
+      'all_items'          => esc_html__( 'All Contributors', '' ),
+      'search_items'       => esc_html__( 'Search Contributors', '' ),
+      'parent_item_colon'  => esc_html__( 'Parent Contributor', '' ),
+      'not_found'          => esc_html__( 'No Contributors found', '' ),
+      'not_found_in_trash' => esc_html__( 'No Contributors found in Trash', '' ),
+      'name'               => esc_html__( 'Contributors', '' ),
+      'singular_name'      => esc_html__( 'Contributor', '' ),
+    ],
+    'public'              => true,
+    'exclude_from_search' => false,
+    'menu_position'       => 10,
+    'menu_icon'           => 'dashicons-universal-access-alt',
+    'publicly_queryable'  => true,
+    'show_ui'             => true,
+    'show_in_nav_menus'   => true,
+    'show_in_admin_bar'   => true,
+    'show_in_rest'        => true,
+    'capability_type'     => 'post',
+    'hierarchical'        => false,
+    'has_archive'         => false,
+    'query_var'           => true,
+    'can_export'          => true,
+    'rewrite_no_front'    => false,
+    'show_in_menu'        => true,
+    'supports' => [
+      'title',
+      'editor',
+      'thumbnail',
+    ],
+
+    'rewrite' => true
+  ];
+
+  register_post_type( 'contributor', $args );
+}
+add_action( 'init', 'nm_register_post_type_contributor', 0 );
+
 function event_post_type() {
 
   $labels = array(
@@ -41,7 +89,8 @@ function event_post_type() {
     'public'                => true,
     'show_ui'               => true,
     'show_in_menu'          => true,
-    'menu_position'         => 5,
+    'menu_icon'             => 'dashicons-calendar',
+    'menu_position'         => null,
     'show_in_admin_bar'     => true,
     'show_in_nav_menus'     => true,
     'can_export'            => true,
@@ -95,7 +144,7 @@ function notices_post_type() {
     'public'                => true,
     'show_ui'               => true,
     'show_in_menu'          => true,
-    'menu_position'         => 5,
+    'menu_position'         => null,
     'show_in_admin_bar'     => true,
     'show_in_nav_menus'     => true,
     'can_export'            => true,

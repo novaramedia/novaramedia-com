@@ -1,5 +1,15 @@
 <?php
 /**
+* Register custom query variables for custom PHP logic
+*
+*/
+function nm_query_vars( $vars ) {
+  $vars[] = 'is_full_archive';
+  return $vars;
+}
+add_filter( 'query_vars', 'nm_query_vars' );
+
+/**
 * Look for custom template in /specials folder when loading Focus archive template
 *
 */

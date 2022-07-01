@@ -50,19 +50,9 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
-    $categories = get_the_category();
-    $topLevelCategory = array_filter($categories, 'only_top_level_category_filter');
+    $top_level_category = get_the_top_level_category($post->ID);
 
-    if (!$topLevelCategory) { // if there is no top level category set to post
-      if ($categories[0]->parent) { // then check the first category set
-        $topLevelCategory = get_category($categories[0]->parent); // and if there is a parent
-      }
-    } else {
-      $topLevelCategory = array_values($topLevelCategory); // if there is a top level category
-      $topLevelCategory = $topLevelCategory[0]; // get the first one (because there should only be one)
-    }
-
-    $category_link = get_category_link($topLevelCategory->term_id);
+    $category_link = get_category_link($top_level_category->term_id);
 
     $type_category = get_child_level_child_category($post->ID); // check for child level category for display
 
@@ -80,7 +70,7 @@ if( have_posts() ) {
           echo '<a href="' . get_term_link($type_category) . '">' . $type_category->name . '</a>';
         } else {
       ?>
-        <a href="<?php echo $category_link; ?>"><?php echo $topLevelCategory->cat_name; ?></a>
+        <a href="<?php echo $category_link; ?>"><?php echo $top_level_category->cat_name; ?></a>
       <?php
         }
       ?>
@@ -89,11 +79,11 @@ if( have_posts() ) {
 </div>
 
 <?php
-    if ($topLevelCategory->slug === 'articles') {
+    if ($top_level_category->slug === 'articles') {
       get_template_part('partials/singles/single-post-articles');
-    } else if ($topLevelCategory->slug === 'audio') {
+    } else if ($top_level_category->slug === 'audio') {
       get_template_part('partials/singles/single-post-audio');
-    } else if ($topLevelCategory->slug === 'video') {
+    } else if ($top_level_category->slug === 'video') {
       get_template_part('partials/singles/single-post-video');
     }
   }
