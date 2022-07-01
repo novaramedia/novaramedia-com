@@ -29,7 +29,7 @@
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php
-        if ($render_description === true) {
+        if ($render_description) {
           if ($description) {
             echo $description;
           } else {
@@ -50,7 +50,7 @@
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php
-        if ($render_description === true) {
+        if ($render_description) {
           if ($description) {
             echo $description;
           } else {
