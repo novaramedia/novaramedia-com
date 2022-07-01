@@ -52,7 +52,7 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
-    $content_type = get_the_top_category(get_the_ID());
+    $content_type = get_the_top_level_category(get_the_ID());
 
     switch ($content_type->category_nicename) {
       case 'video':

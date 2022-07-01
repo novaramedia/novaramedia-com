@@ -1,4 +1,53 @@
 <?php
+/**
+ * Renders bylines on a post.
+ *
+ * Checks post metadata for either contributors or authors. Prioritises contributors. Optionally can link the rendered bylines. Reverts to Novara Reporters if nothing found.
+ *
+ * @param integer $post_id   Post ID
+ * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata
+ */
+function render_bylines($post_id, $is_linked = false) {
+  $contributors_posts_array = get_contributors_array($post_id);
+
+  $author = get_post_meta($post_id, '_cmb_author', true);
+  $twitter = get_post_meta($post_id, '_cmb_author_twitter', true);
+
+  $twitter_url = false;
+
+  if ($twitter &&(!is_array($twitter) || count($twitter) === 1)) { // if twitter is set and it either isn't an array (old support) or it only has 1 value then we can display it
+    if (is_array($twitter)) {
+      $twitter_url = $twitter[0];
+    } else {
+      $twitter_url = $twitter;
+    }
+  }
+
+  if ($contributors_posts_array) {
+    $number_of_contributors = count($contributors_posts_array);
+
+    foreach($contributors_posts_array as $index => $contributor) {
+      if ($number_of_contributors > 1) {
+        if ($number_of_contributors === $index + 1) {
+          echo ' & ';
+        } else if ($index !== 0) {
+          echo ', ';
+        }
+      }
+
+      echo $is_linked ? '<a href="' . get_the_permalink($contributor->ID) . '">' . $contributor->post_title . '</a>' : $contributor->post_title;
+    }
+
+  } else if (!empty($author)) {
+    if ($twitter_url && $is_linked) {
+      echo '<a href="https://twitter.com/' . $twitter_url . '" target="_blank" rel="nofollow">' . $author . '</a>';
+    } else {
+      echo $author;
+    }
+  } else {
+    echo 'Novara Reporters';
+  }
+}
 
 /**
 * Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
