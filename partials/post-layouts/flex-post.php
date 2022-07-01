@@ -12,6 +12,7 @@
   $meta = get_post_meta($post->ID);
 
   $description = !empty($meta['_cmb_short_desc'][0]) ? $meta['_cmb_short_desc'][0] : false;
+  $render_description = isset($args['render-description']) && empty($args['render-description']) ? false : true; // $args array turns false on an index to an empty value and true to 1-so check if set but empty gives us the false value
 ?>
 <article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
   <a href="<?php the_permalink() ?>">
@@ -28,10 +29,12 @@
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php
-        if ($description) {
-          echo $description;
-        } else {
-          the_excerpt();
+        if ($render_description) {
+          if ($description) {
+            echo $description;
+          } else {
+            the_excerpt();
+          }
         }
       ?>
     </div>
@@ -47,10 +50,12 @@
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php
-        if ($description) {
-          echo $description;
-        } else {
-          the_excerpt();
+        if ($render_description) {
+          if ($description) {
+            echo $description;
+          } else {
+            the_excerpt();
+          }
         }
       ?>
     </div>
