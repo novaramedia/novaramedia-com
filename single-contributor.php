@@ -24,12 +24,13 @@ function render_posts_section($query, $title, $is_full_archive) {
 
         if ( $is_full_archive ) {
           get_template_part('partials/post-layouts/list-post', null, array(
-            'grid-item-classes' => 'flex-grid-item flex-item-xxl-12 margin-bottom-tiny',
+            'grid-item-classes' => 'flex-grid-item flex-item-xxl-12 margin-bottom-tiny'
           ));
         } else {
           get_template_part('partials/post-layouts/flex-post', null, array(
             'grid-item-classes' => $query->post_count < 6 ? $post_classes_larger_display : $post_classes_default,
             'image-size' => 'col12-16to9',
+            'render-description' => false
           ));
         }
       }
