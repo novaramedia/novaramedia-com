@@ -56,9 +56,11 @@ get_template_part( 'lib/thumbnail-sizes' );
 function nm_register_menus() {
   register_nav_menus(
     array(
-      'footer-2' => __( 'Footer (2nd)' ),
-      'footer-3' => __( 'Footer (3rd)' ),
-      'footer-4' => __( 'Footer (4th)' ),
+      'footer-podcasts' => __( 'Footer: Podcasts' ),
+      'footer-focuses' => __( 'Footer: Focuses' ),
+      'footer-articles' => __( 'Footer: Articles' ),
+      'footer-shows' => __( 'Footer: Shows' ),
+      'footer-social-media' => __( 'Footer: Social Media' ),
       'articles-archive-menu' => __( 'Articles archive' ),
       'audio-archive-menu' => __( 'Audio archive' ),
       'video-archive-menu' => __( 'Video archive' ),
