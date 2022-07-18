@@ -85,6 +85,7 @@ get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 
 get_template_part( 'lib/theme-options' );
 get_template_part( 'lib/options-front-page' );
+get_template_part( 'lib/options-fundraising' );
 
 
 function cmb_initialize_cmb_meta_boxes() {
