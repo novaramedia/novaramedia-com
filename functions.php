@@ -76,6 +76,7 @@ get_template_part( 'lib/taxonomies' );
 
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta-boxes' );
+get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
