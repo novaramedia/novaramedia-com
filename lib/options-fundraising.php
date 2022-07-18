@@ -51,13 +51,6 @@ function nm_register_fundraising_options_metabox() {
   ) );
 
   $main_options->add_field( array(
-    'name' => __( 'Support page title override', 'NM' ),
-    'desc' => __( 'Replaces "Support Us" at the top of the support page', 'NM' ),
-    'id'   => $prefix . 'fundraising_settings_support_section_title_override',
-    'type' => 'text',
-  ) );
-
-  $main_options->add_field( array(
     'name'    => 'Page header CTA',
     'desc'    => 'This is the hoisted CTA used during fundraisers',
     'id'      => $prefix . 'fundraising_settings_header_cta_title',
