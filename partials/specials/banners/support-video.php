@@ -1,5 +1,8 @@
 <?php
+  $youtube_id = NM_get_option('nm_fundraising_settings_video_banner_cta_youtube_id', 'nm_fundraising_options');
+  $copy = NM_get_option('nm_fundraising_settings_video_banner_cta_text', 'nm_fundraising_options');
 
+  if (!empty($youtube_id) && !empty($copy)) {
 ?>
 <div class="background-cover-image background-red" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2022-texture.svg'; ?>);">
   <div class="container padding-top-basic padding-bottom-basic">
@@ -11,17 +14,21 @@
     <div class="flex-grid-row">
       <div class="flex-grid-item flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xl-6 flex-item-xxl-7 mobile-margin-bottom-small">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url('ajt2sGPtiCw'); ?>" allow="autoplay" allowfullscreen></iframe>
+          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>" allow="autoplay" allowfullscreen></iframe>
         </div>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xl-6 flex-item-xxl-5">
         <a href="<?php echo site_url('support/'); ?>">
-          <h3 class="font-size-2 font-color-white margin-top-tiny margin-bottom-small">Mainstream media aren’t able to speak to the social reality of what we’re living through. Their coverage is defined by the interests of their super-rich funders.</h3>
-          <h3 class="font-size-2 font-color-white margin-top-tiny margin-bottom-small">But because we are funded entirely by you, we’re free to explore what it takes to build a society that works for everyone, and reflect the truth of the issues that are seriously impacting our lives.</h3>
-          <h3 class="font-size-2 font-color-white margin-top-tiny margin-bottom-small">Watch our video to find out how you can change the media landscape today.</h3>
+          <?php
+            foreach($copy as $paragraph) {
+          ?><h3 class="font-size-2 font-color-white margin-top-tiny margin-bottom-small"><?php echo $paragraph; ?></h3>
+          <?php
+            }
+          ?>
         </a>
         <a href="<?php echo site_url('support/'); ?>" class="nm-button nm-button--white nm-button--inline">Support Us</a>
       </div>
     </div>
   </div>
 </div>
+<?php } ?>
