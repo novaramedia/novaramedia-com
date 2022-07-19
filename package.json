@@ -62,7 +62,7 @@
     "js-cookie": "^3.0.1",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.21",
-    "moment": "^2.29.2"
+    "moment": "^2.29.4"
   },
   "release-it": {
     "npm": {
