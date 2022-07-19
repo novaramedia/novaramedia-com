@@ -184,13 +184,6 @@ function nm_register_front_page_options_metabox() {
     'options' => $banner_options
   ) );
 
-  $main_options->add_field( array(
-    'name'    => 'Show support banner ad?',
-    'desc'    => 'Shows top of the page support banner (for fundraisers etc)',
-    'id'      => $prefix . 'front_page_settings_banners_show_support',
-    'type'    => 'checkbox',
-  ) );
-
   /**
    * Registers secondary options page, and set main item as parent.
    */

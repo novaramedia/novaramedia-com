@@ -1,37 +1,28 @@
 <?php
 get_header();
-
-$override_title = IGV_get_option('_igv_support_page_title_override');
-
-// $override_title = isset($args['override_text']) ? $args['override_text'] : false;
-
-/*
-$fundraiser_expiration = IGV_get_option('_igv_fundraiser_end_time');
-$is_fundraiser = $fundraiser_expiration > time();
-*/
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
 
-    $youtube_id = !empty($meta['_cmb_support_youtube']) ? $meta['_cmb_support_youtube'][0] : false;
+    $page_tag_override = !empty($meta['_nm_support_tag_override']) ? $meta['_nm_support_tag_override'][0] : false;
+    $youtube_id = !empty($meta['_nm_support_youtube']) ? $meta['_nm_support_youtube'][0] : false;
+    $title = !empty($meta['_nm_support_header_title']) ? $meta['_nm_support_header_title'][0] : '';
+    $subtitle = !empty($meta['_nm_support_header_subtitle']) ? $meta['_nm_support_header_subtitle'][0] : '';
+    $form_tag_override = !empty($meta['_nm_support_form_tag_override']) ? $meta['_nm_support_form_tag_override'][0] : false;
+    $form_copy_override = !empty($meta['_nm_support_form_copy_override']) ? $meta['_nm_support_form_copy_override'][0] : false;
 ?>
-  <!-- main posts loop -->
   <article id="page" class="support-page">
     <div class="background-cover-image background-red" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2022-texture.svg'; ?>);">
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
             <h4 class="margin-top-small margin-bottom-tiny font-color-white"><?php
-              if (!empty($override_title)) {
-                echo $override_title;
+              if (!empty($page_tag_override)) {
+                echo $page_tag_override;
               } else {
                 echo 'Support Us';
               }
@@ -40,8 +31,8 @@ if( have_posts() ) {
         </div>
         <div class="flex-grid-row support-page__hero-wrapper font-color-white">
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-12 flex-offset-xxl-0">
-            <h1 class="font-size-5 margin-bottom-tiny">Defy billionaire-backed media and build our supporter base to 10,000&nbsp;strong.</h1>
-            <h2 class="font-size-3">Donate anything you can from just £1 per&nbsp;month.</h2>
+            <h1 class="font-size-5 margin-bottom-tiny"><?php echo $title; ?></h1>
+            <h2 class="font-size-3"><?php echo $subtitle; ?></h2>
           </div>
         </div>
       </div>
@@ -49,8 +40,8 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'heading_copy' => 'Join our regular supporters',
-        'override_text' => 'Defy the billionaire-backed media and build our supporter base to 10,000-strong. Donate anything you can, from £1 per month.'
+        'heading_copy' => $form_tag_override,
+        'override_text' => $form_copy_override
       ));
     ?>
 
@@ -98,8 +89,8 @@ if( have_posts() ) {
 
     <?php
       get_template_part('partials/support-section', null, array(
-        'heading_copy' => 'Join our regular supporters',
-        'override_text' => 'Defy the billionaire-backed media and build our supporter base to 10,000-strong. Donate anything you can, from £1 per month.'
+        'heading_copy' => $form_tag_override,
+        'override_text' => $form_copy_override
       ));
     ?>
 

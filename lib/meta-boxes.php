@@ -422,25 +422,6 @@ function igv_cmb_metaboxes() {
     'options' => array( 'textarea_rows' => 5, ),
   ) );
 
-  // Page: Support
-
-  $support_page_meta_boxes = new_cmb2_box( array (
-    'id'         => 'supper_page_metabox',
-    'title'      => __( 'Support Page Meta', 'cmb' ),
-    'object_types'      => array( 'page' ), // Post type
-    'show_on' => array('key' => 'slug', 'value' => 'support'),
-    'context'    => 'normal',
-    'priority'   => 'high',
-    'show_names' => true, // Show field names on the left
-  ) );
-
-  $support_page_meta_boxes->add_field( array(
-    'name'    => __( 'Youtube video', 'cmb' ),
-    'desc'    => __( '(optional)', 'cmb' ),
-    'id'      => $prefix . 'support_youtube',
-    'type'    => 'text',
-  ) );
-
   // Page: About
 
   $about_page_meta_boxes = new_cmb2_box( array (

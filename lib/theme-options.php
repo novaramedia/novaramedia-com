@@ -101,35 +101,6 @@ class IGV_Admin {
       ),
     ) );
 
-    // FUNDING COPY OPTIONS
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Funding Copy & Options', 'cmb2' ),
-      'id'   => $this->prefix . 'funding_title',
-      'type' => 'title',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Support section text', 'IGV' ),
-      'desc' => __( 'If set this will be the text shown in the red sitewide support section', 'IGV' ),
-      'id'   => $this->prefix . 'support_section_text',
-      'type' => 'textarea_small',
-    ) );
-    
-    $options_metabox->add_field( array(
-      'name' => __( 'Article support box text', 'IGV' ),
-      'desc' => __( 'This will be the default text shown in the red outlined box at the top of articles.', 'IGV' ),
-      'id'   => $this->prefix . 'articles_support_box_text',
-      'type' => 'textarea_small',
-    ) );
-
-    $options_metabox->add_field( array(
-      'name' => __( 'Support page title override', 'IGV' ),
-      'desc' => __( 'Replaces "Support Us" at the top of the support page', 'IGV' ),
-      'id'   => $this->prefix . 'support_page_title_override',
-      'type' => 'text',
-    ) );
-        
 /*
     $options_metabox->add_field( array(
       'name' => __( 'Expiration time', 'IGV' ),

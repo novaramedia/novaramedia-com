@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-$show_support_banner = NM_get_option('nm_front_page_settings_banners_show_support');
+$show_support_banner = NM_get_option('nm_fundraising_settings_header_cta_is_displayed', 'nm_fundraising_options');
 
 $banners = array(
   NM_get_option('nm_front_page_banner_option_1'),
