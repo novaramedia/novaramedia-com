@@ -1,56 +1,75 @@
-    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase font-bold font-leading-wider">
+    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white padding-top-basic padding-bottom-large font-uppercase">
       <div class="container">
-        <div class="row">
-          <div class="col col6 mobile-margin-bottom-basic">
-            <ul>
+        <div class="flex-grid-row">
+          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <h6 class="font-weight-regular margin-bottom-small">NM</h6>
+            <ul class="font-weight-bold margin-bottom-small">
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
-              <li><a href="https://donate.novaramedia.com/profile">Manage Donation</a></li>
               <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
               <li><a href="<?php echo site_url('jobs/'); ?>">Jobs</a></li>
-              <li><a href="http://podcast.novaramedia.com">Podcast</a></li>
-              <li><a href="<?php bloginfo('rss2_url'); ?>">RSS</a></li>
+            </ul>
+            <ul class="font-weight-bold margin-bottom-small">
+              <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
+            </ul>
+            <ul class="font-weight-bold">
               <li><a href="<?php echo site_url('terms-and-conditions/'); ?>">Terms & Conditions</a></li>
               <li><a href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></li>
             </ul>
           </div>
-          <div class="col col6 mobile-margin-bottom-basic">
+          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <h6 class="font-weight-regular margin-bottom-small">Podcasts</h6>
             <?php
               wp_nav_menu(
                 array(
-                  'theme_location' => 'footer-2',
+                  'theme_location' => 'footer-podcasts',
                   'fallback_cb' => false,
+                  'menu_class' => 'font-weight-bold margin-bottom-small'
+                )
+              );
+            ?>
+            <h6 class="font-weight-regular margin-bottom-small">Focuses</h6>
+            <?php
+              wp_nav_menu(
+                array(
+                  'theme_location' => 'footer-focuses',
+                  'fallback_cb' => false,
+                  'menu_class' => 'font-weight-bold'
                 )
               );
             ?>
           </div>
-          <div class="col col6">
+          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <h6 class="font-weight-regular margin-bottom-small">Articles</h6>
             <?php
-              function footerMenuFallback() {
-            ?><ul>
-                <li><a href="https://twitter.com/novaramedia" target="_blank" rel="noopener">Twitter</a></li>
-                <li><a href="https://www.facebook.com/novaramedia/" target="_blank" rel="noopener">Facebook</a></li>
-                <li><a href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="noopener">YouTube</a></li>
-                <li><a href="https://www.instagram.com/novaramedia/" target="_blank" rel="noopener">Instagram</a></li>
-                <li><a href="https://t.me/novaramedia" target="_blank" rel="noopener">Telegram</a></li>
-              </ul>
-            <?php }
-
               wp_nav_menu(
                 array(
-                  'theme_location' => 'footer-3',
-                  'fallback_cb' => 'footerMenuFallback',
+                  'theme_location' => 'footer-articles',
+                  'fallback_cb' => false,
+                  'menu_class' => 'font-weight-bold margin-bottom-small'
+                )
+              );
+            ?>
+            <h6 class="font-weight-regular margin-bottom-small">Shows</h6>
+            <?php
+              wp_nav_menu(
+                array(
+                  'theme_location' => 'footer-shows',
+                  'fallback_cb' => false,
+                  'menu_class' => 'font-weight-bold'
                 )
               );
             ?>
           </div>
-          <div class="col col6">
+          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <h6 class="font-weight-regular margin-bottom-small">Social Media</h6>
             <?php
               wp_nav_menu(
                 array(
-                  'theme_location' => 'footer-4',
+                  'theme_location' => 'footer-social-media',
                   'fallback_cb' => false,
+                  'menu_class' => 'font-weight-bold'
                 )
               );
             ?>

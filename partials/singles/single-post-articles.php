@@ -3,7 +3,7 @@
 
   $layout = !empty($meta['_cmb_article_layout'][0]) ? $meta['_cmb_article_layout'][0] : 'basic';
 
-  $articles_support_box_text = IGV_get_option('_igv_articles_support_box_text');
+  $articles_support_box_text = NM_get_option('nm_articles_support_box_text', 'nm_fundraising_options');
   $support_box_override_text = !empty($meta['_cmb_support_box_override'][0]) ? $meta['_cmb_support_box_override'][0] : false;
 
   if (!empty($meta['bitly_url'])) {

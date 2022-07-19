@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-$show_support_banner = NM_get_option('nm_front_page_settings_banners_show_support');
+$show_support_banner = NM_get_option('nm_fundraising_settings_header_cta_is_displayed', 'nm_fundraising_options');
 
 $video = get_category_by_slug('video');
 $category = get_category(get_query_var('cat'));
