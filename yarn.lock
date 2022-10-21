@@ -3749,7 +3749,7 @@ imagemin-gifsicle@^7.0.0:
 
 imagemin-jpegtran@^7.0.0:
   version "7.0.0"
-  resolved "https://registry.npmjs.org/imagemin-jpegtran/-/imagemin-jpegtran-7.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/imagemin-jpegtran/-/imagemin-jpegtran-7.0.0.tgz#7728f84876362d489b9a1656e0cc8e2009406e6f"
   integrity sha512-MJoyTCW8YjMJf56NorFE41SR/WkaGA3IYk4JgvMlRwguJEEd3PnP9UxA8Y2UWjquz8d+On3Ds/03ZfiiLS8xTQ==
   dependencies:
     exec-buffer "^3.0.0"
