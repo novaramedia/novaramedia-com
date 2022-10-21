@@ -32,6 +32,10 @@ function nm_get_support_autovalues() {
     }
   }
 
+  if (count($return) === 0) {
+    $return['default'] = array(3, 5, 8, 5, 10, 20);
+  }
+
   return $return;
 }
 
