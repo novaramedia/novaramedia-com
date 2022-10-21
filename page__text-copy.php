@@ -8,8 +8,6 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
-
-    // var_dump($meta);
 ?>
   <article id="page" class="container margin-top-small margin-bottom-large">
     <?php
