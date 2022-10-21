@@ -5,7 +5,7 @@
 
   $support_section_text = NM_get_option('nm_fundraising_settings_support_section_text', 'nm_fundraising_options');
 
-  $support_section_autovalues = SUPPORT_SECTION_AUTOVALUES;
+  $support_section_autovalues = nm_get_support_autovalues();
 
   $instance = uniqid('support-form-');
 ?>
