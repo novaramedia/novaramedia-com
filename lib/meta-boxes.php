@@ -132,7 +132,7 @@ function igv_cmb_metaboxes() {
     'id'      => $prefix . 'contributors',
     'type'    => 'post_search_text',
     'post_type'   => array('contributor'),
-    'select_behavior' => 'replace',
+    'select_behavior' => 'add',
   ) );
 
   $meta_boxes->add_field( array(
