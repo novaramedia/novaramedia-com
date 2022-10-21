@@ -1,5 +1,34 @@
 <?php
 /**
+ * Gets metadata for support form autovalues, validates and returns correctly structured array
+ *
+ * @return array Array of autovalues for support form
+ */
+function nm_get_support_autovalues() {
+  $meta = NM_get_option('nm_fundraising_settings_support_section_autovalues', 'nm_fundraising_options');
+
+  $return = [];
+
+  foreach($meta as $index => $autovalues_set) {
+    if ($index === 0) {
+      $key = 'default';
+    } else if (isset($autovalues_set['url_code'])) {
+      $key = $autovalues_set['url_code'];
+    } else {
+      $key = false;
+    }
+
+    $values = array($autovalues_set['regular_low'], $autovalues_set['regular_medium'], $autovalues_set['regular_high'], $autovalues_set['oneoff_low'], $autovalues_set['oneoff_medium'], $autovalues_set['oneoff_high']);
+
+    if ($key && count(array_filter($values, 'is_numeric')) === 6) {
+      $return[$key] = $values;
+    }
+  }
+
+  return $return;
+}
+
+/**
  * Gets contributors on a post and returns an array of post objects, or false if nothing set
  *
  * @param integer $post_id Post ID to check for contributors

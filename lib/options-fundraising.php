@@ -50,6 +50,63 @@ function nm_register_fundraising_options_metabox() {
     'type' => 'textarea_small',
   ) );
 
+  $support_section_group = $main_options->add_field( array(
+    'name' => __( 'Support section auto values', 'NM' ),
+    'description' => __( 'Sets the default values for the support section form. Also sets the url variable alternative values. First set will be the default and ignore the url code.', 'cmb2' ),
+    'id'          => $prefix . 'fundraising_settings_support_section_autovalues',
+    'type'        => 'group',
+    'options'     => array(
+      'group_title'       => __( 'Entry {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+      'add_button'        => __( 'Add Another Entry', 'cmb2' ),
+      'remove_button'     => __( 'Remove Entry', 'cmb2' ),
+      'closed'         => true, // true to have the groups closed by default
+      // 'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation before removing group.
+    ),
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'URL code',
+    'description' => 'Unique code for URL. Normally a random 6 character string.',
+    'id'   => 'url_code',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default low regular donation',
+    'id'   => 'regular_low',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default medium regular donation',
+    'id'   => 'regular_medium',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default high regular donation',
+    'id'   => 'regular_high',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default low one-off donation',
+    'id'   => 'oneoff_low',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default medium one-off donation',
+    'id'   => 'oneoff_medium',
+    'type' => 'text_small',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Default high one-off donation',
+    'id'   => 'oneoff_high',
+    'type' => 'text_small',
+  ) );
+
   $main_options->add_field( array(
     'name'    => 'Page header CTA',
     'desc'    => 'This is the hoisted CTA used during fundraisers',
