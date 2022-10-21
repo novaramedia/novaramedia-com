@@ -9,26 +9,28 @@ function nm_get_support_autovalues() {
 
   $return = [];
 
-  foreach($meta as $index => $autovalues_set) {
-    if ($index === 0) {
-      $key = 'default';
-    } else if (isset($autovalues_set['url_code'])) {
-      $key = $autovalues_set['url_code'];
-    } else {
-      $key = false;
-    }
+  if (!empty($meta)) {
+    foreach($meta as $index => $autovalues_set) {
+      if ($index === 0) {
+        $key = 'default';
+      } else if (isset($autovalues_set['url_code'])) {
+        $key = $autovalues_set['url_code'];
+      } else {
+        $key = false;
+      }
 
-    $values = array(
-      isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null,
-      isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null,
-      isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null,
-      isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null,
-      isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null,
-      isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null,
-    );
+      $values = array(
+        isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null,
+        isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null,
+        isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null,
+        isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null,
+        isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null,
+        isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null,
+      );
 
-    if ($key && count(array_filter($values, 'is_numeric')) === 6) {
-      $return[$key] = $values;
+      if ($key && count(array_filter($values, 'is_numeric')) === 6) {
+        $return[$key] = $values;
+      }
     }
   }
 
