@@ -56,11 +56,10 @@ function nm_register_fundraising_options_metabox() {
     'id'          => $prefix . 'fundraising_settings_support_section_autovalues',
     'type'        => 'group',
     'options'     => array(
-      'group_title'       => __( 'Entry {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+      'group_title'       => __( 'Entry {#}', 'cmb2' ),
       'add_button'        => __( 'Add Another Entry', 'cmb2' ),
       'remove_button'     => __( 'Remove Entry', 'cmb2' ),
-      'closed'         => true, // true to have the groups closed by default
-      // 'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation before removing group.
+      'closed'         => true,
     ),
   ) );
 

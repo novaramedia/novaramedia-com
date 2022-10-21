@@ -8,13 +8,11 @@ function scripts_and_styles_method() {
 
   wp_register_script( 'site-js', $site_js, array(), $theme_version );
 
-  $autovalues = nm_get_support_autovalues();
-
   $global_javascript_variables = array(
   	'siteUrl' => home_url(),
   	'themeUrl' => get_template_directory_uri(),
   	'isAdmin' => current_user_can('administrator') ? 1 : 0,
-  	'supportSectionAutovalues' => $autovalues
+  	'supportSectionAutovalues' => nm_get_support_autovalues()
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
