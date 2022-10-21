@@ -181,7 +181,7 @@ $banners = array(
           if ($recent_audio_category_1->have_posts()) {
             while ($recent_audio_category_1->have_posts()) {
               $recent_audio_category_1->the_post();
-              get_template_part('partials/front-page/front-page-audio-slim');
+              get_template_part('partials/front-page/front-page-audio-default');
             }
           }
         ?>
