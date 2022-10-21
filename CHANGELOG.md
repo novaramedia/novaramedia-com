@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Page template for article style content with CTA link buttons (for use for supporter comms primarily)
+
 ### Changed
 
 - Only first Above The Fold audio post has a thumbnail and it's no longer cropped
