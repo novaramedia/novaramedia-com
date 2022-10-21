@@ -1,12 +1,4 @@
 <?php
-// Support section autovalue options. The array values are first 3 for monthly, last 3 for one-off, default will be lowest monthly
-define('SUPPORT_SECTION_AUTOVALUES', array(
-  'default' => array(1, 3, 5, 5, 10, 15),
-  'F0VUJ2' => array(3, 5, 8, 10, 25, 50),
-  '56R6NI' => array(1, 3, 5, 5, 10, 15),
-  'EO0X91' => array(5, 8, 10, 10, 20, 40),
-));
-
 // Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some Wordpress variables
 function scripts_and_styles_method() {
   $site_js = get_template_directory_uri() . '/dist/main.js';
@@ -20,7 +12,7 @@ function scripts_and_styles_method() {
   	'siteUrl' => home_url(),
   	'themeUrl' => get_template_directory_uri(),
   	'isAdmin' => current_user_can('administrator') ? 1 : 0,
-  	'supportSectionAutovalues' => SUPPORT_SECTION_AUTOVALUES
+  	'supportSectionAutovalues' => nm_get_support_autovalues()
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
@@ -78,6 +70,7 @@ get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
+get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
