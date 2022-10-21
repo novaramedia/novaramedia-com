@@ -19,13 +19,8 @@
       ?>
 
       <h5 class="js-fix-widows"><?php the_title(); ?></h5>
-      <?php
-          if (!empty($meta['_cmb_author'])) {
-      ?>
+
       <h6>by <?php render_bylines($post->ID, false); ?></h6>
-      <?php
-          }
-      ?>
     </div>
   </article>
 </a>
