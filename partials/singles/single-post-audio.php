@@ -14,7 +14,7 @@
   if ($show_category && get_term_meta($show_category->term_id, '_nm_podcast_url', true)) {
     $podcast_url = get_term_meta($show_category->term_id, '_nm_podcast_url', true);
   } else {
-    $podcast_url = 'https://podcast.novaramedia.com';
+    $podcast_url = 'https://podfollow.com/novaramedia/view';
   }
 ?>
 

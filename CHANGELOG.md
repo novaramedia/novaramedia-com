@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update default podcast follow url to Podfollow
+
 ### Fixed
 
 - oEmbed only fixes ratio for videos from Youtube or Vimeo
