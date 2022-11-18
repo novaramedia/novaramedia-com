@@ -190,7 +190,7 @@ $banners = array(
           if ($recent_audio_category_2->have_posts()) {
             while ($recent_audio_category_2->have_posts()) {
               $recent_audio_category_2->the_post();
-              get_template_part('partials/front-page/front-page-audio-slim');
+              get_template_part('partials/front-page/front-page-audio-default');
             }
           }
         ?>
@@ -215,20 +215,22 @@ $banners = array(
           if ($ts_image && $ts_title) {
         ?>
 <a href="<?php echo get_term_link($ts_term); ?>">
-  <div>
+  <div class="flex-grid-row flex-grid--nested-tight">
+    <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
     <?php
-      echo wp_get_attachment_image($ts_image, 'col6-16to9', false, array('class' => 'margin-bottom-micro only-desktop'));
-      echo wp_get_attachment_image($ts_image, 'mobile-16to9', false, array('class' => 'only-mobile'));
+      echo wp_get_attachment_image($ts_image, 'col4-square', false, array('class' => 'margin-bottom-micro'));
     ?>
-    <h4 class="font-small-caps"><?php echo $ts_term->name; ?></h4>
-    <h5 class="js-fix-widows"><?php echo $ts_title; ?></h5>
-    <?php
-      if ($ts_copy) {
-    ?>
-      <div class="margin-top-micro"><?php echo $ts_copy; ?></div>
-    <?php
-      }
-    ?>
+    </div>
+    <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+      <h5 class="js-fix-widows"><?php echo $ts_title; ?></h5>
+      <?php
+        if ($ts_copy) {
+      ?>
+        <div class="margin-top-micro"><?php echo $ts_copy; ?></div>
+      <?php
+        }
+      ?>
+    </div>
   </div>
 </a>
         <?php
