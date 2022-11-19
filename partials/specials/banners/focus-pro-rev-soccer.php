@@ -1,4 +1,3 @@
-
 <?php
   $term = get_term_by('slug', 'pro-revolution-soccer', 'focus');
 
@@ -16,35 +15,16 @@
       background-size: cover;
       background-position: bottom;
     }
-
-    .pro-rev-soccer__container .flex-grid-item {
-      z-index: 20;
-    }
-
     .pro-rev-soccer__logotype {
       max-width: 420px;
     }
-
-    @media screen and (max-width: 1336px) {
-
-    }
-
-    @media screen and (max-width: 1104px) {
-
-    }
-
     @media screen and (max-width: 910px) {
       .pro-rev-soccer__logotype {
         max-width: 300px;
       }
     }
-
-    @media screen and (max-width: 759px) {
-
-    }
   }
   </style>
-
   <div class="container">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
