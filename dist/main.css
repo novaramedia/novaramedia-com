@@ -3773,6 +3773,7 @@ img {
   }
   .component-quote {
     margin-top: 12px;
+    margin-bottom: 42px;
   }
   .inline-action-list li {
     display: inline-block;

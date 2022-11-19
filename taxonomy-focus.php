@@ -52,16 +52,16 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 <?php
 if( have_posts() ) {
   $i = 0;
-  $quote_container_classes = 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic mobile-margin-bottom-large';
+  $post_grid_classes = 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic';
   while( have_posts() ) {
     the_post();
 
     if ($i === 4 && isset($quotes[0])) { ?>
-    <div class="<?php echo $quote_container_classes; ?>">
+    <div class="<?php echo $post_grid_classes; ?>">
       <?php get_template_part('partials/components/quote', null, $quotes[0]); ?>
     </div>
 <?php } else if ($i === 11 && isset($quotes[1])) { ?>
-    <div class="<?php echo $quote_container_classes; ?>">
+    <div class="<?php echo $post_grid_classes; ?>">
       <?php get_template_part('partials/components/quote', null, $quotes[1]); ?>
     </div>
 <?php }
@@ -70,11 +70,13 @@ if( have_posts() ) {
 
     switch ($content_type->category_nicename) {
       case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array('grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic'));
+        get_template_part('partials/post-layouts/flex-video-embed-post', null, array(
+          'grid-item-classes' => $post_grid_classes
+        ));
         break;
       default:
         get_template_part('partials/post-layouts/flex-post', null, array(
-          'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic',
+          'grid-item-classes' => $post_grid_classes,
           'image-size' => 'col12-16to9',
         ));
     }
