@@ -9,6 +9,7 @@ import selectText from '../functions/selectText.js';
 export class Utilities {
   constructor() {
     this.fixWidows();
+    this.lazyLoadVideo();
     this.displayTimeSince();
     this.checkGDPRApproval();
   }
@@ -39,6 +40,16 @@ export class Utilities {
       var string = $(this).html();
       string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
       $(this).html(string);
+    });
+  }
+
+  lazyLoadVideo() {
+    // utility class to lazy load a Youtube container
+    $('.js-lazy-loaded-youtube-embed').each(function () {
+      const src = $(this).data('src');
+      const insert = `<div class="u-video-embed-container"><iframe class="youtube-player" type="text/html" src="${src}" allow="autoplay" allowfullscreen></iframe></div>`;
+
+      $(this).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
     });
   }
 

@@ -13,9 +13,7 @@
     </div>
     <div class="flex-grid-row">
       <div class="flex-grid-item flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xl-6 flex-item-xxl-7 mobile-margin-bottom-small">
-        <div class="u-video-embed-container">
-          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>" allow="autoplay" allowfullscreen></iframe>
-        </div>
+        <div class="js-lazy-loaded-youtube-embed background-red" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></div>
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xl-6 flex-item-xxl-5">
         <a href="<?php echo site_url('support/'); ?>">

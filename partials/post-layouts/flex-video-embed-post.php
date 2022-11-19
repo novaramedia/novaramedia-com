@@ -12,16 +12,14 @@
   <?php
     if ($youtube_id) {
   ?>
-    <div class="u-video-embed-container">
-      <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>" allow="autoplay" allowfullscreen></iframe>
-    </div>
+    <div class="js-lazy-loaded-youtube-embed background-black" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></div>
   <?php
     }
   ?>
 
   <a href="<?php the_permalink() ?>">
     <h5 class="index-post-title margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
-  
+
     <div class="index-post-description margin-top-tiny">
       <?php
         if ($description) {
