@@ -215,18 +215,18 @@ $banners = array(
           if ($ts_image && $ts_title) {
         ?>
 <a href="<?php echo get_term_link($ts_term); ?>">
-  <div class="flex-grid-row flex-grid--nested-tight">
-    <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
+  <div class="flex-grid-row flex-grid--nested-tight only-desktop">
+    <div class="flex-grid-item flex-grid-item--tight flex-item-l-4 flex-item-xxl-4">
     <?php
       echo wp_get_attachment_image($ts_image, 'col4-square', false, array('class' => 'margin-bottom-micro'));
     ?>
     </div>
-    <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-      <h5 class="js-fix-widows"><?php echo $ts_title; ?></h5>
+    <div class="flex-grid-item flex-grid-item--tight flex-item-l-8 flex-item-xxl-8">
+      <h5 class="font-size-1"><?php echo $ts_title; ?></h5>
       <?php
         if ($ts_copy) {
       ?>
-        <div class="margin-top-micro"><?php echo $ts_copy; ?></div>
+        <div class="js-fix-widows margin-top-micro"><?php echo $ts_copy; ?></div>
       <?php
         }
       ?>
