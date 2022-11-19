@@ -8,6 +8,8 @@ $splash_image_id = !empty($splash_override_image_id) ? $splash_override_image_id
 
 $splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($splash_image_id) : false;
 
+$quotes = get_term_meta($term->term_id, '_nm_focus_quotes', true);
+
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
 <main id="main-content">
@@ -49,8 +51,20 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
     <div class="flex-grid-row margin-bottom-basic">
 <?php
 if( have_posts() ) {
+  $i = 0;
+  $quote_container_classes = 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic mobile-margin-bottom-large';
   while( have_posts() ) {
     the_post();
+
+    if ($i === 4 && isset($quotes[0])) { ?>
+    <div class="<?php echo $quote_container_classes; ?>">
+      <?php get_template_part('partials/components/quote', null, $quotes[0]); ?>
+    </div>
+<?php } else if ($i === 11 && isset($quotes[1])) { ?>
+    <div class="<?php echo $quote_container_classes; ?>">
+      <?php get_template_part('partials/components/quote', null, $quotes[1]); ?>
+    </div>
+<?php }
 
     $content_type = get_the_top_level_category(get_the_ID());
 
@@ -64,6 +78,8 @@ if( have_posts() ) {
           'image-size' => 'col12-16to9',
         ));
     }
+
+    $i++;
   }
 } else {
 ?>
