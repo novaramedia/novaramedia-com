@@ -19,11 +19,11 @@
     <?php
       }
     ?>
-    <h5 class="font-larger js-fix-widows"><?php the_title(); ?></h5>
+    <h5 class="font-size-1 js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if ($is_article) {
     ?>
-      <h6 class="margin-top-micro">by <?php render_bylines($post->ID, false); ?></h6>
+      <h6>by <?php render_bylines($post->ID, false); ?></h6>
     <?php
       }
 

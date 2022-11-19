@@ -1909,6 +1909,21 @@ img {
 .category-archive__submenu li:before {
   content: '| ';
 }
+
+.section-archive__submenu {
+  display: inline-block;
+}
+.section-archive__submenu li {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.section-archive__submenu li:after {
+  content: ' | ';
+}
+.section-archive__submenu li:last-child:after {
+  content: none;
+}
+
 .about-page__person a:after {
   content: '\219D';
   position: relative;

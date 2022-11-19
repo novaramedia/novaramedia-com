@@ -1089,6 +1089,20 @@ nmButton()
 
 // ******************************************************
 
+// SECTIONS
+
+.section-archive__submenu
+  display: inline-block
+  li
+    display: inline-block
+    margin-right: .5rem
+    &:after
+      content: ' | '
+    &:last-child:after
+      content: none
+
+// ******************************************************
+
 // PAGE: ABOUT
 
 .about-page__person
