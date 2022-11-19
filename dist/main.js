@@ -655,7 +655,7 @@ var Utilities = /*#__PURE__*/function () {
   }, {
     key: "lazyLoadVideo",
     value: function lazyLoadVideo() {
-      // utility class to lazy load a Youtube container
+      // utility class to lazy load a Youtube container. Target expected to be empty div with data-src of a valid Youtube embed url
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-lazy-loaded-youtube-embed').each(function () {
         var src = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('src');
         var insert = "<div class=\"u-video-embed-container\"><iframe class=\"youtube-player\" type=\"text/html\" src=\"".concat(src, "\" allow=\"autoplay\" allowfullscreen></iframe></div>");

@@ -44,7 +44,7 @@ export class Utilities {
   }
 
   lazyLoadVideo() {
-    // utility class to lazy load a Youtube container
+    // utility class to lazy load a Youtube container. Target expected to be empty div with data-src of a valid Youtube embed url
     $('.js-lazy-loaded-youtube-embed').each(function () {
       const src = $(this).data('src');
       const insert = `<div class="u-video-embed-container"><iframe class="youtube-player" type="text/html" src="${src}" allow="autoplay" allowfullscreen></iframe></div>`;

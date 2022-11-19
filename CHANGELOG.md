@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Utility function to lazy load Youtube embeds
+
 ### Changed
 
 - Update default podcast follow url to Podfollow
