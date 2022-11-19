@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update default podcast follow url to Podfollow
+- Render 2 possible quotes on Focus taxonomy archive and improve display styling
 
 ### Fixed
 

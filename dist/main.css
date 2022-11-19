@@ -1218,6 +1218,18 @@ a {
 .button.button-small {
   padding: 8px;
 }
+.component-quote {
+  margin-top: 16px;
+}
+.component-quote__image-holder {
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
+  z-index: -10;
+  width: 50%;
+  max-height: 100%;
+  overflow: hidden;
+}
 html {
   background-color: #fdfdfd;
   color: #0e0e0e;
@@ -1909,7 +1921,6 @@ img {
 .category-archive__submenu li:before {
   content: '| ';
 }
-
 .section-archive__submenu {
   display: inline-block;
 }
@@ -1923,7 +1934,6 @@ img {
 .section-archive__submenu li:last-child:after {
   content: none;
 }
-
 .about-page__person a:after {
   content: '\219D';
   position: relative;
@@ -2288,6 +2298,9 @@ img {
   }
   .button {
     padding: 12px;
+  }
+  .component-quote {
+    margin-top: 12px;
   }
   .inline-action-list li {
     display: inline-block;
@@ -2791,6 +2804,9 @@ img {
   .button {
     padding: 12px;
   }
+  .component-quote {
+    margin-top: 12px;
+  }
   .inline-action-list li {
     margin-right: 12px;
   }
@@ -3289,6 +3305,9 @@ img {
   .button {
     padding: 12px;
   }
+  .component-quote {
+    margin-top: 12px;
+  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
@@ -3774,6 +3793,10 @@ img {
   .button {
     padding: 12px;
   }
+  .component-quote {
+    margin-top: 12px;
+    margin-bottom: 42px;
+  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
@@ -3905,7 +3928,7 @@ img {
     margin-top: 24px;
   }
   .mobile-margin-top-mid {
-    margin-bottom: 42px;
+    margin-top: 42px;
   }
   .mobile-margin-bottom-none {
     margin-bottom: 0px;
