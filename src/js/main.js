@@ -30,8 +30,7 @@ class Site {
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
-
-    this.utilties.bind();
+    this.utilties.onReady();
   }
 }
 

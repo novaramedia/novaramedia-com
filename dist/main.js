@@ -611,29 +611,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+/**
+ * Sidewide utilities, inc utility css classes
+ */
+
 var Utilities = /*#__PURE__*/function () {
   function Utilities() {
     _classCallCheck(this, Utilities);
 
     this.fixWidows();
-    this.lazyLoadVideo();
     this.displayTimeSince();
     this.checkGDPRApproval();
   }
+  /**
+   * Function to run on jQuery document ready event
+   */
+
 
   _createClass(Utilities, [{
-    key: "bind",
-    value: function bind() {
+    key: "onReady",
+    value: function onReady() {
       var _this = this;
+
+      this.lazyLoadVideo();
 
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section').length) {
         _this.bindResourcesToggle();
       }
 
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-select').click(function () {
-        (0,_functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)[0]); // *** need to fix this
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-select').click(function (event) {
+        (0,_functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target)[0]);
       });
     }
+    /**
+     * Binds the click toggle for the single post resources section
+     */
+
   }, {
     key: "bindResourcesToggle",
     value: function bindResourcesToggle() {
@@ -642,31 +655,44 @@ var Utilities = /*#__PURE__*/function () {
         $resources.toggle();
       });
     }
+    /**
+     * Utility css class mainly for use on headines to avoid widows [single words on a new line]
+     * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
+     */
+
   }, {
     key: "fixWidows",
     value: function fixWidows() {
-      // utility class mainly for use on headines to avoid widows [single words on a new line]
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each(function () {
-        var string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).html();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each(function (index, element) {
+        var string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html();
         string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).html(string);
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(string);
       });
     }
+    /**
+     * Utility css class to lazy load a Youtube container.
+     * Target expected to be empty div with data-src of a valid Youtube embed url
+     */
+
   }, {
     key: "lazyLoadVideo",
     value: function lazyLoadVideo() {
-      // utility class to lazy load a Youtube container. Target expected to be empty div with data-src of a valid Youtube embed url
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-lazy-loaded-youtube-embed').each(function () {
-        var src = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('src');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-lazy-loaded-youtube-embed').each(function (index, element) {
+        var src = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).data('src');
         var insert = "<div class=\"u-video-embed-container\"><iframe class=\"youtube-player\" type=\"text/html\" src=\"".concat(src, "\" allow=\"autoplay\" allowfullscreen></iframe></div>");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
       });
     }
+    /**
+     * Utility css class to render time since post for posts under 5h old
+     * Target expected to be empty element with data-timestamp of a valid timestamp
+     */
+
   }, {
     key: "displayTimeSince",
     value: function displayTimeSince() {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-time-since').each(function () {
-        var $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-time-since').each(function (index, element) {
+        var $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
         var timestamp = $element.data('timestamp');
         var m = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
 
@@ -675,6 +701,10 @@ var Utilities = /*#__PURE__*/function () {
         }
       });
     }
+    /**
+     * Checks anon cookie for GDPR approval and renders approval box if not found
+     */
+
   }, {
     key: "checkGDPRApproval",
     value: function checkGDPRApproval() {
@@ -19092,7 +19122,7 @@ var Site = /*#__PURE__*/function () {
       this.header.onReady();
       this.search.onReady();
       this.support.onReady();
-      this.utilties.bind();
+      this.utilties.onReady();
     }
   }]);
 

@@ -6,58 +6,78 @@ import Cookies from 'js-cookie';
 
 import selectText from '../functions/selectText.js';
 
+/**
+ * Sidewide utilities, inc utility css classes
+ */
 export class Utilities {
   constructor() {
     this.fixWidows();
-    this.lazyLoadVideo();
     this.displayTimeSince();
     this.checkGDPRApproval();
   }
 
-  bind() {
+  /**
+   * Function to run on jQuery document ready event
+   */
+  onReady() {
     const _this = this;
+
+    this.lazyLoadVideo();
 
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
     }
 
-    $('.js-select').click(function () {
-      selectText($(this)[0]); // *** need to fix this
+    $('.js-select').click((event) => {
+      selectText($(event.target)[0]);
     });
   }
 
+  /**
+   * Binds the click toggle for the single post resources section
+   */
   bindResourcesToggle() {
-    var $resources = $('#single-resources-section');
+    const $resources = $('#single-resources-section');
 
-    $('#js-resources-toggle').click(function () {
+    $('#js-resources-toggle').click(() => {
       $resources.toggle();
     });
   }
 
+  /**
+   * Utility css class mainly for use on headines to avoid widows [single words on a new line]
+   * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
+   */
   fixWidows() {
-    // utility class mainly for use on headines to avoid widows [single words on a new line]
-    $('.js-fix-widows').each(function () {
-      var string = $(this).html();
+    $('.js-fix-widows').each((index, element) => {
+      let string = $(element).html();
       string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-      $(this).html(string);
+      $(element).html(string);
     });
   }
 
+  /**
+   * Utility css class to lazy load a Youtube container.
+   * Target expected to be empty div with data-src of a valid Youtube embed url
+   */
   lazyLoadVideo() {
-    // utility class to lazy load a Youtube container. Target expected to be empty div with data-src of a valid Youtube embed url
-    $('.js-lazy-loaded-youtube-embed').each(function () {
-      const src = $(this).data('src');
+    $('.js-lazy-loaded-youtube-embed').each((index, element) => {
+      const src = $(element).data('src');
       const insert = `<div class="u-video-embed-container"><iframe class="youtube-player" type="text/html" src="${src}" allow="autoplay" allowfullscreen></iframe></div>`;
 
-      $(this).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
+      $(element).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
     });
   }
 
+  /**
+   * Utility css class to render time since post for posts under 5h old
+   * Target expected to be empty element with data-timestamp of a valid timestamp
+   */
   displayTimeSince() {
-    $('.js-time-since').each(function () {
-      var $element = $(this);
-      var timestamp = $element.data('timestamp');
-      var m = moment(timestamp);
+    $('.js-time-since').each((index, element) => {
+      const $element = $(element);
+      const timestamp = $element.data('timestamp');
+      const m = moment(timestamp);
 
       if (m.isAfter(moment().subtract(5, 'hours'))) {
         $element.text(`| ${m.fromNow()}`);
@@ -65,13 +85,16 @@ export class Utilities {
     });
   }
 
+  /**
+   * Checks anon cookie for GDPR approval and renders approval box if not found
+   */
   checkGDPRApproval() {
-    var approvalCookie = Cookies.get('gdpr-approval');
+    const approvalCookie = Cookies.get('gdpr-approval');
 
     if (approvalCookie !== 'true') {
       $('#gdpr').show();
 
-      $('#gdpr-accept').click(function () {
+      $('#gdpr-accept').click(() => {
         Cookies.set('gdpr-approval', true);
         $('#gdpr').hide();
       });
