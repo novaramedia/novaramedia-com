@@ -187,7 +187,16 @@ function only_child_category_filter($var) {
   }
 }
 
-// create youtube embed url with consistent parameters
+/**
+ * Create youtube embed url with consistent parameters
+ *
+ * Note the option to use the .js-lazy-loaded-youtube-embed utility class on a container with this return value set as data-src in order to lazy load. See Utilities.js module for more.
+ *
+ * @param string $id Youtube video ID
+ * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy)
+ *
+ * @return string Valid youtube iframe src url
+ */
 function generate_youtube_embed_url($id, $autoplay = false) {
   $url = 'https://www.youtube.com/embed/' . $id . '?modestbranding=1&rel=0';
 

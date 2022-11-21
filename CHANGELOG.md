@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Utility function to lazy load Youtube embeds
 - Banner for 'Pro Revolution Soccer' Focus
 - Navigation menu for section custom taxonomy archives
 
