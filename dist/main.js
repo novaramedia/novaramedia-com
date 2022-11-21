@@ -596,115 +596,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* harmony import */ var _functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../functions/selectText.js */ "./src/js/functions/selectText.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-
-/**
- * Sidewide utilities, inc utility css classes
- */
-
-var Utilities = /*#__PURE__*/function () {
-  function Utilities() {
-    _classCallCheck(this, Utilities);
-
-    this.fixWidows();
-    this.displayTimeSince();
-    this.checkGDPRApproval();
-  }
-  /**
-   * Function to run on jQuery document ready event
-   */
-
-
-  _createClass(Utilities, [{
-    key: "onReady",
-    value: function onReady() {
-      var _this = this;
-
-      this.lazyLoadVideo();
-
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section').length) {
-        _this.bindResourcesToggle();
-      }
-
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-select').click(function (event) {
-        (0,_functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target)[0]);
-      });
-    }
-    /**
-     * Binds the click toggle for the single post resources section
-     */
-
-  }, {
-    key: "bindResourcesToggle",
-    value: function bindResourcesToggle() {
-      var $resources = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-resources-toggle').click(function () {
-        $resources.toggle();
-      });
-    }
-    /**
-     * Utility css class mainly for use on headines to avoid widows [single words on a new line]
-     * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
-     */
-
-  }, {
-    key: "fixWidows",
-    value: function fixWidows() {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each(function (index, element) {
-        var string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html();
-        string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(string);
-      });
-    }
-    /**
-     * Utility css class to lazy load a Youtube container.
-     * Target expected to be empty div with data-src of a valid Youtube embed url
-     */
-
-  }, {
-    key: "lazyLoadVideo",
-    value: function lazyLoadVideo() {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-lazy-loaded-youtube-embed').each(function (index, element) {
-        var src = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).data('src');
-        var insert = "<div class=\"u-video-embed-container\"><iframe class=\"youtube-player\" type=\"text/html\" src=\"".concat(src, "\" allow=\"autoplay\" allowfullscreen></iframe></div>");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
-      });
-    }
-    /**
-     * Utility css class to render time since post for posts under 5h old
-     * Target expected to be empty element with data-timestamp of a valid timestamp
-     */
-
-  }, {
-    key: "displayTimeSince",
-    value: function displayTimeSince() {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-time-since').each(function (index, element) {
-        var $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
-        var timestamp = $element.data('timestamp');
-        var m = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
-
-        if (m.isAfter(moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(5, 'hours'))) {
-          $element.text("| ".concat(m.fromNow()));
-        }
-      });
-    }
-    /**
-     * Checks anon cookie for GDPR approval and renders approval box if not found
-     */
-
+/
   }, {
     key: "checkGDPRApproval",
     value: function checkGDPRApproval() {
@@ -19109,22 +19001,7 @@ var Site = /*#__PURE__*/function () {
     this.analytics = new _modules_Analytics_js__WEBPACK_IMPORTED_MODULE_3__.Analytics();
     this.header = new _modules_Header_js__WEBPACK_IMPORTED_MODULE_4__.Header();
     this.search = new _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__.Search();
-    this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__.Support();
-    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_7__.MailchimpSignup();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_8__.Utilities();
-    jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
-  }
-
-  _createClass(Site, [{
-    key: "onReady",
-    value: function onReady() {
-      lazysizes__WEBPACK_IMPORTED_MODULE_2___default().init();
-      this.header.onReady();
-      this.search.onReady();
-      this.support.onReady();
-      this.utilties.onReady();
-    }
-  }]);
+    this.supp
 
   return Site;
 }();
