@@ -25,7 +25,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
           </div>
         </div>
       </div>
-      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-8">
+      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-offset-xxl-2 flex-item-xxl-6">
         <?php
           if ($splash_image_id) {
             echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
