@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.8.1] - 2022-11-21
+
+### Added
+
+- Utility function to lazy load Youtube embeds
+- Banner for 'Pro Revolution Soccer' Focus
+- Navigation menu for section custom taxonomy archives
+
+### Changed
+
+- Update default podcast follow url to Podfollow
+- Render 2 possible quotes on Focus taxonomy archive and improve display styling
+
+### Fixed
+
+- oEmbed only fixes ratio for videos from Youtube or Vimeo
+
 ## [3.8.0] - 2022-10-21
 
 ### Added

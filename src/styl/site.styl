@@ -462,6 +462,24 @@ a
 
 // ******************************************************
 
+// COMPONENTS
+
+// QUOTE
+
+.component-quote
+  margin-top: $margin-small
+
+.component-quote__image-holder
+  position: absolute
+  bottom: 0
+  right: 2rem
+  z-index: -10
+  width: 50%
+  max-height: 100%
+  overflow: hidden
+
+// ******************************************************
+
 // BASIC
 
 html
@@ -973,21 +991,6 @@ nmButton()
 
 // ******************************************************
 
-// COMPONENTS
-
-// QUOTE
-
-.component-quote__image-holder
-  position: absolute
-  bottom: 0
-  right: 0
-  z-index: -10
-  width: 50%
-  max-height: 100%
-  overflow: hidden
-
-// ******************************************************
-
 // SPINNER
 
 .spinner
@@ -1086,6 +1089,20 @@ nmButton()
     display: inline-block
     &:before
       content: '| '
+
+// ******************************************************
+
+// SECTIONS
+
+.section-archive__submenu
+  display: inline-block
+  li
+    display: inline-block
+    margin-right: .5rem
+    &:after
+      content: ' | '
+    &:last-child:after
+      content: none
 
 // ******************************************************
 
