@@ -112,17 +112,17 @@ if( have_posts() ) {
         wp_reset_postdata();
       }
 
-      $tyksysour_cat_id = get_cat_ID('TyskySour') ? get_cat_ID('TyskySour') : false;
+      $novaralive_cat_id = get_cat_ID('Novara Live') ? get_cat_ID('Novara Live') : false;
 
-      if ( $tyksysour_cat_id ) {
-        $tyskysour = new WP_Query(wp_parse_args(array('cat' => $tyksysour_cat_id), $base_args));
-        render_posts_section($tyskysour, 'TyskySour', $is_full_archive);
+      if ( $novaralive_cat_id ) {
+        $novaralive = new WP_Query(wp_parse_args(array('cat' => $novaralive_cat_id), $base_args));
+        render_posts_section($novaralive, 'Novara Live', $is_full_archive);
         wp_reset_postdata();
       }
 
       $other_video = new WP_Query(wp_parse_args(array(
         'category_name' => 'Video',
-        'category__not_in' => array($downstream_cat_id, $tyksysour_cat_id)
+        'category__not_in' => array($downstream_cat_id, $novaralive_cat_id)
       ), $base_args));
       render_posts_section($other_video, 'Video', $is_full_archive);
       wp_reset_postdata();
