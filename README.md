@@ -1,5 +1,4 @@
-novaramedia-com
-===============
+# novaramedia-com
 
 # no future utopia now
 
