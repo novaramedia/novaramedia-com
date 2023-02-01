@@ -98,6 +98,7 @@ add_action( 'init', 'composer_autoload', 10 );
 // Add custom functions
 
 get_template_part( 'lib/renderers' );
+get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
 get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
