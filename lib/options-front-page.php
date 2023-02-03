@@ -36,8 +36,8 @@ function nm_register_front_page_options_metabox() {
     false => 'None',
     'partials/support-section' => 'Support section',
     'partials/specials/banners/support-video' => 'Support Video',
-    'email-the-cortado' => 'Email signup: The Cortado',
-    'email-the-pick' => 'Email signup: The Pick',
+    'email-the-cortado' => 'Email signup: The Cortado', // depreciated 3.9.0
+    'email-the-pick' => 'Email signup: The Pick', // depreciated 3.9.0
     'partials/specials/banners/focus-pro-rev-soccer' => 'Focus: Pro Rev Soccer',
     'partials/specials/banners/podcast-foreign-agent' => 'Podcast: Foreign Agent',
     'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
@@ -45,6 +45,24 @@ function nm_register_front_page_options_metabox() {
     'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
     'partials/specials/banners/podcast-planet-b' => 'Podcast: Planet B',
   );
+
+  // Get all the newsletter pages and create signup options for all with correct settings
+
+  $child_pages_wp_query = new WP_Query();
+  $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page'));
+  $newsletter_page = get_page_by_title('Newsletters');
+  $newsletter_pages = get_page_children($newsletter_page->ID, $all_wp_pages);
+
+  if ($newsletter_pages) {
+    foreach($newsletter_pages as $newsletter) {
+      $meta = get_post_meta($newsletter->ID);
+      $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
+
+      if ($mailchimp_key) {
+        $banner_options['newsletter-signup-' . $newsletter->ID] = 'Newsletter signup: ' . $newsletter->post_title;
+      }
+    }
+  }
 
   /**
    * Registers main options page menu item and form.
