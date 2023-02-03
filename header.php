@@ -65,10 +65,10 @@
                 <li><a href="<?php echo site_url(); ?>">Front Page</a></li>
                 <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
                 <?php
-                  $ts_term = get_term_by('slug', 'tyskysour-video', 'category');
-                  if ($ts_term) {
+                  $novaralive_term = get_term_by('slug', 'novara-live', 'category');
+                  if ($novaralive_term) {
                 ?>
-                <li><a href="<?php echo get_term_link($ts_term); ?>"><?php echo $ts_term->name; ?></a></li>
+                <li><a href="<?php echo get_term_link($novaralive_term); ?>"><?php echo $novaralive_term->name; ?></a></li>
                 <?php
                   }
                 ?>

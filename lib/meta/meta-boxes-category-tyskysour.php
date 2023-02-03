@@ -9,7 +9,7 @@ add_action( 'cmb2_init', 'nm_cmb_tyskysour_metaboxes' );
 function nm_cmb_is_category_tyskysour( $cmb ) {
   $term = get_term($cmb->object_id);
 
-  if ($term->slug === 'tyskysour-video') {
+  if (isset($term->slug) && ($term->slug === 'tyskysour-video')) {
     return true;
   }
 

@@ -11,15 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Newsletter page template with all meta field settings
 - Auto list all newsletters as signup banner options
+- URL rewrites for /tyskysour and /novara-live to Novara Live category archive
 
 ### Changed
 
 - Newsletter page auto lists all child pages with signup forms
+- TyskySour functionality cloned and renamed Novara Live (non breaking. TyskySour code to be removed after migration)
 
 ### Deprecated
 
 - The Pick and The Cortado single page templates
 - Hardcoded newsletter signup banner options for The Pick and The Cortado
+- TyskySour archive template
 
 ## [3.8.1] - 2022-11-21
 
