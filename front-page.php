@@ -130,10 +130,10 @@ $banners = array(
     }
 
     // *******************
-    // most recent tysky
+    // most recent Novara Live
 
-    $recent_tysky = new WP_Query(array(
-      'category_name' => 'tyskysour-video',
+    $recent_novaralive = new WP_Query(array(
+      'category_name' => 'novara-live',
       'posts_per_page' => 1,
     ));
   ?>
@@ -204,29 +204,29 @@ $banners = array(
           }
         ?>
         <?php
-          // if metadata is set render custom link to Tysky archive, otherwise render latest post
-          $ts_term = get_term_by('slug', 'tyskysour-video', 'category');
-          $ts_category_meta = $ts_term ? get_term_meta($ts_term->term_id) : false;
+          // if metadata is set render custom link to Novara Live archive, otherwise render latest post
+          $novaralive_term = get_term_by('slug', 'novara-live', 'category');
+          $novaralive_category_meta = $novaralive_term ? get_term_meta($novaralive_term->term_id) : false;
 
-          $ts_image = !empty($ts_category_meta['_nm_ts_frontpage_image_id']) ? $ts_category_meta['_nm_ts_frontpage_image_id'][0] : false;
-          $ts_title = !empty($ts_category_meta['_nm_ts_frontpage_title']) ? $ts_category_meta['_nm_ts_frontpage_title'][0] : false;
-          $ts_copy = !empty($ts_category_meta['_nm_ts_frontpage_copy']) ? $ts_category_meta['_nm_ts_frontpage_copy'][0] : false;
+          $novaralive_image = !empty($novaralive_category_meta['_nm_novaralive_frontpage_image_id']) ? $novaralive_category_meta['_nm_novaralive_frontpage_image_id'][0] : false;
+          $novaralive_title = !empty($novaralive_category_meta['_nm_novaralive_frontpage_title']) ? $novaralive_category_meta['_nm_novaralive_frontpage_title'][0] : false;
+          $novaralive_copy = !empty($novaralive_category_meta['_nm_novaralive_frontpage_copy']) ? $novaralive_category_meta['_nm_novaralive_frontpage_copy'][0] : false;
 
-          if ($ts_image && $ts_title) {
+          if ($novaralive_image && $novaralive_title) {
         ?>
-<a href="<?php echo get_term_link($ts_term); ?>">
+<a href="<?php echo get_term_link($novaralive_term); ?>">
   <div class="flex-grid-row flex-grid--nested-tight only-desktop">
     <div class="flex-grid-item flex-grid-item--tight flex-item-l-4 flex-item-xxl-4">
     <?php
-      echo wp_get_attachment_image($ts_image, 'col4-square', false, array('class' => 'margin-bottom-micro'));
+      echo wp_get_attachment_image($novaralive_image, 'col4-square', false, array('class' => 'margin-bottom-micro'));
     ?>
     </div>
     <div class="flex-grid-item flex-grid-item--tight flex-item-l-8 flex-item-xxl-8">
-      <h5 class="font-size-1"><?php echo $ts_title; ?></h5>
+      <h5 class="font-size-1"><?php echo $novaralive_title; ?></h5>
       <?php
-        if ($ts_copy) {
+        if ($novaralive_copy) {
       ?>
-        <div class="js-fix-widows margin-top-micro"><?php echo $ts_copy; ?></div>
+        <div class="js-fix-widows margin-top-micro"><?php echo $novaralive_copy; ?></div>
       <?php
         }
       ?>
@@ -235,11 +235,11 @@ $banners = array(
 </a>
         <?php
           } else {
-            // render recent tysky sour
-            if ($recent_tysky->have_posts()) {
-              while ($recent_tysky->have_posts()) {
-                $recent_tysky->the_post();
-                get_template_part('partials/front-page/front-page-tysky');
+            // render recent Novara Live
+            if ($recent_novaralive->have_posts()) {
+              while ($recent_novaralive->have_posts()) {
+                $recent_novaralive->the_post();
+                get_template_part('partials/front-page/front-page-novaralive');
               }
             }
           }
@@ -252,10 +252,10 @@ $banners = array(
     render_front_page_banner($banners[0]);
   ?>
 
-  <!-- Tyksy Sour video block -->
-  <section id="front-page-tysky-sour-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
+  <!-- Novara Live video block -->
+  <section id="front-page-novara-live-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
-      $video_category_slug = 'tyskysour-video';
+      $video_category_slug = 'novara-live';
 
       render_front_page_video_block($video_category_slug);
     ?>
@@ -351,11 +351,11 @@ $banners = array(
     </div>
   </section>
 
-  <!-- non-TS video block -->
+  <!-- non-Novara Live video block -->
   <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
     <?php
       $video_category_slug = 'video';
-      $excluded_category_slug = 'tyskysour-video';
+      $excluded_category_slug = 'novara-live';
 
       render_front_page_video_block($video_category_slug, $excluded_category_slug);
     ?>
