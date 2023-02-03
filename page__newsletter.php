@@ -1,8 +1,6 @@
 <?php
 /* Template Name: Newsletter */
 get_header();
-
-$newsletter_mailchimp_group_name = 'Novara Live';
 ?>
 <main id="main-content">
 <?php
