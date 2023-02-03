@@ -27,18 +27,32 @@ if( have_posts() ) {
     </div>
 
     <?php
-      get_template_part('partials/email-signup', null, array(
-        'newsletter' => 'The Cortado',
-        'copy' => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.'
-      ));
+      $child_pages_wp_query = new WP_Query();
+      $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page'));
 
-      get_template_part('partials/email-signup', null, array(
-        'newsletter' => 'The Pick',
-        'copy' => 'Sign up to The Pick—our top articles of the week, straight into your inbox. Coming soon!',
-        'background-color' => 'light-purple'
-      ));
+      $newsletter_pages = get_page_children($post->ID, $all_wp_pages);
+
+      if ($newsletter_pages) {
+        $index = 1;
+
+        foreach($newsletter_pages as $newsletter) {
+          $meta = get_post_meta($newsletter->ID);
+
+          $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
+          $banner_text = !empty($meta['_nm_banner_text']) ? $meta['_nm_banner_text'][0] : false;
+
+          if ($mailchimp_key) {
+            get_template_part('partials/email-signup', null, array(
+              'newsletter' => $mailchimp_key,
+              'copy' => $banner_text,
+              'background-color' => $index % 2 === 0 ? 'light-purple' : false,
+            ));
+
+            $index++;
+          }
+        }
+      }
     ?>
-
   <!-- end post -->
   </article>
 <?php

@@ -72,6 +72,7 @@ get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
+get_template_part( 'lib/meta/meta-boxes-category-novara-live' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
@@ -97,6 +98,7 @@ add_action( 'init', 'composer_autoload', 10 );
 // Add custom functions
 
 get_template_part( 'lib/renderers' );
+get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
 get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
