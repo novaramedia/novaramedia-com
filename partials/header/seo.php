@@ -102,7 +102,7 @@ if (is_home()) {
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:type" content="article" />
 <?php
-} else if (is_archive()) {
+} else if (is_archive() && get_queried_object_id()) {
 ?>
   <meta property="og:url" content="<?php echo get_term_link(get_queried_object_id()); ?>"/>
   <meta property="og:type" content="website" />

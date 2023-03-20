@@ -103,12 +103,14 @@ function get_the_top_level_category($post_id) {
   $top_level_category = array_filter($categories, 'only_top_level_category_filter');
 
   if (!$top_level_category) { // if there is no top level category set to post
-    if ($categories[0]->parent) { // then check the first category set
+    if (!empty($categories) && $categories[0]->parent) { // then check the first category set
       $top_level_category = get_category($categories[0]->parent); // and if there is a parent
     }
   } else {
     $top_level_category = array_values($top_level_category); // if there is a top level category
-    $top_level_category = $top_level_category[0]; // get the first one (because there should only be one)
+    if (!empty($top_level_category)) {
+      $top_level_category = $top_level_category[0]; // get the first one (because there should only be one)
+    }
   }
 
   if (!empty($top_level_category)) {
