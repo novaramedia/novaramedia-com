@@ -44,9 +44,12 @@ export class Support {
 
       _this.setAutoValues($form, this.autovalues['show_first']);
 
-      if (this.autovalues['show_first'] === 'oneoff') { // if the setting is to show one off first then update buttons active state
+      if (this.autovalues['show_first'] === 'oneoff') {
+        // if the setting is to show one off first then update buttons active state
         _this.clearActiveButtonState($form);
-        $form.find('.support-form__schedule-option[data-value=oneoff]').addClass('support-form__button--active');
+        $form
+          .find('.support-form__schedule-option[data-value=oneoff]')
+          .addClass('support-form__button--active');
       }
 
       const $valueInput = $form.find('.support-form__value-input').first();
@@ -126,8 +129,9 @@ export class Support {
     const _this = this;
 
     $form.find('.support-form__value-option').each((index, input) => {
-      const value = _this.autovalues[`${donationType}_${$(input).data('name')}`];
-      
+      const value =
+        _this.autovalues[`${donationType}_${$(input).data('name')}`];
+
       $(input).data('value', value).text(`£${value}`);
     });
   }
