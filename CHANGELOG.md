@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support Section default and url code alternate values can now set one off as the default
+
 ### Removed
 
 - The Pick and The Cortado single page templates
