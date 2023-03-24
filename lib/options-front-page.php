@@ -251,6 +251,10 @@ function nm_register_front_page_options_metabox() {
     'description' => 'Short copy. Needs to fit on 2 lines in the small box. This will likely be a short snappy sentence that is a call to action',
     'id'   => 'description',
     'type' => 'textarea_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-word-length' => 14
+    )
   ) );
 
   $secondary_options->add_group_field( $group_field_id, array(
