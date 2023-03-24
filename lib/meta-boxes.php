@@ -128,7 +128,7 @@ function igv_cmb_metaboxes() {
 
   $meta_boxes->add_field( array(
     'name'    => __( 'Contributor[s]', 'cmb' ),
-    'desc'    => __( 'Associate with contributor[s] (optional)', 'cmb' ),
+    'desc'    => __( 'Associate with contributor[s]. Will display multiple contributors in order of selection, with first selected displayed first. (optional)', 'cmb' ),
     'id'      => $prefix . 'contributors',
     'type'    => 'post_search_text',
     'post_type'   => array('contributor'),
