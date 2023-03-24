@@ -19,17 +19,30 @@ function nm_get_support_autovalues() {
         $key = false;
       }
 
-      $values = array(
-        isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null,
-        isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null,
-        isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null,
-        isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null,
-        isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null,
-        isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null,
-      );
+      $data = new \stdClass;
 
-      if ($key && count(array_filter($values, 'is_numeric')) === 6) {
-        $return[$key] = $values;
+      // probably better here to check type and return blank with any failure
+
+      $data->show_first = isset($autovalues_set['show_first']) ? $autovalues_set['show_first'] : null;
+      $data->regular_low = isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null;
+      $data->regular_medium = isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null;
+      $data->regular_high = isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null;
+      $data->oneoff_low = isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null;
+      $data->oneoff_medium = isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null;
+      $data->oneoff_high = isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null;
+
+      // $values = array(
+      //   isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null,
+      //   isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null,
+      //   isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null,
+      //   isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null,
+      //   isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null,
+      //   isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null,
+      // );
+
+      // if ($key && count(array_filter($values, 'is_numeric')) === 6) {
+      if ($key) {
+        $return[$key] = $data;
       }
     }
   }

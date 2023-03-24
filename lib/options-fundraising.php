@@ -71,6 +71,18 @@ function nm_register_fundraising_options_metabox() {
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
+    'name' => 'Show first',
+    'description' => 'Show regular or one off option first?',
+    'id'   => 'show_first',
+    'type' => 'radio_inline',
+    'options' => array(
+		  'regular' => __( 'Regular', 'cmb2' ),
+		  'oneoff'   => __( 'One off', 'cmb2' ),
+    ),
+    'default' => 'regular',
+  ) );
+
+  $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default low regular donation',
     'id'   => 'regular_low',
     'type' => 'text_small',

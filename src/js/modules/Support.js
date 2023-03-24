@@ -27,9 +27,7 @@ export class Support {
 
     if (urlParamSupportCode !== null) {
       if (
-        typeof WP.supportSectionAutovalues[urlParamSupportCode] !==
-          'undefined' &&
-        WP.supportSectionAutovalues[urlParamSupportCode].length === 6
+        typeof WP.supportSectionAutovalues[urlParamSupportCode] !== 'undefined'
       ) {
         autovaluesKey = urlParamSupportCode;
       }
@@ -44,7 +42,12 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
-      _this.setAutoValues($form);
+      _this.setAutoValues($form, this.autovalues['show_first']);
+
+      if (this.autovalues['show_first'] === 'oneoff') { // if the setting is to show one off first then update buttons active state
+        _this.clearActiveButtonState($form);
+        $form.find('.support-form__schedule-option[data-value=oneoff]').addClass('support-form__button--active');
+      }
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
@@ -62,8 +65,6 @@ export class Support {
             $form.attr('action', _this.donationAppUrl + data.value);
 
             _this.clearActiveButtonState($form);
-
-            $valueInput.val(1);
 
             $button.addClass('support-form__button--active');
           } else if (data.action === 'set-value') {
@@ -125,8 +126,8 @@ export class Support {
     const _this = this;
 
     $form.find('.support-form__value-option').each((index, input) => {
-      const autovaluesIndex = donationType === 'oneoff' ? index + 3 : index;
-      const value = _this.autovalues[autovaluesIndex];
+      const value = _this.autovalues[`${donationType}_${$(input).data('name')}`];
+      
       $(input).data('value', value).text(`£${value}`);
     });
   }
