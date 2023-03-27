@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- CMB2 meta field basic validation. Can validate required and max words via data attributes
+
 ### Removed
 
 - The Pick and The Cortado single page templates
