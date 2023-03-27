@@ -45,12 +45,16 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       $form = $(document.getElementById('nm_secondary_options_page'));
     }
 
+    if ($form === false && document.getElementById('nm_fundraising_options')) {
+      $form = $(document.getElementById('nm_fundraising_options'));
+    }
+
     if ($form === false) {
       return; // No form to hook to give up here
     }
 
-    $htmlbody = $( 'html, body' );
-    $toValidate = $( '[data-validation]' );
+    const $htmlbody = $( 'html, body' );
+    let $toValidate = $( '[data-validation]' );
 
     if ( ! $toValidate.length ) {
       return; // Nothing to validate so give up
@@ -78,6 +82,12 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       var labels = [];
       var $first_error_row = null;
       var $row = null;
+
+      $toValidate = $( '[data-validation]' );
+
+      if ( ! $toValidate.length ) {
+        return; // Nothing to validate so give up
+      }
 
       const add_failure = ( $row, reason ) => {        
         $row.css({ 'background-color': 'rgb(255, 170, 170)' });
