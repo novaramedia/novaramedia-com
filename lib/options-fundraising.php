@@ -68,6 +68,10 @@ function nm_register_fundraising_options_metabox() {
     'description' => 'Unique code for URL. Normally a random 6 character string.',
     'id'   => 'url_code',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
@@ -86,36 +90,60 @@ function nm_register_fundraising_options_metabox() {
     'name' => 'Default low regular donation',
     'id'   => 'regular_low',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default medium regular donation',
     'id'   => 'regular_medium',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default high regular donation',
     'id'   => 'regular_high',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default low one-off donation',
     'id'   => 'oneoff_low',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default medium one-off donation',
     'id'   => 'oneoff_medium',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_group_field( $support_section_group, array(
     'name' => 'Default high one-off donation',
     'id'   => 'oneoff_high',
     'type' => 'text_small',
+    'attributes' => array(
+      'data-validation' => 'true',
+      'data-validation-required' => 'true'
+    )
   ) );
 
   $main_options->add_field( array(
