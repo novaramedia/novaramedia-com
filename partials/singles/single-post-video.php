@@ -67,12 +67,14 @@
     ?>
   </div>
   <div id="single-video-related-video-holder" class="flex-grid-item flex-item-s-12 flex-item-xxl-2">
-    <h4 class="margin-bottom-small"><a href="<?php echo $category_link; ?>">More Video</a></h4>
     <div id="single-video-related-video" class="font-smaller">
       <?php
         $related_video = get_related_posts(null, 'Video', 3);
 
         if ($related_video->have_posts()) {
+      ?>
+      <h4 class="margin-bottom-small"><a href="<?php echo get_category_link(get_the_top_level_category($post->ID)); ?>">More Video</a></h4>
+      <?php
           while ($related_video->have_posts()) {
             $related_video->the_post();
       ?>

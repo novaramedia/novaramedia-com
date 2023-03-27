@@ -17,7 +17,7 @@
       class="support-form"
       action="https://donate.novaramedia.com/regular"
     >
-      <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default'][0]; ?>" name="amount" />
+      <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
 
       <div class="flex-grid-row margin-bottom-small">
         <div class="flex-grid-item flex-item-m-12">
@@ -49,13 +49,16 @@
         <div class="support-form__inputs flex-grid-item flex-item-l-12 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
           <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
-              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default'][0]; ?>">£<?php echo $support_section_autovalues['default'][0]; ?></button>
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low ?>" data-name="low"
+              >£<?php echo $support_section_autovalues['default']->regular_low ?></button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
-              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default'][1]; ?>">£<?php echo $support_section_autovalues['default'][1]; ?></button>
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium ?>" data-name="medium"
+              >£<?php echo $support_section_autovalues['default']->regular_medium ?></button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-2">
-              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default'][2]; ?>">£<?php echo $support_section_autovalues['default'][2]; ?></button>
+              <button class="support-form__button support-form__value-option" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high ?>" data-name="high"
+              >£<?php echo $support_section_autovalues['default']->regular_high ?></button>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
               <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0] - 2023-03-27
+
+### Added
+
+- Support Section default and url code alternate values can now set one off as the default
+- CMB2 meta field basic validation. Can validate required and max words via data attributes
+
+### Removed
+
+- The Pick and The Cortado single page templates
+
 ## [3.9.0] - 2023-02-03
 
 ### Added
