@@ -1,5 +1,19 @@
 <?php
 /**
+ * Checks a string to see if it is set and also is a number
+ * 
+ * @param string String to check
+ *
+ * @return boolean
+ */
+function nm_isset_and_numeric($string) {
+  if (isset($string) && is_numeric($string)) {
+    return true;
+  }
+
+  return false;
+}
+/**
  * Gets metadata for support form autovalues, validates and returns correctly structured array
  *
  * @return array Array of autovalues for support form
@@ -19,23 +33,34 @@ function nm_get_support_autovalues() {
         $key = false;
       }
 
-      $values = array(
-        isset($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null,
-        isset($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null,
-        isset($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null,
-        isset($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null,
-        isset($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null,
-        isset($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null,
-      );
+      $data = new \stdClass;
 
-      if ($key && count(array_filter($values, 'is_numeric')) === 6) {
-        $return[$key] = $values;
+      $data->show_first = isset($autovalues_set['show_first']) ? $autovalues_set['show_first'] : null;
+
+      $data->regular_low = nm_isset_and_numeric($autovalues_set['regular_low']) ? $autovalues_set['regular_low'] : null;
+      $data->regular_medium = nm_isset_and_numeric($autovalues_set['regular_medium']) ? $autovalues_set['regular_medium'] : null;
+      $data->regular_high = nm_isset_and_numeric($autovalues_set['regular_high']) ? $autovalues_set['regular_high'] : null;
+      $data->oneoff_low = nm_isset_and_numeric($autovalues_set['oneoff_low']) ? $autovalues_set['oneoff_low'] : null;
+      $data->oneoff_medium = nm_isset_and_numeric($autovalues_set['oneoff_medium']) ? $autovalues_set['oneoff_medium'] : null;
+      $data->oneoff_high = nm_isset_and_numeric($autovalues_set['oneoff_high']) ? $autovalues_set['oneoff_high'] : null;
+
+      if ($key) {
+        $return[$key] = $data;
       }
     }
   }
 
   if (count($return) === 0) {
-    $return['default'] = array(3, 5, 8, 5, 10, 20);
+    $data = new \stdClass;
+    $data->show_first = 'regular';
+    $data->regular_low = 3;
+    $data->regular_medium = 5;
+    $data->regular_high = 8;
+    $data->oneoff_low = 5;
+    $data->oneoff_medium = 10;
+    $data->oneoff_high = 20;
+
+    $return['default'] = $data;
   }
 
   return $return;
