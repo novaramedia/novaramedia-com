@@ -81,15 +81,9 @@ if (is_home()) {
   $description = get_post_meta($post->ID, '_cmb_short_desc', true);
 
   if ($description) {
-    // strip shortcodes from short_desc
-    $excerpt = strip_shortcodes($description);
-    // strip html tags
-    $excerpt = strip_tags(html_entity_decode($excerpt));
+    $excerpt = nm_clean_content_to_plaintext($description);
   } else {
-    // strip shortcodes from post_content
-    $excerpt = strip_shortcodes($post->post_content);
-    // strip html tags
-    $excerpt = strip_tags(html_entity_decode($excerpt));
+    $excerpt = nm_clean_content_to_plaintext($post->post_content);
     // trim post content by 600 chars
     $excerpt = substr($excerpt, 0, 600);
     // add ... to end
@@ -119,6 +113,17 @@ if (is_archive()) {
 
   if (!is_wp_error($raw_term_description) && !empty($raw_term_description)) {
     $og_description = $raw_term_description;
+  }
+}
+
+if (is_page()) {
+  $short_description = get_post_meta($post->ID, '_cmb_short_desc', true);
+
+  if (!empty($short_description)) {
+    $short_description = nm_clean_content_to_plaintext($short_description);
+    $short_description = htmlspecialchars($short_description);
+
+    $og_description = $short_description;
   }
 }
 ?>
