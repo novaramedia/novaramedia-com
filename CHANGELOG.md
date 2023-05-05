@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix critical error in seo.php when archive page has no custom description set
 - Author pages (WP users not our Contributors) force redirected to home.
 - oEmbeds of posts no longer display and link to the WP user who posted them
 

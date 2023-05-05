@@ -117,7 +117,7 @@ if (is_home()) {
 if (is_archive()) {
   $raw_term_description = get_term_field( 'description', get_queried_object_id(), null, $context = 'raw' );
 
-  if (!empty($raw_term_description)) {
+  if (!is_wp_error($raw_term_description) && !empty($raw_term_description)) {
     $og_description = $raw_term_description;
   }
 }
