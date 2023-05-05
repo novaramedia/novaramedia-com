@@ -1,5 +1,22 @@
 <?php
 /**
+ * Hook template_redirect to 301 redirect author pages to the homepage
+ * Author pages are those created for WP users and thus do not relate to any real content
+ *
+ */
+function nm_disable_author_page() {
+  global $wp_query;
+
+  if ( is_author() ) {
+      // Redirect to homepage, set status to 301 permenant redirect.
+      // Function defaults to 302 temporary redirect.
+      wp_redirect(get_option('home'), 301);
+      exit;
+  }
+}
+add_action('template_redirect', 'nm_disable_author_page');
+
+/**
  * Hook pre_get_posts on category archives that match via slug.
  * Changes the main query to display reverse chronological and all posts for serial podcasts
  * !needs to check an array not a string next time we do a serial podcast.

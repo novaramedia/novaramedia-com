@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Author pages (WP users not our Contributors) force redirected to home.
 - oEmbeds of posts no longer display and link to the WP user who posted them
 
 ## [3.10.0] - 2023-03-27
