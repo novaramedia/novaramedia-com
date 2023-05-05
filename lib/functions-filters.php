@@ -1,5 +1,22 @@
 <?php
 /**
+* Change the return values when oembedding one of our articles.
+* Main reason here is to edit the author value to not be the WP editor
+*
+*/
+function nm_edit_oembed_response_data( $data ) {
+    /**
+    * This could get the true author/contrib and link correctly.
+    * But this is an edge case only seen on Discord, so for now this fixes the error.
+    */
+    unset($data['author_url']);
+    $data['author_name'] = 'Novara Media';
+
+    return $data;
+}
+add_filter( 'oembed_response_data', 'nm_edit_oembed_response_data' );
+
+/**
 * Register custom query variables for custom PHP logic
 *
 */
