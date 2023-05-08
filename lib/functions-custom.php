@@ -1,7 +1,23 @@
 <?php
 /**
+ * Takes content filterd by the_content and removes shortcodes and html in order to be useable for meta etc
+ * This can be from both post content but also WYSIWYG meta fields.
+ *
+ * @param string
+ *
+ * @return string
+ */
+function nm_clean_content_to_plaintext($content) {
+  // strip shortcodes from content
+  $content = strip_shortcodes($content);
+  // strip html tags
+  $cleaned_content = strip_tags(html_entity_decode($content));
+
+  return $cleaned_content;
+}
+/**
  * Checks a string to see if it is set and also is a number
- * 
+ *
  * @param string String to check
  *
  * @return boolean

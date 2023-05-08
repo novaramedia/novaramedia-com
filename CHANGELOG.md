@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.1] - 2023-05-08
+
+### Added
+
+- Pages can now set custom short descriptions that display in contexts like opengraph meta or search layouts
+
+### Fixed
+
+- Fix critical error in seo.php when archive page has no custom description set
+- Author pages (WP users not our Contributors) force redirected to home.
+- oEmbeds of posts no longer display and link to the WP user who posted them
+
 ## [3.10.0] - 2023-03-27
 
 ### Added
