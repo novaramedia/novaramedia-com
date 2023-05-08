@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Pages can now set custom short descriptions that display in contexts like opengraph meta or search layouts
+
 ### Fixed
 
 - Fix critical error in seo.php when archive page has no custom description set
