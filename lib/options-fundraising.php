@@ -44,6 +44,14 @@ function nm_register_fundraising_options_metabox() {
   ) );
 
   $main_options->add_field( array(
+    'name' => __( 'Support section title', 'NM' ),
+    'desc' => false,
+    'id'   => $prefix . 'fundraising_settings_support_section_title',
+    'type' => 'text',
+    'default' => 'Support Us',
+  ) );
+
+  $main_options->add_field( array(
     'name' => __( 'Support section text', 'NM' ),
     'desc' => false,
     'id'   => $prefix . 'fundraising_settings_support_section_text',
