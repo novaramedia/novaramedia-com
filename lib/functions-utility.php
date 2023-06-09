@@ -1,5 +1,26 @@
 <?php
 
+
+
+/**
+ * Get file contents
+ *
+ * If found, get file contents directly with file_get_contents. Otherwise get file via old url_get_contents fallback curl function.
+ *
+ * @param string $path Path to file relative to theme root
+ *
+ * @return string $file File contents as a string
+ */
+function nm_get_file($path) {
+  if (function_exists('file_get_contents')) {
+    $file = file_get_contents(__DIR__ . '/..' . $path);
+  } else {
+    $file = url_get_contents(get_bloginfo('stylesheet_directory') . $path);
+  }
+
+  return $file;
+}
+
 // to replace file_get_contents
 function url_get_contents($Url) {
   if (!function_exists('curl_init')){
