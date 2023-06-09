@@ -1,6 +1,8 @@
-<div id="bottom-bar">
+<div id="bottom-bar" class="background-black">
   <?php
-    get_template_part('partials/bottom-bar/bar-support');
+    if (!is_page('support')) {
+      get_template_part('partials/bottom-bar/support-bar');
+    }
     get_template_part('partials/bottom-bar/gdpr');
   ?>
 </div>

@@ -463,6 +463,10 @@ var Support = /*#__PURE__*/function () {
 
         _this.bind();
       }
+
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar').length) {
+        _this.initSupportBar();
+      }
     }
     /**
      * Checks url parameters for valid alternative autovalues codes and uses them if found
@@ -576,6 +580,25 @@ var Support = /*#__PURE__*/function () {
         var value = _this.autovalues["".concat(donationType, "_").concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('name'))];
 
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text("\xA3".concat(value));
+      });
+    }
+  }, {
+    key: "initSupportBar",
+    value: function initSupportBar() {
+      var $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar');
+      var $barClose = $bar.find('.support-bar__close-trigger');
+      var $barOpen = $bar.find('.support-bar__open-trigger');
+      $barOpen.on({
+        click: function click(event) {
+          event.preventDefault();
+          $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+        }
+      });
+      $barClose.on({
+        click: function click(event) {
+          event.preventDefault();
+          $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+        }
       });
     }
   }], [{

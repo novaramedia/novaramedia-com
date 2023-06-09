@@ -8,7 +8,7 @@
 <div id="gdpr">
   <div class="container padding-top-tiny padding-bottom-tiny">
     <div class="flex-grid-row">
-      <div class="flex-grid-item font-color-white">
+      <div class="flex-grid-item font-color-white text-links-underlined">
         <?php echo apply_filters('the_content', $copy); ?>
       </div>
       <div class="flex-grid-item">

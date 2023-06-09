@@ -15,6 +15,10 @@ export class Support {
       _this.setupAutovalues();
       _this.bind();
     }
+
+    if ($('.support-bar').length) {
+      _this.initSupportBar();
+    }
   }
 
   /**
@@ -133,6 +137,28 @@ export class Support {
         _this.autovalues[`${donationType}_${$(input).data('name')}`];
 
       $(input).data('value', value).text(`£${value}`);
+    });
+  }
+
+  initSupportBar() {
+    const $bar = $('.support-bar');
+    const $barClose = $bar.find('.support-bar__close-trigger');
+    const $barOpen = $bar.find('.support-bar__open-trigger');
+
+    $barOpen.on({
+      click(event) {
+        event.preventDefault();
+
+        $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+      },
+    });
+
+    $barClose.on({
+      click(event) {
+        event.preventDefault();
+
+        $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+      },
     });
   }
 
