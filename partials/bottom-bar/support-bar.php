@@ -1,5 +1,8 @@
-<div class="support-bar support-bar--open background-red">
-  <div class="container padding-top-tiny padding-bottom-tiny">
+<div
+  class="support-bar support-bar--open background-cover-image background-red"
+  style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
+>
+  <div class="container padding-top-small padding-bottom-small">
     <div class="support-bar__open-view flex-grid-row padding-bottom-tiny">
       <div class="flex-grid-item flex-item-xxl-3 only-desktop">
         <h3 class="font-color-white font-size-l-3 font-size-4" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
