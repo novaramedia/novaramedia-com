@@ -1237,18 +1237,6 @@ a {
 .ux-pointer {
   cursor: pointer;
 }
-.ux-links-underlined a {
-  text-decoration: underline;
-}
-.ux-links-underlined a:hover {
-  text-decoration: none;
-}
-.ux-link-underlined {
-  text-decoration: underline;
-}
-.ux-link-underlined:hover {
-  text-decoration: none;
-}
 .icon-large:before {
   font-size: 1.400505962399693rem;
 }
@@ -1527,6 +1515,7 @@ img {
 }
 .nm-button--white {
   background-color: #fdfdfd;
+  color: #0e0e0e;
   border-color: #0e0e0e;
 }
 .nm-button--white:hover {
@@ -1611,6 +1600,7 @@ img {
 .support-form__button--white,
 .support-form__custom-input--white {
   background-color: #fdfdfd;
+  color: #0e0e0e;
   border-color: #0e0e0e;
 }
 .support-form__button--white:hover,
@@ -3879,6 +3869,9 @@ img {
   .only-mobile {
     display: initial;
   }
+  .display-s-block {
+    display: block;
+  }
   .only-desktop {
     display: none;
   }
@@ -4255,6 +4248,15 @@ img {
   }
   .support-page__content-copy {
     font-size: 16px;
+  }
+  .support-bar__open-actions-wrapper .ui-hit-area {
+    padding: 0 0 0.5rem 2rem;
+  }
+  #gdpr .flex-grid-row {
+    flex-wrap: wrap;
+  }
+  #gdpr .flex-grid-row .flex-grid-item:first-child {
+    margin-bottom: 0.5rem;
   }
 }
 @keyframes sk-bounce {

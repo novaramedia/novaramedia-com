@@ -475,18 +475,7 @@ a
 .ux-pointer
   cursor: pointer
 
-.ux-links-underlined
-  a
-    text-decoration: underline
-    &:hover
-      text-decoration: none
-
-.ux-link-underlined
-  text-decoration: underline
-  &:hover
-    text-decoration: none
-
-.icon-large:before
+.icon-large:before // is this depreciated? check
   font-size: $font-size-h3
 
 .button // is this depreciated? check
@@ -794,6 +783,7 @@ nmButton()
       border-color: $color-red-dark
   &--white
     background-color: $color-white-soft
+    color: $color-black-soft
     border-color: $color-black-soft
     &:hover
       background-color: $color-black-soft
