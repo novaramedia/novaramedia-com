@@ -20,8 +20,21 @@
       </div>
       <div class="flex-grid-item flex-item-s-12 flex-offset-m-1 flex-item-m-10 flex-item-xl-6 flex-item-xxl-4">
         <a href="<?php echo site_url('support/'); ?>">
-          <h2 class="font-size-3 margin-bottom-tiny js-fix-widows">We’re up against obscene wealth and influence.</h2>
-          <p class="font-size-2">Donate one hour’s wage per month or whatever you can afford to build people-powered media.</p>
+          <?php
+            foreach($copy as $key => $paragraph) {
+              if ($key === 0) {
+            ?>
+            <h3 class="font-size-3 margin-bottom-tiny js-fix-widows"><?php echo $paragraph; ?></h3>
+            <?php
+              } else {
+            ?>
+            <p class="font-size-2"><?php echo $paragraph; ?></p>
+            <?php
+              }
+          ?>
+          <?php
+            }
+          ?>
         </a>
         <a href="<?php echo site_url('support/'); ?>" class="nm-button nm-button--white nm-button--inline">Fund something better</a>
       </div>
