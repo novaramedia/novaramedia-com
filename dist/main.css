@@ -134,11 +134,15 @@ ul.u-inline-list li {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.flex-grid-row:--reverse {
+.flex-grid-row--reverse {
   flex-direction: column-reverse;
 }
-.flex-grid-row:--nowrap {
+.flex-grid-row--nowrap {
   flex-wrap: nowrap;
+}
+.flex-grid-row--align-center {
+  -ms-align-items: center;
+  align-items: center;
 }
 .flex-grid-item {
   position: relative;
@@ -1678,7 +1682,7 @@ img {
   color: #fdfdfd;
 }
 .support-page__hero-wrapper {
-  padding: 120px 0;
+  padding: 70px 0;
 }
 .support-page__content-copy {
   font-family: Georgia, Times, "Times New Roman", serif;

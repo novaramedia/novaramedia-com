@@ -16,7 +16,10 @@ if( have_posts() ) {
     $form_copy_override = !empty($meta['_nm_support_form_copy_override']) ? $meta['_nm_support_form_copy_override'][0] : false;
 ?>
   <article id="page" class="support-page">
-    <div class="background-cover-image background-red" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2022-texture.svg'; ?>);">
+    <div
+      class="background-cover-image background-red"
+      style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
+    >
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
@@ -29,10 +32,16 @@ if( have_posts() ) {
             ?></h4>
           </div>
         </div>
-        <div class="flex-grid-row support-page__hero-wrapper font-color-white">
-          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-12 flex-offset-xxl-0">
-            <h1 class="font-size-5 margin-bottom-tiny"><?php echo $title; ?></h1>
-            <h2 class="font-size-3"><?php echo $subtitle; ?></h2>
+        <div class="flex-grid-row flex-grid-row--align-center support-page__hero-wrapper font-color-white">
+          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
+            <h1 class="font-size-5 mobile-margin-bottom-basic" style="line-height: .85;">
+              <span class="only-desktop">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</span>
+              <span class="only-mobile">Build people-powered media.</span>
+            </h1>
+          </div>
+          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
+            <h2 class="font-size-3 margin-bottom-tiny js-fix-widows">Back truthful, independent journalism today.</h2>
+            <h2 class="font-size-3 js-fix-widows">Donate one hour’s wage per month or whatever you can afford.</h2>
           </div>
         </div>
       </div>
@@ -73,15 +82,18 @@ if( have_posts() ) {
       </div>
     </div>
 
-    <div class="background-lilac">
-      <div class="container padding-top-mid padding-bottom-mid">
+    <div
+      class="background-cover-image background-lilac"
+      style="background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture-alt.png'; ?>); background-blend-mode: overlay, normal;"
+    >
+      <div class="container padding-top-mid padding-bottom-mid font-color-white">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-            <h3 class="font-size-2 margin-bottom-small">Already a supporter?</h3>
+            <h4 class="margin-bottom-small">Already a supporter?</h4>
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
-            <p><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--red">Log in to your account</a></p>
+            <p><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--white">Log in to your account</a></p>
           </div>
         </div>
       </div>
