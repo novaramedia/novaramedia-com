@@ -1986,6 +1986,12 @@ img {
   width: 100%;
   z-index: 100;
 }
+.support-bar {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
 .support-bar .support-bar__open-view {
   -ms-align-items: center;
   align-items: center;
@@ -1999,6 +2005,11 @@ img {
 }
 .support-bar .flex-grid-row.is-one-even-line-grid .flex-grid-item {
   min-width: auto;
+}
+.support-bar--active {
+  -ms-filter: none;
+  filter: none;
+  opacity: 1;
 }
 .support-bar--open .support-bar__open-view {
   display: flex;

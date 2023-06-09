@@ -1184,6 +1184,8 @@ nmButton()
 // BAR SUPPORT
 
 .support-bar
+  opacity: 0
+  transition: opacity $basic-animation-speed
   .support-bar__open-view
     align-items: center
   .flex-grid-row.is-one-even-line-grid
@@ -1192,6 +1194,8 @@ nmButton()
     align-items: center
     .flex-grid-item
       min-width: auto
+  &--active
+    opacity: 1
   &--open
     .support-bar__open-view
       display: flex

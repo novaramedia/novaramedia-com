@@ -436,6 +436,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -445,6 +446,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
 /* global WP */
+
 
 var Support = /*#__PURE__*/function () {
   function Support() {
@@ -457,6 +459,8 @@ var Support = /*#__PURE__*/function () {
     key: "onReady",
     value: function onReady() {
       var _this = this;
+
+      _this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('gdpr-approval') === 'true' ? true : false;
 
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-section').length) {
         _this.setupAutovalues();
@@ -585,19 +589,40 @@ var Support = /*#__PURE__*/function () {
   }, {
     key: "initSupportBar",
     value: function initSupportBar() {
+      var _this = this;
+
       var $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar');
       var $barClose = $bar.find('.support-bar__close-trigger');
       var $barOpen = $bar.find('.support-bar__open-trigger');
+      _this.hasClosedSupportBarCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('support-bar-closed') === 'true' ? true : false;
+
+      if (!_this.hasClosedSupportBarCookie) {
+        $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+      }
+
+      $bar.addClass('support-bar--active');
       $barOpen.on({
         click: function click(event) {
           event.preventDefault();
           $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+
+          if (_this.hasApprovalCookie) {
+            js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'false', {
+              expires: 7
+            });
+          }
         }
       });
       $barClose.on({
         click: function click(event) {
           event.preventDefault();
           $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+
+          if (_this.hasApprovalCookie) {
+            js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'true', {
+              expires: 7
+            });
+          }
         }
       });
     }
@@ -739,12 +764,12 @@ var Utilities = /*#__PURE__*/function () {
   }, {
     key: "checkGDPRApproval",
     value: function checkGDPRApproval() {
-      var approvalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get('gdpr-approval');
+      var approvalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get('gdpr-approval') === 'true' ? true : false;
 
-      if (approvalCookie !== 'true') {
+      if (!approvalCookie) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gdpr').show();
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gdpr-accept').click(function () {
-          js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('gdpr-approval', true);
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gdpr-accept').on('click', function () {
+          js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('gdpr-approval', 'true');
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gdpr').hide();
         });
       }
@@ -18866,7 +18891,10 @@ module.exports = webpackEmptyContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/*! js-cookie v3.0.1 | MIT */
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ api; }
+/* harmony export */ });
+/*! js-cookie v3.0.5 | MIT */
 /* eslint-disable no-var */
 function assign (target) {
   for (var i = 1; i < arguments.length; i++) {
@@ -18899,7 +18927,7 @@ var defaultConverter = {
 /* eslint-disable no-var */
 
 function init (converter, defaultAttributes) {
-  function set (key, value, attributes) {
+  function set (name, value, attributes) {
     if (typeof document === 'undefined') {
       return
     }
@@ -18913,7 +18941,7 @@ function init (converter, defaultAttributes) {
       attributes.expires = attributes.expires.toUTCString();
     }
 
-    key = encodeURIComponent(key)
+    name = encodeURIComponent(name)
       .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
       .replace(/[()]/g, escape);
 
@@ -18940,11 +18968,11 @@ function init (converter, defaultAttributes) {
     }
 
     return (document.cookie =
-      key + '=' + converter.write(value, key) + stringifiedAttributes)
+      name + '=' + converter.write(value, name) + stringifiedAttributes)
   }
 
-  function get (key) {
-    if (typeof document === 'undefined' || (arguments.length && !key)) {
+  function get (name) {
+    if (typeof document === 'undefined' || (arguments.length && !name)) {
       return
     }
 
@@ -18957,25 +18985,25 @@ function init (converter, defaultAttributes) {
       var value = parts.slice(1).join('=');
 
       try {
-        var foundKey = decodeURIComponent(parts[0]);
-        jar[foundKey] = converter.read(value, foundKey);
+        var found = decodeURIComponent(parts[0]);
+        jar[found] = converter.read(value, found);
 
-        if (key === foundKey) {
+        if (name === found) {
           break
         }
       } catch (e) {}
     }
 
-    return key ? jar[key] : jar
+    return name ? jar[name] : jar
   }
 
   return Object.create(
     {
-      set: set,
-      get: get,
-      remove: function (key, attributes) {
+      set,
+      get,
+      remove: function (name, attributes) {
         set(
-          key,
+          name,
           '',
           assign({}, attributes, {
             expires: -1
@@ -18999,7 +19027,7 @@ function init (converter, defaultAttributes) {
 var api = init(defaultConverter, { path: '/' });
 /* eslint-enable no-var */
 
-/* harmony default export */ __webpack_exports__["default"] = (api);
+
 
 
 /***/ })

@@ -1,5 +1,5 @@
 <div
-  class="support-bar support-bar--open background-cover-image background-red"
+  class="support-bar support-bar--closed background-cover-image background-red"
   style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
 >
   <div class="container padding-top-small padding-bottom-small">

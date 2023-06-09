@@ -89,13 +89,13 @@ export class Utilities {
    * Checks anon cookie for GDPR approval and renders approval box if not found
    */
   checkGDPRApproval() {
-    const approvalCookie = Cookies.get('gdpr-approval');
+    const approvalCookie = Cookies.get('gdpr-approval') === 'true' ? true : false;
 
-    if (approvalCookie !== 'true') {
+    if (!approvalCookie) {
       $('#gdpr').show();
 
-      $('#gdpr-accept').click(() => {
-        Cookies.set('gdpr-approval', true);
+      $('#gdpr-accept').on('click', () => {
+        Cookies.set('gdpr-approval', 'true');
         $('#gdpr').hide();
       });
     }
