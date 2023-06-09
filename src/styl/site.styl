@@ -100,7 +100,7 @@ $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
 $font-leading-larger = 1.55
 
-$font-tracking-basic = 0.001em
+$font-tracking-basic = 0
 $font-tracking-medium = 0.0075rem
 $font-tracking-wider = 0.025em
 
@@ -446,12 +446,39 @@ a
 
 // ******************************************************
 
-// UI ELEMENTS
+// UI ELEMENTS / UX HELPERS
 
-.icon-large:before
+.ui-chevron
+  display: inline-block
+  border-right: 2px solid
+  border-bottom: 2px solid
+  height: 1rem
+  width: 1rem
+  &&--up
+    transform: rotate(225deg)
+    margin-bottom: -0.4rem;
+  &&--down
+    transform: rotate(45deg)
+
+.ui-hit-area
+  padding: 2rem
+  cursor: pointer
+  &--small
+    padding: 1rem
+  &--top-right
+    padding-top: 0
+    padding-right: 0
+  &--bottom-right
+    padding-bottom: 0
+    padding-right: 0
+
+.ux-pointer
+  cursor: pointer
+
+.icon-large:before // is this depreciated? check
   font-size: $font-size-h3
 
-.button
+.button // is this depreciated? check
   display: inline-block
   width: 100%
   padding: $margin-small
@@ -627,7 +654,7 @@ img
 
 // HEADER
 
-$header-height = 56px
+$header-height = 46px
 
 #header
   position: fixed
@@ -642,9 +669,10 @@ $header-height = 56px
   height: $header-height
   overflow: hidden
   background-color: black
-  background-image: url('./img/marble-dark-banner.jpg')
-  background-size: cover
-  background-position: center center
+
+#header-main
+  padding-top: 12px
+  padding-bottom: 10px
 
 #header-navs
   vertical-align: middle
@@ -756,6 +784,7 @@ nmButton()
       border-color: $color-red-dark
   &--white
     background-color: $color-white-soft
+    color: $color-black-soft
     border-color: $color-black-soft
     &:hover
       background-color: $color-black-soft
@@ -772,6 +801,8 @@ nmButton()
     display: inline-block
   &--half
     width: 49%
+  &--small
+    padding: $margin-micro $margin-small
 
 .nm-button
   nmButton()
@@ -819,7 +850,7 @@ nmButton()
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
-  padding: 120px 0
+  padding: 70px 0
 
 .support-page__content-copy
   font-family: $font-serif
@@ -1141,23 +1172,67 @@ nmButton()
 
 // ******************************************************
 
+// BOTTOM BAR
+
+#bottom-bar
+  position: fixed
+  bottom: 0
+  left 0
+  width: 100%
+  z-index: 100
+
+// BAR SUPPORT
+
+.support-bar
+  opacity: 0
+  transition: opacity $basic-animation-speed
+  .support-bar__open-view
+    align-items: center
+  .flex-grid-row.is-one-even-line-grid
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+    .flex-grid-item
+      min-width: auto
+  &--active
+    opacity: 1
+  &--open
+    .support-bar__open-view
+      display: flex
+    .support-bar__closed-view
+      display: none
+  &--closed
+    .support-bar__open-view
+      display: none
+    .support-bar__closed-view
+      display: flex
+
+.support-bar__open-actions-column
+  align-self: stretch
+
+.support-bar__open-actions-wrapper
+  display: flex
+  flex-direction: column
+  height: 100%
+  align-items: flex-end
+  justify-content: space-between
+
+
 // GDPR
 
 #gdpr
   display: none
-  position: fixed
-  bottom: 0
-  left 0
-  width: 100vw
   background-color: $color-black-soft
-  z-index: 100
 
-  .button
-    color: $color-white-soft
-    border-color: $color-white-soft
+  .flex-grid-row
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+    .flex-grid-item
+      min-width: auto
+
   p
-    a
-      text-decoration: underline
+    margin-bottom: 0
 
 // ******************************************************
 

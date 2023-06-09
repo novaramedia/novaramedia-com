@@ -35,7 +35,7 @@ $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
 $font-leading-larger = 1.55
 
-$font-tracking-basic = 0.001em
+$font-tracking-basic = 0
 $font-tracking-wider = 0.025em
 
 $border-width = 2px
@@ -220,6 +220,9 @@ p
 
 .only-mobile
   display: initial
+
+.display-s-block
+  display: block
 
 .only-desktop
   display: none
@@ -476,6 +479,7 @@ $header-height = 42px
   svg
     height: 16px
     width: 20px
+    margin-top: 1px
 
 #header-sub
   display: none
@@ -623,3 +627,21 @@ $header-height = 42px
 
 .support-page__content-copy
   font-size: 16px
+
+// ******************************************************
+
+// SUPPORT BAR
+
+.support-bar__open-actions-wrapper
+  .ui-hit-area
+    padding: 0 0 .5rem 2rem
+
+// ******************************************************
+
+// GDPR
+
+#gdpr
+  .flex-grid-row
+    flex-wrap: wrap
+    .flex-grid-item:first-child
+      margin-bottom: .5rem

@@ -30,7 +30,7 @@
 
             <div class="header-main__middle col col16 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                <nav id="header-main__logotype" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logotype-2-white-line.svg'); ?></nav>
+                <nav id="header-main__logotype" class="u-inline-block"><?php echo nm_get_file('/dist/img/logotype-2-white-line.svg'); ?></nav>
 
                 <?php
                   if (is_single()) {
@@ -50,7 +50,7 @@
 
             <a href="<?php echo home_url(); ?>">
               <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logomark" class="u-inline-block"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/logomark-white.svg'); ?></nav>
+                <nav id="menu-logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
               </div>
             </a>
           </div>

@@ -2,6 +2,7 @@
 /* global WP */
 
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 export class Support {
   constructor() {
@@ -11,9 +12,16 @@ export class Support {
   onReady() {
     const _this = this;
 
+    _this.hasApprovalCookie =
+      Cookies.get('gdpr-approval') === 'true' ? true : false;
+
     if ($('.support-section').length) {
       _this.setupAutovalues();
       _this.bind();
+    }
+
+    if ($('.support-bar').length) {
+      _this.initSupportBar();
     }
   }
 
@@ -133,6 +141,46 @@ export class Support {
         _this.autovalues[`${donationType}_${$(input).data('name')}`];
 
       $(input).data('value', value).text(`£${value}`);
+    });
+  }
+
+  initSupportBar() {
+    var _this = this;
+    const $bar = $('.support-bar');
+    const $barClose = $bar.find('.support-bar__close-trigger');
+    const $barOpen = $bar.find('.support-bar__open-trigger');
+
+    _this.hasClosedSupportBarCookie =
+      Cookies.get('support-bar-closed') === 'true' ? true : false;
+
+    if (!_this.hasClosedSupportBarCookie) {
+      $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+    }
+
+    $bar.addClass('support-bar--active');
+
+    $barOpen.on({
+      click(event) {
+        event.preventDefault();
+
+        $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+
+        if (_this.hasApprovalCookie) {
+          Cookies.set('support-bar-closed', 'false', { expires: 7 });
+        }
+      },
+    });
+
+    $barClose.on({
+      click(event) {
+        event.preventDefault();
+
+        $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+
+        if (_this.hasApprovalCookie) {
+          Cookies.set('support-bar-closed', 'true', { expires: 7 });
+        }
+      },
     });
   }
 
