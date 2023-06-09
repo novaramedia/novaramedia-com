@@ -2,12 +2,12 @@
   <div class="container padding-top-tiny padding-bottom-tiny">
     <div class="support-bar__open-view flex-grid-row padding-bottom-tiny">
       <div class="flex-grid-item flex-item-xxl-3 only-desktop">
-        <h3 class="font-color-white font-size-4" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
+        <h3 class="font-color-white font-size-l-3 font-size-4" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
       </div>
       <div class="flex-grid-item flex-item-xxl-10 only-mobile">
-        <h3 class="font-color-white font-size-2">Build people-powered media.</h3>
+        <h3 class="font-color-white font-size-2 margin-bottom-tiny">Build people-powered media.</h3>
       </div>
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 font-color-white font-size-2 only-desktop">
+      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 font-color-white font-size-l-1 font-size-2 only-desktop">
         <p>We’re up against obscene wealth and influence in the media space. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.</p>
         <strong>If you can, donate one hour’s wage per month or whatever you can afford today.</strong>
       </div>
