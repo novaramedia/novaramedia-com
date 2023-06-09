@@ -772,6 +772,8 @@ nmButton()
     display: inline-block
   &--half
     width: 49%
+  &--small
+    padding: $margin-micro $margin-tiny
 
 .nm-button
   nmButton()
@@ -1141,21 +1143,32 @@ nmButton()
 
 // ******************************************************
 
+// BOTTOM BAR
+
+#bottom-bar
+  position: sticky
+  bottom: 0
+  left 0
+  width: 100%
+  z-index: 100
+
+// BAR SUPPORT
+
 // GDPR
 
 #gdpr
   display: none
-  position: fixed
-  bottom: 0
-  left 0
-  width: 100vw
   background-color: $color-black-soft
-  z-index: 100
 
-  .button
-    color: $color-white-soft
-    border-color: $color-white-soft
+  .flex-grid-row
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+    .flex-grid-item
+      min-width: auto
+
   p
+    margin-bottom: 0
     a
       text-decoration: underline
 
