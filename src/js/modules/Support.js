@@ -12,7 +12,8 @@ export class Support {
   onReady() {
     const _this = this;
 
-    _this.hasApprovalCookie = Cookies.get('gdpr-approval') === 'true' ? true : false;
+    _this.hasApprovalCookie =
+      Cookies.get('gdpr-approval') === 'true' ? true : false;
 
     if ($('.support-section').length) {
       _this.setupAutovalues();
@@ -149,7 +150,8 @@ export class Support {
     const $barClose = $bar.find('.support-bar__close-trigger');
     const $barOpen = $bar.find('.support-bar__open-trigger');
 
-    _this.hasClosedSupportBarCookie = Cookies.get('support-bar-closed') === 'true' ? true : false;
+    _this.hasClosedSupportBarCookie =
+      Cookies.get('support-bar-closed') === 'true' ? true : false;
 
     if (!_this.hasClosedSupportBarCookie) {
       $bar.removeClass('support-bar--closed').addClass('support-bar--open');
