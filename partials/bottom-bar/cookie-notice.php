@@ -5,14 +5,14 @@
     $copy = 'We are always working to improve this website for our users. To do this we use data provided by the cookies and external scripts.';
   }
 ?>
-<div id="gdpr">
+<div id="obligation-bar">
   <div class="container padding-top-tiny padding-bottom-tiny">
     <div class="flex-grid-row">
       <div class="flex-grid-item font-color-white text-links-underlined">
         <?php echo apply_filters('the_content', $copy); ?>
       </div>
       <div class="flex-grid-item">
-        <a id="gdpr-accept" class="gdpr-button nm-button nm-button--white nm-button--small u-pointer">Accept</a>
+        <a id="obligation-accept" class="obligation-button nm-button nm-button--white nm-button--small u-pointer">Accept</a>
       </div>
     </div>
   </div>

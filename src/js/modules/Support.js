@@ -13,7 +13,7 @@ export class Support {
     const _this = this;
 
     _this.hasApprovalCookie =
-      Cookies.get('gdpr-approval') === 'true' ? true : false;
+      Cookies.get('cookie-approval') === 'true' ? true : false;
 
     if ($('.support-section').length) {
       _this.setupAutovalues();

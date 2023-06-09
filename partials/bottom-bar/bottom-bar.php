@@ -3,6 +3,6 @@
     if (!is_page('support')) {
       get_template_part('partials/bottom-bar/support-bar');
     }
-    get_template_part('partials/bottom-bar/gdpr');
+    get_template_part('partials/bottom-bar/cookie-notice');
   ?>
 </div>

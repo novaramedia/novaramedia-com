@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Header loses the black marble (wow) and gets tighter
 - Support page gets a fresh skin
 - And the support video banner gets a fresk skin too
-- Cookie approval functionality and layout gets improved
+- Cookie approval functionality and layout gets improved and renamed
 - Button style gets tweaked, some ui/ux utility classes added
 
 ## [3.10.1] - 2023-05-08
