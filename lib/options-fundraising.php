@@ -44,6 +44,14 @@ function nm_register_fundraising_options_metabox() {
   ) );
 
   $main_options->add_field( array(
+    'name' => __( 'Support section title', 'NM' ),
+    'desc' => false,
+    'id'   => $prefix . 'fundraising_settings_support_section_title',
+    'type' => 'text',
+    'default' => 'Support Us',
+  ) );
+
+  $main_options->add_field( array(
     'name' => __( 'Support section text', 'NM' ),
     'desc' => false,
     'id'   => $prefix . 'fundraising_settings_support_section_text',
@@ -190,7 +198,7 @@ function nm_register_fundraising_options_metabox() {
 
   $main_options->add_field( array(
     'name' => __( 'CTA text', 'NM' ),
-    'desc' => 'Add the copy one paragraph at at time using the rows function. One row = one paragraph.',
+    'desc' => 'Add the copy one paragraph at at time using the rows function. One row = one paragraph. The first paragraph will be the headline.',
     'id'   => $prefix . 'fundraising_settings_video_banner_cta_text',
     'type' => 'textarea_small',
     'repeatable' => true

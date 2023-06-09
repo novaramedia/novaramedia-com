@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.11.0] - 2023-06-09
+
+### Added
+
+- Support bar at bottom of page. Has open and closed state that can persist via cookie if allowed. All copy hardcoded
+- Utility function ot use file_get_contents when possible and fallback to old technique
+
+### Changed
+
+- Header loses the black marble (wow) and gets tighter
+- Support page gets a fresh skin
+- And the support video banner gets a fresk skin too
+- Cookie approval functionality and layout gets improved and renamed
+- Button style gets tweaked, some ui/ux utility classes added
+
 ## [3.10.1] - 2023-05-08
 
 ### Added

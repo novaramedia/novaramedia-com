@@ -23,6 +23,6 @@
  * Date: 2021-03-02T17:08Z
  */
 
-/*! js-cookie v3.0.1 | MIT */
+/*! js-cookie v3.0.5 | MIT */
 
 //! moment.js

@@ -86,17 +86,19 @@ export class Utilities {
   }
 
   /**
-   * Checks anon cookie for GDPR approval and renders approval box if not found
+   * Checks anon cookie for privacy approval and renders approval box if not found
    */
   checkGDPRApproval() {
-    const approvalCookie = Cookies.get('gdpr-approval');
+    const approvalCookie =
+      Cookies.get('cookie-approval') === 'true' ? true : false;
 
-    if (approvalCookie !== 'true') {
-      $('#gdpr').show();
+    if (!approvalCookie) {
+      const $bar = $('#obligation-bar');
+      $bar.show();
 
-      $('#gdpr-accept').click(() => {
-        Cookies.set('gdpr-approval', true);
-        $('#gdpr').hide();
+      $('#obligation-accept').on('click', () => {
+        Cookies.set('cookie-approval', 'true');
+        $bar.hide();
       });
     }
   }
