@@ -96,6 +96,16 @@ function composer_autoload() {
 }
 add_action( 'init', 'composer_autoload', 10 );
 
+// Register shortcodes
+
+function nm_register_shortcodes() {
+  function nm_caption_shortcode( $atts, $content = null) {
+    return '<div class="video-caption wp-caption">' . $content . '</div>';
+  }
+  add_shortcode( 'video-caption', 'nm_caption_shortcode' );
+}
+add_action( 'init', 'nm_register_shortcodes' );
+
 // Add custom functions
 
 get_template_part( 'lib/renderers' );
