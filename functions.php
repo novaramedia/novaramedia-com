@@ -82,7 +82,6 @@ get_template_part( 'lib/theme-options' );
 get_template_part( 'lib/options-front-page' );
 get_template_part( 'lib/options-fundraising' );
 
-
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/cmb2/cmb2/init.php';
