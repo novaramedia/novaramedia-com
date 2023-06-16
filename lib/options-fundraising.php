@@ -154,36 +154,6 @@ function nm_register_fundraising_options_metabox() {
     )
   ) );
 
-  // Page header CTA *DEPRECIATED REMOVE THIS AND OTHER FRONT END CODE*
-
-  $main_options->add_field( array(
-    'name'    => 'Page header CTA',
-    'desc'    => 'This is the hoisted CTA used during fundraisers',
-    'id'      => $prefix . 'fundraising_settings_header_cta_title',
-    'type'    => 'title',
-  ) );
-
-  $main_options->add_field( array(
-    'name' => __( 'Header CTA headline', 'NM' ),
-    'desc' => false,
-    'id'   => $prefix . 'fundraising_settings_header_cta_headline',
-    'type' => 'text',
-  ) );
-
-  $main_options->add_field( array(
-    'name' => __( 'Header CTA text', 'NM' ),
-    'desc' => false,
-    'id'   => $prefix . 'fundraising_settings_header_cta_text',
-    'type' => 'textarea_small',
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'Show page header CTA? *DEPRECIATED*',
-    'desc'    => '(for fundraisers etc) (almost certainly dont use this)',
-    'id'      => $prefix . 'fundraising_settings_header_cta_is_displayed',
-    'type'    => 'checkbox',
-  ) );
-
   // Bottom of window support bar
 
   $main_options->add_field( array(

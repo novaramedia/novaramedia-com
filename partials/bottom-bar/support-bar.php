@@ -6,7 +6,6 @@
   $desktop_closed_copy = NM_get_option('nm_fundraising_settings_support_bar_desktop_closed_copy', 'nm_fundraising_options');
   $desktop_closed_cta = NM_get_option('nm_fundraising_settings_support_bar_desktop_closed_cta', 'nm_fundraising_options');
   $mobile_closed_cta = NM_get_option('nm_fundraising_settings_support_bar_mobile_closed_cta', 'nm_fundraising_options');
-
 ?><div
   class="support-bar support-bar--closed background-cover-image background-red"
   style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
