@@ -52,8 +52,18 @@ function is_single_type($type, $post) {
   }
 }
 
-// print var in <pre> tags
-function pr($var) {
+/**
+ * Cleanly print out a variable, with optional title
+ *
+ * @param mixed $var Any PHP variable
+ * @param string $title Optional title for variable
+ *
+ * @return void
+ */
+function pr($var, $title = null) {
+  if ($title) {
+    echo '<strong>' . $title . '</strong><br>';
+  }
   echo '<pre>';
   print_r($var);
   echo '</pre>';

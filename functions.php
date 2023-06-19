@@ -82,7 +82,6 @@ get_template_part( 'lib/theme-options' );
 get_template_part( 'lib/options-front-page' );
 get_template_part( 'lib/options-fundraising' );
 
-
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/cmb2/cmb2/init.php';
@@ -95,6 +94,16 @@ function composer_autoload() {
   require_once( 'vendor/autoload.php' );
 }
 add_action( 'init', 'composer_autoload', 10 );
+
+// Register shortcodes
+
+function nm_register_shortcodes() {
+  function nm_caption_shortcode( $atts, $content = null) {
+    return '<div class="video-caption wp-caption">' . $content . '</div>';
+  }
+  add_shortcode( 'video-caption', 'nm_caption_shortcode' );
+}
+add_action( 'init', 'nm_register_shortcodes' );
 
 // Add custom functions
 

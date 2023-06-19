@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- [video-caption] shortcode with utility TinyMCE button
+
 ### Changed
 
 - Support bar copy now driven by meta set in the fundraising panel
