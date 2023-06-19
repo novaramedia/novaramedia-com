@@ -1,8 +1,6 @@
 <?php
 get_header();
 
-$show_support_banner = NM_get_option('nm_fundraising_settings_header_cta_is_displayed', 'nm_fundraising_options');
-
 $video = get_category_by_slug('video');
 $category = get_category(get_query_var('cat'));
 
@@ -25,13 +23,6 @@ if ($category->slug === 'video') {
 }
 ?>
 <main id="main-content" class="category-archive">
-<?php if ($show_support_banner !== false) {
-  if ($category->slug === 'video') {
-    get_template_part('partials/specials/banners/support-video');
-  } else {
-    get_template_part('partials/front-page/front-page-support-banner');
-  }
-} ?>
   <section id="posts" class="container margin-top-small">
     <div class="flex-grid-row margin-bottom-basic">
       <?php
