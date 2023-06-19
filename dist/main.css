@@ -1133,6 +1133,9 @@ article ol li {
   font-size: 0.8rem;
   margin-top: 8px;
 }
+.wp-video + .wp-caption {
+  margin-top: -1rem;
+}
 .text-copy-max-width {
   max-width: 974px;
   margin: 0 auto;
