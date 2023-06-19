@@ -1,8 +1,6 @@
 <?php
 get_header();
 
-$show_support_banner = NM_get_option('nm_fundraising_settings_header_cta_is_displayed', 'nm_fundraising_options');
-
 $banners = array(
   NM_get_option('nm_front_page_banner_option_1'),
   NM_get_option('nm_front_page_banner_option_2'),
@@ -14,10 +12,6 @@ $banners = array(
 <!-- main content -->
 <main id="main-content">
   <?php
-    if ($show_support_banner !== false) {
-      get_template_part('partials/front-page/front-page-support-banner');
-    }
-
     get_template_part('partials/front-page/front-page-signups');
 
     // **************
