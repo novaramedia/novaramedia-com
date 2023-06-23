@@ -1,8 +1,6 @@
 <?php
 get_header();
 
-$show_support_banner = NM_get_option('nm_fundraising_settings_header_cta_is_displayed', 'nm_fundraising_options');
-
 $section_term = get_queried_object();
 
 $active_state_checklist = [$section_term->term_id]; // haystack to search in for active state
@@ -18,10 +16,6 @@ if ($section_term->parent === 0) { // if queried section is already a top level 
 $top_level_section = get_term($top_level_section_id, 'section');
 ?>
 <main id="main-content" class="category-archive">
-<?php if ($show_support_banner !== false) {
-    get_template_part('partials/front-page/front-page-support-banner');
-  }
-?>
   <section id="posts" class="container margin-top-small">
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6">

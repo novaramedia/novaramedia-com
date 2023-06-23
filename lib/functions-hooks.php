@@ -76,7 +76,6 @@ if ( is_admin() ) {
 }
 
 function extlink_setup_tinymce_plugin() {
-
   // Check if the logged in WordPress User can edit Posts or Pages
   // If not, don't register our TinyMCE plugin
   if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
@@ -96,14 +95,14 @@ function extlink_setup_tinymce_plugin() {
 
 function extlink_add_tinymce_plugin( $plugin_array ) {
   $plugin_array['extlinks'] = get_template_directory_uri() . '/lib/tinyMCE/extlink-tinymce.js';
+  $plugin_array['videocaptionshortcode'] = get_template_directory_uri() . '/lib/tinyMCE/videocaptionshortcode-tinymce.js';
   return $plugin_array;
 }
 
 function extlink_add_tinymce_toolbar_button( $buttons ) {
-
   array_push( $buttons, 'extlinks' );
+  array_push( $buttons, 'videocaptionshortcode' );
   return $buttons;
-
 }
 
 function order_events_by_meta( $query ) {

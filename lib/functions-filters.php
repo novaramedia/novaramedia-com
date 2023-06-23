@@ -1,5 +1,24 @@
 <?php
 /**
+ * Wrap images in the_content with a div for styling.
+ * However this wasn't needed so currently not used. Left here in case of future utility.
+ *
+ */
+function nm_wrap_post_images( $content ) {
+  preg_match_all("/<figure.*>.*?<\/figure>/i", $content, $images);
+
+  if(!is_null($images)) {
+    foreach ($images[0] as $image) {
+      $replacement = '<div class="content-image">' . $image . '</div>';
+      $content = str_replace($image, $replacement, $content);
+    }
+  }
+
+  return $content;
+}
+// add_filter('the_content', 'nm_wrap_post_images', 20, 1);
+
+/**
 * Change the return values when oembedding one of our articles.
 * Main reason here is to edit the author value to not be the WP editor
 *

@@ -1114,7 +1114,7 @@ article ol li {
 .page-copy figure,
 .text-copy .wp-caption,
 .page-copy .wp-caption {
-  width: auto !important;
+  max-width: 100% !important;
   display: block;
   margin: 2rem auto;
 }
@@ -1132,6 +1132,9 @@ article ol li {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
   margin-top: 8px;
+}
+.wp-video + .wp-caption {
+  margin-top: -1rem;
 }
 .text-copy-max-width {
   max-width: 974px;
