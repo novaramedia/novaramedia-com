@@ -29,6 +29,18 @@ function nm_render_podcast_credit($credit) {
 ?>
 <main id="main-content" class="category-archive foreign-agent-archive">
   <style type="text/css">
+    .avif .foreign-agent-archive__container {
+      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.avif'; ?>);
+    }
+
+    .webp .foreign-agent-archive__container {
+      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.webp'; ?>);
+    }
+
+    .fallback .foreign-agent-archive__container {
+      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.jpg'; ?>);
+    }
+
     .foreign-agent-archive__title {
       max-width: 500px
     }
@@ -98,13 +110,13 @@ function nm_render_podcast_credit($credit) {
       }
     }
   </style>
-<div class="background-teal font-color-black background-cover-image" style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent-aerial-background.jpg'; ?>);">
+<div class="foreign-agent-archive__container background-teal font-color-black background-cover-image">
   <section class="container padding-top-small padding-bottom-basic">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-xxl-12 margin-bottom-small">
         <h4 style="color: #E3FFFF;"><a href="<?php echo home_url('category/audio/'); ?>">Podcast</a></h4>
       </div>
-      <div class="flex-grid-item flex-item-xxl-12 text-align-center padding-top-large padding-bottom-large background-cover-image" style="xbackground-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent-background.png'; ?>);">
+      <div class="flex-grid-item flex-item-xxl-12 text-align-center padding-top-large padding-bottom-large">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
         <h3 class="u-visuallyhidden">The IRA’s American connection</h3>
         <div class="foreign-agent-archive__title-holder text-align-center">
