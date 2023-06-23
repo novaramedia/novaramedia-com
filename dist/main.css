@@ -2011,7 +2011,6 @@ img {
   z-index: 100;
 }
 .support-bar {
-  background-blend-mode: overlay, normal;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
