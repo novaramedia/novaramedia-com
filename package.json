@@ -65,6 +65,11 @@
     "moment": "^2.29.4"
   },
   "release-it": {
+    "git": {
+      "commit": false,
+      "tag": false,
+      "push": false
+    },
     "npm": {
       "publish": false
     },
