@@ -16,10 +16,7 @@ if( have_posts() ) {
     $form_copy_override = !empty($meta['_nm_support_form_copy_override']) ? $meta['_nm_support_form_copy_override'][0] : false;
 ?>
   <article id="page" class="support-page">
-    <div
-      class="background-cover-image background-red"
-      style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
-    >
+    <div class="background-red background-support-texture">
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
@@ -82,10 +79,7 @@ if( have_posts() ) {
       </div>
     </div>
 
-    <div
-      class="background-cover-image background-lilac"
-      style="background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture-alt.png'; ?>); background-blend-mode: overlay, normal;"
-    >
+    <div class="background-lilac background-support-texture-alt">
       <div class="container padding-top-mid padding-bottom-mid font-color-white">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">

@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.0] - 2023-06-23
+
+### Added
+
+- Feature detect support for avif and webp
+
+### Changed
+
+- Use webp assets for support texture backgrounds
+- Optimise assets for Breaking Britain & Foreign Agent
+- [video-caption] shortcode with utility TinyMCE button
+- Support bar copy now driven by meta set in the fundraising panel
+- Style to allow the_content <figure>s to be thinner than their container and have the caption fit their width
+- YouTube embeds use no-cookie domain as default
+
+### Removed
+
+- Hoisted support bar for fundraisers feature
+
 ## [3.11.0] - 2023-06-09
 
 ### Added

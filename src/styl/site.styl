@@ -352,7 +352,7 @@ article
   a
     color: $color-blue
   img, figure, .wp-caption
-    width: auto !important
+    max-width: 100% !important
     display: block
     margin: 2rem auto
   .wp-caption
@@ -365,6 +365,9 @@ article
       font-family: $font-sans
       font-size: $font-size-smaller
       margin-top: $margin-tiny
+
+.wp-video + .wp-caption
+  margin-top: -1rem
 
 .text-copy-max-width
   max-width: ( 18 * $col ) + ( 17  * $gutter )
@@ -443,6 +446,26 @@ a
   top: 0
   width: 100%
   height: 100%
+
+.background-support-texture, .background-support-texture-alt
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+  background-blend-mode: overlay, normal
+
+.avif, .webp
+  .background-support-texture
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.webp)
+
+  .background-support-texture-alt
+    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
+
+.fallback
+  .background-support-texture
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.png)
+
+  .background-support-texture-alt
+    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
 
 // ******************************************************
 

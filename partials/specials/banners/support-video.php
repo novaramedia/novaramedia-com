@@ -4,10 +4,7 @@
 
   if (!empty($youtube_id) && !empty($copy)) {
 ?>
-<div
-  class="background-cover-image background-red"
-  style="background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/support-2023-texture.png'; ?>); background-blend-mode: overlay, normal;"
->
+<div class="background-red background-support-texture">
   <div class="container padding-top-basic padding-bottom-basic font-color-white">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">

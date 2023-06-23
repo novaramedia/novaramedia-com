@@ -154,33 +154,58 @@ function nm_register_fundraising_options_metabox() {
     )
   ) );
 
+  // Bottom of window support bar
+
   $main_options->add_field( array(
-    'name'    => 'Page header CTA',
-    'desc'    => 'This is the hoisted CTA used during fundraisers',
-    'id'      => $prefix . 'fundraising_settings_header_cta_title',
+    'name'    => 'Sticky support bar',
+    'desc'    => 'This is the bar at the bottom of the window that has an open and closed state',
+    'id'      => $prefix . 'fundraising_settings_support_bar_title',
     'type'    => 'title',
   ) );
 
   $main_options->add_field( array(
-    'name' => __( 'Header CTA headline', 'NM' ),
-    'desc' => false,
-    'id'   => $prefix . 'fundraising_settings_header_cta_headline',
-    'type' => 'text',
-  ) );
-
-  $main_options->add_field( array(
-    'name' => __( 'Header CTA text', 'NM' ),
-    'desc' => false,
-    'id'   => $prefix . 'fundraising_settings_header_cta_text',
+    'name' => __( 'Open state first paragraph of copy', 'NM' ),
+    'desc' => 'Single paragraph of copy.',
+    'id'   => $prefix . 'fundraising_settings_support_bar_open_paragraph',
     'type' => 'textarea_small',
   ) );
 
   $main_options->add_field( array(
-    'name'    => 'Show page header CTA?',
-    'desc'    => '(for fundraisers etc)',
-    'id'      => $prefix . 'fundraising_settings_header_cta_is_displayed',
-    'type'    => 'checkbox',
+    'name' => __( 'Open state bold CTA', 'NM' ),
+    'desc' => 'Single sentence that shows below the main copy and in bold',
+    'id'   => $prefix . 'fundraising_settings_support_bar_open_cta',
+    'type' => 'text',
   ) );
+
+  $main_options->add_field( array(
+    'name' => __( 'Open state button text', 'NM' ),
+    'desc' => 'Text shown on the button linking to support page',
+    'id'   => $prefix . 'fundraising_settings_support_bar_open_button',
+    'type' => 'text',
+  ) );
+
+  $main_options->add_field( array(
+    'name' => __( 'Closed state, desktop only copy', 'NM' ),
+    'desc' => 'Single sentence shown after slogan',
+    'id'   => $prefix . 'fundraising_settings_support_bar_desktop_closed_copy',
+    'type' => 'text',
+  ) );
+
+  $main_options->add_field( array(
+    'name' => __( 'Closed state, desktop only CTA text', 'NM' ),
+    'desc' => 'Text shown on the underlined link to support page',
+    'id'   => $prefix . 'fundraising_settings_support_bar_desktop_closed_cta',
+    'type' => 'text',
+  ) );
+
+  $main_options->add_field( array(
+    'name' => __( 'Closed state, mobile only CTA', 'NM' ),
+    'desc' => 'Text shown on the underlined link to support page',
+    'id'   => $prefix . 'fundraising_settings_support_bar_mobile_closed_cta',
+    'type' => 'text',
+  ) );
+
+  // Front page video banner block
 
   $main_options->add_field( array(
     'name'    => 'Front page video block CTA',
@@ -203,6 +228,8 @@ function nm_register_fundraising_options_metabox() {
     'type' => 'textarea_small',
     'repeatable' => true
   ) );
+
+  // Misc
 
   $main_options->add_field( array(
     'name'    => 'Misc options',

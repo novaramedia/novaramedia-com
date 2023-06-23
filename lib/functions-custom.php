@@ -241,7 +241,7 @@ function only_child_category_filter($var) {
  * @return string Valid youtube iframe src url
  */
 function generate_youtube_embed_url($id, $autoplay = false) {
-  $url = 'https://www.youtube.com/embed/' . $id . '?modestbranding=1&rel=0';
+  $url = 'https://www.youtube-nocookie.com/embed/' . $id . '?modestbranding=1&rel=0';
 
   if ($autoplay) {
     $url .= '&autoplay=1';
