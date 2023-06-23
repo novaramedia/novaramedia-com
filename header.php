@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
-  <style type="text/css">:root {--theme-path: <?php echo get_bloginfo('stylesheet_directory'); ?>;}</style>
   <?php
     get_template_part('partials/header/google-tag-manager');
     get_template_part('partials/header/seo');
