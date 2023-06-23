@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support bar copy now driven by meta set in the fundraising panel
 - Style to allow the_content <figure>s to be thinner than their container and have the caption fit their width
+- YouTube embeds use no-cookie domain as default
 
 ### Removed
 
