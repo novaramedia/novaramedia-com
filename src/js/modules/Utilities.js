@@ -22,8 +22,6 @@ export class Utilities {
   onReady() {
     const _this = this;
 
-    this.lazyLoadVideo();
-
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
     }
@@ -53,19 +51,6 @@ export class Utilities {
       let string = $(element).html();
       string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
       $(element).html(string);
-    });
-  }
-
-  /**
-   * Utility css class to lazy load a Youtube container.
-   * Target expected to be empty div with data-src of a valid Youtube embed url
-   */
-  lazyLoadVideo() {
-    $('.js-lazy-loaded-youtube-embed').each((index, element) => {
-      const src = $(element).data('src');
-      const insert = `<div class="u-video-embed-container"><iframe class="youtube-player" type="text/html" src="${src}" allow="autoplay" allowfullscreen></iframe></div>`;
-
-      $(element).html(insert).addClass('js-lazy-loaded-youtube-embed--loaded');
     });
   }
 

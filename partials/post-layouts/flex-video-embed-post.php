@@ -12,7 +12,9 @@
   <?php
     if ($youtube_id) {
   ?>
-    <div class="js-lazy-loaded-youtube-embed background-black" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></div>
+    <div class="u-video-embed-container background-black">
+      <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>" frameborder="0" allowfullscreen></iframe>
+    </div>
   <?php
     }
   ?>
