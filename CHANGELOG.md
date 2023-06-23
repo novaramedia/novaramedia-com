@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Feature detect support for avif and webp
+
+### Changed
+
+- Use webp assets for support texture backgrounds
+- Optimise assets for Breaking Britain & Foreign Agent
 - [video-caption] shortcode with utility TinyMCE button
 
 ### Changed

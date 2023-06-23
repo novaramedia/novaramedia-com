@@ -6,101 +6,89 @@ $term = $wp_query->get_queried_object();
 $quotes = get_term_meta($term->term_id, '_nm_focus_quotes', true);
 $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
-
 <div class="breaking-britain__bars-container" style="position: absolute; width: 100%; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
   <div class="breaking-britain__bar-1">
-    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-1.svg'); ?>
+    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg'); ?>
   </div>
   <div class="breaking-britain__bar-2">
-    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-2.svg'); ?>
+    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg'); ?>
   </div>
   <div class="breaking-britain__bar-3">
-    <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-3.svg'); ?>
+    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg'); ?>
   </div>
 </div>
-
 <style type="text/css">
+  .breaking-britain__header {
+    background-size: cover;
+    background-position: bottom;
+  }
+  .breaking-britain__header {
+    background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/breaking-britain/focus-breakingbritain-background.png'; ?>);
+  }
   .breaking-britain__bar-1 {
     position: absolute;
     top: 0;
     left: -400px;
     animation: breakingbars 13131ms ease-in-out 111ms infinite normal forwards;
   }
-
   .breaking-britain__bar-2 {
     position: absolute;
     top: -250px;
     left: 27vw;
     animation: breakingbars 22222ms ease-in-out 77ms infinite normal forwards;
   }
-
   .breaking-britain__bar-3 {
     position: absolute;
     top: -50px;
     right: -250px;
     animation: breakingbars 11111ms ease-in-out 42ms infinite normal forwards;
   }
-
   @media screen and (max-width: 1336px) {
     .breaking-britain__bars-container svg {
       transform: scale(.7)
     }
   }
-
   @media screen and (max-width: 1104px) {
     .breaking-britain__bars-container svg {
       transform: scale(.5)
     }
   }
-
   @media screen and (max-width: 910px) {
     .breaking-britain__bars-container svg {
       transform: scale(.3)
     }
   }
-
   @media screen and (max-width: 759px) {
     .breaking-britain__bars-container svg {
       transform: scale(.2)
     }
-
     .breaking-britain__bar-1 {
       top: -100px;
     }
   }
-
   @keyframes breakingbars {
   0% {
     transform: translate(0) rotate(0deg);
   }
-
   20% {
     transform: translate(-10px, 10px) rotate(-2deg);
   }
-
   40% {
     transform: translate(-10px, -10px);
   }
-
   60% {
     transform: translate(10px, 10px) rotate(2deg);
   }
-
   80% {
     transform: translate(10px, -10px);
   }
-
   100% {
     transform: translate(0) rotate(0deg);
   }
 }
 </style>
-
-<!-- main content -->
-
 <main id="main-content">
-
-  <div style="background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-background.png'; ?>); background-size: cover; background-position: bottom;">
+  <div class="breaking-britain__header">
     <div class="container">
       <div class="flex-grid-row padding-top-small margin-bottom-mid" style="align-items: flex-end;">
         <div class="flex-grid-item flex-item-s-12 flex-item-m-12 flex-item-xl-6 flex-item-xxl-7">
@@ -115,8 +103,6 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
       </div>
     </div>
   </div>
-
-  <!-- main posts loop -->
   <section id="posts" class="container">
 <?php
 if( have_posts() ) {
@@ -208,14 +194,8 @@ if( have_posts() ) {
         ?>
       </div>
     </div>
-
-  <!-- end posts -->
   </section>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>

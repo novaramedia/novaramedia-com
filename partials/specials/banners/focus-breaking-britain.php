@@ -8,13 +8,13 @@
 <div class="padding-top-mid padding-bottom-mid background-neon-blue font-color-white" style="overflow: hidden; position: relative">
   <div class="breaking-britain__bars-container" style="position: absolute; top: 0; width: 100%; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
     <div class="breaking-britain__bar-1">
-      <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-1.svg'); ?>
+      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg'); ?>
     </div>
     <div class="breaking-britain__bar-2">
-      <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-2.svg'); ?>
+      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg'); ?>
     </div>
     <div class="breaking-britain__bar-3">
-      <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/specials/focus-breakingbritain-line-3.svg'); ?>
+      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg'); ?>
     </div>
   </div>
 

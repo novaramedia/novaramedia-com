@@ -447,6 +447,26 @@ a
   width: 100%
   height: 100%
 
+.background-support-texture, .background-support-texture-alt
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+  background-blend-mode: overlay, normal
+
+.avif, .webp
+  .background-support-texture
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.webp)
+
+  .background-support-texture-alt
+    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
+
+.fallback
+  .background-support-texture
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.png)
+
+  .background-support-texture-alt
+    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+
 // ******************************************************
 
 // UI ELEMENTS / UX HELPERS
