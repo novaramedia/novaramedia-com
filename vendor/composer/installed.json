@@ -1,158 +1,175 @@
-[
-    {
-        "name": "cmb2/cmb2",
-        "version": "v2.7.0",
-        "version_normalized": "2.7.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/CMB2/CMB2.git",
-            "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
-            "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">5.2.4"
-        },
-        "require-dev": {
-            "apigen/apigen": "4.1.2",
-            "nette/utils": "2.5.3",
-            "phpunit/phpunit": "6.5.13"
-        },
-        "suggest": {
-            "composer/installers": "~1.0"
-        },
-        "time": "2020-01-21T17:49:50+00:00",
-        "type": "wordpress-plugin",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0-or-later"
-        ],
-        "authors": [
-            {
-                "name": "Justin Sternberg",
-                "email": "justin@dsgnwrks.pro",
-                "homepage": "https://dsgnwrks.pro",
-                "role": "Developer"
+{
+    "packages": [
+        {
+            "name": "cmb2/cmb2",
+            "version": "v2.10.1",
+            "version_normalized": "2.10.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "4afc4bb7b92ab6d93aac2247c9a84af773e42532"
             },
-            {
-                "name": "WebDevStudios",
-                "email": "contact@webdevstudios.com",
-                "homepage": "https://github.com/WebDevStudios",
-                "role": "Developer"
-            }
-        ],
-        "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-        "homepage": "https://github.com/CMB2/CMB2",
-        "keywords": [
-            "metabox",
-            "plugin",
-            "wordpress"
-        ]
-    },
-    {
-        "name": "fightbulc/moment",
-        "version": "1.32.1",
-        "version_normalized": "1.32.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fightbulc/moment.php.git",
-            "reference": "16b63d5d0e545615daf19c6a8b24786cb170172f"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/4afc4bb7b92ab6d93aac2247c9a84af773e42532",
+                "reference": "4afc4bb7b92ab6d93aac2247c9a84af773e42532",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1.2",
+                "awesomemotive/am-cli-tools": ">=1.3.1",
+                "nette/utils": "2.5.3",
+                "phpunit/phpunit": "^6.5",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "composer/installers": "~1.0"
+            },
+            "time": "2022-02-22T14:15:16+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "WebDevStudios",
+                    "email": "contact@webdevstudios.com",
+                    "homepage": "https://github.com/WebDevStudios",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
+            "homepage": "https://github.com/CMB2/CMB2",
+            "keywords": [
+                "metabox",
+                "plugin",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/CMB2/CMB2/issues",
+                "source": "http://wordpress.org/support/plugin/cmb2"
+            },
+            "install-path": "../cmb2/cmb2"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/16b63d5d0e545615daf19c6a8b24786cb170172f",
-            "reference": "16b63d5d0e545615daf19c6a8b24786cb170172f",
-            "shasum": ""
+        {
+            "name": "fightbulc/moment",
+            "version": "1.34",
+            "version_normalized": "1.34.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/moment.php.git",
+                "reference": "c813018ff87dfe77353f838908fc644cc5536b50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/c813018ff87dfe77353f838908fc644cc5536b50",
+                "reference": "c813018ff87dfe77353f838908fc644cc5536b50",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.36 || ^5.5 || ^6.5 || ^7.5 || ^9.0"
+            },
+            "time": "2023-01-26T21:18:59+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Moment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Parse, validate, manipulate, and display dates in PHP w/ i18n support. Inspired by moment.js",
+            "keywords": [
+                "date",
+                "display",
+                "format",
+                "i18n",
+                "locale",
+                "manipulate",
+                "moment",
+                "parse",
+                "time",
+                "translation",
+                "validate"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/moment.php/issues",
+                "source": "https://github.com/fightbulc/moment.php/tree/1.34"
+            },
+            "install-path": "../fightbulc/moment"
         },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8.36 || ^5.5 || ^6.5 || ^7.5"
-        },
-        "time": "2020-03-04T06:31:17+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Moment\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Tino Ehrich",
-                "email": "tino@bigpun.me",
-                "role": "developer"
-            }
-        ],
-        "description": "Parse, validate, manipulate, and display dates in PHP w/ i18n support. Inspired by moment.js",
-        "keywords": [
-            "date",
-            "display",
-            "format",
-            "i18n",
-            "locale",
-            "manipulate",
-            "moment",
-            "parse",
-            "time",
-            "translation",
-            "validate"
-        ]
-    },
-    {
-        "name": "webdevstudios/cmb2-post-search-field",
-        "version": "v0.2.5",
-        "version_normalized": "0.2.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/WebDevStudios/CMB2-Post-Search-field.git",
-            "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/WebDevStudios/CMB2-Post-Search-field/zipball/f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
-            "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">5.2.4"
-        },
-        "suggest": {
-            "composer/installers": "~1.0"
-        },
-        "time": "2016-05-30T06:58:49+00:00",
-        "type": "wordpress-plugin",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "WebDevStudios",
-                "email": "contact@webdevstudios.com",
-                "homepage": "https://github.com/WebDevStudios",
-                "role": "Developer"
-            }
-        ],
-        "description": "Custom field for CMB2 which adds a post-search dialog for searching/attaching other post IDs.",
-        "homepage": "https://github.com/WebDevStudios/CMB2",
-        "keywords": [
-            "field",
-            "metabox",
-            "plugin",
-            "search",
-            "wordpress"
-        ]
-    }
-]
+        {
+            "name": "webdevstudios/cmb2-post-search-field",
+            "version": "v0.2.5",
+            "version_normalized": "0.2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WebDevStudios/CMB2-Post-Search-field.git",
+                "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WebDevStudios/CMB2-Post-Search-field/zipball/f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
+                "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "suggest": {
+                "composer/installers": "~1.0"
+            },
+            "time": "2016-05-30T06:58:49+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "WebDevStudios",
+                    "email": "contact@webdevstudios.com",
+                    "homepage": "https://github.com/WebDevStudios",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Custom field for CMB2 which adds a post-search dialog for searching/attaching other post IDs.",
+            "homepage": "https://github.com/WebDevStudios/CMB2",
+            "keywords": [
+                "field",
+                "metabox",
+                "plugin",
+                "search",
+                "wordpress"
+            ],
+            "install-path": "../webdevstudios/cmb2-post-search-field"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
