@@ -32,7 +32,7 @@
             ?>
         </div>
 
-        <div class="front-page-signup__text font-smaller font-tracking-medium">
+        <div class="front-page-signup__text fs-3-sans">
             <h5><?php echo $title; ?></h5>
             <?php echo apply_filters('the_content', $copy); ?>
         </div>
