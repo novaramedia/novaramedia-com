@@ -453,6 +453,7 @@ var Support = /*#__PURE__*/function () {
     _classCallCheck(this, Support);
 
     this.donationAppUrl = 'https://donate.novaramedia.com/';
+    this.saveClosedStateTimeout = 21; // days
   }
 
   _createClass(Support, [{
@@ -608,7 +609,7 @@ var Support = /*#__PURE__*/function () {
 
           if (_this.hasApprovalCookie) {
             js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'false', {
-              expires: 7
+              expires: _this.saveClosedStateTimeout
             });
           }
         }
@@ -620,7 +621,7 @@ var Support = /*#__PURE__*/function () {
 
           if (_this.hasApprovalCookie) {
             js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'true', {
-              expires: 7
+              expires: _this.saveClosedStateTimeout
             });
           }
         }

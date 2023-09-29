@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 export class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
+    this.saveClosedStateTimeout = 21; // days
   }
 
   onReady() {
@@ -166,7 +167,9 @@ export class Support {
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'false', { expires: 7 });
+          Cookies.set('support-bar-closed', 'false', {
+            expires: _this.saveClosedStateTimeout,
+          });
         }
       },
     });
@@ -178,7 +181,9 @@ export class Support {
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'true', { expires: 7 });
+          Cookies.set('support-bar-closed', 'true', {
+            expires: _this.saveClosedStateTimeout,
+          });
         }
       },
     });

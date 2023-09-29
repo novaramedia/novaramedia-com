@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use lazysizes to lazy load YouTube embeds rather than own solution
+- Extend time til support bar reoopens to 21 days
 
 ## [3.12.0] - 2023-06-23
 
