@@ -51,7 +51,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
           <?php
             }
           ?>
-          <a class="nm-button nm-button--white" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Sign up to the mailing list</a>
+          <a class="nm-button nm-button--white" href="https://novaramedia.us10.list-manage.com/subscribe?u=34902a533127aa0365aa318ad&id=f80fa7138a" target="_blank" rel="nofollow">Sign up to the mailing list</a>
         </div>
       </div>
     </section>
