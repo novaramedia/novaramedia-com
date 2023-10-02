@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
+  <link rel="preload" as="image" href="https://novaramedia.com/wp-content/themes/novaramedia-com/dist/img/specials/support-2023-texture.webp">
   <?php
     get_template_part('partials/header/google-tag-manager');
     get_template_part('partials/header/seo');
