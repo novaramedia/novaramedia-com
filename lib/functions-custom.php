@@ -162,6 +162,42 @@ function get_the_top_level_category($post_id) {
 }
 
 /**
+* Does the post have set the Articles category?
+* Defaults to current $post context
+*
+* @param integer $post_id Post ID
+*
+* @return Boolean
+*/
+function nm_is_article($post_id = null) {
+  global $post;
+
+  if ($post_id === null) {
+    $post_id = $post->ID;
+  }
+
+  $categories = get_the_terms($post_id, 'category'); // get the categories for the post
+
+  if (!$categories) {
+    return false;
+  }
+
+  $found_in_categories = array_filter($categories,
+    function ($category) {
+      return $category->slug === 'articles';
+    }); // check to see if any of the categories returned match the articles slug
+
+  if (count($found_in_categories) > 0) {
+    return true; // if articles slug was found return true
+  }
+
+  return false;
+}
+
+/**
+* @deprecated 4.0.0 Replaced by nm_is_article()
+* @see nm_is_article()
+*
 * Answer the question is this a single post in the articles category?
 *
 * @return Boolean

@@ -1,5 +1,40 @@
 <?php
 /**
+ * Renders the standfirst for a post.
+ *
+ * @param integer $postId Post ID
+ */
+function render_standfirst($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  if ($meta['_cmb_standfirst']) {
+    echo $meta['_cmb_standfirst'][0];
+  }
+}
+/**
+ * Render the meta short description. If not set then render the excerpt.
+ *
+ * @param integer $postId Post ID
+ */
+function render_short_description($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  if ($meta['_cmb_short_desc']) {
+    echo $meta['_cmb_short_desc'][0];
+  } else {
+    echo get_the_excerpt($postId);
+  }
+}
+
+/**
  * Renders bylines on a post.
  *
  * Checks post metadata for either contributors or authors. Prioritises contributors. Optionally can link the rendered bylines. Reverts to Novara Reporters if nothing found.
