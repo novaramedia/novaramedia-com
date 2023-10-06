@@ -1,3 +1,5 @@
+/* global require, __dirname, module */
+
 const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,6 +14,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
 
 var config = {
   entry: './src/js/main.js',
@@ -62,7 +65,7 @@ var config = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ['autoprefixer'],
+                plugins: [postcssPresetEnv(/* pluginOptions */)],
               },
             },
           },
