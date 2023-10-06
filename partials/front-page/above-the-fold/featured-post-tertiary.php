@@ -9,7 +9,7 @@
     <?php
       $meta = get_post_meta(get_the_ID());
     ?>
-    <h5 class="fs-2 font-uppercase">
+    <h5 class="fs-2 font-uppercase mt-1">
       <?php
         if ($isArticle) {
           render_bylines($postId);
@@ -18,7 +18,7 @@
         }
       ?>
     </h5>
-    <p>
+    <p class="mt-1">
       <?php
         if ($isArticle) {
           render_standfirst($postId);

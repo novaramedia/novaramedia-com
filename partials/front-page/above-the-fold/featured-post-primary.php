@@ -7,7 +7,7 @@
   <?php the_post_thumbnail(); ?>
   <div>
     <h2 class="fs-8 js-fix-widows"><?php the_title(); ?></h2>
-    <h5 class="fs-2 font-uppercase">
+    <h5 class="fs-2 font-uppercase mt-3">
       <?php
         if ($isArticle) {
           render_bylines($postId);
@@ -16,7 +16,7 @@
         }
       ?>
     </h5>
-    <p>
+    <p class="mt-2">
       <?php
         if ($isArticle) {
           render_standfirst($postId);

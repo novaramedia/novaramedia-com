@@ -19,13 +19,13 @@ if ($recent_articles->have_posts()) {
     <div class="fs-2">
       <?php if ($sub_category) { echo $sub_category; } ?> | <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
-    <h4 class="fs-5-sans font-bold mt-2">
+    <h4 class="fs-5-sans font-bold font-condensed mt-1">
       <?php the_title(); ?>
     </h4>
-    <h5 class="fs-3-serif">
+    <h5 class="fs-3-serif mt-1">
       <?php render_standfirst($postId); ?>
     </h5>
-    <h5 class="fs-2 font-uppercase">
+    <h5 class="fs-2 font-uppercase mt-1">
       <?php render_bylines($post->ID, false); ?>
     </h5>
   </a>
