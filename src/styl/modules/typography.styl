@@ -28,6 +28,7 @@ h5
   font-weight: bold
 
 p
+  line-height: normal
   margin-bottom: 1rem
 
 // NEW TYPE SCALE v4.0.0 2024
@@ -36,12 +37,15 @@ p
 // (sans, sans-headline, sans-condensed, serif, mono) = font family
 // other classes (font-size-n) are for legacy migration
 
-.fs-1
+font-size-1()
   font-size: 0.5625rem
   font-style: normal
   font-weight: 700
   line-height: normal
   letter-spacing: 0.02813rem
+
+.fs-1
+  font-size-1()
 
 .fs-2, .font-size-0
   font-size: 0.74375rem;

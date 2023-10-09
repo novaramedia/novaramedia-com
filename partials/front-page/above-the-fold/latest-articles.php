@@ -14,16 +14,16 @@ if ($recent_articles->have_posts()) {
     // (3 layout options: default, small image right, full image below)
     // templatize all of these
 ?>
-<div class="margin-bottom-small padding-bottom-small" style="border-bottom: 1px solid #BAB8B8">
+<div class="margin-bottom-small padding-bottom-small ui-border-bottom">
   <a href="<?php the_permalink(); ?>">
-    <div class="fs-2">
-      <?php if ($sub_category) { echo $sub_category; } ?> | <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
+    <div class="layout-split-level fs-2">
+      <span class="ui-tag"><?php if ($sub_category) { echo $sub_category; } ?></span> <span class="js-time-since-unlimited" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
     <h4 class="fs-5-sans font-bold font-condensed mt-1">
       <?php the_title(); ?>
     </h4>
     <h5 class="fs-3-serif mt-1">
-      <?php render_standfirst($postId); ?>
+      <?php render_standfirst($post->ID); ?>
     </h5>
     <h5 class="fs-2 font-uppercase mt-1">
       <?php render_bylines($post->ID, false); ?>

@@ -11,7 +11,7 @@
 
     $cols = 24 / $number_of_signups;
 ?>
-<section id="front-page-signups" class="container margin-top-small margin-bottom-small">
+<section id="front-page-signups" class="container margin-top-small margin-bottom-small padding-bottom-small ui-border-bottom">
   <div class="row">
     <?php
       $i = 0;
@@ -22,7 +22,7 @@
         $signup_text = isset($signups[$i]['signup_text']) ? $signups[$i]['signup_text'] : false;
         $image_id = isset($signups[$i]['image_id']) ? $signups[$i]['image_id'] : false;
     ?>
-    <div class="col col<?php echo $cols;?>">
+    <div class="col col<?php echo $cols;?>" style="background-color: #EDEAEA">
       <a class="front-page-signup" href="<?php echo $link; ?>" <?php if (!strpos($link, 'novaramedia.com/')) {echo 'target="_blank"';} ?> rel="nofollow">
         <div class="front-page-signup__image">
             <?php

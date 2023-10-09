@@ -1,5 +1,29 @@
 <?php
 /**
+ * Renders a post thumbnail.
+ *
+ * @param integer $post_id Post ID
+ * @param string  $size    Thumbnail size
+ */
+function render_thumbnail($post_id, $size = 'col12-16to9') {
+  if (!is_numeric($post_id)) {
+    return;
+  }
+
+  $markup = get_the_post_thumbnail($post_id, $size);
+  $meta = get_post_meta($post_id);
+
+  if (isset($meta['_cmb_alt_thumb_id']) && is_numeric($meta['_cmb_alt_thumb_id'][0])) {
+    $alt_markup = wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], $size);
+
+    if ($alt_markup !== '') {
+      $markup = $alt_markup;
+    }
+  }
+
+  echo $markup;
+}
+/**
  * Renders the standfirst for a post.
  *
  * @param integer $postId Post ID
