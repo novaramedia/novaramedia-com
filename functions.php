@@ -78,9 +78,9 @@ get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 
-get_template_part( 'lib/theme-options' );
-get_template_part( 'lib/options-front-page' );
-get_template_part( 'lib/options-fundraising' );
+get_template_part( 'lib/theme-options/theme-options' );
+get_template_part( 'lib/theme-options/options-front-page' );
+get_template_part( 'lib/theme-options/options-fundraising' );
 
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {

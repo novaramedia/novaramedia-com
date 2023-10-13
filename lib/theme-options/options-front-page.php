@@ -27,6 +27,24 @@ function get_audio_categories_metabox_array() {
 }
 
 /**
+ * Returns a slug indexed array of all the Sections taxonomy options for use in select metaboxes
+ */
+function get_all_theme_sections_array() {
+  $terms = get_terms(array(
+    'taxonomy' => 'section'
+  ));
+
+  $return = [];
+  $return['none'] = 'None';
+
+  foreach($terms as $term) {
+    $return[$term->term_id] = $term->name;
+  }
+
+  return $return;
+}
+
+/**
  * Hook in and register a metabox to handle a theme options page and adds a menu item.
  */
 function nm_register_front_page_options_metabox() {
@@ -103,47 +121,6 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   $main_options->add_field( array(
-    'name'    => 'Articles Curation',
-    'desc'    => 'This is where articles can be curated to be displayed out of chronology',
-    'id'      => $prefix . 'front_page_settings_articles_title',
-    'type'    => 'title',
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'Main featured articles',
-    'desc'    => 'Select the article here to be shown as the main featured articles on the homepage. Only Articles category posts will be shown.',
-    'id'      => $prefix . 'front_page_main_featured_article_1',
-    'type'    => 'post_search_text',
-    'post_type'   => 'post',
-    // Default is 'checkbox', used in the modal view to select the post type
-    'select_type' => 'radio',
-    // Will replace any selection with selection from modal. Default is 'add'
-    'select_behavior' => 'replace',
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'Main featured article 2',
-    'desc'    => 'Select the article here to be shown as the second main featured articles on the homepage. Only Articles category posts will be shown.',
-    'id'      => $prefix . 'front_page_main_featured_article_2',
-    'type'    => 'post_search_text',
-    'post_type'   => 'post',
-    // Default is 'checkbox', used in the modal view to select the post type
-    'select_type' => 'radio',
-    // Will replace any selection with selection from modal. Default is 'add'
-    'select_behavior' => 'replace',
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'Sub featured article',
-    'desc'    => 'Select the article shown in the sub feature section on the homepage. If not selected the most recent Analysis type post will be shown.',
-    'id'      => $prefix . 'front_page_sub_featured_article',
-    'type'    => 'post_search_text',
-    'post_type'   => 'post',
-    'select_type' => 'radio',
-    'select_behavior' => 'replace',
-  ) );
-
-  $main_options->add_field( array(
     'name'    => 'Audio Curation',
     'desc'    => 'This is where audio can be curated',
     'id'      => $prefix . 'front_page_settings_audio_title',
@@ -201,6 +178,185 @@ function nm_register_front_page_options_metabox() {
     'id'      => $prefix . 'front_page_banner_option_4',
     'type'    => 'select',
     'options' => $banner_options
+  ) );
+
+  /**
+   * Register child page for above the fold featured.
+   */
+  $above_the_fold_featured = new_cmb2_box( array(
+    'id'           => 'nm_above_the_fold_featured_options_page',
+    'title'        => 'Above the Fold: Featured',
+    'object_types' => array( 'options-page' ),
+    'option_key'   => 'nm_front_page_above_the_fold_featured_options',
+    'parent_slug'  => 'nm_front_page_options',
+    'capability'   => 'edit_posts',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Above the fold: featured',
+    'desc' => 'This is where the settings for the above the fold featured section can be set',
+    'id'   => $prefix . 'above_the_fold_featured_options_title',
+    'type' => 'title',
+  ) );
+
+  // First featured post: The big one
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'First block: Main featured post',
+    'desc' => 'This is the first featured post',
+    'id'   => $prefix . 'above_the_fold_featured_1_title',
+    'type' => 'title',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => 'Main featured post',
+    'desc'    => 'Select the post to be primary featured post',
+    'id'      => $prefix . 'above_the_fold_featured_1',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Show See Also section (optional)',
+    'id'   => $prefix . 'above_the_fold_featured_1_show_related',
+    'type' => 'checkbox',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'More On section to link (optional)',
+    'desc' => 'Select the thematic section to be linked to in the More On section.',
+    'id'   => $prefix . 'above_the_fold_featured_1_more_on_section',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'options'          => get_all_theme_sections_array()
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Link More On section to product (optional)',
+    'desc' => 'If selected, the More On section will link to the product page of the selected product. This will override the above selection.',
+    'id'   => $prefix . 'above_the_fold_featured_1_is_product_linked',
+    'type' => 'checkbox',
+  ) );
+
+  // Next 3 featured posts: The small ones
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Rest of first featured section',
+    'desc' => 'These are the 3 other featured posts that will be shown in the first featured section',
+    'id'   => $prefix . 'above_the_fold_featured_234_title',
+    'type' => 'title',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '2nd featured post',
+    'desc'    => 'Will display with thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_2',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '3rd featured post',
+    'desc'    => 'Displays without thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_3',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '4th featured post',
+    'desc'    => 'Displays without thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_4',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  // Second featured block: First big one
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Second block: main featured post',
+    'desc' => 'This is the first featured post in the second block. The 5th featured post overall',
+    'id'   => $prefix . 'above_the_fold_featured_5_title',
+    'type' => 'title',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => 'Main featured post',
+    'desc'    => 'Select the post to be primary featured post',
+    'id'      => $prefix . 'above_the_fold_featured_5',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Show See Also section (optional)',
+    'id'   => $prefix . 'above_the_fold_featured_5_show_related',
+    'type' => 'checkbox',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'More On section to link (optional)',
+    'desc' => 'Select the thematic section to be linked to in the More On section.',
+    'id'   => $prefix . 'above_the_fold_featured_5_more_on_section',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'options'          => get_all_theme_sections_array()
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Link More On section to product (optional)',
+    'desc' => 'If selected, the More On section will link to the product page of the selected product. This will override the above selection.',
+    'id'   => $prefix . 'above_the_fold_featured_5_is_product_linked',
+    'type' => 'checkbox',
+  ) );
+
+  // Next 3 featured posts: The small ones
+
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Rest of second featured section',
+    'desc' => 'These are the 3 other featured posts that will be shown in the second featured section',
+    'id'   => $prefix . 'above_the_fold_featured_678_title',
+    'type' => 'title',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '2nd featured post',
+    'desc'    => 'Will display with thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_6',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '3rd featured post',
+    'desc'    => 'Displays without thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_7',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
+  ) );
+
+  $above_the_fold_featured->add_field( array(
+    'name'    => '4th featured post',
+    'desc'    => 'Displays without thumbnail',
+    'id'      => $prefix . 'above_the_fold_featured_8',
+    'type'    => 'post_search_text',
+    'post_type'   => 'post',
+    'select_type' => 'radio',
+    'select_behavior' => 'replace',
   ) );
 
   /**

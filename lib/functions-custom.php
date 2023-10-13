@@ -227,7 +227,12 @@ function nm_is_single_article() {
   return false;
 }
 
-// get and return the first sub category assigned to the post
+/**
+ * Get the first sub category assigned to the post
+ *
+ * @param integer $postId Post ID
+ * @param boolean $object Return WP Term object or just the name
+ */
 function get_the_sub_category($postId, $object = false) {
   $categories = get_the_category($postId);
 
