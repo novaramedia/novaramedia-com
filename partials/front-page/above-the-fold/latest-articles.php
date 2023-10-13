@@ -1,8 +1,15 @@
 <?php
-$recent_articles = new WP_Query(array(
+
+$query_args = array(
   'category_name' => 'articles',
   'posts_per_page' => 7,
-));
+);
+
+if (is_array($args) && count($args) > 0) {
+  $query_args = array_merge($query_args, array('post__not_in' => $args));
+}
+
+$recent_articles = new WP_Query($query_args);
 
 if ($recent_articles->have_posts()) {
   while ($recent_articles->have_posts()) {
