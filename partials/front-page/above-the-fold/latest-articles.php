@@ -1,5 +1,4 @@
 <?php
-
 $query_args = array(
   'category_name' => 'articles',
   'posts_per_page' => 7,
@@ -10,6 +9,7 @@ if (is_array($args) && count($args) > 0) {
 }
 
 $recent_articles = new WP_Query($query_args);
+$i = 0;
 
 if ($recent_articles->have_posts()) {
   while ($recent_articles->have_posts()) {
@@ -17,27 +17,66 @@ if ($recent_articles->have_posts()) {
     $meta = get_post_meta($post->ID);
     $timestamp = get_post_time('c');
     $sub_category = get_the_sub_category($post->ID);
-
-    // (3 layout options: default, small image right, full image below)
-    // templatize all of these
 ?>
 <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
   <a href="<?php the_permalink(); ?>">
     <div class="layout-split-level fs-2">
-      <span class="ui-tag"><?php if ($sub_category) { echo $sub_category; } ?></span> <span class="js-time-since-unlimited" data-timestamp="<?php echo $timestamp; ?>"></span>
+      <span class="ui-tag"><?php if ($sub_category) { echo $sub_category; } ?></span>
+      <span class="js-time-since-unlimited" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
-    <h4 class="fs-5-sans font-bold font-condensed mt-1">
-      <?php the_title(); ?>
-    </h4>
-    <h5 class="fs-3-serif mt-1">
-      <?php render_standfirst($post->ID); ?>
-    </h5>
-    <h5 class="fs-2 font-uppercase mt-1">
-      <?php render_bylines($post->ID, false); ?>
-    </h5>
+    <?php
+      // [temp logic]. to be driven by meta logics based on position and quality of image assets
+      if ($i === 1 || $i === 6) { // render small thumb layout
+    ?>
+      <div class="grid-row grid--nested mt-1">
+        <div class="grid-item is-xxl-16">
+          <h4 class="fs-4-sans font-bold font-condensed">
+            <?php the_title(); ?>
+          </h4>
+          <h5 class="fs-3-serif mt-1">
+            <?php render_standfirst($post->ID); ?>
+          </h5>
+          <h5 class="fs-2 font-uppercase mt-1">
+            <?php render_bylines($post->ID, false); ?>
+      </h5>
+        </div>
+        <div class="grid-item is-xxl-8">
+          <?php render_thumbnail($post->ID, 'col4-square'); ?>
+        </div>
+      </div>
+     <?php
+      } else if ($i === 3) { // render full image layout
+    ?>
+      <h4 class="fs-5-sans font-bold font-condensed mt-1">
+        <?php the_title(); ?>
+      </h4>
+      <div class="mt-1">
+        <?php render_thumbnail($post->ID, 'col12-16to9'); ?>
+      </div>
+      <h5 class="fs-3-serif mt-1">
+        <?php render_standfirst($post->ID); ?>
+      </h5>
+      <h5 class="fs-2 font-uppercase mt-1">
+        <?php render_bylines($post->ID, false); ?>
+      </h5>
+     <?php
+      } else {
+     ?>
+      <h4 class="fs-5-sans font-bold font-condensed mt-1">
+        <?php the_title(); ?>
+      </h4>
+      <h5 class="fs-3-serif mt-1">
+        <?php render_standfirst($post->ID); ?>
+      </h5>
+      <h5 class="fs-2 font-uppercase mt-1">
+        <?php render_bylines($post->ID, false); ?>
+      </h5>
+     <?php
+      } ?>
   </a>
 </div>
   <?php
+      $i++;
     }
   }
 ?>

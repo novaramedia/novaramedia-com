@@ -6,7 +6,8 @@
   // TODO: Vertical borders?
   // TODO: Round soften all images
   // TODO: Hover states?
-  // TODO: Layout options for recent articles bar
+  // TODO: Layout options for recent articles bar [x]
+  // TODO: UI element for AV tag
 ?>
 <section class="front-page__above-the-fold container margin-bottom-mid mobile-margin-top-small mobile-margin-bottom-basic">
   <div class="above-the-fold__featured-posts above-the-fold__featured-posts--primary grid-row">
