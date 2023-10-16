@@ -11,7 +11,7 @@
   $is_product_linked = !empty($args['is_product_linked']) && $args['is_product_linked'] === 'on' ? true : false;
   $more_on_section = !empty($args['more_on_section']) && $args['more_on_section'] !== 'none' ? $args['more_on_section'] : false;
 ?>
-<div class="layout-split-vertical">
+<div>
   <div>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -19,28 +19,32 @@
       </div>
       <?php render_thumbnail($post_id, 'col12-16to9'); ?>
     </div>
-    <div>
-      <h2 class="fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
-      <h5 class="fs-2 font-uppercase mt-3">
-        <?php
-          if ($is_article) {
-            render_bylines($post_id);
-          } else {
-            render_standfirst($post_id);
-          }
-        ?>
-      </h5>
-      <p class="mt-2 mb-0">
-        <?php
-          if ($is_article) {
-            render_standfirst($post_id);
-          } else {
-            render_short_description($post_id);
-          }
-        ?>
-      </p>
+    <div class="grid-row grid--nested">
+      <div class="grid-item is-xxl-18">
+        <h2 class="fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
+        <h5 class="fs-2 font-uppercase mt-3">
+          <?php
+            if ($is_article) {
+              render_bylines($post_id);
+            } else {
+              render_standfirst($post_id);
+            }
+          ?>
+        </h5>
+        <p class="mt-2 mb-0">
+          <?php
+            if ($is_article) {
+              render_standfirst($post_id);
+            } else {
+              render_short_description($post_id);
+            }
+          ?>
+        </p>
+      </div>
+      <div class="grid-item is-xxl-6">
+        See more
+      </div>
     </div>
-  </div>
   <?php
     if ($is_product_linked || $more_on_section) {
       if ($is_product_linked) {
@@ -70,4 +74,5 @@
   <?php
     }
   ?>
+</div>
 </div>
