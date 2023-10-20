@@ -139,7 +139,11 @@ function get_child_level_child_category($post_id) {
 *
 * @return Object/Boolean WP Term object or false if isnt set
 */
-function get_the_top_level_category($post_id) {
+function get_the_top_level_category($post_id = null) {
+  if (is_null($post_id)) {
+    return false;
+  }
+
   $categories = get_the_category($post_id);
   $top_level_category = array_filter($categories, 'only_top_level_category_filter');
 

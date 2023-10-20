@@ -20,15 +20,15 @@ if ($recent_articles->have_posts()) {
 ?>
 <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
   <a href="<?php the_permalink(); ?>">
-    <div class="layout-split-level fs-2">
-      <span class="ui-tag"><?php if ($sub_category) { echo $sub_category; } ?></span>
+    <div class="layout-split-level fs-2 mb-2">
+      <?php render_post_ui_tags($post_id); ?>
       <span class="js-time-since-unlimited" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
     <?php
       // [temp logic]. to be driven by meta logics based on position and quality of image assets
       if ($i === 1 || $i === 6) { // render small thumb layout
     ?>
-      <div class="grid-row grid--nested mt-1">
+      <div class="grid-row grid--nested">
         <div class="grid-item is-xxl-16">
           <h4 class="fs-4-sans font-bold font-condensed">
             <?php the_title(); ?>
@@ -51,15 +51,15 @@ if ($recent_articles->have_posts()) {
      <?php
       } else if ($i === 3) { // render full image layout
     ?>
-      <h4 class="fs-5-sans font-bold font-condensed mt-1">
+      <h4 class="fs-5-sans font-bold font-condensed">
         <?php the_title(); ?>
       </h4>
       <div class="mt-1">
         <?php render_thumbnail($post->ID, 'col12-16to9', array(
-          'class' => 'ui-rounded-image',
-          'data-no-lazysizes' => true,
-          'loading' => 'eager'
-        )); ?>
+        'class' => 'ui-rounded-image',
+        'data-no-lazysizes' => true,
+        'loading' => 'eager'
+      )); ?>
       </div>
       <h5 class="fs-3-serif mt-1">
         <?php render_standfirst($post->ID); ?>
@@ -70,7 +70,7 @@ if ($recent_articles->have_posts()) {
      <?php
       } else {
      ?>
-      <h4 class="fs-5-sans font-bold font-condensed mt-1">
+      <h4 class="fs-5-sans font-bold font-condensed">
         <?php the_title(); ?>
       </h4>
       <h5 class="fs-3-serif mt-1">

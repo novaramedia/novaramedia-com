@@ -10,7 +10,7 @@
 ?>
 <div class="featured-posts__tertiary mt-5">
   <div>
-    <span class="ui-tag"><?php if ($sub_category) { echo $sub_category; } ?></span>
+    <?php render_post_ui_tags($post_id); ?>
   </div>
   <h2 class="fs-5-sans font-bold mt-2 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
   <?php
