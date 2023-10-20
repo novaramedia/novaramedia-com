@@ -26,7 +26,7 @@
       )); ?>
     </div>
     <div class="grid-row grid--nested mt-3">
-      <div class="grid-item is-xxl-18">
+      <div class="grid-item is-s-24 is-l-16 is-xxl-18">
         <h2 class="fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
         <h5 class="fs-2 font-uppercase mt-3">
           <?php
@@ -47,7 +47,7 @@
           ?>
         </p>
       </div>
-      <div class="grid-item is-xxl-6">
+      <div class="grid-item is-s-24 is-l-8 is-xxl-6">
         <?php
           if ($show_related) {
             $meta = get_post_meta($post_id);

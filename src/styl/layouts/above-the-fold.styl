@@ -21,7 +21,12 @@
 @media screen and (max-width: $breakpoint-m)
 
   .above-the-fold__featured-1, .above-the-fold__latest-articles, .above-the-fold__featured-2
-    grid-column-start: auto;
+    grid-column-start: 1;
     grid-column-end: span 24;
     grid-row-start: auto;
     grid-row-end: span 1;
+
+@media screen and (max-width: $breakpoint-s)
+
+  .above-the-fold
+    display: block

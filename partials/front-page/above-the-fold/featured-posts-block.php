@@ -18,7 +18,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
 }
 ?>
 <div class="grid-row grid--nested<?php if ($args['block_number'] % 2 === 0) { echo " grid-row--reverse"; } ?>">
-  <div class="featured-posts__primary grid-item is-xxl-16">
+  <div class="featured-posts__primary grid-item is-l-24 is-xxl-16">
     <?php
     if (is_numeric($to_render[0])) {
       get_template_part('partials/front-page/above-the-fold/featured-post-primary', null, array(
@@ -30,14 +30,19 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
     }
     ?>
   </div>
-  <div class="grid-item is-xxl-8">
+  <div class="grid-item is-l-24 is-xxl-8">
+    <div class="grid-row grid--nested">
+      <div class="grid-item is-s-24 is-l-12 is-xxl-24">
   <?php
     if (is_numeric($to_render[1])) {
       get_template_part('partials/front-page/above-the-fold/featured-post-secondary', null, array(
         'post_id' => $to_render[1],
       ));
     }
-
+?>
+      </div>
+      <div class="grid-item is-s-24 is-l-12 is-xxl-24">
+  <?php
     if (is_numeric($to_render[2])) {
       get_template_part('partials/front-page/above-the-fold/featured-post-tertiary', null, array(
         'post_id' => $to_render[2],
@@ -50,5 +55,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
       ));
     }
   ?>
+      </div>
+    </div>
   </div>
 </div>

@@ -1152,17 +1152,21 @@ nmButton()
 // MEDIA QUERIES
 
 @media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
+  grid-maker(false, 32px, 'xl')
 
   @import "responsive/xl"
 
-@media screen and (max-width: 1104px)
+@media screen and (max-width: $breakpoint-l)
+  grid-maker(false, 32px, 'l')
 
   @import "responsive/l"
 
-@media screen and (max-width: 910px)
+@media screen and (max-width: $breakpoint-m)
+  grid-maker(false, 32px, 'm')
 
   @import "responsive/m"
 
-@media screen and (max-width: 759px)
+@media screen and (max-width: $breakpoint-s)
+  grid-maker(false, 32px, 's')
 
   @import "responsive/s"
