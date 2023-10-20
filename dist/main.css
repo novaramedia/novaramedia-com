@@ -2751,6 +2751,9 @@ b {
   top: 0;
   left: 0;
 }
+.layout-thumbnail-frame img {
+  display: block;
+}
 .ui-tag {
   font-size: 0.5625rem;
   font-style: normal;
@@ -2788,6 +2791,9 @@ b {
 }
 .ui-border-bottom {
   border-bottom: 1px solid #bebebe;
+}
+.ui-rounded-image {
+  border-radius: 2px;
 }
 .above-the-fold__featured-1 {
   -ms-grid-column-start: 1;

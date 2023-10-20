@@ -13,15 +13,19 @@
   $is_product_linked = !empty($args['is_product_linked']) && $args['is_product_linked'] === 'on' ? true : false;
   $more_on_section = !empty($args['more_on_section']) && $args['more_on_section'] !== 'none' ? $args['more_on_section'] : false;
 ?>
-<div>
+<div class="layout-split-vertical">
   <div>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
         <span class="ui-tag ui-tag--no-border"><?php if ($sub_category) { echo $sub_category; } ?></span>
       </div>
-      <?php render_thumbnail($post_id, 'col12-16to9'); ?>
+      <?php render_thumbnail($post_id, 'col12-16to9', array(
+        'class' => 'ui-rounded-image',
+        'data-no-lazysizes' => true,
+        'loading' => 'eager'
+      )); ?>
     </div>
-    <div class="grid-row grid--nested mt-2">
+    <div class="grid-row grid--nested mt-3">
       <div class="grid-item is-xxl-18">
         <h2 class="fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
         <h5 class="fs-2 font-uppercase mt-3">
@@ -105,11 +109,11 @@
         $label = 'More ' . $more_on_section->name;
       }
   ?>
-  <div class="ui-stick-bottom fs-2">
+  </div>
+  <div class="mt-2 fs-2">
     <a href="<?php echo $link; ?>"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
   </div>
   <?php
     }
   ?>
-</div>
 </div>

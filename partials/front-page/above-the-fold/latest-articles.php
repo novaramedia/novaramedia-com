@@ -41,7 +41,11 @@ if ($recent_articles->have_posts()) {
       </h5>
         </div>
         <div class="grid-item is-xxl-8">
-          <?php render_thumbnail($post->ID, 'col4-square'); ?>
+          <?php render_thumbnail($post->ID, 'col4-square', array(
+            'class' => 'ui-rounded-image',
+            'data-no-lazysizes' => true,
+            'loading' => 'eager'
+          )); ?>
         </div>
       </div>
      <?php
@@ -51,7 +55,11 @@ if ($recent_articles->have_posts()) {
         <?php the_title(); ?>
       </h4>
       <div class="mt-1">
-        <?php render_thumbnail($post->ID, 'col12-16to9'); ?>
+        <?php render_thumbnail($post->ID, 'col12-16to9', array(
+          'class' => 'ui-rounded-image',
+          'data-no-lazysizes' => true,
+          'loading' => 'eager'
+        )); ?>
       </div>
       <h5 class="fs-3-serif mt-1">
         <?php render_standfirst($post->ID); ?>

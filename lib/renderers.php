@@ -5,16 +5,16 @@
  * @param integer $post_id Post ID
  * @param string  $size    Thumbnail size
  */
-function render_thumbnail($post_id, $size = 'col12-16to9') {
+function render_thumbnail($post_id, $size = 'col12-16to9', $attributes = null) {
   if (!is_numeric($post_id)) {
     return;
   }
 
-  $markup = get_the_post_thumbnail($post_id, $size);
+  $markup = get_the_post_thumbnail($post_id, $size, $attributes);
   $meta = get_post_meta($post_id);
 
   if (isset($meta['_cmb_alt_thumb_id']) && is_numeric($meta['_cmb_alt_thumb_id'][0])) {
-    $alt_markup = wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], $size);
+    $alt_markup = wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], $size, false, $attributes);
 
     if ($alt_markup !== '') {
       $markup = $alt_markup;

@@ -1,13 +1,14 @@
 <?php
-  // TODO: Logic and UI for curation [~] STILL: render See More block
+  // TODO: Logic and UI for curation [x]
   // TODO: Filtering to avoid double display [x]
+  // TODO: Layout options for recent articles bar [x]
+  // TODO: Logic for recent articles bar images or not
   // TODO: Responsive breakpoint details
-  // TODO: Related post/see more logic
   // TODO: Vertical borders?
   // TODO: Round soften all images
   // TODO: Hover states?
-  // TODO: Layout options for recent articles bar [x]
   // TODO: UI element for AV tag
+  // TODO: Fix stick bottom on primary featured
   // TODO: Update wordpress declared image sizes
 
 $latest_args = array(

@@ -13,9 +13,13 @@
     <div class="layout-thumbnail-frame__inner mt-1 ml-1">
       <span class="ui-tag ui-tag--no-border"><?php if ($sub_category) { echo $sub_category; } ?></span>
     </div>
-    <?php render_thumbnail($post_id, 'col12-16to9'); ?>
+    <?php render_thumbnail($post_id, 'col12-16to9', array(
+        'class' => 'ui-rounded-image',
+        'data-no-lazysizes' => true,
+        'loading' => 'eager'
+      )); ?>
   </div>
-  <div>
+  <div class="mt-2">
     <h2 class="fs-5-sans font-bold js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
     <h5 class="fs-2 font-uppercase mt-1">
       <?php
