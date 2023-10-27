@@ -47,8 +47,21 @@
   &--red
     background-color: $color-red
 
+// -------------
+
 .ui-border-bottom
   border-bottom: 1px solid $color-gray-light
 
+// -------------
+
 .ui-rounded-image
   border-radius: 2px
+
+// -------------
+
+.ui-post-hover
+  .post__title
+    transition: color $duration-quick-transitions ease-in-out
+  &:hover
+    .post__title
+      color: $color-black--hover

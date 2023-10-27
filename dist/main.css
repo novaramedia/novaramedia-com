@@ -2724,7 +2724,8 @@ b {
   display: grid;
   -ms-grid-template-columns: repeat(24, minmax(0, 1fr));
   grid-template-columns: repeat(24, minmax(0, 1fr));
-  grid-gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 0;
   -ms-grid-auto-rows: auto;
   grid-auto-rows: auto;
 }
@@ -2819,6 +2820,12 @@ b {
 }
 .ui-rounded-image {
   border-radius: 2px;
+}
+.ui-post-hover .post__title {
+  transition: color 139.86ms ease-in-out;
+}
+.ui-post-hover:hover .post__title {
+  color: #3d3d3d;
 }
 .above-the-fold__featured-1 {
   -ms-grid-column-start: 1;

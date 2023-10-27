@@ -6,16 +6,16 @@
   // TODO: Round soften all images [x]
   // TODO: UI element for AV tag [x]
   // TODO: Curation select for featureable - meta checkbox [x]
+  // TODO: Use short text for article primary featured [x]
+  // TODO: Hover states [x]
+  // TODO: Just use top margin for primary featured see more link [x]
   // LOGIC/FUNCTION
   // TODO: Logic for recent articles bar images or not | custom cmb2 field option 1-5 radio buttons row or ?
   // TODO: Update wordpress declared image sizes
-  // TODO: See more posts ordered by latest
-  // TODO: Use short text for article primary featured
   // STYLING
   // TODO: Responsive breakpoint details
   // TODO: Vertical borders?
-  // TODO: Hover states?
-  // TODO: Just use top margin for primary featured see more link?
+  // TODO: XXL upscale
 
 $latest_args = array(
   'posts_per_page' => 16,
@@ -48,7 +48,7 @@ for ($i = 0; $i < 8; $i++) {
 ?>
 <section class="front-page__above-the-fold container mt-2 mb-6">
   <div class="above-the-fold layout-grid">
-    <div class="above-the-fold__featured-1">
+    <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-5">
       <?php
         get_template_part('partials/front-page/above-the-fold/featured-posts-block', null, array(
           'block_number' => 1,
