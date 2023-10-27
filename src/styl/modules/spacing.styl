@@ -1,0 +1,29 @@
+spacer-maker($class, $property, $steps = 12)
+  $unit = 1rem
+
+  for $i in 0..$steps
+
+    if $i < 5
+      $step = .25
+      $multiplier = $i
+    else
+      $step = 1
+      $multiplier = $i - 3
+
+    $value = $multiplier * $step
+
+    .{$class}-{$i}
+      {$property}: $value * $unit
+
+// I was having an inexplicible issue with the above function. The output unit was becoming ks-rem.
+// https://stackoverflow.com/questions/77217205/stylus-css-prepending-ks-to-css-rem-unit-why
+
+spacer-maker('mt', 'margin-top')
+spacer-maker('mb', 'margin-bottom')
+spacer-maker('ml', 'margin-left')
+spacer-maker('mr', 'margin-right')
+
+spacer-maker('pt', 'padding-top')
+spacer-maker('pb', 'padding-bottom')
+spacer-maker('pl', 'padding-left')
+spacer-maker('pr', 'padding-right')

@@ -1,6 +1,7 @@
 @import '~kouto-swiss/index.styl'
 @import "helpers"
 @import "grid-functions"
+@import "grid-function-new"
 
 // ******************************************************
 
@@ -34,6 +35,7 @@ $col = 39px
 $gutter = 16px
 
 flex-grid-maker(false, $gutter, 'xxl')
+grid-maker(false, 32px, 'xxl')
 
 .container
   margin: 0 auto
@@ -108,9 +110,11 @@ $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
 $color-white-soft-transparent = rgba(253, 253, 253, .5)
 
+$color-black--hover = rgb(61, 61, 61)
+
 $color-gray = rgb(150,150,150)
 $color-gray-transparent = rgba(150,150,150, .5)
-$color-gray-light = rgb(190,190,190)
+$color-gray-light = rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
 $color-gray-light-transparent = rgba(190,190,190, .5)
 
 $color-red = rgb(220, 0, 5) // Mine
@@ -134,10 +138,15 @@ $border-width = 2px
 $basic-animation-speed = .5s
 
 $duration-medium-transitions = 420ms
+$duration-quick-transitions = $duration-medium-transitions * .333
 $duration-form-transitions = $duration-medium-transitions
 
 $font-serif = font-stack('Georgia')
 $font-sans = font-stack('Helvetica Neue')
+
+$breakpoint-s = 759px
+$breakpoint-m = 910px
+$breakpoint-l = 1104px
 
 // ******************************************************
 
@@ -1133,23 +1142,34 @@ nmButton()
 // MODULES
 
 @import "modules/typography"
+@import "modules/spacing"
+@import "modules/layout"
+@import "modules/ui"
+
+// LAYOUTS
+
+@import "layouts/above-the-fold"
 
 // ******************************************************
 
 // MEDIA QUERIES
 
 @media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
+  grid-maker(false, 32px, 'xl')
 
   @import "responsive/xl"
 
-@media screen and (max-width: 1104px)
+@media screen and (max-width: $breakpoint-l)
+  grid-maker(false, 32px, 'l')
 
   @import "responsive/l"
 
-@media screen and (max-width: 910px)
+@media screen and (max-width: $breakpoint-m)
+  grid-maker(false, 32px, 'm')
 
   @import "responsive/m"
 
-@media screen and (max-width: 759px)
+@media screen and (max-width: $breakpoint-s)
+  grid-maker(false, 32px, 's')
 
   @import "responsive/s"

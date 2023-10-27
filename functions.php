@@ -67,8 +67,11 @@ get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
 get_template_part( 'lib/meta/meta-boxes-instructions' );
-get_template_part( 'lib/meta-boxes' );
+get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
+get_template_part( 'lib/meta/meta-boxes-post' );
+get_template_part( 'lib/meta/meta-boxes-page' );
+get_template_part( 'lib/meta/meta-boxes-page-about' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
@@ -78,9 +81,9 @@ get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 
-get_template_part( 'lib/theme-options' );
-get_template_part( 'lib/options-front-page' );
-get_template_part( 'lib/options-fundraising' );
+get_template_part( 'lib/theme-options/theme-options' );
+get_template_part( 'lib/theme-options/options-front-page' );
+get_template_part( 'lib/theme-options/options-fundraising' );
 
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {

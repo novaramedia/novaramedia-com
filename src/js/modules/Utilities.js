@@ -68,6 +68,14 @@ export class Utilities {
         $element.text(`| ${m.fromNow()}`);
       }
     });
+
+    $('.js-time-since-unlimited').each((index, element) => {
+      const $element = $(element);
+      const timestamp = $element.data('timestamp');
+      const m = moment(timestamp);
+
+      $element.text(m.fromNow());
+    });
   }
 
   /**

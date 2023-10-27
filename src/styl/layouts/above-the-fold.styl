@@ -1,0 +1,32 @@
+// .above-the-fold
+
+.above-the-fold__featured-1
+  grid-column-start: 1;
+  grid-column-end: span 18;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+
+.above-the-fold__latest-articles
+  grid-column-start: 19;
+  grid-column-end: span 6;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+
+.above-the-fold__featured-2
+  grid-column-start: 1;
+  grid-column-end: span 18;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+
+@media screen and (max-width: $breakpoint-m)
+
+  .above-the-fold__featured-1, .above-the-fold__latest-articles, .above-the-fold__featured-2
+    grid-column-start: 1;
+    grid-column-end: span 24;
+    grid-row-start: auto;
+    grid-row-end: span 1;
+
+@media screen and (max-width: $breakpoint-s)
+
+  .above-the-fold
+    display: block

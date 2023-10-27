@@ -18,231 +18,8 @@ $banners = array(
     // ABOVE THE FOLD
     // **************
 
-    $featured_main_1 = NM_get_option('nm_front_page_main_featured_article_1');
-    $featured_main_2 = NM_get_option('nm_front_page_main_featured_article_2');
-    $featured_sub = NM_get_option('nm_front_page_sub_featured_article');
+    get_template_part('partials/front-page/above-the-fold');
 
-    // *******************
-    // get the 2 selected featured posts. fallback to most recent articles if not selected
-    // note: some variable names refer to articles in the context of these posts. this was built first for articles but changed to all posts to support occational special video embeds on the homepage
-
-    // setup basic args
-    $featured_args = array(
-      'posts_per_page' => 2,
-      'fields' => 'ids',
-    );
-
-    // get fallback most recent article posts
-    $featured_fallback = new WP_Query(array_merge($featured_args, array('category_name' => 'articles')));
-
-    // set fallback ids in array
-    $featured_posts_ids = $featured_fallback->posts;
-
-    // get set featured post values
-    if ($featured_main_1 || $featured_main_2) {
-      $featured_main_ids = array_merge(explode(', ', $featured_main_1), explode(', ', $featured_main_2));
-
-      // if set parse ids and query for post ids
-      $featured_args['post__in'] = $featured_main_ids;
-      $featured_args['orderby'] = 'post__in';
-      $featured_posts = new WP_Query($featured_args);
-
-      // if featured post exist put them in front of the fallback ids
-      if ($featured_posts->have_posts()) {
-        $featured_posts_ids = array_merge($featured_posts->posts, $featured_posts_ids);
-      }
-    }
-
-    // trim array to leave only 2 ids left and get full posts
-    $featured_posts_ids = array_slice($featured_posts_ids, 0, 2);
-
-    $featured_display = new WP_Query(array(
-      'post__in' => $featured_posts_ids,
-      'orderby'=> 'post__in'
-    ));
-
-    // *******************
-    // get 4 most recent articles excluding the 2 featured
-
-    $exluded_articles_ids = $featured_posts_ids;
-
-    if ($featured_sub) {
-      $exluded_articles_ids = array_merge($featured_posts_ids, array($featured_sub));
-    }
-
-    $recent_articles = new WP_Query(array(
-      'category_name' => 'articles',
-      'posts_per_page' => 4,
-      'post__not_in' => $exluded_articles_ids
-    ));
-
-    // map the query return to get the IDs for other queries
-    $recent_articles_ids = array_map('nm_filter_query_ids', $recent_articles->posts);
-
-    // *******************
-    // get featured audio shows
-    $featured_audio_category_1 = NM_get_option('nm_front_page_featured_audio_1');
-    $featured_audio_category_2 = NM_get_option('nm_front_page_featured_audio_2');
-
-    // *******************
-    // most recent top audio show
-
-    $recent_audio_category_1 = new WP_Query(array(
-      'category_name' => $featured_audio_category_1,
-      'posts_per_page' => 1,
-    ));
-
-    $recent_audio_ids = array_map('nm_filter_query_ids', $recent_audio_category_1->posts);
-
-    // *******************
-    // most recent second audio show
-
-    $recent_audio_category_2 = new WP_Query(array(
-      'category_name' => $featured_audio_category_2,
-      'posts_per_page' => 1,
-      'post__not_in' => $recent_audio_ids
-    ));
-
-    // *******************
-    // selected sub featured article. if none most recent analysis article excluding existing 7 requested articles
-
-    $sub_featured_args = array(
-      'posts_per_page' => 1
-    );
-
-    if ($featured_sub) {
-      // if sub featured is set get it
-      $sub_featured_args['post__in'] = explode(', ', $featured_sub);
-
-      $sub_featured = new WP_Query($sub_featured_args);
-    } else {
-      // get fallback most recent analysis post that isn't already shown
-      $sub_featured_args['category_name'] = 'analysis';
-      $sub_featured_args['post__not_in'] = array_merge($featured_posts_ids, $recent_articles_ids);
-
-      $sub_featured = new WP_Query($sub_featured_args);
-    }
-
-    // *******************
-    // most recent Novara Live
-
-    $recent_novaralive = new WP_Query(array(
-      'category_name' => 'novara-live',
-      'posts_per_page' => 1,
-    ));
-  ?>
-
-  <section id="front-page-above-the-fold" class="container margin-bottom-mid mobile-margin-top-small mobile-margin-bottom-basic">
-    <div class="row">
-      <div class="front-page-above-the-fold__column front-page-above-the-fold__featured--mobile col only-mobile">
-        <?php
-          // render 2 featured articles
-          if ($featured_display->have_posts()) {
-            while ($featured_display->have_posts()) {
-              $featured_display->the_post();
-              get_template_part('partials/front-page/front-page-featured-main');
-            }
-          }
-        ?>
-      </div>
-      <div class="front-page-above-the-fold__column front-page-above-the-fold__articles col col6">
-        <?php
-          // render 5 recent articles
-          if ($recent_articles->have_posts()) {
-            $i = 0;
-            while ($recent_articles->have_posts()) {
-              $i++;
-              $recent_articles->the_post();
-              get_template_part('partials/front-page/front-page-article-default');
-            }
-          }
-        ?>
-      </div>
-      <div class="front-page-above-the-fold__column front-page-above-the-fold__featured col col12 only-desktop">
-        <?php
-          // render 2 featured articles
-          if ($featured_display->have_posts()) {
-            while ($featured_display->have_posts()) {
-              $featured_display->the_post();
-              get_template_part('partials/front-page/front-page-featured-main');
-            }
-          }
-        ?>
-      </div>
-      <div class="front-page-above-the-fold__column front-page-above-the-fold__mixed col col6">
-        <?php
-          // render recent top audio
-          if ($recent_audio_category_1->have_posts()) {
-            while ($recent_audio_category_1->have_posts()) {
-              $recent_audio_category_1->the_post();
-              get_template_part('partials/front-page/front-page-audio-default');
-            }
-          }
-        ?>
-        <?php
-          // render recent second audio
-          if ($recent_audio_category_2->have_posts()) {
-            while ($recent_audio_category_2->have_posts()) {
-              $recent_audio_category_2->the_post();
-              get_template_part('partials/front-page/front-page-audio-default');
-            }
-          }
-        ?>
-        <?php
-          // render sub featured or analysis article
-          if ($sub_featured->have_posts()) {
-            while ($sub_featured->have_posts()) {
-              $sub_featured->the_post();
-              get_template_part('partials/front-page/front-page-featured-sub');
-            }
-          }
-        ?>
-        <?php
-          // if metadata is set render custom link to Novara Live archive, otherwise render latest post
-          $novaralive_term = get_term_by('slug', 'novara-live', 'category');
-          $novaralive_category_meta = $novaralive_term ? get_term_meta($novaralive_term->term_id) : false;
-
-          $novaralive_image = !empty($novaralive_category_meta['_nm_novaralive_frontpage_image_id']) ? $novaralive_category_meta['_nm_novaralive_frontpage_image_id'][0] : false;
-          $novaralive_title = !empty($novaralive_category_meta['_nm_novaralive_frontpage_title']) ? $novaralive_category_meta['_nm_novaralive_frontpage_title'][0] : false;
-          $novaralive_copy = !empty($novaralive_category_meta['_nm_novaralive_frontpage_copy']) ? $novaralive_category_meta['_nm_novaralive_frontpage_copy'][0] : false;
-
-          if ($novaralive_image && $novaralive_title) {
-        ?>
-<a href="<?php echo get_term_link($novaralive_term); ?>">
-  <div class="flex-grid-row flex-grid--nested-tight only-desktop">
-    <div class="flex-grid-item flex-grid-item--tight flex-item-l-4 flex-item-xxl-4">
-    <?php
-      echo wp_get_attachment_image($novaralive_image, 'col4-square', false, array('class' => 'margin-bottom-micro'));
-    ?>
-    </div>
-    <div class="flex-grid-item flex-grid-item--tight flex-item-l-8 flex-item-xxl-8">
-      <h5 class="font-size-1"><?php echo $novaralive_title; ?></h5>
-      <?php
-        if ($novaralive_copy) {
-      ?>
-        <div class="js-fix-widows margin-top-micro"><?php echo $novaralive_copy; ?></div>
-      <?php
-        }
-      ?>
-    </div>
-  </div>
-</a>
-        <?php
-          } else {
-            // render recent Novara Live
-            if ($recent_novaralive->have_posts()) {
-              while ($recent_novaralive->have_posts()) {
-                $recent_novaralive->the_post();
-                get_template_part('partials/front-page/front-page-novaralive');
-              }
-            }
-          }
-        ?>
-      </div>
-    </div>
-  </section>
-
-  <?php
     render_front_page_banner($banners[0]);
   ?>
 
@@ -276,26 +53,28 @@ $banners = array(
 
     <div class="row margin-bottom-small mobile-margin-bottom-none">
       <?php
-        $latest_articles = new WP_Query(array(
-          'posts_per_page' => 8,
-          'category_name' => 'Articles',
-          'post__not_in' => array_merge($featured_posts_ids, $recent_articles_ids)
-        ));
+        // we will need to parse already shown IDs to exclude them from the query
 
-        if ($latest_articles->have_posts()) {
-          $i = 0;
-          while ($latest_articles->have_posts()) {
-            $latest_articles->the_post();
+        // $latest_articles = new WP_Query(array(
+        //   'posts_per_page' => 8,
+        //   'category_name' => 'Articles',
+        //   'post__not_in' => array_merge($featured_posts_ids, $recent_articles_ids)
+        // ));
 
-            get_template_part('partials/front-page/front-page-article-default');
+        // if ($latest_articles->have_posts()) {
+        //   $i = 0;
+        //   while ($latest_articles->have_posts()) {
+        //     $latest_articles->the_post();
 
-            if ($i === 3) {
-              echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
-            }
+        //     get_template_part('partials/front-page/front-page-article-default');
 
-            $i++;
-          }
-        }
+        //     if ($i === 3) {
+        //       echo '</div><div class="row margin-bottom-small mobile-margin-bottom-none">';
+        //     }
+
+        //     $i++;
+        //   }
+        // }
       ?>
     </div>
   </section>
