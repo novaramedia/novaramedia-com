@@ -5,21 +5,27 @@
   // TODO: Fix stick bottom on primary featured [x]
   // TODO: Round soften all images [x]
   // TODO: UI element for AV tag [x]
+  // TODO: Curation select for featureable - meta checkbox [x]
   // LOGIC/FUNCTION
-  // TODO: Curation select for featureable - meta checkbox?
-  // TODO: Logic for recent articles bar images or not
+  // TODO: Logic for recent articles bar images or not | custom cmb2 field option 1-5 radio buttons row or ?
   // TODO: Update wordpress declared image sizes
+  // TODO: See more posts ordered by latest
+  // TODO: Use short text for article primary featured
   // STYLING
   // TODO: Responsive breakpoint details
   // TODO: Vertical borders?
   // TODO: Hover states?
+  // TODO: Just use top margin for primary featured see more link?
 
 $latest_args = array(
   'posts_per_page' => 16,
   'fields' => 'ids',
-); // this will also filter by some meta value as well
+  'category_name' => 'articles,video,audio',
+  'meta_key' => '_cmb_featurable',
+  'meta_value' => 'on',
+);
 
-$latest_featured_posts = new WP_Query(array_merge($latest_args, array('category_name' => 'articles,video,audio'))); // get the latest featured posts
+$latest_featured_posts = new WP_Query($latest_args);
 $latest_featured_posts_ids = $latest_featured_posts->posts;
 
 $featured_posts_ids = [];
@@ -30,10 +36,13 @@ for ($i = 1; $i <= 8; $i++) { // get the featured posts ids from the theme optio
 
 for ($i = 0; $i < 8; $i++) {
   if (!is_numeric($featured_posts_ids[$i])) { // if the featured post id is not set in the theme options, use the latest featured post
-    while (in_array($latest_featured_posts_ids[0], $featured_posts_ids)) { // ensure fallback latest is not already in the theme options featured posts
-      array_shift($latest_featured_posts_ids);
+    if (!empty($latest_featured_posts_ids)) {
+      while (in_array($latest_featured_posts_ids[0], $featured_posts_ids)) { // ensure fallback latest is not already in the theme options featured posts
+        array_shift($latest_featured_posts_ids);
+      }
+
+      $featured_posts_ids[$i] = array_shift($latest_featured_posts_ids);
     }
-    $featured_posts_ids[$i] = array_shift($latest_featured_posts_ids);
   }
 }
 ?>

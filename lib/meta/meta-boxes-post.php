@@ -69,6 +69,25 @@ function nm_cmb_post_metaboxes() {
     'type'    => 'textarea_small',
   ) );
 
+  // CURATION
+
+  $curation_boxes = new_cmb2_box( array (
+    'id'         => 'post_curation_metabox',
+    'title'      => __( 'Curation Meta', 'cmb' ),
+    'object_types'      => array( 'post' ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true, // Show field names on the left
+    'show_in_rest' => false,
+  ) );
+
+  $curation_boxes->add_field( array(
+    'name' => __( 'Featurable?', 'cmb' ),
+    'desc' => __( 'This will allow the post to be featured automatically above the fold and in other priority locations. This is a judgement on prominence', 'cmb' ),
+    'id'   => $prefix . 'featurable',
+    'type' => 'checkbox',
+  ) );
+
   // AUDIO
 
   $audio_metabox = new_cmb2_box( array (
