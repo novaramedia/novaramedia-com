@@ -36,6 +36,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/functions/swipeDetect.js":
+/*!*****************************************!*\
+  !*** ./src/js/functions/swipeDetect.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/**
+ * Detects swipe gestures on a specified target element and invokes a callback function with the swipe direction.
+ * {@link https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d}
+ * @param {string} target - The CSS selector for the target element.
+ * @param {function} callback - The function to invoke with the swipe direction.
+ * @returns {void}
+ */
+const swipeDetect = (target, callback) => {
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
+  const handleGesture = (touchstartX, touchstartY, touchendX, touchendY) => {
+    const delx = touchendX - touchstartX;
+    const dely = touchendY - touchstartY;
+    if (Math.abs(delx) > Math.abs(dely)) {
+      if (delx > 0) return 'right';else return 'left';
+    } else if (Math.abs(delx) < Math.abs(dely)) {
+      if (dely > 0) return 'down';else return 'up';
+    } else return 'tap';
+  };
+  const gestureZone = document.querySelector(target);
+  gestureZone.addEventListener('touchstart', function (event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+  }, false);
+  gestureZone.addEventListener('touchend', function (event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
+  }, false);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (swipeDetect);
+
+/***/ }),
+
 /***/ "./src/js/modules/Analytics.js":
 /*!*************************************!*\
   !*** ./src/js/modules/Analytics.js ***!
@@ -276,6 +324,86 @@ class MailchimpSignup {
         _this.forms[index].removeClass('email-signup__form--failed');
       });
     });
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/ProductsBar.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/ProductsBar.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ProductsBar: () => (/* binding */ ProductsBar)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../functions/swipeDetect */ "./src/js/functions/swipeDetect.js");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+// import debounce from 'lodash/debounce';
+
+class ProductsBar {
+  constructor() {
+    this.$productsBar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.front-page__products-bar');
+    this.$inner = this.$productsBar.find('.products-bar__inner');
+    this.$navLeft = this.$productsBar.find('.products-bar__nav-left');
+    this.$navRight = this.$productsBar.find('.products-bar__nav-right');
+    this.$navItems = this.$productsBar.find('.products-bar__item');
+    this.carouselLength = this.$navItems.length;
+    this.carouselPosition = 0;
+  }
+  onReady() {
+    const _this = this;
+    _this.itemWidth = _this.$navItems.eq(1).outerWidth(true);
+    _this.bind();
+  }
+  bind() {
+    const _this = this;
+    this.$navLeft.on({
+      click: function () {
+        _this.animateToPosition(_this.carouselPosition - 1);
+      }
+    });
+    this.$navRight.on({
+      click: function () {
+        _this.animateToPosition(_this.carouselPosition + 1);
+      }
+    });
+
+    // could also trottle mouseover triggers as well? https://lodash.com/docs/4.17.15#throttle
+
+    (0,_functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__["default"])('.front-page__products-bar', direction => {
+      if (direction === 'left') {
+        _this.animateToPosition(_this.carouselPosition + 1);
+      } else if (direction === 'right') {
+        _this.animateToPosition(_this.carouselPosition - 1);
+      }
+    });
+  }
+  animateToPosition(position) {
+    const _this = this;
+    if (position < 0) {
+      position = 0;
+    }
+    if (position > _this.carouselLength - 1) {
+      position = _this.carouselLength - 1;
+    }
+    _this.$inner.css({
+      transform: `translateX(-${position * _this.itemWidth}px)`
+    });
+    if (position !== 0) {
+      _this.$navLeft.removeClass('products-bar__nav-left--disabled');
+    } else {
+      _this.$navLeft.addClass('products-bar__nav-left--disabled');
+    }
+    _this.carouselPosition = position;
   }
 }
 
@@ -18791,11 +18919,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Header_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/Header.js */ "./src/js/modules/Header.js");
 /* harmony import */ var _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Search.js */ "./src/js/modules/Search.js");
 /* harmony import */ var _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Support.js */ "./src/js/modules/Support.js");
-/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
-/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_ProductsBar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/ProductsBar.js */ "./src/js/modules/ProductsBar.js");
+/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
+/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
  // import styl for webpack
+
 
 
 
@@ -18811,8 +18941,9 @@ class Site {
     this.header = new _modules_Header_js__WEBPACK_IMPORTED_MODULE_4__.Header();
     this.search = new _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__.Search();
     this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__.Support();
-    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_7__.MailchimpSignup();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_8__.Utilities();
+    this.productsBar = new _modules_ProductsBar_js__WEBPACK_IMPORTED_MODULE_7__.ProductsBar();
+    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_8__.MailchimpSignup();
+    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_9__.Utilities();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
   }
   onReady() {
@@ -18820,6 +18951,7 @@ class Site {
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
+    this.productsBar.onReady();
     this.utilties.onReady();
   }
 }

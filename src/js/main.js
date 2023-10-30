@@ -9,6 +9,7 @@ import { Analytics } from './modules/Analytics.js';
 import { Header } from './modules/Header.js';
 import { Search } from './modules/Search.js';
 import { Support } from './modules/Support.js';
+import { ProductsBar } from './modules/ProductsBar.js';
 import { MailchimpSignup } from './modules/MailchimpSignup.js';
 import { Utilities } from './modules/Utilities.js';
 
@@ -18,6 +19,7 @@ class Site {
     this.header = new Header();
     this.search = new Search();
     this.support = new Support();
+    this.productsBar = new ProductsBar();
     this.mailchimpSignup = new MailchimpSignup();
     this.utilties = new Utilities();
 
@@ -30,6 +32,7 @@ class Site {
     this.header.onReady();
     this.search.onReady();
     this.support.onReady();
+    this.productsBar.onReady();
     this.utilties.onReady();
   }
 }
