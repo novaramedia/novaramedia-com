@@ -2251,7 +2251,6 @@ h5 {
 }
 p {
   line-height: normal;
-  margin-bottom: 1rem;
 }
 .fs-1 {
   font-size: 0.5625rem;
@@ -2827,6 +2826,76 @@ b {
 .ui-post-hover:hover .post__title {
   color: #3d3d3d;
 }
+.products-bar__wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.products-bar__nav-left,
+.products-bar__nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 3rem;
+  cursor: pointer;
+  z-index: 10;
+}
+.products-bar__nav-left {
+  background-image: linear-gradient(270deg,rgba(255,255,255,0) 0%,#fff 100%);
+  left: 0;
+  transition: opacity 139.86ms ease-in-out;
+}
+.products-bar__nav-left--disabled {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  z-index: -10;
+}
+.products-bar__nav-right {
+  background-image: linear-gradient(90deg,rgba(255,255,255,0) 0%,#fff 100%);
+  right: 0;
+}
+.products-bar__inner {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 139.86ms ease-in-out;
+}
+.products-bar__item {
+  -ms-flex-shrink: 0;
+  flex-shrink: 0;
+  max-width: 100%;
+  width: 300px;
+  margin-left: 1rem;
+}
+.products-bar__item:first-child {
+  margin-left: 0;
+}
+.products-bar__item a {
+  display: flex;
+  height: 100%;
+}
+.products-bar__item a:hover .products-bar__item-inner {
+  background-color: #fdfdfd;
+}
+.products-bar__item-inner {
+  border-radius: 2px;
+  background-color: #edeaea;
+  padding: 0.5rem;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: background-color 139.86ms ease-in-out;
+}
+.products-bar__item-image {
+  -ms-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.products-bar__item-image img {
+  display: block;
+  max-height: 100%;
+  width: 3.5rem;
+  height: 3.5rem;
+}
 .above-the-fold__featured-1 {
   -ms-grid-column-start: 1;
   grid-column-start: 1;
@@ -3364,9 +3433,6 @@ b {
   }
   h3 {
     font-size: 1.400505962399693rem;
-  }
-  p {
-    margin-bottom: 1rem;
   }
   .font-size-xl-0 {
     font-size: 12px;
@@ -4129,9 +4195,6 @@ b {
   h3 {
     font-size: 1.400505962399693rem;
   }
-  p {
-    margin-bottom: 1rem;
-  }
   .font-size-l-0 {
     font-size: 12px;
   }
@@ -4888,9 +4951,6 @@ b {
   h3 {
     font-size: 1.334710602476894rem;
   }
-  p {
-    margin-bottom: 1rem;
-  }
   .font-size-m-0 {
     font-size: 12px;
   }
@@ -5592,9 +5652,6 @@ b {
   }
   h3 {
     font-size: 1.272006289292628rem;
-  }
-  p {
-    margin-bottom: 1rem;
   }
   .font-size-0 {
     font-size: 10.27px;

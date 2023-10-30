@@ -12,7 +12,7 @@ $banners = array(
 <!-- main content -->
 <main id="main-content">
   <?php
-    get_template_part('partials/front-page/front-page-signups');
+    get_template_part('partials/front-page/products-bar');
 
     // **************
     // ABOVE THE FOLD
