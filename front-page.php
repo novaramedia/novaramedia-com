@@ -12,6 +12,8 @@ $banners = array(
 <!-- main content -->
 <main id="main-content">
   <?php
+    get_template_part('partials/front-page/submenu');
+
     get_template_part('partials/front-page/front-page-signups');
 
     // **************
