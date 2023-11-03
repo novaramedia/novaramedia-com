@@ -1,3 +1,6 @@
+<?php
+  if (wp_get_nav_menu_object('header-submenu')) {
+?>
 <section class="front-page__submenu container layout-grid mt-3 mb-4 pb-3 ui-border-bottom fs-3-sans font-weight-bold">
   <div class="submenu__date">
     <?php
@@ -22,3 +25,6 @@
     <span class="ui-dot ui-dot--green"></span>Novara is Live
   </div>
 </section>
+<?php
+  }
+?>
