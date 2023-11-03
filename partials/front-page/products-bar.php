@@ -13,7 +13,6 @@
           $title = isset($signup['title']) ? $signup['title'] : '';
           $link = isset($signup['link']) ? $signup['link'] : '';
           $copy = isset($signup['description']) ? $signup['description'] : '';
-          $signup_text = isset($signup['signup_text']) ? $signup['signup_text'] : false;
           $image_id = isset($signup['image_id']) ? $signup['image_id'] : false;
       ?>
       <div class="products-bar__item">
