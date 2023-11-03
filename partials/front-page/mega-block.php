@@ -1,4 +1,4 @@
-<section id="front-page__mega-block" class="container mt-4 mb-4">
+<section id="front-page__mega-block" class="container mt-7 mb-5">
   <?php
     $sections_to_render = array(
       'UK',
@@ -37,7 +37,7 @@
 
         if ($posts) {
     ?>
-      <div class="grid-item is-xxl-4 mb-6 fs-3-sans font-weight-bold">
+      <div class="grid-item is-s-12 is-m-8 is-xl-6 is-xxl-4 mb-6 fs-3-sans font-weight-bold">
         <h4 class="font-uppercase mb-2"><?php echo $section; ?></h4>
     <?php
           $excluded_ids = array_merge($excluded_ids, wp_list_pluck($posts, 'ID'));
