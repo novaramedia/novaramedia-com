@@ -364,7 +364,7 @@ function nm_register_front_page_options_metabox() {
    */
   $secondary_options = new_cmb2_box( array(
     'id'           => 'nm_secondary_options_page',
-    'title'        => 'Links Bar',
+    'title'        => 'Products Bar',
     'object_types' => array( 'options-page' ),
     'option_key'   => 'nm_front_page_links_bar_options',
     'parent_slug'  => 'nm_front_page_options',
@@ -372,8 +372,8 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   $secondary_options->add_field( array(
-    'name' => 'Front Page Links and Signups for',
-    'desc' => 'Up to 4 signup blocks. Displayed in the top bar of the desktop site',
+    'name' => 'Front Page Product Links',
+    'desc' => 'Blocks displayed in the top bar of the desktop site. Used to directly promote product offerings',
     'id'   => $prefix . 'home_signups_title',
     'type' => 'title',
   ) );
@@ -381,11 +381,11 @@ function nm_register_front_page_options_metabox() {
   $group_field_id = $secondary_options->add_field( array(
     'id'          => $prefix . 'front_page_links_bar',
     'type'        => 'group',
-    'description' => 'Signup sections on the Front Page',
+    'description' => 'Product sections on the Front Page',
     'options'     => array(
-      'group_title'       => __( 'Block {#}', 'nm' ),
-      'add_button'        => __( 'Add Another Block', 'nm' ),
-      'remove_button'     => __( 'Remove Block', 'nm' ),
+      'group_title'       => __( 'Product Block {#}', 'nm' ),
+      'add_button'        => __( 'Add Another Product Block', 'nm' ),
+      'remove_button'     => __( 'Remove Product Block', 'nm' ),
       'sortable'          => true,
     ),
   ) );

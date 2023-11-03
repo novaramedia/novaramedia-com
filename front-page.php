@@ -14,7 +14,7 @@ $banners = array(
   <?php
     get_template_part('partials/front-page/submenu');
 
-    get_template_part('partials/front-page/front-page-signups');
+    get_template_part('partials/front-page/products-bar');
 
     // **************
     // ABOVE THE FOLD
