@@ -2896,6 +2896,16 @@ b {
   width: 3.5rem;
   height: 3.5rem;
 }
+@media screen and (max-width: 910px) {
+  .products-bar__item {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 759px) {
+  .products-bar__item {
+    width: 260px;
+  }
+}
 .above-the-fold__featured-1 {
   -ms-grid-column-start: 1;
   grid-column-start: 1;
