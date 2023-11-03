@@ -44,18 +44,16 @@
 
           foreach ($posts as $index => $post) {
         ?>
-        <div>
-          <a href="<?php echo get_permalink($post->ID); ?>">
-            <?php
-              if ($index === 0) {
-                render_thumbnail($post->ID, 'col24-16to9', array(
-                  'class' => 'ui-rounded-image',
-                ));
-              }
-            ?>
-            <h5 class="mb-2"><?php echo $post->post_title; ?></h5>
-          </a>
-        </div>
+        <a href="<?php echo get_permalink($post->ID); ?>">
+          <?php
+            if ($index === 0) {
+              render_thumbnail($post->ID, 'col24-16to9', array(
+                'class' => 'ui-rounded-image',
+              ));
+            }
+          ?>
+          <h5 class="mb-2"><?php echo $post->post_title; ?></h5>
+        </a>
         <?php
           }
     ?>
