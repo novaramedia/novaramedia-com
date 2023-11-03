@@ -32,7 +32,7 @@ const swipeDetect = (target, callback) => {
       touchstartX = event.changedTouches[0].screenX;
       touchstartY = event.changedTouches[0].screenY;
     },
-    false
+    false,
   );
 
   gestureZone.addEventListener(
@@ -42,7 +42,7 @@ const swipeDetect = (target, callback) => {
       touchendY = event.changedTouches[0].screenY;
       callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
     },
-    false
+    false,
   );
 };
 
