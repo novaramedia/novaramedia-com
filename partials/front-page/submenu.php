@@ -1,4 +1,4 @@
-<section class="front-page__submenu container layout-grid mt-2 mb-2">
+<section class="front-page__submenu container layout-grid mt-3 mb-4 pb-3 ui-border-bottom fs-3-sans font-weight-bold">
   <div class="submenu__date">
     <?php
       $m = new \Moment\Moment('now', 'Europe/London');
@@ -19,6 +19,6 @@
   </div>
 
   <div class="submenu__message">
-    Novara is Live
+    <span class="ui-dot ui-dot--green"></span>Novara is Live
   </div>
 </section>
