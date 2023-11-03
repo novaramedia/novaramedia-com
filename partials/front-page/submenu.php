@@ -1,4 +1,8 @@
 <?php
+  // TODO: Scaffold [x]
+  // TODO: Add logic checker for is live?
+  // TODO: Add fallback for not live. What should it be?
+
   if (wp_get_nav_menu_object('header-submenu')) {
 ?>
 <section class="front-page__submenu container layout-grid mt-3 mb-4 pb-3 ui-border-bottom fs-3-sans font-weight-bold">
