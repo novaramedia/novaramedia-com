@@ -8,7 +8,7 @@
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
 ?>
-<a href="<?php the_permalink(); ?>" class="ui-post-hover">
+<a href="<?php echo get_permalink($post_id); ?>" class="ui-post-hover">
   <div class="featured-posts__tertiary mt-5">
     <div>
       <?php render_post_ui_tags($post_id); ?>
@@ -26,7 +26,7 @@
         }
       ?>
     </h5>
-    <p class="mt-1 mb-0">
+    <p class="fs-3-sans mt-1 mb-0">
       <?php
         if ($is_article) {
           render_standfirst($post_id);
