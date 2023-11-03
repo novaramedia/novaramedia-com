@@ -28,21 +28,19 @@ const swipeDetect = (target, callback) => {
 
   gestureZone.addEventListener(
     'touchstart',
-    function (event) {
+    (event) => {
       touchstartX = event.changedTouches[0].screenX;
       touchstartY = event.changedTouches[0].screenY;
-    },
-    false,
+    }
   );
 
   gestureZone.addEventListener(
     'touchend',
-    function (event) {
+    (event) => {
       touchendX = event.changedTouches[0].screenX;
       touchendY = event.changedTouches[0].screenY;
       callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
-    },
-    false,
+    }
   );
 };
 

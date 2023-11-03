@@ -70,15 +70,15 @@ const swipeDetect = (target, callback) => {
     } else return 'tap';
   };
   const gestureZone = document.querySelector(target);
-  gestureZone.addEventListener('touchstart', function (event) {
+  gestureZone.addEventListener('touchstart', event => {
     touchstartX = event.changedTouches[0].screenX;
     touchstartY = event.changedTouches[0].screenY;
-  }, false);
-  gestureZone.addEventListener('touchend', function (event) {
+  });
+  gestureZone.addEventListener('touchend', event => {
     touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
     callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
-  }, false);
+  });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (swipeDetect);
 
