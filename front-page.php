@@ -138,6 +138,8 @@ $banners = array(
 
   <?php
     render_front_page_banner($banners[3]);
+
+    get_template_part('partials/front-page/mega-block');
   ?>
 
 <!-- end main-content -->

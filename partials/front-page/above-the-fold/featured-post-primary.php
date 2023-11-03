@@ -27,7 +27,7 @@
     </a>
     <div class="grid-row grid--nested mt-3">
       <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-xxl-24'; ?>">
-        <a href="<?php the_permalink(); ?>" class="ui-post-hover">
+        <a href="<?php echo get_permalink($post_id); ?>" class="ui-post-hover">
           <h2 class="post__title fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
           <h5 class="fs-2 font-uppercase mt-3">
             <?php
