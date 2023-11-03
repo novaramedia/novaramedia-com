@@ -1,0 +1,36 @@
+.submenu__date
+  grid-column-start: 1
+  grid-column-end: span 5
+
+.submenu__nav
+  grid-column-start: 6
+  grid-column-end: span 14
+  text-align: center
+
+.menu-header-submenu-container
+  display: flex
+  justify-content: center
+
+.submenu__nav-list
+  display: flex
+  li
+    padding: 0 .25rem
+    &:after
+      content: '|'
+      padding-left: .5rem
+    &:last-child:after
+      content: none
+    a:hover
+      color: $color-black--hover
+
+.submenu__message
+  grid-column-start: 20
+  grid-column-end: span 5
+  text-align: right
+
+@media screen and (max-width: $breakpoint-s)
+  .submenu__date, .submenu__message
+    display: none
+
+  .front-page__submenu, .submenu__nav
+    display: block

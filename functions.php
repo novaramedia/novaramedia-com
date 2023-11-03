@@ -48,6 +48,7 @@ get_template_part( 'lib/thumbnail-sizes' );
 function nm_register_menus() {
   register_nav_menus(
     array(
+      'header-submenu' => __( 'Header: Submenu' ),
       'footer-podcasts' => __( 'Footer: Podcasts' ),
       'footer-focuses' => __( 'Footer: Focuses' ),
       'footer-articles' => __( 'Footer: Articles' ),
