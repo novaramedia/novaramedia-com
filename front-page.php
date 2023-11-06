@@ -126,17 +126,9 @@ $banners = array(
     </div>
   </section>
 
-  <!-- non-Novara Live video block -->
-  <section id="front-page-video-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $video_category_slug = 'video';
-      $excluded_category_slug = 'novara-live';
-
-      render_front_page_video_block($video_category_slug, $excluded_category_slug);
-    ?>
-  </section>
-
   <?php
+    get_template_part('partials/front-page/show-blocks/downstream');
+
     render_front_page_banner($banners[3]);
 
     get_template_part('partials/front-page/mega-block');
