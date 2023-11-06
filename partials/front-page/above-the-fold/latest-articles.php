@@ -30,7 +30,7 @@ if ($recent_articles->have_posts()) {
     ?>
       <div class="grid-row grid--nested">
         <div class="grid-item is-xxl-16">
-          <h4 class="post__title fs-4-sans font-bold font-condensed">
+          <h4 class="post__title fs-4-sans font-condensed">
             <?php the_title(); ?>
           </h4>
           <h5 class="fs-3-serif mt-1">
@@ -51,7 +51,7 @@ if ($recent_articles->have_posts()) {
      <?php
       } else if ($i === 3) { // render full image layout
     ?>
-      <h4 class="post__title s-5-sans font-bold font-condensed">
+      <h4 class="post__title s-5-sans font-condensed">
         <?php the_title(); ?>
       </h4>
       <div class="mt-1">
@@ -70,7 +70,7 @@ if ($recent_articles->have_posts()) {
      <?php
       } else {
      ?>
-      <h4 class="post__title fs-5-sans font-bold font-condensed">
+      <h4 class="post__title fs-5-sans font-condensed">
         <?php the_title(); ?>
       </h4>
       <h5 class="fs-3-serif mt-1">
