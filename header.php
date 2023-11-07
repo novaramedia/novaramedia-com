@@ -67,29 +67,55 @@
         </div>
       </div>
 
-      <nav id="header-sub" class="background-gray" role="navigation" aria-label="Sections">
-        <div class="container font-color-white padding-top-small padding-bottom-small">
-          <div class="row">
-            <div class="col col24">
-              <ul class="header-menu u-inline-list text-align-center font-tracking-medium">
-                <li><a href="<?php echo site_url(); ?>">Front Page</a></li>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
-                <?php
-                  $novaralive_term = get_term_by('slug', 'novara-live', 'category');
-                  if ($novaralive_term) {
-                ?>
-                <li><a href="<?php echo get_term_link($novaralive_term); ?>"><?php echo $novaralive_term->name; ?></a></li>
-                <?php
-                  }
-                ?>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
-                <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
-                <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
+      <nav id="header-sub" class="background-black" role="navigation" aria-label="Sections">
+        <div class="container font-color-white pt-3 pb-3">
+          <div class="flex-grid-row">
+            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+              <ul class="font-weight-bold mb-3">
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
-                <li><a href="https://shop.novaramedia.com">Shop</a></li>
-                <li><a href="https://donate.novaramedia.com/login">Donor Log In</a></li>
+                <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
+                <li><a href="<?php echo site_url('about/how-were-funded/'); ?>">How We're Funded</a></li>
+                <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               </ul>
+              <ul class="font-weight-bold mb-3">
+                <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
+              </ul>
+            </div>
+            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Shows</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-shows',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
+            </div>
+            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Series</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-series',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold'
+                  )
+                );
+              ?>
+            </div>
+            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Articles</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'footer-articles',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
             </div>
           </div>
         </div>
