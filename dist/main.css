@@ -975,7 +975,7 @@ template {
 }
 .container {
   margin: 0 auto;
-  width: 1320px;
+  width: 1400px;
 }
 .row:before,
 .row:after {
@@ -992,76 +992,76 @@ template {
   min-height: 1px;
 }
 .col1 {
-  width: 39px;
+  width: 42px;
 }
 .col2 {
-  width: 94px;
+  width: 100px;
 }
 .col3 {
-  width: 149px;
+  width: 158px;
 }
 .col4 {
-  width: 204px;
+  width: 216px;
 }
 .col5 {
-  width: 259px;
+  width: 274px;
 }
 .col6 {
-  width: 314px;
+  width: 332px;
 }
 .col7 {
-  width: 369px;
+  width: 390px;
 }
 .col8 {
-  width: 424px;
+  width: 448px;
 }
 .col9 {
-  width: 479px;
+  width: 506px;
 }
 .col10 {
-  width: 534px;
+  width: 564px;
 }
 .col11 {
-  width: 589px;
+  width: 622px;
 }
 .col12 {
-  width: 644px;
+  width: 680px;
 }
 .col13 {
-  width: 699px;
+  width: 738px;
 }
 .col14 {
-  width: 754px;
+  width: 796px;
 }
 .col15 {
-  width: 809px;
+  width: 854px;
 }
 .col16 {
-  width: 864px;
+  width: 912px;
 }
 .col17 {
-  width: 919px;
+  width: 970px;
 }
 .col18 {
-  width: 974px;
+  width: 1028px;
 }
 .col19 {
-  width: 1029px;
+  width: 1086px;
 }
 .col20 {
-  width: 1084px;
+  width: 1144px;
 }
 .col21 {
-  width: 1139px;
+  width: 1202px;
 }
 .col22 {
-  width: 1194px;
+  width: 1260px;
 }
 .col23 {
-  width: 1249px;
+  width: 1318px;
 }
 .col24 {
-  width: 1304px;
+  width: 1376px;
 }
 .percent-col {
   float: left;
@@ -1290,7 +1290,7 @@ article ol li {
   margin-top: -1rem;
 }
 .text-copy-max-width {
-  max-width: 974px;
+  max-width: 1028px;
   margin: 0 auto;
 }
 .list--links li {
@@ -3313,7 +3313,7 @@ b {
     display: block;
   }
 }
-@media screen and (max-width: 1336px) {
+@media screen and (max-width: 1408px) {
   .grid-row-xl--reverse {
     direction: column-reverse;
   }
