@@ -1333,6 +1333,9 @@ a {
 .background-yellow {
   background-color: #ebb800;
 }
+.background-green {
+  background-color: #5fcc00;
+}
 .background-green-neon {
   background-color: #cadb2a;
 }
@@ -3312,6 +3315,16 @@ b {
   .above-the-fold {
     display: block;
   }
+}
+.novara-fm-archive__header {
+  display: flex;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.novara-fm-archive__header svg {
+  width: 65%;
 }
 @media screen and (max-width: 1336px) {
   .grid-row-xl--reverse {
