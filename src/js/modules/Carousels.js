@@ -4,26 +4,45 @@ import $ from 'jquery';
 import swipeDetect from '../functions/swipeDetect';
 // import debounce from 'lodash/debounce';
 
-export class ProductsBar {
+export class Carousels {
   constructor() {
-    this.$productsBar = $('.front-page__products-bar');
-    this.$inner = this.$productsBar.find('.products-bar__inner');
-    this.$navLeft = this.$productsBar.find('.products-bar__nav-left');
-    this.$navRight = this.$productsBar.find('.products-bar__nav-right');
-    this.$navItems = this.$productsBar.find('.products-bar__item');
+    this.carousels = [];
 
-    this.carouselLength = this.$navItems.length;
+    $('.ux-carousel').each((index, carousel) => {
+      $(carousel).attr('id', `ux-carousel-${index}`);
+      this.carousels.push(new Carousel(carousel));
+    });
+  }
+
+  onReady() {
+    const _this = this;
+
+    _this.carousels.forEach((carousel) => {
+      carousel.onReady();
+    });
+
+    console.log('Carousels ready', _this.carousels);
+  }
+}
+
+class Carousel {
+  constructor(carousel) {
+    this.$carousel = $(carousel);
+    this.$inner = this.$carousel.find('.ux-carousel__inner');
+    this.$items = this.$carousel.find('.ux-carousel__item');
+    this.$navLeft = this.$carousel.find('.ux-carousel__nav-left');
+    this.$navRight = this.$carousel.find('.ux-carousel__nav-right');
+
+    this.carouselLength = this.$items.length;
     this.carouselPosition = 0;
   }
 
   onReady() {
     const _this = this;
 
-    if (this.$productsBar.length !== 0) {
-      _this.itemWidth = _this.$navItems.eq(1).outerWidth(true);
+    _this.itemWidth = _this.$items.eq(1).outerWidth(true);
 
-      _this.bind();
-    }
+    _this.bind();
   }
 
   bind() {
@@ -43,7 +62,7 @@ export class ProductsBar {
 
     // could also trottle mouseover triggers as well? https://lodash.com/docs/4.17.15#throttle
 
-    swipeDetect('.front-page__products-bar', (direction) => {
+    swipeDetect(`#${_this.$carousel.attr('id')}`, (direction) => {
       if (direction === 'left') {
         _this.animateToPosition(_this.carouselPosition + 1);
       } else if (direction === 'right') {
@@ -68,9 +87,15 @@ export class ProductsBar {
     });
 
     if (position !== 0) {
-      _this.$navLeft.removeClass('products-bar__nav-left--disabled');
+      _this.$navLeft.removeClass('ux-carousel__nav-left--disabled');
     } else {
-      _this.$navLeft.addClass('products-bar__nav-left--disabled');
+      _this.$navLeft.addClass('ux-carousel__nav-left--disabled');
+    }
+
+    if (position !== _this.carouselLength - 1) {
+      _this.$navRight.removeClass('ux-carousel__nav-right--disabled');
+    } else {
+      _this.$navRight.addClass('ux-carousel__nav-right--disabled');
     }
 
     _this.carouselPosition = position;

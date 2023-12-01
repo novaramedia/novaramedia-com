@@ -3,8 +3,6 @@ get_header();
 
 $category = get_category(get_query_var('cat'));
 
-// pr($category);
-
 $podcast_copy_override = get_term_meta($category->term_id, '_nm_podcast_text', true);
 $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subscribe to the podcast';
 $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : false;
@@ -40,18 +38,52 @@ function render_large_cross($color = 'black') {
     <path fill-rule="evenodd" clip-rule="evenodd" d="M45.9999 483L46 0.579834L47 0.579834L46.9999 483L45.9999 483Z" fill="#5FCC00"/>
     </svg>';
 }
+
+$episode_block_posts_number = 7;
+
+function render_episode_block($posts) {
+?>
+<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
+  <div class="novara-fm-archive__archive-block-wrapper">
+    <div class="novara-fm-archive__archive-block-nav-left novara-fm-archive__archive-block-nav-left--disabled ux-carousel__nav-left ui-rounded-box"></div>
+    <div class="novara-fm-archive__archive-block-nav-right ux-carousel__nav-right ui-rounded-box"></div>
+    <div class="novara-fm-archive__archive-block-inner ux-carousel__inner">
+      <?php
+        foreach ($posts as $post) {
+          $post_id = $post->ID;
+      ?>
+        <div class="novara-fm-archive__archive-block-post ux-carousel__item">
+          <?php render_thumbnail($post_id, 'col12-16to9', array(
+            'class' => 'ui-rounded-image'
+          )); ?>
+          <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
+          <h4><?php render_standfirst($post_id); ?></h4>
+          <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
+        </div>
+      <?php
+        }
+      ?>
+    </div>
+  </div>
+</div>
+<?php
+}
+
 ?>
 <main id="main-content" class="category-archive novara-fm-archive">
   <div class="background-black">
-    <div class="container">
-      <div class="novara-fm-archive__header pt-6 pb-7">
+    <div class="container"><?php
+      // Header w/ video background
+      ?><div class="novara-fm-archive__header pt-6 pb-7">
         <?php echo nm_get_file('/dist/img/products/novara-fm/novarafm-wordmark.svg'); ?>
       </div>
     </div>
   </div>
 
   <div class="background-green">
-    <div class="container pt-5 pb-5 fs-4-sans">
+    <div class="container pt-5 pb-5 fs-5-sans font-bold"><?php
+      // Sub header
+      ?>
       <div class="grid-row">
         <div class="is-xxl-2">
           <?php echo render_small_cross('black'); ?>
@@ -70,14 +102,16 @@ function render_large_cross($color = 'black') {
   <?php
     $lastest_fm = get_posts(array(
       'category' => $category->term_id,
-      'posts_per_page' => 7
+      'posts_per_page' => ($episode_block_posts_number + 1), // 1 for latest, x for recent
     ));
 
     if ($lastest_fm) {
       $post_id = $lastest_fm[0]->ID;
       $meta = get_post_meta($post_id);
   ?>
-    <section class="container pt-7 pb-7 font-color-white">
+    <section class="container pt-7 pb-8 font-color-white"><?php
+      // Latest episode
+      ?>
       <div class="grid-row">
         <div class="is-xxl-2">
           <?php echo render_large_cross('green'); ?>
@@ -126,32 +160,56 @@ function render_large_cross($color = 'black') {
       }
     ?>
 
-    <section class="container">
-      <h4 class="fs-4-sans font-uppercase">Recent Episodes</h4>
+    <section class="container"><?php
+      // Recent episodes & subject explorer
+      ?>
       <div class="grid-row">
-      <?php
-        foreach ($lastest_fm as $post) {
-          $post_id = $post->ID;
-      ?>
-        <div class="grid-item is-xxl-5">
-          <?php render_thumbnail($post_id, 'col12', array(
-            'class' => 'ui-rounded-image'
-          )); ?>
-          <h2 class="fs-6-sans"><?php echo get_the_title($post_id); ?></h2>
-          <h4><?php render_standfirst($post_id); ?></h4>
-          <p><?php render_short_description($post_id); ?></p>
+        <div class="grid-item is-xxl-24">
+          <h4 class="fs-4-sans font-uppercase font-color-white mb-4">Recent Episodes</h4>
+          <?php
+            array_shift($lastest_fm); // Remove first episode already shown above
+            render_episode_block($lastest_fm); ?>
+
+          <h4 class="fs-4-sans font-uppercase font-color-white mt-4 mb-4">Climate Breakdown</h4>
+          <?php
+            render_episode_block(get_posts(array(
+              'category' => $category->term_id,
+              'posts_per_page' => $episode_block_posts_number,
+              'tax_query' => array(
+                array(
+                  'taxonomy' => 'section',
+                  'field' => 'slug',
+                  'terms' => 'climate'
+                )
+              )
+            ))); ?>
+
+          <h4 class="fs-4-sans font-uppercase font-color-white mt-4 mb-4">Policing</h4>
+          <?php
+            render_episode_block(get_posts(array(
+              'category' => $category->term_id,
+              'posts_per_page' => $episode_block_posts_number,
+              'tax_query' => array(
+                array(
+                  'taxonomy' => 'section',
+                  'field' => 'slug',
+                  'terms' => 'policing'
+                )
+              )
+            ))); ?>
         </div>
-      <?php
-        }
-      ?>
+
+      </div>
     </section>
 
-    <section class="container pt-6 pb-6">
+    <section class="container pt-9 pb-9"><?php
+      // Full about
+      ?>
       <div class="grid-row">
         <div class="grid-item is-xxl-2">
           <?php echo render_small_cross('green'); ?>
         </div>
-        <div class="grid-item offset-xxl-2 is-xxl-16 background-white">
+        <div class="grid-item offset-xxl-2 is-xxl-16 background-white ui-rounded-box">
           <div class="pt-5 pb-5 pl-5 pr-5">
             <h2 class="fs-8 mb-4">About the show</h2>
             <p class="fs-6 mb-4">Novara Media’s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.</p>
@@ -175,8 +233,10 @@ function render_large_cross($color = 'black') {
     get_template_part('partials/support-section');
   ?>
 
-  <div class="background-black font-color-white">
-    <section class="container pt-6 pb-6">
+  <div class="background-green font-color-white"><?php
+      // Credits
+      ?>
+    <section class="container pt-6 pb-7">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
           <h3 class="fs-3-sans font-bold font-uppercase mb-4">Credits</h3>
