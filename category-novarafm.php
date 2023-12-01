@@ -25,20 +25,44 @@ $credits = [
     'role' => 'Host',
     'bio' => 'James is a writer, broadcaster and founder of Novara Media. From 2011 up until 2019 he hosted the majority of Novara FM episodes and therefore you will find him all throughout the archive.'
   ),
-]
+];
+
+function render_small_cross($color = 'black') {
+  echo '<svg width="92" height="38" viewBox="0 0 92 38" fill="none" xmlns="http://www.w3.org/2000/svg" class="novara-fm-archive__cross novara-fm-archive__cross--' . $color . '">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M92 19L1.12875e-07 19L0 18L92 18L92 19Z" fill="#0E0E0E"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M46 38L46 -1.80547e-08L47 0L47 38L46 38Z" fill="#0E0E0E"/>
+    </svg>';
+}
+
+function render_large_cross($color = 'black') {
+  echo '<svg width="92" height="483" viewBox="0 0 92 483" fill="none" xmlns="http://www.w3.org/2000/svg" class="novara-fm-archive__cross novara-fm-archive__cross--' . $color . '">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M92 241.79L8.89111e-09 241.79L0 240.79L92 240.79L92 241.79Z" fill="#5FCC00"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M45.9999 483L46 0.579834L47 0.579834L46.9999 483L45.9999 483Z" fill="#5FCC00"/>
+    </svg>';
+}
 ?>
 <main id="main-content" class="category-archive novara-fm-archive">
   <div class="background-black">
     <div class="container">
-      <div class="novara-fm-archive__header pt-6 pb-6">
+      <div class="novara-fm-archive__header pt-6 pb-7">
         <?php echo nm_get_file('/dist/img/products/novara-fm/novarafm-wordmark.svg'); ?>
       </div>
     </div>
   </div>
 
   <div class="background-green">
-    <div class="container pt-4 pb-4 text-align-center fs-4-sans">
-      <?php echo category_description(); ?>
+    <div class="container pt-5 pb-5 fs-4-sans">
+      <div class="grid-row">
+        <div class="is-xxl-2">
+          <?php echo render_small_cross('black'); ?>
+        </div>
+        <div class="grid-item is-xxl-20 text-align-center">
+          Novara FM is a podcast about the ideas,<br />people and movements that wield power in our lives.
+        </div>
+        <div class="is-xxl-2 text-align-right">
+          <?php echo render_small_cross('black'); ?>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -53,9 +77,12 @@ $credits = [
       $post_id = $lastest_fm[0]->ID;
       $meta = get_post_meta($post_id);
   ?>
-    <section class="container pt-6 pb-7 font-color-white">
+    <section class="container pt-7 pb-7 font-color-white">
       <div class="grid-row">
-        <div class="grid-item offset-xxl-3 is-xxl-18">
+        <div class="is-xxl-2">
+          <?php echo render_large_cross('green'); ?>
+        </div>
+        <div class="grid-item offset-xxl-1 is-xxl-18">
           <div class="grid-row grid--nested">
             <div class="grid-item is-xxl-12">
               <h4 class="fs-3-sans font-bold font-uppercase mb-4">Latest Episode</h4>
@@ -89,7 +116,9 @@ $credits = [
               )); ?>
             </div>
           </div>
-
+        </div>
+        <div class="offset-xxl-1 is-xxl-2 text-align-right">
+          <?php echo render_large_cross('green'); ?>
         </div>
       </div>
     </section>
@@ -119,7 +148,10 @@ $credits = [
 
     <section class="container pt-6 pb-6">
       <div class="grid-row">
-        <div class="grid-item offset-xxl-4 is-xxl-16 background-white">
+        <div class="grid-item is-xxl-2">
+          <?php echo render_small_cross('green'); ?>
+        </div>
+        <div class="grid-item offset-xxl-2 is-xxl-16 background-white">
           <div class="pt-5 pb-5 pl-5 pr-5">
             <h2 class="fs-8 mb-4">About the show</h2>
             <p class="fs-6 mb-4">Novara Media’s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.</p>
@@ -131,6 +163,9 @@ $credits = [
               <li><a class="nm-button nm-button--black" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Everywhere else</a></li>
             </ul>
           </div>
+        </div>
+        <div class="grid-item offset-xxl-2 is-xxl-2 text-align-right">
+          <?php echo render_small_cross('green'); ?>
         </div>
       </div>
     </section>

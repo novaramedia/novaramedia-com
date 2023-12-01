@@ -3324,7 +3324,18 @@ b {
   align-items: center;
 }
 .novara-fm-archive__header svg {
-  width: 65%;
+  width: 60%;
+  max-width: 600px;
+}
+.novara-fm-archive__cross {
+  max-width: 100%;
+  height: auto;
+}
+.novara-fm-archive__cross--black path {
+  fill: #0e0e0e;
+}
+.novara-fm-archive__cross--green path {
+  fill: #5fcc00;
 }
 @media screen and (max-width: 1336px) {
   .grid-row-xl--reverse {
