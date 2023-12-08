@@ -3381,7 +3381,7 @@ b {
   -ms-flex-shrink: 0;
   flex-shrink: 0;
   max-width: 100%;
-  width: 260px;
+  width: 200px;
   margin-left: 1rem;
 }
 .novara-fm-archive__archive-block-post:first-child {
@@ -3393,6 +3393,12 @@ b {
 }
 .novara-fm-archive__archive-block-post a:hover .novara-fm-archive__archive-block-item-inner {
   background-color: #fdfdfd;
+}
+.novara-fm-archive__split-logotype {
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 @media screen and (max-width: 1336px) {
   .grid-row-xl--reverse {
