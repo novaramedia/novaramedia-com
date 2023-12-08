@@ -7,6 +7,7 @@ $podcast_copy_override = get_term_meta($category->term_id, '_nm_podcast_text', t
 $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subscribe to the podcast';
 $podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : false;
 
+// Mock copy here. Should we hardcode this or should it be in some options panel?
 $credits = [
   array(
     'name' => 'Chal Ravens',
@@ -25,6 +26,7 @@ $credits = [
   ),
 ];
 
+// renders the small cross in chosen color. This probably should become a combined function with the large cross renderer
 function render_small_cross($color = 'black') {
   echo '<svg width="92" height="38" viewBox="0 0 92 38" fill="none" xmlns="http://www.w3.org/2000/svg" class="novara-fm-archive__cross novara-fm-archive__cross--' . $color . '">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M92 19L1.12875e-07 19L0 18L92 18L92 19Z" fill="#0E0E0E"/>
@@ -39,8 +41,9 @@ function render_large_cross($color = 'black') {
     </svg>';
 }
 
-$episode_block_posts_number = 9;
+$episode_block_posts_number = 9; // how many episodes to show in the sidescroll blocks
 
+// renders a carousel of episodes
 function render_episode_block($posts) {
 ?>
 <div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
@@ -68,6 +71,7 @@ function render_episode_block($posts) {
 <?php
 }
 
+// renders the follow links for the podcast. How hardcoded should these links be. Likely needs an option for button style classes
 function render_podcast_links() {
 ?>
   <ul class="u-inline-list fs-3-sans font-uppercase">
@@ -85,18 +89,15 @@ function render_podcast_links() {
       <source src="<?php echo get_template_directory_uri(); ?>/dist/video/novara-fm-splash.webm" type="video/webm" />
       <source src="<?php echo get_template_directory_uri(); ?>/dist/video/novara-fm-splash.mp4" type="video/mp4" />
     </video>
-    <div class="container"><?php
-      // Header w/ video background
-      ?><div class="novara-fm-archive__header pt-6 pb-7">
+    <div class="container">
+      <div class="novara-fm-archive__header pt-6 pb-7">
         <?php echo nm_get_file('/dist/img/products/novara-fm/novarafm-wordmark.svg'); ?>
       </div>
     </div>
   </div>
 
   <div class="background-green">
-    <div class="container pt-5 pb-5 fs-5-sans font-bold"><?php
-      // Sub header
-      ?>
+    <div class="container pt-5 pb-5 fs-5-sans font-bold">
       <div class="grid-row">
         <div class="is-xxl-2">
           <?php echo render_small_cross('black'); ?>
@@ -122,9 +123,7 @@ function render_podcast_links() {
       $post_id = $lastest_fm[0]->ID;
       $meta = get_post_meta($post_id);
   ?>
-    <section class="container pt-7 pb-8 font-color-white"><?php
-      // Latest episode
-      ?>
+    <section class="container pt-7 pb-8 font-color-white">
       <div class="grid-row">
         <div class="is-xxl-2">
           <?php echo render_large_cross('green'); ?>
@@ -169,14 +168,12 @@ function render_podcast_links() {
       }
     ?>
 
-    <section class="container"><?php
-      // Recent episodes & subject explorer
-      ?>
+    <section class="container">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
           <h4 class="fs-3-sans font-bold font-uppercase font-color-white mb-4">Recent Episodes Right Now</h4>
           <?php
-            array_shift($lastest_fm); // Remove first episode already shown above
+            array_shift($lastest_fm); // Remove first episode as already shown above
             render_episode_block($lastest_fm); ?>
 
           <h4 class="fs-3-sans font-bold font-uppercase font-color-white mt-4 mb-4">Climate Breakdown Apocalypse</h4>
@@ -211,14 +208,14 @@ function render_podcast_links() {
       </div>
     </section>
 
-    <section class="container pt-9 pb-9"><?php
-      // Full about
-      ?>
+    <section class="container pt-9 pb-9">
       <div class="grid-row">
         <div class="grid-item is-xxl-2">
           <div class="layout-split-vertical">
-            <?php echo render_small_cross('green'); ?>
-            <?php echo render_small_cross('green'); ?>
+            <?php
+              echo render_small_cross('green');
+              echo render_small_cross('green');
+            ?>
           </div>
         </div>
         <div class="grid-item offset-xxl-1 is-xxl-18">
@@ -233,8 +230,10 @@ function render_podcast_links() {
         </div>
         <div class="grid-item offset-xxl-1 is-xxl-2 text-align-right">
           <div class="layout-split-vertical">
-            <?php echo render_small_cross('green'); ?>
-            <?php echo render_small_cross('green'); ?>
+            <?php
+              echo render_small_cross('green');
+              echo render_small_cross('green');
+            ?>
           </div>
         </div>
       </div>
@@ -245,9 +244,7 @@ function render_podcast_links() {
     get_template_part('partials/support-section');
   ?>
 
-  <div class="background-green font-color-white"><?php
-      // Credits
-      ?>
+  <div class="background-green font-color-white">
     <section class="container pt-6 pb-7">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
