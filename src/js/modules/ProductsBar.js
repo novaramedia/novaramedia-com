@@ -19,9 +19,11 @@ export class ProductsBar {
   onReady() {
     const _this = this;
 
-    _this.itemWidth = _this.$navItems.eq(1).outerWidth(true);
+    if (this.$productsBar.length !== 0) {
+      _this.itemWidth = _this.$navItems.eq(1).outerWidth(true);
 
-    _this.bind();
+      _this.bind();
+    }
   }
 
   bind() {

@@ -1161,6 +1161,9 @@ template {
     width: 10%;
   }
 }
+html {
+  --color-green: #5fcc00;
+}
 .font-color-white {
   color: #fdfdfd;
 }
@@ -1332,6 +1335,9 @@ a {
 }
 .background-yellow {
   background-color: #ebb800;
+}
+.background-green {
+  background-color: #5fcc00;
 }
 .background-green-neon {
   background-color: #cadb2a;
@@ -3138,6 +3144,9 @@ b {
 .ui-rounded-image {
   border-radius: 2px;
 }
+.ui-rounded-box {
+  border-radius: 2px;
+}
 .ui-post-hover .post__title {
   transition: color 139.86ms ease-in-out;
 }
@@ -3313,7 +3322,100 @@ b {
     display: block;
   }
 }
-@media screen and (max-width: 1408px) {
+
+.novara-fm-archive__header {
+  display: flex;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.novara-fm-archive__header svg {
+  width: 60%;
+  max-width: 600px;
+}
+.novara-fm-archive__splash-video-container {
+  position: relative;
+  background-color: #0e0e0e;
+  z-index: -10;
+}
+.novara-fm-archive__splash-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+.novara-fm-archive__cross {
+  max-width: 100%;
+  height: auto;
+}
+.novara-fm-archive__cross--black path {
+  fill: #0e0e0e;
+}
+.novara-fm-archive__cross--green path {
+  fill: #5fcc00;
+}
+.novara-fm-archive__archive-block-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.novara-fm-archive__archive-block-nav-left,
+.novara-fm-archive__archive-block-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 3rem;
+  cursor: pointer;
+  z-index: 10;
+}
+.novara-fm-archive__archive-block-nav-left {
+  background-image: linear-gradient(270deg,rgba(255,255,255,0) 0%,var(--color-green) 100%);
+  left: 0;
+  transition: opacity 139.86ms ease-in-out;
+}
+.novara-fm-archive__archive-block-nav-left--disabled {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  z-index: -10;
+}
+.novara-fm-archive__archive-block-nav-right {
+  background-image: linear-gradient(90deg,rgba(255,255,255,0) 0%,var(--color-green) 100%);
+  right: 0;
+}
+.novara-fm-archive__archive-block-inner {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 139.86ms ease-in-out;
+}
+.novara-fm-archive__archive-block-post {
+  -ms-flex-shrink: 0;
+  flex-shrink: 0;
+  max-width: 100%;
+  width: 200px;
+  margin-left: 1rem;
+}
+.novara-fm-archive__archive-block-post:first-child {
+  margin-left: 0;
+}
+.novara-fm-archive__archive-block-post a {
+  display: flex;
+  height: 100%;
+}
+.novara-fm-archive__archive-block-post a:hover .novara-fm-archive__archive-block-item-inner {
+  background-color: #fdfdfd;
+}
+.novara-fm-archive__split-logotype {
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1336px) {
   .grid-row-xl--reverse {
     direction: column-reverse;
   }

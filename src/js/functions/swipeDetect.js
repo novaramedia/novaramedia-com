@@ -26,22 +26,16 @@ const swipeDetect = (target, callback) => {
 
   const gestureZone = document.querySelector(target);
 
-  gestureZone.addEventListener(
-    'touchstart',
-    (event) => {
-      touchstartX = event.changedTouches[0].screenX;
-      touchstartY = event.changedTouches[0].screenY;
-    }
-  );
+  gestureZone.addEventListener('touchstart', (event) => {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+  });
 
-  gestureZone.addEventListener(
-    'touchend',
-    (event) => {
-      touchendX = event.changedTouches[0].screenX;
-      touchendY = event.changedTouches[0].screenY;
-      callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
-    }
-  );
+  gestureZone.addEventListener('touchend', (event) => {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    callback(handleGesture(touchstartX, touchstartY, touchendX, touchendY));
+  });
 };
 
 export default swipeDetect;
