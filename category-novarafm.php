@@ -80,7 +80,11 @@ function render_podcast_links() {
 }
 ?>
 <main id="main-content" class="category-archive novara-fm-archive">
-  <div class="background-black">
+  <div class="novara-fm-archive__splash-video-container">
+    <video class="novara-fm-archive__splash-video" autoplay loop muted>
+      <source src="<?php echo get_template_directory_uri(); ?>/dist/video/novara-fm-splash.webm" type="video/webm" />
+      <source src="<?php echo get_template_directory_uri(); ?>/dist/video/novara-fm-splash.mp4" type="video/mp4" />
+    </video>
     <div class="container"><?php
       // Header w/ video background
       ?><div class="novara-fm-archive__header pt-6 pb-7">
