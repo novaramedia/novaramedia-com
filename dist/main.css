@@ -3322,7 +3322,6 @@ b {
     display: block;
   }
 }
-
 .novara-fm-archive__header {
   display: flex;
   -ms-justify-content: center;
@@ -3415,7 +3414,7 @@ b {
   max-width: 700px;
   margin: 0 auto;
 }
-@media screen and (max-width: 1336px) {
+@media screen and (max-width: 1408px) {
   .grid-row-xl--reverse {
     direction: column-reverse;
   }
