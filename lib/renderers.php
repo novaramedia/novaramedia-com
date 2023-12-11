@@ -4,9 +4,9 @@
  *
  * @param integer $post_id        Post ID
  * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param Boolean $no_border      If the rendered tag should have no border
+ * @param string $style_varient   Additional BEM varient class
  */
-function render_post_ui_tags($post_id, $show_av_icons = false, $no_border = false) {
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $style_varient = false) {
   $sub_category = get_the_sub_category($post_id);
 
   if (!$sub_category) {
@@ -14,18 +14,22 @@ function render_post_ui_tags($post_id, $show_av_icons = false, $no_border = fals
   }
 
   echo '<span class="ui-tag-block">';
-  echo '<span class="';
-  echo $no_border ? 'ui-tag ui-tag--no-border' : 'ui-tag';
-  echo '">' . $sub_category . '</span>';
+  if ($show_text) {
+    echo '<span class="';
+    echo $style_varient ? 'ui-tag ui-tag--' . $style_varient : 'ui-tag';
+    echo '">' . $sub_category . '</span>';
+  }
   if ($show_av_icons) {
     $top_category = get_the_top_level_category($post_id);
 
+    $default_classes = $show_text ? 'ml-1 ui-av-tag' : 'ui-av-tag';
+
     if ($top_category->slug === 'video') {
-      echo '<span class="ml-1 ui-av-tag ui-av-tag--video">
+      echo '<span class="' . $default_classes . ' ui-av-tag--video">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 7 7"><path fill="#000" d="M0 0v7l6.222-3.5L0 0Z"/></svg>
       </span>';
     } else if ($top_category->slug === 'audio') {
-      echo '<span class="ml-1 ui-av-tag ui-av-tag--audio">
+      echo '<span class="' . $default_classes . ' ui-av-tag--audio">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 75 65"><path fill="#000" d="M35.421 65V0l-35 32.5 35 32.5Z"/><path fill="#000" fill-rule="evenodd" d="M61.722 60.044C69.767 53.44 74.9 43.42 74.9 32.2 74.9 20.777 69.577 10.595 61.277 4l-7.135 7.136c6.518 4.724 10.757 12.4 10.757 21.065 0 8.46-4.04 15.976-10.296 20.724l7.12 7.119Zm-13.2-13.2A19.945 19.945 0 0 0 54.9 32.2c0-5.986-2.63-11.359-6.799-15.024l-7.1 7.1a9.983 9.983 0 0 1 3.9 7.924c0 3.021-1.34 5.73-3.458 7.563l7.08 7.08Z" clip-rule="evenodd"/></svg>
       </span>';
     }
