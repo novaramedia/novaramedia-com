@@ -4,9 +4,9 @@
  *
  * @param integer $post_id        Post ID
  * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param Boolean $no_border      If the rendered tag should have no border
+ * @param string $style_varient   Additional BEM varient class
  */
-function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $no_border = false) {
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $style_varient = false) {
   $sub_category = get_the_sub_category($post_id);
 
   if (!$sub_category) {
@@ -16,7 +16,7 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
   echo '<span class="ui-tag-block">';
   if ($show_text) {
     echo '<span class="';
-    echo $no_border ? 'ui-tag ui-tag--no-border' : 'ui-tag';
+    echo $style_varient ? 'ui-tag ui-tag--' . $style_varient : 'ui-tag';
     echo '">' . $sub_category . '</span>';
   }
   if ($show_av_icons) {

@@ -16,7 +16,7 @@
     <a href="<?php echo get_permalink($post_id); ?>">
       <div class="layout-thumbnail-frame">
         <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-          <?php render_post_ui_tags($post_id, true, true, true); ?>
+          <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
         </div>
         <?php render_thumbnail($post_id, 'col24-16to9', array(
           'class' => 'ui-rounded-image',

@@ -31,7 +31,7 @@
           <div class="mt-5">
             <div class="layout-thumbnail-frame">
               <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                <?php render_post_ui_tags($post->ID, true, true, true); ?>
+                <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
               </div>
               <?php render_thumbnail($post->ID, 'col24-16to9', array(
                 'class' => 'ui-rounded-image'
@@ -67,7 +67,7 @@
         <a href="<?php the_permalink(); ?>">
           <div class="pb-4 mb-4 ui-border-bottom">
             <div class="layout-split-level fs-2 mb-3">
-              <?php render_post_ui_tags($post_id); ?>
+              <?php render_post_ui_tags($post_id, true, false, 'no-fill--white'); ?>
               <span><?php the_time('j F Y'); ?></span>
             </div>
             <h4 class="post__title fs-4-sans">
