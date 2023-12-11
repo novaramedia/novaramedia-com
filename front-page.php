@@ -23,18 +23,9 @@ $banners = array(
     get_template_part('partials/front-page/above-the-fold');
 
     render_front_page_banner($banners[0]);
-  ?>
 
-  <!-- Novara Live video block -->
-  <section id="front-page-novara-live-posts" class="container margin-top-mid margin-bottom-large mobile-margin-bottom-basic">
-    <?php
-      $video_category_slug = 'novara-live';
+    get_template_part('partials/front-page/show-blocks/novara-live');
 
-      render_front_page_video_block($video_category_slug);
-    ?>
-  </section>
-
-  <?php
     render_front_page_banner($banners[1]);
   ?>
 
