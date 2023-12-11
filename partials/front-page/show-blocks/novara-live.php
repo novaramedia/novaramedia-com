@@ -14,7 +14,7 @@
 <div class="background-black font-color-white">
   <section id="front-page-novara-live-posts" class="container pt-6 pb-6">
     <div class="grid-row">
-      <div class="grid-item is-s-24 is-xxl-18">
+      <div class="grid-item is-s-24 is-l-16 is-xxl-18">
         <div>
           <a href="<?php echo $category_link; ?>">
             <h3 class="fs-7 mb-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
@@ -38,7 +38,7 @@
               )); ?>
             </div>
             <div class="grid-row grid--nested mt-4">
-              <div class="grid-item is-s-24 is-xxl-12">
+              <div class="grid-item is-m-24 is-xl-18 is-xxl-12">
                 <h6 class="js-fix-widows fs-7"><?php the_title(); ?></h6>
                 <p class="fs-3-sans mt-2 mb-0">
                   <?php render_short_description($post->ID); ?>
@@ -51,7 +51,7 @@
           }
         ?>
       </div>
-      <div class="grid-item is-s-24 is-xxl-6">
+      <div class="grid-item is-s-24 is-l-8 is-xxl-6 mt-s-5">
         <a href="<?php echo $category_link; ?>">
           <div class="layout-split-level fs-2 mb-5">
             <h5 class="font-bold font-uppercase">Full Episodes</h5>
