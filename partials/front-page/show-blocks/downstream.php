@@ -31,9 +31,7 @@
               <?php render_post_ui_tags($post->ID, true, true, true); ?>
             </div>
             <?php render_thumbnail($post->ID, 'col24-16to9', array(
-              'class' => 'ui-rounded-image',
-              'data-no-lazysizes' => true,
-              'loading' => 'eager'
+              'class' => 'ui-rounded-image'
             )); ?>
           </div>
         </a>
@@ -61,9 +59,7 @@
                   <?php render_post_ui_tags($post->ID, false, true, true); ?>
                 </div>
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
-                  'class' => 'ui-rounded-image',
-                  'data-no-lazysizes' => true,
-                  'loading' => 'eager'
+                  'class' => 'ui-rounded-image'
                 )); ?>
               </div>
               <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?></h6>
