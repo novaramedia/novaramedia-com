@@ -1166,6 +1166,8 @@ html {
 }
 .font-color-white {
   color: #fdfdfd;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .font-color-black {
   color: #0e0e0e;
@@ -3088,9 +3090,6 @@ b {
   border-radius: 0.1875rem;
   padding: 0.21875rem 0.3828125rem;
 }
-.ui-tag--no-border {
-  border-color: #fdfdfd;
-}
 .ui-tag:before {
   content: '';
   background-color: #0e0e0e;
@@ -3099,6 +3098,17 @@ b {
   height: 0.4rem;
   display: inline-block;
   margin-right: 0.25rem;
+}
+.ui-tag--no-border {
+  border-color: #fdfdfd;
+}
+.ui-tag--no-fill--white {
+  background-color: transparent;
+  color: #fdfdfd;
+  border-color: #fdfdfd;
+}
+.ui-tag--no-fill--white:before {
+  background-color: #fdfdfd;
 }
 .ui-av-tag {
   font-size: 0.5625rem;
