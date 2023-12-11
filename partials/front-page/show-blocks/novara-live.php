@@ -15,12 +15,10 @@
   <section id="front-page-novara-live-posts" class="container pt-6 pb-6">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-l-16 is-xxl-18">
-        <div>
-          <a href="<?php echo $category_link; ?>">
-            <h3 class="fs-7 mb-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
-            <p class="fs-4">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</p>
-          </a>
-        </div>
+        <a href="<?php echo $category_link; ?>">
+          <h3 class="fs-7 mb-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
+          <p class="fs-4">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</p>
+        </a>
 
         <?php
           if ($latest_video->have_posts()) {
