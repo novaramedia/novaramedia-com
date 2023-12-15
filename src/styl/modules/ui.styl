@@ -77,3 +77,27 @@
   &:hover
     .post__title
       color: $color-black--hover
+
+// -------------
+
+.ui-ticker__wrapper
+  height: 1em
+
+.ui-ticker
+  position: relative
+  overflow: hidden
+  height: 100%
+  .ui-ticker__inner
+    position: absolute
+    top: 0
+    left: 0
+    white-space: nowrap
+    animation: ticker 30s linear infinite
+    animation-play-state: running
+    &:hover
+      animation-play-state: paused
+    @keyframes ticker
+      0%
+        transform: translateX(10%)
+      100%
+        transform: translateX(-90%)

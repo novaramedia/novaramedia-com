@@ -14,11 +14,13 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
   }
 
   echo '<span class="ui-tag-block">';
+
   if ($show_text) {
     echo '<span class="';
     echo $style_varient ? 'ui-tag ui-tag--' . $style_varient : 'ui-tag';
     echo '">' . $sub_category . '</span>';
   }
+
   if ($show_av_icons) {
     $top_category = get_the_top_level_category($post_id);
 
@@ -34,6 +36,7 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
       </span>';
     }
   }
+
   echo '</span>';
 }
 /**

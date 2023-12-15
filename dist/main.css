@@ -3077,6 +3077,17 @@ b {
 .layout-thumbnail-frame img {
   display: block;
 }
+.layout-flex {
+  display: flex;
+}
+.layout-flex-no-shrink {
+  -ms-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.layout-flex-grow {
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+}
 .ui-tag {
   font-size: 0.5625rem;
   font-style: normal;
@@ -3163,6 +3174,33 @@ b {
 }
 .ui-post-hover:hover .post__title {
   color: #3d3d3d;
+}
+.ui-ticker__wrapper {
+  height: 1em;
+}
+.ui-ticker {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.ui-ticker .ui-ticker__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+  animation-play-state: running;
+}
+.ui-ticker .ui-ticker__inner:hover {
+  animation-play-state: paused;
+}
+@keyframes ticker {
+  0% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(-90%);
+  }
 }
 .submenu__date {
   -ms-grid-column-start: 1;
@@ -3332,6 +3370,11 @@ b {
   .above-the-fold {
     display: block;
   }
+}
+.front-page-novara-live__posts-scroller {
+  height: 650px;
+  max-height: auto;
+  overflow-y: auto;
 }
 .novara-fm-archive__header {
   display: flex;

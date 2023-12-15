@@ -5,28 +5,37 @@
     $category_link = get_category_link($novara_life_category->term_id);
 
     $args = array(
-      'posts_per_page' => 8,
+      'posts_per_page' => 14,
       'cat' => $novara_life_category->term_id,
     );
 
     $latest_video = new WP_Query($args);
 ?>
 <div class="background-black font-color-white">
-  <section id="front-page-novara-live-posts" class="container pt-6 pb-6">
+  <section class="front-page-novara-live container pt-5 pb-6">
     <div class="grid-row">
-      <div class="grid-item is-s-24 is-l-16 is-xxl-18">
+      <div class="grid-item is-xxl-24 mb-5">
         <a href="<?php echo $category_link; ?>">
-          <h3 class="fs-7 mb-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
-          <p class="fs-4">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</p>
+          <div class="layout-split-level">
+            <h3 class="fs-7 layout-flex-no-shrink mr-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
+            <div class="ui-ticker__wrapper layout-flex-grow fs-7 font-weight-regular">
+              <div class="ui-ticker">
+                <div class="ui-ticker__inner">
+                  The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.
+                </div>
+              </div>
+            </div>
+          </div>
         </a>
-
+      </div>
+      <div class="grid-item is-s-24 is-l-16 is-xxl-18">
         <?php
           if ($latest_video->have_posts()) {
             $latest_video->the_post();
             $meta = get_post_meta($post->ID);
         ?>
         <a href="<?php the_permalink(); ?>">
-          <div class="mt-5">
+          <div>
             <div class="layout-thumbnail-frame">
               <div class="layout-thumbnail-frame__inner mt-1 ml-1">
                 <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
@@ -51,32 +60,36 @@
       </div>
       <div class="grid-item is-s-24 is-l-8 is-xxl-6 mt-s-5">
         <a href="<?php echo $category_link; ?>">
-          <div class="layout-split-level fs-2 mb-5">
+          <div class="layout-split-level fs-2 mb-4">
             <h5 class="font-bold font-uppercase">Full Episodes</h5>
             <span>See All</span>
           </div>
         </a>
+        <div class="front-page-novara-live__posts-scroller">
         <?php
           if ($latest_video->have_posts()) {
             while($latest_video->have_posts()) {
               $latest_video->the_post();
               $meta = get_post_meta($post->ID);
         ?>
-        <a href="<?php the_permalink(); ?>">
-          <div class="pb-4 mb-4 ui-border-bottom">
-            <div class="layout-split-level fs-2 mb-3">
-              <?php render_post_ui_tags($post_id, true, false, 'no-fill--white'); ?>
-              <span><?php the_time('j F Y'); ?></span>
+          <a href="<?php the_permalink(); ?>">
+            <div class="pb-4 mb-4 ui-border-bottom">
+              <div class="fs-2 mb-3">
+                <?php the_time('j F Y'); ?>
+              </div>
+              <h4 class="post__title fs-4-sans">
+                <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white'); ?> <?php the_title(); ?>
+              </h4>
             </div>
-            <h4 class="post__title fs-4-sans">
-              <?php the_title(); ?>
-            </h4>
-          </div>
-        </a>
+          </a>
         <?php
             }
           }
         ?>
+          <a href="<?php echo $category_link; ?>" class="fs-2">
+            <span>See All</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
