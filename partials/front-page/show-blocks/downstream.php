@@ -40,6 +40,8 @@
           <?php
             $meta = get_post_meta($post->ID);
 
+            $has_related = false;
+
             if (!empty($meta['_cmb_related_posts'])) {
               $related_args = array(
                 'posts_per_page' => 2,
@@ -48,7 +50,9 @@
 
               $related_posts = new WP_Query($related_args);
               $has_related = $related_posts->have_posts();
-              $title_classes = $has_related ? 'is-m-24 is-xxl-16' : 'is-xxl-24';
+            }
+
+            $title_classes = $has_related ? 'is-m-24 is-xxl-16' : 'is-xxl-24';
           ?>
           <div class="grid-item <?php echo $title_classes; ?>">
             <h6 class="js-fix-widows fs-8"><?php the_title(); ?></h6>
@@ -76,9 +80,8 @@
             ?>
               </div>
             <?php
+                wp_reset_postdata();
               }
-              wp_reset_postdata();
-            }
           ?>
         </div>
       </div>
