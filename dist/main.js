@@ -184,9 +184,11 @@ class Carousels {
     _this.carousels.forEach(carousel => {
       carousel.onReady();
     });
-    console.log('Carousels ready', _this.carousels);
+
+    // console.log('Carousels ready', _this.carousels);
   }
 }
+
 class Carousel {
   constructor(carousel) {
     this.$carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
@@ -425,88 +427,6 @@ class MailchimpSignup {
         _this.forms[index].removeClass('email-signup__form--failed');
       });
     });
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/ProductsBar.js":
-/*!***************************************!*\
-  !*** ./src/js/modules/ProductsBar.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ProductsBar: () => (/* binding */ ProductsBar)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../functions/swipeDetect */ "./src/js/functions/swipeDetect.js");
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-// import debounce from 'lodash/debounce';
-
-class ProductsBar {
-  constructor() {
-    this.$productsBar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.front-page__products-bar');
-    this.$inner = this.$productsBar.find('.products-bar__inner');
-    this.$navLeft = this.$productsBar.find('.products-bar__nav-left');
-    this.$navRight = this.$productsBar.find('.products-bar__nav-right');
-    this.$navItems = this.$productsBar.find('.products-bar__item');
-    this.carouselLength = this.$navItems.length;
-    this.carouselPosition = 0;
-  }
-  onReady() {
-    const _this = this;
-    if (this.$productsBar.length !== 0) {
-      _this.itemWidth = _this.$navItems.eq(1).outerWidth(true);
-      _this.bind();
-    }
-  }
-  bind() {
-    const _this = this;
-    this.$navLeft.on({
-      click: function () {
-        _this.animateToPosition(_this.carouselPosition - 1);
-      }
-    });
-    this.$navRight.on({
-      click: function () {
-        _this.animateToPosition(_this.carouselPosition + 1);
-      }
-    });
-
-    // could also trottle mouseover triggers as well? https://lodash.com/docs/4.17.15#throttle
-
-    (0,_functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__["default"])('.front-page__products-bar', direction => {
-      if (direction === 'left') {
-        _this.animateToPosition(_this.carouselPosition + 1);
-      } else if (direction === 'right') {
-        _this.animateToPosition(_this.carouselPosition - 1);
-      }
-    });
-  }
-  animateToPosition(position) {
-    const _this = this;
-    if (position < 0) {
-      position = 0;
-    }
-    if (position > _this.carouselLength - 1) {
-      position = _this.carouselLength - 1;
-    }
-    _this.$inner.css({
-      transform: `translateX(-${position * _this.itemWidth}px)`
-    });
-    if (position !== 0) {
-      _this.$navLeft.removeClass('products-bar__nav-left--disabled');
-    } else {
-      _this.$navLeft.addClass('products-bar__nav-left--disabled');
-    }
-    _this.carouselPosition = position;
   }
 }
 
@@ -19023,13 +18943,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Search.js */ "./src/js/modules/Search.js");
 /* harmony import */ var _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Support.js */ "./src/js/modules/Support.js");
 /* harmony import */ var _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Carousels.js */ "./src/js/modules/Carousels.js");
-/* harmony import */ var _modules_ProductsBar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/ProductsBar.js */ "./src/js/modules/ProductsBar.js");
-/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
-/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
+/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
  // import styl for webpack
-
 
 
 
@@ -19047,9 +18965,8 @@ class Site {
     this.search = new _modules_Search_js__WEBPACK_IMPORTED_MODULE_5__.Search();
     this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_6__.Support();
     this.carousels = new _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_7__.Carousels();
-    this.productsBar = new _modules_ProductsBar_js__WEBPACK_IMPORTED_MODULE_8__.ProductsBar();
-    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__.MailchimpSignup();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_10__.Utilities();
+    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_8__.MailchimpSignup();
+    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_9__.Utilities();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
   }
   onReady() {
@@ -19058,7 +18975,6 @@ class Site {
     this.search.onReady();
     this.support.onReady();
     this.carousels.onReady();
-    this.productsBar.onReady();
     this.utilties.onReady();
   }
 }

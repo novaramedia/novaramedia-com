@@ -21,7 +21,7 @@ export class Carousels {
       carousel.onReady();
     });
 
-    console.log('Carousels ready', _this.carousels);
+    // console.log('Carousels ready', _this.carousels);
   }
 }
 
