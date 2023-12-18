@@ -47,20 +47,22 @@ $episode_block_posts_number = 9; // how many episodes to show in the sidescroll 
 function render_episode_block($posts) {
 ?>
 <div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
-  <div class="novara-fm-archive__archive-block-wrapper">
-    <div class="novara-fm-archive__archive-block-nav-left novara-fm-archive__archive-block-nav-left--disabled ux-carousel__nav-left ui-rounded-box"></div>
-    <div class="novara-fm-archive__archive-block-nav-right ux-carousel__nav-right ui-rounded-box"></div>
-    <div class="novara-fm-archive__archive-block-inner ux-carousel__inner">
+  <div class="ux-carousel__wrapper">
+    <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled ui-rounded-box"></div>
+    <div class="ux-carousel__nav-right ui-rounded-box"></div>
+    <div class="ux-carousel__inner ux-carousel__inner">
       <?php
         foreach ($posts as $post) {
           $post_id = $post->ID;
       ?>
-        <div class="novara-fm-archive__archive-block-post ux-carousel__item">
-          <?php render_thumbnail($post_id, 'col12-16to9', array(
-            'class' => 'ui-rounded-image'
-          )); ?>
-          <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
-          <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
+        <div class="ux-carousel__item">
+          <a href="<?php echo get_permalink($post_id); ?>">
+            <?php render_thumbnail($post_id, 'col12-16to9', array(
+              'class' => 'ui-rounded-image'
+            )); ?>
+            <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
+            <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
+          </a>
         </div>
       <?php
         }
