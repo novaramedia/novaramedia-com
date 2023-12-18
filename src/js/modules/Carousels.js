@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import swipeDetect from '../functions/swipeDetect';
 import debounce from 'lodash/debounce';
+import clamp from 'lodash/clamp';
+import reduce from 'lodash/reduce';
 
 export class Carousels {
   constructor() {
@@ -28,6 +30,7 @@ export class Carousels {
 class Carousel {
   constructor(carousel) {
     this.$carousel = $(carousel);
+    this.$wrapper = this.$carousel.find('.ux-carousel__wrapper');
     this.$inner = this.$carousel.find('.ux-carousel__inner');
     this.$items = this.$carousel.find('.ux-carousel__item');
     this.$navLeft = this.$carousel.find('.ux-carousel__nav-left');
@@ -40,9 +43,34 @@ class Carousel {
   onReady() {
     const _this = this;
 
-    _this.itemWidth = _this.$items.eq(1).outerWidth(true);
-
+    _this.setSizes();
     _this.bind();
+  }
+
+  onResize() {
+    const _this = this;
+
+    _this.setSizes();
+    _this.animateToPosition(_this.carouselPosition);
+  }
+
+  setSizes() {
+    const _this = this;
+
+    _this.itemWidth = _this.$items.eq(1).outerWidth(true);
+    _this.itemMarginWidth = _this.itemWidth - _this.$items.eq(2).outerWidth();
+    _this.carouselWidth = _this.$carousel.outerWidth();
+    _this.wrapperSpacing =
+      _this.$wrapper.outerWidth(true) - _this.$wrapper.width();
+    _this.innerContainerWidth = reduce(
+      _this.$items,
+      (sum, item) => {
+        return sum + $(item).outerWidth(true);
+      },
+      0
+    );
+
+    console.log('_this.wrapperSpacing', _this.wrapperSpacing);
   }
 
   bind() {
@@ -72,6 +100,10 @@ class Carousel {
       'wheel',
       debounce(_this.handleWheel.bind(_this), 100)
     );
+
+    $(window).on({
+      resize: debounce(_this.onResize.bind(_this), 500),
+    });
   }
 
   handleWheel(event) {
@@ -95,8 +127,21 @@ class Carousel {
       position = _this.carouselLength - 1;
     }
 
+    const maxScroll =
+      _this.innerContainerWidth - _this.carouselWidth + _this.wrapperSpacing;
+
+    const isOverflowing = _this.carouselPosition * _this.itemWidth > maxScroll;
+
+    if (isOverflowing && (position - _this.carouselPosition > 0)) {
+      return;
+    }
+
+    const willOverflow = position * _this.itemWidth > maxScroll;
+
+    const scrollDistance = clamp(position * _this.itemWidth, 0, maxScroll);
+
     _this.$inner.css({
-      transform: `translateX(-${position * _this.itemWidth}px)`,
+      transform: `translateX(-${scrollDistance}px)`,
     });
 
     if (position !== 0) {
@@ -105,7 +150,7 @@ class Carousel {
       _this.$navLeft.addClass('ux-carousel__nav-left--disabled');
     }
 
-    if (position !== _this.carouselLength - 1) {
+    if (!willOverflow) {
       _this.$navRight.removeClass('ux-carousel__nav-right--disabled');
     } else {
       _this.$navRight.addClass('ux-carousel__nav-right--disabled');
