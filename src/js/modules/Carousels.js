@@ -2,7 +2,7 @@
 
 import $ from 'jquery';
 import swipeDetect from '../functions/swipeDetect';
-// import debounce from 'lodash/debounce';
+import debounce from 'lodash/debounce';
 
 export class Carousels {
   constructor() {
@@ -60,8 +60,6 @@ class Carousel {
       },
     });
 
-    // could also trottle mouseover triggers as well? https://lodash.com/docs/4.17.15#throttle
-
     swipeDetect(`#${_this.$carousel.attr('id')}`, (direction) => {
       if (direction === 'left') {
         _this.animateToPosition(_this.carouselPosition + 1);
@@ -69,6 +67,21 @@ class Carousel {
         _this.animateToPosition(_this.carouselPosition - 1);
       }
     });
+
+    _this.$carousel[0].addEventListener(
+      'wheel',
+      debounce(_this.handleWheel.bind(_this), 100)
+    );
+  }
+
+  handleWheel(event) {
+    const _this = this;
+
+    if (event.deltaX > 0) {
+      _this.animateToPosition(_this.carouselPosition + 1);
+    } else if (event.deltaX < 0) {
+      _this.animateToPosition(_this.carouselPosition - 1);
+    }
   }
 
   animateToPosition(position) {

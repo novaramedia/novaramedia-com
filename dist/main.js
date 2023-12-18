@@ -165,11 +165,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../functions/swipeDetect */ "./src/js/functions/swipeDetect.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_2__);
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
 
 
-// import debounce from 'lodash/debounce';
 
 class Carousels {
   constructor() {
@@ -216,9 +217,6 @@ class Carousel {
         _this.animateToPosition(_this.carouselPosition + 1);
       }
     });
-
-    // could also trottle mouseover triggers as well? https://lodash.com/docs/4.17.15#throttle
-
     (0,_functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__["default"])(`#${_this.$carousel.attr('id')}`, direction => {
       if (direction === 'left') {
         _this.animateToPosition(_this.carouselPosition + 1);
@@ -226,6 +224,15 @@ class Carousel {
         _this.animateToPosition(_this.carouselPosition - 1);
       }
     });
+    _this.$carousel[0].addEventListener('wheel', lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default()(_this.handleWheel.bind(_this), 100));
+  }
+  handleWheel(event) {
+    const _this = this;
+    if (event.deltaX > 0) {
+      _this.animateToPosition(_this.carouselPosition + 1);
+    } else if (event.deltaX < 0) {
+      _this.animateToPosition(_this.carouselPosition - 1);
+    }
   }
   animateToPosition(position) {
     const _this = this;
