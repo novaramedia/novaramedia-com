@@ -95,7 +95,7 @@ export class Header {
 
     this.$headerSinglePostTitle.css(
       'max-width',
-      `${totalWidth - navsWidth - 10}px`
+      `${totalWidth - navsWidth - 10}px`,
     );
   }
 
