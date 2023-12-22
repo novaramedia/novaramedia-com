@@ -1,6 +1,6 @@
 html
   font-family: $font-sans
-  font-size: 16px
+  font-size: 15px
 
 .font-condensed
   font-family: 'acumin-variable', sans-serif !important
@@ -186,3 +186,101 @@ font-size-1()
 
 .font-larger
   font-size: $font-size-larger
+
+// TO BUILD OUT
+// RESPONSIVE TYPE
+
+@media screen and (max-width: $breakpoint-s)
+
+  .fs-s-1
+    font-size-1()
+
+  .fs-s-2
+    font-size: 0.74375rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02975rem;
+
+  .fs-s-3-sans
+    font-family: $font-sans;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; /* 128.571% */
+    letter-spacing: 0.01094rem;
+
+  .fs-s-3-serif
+    font-family: Georgia;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0175rem;
+
+  .fs-s-4-sans
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.1875rem; /* 118.75% */
+    letter-spacing: 0.01rem;
+
+  .fs-s-4-serif
+    font-family: Georgia;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.375rem; /* 137.5% */
+    letter-spacing: 0.0175rem;
+
+  .fs-s-5-sans
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+  .fs-s-5-sans-headline
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.025rem;
+
+  .fs-s-5-sans-condensed
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: normal
+    line-height: 1.3125rem; /* 105% */
+
+  .fs-s-6
+    font-family: $font-sans
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5625rem; /* 104.167% */
+
+  .fs-s-7
+    font-family: $font-sans
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem; /* 100% */
+
+  .fs-s-8
+    font-family: $font-sans
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.875rem; /* 95.833% */
+    letter-spacing: -0.06rem;
+
+  .fs-s-9
+    font-family: $font-sans
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 4.5rem; /* 100% */
+    letter-spacing: -0.09rem;

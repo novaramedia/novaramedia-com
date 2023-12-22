@@ -2229,7 +2229,7 @@ img {
 }
 html {
   font-family: 'Helvetica Neue';
-  font-size: 16px;
+  font-size: 15px;
 }
 .font-condensed {
   font-family: 'acumin-variable', sans-serif !important;
@@ -2415,6 +2415,105 @@ b {
 }
 .font-larger {
   font-size: 1.3rem;
+}
+@media screen and (max-width: 759px) {
+  .fs-s-1 {
+    font-size: 0.5625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02813rem;
+  }
+  .fs-s-2 {
+    font-size: 0.74375rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02975rem;
+  }
+  .fs-s-3-sans {
+    font-family: 'Helvetica Neue';
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; /* 128.571% */
+    letter-spacing: 0.01094rem;
+  }
+  .fs-s-3-serif {
+    font-family: Georgia;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0175rem;
+  }
+  .fs-s-4-sans {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.1875rem; /* 118.75% */
+    letter-spacing: 0.01rem;
+  }
+  .fs-s-4-serif {
+    font-family: Georgia;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.375rem; /* 137.5% */
+    letter-spacing: 0.0175rem;
+  }
+  .fs-s-5-sans {
+    font-family: 'Helvetica Neue';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .fs-s-5-sans-headline {
+    font-family: 'Helvetica Neue';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.025rem;
+  }
+  .fs-s-5-sans-condensed {
+    font-family: 'Helvetica Neue';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.3125rem; /* 105% */
+  }
+  .fs-s-6 {
+    font-family: 'Helvetica Neue';
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5625rem; /* 104.167% */
+  }
+  .fs-s-7 {
+    font-family: 'Helvetica Neue';
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem; /* 100% */
+  }
+  .fs-s-8 {
+    font-family: 'Helvetica Neue';
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.875rem; /* 95.833% */
+    letter-spacing: -0.06rem;
+  }
+  .fs-s-9 {
+    font-family: 'Helvetica Neue';
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 4.5rem; /* 100% */
+    letter-spacing: -0.09rem;
+  }
 }
 .mt-0 {
   margin-top: 0rem;
@@ -3439,20 +3538,20 @@ b {
     direction: column-reverse;
   }
   .grid-item {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .grid-item--tight {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
   .grid--nested {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -14px;
+    margin-right: -14px;
   }
   .grid--nested-tight {
-    margin-left: -8px;
-    margin-right: -8px;
+    margin-left: -7px;
+    margin-right: -7px;
   }
   .grid-row .offset-xl-0 {
     margin-left: 0%;
@@ -4200,20 +4299,20 @@ b {
     direction: column-reverse;
   }
   .grid-item {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .grid-item--tight {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
   .grid--nested {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -14px;
+    margin-right: -14px;
   }
   .grid--nested-tight {
-    margin-left: -8px;
-    margin-right: -8px;
+    margin-left: -7px;
+    margin-right: -7px;
   }
   .grid-row .offset-l-0 {
     margin-left: 0%;
@@ -4956,20 +5055,20 @@ b {
     direction: column-reverse;
   }
   .grid-item {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .grid-item--tight {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
   .grid--nested {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -14px;
+    margin-right: -14px;
   }
   .grid--nested-tight {
-    margin-left: -8px;
-    margin-right: -8px;
+    margin-left: -7px;
+    margin-right: -7px;
   }
   .grid-row .offset-m-0 {
     margin-left: 0%;
@@ -5727,20 +5826,20 @@ b {
     direction: column-reverse;
   }
   .grid-item {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 11px;
+    padding-right: 11px;
   }
   .grid-item--tight {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 5.5px;
+    padding-right: 5.5px;
   }
   .grid--nested {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -11px;
+    margin-right: -11px;
   }
   .grid--nested-tight {
-    margin-left: -8px;
-    margin-right: -8px;
+    margin-left: -5.5px;
+    margin-right: -5.5px;
   }
   .grid-row .offset-s-0 {
     margin-left: 0%;

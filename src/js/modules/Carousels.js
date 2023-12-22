@@ -67,7 +67,7 @@ class Carousel {
       (sum, item) => {
         return sum + $(item).outerWidth(true);
       },
-      0,
+      0
     );
 
     console.log('_this.wrapperSpacing', _this.wrapperSpacing);
@@ -98,7 +98,7 @@ class Carousel {
 
     _this.$carousel[0].addEventListener(
       'wheel',
-      debounce(_this.handleWheel.bind(_this), 100),
+      debounce(_this.handleWheel.bind(_this), 100)
     );
 
     $(window).on({
