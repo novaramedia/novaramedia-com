@@ -27,42 +27,41 @@
 </head>
 <body <?php body_class(); ?>>
   <section id="main-container">
-    <header id="header" class="margin-bottom-basic">
-      <div id="header-main-wrapper">
-        <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
-          <div class="row">
-            <nav class="header-main__navigation col col4" role="navigation" aria-label="Main">
-              <ul id="header-navs" class="u-inline-list u-inline-block">
-                <li id="menu-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Sections Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
+    <header class="site-header margin-bottom-basic">
+      <div class="site-header__wrapper background-black font-color-white fs-4-sans fs-s-2">
+        <div class="site-header__main container pt-2 pb-2">
+          <div class="grid-row">
+            <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
+              <ul class="site-header__navigation u-inline-list u-inline-block">
+                <li id="menu-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
                 <li id="search-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
             </nav>
 
-            <div class="header-main__middle col col16 text-align-center">
+            <div class="header-main__middle grid-item is-xxl-12 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                <nav id="header-main__logotype" class="u-inline-block"><?php echo nm_get_file('/dist/img/logotype-2-white-line.svg'); ?></nav>
+                <nav class="site-header__logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
 
-                <?php
+                <div class="site-header__scroll-reveal">
+                  <span class="site-header__scroll-reveal-text text-overflow-ellipsis"><?php
                   if (is_single()) {
                     $author = get_post_meta($post->ID, '_cmb_author', true);
-                ?>
-                <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
-                  the_title();
-                  if (!empty($author)) {
-                    echo ' by ' . $author;
+
+                    the_title();
+                    // if (!empty($author)) { // WOW FIX THIS!!!
+                    //   echo ' by ' . $author;
+                    // }
+                  } else {
+                    echo 'Novara Media';
                   }
                 ?></span>
-                <?php
-                  }
-                ?>
+                </div>
               </a>
             </div>
 
-            <a href="<?php echo home_url(); ?>">
-              <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
-              </div>
-            </a>
+            <div class="grid-item is-xxl-6 text-align-right font-weight-bold">
+              <a href="<?php echo home_url('support'); ?>" class="only-desktop">Support Us</a>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,119 @@
+$header-height = 46px
+
+html
+  --header-height: 46px
+
+.site-header
+  position: fixed
+  width: 100%
+  z-index: 1000
+
+#main-content
+  padding-top: var(--header-height)
+  min-height: 55vh
+
+.site-header__wrapper
+  height: var(--header-height)
+  overflow: hidden
+
+.site-header__main
+  padding-top: 12px
+  padding-bottom: 10px
+
+.site-header__navigation
+  user-select: none
+
+.site-header__logomark
+  position: relative
+  transition: opacity $basic-animation-speed
+  svg
+    height: 19px
+    width: 23px
+
+.site-header__scroll-reveal
+  opacity: 0
+  transition: opacity $basic-animation-speed
+  position: absolute
+  left: 0.5em
+  right: 0.5em
+  top: 0
+
+.site-header__scroll-reveal-text
+  display: inline-block
+  max-width: 100%
+  vertical-align: middle
+
+// @media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
+//   html
+//     --header-height: 46px
+
+// @media screen and (max-width: $breakpoint-l)
+//   html
+//     --header-height: 46px
+
+// @media screen and (max-width: $breakpoint-m)
+//   html
+//     --header-height: 46px
+
+@media screen and (max-width: $breakpoint-s)
+  html
+    --header-height: 42px
+
+  #menu-toggle, #search-toggle, #menu-logo
+    padding: 0 2px
+    .icon-menu:before
+      margin: 0
+
+  .site-header__logomark
+    svg
+      height: 15px
+      width: 23px
+
+// ******************************************************
+
+// *** UNREFACTORED FROM HERE
+
+// SITE NAV
+
+#header-sub
+  display: none
+  a
+    font-size: 1.5rem
+    line-height: 1.6
+    padding-right: .66rem
+
+// SEARCH
+
+#header-search
+  display: none
+
+#search-form
+  border: $border-width solid $color-white-soft
+
+#search-input, #search-submit
+  font-size: $font-size-h3
+  border: 0
+  &:focus
+    outline: 0
+
+#search-input
+  float: left
+  width: 70%
+  background-color: transparent
+  color: $color-white-soft
+
+#search-submit
+  width: 8%
+  min-width: 25px
+  float right
+
+#tag-suggestions
+  display: none
+
+// ******************************************************
+
+// 404
+
+.error404
+  #header-search
+    display: block
