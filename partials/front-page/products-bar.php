@@ -3,11 +3,11 @@
 
   if (!empty($signups)) {
 ?>
-<section class="front-page__products-bar container mt-4 mb-4 pb-4 ui-border-bottom">
-  <div class="products-bar__wrapper">
-    <div class="products-bar__nav-left products-bar__nav-left--disabled"></div>
-    <div class="products-bar__nav-right"></div>
-    <div class="products-bar__inner">
+<section class="front-page__products-bar ux-carousel container mt-4 mb-4 pb-4 ui-border-bottom">
+  <div class="ux-carousel__wrapper">
+    <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled"></div>
+    <div class="ux-carousel__nav-right"></div>
+    <div class="ux-carousel__inner">
       <?php
         foreach ($signups as $index => $signup) {
           $title = isset($signup['title']) ? $signup['title'] : '';
@@ -15,7 +15,7 @@
           $copy = isset($signup['description']) ? $signup['description'] : '';
           $image_id = isset($signup['image_id']) ? $signup['image_id'] : false;
       ?>
-      <div class="products-bar__item">
+      <div class="products-bar__item ux-carousel__item">
         <a href="<?php echo $link; ?>" <?php if (!strpos($link, 'novaramedia.com/')) {echo 'target="_blank"';} ?> rel="nofollow">
           <div class="products-bar__item-inner">
             <div class="products-bar__item-image mr-2">
