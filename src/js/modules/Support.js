@@ -85,7 +85,9 @@ export class Support {
 
             _this.clearActiveButtonState($form, 'set-value');
 
-            $('.support-form__custom-input').removeClass('support-form__button--active');
+            $('.support-form__custom-input').removeClass(
+              'support-form__button--active',
+            );
 
             $button.addClass('support-form__button--active');
           }
