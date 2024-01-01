@@ -408,7 +408,7 @@ a
 // QUOTE
 
 .component-quote
-  margin-top: $margin-small
+  margin-top: 1rem
 
 .component-quote__image-holder
   position: absolute
@@ -418,6 +418,10 @@ a
   width: 50%
   max-height: 100%
   overflow: hidden
+
+@media screen and (max-width: $breakpoint-s)
+  .component-quote
+    margin-bottom: 2rem
 
 // ******************************************************
 
