@@ -5,8 +5,8 @@
   $image_id = !empty($args['image_id']) ? $args['image_id'] : false;
 ?>
 <div class="component-quote">
-  <h3 class="font-size-s-4 font-size-3"><?php echo $copy; ?></h3>
-  <h5 class="font-size-2 margin-top-small"><?php echo $attribution; ?></h5>
+  <h3 class="font-condensed fs-7"><?php echo $copy; ?></h3>
+  <h5 class="fs-5-sans mt-3"><?php echo $attribution; ?></h5>
   <?php
     if ($image_id) {
   ?>

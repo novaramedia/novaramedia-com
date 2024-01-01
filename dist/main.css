@@ -1442,7 +1442,7 @@ a {
   padding: 8px;
 }
 .component-quote {
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 .component-quote__image-holder {
   position: absolute;
@@ -1452,6 +1452,11 @@ a {
   width: 50%;
   max-height: 100%;
   overflow: hidden;
+}
+@media screen and (max-width: 759px) {
+  .component-quote {
+    margin-bottom: 2rem;
+  }
 }
 html {
   background-color: #fdfdfd;
@@ -4139,9 +4144,6 @@ html {
   .button {
     padding: 12px;
   }
-  .component-quote {
-    margin-top: 12px;
-  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
@@ -4881,9 +4883,6 @@ html {
   .button {
     padding: 12px;
   }
-  .component-quote {
-    margin-top: 12px;
-  }
   .inline-action-list li {
     margin-right: 12px;
   }
@@ -5619,9 +5618,6 @@ html {
   .button {
     padding: 12px;
   }
-  .component-quote {
-    margin-top: 12px;
-  }
   .inline-action-list li {
     display: inline-block;
     margin-right: 12px;
@@ -6333,10 +6329,6 @@ html {
   }
   .button {
     padding: 12px;
-  }
-  .component-quote {
-    margin-top: 12px;
-    margin-bottom: 42px;
   }
   .inline-action-list li {
     display: inline-block;
