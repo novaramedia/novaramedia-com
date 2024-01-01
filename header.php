@@ -45,12 +45,7 @@
                 <div class="site-header__scroll-reveal">
                   <span class="site-header__scroll-reveal-text text-overflow-ellipsis"><?php
                   if (is_single()) {
-                    $author = get_post_meta($post->ID, '_cmb_author', true);
-
-                    the_title();
-                    // if (!empty($author)) { // WOW FIX THIS!!!
-                    //   echo ' by ' . $author;
-                    // }
+                    the_title(); // this could also contain the byline but there isnt much space. a editorial-ish question
                   } else {
                     echo 'Novara Media';
                   }
