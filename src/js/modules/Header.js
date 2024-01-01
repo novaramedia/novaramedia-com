@@ -93,7 +93,10 @@ export class Header {
     const totalWidth = $('.col18').innerWidth();
     const navsWidth = $('#header-navs').innerWidth();
 
-    this.$headerSinglePostTitle.css('max-width', `${totalWidth - navsWidth - 10}px`);
+    this.$headerSinglePostTitle.css(
+      'max-width',
+      `${totalWidth - navsWidth - 10}px`
+    );
   }
 
   setScrollThreshold() {
