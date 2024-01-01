@@ -3,10 +3,7 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-  "extends": "eslint:recommended",
-  "rules": {
-    "semi": ["error", "always"]
-  },
+  "extends": ["eslint:recommended", "prettier"],
   "env": {
     "browser": true
   }
