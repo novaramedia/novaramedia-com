@@ -3344,10 +3344,7 @@ html {
   border-bottom: 2px solid #fdfdfd;
 }
 .site-header-search__submit {
-  margin: 1rem;
-}
-.site-header-search__submit .icon-search {
-  padding-left: 0.4rem;
+  margin: 1rem 0;
 }
 .error404 #header-search {
   display: block;

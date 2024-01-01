@@ -5,14 +5,11 @@
   <title><?php wp_title('|',true,'right'); bloginfo('name'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
-
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
   <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
-
   <?php
     get_template_part('partials/header/google-tag-manager');
     get_template_part('partials/header/seo');
@@ -27,8 +24,8 @@
 </head>
 <body <?php body_class(); ?>>
   <section id="main-container">
-    <header class="site-header margin-bottom-basic">
-      <div class="site-header__wrapper background-black font-color-white fs-4-sans fs-s-2">
+    <header class="site-header background-black mb-4">
+      <div class="site-header__wrapper font-color-white fs-4-sans fs-s-2">
         <div class="site-header__main container pt-2 pb-2">
           <div class="grid-row">
             <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
@@ -37,11 +34,9 @@
                 <li class="site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
             </nav>
-
             <div class="header-main__middle grid-item is-xxl-12 text-align-center">
               <a href="<?php echo home_url(); ?>">
                 <nav class="site-header__logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
-
                 <div class="site-header__scroll-reveal">
                   <span class="site-header__scroll-reveal-text text-overflow-ellipsis"><?php
                   if (is_single()) {
@@ -53,15 +48,13 @@
                 </div>
               </a>
             </div>
-
             <div class="grid-item is-xxl-6 text-align-right font-weight-bold">
               <a href="<?php echo home_url('support'); ?>" class="only-desktop">Support Us</a>
             </div>
           </div>
         </div>
       </div>
-
-      <nav class="site-header-nav background-black" role="navigation" aria-label="Sections">
+      <nav class="site-header-nav" role="navigation" aria-label="Sections">
         <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
@@ -115,9 +108,7 @@
           </div>
         </div>
       </nav>
-
       <section class="site-header-search" role="dialog" aria-label="Search">
         <?php get_search_form(); ?>
       </section>
-
     </header>
