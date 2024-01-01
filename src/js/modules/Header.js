@@ -7,13 +7,12 @@ export class Header {
   constructor() {
     const _this = this;
 
-    _this.showSinglePostTitle = false;
     _this.scrollPosition = 0;
-    _this.$menuToggle = $('#menu-toggle');
+    _this.$navToggle = $('.site-header__nav-toggle');
     _this.$headerNav = $('.site-header-nav');
-    _this.$searchToggle = $('#search-toggle');
-    _this.$headerSearch = $('#header-search');
-    _this.$searchInput = $('#search-input');
+    _this.$searchToggle = $('.site-header__search-toggle');
+    _this.$headerSearch = $('.site-header-search');
+    _this.$searchInput = $('.site-header-search__input');
   }
 
   onReady() {
@@ -26,44 +25,50 @@ export class Header {
   bind() {
     const _this = this;
 
-    _this.$menuToggle.click(function () {
+    _this.$navToggle.on('click', () => {
       _this.$headerNav.toggle();
 
       if (_this.$headerNav.is(':visible')) {
-        _this.$headerNav.find('a').first().focus(); // focus on first link for accessibility
+        _this.$headerNav.find('a').first().trigger('focus'); // focus on first link for accessibility
       }
 
       $(this).attr('aria-pressed', function (index, attr) {
         return attr === 'true' ? false : true;
       });
+
+      if (_this.$headerSearch.is(':visible')) {
+        _this.$headerSearch.hide();
+        _this.$searchToggle.attr('aria-pressed', false);
+      }
     });
 
-    _this.$searchToggle.click(function () {
+    _this.$searchToggle.on('click', () => {
       _this.$headerSearch.toggle();
 
       $(this).attr('aria-pressed', function (index, attr) {
         return attr === 'true' ? false : true;
       });
 
-      _this.$searchInput.focus();
+      _this.$searchInput.trigger('focus');
+
+      if (_this.$headerNav.is(':visible')) {
+        _this.$headerNav.hide();
+        _this.$navToggle.attr('aria-pressed', false);
+      }
     });
 
-    if (_this.showSinglePostTitle) {
-      $(window).on({
-        scroll: debounce(_this.handleScroll.bind(_this), 35),
-        resize: debounce(_this.handleResize.bind(_this), 25),
-      });
-    }
+    $(window).on({
+      scroll: debounce(_this.handleScroll.bind(_this), 35),
+      resize: debounce(_this.handleResize.bind(_this), 25),
+    });
   }
 
   initScrollReveal() {
-    this.showSinglePostTitle = true;
-
-    this.$headerSinglePostTitle = $('.site-header__scroll-reveal');
+    this.$scrollRevealWrapper = $('.site-header__scroll-reveal');
     this.$headerLogomark = $('.site-header__logomark');
+    this.isSingleArticle = $('.single-articles').length > 0;
 
     this.setScrollThreshold();
-    this.setSinglePostTitleWidth();
   }
 
   handleScroll() {
@@ -73,11 +78,11 @@ export class Header {
 
     if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
       // scroll is down
-      _this.$headerSinglePostTitle.css('opacity', 1);
+      _this.$scrollRevealWrapper.css('opacity', 1);
       _this.$headerLogomark.css('opacity', 0);
     } else {
       // scroll is up
-      _this.$headerSinglePostTitle.css('opacity', 0);
+      _this.$scrollRevealWrapper.css('opacity', 0);
       _this.$headerLogomark.css('opacity', 1);
     }
 
@@ -86,23 +91,10 @@ export class Header {
 
   handleResize() {
     this.setScrollThreshold();
-    this.setSinglePostTitleWidth();
-  }
-
-  setSinglePostTitleWidth() {
-    const totalWidth = $('.col18').innerWidth();
-    const navsWidth = $('#header-navs').innerWidth();
-
-    this.$headerSinglePostTitle.css(
-      'max-width',
-      `${totalWidth - navsWidth - 10}px`
-    );
   }
 
   setScrollThreshold() {
-    const $singleArticlesTitle = $('#single-articles-title');
-
-    if ($singleArticlesTitle.length) {
+    if (this.isSingleArticle) {
       this.scrollThreshold =
         $('#single-articles-title').offset().top +
         $('#single-articles-title').height();
