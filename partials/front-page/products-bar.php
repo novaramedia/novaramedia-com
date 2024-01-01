@@ -3,7 +3,7 @@
 
   if (!empty($signups)) {
 ?>
-<section class="front-page__products-bar ux-carousel container mt-4 mb-4 pb-4 ui-border-bottom">
+<section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4">
   <div class="ux-carousel__wrapper">
     <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled"></div>
     <div class="ux-carousel__nav-right"></div>
@@ -37,6 +37,7 @@
       ?>
     </div>
   </div>
+  <div class="ui-border-bottom pt-4"></div>
 </section>
 <?php
   }

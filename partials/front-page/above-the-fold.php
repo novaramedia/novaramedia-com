@@ -46,7 +46,7 @@ for ($i = 0; $i < 8; $i++) {
   }
 }
 ?>
-<section class="front-page__above-the-fold container mt-2 mb-6">
+<section class="front-page__above-the-fold container container--padded mt-2 mb-6">
   <div class="above-the-fold layout-grid">
     <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-5">
       <?php

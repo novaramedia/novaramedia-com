@@ -27,6 +27,10 @@ grid-maker($width = false, $gutter = false, $size = false, $cols = 24)
       width: $width
 
   if $gutter
+    .container--padded
+      padding-left: ( $gutter / 2 )
+      padding-right: ( $gutter / 2 )
+
     .grid-item
       padding-left: ( $gutter / 2 )
       padding-right: ( $gutter / 2 )

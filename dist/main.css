@@ -717,6 +717,10 @@ template {
 .grid-row-xxl--reverse {
   direction: column-reverse;
 }
+.container--padded {
+  padding-left: 16px;
+  padding-right: 16px;
+}
 .grid-item {
   padding-left: 16px;
   padding-right: 16px;
@@ -3384,14 +3388,23 @@ html {
   grid-column-end: span 5;
   text-align: right;
 }
+@media screen and (max-width: 910px) {
+  .front-page__submenu .layout-grid {
+    column-gap: 1rem;
+  }
+}
 @media screen and (max-width: 759px) {
+  .front-page__submenu .layout-grid {
+    column-gap: 0;
+  }
+  .front-page__submenu .submenu__nav {
+    -ms-grid-column-start: 1;
+    grid-column-start: 1;
+    grid-column-end: span 24;
+  }
   .submenu__date,
   .submenu__message {
     display: none;
-  }
-  .front-page__submenu,
-  .submenu__nav {
-    display: block;
   }
 }
 .front-page__products-bar .ux-carousel__nav-left {
@@ -3539,6 +3552,10 @@ html {
 @media screen and (max-width: 1408px) {
   .grid-row-xl--reverse {
     direction: column-reverse;
+  }
+  .container--padded {
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .grid-item {
     padding-left: 14px;
@@ -4278,6 +4295,10 @@ html {
   .grid-row-l--reverse {
     direction: column-reverse;
   }
+  .container--padded {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
   .grid-item {
     padding-left: 14px;
     padding-right: 14px;
@@ -5010,6 +5031,10 @@ html {
 @media screen and (max-width: 910px) {
   .grid-row-m--reverse {
     direction: column-reverse;
+  }
+  .container--padded {
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .grid-item {
     padding-left: 14px;
@@ -5748,6 +5773,10 @@ html {
 @media screen and (max-width: 759px) {
   .grid-row-s--reverse {
     direction: column-reverse;
+  }
+  .container--padded {
+    padding-left: 11px;
+    padding-right: 11px;
   }
   .grid-item {
     padding-left: 11px;
