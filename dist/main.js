@@ -319,7 +319,7 @@ class Header {
     _this.showSinglePostTitle = false;
     _this.scrollPosition = 0;
     _this.$menuToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#menu-toggle');
-    _this.$headerSub = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#header-sub');
+    _this.$headerNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-nav');
     _this.$searchToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-toggle');
     _this.$headerSearch = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#header-search');
     _this.$searchInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-input');
@@ -332,9 +332,9 @@ class Header {
   bind() {
     const _this = this;
     _this.$menuToggle.click(function () {
-      _this.$headerSub.toggle();
-      if (_this.$headerSub.is(':visible')) {
-        _this.$headerSub.find('a').first().focus(); // focus on first link for accessibility
+      _this.$headerNav.toggle();
+      if (_this.$headerNav.is(':visible')) {
+        _this.$headerNav.find('a').first().focus(); // focus on first link for accessibility
       }
 
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {

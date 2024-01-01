@@ -71,16 +71,51 @@ html
 
 // ******************************************************
 
-// *** UNREFACTORED FROM HERE
-
 // SITE NAV
 
-#header-sub
+.site-header-nav
   display: none
-  a
-    font-size: 1.5rem
-    line-height: 1.6
-    padding-right: .66rem
+
+@media screen and (max-width: $breakpoint-m)
+
+  .site-header-nav
+    max-height: 80vh
+    overflow-y: auto
+
+
+// *** UNREFACTORED FROM HERE
+
+@media screen and (max-width: $breakpoint-m)
+  // SEARCH
+
+  #search-form
+    border: $border-width solid $color-white-soft
+
+  #search-input, #search-submit
+    font-size: $font-size-h3
+
+  #search-input
+    width: 70%
+
+  #search-submit
+    width: 8%
+    min-width: 25px
+
+@media screen and (max-width: $breakpoint-s)
+  // SEARCH
+
+  #search-form
+    border: $border-width solid $color-white-soft
+
+  #search-input, #search-submit
+    font-size: $font-size-h3
+
+  #search-input
+    width: 70%
+
+  #search-submit
+    width: 8%
+    min-width: 25px
 
 // SEARCH
 

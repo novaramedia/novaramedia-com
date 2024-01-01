@@ -10,7 +10,7 @@ export class Header {
     _this.showSinglePostTitle = false;
     _this.scrollPosition = 0;
     _this.$menuToggle = $('#menu-toggle');
-    _this.$headerSub = $('#header-sub');
+    _this.$headerNav = $('.site-header-nav');
     _this.$searchToggle = $('#search-toggle');
     _this.$headerSearch = $('#header-search');
     _this.$searchInput = $('#search-input');
@@ -27,10 +27,10 @@ export class Header {
     const _this = this;
 
     _this.$menuToggle.click(function () {
-      _this.$headerSub.toggle();
+      _this.$headerNav.toggle();
 
-      if (_this.$headerSub.is(':visible')) {
-        _this.$headerSub.find('a').first().focus(); // focus on first link for accessibility
+      if (_this.$headerNav.is(':visible')) {
+        _this.$headerNav.find('a').first().focus(); // focus on first link for accessibility
       }
 
       $(this).attr('aria-pressed', function (index, attr) {

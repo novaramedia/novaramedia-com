@@ -3317,13 +3317,46 @@ html {
     width: 23px;
   }
 }
-#header-sub {
+.site-header-nav {
   display: none;
 }
-#header-sub a {
-  font-size: 1.5rem;
-  line-height: 1.6;
-  padding-right: 0.66rem;
+@media screen and (max-width: 910px) {
+  .site-header-nav {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+@media screen and (max-width: 910px) {
+  #search-form {
+    border: 2px solid #fdfdfd;
+  }
+  #search-input,
+  #search-submit {
+    font-size: 1.400505962399693rem;
+  }
+  #search-input {
+    width: 70%;
+  }
+  #search-submit {
+    width: 8%;
+    min-width: 25px;
+  }
+}
+@media screen and (max-width: 759px) {
+  #search-form {
+    border: 2px solid #fdfdfd;
+  }
+  #search-input,
+  #search-submit {
+    font-size: 1.400505962399693rem;
+  }
+  #search-input {
+    width: 70%;
+  }
+  #search-submit {
+    width: 8%;
+    min-width: 25px;
+  }
 }
 #header-search {
   display: none;
@@ -5745,29 +5778,6 @@ html {
   .padding-bottom-large {
     padding-bottom: 60px;
   }
-  #header-sub {
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  #header-sub a {
-    font-size: 2rem;
-    padding: 0.33rem 1rem;
-    display: block;
-  }
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.334710602476894rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
-  }
   .support-form-holder {
     min-height: 5rem;
     padding: 12px;
@@ -6563,26 +6573,6 @@ html {
   }
   .mobile-padding-bottom-large {
     padding-bottom: 60px;
-  }
-  #header-sub {
-    display: none;
-  }
-  #header-sub .col {
-    margin-bottom: 6px;
-  }
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.272006289292628rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
   }
   .email-signup__email-input {
     margin-bottom: 12px;

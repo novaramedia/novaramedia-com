@@ -61,10 +61,11 @@
         </div>
       </div>
 
-      <nav id="header-sub" class="background-black" role="navigation" aria-label="Sections">
-        <div class="container font-color-white pt-3 pb-3">
-          <div class="flex-grid-row">
-            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+      <nav class="site-header-nav background-black" role="navigation" aria-label="Sections">
+        <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3">
+          <div class="grid-row">
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>
               <ul class="font-weight-bold mb-3">
                 <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
@@ -75,7 +76,7 @@
                 <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
               </ul>
             </div>
-            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Shows</h6>
               <?php
                 wp_nav_menu(
@@ -87,7 +88,7 @@
                 );
               ?>
             </div>
-            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Series</h6>
               <?php
                 wp_nav_menu(
@@ -99,7 +100,7 @@
                 );
               ?>
             </div>
-            <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Articles</h6>
               <?php
                 wp_nav_menu(
