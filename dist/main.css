@@ -2328,6 +2328,9 @@ b {
 .font-larger {
   font-size: 1.3rem;
 }
+.text-paragraph-breaks p {
+  margin-bottom: 1em;
+}
 @media screen and (max-width: 759px) {
   .fs-s-1 {
     font-size: 0.5625rem;
