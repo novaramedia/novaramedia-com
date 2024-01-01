@@ -19,13 +19,7 @@ export class Header {
   onReady() {
     const _this = this;
 
-    if (
-      $('body').hasClass('single') &&
-      $('body').hasClass('category-articles')
-    ) {
-      _this.initSinglePostTitle();
-    }
-
+    _this.initScrollReveal();
     _this.bind();
   }
 
@@ -62,11 +56,11 @@ export class Header {
     }
   }
 
-  initSinglePostTitle() {
+  initScrollReveal() {
     this.showSinglePostTitle = true;
 
-    this.$headerSinglePostTitle = $('#header-main__page-title');
-    this.$headerLogotype = $('#header-main__logotype');
+    this.$headerSinglePostTitle = $('.site-header__scroll-reveal');
+    this.$headerLogomark = $('.site-header__logomark');
 
     this.setScrollThreshold();
     this.setSinglePostTitleWidth();
@@ -80,11 +74,11 @@ export class Header {
     if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
       // scroll is down
       _this.$headerSinglePostTitle.css('opacity', 1);
-      _this.$headerLogotype.css('opacity', 0);
+      _this.$headerLogomark.css('opacity', 0);
     } else {
       // scroll is up
       _this.$headerSinglePostTitle.css('opacity', 0);
-      _this.$headerLogotype.css('opacity', 1);
+      _this.$headerLogomark.css('opacity', 1);
     }
 
     _this.scrollPosition = scrollTop;
@@ -106,8 +100,14 @@ export class Header {
   }
 
   setScrollThreshold() {
-    this.scrollThreshold =
-      $('#single-articles-title').offset().top +
-      $('#single-articles-title').height();
+    const $singleArticlesTitle = $('#single-articles-title');
+
+    if ($singleArticlesTitle.length) {
+      this.scrollThreshold =
+        $('#single-articles-title').offset().top +
+        $('#single-articles-title').height();
+    } else {
+      this.scrollThreshold = 150;
+    }
   }
 }

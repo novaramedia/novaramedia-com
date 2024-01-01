@@ -566,106 +566,6 @@ img
 
 // ******************************************************
 
-// HEADER
-
-$header-height = 46px
-
-#header
-  position: fixed
-  width: 100%
-  z-index: 1000
-
-#main-content
-  padding-top: $header-height
-  min-height: 55vh
-
-#header-main-wrapper
-  height: $header-height
-  overflow: hidden
-  background-color: black
-
-#header-main
-  padding-top: 12px
-  padding-bottom: 10px
-
-#header-navs
-  vertical-align: middle
-
-.header-menu
-  li
-    padding-right: $margin-tiny
-
-#menu-logomark
-  svg
-    height: 19px
-    width: 23px
-
-.header-main__logomark
-  position: relative
-
-.header-main__middle
-  position: relative
-
-#header-main__logotype
-  transition: opacity $basic-animation-speed
-  svg
-    height: 16px
-    width: 100%
-    vertical-align: text-bottom
-
-#header-main__page-title
-  opacity: 0
-  transition: opacity $basic-animation-speed
-  position: absolute
-  left: 0
-  top: 0
-  width: 100%
-
-#header-sub
-  display: none
-  a
-    font-size: 1.5rem
-    line-height: 1.6
-    padding-right: .66rem
-
-// SEARCH
-
-#header-search
-  display: none
-
-#search-form
-  border: $border-width solid $color-white-soft
-
-#search-input, #search-submit
-  font-size: $font-size-h3
-  border: 0
-  &:focus
-    outline: 0
-
-#search-input
-  float: left
-  width: 70%
-  background-color: transparent
-  color: $color-white-soft
-
-#search-submit
-  width: 8%
-  min-width: 25px
-  float right
-
-#tag-suggestions
-  display: none
-
-// ******************************************************
-
-// 404
-
-.error404
-  #header-search
-    display: block
-
-// ******************************************************
-
 // FORM ELEMENTS
 
 nmButton()
@@ -1158,6 +1058,8 @@ nmButton()
 @import "modules/carousel"
 
 // LAYOUTS
+
+@import "layouts/header"
 
 @import "layouts/header-submenu"
 @import "layouts/products-bar"

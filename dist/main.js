@@ -326,9 +326,7 @@ class Header {
   }
   onReady() {
     const _this = this;
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').hasClass('single') && jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').hasClass('category-articles')) {
-      _this.initSinglePostTitle();
-    }
+    _this.initScrollReveal();
     _this.bind();
   }
   bind() {
@@ -357,10 +355,10 @@ class Header {
       });
     }
   }
-  initSinglePostTitle() {
+  initScrollReveal() {
     this.showSinglePostTitle = true;
-    this.$headerSinglePostTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#header-main__page-title');
-    this.$headerLogotype = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#header-main__logotype');
+    this.$headerSinglePostTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__scroll-reveal');
+    this.$headerLogomark = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__logomark');
     this.setScrollThreshold();
     this.setSinglePostTitleWidth();
   }
@@ -370,11 +368,11 @@ class Header {
     if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
       // scroll is down
       _this.$headerSinglePostTitle.css('opacity', 1);
-      _this.$headerLogotype.css('opacity', 0);
+      _this.$headerLogomark.css('opacity', 0);
     } else {
       // scroll is up
       _this.$headerSinglePostTitle.css('opacity', 0);
-      _this.$headerLogotype.css('opacity', 1);
+      _this.$headerLogomark.css('opacity', 1);
     }
     _this.scrollPosition = scrollTop;
   }
@@ -388,7 +386,12 @@ class Header {
     this.$headerSinglePostTitle.css('max-width', `${totalWidth - navsWidth - 10}px`);
   }
   setScrollThreshold() {
-    this.scrollThreshold = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').offset().top + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').height();
+    const $singleArticlesTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title');
+    if ($singleArticlesTitle.length) {
+      this.scrollThreshold = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').offset().top + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').height();
+    } else {
+      this.scrollThreshold = 150;
+    }
   }
 }
 
