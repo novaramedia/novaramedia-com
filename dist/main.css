@@ -3346,9 +3346,6 @@ html {
 .site-header-search__submit {
   margin: 1rem 0;
 }
-.error404 #header-search {
-  display: block;
-}
 .submenu__date {
   -ms-grid-column-start: 1;
   grid-column-start: 1;
