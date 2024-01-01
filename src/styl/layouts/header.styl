@@ -71,49 +71,34 @@ html
 
 // ******************************************************
 
-// *** UNREFACTORED FROM HERE
-
 // SITE NAV
 
-#header-sub
-  display: none
-  a
-    font-size: 1.5rem
-    line-height: 1.6
-    padding-right: .66rem
-
-// SEARCH
-
-#header-search
+.site-header-nav
   display: none
 
-#search-form
-  border: $border-width solid $color-white-soft
+@media screen and (max-width: $breakpoint-m)
 
-#search-input, #search-submit
-  font-size: $font-size-h3
-  border: 0
-  &:focus
-    outline: 0
-
-#search-input
-  float: left
-  width: 70%
-  background-color: transparent
-  color: $color-white-soft
-
-#search-submit
-  width: 8%
-  min-width: 25px
-  float right
-
-#tag-suggestions
-  display: none
+  .site-header-nav
+    max-height: 80vh
+    overflow-y: auto
 
 // ******************************************************
 
-// 404
+// SEARCH
 
-.error404
-  #header-search
-    display: block
+.site-header-search
+  display: none
+
+.site-header-search__input, .site-header-search__submit
+  border: 0
+  width: 100%
+  &:focus
+    outline: 0
+
+.site-header-search__input
+  background-color: transparent
+  padding: 1rem 1rem 1rem 0
+  border-bottom: $border-width solid $color-white-soft
+
+.site-header-search__submit
+  margin: 1rem 0

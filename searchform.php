@@ -1,13 +1,18 @@
-<div class="background-black padding-top-basic padding-bottom-basic">
+<div class="pt-4 pb-5 fs-5-sans">
   <div class="container">
-    <div class="row">
-      <div class="col col24">
-        <form role="search" method="get" id="search-form" class="padding-small u-cf" action="<?php echo site_url(); ?>" autocomplete="off">
-          <label for="search-input" class="u-visuallyhidden">Search this site</label>
-          <input id="search-input" class="font-italic padding-tiny" type="text" value="" name="s" required aria-required="true">
-          <button type="submit" id="search-submit" class="padding-tiny background-white font-color-black" role="button" aria-label="Submit Search"><i class="icon-search"></i></button>
-        </form>
+    <form role="search" method="get" id="search-form" class="site-header-search__form" action="<?php echo site_url(); ?>" autocomplete="off">
+      <div class="grid-row">
+        <div class="grid-item is-xxl-24 u-visuallyhidden">
+          <label for="search-input">Search this site</label>
+        </div>
+
+        <div class="grid-item is-s-20 is-xxl-22">
+          <input id="search-input" class="site-header-search__input font-color-white" type="text" placeholder="Search" value="" name="s" required aria-required="true">
+        </div>
+        <div class="grid-item is-s-4 is-xxl-2">
+          <button type="submit" id="search-submit" class="site-header-search__submit nm-button" role="button" aria-label="Submit Search"><i class="icon-search"></i></button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
