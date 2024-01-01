@@ -3326,66 +3326,28 @@ html {
     overflow-y: auto;
   }
 }
-@media screen and (max-width: 910px) {
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.400505962399693rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
-  }
-}
-@media screen and (max-width: 759px) {
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.400505962399693rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
-  }
-}
-#header-search {
+.site-header-search {
   display: none;
 }
-#search-form {
-  border: 2px solid #fdfdfd;
-}
-#search-input,
-#search-submit {
-  font-size: 1.400505962399693rem;
+.site-header-search__input,
+.site-header-search__submit {
   border: 0;
+  width: 100%;
 }
-#search-input:focus,
-#search-submit:focus {
+.site-header-search__input:focus,
+.site-header-search__submit:focus {
   outline: 0;
 }
-#search-input {
-  float: left;
-  width: 70%;
+.site-header-search__input {
   background-color: transparent;
-  color: #fdfdfd;
+  padding: 1rem 1rem 1rem 0;
+  border-bottom: 2px solid #fdfdfd;
 }
-#search-submit {
-  width: 8%;
-  min-width: 25px;
-  float: right;
+.site-header-search__submit {
+  margin: 1rem;
 }
-#tag-suggestions {
-  display: none;
+.site-header-search__submit .icon-search {
+  padding-left: 0.4rem;
 }
 .error404 #header-search {
   display: block;
@@ -4278,20 +4240,6 @@ html {
   .padding-bottom-large {
     padding-bottom: 60px;
   }
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.400505962399693rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
-  }
   .support-form-holder {
     min-height: 5rem;
     padding: 12px;
@@ -5028,20 +4976,6 @@ html {
   }
   .padding-bottom-large {
     padding-bottom: 60px;
-  }
-  #search-form {
-    border: 2px solid #fdfdfd;
-  }
-  #search-input,
-  #search-submit {
-    font-size: 1.400505962399693rem;
-  }
-  #search-input {
-    width: 70%;
-  }
-  #search-submit {
-    width: 8%;
-    min-width: 25px;
   }
   .support-form-holder {
     min-height: 5rem;

@@ -82,68 +82,35 @@ html
     max-height: 80vh
     overflow-y: auto
 
-
-// *** UNREFACTORED FROM HERE
-
-@media screen and (max-width: $breakpoint-m)
-  // SEARCH
-
-  #search-form
-    border: $border-width solid $color-white-soft
-
-  #search-input, #search-submit
-    font-size: $font-size-h3
-
-  #search-input
-    width: 70%
-
-  #search-submit
-    width: 8%
-    min-width: 25px
-
-@media screen and (max-width: $breakpoint-s)
-  // SEARCH
-
-  #search-form
-    border: $border-width solid $color-white-soft
-
-  #search-input, #search-submit
-    font-size: $font-size-h3
-
-  #search-input
-    width: 70%
-
-  #search-submit
-    width: 8%
-    min-width: 25px
+// ******************************************************
 
 // SEARCH
 
-#header-search
+.site-header-search
   display: none
 
-#search-form
-  border: $border-width solid $color-white-soft
-
-#search-input, #search-submit
-  font-size: $font-size-h3
+.site-header-search__input, .site-header-search__submit
   border: 0
+  width: 100%
   &:focus
     outline: 0
 
-#search-input
-  float: left
-  width: 70%
+.site-header-search__input
   background-color: transparent
-  color: $color-white-soft
+  padding: 1rem 1rem 1rem 0
+  border-bottom: $border-width solid $color-white-soft
 
-#search-submit
-  width: 8%
-  min-width: 25px
-  float right
+.site-header-search__submit
+  margin: 1rem
+  .icon-search
+    padding-left: .4rem // temporary fix for icon alignment
 
-#tag-suggestions
-  display: none
+//@media screen and (max-width: $breakpoint-m)
+
+
+//@media screen and (max-width: $breakpoint-s)
+
+// *** UNREFACTORED FROM HERE
 
 // ******************************************************
 
