@@ -17,35 +17,37 @@
   min-width: 0
   min-height: 0
 
-flex-grid-maker($width = false, $gutter = false, $size = false, $cols = 12)
+flex-grid-maker($size = false, $cols = 12)
 
   .flex-grid-row-{$size}--reverse
     flex-direction: column-reverse
 
-  if $width
-    .container
-      width: $width
+  // stylus doesnt play well with calc so just go literal
+  @css {
+    .flex-grid-item {
+      padding-left: calc(var(--grid-gutter) / 2);
+      padding-right: calc(var(--grid-gutter) / 2);
+    }
 
-  if $gutter
-    .flex-grid-item
-      padding-left: ( $gutter / 2 )
-      padding-right: ( $gutter / 2 )
+    .flex-grid-item--tight {
+      padding-left: calc(var(--grid-gutter) / 4);
+      padding-right: calc(var(--grid-gutter) / 4);
+    }
 
-    .flex-grid-item--tight
-      padding-left: ( $gutter / 4 )
-      padding-right: ( $gutter / 4 )
+    .flex-grid--nested {
+      margin-left: calc(var(--grid-gutter) / 2 * -1);
+      margin-right: calc(var(--grid-gutter) / 2 * -1);
+    }
 
-    .flex-grid--nested
-      margin-left: -( $gutter / 2 )
-      margin-right: -( $gutter / 2 )
-
-    .flex-grid--nested-tight
-      margin-left: -( $gutter / 4 )
-      margin-right: -( $gutter / 4 )
+    .flex-grid--nested-tight {
+      margin-left: calc(var(--grid-gutter) / 4 * -1);
+      margin-right: calc(var(--grid-gutter) / 4 * -1);
+    }
+  }
 
   // COLUMN SIZES & OFFSETS
 
-  if $gutter and $size
+  if $size
 
     for offset in 0..($cols - 1)
       .flex-grid-row
