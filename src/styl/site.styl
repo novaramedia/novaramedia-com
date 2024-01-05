@@ -32,10 +32,14 @@ normalize()
 
 $cols = 24
 $col = 42px
+
 $gutter = 16px
 
-flex-grid-maker(false, $gutter, 'xxl')
-grid-maker(false, 32px, 'xxl')
+html
+  --grid-gutter: 1rem
+
+flex-grid-maker('xxl')
+grid-maker('xxl')
 
 .container
   margin: 0 auto
@@ -149,6 +153,7 @@ $font-sans = font-stack('Helvetica Neue')
 $breakpoint-s = 759px
 $breakpoint-m = 910px
 $breakpoint-l = 1104px
+$breakpoint-xl = 1408px
 
 html
   --color-green: $color-green
@@ -1077,22 +1082,35 @@ nmButton()
 
 // MEDIA QUERIES
 
-@media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
-  grid-maker(false, 28px, 'xl')
+@media screen and (max-width: $breakpoint-xl)
+  .container
+    width: 1056px
+
+  grid-maker('xl')
 
   @import "responsive/xl"
 
 @media screen and (max-width: $breakpoint-l)
-  grid-maker(false, 28px, 'l')
+  .container
+    width: 888px
+
+  grid-maker('l')
 
   @import "responsive/l"
 
 @media screen and (max-width: $breakpoint-m)
-  grid-maker(false, 28px, 'm')
+  .container
+    width: 744px
+
+  grid-maker('m')
 
   @import "responsive/m"
 
 @media screen and (max-width: $breakpoint-s)
-  grid-maker(false, 22px, 's')
+  .container
+    width: 96%
+    max-width: 460px
+
+  grid-maker('s')
 
   @import "responsive/s"

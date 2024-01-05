@@ -3,9 +3,6 @@
 $col = 32px
 $gutter = 12px
 
-.container
-  width: ($col * $cols)+($gutter * $cols)
-
 .col
   margin-left: ($gutter/2)
   margin-right: ($gutter/2)
@@ -14,7 +11,7 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-flex-grid-maker(false, $gutter, 'xl')
+flex-grid-maker('xl')
 
 // ******************************************************
 
