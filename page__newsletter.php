@@ -26,7 +26,7 @@ if( have_posts() ) {
       <div class="container padding-top-small padding-bottom-large">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-xxl-12">
-            <h4>Newsletter</h4>
+            <h4 class="fs-3-sans font-uppercase font-bold">Newsletter</h4>
             <h1 class="<?php
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
             ?> margin-top-basic"><?php the_title(); ?></h1>

@@ -9,13 +9,13 @@ if( have_posts() ) {
     the_post();
     $meta = get_post_meta($post->ID);
 ?>
-  <article id="page" class="container margin-top-small margin-bottom-large">
+  <article id="page" class="container mt-4 margin-bottom-large">
     <?php
       if (!empty($meta['_nm_subtitle'][0])) {
     ?>
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-offset-xxl-12">
-        <h4 class="font-size-1"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
+        <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
       </div>
     </div>
     <?php } ?>

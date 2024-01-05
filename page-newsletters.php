@@ -1,11 +1,7 @@
 <?php
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -13,19 +9,18 @@ if( have_posts() ) {
     $meta = get_post_meta($post->ID);
 ?>
   <article id="page">
-    <div class="container margin-top-small margin-bottom-basic">
-      <div class="flex-grid-row margin-bottom-basic">
+    <div class="container mt-4 mb-4">
+      <div class="flex-grid-row mb-4">
         <div class="flex-grid-item flex-item-xxl-12">
           <h4><?php the_title(); ?></h4>
         </div>
       </div>
-      <div class="flex-grid-row margin-bottom-basic">
+      <div class="flex-grid-row mb-4">
         <div class="flex-grid-item flex-item-xxl-12 page-copy">
           <?php the_content(); ?>
         </div>
       </div>
     </div>
-
     <?php
       $child_pages_wp_query = new WP_Query();
       $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page'));
@@ -53,19 +48,14 @@ if( have_posts() ) {
         }
       }
     ?>
-  <!-- end post -->
   </article>
 <?php
   }
 } ?>
-<!-- end main-content -->
-
 <?php
   get_template_part('partials/support-section');
 ?>
-
 </main>
-
 <?php
 get_footer();
 ?>

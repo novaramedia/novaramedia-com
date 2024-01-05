@@ -1254,6 +1254,10 @@ article ol li {
 .page-copy .oembed-element {
   margin: 2rem auto !important;
 }
+.text-copy p,
+.page-copy p {
+  margin-bottom: 1rem;
+}
 .text-copy blockquote,
 .page-copy blockquote {
   font-family: 'Helvetica Neue';
