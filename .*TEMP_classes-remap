@@ -10,6 +10,17 @@ mb-5
 margin-bottom-large
 mb-6
 
+margin-bottom-micro
+mb-2
+
+margin-bottom-tiny
+mb-3
+
+// PADDING
+
+padding-top-small
+pt-4
+
 // OLD GRID
 
 row
@@ -26,4 +37,5 @@ etc
 // MISC ELEMENTs
 
 H4
-fs-3-sans font-uppercase font-bold [probably]
+fs-3-sans font-uppercase font-bold
+[probably]
