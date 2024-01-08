@@ -6,18 +6,18 @@
     $url = get_term_link($term);
     if ($url) {
 ?>
-<div class="**banner**name**__container padding-top-basic padding-bottom-basic">
+<div class="**banner**name**__container pt-4 pb-4">
   <style type="text/css">
     .**banner**name**__container {
       overflow: hidden;
       position: relative;
       background-color: #EBB800;
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/**banner**name**-banner-background.svg'; ?>);
+      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/**banner**name**-banner-background.svg'; ?>); // should use webp and avif and fallback
       background-size: cover;
       background-position: bottom;
     }
 
-    @media screen and (max-width: 1336px) {
+    @media screen and (max-width: 1336px) { // maybe this should be a css variable?
 
     }
 
@@ -36,19 +36,19 @@
   </style>
 
   <div class="container">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
         <a href="<?php echo $url; ?>"><h4>Focus</h4></a>
       </div>
     </div>
-    <div class="flex-grid-row padding-bottom-small">
-      <div class="flex-grid-item flex-item-s-12 flex-item-m-4 flex-item-xxl-5 mobile-margin-bottom-small">
+    <div class="grid-row pb-4">
+      <div class="grid-item is-xxl-24 is-m-8 is-xxl-10 mb-s-3">
         <a href="<?php echo $url; ?>">
-          <h3 class="font-size-3">Title Text Here or SVG asset</h3>
+          <h3 class="fs-6">Title Text Here or SVG asset</h3>
         </a>
       </div>
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-m-1 flex-item-m-7 flex-offset-xxl-1 flex-item-xxl-6">
-        <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">Strapline here</p></a>
+      <div class="grid-item is-xxl-24 is-m-8 is-xxl-10">
+        <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold">Strapline here</p></a>
         <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">CTA Button</a>
       </div>
     </div>
