@@ -18,19 +18,18 @@
   }
 ?>
 
-<header class="flex-grid-row margin-bottom-small">
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
-    <h1 class="js-fix-widows"><?php the_title(); ?></h1>
-    <?php the_post_thumbnail('col4', ['class' => 'margin-top-small only-desktop']); ?>
+<header class="grid-row mb-4">
+  <div class="grid-item is-s-24 is-m-10 is-xxl-12">
+    <h1 class="fs-8 js-fix-widows"><?php the_title(); ?></h1>
+    <?php the_post_thumbnail('col4', ['class' => 'mt-4 only-desktop']); ?>
   </div>
-
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6 text-copy padding-top-micro">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
     <?php the_content(); ?>
   </div>
 </header>
 
-<div class="flex-grid-row margin-bottom-basic font-smaller">
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
+<div class="grid-row mb-4 fs-3-sans">
+  <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-2">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
@@ -41,12 +40,12 @@
       <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<li><a class="font-smaller" href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
+        echo '<li><a href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
       }
     ?>
     </ul>
   </div>
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
       <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
       <li><?php render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
@@ -62,8 +61,8 @@
   }
 ?>
 
-<div class="flex-grid-row <?php if (empty($transcript)) { echo 'margin-bottom-large'; } else { echo 'margin-bottom-basic'; } ?>">
-  <div class="flex-grid-item flex-item-xxl-12">
+<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>">
+  <div class="grid-item is-xxl-24">
     <?php
       if (!empty($meta['_cmb_sc'][0])) {
     ?>
@@ -72,7 +71,7 @@
       <?php
         if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
       ?>
-        <div class="font-mono font-smaller margin-top-micro">
+        <div class="font-mono font-smaller mt-1">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
@@ -87,13 +86,13 @@
 <?php
   if (!empty($transcript)) {
 ?>
-<div class="flex-grid-row margin-bottom-large">
-  <div class="flex-grid-item flex-item-xxl-12 margin-bottom-small">
+<div class="grid-row mb-6">
+  <div class="grid-item is-xxl-24 mb-4">
     <h4>Transcript</h4>
   </div>
 
-  <div class="flex-grid-item flex-item-m-12 flex-item-xxl-9">
-    <div class="text-copy margin-bottom-basic">
+  <div class="grid-item is-m-24 is-xxl-18">
+    <div class="text-copy mb-4">
       <?php echo apply_filters('the_content', $transcript); ?>
     </div>
   </div>

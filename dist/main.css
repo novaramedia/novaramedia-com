@@ -6672,30 +6672,6 @@ html {
   #single-related .post {
     margin-bottom: 24px;
   }
-  #single-video-related-video-holder {
-    margin-top: 24px;
-  }
-  #single-video-related-video:before,
-  #single-video-related-video:after {
-    content: " ";
-    display: table;
-  }
-  #single-video-related-video:after {
-    clear: both;
-  }
-  .single-video-related-video {
-    width: 50%;
-    float: left;
-  }
-  .single-video-related-video:nth-child(odd) {
-    padding-right: 3px;
-  }
-  .single-video-related-video:nth-child(even) {
-    padding-left: 3px;
-  }
-  .single-video-related-video:nth-child(3) {
-    display: none;
-  }
   .support-page__hero-wrapper {
     padding: 42px 0;
   }

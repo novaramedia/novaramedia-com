@@ -8,19 +8,16 @@
     $share_url = get_the_permalink($post->ID);
   }
 ?>
-
-<header class="flex-grid-row margin-bottom-small">
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
-    <h1 class="js-fix-widows"><?php the_title(); ?></h1>
+<header class="grid-row mb-4">
+  <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-4">
+    <h1 class="fs-8"><?php the_title(); ?></h1>
   </div>
-
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6 text-copy padding-top-micro">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1">
     <?php the_content(); ?>
   </div>
 </header>
-
-<div class="flex-grid-row margin-bottom-basic font-smaller">
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-5 flex-item-xxl-6">
+<div class="grid-row mb-4 fs-3-sans">
+  <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-3">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
       <?php
@@ -30,7 +27,7 @@
       ?>
     </ul>
   </div>
-  <div class="flex-grid-item flex-item-s-12 flex-item-m-7 flex-item-xxl-6">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
       <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet video'); ?></li>
       <li><?php render_facebook_share_link($share_url, 'Share this video on Facebook'); ?></li>
@@ -39,15 +36,13 @@
     </ul>
   </div>
 </div>
-
 <?php
   if (!empty($resources)) {
     render_resources_row($resources);
   }
 ?>
-
-<div class="flex-grid-row margin-bottom-large">
-  <div class="flex-grid-item flex-item-s-12 flex-item-xxl-10">
+<div class="grid-row mb-6">
+  <div class="grid-item is-s-24 is-xxl-20 mb-4">
     <?php
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
@@ -58,7 +53,7 @@
         }
     ?>
       <div class="u-video-embed-container">
-        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0], $autoplay); ?>" allow="autoplay" allowfullscreen></iframe>
+        <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0], $autoplay); ?>" frameborder="0" allowfullscreen></iframe>
       </div>
     <?php
       } else {
@@ -66,23 +61,26 @@
       }
     ?>
   </div>
-  <div id="single-video-related-video-holder" class="flex-grid-item flex-item-s-12 flex-item-xxl-2">
-    <div id="single-video-related-video" class="font-smaller">
+  <div class="grid-item is-s-24 is-xxl-4">
+    <div class="grid-row grid--nested fs-3-sans">
       <?php
         $related_video = get_related_posts(null, 'Video', 3);
 
         if ($related_video->have_posts()) {
-      ?>
-      <h4 class="margin-bottom-small"><a href="<?php echo get_category_link(get_the_top_level_category($post->ID)); ?>">More Video</a></h4>
-      <?php
           while ($related_video->have_posts()) {
             $related_video->the_post();
       ?>
-      <div class="single-video-related-video margin-bottom-small">
+      <div class="grid-item is-s-8 is-xxl-24 mb-3">
         <a href="<?php the_permalink(); ?>">
-         <?php the_post_thumbnail('col4-16to9', array('class' => 'only-desktop')); ?>
-         <?php the_post_thumbnail('col6-16to9', array('class' => 'only-mobile')); ?>
-          <h6 class="js-fix-widows margin-top-micro"><?php the_title(); ?></h6>
+          <div class="layout-thumbnail-frame">
+            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+              <?php render_post_ui_tags($post->ID, false, true, true); ?>
+            </div>
+            <?php render_thumbnail($post->ID, 'col24-16to9', array(
+              'class' => 'ui-rounded-image'
+            )); ?>
+          </div>
+          <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
         </a>
       </div>
       <?php
@@ -91,8 +89,6 @@
         wp_reset_postdata();
       ?>
     </div>
-
     <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe on YouTube</a>
-
   </div>
 </div>
