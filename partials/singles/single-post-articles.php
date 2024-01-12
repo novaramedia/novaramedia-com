@@ -11,14 +11,11 @@
   } else {
     $share_url = get_the_permalink($post->ID);
   }
-?>
 
-<?php
   get_template_part('partials/singles/articles/articles-header-' . $layout);
 ?>
-
-<div class="flex-grid-row margin-top-mid margin-bottom-basic">
-  <div class="flex-grid-item only-desktop flex-item-m-12 flex-item-l-12 flex-item-xl-2 flex-item-xxl-2 margin-bottom-basic">
+<div class="grid-row mt-5 mb-6">
+  <div class="grid-item only-desktop is-m-24 is-l-24 is-xxl-4 mb-4">
     <?php
       if ($articles_support_box_text || $support_box_override_text) {
     ?>
@@ -37,23 +34,20 @@
       }
     ?>
   </div>
-
-  <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-10 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
-
+  <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-3 is-xl-16 offset-xl-0 is-xxl-12 offset-xxl-2">
 <?php
   if (!empty($meta['_cmb_sc'][0])) {
 ?>
-    <div class="text-copy margin-bottom-basic">
+    <div class="text-copy mb-4">
       <p class="font-smaller">Listen to this article as audio:</p>
       <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
     </div>
 <?php
   }
 ?>
-    <div id="single-articles-copy" class="text-copy margin-bottom-basic">
+    <div id="single-articles-copy" class="text-copy mb-4">
       <?php the_content(); ?>
     </div>
-
 <?php
 /*
     Get contributors metadata and if set display in italics in a div below the main content.
@@ -63,7 +57,7 @@
 
     if ($contributors_posts_array) {
 ?>
-    <div class="text-copy font-italic margin-bottom-basic">
+    <div class="text-copy font-italic mb-4">
 <?php
       foreach ($contributors_posts_array as $contributor) {
         $bio = get_post_meta($contributor->ID, '_nm_contributor_short_bio', true);
@@ -78,7 +72,7 @@
   }
 ?>
     <div>
-      <ul class="inline-action-list">
+      <ul class="inline-action-list fs-4-sans font-weight-regular">
         <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
         <li><?php render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
         <li><?php render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>

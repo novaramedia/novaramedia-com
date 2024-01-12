@@ -3,31 +3,27 @@
 //   $is_liveblog = get_post_meta( $post->ID, 'novara_live_updates_enabled', true );
 ?>
 
-<div class="flex-grid-row margin-bottom-basic">
-  <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-9 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-2 flex-item-xxl-8 flex-offset-xxl-2">
-    <h1 id="single-articles-title" class="js-fix-widows"><?php the_title(); ?></h1>
+<div class="grid-row mb-4">
+  <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-2 is-xl-16 offset-xl-4 is-xxl-16 offset-xxl-4">
+    <h1 id="single-articles-title" class="fs-8 js-fix-widows"><?php the_title(); ?></h1>
   </div>
 </div>
-
-<div class="flex-grid-row margin-bottom-mid">
-  <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-8 flex-offset-l-2 flex-item-xl-6 flex-offset-xl-3 flex-item-xxl-6 flex-offset-xxl-3">
-
+<div class="grid-row mb-5">
+  <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-16 offset-l-4 is-xl-12 offset-xl-6 is-xxl-12 offset-xxl-6">
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="margin-bottom-small js-fix-widows"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
+    ?><h2 class="fs-6 mb-3 js-fix-widows"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
     <?php
       }
     ?>
-
-    <h3>by <?php render_bylines($post->ID, true); ?></h3>
-    <h3><?php the_time('j F Y'); ?></h3>
+    <h3 class="fs-6">by <?php render_bylines($post->ID, true); ?></h3>
+    <h3 class="fs-6"><?php the_time('j F Y'); ?></h3>
   </div>
 </div>
-
-<div class="flex-grid-row margin-bottom-basic">
-  <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-12 flex-offset-m-0 flex-item-l-10 flex-offset-l-1 flex-item-xl-10 flex-offset-xl-1 flex-item-xxl-10 flex-offset-xxl-1">
+<div class="grid-row mb-4">
+  <div class="grid-item is-s-24 offset-s-0 is-m-24 offset-m-0 is-l-20 offset-l-2 is-xl-20 offset-xl-2 is-xxl-20 offset-xxl-2">
     <?php the_post_thumbnail('col20'); ?>
-    <div class="font-smaller">
+    <div class="fs-2 font-weight-regular">
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>
