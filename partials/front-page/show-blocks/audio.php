@@ -13,7 +13,8 @@
 
     if ($latest) {
 ?>
-<div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-5 background-<?php echo $background_color; ?> font-color-<?php echo $font_color; ?> ui-rounded-box">
+<div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-5 font-color-<?php echo $font_color; ?> ui-rounded-box">
+      <div class="background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
   <div class="fs-5-sans mb-5">
     <?php echo $description; ?>
   </div>
@@ -23,7 +24,7 @@
     $meta = get_post_meta($post_id);
   ?>
   <div class="grid-row grid--nested mb-5">
-    <div class="grid-item is-xxl-24 mb-3">
+    <div class="grid-item is-xxl-12 mb-3">
       <div class="layout-thumbnail-frame">
         <div class="layout-thumbnail-frame__inner mt-1 ml-1">
           <?php render_post_ui_tags($post_id, true, true, true); ?>
@@ -33,7 +34,7 @@
         )); ?>
       </div>
     </div>
-    <div class="grid-item is-xxl-24">
+    <div class="grid-item is-xxl-12">
       <h3 class="fs-5-sans font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
       <div class="fs-4-sans font-weight-regular mb-3">
         <?php render_short_description($post_id); ?>
@@ -74,6 +75,7 @@
     ?>
     </div>
   </div>
+</div>
 </div>
 <?php
     }
