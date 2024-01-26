@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- If I Speak basic archive template and front page banner
 - Perf: preload support texture
 - Perf: eager load featured post thumbs on front page
 
