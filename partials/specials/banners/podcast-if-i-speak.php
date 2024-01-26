@@ -114,11 +114,11 @@
   </style>
 
   <div class="container">
-    <!-- <div class="flex-grid-row margin-bottom-small">
+    <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
         <a href="<?php echo $url; ?>"><h4>Podcast</h4></a>
       </div>
-    </div> -->
+    </div>
     <div class="flex-grid-row padding-bottom-small">
       <div class="flex-grid-item flex-item-xxl-12">
         <a href="<?php echo $url; ?>">
