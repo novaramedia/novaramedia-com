@@ -14,7 +14,7 @@
 
   get_template_part('partials/singles/articles/articles-header-' . $layout);
 ?>
-<div class="grid-row mt-5 mb-6">
+<div class="grid-row mt-5 mt-s-4 mb-6">
   <div class="grid-item only-desktop is-m-24 is-l-24 is-xxl-4 mb-4">
     <?php
       if ($articles_support_box_text || $support_box_override_text) {

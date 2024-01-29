@@ -10,7 +10,7 @@
     <?php
       }
     ?>
-    <h3 class="fs-6">by <?php render_bylines($post->ID, true); ?></h3>
-    <h3 class="fs-6"><?php the_time('j F Y'); ?></h3>
+    <h3 class="fs-5-sans font-weight-bold">by <?php render_bylines($post->ID, true); ?></h3>
+    <h3 class="fs-5-sans font-weight-bold"><?php the_time('j F Y'); ?></h3>
   </div>
 </div>

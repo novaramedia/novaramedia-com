@@ -10,8 +10,8 @@
     <?php
       }
     ?>
-    <h3 class="fs-6">by <?php render_bylines($post->ID, true); ?></h3>
-    <h3 class="fs-6"><?php the_time('j F Y'); ?></h3>
+    <h3 class="fs-5-sans font-weight-bold">by <?php render_bylines($post->ID, true); ?></h3>
+    <h3 class="fs-5-sans font-weight-bold"><?php the_time('j F Y'); ?></h3>
   </div>
   <div class="grid-item is-s-24 is-m-8 is-xxl-10">
     <?php the_post_thumbnail('col20'); ?>
