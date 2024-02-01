@@ -15,7 +15,7 @@
       </div>
     <?php
       } else {
-        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block', 'data-no-lazysizes' => true));
+        the_post_thumbnail('col12-16to9', array('class' => 'margin-bottom-tiny u-display-block', 'data-no-lazysizes' => true, 'loading' => 'eager'));
       }
 
       $sub_category = get_the_sub_category($post->ID);
