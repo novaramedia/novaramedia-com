@@ -9,14 +9,14 @@ $is_full_archive = get_query_var('is_full_archive'); // get query var to see if 
  * @param Boolean $is_full_archive If displaying in full archive style
  */
 function render_posts_section($query, $title, $is_full_archive) {
-  $post_classes_default = 'flex-grid-item flex-item-m-6 flex-item-l-4 flex-item-xxl-3 margin-bottom-small';
-  $post_classes_larger_display = 'flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4 margin-bottom-small';
+  $post_classes_default = 'grid-item is-m-12 is-l-8 is-xxl-6 mb-4';
+  $post_classes_larger_display = 'grid-item is-s-24 is-m-12 is-xxl-8 mb-4';
 
   if( $query->have_posts() ) {
 ?>
-  <div class="flex-grid-row margin-bottom-small">
-    <div class="flex-grid-item flex-item-xxl-12 margin-bottom-tiny">
-      <h4><?php echo $title; ?></h4>
+  <div class="grid-row mb-4">
+    <div class="grid-item is-xxl-24 mb-2">
+      <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $title; ?></h4>
     </div>
 <?php
       while( $query->have_posts() ) {
@@ -24,21 +24,21 @@ function render_posts_section($query, $title, $is_full_archive) {
 
         if ( $is_full_archive ) {
           get_template_part('partials/post-layouts/list-post', null, array(
-            'grid-item-classes' => 'flex-grid-item flex-item-xxl-12 margin-bottom-tiny'
+            'grid-item-classes' => 'grid-item is-xxl-24 mb-2'
           ));
         } else {
-          get_template_part('partials/post-layouts/flex-post', null, array(
+          get_template_part('partials/post-layouts/archive-post', null, array(
             'grid-item-classes' => $query->post_count < 6 ? $post_classes_larger_display : $post_classes_default,
             'image-size' => 'col12-16to9',
-            'render-description' => false
+            'show-tags' => true
           ));
         }
       }
 
       if ( $query->max_num_pages > 1 ) {
 ?>
-    <div class="flex-grid-item flex-item-xxl-12 margin-bottom-tiny">
-      <a href="?is_full_archive=true">View full archive</a>
+    <div class="grid-item is-xxl-24 mb-2">
+      <a href="?is_full_archive=true" class="nm-button nm-button--inline nm-button--black fs-3-sans">View full archive</a>
     </div>
 <?php
       }
@@ -51,37 +51,37 @@ function render_posts_section($query, $title, $is_full_archive) {
 get_header();
 ?>
 <main id="main-content">
-  <div id="contributor" class="container margin-top-small margin-bottom-basic">
+  <div id="contributor" class="container mt-4 mb-4">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $link = get_post_meta($post->ID, '_nm_contributor_link', true);
 ?>
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-xxl-12">
-        <h4>Contributor</h4>
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
+        <h4 class="fs-3-sans font-uppercase font-bold">Contributor</h4>
       </div>
     </div>
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-4 mobile-margin-bottom-micro">
-        <h1 class="font-size-3 font-semibold">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-s-24 is-xxl-8 mobile-margin-bottom-micro">
+        <h1 class="fs-6 font-semibold">
           <?php the_title(); ?>
         </h1>
       </div>
-      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-5">
+      <div class="grid-item is-s-24 is-l-12 is-xxl-10">
         <?php the_content(); ?>
         <?php
           if (!empty($link)) {
-            echo '<span class="text-links-underlined"><a href="' . $link . '" target="_blank" ref="nofollow">' . $link . '</a></span>';
+            echo '<div class="text-links-underlined mt-2"><a href="' . $link . '" target="_blank" ref="nofollow">' . $link . '</a></div>';
           }
         ?>
       </div>
     <?php
       if (has_post_thumbnail()) {
     ?>
-      <div class="flex-grid-item flex-offset-l-0 flex-item-l-2 flex-offset-xxl-2 flex-item-xxl-1 only-desktop">
-        <?php the_post_thumbnail('col4-square'); ?>
+      <div class="grid-item offset-l-0 is-l-4 offset-xxl-4 is-xxl-2 only-desktop">
+        <?php the_post_thumbnail('grid-item4-square'); ?>
       </div>
     <?php
       }
