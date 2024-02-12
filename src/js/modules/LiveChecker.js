@@ -13,8 +13,8 @@ export class LiveChecker {
     this.basicSchedule = {
       days: [1, 2, 3, 4, 5],
       startHour: 18,
-      endHour: 19
-    }
+      endHour: 19,
+    };
     this.offlineMessages = [
       {
         text: 'Utopia Now',
@@ -30,7 +30,8 @@ export class LiveChecker {
       },
     ];
 
-    if (WP.liveCheckerData.messages && WP.liveCheckerData.messages.length > 0) { // if we have global data use that
+    if (WP.liveCheckerData.messages && WP.liveCheckerData.messages.length > 0) {
+      // if we have global data use that
       this.offlineMessages = WP.liveCheckerData.messages;
     }
   }
@@ -42,7 +43,10 @@ export class LiveChecker {
       return;
     }
 
-    _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
+    _this.randomOfflineMessage =
+      _this.offlineMessages[
+        Math.floor(Math.random() * _this.offlineMessages.length)
+      ];
 
     _this.$offlineMessage
       .text(`"${_this.randomOfflineMessage.text}"`)
@@ -85,10 +89,12 @@ export class LiveChecker {
       status = overrideMatch.status === 'true' ? true : false;
     }
 
-
     if (_this.basicSchedule.days.includes(currentDay)) {
-      if (currentHour >= _this.basicSchedule.startHour && currentHour < _this.basicSchedule.endHour) {
-        status = true
+      if (
+        currentHour >= _this.basicSchedule.startHour &&
+        currentHour < _this.basicSchedule.endHour
+      ) {
+        status = true;
       }
     }
 
