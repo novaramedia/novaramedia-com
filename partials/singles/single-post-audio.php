@@ -22,6 +22,9 @@
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
     <h1 class="fs-8 js-fix-widows mb-4"><?php the_title(); ?></h1>
     <?php the_post_thumbnail([500, 400]); ?>
+    <div class="fs-2 font-weight-regular mt-1">
+      <?php the_post_thumbnail_caption(); ?>
+    </div>
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
     <?php the_content(); ?>
