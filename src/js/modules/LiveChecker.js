@@ -1,4 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global WP */
 
 import $ from 'jquery';
 import { DateTime } from 'luxon';
@@ -16,18 +17,22 @@ export class LiveChecker {
     }
     this.offlineMessages = [
       {
-        quote: 'Utopia Now',
+        text: 'Utopia Now',
         link: 'https://shop.novaramedia.com/products/no-future-utopia-now-scarf',
       },
       {
-        quote: 'calling Radio Alice',
+        text: 'calling Radio Alice',
         link: 'https://en.wikipedia.org/wiki/Radio_Alice',
       },
       {
-        quote: 'va in paradiso',
+        text: 'va in paradiso',
         link: 'https://www.imdb.com/title/tt0066919/',
       },
     ];
+
+    if (WP.liveCheckerData.messages && WP.liveCheckerData.messages.length > 0) { // if we have global data use that
+      this.offlineMessages = WP.liveCheckerData.messages;
+    }
   }
 
   onReady() {
@@ -38,7 +43,10 @@ export class LiveChecker {
     }
 
     _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
-    _this.$offlineMessage.text(`"${_this.randomOfflineMessage.quote}"`).attr('href', _this.randomOfflineMessage.link);
+
+    _this.$offlineMessage
+      .text(`"${_this.randomOfflineMessage.text}"`)
+      .attr('href', _this.randomOfflineMessage.link);
 
     _this.checkIfLive();
     _this.updateMessage();
@@ -51,18 +59,40 @@ export class LiveChecker {
   checkIfLive() {
     const _this = this;
 
+    let status = false;
+    let overrideMatch = undefined;
     let currentTime = DateTime.now().setZone('Europe/London');
     let currentDay = currentTime.weekday;
     let currentHour = currentTime.hour;
 
+    if (
+      WP.liveCheckerData.overrides &&
+      WP.liveCheckerData.overrides.length > 0
+    ) {
+      overrideMatch = WP.liveCheckerData.overrides.find((override) => {
+        let start = DateTime.fromSeconds(override.start).setZone(
+          'Europe/London'
+        );
+        let end = DateTime.fromSeconds(override.end).setZone('Europe/London');
+
+        if (currentTime >= start && currentTime < end) {
+          return true;
+        }
+      });
+    }
+
+    if (overrideMatch !== undefined) {
+      status = overrideMatch.status === 'true' ? true : false;
+    }
+
+
     if (_this.basicSchedule.days.includes(currentDay)) {
       if (currentHour >= _this.basicSchedule.startHour && currentHour < _this.basicSchedule.endHour) {
-        _this.setLiveStatus(true);
-        return;
+        status = true
       }
     }
 
-    _this.setLiveStatus(false);
+    _this.setLiveStatus(status);
   }
 
   setLiveStatus(newLiveStatus) {

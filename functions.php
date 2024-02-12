@@ -12,7 +12,8 @@ function scripts_and_styles_method() {
   	'siteUrl' => home_url(),
   	'themeUrl' => get_template_directory_uri(),
   	'isAdmin' => current_user_can('administrator') ? 1 : 0,
-  	'supportSectionAutovalues' => nm_get_support_autovalues()
+  	'supportSectionAutovalues' => nm_get_support_autovalues(),
+  	'liveCheckerData' => nm_get_livechecker_data()
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );

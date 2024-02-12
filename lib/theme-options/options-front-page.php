@@ -122,31 +122,6 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   $main_options->add_field( array(
-    'name'    => 'Audio Curation',
-    'desc'    => 'This is where audio can be curated',
-    'id'      => $prefix . 'front_page_settings_audio_title',
-    'type'    => 'title',
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'First audio category',
-    'desc'    => 'Select the audio category to take top position in the homepage audio feature',
-    'id'      => $prefix . 'front_page_featured_audio_1',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => get_audio_categories_metabox_array()
-  ) );
-
-  $main_options->add_field( array(
-    'name'    => 'Second audio category',
-    'desc'    => 'Select the audio category to take second position in the homepage audio feature',
-    'id'      => $prefix . 'front_page_featured_audio_2',
-    'type'             => 'select',
-    'show_option_none' => false,
-    'options'          => get_audio_categories_metabox_array()
-  ) );
-
-  $main_options->add_field( array(
     'name'    => 'Adverts and banners',
     'id'      => $prefix . 'front_page_settings_banners_title',
     'type'    => 'title',
@@ -179,6 +154,79 @@ function nm_register_front_page_options_metabox() {
     'id'      => $prefix . 'front_page_banner_option_4',
     'type'    => 'select',
     'options' => $banner_options
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Live Schedule',
+    'desc'    => 'This is where overrides for the live schedule can be set. Can be deleted once in the past',
+    'id'      => $prefix . 'front_page_settings_live_schedule_title',
+    'type'    => 'title',
+  ) );
+
+  $schedule_overrides_group_field_id = $main_options->add_field( array(
+    'id'          => $prefix . 'front_page_settings_live_schedule_overrides',
+    'type'        => 'group',
+    'description' => 'Overrides for the live schedule',
+    'options'     => array(
+      'group_title'       => __( 'Override {#}', 'nm' ),
+      'add_button'        => __( 'Add Another Override', 'nm' ),
+      'remove_button'     => __( 'Remove Override', 'nm' ),
+      'sortable'          => false,
+    ),
+  ) );
+
+  $main_options->add_group_field( $schedule_overrides_group_field_id, array(
+    'name' => 'Start time',
+    'id'   => 'start',
+    'type' => 'text_datetime_timestamp',
+  ) );
+
+  $main_options->add_group_field( $schedule_overrides_group_field_id, array(
+    'name' => 'End time',
+    'id'   => 'end',
+    'type' => 'text_datetime_timestamp',
+  ) );
+
+  $main_options->add_group_field( $schedule_overrides_group_field_id, array(
+    'name' => 'Status',
+    'id'   => 'status',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'default'          => 'false',
+    'options'          => array(
+      'false' => __( 'Offline', 'cmb2' ),
+      'true'   => __( 'Live', 'cmb2' ),
+    ),
+  ) );
+
+  $main_options->add_field( array(
+    'name'    => 'Offline messages',
+    'id'      => $prefix . 'front_page_settings_live_schedule_offline_messages_title',
+    'type'    => 'title',
+  ) );
+
+  $offline_messages_group_field_id = $main_options->add_field( array(
+    'id'          => $prefix . 'front_page_settings_live_schedule_offline_messages',
+    'type'        => 'group',
+    'description' => 'Randomised messages that will be shown in the top bar of the desktop site when the livestream is offline',
+    'options'     => array(
+      'group_title'       => __( 'Message {#}', 'nm' ),
+      'add_button'        => __( 'Add Another Message', 'nm' ),
+      'remove_button'     => __( 'Remove Message', 'nm' ),
+      'sortable'          => false,
+    ),
+  ) );
+
+  $main_options->add_group_field( $offline_messages_group_field_id, array(
+    'name' => 'Quote text',
+    'id'   => 'text',
+    'type' => 'text',
+  ) );
+
+  $main_options->add_group_field( $offline_messages_group_field_id, array(
+    'name' => 'Link',
+    'id'   => 'link',
+    'type' => 'text_url',
   ) );
 
   /**
