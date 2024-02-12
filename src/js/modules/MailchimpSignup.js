@@ -23,7 +23,9 @@ export class MailchimpSignup {
       const $form = $(form);
       const url = $(form).attr('action');
       const $formInputs = $form.find('input');
-      const $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
+      const $feedbackMessageSpan = $form.find(
+        '.email-signup__feedback-message',
+      );
 
       _this.forms[index] = $form;
 
@@ -55,7 +57,7 @@ export class MailchimpSignup {
               const response = JSON.parse(jqXHR.responseText);
 
               $feedbackMessageSpan.text(response.message);
-            } catch(error) {
+            } catch (error) {
               $feedbackMessageSpan.text('General error');
             }
           })

@@ -148,7 +148,7 @@ module.exports = (env, argv) => {
             ],
           },
         },
-      })
+      }),
     );
     config.plugins.push(
       new CopyPlugin({
@@ -165,7 +165,7 @@ module.exports = (env, argv) => {
             to: path.resolve(__dirname, 'dist/fonts/'),
           },
         ],
-      })
+      }),
     );
     config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
     config.performance.hints = 'warning';
