@@ -10,7 +10,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ESLintPlugin = require('eslint-webpack-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
@@ -84,7 +83,6 @@ var config = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
-    new MomentLocalesPlugin(),
   ],
 
   optimization: {

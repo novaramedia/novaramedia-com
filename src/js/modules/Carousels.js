@@ -69,8 +69,6 @@ class Carousel {
       },
       0
     );
-
-    console.log('_this.wrapperSpacing', _this.wrapperSpacing);
   }
 
   bind() {

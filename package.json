@@ -64,8 +64,7 @@
     "js-cookie": "^3.0.1",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.21",
-    "luxon": "^3.4.4",
-    "moment": "^2.29.4"
+    "luxon": "^3.4.4"
   },
   "release-it": {
     "git": {

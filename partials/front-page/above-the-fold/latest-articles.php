@@ -22,7 +22,7 @@ if ($recent_articles->have_posts()) {
   <a href="<?php the_permalink(); ?>" class="ui-post-hover">
     <div class="layout-split-level fs-2 mb-2">
       <?php render_post_ui_tags($post_id); ?>
-      <span class="js-time-since-unlimited" data-timestamp="<?php echo $timestamp; ?>"></span>
+      <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
     <?php
       // [temp logic]. to be driven by meta logics based on position and quality of image assets
