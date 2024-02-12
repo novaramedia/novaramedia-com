@@ -23,7 +23,10 @@
     </div>
 
     <div class="submenu__message">
-      <span class="ui-dot ui-dot--green"></span>Novara is Live
+      <div class="submenu__message__live" style="display: none">
+        <a href="<?php echo site_url('novara-live'); ?>"><span class="ui-dot ui-dot--green"></span>Novara is Live</a>
+      </div>
+      <a class="submenu__message__offline" style="display: none" target="_blank" rel="nofollow"></a>
     </div>
   </div>
 </section>

@@ -1,5 +1,27 @@
 <?php
 /**
+ * Gets data for livechecker javascript module
+ *
+ * @return array Array of autovalues for support form
+ */
+function nm_get_livechecker_data() {
+  $overrides = NM_get_option('nm_front_page_settings_live_schedule_overrides', 'nm_front_page_options');
+  $messages = NM_get_option('nm_front_page_settings_live_schedule_offline_messages', 'nm_front_page_options');
+
+  $return = [];
+
+  if (!empty($overrides)) {
+    $return['overrides'] = $overrides;
+  }
+
+  if (!empty($messages)) {
+    $return['messages'] = $messages;
+  }
+
+  return $return;
+}
+
+/**
  * Takes content filterd by the_content and removes shortcodes and html in order to be useable for meta etc
  * This can be from both post content but also WYSIWYG meta fields.
  *
