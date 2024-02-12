@@ -4,12 +4,13 @@
   }
 
   $post_id = $args['post_id'];
+  $container_classes = $args['container_classes'];
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
 ?>
 <a href="<?php echo get_permalink($post_id); ?>" class="ui-post-hover">
-  <div class="featured-posts__tertiary mt-5">
+  <div class="featured-posts__tertiary <?php echo $container_classes; ?>">
     <div>
       <?php render_post_ui_tags($post_id); ?>
     </div>

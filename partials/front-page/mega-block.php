@@ -52,7 +52,7 @@
               ));
             }
           ?>
-          <h5 class="mb-2"><?php echo $post->post_title; ?></h5>
+          <h5 class="<?php echo $index === 2 ? "mb-2" : "pb-2 mb-2 ui-border-bottom";?>"><?php echo $post->post_title; ?></h5>
         </a>
         <?php
           }

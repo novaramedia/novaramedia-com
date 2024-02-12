@@ -42,7 +42,7 @@ if ($recent_articles->have_posts()) {
         </div>
         <div class="grid-item is-xxl-8">
           <?php render_thumbnail($post->ID, 'col4-square', array(
-            'class' => 'ui-rounded-image',
+            'class' => 'ui-rounded-image u-display-block',
             'data-no-lazysizes' => true,
             'loading' => 'eager'
           )); ?>
@@ -56,7 +56,7 @@ if ($recent_articles->have_posts()) {
       </h4>
       <div class="mt-1">
         <?php render_thumbnail($post->ID, 'col12-16to9', array(
-        'class' => 'ui-rounded-image',
+        'class' => 'ui-rounded-image u-display-block',
         'data-no-lazysizes' => true,
         'loading' => 'eager'
       )); ?>
