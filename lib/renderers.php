@@ -75,7 +75,7 @@ function render_standfirst($postId = null) {
 
   $meta = get_post_meta($postId);
 
-  if ($meta['_cmb_standfirst']) {
+  if (isset($meta['_cmb_standfirst']) && !empty($meta['_cmb_standfirst'])) {
     echo $meta['_cmb_standfirst'][0];
   }
 }

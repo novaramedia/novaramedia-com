@@ -4,7 +4,7 @@
   }
 
   $post_id = $args['post_id'];
-  $container_classes = $args['container_classes'];
+  $container_classes = isset($args['container_classes']) ? $args['container_classes'] : '';
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
