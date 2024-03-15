@@ -4,8 +4,8 @@
 
   if (!empty($youtube_id) && !empty($copy)) {
 ?>
-<div class="">
-  <div class="container pt-2 pb-2 background-red background-support-texture font-color-white ui-rounded-box">
+<div class="background-red background-support-texture font-color-white">
+  <div class="container pt-6 pb-6">
     <div class="grid-row mb-3">
       <div class="grid-item is-xxl-24 fs-3-sans font-uppercase font-weight-bold">
         <a href="<?php echo home_url('support/'); ?>"><h4>Support Us</h4></a>

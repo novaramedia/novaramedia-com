@@ -1,5 +1,5 @@
-<div class="font-color-white">
-  <section class="container background-red pt-2 pb-2 mt-6 mb-6 ui-rounded-box">
+<div class="background-red font-color-white">
+  <section class="container pt-6 pb-6">
     <?php
       $downstream_category = get_term_by('slug', 'downstream', 'category');
 

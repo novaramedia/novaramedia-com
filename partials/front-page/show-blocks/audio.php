@@ -81,7 +81,7 @@
     }
   }
 ?>
-<section id="front-page-audio-posts" class="container mt-7 mb-7">
+<section id="front-page-audio-posts" class="container mt-4 mb-4">
   <div class="grid-row">
     <?php
       render_show('novarafm', 'Novara Media’s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.', 'green', 'black');
