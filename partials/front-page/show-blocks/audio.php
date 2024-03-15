@@ -40,7 +40,7 @@
           <a href="<?php echo get_the_permalink($post_id); ?>">
             <div class="layout-thumbnail-frame">
               <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                <?php render_post_ui_tags($post_id, true, true, true); ?>
+                <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
               </div>
               <?php render_thumbnail($post_id, 'col12', array(
                 'class' => 'ui-rounded-image'
@@ -85,7 +85,7 @@
               <?php echo get_the_time('j F Y', $post_id); ?>
             </div>
             <h4 class="fs-4-sans mb-2">
-              <?php render_post_ui_tags($post_id, false, true, 'no-fill--white'); ?> <?php echo get_the_title($post_id); ?>
+              <?php render_post_ui_tags($post_id, false, true, 'no-fill--white', 'inline'); ?> <?php echo get_the_title($post_id); ?>
             </h4>
             <div>
               <?php render_short_description($post_id); ?>

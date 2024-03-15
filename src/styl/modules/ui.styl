@@ -1,3 +1,8 @@
+.ui-tag-block
+  display: flex
+  &--inline
+    display: inline-flex
+
 .ui-tag
   font-size-1()
   text-transform: uppercase
@@ -38,11 +43,13 @@
       height: .8em
       width: .8em
       margin-left: .25em
+      margin-top: .25em
   &&--audio
     svg
       height: 1em
       width: 1em
-      margin-top: .1em
+      margin-left: -.05rem
+      margin-top: .15em
 
 .ui-dot
   display: inline-block

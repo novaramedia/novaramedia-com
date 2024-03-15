@@ -3,21 +3,25 @@
  * Renders post UI tags
  *
  * @param integer $post_id        Post ID
+ * @param Boolean $show_text      If the rendered tag should show the text
  * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param string $style_varient   Additional BEM varient class
+ * @param string $tag_style_varient   Additional BEM varient class
+ * @param string $block_style_varient Additional BEM varient class
  */
-function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $style_varient = false) {
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $tag_style_varient = false, $block_style_varient = false) {
   $sub_category = get_the_sub_category($post_id);
 
   if (!$sub_category) {
     return;
   }
 
-  echo '<span class="ui-tag-block">';
+  echo '<span class="ui-tag-block';
+  echo $block_style_varient ? ' ui-tag-block--' . $block_style_varient : '';
+  echo '">';
 
   if ($show_text) {
     echo '<span class="';
-    echo $style_varient ? 'ui-tag ui-tag--' . $style_varient : 'ui-tag';
+    echo $tag_style_varient ? 'ui-tag ui-tag--' . $tag_style_varient : 'ui-tag';
     echo '">' . $sub_category . '</span>';
   }
 

@@ -78,7 +78,7 @@
                 <?php the_time('j F Y'); ?>
               </div>
               <h4 class="post__title fs-4-sans">
-                <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white'); ?> <?php the_title(); ?>
+                <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white', 'inline'); ?> <?php the_title(); ?>
               </h4>
             </div>
           </a>

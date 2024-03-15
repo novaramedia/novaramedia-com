@@ -3123,6 +3123,13 @@ b {
   -ms-flex-grow: 1;
   flex-grow: 1;
 }
+.ui-tag-block {
+  display: flex;
+}
+.ui-tag-block--inline {
+  display: -ms-inline-flex;
+  display: inline-flex;
+}
 .ui-tag {
   font-size: 0.5625rem;
   font-style: normal;
@@ -3175,11 +3182,13 @@ b {
   height: 0.8em;
   width: 0.8em;
   margin-left: 0.25em;
+  margin-top: 0.25em;
 }
 .ui-av-tag.ui-av-tag--audio svg {
   height: 1em;
   width: 1em;
-  margin-top: 0.1em;
+  margin-left: -0.05rem;
+  margin-top: 0.15em;
 }
 .ui-dot {
   display: inline-block;
