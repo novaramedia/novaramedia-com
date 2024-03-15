@@ -1,5 +1,5 @@
 <?php
-  function render_show($slug, $description, $background_color = 'black', $font_color = 'white', $logo = null) {
+  function render_show($slug, $description, $logo_url = null, $background_color = 'black', $font_color = 'white', $logo = null) {
     $category = get_term_by('slug', $slug, 'category');
 
     if (!$category) {
@@ -13,78 +13,112 @@
 
     if ($latest) {
 ?>
-<div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-5 font-color-<?php echo $font_color; ?> ui-rounded-box">
-      <div class="background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
-  <div class="fs-5-sans mb-5">
-    <?php echo $description; ?>
-  </div>
+<div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-2 font-color-<?php echo $font_color; ?> ui-rounded-box">
+  <div class="background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
+    <?php
+      if ($logo_url) {
+    ?>
+    <div class="front-page__audio-product-logo mt-2 mb-5">
+      <a href="<?php echo get_term_link($category); ?>">
+        <?php echo nm_get_file($logo_url); ?>
+      </a>
+    </div>
+    <?php
+      }
+    ?>
+    <div class="fs-5-sans mb-4">
+      <?php echo $description; ?>
+    </div>
 
   <?php
     $post_id = $latest[0]->ID;
     $meta = get_post_meta($post_id);
   ?>
-  <div class="grid-row grid--nested mb-5">
-    <div class="grid-item is-xxl-12 mb-3">
-      <div class="layout-thumbnail-frame">
-        <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-          <?php render_post_ui_tags($post_id, true, true, true); ?>
+    <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box">
+      <div class="grid-row grid--nested">
+        <div class="grid-item is-xxl-10">
+          <a href="<?php echo get_the_permalink($post_id); ?>">
+            <div class="layout-thumbnail-frame">
+              <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+                <?php render_post_ui_tags($post_id, true, true, true); ?>
+              </div>
+              <?php render_thumbnail($post_id, 'col12', array(
+                'class' => 'ui-rounded-image'
+              )); ?>
+            </div>
+          </a>
         </div>
-        <?php render_thumbnail($post_id, 'col12', array(
-          'class' => 'ui-rounded-image'
-        )); ?>
+        <div class="grid-item is-xxl-14">
+          <a href="<?php echo get_the_permalink($post_id); ?>">
+            <h3 class="fs-5-sans font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
+            <div class="fs-4-sans font-weight-regular mb-3">
+              <?php render_short_description($post_id); ?>
+            </div>
+          </a>
+          <?php
+            if (!empty($meta['_cmb_sc'][0])) {
+          ?>
+            <iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>&inverse=false&auto_play=false&show_user=true"></iframe>
+          <?php
+          }
+          ?>
+        </div>
       </div>
     </div>
-    <div class="grid-item is-xxl-12">
-      <h3 class="fs-5-sans font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
-      <div class="fs-4-sans font-weight-regular mb-3">
-        <?php render_short_description($post_id); ?>
-      </div>
-      <?php
-        if (!empty($meta['_cmb_sc'][0])) {
-      ?>
-        <iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>&inverse=<?php echo $background_color === 'black' ? 'true' : 'false'; ?>&auto_play=false&show_user=true"></iframe>
-      <?php
-      }
-      ?>
-    </div>
-  </div>
 
-  <div>
-    <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
-    <div class="grid-row grid--nested">
-    <?php
-      array_shift($latest);
-      foreach ($latest as $post) {
-        $post_id = $post->ID;
-    ?>
-      <div class="grid-item is-m-24 is-xxl-12 mt-3 mb-1">
-        <a href="<?php get_the_permalink($post_id); ?>">
-          <div class="fs-2 mb-1">
-            <?php echo get_the_time('j F Y', $post_id); ?>
-          </div>
-          <h4 class="fs-4-sans mb-2">
-            <?php render_post_ui_tags($post_id, false, true, 'no-fill--white'); ?> <?php echo get_the_title($post_id); ?>
-          </h4>
-          <div class="pb-3 ui-border-bottom">
-            <?php render_short_description($post_id); ?>
-          </div>
-        </a>
+    <div class="ui-border-top ui-border--black pt-4">
+      <div class="grid-row grid--nested">
+        <div class="grid-item is-xxl-12">
+          <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
+        </div>
+        <div class="grid-item is-xxl-12 text-align-right">
+          <a href="<?php echo get_term_link($category); ?>" class="fs-3-sans font-weight-bold">See All</a>
+        </div>
+      <?php
+        array_shift($latest);
+        foreach ($latest as $post) {
+          $post_id = $post->ID;
+      ?>
+        <div class="grid-item is-m-24 is-xxl-12 mt-4 mb-2">
+          <a href="<?php echo get_the_permalink($post_id); ?>">
+            <div class="fs-2 mb-2">
+              <?php echo get_the_time('j F Y', $post_id); ?>
+            </div>
+            <h4 class="fs-4-sans mb-2">
+              <?php render_post_ui_tags($post_id, false, true, 'no-fill--white'); ?> <?php echo get_the_title($post_id); ?>
+            </h4>
+            <div>
+              <?php render_short_description($post_id); ?>
+            </div>
+          </a>
+        </div>
+      <?php
+        }
+      ?>
       </div>
-    <?php
-      }
-    ?>
     </div>
   </div>
-</div>
 </div>
 <?php
     }
   }
 ?>
-<section id="front-page-audio-posts" class="container mt-4 mb-4">
+<section class="front-page__audio-products container mt-4 mb-4">
   <div class="grid-row">
     <?php
-      render_show('novarafm', 'Novara Media’s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.', 'green', 'black');
-      render_show('acfm', 'The home of the weird left. Nadia Idle, Jeremy Gilbert and Keir Milburn examine the links between left-wing politics, culture, music and experiences of collective joy.'); ?>
+      render_show(
+        'novarafm',
+        'Novara Media’s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.',
+        '/dist/img/products/novara-fm/novarafm-wordmark.svg',
+        'green',
+        'black'
+      );
+      render_show(
+        'acfm',
+        'The home of the weird left. Nadia Idle, Jeremy Gilbert and Keir Milburn examine the links between left-wing politics, culture, music and experiences of collective joy.',
+        '/dist/img/products/acfm/acfm-logo.svg',
+        'light-blue',
+        'black'
+      ); ?>
   </div>
 </section>

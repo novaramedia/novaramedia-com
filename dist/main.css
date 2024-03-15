@@ -3198,6 +3198,12 @@ b {
 .ui-border-bottom {
   border-bottom: 1px solid #bebebe;
 }
+.ui-border-top {
+  border-top: 1px solid #bebebe;
+}
+.ui-border--black {
+  border-color: #0e0e0e;
+}
 .ui-rounded-image {
   border-radius: 2px;
 }
@@ -3522,6 +3528,14 @@ html {
   height: 650px;
   max-height: auto;
   overflow-y: auto;
+}
+.front-page__audio-product-logo svg {
+  height: auto;
+  width: auto;
+  max-width: 250px;
+  max-height: 100px;
+  margin: 0 auto;
+  display: block;
 }
 .novara-fm-archive__header {
   display: flex;
