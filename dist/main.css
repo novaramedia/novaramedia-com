@@ -577,6 +577,7 @@ template {
 }
 html {
   --grid-gutter: 1rem;
+  --color-black-soft: #0e0e0e;
 }
 .flex-grid-row-xxl--reverse {
   flex-direction: column-reverse;
@@ -3538,6 +3539,9 @@ html {
   max-height: auto;
   overflow-y: auto;
 }
+.front-page__audio-product {
+  height: 100%;
+}
 .front-page__audio-product-logo svg {
   height: auto;
   width: auto;
@@ -3545,6 +3549,9 @@ html {
   max-height: 100px;
   margin: 0 auto;
   display: block;
+}
+.front-page__audio-product--novarafm svg path {
+  fill: var(--color-black-soft) !important;
 }
 .novara-fm-archive__header {
   display: flex;
