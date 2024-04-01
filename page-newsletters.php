@@ -38,6 +38,7 @@ if( have_posts() ) {
             get_template_part('partials/email-signup', null, array(
               'newsletter_page_id' => $newsletter->ID,
               'background-color' => $index % 2 === 0 ? 'light-purple' : false,
+              'text-color' => $index % 2 === 0 ? 'white' : false,
             ));
 
             $index++;
