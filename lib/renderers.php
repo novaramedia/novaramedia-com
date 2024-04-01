@@ -169,12 +169,10 @@ function render_front_page_banner($key) {
         $meta = get_post_meta($newsletter->ID);
 
         $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
-        $banner_text = !empty($meta['_nm_banner_text']) ? $meta['_nm_banner_text'][0] : false;
 
         if ($mailchimp_key) {
           get_template_part('partials/email-signup', null, array(
-            'newsletter' => $mailchimp_key,
-            'copy' => $banner_text,
+            'newsletter_page_id' => $newsletter_id
           ));
         }
       }
