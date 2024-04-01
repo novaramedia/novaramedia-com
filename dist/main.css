@@ -3256,8 +3256,8 @@ b {
   align-items: center;
 }
 .email-signup__email-gdpr-input {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0 1rem;
 }
 .email-signup__form .email-signup__feedback-processing,
