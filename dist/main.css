@@ -579,6 +579,7 @@ html {
   --grid-gutter: 1rem;
   --corner-radius: 2px;
   --color-white-soft: #fdfdfd;
+  --color-black-soft: #0e0e0e;
 }
 .flex-grid-row-xxl--reverse {
   flex-direction: column-reverse;
@@ -3598,6 +3599,116 @@ html {
   .products-bar__item {
     width: 260px;
   }
+}
+.above-the-fold__featured-1 {
+  -ms-grid-column-start: 1;
+  grid-column-start: 1;
+  grid-column-end: span 18;
+  -ms-grid-row-start: 1;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+.above-the-fold__latest-articles {
+  -ms-grid-column-start: 19;
+  grid-column-start: 19;
+  grid-column-end: span 6;
+  -ms-grid-row-start: 1;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+}
+.above-the-fold__featured-2 {
+  -ms-grid-column-start: 1;
+  grid-column-start: 1;
+  grid-column-end: span 18;
+  -ms-grid-row-start: 2;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+}
+@media screen and (max-width: 910px) {
+  .above-the-fold__featured-1,
+  .above-the-fold__latest-articles,
+  .above-the-fold__featured-2 {
+    -ms-grid-column-start: 1;
+    grid-column-start: 1;
+    grid-column-end: span 24;
+    -ms-grid-row-start: auto;
+    grid-row-start: auto;
+    grid-row-end: span 1;
+  }
+}
+@media screen and (max-width: 759px) {
+  .above-the-fold {
+    display: block;
+  }
+}
+.front-page-novara-live__posts-scroller {
+  height: 650px;
+  max-height: auto;
+  overflow-y: auto;
+}
+.front-page__audio-product {
+  height: 100%;
+}
+.front-page__audio-product-logo svg {
+  height: auto;
+  width: auto;
+  max-width: 250px;
+  max-height: 100px;
+  margin: 0 auto;
+  display: block;
+}
+.front-page__audio-product--novarafm svg path {
+  fill: var(--color-black-soft) !important;
+}
+.novara-fm-archive__header {
+  display: flex;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.novara-fm-archive__header svg {
+  width: 60%;
+  max-width: 600px;
+}
+.novara-fm-archive__splash-video-container {
+  position: relative;
+  background-color: #0e0e0e;
+  z-index: -10;
+}
+.novara-fm-archive__splash-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+.novara-fm-archive__cross {
+  max-width: 100%;
+  height: auto;
+}
+.novara-fm-archive__cross--black path {
+  fill: #0e0e0e;
+}
+.novara-fm-archive__cross--green path {
+  fill: #5fcc00;
+}
+.novara-fm-archive__archive-block .ux-carousel__nav-left {
+  background-image: linear-gradient(270deg,rgba(255,255,255,0) 0%,var(--color-green) 100%);
+}
+.novara-fm-archive__archive-block .ux-carousel__nav-right {
+  background-image: linear-gradient(90deg,rgba(255,255,255,0) 0%,var(--color-green) 100%);
+}
+.novara-fm-archive__archive-block .ux-carousel__wrapper {
+  padding: 1rem;
+}
+.novara-fm-archive__split-logotype {
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 @media screen and (max-width: 1408px) {
   .container {
