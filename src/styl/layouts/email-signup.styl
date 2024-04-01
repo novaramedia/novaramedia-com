@@ -1,0 +1,97 @@
+// EMAIL SIGNUP SECTION
+
+.email-signup
+  label
+    a
+      text-decoration: underline
+      &:hover
+        text-decoration: none
+
+.email-signup__completion-section
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.email-signup__name-input, .email-signup__email-input, .email-signup__submit, .email-signup__feedback-processing
+  padding: .4rem .8rem
+
+.email-signup__name-input, .email-signup__email-input
+  width: 100%
+  border-radius: var(--corner-radius)
+  border: 1px solid var(--color-white-soft)
+
+.email-signup__email-gdpr-group
+  display: flex
+  align-items: center
+
+.email-signup__email-gdpr-input
+  width: 1.5rem
+  height: 1.5rem
+  margin: 0 1rem
+
+.email-signup__form
+  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+    display: none
+  &--processing
+    .email-signup__feedback-processing
+      display: block
+    .email-signup__inputs
+      display: none
+  &--failed
+    .email-signup__feedback-failed
+      display: block
+  &--completed
+    .email-signup__feedback-completed
+      display: block
+    .email-signup__inputs
+      display: none
+
+// ******************************************************
+
+// NEWSLETTER PAGE EMAIL SIGNUP
+// TODO: Refactor this when the single newsletter template is updated
+
+.newsletter-page-email-signup__form
+  position: relative
+  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+.newsletter-page-email-signup__form.email-signup__form--processing, .newsletter-page-email-signup__form.email-signup__form--failed, .newsletter-page-email-signup__form.email-signup__form--completed
+  background-color: $color-black-soft
+  color: $color-white-soft
+  .newsletter-page-email-signup__inputs
+    opacity: 0
+
+.newsletter-page-email-signup__inputs
+  justify-content: flex-end
+
+.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input, .newsletter-page-email-signup__submit
+  width: 100%
+  padding: 8px 16px
+  font-size: $font-size-h3
+
+.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input
+  border-color: $color-black-soft
+  border-width: 1px
+  border-radius: 3px
+
+.newsletter-page-email-signup__email-gdpr-group
+  display: flex
+  align-items: center
+  justify-content: flex-end
+
+.newsletter-page-email-signup__email-gdpr-input
+  width: 2rem
+  height: 2rem
+  margin: 0 1rem
+
+.email-signup__icon
+  height: 3rem
+  fill: $color-white-soft
+
+// @media screen and (max-width: $breakpoint-s)
+
