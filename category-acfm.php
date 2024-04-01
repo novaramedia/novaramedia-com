@@ -33,7 +33,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       }
     }
   </style>
-  <div style="background-color: #FC16CB">
+  <div class="background-acfm-pink">
     <section class="container pt-5 pb-5 mb-4 font-color-white">
       <div class="grid-row">
         <div class="grid-item is-s-16 is-xxl-8 mt-4 fs-6 text-paragraph-breaks">

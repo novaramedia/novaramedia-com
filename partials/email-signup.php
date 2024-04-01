@@ -48,10 +48,10 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
-        <h3 class="fs-8 mb-4">
+        <h3 class="fs-8 fs-s-6 mb-4">
           <?php echo $headline; ?>
         </h3>
-        <p class="fs-6">
+        <p class="fs-6 fs-s-4-sans">
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>
@@ -79,7 +79,7 @@
             <input name="gdpr" class="email-signup__email-gdpr-input" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
           </div>
 
-          <input class="email-signup__submit nm-button fs-6" type="submit" value="Sign up">
+          <input class="email-signup__submit nm-button nm-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
 
           <div class="email-signup__feedback-processing">
             <div class="spinner">

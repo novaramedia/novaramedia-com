@@ -53,6 +53,10 @@ function nm_cmb_page_newsletters_metaboxes() {
   		'black' => __( 'Black', 'cmb2' ),
   		'white' => __( 'White', 'cmb2' ),
   		'acfm-pink' => __( 'ACFM Pink', 'cmb2' ),
+  		'yellow' => __( 'Yellow', 'cmb2' ),
+  		'green' => __( 'Green', 'cmb2' ),
+  		'lilac' => __( 'Lilac', 'cmb2' ),
+  		'light-blue' => __( 'Light Blue', 'cmb2' ),
   	),
   ) );
 

@@ -1381,6 +1381,9 @@ a {
 .background-light-purple {
   background-color: #b1b1ff;
 }
+.background-acfm-pink {
+  background-color: #fc16cb;
+}
 .background-cover-image {
   position: relative;
   background-size: cover;
@@ -3236,9 +3239,14 @@ b {
   align-items: center;
 }
 .email-signup__name-input,
+.email-signup__email-input,
+.email-signup__submit,
+.email-signup__feedback-processing {
+  padding: 0.4rem 0.8rem;
+}
+.email-signup__name-input,
 .email-signup__email-input {
   width: 100%;
-  padding: 0.4rem 0.8rem;
   border-radius: var(--corner-radius);
   border: 1px solid var(--color-white-soft);
 }
@@ -3251,12 +3259,6 @@ b {
   width: 2rem;
   height: 2rem;
   margin: 0 1rem;
-}
-.email-signup__submit {
-  padding: 0.4rem 0.8rem;
-}
-.email-signup__feedback-processing {
-  padding: 0.4rem 0.8rem;
 }
 .email-signup__form .email-signup__feedback-processing,
 .email-signup__form .email-signup__feedback-failed,
