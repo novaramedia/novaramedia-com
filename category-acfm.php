@@ -81,6 +81,28 @@ if( have_posts() ) {
       </div>
     </div>
   </div>
+  <?php
+    $newsletter = get_posts(
+      array(
+        'post_type'              => 'page',
+        'title'                  => 'ACFM Newsletter',
+        'numberposts'            => 1,
+        'update_post_term_cache' => false,
+        'update_post_meta_cache' => false,
+      )
+    );
+
+    if ($newsletter) {
+      $meta = get_post_meta($newsletter[0]->ID);
+      $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
+
+      if ($mailchimp_key) {
+        get_template_part('partials/email-signup', null, array(
+          'newsletter_page_id' => $newsletter[0]->ID
+        ));
+      }
+    }
+  ?>
 </main>
 <?php
 get_footer();
