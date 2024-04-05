@@ -459,7 +459,11 @@ class LiveChecker {
     let currentDay = currentTime.weekday;
     let currentHour = currentTime.hour;
     if (WP.liveCheckerData.overrides && WP.liveCheckerData.overrides.length > 0) {
+      console.log(WP.liveCheckerData.overrides);
       overrideMatch = WP.liveCheckerData.overrides.find(override => {
+        if (!override.start || !override.end) {
+          return false;
+        }
         let start = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.start).setZone('Europe/London');
         let end = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.end).setZone('Europe/London');
         if (currentTime >= start && currentTime < end) {
