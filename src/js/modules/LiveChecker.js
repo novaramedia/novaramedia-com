@@ -73,8 +73,6 @@ export class LiveChecker {
       WP.liveCheckerData.overrides &&
       WP.liveCheckerData.overrides.length > 0
     ) {
-      console.log(WP.liveCheckerData.overrides);
-
       overrideMatch = WP.liveCheckerData.overrides.find((override) => {
         if (!override.start || !override.end) {
           return false;

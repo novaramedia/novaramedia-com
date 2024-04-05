@@ -7,12 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Moment\\CustomFormats\\MomentJs' => $vendorDir . '/fightbulc/moment/src/CustomFormats/MomentJs.php',
-    'Moment\\FormatsInterface' => $vendorDir . '/fightbulc/moment/src/FormatsInterface.php',
-    'Moment\\Moment' => $vendorDir . '/fightbulc/moment/src/Moment.php',
-    'Moment\\MomentException' => $vendorDir . '/fightbulc/moment/src/MomentException.php',
-    'Moment\\MomentFromVo' => $vendorDir . '/fightbulc/moment/src/MomentFromVo.php',
-    'Moment\\MomentHelper' => $vendorDir . '/fightbulc/moment/src/MomentHelper.php',
-    'Moment\\MomentLocale' => $vendorDir . '/fightbulc/moment/src/MomentLocale.php',
-    'Moment\\MomentPeriodVo' => $vendorDir . '/fightbulc/moment/src/MomentPeriodVo.php',
 );

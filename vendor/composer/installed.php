@@ -3,7 +3,7 @@
         'name' => 'novaramedia/novaramedia-com',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'a8abaf9cb795bd4eb4e006e3337b604699fa79d6',
+        'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'cmb2/cmb2' => array(
-            'pretty_version' => 'v2.10.1',
-            'version' => '2.10.1.0',
-            'reference' => '4afc4bb7b92ab6d93aac2247c9a84af773e42532',
+            'pretty_version' => 'v2.11.0',
+            'version' => '2.11.0.0',
+            'reference' => '2847828b5cce1b48d09427ee13e6f7c752704468',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../cmb2/cmb2',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'novaramedia/novaramedia-com' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a8abaf9cb795bd4eb4e006e3337b604699fa79d6',
+            'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -22,14 +22,6 @@ class ComposerStaticInit98ace3775a8e3aa9b99bb90834ea3776
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Moment\\CustomFormats\\MomentJs' => __DIR__ . '/..' . '/fightbulc/moment/src/CustomFormats/MomentJs.php',
-        'Moment\\FormatsInterface' => __DIR__ . '/..' . '/fightbulc/moment/src/FormatsInterface.php',
-        'Moment\\Moment' => __DIR__ . '/..' . '/fightbulc/moment/src/Moment.php',
-        'Moment\\MomentException' => __DIR__ . '/..' . '/fightbulc/moment/src/MomentException.php',
-        'Moment\\MomentFromVo' => __DIR__ . '/..' . '/fightbulc/moment/src/MomentFromVo.php',
-        'Moment\\MomentHelper' => __DIR__ . '/..' . '/fightbulc/moment/src/MomentHelper.php',
-        'Moment\\MomentLocale' => __DIR__ . '/..' . '/fightbulc/moment/src/MomentLocale.php',
-        'Moment\\MomentPeriodVo' => __DIR__ . '/..' . '/fightbulc/moment/src/MomentPeriodVo.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
