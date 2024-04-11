@@ -80,7 +80,7 @@
               <input name="gdpr" class="email-signup__email-gdpr-input" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
-            <input class="email-signup__submit nm-button nm-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
+            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
           </div>
 
           <div class="email-signup__feedback-processing">

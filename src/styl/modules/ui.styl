@@ -63,6 +63,47 @@
   &--green
     background-color: $color-green
 
+// Buttons
+// -------------
+
+.ui-button
+  display: inline-flex
+  justify-content: center
+  align-items: flex-start
+  font-size: 20px
+  font-weight: 700
+  line-height: 1
+  padding: 9px 15px 11px 15px
+  background-color: var(--color-white-soft)
+  border: 1px solid var(--color-white-soft)
+  color: var(--color-black-soft)
+  // border-radius: var(--corner-radius)
+  border-radius: 4px
+  &:hover
+    background-color: transparent
+    color: var(--color-white-soft)
+    cursor: pointer
+  &:active
+    opacity: .5
+  &--red
+    background-color: var(--color-red)
+    color: var(--color-white-soft)
+    border-color: var(--color-red)
+    &:hover
+      color: var(--color-red)
+  &--white
+    background-color: var(--color-white-soft)
+    color: var(--color-black-soft)
+    border-color: var(--color-white-soft)
+    &:hover
+      color: var(--color-white-soft)
+  &--black
+    background-color: var(--color-black-soft)
+    color: var(--color-white-soft)
+    border-color: var(--color-black-soft)
+    &:hover
+      color: var(--color-black-soft)
+
 // -------------
 
 .ui-border-bottom

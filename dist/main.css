@@ -580,6 +580,7 @@ html {
   --corner-radius: 2px;
   --color-white-soft: #fdfdfd;
   --color-black-soft: #0e0e0e;
+  --color-red: #ff1941;
 }
 .flex-grid-row-xxl--reverse {
   flex-direction: column-reverse;
@@ -3137,6 +3138,56 @@ b {
 .ui-dot--green {
   background-color: #5fcc00;
 }
+.ui-button {
+  display: -ms-inline-flex;
+  display: inline-flex;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: flex-start;
+  align-items: flex-start;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 9px 15px 11px 15px;
+  background-color: var(--color-white-soft);
+  border: 1px solid var(--color-white-soft);
+  color: var(--color-black-soft);
+  border-radius: 4px;
+}
+.ui-button:hover {
+  background-color: transparent;
+  color: var(--color-white-soft);
+  cursor: pointer;
+}
+.ui-button:active {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.ui-button--red {
+  background-color: var(--color-red);
+  color: var(--color-white-soft);
+  border-color: var(--color-red);
+}
+.ui-button--red:hover {
+  color: var(--color-red);
+}
+.ui-button--white {
+  background-color: var(--color-white-soft);
+  color: var(--color-black-soft);
+  border-color: var(--color-white-soft);
+}
+.ui-button--white:hover {
+  color: var(--color-white-soft);
+}
+.ui-button--black {
+  background-color: var(--color-black-soft);
+  color: var(--color-white-soft);
+  border-color: var(--color-black-soft);
+}
+.ui-button--black:hover {
+  color: var(--color-black-soft);
+}
 .ui-border-bottom {
   border-bottom: 1px solid #bebebe;
 }
@@ -3307,7 +3358,6 @@ b {
 }
 .email-signup__name-input,
 .email-signup__email-input,
-.email-signup__submit,
 .email-signup__feedback-processing {
   padding: 0.4rem 0.8rem;
 }
