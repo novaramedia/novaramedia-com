@@ -6,31 +6,31 @@
 .ui-tag
   font-size-1()
   text-transform: uppercase
-  background-color: $color-white-soft
+  background-color: var(--color-white-soft)
   color: $color-black-soft
-  border: 1px solid $color-gray-light
+  border: 1px solid var(--color-gray-light)
   border-radius: 0.1875rem
   padding: 0.21875rem (0.21875rem * 1.75)
   &:before
     content: ''
-    background-color: $color-black-soft
+    background-color: var(--color-black-soft)
     border-radius: 1rem
     width .4rem
     height: .4rem
     display: inline-block
     margin-right: .25rem
   &--no-border
-    border-color: $color-white-soft
+    border-color: var(--color-white-soft)
   &--no-fill--white
     background-color: transparent
-    color: $color-white-soft
-    border-color: $color-white-soft
+    color: var(--color-white-soft)
+    border-color: var(--color-white-soft)
     &:before
-      background-color: $color-white-soft
+      background-color: var(--color-white-soft)
 
 .ui-av-tag
   font-size-1()
-  background-color: $color-white-soft
+  background-color: var(--color-white-soft)
   border-radius: 50%
   display: inline-block
   vertical-align: middle
@@ -56,12 +56,12 @@
   width: 1ex
   height: 1ex
   border-radius: 10ex
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
   margin-right: .25em
   &--red
-    background-color: $color-red
+    background-color: var(--color-red)
   &--green
-    background-color: $color-green
+    background-color: var(--color-green)
 
 // Buttons
 // -------------
@@ -78,7 +78,7 @@
   border: 1px solid var(--color-white-soft)
   color: var(--color-black-soft)
   // border-radius: var(--corner-radius)
-  border-radius: 4px
+  border-radius: 4px // TODO this should relate to variables
   &:hover
     background-color: transparent
     color: var(--color-white-soft)
@@ -107,13 +107,13 @@
 // -------------
 
 .ui-border-bottom
-  border-bottom: 1px solid $color-gray-light
+  border-bottom: 1px solid var(--color-gray-light)
 
 .ui-border-top
-  border-top: 1px solid $color-gray-light
+  border-top: 1px solid var(--color-gray-light)
 
 .ui-border--black
-  border-color: $color-black-soft
+  border-color: var(--color-black-soft)
 
 // -------------
 
