@@ -93,24 +93,48 @@
 
 // -------------
 
-.ui-ticker__wrapper
-  height: 1em
-
 .ui-ticker
   position: relative
+  width: 100%
+  height: 1.5em
   overflow: hidden
-  height: 100%
-  .ui-ticker__inner
+
+  .ui-ticker__fade-left
     position: absolute
     top: 0
     left: 0
+    width: 1.5rem
+    height: 100%
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0), var(--color-black-soft))
+    z-index: 10
+
+  .ui-ticker__fade-right
+    position: absolute
+    top: 0
+    right: 0
+    width: 1.5rem
+    height: 100%
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), var(--color-black-soft))
+    z-index: 10
+
+  .ui-ticker__item
+    display: inline-block
     white-space: nowrap
-    animation: ticker 30s linear infinite
+
+  .ui-ticker__inner
+    height: 1.5em
+    line-height: 1.5em
+    white-space: nowrap
+    display: inline-block
+    box-sizing: content-box
+    animation: ticker 40s linear infinite
     animation-play-state: running
     &:hover
       animation-play-state: paused
     @keyframes ticker
       0%
-        transform: translateX(10%)
+        transform: translateX(100%)
+        visibility: visible
+
       100%
-        transform: translateX(-90%)
+        transform: translateX(-100%)
