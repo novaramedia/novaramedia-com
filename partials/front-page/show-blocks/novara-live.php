@@ -24,7 +24,6 @@
                 <div class="ui-ticker__fade-right"></div>
                 <div class="ui-ticker__inner">
                   <div class="ui-ticker__item">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</div>
-                  <!-- <div class="ui-ticker__item">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</div> -->
                 </div>
               </div>
             </div>
