@@ -1,7 +1,18 @@
 .front-page-novara-live__posts-scroller
-  height: 650px
-  max-height: auto
-  overflow-y: auto
+  height: 400px
+  position: relative
+  .front-page-novara-live__posts-scroller__inner
+    overflow-y: auto
+    overflow-x: hidden
+    height: 100%
+  .front-page-novara-live__posts-scroller__fade
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 2rem
+    z-index: 10
+    background-image: linear-gradient(rgba(255, 255, 255, 0), var(--color-black-soft))
 
 .front-page__audio-product
   height: 100%

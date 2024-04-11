@@ -2652,6 +2652,47 @@ b {
 .pr-12 {
   padding-right: 9rem;
 }
+@media screen and (max-width: 1104px) {
+  .mt-l-0 {
+    margin-top: 0rem;
+  }
+  .mt-l-1 {
+    margin-top: 0.25rem;
+  }
+  .mt-l-2 {
+    margin-top: 0.5rem;
+  }
+  .mt-l-3 {
+    margin-top: 0.75rem;
+  }
+  .mt-l-4 {
+    margin-top: 1rem;
+  }
+  .mt-l-5 {
+    margin-top: 2rem;
+  }
+  .mt-l-6 {
+    margin-top: 3rem;
+  }
+  .mt-l-7 {
+    margin-top: 4rem;
+  }
+  .mt-l-8 {
+    margin-top: 5rem;
+  }
+  .mt-l-9 {
+    margin-top: 6rem;
+  }
+  .mt-l-10 {
+    margin-top: 7rem;
+  }
+  .mt-l-11 {
+    margin-top: 8rem;
+  }
+  .mt-l-12 {
+    margin-top: 9rem;
+  }
+}
 @media screen and (max-width: 759px) {
   .mt-s-0 {
     margin-top: 0rem;
@@ -3115,19 +3156,26 @@ b {
   color: #3d3d3d;
 }
 .ui-ticker__wrapper {
-  height: 1em;
+  height: 1.5em;
 }
 .ui-ticker {
   position: relative;
+  width: 100%;
   overflow: hidden;
-  height: 100%;
+  height: 1.5em;
+  box-sizing: content-box;
+}
+.ui-ticker .ui-ticker__item {
+  display: inline-block;
 }
 .ui-ticker .ui-ticker__inner {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: inline-block;
+  height: 1.5em;
+  line-height: 1.5em;
   white-space: nowrap;
-  animation: ticker 30s linear infinite;
+  padding-right: 100%;
+  box-sizing: content-box;
+  animation: ticker 60s linear infinite;
   animation-play-state: running;
 }
 .ui-ticker .ui-ticker__inner:hover {
@@ -3135,10 +3183,11 @@ b {
 }
 @keyframes ticker {
   0% {
-    transform: translateX(10%);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
   }
   100% {
-    transform: translateX(-90%);
+    transform: translate3d(-100%, 0, 0);
   }
 }
 .ux-carousel__wrapper {
@@ -3340,9 +3389,22 @@ b {
   fill: #fdfdfd;
 }
 .front-page-novara-live__posts-scroller {
-  height: 650px;
-  max-height: auto;
+  height: 400px;
+  position: relative;
+}
+.front-page-novara-live__posts-scroller .front-page-novara-live__posts-scroller__inner {
   overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.front-page-novara-live__posts-scroller .front-page-novara-live__posts-scroller__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  z-index: 10;
+  background-image: linear-gradient(rgba(255,255,255,0),var(--color-black-soft));
 }
 .front-page__audio-product {
   height: 100%;
