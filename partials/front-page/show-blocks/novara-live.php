@@ -18,12 +18,13 @@
         <a href="<?php echo $category_link; ?>">
           <div class="layout-split-level">
             <h3 class="fs-7 layout-flex-no-shrink mr-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
-            <div class="layout-flex-grow fs-7 font-weight-regular">
-              <div class="ui-ticker__wrapper">
-                <div class="ui-ticker">
-                  <div class="ui-ticker__inner">
-                    <div class="ui-ticker__item">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</div>
-                  </div>
+            <div class="layout-flex-grow layout-overflow-hidden fs-7 font-weight-regular">
+              <div class="ui-ticker">
+                <div class="ui-ticker__fade-left"></div>
+                <div class="ui-ticker__fade-right"></div>
+                <div class="ui-ticker__inner">
+                  <div class="ui-ticker__item">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</div>
+                  <!-- <div class="ui-ticker__item">The biggest stories and guests from the UK and international left. Livestreamed on YouTube weeknights at 6PM GMT.</div> -->
                 </div>
               </div>
             </div>
