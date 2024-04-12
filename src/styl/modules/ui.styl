@@ -69,27 +69,36 @@
 formElementBase()
   display: inline-flex
   justify-content: center
-  align-items: flex-start
+  height: 2.625rem
+  align-items: center
+  font-family: var(--font-family-sans)
   font-size: 1.25rem
-  line-height: 1
+  line-height: 1.25rem
   padding: 0.5625rem 0.9375rem 0.6875rem 0.9375rem
+  box-sizing: border-box
   background-color: var(--color-white-soft)
   border: 1px solid var(--color-white-soft)
   color: var(--color-black-soft)
   border-radius calc('var(--corner-radius) * 2')
   &--small
+    height: 2.1875rem
     font-size: 1rem
+    line-height: 1rem
     padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem
 
 .ui-button
   formElementBase()
   font-weight: 700
+  text-align: center
   &:hover
     background-color: transparent
     color: var(--color-white-soft)
     cursor: pointer
   &:active
     opacity: .5
+
+  &--fill-width
+    width: 100%
 
   &--red
     background-color: var(--color-red)
@@ -111,6 +120,13 @@ formElementBase()
     border-color: var(--color-black-soft)
     &:hover
       color: var(--color-black-soft)
+
+  &--green
+    background-color: var(--color-green)
+    color: var(--color-white-soft)
+    border-color: var(--color-green)
+    &:hover
+      color: var(--color-green)
 
 .ui-input
   formElementBase()

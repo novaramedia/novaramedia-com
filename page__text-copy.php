@@ -40,7 +40,7 @@ if( have_posts() ) {
         <?php
           if (!empty($meta['_nm_cta-link'][0]) && !empty($meta['_nm_cta-copy'][0])) {
         ?>
-          <p><a class="nm-button nm-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
+          <p><a class="ui-button ui-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
         <?php } ?>
       </div>
 
@@ -51,7 +51,7 @@ if( have_posts() ) {
         <?php
           if (!empty($meta['_nm_cta-link'][0]) && !empty($meta['_nm_cta-copy'][0])) {
         ?>
-          <p><a class="nm-button nm-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
+          <p><a class="ui-button ui-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
         <?php } ?>
       </div>
 

@@ -25,7 +25,7 @@
           <nav class="support-bar__close-trigger ui-hit-area ui-hit-area--top-right">
             <span class="ui-chevron ui-chevron--down font-color-white"></span>
           </nav>
-          <a href="<?php echo site_url('support/'); ?>" class="nm-button nm-button--white nm-button--small nm-button--inline only-desktop">
+          <a href="<?php echo site_url('support/'); ?>" class="ui-button ui-button--white ui-button--small only-desktop">
             <?php echo ($open_button ? $open_button : 'Join our supporters'); ?>
           </a>
         </div>
@@ -34,7 +34,7 @@
         <p class="margin-bottom-micro"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media space. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
         <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>
         <div class="margin-top-tiny">
-          <a href="<?php echo site_url('support/'); ?>" class="nm-button nm-button--white nm-button--small nm-button--inline">
+          <a href="<?php echo site_url('support/'); ?>" class="ui-button ui-button--white ui-button--small">
             <?php echo ($open_button ? $open_button : 'Join our supporters'); ?>
           </a>
         </div>

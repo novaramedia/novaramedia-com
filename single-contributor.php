@@ -38,7 +38,7 @@ function render_posts_section($query, $title, $is_full_archive) {
       if ( $query->max_num_pages > 1 ) {
 ?>
     <div class="grid-item is-xxl-24 mb-2">
-      <a href="?is_full_archive=true" class="nm-button nm-button--inline nm-button--black fs-3-sans">View full archive</a>
+      <a href="?is_full_archive=true" class="ui-button ui-button--black ui-button--small fs-3-sans">View full archive</a>
     </div>
 <?php
       }

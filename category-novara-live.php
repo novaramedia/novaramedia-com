@@ -26,10 +26,10 @@ get_header();
         <h1 class="fs-8">Novara Live</h1>
       </div>
       <div class="grid-item offset-s-0 is-s-12 offset-l-0 is-l-6 offset-xl-6 is-xl-6 offset-xxl-10 is-xxl-4">
-        <a class="nm-button nm-button--black fs-s-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
+        <a class="ui-button ui-button--white ui-button--small ui-button--fill-width fs-s-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
       </div>
       <div class="grid-item offset-s-0 is-s-12 is-l-6 is-xl-6 is-xxl-4">
-        <a class="nm-button nm-button--red fs-s-2" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
+        <a class="ui-button ui-button--red ui-button--small ui-button--fill-width fs-s-2" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
       </div>
     </div>
     <div class="novara-live-archive__liveplayer grid-row">

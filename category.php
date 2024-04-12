@@ -63,7 +63,7 @@ if ($category->slug === 'video') {
         if ($is_video) {
       ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
-        <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo $youtube_copy; ?></a>
+        <a class="ui-button ui-button--red ui-button--small" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo $youtube_copy; ?></a>
       </div>
       <?php
         }
@@ -73,7 +73,7 @@ if ($category->slug === 'video') {
           $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
       ?>
       <div class="<?php echo $button_grid_item_classes; ?>">
-        <a class="nm-button nm-button--white" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+        <a class="ui-button ui-button--black ui-button--small" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
       </div>
       <?php
         }

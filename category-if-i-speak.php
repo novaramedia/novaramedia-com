@@ -11,18 +11,18 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
 <main id="main-content" class="category-archive category-archive__if-i-speak">
   <style type="text/css">
     .category-archive__if-i-speak__header {
-      color: rgb(220, 0, 5);
+      color: var(--color-red);
     }
 
-    .category-archive__if-i-speak__header .nm-button {
+    /* .category-archive__if-i-speak__header .ui-button {
       border-color: rgb(220, 0, 5);
       color: rgb(220, 0, 5);
     }
 
-    .category-archive__if-i-speak__header .nm-button:hover {
+    .category-archive__if-i-speak__header .ui-button:hover {
       background-color: rgb(220, 0, 5);
       color: rgb(255, 255, 255);
-    }
+    } */
 
     .category-archive__if-i-speak__title {
       font-size: 18.5rem;
@@ -40,7 +40,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
 
     .category-archive__if-i-speak__border {
-      border: 1px solid rgb(220, 0, 5);
+      border: 1px solid var(--color-red);
       margin-top: 0;
     }
 
@@ -124,7 +124,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
             if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
               $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
           ?>
-          <a class="nm-button nm-button--white nm-button--inline margin-bottom-tiny" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <a class="ui-button ui-button--red mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
           <?php
             }
           ?>
@@ -137,14 +137,14 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
   </div>
 
   <div class="container">
-    <div class="grid-row margin-bottom-basic">
+    <div class="grid-row mb-4">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
     get_template_part('partials/post-layouts/flex-post', null, array(
-      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 margin-bottom-basic',
+      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
       'image-size' => 'col12-16to9',
     ));
   }
@@ -154,7 +154,7 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="grid-row margin-bottom-basic">
+    <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <?php get_template_part('partials/pagination'); ?>
       </div>
