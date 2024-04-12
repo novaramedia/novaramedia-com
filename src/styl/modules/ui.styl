@@ -70,33 +70,39 @@
   display: inline-flex
   justify-content: center
   align-items: flex-start
-  font-size: 20px
+  font-size: 1.25rem
   font-weight: 700
   line-height: 1
-  padding: 9px 15px 11px 15px
+  padding: 0.5625rem 0.9375rem 0.6875rem 0.9375rem
   background-color: var(--color-white-soft)
   border: 1px solid var(--color-white-soft)
   color: var(--color-black-soft)
-  // border-radius: var(--corner-radius)
-  border-radius: 4px // TODO this should relate to variables
+  border-radius calc('var(--corner-radius) * 2')
   &:hover
     background-color: transparent
     color: var(--color-white-soft)
     cursor: pointer
   &:active
     opacity: .5
+
+  &--small
+    font-size: 1rem
+    padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem
+
   &--red
     background-color: var(--color-red)
     color: var(--color-white-soft)
     border-color: var(--color-red)
     &:hover
       color: var(--color-red)
+
   &--white
     background-color: var(--color-white-soft)
     color: var(--color-black-soft)
     border-color: var(--color-white-soft)
     &:hover
       color: var(--color-white-soft)
+
   &--black
     background-color: var(--color-black-soft)
     color: var(--color-white-soft)
