@@ -1,0 +1,30 @@
+// SUPPORT SECTION
+
+.support-form
+  display: block
+  .support-form__inputs
+    opacity: 0
+    transition: opacity var(--animation-speed-basic)
+  &--active
+    .support-form__inputs
+      opacity: 1
+
+.support-form__button, .support-form__custom-input, .support-form__submit
+  color: var(--color-red)
+  background-color: var(--color-white-soft)
+  font-weight: normal
+  text-align: center
+  &:hover, &--active
+    color: var(--color-white-soft)
+    background-color: var(--color-red)
+    border-color: var(--color-white-soft)
+
+// .support-form__custom-input::placeholder
+//   padding-left: 5px
+
+.support-form__custom-input
+  &::placeholder
+    color: var(--color-red)
+  &:hover, &.support-form__button--active
+    &::placeholder
+      color: var(--color-white-soft)

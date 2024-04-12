@@ -56,6 +56,7 @@ html
   --color-gray-light-transparent: rgba(190,190,190, .5)
   --color-gray-extra-light: #EDEAEA
   --font-family-sans: font-stack('Helvetica Neue')
+  --animation-speed-basic: .5s
 
 flex-grid-maker('xxl')
 grid-maker('xxl')
@@ -117,8 +118,6 @@ $color-red-dark = #A80003
 $color-blue = rgb(84, 144, 235)
 
 $border-width = 2px
-
-$basic-animation-speed = .5s
 
 $duration-medium-transitions = 420ms
 $duration-quick-transitions = $duration-medium-transitions * .333
@@ -612,44 +611,6 @@ nmButton()
 
 // ******************************************************
 
-// SUPPORT SECTION
-
-.support-form
-  display: block
-  .support-form__inputs
-    opacity: 0
-    transition: opacity $basic-animation-speed
-  &--active
-    .support-form__inputs
-      opacity: 1
-
-.support-form__button, .support-form__custom-input
-  nmButton()
-  color: $color-red
-  background-color: $color-white-soft
-  &:hover, &--active
-    color: $color-white-soft
-    background-color: $color-red-dark
-    border-color: $color-white-soft
-
-.support-form__button, .support-form__custom-input, .support-form__submit
-  width: 100%
-  font-weight: normal
-  border-color: $color-white-soft
-  &:hover, &--active
-    border-color: $color-white-soft
-
-.support-form__custom-input::placeholder
-  padding-left: 5px
-  transition: color $duration-form-transitions
-
-.support-form__custom-input
-  &::placeholder
-    color: $color-red
-  &:hover, &.support-form__button--active
-    &::placeholder
-      color: $color-white-soft
-
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
@@ -669,23 +630,6 @@ nmButton()
   svg
     height: 2rem
     width: auto
-
-// FUNDRAISER PROGRESS BAR
-
-#progress-bar-row
-  display: none
-
-#progress-bar-holder
-  position: relative
-  height: 1.5em
-
-#progress-bar
-  position: absolute
-  left: 0
-  width: 0%
-  transition: width 1s
-  height: 1.5em
-  background-color: $color-red
 
 // ******************************************************
 
@@ -887,7 +831,7 @@ nmButton()
 
 .support-bar
   opacity: 0
-  transition: opacity $basic-animation-speed
+  transition: opacity var(--animation-speed-basic)
   .support-bar__open-view
     align-items: center
   .flex-grid-row.is-one-even-line-grid
@@ -954,6 +898,7 @@ nmButton()
 @import "layouts/header"
 @import "layouts/novara-fm-archive"
 @import "layouts/products-bar"
+@import "layouts/support-form"
 
 // ******************************************************
 
