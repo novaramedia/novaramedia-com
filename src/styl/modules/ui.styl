@@ -63,31 +63,33 @@
   &--green
     background-color: var(--color-green)
 
-// Buttons
+// Form Elements
 // -------------
 
-.ui-button
+formElementBase()
   display: inline-flex
   justify-content: center
   align-items: flex-start
   font-size: 1.25rem
-  font-weight: 700
   line-height: 1
   padding: 0.5625rem 0.9375rem 0.6875rem 0.9375rem
   background-color: var(--color-white-soft)
   border: 1px solid var(--color-white-soft)
   color: var(--color-black-soft)
   border-radius calc('var(--corner-radius) * 2')
+  &--small
+    font-size: 1rem
+    padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem
+
+.ui-button
+  formElementBase()
+  font-weight: 700
   &:hover
     background-color: transparent
     color: var(--color-white-soft)
     cursor: pointer
   &:active
     opacity: .5
-
-  &--small
-    font-size: 1rem
-    padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem
 
   &--red
     background-color: var(--color-red)
@@ -109,6 +111,15 @@
     border-color: var(--color-black-soft)
     &:hover
       color: var(--color-black-soft)
+
+.ui-input
+  formElementBase()
+  width: 100%
+
+.ui-checkbox
+  formElementBase()
+  width: 1.25rem
+  height: 1.25rem
 
 // -------------
 
