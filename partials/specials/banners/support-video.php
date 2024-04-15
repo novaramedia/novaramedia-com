@@ -35,7 +35,7 @@
             }
           ?>
         </a>
-        <a href="<?php echo site_url('support/'); ?>" class="nm-button nm-button--white nm-button--inline">Fund something better</a>
+        <a href="<?php echo site_url('support/'); ?>" class="ui-button ui-button--white">Fund something better</a>
       </div>
     </div>
   </div>

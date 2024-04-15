@@ -598,6 +598,9 @@ html {
   --font-family-sans: 'Helvetica Neue';
   --animation-speed-basic: 0.5s;
 }
+body {
+  overscroll-behavior: none;
+}
 .flex-grid-row-xxl--reverse {
   flex-direction: column-reverse;
 }
@@ -1322,62 +1325,20 @@ a {
 }
 .avif .background-support-texture,
 .webp .background-support-texture {
-  background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,#ff1941 100%), url("img/specials/support-2023-texture.webp");
+  background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,var(--color-red) 100%), url("img/specials/support-2023-texture.webp");
 }
 .avif .background-support-texture-alt,
 .webp .background-support-texture-alt {
-  background-image: linear-gradient(0deg,#ff1941 -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.webp");
+  background-image: linear-gradient(0deg,var(--color-red) -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.webp");
 }
 .fallback .background-support-texture {
-  background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,#ff1941 100%), url("img/specials/support-2023-texture.png");
+  background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,var(--color-red) 100%), url("img/specials/support-2023-texture.png");
 }
 .fallback .background-support-texture-alt {
-  background-image: linear-gradient(0deg,#ff1941 -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.png");
-}
-.ui-chevron {
-  display: inline-block;
-  border-right: 2px solid;
-  border-bottom: 2px solid;
-  height: 1rem;
-  width: 1rem;
-}
-.ui-chevron.ui-chevron--up {
-  transform: rotate(225deg);
-  margin-bottom: -0.4rem;
-}
-.ui-chevron.ui-chevron--down {
-  transform: rotate(45deg);
-}
-.ui-hit-area {
-  padding: 2rem;
-  cursor: pointer;
-}
-.ui-hit-area--small {
-  padding: 1rem;
-}
-.ui-hit-area--top-right {
-  padding-top: 0;
-  padding-right: 0;
-}
-.ui-hit-area--bottom-right {
-  padding-bottom: 0;
-  padding-right: 0;
-}
-.ux-pointer {
-  cursor: pointer;
+  background-image: linear-gradient(0deg,var(--color-red) -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.png");
 }
 .icon-large:before {
   font-size: 1.400505962399693rem;
-}
-.button {
-  display: inline-block;
-  width: 100%;
-  padding: 16px;
-  text-align: center;
-  border: 2px solid #0e0e0e;
-}
-.button.button-small {
-  padding: 8px;
 }
 .component-quote {
   margin-top: 1rem;
@@ -1521,68 +1482,6 @@ img {
 }
 .padding-bottom-large {
   padding-bottom: 80px;
-}
-.nm-button {
-  display: block;
-  padding: 8px 16px;
-  font-weight: bold;
-  text-align: center;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-radius: 3px;
-  transition-property: background-color, color, border-color;
-  transition-duration: 420ms;
-}
-.nm-button:hover {
-  border-color: $color-gray;
-  cursor: pointer;
-}
-.nm-button--red {
-  background-color: #dc0005;
-  color: #fdfdfd;
-}
-.nm-button--red:hover {
-  background-color: #fdfdfd;
-  color: #dc0005;
-  border-color: #dc0005;
-}
-.nm-button--red-dark {
-  background-color: #a80003;
-  color: #fdfdfd;
-}
-.nm-button--red-dark:hover {
-  background-color: #fdfdfd;
-  color: #a80003;
-  border-color: #a80003;
-}
-.nm-button--white {
-  background-color: #fdfdfd;
-  color: #0e0e0e;
-  border-color: #0e0e0e;
-}
-.nm-button--white:hover {
-  background-color: #0e0e0e;
-  color: #fdfdfd;
-  border-color: #0e0e0e;
-}
-.nm-button--black {
-  background-color: #0e0e0e;
-  color: #fdfdfd;
-  border-color: #fdfdfd;
-}
-.nm-button--black:hover {
-  background-color: #fdfdfd;
-  color: #0e0e0e;
-}
-.nm-button--inline {
-  display: inline-block;
-}
-.nm-button--half {
-  width: 49%;
-}
-.nm-button--small {
-  padding: 4.944271909998838px 16px;
 }
 .support-page__hero-wrapper {
   padding: 70px 0;
@@ -2807,6 +2706,11 @@ b {
   flex: 1;
   height: 100%;
 }
+.layout-flex-align-center {
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
 .layout-thumbnail-frame {
   position: relative;
 }
@@ -2940,6 +2844,9 @@ b {
   line-height: 1rem;
   padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
 }
+.ui-button--auto-height {
+  height: auto;
+}
 .ui-button:hover {
   background-color: transparent;
   color: var(--color-white-soft);
@@ -3011,6 +2918,9 @@ b {
   line-height: 1rem;
   padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
 }
+.ui-input--auto-height {
+  height: auto;
+}
 .ui-checkbox {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
   display: -ms-inline-flex;
@@ -3037,6 +2947,9 @@ b {
   font-size: 1rem;
   line-height: 1rem;
   padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
+}
+.ui-checkbox--auto-height {
+  height: auto;
 }
 .ui-border-bottom {
   border-bottom: 1px solid var(--color-gray-light);
@@ -3107,6 +3020,38 @@ b {
   100% {
     transform: translateX(-100%);
   }
+}
+.ui-chevron {
+  display: inline-block;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  height: 1rem;
+  width: 1rem;
+}
+.ui-chevron.ui-chevron--up {
+  transform: rotate(225deg);
+  margin-bottom: -0.4rem;
+}
+.ui-chevron.ui-chevron--down {
+  transform: rotate(45deg);
+}
+.ui-hit-area {
+  padding: 2rem;
+  cursor: pointer;
+}
+.ui-hit-area--small {
+  padding: 1rem;
+}
+.ui-hit-area--top-right {
+  padding-top: 0;
+  padding-right: 0;
+}
+.ui-hit-area--bottom-right {
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.ux-pointer {
+  cursor: pointer;
 }
 .ux-carousel__wrapper {
   overflow: hidden;
@@ -3209,11 +3154,6 @@ b {
 .email-signup__feedback-processing {
   padding: 0.4rem 0.8rem;
 }
-.email-signup__email-gdpr-group {
-  display: flex;
-  -ms-align-items: center;
-  align-items: center;
-}
 .email-signup__form .email-signup__feedback-processing,
 .email-signup__form .email-signup__feedback-failed,
 .email-signup__form .email-signup__feedback-completed {
@@ -3249,8 +3189,8 @@ b {
 .newsletter-page-email-signup__form.email-signup__form--processing,
 .newsletter-page-email-signup__form.email-signup__form--failed,
 .newsletter-page-email-signup__form.email-signup__form--completed {
-  background-color: #0e0e0e;
-  color: #fdfdfd;
+  background-color: var(--color-black-soft);
+  color: var(--color-white-soft);
 }
 .newsletter-page-email-signup__form.email-signup__form--processing .newsletter-page-email-signup__inputs,
 .newsletter-page-email-signup__form.email-signup__form--failed .newsletter-page-email-signup__inputs,
@@ -3259,38 +3199,9 @@ b {
   filter: alpha(opacity=0);
   opacity: 0;
 }
-.newsletter-page-email-signup__inputs {
-  -ms-justify-content: flex-end;
-  justify-content: flex-end;
-}
-.newsletter-page-email-signup__name-input,
-.newsletter-page-email-signup__email-input,
-.newsletter-page-email-signup__submit {
-  width: 100%;
-  padding: 8px 16px;
-  font-size: 1.400505962399693rem;
-}
-.newsletter-page-email-signup__name-input,
-.newsletter-page-email-signup__email-input {
-  border-color: #0e0e0e;
-  border-width: 1px;
-  border-radius: 3px;
-}
-.newsletter-page-email-signup__email-gdpr-group {
-  display: flex;
-  -ms-align-items: center;
-  align-items: center;
-  -ms-justify-content: flex-end;
-  justify-content: flex-end;
-}
-.newsletter-page-email-signup__email-gdpr-input {
-  width: 2rem;
-  height: 2rem;
-  margin: 0 1rem;
-}
 .email-signup__icon {
   height: 3rem;
-  fill: #fdfdfd;
+  fill: var(--color-white-soft);
 }
 .front-page-novara-live__posts-scroller {
   height: 400px;
@@ -3413,7 +3324,7 @@ html {
 }
 .site-header__logomark {
   position: relative;
-  transition: opacity $basic-animation-speed;
+  transition: opacity var(--animation-speed-basic);
 }
 .site-header__logomark svg {
   height: 19px;
@@ -3423,7 +3334,7 @@ html {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
-  transition: opacity $basic-animation-speed;
+  transition: opacity var(--animation-speed-basic);
   position: absolute;
   left: 0.5em;
   right: 0.5em;
@@ -3532,7 +3443,7 @@ html {
   background-color: transparent;
 }
 .products-bar__item-inner {
-  border-radius: var(--border-radius);
+  border-radius: var(--corner-radius);
   background-color: var(--color-gray-extra-light);
   border: 1px solid var(--color-gray-extra-light);
   padding: 0.5rem;

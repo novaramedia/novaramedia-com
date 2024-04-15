@@ -89,6 +89,6 @@
         wp_reset_postdata();
       ?>
     </div>
-    <a class="nm-button nm-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe on YouTube</a>
+    <a class="ui-button ui-button--red ui-button--small ui-button--auto-height" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe on YouTube</a>
   </div>
 </div>

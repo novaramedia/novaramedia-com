@@ -9,17 +9,7 @@
 <div class="if-i-speak-banner__container padding-top-basic padding-bottom-basic">
   <style type="text/css">
     .if-i-speak-banner__container {
-      color: rgb(220, 0, 5);
-    }
-
-    .if-i-speak-banner__container .nm-button {
-      border-color: rgb(220, 0, 5);
-      color: rgb(220, 0, 5);
-    }
-
-    .if-i-speak-banner__container .nm-button:hover {
-      background-color: rgb(220, 0, 5);
-      color: rgb(255, 255, 255);
+      color: var(--color-red);
     }
 
     .if-i-speak-banner__title {
@@ -46,7 +36,7 @@
     }
 
     .if-i-speak-banner__border {
-      border: 1px solid rgb(220, 0, 5);
+      border: 1px solid var(--color-red);
       margin-top: 0;
     }
 
@@ -143,7 +133,7 @@
         </div>
 
         <a href="<?php echo $url; ?>"><p class="fs-6 font-weight-bold mb-3">New episodes out every Friday</p></a>
-        <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Listen Now</a>
+        <a href="<?php echo $url; ?>" class="ui-button ui-button--red">Listen Now</a>
       </div>
       <div class="grid-item is-xxl-24">
         <hr class="if-i-speak-banner__border">

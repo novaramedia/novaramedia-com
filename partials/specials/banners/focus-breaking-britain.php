@@ -102,7 +102,7 @@
       </div>
       <div class="grid-item is-s-24 is-xxl-12">
         <a href="<?php echo $url; ?>"><p class="fs-5-sans mb-4">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
-        <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Read more</a>
+        <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Read more</a>
       </div>
     </div>
   </div>

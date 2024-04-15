@@ -77,7 +77,7 @@
       </div>
       <div class="grid-item is-s-24 is-xxl-12">
         <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold font-color-green-racing mb-4">Planet B is a new podcast series from Novara Media which imagines a world that isn’t just saved from climate breakdown, but is renewed and transformed by the fight against it.</p></a>
-        <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Listen Now</a>
+        <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Listen Now</a>
       </div>
     </div>
   </div>

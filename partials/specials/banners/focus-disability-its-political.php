@@ -59,7 +59,7 @@
         <div class="disability-its-political__text-background"></div>
         <div class="disability-its-political__text-copy">
           <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold mb-4">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
-          <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
+          <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Explore the Focus</a>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
       <div class="grid-row">
         <div class="grid-item is-xxl-24 mt-4">
           <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold mb-4">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
-          <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
+          <a href="<?php echo $url; ?>" class="ui-button ui-button--white ui-button--inline font-color-black">Explore the Focus</a>
         </div>
       </div>
     </div>
