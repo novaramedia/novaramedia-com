@@ -15,10 +15,6 @@
 .email-signup__feedback-processing
   padding: .4rem .8rem
 
-.email-signup__email-gdpr-group
-  display: flex
-  align-items: center
-
 .email-signup__form
   .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
     display: none
@@ -51,37 +47,14 @@
     height: 100%
 
 .newsletter-page-email-signup__form.email-signup__form--processing, .newsletter-page-email-signup__form.email-signup__form--failed, .newsletter-page-email-signup__form.email-signup__form--completed
-  background-color: $color-black-soft
-  color: $color-white-soft
+  background-color: var(--color-black-soft)
+  color: var(--color-white-soft)
   .newsletter-page-email-signup__inputs
     opacity: 0
 
-.newsletter-page-email-signup__inputs
-  justify-content: flex-end
-
-.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input, .newsletter-page-email-signup__submit
-  width: 100%
-  padding: 8px 16px
-  font-size: $font-size-h3
-
-.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input
-  border-color: $color-black-soft
-  border-width: 1px
-  border-radius: 3px
-
-.newsletter-page-email-signup__email-gdpr-group
-  display: flex
-  align-items: center
-  justify-content: flex-end
-
-.newsletter-page-email-signup__email-gdpr-input
-  width: 2rem
-  height: 2rem
-  margin: 0 1rem
-
 .email-signup__icon
   height: 3rem
-  fill: $color-white-soft
+  fill: var(--color-white-soft)
 
 // @media screen and (max-width: $breakpoint-s)
 
