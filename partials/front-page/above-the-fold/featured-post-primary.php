@@ -13,18 +13,19 @@
   $is_product_linked = !empty($args['is_product_linked']) && $args['is_product_linked'] === 'on' ? true : false;
   $more_on_section = !empty($args['more_on_section']) && $args['more_on_section'] !== 'none' ? $args['more_on_section'] : false;
 ?>
-    <a href="<?php echo get_permalink($post_id); ?>">
-      <div class="layout-thumbnail-frame">
-        <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-          <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
-        </div>
+    <div class="layout-thumbnail-frame">
+      <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+        <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
+      </div>
+      <a href="<?php echo get_permalink($post_id); ?>">
         <?php render_thumbnail($post_id, 'col24-16to9', array(
           'class' => 'ui-rounded-image',
           'data-no-lazysizes' => true,
           'loading' => 'eager'
         )); ?>
-      </div>
-    </a>
+      </a>
+    </div>
+
     <div class="grid-row grid--nested mt-3">
       <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-xxl-24'; ?>">
         <a href="<?php echo get_permalink($post_id); ?>" class="ui-post-hover">

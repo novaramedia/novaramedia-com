@@ -108,30 +108,32 @@
                 $meta = get_post_meta($post->ID);
                 $timestamp = get_post_time('c');
           ?>
-            <a href="<?php the_permalink(); ?>">
-              <div class="pb-3 mb-3 ui-border-bottom">
-                <div class="grid-row grid--nested">
-                  <div class="grid-item is-s-10 is-xxl-8">
+            <div class="pb-3 mb-3 ui-border-bottom">
+              <div class="grid-row grid--nested">
+                <div class="grid-item is-s-10 is-xxl-8">
+                  <a href="<?php the_permalink(); ?>">
                     <?php render_thumbnail($post->ID, 'col24-16to9', array(
                       'class' => 'ui-rounded-image'
                     )); ?>
+                  </a>
+                </div>
+                <div class="grid-item is-s-14 is-xxl-16">
+                  <div class="layout-split-level fs-2 mb-1">
+                    <?php render_post_ui_tags($post->ID, true, false, 'no-fill--white', 'inline'); ?>
+                    <?php if ($i < 6) { ?>
+                      <a href="<?php the_permalink(); ?>"><span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span></a>
+                    <?php } else { ?>
+                      <a href="<?php the_permalink(); ?>"><span><?php the_time('j F Y'); ?></span></a>
+                    <?php } ?>
                   </div>
-                  <div class="grid-item is-s-14 is-xxl-16">
-                    <div class="layout-split-level fs-2 mb-1">
-                      <?php render_post_ui_tags($post->ID, true, false, 'no-fill--white', 'inline'); ?>
-                      <?php if ($i < 6) { ?>
-                        <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
-                      <?php } else { ?>
-                        <span><?php the_time('j F Y'); ?></span>
-                      <?php } ?>
-                    </div>
+                  <a href="<?php the_permalink(); ?>">
                     <h4 class="post__title fs-2 fs-s-4-sans font-bold">
                       <?php the_title(); ?>
                     </h4>
-                  </div>
+                  </a>
                 </div>
               </div>
-            </a>
+            </div>
           <?php
                 $i++;
               }

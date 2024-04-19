@@ -2771,8 +2771,19 @@ b {
   display: inline-block;
   margin-right: 0.25rem;
 }
+.ui-tag:hover {
+  background-color: var(--color-gray-light);
+}
 .ui-tag--no-border {
   border-color: var(--color-white-soft);
+}
+.ui-tag--no-border:hover {
+  background-color: transparent;
+  color: var(--color-white-soft);
+  border-color: var(--color-white-soft);
+}
+.ui-tag--no-border:hover:before {
+  background-color: var(--color-white-soft);
 }
 .ui-tag--no-fill--white {
   background-color: transparent;
@@ -2781,6 +2792,13 @@ b {
 }
 .ui-tag--no-fill--white:before {
   background-color: var(--color-white-soft);
+}
+.ui-tag--no-fill--white:hover {
+  background-color: var(--color-white-soft);
+  color: var(--color-black-soft);
+}
+.ui-tag--no-fill--white:hover:before {
+  background-color: var(--color-black-soft);
 }
 .ui-av-tag {
   font-size: 0.5625rem;

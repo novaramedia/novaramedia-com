@@ -9,20 +9,23 @@
  * @param string $block_style_varient Additional BEM varient class
  */
 function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $tag_style_varient = false, $block_style_varient = false) {
-  $sub_category = get_the_sub_category($post_id);
+  $sub_category = get_the_sub_category($post_id, true);
 
   if (!$sub_category) {
     return;
   }
+
+  $category_link = get_category_link($sub_category->term_id);
 
   echo '<span class="ui-tag-block';
   echo $block_style_varient ? ' ui-tag-block--' . $block_style_varient : '';
   echo '">';
 
   if ($show_text) {
-    echo '<span class="';
+    echo '<a href="' . $category_link . '" class="';
     echo $tag_style_varient ? 'ui-tag ui-tag--' . $tag_style_varient : 'ui-tag';
-    echo '">' . $sub_category . '</span>';
+    echo '">' . $sub_category->name;
+    echo '</a>';
   }
 
   if ($show_av_icons) {

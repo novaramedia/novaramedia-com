@@ -43,15 +43,24 @@
           $excluded_ids = array_merge($excluded_ids, wp_list_pluck($posts, 'ID'));
 
           foreach ($posts as $index => $post) {
-        ?>
-        <a href="<?php echo get_permalink($post->ID); ?>">
-          <?php
             if ($index === 0) {
-              render_thumbnail($post->ID, 'col24-16to9', array(
+          ?>
+          <div class="layout-thumbnail-frame mb-1">
+            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+              <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
+            </div>
+            <a href="<?php echo get_permalink($post->ID); ?>">
+              <?php render_thumbnail($post->ID, 'col24-16to9', array(
                 'class' => 'ui-rounded-image',
-              ));
+                'data-no-lazysizes' => true,
+                'loading' => 'eager'
+              )); ?>
+            </a>
+          </div>
+          <?php
             }
           ?>
+        <a href="<?php echo get_permalink($post->ID); ?>">
           <h5 class="<?php echo $index === 2 ? "mb-2" : "pb-2 mb-2 ui-border-bottom";?>"><?php echo $post->post_title; ?></h5>
         </a>
         <?php
