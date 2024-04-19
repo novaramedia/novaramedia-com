@@ -1,5 +1,6 @@
 .ui-tag-block
   display: flex
+  align-items: center
   &--inline
     display: inline-flex
 
@@ -9,14 +10,16 @@
   background-color: var(--color-white-soft)
   color: $color-black-soft
   border: 1px solid var(--color-gray-light)
-  border-radius: 0.1875rem
-  padding: 0.21875rem (0.21875rem * 1.75)
+  border-radius: var(--corner-radius)
+  padding: 0.25rem 0.40625rem 0.25rem 0.34375rem
+  display: inline-flex
+  align-items: center
   &:before
     content: ''
     background-color: var(--color-black-soft)
     border-radius: 1rem
-    width .4rem
-    height: .4rem
+    width 1cap
+    height: 1cap
     display: inline-block
     margin-right: .25rem
   &--no-border

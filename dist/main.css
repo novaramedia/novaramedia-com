@@ -2738,6 +2738,8 @@ b {
 }
 .ui-tag-block {
   display: flex;
+  -ms-align-items: center;
+  align-items: center;
 }
 .ui-tag-block--inline {
   display: -ms-inline-flex;
@@ -2753,15 +2755,19 @@ b {
   background-color: var(--color-white-soft);
   color: #0e0e0e;
   border: 1px solid var(--color-gray-light);
-  border-radius: 0.1875rem;
-  padding: 0.21875rem 0.3828125rem;
+  border-radius: var(--corner-radius);
+  padding: 0.25rem 0.40625rem 0.25rem 0.34375rem;
+  display: -ms-inline-flex;
+  display: inline-flex;
+  -ms-align-items: center;
+  align-items: center;
 }
 .ui-tag:before {
   content: '';
   background-color: var(--color-black-soft);
   border-radius: 1rem;
-  width: 0.4rem;
-  height: 0.4rem;
+  width: 1cap;
+  height: 1cap;
   display: inline-block;
   margin-right: 0.25rem;
 }

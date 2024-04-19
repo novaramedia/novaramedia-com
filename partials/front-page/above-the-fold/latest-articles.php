@@ -20,7 +20,7 @@ if ($recent_articles->have_posts()) {
 ?>
 <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
   <a href="<?php the_permalink(); ?>" class="ui-post-hover">
-    <div class="layout-split-level fs-2 mb-2">
+    <div class="layout-split-level fs-2 mb-1">
       <?php render_post_ui_tags($post->ID); ?>
       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
     </div>
