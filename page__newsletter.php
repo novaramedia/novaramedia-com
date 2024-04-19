@@ -72,15 +72,15 @@ if( have_posts() ) {
             <div class="newsletter-page-email-signup__inputs">
               <div class="form-group mb-2">
                 <label class="u-visuallyhidden" for="firstName">First name:</label>
-                <input name="firstName" class="newsletter-page-email-signup__name-input ui-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
+                <input name="firstName" class="newsletter-page-email-signup__name-input ui-input ui-input--border-gray" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
               </div>
               <div class="form-group mb-2">
                 <label class="u-visuallyhidden" for="email">Email:</label>
-                <input name="email" class="newsletter-page-email-signup__email-input ui-input" id="email" type="email" autocomplete="email" placeholder="Email" required />
+                <input name="email" class="newsletter-page-email-signup__email-input ui-input ui-input--border-gray" id="email" type="email" autocomplete="email" placeholder="Email" required />
               </div>
               <div class="newsletter-page-email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
                 <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
-                <input name="gdpr" class="newsletter-page-email-signup__email-gdpr-input ui-checkbox ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
+                <input name="gdpr" class="newsletter-page-email-signup__email-gdpr-input ui-checkbox ui-checkbox--border-gray ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
               </div>
 
               <input class="newsletter-page-email-signup__submit ui-button ui-button--black" type="submit" value="Sign up">

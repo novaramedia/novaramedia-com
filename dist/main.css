@@ -579,7 +579,9 @@ html {
   --grid-gutter: 1rem;
   --corner-radius: 2px;
   --color-white-soft: #fdfdfd;
+  --color-white-soft-transparent: rgba(253,253,253,0.5);
   --color-black-soft: #0e0e0e;
+  --color-black-soft-transparent: rgba(14,14,14,0.5);
   --color-red: #ff1941;
   --color-yellow: #ebb800;
   --color-green: #5fcc00;
@@ -2753,7 +2755,7 @@ b {
   letter-spacing: 0.02813rem;
   text-transform: uppercase;
   background-color: var(--color-white-soft);
-  color: #0e0e0e;
+  color: var(--color-black-soft);
   border: 1px solid var(--color-gray-light);
   border-radius: var(--corner-radius);
   padding: 0.25rem 0.40625rem 0.25rem 0.34375rem;
@@ -2774,6 +2776,9 @@ b {
 .ui-tag:hover {
   background-color: var(--color-gray-light);
 }
+.ui-tag:active {
+  color: var(--color-black-soft-transparent);
+}
 .ui-tag--no-border {
   border-color: var(--color-white-soft);
 }
@@ -2784,6 +2789,9 @@ b {
 }
 .ui-tag--no-border:hover:before {
   background-color: var(--color-white-soft);
+}
+.ui-tag--no-border:active {
+  color: var(--color-white-soft-transparent);
 }
 .ui-tag--no-fill--white {
   background-color: transparent;
@@ -2799,6 +2807,9 @@ b {
 }
 .ui-tag--no-fill--white:hover:before {
   background-color: var(--color-black-soft);
+}
+.ui-tag--no-fill--white:active {
+  color: var(--color-black-soft-transparent);
 }
 .ui-av-tag {
   font-size: 0.5625rem;

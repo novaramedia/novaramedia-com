@@ -14,16 +14,6 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       color: var(--color-red);
     }
 
-    /* .category-archive__if-i-speak__header .ui-button {
-      border-color: rgb(220, 0, 5);
-      color: rgb(220, 0, 5);
-    }
-
-    .category-archive__if-i-speak__header .ui-button:hover {
-      background-color: rgb(220, 0, 5);
-      color: rgb(255, 255, 255);
-    } */
-
     .category-archive__if-i-speak__title {
       font-size: 18.5rem;
       line-height: .9;
@@ -124,7 +114,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
             if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
               $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
           ?>
-          <a class="ui-button ui-button--red mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <a class="ui-button ui-button--red ui-button--auto-height mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
           <?php
             }
           ?>

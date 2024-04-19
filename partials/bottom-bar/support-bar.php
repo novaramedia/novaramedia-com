@@ -1,4 +1,6 @@
 <?php
+// TODO: Refactor this to use the new grid system and type scale
+
   $open_copy = NM_get_option('nm_fundraising_settings_support_bar_open_paragraph', 'nm_fundraising_options');
   $open_cta = NM_get_option('nm_fundraising_settings_support_bar_open_cta', 'nm_fundraising_options');
   $open_button = NM_get_option('nm_fundraising_settings_support_bar_open_button', 'nm_fundraising_options');

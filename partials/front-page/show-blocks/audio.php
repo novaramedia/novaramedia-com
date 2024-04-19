@@ -83,13 +83,13 @@
           $post_id = $post->ID;
       ?>
         <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
-          <div class="fs-2 mb-2">
-            <a href="<?php echo get_the_permalink($post_id); ?>"><?php echo get_the_time('j F Y', $post_id); ?></a>
-          </div>
-          <h4 class="fs-4-sans mb-2">
-            <?php render_post_ui_tags($post_id, false, true, 'no-fill--white', 'inline'); ?> <?php echo get_the_title($post_id); ?>
-          </h4>
           <a href="<?php echo get_the_permalink($post_id); ?>">
+            <div class="fs-2 mb-2">
+              <?php echo get_the_time('j F Y', $post_id); ?>
+            </div>
+            <h4 class="fs-4-sans mb-2">
+              <?php render_post_ui_tags($post_id, false, true, 'no-fill--white', 'inline'); ?> <?php echo get_the_title($post_id); ?>
+            </h4>
             <div>
               <?php render_short_description($post_id); ?>
             </div>
