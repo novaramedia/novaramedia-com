@@ -8,7 +8,7 @@
   font-size-1()
   text-transform: uppercase
   background-color: var(--color-white-soft)
-  color: $color-black-soft
+  color: var(--color-black-soft)
   border: 1px solid var(--color-gray-light)
   border-radius: var(--corner-radius)
   padding: 0.25rem 0.40625rem 0.25rem 0.34375rem
@@ -24,6 +24,8 @@
     margin-right: .25rem
   &:hover
     background-color: var(--color-gray-light)
+  &:active
+    color: var(--color-black-soft-transparent)
   &--no-border
     border-color: var(--color-white-soft)
     &:hover
@@ -32,6 +34,8 @@
       border-color: var(--color-white-soft)
       &:before
         background-color: var(--color-white-soft)
+    &:active
+      color: var(--color-white-soft-transparent)
   &--no-fill--white
     background-color: transparent
     color: var(--color-white-soft)
@@ -43,6 +47,8 @@
       color: var(--color-black-soft)
       &:before
         background-color: var(--color-black-soft)
+    &:active
+      color: var(--color-black-soft-transparent)
 
 .ui-av-tag
   font-size-1()
