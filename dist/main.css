@@ -2871,6 +2871,9 @@ b {
 .ui-button--auto-height {
   height: auto;
 }
+.ui-button--border-gray {
+  border-color: var(--color-gray-light);
+}
 .ui-button:hover {
   background-color: transparent;
   color: var(--color-white-soft);
@@ -2945,6 +2948,9 @@ b {
 .ui-input--auto-height {
   height: auto;
 }
+.ui-input--border-gray {
+  border-color: var(--color-gray-light);
+}
 .ui-checkbox {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
   display: -ms-inline-flex;
@@ -2974,6 +2980,9 @@ b {
 }
 .ui-checkbox--auto-height {
   height: auto;
+}
+.ui-checkbox--border-gray {
+  border-color: var(--color-gray-light);
 }
 
 .ui-action-link {
