@@ -1,5 +1,18 @@
 <?php
 /**
+ * Add classes to pagination links
+ *
+ * @param string $attributes Existing link attributes.
+ * @return string The modified string of attributes.
+ */
+function pagination_posts_link_attributes($attributes) {
+  $attributes .= ' class="ui-action-link"';
+
+  return $attributes;
+}
+add_filter('previous_posts_link_attributes', 'pagination_posts_link_attributes');
+add_filter('next_posts_link_attributes', 'pagination_posts_link_attributes');
+/**
  * Filters the admin columns.
  *
  * This function is responsible for modifying the columns displayed in the admin area. It removes the author and comments columns.

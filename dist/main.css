@@ -2951,6 +2951,30 @@ b {
 .ui-checkbox--auto-height {
   height: auto;
 }
+
+.ui-action-link {
+  background-image: linear-gradient(transparent 0%, transparent calc(100% - (1em / 10)), currentColor calc(100% - (1em / 10)), currentColor 100%)
+}
+.ui-action-link {
+  font-size: 1rem;
+  font-weight: 700;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.ui-action-link:hover {
+  background-image: none;
+}
+.ui-action-link:active {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.ui-action-link--large {
+  font-size: 1.25rem;
+}
+.ui-action-link--small {
+  font-size: 0.75rem;
+}
 .ui-border-bottom {
   border-bottom: 1px solid var(--color-gray-light);
 }
