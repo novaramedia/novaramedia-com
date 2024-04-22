@@ -15,21 +15,20 @@
 ?>
 <div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-2 font-color-<?php echo $font_color; ?> ui-rounded-box">
   <div class="front-page__audio-product front-page__audio-product--<?php echo $slug; ?> background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
-    <?php
-      if ($logo_url) {
-    ?>
-    <div class="front-page__audio-product-logo mt-2 mb-5">
-      <a href="<?php echo get_term_link($category); ?>">
+    <a href="<?php echo get_term_link($category); ?>">
+      <?php
+        if ($logo_url) {
+      ?>
+      <div class="front-page__audio-product-logo mt-2 mb-5">
         <?php echo nm_get_file($logo_url); ?>
-      </a>
-    </div>
-    <?php
-      }
-    ?>
-    <div class="fs-5-sans mb-4">
-      <?php echo $description; ?>
-    </div>
-
+      </div>
+      <?php
+        }
+      ?>
+      <div class="fs-5-sans mb-4">
+        <?php echo $description; ?>
+      </div>
+    </a>
   <?php
     $post_id = $latest[0]->ID;
     $meta = get_post_meta($post_id);
@@ -37,16 +36,16 @@
     <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box">
       <div class="grid-row grid--nested">
         <div class="grid-item is-xxl-10">
-          <a href="<?php echo get_the_permalink($post_id); ?>">
-            <div class="layout-thumbnail-frame">
-              <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
-              </div>
+          <div class="layout-thumbnail-frame">
+            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+              <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
+            </div>
+            <a href="<?php echo get_the_permalink($post_id); ?>">
               <?php render_thumbnail($post_id, 'col12', array(
                 'class' => 'ui-rounded-image'
               )); ?>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
         <div class="grid-item is-xxl-14">
           <a href="<?php echo get_the_permalink($post_id); ?>">
@@ -67,19 +66,23 @@
     </div>
 
     <div class="ui-border-top ui-border--black pt-4">
+      <a href="<?php echo get_term_link($category); ?>">
+        <div class="grid-row grid--nested">
+          <div class="grid-item is-xxl-12">
+            <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
+          </div>
+          <div class="grid-item is-xxl-12 text-align-right">
+            <span class="fs-3-sans font-weight-bold">See All</span>
+          </div>
+        </div>
+      </a>
       <div class="grid-row grid--nested">
-        <div class="grid-item is-xxl-12">
-          <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
-        </div>
-        <div class="grid-item is-xxl-12 text-align-right">
-          <a href="<?php echo get_term_link($category); ?>" class="fs-3-sans font-weight-bold">See All</a>
-        </div>
       <?php
         array_shift($latest);
         foreach ($latest as $post) {
           $post_id = $post->ID;
       ?>
-        <div class="grid-item is-m-24 is-xxl-12 mt-4 mb-2">
+        <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
           <a href="<?php echo get_the_permalink($post_id); ?>">
             <div class="fs-2 mb-2">
               <?php echo get_the_time('j F Y', $post_id); ?>

@@ -12,7 +12,7 @@
         <?php echo apply_filters('the_content', $copy); ?>
       </div>
       <div class="flex-grid-item">
-        <a id="obligation-accept" class="obligation-button nm-button nm-button--white nm-button--small u-pointer">Accept</a>
+        <a id="obligation-accept" class="obligation-button ui-button ui-button--white">Accept</a>
       </div>
     </div>
   </div>

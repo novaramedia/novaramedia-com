@@ -65,22 +65,22 @@
           <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
 
           <div class="email-signup__inputs">
-            <div class="form-group mb-2 fs-6">
+            <div class="form-group mb-2">
               <label class="u-visuallyhidden" for="firstName">First name:</label>
-              <input name="firstName" class="email-signup__name-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
+              <input name="firstName" class="email-signup__name-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
             </div>
 
-            <div class="form-group mb-2 fs-6">
+            <div class="form-group mb-2">
               <label class="u-visuallyhidden" for="email">Email:</label>
-              <input name="email" class="email-signup__email-input" id="email" type="email" autocomplete="email" placeholder="Email" required />
+              <input name="email" class="email-signup__email-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="email" type="email" autocomplete="email" placeholder="Email" required />
             </div>
 
-            <div class="email-signup__email-gdpr-group form-group mb-2">
+            <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
               <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
-              <input name="gdpr" class="email-signup__email-gdpr-input" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
+              <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
-            <input class="email-signup__submit nm-button nm-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
+            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
           </div>
 
           <div class="email-signup__feedback-processing">

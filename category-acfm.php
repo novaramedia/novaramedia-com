@@ -47,11 +47,11 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
             if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
               $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
           ?>
-          <a class="nm-button nm-button--white mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <a class="ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
           <?php
             }
           ?>
-          <a class="nm-button nm-button--white" href="https://novara.media/ACFMnewsletter" target="_blank" rel="nofollow">Sign up to the mailing list</a>
+          <a class="ui-button ui-button--white ui-button--small" href="https://novara.media/ACFMnewsletter" target="_blank" rel="nofollow">Sign up to the mailing list</a>
         </div>
       </div>
     </section>

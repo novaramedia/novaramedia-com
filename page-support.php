@@ -87,7 +87,7 @@ if( have_posts() ) {
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
-            <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="nm-button nm-button--white">Log in to your account</a></p>
+            <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--white ui-button--small">Log in to your account</a></p>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@ if( have_posts() ) {
           </p>
           <p class="font-bold mb-3">PayPal</p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
-          <p><a class="mt-3 nm-button nm-button--red" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
+          <p><a class="mt-3 ui-button ui-button--red ui-button--small" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
@@ -127,18 +127,18 @@ if( have_posts() ) {
 
           <div class="mt-3 flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-            <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+            <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
             </div>
           </div>
           <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
             </div>
             <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="nm-button nm-button--red" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
+              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
             </div>
           </div>
         </div>

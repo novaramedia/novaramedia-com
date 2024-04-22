@@ -7,10 +7,10 @@
         </div>
 
         <div class="grid-item is-s-20 is-xxl-22">
-          <input id="search-input" class="site-header-search__input font-color-white" type="text" placeholder="Search" value="" name="s" required aria-required="true">
+          <input id="search-input" class="site-header-search__input ui-input" type="text" placeholder="Search" value="" name="s" required aria-required="true">
         </div>
         <div class="grid-item is-s-4 is-xxl-2">
-          <button type="submit" id="search-submit" class="site-header-search__submit nm-button" role="button" aria-label="Submit Search"><i class="icon-search"></i></button>
+          <button type="submit" id="search-submit" class="site-header-search__submit ui-button ui-button--fill-width" role="button" aria-label="Submit Search"><i class="icon-search"></i></button>
         </div>
       </div>
     </form>

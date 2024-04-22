@@ -117,7 +117,7 @@ if( have_posts() ) {
 
           if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
         ?>
-            <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="nm-button nm-button--black nm-button--inline"><h4>Buy Tickets</h4></a>
+            <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="ui-button ui-button--black"><h4>Buy Tickets</h4></a>
         <?php
           }
         ?>

@@ -39,7 +39,29 @@ html
   --grid-gutter: 1rem
   --corner-radius: 2px
   --color-white-soft: rgb(253, 253, 253)
+  --color-white-soft-transparent: rgba(253, 253, 253, .5)
   --color-black-soft: rgb(14, 14, 14)
+  --color-black-soft-transparent: rgba(14, 14, 14, .5)
+  --color-red: #FF1941
+  --color-yellow: #EBB800
+  --color-green: #5FCC00
+  --color-green-neon: #CADB2A
+  --color-green-racing: #55846B
+  --color-blue: rgb(84, 144, 235)
+  --color-blue-neon: #0018F0
+  --color-blue-light: #CAE5FF
+  --color-teal: #E3FFFF
+  --color-lilac: #B1B1FF
+  --color-gray: rgb(150,150,150)
+  --color-gray-transparent: rgba(150,150,150, .5)
+  --color-gray-light: rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
+  --color-gray-light-transparent: rgba(190,190,190, .5)
+  --color-gray-extra-light: #EDEAEA
+  --font-family-sans: font-stack('Helvetica Neue')
+  --animation-speed-basic: .5s
+
+body
+  overscroll-behavior: none
 
 flex-grid-maker('xxl')
 grid-maker('xxl')
@@ -61,36 +83,13 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-    // FLUID COLS
-
-.percent-col
-  float: left
-  box-sizing: border-box
-
-$pcols = 10
-
-for pcol in 1..$pcols
-  .s-into-{pcol}
-    width: ( 100% / pcol )
-
-@media screen and (min-width: 601px)
-
-  for pcol in 1..$pcols
-    .m-into-{pcol}
-      width: ( 100% / pcol )
-
-@media screen and (min-width: 993px)
-
-  for pcol in 1..$pcols
-    .l-into-{pcol}
-      width: ( 100% / pcol )
-
 // ******************************************************
 
 // VARIABLES
 
 $golden-ratio = 1.61803398875
 
+// START DEPRECATED
 $margin-small = ($gutter)
 $margin-tiny = ($gutter / 2)
 $margin-micro = ($gutter / (2 * $golden-ratio))
@@ -119,32 +118,11 @@ $color-white-soft-transparent = rgba(253, 253, 253, .5)
 
 $color-black--hover = rgb(61, 61, 61)
 
-$color-gray = rgb(150,150,150)
-$color-gray-transparent = rgba(150,150,150, .5)
-$color-gray-light = rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
-$color-gray-light-transparent = rgba(190,190,190, .5)
-$color-gray-extra-light = #EDEAEA
-
 $color-red = rgb(220, 0, 5) // Mine
 $color-red-dark = #A80003
-
-$color-yellow = #EBB800
-
-$color-green = #5FCC00
-$color-green-neon = #CADB2A
-$color-green-racing = #55846B
-
 $color-blue = rgb(84, 144, 235)
-$color-blue-neon = #0018F0
-$color-blue-light = #CAE5FF
-
-$color-teal = #E3FFFF
-
-$color-lilac = #B1B1FF
 
 $border-width = 2px
-
-$basic-animation-speed = .5s
 
 $duration-medium-transitions = 420ms
 $duration-quick-transitions = $duration-medium-transitions * .333
@@ -152,14 +130,12 @@ $duration-form-transitions = $duration-medium-transitions
 
 $font-serif = font-stack('Georgia')
 $font-sans = font-stack('Helvetica Neue')
+// END DEPRECATED
 
 $breakpoint-s = 759px
 $breakpoint-m = 910px
 $breakpoint-l = 1104px
 $breakpoint-xl = 1408px
-
-html
-  --color-green: $color-green
 
 // ******************************************************
 
@@ -170,29 +146,29 @@ html
   // COLOR RULES
 
 .font-color-white
-  color: $color-white-soft
+  color: var(--color-white-soft)
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
 .font-color-black
-  color: $color-black-soft
+  color: var(--color-black-soft)
 
 .font-color-blue-neon
-  color: $color-blue-neon
+  color: var(--color-blue-neon)
 
 .font-color-green-racing
-  color: $color-green-racing
+  color: var(--color-green-racing)
 
   // SHADOWS
 
 .text-shadow-white
-  text-shadow: 0 0 20px $color-white-soft-transparent
+  text-shadow: 0 0 20px var(--color-white-soft-transparent)
 
 .text-shadow-light-gray
-  text-shadow: 0 0 20px $color-gray-light-transparent
+  text-shadow: 0 0 20px var(--color-gray-light-transparent)
 
 .text-shadow-gray
-  text-shadow: 0 0 20px $color-gray-transparent
+  text-shadow: 0 0 20px var(--color-gray-transparent)
 
   // TEXT RULES
 
@@ -298,43 +274,43 @@ a
 // BACKGROUNDS
 
 .background-black
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
 
 .background-white
-  background-color: $color-white-soft
+  background-color: var(--color-white-soft)
 
 .background-gray
-  background-color: $color-gray
+  background-color: var(--color-gray)
 
 .background-light-gray
-  background-color: $color-gray-light
+  background-color: var(--color-gray-light)
 
 .background-red
-  background-color: $color-red
+  background-color: var(--color-red)
 
 .background-yellow
-  background-color: $color-yellow
+  background-color: var(--color-yellow)
 
 .background-green
-  background-color: $color-green
+  background-color: var(--color-green)
 
 .background-green-neon
-  background-color: $color-green-neon
+  background-color: var(--color-green-neon)
 
 .background-light-blue
-  background-color: $color-blue-light
+  background-color: var(--color-blue-light)
 
 .background-neon-blue
-  background-color: $color-blue-neon
+  background-color: var(--color-blue-neon)
 
 .background-teal
-  background-color: $color-teal
+  background-color: var(--color-teal)
 
 .background-lilac
-  background-color: $color-lilac
+  background-color: var(--color-lilac)
 
 .background-light-purple
-  background-color: $color-lilac
+  background-color: var(--color-lilac)
 
 .background-acfm-pink
   background-color: #FC16CB
@@ -359,60 +335,24 @@ a
 
 .avif, .webp
   .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.webp)
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.webp)
 
   .background-support-texture-alt
-    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
+    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
 
 .fallback
   .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.png)
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
 
   .background-support-texture-alt
-    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
 
 // ******************************************************
 
 // UI ELEMENTS / UX HELPERS
 
-.ui-chevron
-  display: inline-block
-  border-right: 2px solid
-  border-bottom: 2px solid
-  height: 1rem
-  width: 1rem
-  &&--up
-    transform: rotate(225deg)
-    margin-bottom: -0.4rem;
-  &&--down
-    transform: rotate(45deg)
-
-.ui-hit-area
-  padding: 2rem
-  cursor: pointer
-  &--small
-    padding: 1rem
-  &--top-right
-    padding-top: 0
-    padding-right: 0
-  &--bottom-right
-    padding-bottom: 0
-    padding-right: 0
-
-.ux-pointer
-  cursor: pointer
-
 .icon-large:before // is this depreciated? check
   font-size: $font-size-h3
-
-.button // is this depreciated? check
-  display: inline-block
-  width: 100%
-  padding: $margin-small
-  text-align: center
-  border: 2px solid $color-black-soft
-  &.button-small
-    padding: $margin-tiny
 
 // ******************************************************
 
@@ -441,8 +381,8 @@ a
 // BASIC
 
 html
-  background-color: $color-white-soft
-  color: $color-black-soft
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
 
 img
   max-width: 100%
@@ -583,101 +523,6 @@ img
 
 // ******************************************************
 
-// FORM ELEMENTS
-
-nmButton()
-  display: block
-  padding: $margin-tiny $margin-small
-  font-weight: bold
-  text-align: center
-  border-width: 1px
-  border-style: solid
-  border-color: transparent
-  border-radius: 3px
-  transition-property: background-color, color, border-color
-  transition-duration: $duration-form-transitions
-  &:hover
-    border-color: $color-gray
-    cursor: pointer
-  &--red
-    background-color: $color-red
-    color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-red
-      border-color: $color-red
-  &--red-dark
-    background-color: $color-red-dark
-    color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-red-dark
-      border-color: $color-red-dark
-  &--white
-    background-color: $color-white-soft
-    color: $color-black-soft
-    border-color: $color-black-soft
-    &:hover
-      background-color: $color-black-soft
-      color: $color-white-soft
-      border-color: $color-black-soft
-  &--black
-    background-color: $color-black-soft
-    color: $color-white-soft
-    border-color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-black-soft
-  &--inline
-    display: inline-block
-  &--half
-    width: 49%
-  &--small
-    padding: $margin-micro $margin-small
-
-.nm-button
-  nmButton()
-
-// ******************************************************
-
-// SUPPORT SECTION
-
-.support-form
-  display: block
-  .support-form__inputs
-    opacity: 0
-    transition: opacity $basic-animation-speed
-  &--active
-    .support-form__inputs
-      opacity: 1
-
-.support-form__button, .support-form__custom-input
-  nmButton()
-  color: $color-red
-  background-color: $color-white-soft
-  &:hover, &--active
-    color: $color-white-soft
-    background-color: $color-red-dark
-    border-color: $color-white-soft
-
-.support-form__button, .support-form__custom-input, .support-form__submit
-  width: 100%
-  font-weight: normal
-  border-color: $color-white-soft
-  &:hover, &--active
-    border-color: $color-white-soft
-
-.support-form__custom-input::placeholder
-  padding-left: 5px
-  transition: color $duration-form-transitions
-
-.support-form__custom-input
-  &::placeholder
-    color: $color-red
-  &:hover, &.support-form__button--active
-    &::placeholder
-      color: $color-white-soft
-
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
@@ -697,23 +542,6 @@ nmButton()
   svg
     height: 2rem
     width: auto
-
-// FUNDRAISER PROGRESS BAR
-
-#progress-bar-row
-  display: none
-
-#progress-bar-holder
-  position: relative
-  height: 1.5em
-
-#progress-bar
-  position: absolute
-  left: 0
-  width: 0%
-  transition: width 1s
-  height: 1.5em
-  background-color: $color-red
 
 // ******************************************************
 
@@ -915,7 +743,7 @@ nmButton()
 
 .support-bar
   opacity: 0
-  transition: opacity $basic-animation-speed
+  transition: opacity var(--animation-speed-basic)
   .support-bar__open-view
     align-items: center
   .flex-grid-row.is-one-even-line-grid
@@ -982,6 +810,7 @@ nmButton()
 @import "layouts/header"
 @import "layouts/novara-fm-archive"
 @import "layouts/products-bar"
+@import "layouts/support-form"
 
 // ******************************************************
 

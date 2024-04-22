@@ -96,7 +96,7 @@
       </div>
       <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12">
         <a href="<?php echo $url; ?>"><p class="fs-6 fs-s-5-sans mb-4">Sex can be disastrous, delightful or extremely okay, but it is always slippery as fuck. From bi erasure to ethical ghosting, male circumcision to family abolition, we ask: what does leftist sex look like? And can we ever do it right?</p></a>
-        <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
+        <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Explore the Focus</a>
       </div>
     </div>
   </div>

@@ -19,11 +19,13 @@ if ($recent_articles->have_posts()) {
     $sub_category = get_the_sub_category($post->ID);
 ?>
 <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
-  <a href="<?php the_permalink(); ?>" class="ui-post-hover">
-    <div class="layout-split-level fs-2 mb-2">
-      <?php render_post_ui_tags($post->ID); ?>
+  <div class="layout-split-level fs-2 mb-1">
+    <?php render_post_ui_tags($post->ID); ?>
+    <a href="<?php the_permalink(); ?>">
       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
-    </div>
+    </a>
+  </div>
+  <a href="<?php the_permalink(); ?>" class="ui-hover-link-post">
     <?php
       // [temp logic]. to be driven by meta logics based on position and quality of image assets
       if ($i === 1 || $i === 6) { // render small thumb layout

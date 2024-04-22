@@ -1,5 +1,6 @@
 <?php
 /* Template Name: Text Copy */
+// TODO: Refactor this to use the new grid system and type scale
 get_header();
 ?>
 <main id="main-content">
@@ -37,11 +38,6 @@ if( have_posts() ) {
 
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-8 flex-offset-m-2 flex-item-l-10 flex-offset-l-1 flex-item-xl-2 flex-item-xxl-2">
-        <?php
-          if (!empty($meta['_nm_cta-link'][0]) && !empty($meta['_nm_cta-copy'][0])) {
-        ?>
-          <p><a class="nm-button nm-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
-        <?php } ?>
       </div>
 
       <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-10 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-0 flex-item-xxl-6 flex-offset-xxl-1">
@@ -51,7 +47,7 @@ if( have_posts() ) {
         <?php
           if (!empty($meta['_nm_cta-link'][0]) && !empty($meta['_nm_cta-copy'][0])) {
         ?>
-          <p><a class="nm-button nm-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
+          <p><a class="ui-button ui-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
         <?php } ?>
       </div>
 
