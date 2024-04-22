@@ -189,14 +189,31 @@ formElementBase()
 
 // -------------
 
+hr
+  border: 0
+  height: 1px
+  margin: 0
+  background-color: var(--color-gray-light)
+
 .ui-border-bottom
   border-bottom: 1px solid var(--color-gray-light)
 
 .ui-border-top
   border-top: 1px solid var(--color-gray-light)
 
+.ui-border-left
+  border-left: 1px solid var(--color-gray-light)
+
 .ui-border--black
   border-color: var(--color-black-soft)
+
+@media screen and (max-width: $breakpoint-m)
+  .ui-border--not-m
+    border: none !important
+
+@media screen and (max-width: $breakpoint-s)
+  .ui-border--not-s
+    border: none !important
 
 // -------------
 

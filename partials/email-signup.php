@@ -44,7 +44,7 @@
     $button_color = $args['button-color'];
   }
 ?>
-<div class="email-signup pt-6 pb-6 background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
+<div class="email-signup <?php if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6'; } ?> background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
@@ -102,6 +102,11 @@
       <?php if ($image_id) { ?>
         <div class="grid-item is-s-8 is-xxl-4">
           <?php echo wp_get_attachment_image($image_id, 'col4-square', false, ['class' => 'email-signup__image']); ?>
+        </div>
+      <?php } ?>
+      <?php if ($background_color == 'white') { ?>
+        <div class="grid-item is-xxl-24 mt-5">
+          <hr />
         </div>
       <?php } ?>
     </div>

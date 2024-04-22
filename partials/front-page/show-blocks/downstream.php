@@ -1,5 +1,9 @@
-<div class="background-red font-color-white">
-  <section class="container pt-6 pb-6">
+<?php
+  $has_red_background = false;
+  $has_border_bottom = true;
+?>
+<div <?php if ($has_red_background) { echo 'class="background-red font-color-white"'; } ?>>
+  <section class="container <?php if ($has_red_background) { echo 'pt-6 pb-6'; } else { echo 'mt-5 mb-5'; } ?>">
     <?php
       $downstream_category = get_term_by('slug', 'downstream', 'category');
 
@@ -63,7 +67,7 @@
           <?php
           if ($has_related) {
             ?>
-              <div class="grid-item is-m-24 is-xxl-8">
+              <div class="grid-item is-m-24 is-xxl-8 ui-border-left ui-border--not-m mt-m-4">
                 <h4 class="fs-2 font-uppercase mb-2">See Also</h4>
             <?php
                 while ($related_posts->have_posts()) {
@@ -99,7 +103,7 @@
             $latest_video->the_post();
             $meta = get_post_meta($post->ID);
         ?>
-          <div class="grid-item is-xxl-12 mb-5">
+          <div class="grid-item is-xxl-12 mb-4">
             <a href="<?php the_permalink(); ?>">
               <div class="layout-thumbnail-frame">
                 <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -119,6 +123,11 @@
         ?>
         </div>
       </div>
+      <?php if ($has_border_bottom) { ?>
+        <div class="grid-item is-xxl-24 mt-5">
+          <hr />
+        </div>
+      <?php } ?>
     <?php
       }
 

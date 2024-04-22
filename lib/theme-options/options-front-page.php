@@ -54,8 +54,6 @@ function nm_register_front_page_options_metabox() {
     false => 'None',
     'partials/support-section' => 'Support section',
     'partials/specials/banners/support-video' => 'Support Video',
-    'email-the-cortado' => 'Email signup: The Cortado', // depreciated 3.9.0
-    'email-the-pick' => 'Email signup: The Pick', // depreciated 3.9.0
     'partials/specials/banners/podcast-if-i-speak' => 'Podcast: If I Speak',
     'partials/specials/banners/focus-pro-rev-soccer' => 'Focus: Pro Rev Soccer',
     'partials/specials/banners/podcast-foreign-agent' => 'Podcast: Foreign Agent',

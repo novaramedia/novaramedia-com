@@ -1,4 +1,4 @@
-<section id="front-page__mega-block" class="container mt-7 mb-5">
+<section id="front-page__mega-block" class="container mt-6 mb-5">
   <?php
     $sections_to_render = array(
       'UK',
