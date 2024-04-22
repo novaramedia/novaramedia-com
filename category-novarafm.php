@@ -46,7 +46,7 @@ $episode_block_posts_number = 9; // how many episodes to show in the sidescroll 
 // renders a carousel of episodes
 function render_episode_block($posts) {
 ?>
-<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
+<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel ux-carousel--autoplay">
   <div class="ux-carousel__wrapper">
     <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled ui-rounded-box"></div>
     <div class="ux-carousel__nav-right ui-rounded-box"></div>

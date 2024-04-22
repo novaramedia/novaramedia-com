@@ -22,8 +22,6 @@ export class Carousels {
     _this.carousels.forEach((carousel) => {
       carousel.onReady();
     });
-
-    // console.log('Carousels ready', _this.carousels);
   }
 }
 
@@ -38,6 +36,10 @@ class Carousel {
 
     this.carouselLength = this.$items.length;
     this.carouselPosition = 0;
+    this.atEnd = false;
+    this.isAutoplayer = this.$carousel.hasClass('ux-carousel--autoplay');
+    this.isAutoplayCancelled = false;
+    this.autoplayTimeout = 4000;
   }
 
   onReady() {
@@ -45,6 +47,10 @@ class Carousel {
 
     _this.setSizes();
     _this.bind();
+
+    if (_this.isAutoplayer) {
+      _this.autoplay();
+    }
   }
 
   onResize() {
@@ -89,8 +95,10 @@ class Carousel {
     swipeDetect(`#${_this.$carousel.attr('id')}`, (direction) => {
       if (direction === 'left') {
         _this.animateToPosition(_this.carouselPosition + 1);
+        _this.cancelAutoplay();
       } else if (direction === 'right') {
         _this.animateToPosition(_this.carouselPosition - 1);
+        _this.cancelAutoplay();
       }
     });
 
@@ -102,6 +110,49 @@ class Carousel {
     $(window).on({
       resize: debounce(_this.onResize.bind(_this), 500),
     });
+
+    if (_this.isAutoplayer) {
+      _this.$carousel.find('.ux-carousel__item').on({
+        mouseenter: function () {
+          _this.pauseAutoplay();
+        },
+        mouseleave: function () {
+          if (!_this.isAutoplayCancelled) {
+            _this.autoplay();
+          }
+        },
+      });
+
+      _this.$carousel
+        .find('.ux-carousel__nav-left, .ux-carousel__nav-right')
+        .on({
+          click: function () {
+            _this.cancelAutoplay();
+          },
+        });
+    }
+  }
+
+  autoplay() {
+    const _this = this;
+
+    this.autoplayInterval = setInterval(() => {
+      if (_this.atEnd) {
+        _this.animateToPosition(0);
+        return;
+      }
+
+      _this.animateToPosition(_this.carouselPosition + 1);
+    }, this.autoplayTimeout);
+  }
+
+  pauseAutoplay() {
+    clearInterval(this.autoplayInterval);
+  }
+
+  cancelAutoplay() {
+    this.pauseAutoplay();
+    this.isAutoplayCancelled = true;
   }
 
   handleWheel(event) {
@@ -112,6 +163,8 @@ class Carousel {
     } else if (event.deltaX < 0) {
       _this.animateToPosition(_this.carouselPosition - 1);
     }
+
+    this.cancelAutoplay();
   }
 
   animateToPosition(position) {
@@ -150,8 +203,10 @@ class Carousel {
 
     if (!willOverflow) {
       _this.$navRight.removeClass('ux-carousel__nav-right--disabled');
+      _this.atEnd = false;
     } else {
       _this.$navRight.addClass('ux-carousel__nav-right--disabled');
+      _this.atEnd = true;
     }
 
     _this.carouselPosition = position;

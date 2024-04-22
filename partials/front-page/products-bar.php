@@ -3,7 +3,7 @@
 
   if (!empty($signups)) {
 ?>
-<section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4">
+<section class="front-page__products-bar ux-carousel ux-carousel--autoplay container container--padded mt-4 mb-4">
   <div class="ux-carousel__wrapper">
     <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled"></div>
     <div class="ux-carousel__nav-right"></div>
