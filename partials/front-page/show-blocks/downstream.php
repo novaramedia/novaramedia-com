@@ -12,7 +12,7 @@
   ?>
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h4 class="fs-7 font-weight-regular"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes. Produced by leftists—but made for everyone.</a></h4>
+        <h4 class="fs-7 font-weight-regular"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</a></h4>
       </div>
     </div>
 
@@ -48,8 +48,9 @@
 
             if (!empty($meta['_cmb_related_posts'])) {
               $related_args = array(
-                'posts_per_page' => 2,
-                'post__in' => explode(', ', $meta['_cmb_related_posts'][0])
+                'posts_per_page' => 1,
+                'post__in' => explode(', ', $meta['_cmb_related_posts'][0]),
+                'orderby' => 'rand',
               );
 
               $related_posts = new WP_Query($related_args);
@@ -68,14 +69,14 @@
           if ($has_related) {
             ?>
               <div class="grid-item is-m-24 is-xxl-8 ui-border-left ui-border--not-m mt-m-4">
-                <h4 class="fs-2 font-uppercase mb-2">See Also</h4>
+                <h4 class="fs-2 font-uppercase mb-1">See Also</h4>
             <?php
                 while ($related_posts->have_posts()) {
                   $related_posts->the_post();
             ?>
-                <div class="mb-2">
+                <div>
                   <a href="<?php the_permalink(); ?>">
-                    <h5 class="fs-4-sans"><?php the_title(); ?></h5>
+                    <h5 class="fs-4-sans js-fix-widows"><?php the_title(); ?></h5>
                     <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                   </a>
                 </div>
