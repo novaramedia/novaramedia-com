@@ -14,7 +14,11 @@
     <h3 class="fs-5-sans font-weight-bold"><?php the_time('j F Y'); ?></h3>
   </div>
   <div class="grid-item is-s-24 is-m-8 is-xxl-10">
-    <?php the_post_thumbnail('col20'); ?>
+    <?php render_thumbnail($post->ID, 'col20', array(
+      'class' => 'ui-rounded-image',
+      'data-no-lazysizes' => true,
+      'loading' => 'eager'
+    )); ?>
     <div class="fs-2 font-weight-regular">
       <?php the_post_thumbnail_caption(); ?>
     </div>

@@ -311,6 +311,16 @@ function render_resources_row($resources) {
 <?php
 }
 
+/**
+ * Renders a Twitter share link.
+ *
+ * @param string $url The URL to be shared.
+ * @param string|null $title The title of the tweet. Default is null.
+ * @param string $link_text The text to be displayed for the link. Default is 'Tweet'.
+ * @param string|null $hashtag The hashtag to be included in the tweet. Default is null.
+ *
+ * @return void
+ */
 function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
   if (empty($url)) {
     return;
@@ -328,7 +338,7 @@ function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag =
 
   $twitter_url .= '&url=' . urlencode($url);
 
-  echo '<a class="share-action share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_facebook_share_link($url, $link_text = 'Facebook share') {
@@ -340,7 +350,7 @@ function render_facebook_share_link($url, $link_text = 'Facebook share') {
 
   $facebook_url .= '&u=' . urlencode($url);
 
-  echo '<a class="share-action share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_email_share_link($url, $subject = '', $link_text = 'Email') {
@@ -350,7 +360,7 @@ function render_email_share_link($url, $subject = '', $link_text = 'Email') {
 
   $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body='. urlencode($url);
 
-  echo '<a class="share-action share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_reddit_share_link($url, $title = null, $link_text = 'Post to Reddit') {
@@ -366,7 +376,7 @@ function render_reddit_share_link($url, $title = null, $link_text = 'Post to Red
     $reddit_url .= '&title=' . urlencode($title);
   }
 
-  echo '<a class="share-action share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 /**

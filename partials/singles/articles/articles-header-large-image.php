@@ -22,7 +22,11 @@
 </div>
 <div class="grid-row mb-4">
   <div class="grid-item is-s-24 offset-s-0 is-m-24 offset-m-0 is-l-20 offset-l-2 is-xl-20 offset-xl-2 is-xxl-20 offset-xxl-2">
-    <?php the_post_thumbnail('col20'); ?>
+    <?php render_thumbnail($post->ID, 'col20', array(
+      'class' => 'ui-rounded-image',
+      'data-no-lazysizes' => true,
+      'loading' => 'eager'
+    )); ?>
     <div class="fs-2 font-weight-regular">
       <?php the_post_thumbnail_caption(); ?>
     </div>
