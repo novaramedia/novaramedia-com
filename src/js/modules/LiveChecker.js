@@ -49,7 +49,7 @@ export class LiveChecker {
       ];
 
     _this.$offlineMessage
-      .text(`"${_this.randomOfflineMessage.text}"`)
+      .text(`“${_this.randomOfflineMessage.text}”`)
       .attr('href', _this.randomOfflineMessage.link);
 
     _this.checkIfLive();

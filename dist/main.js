@@ -487,7 +487,7 @@ class LiveChecker {
       return;
     }
     _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
-    _this.$offlineMessage.text(`"${_this.randomOfflineMessage.text}"`).attr('href', _this.randomOfflineMessage.link);
+    _this.$offlineMessage.text(`“${_this.randomOfflineMessage.text}”`).attr('href', _this.randomOfflineMessage.link);
     _this.checkIfLive();
     _this.updateMessage();
     this.liveCheckerInterval = setInterval(() => {
