@@ -9,7 +9,7 @@
   width: 3rem
   cursor: pointer
   z-index: 10
-  transition: opacity $duration-quick-transitions ease-in-out
+  transition: opacity var(--transition-speed-quick) ease-in-out
   &--disabled
     opacity 0
     z-index: -10
@@ -23,7 +23,7 @@
 .ux-carousel__inner
   display: flex
   flex-wrap: nowrap
-  transition: transform $duration-quick-transitions ease-in-out
+  transition: transform var(--transition-speed-quick) ease-in-out
 
 .ux-carousel__item
   flex-shrink: 0
