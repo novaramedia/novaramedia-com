@@ -3382,6 +3382,18 @@ hr {
 .front-page-novara-live__posts-scroller .ux-scroller__fade-bottom {
   height: 60px;
 }
+@media screen and (max-width: 759px) {
+  .front-page-novara-live__posts-scroller {
+    height: auto;
+  }
+  .front-page-novara-live__posts-scroller .ux-scroller__fade-top,
+  .front-page-novara-live__posts-scroller .ux-scroller__fade-bottom {
+    display: none;
+  }
+  .front-page-novara-live__posts-scroller .ux-scroller__inner > :nth-child(n+4) {
+    display: none;
+  }
+}
 .front-page__audio-product {
   height: 100%;
 }
