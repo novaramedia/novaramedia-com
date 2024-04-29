@@ -621,6 +621,71 @@ class MailchimpSignup {
 
 /***/ }),
 
+/***/ "./src/js/modules/Scrollers.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/Scrollers.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Scrollers: () => (/* binding */ Scrollers)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+class Scrollers {
+  constructor() {
+    this.scrollers = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-scroller').each((index, scroller) => {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller).attr('id', `ux-scroller-${index}`);
+      this.scrollers.push(new Scroller(scroller));
+    });
+  }
+  onReady() {
+    const _this = this;
+    _this.scrollers.forEach(scroller => {
+      scroller.onReady();
+    });
+  }
+}
+class Scroller {
+  constructor(scroller) {
+    this.$scroller = jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller);
+    this.$inner = this.$scroller.find('.ux-scroller__inner');
+    this.$fadeBottom = this.$scroller.find('.ux-scroller__fade-bottom');
+  }
+  onReady() {
+    const _this = this;
+    _this.bind();
+  }
+  onResize() {
+    // const _this = this;
+  }
+  bind() {
+    const _this = this;
+    _this.$inner[0].addEventListener('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 50));
+  }
+  handleScroll() {
+    const _this = this;
+    if (_this.$inner[0].scrollTop === 0) {
+      _this.$scroller.removeClass('ux-scroller--at-bottom').addClass('ux-scroller--at-top');
+    } else if (_this.$inner[0].scrollTop + _this.$inner.outerHeight(true) >= _this.$inner[0].scrollHeight) {
+      _this.$scroller.removeClass('ux-scroller--at-top').addClass('ux-scroller--at-bottom');
+    } else {
+      _this.$scroller.removeClass('ux-scroller--at-top', 'ux-scroller--at-bottom');
+    }
+  }
+}
+
+/***/ }),
+
 /***/ "./src/js/modules/Search.js":
 /*!**********************************!*\
   !*** ./src/js/modules/Search.js ***!
@@ -26061,10 +26126,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Support_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Support.js */ "./src/js/modules/Support.js");
 /* harmony import */ var _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/Carousels.js */ "./src/js/modules/Carousels.js");
 /* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
-/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Scrollers.js */ "./src/js/modules/Scrollers.js");
+/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
  // import styl for webpack
+
 
 
 
@@ -26085,7 +26152,8 @@ class Site {
     this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_7__.Support();
     this.carousels = new _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_8__.Carousels();
     this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__.MailchimpSignup();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_10__.Utilities();
+    this.scrollers = new _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_10__.Scrollers();
+    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_11__.Utilities();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
   }
   onReady() {
@@ -26095,6 +26163,7 @@ class Site {
     this.search.onReady();
     this.support.onReady();
     this.carousels.onReady();
+    this.scrollers.onReady();
     this.utilties.onReady();
   }
 }

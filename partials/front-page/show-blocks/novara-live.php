@@ -3,9 +3,10 @@
 
   if ($novara_life_category) {
     $category_link = get_category_link($novara_life_category->term_id);
+    $posts_to_show = 15;
 
     $args = array(
-      'posts_per_page' => 10,
+      'posts_per_page' => $posts_to_show,
       'cat' => $novara_life_category->term_id,
     );
 
@@ -52,7 +53,7 @@
             <div class="grid-item is-l-24 is-xxl-8 mt-l-3">
               <a href="<?php the_permalink(); ?>">
                 <h6 class="js-fix-widows fs-7"><?php the_title(); ?></h6>
-                <p class="fs-4-sans mt-3">
+                <p class="fs-4-sans font-weight-regular mt-3">
                   <?php render_short_description($post->ID); ?>
                 </p>
               </a>
@@ -97,9 +98,10 @@
             <span>See All</span>
           </div>
         </a>
-        <div class="front-page-novara-live__posts-scroller">
-          <div class="front-page-novara-live__posts-scroller__fade"></div>
-          <div class="front-page-novara-live__posts-scroller__inner">
+        <div class="front-page-novara-live__posts-scroller ux-scroller ux-scroller--at-top">
+          <div class="front-page-novara-live__posts-scroller__fade-top ux-scroller__fade-top"></div>
+          <div class="front-page-novara-live__posts-scroller__fade-bottom ux-scroller__fade-bottom"></div>
+          <div class="front-page-novara-live__posts-scroller__inner ux-scroller__inner">
           <?php
             if ($latest_video->have_posts()) {
               $i = 1;
@@ -108,7 +110,7 @@
                 $meta = get_post_meta($post->ID);
                 $timestamp = get_post_time('c');
           ?>
-            <div class="pb-3 mb-3 ui-border-bottom">
+            <div class="pb-3 mb-3 <?php if ($i < $posts_to_show - 1) {echo 'ui-border-bottom';} ?>">
               <div class="grid-row grid--nested">
                 <div class="grid-item is-s-10 is-xxl-8">
                   <a href="<?php the_permalink(); ?>">
@@ -119,7 +121,7 @@
                 </div>
                 <div class="grid-item is-s-14 is-xxl-16">
                   <div class="layout-split-level fs-2 mb-1">
-                    <?php render_post_ui_tags($post->ID, true, false, 'no-fill--white', 'inline'); ?>
+                    <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white', 'inline'); ?>
                     <a href="<?php the_permalink(); ?>"><?php if ($i < 6) { ?>
                       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
                     <?php } else { ?>

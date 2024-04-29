@@ -187,6 +187,7 @@ formElementBase()
   &--small
     font-size: 0.75rem
 
+// Borderes
 // -------------
 
 hr
@@ -215,6 +216,7 @@ hr
   .ui-border--not-s
     border: none !important
 
+// Rounded Elements
 // -------------
 
 .ui-rounded-image
@@ -223,6 +225,7 @@ hr
 .ui-rounded-box
   border-radius: var(--corner-radius)
 
+// Hover Effects
 // -------------
 
 .ui-post-hover
@@ -232,6 +235,7 @@ hr
     .post__title
       color: $color-black--hover
 
+// Ticker
 // -------------
 
 .ui-ticker
@@ -280,6 +284,42 @@ hr
       100%
         transform: translateX(-100%)
 
+// Scroller
+// -------------
+
+.ux-scroller
+  position: relative
+  .ux-scroller__inner
+    overflow-y: auto
+    overflow-x: hidden
+    height: 100%
+    scrollbar-width: none /* Firefox */
+    -ms-overflow-style: none  /* IE 10+ */
+    &::-webkit-scrollbar
+      background: transparent /* Chrome/Safari/Webkit */
+      width: 0px
+  .ux-scroller__fade-top, .ux-scroller__fade-bottom
+    position: absolute
+    left: 0
+    width: 100%
+    height: 60px
+    z-index: 10
+    pointer-events: none
+    transition: opacity var(--transition-speed-medium) ease-in-out
+  .ux-scroller__fade-top
+    top: 0
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0), var(--color-black-soft))
+  .ux-scroller__fade-bottom
+    bottom: 0
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0), var(--color-black-soft))
+  &--at-top
+    .ux-scroller__fade-top
+      opacity: 0
+  &--at-bottom
+    .ux-scroller__fade-bottom
+      opacity: 0
+
+// Misc
 // -------------
 
 .ui-chevron

@@ -12,6 +12,7 @@ import { Search } from './modules/Search.js';
 import { Support } from './modules/Support.js';
 import { Carousels } from './modules/Carousels.js';
 import { MailchimpSignup } from './modules/MailchimpSignup.js';
+import { Scrollers } from './modules/Scrollers.js';
 import { Utilities } from './modules/Utilities.js';
 
 class Site {
@@ -23,6 +24,7 @@ class Site {
     this.support = new Support();
     this.carousels = new Carousels();
     this.mailchimpSignup = new MailchimpSignup();
+    this.scrollers = new Scrollers();
     this.utilties = new Utilities();
 
     $(document).ready(this.onReady.bind(this));
@@ -36,6 +38,7 @@ class Site {
     this.search.onReady();
     this.support.onReady();
     this.carousels.onReady();
+    this.scrollers.onReady();
     this.utilties.onReady();
   }
 }

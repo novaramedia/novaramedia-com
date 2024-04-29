@@ -58,7 +58,9 @@ html
   --color-gray-light-transparent: rgba(190,190,190, .5)
   --color-gray-extra-light: #EDEAEA
   --font-family-sans: font-stack('Helvetica Neue')
-  --animation-speed-basic: .5s
+  --transition-speed-slow: 1111ms
+  --transition-speed-medium: 420ms
+  --transition-speed-quick: 140ms
 
 body
   overscroll-behavior: none
@@ -743,7 +745,7 @@ img
 
 .support-bar
   opacity: 0
-  transition: opacity var(--animation-speed-basic)
+  transition: opacity var(--transition-speed-medium)
   .support-bar__open-view
     align-items: center
   .flex-grid-row.is-one-even-line-grid
