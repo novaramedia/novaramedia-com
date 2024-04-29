@@ -649,8 +649,7 @@ class Scrollers {
     });
   }
   onReady() {
-    const _this = this;
-    _this.scrollers.forEach(scroller => {
+    this.scrollers.forEach(scroller => {
       scroller.onReady();
     });
   }
@@ -660,26 +659,27 @@ class Scroller {
     this.$scroller = jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller);
     this.$inner = this.$scroller.find('.ux-scroller__inner');
     this.$fadeBottom = this.$scroller.find('.ux-scroller__fade-bottom');
+    this.$scroller.addClass('ux-scroller--at-top');
   }
   onReady() {
-    const _this = this;
-    _this.bind();
+    this.innerHeight = this.$inner.outerHeight(true);
+    this.bind();
   }
   onResize() {
-    // const _this = this;
+    this.innerHeight = this.$inner.outerHeight(true);
   }
   bind() {
     const _this = this;
     _this.$inner[0].addEventListener('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 50));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('resize', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.onResize.bind(_this), 50));
   }
   handleScroll() {
-    const _this = this;
-    if (_this.$inner[0].scrollTop === 0) {
-      _this.$scroller.removeClass('ux-scroller--at-bottom').addClass('ux-scroller--at-top');
-    } else if (_this.$inner[0].scrollTop + _this.$inner.outerHeight(true) >= _this.$inner[0].scrollHeight) {
-      _this.$scroller.removeClass('ux-scroller--at-top').addClass('ux-scroller--at-bottom');
+    if (this.$inner[0].scrollTop === 0) {
+      this.$scroller.removeClass('ux-scroller--at-bottom').addClass('ux-scroller--at-top');
+    } else if (this.$inner[0].scrollTop + this.innerHeight >= this.$inner[0].scrollHeight) {
+      this.$scroller.removeClass('ux-scroller--at-top').addClass('ux-scroller--at-bottom');
     } else {
-      _this.$scroller.removeClass('ux-scroller--at-top', 'ux-scroller--at-bottom');
+      this.$scroller.removeClass('ux-scroller--at-top ux-scroller--at-bottom');
     }
   }
 }

@@ -98,7 +98,7 @@
             <span>See All</span>
           </div>
         </a>
-        <div class="front-page-novara-live__posts-scroller ux-scroller ux-scroller--at-top">
+        <div class="front-page-novara-live__posts-scroller ux-scroller">
           <div class="front-page-novara-live__posts-scroller__fade-top ux-scroller__fade-top"></div>
           <div class="front-page-novara-live__posts-scroller__fade-bottom ux-scroller__fade-bottom"></div>
           <div class="front-page-novara-live__posts-scroller__inner ux-scroller__inner">
