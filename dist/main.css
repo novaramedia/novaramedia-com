@@ -3517,7 +3517,7 @@ html {
 }
 .novara-fm-archive__splash-video-container {
   position: relative;
-  background-color: #0e0e0e;
+  background-color: var(--color-black-soft);
   z-index: -10;
 }
 .novara-fm-archive__splash-video {
@@ -3534,10 +3534,10 @@ html {
   height: auto;
 }
 .novara-fm-archive__cross--black path {
-  fill: #0e0e0e;
+  fill: var(--color-black-soft);
 }
 .novara-fm-archive__cross--green path {
-  fill: $color-green;
+  fill: var(--color-green);
 }
 .novara-fm-archive__archive-block .ux-carousel__nav-left {
   background-image: linear-gradient(270deg,rgba(255,255,255,0) 0%,var(--color-green) 100%);
@@ -3553,6 +3553,11 @@ html {
   width: 80%;
   max-width: 700px;
   margin: 0 auto;
+}
+@media screen and (max-width: 759px) {
+  .novara-fm-archive__archive-block .ux-carousel__item {
+    width: 170px;
+  }
 }
 .front-page__products-bar .ux-carousel__nav-left {
   background-image: linear-gradient(270deg,rgba(255,255,255,0) 0%,#fff 100%);

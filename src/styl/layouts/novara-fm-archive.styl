@@ -8,7 +8,7 @@
 
 .novara-fm-archive__splash-video-container
   position: relative
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
   z-index: -10
 
 .novara-fm-archive__splash-video
@@ -26,11 +26,11 @@
 
 .novara-fm-archive__cross--black
   path
-    fill: $color-black-soft
+    fill: var(--color-black-soft)
 
 .novara-fm-archive__cross--green
   path
-    fill: $color-green
+    fill: var(--color-green)
 
 .novara-fm-archive__archive-block
   .ux-carousel__nav-left
@@ -47,3 +47,9 @@
   width: 80%
   max-width: 700px
   margin: 0 auto
+
+@media screen and (max-width: $breakpoint-s)
+
+  .novara-fm-archive__archive-block
+    .ux-carousel__item
+      width: 170px
