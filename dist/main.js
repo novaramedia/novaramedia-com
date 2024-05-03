@@ -182,7 +182,7 @@ class Carousels {
   constructor() {
     this.carousels = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', `ux-carousel-${index}`);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', "ux-carousel-".concat(index));
       this.carousels.push(new Carousel(carousel));
     });
   }
@@ -243,7 +243,7 @@ class Carousel {
         _this.animateToPosition(_this.carouselPosition + 1);
       }
     });
-    (0,_functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__["default"])(`#${_this.$carousel.attr('id')}`, direction => {
+    (0,_functions_swipeDetect__WEBPACK_IMPORTED_MODULE_1__["default"])("#".concat(_this.$carousel.attr('id')), direction => {
       if (direction === 'left') {
         _this.animateToPosition(_this.carouselPosition + 1);
         _this.cancelAutoplay();
@@ -316,7 +316,7 @@ class Carousel {
     const willOverflow = position * _this.itemWidth > maxScroll;
     const scrollDistance = lodash_clamp__WEBPACK_IMPORTED_MODULE_3___default()(position * _this.itemWidth, 0, maxScroll);
     _this.$inner.css({
-      transform: `translateX(-${scrollDistance}px)`
+      transform: "translateX(-".concat(scrollDistance, "px)")
     });
     if (position !== 0) {
       _this.$navLeft.removeClass('ux-carousel__nav-left--disabled');
@@ -487,7 +487,7 @@ class LiveChecker {
       return;
     }
     _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
-    _this.$offlineMessage.text(`“${_this.randomOfflineMessage.text}”`).attr('href', _this.randomOfflineMessage.link);
+    _this.$offlineMessage.text("\u201C".concat(_this.randomOfflineMessage.text, "\u201D")).attr('href', _this.randomOfflineMessage.link);
     _this.checkIfLive();
     _this.updateMessage();
     this.liveCheckerInterval = setInterval(() => {
@@ -644,7 +644,7 @@ class Scrollers {
   constructor() {
     this.scrollers = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-scroller').each((index, scroller) => {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller).attr('id', `ux-scroller-${index}`);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller).attr('id', "ux-scroller-".concat(index));
       this.scrollers.push(new Scroller(scroller));
     });
   }
@@ -832,7 +832,7 @@ class Support {
    */
   clearActiveButtonState($form, actionType) {
     if (actionType) {
-      $form.find(`.support-form__button[data-action="${actionType}"]`).removeClass('support-form__button--active');
+      $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
     } else {
       $form.find('.support-form__button').removeClass('support-form__button--active');
     }
@@ -848,8 +848,8 @@ class Support {
     let donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
     const _this = this;
     $form.find('.support-form__value-option').each((index, input) => {
-      const value = _this.autovalues[`${donationType}_${jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('name')}`];
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text(`£${value}`);
+      const value = _this.autovalues["".concat(donationType, "_").concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('name'))];
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text("\xA3".concat(value));
     });
   }
   initSupportBar() {

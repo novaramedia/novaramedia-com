@@ -119,7 +119,7 @@ if ($category->slug === 'video') {
             <a href="<?php the_permalink(); ?>">
               <div class="layout-thumbnail-frame">
                 <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                  <?php render_post_ui_tags($post->ID, false, true, true); ?>
+                  <?php render_post_ui_tags($post->ID, false, true, 'no-border'); ?>
                 </div>
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
                   'class' => 'ui-rounded-image'
