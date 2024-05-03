@@ -3455,7 +3455,7 @@ hr {
   margin: 0 auto;
   display: block;
 }
-.front-page__audio-product-logo svg path {
+.front-page__audio-product--novarafm .front-page__audio-product-logo svg path {
   fill: var(--color-black-soft) !important;
 }
 .submenu__date {
