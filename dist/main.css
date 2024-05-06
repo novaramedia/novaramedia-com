@@ -3,6 +3,8 @@
   \************************************************************************************************************************************************************************************************************************/
 .u-hidden {
   display: none !important;
+}
+.u-hidden {
   visibility: hidden;
 }
 .u-visuallyhidden {
@@ -84,12 +86,14 @@ video.wp-video-shortcode {
   display: none;
 }
 .mejs-overlay-play {
+  width: auto !important;
+  height: auto !important;
+}
+.mejs-overlay-play {
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: auto !important;
-  height: auto !important;
 }
 html {
   overflow-y: scroll;
@@ -1219,6 +1223,13 @@ article ol li {
 .text-copy .wp-caption,
 .page-copy .wp-caption {
   max-width: 100% !important;
+}
+.text-copy img,
+.page-copy img,
+.text-copy figure,
+.page-copy figure,
+.text-copy .wp-caption,
+.page-copy .wp-caption {
   display: block;
   margin: 2rem auto;
 }
@@ -1734,6 +1745,8 @@ html {
 }
 .font-condensed {
   font-family: 'acumin-variable', sans-serif !important;
+}
+.font-condensed {
   font-variation-settings: "slnt" 0, "wdth" 68, "wght" 721;
 }
 h1,
@@ -2761,6 +2774,7 @@ b {
 }
 .layout-thumbnail-frame .layout-thumbnail-frame__inner {
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
 }
@@ -2782,13 +2796,82 @@ b {
   overflow: hidden;
 }
 .ui-tag-block {
-  display: flex;
+  display: -ms-inline-flex;
+  display: inline-flex;
   -ms-align-items: center;
   align-items: center;
 }
-.ui-tag-block--inline {
-  display: -ms-inline-flex;
-  display: inline-flex;
+.ui-tag-block:hover .ui-tag,
+.ui-tag-block:hover .ui-av-tag {
+  background-color: var(--color-gray-light);
+}
+.ui-tag-block:active .ui-tag {
+  color: var(--color-black-soft-transparent);
+}
+.ui-tag-block:active .ui-tag:before {
+  background-color: var(--color-black-soft-transparent);
+}
+.ui-tag-block:active .ui-av-tag svg path {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.ui-tag-block--no-border .ui-tag,
+.ui-tag-block--no-border .ui-av-tag {
+  border-color: var(--color-white-soft);
+}
+.ui-tag-block--no-border:hover .ui-tag,
+.ui-tag-block--no-border:hover .ui-av-tag {
+  background-color: transparent;
+  color: var(--color-white-soft);
+  border-color: var(--color-white-soft);
+}
+.ui-tag-block--no-border:hover .ui-tag:before,
+.ui-tag-block--no-border:hover .ui-av-tag:before {
+  background-color: var(--color-white-soft);
+}
+.ui-tag-block--no-border:hover .ui-tag svg path,
+.ui-tag-block--no-border:hover .ui-av-tag svg path {
+  fill: var(--color-white-soft);
+}
+.ui-tag-block--no-border:active .ui-tag {
+  color: var(--color-white-soft-transparent);
+}
+.ui-tag-block--no-border:active .ui-tag:before {
+  background-color: var(--color-white-soft-transparent);
+}
+.ui-tag-block--no-fill--white .ui-tag,
+.ui-tag-block--no-fill--white .ui-av-tag {
+  background-color: transparent;
+  color: var(--color-white-soft);
+  border-color: var(--color-white-soft);
+}
+.ui-tag-block--no-fill--white .ui-tag:before,
+.ui-tag-block--no-fill--white .ui-av-tag:before {
+  background-color: var(--color-white-soft);
+}
+.ui-tag-block--no-fill--white .ui-tag svg path,
+.ui-tag-block--no-fill--white .ui-av-tag svg path {
+  fill: var(--color-white-soft);
+}
+.ui-tag-block--no-fill--white:hover .ui-tag,
+.ui-tag-block--no-fill--white:hover .ui-av-tag {
+  background-color: var(--color-white-soft);
+  color: var(--color-black-soft);
+}
+.ui-tag-block--no-fill--white:hover .ui-tag:before,
+.ui-tag-block--no-fill--white:hover .ui-av-tag:before {
+  background-color: var(--color-black-soft);
+}
+.ui-tag-block--no-fill--white:hover .ui-tag svg path,
+.ui-tag-block--no-fill--white:hover .ui-av-tag svg path {
+  fill: var(--color-black-soft);
+}
+.ui-tag-block--no-fill--white:active .ui-tag {
+  color: var(--color-black-soft-transparent);
+}
+.ui-tag-block--no-fill--white:active .ui-tag:before {
+  background-color: var(--color-black-soft-transparent);
 }
 .ui-tag {
   font-size: 0.5625rem;
@@ -2810,49 +2893,11 @@ b {
 .ui-tag:before {
   content: '';
   background-color: var(--color-black-soft);
-  border-radius: 1rem;
+  border-radius: 50%;
   width: 1cap;
   height: 1cap;
   display: inline-block;
   margin-right: 0.25rem;
-}
-.ui-tag:hover {
-  background-color: var(--color-gray-light);
-}
-.ui-tag:active {
-  color: var(--color-black-soft-transparent);
-}
-.ui-tag--no-border {
-  border-color: var(--color-white-soft);
-}
-.ui-tag--no-border:hover {
-  background-color: transparent;
-  color: var(--color-white-soft);
-  border-color: var(--color-white-soft);
-}
-.ui-tag--no-border:hover:before {
-  background-color: var(--color-white-soft);
-}
-.ui-tag--no-border:active {
-  color: var(--color-white-soft-transparent);
-}
-.ui-tag--no-fill--white {
-  background-color: transparent;
-  color: var(--color-white-soft);
-  border-color: var(--color-white-soft);
-}
-.ui-tag--no-fill--white:before {
-  background-color: var(--color-white-soft);
-}
-.ui-tag--no-fill--white:hover {
-  background-color: var(--color-white-soft);
-  color: var(--color-black-soft);
-}
-.ui-tag--no-fill--white:hover:before {
-  background-color: var(--color-black-soft);
-}
-.ui-tag--no-fill--white:active {
-  color: var(--color-black-soft-transparent);
 }
 .ui-av-tag {
   font-size: 0.5625rem;
@@ -2861,11 +2906,16 @@ b {
   line-height: normal;
   letter-spacing: 0.02813rem;
   background-color: var(--color-white-soft);
+  border: 1px solid var(--color-gray-light);
   border-radius: 50%;
-  display: inline-block;
-  vertical-align: middle;
-  width: 1.2rem;
-  height: 1.2rem;
+  display: -ms-inline-flex;
+  display: inline-flex;
+  -ms-align-content: center;
+  align-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  width: 1.28571429rem;
+  height: 1.28571429rem;
   text-align: center;
   padding: 0.21875rem;
 }
@@ -2885,7 +2935,7 @@ b {
   display: inline-block;
   width: 1ex;
   height: 1ex;
-  border-radius: 10ex;
+  border-radius: 50%;
   background-color: var(--color-black-soft);
   margin-right: 0.25em;
 }
@@ -3405,7 +3455,7 @@ hr {
   margin: 0 auto;
   display: block;
 }
-.front-page__audio-product--novarafm svg path {
+.front-page__audio-product--novarafm .front-page__audio-product-logo svg path {
   fill: var(--color-black-soft) !important;
 }
 .submenu__date {

@@ -1,8 +1,60 @@
 .ui-tag-block
-  display: flex
+  display: inline-flex
   align-items: center
-  &--inline
-    display: inline-flex
+  &:hover
+    .ui-tag, .ui-av-tag
+      background-color: var(--color-gray-light)
+  &:active
+    .ui-tag
+      color: var(--color-black-soft-transparent)
+      &:before
+        background-color: var(--color-black-soft-transparent)
+    .ui-av-tag
+      svg
+        path
+          opacity: .5
+  &--no-border
+    .ui-tag, .ui-av-tag
+      border-color: var(--color-white-soft)
+    &:hover
+      .ui-tag, .ui-av-tag
+        background-color: transparent
+        color: var(--color-white-soft)
+        border-color: var(--color-white-soft)
+        &:before
+          background-color: var(--color-white-soft)
+        svg
+          path
+            fill: var(--color-white-soft)
+    &:active
+      .ui-tag
+        color: var(--color-white-soft-transparent)
+        &:before
+          background-color: var(--color-white-soft-transparent)
+  &--no-fill--white
+    .ui-tag, .ui-av-tag
+      background-color: transparent
+      color: var(--color-white-soft)
+      border-color: var(--color-white-soft)
+      &:before
+        background-color: var(--color-white-soft)
+      svg
+          path
+            fill: var(--color-white-soft)
+    &:hover
+      .ui-tag, .ui-av-tag
+        background-color: var(--color-white-soft)
+        color: var(--color-black-soft)
+        &:before
+          background-color: var(--color-black-soft)
+        svg
+          path
+            fill: var(--color-black-soft)
+    &:active
+      .ui-tag
+        color: var(--color-black-soft-transparent)
+        &:before
+          background-color: var(--color-black-soft-transparent)
 
 .ui-tag
   font-size-1()
@@ -17,47 +69,22 @@
   &:before
     content: ''
     background-color: var(--color-black-soft)
-    border-radius: 1rem
+    border-radius: 50%
     width 1cap
     height: 1cap
     display: inline-block
     margin-right: .25rem
-  &:hover
-    background-color: var(--color-gray-light)
-  &:active
-    color: var(--color-black-soft-transparent)
-  &--no-border
-    border-color: var(--color-white-soft)
-    &:hover
-      background-color: transparent
-      color: var(--color-white-soft)
-      border-color: var(--color-white-soft)
-      &:before
-        background-color: var(--color-white-soft)
-    &:active
-      color: var(--color-white-soft-transparent)
-  &--no-fill--white
-    background-color: transparent
-    color: var(--color-white-soft)
-    border-color: var(--color-white-soft)
-    &:before
-      background-color: var(--color-white-soft)
-    &:hover
-      background-color: var(--color-white-soft)
-      color: var(--color-black-soft)
-      &:before
-        background-color: var(--color-black-soft)
-    &:active
-      color: var(--color-black-soft-transparent)
 
 .ui-av-tag
   font-size-1()
   background-color: var(--color-white-soft)
+  border: 1px solid var(--color-gray-light)
   border-radius: 50%
-  display: inline-block
-  vertical-align: middle
-  width: 1.2rem
-  height: 1.2rem
+  display: inline-flex
+  align-content: center
+  justify-content: center
+  width: 1.28571429rem
+  height: 1.28571429rem
   text-align: center
   padding: 0.21875rem
   &&--video
@@ -79,7 +106,7 @@
   display: inline-block
   width: 1ex
   height: 1ex
-  border-radius: 10ex
+  border-radius: 50%
   background-color: var(--color-black-soft)
   margin-right: .25em
   &--red

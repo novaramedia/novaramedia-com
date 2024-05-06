@@ -5,10 +5,9 @@
  * @param integer $post_id        Post ID
  * @param Boolean $show_text      If the rendered tag should show the text
  * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param string $tag_style_varient   Additional BEM varient class
  * @param string $block_style_varient Additional BEM varient class
  */
-function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $tag_style_varient = false, $block_style_varient = false) {
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false) {
   $sub_category = get_the_sub_category($post_id, true);
 
   if (!$sub_category) {
@@ -17,15 +16,15 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
 
   $category_link = get_category_link($sub_category->term_id);
 
-  echo '<span class="ui-tag-block';
+  echo '<a href="' . $category_link . '" class="ui-tag-block';
   echo $block_style_varient ? ' ui-tag-block--' . $block_style_varient : '';
   echo '">';
 
   if ($show_text) {
-    echo '<a href="' . $category_link . '" class="';
+    echo '<span class="';
     echo $tag_style_varient ? 'ui-tag ui-tag--' . $tag_style_varient : 'ui-tag';
     echo '">' . $sub_category->name;
-    echo '</a>';
+    echo '</span>';
   }
 
   if ($show_av_icons) {
@@ -44,7 +43,7 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
     }
   }
 
-  echo '</span>';
+  echo '</a>';
 }
 /**
  * Renders a post thumbnail.
