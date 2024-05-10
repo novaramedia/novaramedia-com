@@ -14,7 +14,7 @@
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
         <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
       </div>
-      <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover-link-image">
+      <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
         <?php render_thumbnail($post_id, 'col12-16to9', array(
           'class' => 'ui-rounded-image',
           'data-no-lazysizes' => true,
@@ -22,7 +22,7 @@
         )); ?>
       </a>
     </div>
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover-link-post">
+    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
       <div class="mt-1">
         <h2 class="post__title fs-5-sans font-bold js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
         <h5 class="fs-2 font-uppercase mt-1">

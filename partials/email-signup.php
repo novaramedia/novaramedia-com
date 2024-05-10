@@ -48,15 +48,13 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
-        <h3 class="fs-8 fs-s-6 mb-4">
-          <?php echo $headline; ?>
-        </h3>
+        <h3 class="fs-8 fs-s-6 mb-4 js-fix-widows"><?php echo $headline; ?></h3>
         <p class="fs-6 fs-s-4-sans">
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>
           <div class="mt-3 fs-2">
-            <a href="<?php echo site_url('newsletters/'); ?>"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
+            <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
         <?php } ?>
       </div>

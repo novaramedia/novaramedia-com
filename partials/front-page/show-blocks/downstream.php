@@ -29,16 +29,16 @@
         $latest_video->the_post();
       ?>
       <div class="grid-item is-s-24 is-l-14 is-xxl-16 mb-s-5">
-        <a href="<?php the_permalink(); ?>">
-          <div class="layout-thumbnail-frame">
-            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-              <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
-            </div>
+        <div class="layout-thumbnail-frame">
+          <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+            <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
+          </div>
+          <a href="<?php the_permalink(); ?>" class="ui-hover">
             <?php render_thumbnail($post->ID, 'col24-16to9', array(
               'class' => 'ui-rounded-image'
             )); ?>
-          </div>
-        </a>
+          </a>
+        </div>
 
         <div class="grid-row grid--nested mt-4">
           <?php
@@ -60,10 +60,12 @@
             $title_classes = $has_related ? 'is-m-24 is-xxl-16' : 'is-xxl-24';
           ?>
           <div class="grid-item <?php echo $title_classes; ?>">
-            <h6 class="js-fix-widows fs-8"><?php the_title(); ?></h6>
-            <h5 class="fs-6 mt-3">
-              <?php render_standfirst($post->ID); ?>
-            </h5>
+            <a href="<?php the_permalink(); ?>" class="ui-hover">
+              <h6 class="js-fix-widows fs-8"><?php the_title(); ?></h6>
+              <h5 class="fs-6 mt-3">
+                <?php render_standfirst($post->ID); ?>
+              </h5>
+            </a>
           </div>
           <?php
           if ($has_related) {
@@ -75,7 +77,7 @@
                   $related_posts->the_post();
             ?>
                 <div>
-                  <a href="<?php the_permalink(); ?>">
+                  <a href="<?php the_permalink(); ?>" class="ui-hover">
                     <h5 class="fs-4-sans js-fix-widows"><?php the_title(); ?></h5>
                     <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                   </a>
@@ -91,7 +93,7 @@
         </div>
       </div>
       <div class="grid-item is-s-24 is-l-10 is-xxl-8">
-        <a href="<?php echo $category_link; ?>">
+        <a href="<?php echo $category_link; ?>" class="ui-hover">
           <div class="layout-split-level fs-2 mb-4">
             <h5 class="font-bold font-uppercase">Recent Episodes</h5>
             <span>See All</span>
@@ -105,15 +107,17 @@
             $meta = get_post_meta($post->ID);
         ?>
           <div class="grid-item is-xxl-12 mb-4">
-            <a href="<?php the_permalink(); ?>">
-              <div class="layout-thumbnail-frame">
-                <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                  <?php render_post_ui_tags($post->ID, false, true, 'no-border'); ?>
-                </div>
+            <div class="layout-thumbnail-frame">
+              <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+                <?php render_post_ui_tags($post->ID, false, true, 'no-border'); ?>
+              </div>
+              <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
                   'class' => 'ui-rounded-image'
                 )); ?>
-              </div>
+              </a>
+            </div>
+            <a href="<?php the_permalink(); ?>" class="ui-hover">
               <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
             </a>
           </div>

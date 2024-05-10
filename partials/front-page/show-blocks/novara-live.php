@@ -3,7 +3,7 @@
 
   if ($novara_life_category) {
     $category_link = get_category_link($novara_life_category->term_id);
-    $posts_to_show = 15;
+    $posts_to_show = 17;
 
     $args = array(
       'posts_per_page' => $posts_to_show,
@@ -39,19 +39,19 @@
         ?>
           <div class="grid-row grid--nested">
             <div class="grid-item is-l-24 is-xxl-16">
-              <a href="<?php the_permalink(); ?>">
               <div class="layout-thumbnail-frame">
                 <div class="layout-thumbnail-frame__inner mt-1 ml-1">
                   <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
                 </div>
-                <?php render_thumbnail($post->ID, 'col24-16to9', array(
-                  'class' => 'ui-rounded-image'
-                )); ?>
+                <a href="<?php the_permalink(); ?>" class="ui-hover">
+                  <?php render_thumbnail($post->ID, 'col24-16to9', array(
+                    'class' => 'ui-rounded-image'
+                  )); ?>
+                </a>
               </div>
-              </a>
             </div>
             <div class="grid-item is-l-24 is-xxl-8 mt-l-3">
-              <a href="<?php the_permalink(); ?>">
+              <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <h6 class="js-fix-widows fs-7"><?php the_title(); ?></h6>
                 <p class="fs-4-sans font-weight-regular mt-3">
                   <?php render_short_description($post->ID); ?>
@@ -74,7 +74,7 @@
                       $related_posts->the_post();
                 ?>
                     <div class="mb-2">
-                      <a href="<?php the_permalink(); ?>">
+                      <a href="<?php the_permalink(); ?>" class="ui-hover">
                         <h5 class="fs-4-sans"><?php the_title(); ?></h5>
                         <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                       </a>
@@ -113,7 +113,7 @@
             <div class="pb-3 mb-3 <?php if ($i < $posts_to_show - 1) {echo 'ui-border-bottom';} ?>">
               <div class="grid-row grid--nested">
                 <div class="grid-item is-s-10 is-xxl-8">
-                  <a href="<?php the_permalink(); ?>">
+                  <a href="<?php the_permalink(); ?>" class="ui-hover">
                     <?php render_thumbnail($post->ID, 'col24-16to9', array(
                       'class' => 'ui-rounded-image'
                     )); ?>
@@ -122,13 +122,13 @@
                 <div class="grid-item is-s-14 is-xxl-16">
                   <div class="layout-split-level fs-2 mb-1">
                     <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white'); ?>
-                    <a href="<?php the_permalink(); ?>"><?php if ($i < 6) { ?>
+                    <a href="<?php the_permalink(); ?>" class="ui-hover"><?php if ($i < 6) { ?>
                       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
                     <?php } else { ?>
                       <span><?php the_time('j F Y'); ?></span>
                     <?php } ?></a>
                   </div>
-                  <a href="<?php the_permalink(); ?>">
+                  <a href="<?php the_permalink(); ?>" class="ui-hover">
                     <h4 class="post__title fs-2 fs-s-4-sans font-bold">
                       <?php the_title(); ?>
                     </h4>

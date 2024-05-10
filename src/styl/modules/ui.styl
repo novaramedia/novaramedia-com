@@ -255,12 +255,16 @@ hr
 // Hover Effects
 // -------------
 
-.ui-post-hover
-  .post__title
-    transition: color $duration-quick-transitions ease-in-out
+.ui-hover
+  transition: opacity var(--transition-speed-ultra)
   &:hover
-    .post__title
-      color: $color-black--hover
+    opacity: .5
+
+.ui-hover-links-inside
+  a
+    transition: opacity var(--transition-speed-ultra)
+    &:hover
+      opacity: .5
 
 // Ticker
 // -------------

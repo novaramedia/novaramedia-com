@@ -55,7 +55,7 @@
         </div>
       </div>
       <nav class="site-header-nav" role="navigation" aria-label="Sections">
-        <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3">
+        <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>

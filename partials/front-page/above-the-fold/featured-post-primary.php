@@ -17,7 +17,7 @@
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
         <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
       </div>
-      <a href="<?php echo get_permalink($post_id); ?>">
+      <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
         <?php render_thumbnail($post_id, 'col24-16to9', array(
           'class' => 'ui-rounded-image',
           'data-no-lazysizes' => true,
@@ -28,7 +28,7 @@
 
     <div class="grid-row grid--nested mt-3">
       <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-xxl-24'; ?>">
-        <a href="<?php echo get_permalink($post_id); ?>" class="ui-post-hover">
+        <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
           <h2 class="post__title fs-8 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
           <h5 class="fs-2 font-uppercase mt-3">
             <?php
@@ -67,7 +67,7 @@
                 $related_posts->the_post();
           ?>
               <div class="mb-2">
-                <a href="<?php the_permalink(); ?>">
+                <a href="<?php the_permalink(); ?>" class="ui-hover">
                   <h5 class="fs-4-sans"><?php the_title(); ?></h5>
                   <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                 </a>
@@ -110,7 +110,7 @@
       }
   ?>
   <div class="mt-2 fs-2">
-    <a href="<?php echo $link; ?>"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
+    <a href="<?php echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
   </div>
   <?php
     }

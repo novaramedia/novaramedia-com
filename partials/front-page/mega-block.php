@@ -49,7 +49,7 @@
             <div class="layout-thumbnail-frame__inner mt-1 ml-1">
               <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
             </div>
-            <a href="<?php echo get_permalink($post->ID); ?>">
+            <a href="<?php echo get_permalink($post->ID); ?>" class="ui-hover">
               <?php render_thumbnail($post->ID, 'col24-16to9', array(
                 'class' => 'ui-rounded-image',
                 'data-no-lazysizes' => true,
@@ -60,7 +60,7 @@
           <?php
             }
           ?>
-        <a href="<?php echo get_permalink($post->ID); ?>">
+        <a href="<?php echo get_permalink($post->ID); ?>" class="ui-hover">
           <h5 class="<?php echo $index === 2 ? "mb-2" : "pb-2 mb-2 ui-border-bottom";?>"><?php echo $post->post_title; ?></h5>
         </a>
         <?php

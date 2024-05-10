@@ -15,7 +15,7 @@
 ?>
 <div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-2 font-color-<?php echo $font_color; ?> ui-rounded-box">
   <div class="front-page__audio-product front-page__audio-product--<?php echo $slug; ?> background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
-    <a href="<?php echo get_term_link($category); ?>">
+    <a href="<?php echo get_term_link($category); ?>" class="ui-hover">
       <?php
         if ($logo_url) {
       ?>
@@ -40,7 +40,7 @@
             <div class="layout-thumbnail-frame__inner mt-1 ml-1">
               <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
             </div>
-            <a href="<?php echo get_the_permalink($post_id); ?>">
+            <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
               <?php render_thumbnail($post_id, 'col12', array(
                 'class' => 'ui-rounded-image'
               )); ?>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="grid-item is-xxl-14">
-          <a href="<?php echo get_the_permalink($post_id); ?>">
+          <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
             <h3 class="fs-5-sans font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
             <div class="fs-4-sans font-weight-regular mb-3">
               <?php render_short_description($post_id); ?>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="ui-border-top ui-border--black pt-4">
-      <a href="<?php echo get_term_link($category); ?>">
+      <a href="<?php echo get_term_link($category); ?>" class="ui-hover">
         <div class="grid-row grid--nested">
           <div class="grid-item is-xxl-12">
             <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
@@ -83,13 +83,15 @@
           $post_id = $post->ID;
       ?>
         <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
-          <a href="<?php echo get_the_permalink($post_id); ?>">
+          <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
             <div class="fs-2 mb-2">
               <?php echo get_the_time('j F Y', $post_id); ?>
             </div>
-            <h4 class="fs-4-sans mb-2">
-              <?php render_post_ui_tags($post_id, false, true); ?> <?php echo get_the_title($post_id); ?>
-            </h4>
+          </a>
+          <h4 class="fs-4-sans mb-2">
+            <?php render_post_ui_tags($post_id, false, true); ?> <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover"><?php echo get_the_title($post_id); ?></a>
+          </h4>
+          <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
             <div>
               <?php render_short_description($post_id); ?>
             </div>

@@ -13,7 +13,7 @@
     <div>
       <?php render_post_ui_tags($post_id); ?>
     </div>
-    <a href="<?php echo get_permalink($post_id); ?>">
+    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
       <h2 class="post__title fs-5-sans font-bold mt-1 js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
       <?php
         $meta = get_post_meta(get_the_ID());
