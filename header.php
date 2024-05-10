@@ -49,7 +49,7 @@
               </a>
             </div>
             <div class="grid-item is-xxl-6 text-align-right font-weight-bold">
-              <a href="<?php echo home_url('support'); ?>" class="only-desktop">Support Us</a>
+              <a href="<?php echo home_url('support'); ?>" class="only-desktop ui-hover">Support Us</a>
             </div>
           </div>
         </div>
@@ -59,12 +59,23 @@
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-general',
+                    'fallback_cb' => function() { ?>
               <ul class="font-weight-bold mb-3">
-                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
+                <li><a href="<?php echo site_url('about/'); ?>">About Us</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
+                <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
                 <li><a href="<?php echo site_url('about/how-were-funded/'); ?>">How We're Funded</a></li>
                 <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               </ul>
+                  <?php },
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
               <ul class="font-weight-bold mb-3">
                 <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
               </ul>

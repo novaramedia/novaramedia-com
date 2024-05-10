@@ -49,6 +49,7 @@ get_template_part( 'lib/thumbnail-sizes' );
 function nm_register_menus() {
   register_nav_menus(
     array(
+      'header-general' => __( 'Header: General' ),
       'header-shows' => __( 'Header: Shows' ),
       'header-series' => __( 'Header: Series' ),
       'header-submenu' => __( 'Header: Submenu' ),
