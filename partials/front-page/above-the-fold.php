@@ -46,9 +46,9 @@ for ($i = 0; $i < 8; $i++) {
   }
 }
 ?>
-<section class="front-page__above-the-fold container container--padded mt-2 mb-6">
+<section class="front-page__above-the-fold container container--padded mt-2 mb-6 mb-s-5">
   <div class="above-the-fold layout-grid">
-    <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-5">
+    <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-4">
       <?php
         get_template_part('partials/front-page/above-the-fold/featured-posts-block', null, array(
           'block_number' => 1,

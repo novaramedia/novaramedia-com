@@ -1,7 +1,8 @@
 <?php
+$number_of_articles = 7;
 $query_args = array(
   'category_name' => 'articles',
-  'posts_per_page' => 7,
+  'posts_per_page' => $number_of_articles,
 );
 
 if (is_array($args) && count($args) > 0) {
@@ -18,7 +19,7 @@ if ($recent_articles->have_posts()) {
     $timestamp = get_post_time('c');
     $sub_category = get_the_sub_category($post->ID);
 ?>
-<div class="margin-bottom-small padding-bottom-small ui-border-bottom">
+<div class="margin-bottom-small padding-bottom-small <?php if ($i !== ($number_of_articles - 1)) {echo 'ui-border-bottom';} ?>">
   <div class="layout-split-level fs-2 mb-1">
     <?php render_post_ui_tags($post->ID); ?>
     <a href="<?php the_permalink(); ?>" class="ui-hover">
@@ -32,9 +33,7 @@ if ($recent_articles->have_posts()) {
     ?>
       <div class="grid-row grid--nested">
         <div class="grid-item is-xxl-16">
-          <h4 class="post__title fs-4-sans font-condensed">
-            <?php the_title(); ?>
-          </h4>
+          <h4 class="post__title fs-4-sans font-condensed js-fix-widows"><?php the_title(); ?></h4>
           <h5 class="fs-3-serif mt-1">
             <?php render_standfirst($post->ID); ?>
           </h5>
@@ -53,10 +52,8 @@ if ($recent_articles->have_posts()) {
      <?php
       } else if ($i === 3) { // render full image layout
     ?>
-      <h4 class="post__title s-5-sans font-condensed">
-        <?php the_title(); ?>
-      </h4>
-      <div class="mt-1">
+      <h4 class="post__title s-5-sans font-condensed js-fix-widows"><?php the_title(); ?></h4>
+      <div class="mt-2 mb-2">
         <?php render_thumbnail($post->ID, 'col12-16to9', array(
         'class' => 'ui-rounded-image u-display-block',
         'data-no-lazysizes' => true,
@@ -72,9 +69,7 @@ if ($recent_articles->have_posts()) {
      <?php
       } else {
      ?>
-      <h4 class="post__title fs-5-sans font-condensed">
-        <?php the_title(); ?>
-      </h4>
+      <h4 class="post__title fs-5-sans font-condensed js-fix-widows"><?php the_title(); ?></h4>
       <h5 class="fs-3-serif mt-1">
         <?php render_standfirst($post->ID); ?>
       </h5>

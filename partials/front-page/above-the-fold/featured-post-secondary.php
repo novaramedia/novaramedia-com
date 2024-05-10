@@ -23,7 +23,7 @@
       </a>
     </div>
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <div class="mt-1">
+      <div class="mt-2">
         <h2 class="post__title fs-5-sans font-bold js-fix-widows"><?php echo get_the_title($post_id); ?></h2>
         <h5 class="fs-2 font-uppercase mt-1">
           <?php

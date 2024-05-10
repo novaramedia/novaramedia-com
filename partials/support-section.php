@@ -7,7 +7,7 @@
   $instance = uniqid('support-form-');
 ?>
 
-<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white pt-6 pb-6">
+<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="container">
 
     <form
@@ -16,16 +16,11 @@
     >
       <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
 
-      <div class="grid-row margin-bottom-small">
-        <div class="grid-item is-m-24">
-          <a href="<?php echo home_url('support/'); ?>">
-            <h4 class="fs-6"><?php echo $heading_copy; ?></h4>
-          </a>
-        </div>
-      </div>
-
       <div class="grid-row fs-5-sans fs-s-4-sans">
         <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
+          <a href="<?php echo home_url('support/'); ?>">
+            <h4 class="fs-6 mb-3"><?php echo $heading_copy; ?></h4>
+          </a>
           <?php
             if ($support_section_text || $override_text) {
             ?>

@@ -44,12 +44,12 @@
     $button_color = $args['button-color'];
   }
 ?>
-<div class="email-signup <?php if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6'; } ?> background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
+<div class="email-signup <?php if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6 pt-s-5 pb-s-5'; } ?> background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
   <div class="container">
     <div class="grid-row">
-      <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
+      <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
         <h3 class="fs-8 fs-s-6 mb-4 js-fix-widows"><?php echo $headline; ?></h3>
-        <p class="fs-6 fs-s-4-sans">
+        <p class="fs-6 fs-s-4-sans mr-6">
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>
@@ -58,7 +58,7 @@
           </div>
         <?php } ?>
       </div>
-      <div class="grid-item <?php echo $image_id === false ? 'is-s-24 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
+      <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
         <form class="email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
           <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
 

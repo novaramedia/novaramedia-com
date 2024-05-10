@@ -13,7 +13,7 @@
     $latest_video = new WP_Query($args);
 ?>
 <div class="background-black font-color-white">
-  <section class="front-page-novara-live container pt-6 pb-6">
+  <section class="front-page-novara-live container pt-6 pb-6 pt-s-5 pb-s-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-4">
         <a href="<?php echo $category_link; ?>">

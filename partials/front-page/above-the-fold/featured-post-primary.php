@@ -46,7 +46,7 @@
       </div>
       <?php
         if ($show_related) { ?>
-      <div class="grid-item is-s-24 is-l-8 is-xxl-6">
+      <div class="grid-item is-s-24 is-l-8 is-xxl-6 ui-border-left mt-s-3 ui-border--not-s">
       <?php
           $meta = get_post_meta($post_id);
 
