@@ -140,6 +140,11 @@ formElementBase()
     height: auto
   &--border-gray
     border-color: var(--color-gray-light)
+  &:disabled
+    background-color: var(--color-gray-light)
+    color: var(--color-black-soft)
+    border-color: var(--color-gray-light)
+    cursor: not-allowed
 
 .ui-button
   formElementBase()
@@ -182,6 +187,16 @@ formElementBase()
     border-color: var(--color-green)
     &:hover
       color: var(--color-green)
+
+  &--disabled
+    background-color: var(--color-gray-light)
+    color: var(--color-black-soft)
+    border-color: var(--color-gray-light)
+    cursor: not-allowed
+    &:hover
+      background-color: var(--color-gray-light)
+      color: var(--color-black-soft)
+      cursor: not-allowed
 
 .ui-input
   formElementBase()
