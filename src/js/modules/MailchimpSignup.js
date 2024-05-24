@@ -58,10 +58,11 @@ export class MailchimpSignup {
             } catch(error) {
               $feedbackMessageSpan.text('General error');
             }
+
+            $formInputs.prop('disabled', false);
           })
           .always(() => {
             $form.removeClass('email-signup__form--processing');
-            $formInputs.prop('disabled', false);
           });
       });
     });
