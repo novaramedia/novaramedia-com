@@ -19,7 +19,9 @@
   $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
   if ($_SERVER['HTTP_HOST'] === 'localhost:8888' || $_SERVER['HTTP_HOST'] === 'novaramediacom.local') { // for local dev
-    $netlify = 'http://localhost:60573/.netlify/functions/mailchimp-signup';
+    $netlify = 'http://localhost:8888/.netlify/functions/mailchimp-signup';
+  } else if ($_SERVER['HTTP_HOST'] === 'stg-novaramediacom-staging.kinsta.cloud') { // for staging, will always fail. Could spin up the netlify function on staging to test
+    $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
   }
 
   // get metadata with fallback defaults
@@ -78,22 +80,14 @@
               <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
-            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up">
-          </div>
+            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up" />
 
-          <div class="email-signup__feedback-processing">
-            <div class="spinner">
-              <div class="double-bounce1"></div>
-              <div class="double-bounce2"></div>
+            <span class="email-signup__feedback-processing ui-button ui-button--disabled fs-6">Processing...</span>
+            <span class="email-signup__feedback-completed ui-button ui-button--disabled fs-6">Success</span>
+            <div class="email-signup__feedback-failed layout-split-level">
+              <input class="ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Try again" />
+              <p class="ml-2 fs-2">Failed: <span class="email-signup__feedback-message"></span>.</p>
             </div>
-          </div>
-
-          <div class="email-signup__feedback-failed mt-2">
-            <p>Sign up error: <span class="email-signup__feedback-message"></span>. Maybe try again</p>
-          </div>
-
-          <div class="email-signup__feedback-completed fs-6 fs-s-4-sans">
-            <p>Thanks for signing up. &#10003;</p>
           </div>
         </form>
       </div>

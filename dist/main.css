@@ -1125,6 +1125,9 @@ body {
 .font-color-green-racing {
   color: var(--color-green-racing);
 }
+.font-color-red {
+  color: var(--color-red);
+}
 .text-shadow-white {
   text-shadow: 0 0 20px var(--color-white-soft-transparent);
 }
@@ -2980,6 +2983,12 @@ b {
 .ui-button--border-gray {
   border-color: var(--color-gray-light);
 }
+.ui-button:disabled {
+  background-color: var(--color-gray-light);
+  color: var(--color-black-soft);
+  border-color: var(--color-gray-light);
+  cursor: not-allowed;
+}
 .ui-button:hover {
   background-color: transparent;
   color: var(--color-white-soft);
@@ -3025,6 +3034,17 @@ b {
 .ui-button--green:hover {
   color: var(--color-green);
 }
+.ui-button--disabled {
+  background-color: var(--color-gray-light);
+  color: var(--color-black-soft);
+  border-color: var(--color-gray-light);
+  cursor: not-allowed;
+}
+.ui-button--disabled:hover {
+  background-color: var(--color-gray-light);
+  color: var(--color-black-soft);
+  cursor: not-allowed;
+}
 .ui-input {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
   display: -ms-inline-flex;
@@ -3056,6 +3076,12 @@ b {
 }
 .ui-input--border-gray {
   border-color: var(--color-gray-light);
+}
+.ui-input:disabled {
+  background-color: var(--color-gray-light);
+  color: var(--color-black-soft);
+  border-color: var(--color-gray-light);
+  cursor: not-allowed;
 }
 .ui-checkbox {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
@@ -3089,6 +3115,12 @@ b {
 }
 .ui-checkbox--border-gray {
   border-color: var(--color-gray-light);
+}
+.ui-checkbox:disabled {
+  background-color: var(--color-gray-light);
+  color: var(--color-black-soft);
+  border-color: var(--color-gray-light);
+  cursor: not-allowed;
 }
 
 .ui-action-link {
@@ -3394,18 +3426,23 @@ hr {
   display: none;
 }
 .email-signup__form--processing .email-signup__feedback-processing {
-  display: block;
+  display: -ms-inline-flex;
+  display: inline-flex;
 }
-.email-signup__form--processing .email-signup__inputs {
+.email-signup__form--processing .email-signup__submit {
   display: none;
 }
 .email-signup__form--failed .email-signup__feedback-failed {
-  display: block;
+  display: flex;
+}
+.email-signup__form--failed .email-signup__submit {
+  display: none;
 }
 .email-signup__form--completed .email-signup__feedback-completed {
-  display: block;
+  display: -ms-inline-flex;
+  display: inline-flex;
 }
-.email-signup__form--completed .email-signup__inputs {
+.email-signup__form--completed .email-signup__submit {
   display: none;
 }
 .newsletter-page-email-signup__form {
