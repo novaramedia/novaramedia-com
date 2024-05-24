@@ -456,7 +456,7 @@ function nm_register_front_page_options_metabox() {
     'type' => 'textarea_small',
     'attributes' => array(
       'data-validation' => 'true',
-      'data-validation-word-length' => 14
+      'data-validation-word-length' => 12
     )
   ) );
 
