@@ -60,7 +60,7 @@
           </div>
         <?php } ?>
       </div>
-      <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
+      <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
         <form class="email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
           <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
 
