@@ -2,7 +2,7 @@
 
 import $ from 'jquery';
 import Swiper from 'swiper';
-import { Navigation, Autoplay, Mousewheel } from 'swiper/modules';
+import { Navigation, Autoplay, Mousewheel, FreeMode } from 'swiper/modules';
 
 export class Carousels {
   constructor() {
@@ -30,7 +30,7 @@ class Carousel {
     this.$navRight = this.$carousel.find('.swiper-button-next');
 
     this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
-      modules: [Navigation, Autoplay, Mousewheel],
+      modules: [Navigation, Autoplay, Mousewheel, FreeMode],
       navigation: {
         nextEl: this.$navRight[0],
         prevEl: this.$navLeft[0],
@@ -41,6 +41,11 @@ class Carousel {
       },
       mousewheel: {
         enabled: true,
+        thresholdDelta: 4,
+      },
+      freemode: {
+        enabled: true,
+        sticky: true,
       },
       slidesPerView: 'auto',
       rewind: true,

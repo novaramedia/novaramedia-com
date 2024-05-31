@@ -144,7 +144,7 @@ class Carousel {
     this.$navLeft = this.$carousel.find('.swiper-button-prev');
     this.$navRight = this.$carousel.find('.swiper-button-next');
     this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"](this.$carousel.find('.swiper')[0], {
-      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel],
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.FreeMode],
       navigation: {
         nextEl: this.$navRight[0],
         prevEl: this.$navLeft[0]
@@ -154,7 +154,12 @@ class Carousel {
         pauseOnMouseEnter: true
       },
       mousewheel: {
-        enabled: true
+        enabled: true,
+        thresholdDelta: 4
+      },
+      freemode: {
+        enabled: true,
+        sticky: true
       },
       slidesPerView: 'auto',
       rewind: true
