@@ -257,7 +257,7 @@ class Carousel {
       resize: lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default()(_this.onResize.bind(_this), 500)
     });
     if (_this.isAutoplayer) {
-      _this.$carousel.find('.ux-carousel__item').on({
+      _this.$carousel.on({
         mouseenter: function () {
           _this.pauseAutoplay();
         },

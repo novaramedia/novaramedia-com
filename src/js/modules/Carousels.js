@@ -112,7 +112,7 @@ class Carousel {
     });
 
     if (_this.isAutoplayer) {
-      _this.$carousel.find('.ux-carousel__item').on({
+      _this.$carousel.on({
         mouseenter: function () {
           _this.pauseAutoplay();
         },
