@@ -3960,9 +3960,6 @@ html {
 @media screen and (max-width: 759px) {
   .products-bar__item {
     width: 265px;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    opacity: 0.5;
   }
 }
 .support-form {
