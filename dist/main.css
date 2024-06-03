@@ -3626,9 +3626,13 @@ html {
 .site-header-nav {
   display: none;
 }
+.site-header-nav a {
+  display: block;
+  padding: 0.25rem 0;
+}
 @media screen and (max-width: 910px) {
   .site-header-nav {
-    max-height: 80vh;
+    height: calc(100vh - var(--header-height));
     overflow-y: auto;
   }
 }
