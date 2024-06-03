@@ -1937,6 +1937,15 @@ b {
 .text-paragraph-breaks p {
   margin-bottom: 1em;
 }
+@media screen and (max-width: 910px) {
+  .fs-m-7 {
+    font-family: 'Helvetica Neue';
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem; /* 100% */
+  }
+}
 @media screen and (max-width: 759px) {
   .fs-s-1 {
     font-size: 0.5625rem;
@@ -3384,18 +3393,6 @@ hr {
   -ms-grid-row-start: 2;
   grid-row-start: 2;
   grid-row-end: span 1;
-}
-@media screen and (max-width: 910px) {
-  .above-the-fold__featured-1,
-  .above-the-fold__latest-articles,
-  .above-the-fold__featured-2 {
-    -ms-grid-column-start: 1;
-    grid-column-start: 1;
-    grid-column-end: span 24;
-    -ms-grid-row-start: auto;
-    grid-row-start: auto;
-    grid-row-end: span 1;
-  }
 }
 @media screen and (max-width: 759px) {
   .above-the-fold {
