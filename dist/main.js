@@ -753,11 +753,10 @@ class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
+    this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('cookie-approval') === 'true' ? true : false;
   }
-
   onReady() {
     const _this = this;
-    _this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('cookie-approval') === 'true' ? true : false;
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-section').length) {
       _this.setupAutovalues();
       _this.bind();
@@ -985,7 +984,9 @@ class Utilities {
       const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-bar');
       $bar.show();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-accept').on('click', () => {
-        js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('cookie-approval', 'true');
+        js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('cookie-approval', 'true', {
+          expires: 365
+        });
         $bar.hide();
       });
     }

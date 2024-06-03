@@ -83,7 +83,7 @@ export class Utilities {
       $bar.show();
 
       $('#obligation-accept').on('click', () => {
-        Cookies.set('cookie-approval', 'true');
+        Cookies.set('cookie-approval', 'true', { expires: 365 });
         $bar.hide();
       });
     }
