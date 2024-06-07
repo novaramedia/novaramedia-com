@@ -1,7 +1,6 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
 import $ from 'jquery';
-import { debounce } from 'lodash';
 import { DateTime } from 'luxon';
 // possible https://www.npmjs.com/package/fromnow
 
@@ -25,8 +24,6 @@ export class Utilities {
   onReady() {
     const _this = this;
 
-    this.truncateLines();
-
     if ($('#single-resources-section').length) {
       _this.bindResourcesToggle();
     }
@@ -34,13 +31,6 @@ export class Utilities {
     $('.js-select').click((event) => {
       selectText($(event.target)[0]);
     });
-
-    $(window).on(
-      'resize',
-      debounce(() => {
-        _this.truncateLines();
-      }, 250)
-    );
   }
 
   /**
@@ -63,53 +53,6 @@ export class Utilities {
       let string = $(element).html();
       string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
       $(element).html(string);
-    });
-  }
-
-  /**
-   * Utility css class to truncate text to a specified number of lines
-   * Target expected to be a block element with data-lines of the number of lines to truncate to
-   * Adds a css class of is-truncated if the text is truncated
-   * Uses line-height to calculate the height of the element
-   * Adds a max-height to the element based on the line-height and data-lines
-   * Checks if the height of the element is greater than the max-height and adds the is-truncated class
-   */
-  truncateLines() {
-    $('.js-truncate-lines').each((index, element) => {
-      const $element = $(element);
-      const lines = $element.data('lines');
-
-      if ($element.data('initiated') !== true) {
-        $element.data('original-text', $element.text());
-      } else {
-        $element.text($element.data('original-text'));
-      }
-
-      $element.data('initiated', true);
-
-      $element.css('max-height', 'initial'); // reset max-height
-      const styles = window.getComputedStyle($element[0]); // get computed styles
-      const lineHeight = styles
-        .getPropertyValue('line-height')
-        .replace('px', ''); // get line-height in px
-      const maxHeight = lineHeight * lines; // calculate max-height in px
-
-      while ($element.height() > maxHeight) {
-        // while height is greater than max-height
-        $element.text($element.text().slice(0, -1)); // remove last character
-
-        if ($element.height() <= maxHeight) {
-          // if height is less than or equal to max-height then this is the last run
-          $element.text(
-            $element
-              .text()
-              .replace(/\s+$/, '') // remove trailing whitespace
-              .slice(0, -5) + '...' // remove last 5 characters and add ellipsis
-          );
-        }
-      }
-
-      $element.css('max-height', maxHeight); // set max-height
     });
   }
 
