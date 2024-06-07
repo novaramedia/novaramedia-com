@@ -1,8 +1,7 @@
-.ux-carousel__wrapper
-  overflow: hidden
-  position: relative
-
-.ux-carousel__nav-left, .ux-carousel__nav-right
+.swiper-button-prev, .swiper-button-next
+  display: flex
+  justify-content: center
+  align-items: center
   position: absolute
   top: 0
   height: 100%
@@ -14,21 +13,16 @@
     opacity 0
     z-index: -10
 
-.ux-carousel__nav-left
+.swiper-button-prev
   left: 0
 
-.ux-carousel__nav-right
+.swiper-button-next
   right: 0
-
-.ux-carousel__inner
-  display: flex
-  flex-wrap: nowrap
-  transition: transform var(--transition-speed-quick) ease-in-out
 
 .ux-carousel__item
   flex-shrink: 0
   max-width: 100%
   width: 200px
-  margin-left: 1rem
-  &:first-child
-    margin-left: 0
+  margin-right: 1rem
+  &:last-child
+    margin-right: 0

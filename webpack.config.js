@@ -1,6 +1,7 @@
 /* global require, __dirname, module */
 
 const path = require('path');
+const chalk = require('chalk');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -83,6 +84,18 @@ var config = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
+    {
+      apply: (compiler) => {
+        compiler.hooks.compilation.tap('TimestampPlugin', () => {
+          console.log(
+            chalk.inverse.red(
+              '————————————NO FUTURE———NEW COMPILATION NOW————————————'
+            )
+          );
+          console.log(chalk.inverse.greenBright(new Date().toString()));
+        });
+      },
+    },
   ],
 
   optimization: {
