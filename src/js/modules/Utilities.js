@@ -35,9 +35,12 @@ export class Utilities {
       selectText($(event.target)[0]);
     });
 
-    $(window).on('resize', debounce(() => {
-      _this.truncateLines();
-    }, 250));
+    $(window).on(
+      'resize',
+      debounce(() => {
+        _this.truncateLines();
+      }, 250)
+    );
   }
 
   /**
@@ -86,13 +89,17 @@ export class Utilities {
 
       $element.css('max-height', 'initial'); // reset max-height
       const styles = window.getComputedStyle($element[0]); // get computed styles
-      const lineHeight = styles.getPropertyValue('line-height').replace('px', ''); // get line-height in px
+      const lineHeight = styles
+        .getPropertyValue('line-height')
+        .replace('px', ''); // get line-height in px
       const maxHeight = lineHeight * lines; // calculate max-height in px
 
-      while ($element.height() > maxHeight) { // while height is greater than max-height
+      while ($element.height() > maxHeight) {
+        // while height is greater than max-height
         $element.text($element.text().slice(0, -1)); // remove last character
 
-        if ($element.height() <= maxHeight) { // if height is less than or equal to max-height then this is the last run
+        if ($element.height() <= maxHeight) {
+          // if height is less than or equal to max-height then this is the last run
           $element.text(
             $element
               .text()

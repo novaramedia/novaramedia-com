@@ -66,11 +66,7 @@ class Carousel {
     });
   }
 
-  onReady() {
+  onReady() {}
 
-  }
-
-  onResize() {
-
-  }
+  onResize() {}
 }
