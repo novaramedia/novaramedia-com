@@ -27,7 +27,9 @@
             </div>
             <div class="products-bar__item-text fs-3-sans">
               <h5><?php echo $title; ?></h5>
-              <?php echo apply_filters('the_content', $copy); ?>
+              <div class="js-truncate-lines" data-lines="2">
+                <?php echo $copy; ?>
+              </div>
             </div>
           </div>
         </a>
