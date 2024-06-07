@@ -3567,9 +3567,6 @@ hr {
 .ux-pointer {
   cursor: pointer;
 }
-.js-truncate-lines {
-  overflow: hidden;
-}
 .swiper-button-prev,
 .swiper-button-next {
   display: flex;

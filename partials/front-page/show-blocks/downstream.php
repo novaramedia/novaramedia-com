@@ -61,7 +61,7 @@
           ?>
           <div class="grid-item <?php echo $title_classes; ?>">
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows fs-8"><?php the_title(); ?></h6>
+              <h6 class="fs-8"><?php the_title(); ?></h6>
               <h5 class="fs-6 mt-3">
                 <?php render_standfirst($post->ID); ?>
               </h5>
@@ -78,7 +78,7 @@
             ?>
                 <div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <h5 class="fs-4-sans js-fix-widows"><?php the_title(); ?></h5>
+                    <h5 class="fs-4-sans"><?php the_title(); ?></h5>
                     <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                   </a>
                 </div>
@@ -118,7 +118,7 @@
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+              <h6 class="fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
             </a>
           </div>
         <?php

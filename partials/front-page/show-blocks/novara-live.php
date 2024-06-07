@@ -52,7 +52,7 @@
             </div>
             <div class="grid-item is-l-24 is-xxl-8 mt-l-3">
               <a href="<?php the_permalink(); ?>" class="ui-hover">
-                <h6 class="js-fix-widows fs-7"><?php the_title(); ?></h6>
+                <h6 class="fs-7"><?php the_title(); ?></h6>
                 <p class="fs-4-sans font-weight-regular mt-3">
                   <?php render_short_description($post->ID); ?>
                 </p>
