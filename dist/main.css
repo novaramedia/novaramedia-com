@@ -3967,6 +3967,13 @@ html {
   width: 3.5rem;
   height: 3.5rem;
 }
+.products-bar__item-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 @media screen and (max-width: 910px) {
   .products-bar__item {
     width: 280px;
