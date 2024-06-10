@@ -1,5 +1,27 @@
 <?php
 /**
+ * Gets data for livechecker javascript module
+ *
+ * @return array Array of autovalues for support form
+ */
+function nm_get_livechecker_data() {
+  $overrides = NM_get_option('nm_front_page_settings_live_schedule_overrides', 'nm_front_page_options');
+  $messages = NM_get_option('nm_front_page_settings_live_schedule_offline_messages', 'nm_front_page_options');
+
+  $return = [];
+
+  if (!empty($overrides)) {
+    $return['overrides'] = $overrides;
+  }
+
+  if (!empty($messages)) {
+    $return['messages'] = $messages;
+  }
+
+  return $return;
+}
+
+/**
  * Takes content filterd by the_content and removes shortcodes and html in order to be useable for meta etc
  * This can be from both post content but also WYSIWYG meta fields.
  *
@@ -139,7 +161,11 @@ function get_child_level_child_category($post_id) {
 *
 * @return Object/Boolean WP Term object or false if isnt set
 */
-function get_the_top_level_category($post_id) {
+function get_the_top_level_category($post_id = null) {
+  if (is_null($post_id)) {
+    return false;
+  }
+
   $categories = get_the_category($post_id);
   $top_level_category = array_filter($categories, 'only_top_level_category_filter');
 
@@ -162,6 +188,42 @@ function get_the_top_level_category($post_id) {
 }
 
 /**
+* Does the post have set the Articles category?
+* Defaults to current $post context
+*
+* @param integer $post_id Post ID
+*
+* @return Boolean
+*/
+function nm_is_article($post_id = null) {
+  global $post;
+
+  if ($post_id === null) {
+    $post_id = $post->ID;
+  }
+
+  $categories = get_the_terms($post_id, 'category'); // get the categories for the post
+
+  if (!$categories) {
+    return false;
+  }
+
+  $found_in_categories = array_filter($categories,
+    function ($category) {
+      return $category->slug === 'articles';
+    }); // check to see if any of the categories returned match the articles slug
+
+  if (count($found_in_categories) > 0) {
+    return true; // if articles slug was found return true
+  }
+
+  return false;
+}
+
+/**
+* @deprecated 4.0.0 Replaced by nm_is_article()
+* @see nm_is_article()
+*
 * Answer the question is this a single post in the articles category?
 *
 * @return Boolean
@@ -191,7 +253,12 @@ function nm_is_single_article() {
   return false;
 }
 
-// get and return the first sub category assigned to the post
+/**
+ * Get the first sub category assigned to the post
+ *
+ * @param integer $postId Post ID
+ * @param boolean $object Return WP Term object or just the name
+ */
 function get_the_sub_category($postId, $object = false) {
   $categories = get_the_category($postId);
 

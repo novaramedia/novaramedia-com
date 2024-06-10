@@ -6,7 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
   <link rel="preload" as="image" href="https://novaramedia.com/wp-content/themes/novaramedia-com/dist/img/specials/support-2023-texture.webp">
+  <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
   <?php
     get_template_part('partials/header/google-tag-manager');
     get_template_part('partials/header/seo');
@@ -21,76 +25,102 @@
 </head>
 <body <?php body_class(); ?>>
   <section id="main-container">
-    <header id="header" class="margin-bottom-basic">
-      <div id="header-main-wrapper">
-        <div id="header-main" class="container font-color-white padding-top-small padding-bottom-small">
-          <div class="row">
-            <nav class="header-main__navigation col col4" role="navigation" aria-label="Main">
-              <ul id="header-navs" class="u-inline-list u-inline-block">
-                <li id="menu-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Sections Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
-                <li id="search-toggle" class="u-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
+    <header class="site-header background-black mb-4">
+      <div class="site-header__wrapper font-color-white fs-4-sans fs-s-2">
+        <div class="site-header__main container pt-2 pb-2">
+          <div class="grid-row">
+            <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
+              <ul class="site-header__navigation u-inline-list u-inline-block">
+                <li class="site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
+                <li class="site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
             </nav>
-
-            <div class="header-main__middle col col16 text-align-center">
+            <div class="header-main__middle grid-item is-xxl-12 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                <nav id="header-main__logotype" class="u-inline-block"><?php echo nm_get_file('/dist/img/logotype-2-white-line.svg'); ?></nav>
-
-                <?php
+                <nav class="site-header__logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
+                <div class="site-header__scroll-reveal">
+                  <span class="site-header__scroll-reveal-text text-overflow-ellipsis"><?php
                   if (is_single()) {
-                    $author = get_post_meta($post->ID, '_cmb_author', true);
-                ?>
-                <span id="header-main__page-title" class="text-overflow-ellipsis u-inline-block"><?php
-                  the_title();
-                  if (!empty($author)) {
-                    echo ' by ' . $author;
+                    the_title(); // this could also contain the byline but there isnt much space. a editorial-ish question
+                  } else {
+                    echo 'Novara Media';
                   }
                 ?></span>
-                <?php
-                  }
-                ?>
+                </div>
               </a>
             </div>
-
-            <a href="<?php echo home_url(); ?>">
-              <div class="header-main__logomark col col4 text-align-right">
-                <nav id="menu-logomark" class="u-inline-block"><?php echo nm_get_file('/dist/img/logomark-white.svg'); ?></nav>
-              </div>
-            </a>
+            <div class="grid-item is-xxl-6 text-align-right font-weight-bold">
+              <a href="<?php echo home_url('support'); ?>" class="only-desktop ui-hover">Support Us</a>
+            </div>
           </div>
         </div>
       </div>
-
-      <nav id="header-sub" class="background-gray" role="navigation" aria-label="Sections">
-        <div class="container font-color-white padding-top-small padding-bottom-small">
-          <div class="row">
-            <div class="col col24">
-              <ul class="header-menu u-inline-list text-align-center font-tracking-medium">
-                <li><a href="<?php echo site_url(); ?>">Front Page</a></li>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('articles')); ?>">Articles</a></li>
-                <?php
-                  $novaralive_term = get_term_by('slug', 'novara-live', 'category');
-                  if ($novaralive_term) {
-                ?>
-                <li><a href="<?php echo get_term_link($novaralive_term); ?>"><?php echo $novaralive_term->name; ?></a></li>
-                <?php
-                  }
-                ?>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('audio')); ?>">Audio</a></li>
-                <li><a href="<?php echo get_category_link(get_category_by_slug('video')); ?>">Video</a></li>
-                <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
+      <nav class="site-header-nav" role="navigation" aria-label="Sections">
+        <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
+          <div class="grid-row">
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-general',
+                    'fallback_cb' => function() { ?>
+              <ul class="font-weight-bold mb-3">
+                <li><a href="<?php echo site_url('about/'); ?>">About Us</a></li>
                 <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
-                <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
-                <li><a href="https://shop.novaramedia.com">Shop</a></li>
-                <li><a href="https://donate.novaramedia.com/login">Donor Log In</a></li>
+                <li><a href="<?php echo site_url('newsletters/'); ?>">Newsletters</a></li>
+                <li><a href="<?php echo site_url('about/how-were-funded/'); ?>">How We're Funded</a></li>
+                <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               </ul>
+                  <?php },
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
+              <ul class="font-weight-bold mb-3">
+                <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
+              </ul>
+            </div>
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Shows</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-shows',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
+            </div>
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Series</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'header-series',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold'
+                  )
+                );
+              ?>
+            </div>
+            <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
+              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Articles</h6>
+              <?php
+                wp_nav_menu(
+                  array(
+                    'theme_location' => 'footer-articles',
+                    'fallback_cb' => false,
+                    'menu_class' => 'font-weight-bold mb-3'
+                  )
+                );
+              ?>
             </div>
           </div>
         </div>
       </nav>
-
-      <section id="header-search" role="dialog" aria-label="Search">
+      <section class="site-header-search" role="dialog" aria-label="Search">
         <?php get_search_form(); ?>
       </section>
-
     </header>

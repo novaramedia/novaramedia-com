@@ -14,25 +14,24 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 ?>
 <main id="main-content">
   <section id="posts" class="container">
-
-    <div class="flex-grid-row margin-top-small margin-bottom-mid">
-      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-        <h4 class="margin-bottom-micro">Focus</h4>
+    <div class="grid-row mt-3 mb-5">
+      <div class="grid-item is-s-24 is-l-12 is-xxl-8">
+        <h4 class="fs-4-sans font-uppercase mb-2">Focus</h4>
         <div class="only-desktop">
-          <h1 class="margin-bottom-micro"><?php single_cat_title(); ?></h1>
-          <div class="font-size-h2">
+          <h1 class="fs-8 mb-2"><?php single_cat_title(); ?></h1>
+          <div class="fs-6">
             <?php echo category_description(); ?>
           </div>
         </div>
       </div>
-      <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-offset-xxl-2 flex-item-xxl-6">
+      <div class="grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-4 is-xxl-12">
         <?php
           if ($splash_image_id) {
             echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
 
             if ($splash_image_caption) {
           ?>
-          <div class="font-smaller">
+          <div class="fs-2">
             <?php echo $splash_image_caption; ?>
           </div>
           <?php
@@ -40,19 +39,19 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
           }
         ?>
         <div class="only-mobile">
-          <h1 class="margin-top-micro margin-bottom-micro"><?php single_cat_title(); ?></h1>
-          <div class="font-size-h3">
+          <h1 class="fs-7 mt-1 mb-1"><?php single_cat_title(); ?></h1>
+          <div class="fs-6">
             <?php echo category_description(); ?>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="flex-grid-row margin-bottom-basic">
+    <div class="grid-row mb-4">
 <?php
 if( have_posts() ) {
   $i = 0;
-  $post_grid_classes = 'flex-grid-item flex-item-s-12 flex-item-xl-6 flex-item-xxl-4 margin-bottom-basic';
+  $post_grid_classes = 'grid-item is-s-24 is-xl-12 is-xxl-8 mb-4';
   while( have_posts() ) {
     the_post();
 
@@ -85,12 +84,12 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
+    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
 } ?>
     </div>
-    <div class="flex-grid-row margin-bottom-basic font-smaller">
-      <div class="flex-grid-item flex-item-s-12 flex-item-m-6 flex-item-xxl-4">
+    <div class="grid-row mt-6 mb-4 fs-2 text-paragraph-breaks">
+      <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);

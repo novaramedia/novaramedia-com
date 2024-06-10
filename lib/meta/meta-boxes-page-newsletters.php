@@ -23,10 +23,66 @@ function nm_cmb_page_newsletters_metaboxes() {
   ) );
 
   $cmb_term->add_field( array(
+    'name' => esc_html__( 'Banner headline', 'cmb2' ),
+    'desc' => esc_html__( 'Headline for the banner. Should be a CTA', 'cmb2' ),
+    'id'   => $prefix . 'banner_headline',
+    'type' => 'text',
+  ) );
+
+  $cmb_term->add_field( array(
     'name' => esc_html__( 'Banner text', 'cmb2' ),
     'desc' => esc_html__( 'Copy for the banner version of the newsletter signup form (optional)', 'cmb2' ),
     'id'   => $prefix . 'banner_text',
     'type' => 'textarea_small',
+  ) );
+
+  $cmb_term->add_field( array(
+    'name' => esc_html__( 'Banner image', 'cmb2' ),
+    'desc' => esc_html__( 'Square fitting image for the banner (optional)', 'cmb2' ),
+    'id'   => $prefix . 'banner_image',
+    'type' => 'file',
+  ) );
+
+  $cmb_term->add_field( array(
+    'name' => esc_html__( 'Banner background color', 'cmb2' ),
+    'desc' => esc_html__( 'Background color for the banner (optional—defaults to black)', 'cmb2' ),
+    'id'   => $prefix . 'banner_background',
+    'type' => 'select',
+    'show_option_none' => true,
+    'options' => array(
+      'black' => __( 'Black', 'cmb2' ),
+      'white' => __( 'White', 'cmb2' ),
+      'acfm-pink' => __( 'ACFM Pink', 'cmb2' ),
+      'yellow' => __( 'Yellow', 'cmb2' ),
+      'green' => __( 'Green', 'cmb2' ),
+      'lilac' => __( 'Lilac', 'cmb2' ),
+      'light-blue' => __( 'Light Blue', 'cmb2' ),
+    ),
+  ) );
+
+  $cmb_term->add_field( array(
+    'name' => esc_html__( 'Banner text color', 'cmb2' ),
+    'desc' => esc_html__( 'Text color for the banner (optional—defaults to white)', 'cmb2' ),
+    'id'   => $prefix . 'banner_text_color',
+    'type' => 'select',
+    'show_option_none' => true,
+    'options' => array(
+      'black' => __( 'Black', 'cmb2' ),
+      'white' => __( 'White', 'cmb2' ),
+    ),
+  ) );
+
+  $cmb_term->add_field( array(
+    'name' => esc_html__( 'Banner button color', 'cmb2' ),
+    'desc' => esc_html__( 'Button color for the banner (optional—defaults to red)', 'cmb2' ),
+    'id'   => $prefix . 'banner_button_color',
+    'type' => 'select',
+    'show_option_none' => true,
+    'options' => array(
+      'black' => __( 'Black', 'cmb2' ),
+      'white' => __( 'White', 'cmb2' ),
+      'red' => __( 'Red', 'cmb2' ),
+    ),
   ) );
 
   $cmb_term->add_field( array(
@@ -36,11 +92,11 @@ function nm_cmb_page_newsletters_metaboxes() {
     'type' => 'select',
     'show_option_none' => true,
     'options' => array(
-  		'huge' => __( 'Huge', 'cmb2' ),
-  		'big' => __( 'Big', 'cmb2' ),
-  		'medium'   => __( 'Medium', 'cmb2' ),
-  		'smaller'     => __( 'Smaller', 'cmb2' ),
-  	),
+      'huge' => __( 'Huge', 'cmb2' ),
+      'big' => __( 'Big', 'cmb2' ),
+      'medium'   => __( 'Medium', 'cmb2' ),
+      'smaller'     => __( 'Smaller', 'cmb2' ),
+    ),
   ) );
 
 

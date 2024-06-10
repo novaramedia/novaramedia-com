@@ -1,0 +1,32 @@
+.front-page-novara-live__posts-scroller
+  height: 400px
+  .ux-scroller__fade-top, .ux-scroller__fade-bottom
+    height: 60px
+
+@media screen and (max-width: $breakpoint-s)
+  .front-page-novara-live__posts-scroller
+    height: auto
+    .ux-scroller__fade-top, .ux-scroller__fade-bottom
+      display: none
+    .ux-scroller__inner
+      > :nth-child(n+4)
+        display: none
+
+
+.front-page__audio-product
+  height: 100%
+
+.front-page__audio-product-logo
+  svg
+    height: auto
+    width: auto
+    max-width: 250px
+    max-height: 100px
+    margin: 0 auto
+    display: block
+
+.front-page__audio-product--novarafm
+  .front-page__audio-product-logo
+    svg
+      path
+        fill: var(--color-black-soft) !important

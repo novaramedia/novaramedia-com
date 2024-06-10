@@ -8,13 +8,12 @@ export class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
+    this.hasApprovalCookie =
+      Cookies.get('cookie-approval') === 'true' ? true : false;
   }
 
   onReady() {
     const _this = this;
-
-    _this.hasApprovalCookie =
-      Cookies.get('cookie-approval') === 'true' ? true : false;
 
     if ($('.support-section').length) {
       _this.setupAutovalues();

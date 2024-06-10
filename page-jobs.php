@@ -12,7 +12,7 @@ if( have_posts() ) {
   <article id="page-jobs" class="container margin-top-small margin-bottom-large">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
-        <h4><?php the_title(); ?></h4>
+        <h4 class="fs-3-sans font-uppercase font-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 

@@ -16,27 +16,27 @@ namespace Moment;
 
 use PHPUnit\Framework\TestCase;
 
-class MomentCandianFrenchLocaleTest extends TestCase
+class MomentCanadianFrenchLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('fr_CA');
     }
 
-    public function testWeekdayNames()
+    public function testWeekdayNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
         $moment = new Moment($startingDate);
 
         $weekdayNames = array(
-            1 => array('lun', 'lundi'),
-            2 => array('mar', 'mardi'),
-            3 => array('mer', 'mercredi'),
-            4 => array('jeu', 'jeudi'),
-            5 => array('ven', 'vendredi'),
-            6 => array('sam', 'samedi'),
-            7 => array('dim', 'dimanche'),
+            1 => array('lun.', 'lundi'),
+            2 => array('mar.', 'mardi'),
+            3 => array('mer.', 'mercredi'),
+            4 => array('jeu.', 'jeudi'),
+            5 => array('ven.', 'vendredi'),
+            6 => array('sam.', 'samedi'),
+            7 => array('dim.', 'dimanche'),
         );
 
         for ($d = 1; $d < 7; $d++)
@@ -48,25 +48,25 @@ class MomentCandianFrenchLocaleTest extends TestCase
         }
     }
 
-    public function testMonthNames()
+    public function testMonthNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
         $moment = new Moment($startingDate);
 
         $monthNames = array(
-            1  => array('jan', 'janvier'),
-            2  => array('fév', 'février'),
-            3  => array('mar', 'mars'),
-            4  => array('avr', 'avril'),
+            1  => array('jan.', 'janvier'),
+            2  => array('févr.', 'février'),
+            3  => array('mars', 'mars'),
+            4  => array('avr.', 'avril'),
             5  => array('mai', 'mai'),
-            6  => array('jun', 'juin'),
-            7  => array('jul', 'juillet'),
-            8  => array('aoû', 'août'),
-            9  => array('sep', 'septembre'),
-            10 => array('oct', 'octobre'),
-            11 => array('nov', 'novembre'),
-            12 => array('déc', 'décembre'),
+            6  => array('juin', 'juin'),
+            7  => array('juil.', 'juillet'),
+            8  => array('août', 'août'),
+            9  => array('sept.', 'septembre'),
+            10 => array('oct.', 'octobre'),
+            11 => array('nov.', 'novembre'),
+            12 => array('déc.', 'décembre'),
         );
 
         for ($d = 1; $d < 12; $d++)
@@ -78,12 +78,12 @@ class MomentCandianFrenchLocaleTest extends TestCase
         }
     }
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $a = array(
             array('l, F d Y, g:i:s a', 'dimanche, février 14 2010, 3:25:50 pm'),
-            array('D, gA', 'dim, 3PM'),
-            array('n m F M', '2 02 février fév'),
+            array('D, gA', 'dim., 3PM'),
+            array('n m F M', '2 02 février févr.'),
             array('Y y', '2010 10'),
             array('j d', '14 14'),
             array("[le] z[ème jour de l'année]", "le 44ème jour de l'année")
@@ -94,7 +94,7 @@ class MomentCandianFrenchLocaleTest extends TestCase
         }
     }
 
-    public function testOrdinalsFormat()
+    public function testOrdinalsFormat(): void
     {
         $moment = new Moment('2010-06-02T00:00:00+0000');
         self::assertEquals('2', $moment->format('jS'));
@@ -102,7 +102,7 @@ class MomentCandianFrenchLocaleTest extends TestCase
         self::assertEquals('1er', $moment->format('jS'));
     }
 
-    public function testRelative()
+    public function testRelative(): void
     {
         $beginningMoment = new Moment('2015-06-14 20:46:22', 'Europe/Berlin');
         $endMoment = new Moment('2015-06-14 20:48:32', 'Europe/Berlin');

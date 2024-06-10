@@ -9,17 +9,7 @@
 <div class="if-i-speak-banner__container padding-top-basic padding-bottom-basic">
   <style type="text/css">
     .if-i-speak-banner__container {
-      color: rgb(220, 0, 5);
-    }
-
-    .if-i-speak-banner__container .nm-button {
-      border-color: rgb(220, 0, 5);
-      color: rgb(220, 0, 5);
-    }
-
-    .if-i-speak-banner__container .nm-button:hover {
-      background-color: rgb(220, 0, 5);
-      color: rgb(255, 255, 255);
+      color: var(--color-red);
     }
 
     .if-i-speak-banner__title {
@@ -46,7 +36,7 @@
     }
 
     .if-i-speak-banner__border {
-      border: 1px solid rgb(220, 0, 5);
+      border: 1px solid var(--color-red);
       margin-top: 0;
     }
 
@@ -54,7 +44,7 @@
       display: none;
     }
 
-    @media screen and (max-width: 1336px) {
+    @media screen and (max-width: 1408px) {
       .if-i-speak-banner__title {
         font-size: 14.5rem;
       }
@@ -110,42 +100,41 @@
         width: 100%;
       }
     }
-  }
   </style>
 
   <div class="container">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
-        <a href="<?php echo $url; ?>"><h4>Podcast</h4></a>
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
+        <a href="<?php echo $url; ?>"><h4 class="fs-3-sans font-uppercase font-bold">Podcast</h4></a>
       </div>
     </div>
-    <div class="flex-grid-row padding-bottom-small">
-      <div class="flex-grid-item flex-item-xxl-12">
+    <div class="grid-row pb-4">
+      <div class="grid-item is-xxl-24">
         <a href="<?php echo $url; ?>">
           <h3 class="if-i-speak-banner__title">If I Speak...</h3>
         </a>
       </div>
     </div>
-    <div class="flex-grid-row padding-bottom-small">
-      <div class="if-i-speak-banner__off-smaller flex-grid-item flex-item-xxl-4 font-size-2 font-bold">
-        <span class="font-uppercase font-smaller">with</span> Moya Lothian-McLean<br>
-        <span class="font-uppercase font-smaller">and</span> Ash Sarkar
+    <div class="grid-row pb-4">
+      <div class="if-i-speak-banner__off-smaller grid-item is-xxl-8 fs-6">
+        <span class="font-uppercase fs-4-sans">with</span> Moya Lothian-McLean<br>
+        <span class="font-uppercase fs-4-sans">and</span> Ash Sarkar
       </div>
-      <div class="flex-grid-item flex-item-m-6 flex-item-l-3 flex-item-xxl-4">
+      <div class="grid-item is-m-12 is-l-6 is-xxl-8">
         <a href="<?php echo $url; ?>">
           <div class="if-i-speak-banner__image"></div>
         </a>
       </div>
-      <div class="if-i-speak-banner__cta-container flex-grid-item flex-item-m-6 flex-item-l-5 flex-item-xxl-4 text-align-right">
-        <div class="if-i-speak-banner__on-smaller padding-bottom-small font-size-2 font-bold">
-          <span class="font-uppercase font-smaller">with</span> Moya Lothian-McLean<br>
-          <span class="font-uppercase font-smaller">and</span> Ash Sarkar
+      <div class="if-i-speak-banner__cta-container grid-item is-m-12 is-l-10 is-xxl-8 text-align-right">
+        <div class="if-i-speak-banner__on-smaller mb-2 fs-6 fs-s-5-sans font-weight-bold">
+          <span class="font-uppercase fs-4-sans">with</span> Moya Lothian-McLean<br>
+          <span class="font-uppercase fs-4-sans">and</span> Ash Sarkar
         </div>
 
-        <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">New episodes out every Friday</p></a>
-        <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Listen Now</a>
+        <a href="<?php echo $url; ?>"><p class="fs-6 font-weight-bold mb-3">New episodes out every Friday</p></a>
+        <a href="<?php echo $url; ?>" class="ui-button ui-button--red">Listen Now</a>
       </div>
-      <div class="flex-grid-item flex-item-xxl-12">
+      <div class="grid-item is-xxl-24">
         <hr class="if-i-speak-banner__border">
       </div>
     </div>

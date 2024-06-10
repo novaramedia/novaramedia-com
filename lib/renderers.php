@@ -1,5 +1,107 @@
 <?php
 /**
+ * Renders post UI tags
+ *
+ * @param integer $post_id        Post ID
+ * @param Boolean $show_text      If the rendered tag should show the text
+ * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
+ * @param string $block_style_varient Additional BEM varient class
+ */
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false) {
+  $sub_category = get_the_sub_category($post_id, true);
+
+  if (!$sub_category) {
+    return;
+  }
+
+  $category_link = get_category_link($sub_category->term_id);
+
+  echo '<a href="' . $category_link . '" class="ui-tag-block';
+  echo $block_style_varient ? ' ui-tag-block--' . $block_style_varient : '';
+  echo '">';
+
+  if ($show_text) {
+    echo '<span class="ui-tag">' . $sub_category->name . '</span>';
+  }
+
+  if ($show_av_icons) {
+    $top_category = get_the_top_level_category($post_id);
+
+    $default_classes = $show_text ? 'ml-1 ui-av-tag' : 'ui-av-tag';
+
+    if ($top_category->slug === 'video') {
+      echo '<span class="' . $default_classes . ' ui-av-tag--video">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 7 7"><path fill="#000" d="M0 0v7l6.222-3.5L0 0Z"/></svg>
+      </span>';
+    } else if ($top_category->slug === 'audio') {
+      echo '<span class="' . $default_classes . ' ui-av-tag--audio">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 75 65"><path fill="#000" d="M35.421 65V0l-35 32.5 35 32.5Z"/><path fill="#000" fill-rule="evenodd" d="M61.722 60.044C69.767 53.44 74.9 43.42 74.9 32.2 74.9 20.777 69.577 10.595 61.277 4l-7.135 7.136c6.518 4.724 10.757 12.4 10.757 21.065 0 8.46-4.04 15.976-10.296 20.724l7.12 7.119Zm-13.2-13.2A19.945 19.945 0 0 0 54.9 32.2c0-5.986-2.63-11.359-6.799-15.024l-7.1 7.1a9.983 9.983 0 0 1 3.9 7.924c0 3.021-1.34 5.73-3.458 7.563l7.08 7.08Z" clip-rule="evenodd"/></svg>
+      </span>';
+    }
+  }
+
+  echo '</a>';
+}
+/**
+ * Renders a post thumbnail.
+ *
+ * @param integer $post_id Post ID
+ * @param string  $size    Thumbnail size
+ */
+function render_thumbnail($post_id, $size = 'col12-16to9', $attributes = null) {
+  if (!is_numeric($post_id)) {
+    return;
+  }
+
+  $markup = get_the_post_thumbnail($post_id, $size, $attributes);
+  $meta = get_post_meta($post_id);
+
+  if (isset($meta['_cmb_alt_thumb_id']) && is_numeric($meta['_cmb_alt_thumb_id'][0])) {
+    $alt_markup = wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], $size, false, $attributes);
+
+    if ($alt_markup !== '') {
+      $markup = $alt_markup;
+    }
+  }
+
+  echo $markup;
+}
+/**
+ * Echos the standfirst for a post if set and not empty
+ *
+ * @param integer $postId Post ID
+ */
+function render_standfirst($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  if (isset($meta['_cmb_standfirst']) && !empty($meta['_cmb_standfirst'])) {
+    echo $meta['_cmb_standfirst'][0];
+  }
+}
+/**
+ * Echo the meta short description. If not set then render the excerpt.
+ *
+ * @param integer $postId Post ID
+ */
+function render_short_description($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  if ($meta['_cmb_short_desc']) {
+    echo $meta['_cmb_short_desc'][0];
+  } else {
+    echo get_the_excerpt($postId);
+  }
+}
+
+/**
  * Renders bylines on a post.
  *
  * Checks post metadata for either contributors or authors. Prioritises contributors. Optionally can link the rendered bylines. Reverts to Novara Reporters if nothing found.
@@ -66,12 +168,10 @@ function render_front_page_banner($key) {
         $meta = get_post_meta($newsletter->ID);
 
         $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
-        $banner_text = !empty($meta['_nm_banner_text']) ? $meta['_nm_banner_text'][0] : false;
 
         if ($mailchimp_key) {
           get_template_part('partials/email-signup', null, array(
-            'newsletter' => $mailchimp_key,
-            'copy' => $banner_text,
+            'newsletter_page_id' => $newsletter_id
           ));
         }
       }
@@ -92,91 +192,18 @@ function render_front_page_banner($key) {
       get_template_part($key);
   }
 }
-
-function render_front_page_video_block($video_category_slug, $excluded_category_slug = false) {
-  $category = get_term_by('slug', $video_category_slug, 'category');
-
-  if ($category) {
-    $category_link = get_category_link($category->term_id);
-?>
-<div class="row">
-  <div class="col col24 margin-bottom-small">
-    <h4><a href="<?php echo $category_link; ?>"><?php echo $category->name; ?></a></h4>
-  </div>
-</div>
-
-<div class="row">
-  <?php
-    $args = array(
-      'posts_per_page' => 4,
-      'cat' => $category->term_id,
-    );
-
-    if ($excluded_category_slug) {
-      $excluded_category = get_term_by('slug', $excluded_category_slug, 'category');
-
-      if ($excluded_category) {
-        $args['category__not_in'] = array($excluded_category->term_id);
-      }
-    }
-
-    $latest_video = new WP_Query($args);
-
-    render_video_query($latest_video);
-  ?>
-</div>
-<?php
-  }
-}
-
-function render_video_query($query) {
-  global $post;
-
-  // First large video
-  if ($query->have_posts()) {
-    $query->the_post();
-  ?>
-  <div class="col col18 video-block-main-video mobile-margin-bottom-basic">
-    <a href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('col18-16to9'); ?>
-    </a>
-
-    <a href="<?php the_permalink(); ?>">
-      <h6 class="js-fix-widows font-size-2 font-semibold margin-top-micro"><?php the_title(); ?></h6>
-    </a>
-  </div>
-  <div class="col col6">
-    <?php
-
-    // Side 3 remaining vids
-    if ($query->have_posts()) {
-      while($query->have_posts()) {
-        $query->the_post();
-        $meta = get_post_meta($post->ID);
-    ?>
-    <a href="<?php the_permalink(); ?>">
-      <div class="video-related-video margin-bottom-small">
-        <?php
-          if (!empty($meta['_cmb_alt_thumb_id'])) {
-            echo wp_get_attachment_image($meta['_cmb_alt_thumb_id'][0], 'col6-16to9 video-related-video__thumbnail');
-          } else {
-            the_post_thumbnail('col6-16to9 video-related-video__thumbnail');
-          }
-        ?>
-
-        <h6 class="js-fix-widows font-size-1 font-semibold margin-top-micro"><?php the_title(); ?></h6>
-      </div>
-   </a>
-    <?php
-      }
-    }
-    wp_reset_postdata();
-    ?>
-  </div>
-<?php
-  }
-}
-
+/**
+ * Renders the title of a post.
+ *
+ * This function retrieves the title of the post with the given ID and echoes it.
+ * If the post has a sub-category and the current page is not that sub-category,
+ * it prepends the name of the sub-category to the title.
+ *
+ * @param int $postId The ID of the post.
+ *
+ * @return void
+ * @deprecated 3.9.0
+ */
 function render_post_title($postId) {
   $title = get_the_title($postId);
 
@@ -188,11 +215,21 @@ function render_post_title($postId) {
 
   echo $title;
 }
-
+/**
+ * Renders a row of resources.
+ *
+ * This function takes an array of resources, each with a 'title' and 'link' property,
+ * and generates a row of HTML list items. Each list item contains a link to the resource.
+ * Only resources with both a 'title' and 'link' are included.
+ *
+ * @param array $resources An array of resources, each with a 'title' and 'link'.
+ *
+ * @return void
+ */
 function render_resources_row($resources) {
 ?>
-<div id="single-resources-section" class="row margin-bottom-basic">
-  <div class="col col24">
+<div id="single-resources-section" class="grid-row mb-4">
+  <div class="grid-item is-s-24">
     <ul class="inline-action-list">
       <?php
         foreach($resources as $resource) {
@@ -207,6 +244,16 @@ function render_resources_row($resources) {
 <?php
 }
 
+/**
+ * Renders a Twitter share link.
+ *
+ * @param string $url The URL to be shared.
+ * @param string|null $title The title of the tweet. Default is null.
+ * @param string $link_text The text to be displayed for the link. Default is 'Tweet'.
+ * @param string|null $hashtag The hashtag to be included in the tweet. Default is null.
+ *
+ * @return void
+ */
 function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
   if (empty($url)) {
     return;
@@ -224,7 +271,7 @@ function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag =
 
   $twitter_url .= '&url=' . urlencode($url);
 
-  echo '<a class="share-action share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_facebook_share_link($url, $link_text = 'Facebook share') {
@@ -236,7 +283,7 @@ function render_facebook_share_link($url, $link_text = 'Facebook share') {
 
   $facebook_url .= '&u=' . urlencode($url);
 
-  echo '<a class="share-action share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_email_share_link($url, $subject = '', $link_text = 'Email') {
@@ -246,7 +293,7 @@ function render_email_share_link($url, $subject = '', $link_text = 'Email') {
 
   $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body='. urlencode($url);
 
-  echo '<a class="share-action share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
 function render_reddit_share_link($url, $title = null, $link_text = 'Post to Reddit') {
@@ -262,7 +309,7 @@ function render_reddit_share_link($url, $title = null, $link_text = 'Post to Red
     $reddit_url .= '&title=' . urlencode($title);
   }
 
-  echo '<a class="share-action share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
+  echo '<a class="ui-action-link ui-action-link--small share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
 }
 
 /**

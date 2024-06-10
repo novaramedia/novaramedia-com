@@ -20,54 +20,54 @@ get_header();
   if ($is_first_page) {
 ?>
 <div class="background-black font-color-white">
-  <section class="container padding-top-small">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-7 flex-item-l-6 flex-item-xxl-3 mobile-margin-bottom-tiny">
-        <h1 class="font-size-4">Novara Live</h1>
+  <section class="container pt-4">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-s-14 is-l-12 is-xxl-6 mb-s-2">
+        <h1 class="fs-8">Novara Live</h1>
       </div>
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-l-0 flex-item-l-3 flex-offset-xl-3 flex-item-xl-3 flex-offset-xxl-5 flex-item-xxl-2">
-        <a class="nm-button nm-button--black font-size-s-0" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
+      <div class="grid-item offset-s-0 is-s-12 offset-l-0 is-l-6 offset-xl-6 is-xl-6 offset-xxl-10 is-xxl-4">
+        <a class="ui-button ui-button--white ui-button--small ui-button--fill-width ui-button--auto-height" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
       </div>
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-item-l-3 flex-item-xl-3 flex-item-xxl-2">
-        <a class="nm-button nm-button--red font-size-s-0" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
+      <div class="grid-item offset-s-0 is-s-12 is-l-6 is-xl-6 is-xxl-4">
+        <a class="ui-button ui-button--red ui-button--small ui-button--fill-width ui-button--auto-height" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
       </div>
     </div>
-    <div class="novara-live-archive__liveplayer flex-grid-row">
-      <div class="flex-grid-item flex-item-xxl-12">
+    <div class="novara-live-archive__liveplayer grid-row">
+      <div class="grid-item is-xxl-24">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($embed_id, true); ?>"></iframe>
+          <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($embed_id, true); ?>" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
-    <div class="flex-grid-row margin-top-basic mobile-margin-top-small">
-      <div class="flex-grid-item flex-item-s-12 flex-item-m-9 flex-item-l-6 flex-item-xxl-5 font-size-2 font-size-s-1 padding-top-small mobile-padding-top-none">
+    <div class="grid-row mt-4">
+      <div class="grid-item is-s-24 is-m-18 is-l-12 is-xxl-10 pt-4 pt-s-0 fs-5-sans">
         <?php echo category_description(); ?>
       </div>
-      <div class="flex-grid-item flex-offset-s-1 flex-item-s-10 flex-offset-m-3 flex-item-m-7 flex-offset-l-0 flex-item-l-6 flex-offset-xxl-2 flex-item-xxl-5">
+      <div class="grid-item offset-s-2 is-s-20 offset-m-6 is-m-14 offset-l-0 is-l-12 offset-xxl-4 is-xxl-10">
         <?php echo wp_get_attachment_image($team_image_id, 'gallery', false, array('class' => 'novara-live-archive__about-team-image u-display-block')); ?>
       </div>
     </div>
   </section>
 </div>
 <div class="background-yellow">
-  <section class="container padding-top-basic padding-bottom-small mobile-padding-top-small">
-    <div class="flex-grid-row margin-bottom-basic mobile-margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
-        <h2 class="font-size-3 font-size-s-2">Missed the show? Catch up here:</h2>
+  <section class="container pt-4 pb-4">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-s-24">
+        <h2 class="fs-6">Missed the show? Catch up here:</h2>
       </div>
     </div>
-    <div class="flex-grid-row">
+    <div class="grid-row">
       <?php
         $i = 0;
         if (have_posts()) {
           while(have_posts() && $i < 4) {
             the_post();
         ?>
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-small">
+        <div class="grid-item is-s-12 is-xxl-6 mb-4">
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
-            <h6 class="font-size-1 font-size-s-1 font-semibold margin-top-micro"><?php the_time('j F Y'); ?></h6>
-            <h6 class="js-fix-widows font-size-2 font-size-s-1 font-semibold"><?php the_title(); ?></h6>
+            <h6 class="fs-4-sans font-semibold mt-1"><?php the_time('j F Y'); ?></h6>
+            <h6 class="js-fix-widows fs-s-4-sans fs-5-sans font-semibold mt-1"><?php the_title(); ?></h6>
           <a href="<?php the_permalink(); ?>">
         </div>
         <?php
@@ -82,20 +82,20 @@ get_header();
 <?php
   } // end if first page
 ?>
-  <section id="posts" class="container <?php echo $is_first_page ? 'margin-top-basic mobile-margin-top-small' : 'margin-top-small'; ?>">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
-        <h4><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
+  <section id="posts" class="container mt-6 mt-s-5">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-s-24">
+        <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
       </div>
     </div>
-    <div class="flex-grid-row margin-bottom-basic">
+    <div class="grid-row mb-4">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
-    get_template_part('partials/post-layouts/flex-post', null, array(
-      'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic mobile-margin-bottom-tiny',
+    get_template_part('partials/post-layouts/archive-post', null, array(
+      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
       'image-size' => 'col12-16to9',
     ));
   }
@@ -105,8 +105,8 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="grid-row mb-5">
+      <div class="grid-item is-s-24">
         <?php get_template_part('partials/pagination'); ?>
       </div>
     </div>

@@ -1,4 +1,7 @@
+/* global require, __dirname, module */
+
 const path = require('path');
+const chalk = require('chalk');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -8,10 +11,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const ESLintPlugin = require('eslint-webpack-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
 
 var config = {
   entry: './src/js/main.js',
@@ -62,7 +65,7 @@ var config = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ['autoprefixer'],
+                plugins: [postcssPresetEnv(/* pluginOptions */)],
               },
             },
           },
@@ -81,7 +84,18 @@ var config = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
-    new MomentLocalesPlugin(),
+    {
+      apply: (compiler) => {
+        compiler.hooks.compilation.tap('TimestampPlugin', () => {
+          console.log(
+            chalk.inverse.red(
+              '————————————NO FUTURE———NEW COMPILATION NOW————————————'
+            )
+          );
+          console.log(chalk.inverse.greenBright(new Date().toString()));
+        });
+      },
+    },
   ],
 
   optimization: {

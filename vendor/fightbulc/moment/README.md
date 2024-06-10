@@ -115,6 +115,7 @@ __Supported languages so far:__
 ```en_CA``` English (Canada)  
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
+```eo_EO``` Esperanto  
 ```fa_IR``` Farsi  
 ```fi_FI``` Finnish  
 ```fr_FR``` French (Europe)  
@@ -124,6 +125,7 @@ __Supported languages so far:__
 ```id_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
+```kz_KZ``` Kazakh  
 ```oc_LNC``` Lengadocian  
 ```lv_LV``` Latvian (Latviešu)  
 ```pl_PL``` Polish  
@@ -423,6 +425,14 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Change Log
+
+### 1.33.0
+ - fixed:
+    - French locale
+    - Canadian tests
+  - added:
+    - Esperanto locale
+    - Kazakh locale
 
 ### 1.32.1
  - fixed:

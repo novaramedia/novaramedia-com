@@ -1,0 +1,28 @@
+.swiper-button-prev, .swiper-button-next
+  display: flex
+  justify-content: center
+  align-items: center
+  position: absolute
+  top: 0
+  height: 100%
+  width: 3rem
+  cursor: pointer
+  z-index: 10
+  transition: opacity var(--transition-speed-quick) ease-in-out
+  &--disabled
+    opacity 0
+    z-index: -10
+
+.swiper-button-prev
+  left: 0
+
+.swiper-button-next
+  right: 0
+
+.ux-carousel__item
+  flex-shrink: 0
+  max-width: 100%
+  width: 200px
+  margin-right: 1rem
+  &:last-child
+    margin-right: 0

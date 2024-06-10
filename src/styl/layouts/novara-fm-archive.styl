@@ -1,0 +1,55 @@
+.novara-fm-archive__header
+  display: flex
+  justify-content: center
+  align-items: center
+  svg
+    width: 60%
+    max-width: 600px
+
+.novara-fm-archive__splash-video-container
+  position: relative
+  background-color: var(--color-black-soft)
+  z-index: -10
+
+.novara-fm-archive__splash-video
+  width: 100%
+  height: 100%
+  object-fit: cover
+  position: absolute
+  top: 0
+  left: 0
+  z-index: -10
+
+.novara-fm-archive__cross
+  max-width: 100%
+  height: auto
+
+.novara-fm-archive__cross--black
+  path
+    fill: var(--color-black-soft)
+
+.novara-fm-archive__cross--green
+  path
+    fill: var(--color-green)
+
+.novara-fm-archive__archive-block
+  .ux-carousel__nav-left
+    background-image: linear-gradient(270deg, rgba(255,255,255,0) 0%, var(--color-green) 100%)
+
+  .ux-carousel__nav-right
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--color-green) 100%)
+
+  .ux-carousel__wrapper
+    padding: 1rem
+
+.novara-fm-archive__split-logotype
+  display: block
+  width: 80%
+  max-width: 700px
+  margin: 0 auto
+
+@media screen and (max-width: $breakpoint-s)
+
+  .novara-fm-archive__archive-block
+    .ux-carousel__item
+      width: 170px

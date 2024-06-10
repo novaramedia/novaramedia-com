@@ -1,0 +1,52 @@
+// CSS Grid
+
+.layout-grid
+  display: grid
+  grid-template-columns: repeat(24, minmax(0, 1fr))
+  column-gap: var(--grid-gutter)
+  row-gap: 0
+  grid-auto-rows: auto
+
+// Utilties
+
+.layout-split-level
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.layout-split-vertical
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  flex: 1
+  height: 100%
+
+.layout-flex-align-center
+  display: flex
+  align-items: center
+
+.layout-thumbnail-frame
+  position: relative
+  .layout-thumbnail-frame__inner
+    position: absolute
+    display: flex
+    top: 0
+    left: 0
+    z-index: 10
+  img
+    display: block
+
+// Flex helpers
+
+.layout-flex
+  display: flex
+
+.layout-flex-no-shrink
+  flex-shrink: 0
+
+.layout-flex-grow
+  flex-grow: 1
+
+// Display helpers
+.layout-overflow-hidden
+  overflow: hidden
