@@ -7,15 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- New type system
+- New grid system
+- New UI set
+- New UX components
+- Front page Audio product blocks
+- Front page Novara Live block
+- Front page Downstream block
+
 ### Changed
 
 - Above the fold completely refactored
-- Use lazysizes to lazy load YouTube embeds rather than own solution
-- Extend time til support bar reoopens to 21 days
+- Site options meta refactored
+- Quick links bar becomes Product bar
+- Header refactored with new menus
+- Email signup refactored
 
 ### Updated
 
-- Composer & webpack deps
+- Webpack deps
+
+## [3.14.0] - 2024-02-01
+
+### Added
+
+- If I Speak basic archive template and front page banner
+- Perf: preload support texture
+- Perf: eager load featured post thumbs on front page
+
+## [3.13.0] - 2023-09-29
+
+### Added
+
+- ACFM specific show page template (basic first version)
+
+### Changed
+
+- Use lazysizes to lazy load YouTube embeds rather than own solution
+- Extend time til support bar reoopens to 21 days
 
 ## [3.12.0] - 2023-06-23
 
