@@ -21,10 +21,7 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
   echo '">';
 
   if ($show_text) {
-    echo '<span class="';
-    echo $tag_style_varient ? 'ui-tag ui-tag--' . $tag_style_varient : 'ui-tag';
-    echo '">' . $sub_category->name;
-    echo '</span>';
+    echo '<span class="ui-tag">' . $sub_category->name . '</span>';
   }
 
   if ($show_av_icons) {
