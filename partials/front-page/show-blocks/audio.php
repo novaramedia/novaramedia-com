@@ -13,7 +13,7 @@
 
     if ($latest) {
 ?>
-<div class="grid-item is-s-24 is-xxl-12 pt-4 pb-4 mb-s-2 font-color-<?php echo $font_color; ?> ui-rounded-box">
+<div class="grid-item is-s-24 is-xxl-12 mb-4 font-color-<?php echo $font_color; ?> ui-rounded-box">
   <div class="front-page__audio-product front-page__audio-product--<?php echo $slug; ?> background-<?php echo $background_color; ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
     <a href="<?php echo get_term_link($category); ?>" class="ui-hover">
       <?php

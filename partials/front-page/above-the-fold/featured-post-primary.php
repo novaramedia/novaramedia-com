@@ -60,19 +60,21 @@
 
             if ($related_posts->have_posts()) {
           ?>
-            <h4 class="fs-2 font-uppercase mb-2">See Also</h4>
+            <h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
             <div class="related-posts">
           <?php
+              $i = 0;
               while ($related_posts->have_posts()) {
                 $related_posts->the_post();
           ?>
-              <div class="mb-2">
+              <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
                 <a href="<?php the_permalink(); ?>" class="ui-hover">
                   <h5 class="fs-4-sans"><?php the_title(); ?></h5>
                   <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
                 </a>
               </div>
           <?php
+                $i++;
               }
           ?>
             </div>
@@ -109,7 +111,7 @@
         $label = 'More ' . $more_on_section->name;
       }
   ?>
-  <div class="mt-2 fs-2">
+  <div class="mt-2 fs-2 only-desktop">
     <a href="<?php echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
   </div>
   <?php

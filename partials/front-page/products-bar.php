@@ -3,10 +3,10 @@
 
   if (!empty($signups)) {
 ?>
-<section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4">
+<section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4 mt-s-3 mb-s-3">
   <div class="swiper">
-    <div class="swiper-button-prev swiper-button-prev--disabled"><span class="ui-chevron ui-chevron--left"></span></div>
-    <div class="swiper-button-next"><span class="ui-chevron ui-chevron--right"></span></div>
+    <div class="swiper-button-prev swiper-button-prev--disabled"><span class="only-desktop ui-chevron ui-chevron--left"></span></div>
+    <div class="swiper-button-next"><span class="only-desktop ui-chevron ui-chevron--right"></span></div>
     <div class="swiper-wrapper">
       <?php
         foreach ($signups as $index => $signup) {
@@ -37,7 +37,7 @@
       ?>
     </div>
   </div>
-  <div class="ui-border-bottom pt-4"></div>
+  <div class="ui-border-bottom pt-4 pt-s-3"></div>
 </section>
 <?php
   }

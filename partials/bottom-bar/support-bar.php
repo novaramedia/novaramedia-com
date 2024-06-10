@@ -29,7 +29,7 @@
       <div class="support-bar__open-actions-column flex-grid-item flex-item-s-2 flex-item-xxl-3">
         <div class="support-bar__open-actions-wrapper">
           <nav class="support-bar__close-trigger ui-hit-area ui-hit-area--top-right">
-            <span class="ui-chevron ui-chevron--down font-color-white"></span>
+            <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white"></span>
           </nav>
           <a href="<?php echo site_url('support/'); ?>" class="ui-button ui-button--white ui-button--small only-desktop">
             <?php echo ($open_button ? $open_button : 'Join our supporters'); ?>
@@ -62,7 +62,7 @@
           <?php echo ($desktop_closed_cta ? $desktop_closed_cta : 'Fund something better'); ?>
         </a>
         <span class="support-bar__open-trigger ux-pointer pl-3">
-          <span class="ui-chevron ui-chevron--up"></span>
+          <span class="ui-chevron ui-chevron--up ui-chevron--white"></span>
         </span>
       </div>
     </div>

@@ -3536,18 +3536,21 @@ hr {
   height: 1rem;
   width: 1rem;
 }
-.ui-chevron.ui-chevron--up {
+.ui-chevron--up {
   transform: rotate(225deg);
   margin-bottom: -0.4rem;
 }
-.ui-chevron.ui-chevron--down {
+.ui-chevron--down {
   transform: rotate(45deg);
 }
-.ui-chevron.ui-chevron--left {
+.ui-chevron--left {
   transform: rotate(135deg);
 }
-.ui-chevron.ui-chevron--right {
+.ui-chevron--right {
   transform: rotate(315deg);
+}
+.ui-chevron--white {
+  border-color: var(--color-white-soft);
 }
 .ui-hit-area {
   padding: 2rem;
@@ -6262,8 +6265,9 @@ html {
 }
 @media screen and (max-width: 759px) {
   .container {
-    width: 96%;
+    width: 98%;
     max-width: 460px;
+    overflow: hidden;
   }
   .grid-row-s--reverse {
     direction: column-reverse;

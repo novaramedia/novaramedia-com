@@ -37,7 +37,7 @@
 
         if ($posts) {
     ?>
-      <div class="grid-item is-s-12 is-m-8 is-xl-6 is-xxl-4 mb-6 fs-3-sans font-weight-bold">
+      <div class="grid-item is-s-12 is-m-8 is-xl-6 is-xxl-4 mb-6 mb-s-5 fs-3-sans font-weight-bold">
         <h4 class="font-uppercase mb-2"><?php echo $section; ?></h4>
     <?php
           $excluded_ids = array_merge($excluded_ids, wp_list_pluck($posts, 'ID'));
@@ -60,8 +60,8 @@
           <?php
             }
           ?>
-        <a href="<?php echo get_permalink($post->ID); ?>" class="ui-hover">
-          <h5 class="<?php echo $index === 2 ? "mb-2" : "pb-2 mb-2 ui-border-bottom";?>"><?php echo $post->post_title; ?></h5>
+        <a href="<?php echo get_permalink($post->ID); ?>" class="<?php echo $index === 2 ? "pb-2" : "pb-2 mb-2 ui-border-bottom"; ?> ui-hover u-display-block">
+          <h5><?php echo $post->post_title; ?></h5>
         </a>
         <?php
           }

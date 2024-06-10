@@ -61,8 +61,8 @@
           ?>
           <div class="grid-item <?php echo $title_classes; ?>">
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="fs-8"><?php the_title(); ?></h6>
-              <h5 class="fs-6 mt-3">
+              <h6 class="fs-8 fs-m-7"><?php the_title(); ?></h6>
+              <h5 class="fs-6 mt-3 mt-s-2">
                 <?php render_standfirst($post->ID); ?>
               </h5>
             </a>
