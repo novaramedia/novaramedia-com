@@ -21,7 +21,7 @@
             <div class="products-bar__item-image mr-2">
               <?php
                 if ($image_id) {
-                  echo wp_get_attachment_image($image_id, 'col4-square', false, array('class' => 'ui-rounded-image'));
+                  echo wp_get_attachment_image($image_id, 'col4-square', false, array('class' => 'ui-rounded-image', 'data-no-lazysizes' => true, 'loading' => 'eager'));
                 }
               ?>
             </div>

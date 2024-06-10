@@ -30,7 +30,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
 
     .category-archive__if-i-speak__border {
-      border: 1px solid var(--color-red);
+      background-color: var(--color-red);
       margin-top: 0;
     }
 

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
+  <link rel="preload" as="image" href="https://novaramedia.com/wp-content/themes/novaramedia-com/dist/img/specials/support-2023-texture.webp">
   <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
   <?php
     get_template_part('partials/header/google-tag-manager');
