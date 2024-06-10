@@ -1,11 +1,7 @@
 <?php
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -30,138 +26,119 @@ if( have_posts() ) {
     $is_sold_out = get_post_meta( $post->ID, '_cmb_tickets_sold_out', true );
     $tickets_url = get_post_meta( $post->ID, '_cmb_tickets', true );
 
-    $youtube = get_post_meta( $post->ID, '_cmb_youtube', true );
+    $youtube_id = get_post_meta( $post->ID, '_cmb_youtube', true );
 
     $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
 ?>
   <article id="event">
-    <div class="container margin-top-small margin-bottom-large">
-      <div class="row margin-bottom-basic">
-        <div class="col col24">
-          <h4>Events</h4>
+    <div class="container mt-4 mb-6">
+      <div class="grid-row mb-4">
+        <div class="grid-item is-xxl-24">
+          <h4 class="fs-3-sans font-uppercase font-bold">Events</h4>
         </div>
       </div>
-      <div class="row margin-bottom-basic">
-        <div class="col col24 text-align-center">
-          <h1><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
+      <div class="grid-row mb-5">
+        <div class="grid-item is-xxl-24 text-align-center">
+          <h1 class="fs-8"><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
         </div>
       </div>
-      <div class="row margin-bottom-basic">
+      <div class="grid-row mb-4">
         <?php
-          if ($youtube) {
+          if ($youtube_id) {
         ?>
-        <div class="col col4"></div>
-        <div class="col col16">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-4 is-xxl-16">
           <div class="u-video-embed-container">
-            <iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/<?php echo $youtube; ?>?autohide=2&amp;modestbranding=1&amp;origin=http://novaramedia.com&amp;showinfo=0&amp;theme=light&amp;rel=0"></iframe>
+            <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
         <?php
           } else {
         ?>
-        <div class="col col6"></div>
-        <div class="col col12">
-          <?php the_post_thumbnail('col12'); ?>
+        <div class="grid-item offset-s-2 is-s-20 offset-l-3 is-l-18 offset-xxl-6 is-xxl-12">
+          <?php the_post_thumbnail('is-xxl-12'); ?>
         </div>
         <?php
           }
         ?>
       </div>
-      <div class="row margin-bottom-basic">
-        <div class="col col2"></div>
-        <div class="col col8">
-          <div class="margin-bottom-small">
-            <h5 class="margin-bottom-small">Time:</h5>
-            <h3><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?></h3>
-            <h3><?php echo $time->format('H:i'); ?></h3>
+      <div class="grid-row mb-4">
+        <div class="grid-item offset-s-0 is-s-8 offset-xxl-2 is-xxl-8">
+          <div class="mb-4">
+            <h5 class="fs-4-sans mb-2">Time:</h5>
+            <h3 class="fs-5-sans font-weight-bold"><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?></h3>
+            <h3 class="fs-5-sans font-weight-bold"><?php echo $time->format('H:i'); ?></h3>
           </div>
         <?php
           if ($venue_name) {
         ?>
-          <div class="margin-bottom-small">
-            <h5 class="margin-bottom-small">Venue:</h5>
-
+          <div class="mb-4">
+            <h5 class="fs-4-sans mb-2">Venue:</h5>
             <h3><?php echo $venue_name; ?></h3>
         <?php
             if ($venue_postcode) {
         ?>
-            <h3><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
+            <h3 class="fs-5-sans font-weight-bold"><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
         <?php
             }
         ?>
           </div>
         <?php
           }
-        ?>
 
-        <?php
           if ($speakers) {
         ?>
-          <div class="margin-bottom-small">
-            <h5 class="margin-bottom-small">Speakers:</h5>
-
+          <div class="mb-4">
+            <h5 class="fs-4-sans mb-2">Speakers:</h5>
         <?php
           foreach ($speakers as $speaker) {
         ?>
-            <h3><?php echo $speaker; ?></h3>
+            <h3 class="fs-5-sans font-weight-bold"><?php echo $speaker; ?></h3>
         <?php
           }
         ?>
           </div>
         <?php
           }
-        ?>
 
-        <?php
           if ($host) {
         ?>
-          <div class="margin-bottom-small">
-            <h5 class="margin-bottom-small">Host:</h5>
-
-            <h3><?php echo $host; ?></h3>
+          <div class="mb-4">
+            <h5 class="fs-4-sans mb-2">Host:</h5>
+            <h3 class="fs-5-sans font-weight-bold"><?php echo $host; ?></h3>
           </div>
         <?php
           }
-        ?>
 
-        <?php
           if ($is_sold_out) {
         ?>
-            <h4>Sold Out!</h4>
+            <h4 class="fs-4-sans">Sold Out!</h4>
+        <?php
+          }
+
+          if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
+        ?>
+            <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="ui-button ui-button--black"><h4>Buy Tickets</h4></a>
         <?php
           }
         ?>
         </div>
-        <div class="col col12 text-copy font-italic">
+        <div class="grid-item is-s-16 is-xxl-12 text-copy fs-4-serif">
           <?php the_content(); ?>
         </div>
       </div>
-      <?php
-        if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
-      ?>
-      <div class="row margin-bottom-basic">
-        <div class="col col4"></div>
-        <div class="col col16">
-          <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="button"><h4>Buy Tickets</h4></a>
-        </div>
-      </div>
-      <?php
-        }
-      ?>
     </div>
-
     <?php
       if ($gallery) {
     ?>
-    <div class="background-black font-color-white padding-top-mid padding-bottom-mid">
+    <div class="background-black font-grid-itemor-white padding-top-mid padding-bottom-mid">
       <div class="container">
-        <div class="row margin-bottom-basic">
-          <div class="col col24">
+        <div class="grid-row mb-4">
+          <div class="grid-item is-xxl-24">
             <h4>Gallery: <span id="gallery-pagination"></span></h4>
           </div>
         </div>
-        <div class="row margin-bottom-basic">
-          <div class="col col24">
+        <div class="grid-row mb-4">
+          <div class="grid-item is-xxl-24">
             <?php echo do_shortcode($gallery); ?>
           </div>
         </div>
@@ -175,22 +152,17 @@ if( have_posts() ) {
   }
 } else {
 ?>
-  <article id="event" class="container margin-bottom-basic">
-    <div class="row">
-      <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+  <article id="event" class="container mb-4">
+    <div class="grid-row">
+      <article class="grid-item is-xxl-24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
     </div>
   </article>
 <?php
 } ?>
-
   <?php
     get_template_part('partials/support-section');
   ?>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>

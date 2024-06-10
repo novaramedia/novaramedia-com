@@ -1,5 +1,35 @@
 <?php
 /**
+ * Add classes to pagination links
+ *
+ * @param string $attributes Existing link attributes.
+ * @return string The modified string of attributes.
+ */
+function pagination_posts_link_attributes($attributes) {
+  $attributes .= ' class="ui-action-link"';
+
+  return $attributes;
+}
+add_filter('previous_posts_link_attributes', 'pagination_posts_link_attributes');
+add_filter('next_posts_link_attributes', 'pagination_posts_link_attributes');
+/**
+ * Filters the admin columns.
+ *
+ * This function is responsible for modifying the columns displayed in the admin area. It removes the author and comments columns.
+ *
+ * @param array $columns An array of column names.
+ * @return array The modified array of column names.
+ */
+function nm_filter_admin_columns($columns) {
+  unset($columns['author']);
+  unset($columns['comments']);
+
+  return $columns;
+}
+add_filter('manage_posts_columns', 'nm_filter_admin_columns');
+add_filter('manage_pages_columns', 'nm_filter_admin_columns');
+
+/**
  * Wrap images in the_content with a div for styling.
  * However this wasn't needed so currently not used. Left here in case of future utility.
  *
@@ -134,6 +164,7 @@ function add_featured_image_to_feed( $content ) {
 add_filter( 'the_excerpt_rss', 'add_featured_image_to_feed', 1000, 1 );
 add_filter( 'the_content_feed', 'add_featured_image_to_feed', 1000, 1 );
 
+// WARNING: This needs to be updated to work with contributors
 function feed_author($name) { // return the value of the author meta field (this is just for feed readers as author tag is not used in the theme)
   if (is_feed()) {
     global $post;

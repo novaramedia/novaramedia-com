@@ -2,17 +2,13 @@
 
 $gutter = 12px
 
-.container
-  width: 96%
-  max-width: 460px
-
 .col
   width: 100%
   float: none
   margin-left: 0
   margin-right: 0
 
-flex-grid-maker(false, $gutter, 's')
+flex-grid-maker('s')
 
 // ******************************************************
 
@@ -40,8 +36,6 @@ $font-tracking-wider = 0.025em
 
 $border-width = 2px
 
-$basic-animation-speed = .5s
-
 // ******************************************************
 
 // TYPOGRAPHY
@@ -64,9 +58,6 @@ h2, .font-size-h2
 
 h3
   font-size: $font-size-h3
-
-p
-  margin-bottom: 1rem
 
   // NEW TYPE SCALE 2021
 
@@ -198,16 +189,6 @@ p
 
 .button
   padding: $margin-small
-
-// ******************************************************
-
-// COMPONENTS
-
-// QUOTE
-
-.component-quote
-  margin-top: $margin-small
-  margin-bottom: $margin-mid
 
 // ******************************************************
 
@@ -434,82 +415,6 @@ p
 
 // ******************************************************
 
-// BACKGROUNDS
-
-// ******************************************************
-
-// HEADER
-
-$header-height = 42px
-
-#main-content
-  padding-top: $header-height
-
-#header-main-wrapper
-  height: $header-height
-
-.header-menu
-  li
-    padding-right: $margin-tiny
-
-#header-main
-  padding: 0px
-  .col
-    float: left
-  .header-main__navigation
-    width: 25%
-  .header-main__middle
-    width: 55%
-  .header-main__logomark
-    width: 20%
-
-#menu-toggle, #search-toggle, #menu-logo
-  padding: 12px 6px
-  .icon-menu:before
-    margin: 0
-
-#header-main__page-title
-  margin-top: 12px
-
-#header-main__logotype
-  display: none
-
-#menu-logomark
-  padding: 10px
-  svg
-    height: 16px
-    width: 20px
-    margin-top: 1px
-
-#header-sub
-  display: none
-  .col
-    margin-bottom: $margin-tiny
-
-// SEARCH
-
-#search-form
-  border: $border-width solid $color-white-soft
-
-#search-input, #search-submit
-  font-size: $font-size-h3
-
-#search-input
-  width: 70%
-
-#search-submit
-  width: 8%
-  min-width: 25px
-
-// ******************************************************
-
-// EMAIL SIGNUP SECTION
-
-.email-signup__email-input
-  margin-bottom: $margin-small
-
-// ******************************************************
-
 // FRONT PAGE
 
 #featured-post-title-holder
@@ -599,24 +504,6 @@ $header-height = 42px
 #single-related
   .post
     margin-bottom: $margin-basic
-
-  // VIDEO
-
-#single-video-related-video-holder
-  margin-top: $margin-basic
-
-#single-video-related-video
-  clearfix()
-
-.single-video-related-video
-  width: 50%
-  float: left
-  &:nth-child(odd)
-    padding-right: 3px
-  &:nth-child(even)
-    padding-left: 3px
-  &:nth-child(3)
-    display: none
 
 // ******************************************************
 

@@ -1,7 +1,9 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
 import $ from 'jquery';
-import moment from 'moment';
+import { DateTime } from 'luxon';
+// possible https://www.npmjs.com/package/fromnow
+
 import Cookies from 'js-cookie';
 
 import selectText from '../functions/selectText.js';
@@ -62,11 +64,10 @@ export class Utilities {
     $('.js-time-since').each((index, element) => {
       const $element = $(element);
       const timestamp = $element.data('timestamp');
-      const m = moment(timestamp);
 
-      if (m.isAfter(moment().subtract(5, 'hours'))) {
-        $element.text(`| ${m.fromNow()}`);
-      }
+      let published = DateTime.fromISO(timestamp);
+
+      $element.text(published.toRelative());
     });
   }
 
@@ -82,7 +83,7 @@ export class Utilities {
       $bar.show();
 
       $('#obligation-accept').on('click', () => {
-        Cookies.set('cookie-approval', 'true');
+        Cookies.set('cookie-approval', 'true', { expires: 365 });
         $bar.hide();
       });
     }

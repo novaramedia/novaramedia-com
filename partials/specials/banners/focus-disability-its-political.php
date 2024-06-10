@@ -5,7 +5,7 @@
     $url = get_term_link($term);
     if ($url) {
 ?>
-<div class="disability-its-political__container padding-top-basic padding-bottom-basic">
+<div class="disability-its-political__container pt-6 pb-6">
   <style type="text/css">
     .disability-its-political__container {
       overflow: hidden;
@@ -16,7 +16,6 @@
       background-position: bottom;
       outline: 4px black solid;
     }
-
     .disability-its-political__text-background {
       position: absolute;
       left: -2rem;
@@ -26,45 +25,41 @@
       background-color: #B1B1FF;
       border: solid black 4px;
     }
-
     .disability-its-political__text-copy {
       position: relative;
       z-index: 10;
     }
-
     @media screen and (max-width: 759px) {
       .disability-its-political__container {
         background-image: none;
         outline: 2px black solid;
       }
-
       .disability-its-political__text-background {
         display: none;
       }
     }
   }
   </style>
-
   <div class="container">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
         <div class="disability-its-political__text-copy">
-          <a href="<?php echo $url; ?>"><h4>Focus</h4></a>
+          <a href="<?php echo $url; ?>"><h4 class="fs-3-sans font-uppercase font-bold">Focus</h4></a>
         </div>
       </div>
     </div>
-    <div class="flex-grid-row">
-      <div class="flex-grid-item flex-item-s-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-4 mobile-margin-bottom-small">
+    <div class="grid-row">
+      <div class="grid-item is-s-24 is-l-8 is-xl-10 is-xxl-8 mb-s-3">
         <div class="disability-its-political__text-background"></div>
         <div class="disability-its-political__text-copy">
-          <a href="<?php echo $url; ?>"><h3 class="font-size-s-6 font-size-l-4 font-size-5" style="margin-left: -.05em;">Disability:<br/>It’s Political</h3></a>
+          <a href="<?php echo $url; ?>"><h3 class="fs-8 mb-s-3" style="margin-left: -.05em;">Disability:<br/>It’s Political</h3></a>
         </div>
       </div>
-      <div class="flex-grid-item only-desktop flex-offset-l-2 flex-offset-xl-1 flex-offset-xxl-2 flex-item-xxl-6">
+      <div class="grid-item only-desktop offset-l-4 offset-xl-2 offset-xxl-4 is-xxl-12">
         <div class="disability-its-political__text-background"></div>
         <div class="disability-its-political__text-copy">
-          <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
-          <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
+          <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold mb-4">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
+          <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Explore the Focus</a>
         </div>
       </div>
     </div>
@@ -96,10 +91,10 @@
     </svg>
 
     <div class="container">
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-item-s-12 margin-top-small">
-          <a href="<?php echo $url; ?>"><p class="font-size-2 font-bold">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
-          <a href="<?php echo $url; ?>" class="nm-button nm-button--white nm-button--inline font-color-black">Explore the Focus</a>
+      <div class="grid-row">
+        <div class="grid-item is-xxl-24 mt-4">
+          <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold mb-4">Disability isn’t a personal tragedy, it’s a political issue. From autism to assisted dying, sex work to social care, this focus explores how capitalism marginalises those whose minds and bodies don’t "work".</p></a>
+          <a href="<?php echo $url; ?>" class="ui-button ui-button--white ui-button--inline font-color-black">Explore the Focus</a>
         </div>
       </div>
     </div>

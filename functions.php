@@ -12,7 +12,8 @@ function scripts_and_styles_method() {
   	'siteUrl' => home_url(),
   	'themeUrl' => get_template_directory_uri(),
   	'isAdmin' => current_user_can('administrator') ? 1 : 0,
-  	'supportSectionAutovalues' => nm_get_support_autovalues()
+  	'supportSectionAutovalues' => nm_get_support_autovalues(),
+  	'liveCheckerData' => nm_get_livechecker_data()
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
@@ -48,6 +49,10 @@ get_template_part( 'lib/thumbnail-sizes' );
 function nm_register_menus() {
   register_nav_menus(
     array(
+      'header-general' => __( 'Header: General' ),
+      'header-shows' => __( 'Header: Shows' ),
+      'header-series' => __( 'Header: Series' ),
+      'header-submenu' => __( 'Header: Submenu' ),
       'footer-podcasts' => __( 'Footer: Podcasts' ),
       'footer-focuses' => __( 'Footer: Focuses' ),
       'footer-articles' => __( 'Footer: Articles' ),
@@ -67,8 +72,11 @@ get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
 get_template_part( 'lib/meta/meta-boxes-instructions' );
-get_template_part( 'lib/meta-boxes' );
+get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
+get_template_part( 'lib/meta/meta-boxes-post' );
+get_template_part( 'lib/meta/meta-boxes-page' );
+get_template_part( 'lib/meta/meta-boxes-page-about' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
@@ -78,9 +86,9 @@ get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 
-get_template_part( 'lib/theme-options' );
-get_template_part( 'lib/options-front-page' );
-get_template_part( 'lib/options-fundraising' );
+get_template_part( 'lib/theme-options/theme-options' );
+get_template_part( 'lib/theme-options/options-front-page' );
+get_template_part( 'lib/theme-options/options-fundraising' );
 
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {

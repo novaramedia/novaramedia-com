@@ -1,0 +1,43 @@
+.submenu__date
+  grid-column-start: 1
+  grid-column-end: span 5
+
+.submenu__nav
+  grid-column-start: 6
+  grid-column-end: span 14
+  text-align: center
+
+.menu-header-submenu-container
+  display: flex
+  justify-content: center
+
+.submenu__nav-list
+  display: flex
+  li
+    &:after
+      content: '|'
+    &:last-child:after
+      content: none
+    a
+      padding: 0 .5rem .75rem .5rem
+
+.submenu__message
+  grid-column-start: 20
+  grid-column-end: span 5
+  text-align: right
+
+@media screen and (max-width: $breakpoint-m)
+  .front-page__submenu
+    .layout-grid
+      column-gap: 1rem
+
+@media screen and (max-width: $breakpoint-s)
+  .front-page__submenu
+    .layout-grid
+      column-gap: 0
+    .submenu__nav
+      grid-column-start: 1
+      grid-column-end: span 24
+
+  .submenu__date, .submenu__message
+    display: none

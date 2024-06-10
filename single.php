@@ -32,9 +32,9 @@ get_header();
 ?>
   <div class="background-yellow">
     <div class="container">
-      <div class="flex-grid-row padding-top-small padding-bottom-small">
-        <div class="flex-grid-item flex-item-xxl-12">
-          <h1 class="font-size-3 text-align-center font-uppercase">
+      <div class="grid-row pt-4 pb-4">
+        <div class="grid-item is-xxl-24">
+          <h1 class="fs-6 text-align-center font-uppercase">
             Caution: <?php echo $post_status; ?> post
           </h1>
         </div>
@@ -44,7 +44,7 @@ get_header();
 <?php
    }
 ?>
-  <article id="post" class="container margin-top-small margin-bottom-basic">
+  <article id="post" class="container mt-4 mb-4">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -60,9 +60,9 @@ if( have_posts() ) {
     $focus_tax = count($focus_terms) > 0 ? $focus_terms[0] : false;
 ?>
 
-<div class="flex-grid-row margin-bottom-basic mobile-margin-bottom-small">
-  <div class="flex-grid-item flex-item-xxl-12">
-    <h4>
+<div class="grid-row mb-4 mb-s-2">
+  <div class="grid-item is-xxl-24">
+    <h4 class="fs-3-sans font-uppercase font-bold">
       <?php
         if ($focus_tax) {
           echo '<a href="' . get_term_link($focus_tax) . '">' . $focus_tax->name . '</a>';
@@ -89,8 +89,8 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <div class="flex-grid-row">
-      <article class="flex-grid-item flex-item-xxl-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    <div class="grid-row">
+      <article class="grid-item is-xxl-24"><?php _e('Sorry, no posts matched your criteria :['); ?></article>
     </div>
 <?php
 } ?>

@@ -1,7 +1,7 @@
 # top-most EditorConfig file
 root = true
 
-# tab indentation
+# 2 space indentation
 # cleaned new lines
 [*]
 indent_style = space

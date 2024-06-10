@@ -1,8 +1,11 @@
 @import '~kouto-swiss/index.styl'
 @import "helpers"
 @import "grid-functions"
+@import "grid-function-new"
 
 // ******************************************************
+
+@import '../../node_modules/swiper/swiper.css';
 
 // FONTS
 
@@ -30,14 +33,47 @@ normalize()
 // GRID
 
 $cols = 24
-$col = 39px
+$col = 42px
+
 $gutter = 16px
 
-flex-grid-maker(false, $gutter, 'xxl')
+html
+  --grid-gutter: 1rem
+  --corner-radius: 2px
+  --color-white-soft: rgb(253, 253, 253)
+  --color-white-soft-transparent: rgba(253, 253, 253, .5)
+  --color-black-soft: rgb(14, 14, 14)
+  --color-black-soft-transparent: rgba(14, 14, 14, .5)
+  --color-red: #FF1941
+  --color-yellow: #EBB800
+  --color-green: #5FCC00
+  --color-green-neon: #CADB2A
+  --color-green-racing: #55846B
+  --color-blue: rgb(84, 144, 235)
+  --color-blue-neon: #0018F0
+  --color-blue-light: #CAE5FF
+  --color-teal: #E3FFFF
+  --color-lilac: #B1B1FF
+  --color-gray: rgb(150,150,150)
+  --color-gray-transparent: rgba(150,150,150, .5)
+  --color-gray-light: rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
+  --color-gray-light-transparent: rgba(190,190,190, .5)
+  --color-gray-extra-light: #EDEAEA
+  --font-family-sans: font-stack('Helvetica Neue')
+  --transition-speed-slow: 1111ms
+  --transition-speed-medium: 420ms
+  --transition-speed-quick: 140ms
+  --transition-speed-ultra: 33ms
+
+body
+  overscroll-behavior: none
+
+flex-grid-maker('xxl')
+grid-maker('xxl')
 
 .container
   margin: 0 auto
-  width: ($col * $cols)+($gutter * $cols)
+  width: 1400px
 
 .row
   clearfix()
@@ -52,36 +88,13 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-    // FLUID COLS
-
-.percent-col
-  float: left
-  box-sizing: border-box
-
-$pcols = 10
-
-for pcol in 1..$pcols
-  .s-into-{pcol}
-    width: ( 100% / pcol )
-
-@media screen and (min-width: 601px)
-
-  for pcol in 1..$pcols
-    .m-into-{pcol}
-      width: ( 100% / pcol )
-
-@media screen and (min-width: 993px)
-
-  for pcol in 1..$pcols
-    .l-into-{pcol}
-      width: ( 100% / pcol )
-
 // ******************************************************
 
 // VARIABLES
 
 $golden-ratio = 1.61803398875
 
+// START DEPRECATED
 $margin-small = ($gutter)
 $margin-tiny = ($gutter / 2)
 $margin-micro = ($gutter / (2 * $golden-ratio))
@@ -108,195 +121,62 @@ $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
 $color-white-soft-transparent = rgba(253, 253, 253, .5)
 
-$color-gray = rgb(150,150,150)
-$color-gray-transparent = rgba(150,150,150, .5)
-$color-gray-light = rgb(190,190,190)
-$color-gray-light-transparent = rgba(190,190,190, .5)
+$color-black--hover = rgb(61, 61, 61)
 
 $color-red = rgb(220, 0, 5) // Mine
 $color-red-dark = #A80003
-
-$color-yellow = #EBB800
-
-$color-green-neon = #CADB2A
-$color-green-racing = #55846B
-
 $color-blue = rgb(84, 144, 235)
-$color-blue-neon = #0018F0
-$color-blue-light = #CAE5FF
-
-$color-teal = #E3FFFF
-
-$color-lilac = #B1B1FF
 
 $border-width = 2px
 
-$basic-animation-speed = .5s
-
 $duration-medium-transitions = 420ms
+$duration-quick-transitions = $duration-medium-transitions * .333
 $duration-form-transitions = $duration-medium-transitions
 
 $font-serif = font-stack('Georgia')
-$font-sans = font-stack('Helvetica')
+$font-sans = font-stack('Helvetica Neue')
+// END DEPRECATED
+
+$breakpoint-s = 759px
+$breakpoint-m = 910px
+$breakpoint-l = 1104px
+$breakpoint-xl = 1408px
 
 // ******************************************************
 
 // TYPOGRAPHY
 
-html
-  font-family: $font-sans
-  font-size: $font-size-basic
-  letter-spacing: $font-tracking-basic
-
-body
-  line-height: $font-leading-basic
-
-  // HTML ELEMENT STYLING
-
-h1, .font-size-h1
-  font-size: $font-size-h1
-  font-weight: bold
-  margin: 0
-  letter-spacing: -($font-tracking-basic)
-  line-height: 1.3
-
-h2, .font-size-h2
-  font-size: $font-size-h2
-  font-weight: bold
-  margin: 0
-  line-height: 1.3
-
-h3, .font-size-h3
-  font-size: $font-size-h3
-  font-weight: bold
-
-h4
-  text-transform: uppercase
-  font-weight: bold
-
-h5
-  font-weight: bold
-
-p
-  margin-bottom: 1rem
-
-  // NEW TYPE SCALE 2021
-
-.font-size-0
-  font-size: 12px
-
-.font-size-1
-  font-size: 14px
-  line-height: 1.4
-
-.font-size-2
-  font-size: 21px
-  line-height: 1.25
-
-.font-size-3
-  font-size: 32px
-  line-height: 1.1875
-
-.font-size-4
-  font-size: 47px
-  line-height: 1.14893617
-  letter-spacing: -0.025em
-
-.font-size-5
-  font-size: 71px
-  line-height: 1.05633803
-  letter-spacing: -0.025em
-
-.font-size-6
-  font-size: 106px
-  line-height: 0.8490566
-  letter-spacing: -0.025em
-
-.font-size-7
-  font-size: 159px
-  line-height: 0.84937238
-  letter-spacing: -0.02em
-
-.font-size-8
-  font-size: 239px
-  line-height: 0.84937238
-  letter-spacing: -0.04em
-
-  // FONT RULES
-
-.font-italic, em, i
-  font-style: italic
-
-.font-weight-regular
-  font-weight: normal
-
-.font-weight-semibold, .font-semibold
-  font-weight: 500
-
-.font-weight-bold, .font-bold, strong, b
-  font-weight: bold
-
-.font-small-caps
-  font-size: 0.85em
-  text-transform: uppercase
-
-.font-capitalize
-  text-transform: capitalize
-
-.font-uppercase
-  text-transform: uppercase
-
-.font-underline
-  text-decoration: underline
-
-.font-leading-wider
-  line-height: $font-leading-larger
-
-.font-tracking-medium
-  letter-spacing: $font-tracking-medium
-
-.font-tracking-wider
-  letter-spacing: $font-tracking-wider
-
-.font-smaller
-  font-size: $font-size-smaller
-
-.font-mono
-  font-family: monospace
-
-.font-serif
-  font-family: $font-serif
-
-.font-larger
-  font-size: $font-size-larger
-
-.font-size-smaller
-  font-size: 0.85em
+// now imported as modules/typography.styl
 
   // COLOR RULES
 
 .font-color-white
-  color: $color-white-soft
+  color: var(--color-white-soft)
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 .font-color-black
-  color: $color-black-soft
+  color: var(--color-black-soft)
 
 .font-color-blue-neon
-  color: $color-blue-neon
+  color: var(--color-blue-neon)
 
 .font-color-green-racing
-  color: $color-green-racing
+  color: var(--color-green-racing)
+
+.font-color-red
+  color: var(--color-red)
 
   // SHADOWS
 
 .text-shadow-white
-  text-shadow: 0 0 20px $color-white-soft-transparent
+  text-shadow: 0 0 20px var(--color-white-soft-transparent)
 
 .text-shadow-light-gray
-  text-shadow: 0 0 20px $color-gray-light-transparent
+  text-shadow: 0 0 20px var(--color-gray-light-transparent)
 
 .text-shadow-gray
-  text-shadow: 0 0 20px $color-gray-transparent
+  text-shadow: 0 0 20px var(--color-gray-transparent)
 
   // TEXT RULES
 
@@ -341,6 +221,8 @@ article
 .text-copy, .page-copy
   .twitter-tweet, .instagram-media, .oembed-element
     margin: 2rem auto !important
+  p
+    margin-bottom: 1rem
   blockquote
     font-family: $font-sans
     margin: 2rem
@@ -400,40 +282,46 @@ a
 // BACKGROUNDS
 
 .background-black
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
 
 .background-white
-  background-color: $color-white-soft
+  background-color: var(--color-white-soft)
 
 .background-gray
-  background-color: $color-gray
+  background-color: var(--color-gray)
 
 .background-light-gray
-  background-color: $color-gray-light
+  background-color: var(--color-gray-light)
 
 .background-red
-  background-color: $color-red
+  background-color: var(--color-red)
 
 .background-yellow
-  background-color: $color-yellow
+  background-color: var(--color-yellow)
+
+.background-green
+  background-color: var(--color-green)
 
 .background-green-neon
-  background-color: $color-green-neon
+  background-color: var(--color-green-neon)
 
 .background-light-blue
-  background-color: $color-blue-light
+  background-color: var(--color-blue-light)
 
 .background-neon-blue
-  background-color: $color-blue-neon
+  background-color: var(--color-blue-neon)
 
 .background-teal
-  background-color: $color-teal
+  background-color: var(--color-teal)
 
 .background-lilac
-  background-color: $color-lilac
+  background-color: var(--color-lilac)
 
 .background-light-purple
-  background-color: $color-lilac
+  background-color: var(--color-lilac)
+
+.background-acfm-pink
+  background-color: #FC16CB
 
 .background-cover-image
   position: relative
@@ -455,60 +343,24 @@ a
 
 .avif, .webp
   .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.webp)
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.webp)
 
   .background-support-texture-alt
-    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
+    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
 
 .fallback
   .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, #FF1941 100%), url(img/specials/support-2023-texture.png)
+    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
 
   .background-support-texture-alt
-    background-image: linear-gradient(0deg, #FF1941 -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
 
 // ******************************************************
 
 // UI ELEMENTS / UX HELPERS
 
-.ui-chevron
-  display: inline-block
-  border-right: 2px solid
-  border-bottom: 2px solid
-  height: 1rem
-  width: 1rem
-  &&--up
-    transform: rotate(225deg)
-    margin-bottom: -0.4rem;
-  &&--down
-    transform: rotate(45deg)
-
-.ui-hit-area
-  padding: 2rem
-  cursor: pointer
-  &--small
-    padding: 1rem
-  &--top-right
-    padding-top: 0
-    padding-right: 0
-  &--bottom-right
-    padding-bottom: 0
-    padding-right: 0
-
-.ux-pointer
-  cursor: pointer
-
 .icon-large:before // is this depreciated? check
   font-size: $font-size-h3
-
-.button // is this depreciated? check
-  display: inline-block
-  width: 100%
-  padding: $margin-small
-  text-align: center
-  border: 2px solid $color-black-soft
-  &.button-small
-    padding: $margin-tiny
 
 // ******************************************************
 
@@ -517,7 +369,7 @@ a
 // QUOTE
 
 .component-quote
-  margin-top: $margin-small
+  margin-top: 1rem
 
 .component-quote__image-holder
   position: absolute
@@ -528,13 +380,17 @@ a
   max-height: 100%
   overflow: hidden
 
+@media screen and (max-width: $breakpoint-s)
+  .component-quote
+    margin-bottom: 2rem
+
 // ******************************************************
 
 // BASIC
 
 html
-  background-color: $color-white-soft
-  color: $color-black-soft
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
 
 img
   max-width: 100%
@@ -675,201 +531,6 @@ img
 
 // ******************************************************
 
-// HEADER
-
-$header-height = 46px
-
-#header
-  position: fixed
-  width: 100%
-  z-index: 1000
-
-#main-content
-  padding-top: $header-height
-  min-height: 55vh
-
-#header-main-wrapper
-  height: $header-height
-  overflow: hidden
-  background-color: black
-
-#header-main
-  padding-top: 12px
-  padding-bottom: 10px
-
-#header-navs
-  vertical-align: middle
-
-.header-menu
-  li
-    padding-right: $margin-tiny
-
-#menu-logomark
-  svg
-    height: 19px
-    width: 23px
-
-.header-main__logomark
-  position: relative
-
-.header-main__middle
-  position: relative
-
-#header-main__logotype
-  transition: opacity $basic-animation-speed
-  svg
-    height: 16px
-    width: 100%
-    vertical-align: text-bottom
-
-#header-main__page-title
-  opacity: 0
-  transition: opacity $basic-animation-speed
-  position: absolute
-  left: 0
-  top: 0
-  width: 100%
-
-#header-sub
-  display: none
-  a
-    font-size: 1.5rem
-    line-height: 1.6
-    padding-right: .66rem
-
-// SEARCH
-
-#header-search
-  display: none
-
-#search-form
-  border: $border-width solid $color-white-soft
-
-#search-input, #search-submit
-  font-size: $font-size-h3
-  border: 0
-  &:focus
-    outline: 0
-
-#search-input
-  float: left
-  width: 70%
-  background-color: transparent
-  color: $color-white-soft
-
-#search-submit
-  width: 8%
-  min-width: 25px
-  float right
-
-#tag-suggestions
-  display: none
-
-// ******************************************************
-
-// 404
-
-.error404
-  #header-search
-    display: block
-
-// ******************************************************
-
-// FORM ELEMENTS
-
-nmButton()
-  display: block
-  padding: $margin-tiny $margin-small
-  font-weight: bold
-  text-align: center
-  border-width: 1px
-  border-style: solid
-  border-color: transparent
-  border-radius: 3px
-  transition-property: background-color, color, border-color
-  transition-duration: $duration-form-transitions
-  &:hover
-    border-color: $color-gray
-    cursor: pointer
-  &--red
-    background-color: $color-red
-    color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-red
-      border-color: $color-red
-  &--red-dark
-    background-color: $color-red-dark
-    color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-red-dark
-      border-color: $color-red-dark
-  &--white
-    background-color: $color-white-soft
-    color: $color-black-soft
-    border-color: $color-black-soft
-    &:hover
-      background-color: $color-black-soft
-      color: $color-white-soft
-      border-color: $color-black-soft
-  &--black
-    background-color: $color-black-soft
-    color: $color-white-soft
-    border-color: $color-white-soft
-    &:hover
-      background-color: $color-white-soft
-      color: $color-black-soft
-  &--inline
-    display: inline-block
-  &--half
-    width: 49%
-  &--small
-    padding: $margin-micro $margin-small
-
-.nm-button
-  nmButton()
-
-// ******************************************************
-
-// SUPPORT SECTION
-
-.support-form
-  display: block
-  .support-form__inputs
-    opacity: 0
-    transition: opacity $basic-animation-speed
-  &--active
-    .support-form__inputs
-      opacity: 1
-
-.support-form__button, .support-form__custom-input
-  nmButton()
-  color: $color-red
-  background-color: $color-white-soft
-  &:hover, &--active
-    color: $color-white-soft
-    background-color: $color-red-dark
-    border-color: $color-white-soft
-
-.support-form__button, .support-form__custom-input, .support-form__submit
-  width: 100%
-  font-weight: normal
-  border-color: $color-white-soft
-  &:hover, &--active
-    border-color: $color-white-soft
-
-.support-form__custom-input::placeholder
-  padding-left: 5px
-  transition: color $duration-form-transitions
-
-.support-form__custom-input
-  &::placeholder
-    color: $color-red
-  &:hover, &.support-form__button--active
-    &::placeholder
-      color: $color-white-soft
-
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
@@ -889,124 +550,6 @@ nmButton()
   svg
     height: 2rem
     width: auto
-
-// FUNDRAISER PROGRESS BAR
-
-#progress-bar-row
-  display: none
-
-#progress-bar-holder
-  position: relative
-  height: 1.5em
-
-#progress-bar
-  position: absolute
-  left: 0
-  width: 0%
-  transition: width 1s
-  height: 1.5em
-  background-color: $color-red
-
-// ******************************************************
-
-// EMAIL SIGNUP SECTION
-
-.email-signup
-  label
-    a
-      text-decoration: underline
-      &:hover
-        text-decoration: none
-
-.email-signup__completion-section
-  display: flex
-  justify-content: space-between
-  align-items: center
-
-.email-signup__name-input, .email-signup__email-input
-  width: 100%
-  padding: 1.1rem 1.5rem
-  font-size: $font-size-h3
-
-.email-signup__email-gdpr-group
-  display: flex
-  align-items: center
-
-.email-signup__email-gdpr-input
-  width: 2rem
-  height: 2rem
-  margin: 0 1rem
-
-.email-signup__submit
-  padding: 1.1rem 1.5rem
-  font-size: $font-size-h3
-
-.email-signup__feedback-processing
-  padding: 1.1rem 1.5rem
-  font-size: $font-size-h3
-
-.email-signup__form
-  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
-    display: none
-  &--processing
-    .email-signup__feedback-processing
-      display: block
-    .email-signup__inputs
-      display: none
-  &--failed
-    .email-signup__feedback-failed
-      display: block
-  &--completed
-    .email-signup__feedback-completed
-      display: block
-    .email-signup__inputs
-      display: none
-
-// ******************************************************
-
-// NEWSLETTER PAGE EMAIL SIGNUP
-
-.newsletter-page-email-signup__form
-  position: relative
-  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-
-.newsletter-page-email-signup__form.email-signup__form--processing, .newsletter-page-email-signup__form.email-signup__form--failed, .newsletter-page-email-signup__form.email-signup__form--completed
-  background-color: $color-black-soft
-  color: $color-white-soft
-  .newsletter-page-email-signup__inputs
-    opacity: 0
-
-.newsletter-page-email-signup__inputs
-  justify-content: flex-end
-
-.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input, .newsletter-page-email-signup__submit
-  width: 100%
-  padding: 8px 16px
-  font-size: $font-size-h3
-
-.newsletter-page-email-signup__name-input, .newsletter-page-email-signup__email-input
-  border-color: $color-black-soft
-  border-width: 1px
-  border-radius: 3px
-
-.newsletter-page-email-signup__email-gdpr-group
-  display: flex
-  align-items: center
-  justify-content: flex-end
-
-.newsletter-page-email-signup__email-gdpr-input
-  width: 2rem
-  height: 2rem
-  margin: 0 1rem
-
-.email-signup__icon
-  height: 3rem
-  fill: $color-white-soft
 
 // ******************************************************
 
@@ -1208,7 +751,7 @@ nmButton()
 
 .support-bar
   opacity: 0
-  transition: opacity $basic-animation-speed
+  transition: opacity var(--transition-speed-medium)
   .support-bar__open-view
     align-items: center
   .flex-grid-row.is-one-even-line-grid
@@ -1258,20 +801,59 @@ nmButton()
 
 // ******************************************************
 
+// MODULES
+
+@import "modules/typography"
+@import "modules/spacing"
+@import "modules/layout"
+@import "modules/ui"
+@import "modules/carousel"
+
+// LAYOUTS
+
+@import "layouts/above-the-fold"
+@import "layouts/email-signup"
+@import "layouts/front-page-product-blocks"
+@import "layouts/header-submenu"
+@import "layouts/header"
+@import "layouts/novara-fm-archive"
+@import "layouts/products-bar"
+@import "layouts/support-form"
+
+// ******************************************************
+
 // MEDIA QUERIES
 
-@media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
+@media screen and (max-width: $breakpoint-xl)
+  .container
+    width: 1056px
+
+  grid-maker('xl')
 
   @import "responsive/xl"
 
-@media screen and (max-width: 1104px)
+@media screen and (max-width: $breakpoint-l)
+  .container
+    width: 888px
+
+  grid-maker('l')
 
   @import "responsive/l"
 
-@media screen and (max-width: 910px)
+@media screen and (max-width: $breakpoint-m)
+  .container
+    width: 744px
+
+  grid-maker('m')
 
   @import "responsive/m"
 
-@media screen and (max-width: 759px)
+@media screen and (max-width: $breakpoint-s)
+  .container
+    width: 98%
+    max-width: 460px
+    overflow: hidden
+
+  grid-maker('s')
 
   @import "responsive/s"

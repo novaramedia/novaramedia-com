@@ -80,7 +80,7 @@ if (is_single() && get_post_type() === 'job') {
       break;
   }
 
-} else if (nm_is_single_article()) {
+} else if (is_single() && nm_is_article()) {
   $json_ld = array(
     "@context" => "http://schema.org",
     "@type" => "NewsArticle",

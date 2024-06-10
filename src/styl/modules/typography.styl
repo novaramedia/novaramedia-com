@@ -1,0 +1,302 @@
+html
+  font-family: var(--font-family-sans)
+  font-size: 15px
+
+.font-condensed
+  font-family: 'acumin-variable', sans-serif !important
+  font-variation-settings: "slnt" 0, "wdth" 68, "wght" 721
+
+// HTML ELEMENT STYLING
+
+h1, .font-size-h1
+  font-size: $font-size-h1
+  font-weight: bold
+  margin: 0
+  letter-spacing: -($font-tracking-basic)
+  line-height: 1.3
+
+h2, .font-size-h2
+  font-size: $font-size-h2
+  font-weight: bold
+  margin: 0
+  line-height: 1.3
+
+h3, .font-size-h3
+  font-size: $font-size-h3
+  font-weight: bold
+
+h5
+  font-weight: bold
+
+p
+  line-height: normal
+
+// NEW TYPE SCALE v4.0.0 2024
+// fs = font style
+// n = upward scaling step
+// (sans, sans-headline, sans-condensed, serif, mono) = font family
+// other classes (font-size-n) are for legacy migration
+
+font-size-1()
+  font-size: 0.5625rem
+  font-style: normal
+  font-weight: 700
+  line-height: normal
+  letter-spacing: 0.02813rem
+
+.fs-1
+  font-size-1()
+
+.fs-2, .font-size-0
+  font-size: 0.74375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.02975rem;
+
+.fs-3-sans, .font-size-1
+  font-family: $font-sans;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.125rem; /* 128.571% */
+  letter-spacing: 0.01094rem;
+
+.fs-3-serif
+  font-family: Georgia;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0175rem;
+
+.fs-4-sans, .font-size-2
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.1875rem; /* 118.75% */
+  letter-spacing: 0.01rem;
+
+.fs-4-serif
+  font-family: Georgia;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem; /* 137.5% */
+  letter-spacing: 0.0175rem;
+
+.fs-5-sans, .font-size-3
+  font-family: $font-sans
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+.fs-5-sans-headline
+  font-family: $font-sans
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.025rem;
+
+.fs-5-sans-condensed
+  font-family: $font-sans
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: normal
+  line-height: 1.3125rem; /* 105% */
+
+.fs-6
+  font-family: $font-sans
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5625rem; /* 104.167% */
+
+.fs-7
+  font-family: $font-sans
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem; /* 100% */
+
+.fs-8, .font-size-4
+  font-family: $font-sans
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.875rem; /* 95.833% */
+  letter-spacing: -0.06rem;
+
+.fs-9, .font-size-5
+  font-family: $font-sans
+  font-size: 4.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 4.5rem; /* 100% */
+  letter-spacing: -0.09rem;
+
+// what of these big sizes?
+// TODO: sort this out
+
+.font-size-6
+  font-size: 106px
+  line-height: 0.8490566
+  letter-spacing: -0.025em
+
+.font-size-7
+  font-size: 159px
+  line-height: 0.84937238
+  letter-spacing: -0.02em
+
+.font-size-8
+  font-size: 239px
+  line-height: 0.84937238
+  letter-spacing: -0.04em
+
+  // FONT RULES
+
+.font-italic, em, i
+  font-style: italic
+
+.font-weight-regular
+  font-weight: normal
+
+.font-weight-semibold, .font-semibold
+  font-weight: 500
+
+.font-weight-bold, .font-bold, strong, b
+  font-weight: bold
+
+.font-capitalize
+  text-transform: capitalize
+
+.font-uppercase
+  text-transform: uppercase
+
+.font-underline
+  text-decoration: underline
+
+.font-mono
+  font-family: monospace
+
+.font-serif
+  font-family: $font-serif
+
+.font-larger
+  font-size: $font-size-larger
+
+  // TEXT RULES
+
+.text-paragraph-breaks
+  p
+    margin-bottom: 1em
+
+
+// TO BUILD OUT
+// RESPONSIVE TYPE
+
+@media screen and (max-width: $breakpoint-m)
+
+  .fs-m-7
+    font-family: $font-sans
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem; /* 100% */
+
+@media screen and (max-width: $breakpoint-s)
+
+  .fs-s-1
+    font-size-1()
+
+  .fs-s-2
+    font-size: 0.74375rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02975rem;
+
+  .fs-s-3-sans
+    font-family: $font-sans;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; /* 128.571% */
+    letter-spacing: 0.01094rem;
+
+  .fs-s-3-serif
+    font-family: Georgia;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0175rem;
+
+  .fs-s-4-sans
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.1875rem; /* 118.75% */
+    letter-spacing: 0.01rem;
+
+  .fs-s-4-serif
+    font-family: Georgia;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.375rem; /* 137.5% */
+    letter-spacing: 0.0175rem;
+
+  .fs-s-5-sans
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+  .fs-s-5-sans-headline
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.025rem;
+
+  .fs-s-5-sans-condensed
+    font-family: $font-sans
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: normal
+    line-height: 1.3125rem; /* 105% */
+
+  .fs-s-6
+    font-family: $font-sans
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5625rem; /* 104.167% */
+
+  .fs-s-7
+    font-family: $font-sans
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem; /* 100% */
+
+  .fs-s-8
+    font-family: $font-sans
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.875rem; /* 95.833% */
+    letter-spacing: -0.06rem;
+
+  .fs-s-9
+    font-family: $font-sans
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 4.5rem; /* 100% */
+    letter-spacing: -0.09rem;

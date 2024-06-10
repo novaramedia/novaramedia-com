@@ -3,9 +3,6 @@
 $col = 32px
 $gutter = 12px
 
-.container
-  width: ($col * $cols)+($gutter * $cols)
-
 .col
   margin-left: ($gutter/2)
   margin-right: ($gutter/2)
@@ -14,7 +11,7 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-flex-grid-maker(false, $gutter, 'xl')
+flex-grid-maker('xl')
 
 // ******************************************************
 
@@ -42,8 +39,6 @@ $font-tracking-wider = 0.025em
 
 $border-width = 2px
 
-$basic-animation-speed = .5s
-
 // ******************************************************
 
 // TYPOGRAPHY
@@ -66,9 +61,6 @@ h2, .font-size-h2
 
 h3
   font-size: $font-size-h3
-
-p
-  margin-bottom: 1rem
 
   // NEW TYPE SCALE 2021
 
@@ -155,15 +147,6 @@ p
 
 .button
   padding: $margin-small
-
-// ******************************************************
-
-// COMPONENTS
-
-// QUOTE
-
-.component-quote
-  margin-top: $margin-small
 
 // ******************************************************
 
@@ -297,37 +280,6 @@ p
 
 .padding-bottom-large
   padding-bottom: $margin-large
-
-// ******************************************************
-
-// HEADER
-
-$header-height = 46px
-
-#main-content
-  padding-top: $header-height
-
-#header-main-wrapper
-  height: $header-height
-
-.header-menu
-  li
-    padding-right: $margin-tiny
-
-// SEARCH
-
-#search-form
-  border: $border-width solid $color-white-soft
-
-#search-input, #search-submit
-  font-size: $font-size-h3
-
-#search-input
-  width: 70%
-
-#search-submit
-  width: 8%
-  min-width: 25px
 
 // ******************************************************
 

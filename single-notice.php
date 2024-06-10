@@ -1,46 +1,38 @@
 <?php
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
-  <!-- main posts loop -->
-  <section id="notice" class="container margin-top-small margin-bottom-large">
-    <div class="row">
-      <div class="col col24">
-        <h4 class="margin-bottom-basic">Notices</h4>
+  <section id="notice" class="container mt-4 mb-6">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24">
+        <h4 class="fs-3-sans font-uppercase font-bold mb-4">Notices</h4>
       </div>
     </div>
-    <div class="row">
+    <div class="grid-row">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
-      <article class="col col10">
-        <header class="margin-bottom-small">
+      <article class="grid-item is-s-24 is-xl-14 is-xxl-10">
+        <header class="mb-4">
           <h5><?php the_title(); ?></h5>
           <h5><?php the_time('j F Y'); ?></h5>
         </header>
-        <?php the_content(); ?>
+        <div class="page-copy">
+          <?php the_content(); ?>
+        </div>
       </article>
 <?php
   }
 } else {
 ?>
-      <article class="col col24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <article class="grid-item is-xxl-24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>
     </div>
-  <!-- end post -->
   </section>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>

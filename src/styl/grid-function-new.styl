@@ -1,0 +1,66 @@
+.grid-row
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  &--reverse
+    flex-direction: row-reverse
+  &--nowrap
+    flex-wrap: nowrap
+  &--align-center
+    align-items: center
+
+.grid-item
+  position: relative
+  flex: 0 1 auto
+  max-width: 100%
+  max-height: 100%
+  min-width: 0
+  min-height: 0
+
+grid-maker($size = false, $cols = 24)
+
+  .grid-row-{$size}--reverse
+    direction: column-reverse
+
+  // stylus doesnt play well with calc so just go literal
+  @css {
+    .container--padded {
+      padding-left: calc(var(--grid-gutter) / 2);
+      padding-right: calc(var(--grid-gutter) / 2);
+    }
+
+    .grid-item {
+      padding-left: calc(var(--grid-gutter) / 2);
+      padding-right: calc(var(--grid-gutter) / 2);
+    }
+
+    .grid-item--tight {
+      padding-left: calc(var(--grid-gutter) / 4);
+      padding-right: calc(var(--grid-gutter) / 4);
+    }
+
+    .grid--nested {
+      margin-left: calc(var(--grid-gutter) / 2 * -1);
+      margin-right: calc(var(--grid-gutter) / 2 * -1);
+    }
+
+    .grid--nested-tight {
+      margin-left: calc(var(--grid-gutter) / 4 * -1);
+      margin-right: calc(var(--grid-gutter) / 4 * -1);
+    }
+  }
+
+  // COLUMN SIZES & OFFSETS
+
+  if $size
+
+    for offset in 0..($cols - 1)
+      .grid-row
+        .offset-{$size}-{offset}
+          margin-left: ( 100% / $cols ) * offset
+
+    for col in 1..$cols
+      .is-{$size}-{col}
+        flex-basis: ( 100% / $cols ) * col
+      .grid-row > .is-{$size}-{col}
+        max-width: ( 100% / $cols ) * col

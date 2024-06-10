@@ -11,17 +11,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
 <main id="main-content" class="category-archive category-archive__if-i-speak">
   <style type="text/css">
     .category-archive__if-i-speak__header {
-      color: rgb(220, 0, 5);
-    }
-
-    .category-archive__if-i-speak__header .nm-button {
-      border-color: rgb(220, 0, 5);
-      color: rgb(220, 0, 5);
-    }
-
-    .category-archive__if-i-speak__header .nm-button:hover {
-      background-color: rgb(220, 0, 5);
-      color: rgb(255, 255, 255);
+      color: var(--color-red);
     }
 
     .category-archive__if-i-speak__title {
@@ -40,7 +30,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
 
     .category-archive__if-i-speak__border {
-      border: 1px solid rgb(220, 0, 5);
+      background-color: var(--color-red);
       margin-top: 0;
     }
 
@@ -52,13 +42,13 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/banners/if-i-speak.png'; ?>);
     }
 
-    @media screen and (max-width: 1336px) {
+    @media screen and (max-width: 1408px) {
       .category-archive__if-i-speak__title {
         font-size: 14.5rem;
       }
 
       .category-archive__if-i-speak__image {
-        height: 200px;
+        height: 220px;
         width: 320px;
       }
     }
@@ -79,7 +69,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       }
 
       .category-archive__if-i-speak__image {
-        height: 180px;
+        height: 190px;
         width: 290px;
       }
 
@@ -108,28 +98,28 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
   </style>
   <div>
-    <section class="category-archive__if-i-speak__header container padding-top-small padding-bottom-small margin-bottom-small">
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-item-s-12">
+    <section class="category-archive__if-i-speak__header container pt-4 pb-4 mb-4">
+      <div class="grid-row">
+        <div class="grid-item is-xxl-24">
           <h1 class="category-archive__if-i-speak__title">If I Speak...</h1>
         </div>
-        <div class="flex-grid-item flex-item-s-12 flex-item-xxl-5 margin-top-basic font-weight-bold font-size-2 font-size-l-1">
+        <div class="grid-item is-s-24 is-xxl-10 mt-4 font-weight-bold fs-6 fs-s-5-sans">
           <?php echo category_description(); ?>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
+        <div class="grid-item is-s-12 is-xxl-10">
           <div class="category-archive__if-i-speak__image"></div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-2 margin-top-small text-align-right">
+        <div class="grid-item is-s-12 is-xxl-4 mt-4 text-align-right">
           <?php
             if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
               $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
           ?>
-          <a class="nm-button nm-button--white nm-button--inline margin-bottom-tiny" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <a class="ui-button ui-button--red ui-button--auto-height mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
           <?php
             }
           ?>
         </div>
-        <div class="flex-grid-item flex-item-xxl-12">
+        <div class="grid-item is-xxl-24">
           <hr class="category-archive__if-i-speak__border">
         </div>
       </div>
@@ -137,25 +127,25 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
   </div>
 
   <div class="container">
-    <div class="flex-grid-row margin-bottom-basic">
+    <div class="grid-row mb-4">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
     get_template_part('partials/post-layouts/flex-post', null, array(
-      'grid-item-classes' => 'flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4 margin-bottom-basic',
+      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
       'image-size' => 'col12-16to9',
     ));
   }
 } else {
 ?>
-    <article class="flex-grid-item flex-item-s-12"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
+    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
 } ?>
     </div>
-    <div class="flex-grid-row margin-bottom-basic">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-s-24">
         <?php get_template_part('partials/pagination'); ?>
       </div>
     </div>
