@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Show post tags on single related posts block
 - Allow paragraph breaks on description of latest post on NL front page block
+- Update support bar markup for new grid and type
 
 ### Fixed
 
