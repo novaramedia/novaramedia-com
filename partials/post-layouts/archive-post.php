@@ -14,25 +14,29 @@
   $meta = get_post_meta($post->ID);
 ?>
 <article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
-  <a href="<?php the_permalink() ?>">
-    <?php if ($is_show_tags) { ?>
-      <div class="layout-thumbnail-frame">
-        <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-          <?php render_post_ui_tags($post_id, true, true); ?>
-        </div>
+  <?php if ($is_show_tags) { ?>
+    <div class="layout-thumbnail-frame">
+      <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+        <?php render_post_ui_tags($post_id, true, true); ?>
+      </div>
+      <a href="<?php the_permalink() ?>" class="ui-hover">
         <?php render_thumbnail($post_id, $image_size, array(
           'class' => 'ui-rounded-image',
         )); ?>
-      </div>
-    <?php } else { ?>
+      </a>
+    </div>
+  <?php } else { ?>
+    <a href="<?php the_permalink() ?>" class="ui-hover">
       <?php render_thumbnail($post_id, $image_size, array(
         'class' => 'ui-rounded-image',
       )); ?>
-    <?php } ?>
+    </a>
+  <?php } ?>
 <?php
-    switch ($text_size) {
-      case 'regular':
+  switch ($text_size) {
+    case 'regular':
 ?>
+  <a href="<?php the_permalink() ?>" class="ui-hover">
     <h5 class="index-post-title fs-3-sans font-bold mt-2 js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if ($is_article) {
@@ -54,10 +58,10 @@
         }
       ?>
     </div>
-<?php
+  <?php
         break;
       case 'large':
-?>
+  ?>
     <h3 class="font-size-2 mt-2 js-fix-widows"><?php the_title(); ?></h3>
     <?php
       if ($is_article) {
@@ -79,9 +83,9 @@
         }
       ?>
     </div>
-<?php
+  <?php
         break;
     }
-?>
+  ?>
   </a>
 </article>
