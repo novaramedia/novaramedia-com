@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Show post tags on single related posts block
+- Allow paragraph breaks on description of latest post on NL front page block
 
 ### Fixed
 
 - archive-post.php link nesting issue
+- render_short_description() not applying content filters
 
 ## [4.0.0] - 2024-06-10
 
