@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Show post tags on single related posts block
+
 ### Fixed
 
 - archive-post.php link nesting issue
