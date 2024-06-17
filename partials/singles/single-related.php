@@ -24,6 +24,7 @@
           get_template_part('partials/post-layouts/archive-post', null, array(
             'grid-item-classes' => 'grid-item is-s-24 is-xxl-8 mb-4',
             'image-size' => 'col12-16to9',
+            'show-tags' => true
           ));
       }
 ?>

@@ -34,7 +34,7 @@
             }
           ?>
         </h5>
-        <p class="fs-3-sans mt-1 mb-0">
+        <div class="fs-3-sans mt-1 mb-0">
           <?php
             if ($is_article) {
               render_standfirst($post_id);
@@ -42,7 +42,7 @@
               render_short_description($post_id);
             }
           ?>
-        </p>
+        </div>
       </div>
     </a>
   </div>

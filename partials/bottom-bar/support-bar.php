@@ -11,22 +11,24 @@
 ?>
 <div class="support-bar support-bar--closed background-red background-support-texture">
   <div class="container pt-4 pb-4">
-    <div class="support-bar__open-view flex-grid-row pb-2">
-      <div class="flex-grid-item flex-item-xxl-3 only-desktop">
+    <div class="support-bar__open-view grid-row pb-2">
+      <div class="grid-item is-xxl-6 only-desktop">
         <a href="<?php echo site_url('support/'); ?>">
-          <h3 class="font-color-white font-size-l-3 font-size-4" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
+          <h3 class="font-color-white fs-l-6 fs-8" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
         </a>
       </div>
-      <div class="flex-grid-item flex-item-xxl-10 only-mobile">
+      <div class="grid-item is-xxl-20 only-mobile">
         <a href="<?php echo site_url('support/'); ?>">
-          <h3 class="font-color-white font-size-2 mb-2">Build people-powered media.</h3>
+          <h3 class="font-color-white fs-4-sans mb-2">Build people-powered media.</h3>
         </a>
       </div>
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-6 font-color-white font-size-l-1 font-size-2 only-desktop">
-        <p><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media space. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
-        <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>
+      <div class="grid-item is-s-24 flex-item-xxl-6 font-color-white fs-5-sans only-desktop">
+        <div class="ml-m-4">
+          <p class="mb-2 font-weight-regular"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
+          <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>
+        </div>
       </div>
-      <div class="support-bar__open-actions-column flex-grid-item flex-item-s-2 flex-item-xxl-3">
+      <div class="support-bar__open-actions-column grid-item is-s-4 is-xxl-6">
         <div class="support-bar__open-actions-wrapper">
           <nav class="support-bar__close-trigger ui-hit-area ui-hit-area--top-right">
             <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white"></span>
@@ -36,28 +38,28 @@
           </a>
         </div>
       </div>
-      <div class="flex-grid-item flex-item-s-12 font-color-white only-mobile">
-        <p class="margin-bottom-micro"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media space. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
+      <div class="grid-item is-s-24 font-color-white only-mobile">
+        <p class="mb-2"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
         <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>
-        <div class="margin-top-tiny">
+        <div class="mt-3">
           <a href="<?php echo site_url('support/'); ?>" class="ui-button ui-button--white ui-button--small">
             <?php echo ($open_button ? $open_button : 'Join our supporters'); ?>
           </a>
         </div>
       </div>
     </div>
-    <div class="support-bar__closed-view flex-grid-row is-one-even-line-grid font-color-white">
-      <div class="flex-grid-item">
+    <div class="support-bar__closed-view grid-row is-one-even-line-grid font-color-white">
+      <div class="grid-item">
         <span class="only-desktop">
           <a href="<?php echo site_url('support/'); ?>">
-            <strong>Build people-powered media.</strong> <?php echo ($desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media space.'); ?>
+            <strong>Build people-powered media.</strong> <?php echo ($desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.'); ?>
           </a>
         </span>
-        <a href="<?php echo site_url('support/'); ?>" class="font-size-2 only-mobile">
+        <a href="<?php echo site_url('support/'); ?>" class="fs-4-sans only-mobile">
           <?php echo ($mobile_closed_cta ? $mobile_closed_cta : 'Fund independent, truthful journalism'); ?>
         </a>
       </div>
-      <div class="flex-grid-item">
+      <div class="grid-item">
         <a href="<?php echo site_url('support/'); ?>" class="ui-action-link only-desktop">
           <?php echo ($desktop_closed_cta ? $desktop_closed_cta : 'Fund something better'); ?>
         </a>

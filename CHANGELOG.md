@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] - 2024-06-17
+
+### Changed
+
+- Show post tags on single related posts block
+- Allow paragraph breaks on description of latest post on NL front page block
+- Update support bar markup for new grid and type
+
+### Fixed
+
+- archive-post.php link nesting issue
+- render_short_description() not applying content filters
+
 ## [4.0.0] - 2024-06-10
 
 ### Added

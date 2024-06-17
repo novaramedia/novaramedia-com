@@ -42,5 +42,20 @@ fs-3-sans font-uppercase font-bold
 
 // TYPE
 
+font-size-0
+fs-2
+
+font-size-1
+fs-3-sans
+
+font-size-2
+fs-4-sans
+
 font-size-3
 fs-6
+
+font-size-4
+fs-8
+
+font-size-5
+fs-9
