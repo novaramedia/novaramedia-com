@@ -16,9 +16,9 @@
 <div class="margin-bottom-small padding-bottom-small <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
   <div class="layout-split-level fs-2 mb-1">
     <?php render_post_ui_tags($post_id); ?>
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
+    <!-- <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
-    </a>
+    </a> -->
   </div>
   <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
     <div class="grid-row grid--nested">
