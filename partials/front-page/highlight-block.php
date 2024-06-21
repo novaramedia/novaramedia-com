@@ -14,7 +14,11 @@
   $highlight_title = !empty($settings['nm_front_page_highlight_section_options_title']) ? $settings['nm_front_page_highlight_section_options_title'] : $section_term->name;
   $highlight_description = !empty($settings['nm_front_page_highlight_section_options_description']) ? $settings['nm_front_page_highlight_section_options_description'] : '';
 
-  $posts_above_the_fold_ids = []; // Exclude posts from above the fold. needs this passed as a variable somehow
+  $posts_above_the_fold_ids = [];
+
+  if (isset($args['excluded_posts_ids'])) {
+    $posts_above_the_fold_ids = $args['excluded_posts_ids'];
+  }
 
   // Featured posts from query
   $latest_featured_args = array(

@@ -1,15 +1,20 @@
 <?php
-  $number_of_articles = 7;
-  $query_args = array(
-    'category_name' => 'articles',
-    'posts_per_page' => $number_of_articles,
-  );
-
-  if (is_array($args) && count($args) > 0) {
-    $query_args = array_merge($query_args, array('post__not_in' => $args));
+  if ($args['latest_articles_posts_ids']) {
+    $latest_articles_posts_ids = $args['latest_articles_posts_ids'];
+  } else {
+    return;
   }
 
-  $recent_articles = new WP_Query($query_args);
+  $recent_articles = new WP_Query(
+    array(
+      'post__in' => $latest_articles_posts_ids,
+      'orderby' => 'post__in',
+    )
+  );
+
+  // count article returned here
+  $number_of_articles = $recent_articles->post_count;
+
   $i = 0;
 
   if ($recent_articles->have_posts()) {
