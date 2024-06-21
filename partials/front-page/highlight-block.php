@@ -1,5 +1,18 @@
 <?php
-  $section_slug = 'organised-labour';
+  $settings = NM_get_option('all', 'nm_front_page_highlight_section_options');
+
+  if (!isset($settings['nm_front_page_highlight_section_options_is_displayed']) || $settings['nm_front_page_highlight_section_options_is_displayed'] !== 'on') {
+    return;
+  }
+
+  $section_term = get_term($settings['nm_front_page_highlight_section_options_section']);
+
+  if (is_wp_error($section_term) || empty($section_term)) {
+    return;
+  }
+
+  $highlight_title = !empty($settings['nm_front_page_highlight_section_options_title']) ? $settings['nm_front_page_highlight_section_options_title'] : $section_term->name;
+  $highlight_description = !empty($settings['nm_front_page_highlight_section_options_description']) ? $settings['nm_front_page_highlight_section_options_description'] : '';
 
   $posts_above_the_fold_ids = []; // Exclude posts from above the fold. needs this passed as a variable somehow
 
@@ -14,8 +27,8 @@
     'tax_query' => array(
         array (
             'taxonomy' => 'section',
-            'field' => 'slug',
-            'terms' => $section_slug,
+            'field' => 'id',
+            'terms' => $section_term->term_id,
         )
     ),
   );
@@ -35,8 +48,8 @@
     'tax_query' => array(
         array (
             'taxonomy' => 'section',
-            'field' => 'slug',
-            'terms' => $section_slug,
+            'field' => 'id',
+            'terms' => $section_term->term_id,
         )
     ),
   );
@@ -47,7 +60,7 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h3 class="fs-7 font-weight-regular layout-flex-no-shrink mr-4"><strong>General Election 2024</strong> This is the text talking about this highlight and explaining it's purpose.</h3>
+        <h3 class="fs-7 font-weight-regular layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
       </div>
     </div>
   </div>
