@@ -12,15 +12,13 @@
     )
   );
 
-  // count article returned here
   $number_of_articles = $recent_articles->post_count;
-
   $i = 0;
 
   if ($recent_articles->have_posts()) {
     while ($recent_articles->have_posts()) {
       $recent_articles->the_post();
-      $has_border = ($i !== ($number_of_articles - 1)) ? true : false;
+      $has_border = ($i !== ($number_of_articles - 1)) ? false : true;
 
       // [temp logic]. to be driven by meta logics based on position and quality of image assets
 

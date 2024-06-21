@@ -18,9 +18,9 @@
   </div>
   <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
     <h4 class="post__title fs-5-sans fs-s-6 font-condensed"><?php echo get_the_title($post_id); ?></h4>
-    <h5 class="fs-3-serif mt-1">
+    <!-- <h5 class="fs-3-serif mt-1">
       <?php render_standfirst($post_id); ?>
-    </h5>
+    </h5> -->
     <h5 class="fs-2 font-uppercase mt-1">
       <?php render_bylines($post_id, false); ?>
     </h5>

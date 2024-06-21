@@ -24,9 +24,9 @@
     <div class="grid-row grid--nested">
       <div class="grid-item is-xxl-16">
         <h4 class="post__title fs-4-sans fs-s-5-sans font-condensed"><?php echo get_the_title($post_id); ?></h4>
-        <h5 class="fs-3-serif mt-1">
+        <!-- <h5 class="fs-3-serif mt-1">
           <?php render_standfirst($post_id); ?>
-        </h5>
+        </h5> -->
         <h5 class="fs-2 font-uppercase mt-1">
           <?php render_bylines($post_id, false); ?>
     </h5>

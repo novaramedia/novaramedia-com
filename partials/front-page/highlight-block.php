@@ -73,7 +73,7 @@
       <div class="highlight-block__featured-1">
         <div class="grid-row grid--nested">
           <div class="grid-item is-s-24 is-xxl-16">
-            <div class="ui-border-bottom pb-6 mb-4">
+            <div class="ui-border-bottom pb-5 mb-4">
               <?php
                 if (is_numeric($latest_featured_posts_ids[0])) {
                   get_template_part('partials/front-page/above-the-fold/featured-post-primary', null, array(
@@ -151,7 +151,7 @@
             <div class="pb-3 mb-3 <?php if ($i < $latest_others_posts_to_show) {echo 'ui-border-bottom';} ?>">
               <div class="layout-split-level fs-2 mb-1">
                 <?php render_post_ui_tags($post->ID, true, true); ?>
-                <a href="<?php the_permalink(); ?>" class="ui-hover"><span><?php the_time('j F'); ?></span></a>
+                <!-- <a href="<?php the_permalink(); ?>" class="ui-hover"><span><?php the_time('j F'); ?></span></a> -->
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <h4 class="post__title fs-2 fs-s-4-sans font-bold">
