@@ -52,7 +52,7 @@
 
           if (!empty($meta['_cmb_related_posts'])) {
             $related_args = array(
-              'posts_per_page' => 2,
+              'posts_per_page' => 1,
               'post__in' => explode(', ', $meta['_cmb_related_posts'][0])
             );
 

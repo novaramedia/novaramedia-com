@@ -1,21 +1,7 @@
 <?php
-  // TODO: Logic and UI for curation [x]
-  // TODO: Filtering to avoid double display [x]
-  // TODO: Layout options for recent articles bar [x]
-  // TODO: Fix stick bottom on primary featured [x]
-  // TODO: Round soften all images [x]
-  // TODO: UI element for AV tag [x]
-  // TODO: Curation select for featureable - meta checkbox [x]
-  // TODO: Use short text for article primary featured [x]
-  // TODO: Hover states [x]
-  // TODO: Just use top margin for primary featured see more link [x]
   // LOGIC/FUNCTION
   // TODO: Logic for recent articles bar images or not | custom cmb2 field option 1-5 radio buttons row or ?
   // TODO: Update wordpress declared image sizes
-  // STYLING
-  // TODO: Responsive breakpoint details
-  // TODO: Vertical borders?
-  // TODO: XXL upscale
 
 $latest_args = array(
   'posts_per_page' => 16,

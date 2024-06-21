@@ -24,6 +24,8 @@ $banners = array(
 
     render_front_page_banner($banners[0]);
 
+    get_template_part('partials/front-page/highlight-block');
+
     get_template_part('partials/front-page/show-blocks/novara-live');
 
     render_front_page_banner($banners[1]);

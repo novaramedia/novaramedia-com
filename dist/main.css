@@ -3926,6 +3926,22 @@ html {
 .site-header-search {
   display: none;
 }
+.highlight-block__featured-1 {
+  -ms-grid-column-start: 1;
+  grid-column-start: 1;
+  grid-column-end: span 18;
+  -ms-grid-row-start: 1;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+.highlight-block__latest-posts {
+  -ms-grid-column-start: 19;
+  grid-column-start: 19;
+  grid-column-end: span 6;
+  -ms-grid-row-start: 1;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+}
 .novara-fm-archive__header {
   display: flex;
   -ms-justify-content: center;
