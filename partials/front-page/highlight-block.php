@@ -72,7 +72,7 @@
     <div class="highlight-block layout-grid">
       <div class="highlight-block__featured-1">
         <div class="grid-row grid--nested">
-          <div class="grid-item is-l-24 is-xxl-16">
+          <div class="grid-item is-s-24 is-xxl-16">
             <div class="ui-border-bottom pb-6 mb-4">
               <?php
                 if (is_numeric($latest_featured_posts_ids[0])) {
@@ -104,7 +104,7 @@
               </div>
             </div>
           </div>
-          <div class=" grid-item is-l-24 is-xxl-8">
+          <div class=" grid-item is-s-24 is-xxl-8">
             <?php
               if (is_numeric($latest_featured_posts_ids[1])) {
                 get_template_part('partials/front-page/above-the-fold/featured-post-secondary', null, array(
