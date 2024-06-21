@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Hack !important fix for overbolding on mobile—will be clean with type classes update
+- Primary featured component less likely to show empty space with unset related posts but display meta set to show
 
 ## [4.0.1] - 2024-06-17
 
