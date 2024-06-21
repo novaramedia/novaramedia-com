@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Increase hit size on menu toggle nav elements, especially on s size
+
 ### Fixed
 
 - Hack !important fix for overbolding on mobile—will be clean with type classes update
