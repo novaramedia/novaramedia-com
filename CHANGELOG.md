@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Increase hit size on menu toggle nav elements, especially on s size
+- Use UI Tag in place of h4 text on single post
 
 ### Fixed
 
