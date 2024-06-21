@@ -11,7 +11,7 @@
     return;
   }
 
-  $highlight_title = !empty($settings['nm_front_page_highlight_section_options_title']) ? $settings['nm_front_page_highlight_section_options_title'] : $section_term->name;
+  $highlight_title = !empty($settings['nm_front_page_highlight_section_options_display_title']) ? $settings['nm_front_page_highlight_section_options_display_title'] : $section_term->name;
   $highlight_description = !empty($settings['nm_front_page_highlight_section_options_description']) ? $settings['nm_front_page_highlight_section_options_description'] : '';
 
   $posts_above_the_fold_ids = [];
