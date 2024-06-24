@@ -12,6 +12,8 @@
 
   $meta = get_post_meta($post_id);
   $timestamp = get_post_time('c', false, $post_id);
+
+  $is_article = nm_is_article($post_id);
 ?>
 <div class="margin-bottom-small padding-bottom-small <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
   <div class="layout-split-level fs-2 mb-1">
@@ -26,7 +28,13 @@
       <?php render_standfirst($post_id); ?>
     </h5> -->
     <h5 class="fs-2 font-uppercase mt-1">
-      <?php render_bylines($post_id, false); ?>
+      <?php
+        if ($is_article) {
+          render_bylines($post_id);
+        } else {
+          render_standfirst($post_id);
+        }
+      ?>
     </h5>
   </a>
 </div>

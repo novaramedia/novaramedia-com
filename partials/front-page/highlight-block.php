@@ -46,9 +46,6 @@
     'post__not_in' => array_merge($posts_above_the_fold_ids, $latest_featured_posts_ids),
     'posts_per_page' => $latest_others_posts_to_show,
     'category_name' => 'articles,video,audio',
-    // 'meta_key' => '_cmb_featurable',
-    // 'meta_compare' => 'NOT LIKE',
-    // 'meta_value' => 'on',
     'tax_query' => array(
         array (
             'taxonomy' => 'section',
@@ -57,8 +54,6 @@
         )
     ),
   );
-
-  // pr($latest_featured_posts_ids);
 ?>
 <section class="front-page-highlight-block pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="container">
@@ -141,7 +136,6 @@
         </div>
       </div>
       <div class="highlight-block__latest-posts">
-
           <div class="layout-split-level fs-2 mb-4">
             <a href="<?php echo get_term_link($section_term); ?>">
             <h5 class="font-bold font-uppercase"><?php echo $section_term->name; ?></h5>
@@ -160,9 +154,8 @@
                 $timestamp = get_post_time('c');
           ?>
             <div class="pb-3 mb-3 <?php if ($i < $latest_others_posts_to_show) {echo 'ui-border-bottom';} ?>">
-              <div class="layout-split-level mb-1">
+              <div class="mb-1">
                 <?php render_post_ui_tags($post->ID, true, true); ?>
-                <!-- <a href="<?php the_permalink(); ?>" class="ui-hover"><span><?php the_time('j F'); ?></span></a> -->
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <h4 class="post__title fs-3-sans font-bold">
