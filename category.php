@@ -116,15 +116,17 @@ if ($category->slug === 'video') {
               the_post();
           ?>
           <div class="grid-item grid-item--tight is-xxl-12 mb-5">
-            <a href="<?php the_permalink(); ?>">
-              <div class="layout-thumbnail-frame">
-                <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-                  <?php render_post_ui_tags($post->ID, false, true, 'no-border'); ?>
-                </div>
+            <div class="layout-thumbnail-frame">
+              <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+                <?php render_post_ui_tags($post->ID, false, true, 'no-border'); ?>
+              </div>
+              <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
                   'class' => 'ui-rounded-image'
                 )); ?>
-              </div>
+              </a>
+            </div>
+            <a href="<?php the_permalink(); ?>" class="ui-hover">
               <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?></h6>
             </a>
           </div>
