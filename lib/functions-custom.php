@@ -1,4 +1,15 @@
 <?php
+/**
+ * Get the latest articles ids
+ * This function will get the latest articles ids, excluding the featured posts if set
+ * If the featured posts are not set, it will return the latest articles ids
+ * If the latest articles are already in the featured posts, it will skip them
+ * If there are no latest articles, it will return false
+ *
+ * @param array $featured_posts_ids Array of featured post ids
+ *
+ * @return array/Boolean Array of latest articles ids or false if no latest articles
+ */
 function get_latest_articles_ids($featured_posts_ids = false) {
   $query_args = array(
     'category_name' => 'articles',
