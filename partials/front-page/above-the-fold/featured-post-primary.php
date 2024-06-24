@@ -11,6 +11,11 @@
   $has_huge_headline = $args['has_huge_headline'];
 
   $the_title = get_the_title($post_id);
+
+  if (str_word_count($the_title) > 14) { // if the title if long then no huge headline
+    $has_huge_headline = false;
+  }
+
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
