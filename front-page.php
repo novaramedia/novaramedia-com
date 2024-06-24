@@ -20,9 +20,19 @@ $banners = array(
     // ABOVE THE FOLD
     // **************
 
-    get_template_part('partials/front-page/above-the-fold');
+    $featured_posts_ids = get_above_the_fold_featured_post_ids();
+    $latest_articles_posts_ids = get_latest_articles_ids($featured_posts_ids);
+
+    get_template_part('partials/front-page/above-the-fold', null, array(
+      'featured_posts_ids' => $featured_posts_ids,
+      'latest_articles_posts_ids' => $latest_articles_posts_ids,
+    ));
 
     render_front_page_banner($banners[0]);
+
+    get_template_part('partials/front-page/highlight-block', null, array(
+      'excluded_posts_ids' => array_merge($featured_posts_ids, $latest_articles_posts_ids),
+    ));
 
     get_template_part('partials/front-page/show-blocks/novara-live');
 

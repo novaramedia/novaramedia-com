@@ -71,15 +71,17 @@
             $related_video->the_post();
       ?>
       <div class="grid-item is-s-8 is-xxl-24 mb-3">
-        <a href="<?php the_permalink(); ?>">
-          <div class="layout-thumbnail-frame">
-            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-              <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
-            </div>
+        <div class="layout-thumbnail-frame">
+          <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+            <?php render_post_ui_tags($post->ID, true, true, 'no-border'); ?>
+          </div>
+          <a href="<?php the_permalink(); ?>" class="ui-hover">
             <?php render_thumbnail($post->ID, 'col24-16to9', array(
               'class' => 'ui-rounded-image'
             )); ?>
-          </div>
+          </a>
+        </div>
+        <a href="<?php the_permalink(); ?>" class="ui-hover">
           <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
         </a>
       </div>

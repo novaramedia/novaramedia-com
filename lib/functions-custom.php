@@ -1,5 +1,81 @@
 <?php
 /**
+ * Get the latest articles ids
+ * This function will get the latest articles ids, excluding the featured posts if set
+ * If the featured posts are not set, it will return the latest articles ids
+ * If the latest articles are already in the featured posts, it will skip them
+ * If there are no latest articles, it will return false
+ *
+ * @param array $featured_posts_ids Array of featured post ids
+ *
+ * @return array/Boolean Array of latest articles ids or false if no latest articles
+ */
+function get_latest_articles_ids($featured_posts_ids = false) {
+  $query_args = array(
+    'category_name' => 'articles',
+    'posts_per_page' => 7,
+    'fields' => 'ids',
+  );
+
+  if (is_array($featured_posts_ids) && count($featured_posts_ids) > 0) {
+    $query_args = array_merge($query_args, array('post__not_in' => $featured_posts_ids));
+  }
+
+  $recent_articles = new WP_Query($query_args);
+
+  if (!$recent_articles->have_posts()) {
+    return false;
+  }
+
+  $latest_articles_ids = $recent_articles->posts;
+
+  return $latest_articles_ids;
+}
+/**
+ * Get the featured post ids for the above the fold section
+ * This function will get the featured post ids from the theme options if set and in position
+ * If the featured post id is not set in the theme options, it will use the latest featured post
+ * If the latest featured post is already in the theme options featured posts, it will skip it
+ *
+ * @return array Array of featured post ids
+ */
+function get_above_the_fold_featured_post_ids() {
+  $latest_args = array(
+    'posts_per_page' => 16,
+    'fields' => 'ids',
+    'category_name' => 'articles,video,audio',
+    'meta_key' => '_cmb_featurable',
+    'meta_value' => 'on',
+  );
+
+  $latest_featured_posts = new WP_Query($latest_args);
+  $latest_featured_posts_ids = $latest_featured_posts->posts;
+
+  $featured_posts_ids = [];
+
+  for ($i = 1; $i <= 8; $i++) { // get the featured posts ids from the theme options if set and in position
+    $featured_posts_ids[$i - 1] = NM_get_option('nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options');
+  }
+
+  for ($i = 0; $i < 8; $i++) {
+    if (!is_numeric($featured_posts_ids[$i])) { // if the featured post id is not set in the theme options, use the latest featured post
+      if (!empty($latest_featured_posts_ids)) {
+        while (in_array($latest_featured_posts_ids[0], $featured_posts_ids)) { // ensure fallback latest is not already in the theme options featured posts
+          array_shift($latest_featured_posts_ids);
+        }
+
+        $featured_posts_ids[$i] = array_shift($latest_featured_posts_ids);
+      }
+    }
+  }
+
+  if (empty($featured_posts_ids)) {
+    return false;
+  }
+
+  return $featured_posts_ids;
+}
+/**
  * Gets data for livechecker javascript module
  *
  * @return array Array of autovalues for support form
