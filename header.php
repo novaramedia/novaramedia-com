@@ -27,12 +27,12 @@
   <section id="main-container">
     <header class="site-header background-black mb-4">
       <div class="site-header__wrapper font-color-white fs-4-sans fs-s-2">
-        <div class="site-header__main container pt-2 pb-2">
+        <div class="site-header__main container">
           <div class="grid-row">
             <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
               <ul class="site-header__navigation u-inline-list u-inline-block">
-                <li class="site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
-                <li class="site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
+                <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
+                <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
             </nav>
             <div class="header-main__middle grid-item is-xxl-12 text-align-center">

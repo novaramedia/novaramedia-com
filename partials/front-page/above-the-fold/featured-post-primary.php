@@ -22,6 +22,7 @@
 
   $show_related = !empty($args['show_related']) && $args['show_related'] !== 'none' ? $args['show_related'] : false;
 
+
   $is_product_linked = !empty($args['is_product_linked']) && $args['is_product_linked'] === 'on' ? true : false;
   $more_on_section = !empty($args['more_on_section']) && $args['more_on_section'] !== 'none' ? $args['more_on_section'] : false;
 ?>
@@ -39,7 +40,7 @@
     </div>
 
     <div class="grid-row grid--nested mt-3">
-      <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-l-24 is-xxl-20'; ?>">
+      <div class="grid-item is-s-24 <?php echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-l-24 is-xxl-20'; ?>">
         <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
           <h2 class="post__title <?php echo $has_huge_headline ? 'fs-8 fs-m-7' : 'fs-7'; ?>"><?php echo $the_title; ?></h2>
           <h5 class="fs-2 font-uppercase mt-3">
@@ -57,11 +58,7 @@
         </a>
       </div>
       <?php
-        if ($show_related) { ?>
-      <div class="grid-item is-s-24 is-l-8 is-xxl-6 ui-border-left mt-s-3 ui-border--not-s">
-      <?php
-          $meta = get_post_meta($post_id);
-
+        if ($show_related) {
           if (!empty($meta['_cmb_related_posts'])) {
             $related_args = array(
               'posts_per_page' => 1,
@@ -71,32 +68,31 @@
             $related_posts = new WP_Query($related_args);
 
             if ($related_posts->have_posts()) {
-          ?>
-            <h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
-            <div class="related-posts">
-          <?php
-              $i = 0;
-              while ($related_posts->have_posts()) {
-                $related_posts->the_post();
-          ?>
-              <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
-                <a href="<?php the_permalink(); ?>" class="ui-hover">
-                  <h5 class="fs-4-sans"><?php the_title(); ?></h5>
-                  <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
-                </a>
-              </div>
-          <?php
-                $i++;
-              }
-          ?>
-            </div>
-          <?php
+      ?>
+      <div class="grid-item is-s-24 is-l-8 is-xxl-6 ui-border-left mt-s-3 ui-border--not-s">
+        <h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
+        <div class="related-posts">
+      <?php
+          $i = 0;
+          while ($related_posts->have_posts()) {
+            $related_posts->the_post();
+      ?>
+          <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
+            <a href="<?php the_permalink(); ?>" class="ui-hover">
+              <h5 class="fs-4-sans"><?php the_title(); ?></h5>
+              <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
+            </a>
+          </div>
+      <?php
+            $i++;
+          }
+      ?>
+        </div>
+      </div>
+      <?php
             }
             wp_reset_postdata();
           }
-      ?>
-      </div>
-      <?php
         }
       ?>
     </div>
