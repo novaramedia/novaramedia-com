@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Highlight module that can be used to show recent content from a specific Section
+
+### Changed
+
+- Primary featured posts will not have huge titles if the titles are more than 14 words long
+
 ### Fixed
 
 - Hack !important fix for overbolding on mobile—will be clean with type classes update
