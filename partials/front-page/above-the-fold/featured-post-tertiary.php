@@ -3,8 +3,14 @@
     return;
   }
 
+  if (!isset($args['show_descriptive_text'])) {
+    $args['show_descriptive_text'] = true;
+  }
+
   $post_id = $args['post_id'];
+  $show_descriptive_text = $args['show_descriptive_text'];
   $container_classes = isset($args['container_classes']) ? $args['container_classes'] : '';
+
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
@@ -27,6 +33,9 @@
           }
         ?>
       </h5>
+      <?php
+        if ($show_descriptive_text) {
+      ?>
       <div class="fs-3-sans mt-1 mb-0">
         <?php
           if ($is_article) {
@@ -36,5 +45,8 @@
           }
         ?>
       </div>
+      <?php
+        }
+      ?>
     </a>
   </div>

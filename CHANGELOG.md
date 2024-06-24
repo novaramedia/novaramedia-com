@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Highlight module that can be used to show recent content from a specific Section
+
 ### Changed
 
+- Primary featured posts will not have huge titles if the titles are more than 14 words long
 - Increase hit size on menu toggle nav elements, especially on s size
 - Use UI Tag in place of h4 text on single post
 

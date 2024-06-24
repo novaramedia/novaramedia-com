@@ -407,6 +407,55 @@ function nm_register_front_page_options_metabox() {
   ) );
 
   /**
+   * Register child page for the highlight section
+   */
+  $highlight_section = new_cmb2_box( array(
+    'id'           => 'nm_highlight_section_options_page',
+    'title'        => 'Highlight Section',
+    'object_types' => array( 'options-page' ),
+    'option_key'   => $prefix . 'front_page_highlight_section_options',
+    'parent_slug'  => $prefix . 'front_page_options',
+    'capability'   => 'edit_posts',
+  ) );
+
+  $highlight_section->add_field( array(
+    'name' => 'Highlight Section',
+    'desc' => 'This is where the settings for the front page Highlight Section can be set',
+    'id'   => $prefix . 'front_page_highlight_section_options_title',
+    'type' => 'title',
+  ) );
+
+  $highlight_section->add_field( array(
+    'name' => 'Show section',
+    'desc' => 'If selected, the Highlight Section will be displayed below the fold immediately after the support signup section',
+    'id'   => $prefix . 'front_page_highlight_section_options_is_displayed',
+    'type' => 'checkbox',
+  ) );
+
+  $highlight_section->add_field( array(
+    'name' => 'Content thematic Section to display',
+    'desc' => 'Select the thematic section to display in the Highlight Section. Only posts in this Section will be shown',
+    'id'   => $prefix . 'front_page_highlight_section_options_section',
+    'type'             => 'select',
+    'show_option_none' => false,
+    'options'          => get_all_theme_sections_array()
+  ) );
+
+  $highlight_section->add_field( array(
+    'name' => 'Section title (optional)',
+    'desc' => 'The text shown above the posts in the Highlight Section. If not set will default to the name of the Section',
+    'id'   => $prefix . 'front_page_highlight_section_options_display_title',
+    'type' => 'text',
+  ) );
+
+  $highlight_section->add_field( array(
+    'name' => 'Section description (optional)',
+    'desc' => 'The text shown after the title. This should be no longer than 2 sentences',
+    'id'   => $prefix . 'front_page_highlight_section_options_description',
+    'type' => 'textarea_small',
+  ) );
+
+  /**
    * Registers secondary options page, and set main item as parent.
    */
   $secondary_options = new_cmb2_box( array(

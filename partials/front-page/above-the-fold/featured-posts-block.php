@@ -40,7 +40,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
         'container_classes' => 'mb-4',
       ));
     }
-?>
+  ?>
       </div>
       <div class="grid-item is-l-12 is-xxl-24">
   <?php
