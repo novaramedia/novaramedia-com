@@ -14,10 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Primary featured posts will not have huge titles if the titles are more than 14 words long
+- Increase hit size on menu toggle nav elements, especially on s size
+- Use UI Tag in place of h4 text on single post
 
 ### Fixed
 
 - Hack !important fix for overbolding on mobile—will be clean with type classes update
+- Primary featured component less likely to show empty space with unset related posts but display meta set to show
 
 ## [4.0.1] - 2024-06-17
 

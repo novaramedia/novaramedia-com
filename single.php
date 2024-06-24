@@ -52,29 +52,13 @@ if( have_posts() ) {
 
     $top_level_category = get_the_top_level_category($post->ID);
 
-    $category_link = get_category_link($top_level_category->term_id);
-
-    $type_category = get_child_level_child_category($post->ID); // check for child level category for display
-
     $focus_terms = wp_get_post_terms($post->ID, 'focus'); // check for focus on the post
     $focus_tax = count($focus_terms) > 0 ? $focus_terms[0] : false;
 ?>
 
 <div class="grid-row mb-4 mb-s-2">
   <div class="grid-item is-xxl-24">
-    <h4 class="fs-3-sans font-uppercase font-bold">
-      <?php
-        if ($focus_tax) {
-          echo '<a href="' . get_term_link($focus_tax) . '">' . $focus_tax->name . '</a>';
-        } else if ($type_category) {
-          echo '<a href="' . get_term_link($type_category) . '">' . $type_category->name . '</a>';
-        } else {
-      ?>
-        <a href="<?php echo $category_link; ?>"><?php echo $top_level_category->cat_name; ?></a>
-      <?php
-        }
-      ?>
-    </h4>
+    <?php render_post_ui_tags($post->ID); ?>
   </div>
 </div>
 
