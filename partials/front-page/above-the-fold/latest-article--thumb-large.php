@@ -3,8 +3,12 @@
     return;
   }
 
+  if (!isset($args['has_bottom_border'])) {
+    $args['has_bottom_border'] = false;
+  }
+
   $post_id = $args['post_id'];
-  $has_bottom_border = !isset($args['has_bottom_border']) && $args['has_bottom_border'];
+  $has_bottom_border = $args['has_bottom_border'];
 
   $meta = get_post_meta($post_id);
   $timestamp = get_post_time('c', false, $post_id);

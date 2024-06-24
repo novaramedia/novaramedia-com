@@ -3,7 +3,14 @@
     return;
   }
 
+  if (!isset($args['has_huge_headline'])) {
+    $args['has_huge_headline'] = true;
+  }
+
   $post_id = $args['post_id'];
+  $has_huge_headline = $args['has_huge_headline'];
+
+  $the_title = get_the_title($post_id);
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
@@ -27,9 +34,9 @@
     </div>
 
     <div class="grid-row grid--nested mt-3">
-      <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-xxl-24'; ?>">
+      <div class="grid-item is-s-24 <?php echo $show_related ? 'is-l-16 is-xxl-18' : 'is-l-24 is-xxl-20'; ?>">
         <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-          <h2 class="post__title fs-8 fs-m-7"><?php echo get_the_title($post_id); ?></h2>
+          <h2 class="post__title <?php echo $has_huge_headline ? 'fs-8 fs-m-7' : 'fs-7'; ?>"><?php echo $the_title; ?></h2>
           <h5 class="fs-2 font-uppercase mt-3">
             <?php
               if ($is_article) {

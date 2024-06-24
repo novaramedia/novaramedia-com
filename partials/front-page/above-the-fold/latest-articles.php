@@ -18,16 +18,14 @@
   if ($recent_articles->have_posts()) {
     while ($recent_articles->have_posts()) {
       $recent_articles->the_post();
-      $has_border = ($i !== ($number_of_articles - 1)) ? false : true;
+      $has_border = ($i !== ($number_of_articles - 1)) ? true : false;
 
-      // [temp logic]. to be driven by meta logics based on position and quality of image assets
-
-      if ($i === 1 || $i === 6) { // render small thumb layout
+      if ($i === 1 || $i === 6) {
         get_template_part('partials/front-page/above-the-fold/latest-article--thumb-small', null, array(
           'post_id' => $post->ID,
           'has_bottom_border' => $has_border,
         ));
-      } else if ($i === 3) { // render full image layout
+      } else if ($i === 3) {
         get_template_part('partials/front-page/above-the-fold/latest-article--thumb-large', null, array(
           'post_id' => $post->ID,
           'has_bottom_border' => $has_border,

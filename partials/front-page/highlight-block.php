@@ -41,7 +41,7 @@
   $latest_featured_posts_ids = $latest_featured_posts->posts;
 
   // Non-featured posts from query
-  $latest_others_posts_to_show = 10;
+  $latest_others_posts_to_show = 7;
   $latest_others_args = array(
     'post__not_in' => array_merge($posts_above_the_fold_ids, $latest_featured_posts_ids),
     'posts_per_page' => $latest_others_posts_to_show,
@@ -73,12 +73,13 @@
       <div class="highlight-block__featured-1">
         <div class="grid-row grid--nested">
           <div class="grid-item is-s-24 is-xxl-16">
-            <div class="ui-border-bottom pb-5 mb-4">
+            <div class="ui-border-bottom pb-4 mb-4">
               <?php
                 if (is_numeric($latest_featured_posts_ids[0])) {
                   get_template_part('partials/front-page/above-the-fold/featured-post-primary', null, array(
                     'post_id' => $latest_featured_posts_ids[0],
                     'show_related' => false,
+                    'has_huge_headline' => false
                   ));
                 }
               ?>
@@ -124,6 +125,7 @@
                 get_template_part('partials/front-page/above-the-fold/featured-post-tertiary', null, array(
                   'post_id' => $latest_featured_posts_ids[5],
                   'container_classes' => 'mb-4',
+                  'show_descriptive_text' => false,
                 ));
               }
 
@@ -131,6 +133,7 @@
                 get_template_part('partials/front-page/above-the-fold/featured-post-tertiary', null, array(
                   'post_id' => $latest_featured_posts_ids[6],
                   'container_classes' => 'mb-4',
+                  'show_descriptive_text' => false,
                 ));
               }
             ?>
@@ -138,6 +141,14 @@
         </div>
       </div>
       <div class="highlight-block__latest-posts">
+
+          <div class="layout-split-level fs-2 mb-4">
+            <a href="<?php echo get_term_link($section_term); ?>">
+            <h5 class="font-bold font-uppercase"><?php echo $section_term->name; ?></h5>
+            </a>
+            <a href="<?php echo get_term_link($section_term); ?>" class="ui-action-link ui-action-link--small">See All</a>
+          </div>
+        </a>
         <?php
           $latest_others = new WP_Query($latest_others_args);
 
@@ -149,14 +160,23 @@
                 $timestamp = get_post_time('c');
           ?>
             <div class="pb-3 mb-3 <?php if ($i < $latest_others_posts_to_show) {echo 'ui-border-bottom';} ?>">
-              <div class="layout-split-level fs-2 mb-1">
+              <div class="layout-split-level mb-1">
                 <?php render_post_ui_tags($post->ID, true, true); ?>
                 <!-- <a href="<?php the_permalink(); ?>" class="ui-hover"><span><?php the_time('j F'); ?></span></a> -->
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
-                <h4 class="post__title fs-2 fs-s-4-sans font-bold">
+                <h4 class="post__title fs-3-sans font-bold">
                   <?php the_title(); ?>
                 </h4>
+                <?php
+                  if (nm_is_article($post->ID)) {
+                ?>
+                <h5 class="fs-2 font-uppercase mt-1">
+                  <?php render_bylines($post->ID, false); ?>
+                </h5>
+                <?php
+                  }
+                ?>
               </a>
             </div>
           <?php
