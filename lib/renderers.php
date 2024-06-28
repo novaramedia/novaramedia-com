@@ -94,7 +94,7 @@ function render_short_description($postId = null) {
 
   $meta = get_post_meta($postId);
 
-  if ($meta['_cmb_short_desc']) {
+  if (isset($meta['_cmb_short_desc']) && $meta['_cmb_short_desc'][0]) {
     echo apply_filters('the_content', $meta['_cmb_short_desc'][0]);
   } else {
     echo get_the_excerpt($postId);
