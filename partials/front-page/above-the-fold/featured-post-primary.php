@@ -7,8 +7,13 @@
     $args['has_huge_headline'] = true;
   }
 
+  if (!isset($args['has_embed'])) {
+    $args['has_embed'] = false;
+  }
+
   $post_id = $args['post_id'];
   $has_huge_headline = $args['has_huge_headline'];
+  $has_embed = $args['has_embed'];
 
   $the_title = get_the_title($post_id);
 
@@ -19,6 +24,10 @@
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
   $sub_category = get_the_sub_category($post_id);
+
+  if (empty($meta['_cmb_utube'])) {
+    $has_embed = false;
+  }
 
   $show_related = !empty($args['show_related']) && $args['show_related'] !== 'none' ? $args['show_related'] : false;
 
@@ -41,6 +50,13 @@
 
   $is_product_linked = !empty($args['is_product_linked']) && $args['is_product_linked'] === 'on' ? true : false;
   $more_on_section = !empty($args['more_on_section']) && $args['more_on_section'] !== 'none' ? $args['more_on_section'] : false;
+    if ($has_embed) {
+?>
+    <div class="u-video-embed-container background-black">
+      <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
+    </div>
+<?php
+    } else {
 ?>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -54,6 +70,9 @@
         )); ?>
       </a>
     </div>
+<?php
+  }
+?>
 
     <div class="grid-row grid--nested mt-3">
       <div class="grid-item is-s-24 <?php echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>"">
