@@ -8,6 +8,10 @@
  * @param integer  $number_of_posts The number of posts to render
  */
 function render_see_also($query, $number_of_posts = 1) {
+  if (!$query) {
+    return;
+  }
+
   if ($query->have_posts()) {
 ?>
 <h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
