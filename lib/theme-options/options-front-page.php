@@ -287,6 +287,13 @@ function nm_register_front_page_options_metabox() {
     'type' => 'checkbox',
   ) );
 
+  $above_the_fold_featured->add_field( array(
+    'name' => 'Allow video embed (very optional)',
+    'desc' => 'If selected, the featured post will allow for a video embed. This is only for very rare things like ElectionSesh',
+    'id'   => $prefix . 'above_the_fold_featured_1_has_embed',
+    'type' => 'checkbox',
+  ) );
+
   // Next 3 featured posts: The small ones
 
   $above_the_fold_featured->add_field( array(

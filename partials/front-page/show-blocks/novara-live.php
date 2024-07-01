@@ -67,20 +67,7 @@
                   $related_posts = new WP_Query($related_args);
 
                   if ($related_posts->have_posts()) {
-                ?>
-                  <h4 class="fs-2 font-uppercase ui-border-top pt-3 mt-3 mb-2">See Also</h4>
-                <?php
-                    while ($related_posts->have_posts()) {
-                      $related_posts->the_post();
-                ?>
-                    <div class="mb-2">
-                      <a href="<?php the_permalink(); ?>" class="ui-hover">
-                        <h5 class="fs-4-sans"><?php the_title(); ?></h5>
-                        <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
-                      </a>
-                    </div>
-                <?php
-                    }
+                    render_see_also($related_posts);
                   }
                   wp_reset_postdata();
                 }

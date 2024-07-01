@@ -23,7 +23,7 @@ if( have_posts() ) {
     </div>
     <?php
       $child_pages_wp_query = new WP_Query();
-      $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page'));
+      $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page', 'orderby' => 'menu_order'));
 
       $newsletter_pages = get_page_children($post->ID, $all_wp_pages);
 
@@ -35,10 +35,18 @@ if( have_posts() ) {
           $mailchimp_key = !empty($meta['_nm_mailchimp_key']) ? $meta['_nm_mailchimp_key'][0] : false;
 
           if ($mailchimp_key) {
+            $background_color = $index % 2 === 0 ? 'white' : false;
+            $text_color = $index % 2 === 0 ? 'black' : false;
+
+            if ($newsletter->post_name === 'the-cortado') {
+              $background_color = 'black';
+              $text_color = 'white';
+            }
+
             get_template_part('partials/email-signup', null, array(
               'newsletter_page_id' => $newsletter->ID,
-              'background-color' => $index % 2 === 0 ? 'light-purple' : false,
-              'text-color' => $index % 2 === 0 ? 'white' : false,
+              'background-color' => $background_color,
+              'text-color' => $text_color
             ));
 
             $index++;

@@ -1,5 +1,53 @@
 <?php
 /**
+ * Render the see also block
+ * Based on a passed query. Can render more than 1 post but will only show one on mobile
+ * Not a complete component which is why it is a renderer. Use this inside other conditionals
+ *
+ * @param WP_Query $query           The query to render
+ * @param integer  $number_of_posts The number of posts to render
+ */
+function render_see_also($query, $number_of_posts = 1) {
+  if (!$query) {
+    return;
+  }
+
+  if ($query->have_posts()) {
+?>
+<h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
+<div class="related-posts">
+<?php
+    $i = 0;
+    while ($query->have_posts()) {
+      if ($i >= $number_of_posts) {
+        break;
+      }
+      $query->the_post();
+      $post_id = get_the_id();
+?>
+  <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
+    <a href="<?php the_permalink(); ?>" class="ui-hover">
+      <h5 class="fs-4-sans"><?php the_title(); ?></h5>
+      <h6 class="fs-2 font-uppercase mt-1">
+        <?php
+          if (nm_is_article($post_id)) {
+            render_bylines($post_id);
+          } else {
+            render_standfirst($post_id);
+          }
+        ?>
+      </h6>
+    </a>
+  </div>
+<?php
+      $i++;
+    }
+?>
+</div>
+<?php
+  }
+}
+/**
  * Renders post UI tags
  *
  * @param integer $post_id        Post ID
@@ -80,6 +128,8 @@ function render_standfirst($postId = null) {
 
   if (isset($meta['_cmb_standfirst']) && !empty($meta['_cmb_standfirst'])) {
     echo $meta['_cmb_standfirst'][0];
+  } else {
+    return;
   }
 }
 /**
@@ -94,7 +144,7 @@ function render_short_description($postId = null) {
 
   $meta = get_post_meta($postId);
 
-  if ($meta['_cmb_short_desc']) {
+  if (isset($meta['_cmb_short_desc']) && $meta['_cmb_short_desc'][0]) {
     echo apply_filters('the_content', $meta['_cmb_short_desc'][0]);
   } else {
     echo get_the_excerpt($postId);
