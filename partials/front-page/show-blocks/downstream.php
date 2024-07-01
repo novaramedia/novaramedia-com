@@ -71,20 +71,7 @@
           if ($has_related) {
             ?>
               <div class="grid-item is-m-24 is-xxl-8 ui-border-left ui-border--not-m mt-m-4">
-                <h4 class="fs-2 font-uppercase mb-1">See Also</h4>
-            <?php
-                while ($related_posts->have_posts()) {
-                  $related_posts->the_post();
-            ?>
-                <div>
-                  <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <h5 class="fs-4-sans"><?php the_title(); ?></h5>
-                    <h6 class="fs-2 font-uppercase mt-1"><?php render_bylines($post->ID, false); ?></h6>
-                  </a>
-                </div>
-            <?php
-                }
-            ?>
+                <?php render_see_also($related_posts); ?>
               </div>
             <?php
                 wp_reset_postdata();
