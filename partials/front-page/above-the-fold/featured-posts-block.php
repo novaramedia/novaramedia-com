@@ -26,6 +26,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
         'show_related' => NM_get_option('nm_above_the_fold_featured_' . (1 + (4 * ($args['block_number'] - 1))) . '_show_related', 'nm_front_page_above_the_fold_featured_options'),
         'more_on_section' => NM_get_option('nm_above_the_fold_featured_' . (1 + (4 * ($args['block_number'] - 1))) . '_more_on_section', 'nm_front_page_above_the_fold_featured_options'),
         'is_product_linked' => NM_get_option('nm_above_the_fold_featured_' . (1 + (4 * ($args['block_number'] - 1))) . '_is_product_linked', 'nm_front_page_above_the_fold_featured_options'),
+        'has_embed' => ($args['block_number'] === 1 && NM_get_option('nm_above_the_fold_featured_1_has_embed', 'nm_front_page_above_the_fold_featured_options')) ? true : false,
       ));
     }
     ?>
