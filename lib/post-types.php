@@ -48,6 +48,54 @@ function nm_register_post_type_contributor() {
 }
 add_action( 'init', 'nm_register_post_type_contributor', 0 );
 
+function nm_register_post_type_newsletter() {
+  $args = [
+    'label'  => esc_html__( 'Newsletters', 'text-domain' ),
+    'labels' => [
+      'menu_name'          => esc_html__( 'Newsletters', '' ),
+      'name_admin_bar'     => esc_html__( 'Newsletter', '' ),
+      'add_new'            => esc_html__( 'Add Newsletter', '' ),
+      'add_new_item'       => esc_html__( 'Add new Newsletter', '' ),
+      'new_item'           => esc_html__( 'New Newsletter', '' ),
+      'edit_item'          => esc_html__( 'Edit Newsletter', '' ),
+      'view_item'          => esc_html__( 'View Newsletter', '' ),
+      'update_item'        => esc_html__( 'View Newsletter', '' ),
+      'all_items'          => esc_html__( 'All Newsletters', '' ),
+      'search_items'       => esc_html__( 'Search Newsletters', '' ),
+      'parent_item_colon'  => esc_html__( 'Parent Newsletter', '' ),
+      'not_found'          => esc_html__( 'No Newsletters found', '' ),
+      'not_found_in_trash' => esc_html__( 'No Newsletters found in Trash', '' ),
+      'name'               => esc_html__( 'Newsletters', '' ),
+      'singular_name'      => esc_html__( 'Newsletter', '' ),
+    ],
+    'public'              => true,
+    'exclude_from_search' => false,
+    'publicly_queryable'  => true,
+    'show_ui'             => true,
+    'show_in_nav_menus'   => true,
+    'show_in_admin_bar'   => true,
+    'show_in_rest'        => true,
+    'menu_icon'           => 'dashicons-email',
+    'capability_type'     => 'post',
+    'hierarchical'        => false,
+    'has_archive'         => true,
+    'query_var'           => true,
+    'can_export'          => true,
+    'rewrite_no_front'    => false,
+    'show_in_menu'        => true,
+    'supports' => [
+      'title',
+      'editor',
+      'thumbnail',
+    ],
+
+    'rewrite' => true
+  ];
+
+  register_post_type( 'newsletter', $args );
+}
+add_action( 'init', 'nm_register_post_type_newsletter', 0 );
+
 function event_post_type() {
 
   $labels = array(
@@ -149,7 +197,7 @@ function notices_post_type() {
     'show_in_nav_menus'     => true,
     'can_export'            => true,
     'has_archive'           => false,
-    'exclude_from_search'   => false,
+    'exclude_from_search'   => true,
     'publicly_queryable'    => true,
     'capability_type'       => 'page',
     'show_in_rest'          => true,
