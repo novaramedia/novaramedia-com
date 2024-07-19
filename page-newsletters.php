@@ -1,4 +1,8 @@
 <?php
+/*
+  DEPRECATED @ VERSION 4.2.0
+  TO BE REMOVED AFTER MIGRATION
+*/
 get_header();
 ?>
 <main id="main-content">

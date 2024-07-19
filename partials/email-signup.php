@@ -45,6 +45,18 @@
   if (!empty($args['button-color'])) {
     $button_color = $args['button-color'];
   }
+
+  $hide_discover = false;
+
+  if (!empty($args['hide-discover'])) {
+    $hide_discover = $args['hide-discover'];
+  }
+
+  $hide_border = false;
+
+  if (!empty($args['hide-border'])) {
+    $hide_border = $args['hide-border'];
+  }
 ?>
 <div class="email-signup <?php if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6 pt-s-5 pb-s-5'; } ?> background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
   <div class="container">
@@ -54,7 +66,7 @@
         <p class="fs-6 fs-s-4-sans mr-6">
           <?php echo $copy; ?>
         </p>
-        <?php if (!is_page('newsletters')) { ?>
+        <?php if (!$hide_discover) { ?>
           <div class="mt-3 fs-2">
             <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
@@ -96,7 +108,7 @@
           <?php echo wp_get_attachment_image($image_id, 'col4-square', false, ['class' => 'email-signup__image']); ?>
         </div>
       <?php } ?>
-      <?php if ($background_color == 'white') { ?>
+      <?php if ($background_color == 'white' && $hide_border !== true) { ?>
         <div class="grid-item is-xxl-24 mt-5">
           <hr />
         </div>

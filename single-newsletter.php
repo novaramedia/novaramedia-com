@@ -1,9 +1,9 @@
 <?php
-/* Template Name: Newsletter */
-/*
-  DEPRECATED @ VERSION 4.2.0
-  TO BE REMOVED AFTER MIGRATION
-*/
+
+  // TODO
+  // - [ ] Generate the form input elements via a function and use in the email-signup.php partial also
+  // - [ ] Migrate font sizes to new system
+
 get_header();
 ?>
 <main id="main-content">
@@ -30,7 +30,9 @@ if( have_posts() ) {
       <div class="container pt-4 pb-6">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <h4 class="fs-3-sans font-uppercase font-bold">Newsletter</h4>
+            <a href="<?php echo get_post_type_archive_link('newsletter'); ?>">
+              <h4 class="fs-3-sans font-uppercase font-bold">Newsletter</h4>
+            </a>
             <h1 class="<?php
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
             ?> mt-4"><?php the_title(); ?></h1>

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Wordpress core cache auto-flushed when front page options are updated. This should ideally improve cache busting for changing e.g. featured posts above the fold
 
+### Changed
+
+- Migrate newsletter functionality to custom post type not page templates
+
 ## [4.1.1] - 2024-07-01
 
 ### Added

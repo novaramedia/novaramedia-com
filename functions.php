@@ -83,8 +83,9 @@ get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-novara-live' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
-get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
+get_template_part( 'lib/meta/meta-boxes-posttype-job' );
+get_template_part( 'lib/meta/meta-boxes-posttype-newsletter' );
 
 get_template_part( 'lib/theme-options/theme-options' );
 get_template_part( 'lib/theme-options/options-front-page' );
