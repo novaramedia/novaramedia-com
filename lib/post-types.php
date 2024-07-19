@@ -81,7 +81,7 @@ function nm_register_post_type_newsletter() {
     'has_archive'         => true,
     'query_var'           => true,
     'can_export'          => true,
-    'rewrite_no_front'    => false,
+    'rewrite'             => array('slug' => 'newsletters', 'feeds' => false),
     'show_in_menu'        => true,
     'supports' => [
       'title',
