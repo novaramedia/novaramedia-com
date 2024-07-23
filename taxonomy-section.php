@@ -26,7 +26,7 @@ $top_level_section = get_term($top_level_section_id, 'section');
           $second_level_sections = get_terms('section', array('parent' => $top_level_section->term_id, 'hide_empty' => true));
 
           if (count($second_level_sections) > 0) { // render section level sections as submenu. highlight active section (or ancestor) in menu
-            ?><ul class="section-archive__submenu fs-3-sans mt-2"><?php
+            ?><ul class="section-archive__submenu font-size-9 mt-2"><?php
             foreach($second_level_sections as $section) {
               ?><li <?php if (in_array($section->term_id, $active_state_checklist)) {echo 'class="font-weight-bold"';} ?>><a href="<?php echo get_term_link($section->term_id); ?>"><?php echo $section->name; ?></a></li><?php
             }

@@ -55,7 +55,7 @@
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>
-          <div class="mt-3 fs-2">
+          <div class="mt-3 font-size-8 font-weight-bold">
             <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
         <?php } ?>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
-              <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+              <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
               <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
@@ -86,7 +86,7 @@
             <span class="email-signup__feedback-completed ui-button ui-button--disabled fs-6">Success</span>
             <div class="email-signup__feedback-failed layout-split-level">
               <input class="ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Try again" />
-              <p class="ml-2 fs-2">Failed: <span class="email-signup__feedback-message"></span>.</p>
+              <p class="ml-2 font-size-8 font-weight-bold">Failed: <span class="email-signup__feedback-message"></span>.</p>
             </div>
           </div>
         </form>

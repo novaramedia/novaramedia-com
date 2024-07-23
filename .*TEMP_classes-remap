@@ -59,3 +59,14 @@ fs-8
 
 font-size-5
 fs-9
+
+// TYPE AGAIN
+
+.fs-2
+.font-size-8 .font-weight-bold
+
+big stuff
+font-size-17 is biggest
+
+fs-3-sans
+font-size-9

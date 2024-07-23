@@ -90,7 +90,7 @@
   // end of surprizing conditional
   }
 ?>
-      <h5 class="fs-2 text-uppercase">
+      <h5 class="font-size-8 font-weight-bold text-uppercase">
         <?php
           if ($is_article) {
             render_bylines($post_id);
@@ -99,7 +99,7 @@
           }
         ?>
       </h5>
-      <div class="fs-3-sans mt-2 mb-0">
+      <div class="font-size-9 mt-2 mb-0">
         <?php render_short_description($post_id); ?>
       </div>
     </a>
@@ -140,7 +140,7 @@ if ($is_product_linked || $more_on_section) {
     $label = 'More ' . $more_on_section->name;
   }
 ?>
-<div class="mt-2 fs-2 only-desktop">
+<div class="mt-2 font-size-8 font-weight-bold only-desktop">
   <a href="<?php echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
 </div>
 <?php

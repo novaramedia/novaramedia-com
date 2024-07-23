@@ -63,7 +63,7 @@
   <div class="container">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <a class="fs-3-sans text-uppercase font-weight-bold font-color-green-racing" href="<?php echo $url; ?>"><h4>Podcast</h4></a>
+        <a class="font-size-9 text-uppercase font-weight-bold font-color-green-racing" href="<?php echo $url; ?>"><h4>Podcast</h4></a>
       </div>
     </div>
     <div class="grid-row">

@@ -15,14 +15,14 @@ html
 
 // REFACTOR TODO
 // - [x] Write function to generate font-size classes with final scale
-// - [ ] Obvious classes for general rules (font-weight-bold, font-italic, etc.)
+// - [x] Obvious classes for general rules (font-weight-bold, font-italic, etc.)
 // - [x] Generate good styles for all responsive sizes
-// - [ ] Work out find/replace for fs- classes
+// - [x] Work out find/replace for fs- classes
 // - [ ] Remove all old classes one by one with find/replace
-//  - [ ] .fs-1
-//  - [ ] .fs-2
-//  - [ ] .fs-3-sans
-//  - [ ] .fs-3-serif
+//  - [x] .fs-1
+//  - [x] .fs-2
+//  - [x] .fs-3-sans
+//  - [x] .fs-3-serif
 //  - [ ] .fs-4-sans
 //  - [ ] .fs-4-serif
 //  - [ ] .fs-5-sans
@@ -42,6 +42,7 @@ font-size-maker($breakpoint = false, $larger-scale = true)
   $large-scale = 0.5625 0.75 0.875 1 1.25 1.5 2 2.5 3 3.75 4.5
   $small-scale = 0.57142857 0.71428571 0.85714286 1 1.14285714 1.35714286 1.71428571 2.28571429 2.85714286 3.42857143 4.28571429
   $line-height = 1.2 1.2 1.2 1.2 1.1 1.1 1 1 1 1 1
+  $letter-spacing = 0.02813 0.02975 0.01094 0.01 0.025 0.01 0.01 0.01 0.01 0.01 0.01
   $offset-to-root = 7 // this centers the scale on the root size which is 1rem. the helper classes center at .font-size-10
 
   if $breakpoint
@@ -54,10 +55,12 @@ font-size-maker($breakpoint = false, $larger-scale = true)
       {$prefix}{i+$offset-to-root}
         font-size: $large-scale[i] * 1rem
         line-height: $line-height[i] * 1em
+        letter-spacing: $letter-spacing[i] * 1rem
     else
       {$prefix}{i+$offset-to-root}
         font-size: $small-scale[i] * 1rem
         line-height: $line-height[i] * 1em
+        letter-spacing: $letter-spacing[i] * 1rem
 
 font-size-maker()
 
@@ -82,7 +85,7 @@ font-size-maker()
   font-weight: 500
 
 .font-weight-bold, strong, b
-  font-weight: bold
+  font-weight: 700
 
 // TEXT RULES
 
@@ -104,9 +107,6 @@ font-size-maker()
 h5
   font-weight: bold
 
-p
-  line-height: normal
-
 // NEW TYPE SCALE v4.0.0 2024
 // fs = font style
 // n = upward scaling step
@@ -119,32 +119,6 @@ font-size-1()
   font-weight: 700
   line-height: normal
   letter-spacing: 0.02813rem
-
-.fs-1
-  font-size-1()
-
-.fs-2, .font-size-0
-  font-size: 0.74375rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.02975rem;
-
-.fs-3-sans, .font-size-1
-  font-family: $font-sans;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.125rem; /* 128.571% */
-  letter-spacing: 0.01094rem;
-
-.fs-3-serif
-  font-family: Georgia;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.0175rem;
 
 .fs-4-sans, .font-size-2
   font-size: 1rem;
@@ -226,11 +200,6 @@ font-size-1()
   line-height: 0.84937238
   letter-spacing: -0.02em
 
-.font-size-8
-  font-size: 239px
-  line-height: 0.84937238
-  letter-spacing: -0.04em
-
 // TO BUILD OUT
 // RESPONSIVE TYPE
 
@@ -254,8 +223,6 @@ font-size-1()
 
 @media screen and (max-width: $breakpoint-s)
 
-  .fs-s-1
-    font-size-1()
 
   .fs-s-2
     font-size: 0.74375rem;

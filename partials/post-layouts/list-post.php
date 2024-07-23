@@ -10,7 +10,7 @@
 ?>
 <div <?php post_class($args['grid-item-classes']); ?>>
   <a href="<?php the_permalink() ?>">
-    <span class="fs-3-sans"><?php the_time('j F Y'); ?></span>
-    <h3 class="fs-3-sans font-weight-semibold"><?php the_title(); ?></h3>
+    <span class="font-size-9"><?php the_time('j F Y'); ?></span>
+    <h3 class="font-size-9 font-weight-semibold"><?php the_title(); ?></h3>
   </a>
 </div>

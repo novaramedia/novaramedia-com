@@ -1993,183 +1993,227 @@ html {
 .font-size-7 {
   font-size: 0.5625rem;
   line-height: 1.2em;
+  letter-spacing: 0.02813rem;
 }
 .font-size-8 {
   font-size: 0.75rem;
   line-height: 1.2em;
+  letter-spacing: 0.02975rem;
 }
 .font-size-9 {
   font-size: 0.875rem;
   line-height: 1.2em;
+  letter-spacing: 0.01094rem;
 }
 .font-size-10 {
   font-size: 1rem;
   line-height: 1.2em;
+  letter-spacing: 0.01rem;
 }
 .font-size-11 {
   font-size: 1.25rem;
   line-height: 1.1em;
+  letter-spacing: 0.025rem;
 }
 .font-size-12 {
   font-size: 1.5rem;
   line-height: 1.1em;
+  letter-spacing: 0.01rem;
 }
 .font-size-13 {
   font-size: 2rem;
   line-height: 1em;
+  letter-spacing: 0.01rem;
 }
 .font-size-14 {
   font-size: 2.5rem;
   line-height: 1em;
+  letter-spacing: 0.01rem;
 }
 .font-size-15 {
   font-size: 3rem;
   line-height: 1em;
+  letter-spacing: 0.01rem;
 }
 .font-size-16 {
   font-size: 3.75rem;
   line-height: 1em;
+  letter-spacing: 0.01rem;
 }
 .font-size-17 {
   font-size: 4.5rem;
   line-height: 1em;
+  letter-spacing: 0.01rem;
 }
 @media screen and (max-width: 1104px) {
   .font-size-l-7 {
     font-size: 0.5625rem;
     line-height: 1.2em;
+    letter-spacing: 0.02813rem;
   }
   .font-size-l-8 {
     font-size: 0.75rem;
     line-height: 1.2em;
+    letter-spacing: 0.02975rem;
   }
   .font-size-l-9 {
     font-size: 0.875rem;
     line-height: 1.2em;
+    letter-spacing: 0.01094rem;
   }
   .font-size-l-10 {
     font-size: 1rem;
     line-height: 1.2em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-11 {
     font-size: 1.25rem;
     line-height: 1.1em;
+    letter-spacing: 0.025rem;
   }
   .font-size-l-12 {
     font-size: 1.5rem;
     line-height: 1.1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-13 {
     font-size: 2rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-14 {
     font-size: 2.5rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-15 {
     font-size: 3rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-16 {
     font-size: 3.75rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-l-17 {
     font-size: 4.5rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
 }
 @media screen and (max-width: 910px) {
   .font-size-m-7 {
     font-size: 0.57142857rem;
     line-height: 1.2em;
+    letter-spacing: 0.02813rem;
   }
   .font-size-m-8 {
     font-size: 0.71428571rem;
     line-height: 1.2em;
+    letter-spacing: 0.02975rem;
   }
   .font-size-m-9 {
     font-size: 0.85714286rem;
     line-height: 1.2em;
+    letter-spacing: 0.01094rem;
   }
   .font-size-m-10 {
     font-size: 1rem;
     line-height: 1.2em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-11 {
     font-size: 1.14285714rem;
     line-height: 1.1em;
+    letter-spacing: 0.025rem;
   }
   .font-size-m-12 {
     font-size: 1.35714286rem;
     line-height: 1.1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-13 {
     font-size: 1.71428571rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-14 {
     font-size: 2.28571429rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-15 {
     font-size: 2.85714286rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-16 {
     font-size: 3.42857143rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-m-17 {
     font-size: 4.28571429rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
 }
 @media screen and (max-width: 759px) {
   .font-size-s-7 {
     font-size: 0.57142857rem;
     line-height: 1.2em;
+    letter-spacing: 0.02813rem;
   }
   .font-size-s-8 {
     font-size: 0.71428571rem;
     line-height: 1.2em;
+    letter-spacing: 0.02975rem;
   }
   .font-size-s-9 {
     font-size: 0.85714286rem;
     line-height: 1.2em;
+    letter-spacing: 0.01094rem;
   }
   .font-size-s-10 {
     font-size: 1rem;
     line-height: 1.2em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-11 {
     font-size: 1.14285714rem;
     line-height: 1.1em;
+    letter-spacing: 0.025rem;
   }
   .font-size-s-12 {
     font-size: 1.35714286rem;
     line-height: 1.1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-13 {
     font-size: 1.71428571rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-14 {
     font-size: 2.28571429rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-15 {
     font-size: 2.85714286rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-16 {
     font-size: 3.42857143rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
   .font-size-s-17 {
     font-size: 4.28571429rem;
     line-height: 1em;
+    letter-spacing: 0.01rem;
   }
 }
 .font-italic,
@@ -2186,7 +2230,7 @@ i {
 .font-weight-bold,
 strong,
 b {
-  font-weight: bold;
+  font-weight: 700;
 }
 .text-capitalize {
   text-transform: capitalize;
@@ -2203,41 +2247,6 @@ b {
 }
 h5 {
   font-weight: bold;
-}
-p {
-  line-height: normal;
-}
-.fs-1 {
-  font-size: 0.5625rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.02813rem;
-}
-.fs-2,
-.font-size-0 {
-  font-size: 0.74375rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.02975rem;
-}
-.fs-3-sans,
-.font-size-1 {
-  font-family: 'Helvetica Neue';
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.125rem; /* 128.571% */
-  letter-spacing: 0.01094rem;
-}
-.fs-3-serif {
-  font-family: Georgia;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.0175rem;
 }
 .fs-4-sans,
 .font-size-2 {
@@ -2320,11 +2329,6 @@ p {
   line-height: 0.84937238;
   letter-spacing: -0.02em;
 }
-.font-size-8 {
-  font-size: 239px;
-  line-height: 0.84937238;
-  letter-spacing: -0.04em;
-}
 @media screen and (max-width: 1104px) {
   .fs-l-4-sans {
     font-size: 1rem;
@@ -2344,13 +2348,6 @@ p {
   }
 }
 @media screen and (max-width: 759px) {
-  .fs-s-1 {
-    font-size: 0.5625rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.02813rem;
-  }
   .fs-s-2 {
     font-size: 0.74375rem;
     font-style: normal;
@@ -6898,88 +6895,6 @@ html {
   }
   body {
     line-height: 1.4;
-  }
-  .font-size-0 {
-    font-size: 10.27px;
-    line-height: 1.3;
-  }
-  .font-size-1 {
-    font-size: 13px;
-    line-height: 1.3;
-  }
-  .font-size-2 {
-    font-size: 16.5px;
-    line-height: 20px;
-  }
-  .font-size-3 {
-    font-size: 20.8px;
-    line-height: 27px;
-  }
-  .font-size-4 {
-    font-size: 26.4px;
-    line-height: 30px;
-    letter-spacing: -0.01em;
-  }
-  .font-size-5 {
-    font-size: 33.4px;
-    line-height: 1.07142857;
-    letter-spacing: -0.025em;
-  }
-  .font-size-6 {
-    font-size: 42px;
-    line-height: 50px;
-    letter-spacing: -0.025em;
-  }
-  .font-size-7 {
-    font-size: 53px;
-    line-height: 68px;
-    letter-spacing: -0.02em;
-  }
-  .font-size-8 {
-    font-size: 88px;
-    line-height: 82px;
-    letter-spacing: -0.04em;
-  }
-  .font-size-s-0 {
-    font-size: 10.27px;
-    line-height: 1.3;
-  }
-  .font-size-s-1 {
-    font-size: 13px;
-    line-height: 1.3;
-  }
-  .font-size-s-2 {
-    font-size: 16.5px;
-    line-height: 20px;
-  }
-  .font-size-s-3 {
-    font-size: 20.8px;
-    line-height: 27px;
-  }
-  .font-size-s-4 {
-    font-size: 26.4px;
-    line-height: 30px;
-    letter-spacing: -0.01em;
-  }
-  .font-size-s-5 {
-    font-size: 33.4px;
-    line-height: 1.07142857;
-    letter-spacing: -0.025em;
-  }
-  .font-size-s-6 {
-    font-size: 42px;
-    line-height: 50px;
-    letter-spacing: -0.025em;
-  }
-  .font-size-s-7 {
-    font-size: 53px;
-    line-height: 68px;
-    letter-spacing: -0.02em;
-  }
-  .font-size-s-8 {
-    font-size: 88px;
-    line-height: 82px;
-    letter-spacing: -0.04em;
   }
   .font-small-caps {
     font-size: 0.85em;

@@ -16,7 +16,7 @@ function render_posts_section($query, $title, $is_full_archive) {
 ?>
   <div class="grid-row mb-4">
     <div class="grid-item is-xxl-24 mb-2">
-      <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php echo $title; ?></h4>
+      <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $title; ?></h4>
     </div>
 <?php
       while( $query->have_posts() ) {
@@ -60,7 +60,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Contributor</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Contributor</h4>
       </div>
     </div>
     <div class="grid-row mb-4">

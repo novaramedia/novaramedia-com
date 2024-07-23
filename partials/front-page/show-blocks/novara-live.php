@@ -80,7 +80,7 @@
       </div>
       <div class="grid-item is-s-24 is-l-9 is-xl-7 is-xxl-6 mt-s-5">
         <a href="<?php echo $category_link; ?>">
-          <div class="layout-split-level fs-2 mb-4">
+          <div class="layout-split-level font-size-8 font-weight-bold mb-4">
             <h5 class="font-weight-bold text-uppercase">Full Episodes</h5>
             <span>See All</span>
           </div>
@@ -107,7 +107,7 @@
                   </a>
                 </div>
                 <div class="grid-item is-s-14 is-xxl-16">
-                  <div class="layout-split-level fs-2 mb-1">
+                  <div class="layout-split-level font-size-8 font-weight-bold mb-1">
                     <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white'); ?>
                     <a href="<?php the_permalink(); ?>" class="ui-hover"><?php if ($i < 6) { ?>
                       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
@@ -116,7 +116,7 @@
                     <?php } ?></a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <h4 class="post__title fs-2 fs-s-4-sans font-weight-bold">
+                    <h4 class="post__title font-size-8 font-weight-bold fs-s-4-sans">
                       <?php the_title(); ?>
                     </h4>
                   </a>

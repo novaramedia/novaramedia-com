@@ -34,7 +34,7 @@ if( have_posts() ) {
     <div class="container mt-4 mb-6">
       <div class="grid-row mb-4">
         <div class="grid-item is-xxl-24">
-          <h4 class="fs-3-sans text-uppercase font-weight-bold">Events</h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold">Events</h4>
         </div>
       </div>
       <div class="grid-row mb-5">

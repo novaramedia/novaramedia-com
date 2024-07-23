@@ -85,7 +85,7 @@ get_header();
   <section id="posts" class="container mt-6 mt-s-5">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
       </div>
     </div>
     <div class="grid-row mb-4">

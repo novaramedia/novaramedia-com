@@ -114,7 +114,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
     <div class="container">
       <div class="grid-row pt-4 mb-5" style="align-items: flex-end;">
         <div class="grid-item is-s-24 is-m-24 is-xl-12 is-xxl-14">
-          <h4 class="mb-2 fs-3-sans text-uppercase font-weight-bold">Focus</h4>
+          <h4 class="mb-2 font-size-9 text-uppercase font-weight-bold">Focus</h4>
           <h1 class="breaking-britain__title mb-2 font-color-blue-neon" style="margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
         </div>
         <div class="grid-item is-s-24 is-m-18 is-xl-12 is-xxl-10">

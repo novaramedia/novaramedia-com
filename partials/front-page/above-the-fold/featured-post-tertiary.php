@@ -24,7 +24,7 @@
       <?php
         $meta = get_post_meta(get_the_ID());
       ?>
-      <h5 class="fs-2 text-uppercase mt-1">
+      <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
           if ($is_article) {
             render_bylines($post_id);
@@ -36,7 +36,7 @@
       <?php
         if ($show_descriptive_text) {
       ?>
-      <div class="fs-3-sans mt-1 mb-0">
+      <div class="font-size-9 mt-1 mb-0">
         <?php
           if ($is_article) {
             render_standfirst($post_id);

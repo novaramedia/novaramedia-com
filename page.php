@@ -11,7 +11,7 @@ if( have_posts() ) {
   <article id="page" class="container mt-4 mb-6">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php the_title(); ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
     <div class="grid-row mb-4">
@@ -30,7 +30,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row margin-top-large mb-4">
       <div class="grid-item is-xxl-24">
-        <h5 class="fs-3-sans text-uppercase font-weight-bold"><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
+        <h5 class="font-size-9 text-uppercase font-weight-bold"><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
       </div>
     </div>
 <?php

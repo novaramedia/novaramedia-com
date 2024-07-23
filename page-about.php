@@ -22,7 +22,7 @@ if( have_posts() ) {
   <article id="page" class="container margin-top-small margin-bottom-large">
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php the_title(); ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 
@@ -34,7 +34,7 @@ if( have_posts() ) {
 
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Team</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Team</h4>
       </div>
     </div>
     <div class="grid-row margin-bottom-small mobile-margin-bottom-none">
@@ -54,7 +54,7 @@ if( have_posts() ) {
 
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Associates</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Associates</h4>
       </div>
     </div>
     <div class="grid-row margin-bottom-small mobile-margin-bottom-none">
@@ -70,7 +70,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Contact and information</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Contact and information</h4>
       </div>
     </div>
     <div class="grid-row margin-bottom-small">
@@ -99,7 +99,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Funding</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Funding</h4>
       </div>
     </div>
 
@@ -133,7 +133,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Regulation</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Regulation</h4>
       </div>
     </div>
 
@@ -149,7 +149,7 @@ if( have_posts() ) {
 ?>
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans text-uppercase font-weight-bold">Legal</h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold">Legal</h4>
       </div>
     </div>
 

@@ -105,7 +105,7 @@
   <div class="container">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <a href="<?php echo $url; ?>"><h4 class="fs-3-sans text-uppercase font-weight-bold">Podcast</h4></a>
+        <a href="<?php echo $url; ?>"><h4 class="font-size-9 text-uppercase font-weight-bold">Podcast</h4></a>
       </div>
     </div>
     <div class="grid-row pb-4">

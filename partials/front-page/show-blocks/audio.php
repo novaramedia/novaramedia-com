@@ -69,10 +69,10 @@
       <a href="<?php echo get_term_link($category); ?>" class="ui-hover">
         <div class="grid-row grid--nested">
           <div class="grid-item is-xxl-12">
-            <h4 class="fs-3-sans font-weight-bold text-uppercase">Recent Episodes</h4>
+            <h4 class="font-size-9 font-weight-bold text-uppercase">Recent Episodes</h4>
           </div>
           <div class="grid-item is-xxl-12 text-align-right">
-            <span class="fs-3-sans font-weight-bold">See All</span>
+            <span class="font-size-9 font-weight-bold">See All</span>
           </div>
         </div>
       </a>
@@ -84,7 +84,7 @@
       ?>
         <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
           <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
-            <div class="fs-2 mb-2">
+            <div class="font-size-8 font-weight-bold mb-2">
               <?php echo get_the_time('j F Y', $post_id); ?>
             </div>
           </a>

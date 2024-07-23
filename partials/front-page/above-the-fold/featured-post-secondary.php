@@ -25,7 +25,7 @@
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
       <div class="mt-2">
         <h2 class="post__title fs-5-sans font-weight-bold"><?php echo get_the_title($post_id); ?></h2>
-        <h5 class="fs-2 text-uppercase mt-1">
+        <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
           <?php
             if ($is_article) {
               render_bylines($post_id);
@@ -34,7 +34,7 @@
             }
           ?>
         </h5>
-        <div class="fs-3-sans mt-1 mb-0">
+        <div class="font-size-9 mt-1 mb-0">
           <?php
             if ($is_article) {
               render_standfirst($post_id);

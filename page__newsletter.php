@@ -15,7 +15,7 @@ if( have_posts() ) {
     $support_override = !empty($meta['_nm_support_text']) ? $meta['_nm_support_text'][0] : false;
 
     $settings_title_classes = array(
-      'huge' => 'font-size-s-7 font-size-m-6 font-size-l-7 font-size-8',
+      'huge' => 'font-size-s-7 font-size-m-6 font-size-l-7 font-size-17',
       'big' => 'font-size-s-7 font-size-m-5 font-size-xl-6 font-size-7',
       'medium' => 'font-size-s-7 font-size-6',
       'smaller' => 'font-size-s-6 font-size-5'
@@ -26,7 +26,7 @@ if( have_posts() ) {
       <div class="container pt-4 pb-6">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <h4 class="fs-3-sans text-uppercase font-weight-bold">Newsletter</h4>
+            <h4 class="font-size-9 text-uppercase font-weight-bold">Newsletter</h4>
             <h1 class="<?php
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
             ?> mt-4"><?php the_title(); ?></h1>
@@ -79,7 +79,7 @@ if( have_posts() ) {
                 <input name="email" class="newsletter-page-email-signup__email-input ui-input ui-input--border-gray" id="email" type="email" autocomplete="email" placeholder="Email" required />
               </div>
               <div class="newsletter-page-email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
-                <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+                <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
                 <input name="gdpr" class="newsletter-page-email-signup__email-gdpr-input ui-checkbox ui-checkbox--border-gray ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
               </div>
 

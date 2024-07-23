@@ -20,7 +20,7 @@ if( have_posts() ) {
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny fs-3-sans text-uppercase font-weight-bold font-color-white"><?php
+            <h4 class="margin-top-small margin-bottom-tiny font-size-9 text-uppercase font-weight-bold font-color-white"><?php
               if (!empty($page_tag_override)) {
                 echo $page_tag_override;
               } else {
@@ -83,7 +83,7 @@ if( have_posts() ) {
       <div class="container padding-top-mid padding-bottom-mid font-color-white">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-            <h4 class="fs-3-sans text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
+            <h4 class="font-size-9 text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
@@ -103,7 +103,7 @@ if( have_posts() ) {
     <div id="other-donation-methods" class="container">
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
-          <h4 class="fs-3-sans text-uppercase font-weight-bold">Other Donation Methods</h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold">Other Donation Methods</h4>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-xxl-3 margin-bottom-small">
           <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>

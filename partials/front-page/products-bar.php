@@ -25,7 +25,7 @@
                 }
               ?>
             </div>
-            <div class="products-bar__item-text fs-3-sans">
+            <div class="products-bar__item-text font-size-9">
               <h5><?php echo $title; ?></h5>
               <?php echo apply_filters('the_content', $copy); ?>
             </div>

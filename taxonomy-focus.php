@@ -31,7 +31,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 
             if ($splash_image_caption) {
           ?>
-          <div class="fs-2">
+          <div class="font-size-8 font-weight-bold">
             <?php echo $splash_image_caption; ?>
           </div>
           <?php
@@ -88,7 +88,7 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="grid-row mt-6 mb-4 fs-2 text-paragraph-breaks">
+    <div class="grid-row mt-6 mb-4 font-size-8 font-weight-bold text-paragraph-breaks">
       <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
           if (!empty($credits)) {
