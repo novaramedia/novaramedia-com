@@ -82,7 +82,7 @@
       <div class="grid-item is-s-24 is-l-10 is-xxl-8">
         <a href="<?php echo $category_link; ?>" class="ui-hover">
           <div class="layout-split-level fs-2 mb-4">
-            <h5 class="font-bold font-uppercase">Recent Episodes</h5>
+            <h5 class="font-weight-bold text-uppercase">Recent Episodes</h5>
             <span>See All</span>
           </div>
         </a>
@@ -105,7 +105,7 @@
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+              <h6 class="fs-3-sans font-weight-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
             </a>
           </div>
         <?php

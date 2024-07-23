@@ -22,11 +22,11 @@
     switch ($text_size) {
       case 'regular':
 ?>
-    <h5 class="index-post-title fs-3-sans font-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title fs-3-sans font-weight-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
     <?php
       if ($is_article) {
     ?>
-    <h6 class="fs-2 font-bold font-uppercase margin-top-micro"><?php render_bylines($post->ID, false); ?></h6>
+    <h6 class="fs-2 font-weight-bold text-uppercase margin-top-micro"><?php render_bylines($post->ID, false); ?></h6>
     <?php } ?>
     <div class="index-post-description fs-3-sans margin-top-tiny">
       <?php
@@ -47,7 +47,7 @@
     <?php
       if ($is_article) {
     ?>
-    <h3 class="font-size-2 font-bold">by <?php render_bylines($post->ID, false); ?></h3>
+    <h3 class="font-size-2 font-weight-bold">by <?php render_bylines($post->ID, false); ?></h3>
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php

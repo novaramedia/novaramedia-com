@@ -5,7 +5,7 @@ get_header();
   <section id="notice" class="container mt-4 mb-6">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans font-uppercase font-bold mb-4">Notices</h4>
+        <h4 class="fs-3-sans text-uppercase font-weight-bold mb-4">Notices</h4>
       </div>
     </div>
     <div class="grid-row">

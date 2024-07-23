@@ -834,6 +834,7 @@ html {
   --color-gray-light-transparent: rgba(190,190,190,0.5);
   --color-gray-extra-light: #edeaea;
   --font-family-sans: 'Helvetica Neue';
+  --font-family-serif: Georgia, Times, "Times New Roman", serif;
   --transition-speed-slow: 1111ms;
   --transition-speed-medium: 420ms;
   --transition-speed-quick: 140ms;
@@ -1588,9 +1589,6 @@ a {
 .fallback .background-support-texture-alt {
   background-image: linear-gradient(0deg,var(--color-red) -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.png");
 }
-.icon-large:before {
-  font-size: 1.400505962399693rem;
-}
 .component-quote {
   margin-top: 1rem;
 }
@@ -1852,7 +1850,7 @@ img {
   max-width: 550px;
 }
 .post-col12-text h3 {
-  font-size: 1.697760280736162rem;
+  font-size: $font-size-h2;
 }
 .category-archive__logo {
   width: 220px;
@@ -1986,25 +1984,222 @@ html {
 .font-condensed {
   font-variation-settings: "slnt" 0, "wdth" 68, "wght" 721;
 }
-h1,
-.font-size-h1 {
-  font-size: 2.74697613423111rem;
-  font-weight: bold;
-  margin: 0;
-  letter-spacing: 0;
-  line-height: 1.3;
+.font-serif {
+  font-family: var(--font-family-serif);
 }
-h2,
-.font-size-h2 {
-  font-size: 1.697760280736162rem;
-  font-weight: bold;
-  margin: 0;
-  line-height: 1.3;
+.font-mono {
+  font-family: monospace;
 }
-h3,
-.font-size-h3 {
-  font-size: 1.400505962399693rem;
+.font-size-7 {
+  font-size: 0.5625rem;
+  line-height: 1.2em;
+}
+.font-size-8 {
+  font-size: 0.75rem;
+  line-height: 1.2em;
+}
+.font-size-9 {
+  font-size: 0.875rem;
+  line-height: 1.2em;
+}
+.font-size-10 {
+  font-size: 1rem;
+  line-height: 1.2em;
+}
+.font-size-11 {
+  font-size: 1.25rem;
+  line-height: 1.1em;
+}
+.font-size-12 {
+  font-size: 1.5rem;
+  line-height: 1.1em;
+}
+.font-size-13 {
+  font-size: 2rem;
+  line-height: 1em;
+}
+.font-size-14 {
+  font-size: 2.5rem;
+  line-height: 1em;
+}
+.font-size-15 {
+  font-size: 3rem;
+  line-height: 1em;
+}
+.font-size-16 {
+  font-size: 3.75rem;
+  line-height: 1em;
+}
+.font-size-17 {
+  font-size: 4.5rem;
+  line-height: 1em;
+}
+@media screen and (max-width: 1104px) {
+  .font-size-l-7 {
+    font-size: 0.5625rem;
+    line-height: 1.2em;
+  }
+  .font-size-l-8 {
+    font-size: 0.75rem;
+    line-height: 1.2em;
+  }
+  .font-size-l-9 {
+    font-size: 0.875rem;
+    line-height: 1.2em;
+  }
+  .font-size-l-10 {
+    font-size: 1rem;
+    line-height: 1.2em;
+  }
+  .font-size-l-11 {
+    font-size: 1.25rem;
+    line-height: 1.1em;
+  }
+  .font-size-l-12 {
+    font-size: 1.5rem;
+    line-height: 1.1em;
+  }
+  .font-size-l-13 {
+    font-size: 2rem;
+    line-height: 1em;
+  }
+  .font-size-l-14 {
+    font-size: 2.5rem;
+    line-height: 1em;
+  }
+  .font-size-l-15 {
+    font-size: 3rem;
+    line-height: 1em;
+  }
+  .font-size-l-16 {
+    font-size: 3.75rem;
+    line-height: 1em;
+  }
+  .font-size-l-17 {
+    font-size: 4.5rem;
+    line-height: 1em;
+  }
+}
+@media screen and (max-width: 910px) {
+  .font-size-m-7 {
+    font-size: 0.57142857rem;
+    line-height: 1.2em;
+  }
+  .font-size-m-8 {
+    font-size: 0.71428571rem;
+    line-height: 1.2em;
+  }
+  .font-size-m-9 {
+    font-size: 0.85714286rem;
+    line-height: 1.2em;
+  }
+  .font-size-m-10 {
+    font-size: 1rem;
+    line-height: 1.2em;
+  }
+  .font-size-m-11 {
+    font-size: 1.14285714rem;
+    line-height: 1.1em;
+  }
+  .font-size-m-12 {
+    font-size: 1.35714286rem;
+    line-height: 1.1em;
+  }
+  .font-size-m-13 {
+    font-size: 1.71428571rem;
+    line-height: 1em;
+  }
+  .font-size-m-14 {
+    font-size: 2.28571429rem;
+    line-height: 1em;
+  }
+  .font-size-m-15 {
+    font-size: 2.85714286rem;
+    line-height: 1em;
+  }
+  .font-size-m-16 {
+    font-size: 3.42857143rem;
+    line-height: 1em;
+  }
+  .font-size-m-17 {
+    font-size: 4.28571429rem;
+    line-height: 1em;
+  }
+}
+@media screen and (max-width: 759px) {
+  .font-size-s-7 {
+    font-size: 0.57142857rem;
+    line-height: 1.2em;
+  }
+  .font-size-s-8 {
+    font-size: 0.71428571rem;
+    line-height: 1.2em;
+  }
+  .font-size-s-9 {
+    font-size: 0.85714286rem;
+    line-height: 1.2em;
+  }
+  .font-size-s-10 {
+    font-size: 1rem;
+    line-height: 1.2em;
+  }
+  .font-size-s-11 {
+    font-size: 1.14285714rem;
+    line-height: 1.1em;
+  }
+  .font-size-s-12 {
+    font-size: 1.35714286rem;
+    line-height: 1.1em;
+  }
+  .font-size-s-13 {
+    font-size: 1.71428571rem;
+    line-height: 1em;
+  }
+  .font-size-s-14 {
+    font-size: 2.28571429rem;
+    line-height: 1em;
+  }
+  .font-size-s-15 {
+    font-size: 2.85714286rem;
+    line-height: 1em;
+  }
+  .font-size-s-16 {
+    font-size: 3.42857143rem;
+    line-height: 1em;
+  }
+  .font-size-s-17 {
+    font-size: 4.28571429rem;
+    line-height: 1em;
+  }
+}
+.font-italic,
+em,
+i {
+  font-style: italic;
+}
+.font-weight-regular {
+  font-weight: normal;
+}
+.font-weight-semibold {
+  font-weight: 500;
+}
+.font-weight-bold,
+strong,
+b {
   font-weight: bold;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-underline {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+.text-paragraph-breaks p {
+  margin-bottom: 1em;
 }
 h5 {
   font-weight: bold;
@@ -2130,46 +2325,6 @@ p {
   line-height: 0.84937238;
   letter-spacing: -0.04em;
 }
-.font-italic,
-em,
-i {
-  font-style: italic;
-}
-.font-weight-regular {
-  font-weight: normal;
-}
-.font-weight-semibold,
-.font-semibold {
-  font-weight: 500;
-}
-.font-weight-bold,
-.font-bold,
-strong,
-b {
-  font-weight: bold;
-}
-.font-capitalize {
-  text-transform: capitalize;
-}
-.font-uppercase {
-  text-transform: uppercase;
-}
-.font-underline {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-.font-mono {
-  font-family: monospace;
-}
-.font-serif {
-  font-family: Georgia, Times, "Times New Roman", serif;
-}
-.font-larger {
-  font-size: 1.3rem;
-}
-.text-paragraph-breaks p {
-  margin-bottom: 1em;
-}
 @media screen and (max-width: 1104px) {
   .fs-l-4-sans {
     font-size: 1rem;
@@ -2286,6 +2441,12 @@ b {
     line-height: 4.5rem; /* 100% */
     letter-spacing: -0.09rem;
   }
+}
+.font-small-caps {
+  font-size: 0.85em;
+}
+.font-smaller {
+  font-size: 0.8rem;
 }
 .mt-0 {
   margin-top: 0rem;
@@ -3872,6 +4033,9 @@ html {
     padding-right: 0.5rem;
   }
 }
+.icon-large:before {
+  font-size: 1.4rem;
+}
 @media screen and (max-width: 759px) {
   .site-header__main {
     padding: 0;
@@ -4627,18 +4791,6 @@ html {
   body {
     line-height: 1.4;
   }
-  h1,
-  .font-size-h1 {
-    font-size: 2.617924rem;
-    letter-spacing: 0;
-  }
-  h2,
-  .font-size-h2 {
-    font-size: 1.697760280736162rem;
-  }
-  h3 {
-    font-size: 1.400505962399693rem;
-  }
   .font-size-xl-0 {
     font-size: 12px;
   }
@@ -4682,17 +4834,8 @@ html {
   .font-small-caps {
     font-size: 0.85em;
   }
-  .font-leading-wider {
-    line-height: 1.55;
-  }
-  .font-tracking-wider {
-    letter-spacing: 0.025em;
-  }
   .font-smaller {
     font-size: 0.8rem;
-  }
-  .font-larger {
-    font-size: 1.3rem;
   }
   .text-copy p {
     font-size: 1.3rem;
@@ -4720,7 +4863,7 @@ html {
     margin-top: 6px;
   }
   .icon-large:before {
-    font-size: 1.400505962399693rem;
+    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -4865,7 +5008,7 @@ html {
     padding: 18px;
   }
   .post-col12-text h3 {
-    font-size: 1.400505962399693rem;
+    font-size: $font-size-h3;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;
@@ -5375,18 +5518,6 @@ html {
   body {
     line-height: 1.4;
   }
-  h1,
-  .font-size-h1 {
-    font-size: 2.377723395896371rem;
-    letter-spacing: 0;
-  }
-  h2,
-  .font-size-h2 {
-    font-size: 1.618rem;
-  }
-  h3 {
-    font-size: 1.400505962399693rem;
-  }
   .font-size-l-0 {
     font-size: 12px;
   }
@@ -5430,17 +5561,8 @@ html {
   .font-small-caps {
     font-size: 0.85em;
   }
-  .font-leading-wider {
-    line-height: 1.55;
-  }
-  .font-tracking-wider {
-    letter-spacing: 0.025em;
-  }
   .font-smaller {
     font-size: 0.8rem;
-  }
-  .font-larger {
-    font-size: 1.3rem;
   }
   .text-copy p {
     font-size: 1.3rem;
@@ -5468,7 +5590,7 @@ html {
     margin-top: 6px;
   }
   .icon-large:before {
-    font-size: 1.400505962399693rem;
+    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -6118,18 +6240,6 @@ html {
   body {
     line-height: 1.4;
   }
-  h1,
-  .font-size-h1 {
-    font-size: 2.377723395896371rem;
-    letter-spacing: 0;
-  }
-  h2,
-  .font-size-h2 {
-    font-size: 1.541986833892032rem;
-  }
-  h3 {
-    font-size: 1.334710602476894rem;
-  }
   .font-size-m-0 {
     font-size: 12px;
   }
@@ -6173,17 +6283,8 @@ html {
   .font-small-caps {
     font-size: 0.85em;
   }
-  .font-leading-wider {
-    line-height: 1.55;
-  }
-  .font-tracking-wider {
-    letter-spacing: 0.025em;
-  }
   .font-smaller {
     font-size: 0.8rem;
-  }
-  .font-larger {
-    font-size: 1.3rem;
   }
   .text-copy p {
     font-size: 1.3rem;
@@ -6212,7 +6313,7 @@ html {
     margin-top: 6px;
   }
   .icon-large:before {
-    font-size: 1.334710602476894rem;
+    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -6798,18 +6899,6 @@ html {
   body {
     line-height: 1.4;
   }
-  h1,
-  .font-size-h1 {
-    font-size: 2.058106176075472rem;
-    letter-spacing: 0;
-  }
-  h2,
-  .font-size-h2 {
-    font-size: 1.400505962399693rem;
-  }
-  h3 {
-    font-size: 1.272006289292628rem;
-  }
   .font-size-0 {
     font-size: 10.27px;
     line-height: 1.3;
@@ -6895,17 +6984,8 @@ html {
   .font-small-caps {
     font-size: 0.85em;
   }
-  .font-leading-wider {
-    line-height: 1.55;
-  }
-  .font-tracking-wider {
-    letter-spacing: 0.025em;
-  }
   .font-smaller {
     font-size: 0.8rem;
-  }
-  .font-larger {
-    font-size: 1.3rem;
   }
   .text-copy p {
     font-size: 1.3rem;
@@ -6934,7 +7014,7 @@ html {
     margin-top: 6px;
   }
   .icon-large:before {
-    font-size: 1.272006289292628rem;
+    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;

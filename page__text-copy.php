@@ -16,7 +16,7 @@ if( have_posts() ) {
     ?>
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-offset-xxl-12">
-        <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
+        <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
       </div>
     </div>
     <?php } ?>

@@ -59,7 +59,7 @@
         <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>
+              <h6 class="font-weight-regular fs-3-sans text-uppercase mb-3">NM</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -82,7 +82,7 @@
               </ul>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Shows</h6>
+              <h6 class="font-weight-regular fs-3-sans text-uppercase mb-3">Shows</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -94,7 +94,7 @@
               ?>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Series</h6>
+              <h6 class="font-weight-regular fs-3-sans text-uppercase mb-3">Series</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -106,7 +106,7 @@
               ?>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Articles</h6>
+              <h6 class="font-weight-regular fs-3-sans text-uppercase mb-3">Articles</h6>
               <?php
                 wp_nav_menu(
                   array(

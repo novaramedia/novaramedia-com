@@ -26,16 +26,12 @@ $margin-large = ($gutter * 5)
 
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
-$font-size-h3 = golden-ratio(1rem , .7)
-$font-size-h2 = golden-ratio(1rem , 1.1)
-$font-size-h1 = golden-ratio(1rem , 2)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
 $font-leading-larger = 1.55
 
 $font-tracking-basic = 0
-$font-tracking-wider = 0.025em
 
 $border-width = 2px
 
@@ -49,18 +45,6 @@ html
 
 body
   line-height: $font-leading-basic
-
-  // HTML ELEMENT STYLING
-
-h1, .font-size-h1
-  font-size: $font-size-h1
-  letter-spacing: -($font-tracking-basic)
-
-h2, .font-size-h2
-  font-size: $font-size-h2
-
-h3
-  font-size: $font-size-h3
 
   // NEW TYPE SCALE 2021
 
@@ -109,17 +93,8 @@ h3
 .font-small-caps
   font-size: 0.85em
 
-.font-leading-wider
-  line-height: $font-leading-larger
-
-.font-tracking-wider
-  letter-spacing: $font-tracking-wider
-
 .font-smaller
   font-size: 0.8rem
-
-.font-larger
-  font-size: $font-size-larger
 
 .text-copy
   p

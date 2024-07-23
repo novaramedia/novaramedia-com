@@ -81,7 +81,7 @@
       <div class="grid-item is-s-24 is-l-9 is-xl-7 is-xxl-6 mt-s-5">
         <a href="<?php echo $category_link; ?>">
           <div class="layout-split-level fs-2 mb-4">
-            <h5 class="font-bold font-uppercase">Full Episodes</h5>
+            <h5 class="font-weight-bold text-uppercase">Full Episodes</h5>
             <span>See All</span>
           </div>
         </a>
@@ -116,7 +116,7 @@
                     <?php } ?></a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <h4 class="post__title fs-2 fs-s-4-sans font-bold">
+                    <h4 class="post__title fs-2 fs-s-4-sans font-weight-bold">
                       <?php the_title(); ?>
                     </h4>
                   </a>

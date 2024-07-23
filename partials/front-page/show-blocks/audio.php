@@ -69,7 +69,7 @@
       <a href="<?php echo get_term_link($category); ?>" class="ui-hover">
         <div class="grid-row grid--nested">
           <div class="grid-item is-xxl-12">
-            <h4 class="fs-3-sans font-weight-bold font-uppercase">Recent Episodes</h4>
+            <h4 class="fs-3-sans font-weight-bold text-uppercase">Recent Episodes</h4>
           </div>
           <div class="grid-item is-xxl-12 text-align-right">
             <span class="fs-3-sans font-weight-bold">See All</span>

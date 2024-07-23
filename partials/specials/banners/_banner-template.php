@@ -48,7 +48,7 @@
         </a>
       </div>
       <div class="grid-item is-xxl-24 is-m-8 is-xxl-10">
-        <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold">Strapline here</p></a>
+        <a href="<?php echo $url; ?>"><p class="fs-5-sans font-weight-bold">Strapline here</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--white">CTA Button</a>
       </div>
     </div>

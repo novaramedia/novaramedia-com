@@ -60,6 +60,7 @@ html
   --color-gray-light-transparent: rgba(190,190,190, .5)
   --color-gray-extra-light: #EDEAEA
   --font-family-sans: font-stack('Helvetica Neue')
+  --font-family-serif: font-stack('Georgia')
   --transition-speed-slow: 1111ms
   --transition-speed-medium: 420ms
   --transition-speed-quick: 140ms
@@ -105,9 +106,6 @@ $margin-large = ($gutter * 5)
 $font-size-basic = 14px
 $font-size-larger = 1.3rem
 $font-size-smaller = .8rem
-$font-size-h3 = golden-ratio(1rem , .7)
-$font-size-h2 = golden-ratio(1rem , 1.1)
-$font-size-h1 = golden-ratio(1rem , 2.1)
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
@@ -115,7 +113,6 @@ $font-leading-larger = 1.55
 
 $font-tracking-basic = 0
 $font-tracking-medium = 0.0075rem
-$font-tracking-wider = 0.025em
 
 $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
@@ -354,13 +351,6 @@ a
 
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
-
-// ******************************************************
-
-// UI ELEMENTS / UX HELPERS
-
-.icon-large:before // is this depreciated? check
-  font-size: $font-size-h3
 
 // ******************************************************
 

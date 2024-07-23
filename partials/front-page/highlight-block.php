@@ -138,7 +138,7 @@
       <div class="highlight-block__latest-posts">
           <div class="layout-split-level fs-2 mb-4">
             <a href="<?php echo get_term_link($section_term); ?>">
-            <h5 class="font-bold font-uppercase"><?php echo $section_term->name; ?></h5>
+            <h5 class="font-weight-bold text-uppercase"><?php echo $section_term->name; ?></h5>
             </a>
             <a href="<?php echo get_term_link($section_term); ?>" class="ui-action-link ui-action-link--small">See All</a>
           </div>
@@ -158,13 +158,13 @@
                 <?php render_post_ui_tags($post->ID, true, true); ?>
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
-                <h4 class="post__title fs-3-sans font-bold">
+                <h4 class="post__title fs-3-sans font-weight-bold">
                   <?php the_title(); ?>
                 </h4>
                 <?php
                   if (nm_is_article($post->ID)) {
                 ?>
-                <h5 class="fs-2 font-uppercase mt-1">
+                <h5 class="fs-2 text-uppercase mt-1">
                   <?php render_bylines($post->ID, false); ?>
                 </h5>
                 <?php

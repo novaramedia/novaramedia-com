@@ -20,7 +20,7 @@ if( have_posts() ) {
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny fs-3-sans font-uppercase font-bold font-color-white"><?php
+            <h4 class="margin-top-small margin-bottom-tiny fs-3-sans text-uppercase font-weight-bold font-color-white"><?php
               if (!empty($page_tag_override)) {
                 echo $page_tag_override;
               } else {
@@ -83,7 +83,7 @@ if( have_posts() ) {
       <div class="container padding-top-mid padding-bottom-mid font-color-white">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-            <h4 class="fs-3-sans font-uppercase font-bold margin-bottom-small">Already a supporter?</h4>
+            <h4 class="fs-3-sans text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
             <?php if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
@@ -103,7 +103,7 @@ if( have_posts() ) {
     <div id="other-donation-methods" class="container">
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
-          <h4 class="fs-3-sans font-uppercase font-bold">Other Donation Methods</h4>
+          <h4 class="fs-3-sans text-uppercase font-weight-bold">Other Donation Methods</h4>
         </div>
         <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-xxl-3 margin-bottom-small">
           <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
@@ -113,7 +113,7 @@ if( have_posts() ) {
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
           </p>
-          <p class="font-bold mb-3">PayPal</p>
+          <p class="font-weight-bold mb-3">PayPal</p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
           <p><a class="mt-3 ui-button ui-button--red ui-button--small" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
         </div>
@@ -122,7 +122,7 @@ if( have_posts() ) {
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
           </p>
-          <p class="font-bold mb-3"><strong>GoCardless</strong></p>
+          <p class="font-weight-bold mb-3"><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
 
           <div class="mt-3 flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
@@ -147,7 +147,7 @@ if( have_posts() ) {
           <p>
             <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
           </p>
-          <p class="font-bold mb-3"><strong>Crypto</strong></p>
+          <p class="font-weight-bold mb-3"><strong>Crypto</strong></p>
           <p>We accept BTC at this address: <code class="font-size-smaller">1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i</code> If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
         </div>
       </div>

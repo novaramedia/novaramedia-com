@@ -37,11 +37,11 @@
     case 'regular':
 ?>
   <a href="<?php the_permalink() ?>" class="ui-hover">
-    <h5 class="index-post-title fs-3-sans font-bold mt-2 js-fix-widows"><?php the_title(); ?></h5>
+    <h5 class="index-post-title fs-3-sans font-weight-bold mt-2 js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if ($is_article) {
     ?>
-    <h6 class="fs-2 font-bold font-uppercase mt-1 js-fix-widows"><?php
+    <h6 class="fs-2 font-weight-bold text-uppercase mt-1 js-fix-widows"><?php
       if ($is_article) {
         render_bylines($post_id);
       } else {
@@ -66,7 +66,7 @@
     <?php
       if ($is_article) {
     ?>
-  <h3 class="fs-3-sans font-bold js-fix-widows"><?php
+  <h3 class="fs-3-sans font-weight-bold js-fix-widows"><?php
       if ($is_article) {
         render_bylines($post_id);
       } else {

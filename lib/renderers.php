@@ -14,7 +14,7 @@ function render_see_also($query, $number_of_posts = 1) {
 
   if ($query->have_posts()) {
 ?>
-<h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
+<h4 class="fs-2 text-uppercase mb-2 mb-s-1">See Also</h4>
 <div class="related-posts">
 <?php
     $i = 0;
@@ -28,7 +28,7 @@ function render_see_also($query, $number_of_posts = 1) {
   <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
     <a href="<?php the_permalink(); ?>" class="ui-hover">
       <h5 class="fs-4-sans"><?php the_title(); ?></h5>
-      <h6 class="fs-2 font-uppercase mt-1">
+      <h6 class="fs-2 text-uppercase mt-1">
         <?php
           if (nm_is_article($post_id)) {
             render_bylines($post_id);

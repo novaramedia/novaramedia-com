@@ -38,7 +38,7 @@
         if ($posts) {
     ?>
       <div class="grid-item is-s-12 is-m-8 is-xl-6 is-xxl-4 mb-6 mb-s-5 fs-3-sans font-weight-bold">
-        <h4 class="font-uppercase mb-2"><?php echo $section; ?></h4>
+        <h4 class="text-uppercase mb-2"><?php echo $section; ?></h4>
     <?php
           $excluded_ids = array_merge($excluded_ids, wp_list_pluck($posts, 'ID'));
 

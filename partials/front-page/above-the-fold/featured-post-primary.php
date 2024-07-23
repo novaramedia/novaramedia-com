@@ -90,7 +90,7 @@
   // end of surprizing conditional
   }
 ?>
-      <h5 class="fs-2 font-uppercase">
+      <h5 class="fs-2 text-uppercase">
         <?php
           if ($is_article) {
             render_bylines($post_id);

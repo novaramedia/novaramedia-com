@@ -29,7 +29,7 @@ if ($category->slug === 'video') {
         if (in_array($category->slug, array('articles', 'audio', 'video'))) {
         ?>
       <div class="grid-item is-s-24 flex-item-xxl-6">
-        <span class="font-uppercase font-bold"><?php echo $category->name; ?></span> <?php
+        <span class="text-uppercase font-weight-bold"><?php echo $category->name; ?></span> <?php
           wp_nav_menu(
             array(
               'theme_location' => $category->slug . '-archive-menu',
@@ -127,7 +127,7 @@ if ($category->slug === 'video') {
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?></h6>
+              <h6 class="js-fix-widows fs-3-sans font-weight-bold mt-1"><?php the_title(); ?></h6>
             </a>
           </div>
           <?php

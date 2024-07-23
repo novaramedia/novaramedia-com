@@ -37,7 +37,7 @@ etc
 // MISC ELEMENTs
 
 H4
-fs-3-sans font-uppercase font-bold
+fs-3-sans text-uppercase font-weight-bold
 [probably]
 
 // TYPE

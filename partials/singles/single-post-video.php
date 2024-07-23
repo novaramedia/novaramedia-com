@@ -82,7 +82,7 @@
           </a>
         </div>
         <a href="<?php the_permalink(); ?>" class="ui-hover">
-          <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+          <h6 class="js-fix-widows fs-3-sans font-weight-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
         </a>
       </div>
       <?php

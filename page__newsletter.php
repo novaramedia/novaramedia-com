@@ -26,7 +26,7 @@ if( have_posts() ) {
       <div class="container pt-4 pb-6">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <h4 class="fs-3-sans font-uppercase font-bold">Newsletter</h4>
+            <h4 class="fs-3-sans text-uppercase font-weight-bold">Newsletter</h4>
             <h1 class="<?php
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
             ?> mt-4"><?php the_title(); ?></h1>
@@ -50,7 +50,7 @@ if( have_posts() ) {
           ?>
         </div>
         <div class="grid-item offset-s-0 is-s-24 offset-m-1 is-m-20 is-xxl-12">
-          <div class="font-size-3 font-semibold mb-4">
+          <div class="font-size-3 font-weight-semibold mb-4">
             <?php the_content(); ?>
           </div>
           <?php
@@ -95,7 +95,7 @@ if( have_posts() ) {
               </div>
             </div>
 
-            <div class="email-signup__feedback-failed font-bold text-align-center">
+            <div class="email-signup__feedback-failed font-weight-bold text-align-center">
               <div class="u-flex-center">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0" y="0" version="1.1" viewBox="0 0 51 51" class="email-signup__icon mb-2 u-pointer" >
@@ -107,7 +107,7 @@ if( have_posts() ) {
                 </div>
               </div>
             </div>
-            <div class="email-signup__feedback-completed font-bold text-align-center">
+            <div class="email-signup__feedback-completed font-weight-bold text-align-center">
               <div class="u-flex-center">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0" y="0" version="1.1" viewBox="0 0 52 52" class="email-signup__icon mb-2">

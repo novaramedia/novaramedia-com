@@ -66,8 +66,8 @@ get_header();
         <div class="grid-item is-s-12 is-xxl-6 mb-4">
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
-            <h6 class="fs-4-sans font-semibold mt-1"><?php the_time('j F Y'); ?></h6>
-            <h6 class="js-fix-widows fs-s-4-sans fs-5-sans font-semibold mt-1"><?php the_title(); ?></h6>
+            <h6 class="fs-4-sans font-weight-semibold mt-1"><?php the_time('j F Y'); ?></h6>
+            <h6 class="js-fix-widows fs-s-4-sans fs-5-sans font-weight-semibold mt-1"><?php the_title(); ?></h6>
           <a href="<?php the_permalink(); ?>">
         </div>
         <?php
@@ -85,7 +85,7 @@ get_header();
   <section id="posts" class="container mt-6 mt-s-5">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
-        <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
+        <h4 class="fs-3-sans text-uppercase font-weight-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
       </div>
     </div>
     <div class="grid-row mb-4">

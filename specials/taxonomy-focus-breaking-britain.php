@@ -114,11 +114,11 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
     <div class="container">
       <div class="grid-row pt-4 mb-5" style="align-items: flex-end;">
         <div class="grid-item is-s-24 is-m-24 is-xl-12 is-xxl-14">
-          <h4 class="mb-2 fs-3-sans font-uppercase font-bold">Focus</h4>
+          <h4 class="mb-2 fs-3-sans text-uppercase font-weight-bold">Focus</h4>
           <h1 class="breaking-britain__title mb-2 font-color-blue-neon" style="margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
         </div>
         <div class="grid-item is-s-24 is-m-18 is-xl-12 is-xxl-10">
-          <div class="fs-5-sans font-bold font-color-blue-neon margin-top-small">
+          <div class="fs-5-sans font-weight-bold font-color-blue-neon margin-top-small">
             <?php echo get_term_field( 'description', $term, null, $context = 'raw' ); // getting like this to avoid the filters that add <p> tags ?>
           </div>
         </div>

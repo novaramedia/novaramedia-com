@@ -31,7 +31,7 @@
       <!-- <h5 class="fs-3-serif mt-1">
         <?php render_standfirst($post_id); ?>
       </h5> -->
-      <h5 class="fs-2 font-uppercase mt-1">
+      <h5 class="fs-2 text-uppercase mt-1">
         <?php
           if ($is_article) {
             render_bylines($post_id);

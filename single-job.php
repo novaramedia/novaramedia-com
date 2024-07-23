@@ -13,7 +13,7 @@ if( have_posts() ) {
   <article id="job" class="container mt-4 mb-6">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-3-sans font-uppercase font-bold mb-4">Job: <?php the_title(); ?></h4>
+        <h4 class="fs-3-sans text-uppercase font-weight-bold mb-4">Job: <?php the_title(); ?></h4>
       </div>
     </div>
     <div class="grid-row mb-4">
@@ -21,7 +21,7 @@ if( have_posts() ) {
         <?php
           if ($has_closed) {
         ?>
-        <p class="fs-6 font-uppercase font-bold">This job listing has now closed.</p>
+        <p class="fs-6 text-uppercase font-weight-bold">This job listing has now closed.</p>
         <?php
           }
 

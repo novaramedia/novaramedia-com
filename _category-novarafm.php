@@ -60,7 +60,7 @@ function render_episode_block($posts) {
             <?php render_thumbnail($post_id, 'col12-16to9', array(
               'class' => 'ui-rounded-image'
             )); ?>
-            <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
+            <h2 class="fs-3-sans font-weight-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
             <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
           </a>
         </div>
@@ -99,7 +99,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
   </div>
 
   <div class="background-green">
-    <div class="container pt-5 pb-5 fs-5-sans font-bold">
+    <div class="container pt-5 pb-5 fs-5-sans font-weight-bold">
       <div class="grid-row">
         <div class="is-xxl-2">
           <?php echo render_small_cross('black'); ?>
@@ -133,7 +133,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
         <div class="grid-item offset-xxl-1 is-xxl-18">
           <div class="grid-row grid--nested">
             <div class="grid-item is-s-24 is-xxl-12 mb-s-5">
-              <h4 class="fs-3-sans font-bold font-uppercase mb-2">Latest Episode</h4>
+              <h4 class="fs-3-sans font-weight-bold text-uppercase mb-2">Latest Episode</h4>
               <h2 class="fs-7 mb-3"><?php echo get_the_title($post_id); ?></h2>
               <p class="fs-4-serif mb-4"><?php render_short_description($post_id); ?></p>
 
@@ -173,12 +173,12 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
     <section class="container">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <h4 class="fs-3-sans font-bold font-uppercase font-color-white mb-4">Recent Episodes Right Now</h4>
+          <h4 class="fs-3-sans font-weight-bold text-uppercase font-color-white mb-4">Recent Episodes Right Now</h4>
           <?php
             array_shift($lastest_fm); // Remove first episode as already shown above
             render_episode_block($lastest_fm); ?>
 
-          <h4 class="fs-3-sans font-bold font-uppercase font-color-white mt-4 mb-4">Climate Breakdown Apocalypse</h4>
+          <h4 class="fs-3-sans font-weight-bold text-uppercase font-color-white mt-4 mb-4">Climate Breakdown Apocalypse</h4>
           <?php
             render_episode_block(get_posts(array(
               'category' => $category->term_id,
@@ -192,7 +192,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
               )
             ))); ?>
 
-          <h4 class="fs-3-sans font-bold font-uppercase font-color-white mt-4 mb-4">Police Freaking Policing</h4>
+          <h4 class="fs-3-sans font-weight-bold text-uppercase font-color-white mt-4 mb-4">Police Freaking Policing</h4>
           <?php
             render_episode_block(get_posts(array(
               'category' => $category->term_id,
@@ -250,13 +250,13 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
     <section class="container pt-6 pb-7">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <h3 class="fs-3-sans font-bold font-uppercase mb-4">Credits</h3>
+          <h3 class="fs-3-sans font-weight-bold text-uppercase mb-4">Credits</h3>
         </div>
         <?php foreach($credits as $credit) {
       ?>
         <div class="grid-item is-s-12 is-xxl-6 mb-5">
           <h4 class="fs-5-sans mb-1"><?php echo $credit['name']; ?></h4>
-          <h6 class="fs-2 font-bold font-uppercase mb-1"><?php echo $credit['role']; ?></h6>
+          <h6 class="fs-2 font-weight-bold text-uppercase mb-1"><?php echo $credit['role']; ?></h6>
           <p class="fs-3-sans"><?php echo $credit['bio']; ?></p>
         </div>
       <?php
