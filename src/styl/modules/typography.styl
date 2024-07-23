@@ -21,9 +21,62 @@ h2, .font-size-h2
   font-weight: bold
   margin: 0
   line-height: 1.3
+// REFACTOR TODO
+// - [x] Write function to generate font-size classes with final scale
+// - [ ] Obvious classes for general rules (font-weight-bold, font-italic, etc.)
+// - [x] Generate good styles for all responsive sizes
+// - [ ] Work out find/replace for fs- classes
+// - [ ] Remove all old classes one by one with find/replace
+//  - [ ] .fs-1
+//  - [ ] .fs-2
+//  - [ ] .fs-3-sans
+//  - [ ] .fs-3-serif
+//  - [ ] .fs-4-sans
+//  - [ ] .fs-4-serif
+//  - [ ] .fs-5-sans
+//  - [ ] .fs-5-sans-headline
+//  - [ ] .fs-5-sans-condensed
+//  - [ ] .fs-6
+//  - [ ] .fs-7
+//  - [ ] .fs-8
+//  - [ ] .fs-9
 
-h3, .font-size-h3
-  font-size: $font-size-h3
+// FONT SIZE GENERATOR
+
+font-size-maker($breakpoint = false, $larger-scale = true)
+  // 11 step scale with 2 variations.
+  // Smaller scale is for mobile, larger scale is for desktop.
+  // This function generates classes for both scales.
+  $large-scale = 0.5625 0.75 0.875 1 1.25 1.5 2 2.5 3 3.75 4.5
+  $small-scale = 0.57142857 0.71428571 0.85714286 1 1.14285714 1.35714286 1.71428571 2.28571429 2.85714286 3.42857143 4.28571429
+  $line-height = 1.2 1.2 1.2 1.2 1.1 1.1 1 1 1 1 1
+  $offset-to-root = 7 // this centers the scale on the root size which is 1rem. the helper classes center at .font-size-10
+
+  if $breakpoint
+    $prefix = '.font-size-' + $breakpoint + '-'
+  else
+    $prefix = '.font-size-'
+
+  for i in 0..10
+    if $larger-scale
+      {$prefix}{i+$offset-to-root}
+        font-size: $large-scale[i] * 1rem
+        line-height: $line-height[i] * 1em
+    else
+      {$prefix}{i+$offset-to-root}
+        font-size: $small-scale[i] * 1rem
+        line-height: $line-height[i] * 1em
+
+font-size-maker()
+
+@media screen and (max-width: $breakpoint-l)
+  font-size-maker('l')
+
+@media screen and (max-width: $breakpoint-m)
+  font-size-maker('m', false)
+
+@media screen and (max-width: $breakpoint-s)
+  font-size-maker('s', false)
   font-weight: bold
 
 h5
