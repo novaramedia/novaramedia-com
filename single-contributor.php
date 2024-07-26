@@ -65,7 +65,7 @@ if( have_posts() ) {
     </div>
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24 is-xxl-8 mobile-margin-bottom-micro">
-        <h1 class="fs-6 font-weight-semibold">
+        <h1 class="font-size-12 font-weight-semibold">
           <?php the_title(); ?>
         </h1>
       </div>

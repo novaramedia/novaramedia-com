@@ -77,7 +77,7 @@
 <div class="grid-row grid--nested mt-3">
   <div class="grid-item is-s-24 <?php echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h2 class="post__title <?php echo $has_huge_headline ? 'fs-8 fs-m-7' : 'fs-7'; ?> mb-3"><?php echo $the_title; ?></h2>
+      <h2 class="post__title <?php echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold mb-3"><?php echo $the_title; ?></h2>
 <?php
   if (!$has_related) {
   // surprizing conditional here: this is so that the title can either have it's own wider box or not depending on the display of related posts

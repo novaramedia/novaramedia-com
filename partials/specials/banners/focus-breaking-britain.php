@@ -98,10 +98,10 @@
     </div>
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-3">
-        <a href="<?php echo $url; ?>"><h3 class="fs-8" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
+        <a href="<?php echo $url; ?>"><h3 class="font-size-15 font-weight-bold" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
       </div>
       <div class="grid-item is-s-24 is-xxl-12">
-        <a href="<?php echo $url; ?>"><p class="fs-5-sans mb-4">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-11 mb-4">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Read more</a>
       </div>
     </div>

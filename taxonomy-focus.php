@@ -16,10 +16,10 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
   <section id="posts" class="container">
     <div class="grid-row mt-3 mb-5">
       <div class="grid-item is-s-24 is-l-12 is-xxl-8">
-        <h4 class="fs-4-sans text-uppercase mb-2">Focus</h4>
+        <h4 class="font-size-10 font-weight-bold text-uppercase mb-2">Focus</h4>
         <div class="only-desktop">
-          <h1 class="fs-8 mb-2"><?php single_cat_title(); ?></h1>
-          <div class="fs-6">
+          <h1 class="font-size-15 font-weight-bold mb-2"><?php single_cat_title(); ?></h1>
+          <div class="font-size-12 font-weight-bold">
             <?php echo category_description(); ?>
           </div>
         </div>
@@ -39,8 +39,8 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
           }
         ?>
         <div class="only-mobile">
-          <h1 class="fs-7 mt-1 mb-1"><?php single_cat_title(); ?></h1>
-          <div class="fs-6">
+          <h1 class="font-size-13 font-weight-bold mt-1 mb-1"><?php single_cat_title(); ?></h1>
+          <div class="font-size-12 font-weight-bold">
             <?php echo category_description(); ?>
           </div>
         </div>

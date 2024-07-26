@@ -72,7 +72,7 @@
   }
 ?>
     <div>
-      <ul class="inline-action-list fs-4-sans font-weight-regular">
+      <ul class="inline-action-list font-size-10 font-weight-regular">
         <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
         <li><?php render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
         <li><?php render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>

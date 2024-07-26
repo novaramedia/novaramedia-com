@@ -25,7 +25,7 @@
       <?php
         }
       ?>
-      <div class="fs-5-sans mb-4">
+      <div class="font-size-11 mb-4">
         <?php echo $description; ?>
       </div>
     </a>
@@ -49,8 +49,8 @@
         </div>
         <div class="grid-item is-xxl-14">
           <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
-            <h3 class="fs-5-sans font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
-            <div class="fs-4-sans font-weight-regular mb-3">
+            <h3 class="font-size-11 font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
+            <div class="font-size-10 font-weight-regular mb-3">
               <?php render_short_description($post_id); ?>
             </div>
           </a>
@@ -88,7 +88,7 @@
               <?php echo get_the_time('j F Y', $post_id); ?>
             </div>
           </a>
-          <h4 class="fs-4-sans mb-2">
+          <h4 class="font-size-10 font-weight-bold mb-2">
             <?php render_post_ui_tags($post_id, false, true); ?> <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover"><?php echo get_the_title($post_id); ?></a>
           </h4>
           <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">

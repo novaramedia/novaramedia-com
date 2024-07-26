@@ -16,10 +16,10 @@
     >
       <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
 
-      <div class="grid-row fs-5-sans fs-s-4-sans">
+      <div class="grid-row font-size-11 font-size-S-10">
         <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
           <a href="<?php echo home_url('support/'); ?>">
-            <h4 class="fs-6 mb-3"><?php echo $heading_copy; ?></h4>
+            <h4 class="font-size-12 font-weight-bold mb-3"><?php echo $heading_copy; ?></h4>
           </a>
           <?php
             if ($support_section_text || $override_text) {
@@ -38,7 +38,7 @@
             ?>
         </div>
 
-        <div class="support-form__inputs grid-item is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 fs-s-3-sans">
+        <div class="support-form__inputs grid-item is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 ">
           <div class="grid-row grid--nested-tight margin-bottom-tiny">
             <div class="grid-item grid-item--tight is-xxl-4">
               <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low ?>" data-name="low"

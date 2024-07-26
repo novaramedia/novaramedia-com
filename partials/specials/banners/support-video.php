@@ -23,11 +23,11 @@
             foreach($copy as $key => $paragraph) {
               if ($key === 0) {
             ?>
-            <h3 class="fs-7 mb-4 js-fix-widows"><?php echo $paragraph; ?></h3>
+            <h3 class="font-size-13 font-weight-bold mb-4 js-fix-widows"><?php echo $paragraph; ?></h3>
             <?php
               } else {
             ?>
-            <p class="fs-5-sans mb-4"><?php echo $paragraph; ?></p>
+            <p class="font-size-11 mb-4"><?php echo $paragraph; ?></p>
             <?php
               }
           ?>

@@ -50,7 +50,7 @@ if ($category->slug === 'video') {
             echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
           } else {
         ?>
-        <h4 class="fs-4-sans"><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
+        <h4 class="font-size-10 font-weight-bold"><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
       <?php
         }
       ?>
@@ -97,8 +97,8 @@ if ($category->slug === 'video') {
             <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
           </div>
           <a href="<?php the_permalink(); ?>">
-            <h6 class="js-fix-widows mt-2 fs-7"><?php the_title(); ?></h6>
-            <h5 class="fs-6 mt-2">
+            <h6 class="js-fix-widows mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
+            <h5 class="font-size-12 font-weight-bold mt-2">
               <?php render_standfirst($post->ID); ?>
             </h5>
           </a>

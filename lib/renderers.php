@@ -27,7 +27,7 @@ function render_see_also($query, $number_of_posts = 1) {
 ?>
   <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
     <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <h5 class="fs-4-sans"><?php the_title(); ?></h5>
+      <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
       <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
           if (nm_is_article($post_id)) {

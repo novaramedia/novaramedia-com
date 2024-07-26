@@ -59,7 +59,7 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h3 class="fs-7 font-weight-regular layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
+        <h3 class="font-size-13 font-weight-regular layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
       </div>
     </div>
   </div>

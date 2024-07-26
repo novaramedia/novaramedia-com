@@ -23,7 +23,7 @@
     </a> -->
   </div>
   <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-    <h4 class="post__title fs-5-sans fs-s-6 font-condensed"><?php echo get_the_title($post_id); ?></h4>
+    <h4 class="post__title font-size-11 fs-s-6 font-condensed"><?php echo get_the_title($post_id); ?></h4>
     <div class="mt-2 mb-2">
       <?php render_thumbnail($post_id, 'col12-16to9', array(
       'class' => 'ui-rounded-image u-display-block',

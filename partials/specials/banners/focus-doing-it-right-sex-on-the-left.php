@@ -91,11 +91,11 @@
     </div>
     <div class="grid-row pb-4">
       <div class="grid-item is-s-24 is-xxl-10 mb-s-3">
-        <a href="<?php echo $url; ?>"><h3 class="fs-8 fs-s-7" style="margin-left: -.05em;">
+        <a href="<?php echo $url; ?>"><h3 class="font-size-15 font-size-s-13 font-weight-bold" style="margin-left: -.05em;">
           Doing It Right:<br/>Sex On The Left</h3></a>
       </div>
       <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12">
-        <a href="<?php echo $url; ?>"><p class="fs-6 fs-s-5-sans mb-4">Sex can be disastrous, delightful or extremely okay, but it is always slippery as fuck. From bi erasure to ethical ghosting, male circumcision to family abolition, we ask: what does leftist sex look like? And can we ever do it right?</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-12 font-size-s-11 font-weight-bold mb-4">Sex can be disastrous, delightful or extremely okay, but it is always slippery as fuck. From bi erasure to ethical ghosting, male circumcision to family abolition, we ask: what does leftist sex look like? And can we ever do it right?</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Explore the Focus</a>
       </div>
     </div>

@@ -38,7 +38,7 @@
         </a>
       </div>
       <div class="grid-item offset-s-0 is-s-24 offset-m-2 is-m-14 offset-xxl-2 is-xxl-12">
-        <a href="<?php echo $url; ?>"><p class="fs-6 font-weight-bold mb-4">Don’t leave your politics at the turnstile.<br/>A football series from Novara Media.</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-12 font-weight-bold mb-4">Don’t leave your politics at the turnstile.<br/>A football series from Novara Media.</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Explore the articles and podcast</a>
       </div>
     </div>

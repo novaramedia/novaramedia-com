@@ -21,7 +21,7 @@ if( have_posts() ) {
         <?php
           if ($has_closed) {
         ?>
-        <p class="fs-6 text-uppercase font-weight-bold">This job listing has now closed.</p>
+        <p class="font-size-12 font-weight-bold text-uppercase">This job listing has now closed.</p>
         <?php
           }
 

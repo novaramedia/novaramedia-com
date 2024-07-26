@@ -31,14 +31,14 @@ if( have_posts() ) {
         </div>
         <div class="flex-grid-row flex-grid-row--align-center support-page__hero-wrapper font-color-white">
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
-            <h1 class="font-size-5 mobile-margin-bottom-basic" style="line-height: .85;">
+            <h1 class="font-size-17 font-weight-bold mobile-margin-bottom-basic" style="line-height: .85;">
               <span class="only-desktop">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</span>
               <span class="only-mobile">Build people-powered media.</span>
             </h1>
           </div>
           <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
-            <h2 class="fs-7 margin-bottom-tiny js-fix-widows">Back truthful, independent journalism today.</h2>
-            <h2 class="fs-7 js-fix-widows">Donate one hour’s wage per month or whatever you can afford.</h2>
+            <h2 class="font-size-13 font-weight-bold margin-bottom-tiny js-fix-widows">Back truthful, independent journalism today.</h2>
+            <h2 class="font-size-13 font-weight-bold js-fix-widows">Donate one hour’s wage per month or whatever you can afford.</h2>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ $top_level_section = get_term($top_level_section_id, 'section');
   <section id="posts" class="container mt-4">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <h1 class="fs-4-sans">
+        <h1 class="font-size-10 font-weight-bold">
           <a href="<?php echo get_term_link($top_level_section->term_id); ?>"><?php echo $top_level_section->name; ?></a>
         </h1>
         <?php
