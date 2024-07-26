@@ -207,7 +207,7 @@ if( have_posts() ) {
 ?>
     </div>
 
-    <div class="grid-row mt-5 mb-5 font-smaller">
+    <div class="grid-row mt-5 mb-5 font-size-8">
       <div class="grid-item is-s-24 flex-item-m-6 is-xxl-8">
         <?php
           if (!empty($credits)) {

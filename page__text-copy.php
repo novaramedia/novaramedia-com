@@ -30,7 +30,7 @@ if( have_posts() ) {
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-12 flex-offset-m-0 flex-item-l-10 flex-offset-l-1 flex-item-xl-10 flex-offset-xl-1 flex-item-xxl-10 flex-offset-xxl-1">
         <?php the_post_thumbnail('col20'); ?>
-        <div class="font-smaller">
+        <div class="font-size-8">
           <?php the_post_thumbnail_caption(); ?>
         </div>
       </div>

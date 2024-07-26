@@ -260,7 +260,7 @@ function render_post_title($postId) {
   $sub_category = get_the_sub_category($postId, true);
 
   if ($sub_category && !is_category($sub_category->term_id)) {
-    $title = '<span class="font-small-caps">' . $sub_category->name . ':</span> ' . $title;
+    $title = '<span class="font-size-8">' . $sub_category->name . ':</span> ' . $title;
   }
 
   echo $title;
@@ -375,7 +375,7 @@ function render_about_group_field($data) {
   foreach($data as $person) {
 ?>
   <div class="margin-bottom-small">
-    <h6 class="font-small-caps"><?php echo $person['title']; ?></h6>
+    <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
 <?php
     foreach($person['name'] as $name) {
 ?>

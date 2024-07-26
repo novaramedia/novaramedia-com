@@ -1842,16 +1842,6 @@ img {
   right: 0;
   background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%);
 }
-.post-col12-text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 24px;
-  max-width: 550px;
-}
-.post-col12-text h3 {
-  font-size: $font-size-h2;
-}
 .category-archive__logo {
   width: 220px;
 }
@@ -1976,6 +1966,10 @@ img {
 html {
   font-family: var(--font-family-sans);
   font-size: 15px;
+  letter-spacing: 0.01rem;
+}
+body {
+  line-height: 1.2em;
 }
 .font-condensed {
   font-family: 'acumin-variable', sans-serif !important;
@@ -2044,6 +2038,63 @@ html {
   font-size: 4.5rem;
   line-height: 1em;
   letter-spacing: 0.01rem;
+}
+@media screen and (max-width: 1408px) {
+  .font-size-xl-7 {
+    font-size: 0.5625rem;
+    line-height: 1.2em;
+    letter-spacing: 0.02813rem;
+  }
+  .font-size-xl-8 {
+    font-size: 0.75rem;
+    line-height: 1.2em;
+    letter-spacing: 0.02975rem;
+  }
+  .font-size-xl-9 {
+    font-size: 0.875rem;
+    line-height: 1.2em;
+    letter-spacing: 0.01094rem;
+  }
+  .font-size-xl-10 {
+    font-size: 1rem;
+    line-height: 1.2em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-11 {
+    font-size: 1.25rem;
+    line-height: 1.1em;
+    letter-spacing: 0.025rem;
+  }
+  .font-size-xl-12 {
+    font-size: 1.5rem;
+    line-height: 1.1em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-13 {
+    font-size: 2rem;
+    line-height: 1em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-14 {
+    font-size: 2.5rem;
+    line-height: 1em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-15 {
+    font-size: 3rem;
+    line-height: 1em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-16 {
+    font-size: 3.75rem;
+    line-height: 1em;
+    letter-spacing: 0.01rem;
+  }
+  .font-size-xl-17 {
+    font-size: 4.5rem;
+    line-height: 1em;
+    letter-spacing: 0.01rem;
+  }
 }
 @media screen and (max-width: 1104px) {
   .font-size-l-7 {
@@ -2247,12 +2298,6 @@ b {
 }
 h5 {
   font-weight: bold;
-}
-.font-small-caps {
-  font-size: 0.85em;
-}
-.font-smaller {
-  font-size: 0.8rem;
 }
 .mt-0 {
   margin-top: 0rem;
@@ -4592,84 +4637,16 @@ html {
   }
   html {
     font-size: 14px;
-    letter-spacing: 0;
-  }
-  body {
-    line-height: 1.4;
-  }
-  .font-size-xl-0 {
-    font-size: 12px;
-  }
-  .font-size-xl-1 {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  .font-size-xl-2 {
-    font-size: 21px;
-    line-height: 1.25;
-  }
-  .font-size-xl-3 {
-    font-size: 32px;
-    line-height: 1.1875;
-  }
-  .font-size-xl-4 {
-    font-size: 47px;
-    line-height: 1.14893617;
-    letter-spacing: -0.025em;
-  }
-  .font-size-xl-5 {
-    font-size: 71px;
-    line-height: 1.05633803;
-    letter-spacing: -0.025em;
-  }
-  .font-size-xl-6 {
-    font-size: 106px;
-    line-height: 0.8490566;
-    letter-spacing: -0.025em;
-  }
-  .font-size-xl-7 {
-    font-size: 159px;
-    line-height: 0.84937238;
-    letter-spacing: -0.02em;
-  }
-  .font-size-xl-8 {
-    font-size: 239px;
-    line-height: 0.84937238;
-    letter-spacing: -0.04em;
-  }
-  .font-small-caps {
-    font-size: 0.85em;
-  }
-  .font-smaller {
-    font-size: 0.8rem;
   }
   .text-copy p {
     font-size: 1.3rem;
     line-height: 1.55;
   }
-  .text-copy blockquote {
-    margin: 3rem;
-  }
-  .text-copy h1,
-  .text-copy h2,
-  .text-copy h3,
-  .text-copy h4,
-  .text-copy h5,
-  .text-copy h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
   .text-copy a {
     color: #5490eb;
   }
-  .text-copy img {
-    margin: 2.5rem auto;
-  }
   .text-copy .wp-caption .wp-caption-text {
     margin-top: 6px;
-  }
-  .icon-large:before {
-    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -4809,12 +4786,6 @@ html {
   #featured-post-title-holder {
     padding: 60px;
     font-size: 3.330015792890114rem;
-  }
-  .post-col12-text {
-    padding: 18px;
-  }
-  .post-col12-text h3 {
-    font-size: $font-size-h3;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;
@@ -5319,84 +5290,16 @@ html {
   }
   html {
     font-size: 14px;
-    letter-spacing: 0;
-  }
-  body {
-    line-height: 1.4;
-  }
-  .font-size-l-0 {
-    font-size: 12px;
-  }
-  .font-size-l-1 {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  .font-size-l-2 {
-    font-size: 21px;
-    line-height: 1.25;
-  }
-  .font-size-l-3 {
-    font-size: 32px;
-    line-height: 1.1875;
-  }
-  .font-size-l-4 {
-    font-size: 47px;
-    line-height: 1.14893617;
-    letter-spacing: -0.025em;
-  }
-  .font-size-l-5 {
-    font-size: 71px;
-    line-height: 1.05633803;
-    letter-spacing: -0.025em;
-  }
-  .font-size-l-6 {
-    font-size: 106px;
-    line-height: 0.8490566;
-    letter-spacing: -0.025em;
-  }
-  .font-size-l-7 {
-    font-size: 159px;
-    line-height: 0.84937238;
-    letter-spacing: -0.02em;
-  }
-  .font-size-l-8 {
-    font-size: 239px;
-    line-height: 0.84937238;
-    letter-spacing: -0.04em;
-  }
-  .font-small-caps {
-    font-size: 0.85em;
-  }
-  .font-smaller {
-    font-size: 0.8rem;
   }
   .text-copy p {
     font-size: 1.3rem;
     line-height: 1.55;
   }
-  .text-copy blockquote {
-    margin: 3rem;
-  }
-  .text-copy h1,
-  .text-copy h2,
-  .text-copy h3,
-  .text-copy h4,
-  .text-copy h5,
-  .text-copy h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
   .text-copy a {
     color: #5490eb;
   }
-  .text-copy img {
-    margin: 2.5rem auto;
-  }
   .text-copy .wp-caption .wp-caption-text {
     margin-top: 6px;
-  }
-  .icon-large:before {
-    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -5534,9 +5437,6 @@ html {
   }
   .front-page-signup__text {
     width: 100%;
-  }
-  .post-col12-text {
-    padding: 12px;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;
@@ -6041,85 +5941,19 @@ html {
   }
   html {
     font-size: 13px;
-    letter-spacing: 0;
-  }
-  body {
-    line-height: 1.4;
-  }
-  .font-size-m-0 {
-    font-size: 12px;
-  }
-  .font-size-m-1 {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  .font-size-m-2 {
-    font-size: 21px;
-    line-height: 1.25;
-  }
-  .font-size-m-3 {
-    font-size: 32px;
-    line-height: 1.1875;
-  }
-  .font-size-m-4 {
-    font-size: 47px;
-    line-height: 1.14893617;
-    letter-spacing: -0.025em;
-  }
-  .font-size-m-5 {
-    font-size: 71px;
-    line-height: 1.05633803;
-    letter-spacing: -0.025em;
-  }
-  .font-size-m-6 {
-    font-size: 106px;
-    line-height: 0.8490566;
-    letter-spacing: -0.025em;
-  }
-  .font-size-m-7 {
-    font-size: 159px;
-    line-height: 0.84937238;
-    letter-spacing: -0.02em;
-  }
-  .font-size-m-8 {
-    font-size: 239px;
-    line-height: 0.84937238;
-    letter-spacing: -0.04em;
-  }
-  .font-small-caps {
-    font-size: 0.85em;
-  }
-  .font-smaller {
-    font-size: 0.8rem;
   }
   .text-copy p {
     font-size: 1.3rem;
     line-height: 1.55;
-  }
-  .text-copy blockquote {
-    margin: 3rem;
-  }
-  .text-copy h1,
-  .text-copy h2,
-  .text-copy h3,
-  .text-copy h4,
-  .text-copy h5,
-  .text-copy h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
   }
   .text-copy a {
     color: #5490eb;
   }
   .text-copy img {
     display: block;
-    margin: 2.5rem auto;
   }
   .text-copy .wp-caption .wp-caption-text {
     margin-top: 6px;
-  }
-  .icon-large:before {
-    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -6258,12 +6092,6 @@ html {
   }
   #front-page-signups {
     display: none;
-  }
-  .post-col12-text {
-    padding: 12px;
-  }
-  .post-col12-text h3 {
-    font-size: 1.3rem;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;
@@ -6700,45 +6528,16 @@ html {
   }
   html {
     font-size: 13px;
-    letter-spacing: 0;
-  }
-  body {
-    line-height: 1.4;
-  }
-  .font-small-caps {
-    font-size: 0.85em;
-  }
-  .font-smaller {
-    font-size: 0.8rem;
   }
   .text-copy p {
     font-size: 1.3rem;
     line-height: 1.55;
   }
-  .text-copy blockquote {
-    margin: 3rem;
-  }
-  .text-copy h1,
-  .text-copy h2,
-  .text-copy h3,
-  .text-copy h4,
-  .text-copy h5,
-  .text-copy h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
   .text-copy a {
     color: #5490eb;
   }
-  .text-copy img {
-    display: block;
-    margin: 2.5rem auto;
-  }
   .text-copy .wp-caption .wp-caption-text {
     margin-top: 6px;
-  }
-  .icon-large:before {
-    font-size: $font-size-h3;
   }
   .button {
     padding: 12px;
@@ -7003,20 +6802,6 @@ html {
   }
   .post-col12-image {
     position: relative;
-  }
-  .post-col12-text {
-    position: relative;
-    padding: 0;
-    margin-top: 6px;
-    color: #0e0e0e;
-  }
-  .post-col12-text h3 {
-    font-size: 13px;
-  }
-  .post-col12-text h5 {
-    margin-top: 0;
-    font-size: 13px;
-    font-weight: normal;
   }
   .text-copy .liveblog-update-heading {
     border-top: 1px solid #0e0e0e;

@@ -39,7 +39,7 @@
   if (!empty($meta['_cmb_sc'][0])) {
 ?>
     <div class="text-copy mb-4">
-      <p class="font-smaller">Listen to this article as audio:</p>
+      <p class="font-size-8">Listen to this article as audio:</p>
       <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
     </div>
 <?php

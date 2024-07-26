@@ -1,6 +1,10 @@
 html
   font-family: var(--font-family-sans)
   font-size: 15px
+  letter-spacing: 0.01rem
+
+body
+  line-height: 1.2em
 
 .font-condensed
   font-family: 'acumin-variable', sans-serif !important
@@ -12,27 +16,6 @@ html
 
 .font-mono
   font-family: monospace
-
-// REFACTOR TODO
-// - [x] Write function to generate font-size classes with final scale
-// - [x] Obvious classes for general rules (font-weight-bold, font-italic, etc.)
-// - [x] Generate good styles for all responsive sizes
-// - [x] Work out find/replace for fs- classes
-// - [ ] Remove all old classes one by one with find/replace
-//  - [x] .fs-1
-//  - [x] .fs-2
-//  - [x] .fs-3-sans
-//  - [x] .fs-3-serif
-//  - [x] .fs-4-sans
-//  - [x] .fs-4-serif
-//  - [x] .fs-5-sans
-//  - [x] .fs-5-sans-headline
-//  - [x] .fs-5-sans-condensed
-//  - [x] .fs-6
-//  - [x] .fs-7
-//  - [x] .fs-8
-//  - [x] .fs-9
-//  - [x] responsive versions
 
 // FONT SIZE GENERATOR
 
@@ -64,6 +47,9 @@ font-size-maker($breakpoint = false, $larger-scale = true)
         letter-spacing: $letter-spacing[i] * 1rem
 
 font-size-maker()
+
+@media screen and (max-width: $breakpoint-xl)
+  font-size-maker('xl')
 
 @media screen and (max-width: $breakpoint-l)
   font-size-maker('l')
@@ -120,11 +106,3 @@ font-size-1()
   font-weight: 700
   line-height: normal
   letter-spacing: 0.02813rem
-
-// to find and fix
-
-.font-small-caps
-  font-size: 0.85em
-
-.font-smaller
-  font-size: 0.8rem
