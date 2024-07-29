@@ -61,6 +61,7 @@ function render_episode_block($posts) {
               'class' => 'ui-rounded-image'
             )); ?>
             <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
+            <h3 class="fs-3-sans font-bold mb-1"><?php render_standfirst($post_id); ?></h3>
             <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
           </a>
         </div>
