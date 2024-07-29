@@ -156,7 +156,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
               <?php render_podcast_links($podcast_url); ?>
             </div>
             <div class="grid-item is-s-24 is-xxl-12">
-              <?php render_thumbnail($post_id, 'col12', array(
+              <?php render_thumbnail($post_id, array(510, 510), array(
                 'class' => 'mt-1'
               )); ?>
             </div>
