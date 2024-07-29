@@ -3647,6 +3647,7 @@ hr {
 .swiper-button-next {
   right: 0;
 }
+.swiper-slide,
 .ux-carousel__item {
   -ms-flex-shrink: 0;
   flex-shrink: 0;
@@ -3654,6 +3655,7 @@ hr {
   width: 200px;
   margin-right: 1rem;
 }
+.swiper-slide:last-child,
 .ux-carousel__item:last-child {
   margin-right: 0;
 }
@@ -4025,6 +4027,9 @@ html {
 }
 .novara-fm-archive__archive-block .swiper-wrapper {
   padding: 1rem;
+}
+.novara-fm-archive__archive-block .swiper-slide {
+  width: 300px;
 }
 .novara-fm-archive__split-logotype {
   display: block;
