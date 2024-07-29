@@ -104,12 +104,10 @@ $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
 $font-size-basic = 14px
-$font-size-larger = 1.3rem
 $font-size-smaller = .8rem
 
 $font-leading-basic = 1.4
 $font-leading-tighter = 1.15
-$font-leading-larger = 1.55
 
 $font-tracking-basic = 0
 $font-tracking-medium = 0.0075rem
@@ -145,56 +143,6 @@ $breakpoint-xl = 1408px
 
 // now imported as modules/typography.styl
 
-  // COLOR RULES
-
-.font-color-white
-  color: var(--color-white-soft)
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-
-.font-color-black
-  color: var(--color-black-soft)
-
-.font-color-blue-neon
-  color: var(--color-blue-neon)
-
-.font-color-green-racing
-  color: var(--color-green-racing)
-
-.font-color-red
-  color: var(--color-red)
-
-  // SHADOWS
-
-.text-shadow-white
-  text-shadow: 0 0 20px var(--color-white-soft-transparent)
-
-.text-shadow-light-gray
-  text-shadow: 0 0 20px var(--color-gray-light-transparent)
-
-.text-shadow-gray
-  text-shadow: 0 0 20px var(--color-gray-transparent)
-
-  // TEXT RULES
-
-.text-overflow-ellipsis
-  overflow: ellipsis
-
-.text-align-left
-  text-align: left
-
-.text-align-right
-  text-align: right
-
-.text-align-center
-  text-align: center
-
-.text-links-underlined
-  a
-    text-decoration: underline
-    &:hover
-      text-decoration: none
-
 article
   ul, ol
     margin-top: 2rem
@@ -206,30 +154,18 @@ article
     li
       list-style: decimal inside
 
-.text-copy
-  p
-    font-family: $font-serif
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-  ul, ol
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-
 .text-copy, .page-copy
   .twitter-tweet, .instagram-media, .oembed-element
     margin: 2rem auto !important
   p
     margin-bottom: 1rem
   blockquote
-    font-family: $font-sans
     margin: 2rem
-    p
-      font-family: $font-sans
-  h1,h2,h3,h4,h5,h6
+  h1, h2, h3, h4, h5, h6
     margin-top: 1.5rem
     margin-bottom: 1.5rem
   a
-    color: $color-blue
+    color: var(--color-blue)
   img, figure, .wp-caption
     max-width: 100% !important
     display: block
@@ -241,38 +177,10 @@ article
       margin: 0 auto
     .wp-caption-text
       text-align: left
-      font-family: $font-sans
-      font-size: $font-size-smaller
       margin-top: $margin-tiny
 
 .wp-video + .wp-caption
   margin-top: -1rem
-
-.text-copy-max-width
-  max-width: ( 18 * $col ) + ( 17  * $gutter )
-  margin: 0 auto
-
-// LISTS
-
-.list--links
-  li
-    list-style: none
-    margin-bottom: .5rem
-    &:last-child
-      margin-bottom: 0
-  a
-    text-decoration: underline
-    text-underline-offset: 2px
-    text-decoration-color: $color-red
-    transition: text-decoration-color $duration-form-transitions
-    &:hover
-      text-decoration-color: transparent
-
-  // LINKS
-
-a
-  color: inherit
-  text-decoration: none
 
 // ******************************************************
 

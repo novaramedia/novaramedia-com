@@ -21,8 +21,6 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$border-width = 2px
-
 // ******************************************************
 
 // TYPOGRAPHY
@@ -31,11 +29,6 @@ html
   font-size: 13px
 
 .text-copy
-  p
-    font-size: 1.3rem
-    line-height: 1.55
-  a
-    color: $color-blue
   .wp-caption
     .wp-caption-text
       margin-top: $margin-tiny
@@ -272,54 +265,6 @@ html
 
 // ******************************************************
 
-// FRONT PAGE
-
-#featured-post-title-holder
-  position: relative
-  padding: $margin-small + $margin-tiny
-  font-size: golden-ratio(1rem , 1.2)
-
-#featured-post-title
-  color: black
-  text-shadow: none
-
-#home-articles-posts, #home-fm-posts, #home-focus-posts, #home-long-read-posts
-  .col
-    margin-bottom: $margin-small
-
-.front-page-above-the-fold__articles
-  article
-    clearfix()
-    .wp-post-image
-      float: left
-      width: 'calc(50% - %s)' % $margin-micro
-      padding-right: $margin-micro * 2
-    div
-      float: left
-      width: 'calc(50% - %s)' % $margin-micro
-
-
-// ******************************************************
-
-// VIDEO BLOCK
-
-.video-block-main-video
-  margin-bottom: $margin-small
-
-.video-related-video
-  width: 100%
-  clearfix()
-  .video-related-video__thumbnail
-    float: left
-    width: 'calc(50% - %s)' % $margin-micro
-    padding-right: $margin-micro * 2
-  h6
-    float: left
-    width: 'calc(50% - %s)' % $margin-micro
-    font-size: 1rem
-
-// ******************************************************
-
 // INDEXES
 
 #posts
@@ -330,25 +275,6 @@ html
 
 .post-col12-image
   position: relative
-
-// ******************************************************
-
-// SINGLE
-
-  // LIVEBLOG
-
-.text-copy
-  .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
-    padding-top: $margin-basic
-    margin-top: $margin-mid
-    margin-bottom: $margin-small
-    &:first-of-type
-      margin-top: $margin-basic
-
-#single-related
-  .post
-    margin-bottom: $margin-basic
 
 // ******************************************************
 

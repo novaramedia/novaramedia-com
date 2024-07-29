@@ -24,9 +24,6 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-
-$border-width = 2px
-
 // ******************************************************
 
 // TYPOGRAPHY
@@ -35,11 +32,6 @@ html
   font-size: 14px
 
 .text-copy
-  p
-    font-size: 1.3rem
-    line-height: 1.55
-  a
-    color: $color-blue
   .wp-caption
     .wp-caption-text
       margin-top: $margin-tiny
@@ -200,14 +192,6 @@ html
   margin-left: 2%
   padding: $margin-tiny $margin-small
 
-// ******************************************************
-
-// FRONT PAGE
-
-#featured-post-title-holder
-  padding: $margin-large
-  font-size: golden-ratio(1rem , 2.5)
-
 // SIGNUPS
 
 .front-page-signup__image
@@ -215,18 +199,3 @@ html
 
 .front-page-signup__text
   width: 100%
-
-// ******************************************************
-
-// SINGLE
-
-  // LIVEBLOG
-
-.text-copy
-  .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
-    padding-top: $margin-basic
-    margin-top: $margin-mid
-    margin-bottom: $margin-small
-    &:first-of-type
-      margin-top: $margin-basic

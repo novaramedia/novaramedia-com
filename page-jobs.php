@@ -35,13 +35,13 @@ if( have_posts() ) {
 
           if (!empty($jobs)) {
         ?>
-        <h5 class="font-size-2">We are currently hiring:</h5>
-        <ul class="list--links font-size-2">
+        <h5 class="font-size-10">We are currently hiring:</h5>
+        <ul>
         <?php
             foreach ($jobs as $job) {
               $deadline = get_post_meta($job->ID, '_nm_deadline', true);
         ?>
-          <li><a href="<?php echo get_permalink($job); ?>"><?php echo $job->post_title; ?> (deadline <?php echo date('j F', $deadline); ?>)</a></li>
+          <li><a href="<?php echo get_permalink($job); ?>" class="ui-action-link"><?php echo $job->post_title; ?> (deadline <?php echo date('j F', $deadline); ?>)</a></li>
         <?php
             }
           } else {

@@ -85,20 +85,88 @@ font-size-maker()
 .text-underline
   text-decoration: underline
 
+.text-overflow-ellipsis
+  overflow: ellipsis
+
+.text-align-left
+  text-align: left
+
+.text-align-right
+  text-align: right
+
+.text-align-center
+  text-align: center
+
+.text-links-underlined
+  a
+    text-decoration: underline
+    &:hover
+      text-decoration: none
+
+// TEXT SPACING
+
 .text-paragraph-breaks
   p
     margin-bottom: 1em
 
-// HTML ELEMENT STYLING
+// FORMATTING COPY
 
-h5
-  font-weight: bold
+.text-copy
+  p
+    font-family: var(--font-family-serif)
+  p, ul, ol
+    font-size: 1.3rem // this should be deprecated as an implementation
+    line-height: 1.55 // this should be deprecated as an implementation
 
-// NEW TYPE SCALE v4.0.0 2024
-// fs = font style
-// n = upward scaling step
-// (sans, sans-headline, sans-condensed, serif, mono) = font family
-// other classes (font-size-n) are for legacy migration
+.text-copy, .page-copy
+  blockquote
+    font-family: var(--font-family-sans)
+    p
+      font-family: var(--font-family-sans)
+  .wp-caption
+    .wp-caption-text
+      font-family: var(--font-family-sans)
+      font-size: $font-size-smaller
+
+// COLOR RULES
+
+.font-color-white
+  color: var(--color-white-soft)
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+.font-color-black
+  color: var(--color-black-soft)
+
+.font-color-blue-neon
+  color: var(--color-blue-neon)
+
+.font-color-green-racing
+  color: var(--color-green-racing)
+
+.font-color-red
+  color: var(--color-red)
+
+// SHADOWS
+
+.text-shadow-white
+  text-shadow: 0 0 20px var(--color-white-soft-transparent)
+
+.text-shadow-light-gray
+  text-shadow: 0 0 20px var(--color-gray-light-transparent)
+
+.text-shadow-gray
+  text-shadow: 0 0 20px var(--color-gray-transparent)
+
+// HTML ELEMENTS
+
+a
+  color: inherit
+  text-decoration: none
+
+// *******
+
+// MIGRATE BELOW
 
 font-size-1()
   font-size: 0.5625rem
