@@ -1644,51 +1644,9 @@ img {
 .support-page__hero-wrapper {
   padding: 70px 0;
 }
-.support-page__content-copy {
-  font-family: Georgia, Times, "Times New Roman", serif;
-  font-size: 18px;
-  line-height: $font-leading-larger;
-}
-.support-page__content-copy h3 {
-  font-family: 'Helvetica Neue';
-  font-size: 31.5px;
-  line-height: 38.46px;
-  margin-bottom: 1rem;
-}
 #other-donation-methods svg {
   height: 2rem;
   width: auto;
-}
-#radio-player {
-  display: none;
-}
-.jp-controls-holder {
-  margin-right: 8px;
-}
-.jp-block {
-  display: block;
-  height: 32px;
-  width: 100%;
-  text-align: center;
-  border: 2px solid #fdfdfd;
-}
-.jp-button {
-  text-align: center;
-}
-.jp-stop {
-  display: none;
-}
-.jp-volume-bar {
-  position: relative;
-}
-.jp-button:hover,
-.jp-volume-bar:hover {
-  cursor: pointer;
-}
-.jp-volume-bar-value {
-  background-color: #fff;
-  position: relative;
-  height: 100%;
 }
 .spinner {
   width: 1em;
@@ -1716,29 +1674,6 @@ img {
 }
 .double-bounce2 {
   animation-delay: -1s;
-}
-.front-page-signup {
-  display: flex;
-  -ms-align-items: flex-start;
-  align-items: flex-start;
-}
-.front-page-signup__image {
-  width: 25%;
-  padding-right: 1.25rem;
-  max-width: 80px;
-}
-.front-page-signup__image img {
-  display: block;
-}
-.front-page-signup__text {
-  width: 73%;
-}
-.front-page-signup__text p {
-  margin-bottom: 0;
-}
-.front-page-above-the-fold__column .col {
-  margin-left: 0;
-  margin-right: 0;
 }
 .post-col12-image {
   position: relative;
@@ -6669,9 +6604,6 @@ html {
   }
   .support-page__hero-wrapper {
     padding: 42px 0;
-  }
-  .support-page__content-copy {
-    font-size: 16px;
   }
   .support-bar__open-actions-wrapper .ui-hit-area {
     padding: 0 0 0.5rem 2rem;
