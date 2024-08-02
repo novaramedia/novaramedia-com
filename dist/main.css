@@ -811,6 +811,9 @@ template {
 [hidden] {
   display: none;
 }
+h1 {
+  margin: 0;
+}
 html {
   --grid-gutter: 1rem;
   --corner-radius: 2px;

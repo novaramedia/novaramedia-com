@@ -73,7 +73,7 @@ if( have_posts() ) {
         </div>
         <?php } ?>
 
-        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 font-size-12 font-size-s-11 font-serif text-paragraph-breaks">
+        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 text-copy font-serif">
           <?php the_content(); ?>
         </div>
       </div>

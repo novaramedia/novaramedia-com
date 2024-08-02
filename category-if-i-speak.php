@@ -18,6 +18,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       font-size: 18.5rem;
       line-height: .9;
       letter-spacing: -0.03em;
+      font-weight: 700;
     }
 
     .category-archive__if-i-speak__image {
