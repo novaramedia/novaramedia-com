@@ -365,29 +365,6 @@ ul.u-inline-list li {
   -ms-justify-content: center;
   justify-content: center;
 }
-.flex-grid-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.flex-grid-row--reverse {
-  flex-direction: column-reverse;
-}
-.flex-grid-row--nowrap {
-  flex-wrap: nowrap;
-}
-.flex-grid-row--align-center {
-  -ms-align-items: center;
-  align-items: center;
-}
-.flex-grid-item {
-  position: relative;
-  flex: 0 1 auto;
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 0;
-  min-height: 0;
-}
 .grid-row {
   display: flex;
   flex-direction: row;
@@ -404,6 +381,29 @@ ul.u-inline-list li {
   align-items: center;
 }
 .grid-item {
+  position: relative;
+  flex: 0 1 auto;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.flex-grid-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.flex-grid-row--reverse {
+  flex-direction: column-reverse;
+}
+.flex-grid-row--nowrap {
+  flex-wrap: nowrap;
+}
+.flex-grid-row--align-center {
+  -ms-align-items: center;
+  align-items: center;
+}
+.flex-grid-item {
   position: relative;
   flex: 0 1 auto;
   max-width: 100%;
