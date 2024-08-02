@@ -8,7 +8,7 @@ if (is_search() || is_tag()) {
 ?>
     <div class="grid-row mb-5">
       <div class="grid-item is-xxl-24">
-        <h4 class="fs-4-sans">
+        <h4 class="font-size-10 font-weight-bold">
 <?php
   if (is_search()) {
 ?>

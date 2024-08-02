@@ -20,11 +20,11 @@
       <?php render_post_ui_tags($post_id); ?>
     </div>
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h2 class="post__title fs-5-sans font-bold mt-1"><?php echo get_the_title($post_id); ?></h2>
+      <h2 class="post__title font-size-11 font-weight-bold mt-1"><?php echo get_the_title($post_id); ?></h2>
       <?php
         $meta = get_post_meta(get_the_ID());
       ?>
-      <h5 class="fs-2 font-uppercase mt-1">
+      <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
           if ($is_article) {
             render_bylines($post_id);
@@ -36,7 +36,7 @@
       <?php
         if ($show_descriptive_text) {
       ?>
-      <div class="fs-3-sans mt-1 mb-0">
+      <div class="font-size-9 mt-1 mb-0">
         <?php
           if ($is_article) {
             render_standfirst($post_id);

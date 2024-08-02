@@ -10,7 +10,7 @@
     <?php the_post_thumbnail('col8-16to9', array('class' => 'index-post-thumbnail')); ?>
     <h5 class="index-post-title margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
     <?php if ($is_article) { ?>
-    <h6 class="margin-top-micro font-bold">by <?php render_bylines($post->ID, false); ?></h6>
+    <h6 class="margin-top-micro font-weight-bold">by <?php render_bylines($post->ID, false); ?></h6>
     <?php } ?>
     <div class="index-post-description margin-top-tiny">
       <?php

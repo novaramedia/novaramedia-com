@@ -12,7 +12,7 @@
   ?>
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h4 class="fs-7 font-weight-regular"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</a></h4>
+        <h4 class="font-size-13"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</a></h4>
       </div>
     </div>
 
@@ -61,8 +61,8 @@
           ?>
           <div class="grid-item <?php echo $title_classes; ?>">
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="fs-8 fs-m-7"><?php the_title(); ?></h6>
-              <h5 class="fs-6 mt-3 mt-s-2">
+              <h6 class="font-size-15 font-weight-bold font-size-m-13"><?php the_title(); ?></h6>
+              <h5 class="font-size-12 font-weight-bold mt-3 mt-s-2">
                 <?php render_standfirst($post->ID); ?>
               </h5>
             </a>
@@ -81,8 +81,8 @@
       </div>
       <div class="grid-item is-s-24 is-l-10 is-xxl-8">
         <a href="<?php echo $category_link; ?>" class="ui-hover">
-          <div class="layout-split-level fs-2 mb-4">
-            <h5 class="font-bold font-uppercase">Recent Episodes</h5>
+          <div class="layout-split-level font-size-8 font-weight-bold mb-4">
+            <h5 class="font-weight-bold text-uppercase">Recent Episodes</h5>
             <span>See All</span>
           </div>
         </a>
@@ -105,7 +105,7 @@
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+              <h6 class="font-size-9 font-weight-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
             </a>
           </div>
         <?php

@@ -34,7 +34,7 @@ get_header();
     <div class="container">
       <div class="grid-row pt-4 pb-4">
         <div class="grid-item is-xxl-24">
-          <h1 class="fs-6 text-align-center font-uppercase">
+          <h1 class="font-size-12 font-weight-bold text-align-center text-uppercase">
             Caution: <?php echo $post_status; ?> post
           </h1>
         </div>

@@ -37,11 +37,11 @@
     case 'regular':
 ?>
   <a href="<?php the_permalink() ?>" class="ui-hover">
-    <h5 class="index-post-title fs-3-sans font-bold mt-2 js-fix-widows"><?php the_title(); ?></h5>
+    <h5 class="index-post-title font-size-9 font-weight-bold mt-2 js-fix-widows"><?php the_title(); ?></h5>
     <?php
       if ($is_article) {
     ?>
-    <h6 class="fs-2 font-bold font-uppercase mt-1 js-fix-widows"><?php
+    <h6 class="font-size-8 font-weight-bold text-uppercase mt-1 js-fix-widows"><?php
       if ($is_article) {
         render_bylines($post_id);
       } else {
@@ -49,7 +49,7 @@
       }
     ?></h6>
     <?php } ?>
-    <div class="fs-3-sans mt-1">
+    <div class="font-size-9 mt-1">
       <?php
         if ($is_article) {
           render_standfirst($post_id);
@@ -62,11 +62,11 @@
         break;
       case 'large':
   ?>
-    <h3 class="font-size-2 mt-2 js-fix-widows"><?php the_title(); ?></h3>
+    <h3 class="font-size-10 font-weight-bold mt-2 js-fix-widows"><?php the_title(); ?></h3>
     <?php
       if ($is_article) {
     ?>
-  <h3 class="fs-3-sans font-bold js-fix-widows"><?php
+  <h3 class="font-size-9 font-weight-bold js-fix-widows"><?php
       if ($is_article) {
         render_bylines($post_id);
       } else {
