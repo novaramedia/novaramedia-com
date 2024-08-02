@@ -23,4 +23,8 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'col24-16to9', 1304, 733, true );
 
   add_image_size( 'gallery', 1304, 733, false );
+
+  // V4.0.0
+
+  add_image_size( '12-square', 685, 685, true );
 }

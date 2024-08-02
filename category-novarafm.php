@@ -60,7 +60,7 @@ function render_episode_block($posts) {
             <?php render_thumbnail($post_id, 'col12-16to9', array(
               'class' => 'ui-rounded-image'
             )); ?>
-            <h2 class="fs-3-sans font-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
+            <h2 class="fs-4-sans font-bold mt-1 mb-1"><?php echo get_the_title($post_id); ?></h2>
             <h3 class="fs-3-sans font-bold mb-1"><?php render_standfirst($post_id); ?></h3>
             <p class="fs-3-sans"><?php render_short_description($post_id); ?></p>
           </a>
@@ -156,7 +156,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
               <?php render_podcast_links($podcast_url); ?>
             </div>
             <div class="grid-item is-s-24 is-xxl-12">
-              <?php render_thumbnail($post_id, array(510, 510), array(
+              <?php render_thumbnail($post_id, '12-square', array(
                 'class' => 'mt-1'
               )); ?>
             </div>
