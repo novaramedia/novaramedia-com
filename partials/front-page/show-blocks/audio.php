@@ -50,7 +50,7 @@
         <div class="grid-item is-xxl-14">
           <a href="<?php echo get_the_permalink($post_id); ?>" class="ui-hover">
             <h3 class="font-size-11 font-weight-bold mb-2"><?php echo get_the_title($post_id); ?></h3>
-            <div class="font-size-10 font-weight-regular mb-3">
+            <div class="font-size-10 mb-3">
               <?php render_short_description($post_id); ?>
             </div>
           </a>

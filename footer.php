@@ -2,7 +2,7 @@
       <div class="container">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
-            <h6 class="font-weight-regular margin-bottom-small">NM</h6>
+            <h6 class="margin-bottom-small">NM</h6>
             <ul class="font-weight-bold margin-bottom-small">
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
@@ -20,7 +20,7 @@
             </ul>
           </div>
           <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
-            <h6 class="font-weight-regular margin-bottom-small">Podcasts</h6>
+            <h6 class="margin-bottom-small">Podcasts</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -30,7 +30,7 @@
                 )
               );
             ?>
-            <h6 class="font-weight-regular margin-bottom-small">Focuses</h6>
+            <h6 class="margin-bottom-small">Focuses</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -42,7 +42,7 @@
             ?>
           </div>
           <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
-            <h6 class="font-weight-regular margin-bottom-small">Articles</h6>
+            <h6 class="margin-bottom-small">Articles</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -52,7 +52,7 @@
                 )
               );
             ?>
-            <h6 class="font-weight-regular margin-bottom-small">Shows</h6>
+            <h6 class="margin-bottom-small">Shows</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -64,7 +64,7 @@
             ?>
           </div>
           <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
-            <h6 class="font-weight-regular margin-bottom-small">Social Media</h6>
+            <h6 class="margin-bottom-small">Social Media</h6>
             <?php
               wp_nav_menu(
                 array(

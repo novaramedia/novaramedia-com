@@ -19,7 +19,7 @@
         <a href="<?php echo $category_link; ?>">
           <div class="layout-split-level">
             <h3 class="font-size-13 font-weight-bold layout-flex-no-shrink mr-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
-            <div class="layout-flex-grow layout-overflow-hidden font-size-13 font-weight-regular">
+            <div class="layout-flex-grow layout-overflow-hidden font-size-13">
               <div class="ui-ticker">
                 <div class="ui-ticker__fade-left"></div>
                 <div class="ui-ticker__fade-right"></div>
@@ -53,7 +53,7 @@
             <div class="grid-item is-l-24 is-xxl-8 mt-l-3">
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <h6 class="font-size-13 font-weight-bold"><?php the_title(); ?></h6>
-                <div class="font-size-10 font-weight-regular text-paragraph-breaks mt-3">
+                <div class="font-size-10 text-paragraph-breaks mt-3">
                   <?php render_short_description($post->ID); ?>
                 </div>
               </a>

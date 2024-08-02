@@ -12,7 +12,7 @@
   ?>
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h4 class="font-size-13 font-weight-regular"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</a></h4>
+        <h4 class="font-size-13"><a href="<?php echo $category_link; ?>"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</a></h4>
       </div>
     </div>
 

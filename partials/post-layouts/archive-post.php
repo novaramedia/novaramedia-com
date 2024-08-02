@@ -62,7 +62,7 @@
         break;
       case 'large':
   ?>
-    <h3 class="font-size-2 mt-2 js-fix-widows"><?php the_title(); ?></h3>
+    <h3 class="font-size-10 font-weight-bold mt-2 js-fix-widows"><?php the_title(); ?></h3>
     <?php
       if ($is_article) {
     ?>

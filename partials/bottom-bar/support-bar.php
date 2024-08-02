@@ -14,17 +14,17 @@
     <div class="support-bar__open-view grid-row pb-2">
       <div class="grid-item is-xxl-6 only-desktop">
         <a href="<?php echo site_url('support/'); ?>">
-          <h3 class="font-color-white fs-l-6 font-size-15 font-weight-bold" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
+          <h3 class="font-color-white font-size-l-13 font-size-15 font-weight-bold" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
         </a>
       </div>
       <div class="grid-item is-xxl-20 only-mobile">
         <a href="<?php echo site_url('support/'); ?>">
-          <h3 class="font-color-white font-size-10 font-weight-bold mb-2">Build people-powered media.</h3>
+          <h3 class="font-color-white font-size-11 font-weight-bold mb-2">Build people-powered media.</h3>
         </a>
       </div>
       <div class="grid-item is-s-24 flex-item-xxl-6 font-color-white font-size-11 only-desktop">
         <div class="ml-m-4">
-          <p class="mb-2 font-weight-regular"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
+          <p class="mb-2"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
           <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>
         </div>
       </div>

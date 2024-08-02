@@ -15,21 +15,21 @@ if( have_posts() ) {
     $support_override = !empty($meta['_nm_support_text']) ? $meta['_nm_support_text'][0] : false;
 
     $settings_title_classes = array(
-      'huge' => 'font-size-s-7 font-size-m-6 font-size-l-7 font-size-17',
-      'big' => 'font-size-s-7 font-size-m-5 font-size-xl-6 font-size-7',
-      'medium' => 'font-size-s-7 font-size-6',
-      'smaller' => 'font-size-s-6 font-size-5'
+      'huge' => 'font-size-s-15 font-size-m-16 font-size-17',
+      'big' => 'font-size-s-14 font-size-m-15 font-size-16',
+      'medium' => 'font-size-s-13 font-size-15',
+      'smaller' => 'font-size-s-12 font-size-13'
     );
 ?>
   <article id="page">
     <div class="background-black font-color-white">
-      <div class="container pt-4 pb-6">
+      <div class="container pt-4 pb-6 pb-m-4">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <h4 class="font-size-9 text-uppercase font-weight-bold">Newsletter</h4>
             <h1 class="<?php
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
-            ?> mt-4"><?php the_title(); ?></h1>
+            ?> font-weight-bold mt-4"><?php the_title(); ?></h1>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@ if( have_posts() ) {
           ?>
         </div>
         <div class="grid-item offset-s-0 is-s-24 offset-m-1 is-m-20 is-xxl-12">
-          <div class="font-size-3 font-weight-semibold mb-4">
+          <div class="font-size-12 font-weight-semibold mb-4">
             <?php the_content(); ?>
           </div>
           <?php

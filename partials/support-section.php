@@ -16,7 +16,7 @@
     >
       <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
 
-      <div class="grid-row font-size-11 font-size-S-10">
+      <div class="grid-row font-size-11 font-size-s-10">
         <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
           <a href="<?php echo home_url('support/'); ?>">
             <h4 class="font-size-12 font-weight-bold mb-3"><?php echo $heading_copy; ?></h4>

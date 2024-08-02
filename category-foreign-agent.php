@@ -146,7 +146,7 @@ function nm_render_podcast_credit($credit) {
       </div>
     </div>
     <div class="flex-grid-row mb-6">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center font-size-13 font-weight-regular text-links-underlined">
+      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center font-size-13 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
           Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>, <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
         </div>

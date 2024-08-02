@@ -50,8 +50,8 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
-        <h3 class="font-size-15 font-weight-bold fs-s-6 mb-4 js-fix-widows"><?php echo $headline; ?></h3>
-        <p class="font-size-12 font-size-S-10 font-weight-bold mr-6">
+        <h3 class="font-size-15 font-size-s-12 font-weight-bold mb-4 js-fix-widows"><?php echo $headline; ?></h3>
+        <p class="font-size-12 font-size-s-10 font-weight-bold mr-6">
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>

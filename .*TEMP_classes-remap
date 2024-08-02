@@ -50,9 +50,11 @@ fs-3-sans
 
 font-size-2
 fs-4-sans
+font-size-10 font-weight-bold
 
 font-size-3
 fs-6
+font-size-12 font-weight-bold
 
 font-size-4
 fs-8

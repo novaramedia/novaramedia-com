@@ -19,7 +19,7 @@
       'data-no-lazysizes' => true,
       'loading' => 'eager'
     )); ?>
-    <div class="font-size-8 font-weight-regular">
+    <div class="font-size-8">
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>

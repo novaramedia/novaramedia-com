@@ -111,14 +111,14 @@
     <div class="grid-row pb-4">
       <div class="grid-item is-xxl-24">
         <a href="<?php echo $url; ?>">
-          <h3 class="if-i-speak-banner__title">If I Speak...</h3>
+          <h3 class="if-i-speak-banner__title font-weight-bold">If I Speak...</h3>
         </a>
       </div>
     </div>
     <div class="grid-row pb-4">
       <div class="if-i-speak-banner__off-smaller grid-item is-xxl-8 font-size-12 font-weight-bold">
-        <span class="text-uppercase font-size-10 font-weight-bold">with</span> Moya Lothian-McLean<br>
-        <span class="text-uppercase font-size-10 font-weight-bold">and</span> Ash Sarkar
+        <span class="text-uppercase font-size-10">with</span> Moya Lothian-McLean<br>
+        <span class="text-uppercase font-size-10">and</span> Ash Sarkar
       </div>
       <div class="grid-item is-m-12 is-l-6 is-xxl-8">
         <a href="<?php echo $url; ?>">
@@ -127,8 +127,8 @@
       </div>
       <div class="if-i-speak-banner__cta-container grid-item is-m-12 is-l-10 is-xxl-8 text-align-right">
         <div class="if-i-speak-banner__on-smaller mb-2 font-size-12 font-size-s-11 font-weight-bold">
-          <span class="text-uppercase font-size-10 font-weight-bold">with</span> Moya Lothian-McLean<br>
-          <span class="text-uppercase font-size-10 font-weight-bold">and</span> Ash Sarkar
+          <span class="text-uppercase font-size-10">with</span> Moya Lothian-McLean<br>
+          <span class="text-uppercase font-size-10">and</span> Ash Sarkar
         </div>
 
         <a href="<?php echo $url; ?>"><p class="font-size-12 font-weight-bold mb-3">New episodes out every Friday</p></a>
