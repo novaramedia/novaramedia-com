@@ -38,8 +38,10 @@ $col = 42px
 $gutter = 16px
 
 html
+  // layout
   --grid-gutter: 1rem
   --corner-radius: 2px
+  // colors
   --color-white-soft: rgb(253, 253, 253)
   --color-white-soft-transparent: rgba(253, 253, 253, .5)
   --color-black-soft: rgb(14, 14, 14)
@@ -59,8 +61,10 @@ html
   --color-gray-light: rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
   --color-gray-light-transparent: rgba(190,190,190, .5)
   --color-gray-extra-light: #EDEAEA
+  // typography
   --font-family-sans: font-stack('Helvetica Neue')
   --font-family-serif: font-stack('Georgia')
+  // transitions
   --transition-speed-slow: 1111ms
   --transition-speed-medium: 420ms
   --transition-speed-quick: 140ms
@@ -93,9 +97,15 @@ for col in 1..$cols
 
 // VARIABLES
 
+$breakpoint-s = 759px
+$breakpoint-m = 910px
+$breakpoint-l = 1104px
+$breakpoint-xl = 1408px
+
 $golden-ratio = 1.61803398875
 
 // START DEPRECATED
+
 $margin-small = ($gutter)
 $margin-tiny = ($gutter / 2)
 $margin-micro = ($gutter / (2 * $golden-ratio))
@@ -107,65 +117,11 @@ $color-black-soft = rgb(14, 14, 14)
 $color-white-soft = rgb(253, 253, 253)
 $color-white-soft-transparent = rgba(253, 253, 253, .5)
 
-$color-black--hover = rgb(61, 61, 61)
-
 $color-red = rgb(220, 0, 5) // Mine
 $color-red-dark = #A80003
 $color-blue = rgb(84, 144, 235)
 
-$duration-medium-transitions = 420ms
-$duration-quick-transitions = $duration-medium-transitions * .333
-$duration-form-transitions = $duration-medium-transitions
-
 // END DEPRECATED
-
-$breakpoint-s = 759px
-$breakpoint-m = 910px
-$breakpoint-l = 1104px
-$breakpoint-xl = 1408px
-
-// ******************************************************
-
-// TEXT FORMATTING
-
-article
-  ul, ol
-    margin-top: 2rem
-    margin-bottom: 2rem
-  ul
-    li
-      list-style: disc inside
-  ol
-    li
-      list-style: decimal inside
-
-.text-copy, .page-copy
-  .twitter-tweet, .instagram-media, .oembed-element
-    margin: 2rem auto !important
-  p
-    margin-bottom: 1rem
-  blockquote
-    margin: 2rem
-  h1, h2, h3, h4, h5, h6
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
-  a
-    color: var(--color-blue)
-  img, figure, .wp-caption
-    max-width: 100% !important
-    display: block
-    margin: 2rem auto
-  .wp-caption
-    &.alignnone
-      text-align: center
-    img
-      margin: 0 auto
-    .wp-caption-text
-      text-align: left
-      margin-top: $margin-tiny
-
-.wp-video + .wp-caption
-  margin-top: -1rem
 
 // ******************************************************
 

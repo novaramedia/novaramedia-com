@@ -1344,85 +1344,6 @@ body {
 .col24 {
   width: 1376px;
 }
-article ul,
-article ol {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-article ul li {
-  list-style: disc inside;
-}
-article ol li {
-  list-style: decimal inside;
-}
-.text-copy .twitter-tweet,
-.page-copy .twitter-tweet,
-.text-copy .instagram-media,
-.page-copy .instagram-media,
-.text-copy .oembed-element,
-.page-copy .oembed-element {
-  margin: 2rem auto !important;
-}
-.text-copy p,
-.page-copy p {
-  margin-bottom: 1rem;
-}
-.text-copy blockquote,
-.page-copy blockquote {
-  margin: 2rem;
-}
-.text-copy h1,
-.page-copy h1,
-.text-copy h2,
-.page-copy h2,
-.text-copy h3,
-.page-copy h3,
-.text-copy h4,
-.page-copy h4,
-.text-copy h5,
-.page-copy h5,
-.text-copy h6,
-.page-copy h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.text-copy a,
-.page-copy a {
-  color: var(--color-blue);
-}
-.text-copy img,
-.page-copy img,
-.text-copy figure,
-.page-copy figure,
-.text-copy .wp-caption,
-.page-copy .wp-caption {
-  max-width: 100% !important;
-}
-.text-copy img,
-.page-copy img,
-.text-copy figure,
-.page-copy figure,
-.text-copy .wp-caption,
-.page-copy .wp-caption {
-  display: block;
-  margin: 2rem auto;
-}
-.text-copy .wp-caption.alignnone,
-.page-copy .wp-caption.alignnone {
-  text-align: center;
-}
-.text-copy .wp-caption img,
-.page-copy .wp-caption img {
-  margin: 0 auto;
-}
-.text-copy .wp-caption .wp-caption-text,
-.page-copy .wp-caption .wp-caption-text {
-  text-align: left;
-  margin-top: 8px;
-}
-.wp-video + .wp-caption {
-  margin-top: -1rem;
-}
 .background-black {
   background-color: var(--color-black-soft);
 }
@@ -1828,7 +1749,9 @@ body {
 .font-mono {
   font-family: monospace;
 }
-.font-size-7 {
+.font-size-7,
+.ui-tag,
+.ui-av-tag {
   font-size: 0.5625rem;
   line-height: 1.2em;
   letter-spacing: 0.02813rem;
@@ -2162,6 +2085,17 @@ b {
 .text-paragraph-breaks p {
   margin-bottom: 1em;
 }
+article ul,
+article ol {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+article ul li {
+  list-style: disc inside;
+}
+article ol li {
+  list-style: decimal inside;
+}
 .text-copy p {
   font-family: var(--font-family-serif);
 }
@@ -2183,6 +2117,74 @@ b {
 .page-copy .wp-caption .wp-caption-text {
   font-family: var(--font-family-sans);
   font-size: 0.8rem;
+}
+.text-copy .twitter-tweet,
+.page-copy .twitter-tweet,
+.text-copy .instagram-media,
+.page-copy .instagram-media,
+.text-copy .oembed-element,
+.page-copy .oembed-element {
+  margin: 2rem auto !important;
+}
+.text-copy p,
+.page-copy p {
+  margin-bottom: 1rem;
+}
+.text-copy blockquote,
+.page-copy blockquote {
+  margin: 2rem;
+}
+.text-copy h1,
+.page-copy h1,
+.text-copy h2,
+.page-copy h2,
+.text-copy h3,
+.page-copy h3,
+.text-copy h4,
+.page-copy h4,
+.text-copy h5,
+.page-copy h5,
+.text-copy h6,
+.page-copy h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.text-copy a,
+.page-copy a {
+  color: var(--color-blue);
+}
+.text-copy img,
+.page-copy img,
+.text-copy figure,
+.page-copy figure,
+.text-copy .wp-caption,
+.page-copy .wp-caption {
+  max-width: 100% !important;
+}
+.text-copy img,
+.page-copy img,
+.text-copy figure,
+.page-copy figure,
+.text-copy .wp-caption,
+.page-copy .wp-caption {
+  display: block;
+  margin: 2rem auto;
+}
+.text-copy .wp-caption.alignnone,
+.page-copy .wp-caption.alignnone {
+  text-align: center;
+}
+.text-copy .wp-caption img,
+.page-copy .wp-caption img {
+  margin: 0 auto;
+}
+.text-copy .wp-caption .wp-caption-text,
+.page-copy .wp-caption .wp-caption-text {
+  text-align: left;
+  margin-top: 8px;
+}
+.wp-video + .wp-caption {
+  margin-top: -1rem;
 }
 .font-color-white {
   color: var(--color-white-soft);
@@ -3097,12 +3099,8 @@ a {
   background-color: var(--color-black-soft-transparent);
 }
 .ui-tag {
-  font-size: 0.5625rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.02813rem;
   text-transform: uppercase;
+  font-weight: 700;
   background-color: var(--color-white-soft);
   color: var(--color-black-soft);
   border: 1px solid var(--color-gray-light);
@@ -3123,11 +3121,7 @@ a {
   margin-right: 0.25rem;
 }
 .ui-av-tag {
-  font-size: 0.5625rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.02813rem;
   background-color: var(--color-white-soft);
   border: 1px solid var(--color-gray-light);
   border-radius: 50%;

@@ -17,16 +17,17 @@ body
 .font-mono
   font-family: monospace
 
-// FONT SIZE GENERATOR
+// FONT SIZE GENERATOR FUNCTIONS
+
+$large-scale = 0.5625 0.75 0.875 1 1.25 1.5 2 2.5 3 3.75 4.5
+$small-scale = 0.57142857 0.71428571 0.85714286 1 1.14285714 1.35714286 1.71428571 2.28571429 2.85714286 3.42857143 4.28571429
+$line-height-scale = 1.2 1.2 1.2 1.2 1.1 1.1 1 1 1 1 1
+$letter-spacing-scale = 0.02813 0.02975 0.01094 0.01 0.025 0.01 0.01 0.01 0.01 0.01 0.01
 
 font-size-maker($breakpoint = false, $larger-scale = true)
   // 11 step scale with 2 variations.
   // Smaller scale is for mobile, larger scale is for desktop.
   // This function generates classes for both scales.
-  $large-scale = 0.5625 0.75 0.875 1 1.25 1.5 2 2.5 3 3.75 4.5
-  $small-scale = 0.57142857 0.71428571 0.85714286 1 1.14285714 1.35714286 1.71428571 2.28571429 2.85714286 3.42857143 4.28571429
-  $line-height = 1.2 1.2 1.2 1.2 1.1 1.1 1 1 1 1 1
-  $letter-spacing = 0.02813 0.02975 0.01094 0.01 0.025 0.01 0.01 0.01 0.01 0.01 0.01
   $offset-to-root = 7 // this centers the scale on the root size which is 1rem. the helper classes center at .font-size-10
 
   if $breakpoint
@@ -38,13 +39,15 @@ font-size-maker($breakpoint = false, $larger-scale = true)
     if $larger-scale
       {$prefix}{i+$offset-to-root}
         font-size: $large-scale[i] * 1rem
-        line-height: $line-height[i] * 1em
-        letter-spacing: $letter-spacing[i] * 1rem
+        line-height: $line-height-scale[i] * 1em
+        letter-spacing: $letter-spacing-scale[i] * 1rem
     else
       {$prefix}{i+$offset-to-root}
         font-size: $small-scale[i] * 1rem
-        line-height: $line-height[i] * 1em
-        letter-spacing: $letter-spacing[i] * 1rem
+        line-height: $line-height-scale[i] * 1em
+        letter-spacing: $letter-spacing-scale[i] * 1rem
+
+// GENERATE FONT SIZES
 
 font-size-maker()
 
@@ -111,12 +114,23 @@ font-size-maker()
 
 // FORMATTING COPY
 
+article
+  ul, ol
+    margin-top: 2rem
+    margin-bottom: 2rem
+  ul
+    li
+      list-style: disc inside
+  ol
+    li
+      list-style: decimal inside
+
 .text-copy
   p
     font-family: var(--font-family-serif)
   p, ul, ol
-    font-size: 1.3rem // this should be deprecated as an implementation
-    line-height: 1.55 // this should be deprecated as an implementation
+    font-size: 1.3rem // this should be deprecated as an implementation by @4.3.0
+    line-height: 1.55 // this should be deprecated as an implementation by @4.3.0
 
 .text-copy, .page-copy
   blockquote
@@ -126,7 +140,33 @@ font-size-maker()
   .wp-caption
     .wp-caption-text
       font-family: var(--font-family-sans)
-      font-size: .8rem // this should be deprecated as an implementation
+      font-size: .8rem // this should be deprecated as an implementation by @4.3.0
+  .twitter-tweet, .instagram-media, .oembed-element
+    margin: 2rem auto !important
+  p
+    margin-bottom: 1rem
+  blockquote
+    margin: 2rem
+  h1, h2, h3, h4, h5, h6
+    margin-top: 1.5rem
+    margin-bottom: 1.5rem
+  a
+    color: var(--color-blue)
+  img, figure, .wp-caption
+    max-width: 100% !important
+    display: block
+    margin: 2rem auto
+  .wp-caption
+    &.alignnone
+      text-align: center
+    img
+      margin: 0 auto
+    .wp-caption-text
+      text-align: left
+      margin-top: $margin-tiny
+
+.wp-video + .wp-caption
+  margin-top: -1rem
 
 // COLOR RULES
 
@@ -163,14 +203,3 @@ font-size-maker()
 a
   color: inherit
   text-decoration: none
-
-// *******
-
-// MIGRATE BELOW
-
-font-size-1()
-  font-size: 0.5625rem
-  font-style: normal
-  font-weight: 700
-  line-height: normal
-  letter-spacing: 0.02813rem

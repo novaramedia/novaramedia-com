@@ -57,8 +57,9 @@
           background-color: var(--color-black-soft-transparent)
 
 .ui-tag
-  font-size-1()
+  @extend .font-size-7
   text-transform: uppercase
+  font-weight: 700
   background-color: var(--color-white-soft)
   color: var(--color-black-soft)
   border: 1px solid var(--color-gray-light)
@@ -76,7 +77,8 @@
     margin-right: .25rem
 
 .ui-av-tag
-  font-size-1()
+  @extend .font-size-7
+  font-weight: 700
   background-color: var(--color-white-soft)
   border: 1px solid var(--color-gray-light)
   border-radius: 50%
@@ -117,7 +119,7 @@
 // Form Elements
 // -------------
 
-formElementBase()
+formElementBase() // This could be a class that is extended rather than a mixin
   display: inline-flex
   justify-content: center
   height: 2.625rem
