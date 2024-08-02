@@ -250,7 +250,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
     get_template_part('partials/support-section');
   ?>
 
-  <div class="background-green">
+  <div class="background-black font-color-white">
     <section class="container pt-6 pb-7">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
