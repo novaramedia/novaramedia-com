@@ -134,8 +134,10 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
         <div class="grid-item offset-xxl-1 is-xxl-18">
           <div class="grid-row grid--nested">
             <div class="grid-item is-s-24 is-xxl-12 mb-s-5">
-              <h4 class="fs-3-sans font-bold font-uppercase mb-2">Latest Episode</h4>
-              <h2 class="fs-7 mb-3"><?php echo get_the_title($post_id); ?></h2>
+              <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
+                <h4 class="fs-3-sans font-bold font-uppercase mb-2">Latest Episode</h4>
+                <h2 class="fs-8 mb-3"><?php echo get_the_title($post_id); ?></h2>
+              </a>
               <p class="fs-4-serif mb-4"><?php render_short_description($post_id); ?></p>
 
               <?php
@@ -156,9 +158,11 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
               <?php render_podcast_links($podcast_url); ?>
             </div>
             <div class="grid-item is-s-24 is-xxl-12">
-              <?php render_thumbnail($post_id, '12-square', array(
-                'class' => 'mt-1'
-              )); ?>
+              <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
+                <?php render_thumbnail($post_id, '12-square', array(
+                  'class' => 'mt-1'
+                )); ?>
+              </a>
             </div>
           </div>
         </div>
