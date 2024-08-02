@@ -4031,11 +4031,16 @@ html {
 .novara-fm-archive__archive-block .swiper-slide {
   width: 300px;
 }
+.novara-fm-archive__about-the-show {
+  position: relative;
+  z-index: 100;
+}
 .novara-fm-archive__split-logotype {
   display: block;
   width: 80%;
   max-width: 700px;
-  margin: 0 auto;
+  margin: -1px auto;
+  z-index: -100;
 }
 @media screen and (max-width: 759px) {
   .novara-fm-archive__archive-block .swiper-slide {
