@@ -133,6 +133,32 @@ function render_standfirst($postId = null) {
   }
 }
 /**
+ * Render video title and the standfirst as single line
+ *
+ * Conditionally adds a period if the title does not end with a letter or number
+ *
+ * @param integer $postId Post ID
+ */
+function render_video_title_and_standfirst($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  echo get_the_title($postId);
+
+  if (isset($meta['_cmb_standfirst']) && !empty($meta['_cmb_standfirst'])) {
+    if (preg_match('/[a-zA-Z0-9]$/', get_the_title($postId)) !== 0) {
+      echo '. ';
+    } else {
+      echo ' ';
+    }
+
+    render_standfirst($postId);
+  }
+}
+/**
  * Echo the meta short description. If not set then render the excerpt.
  *
  * @param integer $postId Post ID

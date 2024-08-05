@@ -105,7 +105,9 @@
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="font-size-9 font-weight-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+              <h6 class="font-size-9 font-weight-bold mt-1">
+                <?php render_video_title_and_standfirst($post->ID); ?>
+              </h6>
             </a>
           </div>
         <?php

@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor typography declarations to separate sizes from weights and fonts
 - Refactor stylus to use nm-stylus-library via packages
 
+### Fixed
+
+- Video titles with standfirsts in same line now use a renderer and don't display stray full stops
+
 ## [4.1.1] - 2024-07-01
 
 ### Added

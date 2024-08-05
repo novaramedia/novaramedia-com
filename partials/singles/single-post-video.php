@@ -69,6 +69,7 @@
         if ($related_video->have_posts()) {
           while ($related_video->have_posts()) {
             $related_video->the_post();
+            $meta = get_post_meta($post->ID);
       ?>
       <div class="grid-item is-s-8 is-xxl-24 mb-3">
         <div class="layout-thumbnail-frame">
@@ -82,7 +83,9 @@
           </a>
         </div>
         <a href="<?php the_permalink(); ?>" class="ui-hover">
-          <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+          <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1">
+            <?php render_video_title_and_standfirst($post->ID); ?>
+          </h6>
         </a>
       </div>
       <?php
