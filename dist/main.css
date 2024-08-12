@@ -3729,35 +3729,6 @@ hr {
 .email-signup__form--completed .email-signup__submit {
   display: none;
 }
-.newsletter-page-email-signup__form {
-  position: relative;
-}
-.newsletter-page-email-signup__form .email-signup__feedback-processing,
-.newsletter-page-email-signup__form .email-signup__feedback-failed,
-.newsletter-page-email-signup__form .email-signup__feedback-completed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.newsletter-page-email-signup__form.email-signup__form--processing,
-.newsletter-page-email-signup__form.email-signup__form--failed,
-.newsletter-page-email-signup__form.email-signup__form--completed {
-  background-color: var(--color-black-soft);
-  color: var(--color-white-soft);
-}
-.newsletter-page-email-signup__form.email-signup__form--processing .newsletter-page-email-signup__inputs,
-.newsletter-page-email-signup__form.email-signup__form--failed .newsletter-page-email-signup__inputs,
-.newsletter-page-email-signup__form.email-signup__form--completed .newsletter-page-email-signup__inputs {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  opacity: 0;
-}
-.email-signup__icon {
-  height: 3rem;
-  fill: var(--color-white-soft);
-}
 .front-page-novara-live__posts-scroller {
   height: 400px;
 }

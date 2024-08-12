@@ -1,5 +1,49 @@
 <?php
 /**
+ * Renders a Mailchimp signup form.
+ *
+ * @param string $mailchimp_key The Mailchimp key.
+ * @param string $netlify_url The Netlify URL.
+ * @param string $background_color The background color. Default is 'black'.
+ * @param string $button_color The button color. Default is 'red'.
+ */
+function render_mailchimp_signup_form($netlify_url, $mailchimp_key, $background_color = 'black', $button_color = 'red') {
+  if (!$mailchimp_key) {
+    return;
+  }
+?>
+<form class="email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
+  <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
+
+  <div class="email-signup__inputs">
+    <div class="form-group mb-2">
+      <label class="u-visuallyhidden" for="firstName">First name:</label>
+      <input name="firstName" class="email-signup__name-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
+    </div>
+
+    <div class="form-group mb-2">
+      <label class="u-visuallyhidden" for="email">Email:</label>
+      <input name="email" class="email-signup__email-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="email" type="email" autocomplete="email" placeholder="Email" required />
+    </div>
+
+    <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
+      <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+      <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
+    </div>
+
+    <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up" />
+
+    <span class="email-signup__feedback-processing ui-button ui-button--disabled fs-6">Processing...</span>
+    <span class="email-signup__feedback-completed ui-button ui-button--disabled fs-6">Success</span>
+    <div class="email-signup__feedback-failed layout-split-level">
+      <input class="ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Try again" />
+      <p class="ml-2 fs-2">Failed: <span class="email-signup__feedback-message"></span>.</p>
+    </div>
+  </div>
+</form>
+<?php
+}
+/**
  * Render the see also block
  * Based on a passed query. Can render more than 1 post but will only show one on mobile
  * Not a complete component which is why it is a renderer. Use this inside other conditionals
