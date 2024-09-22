@@ -39,7 +39,7 @@
   if (!empty($meta['_cmb_sc'][0])) {
 ?>
     <div class="text-copy mb-4">
-      <p class="font-smaller">Listen to this article as audio:</p>
+      <p class="font-size-8">Listen to this article as audio:</p>
       <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
     </div>
 <?php
@@ -72,7 +72,7 @@
   }
 ?>
     <div>
-      <ul class="inline-action-list fs-4-sans font-weight-regular">
+      <ul class="inline-action-list font-size-10">
         <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
         <li><?php render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
         <li><?php render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>

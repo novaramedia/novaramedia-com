@@ -58,8 +58,8 @@ export class Header {
     });
 
     $(window).on({
-      scroll: debounce(_this.handleScroll.bind(_this), 35),
-      resize: debounce(_this.handleResize.bind(_this), 25),
+      scroll: debounce(_this.handleScroll.bind(_this), 250),
+      resize: debounce(_this.handleResize.bind(_this), 250),
     });
   }
 

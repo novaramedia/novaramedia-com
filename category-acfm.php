@@ -36,7 +36,7 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
   <div class="background-acfm-pink">
     <section class="container pt-5 pb-5 mb-4 font-color-white">
       <div class="grid-row">
-        <div class="grid-item is-s-16 is-xxl-8 mt-4 fs-6 text-paragraph-breaks">
+        <div class="grid-item is-s-16 is-xxl-8 mt-4 font-size-12 font-weight-bold text-paragraph-breaks">
           <?php echo category_description(); ?>
         </div>
         <div class="category-archive__acfm__logo grid-item is-s-8 is-xxl-8 text-align-center">

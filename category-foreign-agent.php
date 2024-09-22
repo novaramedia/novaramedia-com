@@ -21,7 +21,7 @@ $credits_thanks = array(
 function nm_render_podcast_credit($credit) {
 ?>
 <div class="podcast-credit mb-3">
-  <div class="font-small-caps"><?php echo $credit[0]; ?></div>
+  <div class="font-size-8"><?php echo $credit[0]; ?></div>
   <?php echo $credit[1]; ?>
 </div>
 <?php
@@ -114,7 +114,7 @@ function nm_render_podcast_credit($credit) {
   <section class="container pt-4 pb-4">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 mb-4">
-        <h4 class="fs-3-sans font-uppercase font-bold" style="color: #E3FFFF;"><a href="<?php echo home_url('category/audio/'); ?>">Podcast</a></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold" style="color: #E3FFFF;"><a href="<?php echo home_url('category/audio/'); ?>">Podcast</a></h4>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
@@ -134,7 +134,7 @@ function nm_render_podcast_credit($credit) {
   <section class="container">
     <div class="flex-grid-row mt-4 mb-4">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
-        <h3 class="mb-4 fs-6">Listen to the trailer:</h3>
+        <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1270698601&color=%23ffab70&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
       </div>
     </div>
@@ -146,7 +146,7 @@ function nm_render_podcast_credit($credit) {
       </div>
     </div>
     <div class="flex-grid-row mb-6">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center fs-7 font-weight-regular text-links-underlined">
+      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center font-size-13 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
           Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>, <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
         </div>
@@ -163,8 +163,8 @@ if( have_posts() ) {
 ?>
       <article class="foreign-agent-archive__episode flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
-          <h4 class="fs-3-sans font-uppercase font-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="fs-7 font-semibold js-fix-widows"><?php the_title(); ?></h3>
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
+          <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail('col12-16to9', array('class' => 'index-post-thumbnail')); ?>
@@ -183,27 +183,27 @@ if( have_posts() ) {
     </div>
   </section>
   <div style="background-color: #FFAB70;">
-    <div class="foreign-agent-archive__credits container pt-6 pb-6">
+    <div class="foreign-agent-archive__credits container font-size-10 pt-6 pb-6">
       <div class="flex-grid-row mb-5">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-          <h4 class="fs-3-sans font-uppercase font-bold">The producers</h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold">The producers</h4>
         </div>
       </div>
       <div class="flex-grid-row mb-5">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
           <div class="foreign-agent-archive__box" style="transform: rotate(-2deg);">
-            <span class="font-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
+            <span class="font-weight-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
           <div class="foreign-agent-archive__box" style="transform: rotate(1deg);">
-            <span class="font-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
+            <span class="font-weight-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
           </div>
         </div>
       </div>
       <div class="flex-grid-row mb-5">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-          <h4 class="fs-3-sans font-uppercase font-bold">Credits</h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold">Credits</h4>
         </div>
       </div>
       <div class="flex-grid-row">

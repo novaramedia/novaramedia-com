@@ -77,7 +77,7 @@
 <div class="grid-row grid--nested mt-3">
   <div class="grid-item is-s-24 <?php echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h2 class="post__title <?php echo $has_huge_headline ? 'fs-8 fs-m-7' : 'fs-7'; ?> mb-3"><?php echo $the_title; ?></h2>
+      <h2 class="post__title <?php echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold mb-3"><?php echo $the_title; ?></h2>
 <?php
   if (!$has_related) {
   // surprizing conditional here: this is so that the title can either have it's own wider box or not depending on the display of related posts
@@ -90,7 +90,7 @@
   // end of surprizing conditional
   }
 ?>
-      <h5 class="fs-2 font-uppercase">
+      <h5 class="font-size-8 font-weight-bold text-uppercase">
         <?php
           if ($is_article) {
             render_bylines($post_id);
@@ -99,7 +99,7 @@
           }
         ?>
       </h5>
-      <div class="fs-3-sans mt-2 mb-0">
+      <div class="font-size-9 mt-2 mb-0">
         <?php render_short_description($post_id); ?>
       </div>
     </a>
@@ -140,7 +140,7 @@ if ($is_product_linked || $more_on_section) {
     $label = 'More ' . $more_on_section->name;
   }
 ?>
-<div class="mt-2 fs-2 only-desktop">
+<div class="mt-2 font-size-8 font-weight-bold only-desktop">
   <a href="<?php echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
 </div>
 <?php

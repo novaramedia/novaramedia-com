@@ -1,5 +1,28 @@
 <?php
 /**
+ * Hook cmb2_save_options-page_fields to flush the cache when theme options are saved
+ * This is necessary because the front page is cached and the cache needs to be flushed when the front page options are saved
+ *
+ * @param int $object_id
+ * @param array $updated
+ * @param CMB2 $cmb
+ * @param string $object_type
+ */
+function nm_flush_cache_on_theme_options_save($object_id, $updated, $cmb, $object_type) {
+  $matches = [
+    'nm_front_page_options',
+    'nm_front_page_above_the_fold_featured_options',
+    'nm_front_page_links_bar_options',
+    'nm_front_page_highlight_section_options',
+  ];
+
+  if (in_array($object_id, $matches)) {
+    // flushes the whole cache. would be better to flush only the cache for the front page but that functionality doest not seem to be available
+    wp_cache_flush();
+  }
+}
+add_action('cmb2_save_options-page_fields', 'nm_flush_cache_on_theme_options_save', 10, 4);
+/**
  * Hook template_redirect to 301 redirect author pages to the homepage
  * Author pages are those created for WP users and thus do not relate to any real content
  *
