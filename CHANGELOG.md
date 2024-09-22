@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Hardcoded temporary apology notice. To automatically hide after term. Can potentially be recycled in future.
 - Wordpress core cache auto-flushed when front page options are updated. This should ideally improve cache busting for changing e.g. featured posts above the fold
 
 ### Changed

@@ -1,5 +1,28 @@
 <?php
 /**
+ * Check for apology notice and display it if it is in the future
+ * This function will check if the apology notice is in the future and display it if it is
+ *
+ * @return array/Boolean Array of apology post or false if no apology post
+ * @since 4.1.1
+ */
+function check_for_apology_notice() {
+  $m = new \Moment\Moment(1727035200); // Sun, 22 Sept 20:00:00 GMT
+  $m->addWeeks(8); // Time for notice to show
+  $momentFromVo = $m->fromNow();
+
+  if ($momentFromVo->getDirection() === 'future') {
+    $apology_post = get_posts(array('name' => 'gary-and-jack-lubner-apology', 'post_type' => 'notice'));
+    if ($apology_post) {
+      return $apology_post;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+/**
  * Get the latest articles ids
  * This function will get the latest articles ids, excluding the featured posts if set
  * If the featured posts are not set, it will return the latest articles ids

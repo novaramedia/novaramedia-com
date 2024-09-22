@@ -9,6 +9,25 @@
     <div class="swiper-button-next"><span class="only-desktop ui-chevron ui-chevron--right"></span></div>
     <div class="swiper-wrapper">
       <?php
+        if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
+          $post_id = $apology_post[0]->ID;
+        ?>
+        <div class="swiper-slide products-bar__item ux-carousel__item">
+          <a href="<?php echo get_permalink($post_id); ?>">
+            <div class="products-bar__item-inner" style="width: 100%;">
+              <div class="products-bar__item-image mr-2">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=" alt="Blank image" class="ui-rounded-image" data-no-lazysizes="true" loading="eager">
+              </div>
+              <div class="products-bar__item-text font-size-9">
+                <h5 class="font-weight-bold">Correction</h5>
+                <?php echo get_the_title($post_id); ?>
+              </div>
+            </div>
+          </a>
+        </div>
+        <?php
+        }
+
         foreach ($signups as $index => $signup) {
           $title = isset($signup['title']) ? $signup['title'] : '';
           $link = isset($signup['link']) ? $signup['link'] : '';
