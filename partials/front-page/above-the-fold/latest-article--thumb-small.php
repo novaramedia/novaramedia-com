@@ -27,7 +27,7 @@
     <div class="grid-item is-xxl-16">
       <?php render_post_ui_tags($post_id); ?>
       <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h4 class="post__title font-size-10 font-size-s-11 font-weight-bold font-condensed pt-1"><?php echo get_the_title($post_id); ?></h4>
+      <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed pt-1"><?php echo get_the_title($post_id); ?></h4>
 
       <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
