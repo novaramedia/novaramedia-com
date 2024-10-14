@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Increase root type size to 16px
 - Have only 1 heading type size for latest articles section above the fold
 
 ### Fixed
