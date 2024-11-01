@@ -58,7 +58,7 @@ function render_see_also($query, $number_of_posts = 1) {
 function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false) {
   $sub_category = get_the_sub_category($post_id, true);
 
-  if (!$sub_category) {
+  if (empty($sub_category)) {
     return;
   }
 
@@ -285,7 +285,7 @@ function render_post_title($postId) {
 
   $sub_category = get_the_sub_category($postId, true);
 
-  if ($sub_category && !is_category($sub_category->term_id)) {
+  if (!empty($sub_category) && !is_category($sub_category->term_id)) {
     $title = '<span class="font-size-8">' . $sub_category->name . ':</span> ' . $title;
   }
 
