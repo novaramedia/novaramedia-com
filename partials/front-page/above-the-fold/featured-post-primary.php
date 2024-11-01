@@ -23,7 +23,6 @@
 
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
-  $sub_category = get_the_sub_category($post_id);
 
   if (empty($meta['_cmb_utube'])) {
     $has_embed = false;
@@ -121,6 +120,11 @@
 if ($is_product_linked || $more_on_section) {
   if ($is_product_linked) {
     $product_term_object = get_the_sub_category($post_id, true);
+
+    if (empty($product_term_object)) {
+      return;
+    }
+
     $link = get_term_link($product_term_object);
     $media_type = get_the_top_level_category($post_id);
 

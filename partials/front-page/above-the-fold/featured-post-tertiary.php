@@ -13,7 +13,6 @@
 
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
-  $sub_category = get_the_sub_category($post_id);
 ?>
   <div class="featured-posts__tertiary <?php echo $container_classes; ?>">
     <div>
