@@ -126,7 +126,7 @@ function my_gallery_shortcode($attr) {
 
     if ( $captiontag && trim($attachment->post_excerpt) ) {
       $tag = "
-        <{$captiontag} class='margin-top-tiny font-smaller'>
+        <{$captiontag} class='margin-top-tiny font-size-8'>
         " . wptexturize($attachment->post_excerpt) . "
         </{$captiontag}>";
     } else {

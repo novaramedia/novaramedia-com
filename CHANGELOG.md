@@ -5,11 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+### Fixed
+
+- nm_is_articles() supports posts where Articles hasnt been selected but a child category has
+
+## [4.2.3] - 2024-11-01
+
+### Fixed
+
+- Uncaught false returns with get_the_sub_category()
+
+## [4.2.2] - 2024-10-14
+
+### Changed
+
+- Increase root type size to 16px
+- Have only 1 heading type size for latest articles section above the fold
+
+### Fixed
+
+- Incorrect letter spacing values on new type tooling
+
+## [4.2.1] - 2024-09-30
+
+### Fixed
+
+- Added styles for articles headings to fix missing function from type styles migration
+
+## [4.2.0] - 2024-09-22
 
 ### Added
 
+- Hardcoded temporary apology notice. To automatically hide after term. Can potentially be recycled in future.
 - Wordpress core cache auto-flushed when front page options are updated. This should ideally improve cache busting for changing e.g. featured posts above the fold
+
+### Changed
+
+- Refactor typography declarations to separate sizes from weights and fonts
+- Refactor stylus to use nm-stylus-library via packages
+
+### Fixed
+
+- Video titles with standfirsts in same line now use a renderer and don't display stray full stops
 
 ## [4.1.1] - 2024-07-01
 

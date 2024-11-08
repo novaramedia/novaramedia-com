@@ -1,0 +1,113 @@
+margin-top-small
+mt-4
+
+margin-bottom-basic
+mb-4
+
+margin-bottom-mid
+mb-5
+
+margin-bottom-large
+mb-6
+
+margin-bottom-micro
+mb-2
+
+margin-bottom-tiny
+mb-3
+
+// PADDING
+
+padding-top-small
+pt-4
+
+// OLD GRID
+
+row
+grid-row
+
+col
+grid-item
+
+col24
+is-xxl-24
+
+etc
+
+// MISC ELEMENTs
+
+H4
+fs-3-sans text-uppercase font-weight-bold
+[probably]
+
+// TYPE
+
+font-size-0
+fs-2
+
+font-size-1
+fs-3-sans
+
+font-size-2
+fs-4-sans
+font-size-10 font-weight-bold
+
+font-size-3
+fs-6
+font-size-12 font-weight-bold
+
+font-size-4
+fs-8
+
+font-size-5
+fs-9
+
+// TYPE AGAIN
+
+.fs-2
+.font-size-8 .font-weight-bold
+
+big stuff
+font-size-17 is biggest
+
+fs-3-sans
+font-size-9
+
+fs-4-sans
+font-size-10 font-weight-bold
+
+fs-4-serif
+font-size-10 font-serif
+
+fs-5-sans
+font-size-11
+
+fs-6
+font-size-12 font-weight-bold
+
+fs-7
+font-size-13 font-weight-bold
+
+fs-8
+font-size-15 font-weight-bold
+
+fs-9
+font-size-17 font-weight-bold
+
+fs-l-4-sans
+font-size-l-10
+
+fs-m-7
+font-size-m-13
+
+fs-s-2
+font-size-s-8
+
+fs-s-5-sans
+font-size-s-11
+
+fs-s-6
+font-size-s-12
+
+fs-s-7
+font-size-s-13

@@ -1,5 +1,28 @@
 <?php
 /**
+ * Check for apology notice and display it if it is in the future
+ * This function will check if the apology notice is in the future and display it if it is
+ *
+ * @return array/Boolean Array of apology post or false if no apology post
+ * @since 4.1.1
+ */
+function check_for_apology_notice() {
+  $m = new \Moment\Moment(1727035200); // Sun, 22 Sept 20:00:00 GMT
+  $m->addWeeks(8); // Time for notice to show
+  $momentFromVo = $m->fromNow();
+
+  if ($momentFromVo->getDirection() === 'future') {
+    $apology_post = get_posts(array('name' => 'gary-and-jack-lubner-apology', 'post_type' => 'notice'));
+    if ($apology_post) {
+      return $apology_post;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+/**
  * Get the latest articles ids
  * This function will get the latest articles ids, excluding the featured posts if set
  * If the featured posts are not set, it will return the latest articles ids
@@ -264,7 +287,7 @@ function get_the_top_level_category($post_id = null) {
 }
 
 /**
-* Does the post have set the Articles category?
+* Does the post have set the Articles category? or is it a child of the Articles category?
 * Defaults to current $post context
 *
 * @param integer $post_id Post ID
@@ -284,9 +307,14 @@ function nm_is_article($post_id = null) {
     return false;
   }
 
+  // check to see if any of the categories returned match the articles slug or have a parent with the articles id
   $found_in_categories = array_filter($categories,
     function ($category) {
-      return $category->slug === 'articles';
+      if ($category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id) {
+        return true;
+      }
+
+      return false;
     }); // check to see if any of the categories returned match the articles slug
 
   if (count($found_in_categories) > 0) {

@@ -7,7 +7,6 @@
   $container_classes = $args['container_classes'];
   $meta = get_post_meta($post_id);
   $is_article = nm_is_article($post_id);
-  $sub_category = get_the_sub_category($post_id);
 ?>
   <div class="featured-posts__secondary <?php echo $container_classes; ?>">
     <div class="layout-thumbnail-frame">
@@ -24,8 +23,8 @@
     </div>
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
       <div class="mt-2">
-        <h2 class="post__title fs-5-sans font-bold"><?php echo get_the_title($post_id); ?></h2>
-        <h5 class="fs-2 font-uppercase mt-1">
+        <h2 class="post__title font-size-11 font-weight-bold"><?php echo get_the_title($post_id); ?></h2>
+        <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
           <?php
             if ($is_article) {
               render_bylines($post_id);
@@ -34,7 +33,7 @@
             }
           ?>
         </h5>
-        <div class="fs-3-sans mt-1 mb-0">
+        <div class="font-size-9 mt-1 mb-0">
           <?php
             if ($is_article) {
               render_standfirst($post_id);

@@ -59,7 +59,7 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h3 class="fs-7 font-weight-regular layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
+        <h3 class="font-size-13 layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
       </div>
     </div>
   </div>
@@ -136,9 +136,9 @@
         </div>
       </div>
       <div class="highlight-block__latest-posts">
-          <div class="layout-split-level fs-2 mb-4">
+          <div class="layout-split-level font-size-8 font-weight-bold mb-4">
             <a href="<?php echo get_term_link($section_term); ?>">
-            <h5 class="font-bold font-uppercase"><?php echo $section_term->name; ?></h5>
+            <h5 class="font-weight-bold text-uppercase"><?php echo $section_term->name; ?></h5>
             </a>
             <a href="<?php echo get_term_link($section_term); ?>" class="ui-action-link ui-action-link--small">See All</a>
           </div>
@@ -158,13 +158,13 @@
                 <?php render_post_ui_tags($post->ID, true, true); ?>
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
-                <h4 class="post__title fs-3-sans font-bold">
+                <h4 class="post__title font-size-9 font-weight-bold">
                   <?php the_title(); ?>
                 </h4>
                 <?php
                   if (nm_is_article($post->ID)) {
                 ?>
-                <h5 class="fs-2 font-uppercase mt-1">
+                <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
                   <?php render_bylines($post->ID, false); ?>
                 </h5>
                 <?php

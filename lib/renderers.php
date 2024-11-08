@@ -14,7 +14,7 @@ function render_see_also($query, $number_of_posts = 1) {
 
   if ($query->have_posts()) {
 ?>
-<h4 class="fs-2 font-uppercase mb-2 mb-s-1">See Also</h4>
+<h4 class="font-size-8 font-weight-bold text-uppercase mb-2 mb-s-1">See Also</h4>
 <div class="related-posts">
 <?php
     $i = 0;
@@ -27,8 +27,8 @@ function render_see_also($query, $number_of_posts = 1) {
 ?>
   <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
     <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <h5 class="fs-4-sans"><?php the_title(); ?></h5>
-      <h6 class="fs-2 font-uppercase mt-1">
+      <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
+      <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
           if (nm_is_article($post_id)) {
             render_bylines($post_id);
@@ -58,7 +58,7 @@ function render_see_also($query, $number_of_posts = 1) {
 function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false) {
   $sub_category = get_the_sub_category($post_id, true);
 
-  if (!$sub_category) {
+  if (empty($sub_category)) {
     return;
   }
 
@@ -130,6 +130,32 @@ function render_standfirst($postId = null) {
     echo $meta['_cmb_standfirst'][0];
   } else {
     return;
+  }
+}
+/**
+ * Render video title and the standfirst as single line
+ *
+ * Conditionally adds a period if the title does not end with a letter or number
+ *
+ * @param integer $postId Post ID
+ */
+function render_video_title_and_standfirst($postId = null) {
+  if ($postId === null) {
+    return;
+  }
+
+  $meta = get_post_meta($postId);
+
+  echo get_the_title($postId);
+
+  if (isset($meta['_cmb_standfirst']) && !empty($meta['_cmb_standfirst'])) {
+    if (preg_match('/[a-zA-Z0-9]$/', get_the_title($postId)) !== 0) {
+      echo '. ';
+    } else {
+      echo ' ';
+    }
+
+    render_standfirst($postId);
   }
 }
 /**
@@ -259,8 +285,8 @@ function render_post_title($postId) {
 
   $sub_category = get_the_sub_category($postId, true);
 
-  if ($sub_category && !is_category($sub_category->term_id)) {
-    $title = '<span class="font-small-caps">' . $sub_category->name . ':</span> ' . $title;
+  if (!empty($sub_category) && !is_category($sub_category->term_id)) {
+    $title = '<span class="font-size-8">' . $sub_category->name . ':</span> ' . $title;
   }
 
   echo $title;
@@ -375,7 +401,7 @@ function render_about_group_field($data) {
   foreach($data as $person) {
 ?>
   <div class="margin-bottom-small">
-    <h6 class="font-small-caps"><?php echo $person['title']; ?></h6>
+    <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
 <?php
     foreach($person['name'] as $name) {
 ?>

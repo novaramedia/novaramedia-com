@@ -1,7 +1,7 @@
 <?php
   if (wp_get_nav_menu_object('header-submenu')) {
 ?>
-<section class="front-page__submenu container container--padded mt-3 mb-4 mb-s-3 fs-3-sans font-weight-bold">
+<section class="front-page__submenu container container--padded mt-3 mb-4 mb-s-3 font-size-9 font-weight-bold">
   <div class="layout-grid ui-border-bottom pb-3">
     <div class="submenu__date">
       <?php

@@ -12,7 +12,7 @@ if( have_posts() ) {
   <article id="page-jobs" class="container margin-top-small margin-bottom-large">
     <div class="flex-grid-row margin-bottom-small">
       <div class="flex-grid-item flex-item-s-12">
-        <h4 class="fs-3-sans font-uppercase font-bold"><?php the_title(); ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 
@@ -35,13 +35,13 @@ if( have_posts() ) {
 
           if (!empty($jobs)) {
         ?>
-        <h5 class="font-size-2">We are currently hiring:</h5>
-        <ul class="list--links font-size-2">
+        <h5 class="font-size-10">We are currently hiring:</h5>
+        <ul>
         <?php
             foreach ($jobs as $job) {
               $deadline = get_post_meta($job->ID, '_nm_deadline', true);
         ?>
-          <li><a href="<?php echo get_permalink($job); ?>"><?php echo $job->post_title; ?> (deadline <?php echo date('j F', $deadline); ?>)</a></li>
+          <li><a href="<?php echo get_permalink($job); ?>" class="ui-action-link"><?php echo $job->post_title; ?> (deadline <?php echo date('j F', $deadline); ?>)</a></li>
         <?php
             }
           } else {

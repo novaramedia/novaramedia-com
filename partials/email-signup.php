@@ -50,12 +50,12 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
-        <h3 class="fs-8 fs-s-6 mb-4 js-fix-widows"><?php echo $headline; ?></h3>
-        <p class="fs-6 fs-s-4-sans mr-6">
+        <h3 class="font-size-15 font-size-s-12 font-weight-bold mb-4 js-fix-widows"><?php echo $headline; ?></h3>
+        <p class="font-size-12 font-size-s-10 font-weight-bold mr-6">
           <?php echo $copy; ?>
         </p>
         <?php if (!is_page('newsletters')) { ?>
-          <div class="mt-3 fs-2">
+          <div class="mt-3 font-size-8 font-weight-bold">
             <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
         <?php } ?>
@@ -76,17 +76,17 @@
             </div>
 
             <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
-              <label for="newsletter-gdpr" class="fs-2">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+              <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
               <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
-            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up" />
+            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Sign up" />
 
-            <span class="email-signup__feedback-processing ui-button ui-button--disabled fs-6">Processing...</span>
-            <span class="email-signup__feedback-completed ui-button ui-button--disabled fs-6">Success</span>
+            <span class="email-signup__feedback-processing ui-button ui-button--disabled font-size-12 font-weight-bold">Processing...</span>
+            <span class="email-signup__feedback-completed ui-button ui-button--disabled font-size-12 font-weight-bold">Success</span>
             <div class="email-signup__feedback-failed layout-split-level">
-              <input class="ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Try again" />
-              <p class="ml-2 fs-2">Failed: <span class="email-signup__feedback-message"></span>.</p>
+              <input class="ui-button ui-button--<?php echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Try again" />
+              <p class="ml-2 font-size-8 font-weight-bold">Failed: <span class="email-signup__feedback-message"></span>.</p>
             </div>
           </div>
         </form>

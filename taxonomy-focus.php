@@ -16,10 +16,10 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
   <section id="posts" class="container">
     <div class="grid-row mt-3 mb-5">
       <div class="grid-item is-s-24 is-l-12 is-xxl-8">
-        <h4 class="fs-4-sans font-uppercase mb-2">Focus</h4>
+        <h4 class="font-size-10 font-weight-bold text-uppercase mb-2">Focus</h4>
         <div class="only-desktop">
-          <h1 class="fs-8 mb-2"><?php single_cat_title(); ?></h1>
-          <div class="fs-6">
+          <h1 class="font-size-15 font-weight-bold mb-2"><?php single_cat_title(); ?></h1>
+          <div class="font-size-12 font-weight-bold">
             <?php echo category_description(); ?>
           </div>
         </div>
@@ -31,7 +31,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 
             if ($splash_image_caption) {
           ?>
-          <div class="fs-2">
+          <div class="font-size-8 font-weight-bold">
             <?php echo $splash_image_caption; ?>
           </div>
           <?php
@@ -39,8 +39,8 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
           }
         ?>
         <div class="only-mobile">
-          <h1 class="fs-7 mt-1 mb-1"><?php single_cat_title(); ?></h1>
-          <div class="fs-6">
+          <h1 class="font-size-13 font-weight-bold mt-1 mb-1"><?php single_cat_title(); ?></h1>
+          <div class="font-size-12 font-weight-bold">
             <?php echo category_description(); ?>
           </div>
         </div>
@@ -88,7 +88,7 @@ if( have_posts() ) {
 <?php
 } ?>
     </div>
-    <div class="grid-row mt-6 mb-4 fs-2 text-paragraph-breaks">
+    <div class="grid-row mt-6 mb-4 font-size-8 font-weight-bold text-paragraph-breaks">
       <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
           if (!empty($credits)) {

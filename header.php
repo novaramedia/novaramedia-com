@@ -26,7 +26,7 @@
 <body <?php body_class(); ?>>
   <section id="main-container">
     <header class="site-header background-black mb-4">
-      <div class="site-header__wrapper font-color-white fs-4-sans fs-s-2">
+      <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
         <div class="site-header__main container">
           <div class="grid-row">
             <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
@@ -56,10 +56,10 @@
         </div>
       </div>
       <nav class="site-header-nav" role="navigation" aria-label="Sections">
-        <div class="container fs-6 fs-s-7 font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
+        <div class="container font-size-12 font-size-s-13 font-weight-bold font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">NM</h6>
+              <h6 class="font-weight-regular font-size-9 text-uppercase mb-3">NM</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -82,7 +82,7 @@
               </ul>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Shows</h6>
+              <h6 class="font-weight-regular font-size-9 text-uppercase mb-3">Shows</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -94,7 +94,7 @@
               ?>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Series</h6>
+              <h6 class="font-weight-regular font-size-9 text-uppercase mb-3">Series</h6>
               <?php
                 wp_nav_menu(
                   array(
@@ -106,7 +106,7 @@
               ?>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
-              <h6 class="font-weight-regular fs-3-sans font-uppercase mb-3">Articles</h6>
+              <h6 class="font-weight-regular font-size-9 text-uppercase mb-3">Articles</h6>
               <?php
                 wp_nav_menu(
                   array(

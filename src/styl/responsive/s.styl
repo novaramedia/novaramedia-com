@@ -21,161 +21,14 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 13px
-$font-size-larger = 1.3rem
-$font-size-h3 = golden-ratio(1rem , .5)
-$font-size-h2 = golden-ratio(1rem , .7)
-$font-size-h1 = golden-ratio(1rem , 1.5)
-
-$font-leading-basic = 1.4
-$font-leading-tighter = 1.15
-$font-leading-larger = 1.55
-
-$font-tracking-basic = 0
-$font-tracking-wider = 0.025em
-
-$border-width = 2px
-
 // ******************************************************
 
 // TYPOGRAPHY
 
 html
-  font-size: $font-size-basic
-  letter-spacing: $font-tracking-basic
-
-body
-  line-height: $font-leading-basic
-
-  // HTML ELEMENT STYLING
-
-h1, .font-size-h1
-  font-size: $font-size-h1
-  letter-spacing: -($font-tracking-basic)
-
-h2, .font-size-h2
-  font-size: $font-size-h2
-
-h3
-  font-size: $font-size-h3
-
-  // NEW TYPE SCALE 2021
-
-.font-size-0
-  font-size: 10.27px
-  line-height: 1.3
-
-.font-size-1
-  font-size: 13px
-  line-height: 1.3
-
-.font-size-2
-  font-size: 16.5px
-  line-height: 20px
-
-.font-size-3
-  font-size: 20.8px
-  line-height: 27px
-
-.font-size-4
-  font-size: 26.4px
-  line-height: 30px
-  letter-spacing: -0.01em
-
-.font-size-5
-  font-size: 33.4px
-  line-height: 1.07142857
-  letter-spacing: -0.025em
-
-.font-size-6
-  font-size: 42px
-  line-height: 50px
-  letter-spacing: -0.025em
-
-.font-size-7
-  font-size: 53px
-  line-height: 68px
-  letter-spacing: -0.02em
-
-.font-size-8
-  font-size: 88px
-  line-height: 82px
-  letter-spacing: -0.04em
-
-  // size s overrides (should match sizes above)
-
-.font-size-s-0
-  font-size: 10.27px
-  line-height: 1.3
-
-.font-size-s-1
-  font-size: 13px
-  line-height: 1.3
-
-.font-size-s-2
-  font-size: 16.5px
-  line-height: 20px
-
-.font-size-s-3
-  font-size: 20.8px
-  line-height: 27px
-
-.font-size-s-4
-  font-size: 26.4px
-  line-height: 30px
-  letter-spacing: -0.01em
-
-.font-size-s-5
-  font-size: 33.4px
-  line-height: 1.07142857
-  letter-spacing: -0.025em
-
-.font-size-s-6
-  font-size: 42px
-  line-height: 50px
-  letter-spacing: -0.025em
-
-.font-size-s-7
-  font-size: 53px
-  line-height: 68px
-  letter-spacing: -0.02em
-
-.font-size-s-8
-  font-size: 88px
-  line-height: 82px
-  letter-spacing: -0.04em
-
-  // FONT RULES
-
-.font-small-caps
-  font-size: 0.85em
-
-.font-leading-wider
-  line-height: $font-leading-larger
-
-.font-tracking-wider
-  letter-spacing: $font-tracking-wider
-
-.font-smaller
-  font-size: 0.8rem
-
-.font-larger
-  font-size: $font-size-larger
+  font-size: 14px
 
 .text-copy
-  p
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-  blockquote
-    margin: 3rem
-  h1,h2,h3,h4,h5,h6
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
-  a
-    color: $color-blue
-  img
-    display: block
-    margin: 2.5rem auto
   .wp-caption
     .wp-caption-text
       margin-top: $margin-tiny
@@ -183,9 +36,6 @@ h3
 // ******************************************************
 
 // UI ELEMENTS
-
-.icon-large:before
-  font-size: $font-size-h3
 
 .button
   padding: $margin-small
@@ -415,54 +265,6 @@ h3
 
 // ******************************************************
 
-// FRONT PAGE
-
-#featured-post-title-holder
-  position: relative
-  padding: $margin-small + $margin-tiny
-  font-size: golden-ratio(1rem , 1.2)
-
-#featured-post-title
-  color: black
-  text-shadow: none
-
-#home-articles-posts, #home-fm-posts, #home-focus-posts, #home-long-read-posts
-  .col
-    margin-bottom: $margin-small
-
-.front-page-above-the-fold__articles
-  article
-    clearfix()
-    .wp-post-image
-      float: left
-      width: 'calc(50% - %s)' % $margin-micro
-      padding-right: $margin-micro * 2
-    div
-      float: left
-      width: 'calc(50% - %s)' % $margin-micro
-
-
-// ******************************************************
-
-// VIDEO BLOCK
-
-.video-block-main-video
-  margin-bottom: $margin-small
-
-.video-related-video
-  width: 100%
-  clearfix()
-  .video-related-video__thumbnail
-    float: left
-    width: 'calc(50% - %s)' % $margin-micro
-    padding-right: $margin-micro * 2
-  h6
-    float: left
-    width: 'calc(50% - %s)' % $margin-micro
-    font-size: 1rem
-
-// ******************************************************
-
 // INDEXES
 
 #posts
@@ -474,46 +276,12 @@ h3
 .post-col12-image
   position: relative
 
-.post-col12-text
-  position: relative
-  padding: 0
-  margin-top: $margin-tiny
-  color: $color-black-soft
-  h3
-    font-size: $font-size-basic
-  h5
-    margin-top: 0
-    font-size: $font-size-basic
-    font-weight: normal
-
-// ******************************************************
-
-// SINGLE
-
-  // LIVEBLOG
-
-.text-copy
-  .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
-    padding-top: $margin-basic
-    margin-top: $margin-mid
-    margin-bottom: $margin-small
-    &:first-of-type
-      margin-top: $margin-basic
-
-#single-related
-  .post
-    margin-bottom: $margin-basic
-
 // ******************************************************
 
 // SUPPORT PAGE
 
 .support-page__hero-wrapper
   padding: $margin-mid 0
-
-.support-page__content-copy
-  font-size: 16px
 
 // ******************************************************
 
