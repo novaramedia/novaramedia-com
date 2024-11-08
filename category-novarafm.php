@@ -55,7 +55,7 @@ function render_episode_block($posts) {
         foreach ($posts as $post) {
           $post_id = $post->ID;
       ?>
-        <div class="swiper-slide">
+        <div class="swiper-slide ux-carousel__item">
           <a href="<?php echo get_permalink($post_id); ?>">
             <?php render_thumbnail($post_id, 'col12-16to9', array(
               'class' => 'ui-rounded-image'
