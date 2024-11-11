@@ -222,11 +222,17 @@ function nm_register_fundraising_options_metabox() {
   ) );
 
   $main_options->add_field( array(
+    'name' => __( 'CTA Headline', 'NM' ),
+    'desc' => 'Add headline.',
+    'id'   => $prefix . 'fundraising_settings_video_banner_cta_headline',
+    'type' => 'text',
+  ) );
+
+    $main_options->add_field( array(
     'name' => __( 'CTA text', 'NM' ),
-    'desc' => 'Add the copy one paragraph at at time using the rows function. One row = one paragraph. The first paragraph will be the headline.',
+    'desc' => 'Add the copy.',
     'id'   => $prefix . 'fundraising_settings_video_banner_cta_text',
     'type' => 'textarea_small',
-    'repeatable' => true
   ) );
 
   // Misc
