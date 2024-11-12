@@ -11,7 +11,7 @@
   // Check if YouTube ID exists
   if (!empty($youtube_id)) {
 ?>
-    <div id="<?php echo $instance; ?>" class="support-section background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
+    <div id="<?php echo $instance; ?>" class="support-section background-red font-color-white pt-2 pb-2 pt-s-2 pb-s-2 pl-0 pt-s-5 pb-s-5 ">
       <div class="container">
         <form class="support-form" action="https://donate.novaramedia.com/regular">
           <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
@@ -27,7 +27,7 @@
             </div>
             
             <!-- Title and form section -->
-            <div class="support-form__inputs grid-item is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2">
+            <div class="support-form__inputs grid-item is-l-24 offset-xl-0 is-xxl-12">
               
               <!-- Copy and heading -->
               <a href="<?php echo site_url('support/'); ?>">
@@ -35,7 +35,7 @@
                   if ($heading_copy || $customHeadline) {
                 ?>
                   <div class="margin-top-micro margin-bottom-small">
-                    <h3 class="font-size-13 font-weight-bold mb-4 js-fix-widows">
+                    <h3 class="font-size-13 font-weight-bold mb-4 mt-4 js-fix-widows">
                       <?php 
                         if ($customHeadline) {
                           echo $customHeadline;
