@@ -2,9 +2,10 @@
 $override_text = isset($args['override_text']) ? $args['override_text'] : false;
 $heading_copy = !empty($args['heading_copy']) ? $args['heading_copy'] : NM_get_option('nm_fundraising_settings_support_section_title', 'nm_fundraising_options');
 $support_section_text = NM_get_option('nm_fundraising_settings_support_section_text', 'nm_fundraising_options');
+
 ?>
 
-<div id="<?php echo $instance; ?>" class="support-section background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
+<div class="background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="container">
 
 
@@ -29,9 +30,10 @@ $support_section_text = NM_get_option('nm_fundraising_settings_support_section_t
         }
         ?>
       </div>
-
-      <!-- Reneders the support form -->
-      <?php render_support_form(); ?>
+      <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item">
+        <?php // Reneders the support form --> 
+        render_support_form(); ?>
+      </div>
     </div>
   </div>
 </div>

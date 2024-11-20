@@ -233,7 +233,7 @@ function nm_register_fundraising_options_metabox()
   $main_options->add_field(array(
     'name' => __('CTA text', 'NM'),
     'desc' => 'Add custom text here, if left blank it will be populated with the standard support section text.',
-    'id'   => $prefix . 'fundraising_settings_video_banner_cta_text',
+    'id'   => $prefix . 'fundraising_settings_video_banner_cta_custom_text',
     'type' => 'textarea_small',
   ));
 

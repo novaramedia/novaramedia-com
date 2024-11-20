@@ -15,8 +15,8 @@ function render_support_form()
   $instance = uniqid('support-form-');
   $support_section_autovalues = nm_get_support_autovalues();
 ?>
-  <form class="support-form" action="https://donate.novaramedia.com/regular">
-    <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
+  <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
+    <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
     <div class="grid-row grid--nested-tight margin-bottom-tiny">
       <div class="grid-item grid-item--tight is-xxl-4">
         <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low ?>" data-name="low">
