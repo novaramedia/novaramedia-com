@@ -3,8 +3,10 @@
 /**
  * Render the support donation form.
  * 
- * Generatesgenerates unique instance identifiers to handle multiple forms on a single page,
- * helping avoid conflicts with input labels and IDs.
+ * Generates unique instance identifiers to manage multiple forms on a single page,
+ * ensuring there are no conflicts with input labels or IDs.
+ * This function should be used within a grid item and must account for holistic layout
+ * requirements wherever it is called.
  *
  * @uses nm_get_support_autovalues() Fetches predefined support values for donation levels.
  * @return void Outputs the HTML form directly.

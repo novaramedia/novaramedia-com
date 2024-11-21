@@ -11,7 +11,7 @@ $youtube_id = get_post_meta($post_id, '_nm_support_youtube', true);
 <div class="background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="container">
     <div class="grid-row font-size-11 font-size-s-10">
-      <?php //Video section 
+      <?php //Video embed section with default and hard coded fall backs
       ?>
       <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
         <div class="u-video-embed-container background-red">
@@ -28,7 +28,7 @@ $youtube_id = get_post_meta($post_id, '_nm_support_youtube', true);
       </div>
       <div class="support-form__inputs  grid-item is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2">
         <?php
-        // copy and heading
+        // custom copy and heading with default and hard coded fall backs
         ?>
         <a href="<?php echo site_url('support/'); ?>">
           <div class="margin-top-micro margin-bottom-small">
@@ -58,7 +58,7 @@ $youtube_id = get_post_meta($post_id, '_nm_support_youtube', true);
             </p>
           </div>
         </a>
-        <?php // Reneders the support form --> 
+        <?php // Reneders the support form from renderers.php
         render_support_form(); ?>
       </div>
     </div>

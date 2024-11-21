@@ -31,7 +31,7 @@ $support_section_text = NM_get_option('nm_fundraising_settings_support_section_t
         ?>
       </div>
       <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item">
-        <?php // Reneders the support form --> 
+        <?php //Reneders the support form from renderers.php
         render_support_form(); ?>
       </div>
     </div>
