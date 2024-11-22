@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added 
+
+- Support video section
+
 ### Fixed
 
 - nm_is_articles() supports posts where Articles hasnt been selected but a child category has
