@@ -34,15 +34,6 @@ function url_get_contents($Url) {
   return $output;
 }
 
-// get ID of page by slug
-function get_id_by_slug($page_slug) {
-	$page = get_page_by_path($page_slug);
-	if($page) {
-		return $page->ID;
-	} else {
-		return null;
-	}
-}
 // is_single for custom post type
 function is_single_type($type, $post) {
   if (get_post_type($post->ID) === $type) {

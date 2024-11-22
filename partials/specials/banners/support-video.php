@@ -2,10 +2,16 @@
 // Get options and values
 $default_support_section_text = NM_get_option('nm_fundraising_settings_support_section_text', 'nm_fundraising_options');
 $default_support_section_heading = !empty($args['heading_copy']) ? $args['heading_copy'] : NM_get_option('nm_fundraising_settings_support_section_title', 'nm_fundraising_options');
-$customYoutube_id = NM_get_option('nm_fundraising_settings_video_banner_cta_youtube_id', 'nm_fundraising_options');
+$custom_youtube_id = NM_get_option('nm_fundraising_settings_video_banner_cta_youtube_id', 'nm_fundraising_options');
 $custom_text = NM_get_option('nm_fundraising_settings_video_banner_cta_custom_text', 'nm_fundraising_options');
 $custom_headline = NM_get_option('nm_fundraising_settings_video_banner_cta_headline', 'nm_fundraising_options');
-$youtube_id = get_post_meta($post_id, '_nm_support_youtube', true);
+
+$support_page = get_page_by_path("support");
+$suport_page_youtube_id = false;
+
+if (!$support_page === null) {
+  $suport_page_youtube_id = get_post_meta($support_page->ID, '_nm_support_youtube', true);
+}
 
 ?>
 <div class="background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
@@ -16,10 +22,10 @@ $youtube_id = get_post_meta($post_id, '_nm_support_youtube', true);
       <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
         <div class="u-video-embed-container background-red">
           <iframe class="youtube-player lazyload" data-src="<?php
-                                                            if ($customYoutube_id) {
-                                                              echo generate_youtube_embed_url($customYoutube_id);
-                                                            } else if ($youtube_id) {
-                                                              echo generate_youtube_embed_url($youtube_id);
+                                                            if ($custom_youtube_id) {
+                                                              echo generate_youtube_embed_url($custom_youtube_id);
+                                                            } else if ($support_page_youtube_id) {
+                                                              echo generate_youtube_embed_url($support_page_youtube_id);
                                                             } else {
                                                               echo generate_youtube_embed_url("c6hfjBmzt5c");
                                                             }
