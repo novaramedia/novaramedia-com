@@ -1,6 +1,9 @@
+@import '../../node_modules/nm-stylus-library/variables.styl';
 @import '~kouto-swiss/index.styl'
 @import '../../node_modules/nm-stylus-library/utility/helpers';
 @import '../../node_modules/nm-stylus-library/functions/grid-function-new';
+@import '../../node_modules/nm-stylus-library/modules/backgrounds.styl';
+
 
 // this should be deprecated as an implementation by @4.3.0
 @import "grid-functions"
@@ -42,39 +45,6 @@ $col = 42px
 
 $gutter = 16px
 
-html
-  // layout
-  --grid-gutter: 1rem
-  --corner-radius: 2px
-  // colors
-  --color-white-soft: rgb(253, 253, 253)
-  --color-white-soft-transparent: rgba(253, 253, 253, .5)
-  --color-black-soft: rgb(14, 14, 14)
-  --color-black-soft-transparent: rgba(14, 14, 14, .5)
-  --color-red: #FF1941
-  --color-yellow: #EBB800
-  --color-green: #5FCC00
-  --color-green-neon: #CADB2A
-  --color-green-racing: #55846B
-  --color-blue: rgb(84, 144, 235)
-  --color-blue-neon: #0018F0
-  --color-blue-light: #CAE5FF
-  --color-teal: #E3FFFF
-  --color-lilac: #B1B1FF
-  --color-gray: rgb(150,150,150)
-  --color-gray-transparent: rgba(150,150,150, .5)
-  --color-gray-light: rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
-  --color-gray-light-transparent: rgba(190,190,190, .5)
-  --color-gray-extra-light: #EDEAEA
-  // typography
-  --font-family-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-family-serif: font-stack('Georgia')
-  // transitions
-  --transition-speed-slow: 1111ms
-  --transition-speed-medium: 420ms
-  --transition-speed-quick: 140ms
-  --transition-speed-ultra: 33ms
-
 body
   overscroll-behavior: none
 
@@ -98,17 +68,8 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
+
 // ******************************************************
-
-// VARIABLES
-
-$breakpoint-s = 759px
-$breakpoint-m = 910px
-$breakpoint-l = 1104px
-$breakpoint-xl = 1408px
-
-$golden-ratio = 1.61803398875
-
 // START DEPRECATED
 
 $margin-small = ($gutter)
@@ -127,84 +88,6 @@ $color-red-dark = #A80003
 $color-blue = rgb(84, 144, 235)
 
 // END DEPRECATED
-
-// ******************************************************
-
-// BACKGROUNDS
-
-.background-black
-  background-color: var(--color-black-soft)
-
-.background-white
-  background-color: var(--color-white-soft)
-
-.background-gray
-  background-color: var(--color-gray)
-
-.background-light-gray
-  background-color: var(--color-gray-light)
-
-.background-red
-  background-color: var(--color-red)
-
-.background-yellow
-  background-color: var(--color-yellow)
-
-.background-green
-  background-color: var(--color-green)
-
-.background-green-neon
-  background-color: var(--color-green-neon)
-
-.background-light-blue
-  background-color: var(--color-blue-light)
-
-.background-neon-blue
-  background-color: var(--color-blue-neon)
-
-.background-teal
-  background-color: var(--color-teal)
-
-.background-lilac
-  background-color: var(--color-lilac)
-
-.background-light-purple
-  background-color: var(--color-lilac)
-
-.background-acfm-pink
-  background-color: #FC16CB
-
-.background-cover-image
-  position: relative
-  background-size: cover
-  background-position: center
-  background-repeat: no-repeat
-
-.background-cover-overlay
-  position: absolute
-  top: 0
-  width: 100%
-  height: 100%
-
-.background-support-texture, .background-support-texture-alt
-  background-size: cover
-  background-position: center
-  background-repeat: no-repeat
-  background-blend-mode: overlay, normal
-
-.avif, .webp
-  .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.webp)
-
-  .background-support-texture-alt
-    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
-
-.fallback
-  .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
-
-  .background-support-texture-alt
-    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
 
 // ******************************************************
 
