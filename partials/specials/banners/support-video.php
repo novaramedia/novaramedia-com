@@ -18,7 +18,7 @@ if (!$support_page === null) {
     <div class="grid-row font-size-11 font-size-s-10">
       <?php //Video embed section with default and hard coded fall backs
       ?>
-      <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
+      <div class="grid-item is-m-24 is-l-24 is-xl-12 is-xxl-12">
         <div class="u-video-embed-container background-red">
           <iframe class="youtube-player lazyload" data-src="<?php
             if ($custom_youtube_id) {
@@ -31,13 +31,13 @@ if (!$support_page === null) {
       ?>" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="support-form__inputs  grid-item is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2">
+      <div class="support-form__inputs  grid-item is-l-24 offset-xl-0 is-xxl-12">
         <?php
         // custom copy and heading with default and hard coded fall backs
         ?>
         <a href="<?php echo site_url('support/'); ?>">
           <div class="margin-top-micro margin-bottom-small">
-            <h3 class="font-size-13 font-weight-bold mb-4 mt-4 js-fix-widows">
+            <h3 class="font-size-13 font-weight-bold mb-4 mt-l-4 js-fix-widows">
               <?php
                 if ($custom_headline) {
                     echo $custom_headline;
