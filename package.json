@@ -52,7 +52,7 @@
     "postcss-preset-env": "^9.1.4",
     "release-it": "^16.2.1",
     "style-loader": "^3.3.1",
-    "stylus": "0.60.0",
+    "stylus": "0.64.0",
     "stylus-native-loader": "^1.4.3",
     "terser-webpack-plugin": "^5.2.4",
     "webpack": "^5.94.0",
