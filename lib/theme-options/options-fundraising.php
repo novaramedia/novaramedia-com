@@ -235,7 +235,7 @@ function nm_register_fundraising_options_metabox() {
           'id'   => $prefix . 'fundraising_settings_video_banner_cta_headline',
           'type' => 'text',
       )
-    );
+  );
 
   $main_options->add_field(
       array(
@@ -244,7 +244,7 @@ function nm_register_fundraising_options_metabox() {
           'id'   => $prefix . 'fundraising_settings_video_banner_cta_custom_text',
           'type' => 'textarea_small',
       )
-    );
+  );
 
     // Misc
 
