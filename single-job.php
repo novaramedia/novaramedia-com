@@ -3,13 +3,14 @@ get_header();
 ?>
 <main id="main-content">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
+if ( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
-    $meta = get_post_meta($post->ID);
-    $email_subject = strtoupper($post->post_title);
-    $has_closed = $meta['_nm_deadline'][0] < time();
-?>
+    $meta = get_post_meta( $post->ID );
+    $email_subject = strtoupper( $post->post_title );
+    $start_of_day = strtotime( 'today midnight' );
+    $is_open = $meta['_nm_deadline'][0] >= $start_of_day;
+    ?>
   <article id="job" class="container mt-4 mb-6">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
@@ -19,30 +20,29 @@ if( have_posts() ) {
     <div class="grid-row mb-4">
       <article class="grid-item is-s-24 is-xl-14 is-xxl-10 page-copy">
         <?php
-          if ($has_closed) {
-        ?>
+        if ( ! $is_open ) {
+          ?>
         <p class="font-size-12 font-weight-bold text-uppercase">This job listing has now closed.</p>
-        <?php
-          }
-
+          <?php
+        }
           the_content();
         ?>
-        <p>Send your application in a single email to <a href="mailto:info@novaramedia.com?subject=<?php echo urlencode($email_subject); ?>">info@novaramedia.com</a> with <?php echo $email_subject; ?> in the subject line.</p>
-        <p>Closing date: <?php echo date('j F Y', $meta['_nm_deadline'][0]); ?></p>
+        <p>Closing date: <?php echo gmdate( 'j F Y', $meta['_nm_deadline'][0] ); ?></p>
       </div>
     </div>
   </article>
-<?php
+    <?php
   }
 } else {
-?>
+  ?>
   <div class="container">
     <div class="grid-row">
-      <article class="grid-item is-xxl-24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <article class="grid-item is-xxl-24"><?php esc_html_e( 'Sorry, no posts matched your criteria :{' ); ?></article>
     </div>
   </div>
-<?php
-} ?>
+  <?php
+}
+?>
 </main>
 <?php
 get_footer();
