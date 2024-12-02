@@ -35,7 +35,6 @@
 	<!-- Check up to 8 files simultaneously. -->
 	<arg name="parallel" value="8"/>
 
-
 	<!--
 	#############################################################################
 	SET UP THE RULESETS
@@ -43,11 +42,12 @@
 	-->
 
   <rule ref="WordPress">
+    <!-- No annoying yoga conditionals -->
     <exclude name="WordPress.PHP.YodaConditions" />
 
+    <!-- No documentation needed for small functions and variables -->
     <exclude name="Generic.Commenting.DocComment.MissingShort" />
     <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
-
   </rule>
 
 	<!-- Include the WordPress-Extra standard. -->
@@ -92,7 +92,6 @@
 	</rule>
 	-->
 
-
 	<!--
 	#############################################################################
 	SNIFF SPECIFIC CONFIGURATION
@@ -119,14 +118,18 @@
 		</properties>
 	</rule> -->
 
+  <!--
+  We should be prefixing all our globals
+  But actually nm is too short a prefix and Wordpress wants ideally 3 characters min
+  So where we do migrate to this lets use nmio_
+  -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="nm"/>
+				<element value="nmio"/>
 			</property>
 		</properties>
 	</rule>
-
 
 	<!--
 	#############################################################################
@@ -165,9 +168,20 @@
   #############################################################################
   -->
 
+  <!-- Yoda, no! -->
   <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
 
+  <rule ref="WordPress">
+    <!-- Ternarys are fine tbh -->
+    <exclude name="WordPress.PHP.DisallowShortTernary.Found" />
+    <!-- Its fine to output unescaped strings tbh, tho perhaps we could config here more for variables -->
+    <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
+    <!-- Allow space indents (part of intentation configs) -->
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+  </rule>
+
   <rule ref="WordPress-Docs">
+    <!-- Turn off some over the top commenting requirements -->
     <exclude name="Squiz.Commenting.FileComment.Missing" />
     <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
     <exclude name="Squiz.Commenting.ClassComment.Missing" />
@@ -177,6 +191,7 @@
     <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
   </rule>
 
+  <!-- I don't know what this rule is doing. Looks to me like it isnt really doing anything -->
   <rule ref="WordPress.Security.EscapeOutput">
     <properties>
       <property name="customAutoEscapedFunctions" type="array">
@@ -186,17 +201,14 @@
     </properties>
   </rule>
 
-  <rule ref="WordPress">
-    <exclude name="WordPress.PHP.DisallowShortTernary.Found" />
-    <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
-  </rule>
-
+  <!-- Maximum nesting level of 4. This means logic nesting but could perhaps apply to other things -->
   <rule ref="Generic.Metrics.NestingLevel">
     <properties>
       <property name="absoluteNestingLevel" value="4"/>
     </properties>
   </rule>
 
+  <!-- Ban some bad default functions. But we can also use this config to depreciate things. -->
   <rule ref="Generic.PHP.ForbiddenFunctions">
     <properties>
       <property name="forbiddenFunctions" type="array">
@@ -212,11 +224,8 @@
     </properties>
   </rule>
 
+  <!-- Basically all the rest of this is about getting 2 space indentation working -->
   <exclude name="Generic.Formatting.MultipleStatementAlignment" />
-
-  <rule ref="WordPress">
-    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
-  </rule>
 
   <rule ref="Generic.WhiteSpace.ScopeIndent">
     <properties>
