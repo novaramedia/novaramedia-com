@@ -219,7 +219,7 @@
         <element key="print" value="echo"/>
         <element key="create_function" value="null"/>
         <element key="sizeof" value="count"/>
-        <element key="print_r" value="null"/>
+        <!-- <element key="print_r" value="null"/> -->
         <element key="eval" value="null"/>
         <element key="compact" value="null"/>
         <!-- Add depreciated functions here! -->

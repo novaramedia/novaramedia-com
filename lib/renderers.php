@@ -2,7 +2,7 @@
 
 /**
  * Render the support donation form.
- * 
+ *
  * Generates unique instance identifiers to manage multiple forms on a single page,
  * ensuring there are no conflicts with input labels or IDs.
  * This function should be used within a grid item and must account for holistic layout
@@ -11,28 +11,27 @@
  * @uses nm_get_support_autovalues() Fetches predefined support values for donation levels.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form()
-{
+function render_support_form() {
   // Generate unique ID for the form
-  $instance = uniqid('support-form-');
+  $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
-?>
+  ?>
   <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
     <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
     <div class="grid-row grid--nested-tight margin-bottom-tiny">
       <div class="grid-item grid-item--tight is-xxl-4">
         <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low ?>" data-name="low">
-          £<?php echo $support_section_autovalues['default']->regular_low ?>
+          £<?php echo $support_section_autovalues['default']->regular_low; ?>
         </button>
       </div>
       <div class="grid-item grid-item--tight is-xxl-4">
         <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium ?>" data-name="medium">
-          £<?php echo $support_section_autovalues['default']->regular_medium ?>
+          £<?php echo $support_section_autovalues['default']->regular_medium; ?>
         </button>
       </div>
       <div class="grid-item grid-item--tight is-xxl-4">
         <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high ?>" data-name="high">
-          £<?php echo $support_section_autovalues['default']->regular_high ?>
+          £<?php echo $support_section_autovalues['default']->regular_high; ?>
         </button>
       </div>
       <div class="grid-item grid-item--tight is-xxl-12">
@@ -60,36 +59,39 @@ function render_support_form()
  * Based on a passed query. Can render more than 1 post but will only show one on mobile
  * Not a complete component which is why it is a renderer. Use this inside other conditionals
  *
- * @param WP_Query $query           The query to render
- * @param integer  $number_of_posts The number of posts to render
+ * @param WP_Query $query           The query to render.
+ * @param integer  $number_of_posts The number of posts to render.
  */
-function render_see_also($query, $number_of_posts = 1)
-{
-  if (!$query) {
+function render_see_also( $query, $number_of_posts = 1 ) {
+  if ( ! $query ) {
     return;
   }
 
-  if ($query->have_posts()) {
-?>
+  if ( $query->have_posts() ) {
+    ?>
     <h4 class="font-size-8 font-weight-bold text-uppercase mb-2 mb-s-1">See Also</h4>
     <div class="related-posts">
       <?php
       $i = 0;
-      while ($query->have_posts()) {
-        if ($i >= $number_of_posts) {
+      while ( $query->have_posts() ) {
+        if ( $i >= $number_of_posts ) {
           break;
         }
         $query->the_post();
         $post_id = get_the_id();
-      ?>
-        <div class="mb-2 <?php if ($i != 0) {
+        ?>
+        <div class="mb-2 
+        <?php
+        if ( $i != 0 ) {
                             echo 'only-desktop';
-                          } ?>">
+        }
+        ?>
+        ">
           <a href="<?php the_permalink(); ?>" class="ui-hover">
             <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
             <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
               <?php
-              if (nm_is_article($post_id)) {
+              if ( nm_is_article($post_id) ) {
                 render_bylines($post_id);
               } else {
                 render_standfirst($post_id);
