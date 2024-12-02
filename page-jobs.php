@@ -30,7 +30,7 @@ if ( have_posts() ) {
                 'orderby'      => 'meta_value',
                 'order'        => 'ASC',
                 'meta_key'     => '_nm_deadline',
-                'meta_value'   => $end_of_today,
+                'meta_value'   => $end_of_day,
                 'meta_type'    => 'NUMERIC',
                 'meta_compare' => '>=',
             )
