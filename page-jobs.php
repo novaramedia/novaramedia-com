@@ -44,7 +44,7 @@ if ( have_posts() ) {
           foreach ( $jobs as $job ) {
             $deadline = get_post_meta( $job->ID, '_nm_deadline', true );
             ?>
-          <li><a href="<?php echo get_permalink( $job ); ?>" class="ui-action-link"><?php echo $job->post_title; ?> (deadline <?php echo date( 'j F', $deadline ); ?>)</a></li>
+          <li><a href="<?php echo get_permalink( $job ); ?>" class="ui-action-link"><?php echo $job->post_title; ?> (deadline <?php echo gmdate( 'j F', $deadline ); ?>)</a></li>
             <?php
           }
         } else {
