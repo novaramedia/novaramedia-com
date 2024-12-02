@@ -10,14 +10,5 @@
     "fightbulc/moment": "*",
     "cmb2/cmb2": "^2.7",
     "webdevstudios/cmb2-post-search-field": "^0.2.5"
-  },
-  "require-dev": {
-    "squizlabs/php_codesniffer": "^3.0",
-    "wp-coding-standards/wpcs": "^3.0"
-  },
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
-    }
   }
 }
