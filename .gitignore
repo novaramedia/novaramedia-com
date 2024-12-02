@@ -1,11 +1,3 @@
 config.codekit
 .DS_Store
 /node_modules
-
-# Ignore Composer
-/vendor
-
-# Allow specific Composer packages that are needed
-!/vendor/cmb2/**
-!/vendor/webdevstudios/**
-!/vendor/fightbulc/**
