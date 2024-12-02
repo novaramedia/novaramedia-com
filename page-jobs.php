@@ -22,7 +22,7 @@ if ( have_posts() ) {
       </div>
       <div class="flex-grid-item flex-item-m-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-6">
         <?php
-        $end_of_day = strtotime( 'tomorrow midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
+        $end_of_day = strtotime( 'today midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
         $jobs = get_posts(
             array(
                 'numberposts'  => -1,

@@ -8,7 +8,7 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     $email_subject = strtoupper( $post->post_title );
-    $end_of_day = strtotime( 'tomorrow midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
+    $end_of_day = strtotime( 'today midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
     $has_closed = $meta['_nm_deadline'][0] <= $end_of_day;
     ?>
   <article id="job" class="container mt-4 mb-6">
