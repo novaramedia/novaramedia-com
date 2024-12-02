@@ -119,17 +119,18 @@
 	</rule> -->
 
   <!--
+  ## Not implemented for now. If this could just be for functions it would be great.
   We should be prefixing all our globals
   But actually nm is too short a prefix and Wordpress wants ideally 3 characters min
   So where we do migrate to this lets use nmio_
   -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+	<!-- <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
 				<element value="nmio"/>
 			</property>
 		</properties>
-	</rule>
+	</rule> -->
 
 	<!--
 	#############################################################################
@@ -178,6 +179,8 @@
     <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
     <!-- Allow space indents (part of intentation configs) -->
     <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+    <!-- For now dont bother with all global prefixed. It seems too much for variables -->
+    <exclude name="WordPress.NamingConventions.PrefixAllGlobals" />
   </rule>
 
   <rule ref="WordPress-Docs">
