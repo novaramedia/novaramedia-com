@@ -37,7 +37,7 @@ if ( have_posts() ) {
   ?>
   <div class="container">
     <div class="grid-row">
-      <article class="grid-item is-xxl-24"><?php _e( 'Sorry, no posts matched your criteria :{' ); ?></article>
+      <article class="grid-item is-xxl-24"><?php esc_html_e( 'Sorry, no posts matched your criteria :{' ); ?></article>
     </div>
   </div>
   <?php
