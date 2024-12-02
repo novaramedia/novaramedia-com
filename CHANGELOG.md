@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support video section
+- Config for PHPCS that uses WP Standards with some of our own styles and a little more tolerance
 
 ### Fixed
 
