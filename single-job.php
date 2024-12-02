@@ -8,8 +8,8 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     $email_subject = strtoupper( $post->post_title );
-    $end_of_day = strtotime( 'today midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
-    $has_closed = $meta['_nm_deadline'][0] <= $end_of_day;
+    $start_of_day = strtotime( 'today midnight' );
+    $is_open = $meta['_nm_deadline'][0] >= $start_of_day;
     ?>
   <article id="job" class="container mt-4 mb-6">
     <div class="grid-row mb-4">
@@ -20,7 +20,7 @@ if ( have_posts() ) {
     <div class="grid-row mb-4">
       <article class="grid-item is-s-24 is-xl-14 is-xxl-10 page-copy">
         <?php
-        if ( $has_closed ) {
+        if ( ! $is_open ) {
           ?>
         <p class="font-size-12 font-weight-bold text-uppercase">This job listing has now closed.</p>
           <?php

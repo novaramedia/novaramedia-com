@@ -22,7 +22,7 @@ if ( have_posts() ) {
       </div>
       <div class="flex-grid-item flex-item-m-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-6">
         <?php
-        $end_of_day = strtotime( 'today midnight' ) - 1; // Calculates the Unix timestamp for the very end of the current day (23:59:59)
+        $start_of_day = strtotime( 'today midnight' );
         $jobs = get_posts(
             array(
                 'numberposts'  => -1,
@@ -30,9 +30,9 @@ if ( have_posts() ) {
                 'orderby'      => 'meta_value',
                 'order'        => 'ASC',
                 'meta_key'     => '_nm_deadline',
-                'meta_value'   => $end_of_day,
+                'meta_value'   => $start_of_day,
                 'meta_type'    => 'NUMERIC',
-                'meta_compare' => '>=',
+                'meta_compare' => '>=', // anything closing today or later
             )
         );
 
