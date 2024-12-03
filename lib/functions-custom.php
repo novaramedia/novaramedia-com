@@ -287,7 +287,7 @@ function get_the_top_level_category($post_id = null) {
 }
 
 /**
-* Does the post have set the Articles category?
+* Does the post have set the Articles category? or is it a child of the Articles category?
 * Defaults to current $post context
 *
 * @param integer $post_id Post ID
@@ -307,9 +307,14 @@ function nm_is_article($post_id = null) {
     return false;
   }
 
+  // check to see if any of the categories returned match the articles slug or have a parent with the articles id
   $found_in_categories = array_filter($categories,
     function ($category) {
-      return $category->slug === 'articles';
+      if ($category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id) {
+        return true;
+      }
+
+      return false;
     }); // check to see if any of the categories returned match the articles slug
 
   if (count($found_in_categories) > 0) {

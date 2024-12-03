@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="NM PHP Standard" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/master/phpcs.xsd">
+
+	<description>Yes we can't just do the default. We are xtra.</description>
+
+	<!--
+	#############################################################################
+	COMMAND LINE ARGUMENTS
+	https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Annotated-Ruleset
+	#############################################################################
+	-->
+
+	<file>.</file>
+
+	<!-- Exclude WP Core folders and files from being checked. -->
+	<exclude-pattern>/docroot/wp-admin/*</exclude-pattern>
+	<exclude-pattern>/docroot/wp-includes/*</exclude-pattern>
+	<exclude-pattern>/docroot/wp-*.php</exclude-pattern>
+	<exclude-pattern>/docroot/index.php</exclude-pattern>
+	<exclude-pattern>/docroot/xmlrpc.php</exclude-pattern>
+	<exclude-pattern>/docroot/wp-content/plugins/*</exclude-pattern>
+
+	<!-- Exclude the Composer Vendor directory. -->
+	<exclude-pattern>/vendor/*</exclude-pattern>
+
+	<!-- Exclude the Node Modules directory. -->
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+
+	<!-- Exclude minified Javascript files. -->
+	<exclude-pattern>*.min.js</exclude-pattern>
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="."/>
+
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
+
+	<!--
+	#############################################################################
+	SET UP THE RULESETS
+	#############################################################################
+	-->
+
+  <rule ref="WordPress">
+    <!-- No annoying yoga conditionals -->
+    <exclude name="WordPress.PHP.YodaConditions" />
+
+    <!-- No documentation needed for small functions and variables -->
+    <exclude name="Generic.Commenting.DocComment.MissingShort" />
+    <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+  </rule>
+
+	<!-- Include the WordPress-Extra standard. -->
+	<rule ref="WordPress-Extra">
+		<!--
+		We may want a middle ground though. The best way to do this is add the
+		entire ruleset, then rule by rule, remove ones that don't suit a project.
+		We can do this by running `phpcs` with the '-s' flag, which allows us to
+		see the names of the sniffs reporting errors.
+		Once we know the sniff names, we can opt to exclude sniffs which don't
+		suit our project like so.
+
+		The below two examples just show how you can exclude rules/error codes.
+		They are not intended as advice about which sniffs to exclude.
+		-->
+
+		<!--
+		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+		<exclude name="Modernize.FunctionCalls.Dirname.Nested"/>
+		-->
+	</rule>
+
+	<!-- Let's also check that everything is properly documented. -->
+	<rule ref="WordPress-Docs"/>
+
+	<!-- Add in some extra rules from other standards. -->
+	<rule ref="Generic.Commenting.Todo"/>
+
+	<!-- Check for PHP cross-version compatibility. -->
+	<!--
+	To enable this, the PHPCompatibilityWP standard needs
+	to be installed.
+	See the readme for installation instructions:
+	https://github.com/PHPCompatibility/PHPCompatibilityWP
+	For more information, also see:
+	https://github.com/PHPCompatibility/PHPCompatibility
+	-->
+	<!--
+	<config name="testVersion" value="5.6-"/>
+	<rule ref="PHPCompatibilityWP">
+		<include-pattern>*\.php</include-pattern>
+	</rule>
+	-->
+
+	<!--
+	#############################################################################
+	SNIFF SPECIFIC CONFIGURATION
+	#############################################################################
+	-->
+
+	<!--
+	To get the optimal benefits of using WordPressCS, we should add a couple of
+	custom properties.
+	Adjust the values of these properties to fit our needs.
+
+	For information on additional custom properties available, check out
+	the wiki:
+	https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
+	-->
+	<config name="minimum_wp_version" value="6.0"/>
+
+	<!-- <rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="my-textdomain"/>
+				<element value="library-textdomain"/>
+			</property>
+		</properties>
+	</rule> -->
+
+  <!--
+  ## Not implemented for now. If this could just be for functions it would be great.
+  We should be prefixing all our globals
+  But actually nm is too short a prefix and Wordpress wants ideally 3 characters min
+  So where we do migrate to this lets use nmio_
+  -->
+	<!-- <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="nmio"/>
+			</property>
+		</properties>
+	</rule> -->
+
+	<!--
+	#############################################################################
+	SELECTIVE EXCLUSIONS
+	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
+	#############################################################################
+	-->
+
+	<!--
+	Sometimes, you may want to exclude a certain directory, like your tests,
+	for select sniffs.
+	The below examples demonstrate how to do this.
+
+	In the example, the `GlobalVariablesOverride` rule is excluded for test files
+	as it is sometimes necessary to overwrite WP globals in test situations (just
+	don't forget to restore them after the test!).
+
+	Along the same lines, PHPUnit is getting stricter about using PSR-4 file names,
+	so excluding test files from the `WordPress.Files.Filename` sniff can be a
+	legitimate exclusion.
+
+	For more information on ruleset configuration options, check out the PHPCS wiki:
+	https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Annotated-Ruleset
+	-->
+	<!-- <rule ref="WordPress.WP.GlobalVariablesOverride">
+		<exclude-pattern>/path/to/Tests/*Test\.php</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>/path/to/Tests/*Test\.php</exclude-pattern>
+	</rule> -->
+
+  <!--
+  #############################################################################
+  OVERRIDE RULES FOR NOVARA MEDIA DIGI TEAM
+  Yes we can't just do the default. We are xtra.
+  #############################################################################
+  -->
+
+  <!-- Yoda, no! -->
+  <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
+
+  <rule ref="WordPress">
+    <!-- Ternarys are fine tbh -->
+    <exclude name="WordPress.PHP.DisallowShortTernary.Found" />
+    <!-- Its fine to output unescaped strings tbh, tho perhaps we could config here more for variables -->
+    <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
+    <!-- Allow space indents (part of intentation configs) -->
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+    <!-- For now dont bother with all global prefixed. It seems too much for variables -->
+    <exclude name="WordPress.NamingConventions.PrefixAllGlobals" />
+  </rule>
+
+  <rule ref="WordPress-Docs">
+    <!-- Turn off some over the top commenting requirements -->
+    <exclude name="Squiz.Commenting.FileComment.Missing" />
+    <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+    <exclude name="Squiz.Commenting.ClassComment.Missing" />
+    <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
+    <exclude name="Squiz.Commenting.VariableComment.Missing" />
+    <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+    <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+  </rule>
+
+  <!-- I don't know what this rule is doing. Looks to me like it isnt really doing anything -->
+  <rule ref="WordPress.Security.EscapeOutput">
+    <properties>
+      <property name="customAutoEscapedFunctions" type="array">
+        <element value="rd_render_attributes" />
+        <element value="rd_get_picture_html" />
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Maximum nesting level of 4. This means logic nesting but could perhaps apply to other things -->
+  <rule ref="Generic.Metrics.NestingLevel">
+    <properties>
+      <property name="absoluteNestingLevel" value="4"/>
+    </properties>
+  </rule>
+
+  <!-- Ban some bad default functions. But we can also use this config to depreciate things. -->
+  <rule ref="Generic.PHP.ForbiddenFunctions">
+    <properties>
+      <property name="forbiddenFunctions" type="array">
+        <element key="delete" value="unset"/>
+        <element key="print" value="echo"/>
+        <element key="create_function" value="null"/>
+        <element key="sizeof" value="count"/>
+        <!-- <element key="print_r" value="null"/> -->
+        <element key="eval" value="null"/>
+        <element key="compact" value="null"/>
+        <!-- Add depreciated functions here! -->
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Basically all the rest of this is about getting 2 space indentation working -->
+  <exclude name="Generic.Formatting.MultipleStatementAlignment" />
+
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+      <property name="tabIndent" value="false"/>
+    </properties>
+  </rule>
+
+  <arg name="tab-width" value="2"/>
+
+  <rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+
+  <!-- Disable MultipleStatementAlignment sniff -->
+  <rule ref="Generic.Formatting.MultipleStatementAlignment">
+    <exclude-pattern>*</exclude-pattern>
+  </rule>
+
+  <rule ref="Universal.WhiteSpace.PrecisionAlignment">
+    <exclude-pattern>*</exclude-pattern>
+  </rule>
+
+</ruleset>
