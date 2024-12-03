@@ -1,50 +1,111 @@
 <?php
+
+/**
+ * Render the support donation form.
+ *
+ * Generates unique instance identifiers to manage multiple forms on a single page,
+ * ensuring there are no conflicts with input labels or IDs.
+ * This function should be used within a grid item and must account for holistic layout
+ * requirements wherever it is called.
+ *
+ * @uses nm_get_support_autovalues() Fetches predefined support values for donation levels.
+ * @return void Outputs the HTML form directly.
+ */
+function render_support_form() {
+  // Generate unique ID for the form
+  $instance = uniqid( 'support-form-' );
+  $support_section_autovalues = nm_get_support_autovalues();
+  ?>
+  <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
+    <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
+    <div class="grid-row grid--nested-tight margin-bottom-tiny">
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low ?>" data-name="low">
+          £<?php echo $support_section_autovalues['default']->regular_low; ?>
+        </button>
+      </div>
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium ?>" data-name="medium">
+          £<?php echo $support_section_autovalues['default']->regular_medium; ?>
+        </button>
+      </div>
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high ?>" data-name="high">
+          £<?php echo $support_section_autovalues['default']->regular_high; ?>
+        </button>
+      </div>
+      <div class="grid-item grid-item--tight is-xxl-12">
+        <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
+        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
+      </div>
+    </div>
+    <div class="grid-row grid--nested-tight">
+      <div class="grid-item grid-item--tight is-xxl-6">
+        <button class="support-form__button support-form__schedule-option ui-input" data-action="set-type" data-value="oneoff">One-off</button>
+      </div>
+      <div class="grid-item grid-item--tight is-xxl-6">
+        <button class="support-form__button support-form__button--active support-form__schedule-option ui-input" data-action="set-type" data-value="regular">Monthly</button>
+      </div>
+      <div class="grid-item grid-item--tight is-xxl-12">
+        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+      </div>
+    </div>
+  </form>
+<?php } ?>
+
+<?php
 /**
  * Render the see also block
  * Based on a passed query. Can render more than 1 post but will only show one on mobile
  * Not a complete component which is why it is a renderer. Use this inside other conditionals
  *
- * @param WP_Query $query           The query to render
- * @param integer  $number_of_posts The number of posts to render
+ * @param WP_Query $query           The query to render.
+ * @param integer  $number_of_posts The number of posts to render.
  */
-function render_see_also($query, $number_of_posts = 1) {
-  if (!$query) {
+function render_see_also( $query, $number_of_posts = 1 ) {
+  if ( ! $query ) {
     return;
   }
 
-  if ($query->have_posts()) {
-?>
-<h4 class="font-size-8 font-weight-bold text-uppercase mb-2 mb-s-1">See Also</h4>
-<div class="related-posts">
-<?php
-    $i = 0;
-    while ($query->have_posts()) {
-      if ($i >= $number_of_posts) {
-        break;
-      }
-      $query->the_post();
-      $post_id = get_the_id();
-?>
-  <div class="mb-2 <?php if ($i != 0) { echo 'only-desktop'; } ?>">
-    <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
-      <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
-        <?php
-          if (nm_is_article($post_id)) {
-            render_bylines($post_id);
-          } else {
-            render_standfirst($post_id);
-          }
+  if ( $query->have_posts() ) {
+    ?>
+    <h4 class="font-size-8 font-weight-bold text-uppercase mb-2 mb-s-1">See Also</h4>
+    <div class="related-posts">
+      <?php
+      $i = 0;
+      while ( $query->have_posts() ) {
+        if ( $i >= $number_of_posts ) {
+          break;
+        }
+        $query->the_post();
+        $post_id = get_the_id();
         ?>
-      </h6>
-    </a>
-  </div>
-<?php
-      $i++;
-    }
-?>
-</div>
-<?php
+        <div class="mb-2 
+        <?php
+        if ( $i != 0 ) {
+                            echo 'only-desktop';
+        }
+        ?>
+        ">
+          <a href="<?php the_permalink(); ?>" class="ui-hover">
+            <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
+            <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
+              <?php
+              if ( nm_is_article($post_id) ) {
+                render_bylines($post_id);
+              } else {
+                render_standfirst($post_id);
+              }
+              ?>
+            </h6>
+          </a>
+        </div>
+      <?php
+        $i++;
+      }
+      ?>
+    </div>
+  <?php
   }
 }
 /**
@@ -55,7 +116,8 @@ function render_see_also($query, $number_of_posts = 1) {
  * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
  * @param string $block_style_varient Additional BEM varient class
  */
-function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false) {
+function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false)
+{
   $sub_category = get_the_sub_category($post_id, true);
 
   if (empty($sub_category)) {
@@ -96,7 +158,8 @@ function render_post_ui_tags($post_id, $show_text = true, $show_av_icons = false
  * @param integer $post_id Post ID
  * @param string  $size    Thumbnail size
  */
-function render_thumbnail($post_id, $size = 'col12-16to9', $attributes = null) {
+function render_thumbnail($post_id, $size = 'col12-16to9', $attributes = null)
+{
   if (!is_numeric($post_id)) {
     return;
   }
@@ -119,7 +182,8 @@ function render_thumbnail($post_id, $size = 'col12-16to9', $attributes = null) {
  *
  * @param integer $postId Post ID
  */
-function render_standfirst($postId = null) {
+function render_standfirst($postId = null)
+{
   if ($postId === null) {
     return;
   }
@@ -139,7 +203,8 @@ function render_standfirst($postId = null) {
  *
  * @param integer $postId Post ID
  */
-function render_video_title_and_standfirst($postId = null) {
+function render_video_title_and_standfirst($postId = null)
+{
   if ($postId === null) {
     return;
   }
@@ -163,7 +228,8 @@ function render_video_title_and_standfirst($postId = null) {
  *
  * @param integer $postId Post ID
  */
-function render_short_description($postId = null) {
+function render_short_description($postId = null)
+{
   if ($postId === null) {
     return;
   }
@@ -185,7 +251,8 @@ function render_short_description($postId = null) {
  * @param integer $post_id   Post ID
  * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata
  */
-function render_bylines($post_id, $is_linked = false) {
+function render_bylines($post_id, $is_linked = false)
+{
   $contributors_posts_array = get_contributors_array($post_id);
 
   $author = get_post_meta($post_id, '_cmb_author', true);
@@ -193,7 +260,7 @@ function render_bylines($post_id, $is_linked = false) {
 
   $twitter_url = false;
 
-  if ($twitter &&(!is_array($twitter) || count($twitter) === 1)) { // if twitter is set and it either isn't an array (old support) or it only has 1 value then we can display it
+  if ($twitter && (!is_array($twitter) || count($twitter) === 1)) { // if twitter is set and it either isn't an array (old support) or it only has 1 value then we can display it
     if (is_array($twitter)) {
       $twitter_url = $twitter[0];
     } else {
@@ -204,7 +271,7 @@ function render_bylines($post_id, $is_linked = false) {
   if ($contributors_posts_array) {
     $number_of_contributors = count($contributors_posts_array);
 
-    foreach($contributors_posts_array as $index => $contributor) {
+    foreach ($contributors_posts_array as $index => $contributor) {
       if ($number_of_contributors > 1) {
         if ($number_of_contributors === $index + 1) {
           echo ' & ';
@@ -215,7 +282,6 @@ function render_bylines($post_id, $is_linked = false) {
 
       echo $is_linked ? '<a href="' . get_the_permalink($contributor->ID) . '">' . $contributor->post_title . '</a>' : $contributor->post_title;
     }
-
   } else if (!empty($author)) {
     if ($twitter_url && $is_linked) {
       echo '<a href="https://twitter.com/' . $twitter_url . '" target="_blank" rel="nofollow">' . $author . '</a>';
@@ -228,15 +294,16 @@ function render_bylines($post_id, $is_linked = false) {
 }
 
 /**
-* Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
-*
-* @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
-*/
-function render_front_page_banner($key) {
+ * Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
+ *
+ * @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
+ */
+function render_front_page_banner($key)
+{
   switch ($key) {
     case (false || '0'): // if empty or set none
       break;
-    case (preg_match('/^newsletter-signup-/', $key) ? true : false) : // if key has newsletter signup prefix
+    case (preg_match('/^newsletter-signup-/', $key) ? true : false): // if key has newsletter signup prefix
       $newsletter_id = str_replace('newsletter-signup-', '', $key);
       $newsletter = get_post($newsletter_id);
 
@@ -280,7 +347,8 @@ function render_front_page_banner($key) {
  * @return void
  * @deprecated 3.9.0
  */
-function render_post_title($postId) {
+function render_post_title($postId)
+{
   $title = get_the_title($postId);
 
   $sub_category = get_the_sub_category($postId, true);
@@ -302,22 +370,23 @@ function render_post_title($postId) {
  *
  * @return void
  */
-function render_resources_row($resources) {
-?>
-<div id="single-resources-section" class="grid-row mb-4">
-  <div class="grid-item is-s-24">
-    <ul class="inline-action-list">
-      <?php
-        foreach($resources as $resource) {
+function render_resources_row($resources)
+{
+  ?>
+  <div id="single-resources-section" class="grid-row mb-4">
+    <div class="grid-item is-s-24">
+      <ul class="inline-action-list">
+        <?php
+        foreach ($resources as $resource) {
           if (!empty($resource['title']) && !empty($resource['link'])) {
             echo '<li><a target="_black" href="' . $resource['link'] . '">' . $resource['title'] . '</a><li>';
           }
         }
-      ?>
-    </ul>
+        ?>
+      </ul>
+    </div>
   </div>
-</div>
-<?php
+  <?php
 }
 
 /**
@@ -330,7 +399,8 @@ function render_resources_row($resources) {
  *
  * @return void
  */
-function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null) {
+function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag = null)
+{
   if (empty($url)) {
     return;
   }
@@ -350,7 +420,8 @@ function render_tweet_link($url, $title = null, $link_text = 'Tweet', $hashtag =
   echo '<a class="ui-action-link ui-action-link--small share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
 
-function render_facebook_share_link($url, $link_text = 'Facebook share') {
+function render_facebook_share_link($url, $link_text = 'Facebook share')
+{
   if (empty($url)) {
     return;
   }
@@ -362,17 +433,19 @@ function render_facebook_share_link($url, $link_text = 'Facebook share') {
   echo '<a class="ui-action-link ui-action-link--small share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
 
-function render_email_share_link($url, $subject = '', $link_text = 'Email') {
+function render_email_share_link($url, $subject = '', $link_text = 'Email')
+{
   if (empty($url)) {
     return;
   }
 
-  $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body='. urlencode($url);
+  $mailto_scheme = 'mailto:?subject=' . urlencode($subject) . '&body=' . urlencode($url);
 
   echo '<a class="ui-action-link ui-action-link--small share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
-function render_reddit_share_link($url, $title = null, $link_text = 'Post to Reddit') {
+function render_reddit_share_link($url, $title = null, $link_text = 'Post to Reddit')
+{
   if (empty($url)) {
     return;
   }
@@ -389,27 +462,28 @@ function render_reddit_share_link($url, $title = null, $link_text = 'Post to Red
 }
 
 /**
-* Renders a CMB2 meta field for the About page containing an array of roles and persons in those roles.
-*
-* @param array $data The return value of get_meta_field with single true.
-*/
-function render_about_group_field($data) {
+ * Renders a CMB2 meta field for the About page containing an array of roles and persons in those roles.
+ *
+ * @param array $data The return value of get_meta_field with single true.
+ */
+function render_about_group_field($data)
+{
   if (!$data) {
     return;
   }
 
-  foreach($data as $person) {
-?>
-  <div class="margin-bottom-small">
-    <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
-<?php
-    foreach($person['name'] as $name) {
-?>
-      <div class="about-page__person"><?php echo $name; ?></div>
-<?php
-    }
+  foreach ($data as $person) {
   ?>
-  </div>
+    <div class="margin-bottom-small">
+      <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
+      <?php
+      foreach ($person['name'] as $name) {
+      ?>
+        <div class="about-page__person"><?php echo $name; ?></div>
+      <?php
+      }
+      ?>
+    </div>
 <?php
   }
 }
