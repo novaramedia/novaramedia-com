@@ -102,7 +102,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     <section class="category-archive__if-i-speak__header container pt-4 pb-4 mb-4">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <h1 class="category-archive__if-i-speak__title">If I Speak...</h1>
+          <h1 class="category-archive__if-i-speak__title mb-4 mb-s-0">If I Speak...</h1>
         </div>
         <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold">
           <?php echo category_description(); ?>
