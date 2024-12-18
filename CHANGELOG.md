@@ -15,8 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Timestamp for job posts so they remain visable until 23:59:59 on deadline day
-- Removed the lines that told applicants to email in their aplication
+- Timestamp for job posts so they remain visible until 23:59:59 on deadline day
+- Removed the lines that told applicants to email in their application
 
 ### Added
 
