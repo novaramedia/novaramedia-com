@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed 
+### Fixed
 
-- Added a margin to the bottom of the heading on larger screens to stop it overlapping text below 
+- Added a margin to the bottom of the heading on larger screens to stop it overlapping text below
 
 ## [4.2.4] - 2024-12-02
 
