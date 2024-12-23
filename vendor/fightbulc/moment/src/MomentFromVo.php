@@ -3,11 +3,11 @@
 namespace Moment;
 
 /**
- * MomentFromVo
+ * moment_from_vo
  * @package Moment
  * @author  Tino Ehrich (tino@bigpun.me)
  */
-class MomentFromVo
+class moment_from_vo
 {
     /**
      * @var Moment
@@ -85,7 +85,7 @@ class MomentFromVo
     /**
      * @param string $direction
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setDirection($direction)
     {
@@ -105,7 +105,7 @@ class MomentFromVo
     /**
      * @param float $days
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setDays($days)
     {
@@ -125,7 +125,7 @@ class MomentFromVo
     /**
      * @param float $hours
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setHours($hours)
     {
@@ -145,7 +145,7 @@ class MomentFromVo
     /**
      * @param float $minutes
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setMinutes($minutes)
     {
@@ -165,7 +165,7 @@ class MomentFromVo
     /**
      * @param int $seconds
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setSeconds($seconds)
     {
@@ -185,7 +185,7 @@ class MomentFromVo
     /**
      * @param mixed $weeks
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      */
     public function setWeeks($weeks)
     {

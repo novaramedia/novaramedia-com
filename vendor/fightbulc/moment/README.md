@@ -287,22 +287,22 @@ setYear($y)     | getYear()
 
 ```php
 $m = new \Moment\Moment('2013-02-01T07:00:00');
-$momentFromVo = $m->fromNow();
+$moment_from_vo = $m->fromNow();
 
 // or from a specific moment
 $m = new \Moment\Moment('2013-02-01T07:00:00');
-$momentFromVo = $m->from('2011-09-25T10:00:00');
+$moment_from_vo = $m->from('2011-09-25T10:00:00');
 
 // result comes as a value object class
-echo $momentFromVo->getDirection()  // "future"
-echo $momentFromVo->getSeconds()    // -42411600
-echo $momentFromVo->getMinutes()    // -706860
-echo $momentFromVo->getHours()      // -11781
-echo $momentFromVo->getDays()       // -490.88
-echo $momentFromVo->getWeeks()      // -70.13
-echo $momentFromVo->getMonths()     // -17.53
-echo $momentFromVo->getYears()      // -1.42
-echo $momentFromVo->getRelative()   // in a year
+echo $moment_from_vo->getDirection()  // "future"
+echo $moment_from_vo->getSeconds()    // -42411600
+echo $moment_from_vo->getMinutes()    // -706860
+echo $moment_from_vo->getHours()      // -11781
+echo $moment_from_vo->getDays()       // -490.88
+echo $moment_from_vo->getWeeks()      // -70.13
+echo $moment_from_vo->getMonths()     // -17.53
+echo $moment_from_vo->getYears()      // -1.42
+echo $moment_from_vo->getRelative()   // in a year
 ```
 
 -------------------------------------------------
@@ -717,19 +717,19 @@ You can now run through the result and put it formatted into a drop-down field o
 ### 1.6.0
 - added:
     - Locale
-    - MomentFromVo:
+    - moment_from_vo:
         - getMonths()
         - getYears()
         - getRelative()
 - fixed:
-    - MomentFromVo:
+    - moment_from_vo:
         - getSeconds() shows now direction as well
 
 ### 1.5.3
 - fixed:
     - timezone issue which occured only for unixtime dates
 - other:
-    - MomentFromVo:
+    - moment_from_vo:
         - direction returns now: "future" (-) / "past" (+)
         - time values are now type casted as floats
 

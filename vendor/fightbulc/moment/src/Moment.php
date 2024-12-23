@@ -713,7 +713,7 @@ class Moment extends \DateTime
      * @param string|Moment $fromMoment
      * @param null          $timezoneString
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      * @throws MomentException
      */
     public function from($fromMoment = 'now', $timezoneString = null)
@@ -728,9 +728,9 @@ class Moment extends \DateTime
 
         // calc difference between dates
         $dateDiff = parent::diff($fromMoment);
-        $momentFromVo = new MomentFromVo($fromMoment);
+        $moment_from_vo = new moment_from_vo($fromMoment);
 
-        return $momentFromVo
+        return $moment_from_vo
             ->setDirection($dateDiff->format('%R'))
             ->setSeconds($this->fromToSeconds($dateDiff))
             ->setMinutes($this->fromToMinutes($dateDiff))
@@ -743,7 +743,7 @@ class Moment extends \DateTime
     /**
      * @param null $timezoneString
      *
-     * @return MomentFromVo
+     * @return moment_from_vo
      * @throws MomentException
      */
     public function fromNow($timezoneString = null)
@@ -920,8 +920,8 @@ class Moment extends \DateTime
     public function calendar($withTime = true, Moment $refMoment = null)
     {
         $refMoment = $refMoment ? $refMoment : new Moment('now', $this->getTimezoneString());
-        $momentFromVo = $this->cloning()->startOf('day')->from($refMoment->startOf('day'));
-        $diff = $momentFromVo->getDays();
+        $moment_from_vo = $this->cloning()->startOf('day')->from($refMoment->startOf('day'));
+        $diff = $moment_from_vo->getDays();
 
         // handle time string
         $renderedTimeString = MomentLocale::renderLocaleString(array('calendar', 'withTime'), array($this));
