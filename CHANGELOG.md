@@ -5,13 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- If I Speak title onto one line and image to contain rather than cover
+
 ## [4.2.5] - 2025-01-13
 
 ### Fixed
 
 - Added a margin to the bottom of the heading on larger screens to stop it overlapping text below
 
-### Changed 
+### Changed
 
 - included NM stylus library
 
@@ -19,8 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Timestamp for job posts so they remain visable until 23:59:59 on deadline day
-- Removed the lines that told applicants to email in their aplication
+- Timestamp for job posts so they remain visible until 23:59:59 on deadline day
+- Removed the lines that told applicants to email in their application
 
 ### Added
 
