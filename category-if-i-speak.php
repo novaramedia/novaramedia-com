@@ -15,7 +15,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     }
 
     .category-archive__if-i-speak__title {
-      font-size: 18.5rem;
+      font-size: 17.5rem;
       line-height: .9;
       letter-spacing: -0.03em;
       font-weight: 700;
@@ -45,7 +45,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
     @media screen and (max-width: 1408px) {
       .category-archive__if-i-speak__title {
-        font-size: 14.5rem;
+        font-size: 13rem;
       }
 
       .category-archive__if-i-speak__image {
@@ -56,7 +56,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
     @media screen and (max-width: 1104px) {
       .category-archive__if-i-speak__title {
-        font-size: 12.5rem;
+        font-size: 12rem;
       }
 
       .category-archive__if-i-speak__image {
@@ -66,7 +66,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
     @media screen and (max-width: 910px) {
       .category-archive__if-i-speak__title {
-        font-size: 11.4rem;
+        font-size: 10.5rem;
       }
 
       .category-archive__if-i-speak__image {
@@ -89,7 +89,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
     @media screen and (max-width: 759px) {
       .category-archive__if-i-speak__title {
-        font-size: 7rem;
+        font-size: 5rem;
       }
 
       .category-archive__if-i-speak__image {
@@ -102,7 +102,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     <section class="category-archive__if-i-speak__header container pt-4 pb-4 mb-4">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <h1 class="category-archive__if-i-speak__title mb-4 mb-s-0">If I Speak...</h1>
+          <h1 class="category-archive__if-i-speak__title mb-5 mb-s-0">If I Speak...</h1>
         </div>
         <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold">
           <?php echo category_description(); ?>
