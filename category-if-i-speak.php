@@ -74,7 +74,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
       }
 
       .category-archive__if-i-speak__image {
-        height: 200px;
+        height: 210px;
         width: 290px;
       }
 
@@ -108,7 +108,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
         <div class="grid-item is-xxl-24">
           <h1 class="category-archive__if-i-speak__title mb-5 mb-s-0">If I Speak...</h1>
         </div>
-        <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold">
+        <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold mb-m-3">
           <?php echo category_description(); ?>
         </div>
         <div class="grid-item is-s-12 is-xxl-10">
