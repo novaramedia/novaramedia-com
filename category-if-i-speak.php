@@ -62,10 +62,6 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
       .category-archive__if-i-speak__title {
         font-size: 12rem;
       }
-
-      .category-archive__if-i-speak__image {
-        /* width: 280px; */
-      }
     }
 
     @media screen and (max-width: 910px) {
