@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added a margin to the bottom of the heading on larger screens to stop it overlapping text below
 
-### Changed 
+### Changed
 
 - included NM stylus library
 
