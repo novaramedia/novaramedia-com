@@ -22,12 +22,14 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     }
 
     .category-archive__if-i-speak__image {
-      background-size: cover;
       background-position: top;
-      height: 210px;
+      height: 300px;
       width: 360px;
       margin: 0 auto;
       margin-top: 0;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .category-archive__if-i-speak__border {
@@ -37,6 +39,9 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
     .avif .category-archive__if-i-speak__image, .webp .category-archive__if-i-speak__image {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.webp'; ?>);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .fallback .category-archive__if-i-speak__image {
@@ -49,8 +54,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
       }
 
       .category-archive__if-i-speak__image {
-        height: 220px;
-        width: 320px;
+        height: 300px;
       }
     }
 
@@ -60,7 +64,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
       }
 
       .category-archive__if-i-speak__image {
-        width: 280px;
+        /* width: 280px; */
       }
     }
 
@@ -70,7 +74,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
       }
 
       .category-archive__if-i-speak__image {
-        height: 190px;
+        height: 200px;
         width: 290px;
       }
 
@@ -94,7 +98,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
       .category-archive__if-i-speak__image {
         height: 160px;
-        width: 100%;
+        width: 200px;
       }
     }
   </style>
