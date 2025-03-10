@@ -51,12 +51,14 @@ if ( $local_term ) {
     }
     @media screen and (max-width: 1408px) {
       .committed-banner__backgrounded {
-        background-position: 0% 27%;
+        background-position: 50% 29%;
+        background-size: 150%;
       }
     }
     @media screen and (max-width: 910px) {
       .committed-banner__backgrounded {
-        background-position: 0% 26%;
+        background-position: 50% 29%;
+         background-size: 190%;
       }
     }
     @media screen and (max-width: 759px) {
@@ -64,8 +66,8 @@ if ( $local_term ) {
         justify-content: start;
       }
       .committed-banner__backgrounded {
-        background-position: 50% 31%;
-        background-size: 150%;
+        background-position: 50% 35%;
+        background-size: 200%;
       }
       .committed-banner__logo {
         order: 1;
@@ -75,7 +77,6 @@ if ( $local_term ) {
         order: 2;
         justify-content: flex-start;
         align-items: flex-start;
-
       }
       .committed-banner__grid-item-right {
         order: 3;
@@ -83,16 +84,16 @@ if ( $local_term ) {
       }
     }
   </style>
-  <div class="container committed-banner__container pt-6 pb-6">
+  <div class="container committed-banner__container pt-6 pb-6 pt-s-4">
     <div class="grid-row committed-banner__grid-row">
-      <div class="grid-item is-s-12 is-l-8 is-xxl-5 committed-banner__grid-item committed-banner__grid-item-left mt-s-4">
-        <p class="font-color-white font-weight-bold font-size-11 font-size-s-12">Would you go to prison</br>for your politics?</p>
+      <div class="grid-item is-s-12 is-xxl-6 is-m-7 committed-banner__grid-item committed-banner__grid-item-left mt-s-4">
+        <p class="font-color-white font-weight-bold font-size-11 font-size-s-11 pl-s-2">Would you go to prison</br>for your politics?</p>
       </div>
-      <div class="grid-item is-s-24 is-xs-20 is-l-8 is-xxl-14 committed-banner__grid-item committed-banner__logo">
+      <div class="grid-item is-s-24 is-xs-20 is-xxl-12 is-m-10 committed-banner__grid-item committed-banner__logo">
       </div>
-      <div class="grid-item is-s-12 is-l-8 is-xxl-5 committed-banner__grid-item committed-banner__grid-item-right mt-s-4">
-        <div class="committed-banner__button-container committed-banner__grid-item-right">
-          <p class="font-color-white font-weight-bold font-size-11 mb-3 pt-6 pt-s-0 font-size-s-12">Meet the people who</br>have done just that</p>
+      <div class="grid-item is-s-12 is-xxl-6 is-m-7 committed-banner__grid-item committed-banner__grid-item-right mt-s-4">
+        <div class="committed-banner__button-container committed-banner__grid-item-right pr-s-2">
+          <p class="font-color-white font-weight-bold font-size-11 mb-3 pt-6 pt-s-0 font-size-s-11">Meet the people who</br>have done just that</p>
           <a href="<?php echo $url; ?>" class="ui-button ui-button--small ui-button--white">Listen Now</a>
         </div>
       </div>
