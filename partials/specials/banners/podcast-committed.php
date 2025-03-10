@@ -66,7 +66,7 @@ if ( $local_term ) {
         justify-content: start;
       }
       .committed-banner__backgrounded {
-        background-position: 50% 35%;
+        background-position: 50% 33%;
         background-size: 200%;
       }
       .committed-banner__logo {
