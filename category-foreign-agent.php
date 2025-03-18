@@ -122,7 +122,7 @@ function nm_render_podcast_credit( $credit ) {
   <section class="container pt-4 pb-4">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 mb-4">
-        <h4 class="font-size-9 text-uppercase font-weight-bold" style="color: #E3FFFF;"><a href="<?php echo home_url( 'category/audio/' ); ?>">Podcast</a></h4>
+        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block"><span class="ui-tag">Podcast</span></a>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
