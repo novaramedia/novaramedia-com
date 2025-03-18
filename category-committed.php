@@ -35,7 +35,7 @@ function nm_render_podcast_credit( $credit ) {
   <?php
 }
 ?>
-<main id="main-content" class="category-archive foreign-agent-archive">
+<main id="main-content" class="category-archive">
   <style type="text/css">
     .webp .committed__backgrounded {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/catagory-committed-background.webp'; ?>);
@@ -132,7 +132,7 @@ function nm_render_podcast_credit( $credit ) {
       </div>
     </div>
     <div class="flex-grid-row mt-4 mb-5">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif foreign-agent__serif-large text-paragraph-breaks">
+      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif text-paragraph-breaks">
         <p>INSERT COMMITTED TEXT</p>
         <p>INSERT COMMITTED TEXT</p>
         <p>INSERT COMMITTED TEXT</p>
@@ -154,7 +154,7 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-      <article class="foreign-agent-archive__episode flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
+      <article class="flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
           <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php the_title(); ?></h3>
@@ -165,7 +165,7 @@ if ( have_posts() ) {
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif mb-4 text-paragraph-breaks">
           <?php the_content(); ?>
         </div>
       </article>
@@ -176,7 +176,7 @@ if ( have_posts() ) {
     </div>
   </section>
   <div style="background-color: #FE6919;">
-    <div class="foreign-agent-archive__credits container font-size-10 pt-10 pb-6 font-color-white">
+    <div class="container font-size-10 pt-10 pb-6 font-color-white">
       <div class="flex-grid-row mb-5">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
           <h4 class="font-size-9 text-uppercase font-weight-bold">The producers</h4>
@@ -184,12 +184,12 @@ if ( have_posts() ) {
       </div>
       <div class="flex-grid-row mb-5">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
-          <div class="foreign-agent-archive__box">
+          <div>
             <span class="font-weight-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
-          <div class="foreign-agent-archive__box">
+          <div>
             <span class="font-weight-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
           </div>
         </div>
@@ -201,7 +201,7 @@ if ( have_posts() ) {
       </div>
       <div class="flex-grid-row">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-3">
-          <div class="foreign-agent-archive__box" style="display: inline-block;">
+          <div style="display: inline-block;">
             <?php
             for ( $i = 0, $size = count( $credits_1 ); $i < $size; $i++ ) {
                 nm_render_podcast_credit( $credits_1[ $i ] );
@@ -210,7 +210,7 @@ if ( have_posts() ) {
           </div>
         </div>
         <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-4">
-          <div class="foreign-agent-archive__box" style="display: inline-block;">
+          <div style="display: inline-block;">
             <?php
             for ( $i = 0, $size = count( $credits_2 ); $i < $size; $i++ ) {
                 nm_render_podcast_credit( $credits_2[ $i ] );
@@ -219,7 +219,7 @@ if ( have_posts() ) {
           </div>
         </div>
         <div class="flex-grid-item flex-offset-s-2 flex-item-s-7 flex-item-l-4 flex-item-xxl-3 mt-s-4">
-          <div class="foreign-agent-archive__box" style="display: inline-block;">
+          <div style="display: inline-block;">
             <?php
             for ( $i = 0, $size = count( $credits_thanks ); $i < $size; $i++ ) {
                 nm_render_podcast_credit( $credits_thanks[ $i ] );
