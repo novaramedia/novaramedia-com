@@ -54,7 +54,7 @@ function nm_render_podcast_credit( $credit ) {
       background-position: center;
     }
 
-    .committed-archive__logo {
+    .committed-archive__logo,  .committed-credits__logo {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
@@ -71,48 +71,110 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-archive-listen__box {
-    display: flex;
-     justify-content: center;
-
+      display: flex;
+      justify-content: center;
     }
 
     .committed-archive__box {
-      border-radius: 0px;
-      padding: .8rem 1rem;
-      background-color:rgb(254, 105, 25);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-listen-now-background.png'; ?>);
+      padding: 25px 30px;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 430px;
+    }
+
+    .committed-listen-now-title {
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-listen-now-title.png'; ?>);
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 1.8rem;
+    }
+
+    .committed-listen-now__links a:hover {
+      text-decoration: underline;
+    }
+
+    .committed__serif-large {
+      font-size: 27px;
+      line-height: 1.25;
+    }
+
+    .committed__serif-medium {
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .committed-credits__background{
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background__desktop.png'; ?>);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      align-items: center;
+      height: 500px;
+    }
+
+    .committed-credits__logo {
+      height: 80px;
+    }
+
+    .committed-credits__logo-row {
+      justify-content: center;
+    }
+
+    .committed-credits__reporters img {
+      height: 120px;
+    }
+
+    .committed-credits__info-row {
+      justify-content: center;
     }
 
     @media screen and (max-width: 1336px) {
+      .committed__serif-large {
+        font-size: 23px;
+      }
     }
 
     @media screen and (max-width: 1104px) {
-              .committed-archive__container {
-      height: 400px;
-      background-position: center;
+     .committed-archive__container {
+        height: 400px;
+        background-position: center;
+      }
+      .committed__serif-medium {
+        font-size: 19px;
       }
     }
 
     @media screen and (max-width: 910px) {
-
+      .committed__serif-large {
+        font-size: 19px;
+      }
+      .committed__serif-medium {
+        font-size: 16px;
+      }
     }
 
     @media screen and (max-width: 759px) {
       .committed-archive__container {
-      height: 400px;
-      background-position: center;
+        height: 400px;
+        background-position: center;
       }
       .committed-archive__logo {
         height: 70px;
       }
-       .committed-archive__subtitle {
+      .committed-archive__subtitle {
         height: 50px;
        }
+      .committed__serif-large {
+        font-size: 18px;
+      }
     }
   </style>
 <div class="committed-archive__container committed__backgrounded">
   <section class="container">
     <div class="flex-grid-row mb-4">
-      <div class="flex-grid-item flex-item-xxl-12 mb-4">
+      <div class="flex-grid-item flex-item-xxl-12 mb-4 mt-4">
         <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block"><span class="ui-tag">Podcast</span></a>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-s-12">
@@ -132,16 +194,21 @@ function nm_render_podcast_credit( $credit ) {
       </div>
     </div>
     <div class="flex-grid-row mt-4 mb-5">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif text-paragraph-breaks">
-        <p>INSERT COMMITTED TEXT</p>
-        <p>INSERT COMMITTED TEXT</p>
-        <p>INSERT COMMITTED TEXT</p>
+      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif committed__serif-large text-paragraph-breaks">
+        <p>In the 1970s, the Provisional IRA was in the early days of its armed campaign to end British rule on the island of Ireland. In the United States, a small group of activists began organising on their behalf. They called themselves the Irish Northern Aid Committee, or Noraid—and they were looking for a fight.</p>
+        <p>Hosted by documentary filmmaker Nate Lavey, Foreign Agent is a podcast series about the connection between ordinary Irish Americans and a revolutionary socialist guerrilla group. In six episodes, travelling back and forth across the Atlantic over three decades of conflict, Foreign Agent explores how regular Americans became militant advocates for the cause of Irish freedom.</p>
+        <p>It’s a story of guns smuggled in furniture and wild plots to build homemade missiles. But it’s also about the political and material power that the Irish American community wielded, and how the intoxicating spell of nationalism created a movement out of seemingly irreconcilable social and political positions. And at every step of the way, the US government tried to shut them down. This is the story of the Troubles—as seen through American eyes.</p>
       </div>
     </div>
     <div class="flex-grid-row mb-6">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-size-11 font-color-white committed-archive-listen__box text-links-underlined">
+      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-color-white committed-archive-listen__box">
         <div class="committed-archive__box" style="display: inline-block;">
-          <p class="font-weight-bold mb-0">Listen now on:</p><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>, <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
+          <div class="committed-listen-now-title mb-1"></div>
+          <div class="font-weight-bold committed-listen-now__links font-size-13">
+            <a href="https://podcasts.apple.com/us/podcast/committed-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,
+            <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>,
+            <a href="https://feeds.podcastmirror.com/committed">RSS</a>
+          </div>
         </div>
       </div>
     </div>
@@ -165,7 +232,7 @@ if ( have_posts() ) {
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif mb-4 text-paragraph-breaks">
+        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif mb-4 text-paragraph-breaks committed__serif-medium">
           <?php the_content(); ?>
         </div>
       </article>
@@ -175,57 +242,39 @@ if ( have_posts() ) {
 ?>
     </div>
   </section>
-  <div style="background-color: #FE6919;">
-    <div class="container font-size-10 pt-10 pb-6 font-color-white">
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-          <h4 class="font-size-9 text-uppercase font-weight-bold">The producers</h4>
+  <div>
+    <div class="committed-credits__background container pt-4 pb-6 font-color-white">
+      <div class="flex-grid-row mb-5 mt-6 committed-credits__logo-row">
+        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5 committed-credits__logo">
         </div>
       </div>
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
-          <div>
-            <span class="font-weight-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
+      <div class="flex-grid-row committed-credits__info-row font-size-9">
+        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3">
+          <div class="flex-grid-row font-weight-bold">Reporters</div>
+          <div class="committed-credits__reporters font-size-6 flex-grid-row mt-1">
+            <div class="mr-4">
+              <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
+              <p>Rivkah Brown</p>
+            </div>
+            <div class="">
+              <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-clare-logo.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
+              <p>Clare Hymer</p>
+            </div>
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
-          <div>
-            <span class="font-weight-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
-          </div>
+        <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-3">
+          <div class="font-weight-bold mb-1">Producers</div>
+          <p class="mb-2">Richard Hames and Chal Ravens</p>
+          <div class="font-weight-bold">Music and sound editing</div>
+          <p class="mb-2">Matt Huxley</p>
+          <div class="font-weight-bold">Design and digital</div>
+          <p class="mb-2">Garrone and Filippo Marra</p>
+          <div class="font-weight-bold">Social media production</div>
+          <p class="mb-2">Dunya Kamal and Bronte Dow</p>
         </div>
-      </div>
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
-          <h4 class="font-size-9 text-uppercase font-weight-bold">Credits</h4>
-        </div>
-      </div>
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-3">
-          <div style="display: inline-block;">
-            <?php
-            for ( $i = 0, $size = count( $credits_1 ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_1[ $i ] );
-            }
-            ?>
-          </div>
-        </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-4">
-          <div style="display: inline-block;">
-            <?php
-            for ( $i = 0, $size = count( $credits_2 ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_2[ $i ] );
-            }
-            ?>
-          </div>
-        </div>
-        <div class="flex-grid-item flex-offset-s-2 flex-item-s-7 flex-item-l-4 flex-item-xxl-3 mt-s-4">
-          <div style="display: inline-block;">
-            <?php
-            for ( $i = 0, $size = count( $credits_thanks ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_thanks[ $i ] );
-            }
-            ?>
-          </div>
+        <div class="flex-grid-item flex-item-s-7 flex-item-l-4 flex-item-xxl-3">
+          <div class="font-weight-bold mb-1">Thanks to</div>
+          All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.
         </div>
       </div>
     </div>
