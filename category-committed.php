@@ -59,7 +59,7 @@ function nm_render_podcast_credit( $credit ) {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      height: 200px;
+      height: 180px;
     }
 
     .committed-archive__subtitle {
@@ -105,13 +105,17 @@ function nm_render_podcast_credit( $credit ) {
       line-height: 1.25;
     }
 
-    .committed-credits__background{
+    .committed-credits__background {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background__desktop.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      align-items: center;
       height: 500px;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .committed-credits__logo {
@@ -123,7 +127,7 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-credits__reporters img {
-      height: 120px;
+      height: 110px;
     }
 
     .committed-credits__info-row {
@@ -147,12 +151,20 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     @media screen and (max-width: 910px) {
+      .committed-archive__logo {
+        height: 150px;
+      }
       .committed__serif-large {
         font-size: 19px;
       }
       .committed__serif-medium {
         font-size: 16px;
       }
+      .committed-credits__background {
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-m.png'; ?>);
+      height: 500px;
+      max-width: 1000px;
+    }
     }
 
     @media screen and (max-width: 759px) {
@@ -169,15 +181,25 @@ function nm_render_podcast_credit( $credit ) {
       .committed__serif-large {
         font-size: 18px;
       }
+      .committed-credits__background {
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-s.png'; ?>);
+      height: 700px;
+      }
+      .committed-credits__logo {
+      height: 45px;
+    }
+    .committed-credits__reporters img{
+      height: 34vw;
+    }
     }
   </style>
 <div class="committed-archive__container committed__backgrounded">
   <section class="container">
     <div class="flex-grid-row mb-4">
-      <div class="flex-grid-item flex-item-xxl-12 mb-4 mt-4">
+      <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
         <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block"><span class="ui-tag">Podcast</span></a>
       </div>
-      <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-s-12">
+      <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
         <h3 class="u-visuallyhidden">Would you go to prison for your politics?</h3>
         <div class="committed-archive__logo"></div>
@@ -243,16 +265,15 @@ if ( have_posts() ) {
     </div>
   </section>
   <div>
-    <div class="committed-credits__background container pt-4 pb-6 font-color-white">
-      <div class="flex-grid-row mb-5 mt-6 committed-credits__logo-row">
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5 committed-credits__logo">
-        </div>
+    <div class="committed-credits__background container pt-4 pb-l-6 pb-m-3 mb-m-5 font-color-white">
+      <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
+        <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
       </div>
-      <div class="flex-grid-row committed-credits__info-row font-size-9">
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3">
-          <div class="flex-grid-row font-weight-bold">Reporters</div>
-          <div class="committed-credits__reporters font-size-6 flex-grid-row mt-1">
-            <div class="mr-4">
+      <div class="flex-grid-row committed-credits__info-row font-size-10">
+        <div class="flex-grid-item flex-item-m-4 flex-item-xxl-3 flex-item-s-8 mb-s-5">
+          <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
+          <div class="committed-credits__reporters flex-grid-row">
+            <div class="mr-2">
               <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
               <p>Rivkah Brown</p>
             </div>
@@ -262,7 +283,7 @@ if ( have_posts() ) {
             </div>
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <div class="font-weight-bold mb-1">Producers</div>
           <p class="mb-2">Richard Hames and Chal Ravens</p>
           <div class="font-weight-bold">Music and sound editing</div>
@@ -272,7 +293,7 @@ if ( have_posts() ) {
           <div class="font-weight-bold">Social media production</div>
           <p class="mb-2">Dunya Kamal and Bronte Dow</p>
         </div>
-        <div class="flex-grid-item flex-item-s-7 flex-item-l-4 flex-item-xxl-3">
+        <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
           All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.
         </div>
