@@ -110,8 +110,7 @@ function nm_render_podcast_credit( $credit ) {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      height: 500px;
-      max-width: 1000px;
+      height: 650px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -138,6 +137,9 @@ function nm_render_podcast_credit( $credit ) {
       .committed__serif-large {
         font-size: 23px;
       }
+      .committed-credits__background {
+        height: 650px;
+      }
     }
 
     @media screen and (max-width: 1104px) {
@@ -147,6 +149,9 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed__serif-medium {
         font-size: 19px;
+      }
+      .committed-credits__background {
+        height: 550px;
       }
     }
 
@@ -162,8 +167,7 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed-credits__background {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-m.png'; ?>);
-      height: 500px;
-      max-width: 1000px;
+      height: 550px;
     }
     }
 
@@ -182,8 +186,8 @@ function nm_render_podcast_credit( $credit ) {
         font-size: 18px;
       }
       .committed-credits__background {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-s.png'; ?>);
-      height: 700px;
+        background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-s.png'; ?>);
+        height: 1000px;
       }
       .committed-credits__logo {
       height: 45px;
@@ -192,6 +196,14 @@ function nm_render_podcast_credit( $credit ) {
       height: 34vw;
     }
     }
+     @media screen and (max-width: 420px) {
+      .committed-credits__background{
+        height: 800px;
+      }
+      .committed-listen-now-title{
+        height: 1.3rem;
+      }
+     }
   </style>
 <div class="committed-archive__container committed__backgrounded">
   <section class="container">
@@ -222,11 +234,11 @@ function nm_render_podcast_credit( $credit ) {
         <p>It’s a story of guns smuggled in furniture and wild plots to build homemade missiles. But it’s also about the political and material power that the Irish American community wielded, and how the intoxicating spell of nationalism created a movement out of seemingly irreconcilable social and political positions. And at every step of the way, the US government tried to shut them down. This is the story of the Troubles—as seen through American eyes.</p>
       </div>
     </div>
-    <div class="flex-grid-row mb-6">
+    <div class="flex-grid-row mb-6 mb-s-4">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-color-white committed-archive-listen__box">
         <div class="committed-archive__box" style="display: inline-block;">
           <div class="committed-listen-now-title mb-1"></div>
-          <div class="font-weight-bold committed-listen-now__links font-size-13">
+          <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
             <a href="https://podcasts.apple.com/us/podcast/committed-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,
             <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>,
             <a href="https://feeds.podcastmirror.com/committed">RSS</a>
@@ -265,7 +277,7 @@ if ( have_posts() ) {
     </div>
   </section>
   <div>
-    <div class="committed-credits__background container pt-4 pb-l-6 pb-m-3 mb-m-5 font-color-white">
+    <div class="committed-credits__background pt-4 pb-l-6 pb-m-3 mb-m-5 mb-s-2 pb-s-0 font-color-white">
       <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
         <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
       </div>
@@ -289,7 +301,7 @@ if ( have_posts() ) {
           <div class="font-weight-bold">Music and sound editing</div>
           <p class="mb-2">Matt Huxley</p>
           <div class="font-weight-bold">Design and digital</div>
-          <p class="mb-2">Garrone and Filippo Marra</p>
+          <p class="mb-2">Pietro Garrone, Filippo Marra and Kimberley Dobney</p>
           <div class="font-weight-bold">Social media production</div>
           <p class="mb-2">Dunya Kamal and Bronte Dow</p>
         </div>
