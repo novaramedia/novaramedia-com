@@ -7,6 +7,9 @@ if ( $local_term ) {
     ?>
 <div class="committed-banner__backgrounded" style="background-color:rgb(254, 105, 25); overflow: hidden; position: relative">
   <style type="text/css">
+    .fallback .committed-banner__backgrounded {
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-background.webp'; ?>);
+    }
     .webp .committed-banner__backgrounded {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-background.webp'; ?>);
     }
