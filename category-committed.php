@@ -78,10 +78,7 @@ function nm_render_podcast_credit( $credit ) {
     .committed-archive__box {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-listen-now-background.png'; ?>);
       padding: 25px 30px;
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      width: 430px;
+      background-size: 100% 100%;
     }
 
     .committed-listen-now-title {
@@ -107,10 +104,9 @@ function nm_render_podcast_credit( $credit ) {
 
     .committed-credits__background {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background__desktop.png'; ?>);
-      background-size: contain;
+      background-size: 100% 100%;
       background-repeat: no-repeat;
       background-position: center;
-      height: 650px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -137,9 +133,6 @@ function nm_render_podcast_credit( $credit ) {
       .committed__serif-large {
         font-size: 23px;
       }
-      .committed-credits__background {
-        height: 650px;
-      }
     }
 
     @media screen and (max-width: 1104px) {
@@ -149,9 +142,6 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed__serif-medium {
         font-size: 19px;
-      }
-      .committed-credits__background {
-        height: 550px;
       }
     }
 
@@ -167,7 +157,6 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed-credits__background {
       background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-m.png'; ?>);
-      height: 550px;
     }
     }
 
@@ -187,7 +176,6 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed-credits__background {
         background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-s.png'; ?>);
-        height: 1000px;
       }
       .committed-credits__logo {
       height: 45px;
@@ -196,11 +184,8 @@ function nm_render_podcast_credit( $credit ) {
       height: 34vw;
     }
     }
-     @media screen and (max-width: 420px) {
-      .committed-credits__background{
-        height: 800px;
-      }
-      .committed-listen-now-title{
+     @media screen and (max-width: 480px) {
+        .committed-listen-now-title{
         height: 1.3rem;
       }
      }
@@ -277,7 +262,7 @@ if ( have_posts() ) {
     </div>
   </section>
   <div>
-    <div class="committed-credits__background pt-4 pb-l-6 pb-m-3 mb-m-5 mb-s-2 pb-s-0 font-color-white">
+    <div class="committed-credits__background pb-6 pt-6 font-color-white">
       <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
         <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
       </div>
