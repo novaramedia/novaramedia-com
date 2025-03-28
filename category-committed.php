@@ -1,22 +1,15 @@
 <?php
 get_header();
 
-$credits_1 = array(
-    array( 'Executive Producer', 'Chal Ravens' ),
-    array( 'Commissioning Editors', 'Chal Ravens & Craig Gent' ),
-    array( 'Factchecking', 'Steven Methven' ),
-    array( 'Legal Advisor', 'Philip Wheeler' ),
+$credits = array(
+    'producers'      => 'Richard Hames and Chal Ravens',
+    'music_sound'    => 'Matt Huxley',
+    'design_digital' => 'Pietro Garrone, Filippo Marra and Kimberley Dobney',
+    'social_media'   => 'Dunya Kamal and Bronte Dow',
+    'thanks'         => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
 );
 
-$credits_2 = array(
-    array( 'Music', 'Matt Huxley' ),
-    array( 'Design & Digital', 'Pietro Garrone, Patrick Best & Max Ryan' ),
-    array( 'Social Media Production', 'Luisa Le Voguer Couyet & Jonah Sealey Braverman' ),
-);
-
-$credits_thanks = array(
-    array( 'Thanks', 'Arielle Angel, Colin Archdeacon, Michael Casper, Chelsea Converse, Claire Devoogd, Corey Eastwood, Donal Foreman, Dov Weinryb Grosghal, Sam McBride, Jess MilNeil, Josh Nathan-Kazis, Wilson Sherwin, Peter Smith and Zach Vary' ),
-);
+$base_image_path = get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/';
 
 /**
  * Renders the podcast credit section.
@@ -38,13 +31,13 @@ function nm_render_podcast_credit( $credit ) {
 <main id="main-content" class="category-archive">
   <style type="text/css">
     .webp .committed__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/catagory-committed-background.webp'; ?>);
+      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.webp'; ?>);
     }
     .avif .committed__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/catagory-committed-background.avif'; ?>);
+      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.avif'; ?>);
     }
     .fallback .committed__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/catagory-committed-background.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.png'; ?>);
     }
 
     .committed-archive__container {
@@ -55,15 +48,22 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-archive__logo,  .committed-credits__logo {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-logo-white.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+    }
+
+     .committed-archive__logo {
       height: 180px;
+     }
+
+    .committed-credits__logo {
+      height: 80px;
     }
 
     .committed-archive__subtitle {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-subtitle.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-subtitle.png'; ?>);
       height: 100px;
       background-size: contain;
       background-repeat: no-repeat;
@@ -76,20 +76,20 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-archive__box {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-listen-now-background.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-listen-now-background.png'; ?>);
       padding: 25px 30px;
       background-size: 100% 100%;
     }
 
     .committed-listen-now-title {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-listen-now-title.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-listen-now-title.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       height: 1.8rem;
     }
 
     .committed-listen-now__links a:hover {
-      text-decoration: underline;
+      text-decoration: underline; /* using as alternative to styles lib */
     }
 
     .committed__serif-large {
@@ -103,7 +103,7 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-credits__background {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background__desktop.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-credits-background__desktop.png'; ?>);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       background-position: center;
@@ -111,10 +111,6 @@ function nm_render_podcast_credit( $credit ) {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    }
-
-    .committed-credits__logo {
-      height: 80px;
     }
 
     .committed-credits__logo-row {
@@ -138,7 +134,6 @@ function nm_render_podcast_credit( $credit ) {
     @media screen and (max-width: 1104px) {
      .committed-archive__container {
         height: 400px;
-        background-position: center;
       }
       .committed__serif-medium {
         font-size: 19px;
@@ -156,15 +151,11 @@ function nm_render_podcast_credit( $credit ) {
         font-size: 16px;
       }
       .committed-credits__background {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-m.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-credits-background-m.png'; ?>);
     }
     }
 
     @media screen and (max-width: 759px) {
-      .committed-archive__container {
-        height: 400px;
-        background-position: center;
-      }
       .committed-archive__logo {
         height: 70px;
       }
@@ -175,7 +166,7 @@ function nm_render_podcast_credit( $credit ) {
         font-size: 18px;
       }
       .committed-credits__background {
-        background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-credits-background-s.png'; ?>);
+        background-image: url(<?php echo $base_image_path . 'committed-credits-background-s.png'; ?>);
       }
       .committed-credits__logo {
       height: 45px;
@@ -221,7 +212,7 @@ function nm_render_podcast_credit( $credit ) {
     </div>
     <div class="flex-grid-row mb-6 mb-s-4">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-color-white committed-archive-listen__box">
-        <div class="committed-archive__box" style="display: inline-block;">
+        <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
             <a href="https://podcasts.apple.com/us/podcast/committed-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,
@@ -267,6 +258,8 @@ if ( have_posts() ) {
         <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
       </div>
       <div class="flex-grid-row committed-credits__info-row font-size-10">
+
+        <!-- Reporters -->
         <div class="flex-grid-item flex-item-m-4 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
           <div class="committed-credits__reporters flex-grid-row">
@@ -280,19 +273,24 @@ if ( have_posts() ) {
             </div>
           </div>
         </div>
+
+        <!-- Producers -->
         <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <div class="font-weight-bold mb-1">Producers</div>
-          <p class="mb-2">Richard Hames and Chal Ravens</p>
+            <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['producers'] ) ); ?></p>
+
           <div class="font-weight-bold">Music and sound editing</div>
-          <p class="mb-2">Matt Huxley</p>
+          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['music_sound'] ) ); ?></p>
+
           <div class="font-weight-bold">Design and digital</div>
-          <p class="mb-2">Pietro Garrone, Filippo Marra and Kimberley Dobney</p>
+          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['design_digital'] ) ); ?></p>
+
           <div class="font-weight-bold">Social media production</div>
-          <p class="mb-2">Dunya Kamal and Bronte Dow</p>
+          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['social_media'] ) ); ?></p>
         </div>
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
-          All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.
+            <p><?php echo nl2br( htmlspecialchars( $credits['thanks'] ) ); ?></p>
         </div>
       </div>
     </div>
