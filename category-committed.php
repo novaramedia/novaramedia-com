@@ -118,7 +118,7 @@ function nm_render_podcast_credit( $credit ) {
     }
 
     .committed-credits__reporters img {
-      height: 110px;
+      height: 140px;
     }
 
     .committed-credits__info-row {
@@ -138,6 +138,9 @@ function nm_render_podcast_credit( $credit ) {
       .committed__serif-medium {
         font-size: 19px;
       }
+            .committed-credits__reporters img{
+      height: 110px;
+    }
     }
 
     @media screen and (max-width: 910px) {
@@ -153,6 +156,7 @@ function nm_render_podcast_credit( $credit ) {
       .committed-credits__background {
       background-image: url(<?php echo $base_image_path . 'committed-credits-background-m.png'; ?>);
     }
+
     }
 
     @media screen and (max-width: 759px) {
