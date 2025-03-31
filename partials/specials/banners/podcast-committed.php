@@ -1,20 +1,19 @@
 <?php
   $local_term = get_term_by( 'slug', 'committed', 'category' );
-
-if ( $local_term ) {
-   $url = get_term_link( $local_term );
-  if ( $url ) {
-    ?>
+  $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
+  $url = $local_term ? get_term_link( $local_term ) : false;
+if ( $local_term && $url ) {
+  ?>
 <div class="committed-banner__backgrounded" style="background-color:rgb(254, 105, 25); overflow: hidden; position: relative">
   <style type="text/css">
     .fallback .committed-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-background.webp'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-background.jpg'; ?>);
     }
     .webp .committed-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-background.webp'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-background.webp'; ?>);
     }
     .avif .committed-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-background.avif'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-background.avif'; ?>);
     }
     .committed-banner__backgrounded {
       height: 267px;
@@ -44,7 +43,7 @@ if ( $local_term ) {
       min-height: 100%;
     }
     .committed-banner__logo {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'committed-logo-white.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -86,13 +85,12 @@ if ( $local_term ) {
       <div class="grid-item is-s-12 is-xxl-6 is-m-7 committed-banner__grid-item committed-banner__grid-item-right mt-s-4">
         <div class="committed-banner__button-container committed-banner__grid-item-right">
           <p class="font-color-white font-weight-bold font-size-11 mb-3 pt-6 pt-s-0 font-size-s-11">Meet the people who</br>have done just that.</p>
-          <a href="<?php echo $url; ?>" class="ui-button ui-button--small ui-button--white">Listen Now</a>
+          <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--small ui-button--white">Listen Now</a>
         </div>
       </div>
     </div>
   </div>
 </div>
      <?php
-  }
 }
 ?>

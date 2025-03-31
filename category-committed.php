@@ -9,7 +9,7 @@ $credits = array(
     'thanks'         => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
 );
 
-$base_image_path = get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/';
+$base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
 
 /**
  * Renders the podcast credit section.
