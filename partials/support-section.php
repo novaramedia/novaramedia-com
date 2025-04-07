@@ -5,12 +5,10 @@ $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_
 
 ?>
 
-<div class="background-red font-color-white pt-6 pb-6 pt-s-5 pb-s-5">
-  <div class="container">
-
-
+<div class="font-color-white">
+  <div class="background-red p-4 support-form__box-radius m-2">
     <div class="grid-row font-size-11 font-size-s-10">
-      <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-10">
+      <div class="grid-item is-m-24 is-l-16 is-xl-12 is-xxl-12">
         <a href="<?php echo home_url( 'support/' ); ?>">
           <h4 class="font-size-12 font-weight-bold mb-3"><?php echo $heading_copy; ?></h4>
         </a>
@@ -32,7 +30,7 @@ $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_
         }
         ?>
       </div>
-      <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item">
+      <div class="is-l-24 offset-xl-0 is-xxl-12 grid-item">
         <?php
         // Reneders the support form from renderers.php
         render_support_form();

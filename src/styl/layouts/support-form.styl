@@ -9,22 +9,32 @@
     .support-form__inputs
       opacity: 1
 
+.support-form__box-radius
+  border-radius: 4px
+
+.support-form__schedule-option-right
+  border-radius:  0px 4px 4px 0px;
+
+.support-form__schedule-option-left
+  border-radius:  4px 0px 0px 4px;
+
 .support-form__button, .support-form__custom-input, .support-form__submit
-  color: var(--color-red)
-  background-color: var(--color-white-soft)
-  font-weight: normal
+  color: var(--color-white-soft)
+  background-color: var(--color-red)
   text-align: center
   &:hover, &--active
-    color: var(--color-white-soft)
-    background-color: var(--color-red)
+    color: var(--color-black-soft)
+    background-color: var(--color-white-soft)
     border-color: var(--color-white-soft)
+  &:focus
+    outline: none
 
-// .support-form__custom-input::placeholder
-//   padding-left: 5px
+.support-form__custom-input::placeholder
+  padding-left: 5px
 
 .support-form__custom-input
   &::placeholder
-    color: var(--color-red)
+    color: var(--color-white-soft)
   &:hover, &.support-form__button--active
     &::placeholder
       color: var(--color-white-soft)
