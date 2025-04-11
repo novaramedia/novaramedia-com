@@ -9,12 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Committed banner for home page
-- Committed page
+- Committed (podcast series) archive page and banner
 
 ## Changed
 
-- Podcast_series_pre_get_posts() to look at serial categories array
+- podcast_series_pre_get_posts() to look at serial categories array
 
 ## [4.2.6] - 2025-01-13
 

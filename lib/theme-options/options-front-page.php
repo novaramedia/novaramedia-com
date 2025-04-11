@@ -57,6 +57,7 @@ function nm_register_front_page_options_metabox() {
       false                                              => 'None',
       'partials/support-section'                         => 'Support section',
       'partials/specials/banners/support-video'          => 'Support Video',
+      'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
       'partials/specials/banners/podcast-if-i-speak'     => 'Podcast: If I Speak',
       'partials/specials/banners/focus-pro-rev-soccer'   => 'Focus: Pro Rev Soccer',
       'partials/specials/banners/podcast-foreign-agent'  => 'Podcast: Foreign Agent',
@@ -64,7 +65,6 @@ function nm_register_front_page_options_metabox() {
       'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
       'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
       'partials/specials/banners/podcast-planet-b'       => 'Podcast: Planet B',
-      'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
   );
 
   // Get all the newsletter pages and create signup options for all with correct settings

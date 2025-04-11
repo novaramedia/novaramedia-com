@@ -26,7 +26,7 @@ $credits_thanks = array(
  *
  * @return void
  */
-function nm_render_podcast_credit( $credit ) {
+function nm_render_foreign_agent_credit( $credit ) {
   ?>
 <div class="podcast-credit mb-3">
   <div class="font-size-8"><?php echo $credit[0]; ?></div>
@@ -122,7 +122,7 @@ function nm_render_podcast_credit( $credit ) {
   <section class="container pt-4 pb-4">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 mb-4">
-        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block"><span class="ui-tag">Podcast</span></a>
+        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block ui-tag-block--no-border"><span class="ui-tag ">Podcast</span></a>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
@@ -219,7 +219,7 @@ if ( have_posts() ) {
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_1 ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_1[ $i ] );
+                nm_render_foreign_agent_credit( $credits_1[ $i ] );
             }
             ?>
           </div>
@@ -228,7 +228,7 @@ if ( have_posts() ) {
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_2 ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_2[ $i ] );
+                nm_render_foreign_agent_credit( $credits_2[ $i ] );
             }
             ?>
           </div>
@@ -237,7 +237,7 @@ if ( have_posts() ) {
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_thanks ); $i < $size; $i++ ) {
-                nm_render_podcast_credit( $credits_thanks[ $i ] );
+                nm_render_foreign_agent_credit( $credits_thanks[ $i ] );
             }
             ?>
           </div>

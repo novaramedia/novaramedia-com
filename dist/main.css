@@ -4191,6 +4191,9 @@ a {
     padding-right: 9rem;
   }
 }
+#mainContent {
+  min-height: 66vh;
+}
 .layout-grid {
   display: grid;
   -ms-grid-template-columns: repeat(24, minmax(0, 1fr));
@@ -4409,6 +4412,7 @@ a {
   border-radius: calc(var(--corner-radius) * 2);
   font-weight: 700;
   text-align: center;
+  width: auto;
 }
 .ui-button--small {
   height: 2.1875rem;
@@ -4447,7 +4451,7 @@ a {
   border-color: var(--color-red);
 }
 .ui-button--red:hover {
-  color: var(--color-red);
+  color: var(--color-black);
 }
 .ui-button--white {
   background-color: var(--color-white-soft);
@@ -4483,6 +4487,10 @@ a {
   background-color: var(--color-gray-light);
   color: var(--color-black-soft);
   cursor: not-allowed;
+}
+.ui-button--small-text {
+  font-weight: 500;
+  font-size: 1rem;
 }
 .ui-input {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
@@ -4521,6 +4529,9 @@ a {
   color: var(--color-black-soft);
   border-color: var(--color-gray-light);
   cursor: not-allowed;
+}
+.ui-input--black {
+  border-color: var(--color-black-soft);
 }
 .ui-checkbox {
   border-radius: -webkit-calc(var(--corner-radius) * 2);

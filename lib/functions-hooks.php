@@ -49,7 +49,7 @@ function podcast_series_pre_get_posts( $query ) {
 
   $serial_categories = array( 'foreign-agent', 'committed' ); // Add more slugs as needed
 
-  if ( $query->is_archive() && is_category( $serial_categories ) ) {
+  if ( $query->is_archive() && $query->is_category( $serial_categories ) ) {
     if ( isset( $query->query_vars['posts_per_page'] ) && $query->query_vars['posts_per_page'] === 1 ) {
       return; // Skip modification if a specific post count is requested
     }

@@ -9,7 +9,7 @@ $credits = array(
     'thanks'         => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
 );
 
-$base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
+$base_image_path = get_stylesheet_directory_uri() . '/src/img/specials/committed/';
 
 /**
  * Renders the podcast credit section.
@@ -19,7 +19,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committe
  *
  * @return void
  */
-function nm_render_podcast_credit( $credit ) {
+function nm_render_committed_credit( $credit ) {
   ?>
 <div class="podcast-credit mb-3">
   <div class="font-size-8"><?php echo $credit[0]; ?></div>
@@ -28,7 +28,7 @@ function nm_render_podcast_credit( $credit ) {
   <?php
 }
 ?>
-<main id="main-content" class="category-archive">
+<main id="main-content" class="catagory-archive">
   <style type="text/css">
     .webp .committed__backgrounded {
       background-image: url(<?php echo $base_image_path . 'catagory-committed-background.webp'; ?>);
@@ -155,29 +155,28 @@ function nm_render_podcast_credit( $credit ) {
       }
       .committed-credits__background {
       background-image: url(<?php echo $base_image_path . 'committed-credits-background-m.png'; ?>);
-    }
-
+      }
     }
 
     @media screen and (max-width: 759px) {
       .committed-archive__logo {
-        height: 70px;
+          height: 70px;
       }
       .committed-archive__subtitle {
-        height: 50px;
-       }
+          height: 50px;
+      }
       .committed__serif-large {
-        font-size: 18px;
+          font-size: 18px;
       }
       .committed-credits__background {
-        background-image: url(<?php echo $base_image_path . 'committed-credits-background-s.png'; ?>);
+          background-image: url(<?php echo $base_image_path . 'committed-credits-background-s.png'; ?>);
       }
       .committed-credits__logo {
-      height: 45px;
-    }
-    .committed-credits__reporters img{
-      height: 34vw;
-    }
+        height: 45px;
+      }
+      .committed-credits__reporters img{
+        height: 34vw;
+      }
     }
      @media screen and (max-width: 480px) {
         .committed-listen-now-title{
@@ -189,7 +188,7 @@ function nm_render_podcast_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
-        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block"><span class="ui-tag">Podcast</span></a>
+        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block ui-tag-block--no-border"><span class="ui-tag">Podcast</span></a>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
@@ -219,9 +218,9 @@ function nm_render_podcast_credit( $credit ) {
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
-            <a href="https://podcasts.apple.com/us/podcast/committed-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,
-            <a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>,<br/><a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5wb2RjYXN0bWlycm9yLmNvbS9mb3JlaWduLWFnZW50">Google Podcasts</a>,
-            <a href="https://feeds.podcastmirror.com/committed">RSS</a>
+            <a href="#">Apple Podcasts</a>,
+            <a href="#">Spotify</a>,<br/><a href="#">Google Podcasts</a>,
+            <a href="#">RSS</a>
           </div>
         </div>
       </div>
@@ -259,7 +258,7 @@ if ( have_posts() ) {
   <div>
     <div class="committed-credits__background pb-6 pt-6 font-color-white">
       <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
-        <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-logo-white.png'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
+        <img src="<?php echo $base_image_path . 'committed-logo-white.png'; ?>" alt="committed credits logo" class="committed-credits__logo"/>
       </div>
       <div class="flex-grid-row committed-credits__info-row font-size-10">
 
@@ -268,11 +267,11 @@ if ( have_posts() ) {
           <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
           <div class="committed-credits__reporters flex-grid-row">
             <div class="mr-2">
-              <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
+              <img src="<?php echo $base_image_path . 'committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
               <p>Rivkah Brown</p>
             </div>
             <div class="">
-              <img src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/committed/committed-clare-logo.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
+              <img src="<?php echo $base_image_path . 'committed-clare-logo.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
               <p>Clare Hymer</p>
             </div>
           </div>
@@ -281,20 +280,21 @@ if ( have_posts() ) {
         <!-- Producers -->
         <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <div class="font-weight-bold mb-1">Producers</div>
-            <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['producers'] ) ); ?></p>
+          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['producers'] ); ?></p>
 
           <div class="font-weight-bold">Music and sound editing</div>
-          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['music_sound'] ) ); ?></p>
+          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['music_sound'] ); ?></p>
 
           <div class="font-weight-bold">Design and digital</div>
-          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['design_digital'] ) ); ?></p>
+          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['design_digital'] ); ?></p>
 
           <div class="font-weight-bold">Social media production</div>
-          <p class="mb-2"><?php echo nl2br( htmlspecialchars( $credits['social_media'] ) ); ?></p>
+          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['social_media'] ); ?></p>
         </div>
+
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
-            <p><?php echo nl2br( htmlspecialchars( $credits['thanks'] ) ); ?></p>
+          <p><?php echo apply_filters( 'the_content', $credits['thanks'] ); ?></p>
         </div>
       </div>
     </div>
