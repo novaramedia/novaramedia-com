@@ -1,5 +1,35 @@
 <?php
 /**
+ * Redirects single posts in a serial podcast category to the category archive with an anchor.
+ *
+ * @return void Exits script execution after issuing a redirect.
+ */
+function nm_serial_podcast_redirect() {
+  if ( ! is_singular( 'post' ) ) {
+    return;
+  }
+  global $post;
+  // Slugs of serial podcasts you want this redirect behavior for:
+  $serial_slugs = array( 'foreign-agent', 'committed' );
+  $categories = get_the_category( $post->ID );
+    $match = array_filter(
+        $categories,
+        function ( $cat ) use ( $serial_slugs ) {
+          return in_array( $cat->slug, $serial_slugs );
+        }
+    );
+  if ( ! empty( $match ) ) {
+    $matched_category = array_values( $match )[0];
+    $link = get_term_link( $matched_category );
+    if ( $link && isset( $post->post_name ) ) {
+      wp_redirect( $link . '#' . $post->post_name, 301 );
+      exit;
+    }
+  }
+}
+add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
+
+/**
  * Check for apology notice and display it if it is in the future
  * This function will check if the apology notice is in the future and display it if it is
  *

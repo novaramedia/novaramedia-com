@@ -267,11 +267,15 @@ if ( have_posts() ) {
           <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
           <div class="committed-credits__reporters flex-grid-row">
             <div class="mr-2">
+              <a href="<?php echo home_url( 'contributor/rivkah-brown/' ); ?>" class="ui-hover">
               <img src="<?php echo $base_image_path . 'committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
+              </a>
               <p>Rivkah Brown</p>
             </div>
             <div class="">
+              <a href=<?php echo home_url( 'contributor/clare-hymer/' ); ?> class="ui-hover">
               <img src="<?php echo $base_image_path . 'committed-clare-logo.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
+              </a>
               <p>Clare Hymer</p>
             </div>
           </div>
