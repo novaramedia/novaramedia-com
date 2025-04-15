@@ -85,15 +85,15 @@ if ( $local_term && $url ) {
     <div class="grid-row committed-banner__grid-row">
       <div class="grid-item is-s-12 is-xxl-6 is-m-7 committed-banner__grid-item committed-banner__grid-item-left mt-s-4">
         <a href="<?php echo esc_url( $url ); ?>">
-          <p class="font-color-white font-weight-bold font-size-11 font-size-s-11">Would you go to prison for your politics?</p>
+          <p class="font-color-white font-weight-bold font-size-11 font-size-s-11 ui-hover">Would you go to prison for your politics?</p>
         </a>
       </div>
-      <div class="grid-item is-s-24 is-xs-20 is-xxl-12 is-m-10 committed-banner__grid-item committed-banner__logo">
+      <div class="grid-item is-s-24 is-xs-20 is-xxl-12 is-m-10 committed-banner__grid-item committed-banner__logo ui-hover">
         <a href="<?php echo esc_url( $url ); ?>" class="text-link-wrapper"></a>
       </div>
       <div class="grid-item is-s-12 is-xxl-6 is-m-7 committed-banner__grid-item committed-banner__grid-item-right mt-s-4">
         <div class="committed-banner__button-container committed-banner__grid-item-right">
-          <p class="font-color-white font-weight-bold font-size-11 mb-3 pt-6 pt-s-0 font-size-s-11">
+          <p class="font-color-white font-weight-bold font-size-11 mb-3 pt-6 pt-s-0 font-size-s-11 ui-hover">
             <a href="<?php echo esc_url( $url ); ?>" class="text-link-wrapper">
               Meet the people who<br>have done just that.
             </a>
