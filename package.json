@@ -61,13 +61,13 @@
     "webpack-notifier": "~1.12.0"
   },
   "dependencies": {
-    "jquery": "^3.5.1",
-    "js-cookie": "^3.0.1",
-    "lazysizes": "^5.2.2",
-    "lodash": "^4.17.21",
-    "luxon": "^3.4.4",
+    "jquery": "~3.7.1",
+    "js-cookie": "~3.0.1",
+    "lazysizes": "~5.3.2",
+    "lodash": "~4.17.21",
+    "luxon": "~3.6.1",
     "nm-stylus-library": "novaramedia/nm-stylus-library",
-    "swiper": "^11.1.4"
+    "swiper": "~11.1.4"
   },
   "release-it": {
     "git": {
