@@ -42,8 +42,9 @@ if ( $local_term && $url ) {
       justify-content: center;
       min-height: 100%;
     }
-    .committed-banner__logo {
-      background-image: url(<?php echo $base_image_path . 'committed-logo-white.png'; ?>);
+   .committed-banner__logo {
+      position: relative;
+      background-image: url('<?php echo $base_image_path . 'committed-logo-white.png'; ?>');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;

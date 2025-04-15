@@ -21,8 +21,8 @@ $base_image_path = get_stylesheet_directory_uri() . '/src/img/specials/committed
  */
 function nm_render_committed_credit( $credit ) {
   ?>
-<div class="podcast-credit mb-3">
-  <div class="font-size-8"><?php echo $credit[0]; ?></div>
+<div class="podcast-credit">
+  <div><?php echo $credit[0]; ?></div>
   <?php echo $credit[1]; ?>
 </div>
   <?php
@@ -118,7 +118,7 @@ function nm_render_committed_credit( $credit ) {
     }
 
     .committed-credits__reporters img {
-      height: 140px;
+      height: 18vw;
     }
 
     .committed-credits__info-row {
@@ -132,15 +132,12 @@ function nm_render_committed_credit( $credit ) {
     }
 
     @media screen and (max-width: 1104px) {
-     .committed-archive__container {
+      .committed-archive__container {
         height: 400px;
-      }
+        }
       .committed__serif-medium {
         font-size: 19px;
-      }
-            .committed-credits__reporters img{
-      height: 110px;
-    }
+        }
     }
 
     @media screen and (max-width: 910px) {
@@ -263,7 +260,7 @@ if ( have_posts() ) {
       <div class="flex-grid-row committed-credits__info-row font-size-10">
 
         <!-- Reporters -->
-        <div class="flex-grid-item flex-item-m-4 flex-item-xxl-3 flex-item-s-8 mb-s-5">
+        <div class="flex-grid-item flex-item-m-4 flex-item-xxl-4 flex-item-s-8 mb-s-5">
           <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
           <div class="committed-credits__reporters flex-grid-row">
             <div class="mr-2">
@@ -274,7 +271,7 @@ if ( have_posts() ) {
             </div>
             <div class="">
               <a href=<?php echo home_url( 'contributor/clare-hymer/' ); ?> class="ui-hover">
-              <img src="<?php echo $base_image_path . 'committed-clare-logo.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
+              <img src="<?php echo $base_image_path . 'committed-clare.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
               </a>
               <p>Clare Hymer</p>
             </div>
@@ -284,21 +281,26 @@ if ( have_posts() ) {
         <!-- Producers -->
         <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <div class="font-weight-bold mb-1">Producers</div>
-          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['producers'] ); ?></p>
-
-          <div class="font-weight-bold">Music and sound editing</div>
-          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['music_sound'] ); ?></p>
-
-          <div class="font-weight-bold">Design and digital</div>
-          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['design_digital'] ); ?></p>
-
-          <div class="font-weight-bold">Social media production</div>
-          <p class="mb-2"><?php echo apply_filters( 'the_content', $credits['social_media'] ); ?></p>
+          <div class="mb-2">
+            <?php echo wp_kses_post( $credits['producers'] ); ?>
+          </div>
+          <div class="font-weight-bold mb-1">Music and sound editing</div>
+          <div class="mb-2">
+            <?php echo wp_kses_post( $credits['music_sound'] ); ?>
+          </div>
+          <div class="font-weight-bold mb-1">Design and digital</div>
+          <div class="mb-2">
+            <?php echo wp_kses_post( $credits['design_digital'] ); ?>
+          </div>
+          <div class="font-weight-bold mb-1">Social media production</div>
+          <div>
+            <?php echo wp_kses_post( $credits['social_media'] ); ?>
+          </div>
         </div>
 
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
-          <p><?php echo apply_filters( 'the_content', $credits['thanks'] ); ?></p>
+          <?php echo apply_filters( 'the_content', $credits['thanks'] ); ?>
         </div>
       </div>
     </div>
