@@ -151,7 +151,7 @@ module.exports = (env, argv) => {
                       name: 'preset-default',
                       params: {
                         overrides: {
-                          cleanupIDs: false,
+                          cleanupIds: false,
                           removeViewBox: false,
                         },
                       },
