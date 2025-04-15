@@ -4393,10 +4393,6 @@ a {
   background-color: var(--color-green);
 }
 .ui-button {
-  -webkit-text-decoration: none !important;
-  text-decoration: none !important;
-}
-.ui-button {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
   display: -ms-inline-flex;
   display: inline-flex;
@@ -4455,7 +4451,7 @@ a {
   border-color: var(--color-red);
 }
 .ui-button--red:hover {
-  border-color: var(--color-red);
+  color: var(--color-black);
 }
 .ui-button--white {
   background-color: var(--color-white-soft);
@@ -4491,6 +4487,10 @@ a {
   background-color: var(--color-gray-light);
   color: var(--color-black-soft);
   cursor: not-allowed;
+}
+.ui-button--small-text {
+  font-weight: 500;
+  font-size: 1rem;
 }
 .ui-input {
   border-radius: -webkit-calc(var(--corner-radius) * 2);

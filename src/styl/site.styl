@@ -69,7 +69,7 @@ for col in 1..$cols
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
 
-// BACKGROUNDS
+// BACKGROUNDS 
 
 .background-support-texture, .background-support-texture-alt
   background-size: cover
@@ -129,7 +129,7 @@ $color-blue = rgb(84, 144, 235)
   max-height: 100%
   overflow: hidden
 
-@media screen and (max-width: 759px)
+@media screen and (max-width: $breakpoint-s)
   .component-quote
     margin-bottom: 2rem
 
@@ -491,7 +491,7 @@ img
 
 // MEDIA QUERIES
 
-@media screen and (max-width: 1408px)
+@media screen and (max-width: $breakpoint-xl)
   .container
     width: 1056px
 
@@ -499,7 +499,7 @@ img
 
   @import "responsive/xl"
 
-@media screen and (max-width: 1104px)
+@media screen and (max-width: $breakpoint-l)
   .container
     width: 888px
 
@@ -507,7 +507,7 @@ img
 
   @import "responsive/l"
 
-@media screen and (max-width: 910px)
+@media screen and (max-width: $breakpoint-m)
   .container
     width: 744px
 
@@ -515,7 +515,7 @@ img
 
   @import "responsive/m"
 
-@media screen and (max-width: 759px)
+@media screen and (max-width: $breakpoint-s)
   .container
     width: 98%
     max-width: 460px
