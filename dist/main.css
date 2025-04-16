@@ -265,8 +265,6 @@ html {
 }
 .u-hidden {
   display: none !important;
-}
-.u-hidden {
   visibility: hidden;
 }
 .u-visuallyhidden {
@@ -314,7 +312,6 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-clip-path: inset(1px 1px);
   clip-path: inset(1px 1px);
 }
 .wp-video {
@@ -348,14 +345,12 @@ video.wp-video-shortcode {
   display: none;
 }
 .mejs-overlay-play {
-  width: auto !important;
-  height: auto !important;
-}
-.mejs-overlay-play {
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  width: auto !important;
+  height: auto !important;
 }
 html {
   overflow-y: scroll;
@@ -1742,10 +1737,8 @@ body {
 }
 .font-condensed {
   font-family: 'acumin-variable', sans-serif !important;
-  font-weight: normal !important;
-}
-.font-condensed {
   font-variation-settings: "slnt" 0, "wdth" 68, "wght" 721;
+  font-weight: normal !important;
 }
 .font-serif {
   font-family: var(--font-family-serif);
@@ -2176,13 +2169,6 @@ article ol li {
 .text-copy .wp-caption,
 .page-copy .wp-caption {
   max-width: 100% !important;
-}
-.text-copy img,
-.page-copy img,
-.text-copy figure,
-.page-copy figure,
-.text-copy .wp-caption,
-.page-copy .wp-caption {
   display: block;
   margin: 2rem auto;
 }
@@ -4191,9 +4177,6 @@ a {
     padding-right: 9rem;
   }
 }
-#mainContent {
-  min-height: 66vh;
-}
 .layout-grid {
   display: grid;
   -ms-grid-template-columns: repeat(24, minmax(0, 1fr));
@@ -4412,6 +4395,8 @@ a {
   border-radius: calc(var(--corner-radius) * 2);
   font-weight: 700;
   text-align: center;
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
   width: auto;
 }
 .ui-button--small {
@@ -4451,7 +4436,7 @@ a {
   border-color: var(--color-red);
 }
 .ui-button--red:hover {
-  color: var(--color-black);
+  border-color: var(--color-red);
 }
 .ui-button--white {
   background-color: var(--color-white-soft);
@@ -4487,10 +4472,6 @@ a {
   background-color: var(--color-gray-light);
   color: var(--color-black-soft);
   cursor: not-allowed;
-}
-.ui-button--small-text {
-  font-weight: 500;
-  font-size: 1rem;
 }
 .ui-input {
   border-radius: -webkit-calc(var(--corner-radius) * 2);
@@ -4530,7 +4511,7 @@ a {
   border-color: var(--color-gray-light);
   cursor: not-allowed;
 }
-.ui-input--black {
+.ui-input--border-black {
   border-color: var(--color-black-soft);
 }
 .ui-checkbox {

@@ -1,847 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/functions/selectText.js":
-/*!****************************************!*\
-  !*** ./src/js/functions/selectText.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(element) {
-  if (!element) {
-    return;
-  }
-  const doc = document;
-  let range;
-  let selection;
-  if (doc.body.createTextRange) {
-    range = document.body.createTextRange();
-    range.moveToElementText(element);
-    range.select();
-  } else if (window.getSelection) {
-    selection = window.getSelection();
-    range = document.createRange();
-    range.selectNodeContents(element);
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Analytics.js":
-/*!*************************************!*\
-  !*** ./src/js/modules/Analytics.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Analytics: () => (/* binding */ Analytics)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global dataLayer */
-
-
-class Analytics {
-  constructor() {
-    if (typeof dataLayer !== 'undefined') {
-      this.bind();
-    }
-  }
-  bind() {
-    const _this = this;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form-slider').on('input', _this.debounce(function () {
-      dataLayer.push({
-        'event': 'sliderChanged',
-        'target': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target'),
-        'amount': this.value
-      });
-    }, 250));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#menu-toggle').click(function () {
-      // bind hamburger click
-      dataLayer.push({
-        'event': 'headerToggled'
-      });
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.related-posts .post').click(function () {
-      dataLayer.push({
-        'event': 'relatedPostClicked'
-      });
-    });
-  }
-  debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-      var context = this,
-        args = arguments;
-      var later = function () {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) {
-        func.apply(context, args);
-      }
-    };
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Carousels.js":
-/*!*************************************!*\
-  !*** ./src/js/modules/Carousels.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Carousels: () => (/* binding */ Carousels)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.mjs");
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-
-class Carousels {
-  constructor() {
-    this.carousels = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', "ux-carousel-".concat(index));
-      this.carousels.push(new Carousel(carousel));
-    });
-  }
-  onReady() {
-    const _this = this;
-    _this.carousels.forEach(carousel => {
-      carousel.onReady();
-    });
-  }
-}
-class Carousel {
-  constructor(carousel) {
-    this.$carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
-    this.$navLeft = this.$carousel.find('.swiper-button-prev');
-    this.$navRight = this.$carousel.find('.swiper-button-next');
-    this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"](this.$carousel.find('.swiper')[0], {
-      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.FreeMode],
-      navigation: {
-        nextEl: this.$navRight[0],
-        prevEl: this.$navLeft[0]
-      },
-      autoplay: {
-        delay: 4000,
-        pauseOnMouseEnter: true
-      },
-      mousewheel: {
-        enabled: true,
-        thresholdDelta: 4
-      },
-      freemode: {
-        enabled: true,
-        sticky: true
-      },
-      slidesPerView: 'auto',
-      rewind: true
-    });
-    this.swiper.on('slideChange', event => {
-      if (event.isBeginning) {
-        this.$navLeft.addClass('swiper-button-prev--disabled');
-      } else {
-        this.$navLeft.removeClass('swiper-button-prev--disabled');
-      }
-      if (event.isEnd) {
-        this.$navRight.addClass('swiper-button-next--disabled');
-      } else {
-        this.$navRight.removeClass('swiper-button-next--disabled');
-      }
-    });
-  }
-  onReady() {}
-  onResize() {}
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Header.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/Header.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Header: () => (/* binding */ Header)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-class Header {
-  constructor() {
-    const _this = this;
-    _this.scrollPosition = 0;
-    _this.$navToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__nav-toggle');
-    _this.$headerNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-nav');
-    _this.$searchToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__search-toggle');
-    _this.$headerSearch = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-search');
-    _this.$searchInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-search__input');
-  }
-  onReady() {
-    const _this = this;
-    _this.initScrollReveal();
-    _this.bind();
-  }
-  bind() {
-    const _this = this;
-    _this.$navToggle.on('click', () => {
-      _this.$headerNav.toggle();
-      if (_this.$headerNav.is(':visible')) {
-        _this.$headerNav.find('a').first().trigger('focus'); // focus on first link for accessibility
-      }
-
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
-        return attr === 'true' ? false : true;
-      });
-      if (_this.$headerSearch.is(':visible')) {
-        _this.$headerSearch.hide();
-        _this.$searchToggle.attr('aria-pressed', false);
-      }
-    });
-    _this.$searchToggle.on('click', () => {
-      _this.$headerSearch.toggle();
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
-        return attr === 'true' ? false : true;
-      });
-      _this.$searchInput.trigger('focus');
-      if (_this.$headerNav.is(':visible')) {
-        _this.$headerNav.hide();
-        _this.$navToggle.attr('aria-pressed', false);
-      }
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on({
-      scroll: lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 250),
-      resize: lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleResize.bind(_this), 250)
-    });
-  }
-  initScrollReveal() {
-    this.$scrollRevealWrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__scroll-reveal');
-    this.$headerLogomark = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__logomark');
-    this.isSingleArticle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.single-articles').length > 0;
-    this.setScrollThreshold();
-  }
-  handleScroll() {
-    const _this = this;
-    const scrollTop = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollTop();
-    if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
-      // scroll is down
-      _this.$scrollRevealWrapper.css('opacity', 1);
-      _this.$headerLogomark.css('opacity', 0);
-    } else {
-      // scroll is up
-      _this.$scrollRevealWrapper.css('opacity', 0);
-      _this.$headerLogomark.css('opacity', 1);
-    }
-    _this.scrollPosition = scrollTop;
-  }
-  handleResize() {
-    this.setScrollThreshold();
-  }
-  setScrollThreshold() {
-    if (this.isSingleArticle) {
-      this.scrollThreshold = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').offset().top + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').height();
-    } else {
-      this.scrollThreshold = 150;
-    }
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/LiveChecker.js":
-/*!***************************************!*\
-  !*** ./src/js/modules/LiveChecker.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   LiveChecker: () => (/* binding */ LiveChecker)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/src/luxon.js");
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global WP */
-
-
-
-class LiveChecker {
-  constructor() {
-    this.isLive = false;
-    this.$messageContainer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message');
-    this.$liveMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message__live');
-    this.$offlineMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message__offline');
-    this.basicSchedule = {
-      days: [1, 2, 3, 4, 5],
-      startHour: 18,
-      endHour: 19
-    };
-    this.offlineMessages = [{
-      text: 'Utopia Now',
-      link: 'https://shop.novaramedia.com/products/no-future-utopia-now-scarf'
-    }, {
-      text: 'calling Radio Alice',
-      link: 'https://en.wikipedia.org/wiki/Radio_Alice'
-    }, {
-      text: 'va in paradiso',
-      link: 'https://www.imdb.com/title/tt0066919/'
-    }];
-    if (WP.liveCheckerData.messages && WP.liveCheckerData.messages.length > 0) {
-      // if we have global data use that
-      this.offlineMessages = WP.liveCheckerData.messages;
-    }
-  }
-  onReady() {
-    const _this = this;
-    if (_this.$messageContainer.length === 0) {
-      return;
-    }
-    _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
-    _this.$offlineMessage.text("\u201C".concat(_this.randomOfflineMessage.text, "\u201D")).attr('href', _this.randomOfflineMessage.link);
-    _this.checkIfLive();
-    _this.updateMessage();
-    this.liveCheckerInterval = setInterval(() => {
-      _this.checkIfLive();
-    }, 1000 * 60);
-  }
-  checkIfLive() {
-    const _this = this;
-    let status = false;
-    let overrideMatch = undefined;
-    let currentTime = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.now().setZone('Europe/London');
-    let currentDay = currentTime.weekday;
-    let currentHour = currentTime.hour;
-    if (WP.liveCheckerData.overrides && WP.liveCheckerData.overrides.length > 0) {
-      overrideMatch = WP.liveCheckerData.overrides.find(override => {
-        if (!override.start || !override.end) {
-          return false;
-        }
-        let start = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.start).setZone('Europe/London');
-        let end = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.end).setZone('Europe/London');
-        if (currentTime >= start && currentTime < end) {
-          return true;
-        }
-      });
-    }
-    if (overrideMatch !== undefined) {
-      status = overrideMatch.status === 'true' ? true : false;
-    }
-    if (_this.basicSchedule.days.includes(currentDay)) {
-      if (currentHour >= _this.basicSchedule.startHour && currentHour < _this.basicSchedule.endHour) {
-        status = true;
-      }
-    }
-    _this.setLiveStatus(status);
-  }
-  setLiveStatus(newLiveStatus) {
-    if (this.isLive !== newLiveStatus) {
-      this.isLive = newLiveStatus;
-      this.updateMessage();
-    }
-  }
-  updateMessage() {
-    const _this = this;
-    if (_this.isLive) {
-      _this.$liveMessage.show();
-      _this.$offlineMessage.hide();
-    } else {
-      _this.$liveMessage.hide();
-      _this.$offlineMessage.show();
-    }
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/MailchimpSignup.js":
-/*!*******************************************!*\
-  !*** ./src/js/modules/MailchimpSignup.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   MailchimpSignup: () => (/* binding */ MailchimpSignup)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global */
-
-
-
-/**
- * MailchimpSignup class follows convention of module classes.
- * bind() called on construction.
- */
-class MailchimpSignup {
-  constructor() {
-    this.forms = [];
-    this.bind();
-  }
-
-  /**
-   * Function to bind all event handlers
-   */
-  bind() {
-    const _this = this;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__form').each((index, form) => {
-      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form);
-      const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).attr('action');
-      const $formInputs = $form.find('input');
-      const $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
-      _this.forms[index] = $form;
-      $form.on('submit', event => {
-        event.preventDefault();
-        const data = $form.serialize();
-        $form.addClass('email-signup__form--processing');
-        $formInputs.prop('disabled', true);
-        $form.removeClass('email-signup__form--failed');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(() => {
-          $form.removeClass('email-signup__form--processing');
-          $form.addClass('email-signup__form--completed');
-        }).fail(jqXHR => {
-          $form.removeClass('email-signup__form--processing');
-          $formInputs.prop('disabled', false);
-          $form.addClass('email-signup__form--failed');
-          if (jqXHR.statusText === 'error') {
-            $feedbackMessageSpan.text('General error');
-          }
-          try {
-            const response = JSON.parse(jqXHR.responseText);
-            $feedbackMessageSpan.text(response.message);
-          } catch (error) {
-            $feedbackMessageSpan.text('General error');
-          }
-          $formInputs.prop('disabled', false);
-        }).always(() => {
-          $form.removeClass('email-signup__form--processing');
-        });
-      });
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__feedback-failed').each((index, element) => {
-      const $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
-      $element.on('click', () => {
-        _this.forms[index].removeClass('email-signup__form--failed');
-      });
-    });
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Scrollers.js":
-/*!*************************************!*\
-  !*** ./src/js/modules/Scrollers.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Scrollers: () => (/* binding */ Scrollers)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-class Scrollers {
-  constructor() {
-    this.scrollers = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-scroller').each((index, scroller) => {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller).attr('id', "ux-scroller-".concat(index));
-      this.scrollers.push(new Scroller(scroller));
-    });
-  }
-  onReady() {
-    this.scrollers.forEach(scroller => {
-      scroller.onReady();
-    });
-  }
-}
-class Scroller {
-  constructor(scroller) {
-    this.$scroller = jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller);
-    this.$inner = this.$scroller.find('.ux-scroller__inner');
-    this.$fadeBottom = this.$scroller.find('.ux-scroller__fade-bottom');
-    this.$scroller.addClass('ux-scroller--at-top');
-  }
-  onReady() {
-    this.innerHeight = this.$inner.outerHeight(true);
-    this.bind();
-  }
-  onResize() {
-    this.innerHeight = this.$inner.outerHeight(true);
-  }
-  bind() {
-    const _this = this;
-    _this.$inner[0].addEventListener('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 50));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('resize', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.onResize.bind(_this), 50));
-  }
-  handleScroll() {
-    if (this.$inner[0].scrollTop === 0) {
-      this.$scroller.removeClass('ux-scroller--at-bottom').addClass('ux-scroller--at-top');
-    } else if (this.$inner[0].scrollTop + this.innerHeight >= this.$inner[0].scrollHeight) {
-      this.$scroller.removeClass('ux-scroller--at-top').addClass('ux-scroller--at-bottom');
-    } else {
-      this.$scroller.removeClass('ux-scroller--at-top ux-scroller--at-bottom');
-    }
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Search.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/Search.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Search: () => (/* binding */ Search)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-class Search {
-  onReady() {
-    const _this = this;
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').hasClass('error404')) {
-      _this.fourzerofour();
-    }
-  }
-  fourzerofour() {
-    var href = window.location.href;
-    // remove url before WP
-    var request = href.split('/');
-    // get last part of url
-
-    // If trailing /
-    if (request[request.length - 1] === '') {
-      // Remove last element from the array
-      request.pop();
-    }
-    request = request[request.length - 1];
-    // remove any dashes [in the case of a real permalink slug]
-    request = request.replace(/-/g, ' ');
-    if (request) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-input').val(request).focus();
-    }
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Support.js":
-/*!***********************************!*\
-  !*** ./src/js/modules/Support.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Support: () => (/* binding */ Support)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global WP */
-
-
-
-class Support {
-  constructor() {
-    this.donationAppUrl = 'https://donate.novaramedia.com/';
-    this.saveClosedStateTimeout = 21; // days
-    this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('cookie-approval') === 'true' ? true : false;
-  }
-  onReady() {
-    const _this = this;
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-section').length) {
-      _this.setupAutovalues();
-      _this.bind();
-    }
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar').length) {
-      _this.initSupportBar();
-    }
-  }
-
-  /**
-   * Checks url parameters for valid alternative autovalues codes and uses them if found
-   */
-  setupAutovalues() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlParamSupportCode = urlParams.get('sv');
-    let autovaluesKey = 'default';
-    if (urlParamSupportCode !== null) {
-      if (typeof WP.supportSectionAutovalues[urlParamSupportCode] !== 'undefined') {
-        autovaluesKey = urlParamSupportCode;
-      }
-    }
-    this.autovalues = WP.supportSectionAutovalues[autovaluesKey];
-  }
-  bind() {
-    const _this = this;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form').each((index, value) => {
-      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value);
-      _this.setAutoValues($form, this.autovalues['show_first']);
-      if (this.autovalues['show_first'] === 'oneoff') {
-        // if the setting is to show one off first then update buttons active state
-        _this.clearActiveButtonState($form);
-        $form.find('.support-form__schedule-option[data-value=oneoff]').addClass('support-form__button--active');
-      }
-      const $valueInput = $form.find('.support-form__value-input').first();
-      $form.find('.support-form__button').on({
-        click(event) {
-          event.preventDefault();
-          const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-          const data = $button.data();
-          if (data.action === 'set-type') {
-            // if the button is setting the type of donation
-            _this.setAutoValues($form, data.value);
-            $form.attr('action', _this.donationAppUrl + data.value);
-            _this.clearActiveButtonState($form);
-            $button.addClass('support-form__button--active');
-          } else if (data.action === 'set-value') {
-            // if the button is setting the donation value
-            $valueInput.val(data.value);
-            _this.clearActiveButtonState($form, 'set-value');
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form__custom-input').removeClass('support-form__button--active');
-            $button.addClass('support-form__button--active');
-          }
-        }
-      });
-      $form.find('.support-form__custom-input').on({
-        input(event) {
-          event.preventDefault();
-          $valueInput.val(event.target.value);
-          _this.clearActiveButtonState($form, 'set-value');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('support-form__button--active');
-        }
-      });
-      $form.addClass('support-form--active');
-    });
-  }
-
-  /**
-   * Clears the active state from input buttons. Default clears all but optional param clears just one action type of button
-   *
-   * @param {Object}   $form         jQuery object of the form in question.
-   * @param {String}   [actionType]  Action type filter to clear just one type of button. 'set-value' or 'set-type'
-   */
-  clearActiveButtonState($form, actionType) {
-    if (actionType) {
-      $form.find(".support-form__button[data-action=\"".concat(actionType, "\"]")).removeClass('support-form__button--active');
-    } else {
-      $form.find('.support-form__button').removeClass('support-form__button--active');
-    }
-  }
-
-  /**
-   * Switches the quick auto values displayed on the form depending on the type of donation.
-   *
-   * @param {Object}   $form         jQuery object of the form in question.
-   * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
-   */
-  setAutoValues($form) {
-    let donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
-    const _this = this;
-    $form.find('.support-form__value-option').each((index, input) => {
-      const value = _this.autovalues["".concat(donationType, "_").concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('name'))];
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text("\xA3".concat(value));
-    });
-  }
-  initSupportBar() {
-    var _this = this;
-    const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar');
-    const $barClose = $bar.find('.support-bar__close-trigger');
-    const $barOpen = $bar.find('.support-bar__open-trigger');
-    _this.hasClosedSupportBarCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('support-bar-closed') === 'true' ? true : false;
-    if (!_this.hasClosedSupportBarCookie) {
-      $bar.removeClass('support-bar--closed').addClass('support-bar--open');
-    }
-    $bar.addClass('support-bar--active');
-    $barOpen.on({
-      click(event) {
-        event.preventDefault();
-        $bar.removeClass('support-bar--closed').addClass('support-bar--open');
-        if (_this.hasApprovalCookie) {
-          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'false', {
-            expires: _this.saveClosedStateTimeout
-          });
-        }
-      }
-    });
-    $barClose.on({
-      click(event) {
-        event.preventDefault();
-        $bar.removeClass('support-bar--open').addClass('support-bar--closed');
-        if (_this.hasApprovalCookie) {
-          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'true', {
-            expires: _this.saveClosedStateTimeout
-          });
-        }
-      }
-    });
-  }
-  static numberWithCommas(x) {
-    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/modules/Utilities.js":
-/*!*************************************!*\
-  !*** ./src/js/modules/Utilities.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Utilities: () => (/* binding */ Utilities)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/src/luxon.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* harmony import */ var _functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../functions/selectText.js */ "./src/js/functions/selectText.js");
-/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-
-
-
-// possible https://www.npmjs.com/package/fromnow
-
-
-
-
-/**
- * Sidewide utilities, inc utility css classes
- */
-class Utilities {
-  constructor() {
-    this.fixWidows();
-    this.displayTimeSince();
-    this.checkGDPRApproval();
-  }
-
-  /**
-   * Function to run on jQuery document ready event
-   */
-  onReady() {
-    const _this = this;
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section').length) {
-      _this.bindResourcesToggle();
-    }
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-select').click(event => {
-      (0,_functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target)[0]);
-    });
-  }
-
-  /**
-   * Binds the click toggle for the single post resources section
-   */
-  bindResourcesToggle() {
-    const $resources = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-resources-toggle').click(() => {
-      $resources.toggle();
-    });
-  }
-
-  /**
-   * Utility css class mainly for use on headines to avoid widows [single words on a new line]
-   * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
-   */
-  fixWidows() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each((index, element) => {
-      let string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html();
-      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(string);
-    });
-  }
-
-  /**
-   * Utility css class to render time since post for posts under 5h old
-   * Target expected to be empty element with data-timestamp of a valid timestamp
-   */
-  displayTimeSince() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-time-since').each((index, element) => {
-      const $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
-      const timestamp = $element.data('timestamp');
-      let published = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromISO(timestamp);
-      $element.text(published.toRelative());
-    });
-  }
-
-  /**
-   * Checks anon cookie for privacy approval and renders approval box if not found
-   */
-  checkGDPRApproval() {
-    const approvalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get('cookie-approval') === 'true' ? true : false;
-    if (!approvalCookie) {
-      const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-bar');
-      $bar.show();
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-accept').on('click', () => {
-        js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('cookie-approval', 'true', {
-          expires: 365
-        });
-        $bar.hide();
-      });
-    }
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -11569,6 +10728,155 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/js-cookie/dist/js.cookie.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/js-cookie/dist/js.cookie.mjs ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ api)
+/* harmony export */ });
+/*! js-cookie v3.0.5 | MIT */
+/* eslint-disable no-var */
+function assign (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+      target[key] = source[key];
+    }
+  }
+  return target
+}
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+var defaultConverter = {
+  read: function (value) {
+    if (value[0] === '"') {
+      value = value.slice(1, -1);
+    }
+    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
+  },
+  write: function (value) {
+    return encodeURIComponent(value).replace(
+      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
+      decodeURIComponent
+    )
+  }
+};
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+
+function init (converter, defaultAttributes) {
+  function set (name, value, attributes) {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    attributes = assign({}, defaultAttributes, attributes);
+
+    if (typeof attributes.expires === 'number') {
+      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
+    }
+    if (attributes.expires) {
+      attributes.expires = attributes.expires.toUTCString();
+    }
+
+    name = encodeURIComponent(name)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/[()]/g, escape);
+
+    var stringifiedAttributes = '';
+    for (var attributeName in attributes) {
+      if (!attributes[attributeName]) {
+        continue
+      }
+
+      stringifiedAttributes += '; ' + attributeName;
+
+      if (attributes[attributeName] === true) {
+        continue
+      }
+
+      // Considers RFC 6265 section 5.2:
+      // ...
+      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
+      //     character:
+      // Consume the characters of the unparsed-attributes up to,
+      // not including, the first %x3B (";") character.
+      // ...
+      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+    }
+
+    return (document.cookie =
+      name + '=' + converter.write(value, name) + stringifiedAttributes)
+  }
+
+  function get (name) {
+    if (typeof document === 'undefined' || (arguments.length && !name)) {
+      return
+    }
+
+    // To prevent the for loop in the first place assign an empty array
+    // in case there are no cookies at all.
+    var cookies = document.cookie ? document.cookie.split('; ') : [];
+    var jar = {};
+    for (var i = 0; i < cookies.length; i++) {
+      var parts = cookies[i].split('=');
+      var value = parts.slice(1).join('=');
+
+      try {
+        var found = decodeURIComponent(parts[0]);
+        jar[found] = converter.read(value, found);
+
+        if (name === found) {
+          break
+        }
+      } catch (e) {}
+    }
+
+    return name ? jar[name] : jar
+  }
+
+  return Object.create(
+    {
+      set,
+      get,
+      remove: function (name, attributes) {
+        set(
+          name,
+          '',
+          assign({}, attributes, {
+            expires: -1
+          })
+        );
+      },
+      withAttributes: function (attributes) {
+        return init(this.converter, assign({}, this.attributes, attributes))
+      },
+      withConverter: function (converter) {
+        return init(assign({}, this.converter, converter), this.attributes)
+      }
+    },
+    {
+      attributes: { value: Object.freeze(defaultAttributes) },
+      converter: { value: Object.freeze(converter) }
+    }
+  )
+}
+
+var api = init(defaultConverter, { path: '/' });
+/* eslint-enable no-var */
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/lazysizes/lazysizes.js":
 /*!*********************************************!*\
   !*** ./node_modules/lazysizes/lazysizes.js ***!
@@ -13049,168 +12357,6 @@ function toNumber(value) {
 }
 
 module.exports = toNumber;
-
-
-/***/ }),
-
-/***/ "./src/styl/site.styl":
-/*!****************************!*\
-  !*** ./src/styl/site.styl ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./node_modules/js-cookie/dist/js.cookie.mjs":
-/*!***************************************************!*\
-  !*** ./node_modules/js-cookie/dist/js.cookie.mjs ***!
-  \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ api)
-/* harmony export */ });
-/*! js-cookie v3.0.5 | MIT */
-/* eslint-disable no-var */
-function assign (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-    for (var key in source) {
-      target[key] = source[key];
-    }
-  }
-  return target
-}
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-var defaultConverter = {
-  read: function (value) {
-    if (value[0] === '"') {
-      value = value.slice(1, -1);
-    }
-    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
-  },
-  write: function (value) {
-    return encodeURIComponent(value).replace(
-      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-      decodeURIComponent
-    )
-  }
-};
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-
-function init (converter, defaultAttributes) {
-  function set (name, value, attributes) {
-    if (typeof document === 'undefined') {
-      return
-    }
-
-    attributes = assign({}, defaultAttributes, attributes);
-
-    if (typeof attributes.expires === 'number') {
-      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
-    }
-    if (attributes.expires) {
-      attributes.expires = attributes.expires.toUTCString();
-    }
-
-    name = encodeURIComponent(name)
-      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-      .replace(/[()]/g, escape);
-
-    var stringifiedAttributes = '';
-    for (var attributeName in attributes) {
-      if (!attributes[attributeName]) {
-        continue
-      }
-
-      stringifiedAttributes += '; ' + attributeName;
-
-      if (attributes[attributeName] === true) {
-        continue
-      }
-
-      // Considers RFC 6265 section 5.2:
-      // ...
-      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
-      //     character:
-      // Consume the characters of the unparsed-attributes up to,
-      // not including, the first %x3B (";") character.
-      // ...
-      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
-    }
-
-    return (document.cookie =
-      name + '=' + converter.write(value, name) + stringifiedAttributes)
-  }
-
-  function get (name) {
-    if (typeof document === 'undefined' || (arguments.length && !name)) {
-      return
-    }
-
-    // To prevent the for loop in the first place assign an empty array
-    // in case there are no cookies at all.
-    var cookies = document.cookie ? document.cookie.split('; ') : [];
-    var jar = {};
-    for (var i = 0; i < cookies.length; i++) {
-      var parts = cookies[i].split('=');
-      var value = parts.slice(1).join('=');
-
-      try {
-        var found = decodeURIComponent(parts[0]);
-        jar[found] = converter.read(value, found);
-
-        if (name === found) {
-          break
-        }
-      } catch (e) {}
-    }
-
-    return name ? jar[name] : jar
-  }
-
-  return Object.create(
-    {
-      set,
-      get,
-      remove: function (name, attributes) {
-        set(
-          name,
-          '',
-          assign({}, attributes, {
-            expires: -1
-          })
-        );
-      },
-      withAttributes: function (attributes) {
-        return init(this.converter, assign({}, this.attributes, attributes))
-      },
-      withConverter: function (converter) {
-        return init(assign({}, this.converter, converter), this.attributes)
-      }
-    },
-    {
-      attributes: { value: Object.freeze(defaultAttributes) },
-      converter: { value: Object.freeze(converter) }
-    }
-  )
-}
-
-var api = init(defaultConverter, { path: '/' });
-/* eslint-enable no-var */
-
-
 
 
 /***/ }),
@@ -32053,6 +31199,860 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/***/ }),
+
+/***/ "./src/js/functions/selectText.js":
+/*!****************************************!*\
+  !*** ./src/js/functions/selectText.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(element) {
+  if (!element) {
+    return;
+  }
+  const doc = document;
+  let range;
+  let selection;
+  if (doc.body.createTextRange) {
+    range = document.body.createTextRange();
+    range.moveToElementText(element);
+    range.select();
+  } else if (window.getSelection) {
+    selection = window.getSelection();
+    range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Analytics.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/Analytics.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Analytics: () => (/* binding */ Analytics)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global dataLayer */
+
+
+class Analytics {
+  constructor() {
+    if (typeof dataLayer !== 'undefined') {
+      this.bind();
+    }
+  }
+  bind() {
+    const _this = this;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form-slider').on('input', _this.debounce(function () {
+      dataLayer.push({
+        'event': 'sliderChanged',
+        'target': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target'),
+        'amount': this.value
+      });
+    }, 250));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#menu-toggle').click(function () {
+      // bind hamburger click
+      dataLayer.push({
+        'event': 'headerToggled'
+      });
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.related-posts .post').click(function () {
+      dataLayer.push({
+        'event': 'relatedPostClicked'
+      });
+    });
+  }
+  debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+      var context = this,
+        args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) {
+          func.apply(context, args);
+        }
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) {
+        func.apply(context, args);
+      }
+    };
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Carousels.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/Carousels.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Carousels: () => (/* binding */ Carousels)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.mjs");
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+
+class Carousels {
+  constructor() {
+    this.carousels = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', `ux-carousel-${index}`);
+      this.carousels.push(new Carousel(carousel));
+    });
+  }
+  onReady() {
+    const _this = this;
+    _this.carousels.forEach(carousel => {
+      carousel.onReady();
+    });
+  }
+}
+class Carousel {
+  constructor(carousel) {
+    this.$carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
+    this.$navLeft = this.$carousel.find('.swiper-button-prev');
+    this.$navRight = this.$carousel.find('.swiper-button-next');
+    this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"](this.$carousel.find('.swiper')[0], {
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.FreeMode],
+      navigation: {
+        nextEl: this.$navRight[0],
+        prevEl: this.$navLeft[0]
+      },
+      autoplay: {
+        delay: 4000,
+        pauseOnMouseEnter: true
+      },
+      mousewheel: {
+        enabled: true,
+        thresholdDelta: 4
+      },
+      freemode: {
+        enabled: true,
+        sticky: true
+      },
+      slidesPerView: 'auto',
+      rewind: true
+    });
+    this.swiper.on('slideChange', event => {
+      if (event.isBeginning) {
+        this.$navLeft.addClass('swiper-button-prev--disabled');
+      } else {
+        this.$navLeft.removeClass('swiper-button-prev--disabled');
+      }
+      if (event.isEnd) {
+        this.$navRight.addClass('swiper-button-next--disabled');
+      } else {
+        this.$navRight.removeClass('swiper-button-next--disabled');
+      }
+    });
+  }
+  onReady() {}
+  onResize() {}
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Header.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/Header.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Header: () => (/* binding */ Header)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+class Header {
+  constructor() {
+    const _this = this;
+    _this.scrollPosition = 0;
+    _this.$navToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__nav-toggle');
+    _this.$headerNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-nav');
+    _this.$searchToggle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__search-toggle');
+    _this.$headerSearch = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-search');
+    _this.$searchInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header-search__input');
+  }
+  onReady() {
+    const _this = this;
+    _this.initScrollReveal();
+    _this.bind();
+  }
+  bind() {
+    const _this = this;
+    _this.$navToggle.on('click', () => {
+      _this.$headerNav.toggle();
+      if (_this.$headerNav.is(':visible')) {
+        _this.$headerNav.find('a').first().trigger('focus'); // focus on first link for accessibility
+      }
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
+        return attr === 'true' ? false : true;
+      });
+      if (_this.$headerSearch.is(':visible')) {
+        _this.$headerSearch.hide();
+        _this.$searchToggle.attr('aria-pressed', false);
+      }
+    });
+    _this.$searchToggle.on('click', () => {
+      _this.$headerSearch.toggle();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-pressed', function (index, attr) {
+        return attr === 'true' ? false : true;
+      });
+      _this.$searchInput.trigger('focus');
+      if (_this.$headerNav.is(':visible')) {
+        _this.$headerNav.hide();
+        _this.$navToggle.attr('aria-pressed', false);
+      }
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on({
+      scroll: lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 250),
+      resize: lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleResize.bind(_this), 250)
+    });
+  }
+  initScrollReveal() {
+    this.$scrollRevealWrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__scroll-reveal');
+    this.$headerLogomark = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__logomark');
+    this.isSingleArticle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.single-articles').length > 0;
+    this.setScrollThreshold();
+  }
+  handleScroll() {
+    const _this = this;
+    const scrollTop = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollTop();
+    if (scrollTop > _this.scrollPosition && scrollTop > _this.scrollThreshold) {
+      // scroll is down
+      _this.$scrollRevealWrapper.css('opacity', 1);
+      _this.$headerLogomark.css('opacity', 0);
+    } else {
+      // scroll is up
+      _this.$scrollRevealWrapper.css('opacity', 0);
+      _this.$headerLogomark.css('opacity', 1);
+    }
+    _this.scrollPosition = scrollTop;
+  }
+  handleResize() {
+    this.setScrollThreshold();
+  }
+  setScrollThreshold() {
+    if (this.isSingleArticle) {
+      this.scrollThreshold = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').offset().top + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').height();
+    } else {
+      this.scrollThreshold = 150;
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/LiveChecker.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/LiveChecker.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LiveChecker: () => (/* binding */ LiveChecker)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/src/luxon.js");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global WP */
+
+
+
+class LiveChecker {
+  constructor() {
+    this.isLive = false;
+    this.$messageContainer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message');
+    this.$liveMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message__live');
+    this.$offlineMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.submenu__message__offline');
+    this.basicSchedule = {
+      days: [1, 2, 3, 4, 5],
+      startHour: 18,
+      endHour: 19
+    };
+    this.offlineMessages = [{
+      text: 'Utopia Now',
+      link: 'https://shop.novaramedia.com/products/no-future-utopia-now-scarf'
+    }, {
+      text: 'calling Radio Alice',
+      link: 'https://en.wikipedia.org/wiki/Radio_Alice'
+    }, {
+      text: 'va in paradiso',
+      link: 'https://www.imdb.com/title/tt0066919/'
+    }];
+    if (WP.liveCheckerData.messages && WP.liveCheckerData.messages.length > 0) {
+      // if we have global data use that
+      this.offlineMessages = WP.liveCheckerData.messages;
+    }
+  }
+  onReady() {
+    const _this = this;
+    if (_this.$messageContainer.length === 0) {
+      return;
+    }
+    _this.randomOfflineMessage = _this.offlineMessages[Math.floor(Math.random() * _this.offlineMessages.length)];
+    _this.$offlineMessage.text(`“${_this.randomOfflineMessage.text}”`).attr('href', _this.randomOfflineMessage.link);
+    _this.checkIfLive();
+    _this.updateMessage();
+    this.liveCheckerInterval = setInterval(() => {
+      _this.checkIfLive();
+    }, 1000 * 60);
+  }
+  checkIfLive() {
+    const _this = this;
+    let status = false;
+    let overrideMatch = undefined;
+    let currentTime = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.now().setZone('Europe/London');
+    let currentDay = currentTime.weekday;
+    let currentHour = currentTime.hour;
+    if (WP.liveCheckerData.overrides && WP.liveCheckerData.overrides.length > 0) {
+      overrideMatch = WP.liveCheckerData.overrides.find(override => {
+        if (!override.start || !override.end) {
+          return false;
+        }
+        let start = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.start).setZone('Europe/London');
+        let end = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromSeconds(override.end).setZone('Europe/London');
+        if (currentTime >= start && currentTime < end) {
+          return true;
+        }
+      });
+    }
+    if (overrideMatch !== undefined) {
+      status = overrideMatch.status === 'true' ? true : false;
+    }
+    if (_this.basicSchedule.days.includes(currentDay)) {
+      if (currentHour >= _this.basicSchedule.startHour && currentHour < _this.basicSchedule.endHour) {
+        status = true;
+      }
+    }
+    _this.setLiveStatus(status);
+  }
+  setLiveStatus(newLiveStatus) {
+    if (this.isLive !== newLiveStatus) {
+      this.isLive = newLiveStatus;
+      this.updateMessage();
+    }
+  }
+  updateMessage() {
+    const _this = this;
+    if (_this.isLive) {
+      _this.$liveMessage.show();
+      _this.$offlineMessage.hide();
+    } else {
+      _this.$liveMessage.hide();
+      _this.$offlineMessage.show();
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/MailchimpSignup.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/MailchimpSignup.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MailchimpSignup: () => (/* binding */ MailchimpSignup)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global */
+
+
+
+/**
+ * MailchimpSignup class follows convention of module classes.
+ * bind() called on construction.
+ */
+class MailchimpSignup {
+  constructor() {
+    this.forms = [];
+    this.bind();
+  }
+
+  /**
+   * Function to bind all event handlers
+   */
+  bind() {
+    const _this = this;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__form').each((index, form) => {
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form);
+      const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form).attr('action');
+      const $formInputs = $form.find('input');
+      const $feedbackMessageSpan = $form.find('.email-signup__feedback-message');
+      _this.forms[index] = $form;
+      $form.on('submit', event => {
+        event.preventDefault();
+        const data = $form.serialize();
+        $form.addClass('email-signup__form--processing');
+        $formInputs.prop('disabled', true);
+        $form.removeClass('email-signup__form--failed');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data).done(() => {
+          $form.removeClass('email-signup__form--processing');
+          $form.addClass('email-signup__form--completed');
+        }).fail(jqXHR => {
+          $form.removeClass('email-signup__form--processing');
+          $formInputs.prop('disabled', false);
+          $form.addClass('email-signup__form--failed');
+          if (jqXHR.statusText === 'error') {
+            $feedbackMessageSpan.text('General error');
+          }
+          try {
+            const response = JSON.parse(jqXHR.responseText);
+            $feedbackMessageSpan.text(response.message);
+          } catch (error) {
+            $feedbackMessageSpan.text('General error');
+          }
+          $formInputs.prop('disabled', false);
+        }).always(() => {
+          $form.removeClass('email-signup__form--processing');
+        });
+      });
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.email-signup__feedback-failed').each((index, element) => {
+      const $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
+      $element.on('click', () => {
+        _this.forms[index].removeClass('email-signup__form--failed');
+      });
+    });
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Scrollers.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/Scrollers.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Scrollers: () => (/* binding */ Scrollers)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+class Scrollers {
+  constructor() {
+    this.scrollers = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-scroller').each((index, scroller) => {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller).attr('id', `ux-scroller-${index}`);
+      this.scrollers.push(new Scroller(scroller));
+    });
+  }
+  onReady() {
+    this.scrollers.forEach(scroller => {
+      scroller.onReady();
+    });
+  }
+}
+class Scroller {
+  constructor(scroller) {
+    this.$scroller = jquery__WEBPACK_IMPORTED_MODULE_0___default()(scroller);
+    this.$inner = this.$scroller.find('.ux-scroller__inner');
+    this.$fadeBottom = this.$scroller.find('.ux-scroller__fade-bottom');
+    this.$scroller.addClass('ux-scroller--at-top');
+  }
+  onReady() {
+    this.innerHeight = this.$inner.outerHeight(true);
+    this.bind();
+  }
+  onResize() {
+    this.innerHeight = this.$inner.outerHeight(true);
+  }
+  bind() {
+    const _this = this;
+    _this.$inner[0].addEventListener('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.handleScroll.bind(_this), 50));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('resize', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(_this.onResize.bind(_this), 50));
+  }
+  handleScroll() {
+    if (this.$inner[0].scrollTop === 0) {
+      this.$scroller.removeClass('ux-scroller--at-bottom').addClass('ux-scroller--at-top');
+    } else if (this.$inner[0].scrollTop + this.innerHeight >= this.$inner[0].scrollHeight) {
+      this.$scroller.removeClass('ux-scroller--at-top').addClass('ux-scroller--at-bottom');
+    } else {
+      this.$scroller.removeClass('ux-scroller--at-top ux-scroller--at-bottom');
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Search.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/Search.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Search: () => (/* binding */ Search)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+class Search {
+  onReady() {
+    const _this = this;
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').hasClass('error404')) {
+      _this.fourzerofour();
+    }
+  }
+  fourzerofour() {
+    var href = window.location.href;
+    // remove url before WP
+    var request = href.split('/');
+    // get last part of url
+
+    // If trailing /
+    if (request[request.length - 1] === '') {
+      // Remove last element from the array
+      request.pop();
+    }
+    request = request[request.length - 1];
+    // remove any dashes [in the case of a real permalink slug]
+    request = request.replace(/-/g, ' ');
+    if (request) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-input').val(request).focus();
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Support.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/Support.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Support: () => (/* binding */ Support)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global WP */
+
+
+
+class Support {
+  constructor() {
+    this.donationAppUrl = 'https://donate.novaramedia.com/';
+    this.saveClosedStateTimeout = 21; // days
+    this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('cookie-approval') === 'true' ? true : false;
+  }
+  onReady() {
+    const _this = this;
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-section').length) {
+      _this.setupAutovalues();
+      _this.bind();
+    }
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar').length) {
+      _this.initSupportBar();
+    }
+  }
+
+  /**
+   * Checks url parameters for valid alternative autovalues codes and uses them if found
+   */
+  setupAutovalues() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlParamSupportCode = urlParams.get('sv');
+    let autovaluesKey = 'default';
+    if (urlParamSupportCode !== null) {
+      if (typeof WP.supportSectionAutovalues[urlParamSupportCode] !== 'undefined') {
+        autovaluesKey = urlParamSupportCode;
+      }
+    }
+    this.autovalues = WP.supportSectionAutovalues[autovaluesKey];
+  }
+  bind() {
+    const _this = this;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form').each((index, value) => {
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value);
+      _this.setAutoValues($form, this.autovalues['show_first']);
+      if (this.autovalues['show_first'] === 'oneoff') {
+        // if the setting is to show one off first then update buttons active state
+        _this.clearActiveButtonState($form);
+        $form.find('.support-form__schedule-option[data-value=oneoff]').addClass('support-form__button--active');
+      }
+      const $valueInput = $form.find('.support-form__value-input').first();
+      $form.find('.support-form__button').on({
+        click(event) {
+          event.preventDefault();
+          const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+          const data = $button.data();
+          if (data.action === 'set-type') {
+            // if the button is setting the type of donation
+            _this.setAutoValues($form, data.value);
+            $form.attr('action', _this.donationAppUrl + data.value);
+            _this.clearActiveButtonState($form);
+            $button.addClass('support-form__button--active');
+          } else if (data.action === 'set-value') {
+            // if the button is setting the donation value
+            $valueInput.val(data.value);
+            _this.clearActiveButtonState($form, 'set-value');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form__custom-input').removeClass('support-form__button--active');
+            $button.addClass('support-form__button--active');
+          }
+        }
+      });
+      $form.find('.support-form__custom-input').on({
+        input(event) {
+          event.preventDefault();
+          $valueInput.val(event.target.value);
+          _this.clearActiveButtonState($form, 'set-value');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('support-form__button--active');
+        }
+      });
+      $form.addClass('support-form--active');
+    });
+  }
+
+  /**
+   * Clears the active state from input buttons. Default clears all but optional param clears just one action type of button
+   *
+   * @param {Object}   $form         jQuery object of the form in question.
+   * @param {String}   [actionType]  Action type filter to clear just one type of button. 'set-value' or 'set-type'
+   */
+  clearActiveButtonState($form, actionType) {
+    if (actionType) {
+      $form.find(`.support-form__button[data-action="${actionType}"]`).removeClass('support-form__button--active');
+    } else {
+      $form.find('.support-form__button').removeClass('support-form__button--active');
+    }
+  }
+
+  /**
+   * Switches the quick auto values displayed on the form depending on the type of donation.
+   *
+   * @param {Object}   $form         jQuery object of the form in question.
+   * @param {String}   [donationType=regular]  Type of donation. oneoff OR regular
+   */
+  setAutoValues($form) {
+    let donationType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'regular';
+    const _this = this;
+    $form.find('.support-form__value-option').each((index, input) => {
+      const value = _this.autovalues[`${donationType}_${jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('name')}`];
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).data('value', value).text(`£${value}`);
+    });
+  }
+  initSupportBar() {
+    var _this = this;
+    const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar');
+    const $barClose = $bar.find('.support-bar__close-trigger');
+    const $barOpen = $bar.find('.support-bar__open-trigger');
+    _this.hasClosedSupportBarCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('support-bar-closed') === 'true' ? true : false;
+    if (!_this.hasClosedSupportBarCookie) {
+      $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+    }
+    $bar.addClass('support-bar--active');
+    $barOpen.on({
+      click(event) {
+        event.preventDefault();
+        $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+        if (_this.hasApprovalCookie) {
+          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'false', {
+            expires: _this.saveClosedStateTimeout
+          });
+        }
+      }
+    });
+    $barClose.on({
+      click(event) {
+        event.preventDefault();
+        $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+        if (_this.hasApprovalCookie) {
+          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'true', {
+            expires: _this.saveClosedStateTimeout
+          });
+        }
+      }
+    });
+  }
+  static numberWithCommas(x) {
+    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Utilities.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/Utilities.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Utilities: () => (/* binding */ Utilities)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/src/luxon.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+/* harmony import */ var _functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../functions/selectText.js */ "./src/js/functions/selectText.js");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+// possible https://www.npmjs.com/package/fromnow
+
+
+
+
+/**
+ * Sidewide utilities, inc utility css classes
+ */
+class Utilities {
+  constructor() {
+    this.fixWidows();
+    this.displayTimeSince();
+    this.checkGDPRApproval();
+  }
+
+  /**
+   * Function to run on jQuery document ready event
+   */
+  onReady() {
+    const _this = this;
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section').length) {
+      _this.bindResourcesToggle();
+    }
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-select').click(event => {
+      (0,_functions_selectText_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target)[0]);
+    });
+  }
+
+  /**
+   * Binds the click toggle for the single post resources section
+   */
+  bindResourcesToggle() {
+    const $resources = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-resources-toggle').click(() => {
+      $resources.toggle();
+    });
+  }
+
+  /**
+   * Utility css class mainly for use on headines to avoid widows [single words on a new line]
+   * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
+   */
+  fixWidows() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each((index, element) => {
+      let string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html();
+      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(string);
+    });
+  }
+
+  /**
+   * Utility css class to render time since post for posts under 5h old
+   * Target expected to be empty element with data-timestamp of a valid timestamp
+   */
+  displayTimeSince() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-time-since').each((index, element) => {
+      const $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
+      const timestamp = $element.data('timestamp');
+      let published = luxon__WEBPACK_IMPORTED_MODULE_1__.DateTime.fromISO(timestamp);
+      $element.text(published.toRelative());
+    });
+  }
+
+  /**
+   * Checks anon cookie for privacy approval and renders approval box if not found
+   */
+  checkGDPRApproval() {
+    const approvalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get('cookie-approval') === 'true' ? true : false;
+    if (!approvalCookie) {
+      const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-bar');
+      $bar.show();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#obligation-accept').on('click', () => {
+        js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].set('cookie-approval', 'true', {
+          expires: 365
+        });
+        $bar.hide();
+      });
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/styl/site.styl":
+/*!****************************!*\
+  !*** ./src/styl/site.styl ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
 /***/ })
 
 /******/ 	});
@@ -32136,7 +32136,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 /*!************************!*\
