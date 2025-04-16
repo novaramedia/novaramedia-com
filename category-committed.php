@@ -220,9 +220,9 @@ function nm_render_committed_credit( $credit ) {
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
-            <a href="#">Apple Podcasts</a>,
-            <a href="#">Spotify</a>,<br/><a href="#">Google Podcasts</a>,
-            <a href="#">RSS</a>
+            <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,
+            <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,<br/><a href="#">Google Podcasts</a>,
+            <a href="https://feeds.podcastmirror.com/novara-media">RSS</a>
           </div>
         </div>
       </div>
@@ -303,7 +303,7 @@ if ( have_posts() ) {
           </div>
         </div>
 
-        <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
+        <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-5 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
           <?php echo wp_kses_post( $credits['thanks'] ); ?>
 
