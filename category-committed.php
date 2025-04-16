@@ -205,9 +205,10 @@ function nm_render_committed_credit( $credit ) {
     </div>
     <div class="flex-grid-row mt-4 mb-5">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif committed__serif-large text-paragraph-breaks">
-        <p>In the 1970s, the Provisional IRA was in the early days of its armed campaign to end British rule on the island of Ireland. In the United States, a small group of activists began organising on their behalf. They called themselves the Irish Northern Aid Committee, or Noraid—and they were looking for a fight.</p>
-        <p>Hosted by documentary filmmaker Nate Lavey, Foreign Agent is a podcast series about the connection between ordinary Irish Americans and a revolutionary socialist guerrilla group. In six episodes, travelling back and forth across the Atlantic over three decades of conflict, Foreign Agent explores how regular Americans became militant advocates for the cause of Irish freedom.</p>
-        <p>It’s a story of guns smuggled in furniture and wild plots to build homemade missiles. But it’s also about the political and material power that the Irish American community wielded, and how the intoxicating spell of nationalism created a movement out of seemingly irreconcilable social and political positions. And at every step of the way, the US government tried to shut them down. This is the story of the Troubles—as seen through American eyes.</p>
+        <p>Britain is locking up peaceful climate protesters. You’ve probably heard of some of them – they’re the road-blockers, soup-throwers and spray-painters who’ve made headlines around the world with Just Stop Oil.</p>
+        <p>In a new podcast series from Novara Media, we meet the real people behind the front pages. What type of person would risk their freedom for a cause they believe in? What’s it really like in Britain’s overcrowded prisons – and is life on the inside any different for political prisoners? How does jail-time strain the relationships with those they love most? And when you’re facing many years inside, how do you make sense of what you’ve done?</P>
+        <p>Hosted by Rivkah Brown and Clare Hymer, Committed is a podcast about why some people are willing to go to prison for their politics.</p>
+        <p>Over four episodes, we follow a group of Just Stop Oil activists into jail and out again, asking them why they did it – and asking ourselves if we’d be willing to do the same.</p>
       </div>
     </div>
     <div class="flex-grid-row mb-6 mb-s-4">
