@@ -19,16 +19,24 @@
 .support-form__schedule-option-left
   border-radius:  4px 0px 0px 4px;
 
-.support-form__button, .support-form__custom-input, .support-form__submit
-  color: var(--color-white-soft)
-  background-color: var(--color-red)
-  text-align: center
-  &:hover, &--active
-    color: var(--color-black-soft)
-    background-color: var(--color-white-soft)
-    border-color: var(--color-white-soft)
+.support-form__button-wide
+  width: 100%
+
+.support-form__button,
+.support-form__custom-input,
+.support-form__submit
+  color: var(--color-white-soft);
+  background-color: var(--color-red);
+  text-align: center;
+  transition: opacity var(--transition-speed-ultra);
+  &:not(&--active):hover
+    opacity: 0.5;
+  &--active
+    color: var(--color-black-soft);
+    background-color: var(--color-white-soft);
+    border-color: var(--color-white-soft);
   &:focus
-    outline: none
+    outline: none;
 
 .support-form__custom-input::placeholder
   padding-left: 5px

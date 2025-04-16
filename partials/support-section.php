@@ -29,6 +29,16 @@ $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_
           <?php
         }
         ?>
+      <div class="grid-row">
+      <div class="mt-2">
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Visa.jpg" alt="visa icon" />
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Mastercard.jpg" alt="mastercard icon" />
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Stripe.jpg" alt="stripe icon" />
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Paypal.jpg" alt="paypal icon" />
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/ApplePay.jpg" alt="apple pay icon" />
+        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/GooglePay.jpg" alt="google pay icon" />
+      </div>
+    </div>
       </div>
       <div class="is-l-24 offset-xl-0 is-xxl-12 grid-item">
         <?php

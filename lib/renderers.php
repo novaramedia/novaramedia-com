@@ -53,16 +53,6 @@ function render_support_form() {
       </div>
     </div>
     <div class="grid-row grid--nested-tight">
-      <div class="mt-2">
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Visa.jpg" alt="Support icon" />
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Mastercard.jpg" alt="Support icon" />
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Stripe.jpg" alt="Support icon" />
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/Paypal.jpg" alt="Support icon" />
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/ApplePay.jpg" alt="Support icon" />
-        <img class="support-form__payment-type" src="<?php echo get_template_directory_uri(); ?>/dist/img/support-form/GooglePay.jpg" alt="Support icon" />
-      </div>
-    </div>
-    <div class="grid-row grid--nested-tight">
       <div class="is-xxl-24 mt-5">
         <input class="ui-input support-form__custom-input--active" type="submit" value="Donate" />
       </div>
