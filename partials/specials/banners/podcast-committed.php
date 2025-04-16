@@ -1,6 +1,6 @@
 <?php
   $local_term = get_term_by( 'slug', 'committed', 'category' );
-  $base_image_path = get_stylesheet_directory_uri() . '/src/img/specials/committed/';
+  $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
   $url = $local_term ? get_term_link( $local_term ) : false;
 if ( $local_term && $url ) {
   ?>

@@ -122,7 +122,7 @@ function nm_render_foreign_agent_credit( $credit ) {
   <section class="container pt-4 pb-4">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 mb-4">
-        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block ui-tag-block--no-border"><span class="ui-tag ">Podcast</span></a>
+        <?php render_series_ui_tag( 'Podcast', home_url( 'category/audio/' ) ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>

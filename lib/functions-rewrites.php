@@ -1,6 +1,23 @@
 <?php
-add_action( 'init', 'novara_live_rewrites' );
+/** TODO: Refactor this to use an array rather than repeating code.
+ */
 
+add_action( 'init', 'committed_rewrites' );
+/**
+ * Redirects /committed to /category/audio/committed.
+ */
+function committed_rewrites() {
+  $cat = get_category_by_slug( 'committed' );
+  if ( $cat ) {
+    add_rewrite_rule(
+        '^committed/?$',
+        'index.php?category_name=' . $cat->slug,
+        'top'
+    );
+  }
+}
+
+add_action( 'init', 'novara_live_rewrites' );
 /**
  * Adds rewrite rules for Novara Live category.
  */

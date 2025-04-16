@@ -1,5 +1,18 @@
 <?php
-
+/**
+ * Render a simplified UI tag for series podcasts.
+ *
+ * @param string $label The text to display inside the tag.
+ * @param string $url The link to wrap the tag in.
+ * @param string $variant_class Optional extra classes can be added for styling variants.
+ */
+function render_series_ui_tag( $label, $url, $variant_class = '' ) {
+  ?>
+  <a href="<?php echo esc_url( $url ); ?>" class="ui-tag-block ui-tag-block--no-border <?php echo esc_attr( $variant_class ); ?>">
+    <span class="ui-tag"><?php echo esc_html( $label ); ?></span>
+  </a>
+  <?php
+}
 /**
  * Render the support donation form.
  *
@@ -80,7 +93,7 @@ function render_see_also( $query, $number_of_posts = 1 ) {
         $query->the_post();
         $post_id = get_the_id();
         ?>
-        <div class="mb-2 
+        <div class="mb-2
         <?php
         if ( $i != 0 ) {
                             echo 'only-desktop';

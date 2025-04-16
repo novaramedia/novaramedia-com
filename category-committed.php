@@ -9,7 +9,7 @@ $credits = array(
     'thanks'         => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
 );
 
-$base_image_path = get_stylesheet_directory_uri() . '/src/img/specials/committed/';
+$base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
 
 /**
  * Renders the podcast credit section.
@@ -185,7 +185,7 @@ function nm_render_committed_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
-        <a href="<?php echo home_url( 'category/audio/' ); ?>" class="ui-tag-block ui-tag-block--no-border"><span class="ui-tag">Podcast</span></a>
+        <?php render_series_ui_tag( 'Podcast', home_url( 'category/audio/' ) ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
