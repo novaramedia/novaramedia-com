@@ -2,11 +2,15 @@
 get_header();
 
 $credits = array(
-    'producers'      => 'Richard Hames and Chal Ravens',
-    'music_sound'    => 'Matt Huxley',
-    'design_digital' => 'Pietro Garrone, Filippo Marra and Kimberley Dobney',
-    'social_media'   => 'Dunya Kamal and Bronte Dow',
-    'thanks'         => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
+    'producers'       => 'Richard Hames and Chal Ravens',
+    'music_sound'     => 'Matt Huxley',
+    'design_digital'  => 'Pietro Garrone, Filippo Marra and Kimberley Dobney',
+    'social_media'    => 'Dunya Kamal and Bronte Dow',
+    'thanks'          => 'All of the prisoners, their partners, friends and family members who spoke to us for this podcast. Thanks to their prison buddies: Alex, Jamie, Kate and Pia, and to Bertie Coyle from Just Stop Oil.',
+    'image_covers'    => 'Covers photography courtesy of Just Stop Oil',
+    'image_ep_three'  => 'Episode 3 photograph by Crispin Hughes',
+    'image_reporters' => 'Reporters’ portraits by Magdalena Siwicka',
+    'image_misc'      => 'Miscellaneous imagery by Reuters',
 );
 
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committed/';
@@ -301,7 +305,13 @@ if ( have_posts() ) {
 
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-3 mt-s-0 flex-item-s-8">
           <div class="font-weight-bold mb-1">Thanks to</div>
-          <?php echo apply_filters( 'the_content', $credits['thanks'] ); ?>
+          <?php echo wp_kses_post( $credits['thanks'] ); ?>
+
+          <div class="font-weight-bold mt-5 mb-1">Image credits</div>
+          <?php echo wp_kses_post( $credits['image_covers'] ); ?>
+          <?php echo wp_kses_post( $credits['image_ep_three'] ); ?>
+          <?php echo wp_kses_post( $credits['image_reporters'] ); ?>
+          <?php echo wp_kses_post( $credits['image_misc'] ); ?>
         </div>
       </div>
     </div>
