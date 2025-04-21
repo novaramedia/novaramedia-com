@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changed
 
-- podcast_series_pre_get_posts() to look at serial categories array
+- podcast_series_pre_get_posts() to look at series categories array
 - render_ui_tag() to render the UI tags
 
 ## [4.2.6] - 2025-01-13
