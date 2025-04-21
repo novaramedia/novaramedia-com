@@ -41,7 +41,7 @@ function nm_render_committed_credit( $credit ) {
       background-image: url(<?php echo $base_image_path . 'catagory-committed-background.avif'; ?>);
     }
     .fallback .committed__backgrounded {
-      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.png'; ?>);
+      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.jpg'; ?>);
     }
 
     .committed-archive__container {
@@ -189,7 +189,7 @@ function nm_render_committed_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
-        <?php render_series_ui_tag( 'Podcast', home_url( 'category/audio/' ) ); ?>
+        <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ) ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
@@ -220,8 +220,8 @@ function nm_render_committed_credit( $credit ) {
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
-            <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,
-            <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,<br/><a href="#">Google Podcasts</a>,
+            <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,<br/>
+            <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,
             <a href="https://feeds.podcastmirror.com/novara-media">RSS</a>
           </div>
         </div>
@@ -239,7 +239,7 @@ if ( have_posts() ) {
       <article class="flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php the_title(); ?></h3>
+          <h3 class="font-size-13 font-weight-semibold"><?php the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
@@ -285,32 +285,32 @@ if ( have_posts() ) {
 
         <!-- Producers -->
         <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
-          <div class="font-weight-bold mb-1">Producers</div>
+          <h6 class="font-weight-bold mb-1">Producers</h6>
           <div class="mb-2">
             <?php echo wp_kses_post( $credits['producers'] ); ?>
           </div>
-          <div class="font-weight-bold mb-1">Music and sound editing</div>
+          <h6 class="font-weight-bold mb-1">Music and sound editing</h6>
           <div class="mb-2">
             <?php echo wp_kses_post( $credits['music_sound'] ); ?>
           </div>
-          <div class="font-weight-bold mb-1">Design and digital</div>
+          <h6 class="font-weight-bold mb-1">Design and digital</h6>
           <div class="mb-2">
             <?php echo wp_kses_post( $credits['design_digital'] ); ?>
           </div>
-          <div class="font-weight-bold mb-1">Social media production</div>
+          <h6 class="font-weight-bold mb-1">Social media production</h6>
           <div>
             <?php echo wp_kses_post( $credits['social_media'] ); ?>
           </div>
         </div>
 
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-5 mt-s-0 flex-item-s-8">
-          <div class="font-weight-bold mb-1">Thanks to</div>
+          <h6 class="font-weight-bold mb-1">Thanks to</h6>
           <?php echo wp_kses_post( $credits['thanks'] ); ?>
 
-          <div class="font-weight-bold mt-5 mb-1">Image credits</div>
-          <?php echo wp_kses_post( $credits['image_covers'] ); ?>
-          <?php echo wp_kses_post( $credits['image_ep_three'] ); ?>
-          <?php echo wp_kses_post( $credits['image_reporters'] ); ?>
+          <h6 class="font-weight-bold mt-5 mb-1">Image credits</h6>
+          <?php echo wp_kses_post( $credits['image_covers'] ); ?><br/>
+          <?php echo wp_kses_post( $credits['image_ep_three'] ); ?><br/>
+          <?php echo wp_kses_post( $credits['image_reporters'] ); ?><br/>
           <?php echo wp_kses_post( $credits['image_misc'] ); ?>
         </div>
       </div>

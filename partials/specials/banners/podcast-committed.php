@@ -28,7 +28,6 @@ if ( $local_term && $url ) {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0px;
     }
     .committed-banner__grid-item-left {
       justify-content: flex-start;
