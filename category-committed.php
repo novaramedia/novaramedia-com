@@ -78,6 +78,12 @@ function nm_render_committed_credit( $credit ) {
       display: flex;
       justify-content: center;
     }
+    .committed-archive-listen__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
 
     .committed-archive__box {
       background-image: url(<?php echo $base_image_path . 'committed-listen-now-background.png'; ?>);
@@ -189,7 +195,7 @@ function nm_render_committed_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
-        <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ) ); ?>
+        <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
@@ -204,8 +210,7 @@ function nm_render_committed_credit( $credit ) {
     <div class="flex-grid-row mt-4 mb-4">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1270698601&color=%23ffab70&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
-      </div>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2081003709&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
     </div>
     <div class="flex-grid-row mt-4 mb-5">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif committed__serif-large text-paragraph-breaks">
@@ -215,7 +220,7 @@ function nm_render_committed_credit( $credit ) {
         <p>Over four episodes, we follow a group of Just Stop Oil activists into jail and out again, asking them why they did it – and asking ourselves if we’d be willing to do the same.</p>
       </div>
     </div>
-    <div class="flex-grid-row mb-6 mb-s-4">
+    <div class="flex-grid-row mb-6 mb-s-4 committed-archive-listen__container">
       <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-color-white committed-archive-listen__box">
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>

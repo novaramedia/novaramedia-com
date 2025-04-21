@@ -1,18 +1,31 @@
 <?php
 /**
- * Render a simplified UI tag for series podcasts.
+ * Render a simplified UI tag link.
  *
- * @param string $label The text to display inside the tag.
- * @param string $url The link to wrap the tag in.
- * @param string $variant_class Optional extra classes can be added for styling variants.
+ * @param string       $label         The text to display inside the tag.
+ * @param string       $url           The link to wrap the tag in.
+ * @param string[]|string $variants   Optional variant class(es) for styling. Can be a string or array.
  */
-function render_ui_tag( $label, $url, $variant_class = '' ) {
+function render_ui_tag( $label, $url, $variants = array() ) {
+  $variant_classes = is_array( $variants ) ? $variants : explode( ' ', $variants );
+  $classes =
+    array_merge(
+        array( 'ui-tag-block' ),
+        array_map(
+            function ( $v ) {
+              return 'ui-tag-block--' . $v;
+            },
+            $variant_classes
+        )
+    );
+
   ?>
-  <a href="<?php echo esc_url( $url ); ?>" class="ui-tag-block ui-tag-block--no-border <?php echo esc_attr( $variant_class ); ?>">
+  <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
     <span class="ui-tag"><?php echo esc_html( $label ); ?></span>
   </a>
   <?php
 }
+
 /**
  * Render the support donation form.
  *
