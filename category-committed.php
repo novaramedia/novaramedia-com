@@ -214,10 +214,9 @@ function nm_render_committed_credit( $credit ) {
     </div>
     <div class="flex-grid-row mt-4 mb-5">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif committed__serif-large text-paragraph-breaks">
-        <p>Britain is locking up peaceful climate protesters. You’ve probably heard of some of them – they’re the road-blockers, soup-throwers and spray-painters who’ve made headlines around the world with Just Stop Oil.</p>
-        <p>In a new podcast series from Novara Media, we meet the real people behind the front pages. What type of person would risk their freedom for a cause they believe in? What’s it really like in Britain’s overcrowded prisons – and is life on the inside any different for political prisoners? How does jail-time strain the relationships with those they love most? And when you’re facing many years inside, how do you make sense of what you’ve done?</P>
-        <p>Hosted by Rivkah Brown and Clare Hymer, Committed is a podcast about why some people are willing to go to prison for their politics.</p>
-        <p>Over four episodes, we follow a group of Just Stop Oil activists into jail and out again, asking them why they did it – and asking ourselves if we’d be willing to do the same.</p>
+        <p>Britain is locking up climate activists. You’ve probably heard of some of them – they’re the road-blockers, soup-throwers and spray-painters who made headlines around the world as Just Stop Oil. Some of them are now facing years in prison, caught under the wheels of a crackdown on protest. But what type of person risks their freedom for a cause they believe in?</P>
+        <p>Committed is a new podcast series from Novara Media about Britain's political prisoners. Over four episodes, reporters Rivkah Brown and Clare Hymer follow five young people into jail and out again, asking how a concerned citizen could become a convicted criminal. We speak directly to activists in prison to find out how Just Stop Oil persuaded so many of them to take direct action against the climate crisis.</p>
+        <p>Now that the orange paint has dried, how do Just Stop Oil prisoners make sense of what they’ve done? What’s it really like in prison, and is life on the inside any different for political prisoners? How does jail-time strain the relationships with the people they love most? And with Just Stop Oil’s actions slowing to a halt, was it all worth it?</p>
       </div>
     </div>
     <div class="flex-grid-row mb-6 mb-s-4 committed-archive-listen__container">
