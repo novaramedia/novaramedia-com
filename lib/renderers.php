@@ -1,4 +1,30 @@
 <?php
+/**
+ * Render a simplified UI tag link.
+ *
+ * @param string       $label         The text to display inside the tag.
+ * @param string       $url           The link to wrap the tag in.
+ * @param string[]|string $variants   Optional variant class(es) for styling. Can be a string or array.
+ */
+function render_ui_tag( $label, $url, $variants = array() ) {
+  $variant_classes = is_array( $variants ) ? $variants : explode( ' ', $variants );
+  $classes =
+    array_merge(
+        array( 'ui-tag-block' ),
+        array_map(
+            function ( $v ) {
+              return 'ui-tag-block--' . $v;
+            },
+            $variant_classes
+        )
+    );
+
+  ?>
+  <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+    <span class="ui-tag"><?php echo esc_html( $label ); ?></span>
+  </a>
+  <?php
+}
 
 /**
  * Render the support donation form.
@@ -16,29 +42,21 @@ function render_support_form() {
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
   ?>
-  <form class=" support-section support-form font-size-9" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
-    <input class="support-form__value-input" type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
-    <div class="grid-row grid--nested-tight">
-      <div class="is-xxl-12 pr-0">
-        <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left " data-action="set-type" data-value="oneoff">One-off</button>
-      </div>
-      <div class="is-xxl-12 pl-0">
-        <button class="support-form__button support-form__button--active support-form__schedule-option support-form__schedule-option-right ui-input" data-action="set-type" data-value="regular">Monthly</button>
-      </div>
-    </div>
-    <div class="grid-row grid--nested-tight mt-2">
-      <div class="pr-2 pr-s-1 is-xxl-3">
-        <button class="ui-input support-form__button" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low; ?>" data-name="low">
+  <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
+    <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
+    <div class="grid-row grid--nested-tight margin-bottom-tiny">
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low; ?>" data-name="low">
           £<?php echo $support_section_autovalues['default']->regular_low; ?>
         </button>
       </div>
-      <div class="pr-2 pr-s-1 is-xxl-3">
-        <button class="ui-input support-form__button" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium; ?>" data-name="medium">
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium; ?>" data-name="medium">
           £<?php echo $support_section_autovalues['default']->regular_medium; ?>
         </button>
       </div>
-      <div class="pr-2 pr-s-1 is-xxl-3">
-        <button class="ui-input support-form__button" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high; ?>" data-name="high">
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high; ?>" data-name="high">
           £<?php echo $support_section_autovalues['default']->regular_high; ?>
         </button>
       </div>
@@ -313,35 +331,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-        get_template_part(
+          get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-          );
+        );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-      );
+    );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-      );
+    );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );

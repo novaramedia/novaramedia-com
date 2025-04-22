@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.7] - 2025-04-21
+
+### Added
+
+- Committed (podcast series) archive page and banner
+
+## Changed
+
+- podcast_series_pre_get_posts() to look at series categories array
+- render_ui_tag() to render the UI tags
+
 ## [4.2.6] - 2025-01-13
 
 ### Fixed

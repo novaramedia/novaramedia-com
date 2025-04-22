@@ -1,20 +1,20 @@
 <?php
-  $term = get_term_by('slug', 'foreign-agent', 'category');
+  $local_term = get_term_by( 'slug', 'foreign-agent', 'category' );
 
-  if ($term) {
-    $url = get_term_link($term);
-    if ($url) {
-?>
+if ( $local_term ) {
+    $url = get_term_link( $local_term );
+  if ( $url ) {
+    ?>
 <div class="pt-6 pb-6" style="background-color: #FFAB70; overflow: hidden; position: relative">
   <style type="text/css">
     .fallback .foreign-agent-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-background.png'; ?>);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-background.png'; ?>);
     }
     .webp .foreign-agent-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-background.webp'; ?>);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-background.webp'; ?>);
     }
     .avif .foreign-agent-banner__backgrounded {
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/foreign-agent/foreign-agent-background.avif'; ?>);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-background.avif'; ?>);
     }
     .foreign-agent-banner__title {
       max-width: 280px;
@@ -71,7 +71,7 @@
     </div>
   </div>
 </div>
-<?php
-    }
+    <?php
   }
+}
 ?>
