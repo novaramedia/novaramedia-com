@@ -44,7 +44,15 @@ function render_support_form() {
   ?>
   <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
     <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
-    <div class="grid-row grid--nested-tight margin-bottom-tiny">
+      <div class="grid-row mb-2">
+        <div class="is-xxl-12">
+          <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left" data-action="set-type" data-value="oneoff">One-off</button>
+        </div>
+        <div class="is-xxl-12">
+          <button class="support-form__button support-form__button--active support-form__schedule-option ui-input support-form__schedule-option-right" data-action="set-type" data-value="regular">Monthly</button>
+        </div>
+      </div>
+    <div class="grid-row grid--nested-tight mb-2">
       <div class="grid-item grid-item--tight is-xxl-4">
         <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low; ?>" data-name="low">
           £<?php echo $support_section_autovalues['default']->regular_low; ?>
@@ -60,19 +68,15 @@ function render_support_form() {
           £<?php echo $support_section_autovalues['default']->regular_high; ?>
         </button>
       </div>
-      <div class="is-xxl-15">
+      <div class="grid-item grid-item--tight is-xxl-12">
         <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-        <input id="<?php echo $instance; ?>__custom-input" class="ui-input support-form__custom-input" type="number" min="1" placeholder="£ Custom amount" />
+        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
       </div>
     </div>
     <div class="grid-row grid--nested-tight">
-      <div class="grid-item grid-item--tight font-size-8 mt-2">
-        <p>Help us pay for an article to be commisioned.</p>
-      </div>
-    </div>
-    <div class="grid-row grid--nested-tight">
-      <div class="is-xxl-24 mt-5">
-        <input class="ui-input support-form__custom-input--active" type="submit" value="Donate" />
+      <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commisioned.</p>
+      <div class="grid-item grid-item--tight is-xxl-24">
+        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
       </div>
     </div>
   </form>
@@ -331,35 +335,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          get_template_part(
+        get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-        );
+          );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-    );
+      );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-    );
+      );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );

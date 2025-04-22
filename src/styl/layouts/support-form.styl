@@ -12,7 +12,6 @@
 .support-form__box-radius
   border-radius: 4px
 
-
 .support-form__schedule-option-right
   border-radius:  0px 4px 4px 0px;
 
@@ -23,20 +22,21 @@
   width: 100%
 
 .support-form__button,
-.support-form__custom-input,
-.support-form__submit
+.support-form__custom-input
   color: var(--color-white-soft);
   background-color: var(--color-red);
   text-align: center;
   transition: opacity var(--transition-speed-ultra);
-  &:not(&--active):hover
+  &:not(&--active):hover:not(:focus)
     opacity: 0.5;
   &--active
     color: var(--color-black-soft);
     background-color: var(--color-white-soft);
     border-color: var(--color-white-soft);
   &:focus
-    outline: none;
+    color: var(--color-black-soft);
+    background-color: var(--color-white-soft);
+    border-color: var(--color-white-soft);
 
 .support-form__custom-input::placeholder
   padding-left: 5px
@@ -47,3 +47,10 @@
   &:hover, &.support-form__button--active
     &::placeholder
       color: var(--color-white-soft)
+
+.support-form__payment-type-container
+  display: flex
+  align-items: flex-end
+
+.support-form__payment-type
+  vertical-align: bottom
