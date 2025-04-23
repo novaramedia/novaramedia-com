@@ -49,9 +49,21 @@
     &::placeholder
       color: var(--color-white-soft)
 
-.support-form__payment-type-container
-  display: flex
-  align-items: flex-end
-
 .support-form__payment-type
   vertical-align: bottom
+
+.payment-mobile
+  display: none;
+
+.payment-desktop
+  display: flex;
+  align-items: flex-end
+
+@media (max-width: 1010px)
+  .payment-mobile
+    display: flex;
+    align-items: flex-end
+    justify-content: center
+
+  .payment-desktop
+    display: none;

@@ -1,5 +1,21 @@
 <?php
 /**
+ * Render payment icons for the support section.
+ */
+function render_payment_icons( $class = '' ) {
+  $img_base = get_template_directory_uri() . '/dist/img/support-form/';
+  ?>
+  <div class=" <?php echo esc_attr( $class ); ?>">
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Visa.jpg" alt="visa icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Mastercard.jpg" alt="mastercard icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Stripe.jpg" alt="stripe icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Paypal.jpg" alt="paypal icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>ApplePay.jpg" alt="apple pay icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>GooglePay.jpg" alt="google pay icon" />
+  </div>
+  <?php
+}
+/**
  * Render a simplified UI tag link.
  *
  * @param string       $label         The text to display inside the tag.
