@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed 
-- Increased the margin under the committed archive post title 
+### Fixed
+
+- Increased the margin under the committed archive post title
 
 ## [4.2.7] - 2025-04-21
 
