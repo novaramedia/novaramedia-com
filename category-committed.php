@@ -209,7 +209,7 @@ function nm_render_committed_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mt-4 mb-4">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
-        <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
+        <h3 class="mb-2 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2081003709&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
     </div>
     <div class="flex-grid-row mt-4 mb-5">
@@ -243,7 +243,7 @@ if ( have_posts() ) {
       <article class="flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="font-size-13 font-weight-semibold"><?php the_title(); ?></h3>
+          <h3 class="font-size-13 font-weight-semibold mb-2"><?php the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
