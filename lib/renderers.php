@@ -97,7 +97,7 @@ function render_support_heading_and_text( $heading_copy, $support_section_text, 
       <h4 class="font-size-12 font-weight-bold mb-3"><?php echo esc_html( $heading_copy ); ?></h4>
     </a>
     <?php if ( $support_section_text || $override_text ) : ?>
-      <div class="margin-top-micro margin-bottom-small">
+      <div class="mb-2">
         <a href="<?php echo home_url( 'support/' ); ?>" class="js-fix-widows">
           <?php
           // Display the override text if it's set, otherwise display the default text
@@ -420,35 +420,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          get_template_part(
+        get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-        );
+          );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-    );
+      );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-    );
+      );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
