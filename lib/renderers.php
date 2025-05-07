@@ -1,21 +1,5 @@
 <?php
 /**
- * Render payment icons for the support section.
- */
-function render_payment_icons( $class = '' ) {
-  $img_base = get_template_directory_uri() . '/dist/img/support-form/';
-  ?>
-  <div class=" <?php echo esc_attr( $class ); ?>">
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Visa.jpg" alt="visa icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Mastercard.jpg" alt="mastercard icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Stripe.jpg" alt="stripe icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Paypal.jpg" alt="paypal icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>ApplePay.jpg" alt="apple pay icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>GooglePay.jpg" alt="google pay icon" />
-  </div>
-  <?php
-}
-/**
  * Render a simplified UI tag link.
  *
  * @param string       $label         The text to display inside the tag.
@@ -41,61 +25,145 @@ function render_ui_tag( $label, $url, $variants = array() ) {
   </a>
   <?php
 }
-
 /**
- * Render the support donation form.
+ * Renders the schedule buttons for the support form, one off or regular.
  *
- * Generates unique instance identifiers to manage multiple forms on a single page,
- * ensuring there are no conflicts with input labels or IDs.
- * This function should be used within a grid item and must account for holistic layout
- * requirements wherever it is called.
+ * This function outputs the schedule buttons for the support form.
  *
- * @uses nm_get_support_autovalues() Fetches predefined support values for donation levels.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form() {
+function render_support_form_schedule_buttons( $schedule_classes = '' ) {
+  ?>
+  <div class="grid-row mb-2 <?php echo esc_attr( $schedule_classes ); ?>">
+    <div class="is-xxl-12">
+      <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left" data-action="set-type" data-value="oneoff">One-off</button>
+    </div>
+    <div class="is-xxl-12">
+      <button class="support-form__button support-form__button--active support-form__schedule-option ui-input support-form__schedule-option-right" data-action="set-type" data-value="regular">Monthly</button>
+    </div>
+  </div>
+  <?php
+}
+/**
+ * Renders the amount and submit buttons for the support form.
+ *
+ * This function outputs the amount and submit buttons for the support form.
+ *
+ * @param object $values The values object containing the donation amounts.
+ * @param int $instance The unique instance identifier for the form.
+ *
+ * @return void Outputs the HTML form directly.
+ */
+function render_support_form_amount_buttons( $values, $instance ) {
+  ?>
+  <div class="grid-row grid--nested-tight mb-2">
+    <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
+      <div class="grid-item grid-item--tight is-xxl-4">
+        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>" data-name="<?php echo $tier; ?>">
+          £<?php echo $values->{"regular_$tier"}; ?>
+        </button>
+      </div>
+    <?php endforeach; ?>
+    <div class="grid-item grid-item--tight is-xxl-12">
+      <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
+      <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
+    </div>
+  </div>
+  <div class="grid-row grid--nested-tight">
+    <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commissioned.</p>
+    <div class="grid-item grid-item--tight is-xxl-24">
+      <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+    </div>
+  </div>
+  <?php
+}
+
+/**
+ * Render the heading and support section text.
+ *
+ * This function outputs the heading and the support section text.
+ * It can be used in two places within the form.
+ *
+ * @param string $heading_copy The heading copy.
+ * @param string $support_section_text The support section text.
+ * @param string $override_text Optional override text to replace the default text.
+ */
+function render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, $text_classes = '' ) {
+  ?>
+  <div class="<?php echo esc_attr( $text_classes ); ?>">
+    <a href="<?php echo home_url( 'support/' ); ?>">
+      <h4 class="font-size-12 font-weight-bold mb-3"><?php echo esc_html( $heading_copy ); ?></h4>
+    </a>
+    <?php if ( $support_section_text || $override_text ) : ?>
+      <div class="margin-top-micro margin-bottom-small">
+        <a href="<?php echo home_url( 'support/' ); ?>" class="js-fix-widows">
+          <?php
+          // Display the override text if it's set, otherwise display the default text
+          echo esc_html( $override_text ? $override_text : $support_section_text );
+          ?>
+        </a>
+      </div>
+    <?php endif; ?>
+  </div>
+  <?php
+}
+/**
+ * Render payment icons for the support section.
+ */
+function render_payment_icons( $payment_classes = '' ) {
+  $img_base = get_template_directory_uri() . '/dist/img/support-form/';
+  ?>
+  <div class=" <?php echo esc_attr( $payment_classes ); ?>">
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Visa.jpg" alt="visa icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Mastercard.jpg" alt="mastercard icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Stripe.jpg" alt="stripe icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Paypal.jpg" alt="paypal icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>ApplePay.jpg" alt="apple pay icon" />
+    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>GooglePay.jpg" alt="google pay icon" />
+  </div>
+  <?php
+}
+/**
+ * Render the support donation form with the heading, text, and form elements.
+ *
+ * @uses render_support_heading_and_text() Render the heading and support section text.
+ * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
+ * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
+ * @uses NM_get_option() Get the option valueas.
+ * @return void Outputs the HTML form directly.
+ */
+function render_support_form( $heading_copy, $support_section_text, $override_text ) {
   // Generate unique ID for the form
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
   ?>
-  <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
-    <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
-      <div class="grid-row mb-2">
-        <div class="is-xxl-12">
-          <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left" data-action="set-type" data-value="oneoff">One-off</button>
-        </div>
-        <div class="is-xxl-12">
-          <button class="support-form__button support-form__button--active support-form__schedule-option ui-input support-form__schedule-option-right" data-action="set-type" data-value="regular">Monthly</button>
-        </div>
-      </div>
-    <div class="grid-row grid--nested-tight mb-2">
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low; ?>" data-name="low">
-          £<?php echo $support_section_autovalues['default']->regular_low; ?>
-        </button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium; ?>" data-name="medium">
-          £<?php echo $support_section_autovalues['default']->regular_medium; ?>
-        </button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high; ?>" data-name="high">
-          £<?php echo $support_section_autovalues['default']->regular_high; ?>
-        </button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-12">
-        <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
-      </div>
+
+  <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+
+  <!-- Mobile: Schedule -->
+  <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile' ); ?>
+
+  <!-- Mobile: Text -->
+  <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
+  <div class="grid-row">
+    <div class="grid-item grid-item is-l-16 is-xl-12 is-xxl-10 support-form__left-column-desktop">
+      <!-- Desktop: Text -->
+      <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12' ); ?>
+
+      <!-- Desktop: Payment -->
+      <?php render_payment_icons( 'support-form__payment-type-desktop is-l-12 mt-2' ); ?>
     </div>
-    <div class="grid-row grid--nested-tight">
-      <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commisioned.</p>
-      <div class="grid-item grid-item--tight is-xxl-24">
-        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
-      </div>
+    <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
+      <!-- Desktop: Schedule -->
+      <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
+
+      <!-- Common: Buttons -->
+      <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance ); ?>
     </div>
-  </form>
+  </div>
+  <!-- Mobile: Payment -->
+  <?php render_payment_icons( 'support-form__payment-type-mobile is-l-24 mt-2' ); ?>
+</form>
 <?php } ?>
 
 <?php

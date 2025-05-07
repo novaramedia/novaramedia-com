@@ -7,39 +7,9 @@ $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_
 
 <div class="font-color-white">
   <div class="background-red p-4 support-form__box-radius m-2">
-    <div class="grid-row font-size-10 font-size-s-9 support-section__text-container">
-      <div class="grid-row is-m-24 is-l-24 is-xl-12 is-xxl-12">
-      <div class="grid-item">
-        <a href="<?php echo home_url( 'support/' ); ?>">
-          <h4 class="font-size-12 font-weight-bold mb-3"><?php echo $heading_copy; ?></h4>
-        </a>
-        <?php
-        if ( $support_section_text || $override_text ) {
-          ?>
-          <div class="margin-top-micro margin-bottom-small">
-            <a href="<?php echo home_url( 'support/' ); ?>" class="js-fix-widows">
-              <?php
-              if ( $override_text ) {
-                echo $override_text;
-              } else {
-                echo $support_section_text;
-              }
-              ?>
-              </a>
-          </div>
-          <?php
-        }
-        ?>
-      </div>
-      <?php render_payment_icons( 'payment-desktop is-xl-12 mt-2' ); ?>
-      </div>
-      <div class="is-l-24 offset-xl-0 is-xxl-12 grid-item">
-        <?php
-        // Reneders the support form from renderers.php
-        render_support_form();
-        ?>
-      </div>
-      <?php render_payment_icons( 'payment-mobile is-l-24 mt-2' ); ?>
-    </div>
+     <?php
+      // Call the function to render the full support form
+      render_support_form( $heading_copy, $support_section_text, $override_text );
+      ?>
   </div>
 </div>

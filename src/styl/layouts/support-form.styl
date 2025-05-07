@@ -52,18 +52,36 @@
 .support-form__payment-type
   vertical-align: bottom
 
-.payment-mobile
+
+.support-form__text-mobile,
+.support-form__schedule-mobile,
+.support-form__payment-type-mobile
   display: none;
 
-.payment-desktop
+
+.support-form__schedule-desktop,
+.support-form__payment-type-desktop
   display: flex;
-  align-items: flex-end
 
-@media (max-width: 1010px)
-  .payment-mobile
+.support-form__text-desktop
+  display: block;
+
+.support-form__left-column-desktop
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+@media (max-width: 768px)
+  .support-form__text-mobile,
+  .support-form__payment-type-mobile
+    display: block; // or flex depending on layout
+
+  .support-form__schedule-mobile
     display: flex;
-    align-items: flex-end
-    justify-content: center
+    flex-direction: row;
 
-  .payment-desktop
+  .support-form__text-desktop,
+  .support-form__schedule-desktop,
+  .support-form__payment-type-desktop
     display: none;
+
