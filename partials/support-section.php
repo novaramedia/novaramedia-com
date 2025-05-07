@@ -6,7 +6,7 @@ $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_
 ?>
 
 <div class="font-color-white">
-  <div class="background-red p-4 support-form__box-radius m-2">
+  <div class="background-red support-form__box-radius m-2">
      <?php
       // Call the function to render the full support form
       render_support_form( $heading_copy, $support_section_text, $override_text );

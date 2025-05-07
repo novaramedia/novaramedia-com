@@ -52,10 +52,10 @@
 .support-form__payment-type
   vertical-align: bottom
 
-
 .support-form__text-mobile,
 .support-form__schedule-mobile,
-.support-form__payment-type-mobile
+.support-form__payment-type-mobile,
+.support-form__buttons-mobile
   display: none;
 
 
@@ -63,7 +63,8 @@
 .support-form__payment-type-desktop
   display: flex;
 
-.support-form__text-desktop
+.support-form__text-desktop,
+.support-form__buttons-desktop
   display: block;
 
 .support-form__left-column-desktop
@@ -71,17 +72,28 @@
   flex-direction: column;
   justify-content: space-between;
 
-@media (max-width: 768px)
+@media (max-width: $breakpoint-s)
+  .support-form__schedule-option
+    border: none !important;
+
   .support-form__text-mobile,
-  .support-form__payment-type-mobile
+  .support-form__buttons-mobile
     display: block; // or flex depending on layout
 
-  .support-form__schedule-mobile
+  .support-form__schedule-mobile,
+  .support-form__payment-type-mobile
     display: flex;
     flex-direction: row;
+    justify-content: center;
 
   .support-form__text-desktop,
   .support-form__schedule-desktop,
-  .support-form__payment-type-desktop
+  .support-form__payment-type-desktop,
+  .support-form__buttons-desktop
     display: none;
 
+  .support-form__schedule-option-right
+    border-radius:  0px 4px 0px 0px;
+
+  .support-form__schedule-option-left
+    border-radius:  4px 0px 0px 0px;

@@ -54,25 +54,27 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_amount_buttons( $values, $instance ) {
+function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
-  <div class="grid-row grid--nested-tight mb-2">
-    <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>" data-name="<?php echo $tier; ?>">
-          £<?php echo $values->{"regular_$tier"}; ?>
-        </button>
+  <div class="<?php echo esc_attr( $button_classes ); ?>">
+    <div class="grid-row grid--nested-tight mb-2">
+      <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
+        <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
+          <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>" data-name="<?php echo $tier; ?>">
+            £<?php echo $values->{"regular_$tier"}; ?>
+          </button>
+        </div>
+      <?php endforeach; ?>
+      <div class="grid-item grid-item--tight is-xxl-12 is-s-24">
+        <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
+        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
       </div>
-    <?php endforeach; ?>
-    <div class="grid-item grid-item--tight is-xxl-12">
-      <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-      <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
     </div>
-  </div>
-  <div class="grid-row grid--nested-tight">
-    <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commissioned.</p>
-    <div class="grid-item grid-item--tight is-xxl-24">
-      <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+    <div class="grid-row grid--nested-tight">
+      <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commissioned.</p>
+      <div class="grid-item grid-item--tight is-xxl-24">
+        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+      </div>
     </div>
   </div>
   <?php
@@ -137,32 +139,31 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
   ?>
-
   <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-
   <!-- Mobile: Schedule -->
   <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile' ); ?>
-
-  <!-- Mobile: Text -->
-  <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
-  <div class="grid-row">
-    <div class="grid-item grid-item is-l-16 is-xl-12 is-xxl-10 support-form__left-column-desktop">
-      <!-- Desktop: Text -->
-      <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12' ); ?>
-
-      <!-- Desktop: Payment -->
-      <?php render_payment_icons( 'support-form__payment-type-desktop is-l-12 mt-2' ); ?>
+  <div class="p-4">
+    <!-- Mobile: Text -->
+    <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
+    <div class="grid-row">
+      <div class="grid-item is-l-16 is-xl-12 is-xxl-10 support-form__left-column-desktop">
+        <!-- Desktop: Text -->
+        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12' ); ?>
+        <!-- Desktop: Payment -->
+        <?php render_payment_icons( 'support-form__payment-type-desktop is-l-12 mt-2' ); ?>
+      </div>
+      <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
+        <!-- Desktop: Schedule -->
+        <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
+        <!-- Desktop: Buttons -->
+        <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-desktop' ); ?>
+      </div>
     </div>
-    <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
-      <!-- Desktop: Schedule -->
-      <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-
-      <!-- Common: Buttons -->
-      <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance ); ?>
-    </div>
+    <!-- Mobile: Buttons -->
+        <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-mobile' ); ?>
+    <!-- Mobile: Payment -->
+    <?php render_payment_icons( 'support-form__payment-type-mobile is-l-24 mt-2' ); ?>
   </div>
-  <!-- Mobile: Payment -->
-  <?php render_payment_icons( 'support-form__payment-type-mobile is-l-24 mt-2' ); ?>
 </form>
 <?php } ?>
 
@@ -419,35 +420,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-        get_template_part(
+          get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-          );
+        );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-      );
+    );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-      );
+    );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
