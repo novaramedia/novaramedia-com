@@ -208,63 +208,102 @@ function nm_register_fundraising_options_metabox() {
     )
   );
 
+    // support form schedule relient headings and copy
+    $main_options->add_group_field(
+        $support_section_group,
+        array(
+            'name' => 'Regular heading',
+            'id'   => 'regular_heading',
+            'type' => 'text',
+        )
+    );
+
+    $main_options->add_group_field(
+        $support_section_group,
+        array(
+            'name' => 'Regular text',
+            'id'   => 'regular_text',
+            'type' => 'textarea_small',
+        )
+    );
+
+    $main_options->add_group_field(
+        $support_section_group,
+        array(
+            'name' => 'One-off heading',
+            'id'   => 'oneoff_heading',
+            'type' => 'text',
+        )
+    );
+
+    $main_options->add_group_field(
+        $support_section_group,
+        array(
+            'name' => 'One-off text',
+            'id'   => 'oneoff_text',
+            'type' => 'textarea_small',
+        )
+    );
+
     // Front page video banner block
+    $main_options->add_field(
+        array(
+            'name' => 'Front page video block CTA',
+            'desc' => 'This is the video embed CTA block used as a banner option on the front page',
+            'id'   => $prefix . 'fundraising_settings_video_banner_cta_title',
+            'type' => 'title',
+        )
+    );
 
-  $main_options->add_field(
-      array(
-          'name' => 'Front page video block CTA',
-          'desc' => 'This is the video embed CTA block used as a banner option on the front page',
-          'id'   => $prefix . 'fundraising_settings_video_banner_cta_title',
-          'type' => 'title',
-      )
-  );
+    $main_options->add_field(
+        array(
+            'name' => __( 'YouTube embed ID', 'NM' ),
+            'desc' => false,
+            'id'   => $prefix . 'fundraising_settings_video_banner_cta_youtube_id',
+            'type' => 'text',
+        )
+    );
 
-  $main_options->add_field(
-      array(
-          'name' => __( 'YouTube embed ID', 'NM' ),
-          'desc' => false,
-          'id'   => $prefix . 'fundraising_settings_video_banner_cta_youtube_id',
-          'type' => 'text',
-      )
-  );
+    $main_options->add_field(
+        array(
+            'name' => __( 'CTA title', 'NM' ),
+            'desc' => 'Add a custom title here, if left blank it will be populated with the standard support section title.',
+            'id'   => $prefix . 'fundraising_settings_video_banner_cta_headline',
+            'type' => 'text',
+        )
+    );
 
-  $main_options->add_field(
-      array(
-          'name' => __( 'CTA title', 'NM' ),
-          'desc' => 'Add a custom title here, if left blank it will be populated with the standard support section title.',
-          'id'   => $prefix . 'fundraising_settings_video_banner_cta_headline',
-          'type' => 'text',
-      )
-  );
-
-  $main_options->add_field(
-      array(
-          'name' => __( 'CTA text', 'NM' ),
-          'desc' => 'Add custom text here, if left blank it will be populated with the standard support section text.',
-          'id'   => $prefix . 'fundraising_settings_video_banner_cta_custom_text',
-          'type' => 'textarea_small',
-      )
-  );
+    $main_options->add_field(
+        array(
+            'name' => __( 'CTA text', 'NM' ),
+            'desc' => 'Add custom text here, if left blank it will be populated with the standard support section text.',
+            'id'   => $prefix . 'fundraising_settings_video_banner_cta_custom_text',
+            'type' => 'textarea_small',
+        )
+    );
 
     // Misc
 
-    $main_options->add_field(array(
-      'name'    => 'Misc options',
-      'id'      => $prefix . 'fundraising_misc_title',
-      'type'    => 'title',
-    ));
+    $main_options->add_field(
+        array(
+            'name'    => 'Misc options',
+            'id'      => $prefix . 'fundraising_misc_title',
+            'type'    => 'title',
+        )
+    );
 
-    $main_options->add_field(array(
-      'name' => __('Article support box text', 'NM'),
-      'desc' => __('This will be the default text shown in the red outlined box at the top of articles.', 'NM'),
-      'id'   => $prefix . 'articles_support_box_text',
-      'type' => 'textarea_small',
-    ));
-
-
+    $main_options->add_field(
+        array(
+            'name' => __( 'Article support box text', 'NM' ),
+            'desc' => __( 'This will be the default text shown in the red outlined box at the top of articles.', 'NM' ),
+            'id'   => $prefix . 'articles_support_box_text',
+            'type' => 'textarea_small',
+        )
+    );
     /**
      * Registers secondary options page, and set main item as parent.
      */
+
     /*
     $secondary_options = new_cmb2_box( array(
       'id'           => 'nm_secondary_options_page',
@@ -278,6 +317,7 @@ function nm_register_fundraising_options_metabox() {
     /**
      * Registers tertiary options page, and set main item as parent.
      */
+
     /*
     $tertiary_options = new_cmb2_box( array(
       'id'           => 'nm_tertiary_options_page',
@@ -288,4 +328,4 @@ function nm_register_fundraising_options_metabox() {
     ) );
   */
 }
-add_action('cmb2_admin_init', 'nm_register_fundraising_options_metabox');
+add_action( 'cmb2_admin_init', 'nm_register_fundraising_options_metabox' );
