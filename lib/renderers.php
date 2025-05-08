@@ -134,37 +134,66 @@ function render_payment_icons( $payment_classes = '' ) {
  * @uses NM_get_option() Get the option valueas.
  * @return void Outputs the HTML form directly.
  */
+function render_support_form_condensed_version( $heading_copy, $support_section_text, $override_text ) {
+  // Generate unique ID for the form
+  $instance = uniqid( 'support-form-' );
+  $support_section_autovalues = nm_get_support_autovalues();
+  ?>
+  <div class="background-red support-form__box-radius m-2 support-form-condensed font-color-white">
+    <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <?php render_support_form_schedule_buttons( 'background-white' ); ?>
+      <div class="p-4">
+        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, ' is-s-24' ); ?>
+            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, '' ); ?>
+        <?php render_payment_icons( ' mt-2' ); ?>
+      </div>
+    </form>
+  </div>
+  <?php
+}
+
+/**
+ * Render the support donation form with the heading, text, and form elements.
+ *
+ * @uses render_support_heading_and_text() Render the heading and support section text.
+ * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
+ * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
+ * @uses NM_get_option() Get the option valueas.
+ * @return void Outputs the HTML form directly.
+ */
 function render_support_form( $heading_copy, $support_section_text, $override_text ) {
   // Generate unique ID for the form
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
   ?>
-  <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-  <!-- Mobile: Schedule -->
-  <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
-  <div class="p-4">
-    <!-- Mobile: Text -->
-    <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
-    <div class="grid-row">
-      <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
-        <!-- Desktop: Text -->
-        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
-        <!-- Desktop: Payment -->
-        <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
+   <div class="background-red support-form__box-radius m-2 font-color-white">
+    <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <!-- Mobile: Schedule -->
+    <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
+      <div class="p-4">
+        <!-- Mobile: Text -->
+        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
+        <div class="grid-row">
+          <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
+            <!-- Desktop: Text -->
+            <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
+            <!-- Desktop: Payment -->
+            <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
+          </div>
+          <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
+            <!-- Desktop: Schedule -->
+            <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
+            <!-- Desktop: Buttons -->
+            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-desktop' ); ?>
+          </div>
+        </div>
+        <!-- Mobile: Buttons -->
+            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-mobile' ); ?>
+        <!-- Mobile: Payment -->
+        <?php render_payment_icons( 'support-form__payment-type-mobile mt-2' ); ?>
       </div>
-      <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
-        <!-- Desktop: Schedule -->
-        <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-        <!-- Desktop: Buttons -->
-        <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-desktop' ); ?>
-      </div>
-    </div>
-    <!-- Mobile: Buttons -->
-        <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-mobile' ); ?>
-    <!-- Mobile: Payment -->
-    <?php render_payment_icons( 'support-form__payment-type-mobile mt-2' ); ?>
-  </div>
-</form>
+    </form>
+   </div>
 <?php } ?>
 
 <?php
