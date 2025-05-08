@@ -148,7 +148,7 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
     <div class="grid-row">
       <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
         <!-- Desktop: Text -->
-        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-5' ); ?>
+        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
         <!-- Desktop: Payment -->
         <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
       </div>
