@@ -141,18 +141,18 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
   ?>
   <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
   <!-- Mobile: Schedule -->
-  <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile' ); ?>
+  <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
   <div class="p-4">
     <!-- Mobile: Text -->
     <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
     <div class="grid-row">
-      <div class="grid-item is-l-16 is-xl-12 is-xxl-10 support-form__left-column-desktop">
+      <div class="grid-item is-xl-12 support-form__left-column-desktop">
         <!-- Desktop: Text -->
         <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12' ); ?>
         <!-- Desktop: Payment -->
         <?php render_payment_icons( 'support-form__payment-type-desktop is-l-12 mt-2' ); ?>
       </div>
-      <div class="is-l-24 offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
+      <div class="offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
         <!-- Desktop: Schedule -->
         <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
         <!-- Desktop: Buttons -->
@@ -162,7 +162,7 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
     <!-- Mobile: Buttons -->
         <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-mobile' ); ?>
     <!-- Mobile: Payment -->
-    <?php render_payment_icons( 'support-form__payment-type-mobile is-l-24 mt-2' ); ?>
+    <?php render_payment_icons( 'support-form__payment-type-mobile mt-2' ); ?>
   </div>
 </form>
 <?php } ?>
