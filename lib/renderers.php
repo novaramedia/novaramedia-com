@@ -36,10 +36,10 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
   ?>
   <div class="grid-row mb-2 <?php echo esc_attr( $schedule_classes ); ?>">
     <div class="is-xxl-12">
-      <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left" data-action="set-type" data-value="oneoff">One-off</button>
+      <button class="support-form__button support-form__schedule-option ui-input support-form__schedule-option-left font-weight-bold" data-action="set-type" data-value="oneoff">One-off</button>
     </div>
     <div class="is-xxl-12">
-      <button class="support-form__button support-form__button--active support-form__schedule-option ui-input support-form__schedule-option-right" data-action="set-type" data-value="regular">Monthly</button>
+      <button class="support-form__button support-form__button--active support-form__schedule-option ui-input support-form__schedule-option-right font-weight-bold" data-action="set-type" data-value="regular">Monthly</button>
     </div>
   </div>
   <?php
@@ -57,19 +57,29 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
 function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
+    <!-- Hidden field that JS will update -->
+    <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $values->regular_low ); ?>" />
+
     <div class="grid-row grid--nested-tight mb-2">
+      <!-- Low, Medium, High Tier Buttons -->
       <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
         <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
-          <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>" data-name="<?php echo $tier; ?>">
-            £<?php echo $values->{"regular_$tier"}; ?>
+          <button class="support-form__button support-form__value-option ui-input"
+                  data-action="set-value"
+                  data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
+                  data-name="<?php echo esc_attr( $tier ); ?>">
+            £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
           </button>
         </div>
       <?php endforeach; ?>
+
+      <!-- Custom Input Field -->
       <div class="grid-item grid-item--tight is-xxl-12 is-s-24">
-        <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
+        <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
+        <input id="<?php echo esc_attr( $instance ); ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
       </div>
     </div>
+
     <div class="grid-row grid--nested-tight">
       <p class="font-size-8 grid-item grid-item--tight mb-4">Help us pay for an article to be commissioned.</p>
       <div class="grid-item grid-item--tight is-xxl-24">
@@ -449,35 +459,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          get_template_part(
+        get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-        );
+          );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-    );
+      );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-    );
+      );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
