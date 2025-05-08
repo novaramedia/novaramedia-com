@@ -146,13 +146,13 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
     <!-- Mobile: Text -->
     <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
     <div class="grid-row">
-      <div class="grid-item is-xl-12 support-form__left-column-desktop">
+      <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
         <!-- Desktop: Text -->
-        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12' ); ?>
+        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-5' ); ?>
         <!-- Desktop: Payment -->
-        <?php render_payment_icons( 'support-form__payment-type-desktop is-l-12 mt-2' ); ?>
+        <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
       </div>
-      <div class="offset-xl-0 is-xxl-12 offset-xxl-2 grid-item support-form__right-column-desktop">
+      <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
         <!-- Desktop: Schedule -->
         <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
         <!-- Desktop: Buttons -->
@@ -420,35 +420,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-        get_template_part(
+          get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-          );
+        );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-      );
+    );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-      );
+    );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
