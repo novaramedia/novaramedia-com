@@ -54,18 +54,19 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
+function render_support_form_amount_buttons( $values, $instance, $mode = 'regular', $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <div class="grid-row grid--nested-tight mb-2">
       <!-- Low, Medium, High Tier Buttons -->
       <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
+        <?php $value_key = "{$mode}_$tier"; ?>
         <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
           <button class="support-form__button support-form__value-option ui-input"
                   data-action="set-value"
                   data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
                   data-name="<?php echo esc_attr( $tier ); ?>">
-            £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
+            £<?php echo esc_html( $values->$value_key ); ?>
           </button>
         </div>
       <?php endforeach; ?>
@@ -86,30 +87,58 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   </div>
   <?php
 }
-
 /**
- * Render the heading and support section text.
- *
- * This function outputs the heading and the support section text.
- * It can be used in two places within the form.
- *
- * @param string $heading_copy The heading copy.
- * @param string $support_section_text The support section text.
- * @param string $override_text Optional override text to replace the default text.
+ * Render the heading and support section text, preferring mode-specific values, then global, then hardcoded defaults.
  */
-function render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, $text_classes = '' ) {
+function render_support_heading_and_text( $mode = '', $text_classes = '' ) {
+  $heading_copy = NM_get_option( 'nm_fundraising_settings_support_section_title', 'nm_fundraising_options' );
+  $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_text', 'nm_fundraising_options' );
+
+  // Mode-specific overrides
+  $regular_heading = NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' );
+  $regular_text = NM_get_option( 'nm_fundraising_settings_regular_text_override', 'nm_fundraising_options' );
+  $oneoff_heading = NM_get_option( 'nm_fundraising_settings_oneoff_heading_override', 'nm_fundraising_options' );
+  $oneoff_text = NM_get_option( 'nm_fundraising_settings_oneoff_text_override', 'nm_fundraising_options' );
+
+  $heading = '';
+  $text = '';
+
+  // Use mode-specific values if mode is provided and both heading and text are available
+  if ( ! empty( $mode ) ) {
+    if ( $mode === 'regular' && ! empty( $regular_heading ) && ! empty( $regular_text ) ) {
+      // Use regular mode specific overrides if mode is 'regular'
+      $heading = $regular_heading;
+      $text = $regular_text;
+    } elseif ( $mode === 'oneoff' && ! empty( $oneoff_heading ) && ! empty( $oneoff_text ) ) {
+      // Use oneoff mode specific overrides if mode is 'oneoff'
+      $heading = $oneoff_heading;
+      $text = $oneoff_text;
+    }
+  }
+
+  // Fallback to global values if mode-specific values are not found
+  if ( empty( $heading ) && empty( $text ) ) {
+    if ( ! empty( $heading_copy ) && ! empty( $support_section_text ) ) {
+      // Use global heading and text if mode-specific values are not available
+      $heading = $heading_copy;
+      $text = $support_section_text;
+    } else {
+      // Default fallback if no values are found
+      $heading = 'Support Novara Media';
+      $text = 'Help us fund independent journalism.';
+    }
+  }
+
+  // Output the heading and text in the wrapper with provided or default classes
   ?>
   <div class="<?php echo esc_attr( $text_classes ); ?>">
     <a href="<?php echo home_url( 'support/' ); ?>">
-      <h4 class="font-size-12 font-weight-bold mb-3"><?php echo esc_html( $heading_copy ); ?></h4>
+      <h4 class="font-size-12 font-weight-bold mb-3"><?php echo esc_html( $heading ); ?></h4>
     </a>
-    <?php if ( $support_section_text || $override_text ) : ?>
+    <?php if ( $text ) : ?>
       <div class="mb-2">
         <a href="<?php echo home_url( 'support/' ); ?>" class="js-fix-widows">
-          <?php
-          // Display the override text if it's set, otherwise display the default text
-          echo esc_html( $override_text ? $override_text : $support_section_text );
-          ?>
+          <?php echo esc_html( $text ); ?>
         </a>
       </div>
     <?php endif; ?>
@@ -170,10 +199,12 @@ function render_support_form_condensed_version( $heading_copy, $support_section_
  * @uses NM_get_option() Get the option valueas.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $heading_copy, $support_section_text, $override_text ) {
+function render_support_form() {
   // Generate unique ID for the form
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
+  $active_values = $support_section_autovalues['default'];
+  $donation_mode = nm_get_donation_mode( $active_values );
   ?>
    <div class="background-red support-form__box-radius m-2 font-color-white">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
@@ -182,11 +213,11 @@ function render_support_form( $heading_copy, $support_section_text, $override_te
     <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
       <div class="p-5">
         <!-- Mobile: Text -->
-        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-mobile is-s-24' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile is-s-24' ); ?>
         <div class="grid-row">
           <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
             <!-- Desktop: Text -->
-            <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
             <!-- Desktop: Payment -->
             <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
           </div>

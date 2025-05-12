@@ -20,11 +20,11 @@ function nm_register_fundraising_options_metabox() {
             * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
             */
 
-            'option_key'      => 'nm_fundraising_options', // The option key and admin menu page slug.
-            'icon_url'        => 'dashicons-money-alt', // Menu icon. Only applicable if 'parent_slug' is left empty.
-            'menu_title'      => esc_html__( 'Fundraising', 'cmb2' ), // Falls back to 'title' (above).
+            'option_key'   => 'nm_fundraising_options', // The option key and admin menu page slug.
+            'icon_url'     => 'dashicons-money-alt', // Menu icon. Only applicable if 'parent_slug' is left empty.
+            'menu_title'   => esc_html__( 'Fundraising', 'cmb2' ), // Falls back to 'title' (above).
             // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
-            'capability'      => 'edit_posts', // Cap required to view options-page.
+            'capability'   => 'edit_posts', // Cap required to view options-page.
             // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
             // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
             // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
@@ -39,21 +39,59 @@ function nm_register_fundraising_options_metabox() {
      * to be unique within this box.
      * Prefix is not needed.
      */
+    // Regular heading and text for overrides
     $main_options->add_field(
         array(
-            'name'    => 'Support section',
-            'desc'    => 'This is the common element with the form to start the donate process',
-            'id'      => $prefix . 'fundraising_settings_support_section_title',
-            'type'    => 'title',
+            'name' => 'Regular Heading Override',
+            'desc' => 'Override the default regular heading for the donation form.',
+            'id'   => $prefix . 'fundraising_settings_regular_heading_override',
+            'type' => 'text',
         )
     );
 
     $main_options->add_field(
         array(
-            'name' => __( 'Support section title', 'NM' ),
-            'desc' => false,
-            'id'   => $prefix . 'fundraising_settings_support_section_title',
+            'name' => 'Regular Text Override',
+            'desc' => 'Override the default regular text for the donation form.',
+            'id'   => $prefix . 'fundraising_settings_regular_text_override',
+            'type' => 'textarea_small',
+        )
+    );
+
+    // One-off heading and text for overrides
+    $main_options->add_field(
+        array(
+            'name' => 'One-off Heading Override',
+            'desc' => 'Override the default one-off heading for the donation form.',
+            'id'   => $prefix . 'fundraising_settings_oneoff_heading_override',
             'type' => 'text',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => 'One-off Text Override',
+            'desc' => 'Override the default one-off text for the donation form.',
+            'id'   => $prefix . 'fundraising_settings_oneoff_text_override',
+            'type' => 'textarea_small',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => 'Support section',
+            'desc' => 'This is the common element with the form to start the donate process',
+            'id'   => $prefix . 'fundraising_settings_support_section_title',
+            'type' => 'title',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name'    => __( 'Support section title', 'NM' ),
+            'desc'    => false,
+            'id'      => $prefix . 'fundraising_settings_support_section_title',
+            'type'    => 'text',
             'default' => 'Support Us',
         )
     );
@@ -69,15 +107,15 @@ function nm_register_fundraising_options_metabox() {
 
     $support_section_group = $main_options->add_field(
         array(
-            'name' => __( 'Support section auto values', 'NM' ),
+            'name'        => __( 'Support section auto values', 'NM' ),
             'description' => __( 'Sets the default values for the support section form. Also sets the url variable alternative values. First set will be the default and ignore the url code.', 'cmb2' ),
             'id'          => $prefix . 'fundraising_settings_support_section_autovalues',
             'type'        => 'group',
             'options'     => array(
-                'group_title'       => __( 'Entry {#}', 'cmb2' ),
-                'add_button'        => __( 'Add Another Entry', 'cmb2' ),
-                'remove_button'     => __( 'Remove Entry', 'cmb2' ),
-                'closed'         => true,
+                'group_title'   => __( 'Entry {#}', 'cmb2' ),
+                'add_button'    => __( 'Add Another Entry', 'cmb2' ),
+                'remove_button' => __( 'Remove Entry', 'cmb2' ),
+                'closed'        => true,
             ),
         )
     );
@@ -85,12 +123,12 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'URL code',
+            'name'        => 'URL code',
             'description' => 'Unique code for URL. Normally a random 6 character string.',
-            'id'   => 'url_code',
-            'type' => 'text_small',
-            'attributes' => array(
-                'data-validation' => 'true',
+            'id'          => 'url_code',
+            'type'        => 'text_small',
+            'attributes'  => array(
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -99,26 +137,26 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Show first',
+            'name'        => 'Show first',
             'description' => 'Show regular or one off option first?',
-            'id'   => 'show_first',
-            'type' => 'radio_inline',
-            'options' => array(
+            'id'          => 'show_first',
+            'type'        => 'radio_inline',
+            'options'     => array(
                 'regular' => __( 'Regular', 'cmb2' ),
-                'oneoff'   => __( 'One off', 'cmb2' ),
+                'oneoff'  => __( 'One off', 'cmb2' ),
             ),
-            'default' => 'regular',
+            'default'     => 'regular',
         )
     );
 
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default low regular donation',
-            'id'   => 'regular_low',
-            'type' => 'text_small',
+            'name'       => 'Default low regular donation',
+            'id'         => 'regular_low',
+            'type'       => 'text_small',
             'attributes' => array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -127,11 +165,11 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default medium regular donation',
-            'id'   => 'regular_medium',
-            'type' => 'text_small',
+            'name'       => 'Default medium regular donation',
+            'id'         => 'regular_medium',
+            'type'       => 'text_small',
             'attributes' => array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -140,11 +178,11 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default high regular donation',
-            'id'   => 'regular_high',
-            'type' => 'text_small',
+            'name'       => 'Default high regular donation',
+            'id'         => 'regular_high',
+            'type'       => 'text_small',
             'attributes' => array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -153,11 +191,11 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default low one-off donation',
-            'id'   => 'oneoff_low',
-            'type' => 'text_small',
+            'name'       => 'Default low one-off donation',
+            'id'         => 'oneoff_low',
+            'type'       => 'text_small',
             'attributes' => array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -166,11 +204,11 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default medium one-off donation',
-            'id'   => 'oneoff_medium',
-            'type' => 'text_small',
+            'name'       => 'Default medium one-off donation',
+            'id'         => 'oneoff_medium',
+            'type'       => 'text_small',
             'attributes' => array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
@@ -179,25 +217,24 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_group_field(
         $support_section_group,
         array(
-            'name' => 'Default high one-off donation',
-            'id'   => 'oneoff_high',
-            'type' => 'text_small',
+            'name'       => 'Default high one-off donation',
+            'id'         => 'oneoff_high',
+            'type'       => 'text_small',
             'attributes' =>
             array(
-                'data-validation' => 'true',
+                'data-validation'          => 'true',
                 'data-validation-required' => 'true',
             ),
         )
     );
-
     // Bottom of window support bar
 
     $main_options->add_field(
         array(
-            'name'    => 'Sticky support bar',
-            'desc'    => 'This is the bar at the bottom of the window that has an open and closed state',
-            'id'      => $prefix . 'fundraising_settings_support_bar_title',
-            'type'    => 'title',
+            'name' => 'Sticky support bar',
+            'desc' => 'This is the bar at the bottom of the window that has an open and closed state',
+            'id'   => $prefix . 'fundraising_settings_support_bar_title',
+            'type' => 'title',
         )
     );
 
@@ -255,43 +292,6 @@ function nm_register_fundraising_options_metabox() {
         )
     );
 
-    // support form schedule relient headings and copy
-    $main_options->add_group_field(
-        $support_section_group,
-        array(
-            'name' => 'Regular heading',
-            'id'   => 'regular_heading',
-            'type' => 'text',
-        )
-    );
-
-    $main_options->add_group_field(
-        $support_section_group,
-        array(
-            'name' => 'Regular text',
-            'id'   => 'regular_text',
-            'type' => 'textarea_small',
-        )
-    );
-
-    $main_options->add_group_field(
-        $support_section_group,
-        array(
-            'name' => 'One-off heading',
-            'id'   => 'oneoff_heading',
-            'type' => 'text',
-        )
-    );
-
-    $main_options->add_group_field(
-        $support_section_group,
-        array(
-            'name' => 'One-off text',
-            'id'   => 'oneoff_text',
-            'type' => 'textarea_small',
-        )
-    );
-
     // Front page video banner block
     $main_options->add_field(
         array(
@@ -333,9 +333,9 @@ function nm_register_fundraising_options_metabox() {
 
     $main_options->add_field(
         array(
-            'name'    => 'Misc options',
-            'id'      => $prefix . 'fundraising_misc_title',
-            'type'    => 'title',
+            'name' => 'Misc options',
+            'id'   => $prefix . 'fundraising_misc_title',
+            'type' => 'title',
         )
     );
 

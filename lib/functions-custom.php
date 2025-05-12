@@ -254,9 +254,23 @@ function nm_get_support_autovalues() {
 }
 
 /**
+ * Determines the donation mode to show first (regular or oneoff)
+ *
+ * @param object $values Object containing autovalues for the form.
+ * @return string 'regular' or 'oneoff'
+ */
+function nm_get_donation_mode( $values ) {
+  if ( isset( $values->show_first ) && in_array( $values->show_first, array( 'regular', 'oneoff' ), true ) ) {
+    return $values->show_first;
+  }
+
+  return 'regular'; // Fallback
+}
+
+/**
  * Gets contributors on a post and returns an array of post objects, or false if nothing set
  *
- * @param integer $post_id Post ID to check for contributors
+ * @param integer $post_id Post ID to check for contributors.
  *
  * @return array/Boolean Array of contributor post objects
  */
