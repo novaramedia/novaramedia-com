@@ -39,14 +39,13 @@
     border-color: var(--color-white-soft);
     outline: none;
 
-.support-form__schedule-mobile .support-form__button
+.support-form__schedule-mobile .support-form__button,
+.support-form__tab-schedule-buttons .support-form__button
   color: var(--color-black-soft);
   background-color: var(--color-white-soft);
   &--active
     color: var(--color-white-soft);
     background-color: var(--color-red);
-  &:hover
-      color: var(--color-grey);
 
 .support-form__custom-input::placeholder
   padding-left: 5px
@@ -60,7 +59,8 @@
 
 .support-form__payment-type
   vertical-align: bottom
-  height: 2.5vh;
+  height: 3vh;
+  border-radius: 4px;
 
 .support-form__text-mobile,
 .support-form__schedule-mobile,
@@ -71,6 +71,9 @@
 .support-form__left-column-desktop, .support-form__right-column-desktop
   padding: 0 !important;
 
+.support-form__tab-schedule-buttons button
+  border: none !important;
+  border-radius: 4px 4px 0 0;
 
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,
@@ -89,28 +92,27 @@
 .support-form-condensed
   width: 50%;
 
+.support-form__payment-type-condensed
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
 @media (max-width: $breakpoint-s)
-  .support-form__schedule-option
-    border: none !important;
-
-  .support-form__text-mobile,
-  .support-form__buttons-mobile
-    display: block;
-
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile
     display: flex;
     flex-direction: row;
     justify-content: center;
 
+  .support-form-condensed
+    width: auto;
+
+  .support-form__text-mobile,
+  .support-form__buttons-mobile
+    display: block;
+
   .support-form__text-desktop,
   .support-form__schedule-desktop,
   .support-form__payment-type-desktop,
   .support-form__buttons-desktop
     display: none;
-
-  .support-form__schedule-option-right
-    border-radius:  4px 4px 0px 0px;
-
-  .support-form__schedule-option-left
-    border-radius:  4px 4px 0px 0px;

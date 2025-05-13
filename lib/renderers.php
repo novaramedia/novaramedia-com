@@ -57,7 +57,7 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
 function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
-    <div class="grid-row grid--nested-tight mb-2">
+    <div class="grid-row grid--nested-tight mb-5">
       <!-- Low, Medium, High Tier Buttons -->
       <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
         <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
@@ -143,12 +143,12 @@ function render_support_heading_and_text( $donation_mode, $device, $text_classes
   ?>
   <div class="<?php echo esc_attr( $text_classes ); ?>">
     <a href="<?php echo home_url( 'support/' ); ?>">
-    <h4 id="<?php echo esc_attr( $heading_id ); ?>" class="font-size-12 font-weight-bold mb-3">
+    <h4 id="<?php echo esc_attr( $heading_id ); ?>" class="font-size-13 font-weight-bold mb-3">
       <?php echo esc_html( $heading ); ?>
     </h4>
     </a>
     <?php if ( $text ) : ?>
-      <div class="mb-2">
+      <div class="mb-5">
         <a id="<?php echo esc_attr( $text_id ); ?>" href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="js-fix-widows">
           <?php echo esc_html( $text ); ?>
         </a>
@@ -184,11 +184,11 @@ function render_support_form_condensed_version( $instance, $active_values, $dona
   <div class="background-red support-form__box-radius m-2 support-form-condensed font-color-white">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
     <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-    <?php render_support_form_schedule_buttons( 'background-white' ); ?>
+    <?php render_support_form_schedule_buttons( 'background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
         <?php render_support_heading_and_text( $donation_mode, 'mobile', 'is-s-24' ); ?>
             <?php render_support_form_amount_buttons( $active_values, $instance, '' ); ?>
-        <?php render_payment_icons( ' mt-2' ); ?>
+        <?php render_payment_icons( 'mt-3 support-form__payment-type-condensed' ); ?>
       </div>
     </form>
   </div>
@@ -206,7 +206,7 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
   <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
     <!-- Mobile: Schedule -->
-    <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
+    <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
         <!-- Mobile: Text -->
         <?php render_support_heading_and_text( $donation_mode, 'mobile', 'support-form__text-mobile is-s-24' ); ?>
@@ -227,7 +227,7 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
         <!-- Mobile: Buttons -->
             <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
         <!-- Mobile: Payment -->
-        <?php render_payment_icons( 'support-form__payment-type-mobile mt-2' ); ?>
+        <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>
    </div>
