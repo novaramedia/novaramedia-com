@@ -73,8 +73,8 @@ export class Support {
           const copy = window.SupportFormCopy && window.SupportFormCopy[data.value];
           if (!copy) return;
 
-          const heading = $form.find('.support-form__dynamic-heading').first();
-          const text = $form.find('.support-form__dynamic-text').first();
+          const heading = $form.find('.support-form__dynamic-heading');
+          const text = $form.find('.support-form__dynamic-text');
 
           if (heading.length) heading.html(copy.heading);
           if (text.length) text.html(copy.text);
