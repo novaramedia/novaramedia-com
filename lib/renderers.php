@@ -88,7 +88,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
 /**
  * Render the heading and support section text, preferring mode-specific values, then global, then hardcoded defaults.
  */
-function render_support_heading_and_text( $donation_mode, $device, $text_classes = '' ) {
+function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   $heading_copy = NM_get_option( 'nm_fundraising_settings_support_section_title', 'nm_fundraising_options' );
   $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_text', 'nm_fundraising_options' );
   $regular_heading = NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' );
@@ -99,10 +99,6 @@ function render_support_heading_and_text( $donation_mode, $device, $text_classes
   $heading_text_data = array();
   $heading = '';
   $text = '';
-
-  $heading_id = $device === 'desktop' ? 'support-heading-desktop' : 'support-heading-mobile';
-  $text_id = $device === 'desktop' ? 'support-text-desktop' : 'support-text-mobile';
-
   if ( ! empty( $regular_heading ) && ! empty( $regular_text ) ) {
     $heading_text_data['regular'] = array(
         'heading' => $regular_heading,
@@ -143,13 +139,13 @@ function render_support_heading_and_text( $donation_mode, $device, $text_classes
   ?>
   <div class="<?php echo esc_attr( $text_classes ); ?>">
     <a href="<?php echo home_url( 'support/' ); ?>">
-    <h4 id="<?php echo esc_attr( $heading_id ); ?>" class="font-size-13 font-weight-bold mb-3">
+    <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
       <?php echo esc_html( $heading ); ?>
     </h4>
     </a>
     <?php if ( $text ) : ?>
       <div class="mb-5">
-        <a id="<?php echo esc_attr( $text_id ); ?>" href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="js-fix-widows">
+        <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="js-fix-widows support-form__dynamic-text">
           <?php echo esc_html( $text ); ?>
         </a>
       </div>
@@ -186,7 +182,7 @@ function render_support_form_condensed_version( $instance, $active_values, $dona
     <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
     <?php render_support_form_schedule_buttons( 'background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
-        <?php render_support_heading_and_text( $donation_mode, 'mobile', 'is-s-24' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'is-s-24' ); ?>
             <?php render_support_form_amount_buttons( $active_values, $instance, '' ); ?>
         <?php render_payment_icons( 'mt-3 support-form__payment-type-condensed' ); ?>
       </div>
@@ -209,11 +205,11 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
     <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
         <!-- Mobile: Text -->
-        <?php render_support_heading_and_text( $donation_mode, 'mobile', 'support-form__text-mobile is-s-24' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile is-s-24' ); ?>
         <div class="grid-row">
           <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
             <!-- Desktop: Text -->
-            <?php render_support_heading_and_text( $donation_mode, 'desktop', 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
             <!-- Desktop: Payment -->
             <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
           </div>

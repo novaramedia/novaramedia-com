@@ -69,22 +69,15 @@ export class Support {
         const $button = $(this);
         const data = $button.data();
         // function to update the support section copy depending on the type of donation
-        function updateSupportSection(data) {
+        function updateSupportSection(data, $form) {
           const copy = window.SupportFormCopy && window.SupportFormCopy[data.value];
           if (!copy) return;
 
-            const ids = [
-              { heading: 'support-heading-desktop', text: 'support-text-desktop' },
-              { heading: 'support-heading-mobile', text: 'support-text-mobile' }
-            ];
+          const heading = $form.find('.support-form__dynamic-heading').first();
+          const text = $form.find('.support-form__dynamic-text').first();
 
-          ids.forEach(pair => {
-            const heading = document.getElementById(pair.heading);
-            const text = document.getElementById(pair.text);
-
-            if (heading) heading.innerHTML = copy.heading;
-            if (text) text.innerHTML = copy.text;
-          });
+          if (heading.length) heading.html(copy.heading);
+          if (text.length) text.html(copy.text);
         }
 
         if (data.action === 'set-type') {
@@ -97,7 +90,7 @@ export class Support {
 
           $button.addClass('support-form__button--active');
 
-          updateSupportSection(data);
+          updateSupportSection(data, $form)
 
         } else if (data.action === 'set-value') {
             // if the button is setting the donation value
