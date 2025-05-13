@@ -70,18 +70,23 @@ export class Support {
         const data = $button.data();
 
         function updateSupportSection(data) {
-          const headingId = data.value === 'regular' ? 'support-heading' : 'support-heading-desktop';
-          const textId = data.value === 'regular' ? 'support-text' : 'support-text-desktop';
+          console.log('Updating heading and text for mode:', data.value);
 
-          console.log('Updating heading and text:', headingId, textId);
+          const copy = window.SupportFormCopy && window.SupportFormCopy[data.value];
+          if (!copy) return;
 
-          const heading = document.getElementById(headingId);
-          const text = document.getElementById(textId);
+            const ids = [
+              { heading: 'support-heading-desktop', text: 'support-text-desktop' },
+              { heading: 'support-heading-mobile', text: 'support-text-mobile' }
+            ];
 
-          if (heading && text) {
-            heading.innerHTML = window.SupportFormCopy[data.value].heading;
-            text.innerHTML = window.SupportFormCopy[data.value].text;
-          }
+          ids.forEach(pair => {
+            const heading = document.getElementById(pair.heading);
+            const text = document.getElementById(pair.text);
+
+            if (heading) heading.innerHTML = copy.heading;
+            if (text) text.innerHTML = copy.text;
+          });
         }
 
         if (data.action === 'set-type') {
