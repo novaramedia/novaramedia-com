@@ -178,24 +178,17 @@ function render_payment_icons( $payment_classes = '' ) {
 /**
  * Render the support donation form with the heading, text, and form elements.
  *
- * @uses render_support_heading_and_text() Render the heading and support section text.
- * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
- * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
- * @uses NM_get_option() Get the option valueas.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_condensed_version( $heading_copy, $support_section_text, $override_text ) {
-  // Generate unique ID for the form
-  $instance = uniqid( 'support-form-' );
-  $support_section_autovalues = nm_get_support_autovalues();
+function render_support_form_condensed_version( $instance, $active_values, $donation_mode ) {
   ?>
   <div class="background-red support-form__box-radius m-2 support-form-condensed font-color-white">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-  <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $support_section_autovalues['default']->regular_low ); ?>" />
+    <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
     <?php render_support_form_schedule_buttons( 'background-white' ); ?>
       <div class="p-5">
-        <?php render_support_heading_and_text( $heading_copy, $support_section_text, $override_text, ' is-s-24' ); ?>
-            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, '' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'mobile', 'is-s-24' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance, '' ); ?>
         <?php render_payment_icons( ' mt-2' ); ?>
       </div>
     </form>
@@ -206,22 +199,13 @@ function render_support_form_condensed_version( $heading_copy, $support_section_
 /**
  * Render the support donation form with the heading, text, and form elements.
  *
- * @uses render_support_heading_and_text() Render the heading and support section text.
- * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
- * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
- * @uses NM_get_option() Get the option valueas.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form() {
-  // Generate unique ID for the form
-  $instance = uniqid( 'support-form-' );
-  $support_section_autovalues = nm_get_support_autovalues();
-  $active_values = $support_section_autovalues['default'];
-  $donation_mode = nm_get_donation_mode( $active_values );
+function render_support_form( $instance, $active_values, $donation_mode ) {
   ?>
    <div class="background-red support-form__box-radius m-2 font-color-white">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-  <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $support_section_autovalues['default']->regular_low ); ?>" />
+  <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
     <!-- Mobile: Schedule -->
     <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white' ); ?>
       <div class="p-5">
@@ -238,19 +222,45 @@ function render_support_form() {
             <!-- Desktop: Schedule -->
             <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
             <!-- Desktop: Buttons -->
-            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-desktop' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
         <!-- Mobile: Buttons -->
-            <?php render_support_form_amount_buttons( $support_section_autovalues['default'], $instance, 'support-form__buttons-mobile' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
         <!-- Mobile: Payment -->
         <?php render_payment_icons( 'support-form__payment-type-mobile mt-2' ); ?>
       </div>
     </form>
    </div>
-<?php } ?>
+  <?php
+}
+/**
+ * Render the appropriate support form version.
+ * Add more cases here if needed.
+ *
+ * @uses render_support_heading_and_text() Render the heading and support section text.
+ * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
+ * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
+ * @uses NM_get_option() Get the option value as.
+ * @param string $variant One of: 'banner', 'condensed'.
+ */
+function render_support_form_dispatcher( $variant ) {
+    // Generate unique ID for the form
+  $instance = uniqid( 'support-form-' );
+  $support_section_autovalues = nm_get_support_autovalues();
+  $active_values = $support_section_autovalues['default'];
+  $donation_mode = nm_get_donation_mode( $active_values );
+  switch ( $variant ) {
+    case 'condensed':
+      render_support_form_condensed_version( $instance, $active_values, $donation_mode );
+        break;
 
-<?php
+    case 'banner':
+    default:
+      render_support_form( $instance, $active_values, $donation_mode );
+        break;
+  }
+}
 /**
  * Render the see also block
  * Based on a passed query. Can render more than 1 post but will only show one on mobile
