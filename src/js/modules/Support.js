@@ -68,10 +68,8 @@ export class Support {
 
         const $button = $(this);
         const data = $button.data();
-
+        // function to update the support section copy depending on the type of donation
         function updateSupportSection(data) {
-          console.log('Updating heading and text for mode:', data.value);
-
           const copy = window.SupportFormCopy && window.SupportFormCopy[data.value];
           if (!copy) return;
 

@@ -54,19 +54,18 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_amount_buttons( $values, $instance, $mode, $button_classes = '' ) {
+function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <div class="grid-row grid--nested-tight mb-2">
       <!-- Low, Medium, High Tier Buttons -->
       <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
-        <?php $value_key = "{$mode}_$tier"; ?>
         <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
           <button class="support-form__button support-form__value-option ui-input"
                   data-action="set-value"
                   data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
                   data-name="<?php echo esc_attr( $tier ); ?>">
-            £<?php echo esc_html( $values->$value_key ); ?>
+            £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
           </button>
         </div>
       <?php endforeach; ?>
