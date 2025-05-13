@@ -207,9 +207,7 @@ function nm_isset_and_numeric( $string ) {
  */
 function nm_get_support_autovalues() {
   $meta = NM_get_option( 'nm_fundraising_settings_support_section_autovalues', 'nm_fundraising_options' );
-
   $return = array();
-
   if ( ! empty( $meta ) ) {
     foreach ( $meta as $index => $autovalues_set ) {
       if ( $index === 0 ) {

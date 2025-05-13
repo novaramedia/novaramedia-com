@@ -62,23 +62,41 @@ export class Support {
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
-      $form.find('.support-form__button').on({
-        click(event) {
-          event.preventDefault();
+          $form.find('.support-form__button').on({
+      click(event) {
+        event.preventDefault();
 
-          const $button = $(this);
-          const data = $button.data();
+        const $button = $(this);
+        const data = $button.data();
 
-          if (data.action === 'set-type') {
-            // if the button is setting the type of donation
-            _this.setAutoValues($form, data.value);
+        function updateSupportSection(data) {
+          const headingId = data.value === 'regular' ? 'support-heading' : 'support-heading-desktop';
+          const textId = data.value === 'regular' ? 'support-text' : 'support-text-desktop';
 
-            $form.attr('action', _this.donationAppUrl + data.value);
+          console.log('Updating heading and text:', headingId, textId);
 
-            _this.clearActiveButtonState($form);
+          const heading = document.getElementById(headingId);
+          const text = document.getElementById(textId);
 
-            $button.addClass('support-form__button--active');
-          } else if (data.action === 'set-value') {
+          if (heading && text) {
+            heading.innerHTML = window.SupportFormCopy[data.value].heading;
+            text.innerHTML = window.SupportFormCopy[data.value].text;
+          }
+        }
+
+        if (data.action === 'set-type') {
+          // if the button is setting the type of donation
+          _this.setAutoValues($form, data.value);
+
+          $form.attr('action', _this.donationAppUrl + data.value);
+
+          _this.clearActiveButtonState($form);
+
+          $button.addClass('support-form__button--active');
+
+          updateSupportSection(data);
+
+        } else if (data.action === 'set-value') {
             // if the button is setting the donation value
             $valueInput.val(data.value);
 
