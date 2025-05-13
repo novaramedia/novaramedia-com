@@ -158,7 +158,7 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
  */
 function render_payment_icons( $payment_classes = '' ) {
   // change to src and get assets from pietro
-  $img_base = get_template_directory_uri() . '/dist/img/support-form/';
+  $img_base = get_template_directory_uri() . '/src/img/support-form/';
   ?>
   <div class=" <?php echo esc_attr( $payment_classes ); ?>">
     <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Visa.jpg" alt="visa icon" />
@@ -313,10 +313,10 @@ function render_see_also( $query, $number_of_posts = 1 ) {
 /**
  * Renders post UI tags
  *
- * @param integer $post_id        Post ID
- * @param Boolean $show_text      If the rendered tag should show the text
- * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param string $block_style_varient Additional BEM varient class
+ * @param integer $post_id        Post ID.
+ * @param Boolean $show_text      If the rendered tag should show the text.
+ * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon.
+ * @param string $block_style_varient Additional BEM varient class.
  */
 function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false ) {
   $sub_category = get_the_sub_category( $post_id, true );
@@ -356,8 +356,8 @@ function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = fals
 /**
  * Renders a post thumbnail.
  *
- * @param integer $post_id Post ID
- * @param string  $size    Thumbnail size
+ * @param integer $post_id Post ID.
+ * @param string  $size    Thumbnail size.
  */
 function render_thumbnail( $post_id, $size = 'col12-16to9', $attributes = null ) {
   if ( ! is_numeric( $post_id ) ) {
