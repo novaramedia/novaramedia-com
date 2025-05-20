@@ -3,78 +3,56 @@ get_header();
 ?>
 <main id="main-content">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
+if ( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
-    $meta = get_post_meta($post->ID);
+    $meta = get_post_meta( $post->ID );
 
-    $page_tag_override = !empty($meta['_nm_support_tag_override']) ? $meta['_nm_support_tag_override'][0] : false;
-    $youtube_id = !empty($meta['_nm_support_youtube']) ? $meta['_nm_support_youtube'][0] : false;
-    $title = !empty($meta['_nm_support_header_title']) ? $meta['_nm_support_header_title'][0] : '';
-    $subtitle = !empty($meta['_nm_support_header_subtitle']) ? $meta['_nm_support_header_subtitle'][0] : '';
-    $form_tag_override = !empty($meta['_nm_support_form_tag_override']) ? $meta['_nm_support_form_tag_override'][0] : false;
-    $form_copy_override = !empty($meta['_nm_support_form_copy_override']) ? $meta['_nm_support_form_copy_override'][0] : false;
-?>
+    $page_tag_override = ! empty( $meta['_nm_support_tag_override'] ) ? $meta['_nm_support_tag_override'][0] : false;
+    $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
+    $title = ! empty( $meta['_nm_support_header_title'] ) ? $meta['_nm_support_header_title'][0] : '';
+    $subtitle = ! empty( $meta['_nm_support_header_subtitle'] ) ? $meta['_nm_support_header_subtitle'][0] : '';
+    $form_tag_override = ! empty( $meta['_nm_support_form_tag_override'] ) ? $meta['_nm_support_form_tag_override'][0] : false;
+    $form_copy_override = ! empty( $meta['_nm_support_form_copy_override'] ) ? $meta['_nm_support_form_copy_override'][0] : false;
+    ?>
   <article id="page" class="support-page">
-    <div class="background-red background-support-texture">
+    <div class="background-red background-support-texture-alt">
       <div class="container">
         <div class="flex-grid-row">
-          <div class="flex-grid-item flex-item-s-12">
-            <h4 class="margin-top-small margin-bottom-tiny font-size-9 text-uppercase font-weight-bold font-color-white"><?php
-              if (!empty($page_tag_override)) {
-                echo $page_tag_override;
-              } else {
-                echo 'Support Us';
-              }
-            ?></h4>
+          <div class="flex-grid-item flex-item-s-12 support-page__tag-wrapper">
+            <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
+            <?php
+            if ( ! empty( $page_tag_override ) ) {
+              echo $page_tag_override;
+            } else {
+              echo 'Support Us';
+            }
+            ?>
+            </h4>
           </div>
         </div>
-        <div class="flex-grid-row flex-grid-row--align-center support-page__hero-wrapper font-color-white">
-          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
-            <h1 class="font-size-17 font-weight-bold mobile-margin-bottom-basic" style="line-height: .85;">
-              <span class="only-desktop">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</span>
-              <span class="only-mobile">Build people-powered media.</span>
+        <div class="flex-grid-row flex-grid-row--align-center pt-2 pb-2">
+            <h1 class="font-weight-bold support-page__heading" style="line-height: 0.85;">
+              <span class="font-color-white">Beat the billionaires.</span></br>
+              <span class="font-color-black">Unfuck the media.</span>
             </h1>
-          </div>
-          <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-xxl-6 flex-offset-xxl-0">
-            <h2 class="font-size-13 font-weight-bold margin-bottom-tiny js-fix-widows">Back truthful, independent journalism today.</h2>
-            <h2 class="font-size-13 font-weight-bold js-fix-widows">Donate one hour’s wage per month or whatever you can afford.</h2>
-          </div>
         </div>
       </div>
-    </div>
-
-    <?php
-      get_template_part('partials/support-section', null, array(
-        'heading_copy' => $form_tag_override,
-        'override_text' => $form_copy_override
-      ));
-    ?>
-
-    <div class="container">
-      <div class="flex-grid-row margin-top-basic margin-bottom-basic">
-        <?php
-          if ($youtube_id) {
-        ?>
-        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 margin-bottom-small">
+      <div class="container">
+        <div class="flex-grid-row ui-rounded-box">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-gray text-copy font-serif ">
+            <?php the_content(); ?>
+              <?php
+              if ( $youtube_id ) {
+                ?>
           <div class="u-video-embed-container">
-            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
+            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
           </div>
-
-          <ul class="inline-action-list margin-top-small">
-            <?php
-              $share_url = 'https://novaramedia.com/support/';
-            ?>
-            <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet your support'); ?></li>
-            <li><?php render_facebook_share_link($share_url, 'Share this page on Facebook'); ?></li>
-            <li><?php render_email_share_link($share_url, $post->post_title, 'Email to a friend');?></li>
-            <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
-          </ul>
-        </div>
-        <?php } ?>
-
-        <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 text-copy font-serif">
-          <?php the_content(); ?>
+              <?php } ?>
+          </div>
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white">
+            <div class="background-red p-4 mt-2" style="height:200px;">This is to mimic support box for now</div>
+          </div>
         </div>
       </div>
     </div>
@@ -84,9 +62,11 @@ if( have_posts() ) {
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h4 class="font-size-9 text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
-            <?php if (!empty($meta['_cmb_page_extra'])) {
-              echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
-            } ?>
+            <?php
+            if ( ! empty( $meta['_cmb_page_extra'] ) ) {
+              echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0] );
+            }
+            ?>
             <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--white ui-button--small">Log in to your account</a></p>
           </div>
         </div>
@@ -94,10 +74,14 @@ if( have_posts() ) {
     </div>
 
     <?php
-      get_template_part('partials/support-section', null, array(
-        'heading_copy' => $form_tag_override,
-        'override_text' => $form_copy_override
-      ));
+    get_template_part(
+        'partials/support-section',
+        null,
+        array(
+            'heading_copy'  => $form_tag_override,
+            'override_text' => $form_copy_override,
+        )
+    );
     ?>
 
     <div id="other-donation-methods" class="container">
@@ -111,7 +95,7 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
+            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-paypal.svg' ); ?>
           </p>
           <p class="font-weight-bold mb-3">PayPal</p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
@@ -120,7 +104,7 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
+            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-directdebit.svg' ); ?>
           </p>
           <p class="font-weight-bold mb-3"><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
@@ -145,7 +129,7 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
+            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-bitcoin.svg' ); ?>
           </p>
           <p class="font-weight-bold mb-3"><strong>Crypto</strong></p>
           <p>We accept BTC at this address: <code class="font-size-smaller">1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i</code> If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
@@ -154,9 +138,10 @@ if( have_posts() ) {
     </div>
   <!-- end post -->
   </article>
-<?php
+    <?php
   }
-} ?>
+}
+?>
 <!-- end main-content -->
 </main>
 
