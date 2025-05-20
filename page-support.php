@@ -19,7 +19,7 @@ if ( have_posts() ) {
     <div class="background-red background-support-texture-alt">
       <div class="container">
         <div class="flex-grid-row">
-          <div class="flex-grid-item flex-item-s-12 support-page__tag-wrapper">
+          <div class="support-page__tag-wrapper">
             <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
             <?php
             if ( ! empty( $page_tag_override ) ) {
@@ -32,15 +32,15 @@ if ( have_posts() ) {
           </div>
         </div>
         <div class="flex-grid-row flex-grid-row--align-center pt-2 pb-2">
-            <h1 class="font-weight-bold support-page__heading" style="line-height: 0.85;">
+            <h1 class="font-weight-bold support-page__heading">
               <span class="font-color-white">Beat the billionaires.</span></br>
               <span class="font-color-black">Unfuck the media.</span>
             </h1>
         </div>
       </div>
       <div class="container">
-        <div class="flex-grid-row ui-rounded-box">
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-gray text-copy font-serif ">
+        <div class="flex-grid-row ui-rounded-box" style="position: relative;">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white text-copy font-serif p-4">
             <?php the_content(); ?>
               <?php
               if ( $youtube_id ) {
@@ -50,9 +50,16 @@ if ( have_posts() ) {
           </div>
               <?php } ?>
           </div>
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white">
-            <div class="background-red p-4 mt-2" style="height:200px;">This is to mimic support box for now</div>
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-purple">
+
+              <div class="support-page__-donation-form-sticky">
+                <div class="background-red p-4 mt-2" style="height: 200px;">
+                  This is to mimic support box for now
+                </div>
+              </div>
+
           </div>
+
         </div>
       </div>
     </div>
