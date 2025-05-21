@@ -91,7 +91,12 @@ if ( have_posts() ) {
         </div>
       </div>
       <!-- Our story -->
-      <div class="support-page__container background-black ui-rounded-box pb-6 pt-6"></div>
+      <div class="support-page__container background-black ui-rounded-box pb-6 pt-6">
+        <div class="flex-grid-row support-page__how-funded-container">
+          <div class="text-uppercase p-2 background-white font-color-black support-page__tab-heading font-size-10 mb-5">Our story
+          </div>
+      </div>
+    </div>
     </div>
 
     <div class="background-red">
