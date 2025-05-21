@@ -66,6 +66,7 @@ if ( have_posts() ) {
       </div>
     </div>
     <div class="support-page__background-grey">
+      <!-- how we are funded -->
       <div class="support-page__container">
         <div class="flex-grid-row pt-6 pb-6 support-page__how-funded-container ui-border-top ui-border--black">
           <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10">How we are funded</div>
@@ -75,19 +76,22 @@ if ( have_posts() ) {
           <div class="font-weight-bold support-page__how-funded-text font-size-13">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
         </div>
       </div>
-      <div class="support-page__container background-white ui-rounded-box">
-        <div class="flex-grid-row pt-6 support-page__how-funded-container">
-          <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10">How we spend our funds</div>
-          <div class="font-weight-bold support-page__how-funded-text font-size-15">
-            <span class="">Every penny Novara Media makes goes back into our journalism.</span>
-            <span> support pays for the hours it takes to research and meticulously check the claims in our articles.</span>
-            <span>It pays for the studio space where we film our live show.</span>
-            <span>It allows us to hire key roles, like a labour movement correspondent.</span>
-            <span>It helps us fight (and win) against the smears of the rightwing press.</span>
-            <span>Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</span>
+      <!-- what we spend our funds on -->
+      <div class="support-page__container mb-6 pb-6">
+        <div class="flex-grid-row pt-6 pb-6 support-page__how-funded-container background-white ui-rounded-box ">
+          <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10 mb-5">How we spend our funds</div>
+          <div class="support-page__how-funded-text font-size-13">
+            <div class="font-weight-bold mb-5">Every penny Novara Media makes goes back into our journalism.</div>
+            <div class="mb-5">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
+            <div class="mb-5">It pays for the studio space where we film our live show.</div>
+            <div class="mb-5">It allows us to hire key roles, like a labour movement correspondent.</div>
+            <div class="mb-5">It helps us fight (and win) against the smears of the rightwing press.</div>
+            <div class="">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
           </div>
         </div>
       </div>
+      <!-- Our story -->
+      <div class="support-page__container background-black ui-rounded-box pb-6 pt-6"></div>
     </div>
 
     <div class="background-red">
