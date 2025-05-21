@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.2.9] - 2025-05-21
 
 ### Added
-- Redirect to red-flags catagory https://novaramedia.com/redflags to https://novaramedia.com/category/articles/red-flags/
+- Redirect to red-flags category https://novaramedia.com/redflags to https://novaramedia.com/category/articles/red-flags/
 
 ## [4.2.8] - 2025-04-30
 
