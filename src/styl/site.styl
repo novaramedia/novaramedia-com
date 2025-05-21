@@ -77,6 +77,9 @@ for col in 1..$cols
   background-repeat: no-repeat
   background-blend-mode: overlay, normal
 
+.background-support-texture-alt--fade-to-white
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 25%, white 100%), url('img/specials/support-2023-texture-alt.webp');
+
 .avif, .webp
   .background-support-texture
     background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.webp)
@@ -90,6 +93,7 @@ for col in 1..$cols
 
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+
 
 // ******************************************************
 // START DEPRECATED

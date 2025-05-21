@@ -1,25 +1,42 @@
 .support-page__heading
+  font-size: 9rem;
   line-height: 0.85;
   white-space: nowrap; /* corrected from wrap: no-wrap */
 
-.support-page__-donation-form-sticky
+.support-page__donation-form-sticky
   position: sticky;
   top: 100px;
   z-index: 1;
 
+.support-page__left-radius
+  border-radius: 4px 0 0 4px;
+
+.support-page__right-radius
+  border-radius: 0 4px 4px 0;
+
+// container re-style
+
+.support-page__container
+  margin: 0 auto
+  width: 98%
 
 @media screen and (max-width: $breakpoint-xl)
   .support-page__heading
-    font-size: 6.7rem;
+    font-size: 8.3rem;
 
 @media screen and (max-width: $breakpoint-l)
   .support-page__heading
-    font-size: 6rem;
+    font-size: 7.2rem;
 
 @media screen and (max-width: $breakpoint-m)
-   .support-page__heading
-    font-size: 5.4rem;
+  .support-page__heading
+    font-size: 6.3rem;
 
 @media screen and (max-width: $breakpoint-s)
-   .support-page__heading
-    font-size: 3.3rem;
+  .support-page__heading
+    font-size: 4.5rem;
+    white-space: wrap;
+
+  .support-page__container
+    width: 98%
+    overflow: hidden

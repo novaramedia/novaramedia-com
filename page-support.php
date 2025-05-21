@@ -16,8 +16,8 @@ if ( have_posts() ) {
     $form_copy_override = ! empty( $meta['_nm_support_form_copy_override'] ) ? $meta['_nm_support_form_copy_override'][0] : false;
     ?>
   <article id="page" class="support-page">
-    <div class="background-red background-support-texture-alt">
-      <div class="container">
+    <div class="background-white background-support-texture-alt--fade-to-white">
+      <div class="support-page__container">
         <div class="flex-grid-row">
           <div class="support-page__tag-wrapper">
             <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
@@ -38,34 +38,44 @@ if ( have_posts() ) {
             </h1>
         </div>
       </div>
-      <div class="container">
-        <div class="flex-grid-row ui-rounded-box" style="position: relative;">
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white text-copy font-serif p-4">
-            <?php the_content(); ?>
+      <div class="support-page__container">
+        <div class="flex-grid-row" style="position: relative;">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white text-copy font-serif support-page__left-radius">
+            <div class="m-5 font-size-12">
+              <?php the_content(); ?>
               <?php
               if ( $youtube_id ) {
                 ?>
-          <div class="u-video-embed-container">
-            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
-          </div>
+              <div class="u-video-embed-container">
+                <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
+              </div>
               <?php } ?>
+            </div>
           </div>
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-purple">
 
-              <div class="support-page__-donation-form-sticky">
-                <div class="background-red p-4 mt-2" style="height: 200px;">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-purple support-page__right-radius">
+
+              <div class="support-page__donation-form-sticky mb-4">
+                <div class="background-red m-5" style="height: 200px;">
                   This is to mimic support box for now
                 </div>
               </div>
-
           </div>
-
         </div>
+
       </div>
     </div>
+    <div class="background-cream">
+      <div class="flex-grid-row">
+        <div>How we are funded</div></br>
+        <div>Graphic</div></br>
+        <div>Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+      </div>
 
-    <div class="background-lilac background-support-texture-alt">
-      <div class="container padding-top-mid padding-bottom-mid font-color-white">
+    </div>
+
+    <div class="background-red">
+      <div class="support-page__container padding-top-mid padding-bottom-mid font-color-white">
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h4 class="font-size-9 text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
@@ -91,7 +101,7 @@ if ( have_posts() ) {
     );
     ?>
 
-    <div id="other-donation-methods" class="container">
+    <div id="other-donation-methods" class="support-page__container">
       <div class="flex-grid-row padding-top-mid padding-bottom-mid">
         <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
           <h4 class="font-size-9 text-uppercase font-weight-bold">Other Donation Methods</h4>
