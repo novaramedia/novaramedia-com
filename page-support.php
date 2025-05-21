@@ -41,7 +41,7 @@ if ( have_posts() ) {
       <div class="support-page__container">
         <div class="flex-grid-row" style="position: relative;">
           <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white text-copy font-serif support-page__left-radius">
-            <div class="m-5 font-size-12">
+            <div class="m-5 font-size-13">
               <?php the_content(); ?>
               <?php
               if ( $youtube_id ) {
@@ -66,12 +66,15 @@ if ( have_posts() ) {
       </div>
     </div>
     <div class="background-cream">
-      <div class="flex-grid-row">
-        <div>How we are funded</div></br>
-        <div>Graphic</div></br>
-        <div>Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+      <div class="support-page__container">
+        <div class="flex-grid-row p-5 support-page__how-funded-container">
+          <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10">How we are funded</div>
+          <br/>
+          <div class="flex-grid-item flex-item-xxl-12">Graphic</div>
+          <br/>
+          <div class="font-weight-bold support-page__how-funded-text font-size-13">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+        </div>
       </div>
-
     </div>
 
     <div class="background-red">
