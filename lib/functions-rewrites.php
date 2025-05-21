@@ -2,6 +2,24 @@
 /** TODO: Refactor this to use an array rather than repeating code.
  */
 
+add_action( 'template_redirect', 'ask_sophie_rewrites' );
+/**
+ * Redirects novaramedia.com/asksophie to the Google Form.
+ */
+function ask_sophie_rewrites() {
+  if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+      return;
+  }
+  $request_uri = trim( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '/' );
+  $redirects = array(
+      'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
+  );
+  if ( isset( $redirects[ $request_uri ] ) ) {
+      wp_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
+      exit;
+  }
+}
+
 add_action( 'init', 'red_flag_rewrites' );
 /**
  * Redirects /red-flags to /category/articles/red-flags/
