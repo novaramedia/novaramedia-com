@@ -16,7 +16,7 @@ if ( have_posts() ) {
     $form_copy_override = ! empty( $meta['_nm_support_form_copy_override'] ) ? $meta['_nm_support_form_copy_override'][0] : false;
     ?>
   <article id="page" class="support-page">
-    <div class="background-white background-support-texture-alt--fade-to-white">
+    <div class="background-white background-support-texture-alt--fade-to-white pb-6">
       <div class="support-page__container">
         <div class="flex-grid-row">
           <div class="support-page__tag-wrapper">
@@ -53,7 +53,7 @@ if ( have_posts() ) {
             </div>
           </div>
 
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-light-purple support-page__right-radius">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 support-page__background-grey support-page__right-radius">
 
               <div class="support-page__donation-form-sticky mb-4">
                 <div class="background-red m-5" style="height: 200px;">
@@ -65,14 +65,27 @@ if ( have_posts() ) {
 
       </div>
     </div>
-    <div class="background-cream">
+    <div class="support-page__background-grey">
       <div class="support-page__container">
-        <div class="flex-grid-row p-5 support-page__how-funded-container">
+        <div class="flex-grid-row pt-6 pb-6 support-page__how-funded-container ui-border-top ui-border--black">
           <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10">How we are funded</div>
           <br/>
           <div class="flex-grid-item flex-item-xxl-12">Graphic</div>
           <br/>
           <div class="font-weight-bold support-page__how-funded-text font-size-13">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+        </div>
+      </div>
+      <div class="support-page__container background-white ui-rounded-box">
+        <div class="flex-grid-row pt-6 support-page__how-funded-container">
+          <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10">How we spend our funds</div>
+          <div class="font-weight-bold support-page__how-funded-text font-size-15">
+            <span class="">Every penny Novara Media makes goes back into our journalism.</span>
+            <span> support pays for the hours it takes to research and meticulously check the claims in our articles.</span>
+            <span>It pays for the studio space where we film our live show.</span>
+            <span>It allows us to hire key roles, like a labour movement correspondent.</span>
+            <span>It helps us fight (and win) against the smears of the rightwing press.</span>
+            <span>Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</span>
+          </div>
         </div>
       </div>
     </div>
