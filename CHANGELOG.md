@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Function to handle simple path-based redirects with array to add more external redirects in future.
 - Redirect from https://novaramedia.com/asksophie to this google form https://docs.google.com/forms/d/e/1FAIpQLSegJV5jED2FhIUS7_rryZC6V2Y65W7W-kE3tXGMH7zr4sl_uQ/viewform
 
