@@ -2,6 +2,7 @@
   font-size: 9rem;
   line-height: 0.85;
   white-space: nowrap; /* corrected from wrap: no-wrap */
+  max-width: 100%;
 
 .support-page__donation-form-sticky
   position: sticky;
@@ -14,13 +15,10 @@
 .support-page__right-radius
   border-radius: 0 4px 4px 0;
 
-.support-page__how-funded-text
-  width: 750px;
+.support-page__text-box-width
+  width: 60%;
 
-.support-page__tab-heading
-  text-align: center;
-
-.support-page__how-funded-container
+.support-page__text-container
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +55,7 @@
 
 @media screen and (max-width: $breakpoint-xl)
   .support-page__heading
-    font-size: 8.3rem;
+    font-size: 7rem;
 
 @media screen and (max-width: $breakpoint-l)
   .support-page__heading
@@ -70,7 +68,7 @@
 @media screen and (max-width: $breakpoint-s)
   .support-page__heading
     font-size: 4.5rem;
-    white-space: wrap;
+    white-space: normal;
 
   .support-page__container
     width: 98%
