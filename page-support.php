@@ -76,10 +76,10 @@ if ( have_posts() ) {
             height: 200px;
             width: 100%;
           }
-
           @media (max-width: 768px) {
             .support-page__infographic {
-              background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/desktop-how-we-are-funded-graphic.svg');
+              background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/mobile-how-we-are-funded-graphic.svg');
+              height: 400px;
             }
           }
       </style>
@@ -125,7 +125,7 @@ if ( have_posts() ) {
       <div class="support-page__container pb-6 pt-6 mb-6 ">
         <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-10 mb-7"> Our story </div>
-          <div class="font-color-white flex-grid-item flex-item-6 support-page__text-box-width text-align-left">
+          <div class="font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
             <div class="font-weight-bold mb-4 font-size-12 ">
               Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
             </div>
