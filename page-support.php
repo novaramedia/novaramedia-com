@@ -73,15 +73,15 @@ if ( have_posts() ) {
           <br/>
           <div class="flex-grid-item flex-item-xxl-12">Graphic</div>
           <br/>
-          <div class="font-weight-bold support-page__how-funded-text font-size-13">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+          <div class="font-weight-bold support-page__how-funded-text text-align-center font-size-13">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
         </div>
       </div>
       <!-- what we spend our funds on -->
       <div class="support-page__container mb-6 pb-6">
         <div class="flex-grid-row pt-6 pb-6 support-page__how-funded-container background-white ui-rounded-box ">
           <div class="text-uppercase p-2 background-black font-color-white support-page__tab-heading font-size-10 mb-5">How we spend our funds</div>
-          <div class="support-page__how-funded-text font-size-13">
-            <div class="font-weight-bold mb-5">Every penny Novara Media makes goes back into our journalism.</div>
+          <div class="support-page__how-funded-text font-size-13 text-align-center font-weight-bold">
+            <div class="mb-5">Every penny Novara Media makes goes back into our journalism.</div>
             <div class="mb-5">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
             <div class="mb-5">It pays for the studio space where we film our live show.</div>
             <div class="mb-5">It allows us to hire key roles, like a labour movement correspondent.</div>
@@ -91,9 +91,30 @@ if ( have_posts() ) {
         </div>
       </div>
       <!-- Our story -->
-      <div class="support-page__container background-black ui-rounded-box pb-6 pt-6">
-        <div class="flex-grid-row support-page__how-funded-container">
-          <div class="text-uppercase p-2 background-white font-color-black support-page__tab-heading font-size-10 mb-5">Our story
+      <style>
+        .avif .support-page__our-story-background
+        {
+          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
+
+        }
+        .webp .support-page__our-story-background {
+          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.webp'; ?>);
+        }
+
+        .fallback .support-page__our-story-background {
+          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
+        }
+      </style>
+      <div class="support-page__container pb-6 pt-6 mb-6 ">
+        <div class="flex-grid-row support-page__how-funded-container support-page__our-story-background ui-rounded-box pt-6 pb-6">
+          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black support-page__tab-heading font-size-10 mb-7"> Our story </div>
+          <div class="font-color-white flex-grid-item flex-item-6 support-page__how-funded-text text-align-left">
+            <div class="font-weight-bold mb-4 font-size-12 ">
+              Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
+            </div>
+            <div class="font-size-11 pb-5">
+              From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.
+            </div>
           </div>
       </div>
     </div>
