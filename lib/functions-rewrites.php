@@ -2,9 +2,44 @@
 /** TODO: Refactor this to use an array rather than repeating code.
  */
 
+// for redirects that send users to an external URL.
+// Add more path => URL pairs to the array as needed.
+// Format: 'path' => 'https://example.com/redirect-url'
+add_action(
+    'template_redirect',
+    function () {
+        handle_simple_redirects(
+            array(
+                'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
+            )
+        );
+    }
+);
+/**
+ * Handles simple path-based redirects.
+ * For redirects that send users to an external URL.
+ *
+ * You can add more redirects in the array above without duplicating logic.
+ *
+ * @param array $redirects Associative array of path => destination URL.
+ */
+function handle_simple_redirects( $redirects ) {
+  if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+      return;
+  }
+
+  $request_uri = trim( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '/' );
+
+  if ( isset( $redirects[ $request_uri ] ) ) {
+      wp_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
+      exit;
+  }
+}
+
 add_action( 'init', 'red_flag_rewrites' );
 /**
  * Redirects /red-flags to /category/articles/red-flags/
+ * Internal rewrite rule.
  */
 function red_flag_rewrites() {
   $cat = get_category_by_path( 'articles/red-flags' );
