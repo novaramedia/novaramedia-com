@@ -5551,7 +5551,8 @@ nice-try@^1.0.4:
 
 "nm-stylus-library@github:novaramedia/nm-stylus-library#v0.10.0":
   version "0.10.0"
-  resolved "git+ssh://git@github.com/novaramedia/nm-stylus-library.git#dab0a04128cdadedd69d6aa75cded3595f557fcc"
+  resolved "git+ssh://git@github.com/novaramedia/nm-stylus-library.git"
+  integrity sha512-vSFZX1ZAFDA0/WUY4XWkSwPHIHgv+njB4HNlLNi9owx9baqV/st2gLKsSD0SvNJD1n8eEPgUVZ8v6fvWjXgnAA==
 
 node-domexception@^1.0.0:
   version "1.0.0"

@@ -161,12 +161,12 @@ function render_payment_icons( $payment_classes = '' ) {
   $img_base = get_template_directory_uri() . '/src/img/support-form/';
   ?>
   <div class=" <?php echo esc_attr( $payment_classes ); ?>">
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Visa.jpg" alt="visa icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Mastercard.jpg" alt="mastercard icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Stripe.jpg" alt="stripe icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>Paypal.jpg" alt="paypal icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>ApplePay.jpg" alt="apple pay icon" />
-    <img class="support-form__payment-type mr-2 ui-rounded-image" src="<?php echo $img_base; ?>GooglePay.jpg" alt="google pay icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Visa.png" alt="visa icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Mastercard.png" alt="mastercard icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Stripe.png" alt="stripe icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Paypal.png" alt="paypal icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>ApplePay.png" alt="apple pay icon" />
+    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>GooglePay.png" alt="google pay icon" />
   </div>
   <?php
 }
