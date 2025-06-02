@@ -157,7 +157,6 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
  * Render payment icons for the support section.
  */
 function render_payment_icons( $payment_classes = '' ) {
-  // change to src and get assets from pietro
   $img_base = get_template_directory_uri() . '/dist/img/support-form/';
   ?>
   <div class=" <?php echo esc_attr( $payment_classes ); ?>">
