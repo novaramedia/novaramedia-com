@@ -39,44 +39,6 @@ function nm_register_fundraising_options_metabox() {
      * to be unique within this box.
      * Prefix is not needed.
      */
-    // Regular heading and text for overrides
-    $main_options->add_field(
-        array(
-            'name' => 'Regular Heading Override',
-            'desc' => 'Override the default regular heading for the donation form.',
-            'id'   => $prefix . 'fundraising_settings_regular_heading_override',
-            'type' => 'text',
-        )
-    );
-
-    $main_options->add_field(
-        array(
-            'name' => 'Regular Text Override',
-            'desc' => 'Override the default regular text for the donation form.',
-            'id'   => $prefix . 'fundraising_settings_regular_text_override',
-            'type' => 'textarea_small',
-        )
-    );
-
-    // One-off heading and text for overrides
-    $main_options->add_field(
-        array(
-            'name' => 'One-off Heading Override',
-            'desc' => 'Override the default one-off heading for the donation form.',
-            'id'   => $prefix . 'fundraising_settings_oneoff_heading_override',
-            'type' => 'text',
-        )
-    );
-
-    $main_options->add_field(
-        array(
-            'name' => 'One-off Text Override',
-            'desc' => 'Override the default one-off text for the donation form.',
-            'id'   => $prefix . 'fundraising_settings_oneoff_text_override',
-            'type' => 'textarea_small',
-        )
-    );
-
     $main_options->add_field(
         array(
             'name' => 'Support section',
@@ -96,12 +58,68 @@ function nm_register_fundraising_options_metabox() {
         )
     );
 
+        $main_options->add_field(
+            array(
+                'name' => __( 'Support section text', 'NM' ),
+                'desc' => false,
+                'id'   => $prefix . 'fundraising_settings_support_section_text',
+                'type' => 'textarea_small',
+            )
+        );
+
+        $main_options->add_field(
+            array(
+                'name' => 'scheduled Donation Overrides',
+                'desc' => 'These fields dynamically update the form text based on whether the user selects a one-off or regular donation. Note: All fields in this section must be completed for the overrides to take effect. Leave blank if you do not want to override the text above.',
+                'id'   => $prefix . 'fundraising_settings_regular_override_title',
+                'type' => 'title',
+            )
+        );
+
+    // Regular heading and text for overrides
     $main_options->add_field(
         array(
-            'name' => __( 'Support section text', 'NM' ),
-            'desc' => false,
-            'id'   => $prefix . 'fundraising_settings_support_section_text',
+            'name' => 'Regular Heading Override',
+            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
+            'id'   => $prefix . 'fundraising_settings_regular_heading_override',
+            'type' => 'text',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => 'Regular Text Override',
+            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
+            'id'   => $prefix . 'fundraising_settings_regular_text_override',
             'type' => 'textarea_small',
+        )
+    );
+
+    // One-off heading and text for overrides
+    $main_options->add_field(
+        array(
+            'name' => 'One-off Heading Override',
+            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
+            'id'   => $prefix . 'fundraising_settings_oneoff_heading_override',
+            'type' => 'text',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => 'One-off Text Override',
+            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
+            'id'   => $prefix . 'fundraising_settings_oneoff_text_override',
+            'type' => 'textarea_small',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => 'Support section auto values',
+            'desc' => 'These fields override the default support section when the user selects a regular donation schedule.',
+            'id'   => $prefix . 'fundraising_settings_support_section_override_title',
+            'type' => 'title',
         )
     );
 
