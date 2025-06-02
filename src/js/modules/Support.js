@@ -62,37 +62,37 @@ export class Support {
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
-          $form.find('.support-form__button').on({
-      click(event) {
-        event.preventDefault();
+      $form.find('.support-form__button').on({
+        click(event) {
+          event.preventDefault();
 
-        const $button = $(this);
-        const data = $button.data();
-        // function to update the support section copy depending on the type of donation
-        function updateSupportSection(data, $form) {
-          const copy = window.SupportFormCopy && window.SupportFormCopy[data.value];
-          if (!copy) return;
+          const $button = $(this);
+          const data = $button.data();
+          // function to update the support section copy depending on the type of donation
+          function updateSupportSection(data, $form) {
+            const copy =
+              window.SupportFormCopy && window.SupportFormCopy[data.value];
+            if (!copy) return;
 
-          const heading = $form.find('.support-form__dynamic-heading');
-          const text = $form.find('.support-form__dynamic-text');
+            const heading = $form.find('.support-form__dynamic-heading');
+            const text = $form.find('.support-form__dynamic-text');
 
-          if (heading.length) heading.html(copy.heading);
-          if (text.length) text.html(copy.text);
-        }
+            if (heading.length) heading.html(copy.heading);
+            if (text.length) text.html(copy.text);
+          }
 
-        if (data.action === 'set-type') {
-          // if the button is setting the type of donation
-          _this.setAutoValues($form, data.value);
+          if (data.action === 'set-type') {
+            // if the button is setting the type of donation
+            _this.setAutoValues($form, data.value);
 
-          $form.attr('action', _this.donationAppUrl + data.value);
+            $form.attr('action', _this.donationAppUrl + data.value);
 
-          _this.clearActiveButtonState($form);
+            _this.clearActiveButtonState($form);
 
-          $button.addClass('support-form__button--active');
+            $button.addClass('support-form__button--active');
 
-          updateSupportSection(data, $form)
-
-        } else if (data.action === 'set-value') {
+            updateSupportSection(data, $form);
+          } else if (data.action === 'set-value') {
             // if the button is setting the donation value
             $valueInput.val(data.value);
 
