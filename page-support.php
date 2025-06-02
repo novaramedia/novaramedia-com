@@ -122,10 +122,10 @@ if ( have_posts() ) {
           background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
         }
       </style>
-      <div class="support-page__container pb-6 pt-6 mb-6 ">
+      <div class="support-page__container pb-6 pt-6 mb-6">
         <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-10 mb-7"> Our story </div>
-          <div class="font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
+          <div class="support-page__text-box-width font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
             <div class="font-weight-bold mb-4 font-size-12 ">
               Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
             </div>
@@ -135,7 +135,65 @@ if ( have_posts() ) {
           </div>
       </div>
     </div>
-    </div>
+    <section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4 mt-s-3 mb-s-3">
+      <div class="swiper">
+        <div class="swiper-button-prev swiper-button-prev--disabled">
+          <span class="only-desktop ui-chevron ui-chevron--left"></span>
+        </div>
+        <div class="swiper-button-next">
+          <span class="only-desktop ui-chevron ui-chevron--right"></span>
+        </div>
+
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
+            <a href="#">
+              <div class="products-bar__item-inner">
+                <div class="products-bar__item-image mr-2">
+                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
+                </div>
+                <div class="products-bar__item-text font-size-9">
+                  <h5 class="font-weight-bold">Title 1</h5>
+                  <p>Short description here</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
+            <a href="#">
+              <div class="products-bar__item-inner">
+                <div class="products-bar__item-image mr-2">
+                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
+                </div>
+                <div class="products-bar__item-text font-size-9">
+                  <h5 class="font-weight-bold">Title 2</h5>
+                  <p>Another description</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
+            <a href="#">
+              <div class="products-bar__item-inner">
+                <div class="products-bar__item-image mr-2">
+                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
+                </div>
+                <div class="products-bar__item-text font-size-9">
+                  <h5 class="font-weight-bold">Title 3</h5>
+                  <p>Another short bit of text</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui-border-bottom pt-4 pt-s-3"></div>
+    </section>
+
 
     <div class="background-red">
       <div class="support-page__container padding-top-mid padding-bottom-mid font-color-white">
