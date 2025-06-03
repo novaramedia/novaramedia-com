@@ -106,9 +106,6 @@ class CarouselAlt {
       loop: true,
       centeredSlides: true,
       breakpoints: {
-        768: {
-          slidesPerView: 2,
-        },
         480: {
           slidesPerView: 1,
         },

@@ -25,7 +25,7 @@
 
 .support-page__container
   margin: 0 auto
-  width: 98%
+  width: 97%
 
 .support-page__our-story-background
   position: relative;
@@ -56,7 +56,7 @@
 
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto;
-  height: 30px
+  height: 30px;
 
 @media screen and (max-width: $breakpoint-xl)
   .support-page__heading
@@ -71,11 +71,21 @@
     font-size: 6.3rem;
 
 @media screen and (max-width: $breakpoint-s)
+  .support-page__left-radius
+    order: 2;
+
+  .support-page__right-radius
+    order: 1;
+
+  .support-page__grid-item
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
   .support-page__text-box-width
     width: 100%;
 
   .support-page__left-radius, .support-page__right-radius
-    background-color: none;
+    background-color: transparent;
 
   .support-page__heading
     font-size: 4.5rem;
@@ -84,7 +94,6 @@
   .support-page__our-story-background
     background-size: cover;
 
-
   .support-page__container
-    width: 98%
-    overflow: hidden
+    width: 95%;
+    overflow: hidden;
