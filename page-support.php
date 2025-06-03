@@ -135,63 +135,32 @@ if ( have_posts() ) {
           </div>
       </div>
     </div>
-    <section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4 mt-s-3 mb-s-3">
+    <section class="ux-carousel pb-6 pt-6 mb-6 alt">
       <div class="swiper">
-        <div class="swiper-button-prev swiper-button-prev--disabled">
-          <span class="only-desktop ui-chevron ui-chevron--left"></span>
-        </div>
-        <div class="swiper-button-next">
-          <span class="only-desktop ui-chevron ui-chevron--right"></span>
-        </div>
-
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
-          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
-            <a href="#">
-              <div class="products-bar__item-inner">
-                <div class="products-bar__item-image mr-2">
-                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
-                </div>
-                <div class="products-bar__item-text font-size-9">
-                  <h5 class="font-weight-bold">Title 1</h5>
-                  <p>Short description here</p>
-                </div>
-              </div>
-            </a>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
+                <h5 class="font-weight-bold mb-5">Title 1</h5>
+                <p>Short description here</p>
           </div>
-
           <!-- Slide 2 -->
-          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
-            <a href="#">
-              <div class="products-bar__item-inner">
-                <div class="products-bar__item-image mr-2">
-                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
-                </div>
-                <div class="products-bar__item-text font-size-9">
-                  <h5 class="font-weight-bold">Title 2</h5>
-                  <p>Another description</p>
-                </div>
-              </div>
-            </a>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
+                <h5 class="font-weight-bold mb-5">Title 2</h5>
+                <p>Short description here</p>
           </div>
-
           <!-- Slide 3 -->
-          <div class="swiper-slide support-page__ux-carousel__item ux-carousel__item">
-            <a href="#">
-              <div class="products-bar__item-inner">
-                <div class="products-bar__item-image mr-2">
-                  <img src="https://via.placeholder.com/56" alt="Placeholder" class="ui-rounded-image" loading="eager">
-                </div>
-                <div class="products-bar__item-text font-size-9">
-                  <h5 class="font-weight-bold">Title 3</h5>
-                  <p>Another short bit of text</p>
-                </div>
-              </div>
-            </a>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
+                <h5 class="font-weight-bold mb-5">Title 3</h5>
+                <p>Short description here</p>
+          </div>
+          <!-- Slide 4 -->
+          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
+                <h5 class="font-weight-bold mb-5">Title 4</h5>
+                <p>Short description here</p>
           </div>
         </div>
+      <div class="swiper-pagination"></div>
       </div>
-      <div class="ui-border-bottom pt-4 pt-s-3"></div>
     </section>
 
 
