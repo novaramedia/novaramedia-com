@@ -40,8 +40,8 @@ if ( have_posts() ) {
       </div>
       <div class="support-page__container">
         <div class="flex-grid-row" style="position: relative;">
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 background-white text-copy font-serif support-page__left-radius">
-            <div class="m-5 font-size-13 font-serif">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-white text-copy font-serif support-page__left-radius">
+            <div class="m-5 m-s-0 font-size-13 font-serif">
               <?php the_content(); ?>
               <?php
               if ( $youtube_id ) {
@@ -53,10 +53,10 @@ if ( have_posts() ) {
             </div>
           </div>
 
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 support-page__background-grey support-page__right-radius">
+          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-gray-base support-page__right-radius">
 
               <div class="support-page__donation-form-sticky mb-4">
-                <div class="background-red m-5" style="height: 200px;">
+                <div class="background-red m-5 m-s-0" style="height: 200px;">
                   This is to mimic support box for now
                 </div>
               </div>
@@ -65,7 +65,8 @@ if ( have_posts() ) {
 
       </div>
     </div>
-    <div class="support-page__background-grey">
+    <div class="background-gray-base">
+
       <!-- how we are funded -->
       <style>
           .support-page__infographic {
@@ -85,17 +86,18 @@ if ( have_posts() ) {
       </style>
       <div class="support-page__container">
         <div class="flex-grid-row pt-6 pb-6 support-page__text-container ui-border-top ui-border--black">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10">How we are funded</div>
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">How we are funded</div>
           <br/>
           <div class="support-page__infographic"></div>
           <br/>
           <div class="font-weight-bold support-page__text-box-width text-align-center font-size-12">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
         </div>
       </div>
+
       <!-- what we spend our funds on -->
       <div class="support-page__container mb-6 pb-6">
-        <div class="flex-grid-row pt-6 pb-6 support-page__text-container background-white ui-rounded-box ">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10 mb-5">How we spend our funds</div>
+        <div class="flex-grid-row pt-6 pb-6 support-page__text-container background-white ui-rounded-box-large">
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">How we spend our funds</div>
           <div class="support-page__text-box-width text-align-center font-weight-bold font-size-13
           ">
             <div class="font-color-black mb-5">Every penny Novara Media makes goes back into our journalism.</div>
@@ -107,7 +109,8 @@ if ( have_posts() ) {
           </div>
         </div>
       </div>
-      <!-- Our story -->
+
+      <!-- our story -->
       <style>
         .avif .support-page__our-story-background
         {
@@ -123,8 +126,8 @@ if ( have_posts() ) {
         }
       </style>
       <div class="support-page__container pb-6 pt-6 mb-6">
-        <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box pt-6 pb-6">
-          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-10 mb-7"> Our story </div>
+        <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
+          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7"> Our story </div>
           <div class="support-page__text-box-width font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
             <div class="font-weight-bold mb-4 font-size-12 ">
               Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
@@ -135,114 +138,109 @@ if ( have_posts() ) {
           </div>
       </div>
     </div>
+
+    <!-- carousel -->
     <section class="ux-carousel pb-6 pt-6 mb-6 alt">
       <div class="swiper">
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
-                <h5 class="font-weight-bold mb-5">Title 1</h5>
-                <p>Short description here</p>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center p-4 ui-rounded-box-large">
+            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Title 1</h5>
+            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
+            <p class="font-serif font-size-12">Short description here</p>
           </div>
           <!-- Slide 2 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
-                <h5 class="font-weight-bold mb-5">Title 2</h5>
-                <p>Short description here</p>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center p-4 ui-rounded-box-large">
+            <div class="pr-8 pl-8">
+              <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Title 2</h5>
+              <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
+              <p class="font-serif font-size-12">Short description here more words to see whhat it looks like. j jncsiu njwepfjnc wejf c wejf</p>
+            </div>
           </div>
           <!-- Slide 3 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
-                <h5 class="font-weight-bold mb-5">Title 3</h5>
-                <p>Short description here</p>
+          <div class="swiper-slide alt-ux-carousel__item text-align-center p-4 ui-rounded-box-large">
+            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Title 3</h5>
+            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
+            <p class="font-serif font-size-12">Short description here</p>
           </div>
           <!-- Slide 4 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center background-white p-4">
-                <h5 class="font-weight-bold mb-5">Title 4</h5>
-                <p>Short description here</p>
+           <div class="swiper-slide alt-ux-carousel__item text-align-center p-4 ui-rounded-box-large">
+            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Title 4</h5>
+            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
+            <p class="font-serif font-size-12">Short description here</p>
           </div>
         </div>
       <div class="swiper-pagination"></div>
       </div>
     </section>
 
-
-    <div class="background-red">
-      <div class="support-page__container padding-top-mid padding-bottom-mid font-color-white">
-        <div class="flex-grid-row">
-          <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
-            <h4 class="font-size-9 text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
-            <?php
-            if ( ! empty( $meta['_cmb_page_extra'] ) ) {
-              echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0] );
-            }
-            ?>
-            <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--white ui-button--small">Log in to your account</a></p>
-          </div>
-        </div>
-      </div>
+    <!-- donation form -->
+    <div class="support-page__container">
+      <?php
+        get_template_part(
+            'partials/support-section',
+            null,
+            array(
+                'heading_copy'  => $form_tag_override,
+                'override_text' => $form_copy_override,
+            )
+        );
+      ?>
     </div>
-
-    <?php
-    get_template_part(
-        'partials/support-section',
-        null,
-        array(
-            'heading_copy'  => $form_tag_override,
-            'override_text' => $form_copy_override,
-        )
-    );
-    ?>
 
     <div id="other-donation-methods" class="support-page__container">
-      <div class="flex-grid-row padding-top-mid padding-bottom-mid">
-        <div class="flex-grid-item flex-item-xxl-12 margin-bottom-basic">
-          <h4 class="font-size-9 text-uppercase font-weight-bold">Other Donation Methods</h4>
-        </div>
-        <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-xxl-3 margin-bottom-small">
-          <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
-        </div>
-
-        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
-          <p>
-            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-paypal.svg' ); ?>
-          </p>
-          <p class="font-weight-bold mb-3">PayPal</p>
-          <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
-          <p><a class="mt-3 ui-button ui-button--red ui-button--small" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
+      <!-- already a supporter -->
+      <div class="flex-grid-row pt-6 pb-6">
+        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-6 mb-4">
+          <h4 class="font-size-11 font-weight-bold mb-3">Already a supporter?</h4>
+          <?php
+          if ( ! empty( $meta['_cmb_page_extra'] ) ) {
+            echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0] );
+          }
+          ?>
+          <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small">Log in to your account</a></p>
         </div>
 
-        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
-          <p>
-            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-directdebit.svg' ); ?>
-          </p>
-          <p class="font-weight-bold mb-3"><strong>GoCardless</strong></p>
-          <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
+        <!-- Other donation methods -->
+        <div class="flex-grid-item flex-item-xxl-6 flex-item-s-12">
+          <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-s-12 mb-5">
+            <h4 class="font-size-11 font-weight-bold mb-3">Other Donation Methods</h4>
+            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
+          </div>
 
-          <div class="mt-3 flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
-            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+          <div class="flex-grid-row">
+            <!-- paypal -->
+            <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12">
+              <img class="support-page__paypal-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-paypal.svg" alt="PayPal logo" />
+              <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
+              <p><a class="mt-3 ui-button ui-button--red ui-button--small" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
             </div>
-            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-            <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+
+            <!-- GoCardless -->
+            <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12">
+              <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
+              <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>
+              <div class="mt-3 flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                  <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
+                </div>
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mon</a>
+                </div>
+              </div>
+              <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                  <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
+                </div>
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                  <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
-            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
-            </div>
-            <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6">
-              <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
-          <p>
-            <?php echo url_get_contents( get_bloginfo( 'stylesheet_directory' ) . '/dist/img/support-logo-bitcoin.svg' ); ?>
-          </p>
-          <p class="font-weight-bold mb-3"><strong>Crypto</strong></p>
-          <p>We accept BTC at this address: <code class="font-size-smaller">1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i</code> If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
-        </div>
       </div>
     </div>
+  </div>
   <!-- end post -->
   </article>
     <?php
