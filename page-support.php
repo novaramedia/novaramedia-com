@@ -197,14 +197,14 @@ if ( have_posts() ) {
             echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0] );
           }
           ?>
-          <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small mb-s-6">Log in to your account</a></p>
+          <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small mb-s-5">Log in to your account</a></p>
         </div>
 
         <!-- Other donation methods -->
         <div class="flex-grid-item flex-item-xxl-6 flex-item-s-12 support-page__grid-item">
-          <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-s-12 mb-5 support-page__grid-item">
+          <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-s-12 mb-5 mb-s-4 support-page__grid-item">
             <h4 class="font-size-11 font-weight-bold mb-3">Other Donation Methods</h4>
-            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal, UK Direct Debit or Bitcoin if you prefer.</p>
+            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal or UK Direct Debit.</p>
           </div>
 
           <div class="flex-grid-row">
@@ -212,26 +212,24 @@ if ( have_posts() ) {
             <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 support-page__grid-item">
               <img class="support-page__paypal-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-paypal.svg" alt="PayPal logo" />
               <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
-              <p><a class="mt-3 ui-button ui-button--red ui-button--small mb-m-5" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
+              <p><a class="mt-3 ui-button ui-button--red ui-button--small mb-m-5 mb-s-4" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
             </div>
 
             <!-- GoCardless -->
             <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 support-page__grid-item">
               <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
               <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>
-              <div class="mt-3 flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+              <div class="mt-3 flex-grid-row flex-grid--nested-tight mb-3">
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3 mb-3">
                   <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
                 </div>
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
-                <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mon</a>
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
+                <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
                 </div>
-              </div>
-              <div class="flex-grid-row flex-grid--nested-tight margin-bottom-tiny">
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
                   <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
                 </div>
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-4">
+                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
                   <a class="ui-button ui-button--red ui-button--small mb-s-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
                 </div>
               </div>
