@@ -102,12 +102,12 @@ class CarouselAlt {
         forceToAxis: true,
       },
       freeMode: false,
-      slidesPerView: 2,
+      slidesPerView: 1,
       loop: true,
       centeredSlides: true,
       breakpoints: {
         480: {
-          slidesPerView: 1,
+          slidesPerView: 3,
         },
       },
     });
