@@ -150,11 +150,9 @@ if ( have_posts() ) {
           </div>
           <!-- Slide 2 -->
           <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
-            <div class="pr-8 pl-8">
               <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Supporters Say</h5>
               <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
               <p class="font-serif font-size-12">Short description here more words to see whhat it looks like. j jncsiu njwepfjnc wejf c wejf</p>
-            </div>
           </div>
           <!-- Slide 3 -->
           <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
