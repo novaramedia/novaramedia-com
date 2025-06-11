@@ -94,18 +94,18 @@ if ( have_posts() ) {
         </div>
       </div>
 
-      <!-- what we spend our funds on -->
+      <!-- how we spend our funds -->
       <div class="support-page__container mb-6 pb-6">
         <div class="flex-grid-row pt-6 pb-5 support-page__text-container background-white ui-rounded-box-large">
           <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">How we spend our funds</div>
-          <div class="support-page__text-box-width text-align-center font-weight-bold font-size-13 font-size-s-12 pl-s-5 pr-s-5">
-            <div class="font-color-black mb-5">Every penny Novara Media makes goes back into our journalism.</div>
-            <div class="font-color-gray-light mb-5">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
-            <div class="font-color-gray-light mb-5">It pays for the studio space where we film our live show.</div>
-            <div class="font-color-gray-light mb-5">It allows us to hire key roles, like a labour movement correspondent.</div>
-            <div class="font-color-gray-light mb-5">It helps us fight (and win) against the smears of the rightwing press.</div>
-            <div class="font-color-gray-light">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
-          </div>
+            <div class="ux-highlighter support-page__text-box-width text-align-center font-size-13 font-size-s-12 font-weight-bold">
+              <div class="ux-highlighter__line mb-5 font-color-black">Every penny Novara Media makes goes back into our journalism.</div>
+              <div class="ux-highlighter__line mb-5 font-color-gray-light">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
+              <div class="ux-highlighter__line mb-5 font-color-gray-light">It pays for the studio space where we film our live show.</div>
+              <div class="ux-highlighter__line mb-5 font-color-gray-light">It allows us to hire key roles, like a labour movement correspondent.</div>
+              <div class="ux-highlighter__line mb-5 font-color-gray-light">It helps us fight (and win) against the smears of the rightwing press.</div>
+              <div class="ux-highlighter__line font-color-gray-light">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
+            </div>
         </div>
       </div>
 
@@ -124,7 +124,7 @@ if ( have_posts() ) {
           background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
         }
       </style>
-      <div class="support-page__container pb-6 pt-5 mb-6">
+      <div class="support-page__container pb-6 pb-s-0 pt-5 pt-s-0 mb-6 ">
         <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7"> Our story </div>
           <div class="support-page__text-box-width font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
@@ -139,7 +139,7 @@ if ( have_posts() ) {
     </div>
 
     <!-- carousel -->
-    <section class="ux-carousel pb-6 pt-6 mb-6 alt">
+    <section class="ux-carousel pb-6 pt-6 mb-6 mb-s-0 alt">
       <div class="swiper">
         <div class="swiper-wrapper">
           <!-- Slide 1 -->

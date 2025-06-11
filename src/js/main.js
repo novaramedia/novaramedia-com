@@ -14,6 +14,7 @@ import { Carousels } from './modules/Carousels.js';
 import { MailchimpSignup } from './modules/MailchimpSignup.js';
 import { Scrollers } from './modules/Scrollers.js';
 import { Utilities } from './modules/Utilities.js';
+import { Highlighters } from './modules/HighlightScroll.js';
 
 class Site {
   constructor() {
@@ -26,6 +27,7 @@ class Site {
     this.mailchimpSignup = new MailchimpSignup();
     this.scrollers = new Scrollers();
     this.utilties = new Utilities();
+    this.highlighters = new Highlighters();
 
     $(document).ready(this.onReady.bind(this));
   }
@@ -40,6 +42,7 @@ class Site {
     this.carousels.onReady();
     this.scrollers.onReady();
     this.utilties.onReady();
+    this.highlighters.onReady();
   }
 }
 
