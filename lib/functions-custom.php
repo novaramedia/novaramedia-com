@@ -201,6 +201,32 @@ function nm_isset_and_numeric( $string ) {
   return false;
 }
 /**
+ * Retrieves the support section heading and text content for different donation modes.
+ *
+ * Returns an associative array containing heading and text pairs for:
+ * - 'regular' donations
+ * - 'oneoff' donations
+ * - 'default' fallback values
+ *
+ * These values are pulled from the fundraising options.
+ */
+function nm_get_support_heading_text_data() {
+  return array(
+      'regular' => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_regular_text_override', 'nm_fundraising_options' ),
+      ),
+      'oneoff' => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_oneoff_heading_override', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_oneoff_text_override', 'nm_fundraising_options' ),
+      ),
+      'default' => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_support_section_title', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_support_section_text', 'nm_fundraising_options' ),
+      ),
+  );
+}
+/**
  * Gets metadata for support form autovalues, validates and returns correctly structured array
  *
  * @return array Array of autovalues for support form

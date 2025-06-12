@@ -58,8 +58,11 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <div class="grid-row grid--nested-tight mb-5">
+
       <!-- Low, Medium, High Tier Buttons -->
-      <?php foreach ( array( 'low', 'medium', 'high' ) as $tier ) : ?>
+      <?php
+      foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
+        ?>
         <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
           <button class="support-form__button support-form__value-option ui-input"
                   data-action="set-value"
@@ -68,80 +71,62 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
             £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
           </button>
         </div>
-      <?php endforeach; ?>
+        <?php
+      }
+      ?>
 
       <!-- Custom Input Field -->
       <div class="grid-item grid-item--tight is-xxl-12 is-s-24">
-        <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-        <input id="<?php echo esc_attr( $instance ); ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
+        <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
+          Custom donation amount in pounds
+        </label>
+        <input id="<?php echo esc_attr( $instance ); ?>__custom-input"
+               class="support-form__custom-input ui-input"
+               type="number"
+               min="1"
+               placeholder="£ Custom amount" />
       </div>
     </div>
 
     <div class="grid-row grid--nested-tight">
       <div class="grid-item grid-item--tight is-xxl-24">
-        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width"
+               type="submit"
+               value="Go" />
       </div>
     </div>
   </div>
   <?php
 }
 /**
- * Render the heading and support section text, preferring mode-specific values, then global, then hardcoded defaults.
+ * Render the support section heading and text based on the donation mode.
+ *
+ * @param string $donation_mode The donation mode, either 'regular' or 'oneoff'.
+ * @param string $text_classes Optional additional classes for the text container.
  */
 function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
-  $heading_copy = NM_get_option( 'nm_fundraising_settings_support_section_title', 'nm_fundraising_options' );
-  $support_section_text = NM_get_option( 'nm_fundraising_settings_support_section_text', 'nm_fundraising_options' );
-  $regular_heading = NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' );
-  $regular_text = NM_get_option( 'nm_fundraising_settings_regular_text_override', 'nm_fundraising_options' );
-  $oneoff_heading = NM_get_option( 'nm_fundraising_settings_oneoff_heading_override', 'nm_fundraising_options' );
-  $oneoff_text = NM_get_option( 'nm_fundraising_settings_oneoff_text_override', 'nm_fundraising_options' );
+  $data = nm_get_support_heading_text_data();
 
-  $heading_text_data = array();
   $heading = '';
   $text = '';
-  if ( ! empty( $regular_heading ) && ! empty( $regular_text ) ) {
-    $heading_text_data['regular'] = array(
-        'heading' => $regular_heading,
-        'text'    => $regular_text,
-    );
-  }
 
-  if ( ! empty( $oneoff_heading ) && ! empty( $oneoff_text ) ) {
-    $heading_text_data['oneoff'] = array(
-        'heading' => $oneoff_heading,
-        'text'    => $oneoff_text,
-    );
-  }
-
-  if ( ! empty( $heading_text_data ) ) {
-    echo '<script>';
-    echo 'window.SupportFormCopy = ' . wp_json_encode( $heading_text_data ) . ';';
-    echo '</script>';
-  }
-
-  // Initial heading/text logic
-
-  if ( $donation_mode === 'regular' && ! empty( $regular_heading ) && ! empty( $regular_text ) ) {
-    $heading = $regular_heading;
-    $text    = $regular_text;
-  } elseif ( $donation_mode === 'oneoff' && ! empty( $oneoff_heading ) && ! empty( $oneoff_text ) ) {
-    $heading = $oneoff_heading;
-    $text    = $oneoff_text;
-  } elseif ( ! empty( $heading_copy ) && ! empty( $support_section_text ) ) {
-    $heading = $heading_copy;
-    $text    = $support_section_text;
+  if ( isset( $data[ $donation_mode ] ) && ! empty( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+    $heading = $data[ $donation_mode ]['heading'];
+    $text = $data[ $donation_mode ]['text'];
+  } elseif ( ! empty( $data['default']['heading'] ) && ! empty( $data['default']['text'] ) ) {
+    $heading = $data['default']['heading'];
+    $text = $data['default']['text'];
   } else {
     $heading = 'Support Novara Media';
-    $text    = 'Help us fund independent journalism.';
+    $text = 'Help us fund independent journalism.';
   }
 
-  // Output the heading and text in the wrapper with provided or default classes
   ?>
   <div class="<?php echo esc_attr( $text_classes ); ?>">
-    <a href="<?php echo home_url( 'support/' ); ?>">
-    <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
-      <?php echo esc_html( $heading ); ?>
-    </h4>
+    <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>">
+      <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
+        <?php echo esc_html( $heading ); ?>
+      </h4>
     </a>
     <?php if ( $text ) : ?>
       <div class="mb-5">
@@ -507,35 +492,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          get_template_part(
+        get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-        );
+          );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-    );
+      );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-      get_template_part(
+    get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-    );
+      );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
