@@ -130,7 +130,7 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
     </a>
     <?php if ( $text ) : ?>
       <div class="mb-5">
-        <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="js-fix-widows support-form__dynamic-text">
+        <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text">
           <?php echo esc_html( $text ); ?>
         </a>
       </div>
@@ -143,14 +143,23 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
  */
 function render_payment_icons( $payment_classes = '' ) {
   $img_base = get_template_directory_uri() . '/dist/img/support-form/';
+  $payment_methods = array(
+      'Visa'       => 'visa icon',
+      'Mastercard' => 'mastercard icon',
+      'Stripe'     => 'stripe icon',
+      'PayPal'     => 'paypal icon',
+      'ApplePay'   => 'apple pay icon',
+      'GooglePay'  => 'google pay icon',
+  );
   ?>
-  <div class=" <?php echo esc_attr( $payment_classes ); ?>">
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Visa.svg" alt="visa icon" />
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Mastercard.svg" alt="mastercard icon" />
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>Stripe.svg" alt="stripe icon" />
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>PayPal.svg" alt="paypal icon" />
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>ApplePay.svg" alt="apple pay icon" />
-    <img class="support-form__payment-type mr-2" src="<?php echo $img_base; ?>GooglePay.svg" alt="google pay icon" />
+  <div class="<?php echo esc_attr( $payment_classes ); ?>">
+    <?php foreach ( $payment_methods as $filename => $alt_text ) : ?>
+      <img
+        class="support-form__payment-type mr-2"
+        src="<?php echo esc_url( $img_base . $filename . '.svg' ); ?>"
+        alt="<?php echo esc_attr( $alt_text ); ?>"
+      />
+    <?php endforeach; ?>
   </div>
   <?php
 }
@@ -224,19 +233,24 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
  * @param string $variant One of: 'banner', 'condensed'.
  */
 function render_support_form_dispatcher( $variant ) {
-    // Generate unique ID for the form
   $instance = uniqid( 'support-form-' );
   $support_section_autovalues = nm_get_support_autovalues();
   $active_values = $support_section_autovalues['default'];
-  $donation_mode = nm_get_donation_mode( $active_values );
+
+  if ( isset( $active_values->show_first ) && in_array( $active_values->show_first, array( 'regular', 'oneoff' ), true ) ) {
+        $donation_mode = $active_values->show_first;
+  } else {
+        $donation_mode = 'regular'; // fallback
+  }
+
   switch ( $variant ) {
     case 'condensed':
-      render_support_form_condensed_version( $instance, $active_values, $donation_mode );
+            render_support_form_condensed_version( $instance, $active_values, $donation_mode );
         break;
 
     case 'banner':
     default:
-      render_support_form( $instance, $active_values, $donation_mode );
+            render_support_form( $instance, $active_values, $donation_mode );
         break;
   }
 }
@@ -492,35 +506,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-        get_template_part(
+          get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-          );
+        );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-      );
+    );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-      );
+    );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
