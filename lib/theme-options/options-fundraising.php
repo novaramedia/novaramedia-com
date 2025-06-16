@@ -69,7 +69,7 @@ function nm_register_fundraising_options_metabox() {
 
         $main_options->add_field(
             array(
-                'name' => 'scheduled Donation Overrides',
+                'name' => 'Support Section Dynamic Copy',
                 'desc' => 'These fields dynamically update the form text based on whether the user selects a one-off or regular donation. Note: All fields in this section must be completed for the overrides to take effect. Leave blank if you do not want to override the text above.',
                 'id'   => $prefix . 'fundraising_settings_regular_override_title',
                 'type' => 'title',

@@ -9,26 +9,22 @@
     .support-form__inputs
       opacity: 1
 
-.support-form__box-radius
-  border-radius: 4px
-
 .support-form__schedule-option-right
   border-radius:  0px 4px 4px 0px;
 
 .support-form__schedule-option-left
   border-radius:  4px 0px 0px 4px;
 
-.support-form__button-wide
-  width: 100%
+// .support-form__button-wide
+//   width: 100%
 
-.support-form__button,
-.support-form__custom-input
-  color: var(--color-white-soft);
-  background-color: var(--color-red);
-  text-align: center;
-  transition: opacity var(--transition-speed-ultra);
-  &:not(&--active):hover:not(:focus)
-    opacity: 0.5;
+.support-form__button
+  // color: var(--color-white-soft);
+  // background-color: var(--color-red);
+  // text-align: center;
+  // transition: opacity var(--transition-speed-ultra);
+  // &:not(&--active):hover:not(:focus)
+  //   opacity: 0.5;
   &--active
     color: var(--color-black-soft);
     background-color: var(--color-white-soft);
@@ -39,6 +35,17 @@
     border-color: var(--color-white-soft);
     outline: none;
 
+.support-form__input-wrapper
+  position: relative
+
+.support-form__input-prefix
+  position: absolute
+  top: 50%
+  left: 12px
+  transform: translateY(-50%)
+  color: var(--color-white-soft) // adjust if needed
+
+
 .support-form__schedule-mobile .support-form__button,
 .support-form__tab-schedule-buttons .support-form__button
   color: var(--color-black-soft);
@@ -47,12 +54,10 @@
     color: var(--color-white-soft);
     background-color: var(--color-red);
 
-.support-form__custom-input::placeholder
-  padding-left: 5px
-
 .support-form__custom-input
+  padding-left: 30px
   &::placeholder
-    color: var(--color-white-soft)
+    color: var(--color-white-soft-transparent)
   &:hover, &.support-form__button--active
     &::placeholder
       color: var(--color-white-soft)
@@ -60,7 +65,6 @@
 .support-form__payment-type
   vertical-align: bottom
   height: 3vh;
-  border-radius: 4px;
 
 .support-form__text-mobile,
 .support-form__schedule-mobile,
