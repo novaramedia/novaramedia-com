@@ -63,7 +63,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
-        <div class="grid-item grid-item--tight is-xxl-4 is-s-8 mb-s-2">
+        <div class="grid-item grid-item--tight is-xxl-3 is-s-8 mb-s-2">
           <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__value-option"
                   data-action="set-value"
                   data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
@@ -76,7 +76,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
       ?>
 
       <!-- Custom Input Field -->
-      <div class="grid-item grid-item--tight is-xxl-12 is-s-24">
+      <div class="grid-item grid-item--tight is-xxl-15 is-s-24">
         <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
           Custom donation amount in pounds
         </label>
