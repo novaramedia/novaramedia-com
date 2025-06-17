@@ -40,11 +40,14 @@
 .support-form__tab-schedule-buttons .support-form__button
   color: var(--color-black-soft)
   background-color: var(--color-white-soft)
-  &--active
+  &:hover:not(:focus):not(.support-form__button--active)
+    color: var(--color-gray)
+  &.support-form__button--active
     color: var(--color-white-soft)
     background-color: var(--color-red)
-  &:not(.support-form__button--active):hover
-    color: var(--color-gray)
+    &:hover
+      color: var(--color-white-soft)
+      background-color: var(--color-red)
 
 .support-form__custom-input
   padding-left: 30px

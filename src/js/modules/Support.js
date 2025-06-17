@@ -57,7 +57,7 @@ export class Support {
         _this.clearActiveButtonState($form);
         $form
           .find('.support-form__schedule-option[data-value=oneoff]')
-          .addClass('support-form__button--active');
+          .addClass('support-form__button--active ui-button--active');
       }
 
       const $valueInput = $form.find('.support-form__value-input').first();
@@ -89,7 +89,7 @@ export class Support {
 
             _this.clearActiveButtonState($form);
 
-            $button.addClass('support-form__button--active');
+            $button.addClass('support-form__button--active ui-button--active');
 
             updateSupportSection(data, $form);
           } else if (data.action === 'set-value') {
@@ -99,10 +99,10 @@ export class Support {
             _this.clearActiveButtonState($form, 'set-value');
 
             $('.support-form__custom-input').removeClass(
-              'support-form__button--active'
+              'support-form__button--active ui-button--active'
             );
 
-            $button.addClass('support-form__button--active');
+            $button.addClass('support-form__button--active ui-button--active');
           }
         },
       });
@@ -115,11 +115,11 @@ export class Support {
 
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).addClass('support-form__button--active');
+          $(this).addClass('support-form__button--active ui-button--active');
         },
       });
 
-      $form.addClass('support-form--active');
+      $form.addClass('support-form--active ui-button--active');
     });
   }
 
@@ -133,11 +133,11 @@ export class Support {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
-        .removeClass('support-form__button--active');
+        .removeClass('support-form__button--active ui-button--active');
     } else {
       $form
         .find('.support-form__button')
-        .removeClass('support-form__button--active');
+        .removeClass('support-form__button--active ui-button--active');
     }
   }
 
