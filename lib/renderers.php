@@ -203,7 +203,7 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
         <div class="grid-row">
           <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
             <!-- Desktop: Text -->
-            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-4' ); ?>
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-6' ); ?>
             <!-- Desktop: Payment -->
             <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
           </div>
@@ -507,35 +507,35 @@ function render_front_page_banner( $key ) {
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-        get_template_part(
+          get_template_part(
             'partials/email-signup',
             null,
             array(
                 'newsletter_page_id' => $newsletter_id,
             )
-          );
+        );
         }
       }
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Cortado',
             'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-      );
+    );
         break;
     case 'email-the-pick': // depreciated 3.9.0
-    get_template_part(
+      get_template_part(
         'partials/email-signup',
         null,
         array(
             'newsletter' => 'The Pick',
             'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-      );
+    );
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
