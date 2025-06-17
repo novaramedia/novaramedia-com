@@ -117,8 +117,12 @@ export class Support {
 
           $(this).addClass('support-form__button--active ui-button--active');
         },
+        keydown(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault(); // prevents form submission on enter and state reset
+          }
+        }
       });
-
       $form.addClass('support-form--active ui-button--active');
     });
   }
