@@ -70,8 +70,10 @@ export class Support {
           const data = $button.data();
           // function to update the support section copy depending on the type of donation
           function updateSupportSection(data, $form) {
-            const copy =
-              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+            const heading = $form.find('.support-form__dynamic-heading');
+            const text = $form.find('.support-form__dynamic-text');
+            const copy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+
             if (!copy) {
               if (heading.length) {
                 heading.text('Support Us');
@@ -81,8 +83,6 @@ export class Support {
               }
               return;
             }
-            const heading = $form.find('.support-form__dynamic-heading');
-            const text = $form.find('.support-form__dynamic-text');
 
             if (heading.length) {
               heading.text(copy.heading);
