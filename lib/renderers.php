@@ -58,8 +58,6 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <div class="grid-row grid--nested-tight mb-5">
-
-      <!-- Low, Medium, High Tier Buttons -->
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
@@ -74,8 +72,6 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         <?php
       }
       ?>
-
-      <!-- Custom Input Field -->
       <div class="grid-item grid-item--tight is-xxl-15 is-s-24">
         <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
           Custom donation amount in pounds
@@ -195,28 +191,28 @@ function render_support_form( $instance, $active_values, $donation_mode ) {
    <div class="background-red ui-rounded-box-large m-2 font-color-white">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
   <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-    <!-- Mobile: Schedule -->
+    <?php // Mobile: Schedule ?>
     <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
-        <!-- Mobile: Text -->
+        <?php // Mobile: Text ?>
         <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile is-s-24' ); ?>
         <div class="grid-row">
           <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
-            <!-- Desktop: Text -->
+            <?php // Desktop: Text ?>
             <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-6' ); ?>
-            <!-- Desktop: Payment -->
+            <?php // Desktop: Payment ?>
             <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
           </div>
           <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
-            <!-- Desktop: Schedule -->
+            <?php // Desktop: Schedule ?>
             <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-            <!-- Desktop: Buttons -->
+            <?php // Desktop: Buttons ?>
             <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
-        <!-- Mobile: Buttons -->
-            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
-        <!-- Mobile: Payment -->
+        <?php // Mobile: Buttons ?>
+        <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
+        <?php // Mobile: Payment ?>
         <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>
