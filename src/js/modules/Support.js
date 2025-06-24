@@ -72,15 +72,25 @@ export class Support {
           function updateSupportSection(data, $form) {
             const copy =
               WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-            if (!copy) return;
-
+            if (!copy) {
+              if (heading.length) {
+                heading.text('Support Us');
+              }
+              if (text.length) {
+                text.text('You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today');
+              }
+              return;
+            }
             const heading = $form.find('.support-form__dynamic-heading');
             const text = $form.find('.support-form__dynamic-text');
 
-            if (heading.length) heading.text(copy.heading);
-            if (text.length) text.text(copy.text);
+            if (heading.length) {
+              heading.text(copy.heading);
+            }
+            if (text.length) {
+              text.text(copy.text);
+            }
           }
-
           if (data.action === 'set-type') {
             // if the button is setting the type of donation
             _this.setAutoValues($form, data.value);
