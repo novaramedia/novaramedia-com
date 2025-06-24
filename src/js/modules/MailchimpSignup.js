@@ -59,6 +59,7 @@ export class MailchimpSignup {
               $feedbackMessageSpan.text(response.message);
             } catch (error) {
               $feedbackMessageSpan.text('General error');
+              console.error('Error parsing response:', error);
             }
 
             $formInputs.prop('disabled', false);
