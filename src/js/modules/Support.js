@@ -79,7 +79,9 @@ export class Support {
                 heading.text('Support Us');
               }
               if (text.length) {
-                text.text('You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today');
+                text.text(
+                  'You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today'
+                );
               }
               return;
             }
