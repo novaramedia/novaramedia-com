@@ -82,7 +82,10 @@ var config = {
   },
 
   plugins: [
-    new ESLintPlugin(),
+    new ESLintPlugin({
+      configType: 'eslintrc',
+      failOnError: false,
+    }),
     new MiniCssExtractPlugin(),
     {
       apply: (compiler) => {
