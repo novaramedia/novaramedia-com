@@ -77,8 +77,8 @@ export class Support {
             const heading = $form.find('.support-form__dynamic-heading');
             const text = $form.find('.support-form__dynamic-text');
 
-            if (heading.length) heading.html(copy.heading);
-            if (text.length) text.html(copy.text);
+            if (heading.length) heading.text(copy.heading);
+            if (text.length) text.text(copy.text);
           }
 
           if (data.action === 'set-type') {
