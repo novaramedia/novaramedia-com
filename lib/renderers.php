@@ -125,13 +125,13 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
       <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
         <?php echo esc_html( $heading ); ?>
       </h4>
-    <?php if ( $text ) : ?>
-      <div class="mb-5">
-        <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text">
-          <?php echo esc_html( $text ); ?>
-        </a>
-      </div>
-    <?php endif; ?>
+     <?php if ( $text ) { ?>
+    <div class="mb-5">
+      <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text">
+        <?php echo esc_html( $text ); ?>
+      </a>
+    </div>
+    <?php } ?>
   </div>
   <?php
 }
@@ -150,13 +150,13 @@ function render_payment_icons( $payment_classes = '' ) {
   );
   ?>
   <div class="<?php echo esc_attr( $payment_classes ); ?>">
-    <?php foreach ( $payment_methods as $filename => $alt_text ) : ?>
+    <?php foreach ( $payment_methods as $filename => $alt_text ) { ?>
       <img
         class="support-form__payment-type ui-rounded-box-large mr-2"
         src="<?php echo esc_url( $img_base . $filename . '.svg' ); ?>"
         alt="<?php echo esc_attr( $alt_text ); ?>"
       />
-    <?php endforeach; ?>
+    <?php } ?>
   </div>
   <?php
 }
