@@ -72,7 +72,8 @@ export class Support {
           function updateSupportSection(data, $form) {
             const heading = $form.find('.support-form__dynamic-heading');
             const text = $form.find('.support-form__dynamic-text');
-            const copy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+            const copy =
+              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
 
             if (!copy) {
               if (heading.length) {
