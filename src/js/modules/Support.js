@@ -131,8 +131,10 @@ export class Support {
         },
       });
 
-      $form.find('.support-form__button').on('keydown', function(event) {
-        const $buttons = $(this).closest('.support-form').find('.support-form__button');
+      $form.find('.support-form__button').on('keydown', function (event) {
+        const $buttons = $(this)
+          .closest('.support-form')
+          .find('.support-form__button');
         let index = $buttons.index(this);
 
         if (event.key === 'ArrowRight') {
@@ -169,7 +171,9 @@ export class Support {
             const val = $(this).val().trim();
             if (val !== '') {
               _this.clearActiveButtonState($form, 'set-value');
-              $(this).addClass('support-form__button--active ui-button--active');
+              $(this).addClass(
+                'support-form__button--active ui-button--active'
+              );
               $form.find('[data-action="set-value"]').each((i, btn) => {
                 btn.setAttribute('aria-checked', 'false');
                 btn.setAttribute('tabindex', '-1');
@@ -177,7 +181,7 @@ export class Support {
               // Optionally, trigger form submission or next step here
             }
           }
-        }
+        },
       });
       $form.addClass('support-form--active ui-button--active');
     });
