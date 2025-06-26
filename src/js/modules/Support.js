@@ -131,23 +131,21 @@ export class Support {
         },
       });
 
-      // Add keyboard support for arrow keys and enter/space key
       $form.find('.support-form__button').on('keydown', function(event) {
-        const key = event.key;
-        const $buttons = $(this).closest('.support-form').find(`.support-form__button[data-action="${$(this).data('action')}"]`);
+        const $buttons = $(this).closest('.support-form').find('.support-form__button');
         let index = $buttons.index(this);
 
-        if (key === 'ArrowRight' || key === 'ArrowDown') {
+        if (event.key === 'ArrowRight') {
           event.preventDefault();
-          index = (index + 1) % $buttons.length;  // wrap around next
-          $buttons.eq(index).focus().click();
-        } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+          index = (index + 1) % $buttons.length;
+          $buttons.eq(index).focus();
+        } else if (event.key === 'ArrowLeft') {
           event.preventDefault();
-          index = (index - 1 + $buttons.length) % $buttons.length;  // wrap around prev
-          $buttons.eq(index).focus().click();
-        } else if (key === 'Enter' || key === ' ') {
+          index = (index - 1 + $buttons.length) % $buttons.length;
+          $buttons.eq(index).focus();
+        } else if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          $(this).click();  // simulate click on enter/space
+          $(this).trigger('click'); // Activate on Enter or Space
         }
       });
 
@@ -166,6 +164,21 @@ export class Support {
             btn.setAttribute('tabindex', '-1');
           });
         },
+        keydown(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            const val = $(this).val().trim();
+            if (val !== '') {
+              _this.clearActiveButtonState($form, 'set-value');
+              $(this).addClass('support-form__button--active ui-button--active');
+              $form.find('[data-action="set-value"]').each((i, btn) => {
+                btn.setAttribute('aria-checked', 'false');
+                btn.setAttribute('tabindex', '-1');
+              });
+              // Optionally, trigger form submission or next step here
+            }
+          }
+        }
       });
       $form.addClass('support-form--active ui-button--active');
     });
