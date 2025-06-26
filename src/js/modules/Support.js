@@ -174,8 +174,18 @@ export class Support {
                 btn.setAttribute('aria-checked', 'false');
                 btn.setAttribute('tabindex', '-1');
               });
-              // Optionally, trigger form submission or next step here
             }
+          }
+        },
+        focus() {
+          const $prefix = $(this).siblings('.support-form__input-prefix');
+          $prefix.css('color', 'var(--color-black-soft)');
+        },
+        blur() {
+          const $input = $(this);
+          const $prefix = $input.siblings('.support-form__input-prefix');
+          if (!$input.hasClass('support-form__button--active')) {
+            $prefix.css('color', '');
           }
         }
       });
