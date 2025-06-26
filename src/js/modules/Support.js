@@ -132,25 +132,28 @@ export class Support {
       });
 
       // Add keyboard support for arrow keys and enter/space key
-      $form.find('.support-form__button').on('keydown', function(event) {
+      $form.find('.support-form__button').on('keydown', function (event) {
         const key = event.key;
-        const $buttons = $(this).closest('.support-form').find(`.support-form__button[data-action="${$(this).data('action')}"]`);
+        const $buttons = $(this)
+          .closest('.support-form')
+          .find(
+            `.support-form__button[data-action="${$(this).data('action')}"]`
+          );
         let index = $buttons.index(this);
 
         if (key === 'ArrowRight' || key === 'ArrowDown') {
           event.preventDefault();
-          index = (index + 1) % $buttons.length;  // wrap around next
+          index = (index + 1) % $buttons.length; // wrap around next
           $buttons.eq(index).focus().click();
         } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
           event.preventDefault();
-          index = (index - 1 + $buttons.length) % $buttons.length;  // wrap around prev
+          index = (index - 1 + $buttons.length) % $buttons.length; // wrap around prev
           $buttons.eq(index).focus().click();
         } else if (key === 'Enter' || key === ' ') {
           event.preventDefault();
-          $(this).click();  // simulate click on enter/space
+          $(this).click(); // simulate click on enter/space
         }
       });
-
 
       $form.find('.support-form__custom-input').on({
         input(event) {
