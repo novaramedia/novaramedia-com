@@ -50,15 +50,16 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
-      _this.setAutoValues($form, this.autovalues['show_first']);
+      // Always call setAutoValues with the preferred initial type
+      const showFirst = this.autovalues['show_first'];
+      _this.setAutoValues($form, showFirst);
 
-      if (this.autovalues['show_first'] === 'oneoff') {
-        // if the setting is to show one off first then update buttons active state
-        _this.clearActiveButtonState($form);
-        $form
-          .find('.support-form__schedule-option[data-value=oneoff]')
-          .addClass('support-form__button--active ui-button--active');
-      }
+      // Highlight correct schedule option
+      $form
+        .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
+        .addClass('support-form__button--active ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
@@ -95,16 +96,19 @@ export class Support {
             }
           }
           if (data.action === 'set-type') {
-            // if the button is setting the type of donation
-            _this.setAutoValues($form, data.value);
-
-            $form.attr('action', _this.donationAppUrl + data.value);
-
             _this.clearActiveButtonState($form);
 
+            _this.setAutoValues($form, data.value);
+            $form.attr('action', _this.donationAppUrl + data.value);
             $button.addClass('support-form__button--active ui-button--active');
 
             updateSupportSection(data, $form);
+
+            $form.find('[data-action="set-type"]').each((i, btn) => {
+              const isSelected = btn === $button[0];
+              btn.setAttribute('aria-checked', isSelected.toString());
+              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
             $valueInput.val(data.value);
@@ -116,6 +120,13 @@ export class Support {
             );
 
             $button.addClass('support-form__button--active ui-button--active');
+
+            // Accessibility state management for custom radio buttons
+            $form.find('[data-action="set-value"]').each((i, btn) => {
+              const isSelected = btn === $button[0];
+              btn.setAttribute('aria-checked', isSelected.toString());
+              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
           }
         },
       });
@@ -129,6 +140,12 @@ export class Support {
           _this.clearActiveButtonState($form, 'set-value');
 
           $(this).addClass('support-form__button--active ui-button--active');
+
+          // Clear ARIA radio state for value buttons when custom input is used
+          $form.find('[data-action="set-value"]').each((i, btn) => {
+            btn.setAttribute('aria-checked', 'false');
+            btn.setAttribute('tabindex', '-1');
+          });
         },
         keydown(event) {
           if (event.key === 'Enter') {
@@ -166,14 +183,37 @@ export class Support {
    */
   setAutoValues($form, donationType = 'regular') {
     const _this = this;
+    const $buttons = $form.find('.support-form__value-option');
+    const $valueInput = $form.find('.support-form__value-input').first();
 
-    $form.find('.support-form__value-option').each((index, input) => {
-      const value =
-        _this.autovalues[`${donationType}_${$(input).data('name')}`];
+    // Clear old state before setting new one
+    _this.clearActiveButtonState($form, 'set-value');
 
-      $(input).data('value', value).text(`£${value}`);
+    // Update each button with new values
+    $buttons.each((index, input) => {
+      const $input = $(input);
+      const name = $input.data('name');
+      const value = _this.autovalues[`${donationType}_${name}`];
+
+      $input
+        .data('value', value)
+        .text(`£${value}`)
+        .attr('aria-checked', 'false')
+        .attr('tabindex', '-1');
     });
+
+    // Select the first button by default
+    const $first = $buttons.first();
+    if ($first.length) {
+      $first
+        .addClass('support-form__button--active ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
+
+      $valueInput.val($first.data('value'));
+    }
   }
+
 
   initSupportBar() {
     var _this = this;
