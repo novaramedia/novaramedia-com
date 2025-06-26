@@ -252,6 +252,10 @@ export class Support {
 
       $valueInput.val($first.data('value'));
     }
+    // ✅ Clear custom input
+    const $customInput = $form.find('.support-form__custom-input');
+    $customInput.val('').removeClass('support-form__button--active ui-button--active');
+    $customInput.siblings('.support-form__input-prefix').css('color', '');
   }
 
   initSupportBar() {
