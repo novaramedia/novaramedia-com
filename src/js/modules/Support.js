@@ -214,7 +214,6 @@ export class Support {
     }
   }
 
-
   initSupportBar() {
     var _this = this;
     const $bar = $('.support-bar');
