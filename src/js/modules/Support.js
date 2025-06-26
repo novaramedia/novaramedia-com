@@ -131,12 +131,31 @@ export class Support {
         },
       });
 
+      // Add keyboard support for arrow keys and enter/space key
+      $form.find('.support-form__button').on('keydown', function(event) {
+        const key = event.key;
+        const $buttons = $(this).closest('.support-form').find(`.support-form__button[data-action="${$(this).data('action')}"]`);
+        let index = $buttons.index(this);
+
+        if (key === 'ArrowRight' || key === 'ArrowDown') {
+          event.preventDefault();
+          index = (index + 1) % $buttons.length;  // wrap around next
+          $buttons.eq(index).focus().click();
+        } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+          event.preventDefault();
+          index = (index - 1 + $buttons.length) % $buttons.length;  // wrap around prev
+          $buttons.eq(index).focus().click();
+        } else if (key === 'Enter' || key === ' ') {
+          event.preventDefault();
+          $(this).click();  // simulate click on enter/space
+        }
+      });
+
+
       $form.find('.support-form__custom-input').on({
         input(event) {
           event.preventDefault();
-
           $valueInput.val(event.target.value);
-
           _this.clearActiveButtonState($form, 'set-value');
 
           $(this).addClass('support-form__button--active ui-button--active');
@@ -146,11 +165,6 @@ export class Support {
             btn.setAttribute('aria-checked', 'false');
             btn.setAttribute('tabindex', '-1');
           });
-        },
-        keydown(event) {
-          if (event.key === 'Enter') {
-            event.preventDefault(); // prevents form submission on enter and state reset
-          }
         },
       });
       $form.addClass('support-form--active ui-button--active');
