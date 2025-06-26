@@ -149,7 +149,6 @@ export class Support {
         }
       });
 
-
       $form.find('.support-form__custom-input').on({
         input(event) {
           event.preventDefault();
