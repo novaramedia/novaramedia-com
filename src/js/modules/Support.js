@@ -191,7 +191,7 @@ export class Support {
           if (!$input.hasClass('support-form__button--active')) {
             $prefix.css('color', '');
           }
-        }
+        },
       });
       $form.addClass('support-form--active ui-button--active');
     });
