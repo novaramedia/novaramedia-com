@@ -115,9 +115,7 @@ export class Support {
 
             _this.clearActiveButtonState($form, 'set-value');
 
-            $('.support-form__custom-input').removeClass(
-              'ui-button--active'
-            );
+            $('.support-form__custom-input').removeClass('ui-button--active');
 
             $button.addClass('ui-button--active');
 
@@ -207,9 +205,7 @@ export class Support {
         .find(`.support-form__button[data-action="${actionType}"]`)
         .removeClass('ui-button--active');
     } else {
-      $form
-        .find('.support-form__button')
-        .removeClass('ui-button--active');
+      $form.find('.support-form__button').removeClass('ui-button--active');
     }
   }
 
@@ -252,9 +248,7 @@ export class Support {
     }
     // ✅ Clear custom input
     const $customInput = $form.find('.support-form__custom-input');
-    $customInput
-      .val('')
-      .removeClass('ui-button--active');
+    $customInput.val('').removeClass('ui-button--active');
     $customInput.siblings('.support-form__input-prefix').css('color', '');
   }
 
