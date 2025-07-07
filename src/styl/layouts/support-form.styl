@@ -4,7 +4,6 @@
   display: block
   .support-form__inputs
     opacity: 0
-    transition: opacity var(--transition-speed-medium)
   &--active
     .support-form__inputs
       opacity: 1
@@ -18,6 +17,7 @@
 .support-form__button
   &:hover:not(:focus):not(.ui-button--active)
       color: var(--color-white-soft-transparent)
+      border-color: var(--color-white-soft-transparent);
   &.ui-button--active
     color: var(--color-black-soft);
     background-color: var(--color-white-soft);
