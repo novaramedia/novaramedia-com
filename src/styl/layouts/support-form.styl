@@ -16,6 +16,8 @@
   border-radius:  4px 0px 0px 4px;
 
 .support-form__button
+  &:hover:not(:focus):not(.ui-button--active)
+      color: var(--color-white-soft-transparent)
   &.ui-button--active
     color: var(--color-black-soft);
     background-color: var(--color-white-soft);
@@ -55,6 +57,21 @@
 .support-form__payment-type
   vertical-align: bottom
   height: 1.6rem;
+
+.force-mobile
+  .support-form__text-desktop,
+  .support-form__schedule-desktop,
+  .support-form__payment-type-desktop,
+  .support-form__buttons-desktop
+    display: none;
+
+  .support-form__schedule-mobile
+    display: flex;
+
+  .support-form__text-mobile,
+  .support-form__payment-type-mobile,
+  .support-form__buttons-mobile
+    display: block;
 
 .support-form__text-mobile,
 .support-form__schedule-mobile,

@@ -169,58 +169,30 @@ function render_payment_icons( $payment_classes = '' ) {
  *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_condensed_version( $instance, $active_values, $donation_mode ) {
+function render_support_form( $instance, $active_values, $donation_mode, $mode = 'banner' ) {
+  $force_mobile_class = ( $mode === 'condensed' ) ? 'force-mobile' : '';
   ?>
-  <div class="background-red ui-rounded-box-large m-2 support-form-condensed font-color-white">
+  <div class="background-red ui-rounded-box-large m-2 font-color-white <?php echo esc_attr( $force_mobile_class ); ?>">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-    <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-    <?php render_support_form_schedule_buttons( 'background-white support-form__tab-schedule-buttons' ); ?>
+      <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
+      <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
       <div class="p-5">
-        <?php render_support_heading_and_text( $donation_mode, 'is-s-24' ); ?>
-            <?php render_support_form_amount_buttons( $active_values, $instance, '' ); ?>
-        <?php render_payment_icons( 'mt-3 support-form__payment-type-condensed' ); ?>
-      </div>
-    </form>
-  </div>
-  <?php
-}
-
-/**
- * Render the support donation form with the heading, text, and form elements.
- *
- * @return void Outputs the HTML form directly.
- */
-function render_support_form( $instance, $active_values, $donation_mode ) {
-  ?>
-   <div class="background-red ui-rounded-box-large m-2 font-color-white">
-    <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-  <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-    <?php // Mobile: Schedule ?>
-    <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
-      <div class="p-5">
-        <?php // Mobile: Text ?>
         <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile is-s-24' ); ?>
         <div class="grid-row">
           <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
-            <?php // Desktop: Text ?>
             <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-6' ); ?>
-            <?php // Desktop: Payment ?>
             <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
           </div>
           <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
-            <?php // Desktop: Schedule ?>
             <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-            <?php // Desktop: Buttons ?>
             <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
-        <?php // Mobile: Buttons ?>
         <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
-        <?php // Mobile: Payment ?>
         <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>
-   </div>
+  </div>
   <?php
 }
 /**
@@ -241,17 +213,17 @@ function render_support_form_dispatcher( $variant ) {
   if ( isset( $active_values->show_first ) && in_array( $active_values->show_first, array( 'regular', 'oneoff' ), true ) ) {
         $donation_mode = $active_values->show_first;
   } else {
-        $donation_mode = 'regular'; // fallback
+        $donation_mode = 'regular';
   }
 
   switch ( $variant ) {
     case 'condensed':
-            render_support_form_condensed_version( $instance, $active_values, $donation_mode );
+        render_support_form( $instance, $active_values, $donation_mode, 'condensed' );
         break;
 
     case 'banner':
     default:
-            render_support_form( $instance, $active_values, $donation_mode );
+        render_support_form( $instance, $active_values, $donation_mode, 'banner' );
         break;
   }
 }

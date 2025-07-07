@@ -54,6 +54,17 @@ export class Support {
       const showFirst = this.autovalues['show_first'];
       _this.setAutoValues($form, showFirst);
 
+      // Ensure the first value button is also selected and active
+      const $firstValueBtn = $form.find('.support-form__value-option:visible').first();
+      if ($firstValueBtn.length) {
+        $firstValueBtn
+          .addClass('ui-button--active')
+          .attr('aria-checked', 'true')
+          .attr('tabindex', '0');
+
+        $form.find('.support-form__value-input').val($firstValueBtn.data('value'));
+      }
+
       // Highlight correct schedule option
       $form
         .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
@@ -241,7 +252,7 @@ export class Support {
     });
 
     // Select the first button by default
-    const $first = $buttons.first();
+    const $first = $buttons.filter(':visible').first();
     if ($first.length) {
       $first
         .addClass('ui-button--active')
@@ -250,7 +261,6 @@ export class Support {
 
       $valueInput.val($first.data('value'));
     }
-    // ✅ Clear custom input
     const $customInput = $form.find('.support-form__custom-input');
     $customInput
       .val('')
