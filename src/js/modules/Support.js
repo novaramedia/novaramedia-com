@@ -55,14 +55,18 @@ export class Support {
       _this.setAutoValues($form, showFirst);
 
       // Ensure the first value button is also selected and active
-      const $firstValueBtn = $form.find('.support-form__value-option:visible').first();
+      const $firstValueBtn = $form
+        .find('.support-form__value-option:visible')
+        .first();
       if ($firstValueBtn.length) {
         $firstValueBtn
           .addClass('ui-button--active')
           .attr('aria-checked', 'true')
           .attr('tabindex', '0');
 
-        $form.find('.support-form__value-input').val($firstValueBtn.data('value'));
+        $form
+          .find('.support-form__value-input')
+          .val($firstValueBtn.data('value'));
       }
 
       // Highlight correct schedule option
