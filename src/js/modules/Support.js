@@ -57,7 +57,7 @@ export class Support {
       // Highlight correct schedule option
       $form
         .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
-        .addClass('support-form__button--active ui-button--active')
+        .addClass('ui-button--active')
         .attr('aria-checked', 'true')
         .attr('tabindex', '0');
 
@@ -100,7 +100,7 @@ export class Support {
 
             _this.setAutoValues($form, data.value);
             $form.attr('action', _this.donationAppUrl + data.value);
-            $button.addClass('support-form__button--active ui-button--active');
+            $button.addClass('ui-button--active');
 
             updateSupportSection(data, $form);
 
@@ -116,10 +116,10 @@ export class Support {
             _this.clearActiveButtonState($form, 'set-value');
 
             $('.support-form__custom-input').removeClass(
-              'support-form__button--active ui-button--active'
+              'ui-button--active'
             );
 
-            $button.addClass('support-form__button--active ui-button--active');
+            $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
             $form.find('[data-action="set-value"]').each((i, btn) => {
@@ -157,7 +157,7 @@ export class Support {
           $valueInput.val(event.target.value);
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).addClass('support-form__button--active ui-button--active');
+          $(this).addClass('ui-button--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
           $form.find('[data-action="set-value"]').each((i, btn) => {
@@ -171,9 +171,7 @@ export class Support {
             const val = $(this).val().trim();
             if (val !== '') {
               _this.clearActiveButtonState($form, 'set-value');
-              $(this).addClass(
-                'support-form__button--active ui-button--active'
-              );
+              $(this).addClass('ui-button--active');
               $form.find('[data-action="set-value"]').each((i, btn) => {
                 btn.setAttribute('aria-checked', 'false');
                 btn.setAttribute('tabindex', '-1');
@@ -188,7 +186,7 @@ export class Support {
         blur() {
           const $input = $(this);
           const $prefix = $input.siblings('.support-form__input-prefix');
-          if (!$input.hasClass('support-form__button--active')) {
+          if (!$input.hasClass('ui-button--active')) {
             $prefix.css('color', '');
           }
         },
@@ -207,11 +205,11 @@ export class Support {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
-        .removeClass('support-form__button--active ui-button--active');
+        .removeClass('ui-button--active');
     } else {
       $form
         .find('.support-form__button')
-        .removeClass('support-form__button--active ui-button--active');
+        .removeClass('ui-button--active');
     }
   }
 
@@ -246,7 +244,7 @@ export class Support {
     const $first = $buttons.first();
     if ($first.length) {
       $first
-        .addClass('support-form__button--active ui-button--active')
+        .addClass('ui-button--active')
         .attr('aria-checked', 'true')
         .attr('tabindex', '0');
 
@@ -256,7 +254,7 @@ export class Support {
     const $customInput = $form.find('.support-form__custom-input');
     $customInput
       .val('')
-      .removeClass('support-form__button--active ui-button--active');
+      .removeClass('ui-button--active');
     $customInput.siblings('.support-form__input-prefix').css('color', '');
   }
 

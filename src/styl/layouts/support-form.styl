@@ -16,7 +16,7 @@
   border-radius:  4px 0px 0px 4px;
 
 .support-form__button
-  &--active
+  &.ui-button--active
     color: var(--color-black-soft);
     background-color: var(--color-white-soft);
     border-color: var(--color-white-soft);
@@ -35,9 +35,9 @@
 .support-form__tab-schedule-buttons .support-form__button
   color: var(--color-black-soft)
   background-color: var(--color-white-soft)
-  &:hover:not(:focus):not(.support-form__button--active)
+  &:hover:not(:focus):not(.ui-button--active)
     color: var(--color-gray)
-  &.support-form__button--active
+  &.ui-button--active
     color: var(--color-white-soft)
     background-color: var(--color-red)
     &:hover
@@ -48,7 +48,7 @@
   padding-left: 30px
   &::placeholder
     color: var(--color-white-soft-transparent)
-  &:hover, &.support-form__button--active
+  &:hover, &.ui-button--active
     &::placeholder
       color: var(--color-white-soft)
 

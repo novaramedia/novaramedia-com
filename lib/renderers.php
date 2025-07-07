@@ -40,7 +40,7 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
         <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
       </div>
       <div class="is-xxl-12">
-        <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__button--active ui-button--active support-form__schedule-option support-form__schedule-option-right font-weight-bold grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
+        <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline ui-button--active support-form__schedule-option support-form__schedule-option-right font-weight-bold grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
       </div>
     </div>
   <?php
