@@ -17,7 +17,7 @@ if ( have_posts() ) {
     ?>
   <article id="page" class="support-page">
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
-      <div class="support-page__container">
+      <div class="container">
         <div class="flex-grid-row">
           <div class="support-page__tag-wrapper">
             <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
@@ -32,15 +32,13 @@ if ( have_posts() ) {
           </div>
         </div>
         <!-- heading -->
-        <div class="flex-grid-row flex-grid-row--align-center pt-2 pb-2 pb-s-5">
-            <h1 class="font-weight-bold support-page__heading">
-              <span class="font-color-white">Beat the billionaires.</span></br>
-              <span class="font-color-black">Unfuck the media.</span>
-            </h1>
+        <div class="flex-grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
+            <div class="font-color-white">Beat the billionaires.</div>
+            <div class="font-color-black">Unfuck the media.</div>
         </div>
       </div>
       <!-- left column -->
-      <div class="support-page__container">
+      <div class="container">
         <div class="flex-grid-row" style="position: relative;">
           <div class="flex-grid-item support-page__grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-white text-copy font-serif support-page__left-radius">
             <div class="m-5 m-s-0 font-size-13 font-serif">
@@ -57,9 +55,7 @@ if ( have_posts() ) {
           <!-- right column -->
           <div class="flex-grid-item support-page__grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-gray-base support-page__right-radius">
               <div class="support-page__donation-form-sticky mb-4">
-                <div class="background-red m-5 m-s-0" style="height: 200px;">
-                  This is to mimic support box for now
-               </div>
+                   <?php render_support_form_dispatcher( 'condensed' ); ?>
               </div>
           </div>
         </div>
@@ -84,7 +80,7 @@ if ( have_posts() ) {
             }
           }
       </style>
-      <div class="support-page__container">
+      <div class="container">
         <div class="flex-grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
           <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">How we are funded</div>
           <br/>
@@ -95,7 +91,7 @@ if ( have_posts() ) {
       </div>
 
       <!-- how we spend our funds -->
-      <div class="support-page__container mb-6 pb-6">
+      <div class="container mb-6 pb-6">
         <div class="flex-grid-row pt-6 pb-5 support-page__text-container background-white ui-rounded-box-large">
           <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">How we spend our funds</div>
             <div class="ux-highlighter support-page__text-box-width text-align-center font-size-13 font-size-s-12 font-weight-bold">
@@ -124,7 +120,7 @@ if ( have_posts() ) {
           background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
         }
       </style>
-      <div class="support-page__container pb-6 pb-s-0 pt-5 pt-s-0 mb-6 ">
+      <div class="container pb-6 pb-s-0 pt-5 pt-s-0 mb-6 ">
         <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7"> Our story </div>
           <div class="support-page__text-box-width font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
@@ -172,7 +168,7 @@ if ( have_posts() ) {
     </section>
 
     <!-- donation form -->
-    <div class="support-page__container">
+    <div class="container">
       <?php
         get_template_part(
             'partials/support-section',
@@ -185,7 +181,7 @@ if ( have_posts() ) {
       ?>
     </div>
 
-    <div id="other-donation-methods" class="support-page__container">
+    <div id="other-donation-methods" class="container">
       <!-- already a supporter -->
       <div class="flex-grid-row pt-6 pb-6">
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-6 mb-4 support-page__grid-item">
