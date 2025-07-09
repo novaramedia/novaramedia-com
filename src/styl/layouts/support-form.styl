@@ -97,6 +97,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
+.support-form__button:active
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
+  border-color: var(--color-red)
+
 @media (max-width: $breakpoint-s)
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile
@@ -113,3 +118,8 @@
   .support-form__payment-type-desktop,
   .support-form__buttons-desktop
     display: none;
+
+  .ui-button:active
+    opacity: 1 !important
+    filter: none !important
+    -ms-filter: none !important
