@@ -50,15 +50,31 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
-      _this.setAutoValues($form, this.autovalues['show_first']);
+      // Always call setAutoValues with the preferred initial type
+      const showFirst = this.autovalues['show_first'];
+      _this.setAutoValues($form, showFirst);
 
-      if (this.autovalues['show_first'] === 'oneoff') {
-        // if the setting is to show one off first then update buttons active state
-        _this.clearActiveButtonState($form);
+      // Ensure the first value button is also selected and active
+      const $firstValueBtn = $form
+        .find('.support-form__value-option:visible')
+        .first();
+      if ($firstValueBtn.length) {
+        $firstValueBtn
+          .addClass('ui-button--active')
+          .attr('aria-checked', 'true')
+          .attr('tabindex', '0');
+
         $form
-          .find('.support-form__schedule-option[data-value=oneoff]')
-          .addClass('support-form__button--active');
+          .find('.support-form__value-input')
+          .val($firstValueBtn.data('value'));
       }
+
+      // Highlight correct schedule option
+      $form
+        .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
+        .addClass('ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
@@ -68,44 +84,127 @@ export class Support {
 
           const $button = $(this);
           const data = $button.data();
+          // function to update the support section copy depending on the type of donation
+          function updateSupportSection(data, $form) {
+            const heading = $form.find('.support-form__dynamic-heading');
+            const text = $form.find('.support-form__dynamic-text');
+            const copy =
+              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
 
+            if (!copy) {
+              if (heading.length) {
+                heading.text('Support Us');
+              }
+              if (text.length) {
+                text.text(
+                  'You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today'
+                );
+              }
+              return;
+            }
+
+            if (heading.length) {
+              heading.text(copy.heading);
+            }
+            if (text.length) {
+              text.text(copy.text);
+            }
+          }
           if (data.action === 'set-type') {
-            // if the button is setting the type of donation
-            _this.setAutoValues($form, data.value);
-
-            $form.attr('action', _this.donationAppUrl + data.value);
-
             _this.clearActiveButtonState($form);
 
-            $button.addClass('support-form__button--active');
+            _this.setAutoValues($form, data.value);
+            $form.attr('action', _this.donationAppUrl + data.value);
+            $button.addClass('ui-button--active');
+
+            updateSupportSection(data, $form);
+
+            $form.find('[data-action="set-type"]').each((i, btn) => {
+              const isSelected = btn === $button[0];
+              btn.setAttribute('aria-checked', isSelected.toString());
+              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
             $valueInput.val(data.value);
 
             _this.clearActiveButtonState($form, 'set-value');
 
-            $('.support-form__custom-input').removeClass(
-              'support-form__button--active'
-            );
+            $('.support-form__custom-input').removeClass('ui-button--active');
 
-            $button.addClass('support-form__button--active');
+            $button.addClass('ui-button--active');
+
+            // Accessibility state management for custom radio buttons
+            $form.find('[data-action="set-value"]').each((i, btn) => {
+              const isSelected = btn === $button[0];
+              btn.setAttribute('aria-checked', isSelected.toString());
+              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
           }
         },
+      });
+
+      $form.find('.support-form__button').on('keydown', function (event) {
+        const $buttons = $(this)
+          .closest('.support-form')
+          .find('.support-form__button');
+        let index = $buttons.index(this);
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          index = (index + 1) % $buttons.length;
+          $buttons.eq(index).focus();
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          index = (index - 1 + $buttons.length) % $buttons.length;
+          $buttons.eq(index).focus();
+        } else if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          $(this).trigger('click'); // Activate on Enter or Space
+        }
       });
 
       $form.find('.support-form__custom-input').on({
         input(event) {
           event.preventDefault();
-
           $valueInput.val(event.target.value);
-
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).addClass('support-form__button--active');
+          $(this).addClass('ui-button--active');
+
+          // Clear ARIA radio state for value buttons when custom input is used
+          $form.find('[data-action="set-value"]').each((i, btn) => {
+            btn.setAttribute('aria-checked', 'false');
+            btn.setAttribute('tabindex', '-1');
+          });
+        },
+        keydown(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            const val = $(this).val().trim();
+            if (val !== '') {
+              _this.clearActiveButtonState($form, 'set-value');
+              $(this).addClass('ui-button--active');
+              $form.find('[data-action="set-value"]').each((i, btn) => {
+                btn.setAttribute('aria-checked', 'false');
+                btn.setAttribute('tabindex', '-1');
+              });
+            }
+          }
+        },
+        focus() {
+          const $prefix = $(this).siblings('.support-form__input-prefix');
+          $prefix.css('color', 'var(--color-black-soft)');
+        },
+        blur() {
+          const $input = $(this);
+          const $prefix = $input.siblings('.support-form__input-prefix');
+          if (!$input.hasClass('ui-button--active')) {
+            $prefix.css('color', '');
+          }
         },
       });
-
-      $form.addClass('support-form--active');
+      $form.addClass('support-form--active ui-button--active');
     });
   }
 
@@ -119,11 +218,9 @@ export class Support {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
-        .removeClass('support-form__button--active');
+        .removeClass('ui-button--active');
     } else {
-      $form
-        .find('.support-form__button')
-        .removeClass('support-form__button--active');
+      $form.find('.support-form__button').removeClass('ui-button--active');
     }
   }
 
@@ -135,13 +232,38 @@ export class Support {
    */
   setAutoValues($form, donationType = 'regular') {
     const _this = this;
+    const $buttons = $form.find('.support-form__value-option');
+    const $valueInput = $form.find('.support-form__value-input').first();
 
-    $form.find('.support-form__value-option').each((index, input) => {
-      const value =
-        _this.autovalues[`${donationType}_${$(input).data('name')}`];
+    // Clear old state before setting new one
+    _this.clearActiveButtonState($form, 'set-value');
 
-      $(input).data('value', value).text(`£${value}`);
+    // Update each button with new values
+    $buttons.each((index, input) => {
+      const $input = $(input);
+      const name = $input.data('name');
+      const value = _this.autovalues[`${donationType}_${name}`];
+
+      $input
+        .data('value', value)
+        .text(`£${value}`)
+        .attr('aria-checked', 'false')
+        .attr('tabindex', '-1');
     });
+
+    // Select the first button by default
+    const $first = $buttons.filter(':visible').first();
+    if ($first.length) {
+      $first
+        .addClass('ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
+
+      $valueInput.val($first.data('value'));
+    }
+    const $customInput = $form.find('.support-form__custom-input');
+    $customInput.val('').removeClass('ui-button--active');
+    $customInput.siblings('.support-form__input-prefix').css('color', '');
   }
 
   initSupportBar() {
