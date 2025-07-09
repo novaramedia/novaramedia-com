@@ -170,9 +170,14 @@ function render_payment_icons( $payment_classes = '' ) {
  * @return void Outputs the HTML form directly.
  */
 function render_support_form( $instance, $active_values, $donation_mode, $mode = 'banner' ) {
-  $force_mobile_class = ( $mode === 'condensed' ) ? 'force-mobile' : '';
+  $is_condensed = ( $mode === 'condensed' );
+  if ( $is_condensed ) {
+    $grid_classes = 'is-xxl-12 is-s-24';
+  } else {
+      $grid_classes = 'is-xxl-24';
+  }
   ?>
-  <div class="background-red ui-rounded-box-large m-2 font-color-white <?php echo esc_attr( $force_mobile_class ); ?>">
+  <div class="background-red ui-rounded-box-large m-2 font-color-white <?php echo esc_attr( $mode . ' ' . $grid_classes ); ?>">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
