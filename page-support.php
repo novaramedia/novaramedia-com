@@ -10,10 +10,12 @@ if ( have_posts() ) {
 
     $page_tag_override = ! empty( $meta['_nm_support_tag_override'] ) ? $meta['_nm_support_tag_override'][0] : false;
     $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
-    $title = ! empty( $meta['_nm_support_header_title'] ) ? $meta['_nm_support_header_title'][0] : '';
-    $subtitle = ! empty( $meta['_nm_support_header_subtitle'] ) ? $meta['_nm_support_header_subtitle'][0] : '';
-    $form_tag_override = ! empty( $meta['_nm_support_form_tag_override'] ) ? $meta['_nm_support_form_tag_override'][0] : false;
-    $form_copy_override = ! empty( $meta['_nm_support_form_copy_override'] ) ? $meta['_nm_support_form_copy_override'][0] : false;
+    $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
+    $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
+    $how_we_are_funded_heading = ! empty( $meta['_nm_support_how_we_are_funded_heading'] ) ? $meta['_nm_support_how_we_are_funded_heading'][0] : '';
+    $how_we_are_funded_text = ! empty( $meta['_nm_support_how_we_are_funded_text'] ) ? $meta['_nm_support_how_we_are_funded_text'][0] : '';
+    $how_we_spend_our_funds_heading = ! empty( $meta['_nm_support_how_we_spend_our_funds_heading'] ) ? $meta['_nm_support_how_we_spend_our_funds_heading'][0] : '';
+    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_how_we_spend_our_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_how_we_spend_our_funds_lines'][0] ) : array();
     ?>
   <article id="page" class="support-page">
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
@@ -33,8 +35,24 @@ if ( have_posts() ) {
         </div>
         <!-- heading -->
         <div class="flex-grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
-            <div class="font-color-white">Beat the billionaires.</div>
-            <div class="font-color-black">Unfuck the media.</div>
+            <div class="font-color-white">
+              <?php
+              if ( ! empty( $header_first_line ) ) {
+                echo $header_first_line;
+              } else {
+                echo 'Beat the billionaires.';
+              }
+              ?>
+              </div>
+            <div class="font-color-black">
+              <?php
+              if ( ! empty( $header_second_line ) ) {
+                echo $header_second_line;
+              } else {
+                echo 'Unfuck the media.';
+              }
+              ?>
+              </div>
         </div>
       </div>
       <!-- left column -->
@@ -81,27 +99,70 @@ if ( have_posts() ) {
           }
       </style>
       <div class="container">
-        <div class="flex-grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">How we are funded</div>
+        <div class="grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">
+            <?php
+            if ( ! empty( $how_we_are_funded_heading ) ) {
+              echo $how_we_are_funded_heading;
+            } else {
+              echo 'How we are funded';
+            }
+            ?>
+            </div>
           <br/>
           <div class="support-page__infographic"></div>
           <br/>
-          <div class="font-weight-bold support-page__text-box-width text-align-center font-size-12">Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.</div>
+          <div class="font-weight-bold is-xl-13 text-align-center font-size-12">
+            <?php
+            if ( ! empty( $how_we_are_funded_text ) ) {
+              echo $how_we_are_funded_text;
+            } else {
+              echo 'Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.';
+            }
+            ?>
         </div>
       </div>
 
       <!-- how we spend our funds -->
       <div class="container mb-6 pb-6">
-        <div class="flex-grid-row pt-6 pb-5 support-page__text-container background-white ui-rounded-box-large">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">How we spend our funds</div>
-            <div class="ux-highlighter support-page__text-box-width text-align-center font-size-13 font-size-s-12 font-weight-bold">
-              <div class="ux-highlighter__line mb-5 font-color-black">Every penny Novara Media makes goes back into our journalism.</div>
+        <div class="grid-row pt-6 pb-5 support-page__text-container background-white ui-rounded-box-large">
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">
+             <?php
+              if ( ! empty( $how_we_spend_our_funds_heading ) ) {
+                echo $how_we_spend_our_funds_heading;
+              } else {
+                echo 'How we spend our funds';
+              }
+              ?>
+            </div>
+            <div class="ux-highlighter is-xl-13 text-align-center font-size-13 font-size-s-12 font-weight-bold">
+            <?php
+            if ( ! empty( $how_we_spend_our_funds_lines ) && is_array( $how_we_spend_our_funds_lines ) ) {
+              foreach ( $how_we_spend_our_funds_lines as $line ) {
+                if ( ! empty( $line['text'] ) ) {
+                  $color_class = 'font-color-gray-light';
+                  // Make the first line black as in your original markup
+                  if ( $line === reset( $how_we_spend_our_funds_lines ) ) {
+                    $color_class = 'font-color-black';
+                  }
+                  echo '<div class="ux-highlighter__line mb-5 ' . esc_attr( $color_class ) . '">'
+                      . esc_html( $line['text'] )
+                      . '</div>';
+                }
+              }
+            } else {
+              // fallback hardcoded lines
+              ?>
+               <div class="ux-highlighter__line mb-5 font-color-black">Every penny Novara Media makes goes back into our journalism.</div>
               <div class="ux-highlighter__line mb-5 font-color-gray-light">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
               <div class="ux-highlighter__line mb-5 font-color-gray-light">It pays for the studio space where we film our live show.</div>
               <div class="ux-highlighter__line mb-5 font-color-gray-light">It allows us to hire key roles, like a labour movement correspondent.</div>
               <div class="ux-highlighter__line mb-5 font-color-gray-light">It helps us fight (and win) against the smears of the rightwing press.</div>
               <div class="ux-highlighter__line font-color-gray-light">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
-            </div>
+              <?php
+            }
+            ?>
+        </div>
         </div>
       </div>
 
@@ -121,9 +182,9 @@ if ( have_posts() ) {
         }
       </style>
       <div class="container pb-6 pb-s-0 pt-5 pt-s-0 mb-6 ">
-        <div class="flex-grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
+        <div class="grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7"> Our story </div>
-          <div class="support-page__text-box-width font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
+          <div class="is-xl-13 font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
             <div class="font-weight-bold mb-4 font-size-12 ">
               Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
             </div>
@@ -169,16 +230,7 @@ if ( have_posts() ) {
 
     <!-- donation form -->
     <div class="container">
-      <?php
-        get_template_part(
-            'partials/support-section',
-            null,
-            array(
-                'heading_copy'  => $form_tag_override,
-                'override_text' => $form_copy_override,
-            )
-        );
-      ?>
+
     </div>
 
     <div id="other-donation-methods" class="container">
