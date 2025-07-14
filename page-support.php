@@ -143,7 +143,7 @@ if ( have_posts() ) {
 
       <!-- how we spend our funds -->
       <div class="container mb-6">
-        <div class="grid-row pt-6 support-page__text-container background-white ui-rounded-box-large">
+        <div class="grid-row pt-6 pb-6 support-page__text-container background-white ui-rounded-box-large">
           <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">
              <?php
               if ( ! empty( $how_we_spend_our_funds_heading ) ) {
