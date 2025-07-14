@@ -16,15 +16,11 @@ export class Highlighters {
   }
 
   resetAll() {
-    this.$lines
-      .removeClass('font-color-black')
-      .addClass('font-color-gray');
+    this.$lines.removeClass('font-color-black').addClass('font-color-gray');
   }
 
   highlight($el) {
-    $el
-      .removeClass('font-color-gray')
-      .addClass('font-color-black');
+    $el.removeClass('font-color-gray').addClass('font-color-black');
   }
 
   updateHighlighting() {
