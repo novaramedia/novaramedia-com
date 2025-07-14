@@ -15,7 +15,25 @@ if ( have_posts() ) {
     $how_we_are_funded_heading = ! empty( $meta['_nm_support_how_we_are_funded_heading'] ) ? $meta['_nm_support_how_we_are_funded_heading'][0] : '';
     $how_we_are_funded_text = ! empty( $meta['_nm_support_how_we_are_funded_text'] ) ? $meta['_nm_support_how_we_are_funded_text'][0] : '';
     $how_we_spend_our_funds_heading = ! empty( $meta['_nm_support_how_we_spend_our_funds_heading'] ) ? $meta['_nm_support_how_we_spend_our_funds_heading'][0] : '';
-    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_how_we_spend_our_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_how_we_spend_our_funds_lines'][0] ) : array();
+    $how_we_spend_our_funds_lines = array();
+    for ( $i = 1; $i <= 6; $i++ ) {
+        $line_key = '_nm_support_funds_line_' . $i;
+        $line = ! empty( $meta[ $line_key ] ) ? $meta[ $line_key ][0] : '';
+      if ( $line !== '' ) {
+            $how_we_spend_our_funds_lines[] = $line;
+      }
+    }
+    $our_story_heading = ! empty( $meta['_nm_support_our_story_heading'] ) ? $meta['_nm_support_our_story_heading'][0] : '';
+    $our_story_bold_text = ! empty( $meta['_nm_support_our_story_bold_text'] ) ? $meta['_nm_support_our_story_bold_text'][0] : '';
+    $our_story_regular_text = ! empty( $meta['_nm_support_our_story_regular_text'] ) ? $meta['_nm_support_our_story_regular_text'][0] : '';
+    $support_carousel_quotes = array();
+    for ( $i = 1; $i <= 4; $i++ ) {
+        $quote_key = '_nm_support_carousel_quote_' . $i;
+        $quote = ! empty( $meta[ $quote_key ] ) ? $meta[ $quote_key ][0] : '';
+      if ( $quote !== '' ) {
+            $support_carousel_quotes[] = $quote;
+      }
+    }
     ?>
   <article id="page" class="support-page">
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
@@ -137,21 +155,14 @@ if ( have_posts() ) {
             </div>
             <div class="ux-highlighter is-xl-13 text-align-center font-size-13 font-size-s-12 font-weight-bold">
             <?php
-            if ( ! empty( $how_we_spend_our_funds_lines ) && is_array( $how_we_spend_our_funds_lines ) ) {
-              foreach ( $how_we_spend_our_funds_lines as $line ) {
-                if ( ! empty( $line['text'] ) ) {
-                  $color_class = 'font-color-gray-light';
-                  // Make the first line black as in your original markup
-                  if ( $line === reset( $how_we_spend_our_funds_lines ) ) {
-                    $color_class = 'font-color-black';
-                  }
-                  echo '<div class="ux-highlighter__line mb-5 ' . esc_attr( $color_class ) . '">'
-                      . esc_html( $line['text'] )
-                      . '</div>';
-                }
+            if ( ! empty( $how_we_spend_our_funds_lines ) ) {
+              foreach ( $how_we_spend_our_funds_lines as $index => $line_text ) {
+                $color_class = ( $index === 0 ) ? 'font-color-black' : 'font-color-gray-light';
+                echo '<div class="ux-highlighter__line mb-5 ' . esc_attr( $color_class ) . '">'
+                    . esc_html( $line_text )
+                    . '</div>';
               }
             } else {
-              // fallback hardcoded lines
               ?>
                <div class="ux-highlighter__line mb-5 font-color-black">Every penny Novara Media makes goes back into our journalism.</div>
               <div class="ux-highlighter__line mb-5 font-color-gray-light">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
@@ -183,48 +194,62 @@ if ( have_posts() ) {
       </style>
       <div class="container pb-6 pb-s-0 pt-5 pt-s-0 mb-6 ">
         <div class="grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
-          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7"> Our story </div>
+          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7">
+            <?php
+            if ( ! empty( $our_story_heading ) ) {
+              echo $our_story_heading;
+            } else {
+              echo 'Our Story';
+            }
+            ?>
+          </div>
           <div class="is-xl-13 font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
             <div class="font-weight-bold mb-4 font-size-12 ">
-              Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
+              <?php
+              if ( ! empty( $our_story_bold_text ) ) {
+                echo $our_story_bold_text;
+              } else {
+                echo 'Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we\'ve consistently punched above our weight in the national conversation.';
+              }
+              ?>
             </div>
             <div class="font-size-11 pb-5">
-              From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.
+              <?php
+              if ( ! empty( $our_story_regular_text ) ) {
+                echo $our_story_regular_text;
+              } else {
+                echo 'From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel\'s actions in Gaza, we\'ve remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.';
+              }
+              ?>
             </div>
           </div>
       </div>
     </div>
 
+    <?php
+    // Set fallback quotes
+    $fallback_quotes = array(
+        'Novara tells the stories others won’t.',
+        'Independent journalism is vital — and Novara leads the way.',
+        'Supporting Novara feels like action, not charity.',
+        'They speak truth to power. That’s why I give.',
+    );
+    // Merge stored quotes with fallback (max 4)
+    $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, 4 - count( $support_carousel_quotes ) ) ) );
+    ?>
     <!-- carousel -->
     <section class="ux-carousel pb-6 pt-6 mb-6 mb-s-0 alt">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <!-- Slide 1 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
-            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Supporters Say</h5>
-            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
-            <p class="font-serif font-size-12">Short description here</p>
-          </div>
-          <!-- Slide 2 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
-              <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Supporters Say</h5>
-              <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
-              <p class="font-serif font-size-12">Short description here more words to see whhat it looks like. j jncsiu njwepfjnc wejf c wejf</p>
-          </div>
-          <!-- Slide 3 -->
-          <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
-            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Supporters Say</h5>
-            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
-            <p class="font-serif font-size-12">Short description here</p>
-          </div>
-          <!-- Slide 4 -->
-           <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
-            <h5 class="font-weight-bold mb-5 text-uppercase font-weight-bold font-color-black font-size-9">Supporters Say</h5>
-            <img class="support-page__quote-mark mb-2" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/quote-mark.png" alt="big quote mark" />
-            <p class="font-serif font-size-12">Short description here</p>
-          </div>
+          <?php foreach ( $all_quotes as $quote ) : ?>
+            <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
+              <h5 class="font-weight-bold mb-5 text-uppercase font-color-black font-size-9">Supporters Say</h5>
+              <img class="support-page__quote-mark mb-2" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/dist/img/pages/support-page/quote-mark.png' ); ?>" alt="big quote mark" />
+              <p class="font-serif font-size-12">"<?php echo esc_html( $quote ); ?>"</p>
+            </div>
+          <?php endforeach; ?>
         </div>
-      <div class="swiper-pagination"></div>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 

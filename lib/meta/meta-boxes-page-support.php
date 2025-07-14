@@ -70,29 +70,57 @@ function nm_cmb_page_support_metaboxes() {
         )
     );
 
+    // Add a section title
     $support_page_meta_boxes->add_field(
         array(
-            'id'          => $prefix . 'how_we_spend_our_funds_lines',
+            'id'   => $prefix . 'how_we_spend_our_funds_title',
             'name' => __( 'How we spend our funds lines', 'nm' ),
-            'type'        => 'group',
-            'description' => __( 'Add each line that explains how funds are spent. (max 5 lines)', 'nm' ),
-            'options'     => array(
-                'group_title'   => __( 'Line {#}', 'nm' ), // {#} gets replaced by row number
-                'add_button'    => __( 'Add Another Line', 'nm' ),
-                'remove_button' => __( 'Remove Line', 'nm' ),
-                'sortable'      => true,
-                'closed'        => true, // Start closed
-            ),
+            'type' => 'title',
         )
     );
 
-    // Add a text field inside each group item for the line text
-    $support_page_meta_boxes->add_group_field(
-        $prefix . 'how_we_spend_our_funds_lines',
+  for ( $i = 1; $i <= 6; $i++ ) {
+        $support_page_meta_boxes->add_field(
+            array(
+                'id'   => $prefix . 'support_funds_line_' . $i,
+                // translators: %d refers to the line number (e.g., Line 1, Line 2, etc.)
+                'name' => sprintf( __( 'Line %d', 'nm' ), $i ),
+                'type' => 'text',
+            )
+        );
+  }
+  $support_page_meta_boxes->add_field(
+    array(
+        'name' => __( 'Our Story heading', 'cmb' ),
+        'id'   => $prefix . 'support_our_story_heading',
+        'type' => 'text',
+    )
+  );
+
+  $support_page_meta_boxes->add_field(
+    array(
+        'name' => __( 'Our Story Bold text', 'cmb' ),
+        'id'   => $prefix . 'support_our_story_bold_text',
+        'type' => 'textarea_small',
+    )
+  );
+  $support_page_meta_boxes->add_field(
+    array(
+        'name' => __( 'Our Story regular text', 'cmb' ),
+        'id'   => $prefix . 'support_our_story_regular_text',
+        'type' => 'textarea_small',
+    )
+  );
+  for ( $i = 1; $i <= 4; $i++ ) {
+    $support_page_meta_boxes->add_field(
         array(
-            'name' => __( 'Text', 'nm' ),
-            'id'   => 'text',
-            'type' => 'textarea_small',
+            'id'              => $prefix . 'support_carousel_quote_' . $i,
+            // translators: %d refers to the quote number (e.g., Quote 1, Quote 2, etc.)
+            'name'            => sprintf( __( 'Supporters say quote %d', 'nm' ), $i ),
+            'type'            => 'textarea_small',
+            'sanitization_cb' => 'nm_limit_carousel_quote_length',
+            'desc'            => __( 'Max 95 characters.', 'nm' ),
         )
     );
+  }
 }
