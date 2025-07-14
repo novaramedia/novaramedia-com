@@ -38,7 +38,7 @@ if ( have_posts() ) {
   <article id="page" class="support-page">
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
       <div class="container">
-        <div class="flex-grid-row">
+        <div class="grid-row">
           <div class="support-page__tag-wrapper">
             <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
             <?php
@@ -52,7 +52,8 @@ if ( have_posts() ) {
           </div>
         </div>
         <!-- heading -->
-        <div class="flex-grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
+        <div class="grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
+          <div class="grid-item">
             <div class="font-color-white">
               <?php
               if ( ! empty( $header_first_line ) ) {
@@ -61,7 +62,7 @@ if ( have_posts() ) {
                 echo 'Beat the billionaires.';
               }
               ?>
-              </div>
+            </div>
             <div class="font-color-black">
               <?php
               if ( ! empty( $header_second_line ) ) {
@@ -70,13 +71,14 @@ if ( have_posts() ) {
                 echo 'Unfuck the media.';
               }
               ?>
-              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- left column -->
       <div class="container">
-        <div class="flex-grid-row" style="position: relative;">
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-white text-copy font-serif support-page__left-radius">
+        <div class="grid-row" style="position: relative;">
+          <div class="grid-item is-l-6 is-xxl-12 is-s-24 background-white text-copy font-serif support-page__left-radius">
             <div class="m-5 m-s-0 font-size-13 font-serif">
               <?php the_content(); ?>
               <?php
@@ -89,8 +91,8 @@ if ( have_posts() ) {
             </div>
           </div>
           <!-- right column -->
-          <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12 background-gray-base support-page__right-radius">
-              <div class="support-page__donation-form-sticky p-5">
+          <div class="grid-item is-xxl-12 is-s-24 background-gray-base support-page__right-radius">
+              <div class="support-page__donation-form-sticky p-5 p-s-0">
                    <?php render_support_form_dispatcher( 'condensed' ); ?>
               </div>
           </div>
