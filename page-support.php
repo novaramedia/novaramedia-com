@@ -92,7 +92,7 @@ if ( have_posts() ) {
           </div>
           <!-- right column -->
           <div class="grid-item is-xxl-12 is-s-24 background-gray-base support-page__right-radius">
-              <div class="support-page__donation-form-sticky p-5 p-s-0">
+              <div class="support-page__donation-form-sticky p-5 p-s-0 pt-s-3 pb-s-3">
                    <?php render_support_form_dispatcher( 'condensed' ); ?>
               </div>
           </div>
