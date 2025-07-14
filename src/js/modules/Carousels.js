@@ -2,7 +2,13 @@
 
 import $ from 'jquery';
 import Swiper from 'swiper';
-import { Navigation, Autoplay, Mousewheel, FreeMode, Pagination } from 'swiper/modules';
+import {
+  Navigation,
+  Autoplay,
+  Mousewheel,
+  FreeMode,
+  Pagination,
+} from 'swiper/modules';
 
 export class Carousels {
   constructor() {
@@ -82,7 +88,6 @@ class CarouselAlt {
     this.$navLeft = this.$carousel.find('.swiper-button-prev');
     this.$navRight = this.$carousel.find('.swiper-button-next');
 
-
     this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
       modules: [Navigation, Mousewheel, Pagination],
       navigation: {
@@ -96,7 +101,7 @@ class CarouselAlt {
         bulletActiveClass: 'swiper-pagination-bullet-active',
       },
       autoplay: false,
-        mousewheel: {
+      mousewheel: {
         enabled: true,
         thresholdDelta: 4,
         forceToAxis: true,
@@ -111,8 +116,7 @@ class CarouselAlt {
         },
       },
     });
-     console.log(this.$carousel.find('.swiper-pagination')[0]);
-
+    console.log(this.$carousel.find('.swiper-pagination')[0]);
   }
 
   onReady() {}
