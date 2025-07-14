@@ -211,7 +211,7 @@ if ( have_posts() ) {
               if ( ! empty( $our_story_bold_text ) ) {
                 echo $our_story_bold_text;
               } else {
-                echo 'Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we\'ve consistently punched above our weight in the national conversation.';
+                echo "Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.";
               }
               ?>
             </div>
@@ -220,7 +220,7 @@ if ( have_posts() ) {
               if ( ! empty( $our_story_regular_text ) ) {
                 echo $our_story_regular_text;
               } else {
-                echo 'From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel\'s actions in Gaza, we\'ve remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.';
+                echo "From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.";
               }
               ?>
             </div>
