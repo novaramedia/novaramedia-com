@@ -192,7 +192,7 @@ if ( have_posts() ) {
           background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
         }
       </style>
-      <div class="container pb-s-0 pt-5 pt-s-0 mb-6 ">
+      <div class="container pb-s-0 mb-6 ">
         <div class="grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7">
             <?php
