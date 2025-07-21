@@ -35,9 +35,7 @@ if ( have_posts() ) {
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
       <div class="container">
         <div class="grid-item">
-          <div class="grid-row">
-            <div class="support-page__tag-wrapper">
-              <h4 class="mt-4 font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
+              <h4 class=" pt-4 font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
               <?php
               if ( ! empty( $page_tag_override ) ) {
                 echo $page_tag_override;
@@ -46,8 +44,6 @@ if ( have_posts() ) {
               }
               ?>
               </h4>
-            </div>
-          </div>
         </div>
         <!-- heading -->
         <div class="grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
