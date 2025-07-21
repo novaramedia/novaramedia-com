@@ -100,22 +100,6 @@ if ( have_posts() ) {
 
     <div class="background-gray-base">
       <!-- how we are funded -->
-      <style>
-          .support-page__infographic {
-            background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/desktop-how-we-are-funded-graphic.svg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 200px;
-            width: 100%;
-          }
-          @media (max-width: 768px) {
-            .support-page__infographic {
-              background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/mobile-how-we-are-funded-graphic.svg');
-              height: 400px;
-            }
-          }
-      </style>
       <div class="container">
         <div class="grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
           <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">
@@ -178,20 +162,6 @@ if ( have_posts() ) {
       </div>
 
       <!-- our story -->
-      <style>
-        .avif .support-page__our-story-background
-        {
-          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
-
-        }
-        .webp .support-page__our-story-background {
-          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.webp'; ?>);
-        }
-
-        .fallback .support-page__our-story-background {
-          background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/pages/support-page/our-story-background.avif'; ?>);
-        }
-      </style>
       <div class="container pb-s-0 mb-6 ">
         <div class="grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
           <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7">

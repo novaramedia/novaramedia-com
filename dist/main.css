@@ -5085,10 +5085,6 @@ html {
   padding-top: 12px;
   padding-bottom: 10px;
 }
-.site-header__row {
-  -ms-align-items: center;
-  align-items: center;
-}
 .site-header__toggle {
   padding-right: 0.25rem;
 }
@@ -5484,6 +5480,15 @@ html {
   background-repeat: no-repeat;
   z-index: 1;
 }
+.avif .support-page__our-story-background {
+  background-image: url("./img/pages/support-page/our-story-background.avif");
+}
+.webp .support-page__our-story-background {
+  background-image: url("./img/pages/support-page/our-story-background.webp");
+}
+.fallback .support-page__our-story-background {
+  background-image: url("./img/pages/support-page/our-story-background.avif");
+}
 .support-page__our-story-background::before {
   content: '';
   position: absolute;
@@ -5512,6 +5517,14 @@ html {
   width: auto;
   height: 30px;
 }
+.support-page__infographic {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+  width: 100%;
+  background-image: url("./img/pages/support-page/desktop-how-we-are-funded-graphic.svg");
+}
 @media screen and (max-width: 759px) {
   .support-page__left-radius {
     -ms-order: 2;
@@ -5527,6 +5540,10 @@ html {
   }
   .support-page__our-story-background {
     background-size: cover;
+  }
+  .support-page__infographic {
+    background-image: url("./img/pages/support-page/mobile-how-we-are-funded-graphic.svg");
+    height: 400px;
   }
 }
 @media screen and (max-width: 1408px) {

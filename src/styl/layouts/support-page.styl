@@ -22,6 +22,15 @@
   background-repeat: no-repeat;
   z-index: 1;
 
+.avif .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.avif');
+
+.webp .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.webp');
+
+.fallback .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.avif');
+
 .support-page__our-story-background::before
   content: '';
   position: absolute;
@@ -49,6 +58,14 @@
   width: auto;
   height: 30px;
 
+.support-page__infographic
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+  width: 100%;
+  background-image: url('./img/pages/support-page/desktop-how-we-are-funded-graphic.svg');
+
 @media screen and (max-width: $breakpoint-s)
   .support-page__left-radius
     order: 2;
@@ -61,3 +78,7 @@
 
   .support-page__our-story-background
     background-size: cover;
+
+  .support-page__infographic
+    background-image: url('./img/pages/support-page/mobile-how-we-are-funded-graphic.svg');
+    height: 400px;
