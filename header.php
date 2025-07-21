@@ -32,8 +32,8 @@
   <section id="main-container">
     <header class="site-header background-black mb-4">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
-        <div class="text-align-center container">
-          <div class="site-header__row grid-row">
+        <div class="site-header__main container">
+          <div class="text-align-center grid-row">
             <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
               <ul class="site-header__navigation u-inline-list u-inline-block">
                 <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
