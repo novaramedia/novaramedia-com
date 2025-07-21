@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import debounce from 'lodash/debounce';
 
 /**
  * Highlighters - Scroll-based text highlighting component
@@ -45,7 +46,7 @@ export class Highlighters {
     this.resetAll();
     this.highlight(this.$lines.eq(0));
 
-    $(window).on('scroll', () => this.updateHighlighting());
+    $(window).on('scroll', debounce(() => this.updateHighlighting(), 16));
   }
 
   resetAll() {

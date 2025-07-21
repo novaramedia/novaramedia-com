@@ -31569,6 +31569,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 /**
@@ -31615,7 +31618,7 @@ class Highlighters {
   init() {
     this.resetAll();
     this.highlight(this.$lines.eq(0));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('scroll', () => this.updateHighlighting());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(() => this.updateHighlighting(), 16));
   }
   resetAll() {
     this.$lines.removeClass(this.highlightClass).addClass(this.resetClass);
