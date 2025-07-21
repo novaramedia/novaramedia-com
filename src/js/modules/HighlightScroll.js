@@ -46,7 +46,10 @@ export class Highlighters {
     this.resetAll();
     this.highlight(this.$lines.eq(0));
 
-    $(window).on('scroll', debounce(() => this.updateHighlighting(), 16));
+    $(window).on(
+      'scroll',
+      debounce(() => this.updateHighlighting(), 16)
+    );
   }
 
   resetAll() {
