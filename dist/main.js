@@ -31570,11 +31570,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
+
+/**
+ * Highlighters - Scroll-based text highlighting component
+ *
+ * Creates a scroll-triggered highlighting effect where the text element closest
+ * to the center of the viewport gets highlighted as the user scrolls. Perfect
+ * for progressive content reveals like funding breakdowns, feature lists, or testimonials.
+ *
+ * How it works:
+ * 1. Finds all elements matching the selector
+ * 2. Initially highlights the first element
+ * 3. On scroll, calculates which element is closest to viewport center
+ * 4. Removes highlight from all elements, adds it to the closest one
+ *
+ * Usage:
+ * Basic usage with defaults (black highlight, gray reset)
+ * new Highlighters('.ux-highlighter__line');
+ *
+ * Custom colors for different themes
+ * new Highlighters('.feature__item', {
+ *   highlight: 'font-color-red',
+ *   reset: 'font-color-gray-light'
+ * });
+ *
+ * Complex styling with multiple classes
+ * new Highlighters('.stat__number', {
+ *   highlight: 'font-color-white background-primary font-weight-bold',
+ *   reset: 'font-color-gray background-transparent'
+ * });
+ */
 class Highlighters {
   constructor() {
     let selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.ux-highlighter__line';
+    let colors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     this.$lines = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector);
     this.$previous = null;
+
+    // Allow configurable color classes
+    this.highlightClass = colors.highlight || 'font-color-black';
+    this.resetClass = colors.reset || 'font-color-gray';
     this.init();
   }
   init() {
@@ -31583,10 +31618,10 @@ class Highlighters {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('scroll', () => this.updateHighlighting());
   }
   resetAll() {
-    this.$lines.removeClass('font-color-black').addClass('font-color-gray');
+    this.$lines.removeClass(this.highlightClass).addClass(this.resetClass);
   }
   highlight($el) {
-    $el.removeClass('font-color-gray').addClass('font-color-black');
+    $el.removeClass(this.resetClass).addClass(this.highlightClass);
   }
   updateHighlighting() {
     const scrollTop = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollTop();
