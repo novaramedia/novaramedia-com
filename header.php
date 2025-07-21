@@ -32,7 +32,7 @@
   <section id="main-container">
     <header class="site-header background-black mb-4">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
-        <div class="site-header__main container">
+        <div class="text-align-center container">
           <div class="site-header__row grid-row">
             <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
               <ul class="site-header__navigation u-inline-list u-inline-block">

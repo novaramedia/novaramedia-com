@@ -246,8 +246,8 @@ if ( have_posts() ) {
           <?php foreach ( $all_quotes as $quote ) : ?>
             <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
               <h5 class="font-weight-bold mb-5 text-uppercase font-color-black font-size-9">Supporters Say</h5>
-              <img class="support-page__quote-mark mb-2" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/dist/img/pages/support-page/quote-mark.png' ); ?>" alt="big quote mark" />
-              <p class="font-serif font-size-12">"<?php echo esc_html( $quote ); ?>"</p>
+              <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+              <p class="font-serif font-size-12"><?php echo esc_html( $quote ); ?></p>
             </div>
           <?php endforeach; ?>
         </div>
