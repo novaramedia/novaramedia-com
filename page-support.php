@@ -204,7 +204,7 @@ if ( have_posts() ) {
     $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, 4 - count( $support_carousel_quotes ) ) ) );
     ?>
     <!-- carousel -->
-    <section class="ux-carousel mb-6 alt">
+    <section class="ux-carousel mb-6" data-carousel-type="alt">
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>

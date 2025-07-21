@@ -31328,7 +31328,8 @@ class Carousels {
     this.carousels = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', `ux-carousel-${index}`);
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).hasClass('alt')) {
+      const carouselType = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).data('carousel-type') || 'default';
+      if (carouselType === 'alt') {
         this.carousels.push(new CarouselAlt(carousel));
       } else {
         this.carousels.push(new Carousel(carousel));

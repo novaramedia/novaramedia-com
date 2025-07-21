@@ -17,7 +17,9 @@ export class Carousels {
     $('.ux-carousel').each((index, carousel) => {
       $(carousel).attr('id', `ux-carousel-${index}`);
 
-      if ($(carousel).hasClass('alt')) {
+      const carouselType = $(carousel).data('carousel-type') || 'default';
+
+      if (carouselType === 'alt') {
         this.carousels.push(new CarouselAlt(carousel));
       } else {
         this.carousels.push(new Carousel(carousel));
