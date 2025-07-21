@@ -15,24 +15,20 @@ if ( have_posts() ) {
     $how_we_are_funded_heading = ! empty( $meta['_nm_support_how_we_are_funded_heading'] ) ? $meta['_nm_support_how_we_are_funded_heading'][0] : '';
     $how_we_are_funded_text = ! empty( $meta['_nm_support_how_we_are_funded_text'] ) ? $meta['_nm_support_how_we_are_funded_text'][0] : '';
     $how_we_spend_our_funds_heading = ! empty( $meta['_nm_support_how_we_spend_our_funds_heading'] ) ? $meta['_nm_support_how_we_spend_our_funds_heading'][0] : '';
-    $how_we_spend_our_funds_lines = array();
-    for ( $i = 1; $i <= 6; $i++ ) {
-        $line_key = '_nm_support_funds_line_' . $i;
-        $line = ! empty( $meta[ $line_key ] ) ? $meta[ $line_key ][0] : '';
-      if ( $line !== '' ) {
-            $how_we_spend_our_funds_lines[] = $line;
-      }
-    }
+
+    // Get repeatable funds lines
+    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? $meta['_nm_support_funds_lines'][0] : array();
+    // Filter out empty lines
+    $how_we_spend_our_funds_lines = array_filter( $how_we_spend_our_funds_lines );
+
     $our_story_heading = ! empty( $meta['_nm_support_our_story_heading'] ) ? $meta['_nm_support_our_story_heading'][0] : '';
     $our_story_bold_text = ! empty( $meta['_nm_support_our_story_bold_text'] ) ? $meta['_nm_support_our_story_bold_text'][0] : '';
     $our_story_regular_text = ! empty( $meta['_nm_support_our_story_regular_text'] ) ? $meta['_nm_support_our_story_regular_text'][0] : '';
-    $support_carousel_quotes = array();
-    for ( $i = 1; $i <= 4; $i++ ) {
-        $quote_key = '_nm_support_carousel_quote_' . $i;
-        $quote = ! empty( $meta[ $quote_key ] ) ? $meta[ $quote_key ][0] : '';
-      if ( $quote !== '' ) {
-            $support_carousel_quotes[] = $quote;
-      }
+
+    // Get repeatable carousel quotes
+    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? $meta['_nm_support_carousel_quotes'][0] : array();
+    // Filter out empty quotes
+    $support_carousel_quotes = array_filter( $support_carousel_quotes );
     }
     ?>
   <article id="page" class="support-page">

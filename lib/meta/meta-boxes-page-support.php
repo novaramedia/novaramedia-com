@@ -70,25 +70,20 @@ function nm_cmb_page_support_metaboxes() {
         )
     );
 
-    // Add a section title
+    // Repeatable "how we spend our funds" lines
     $support_page_meta_boxes->add_field(
         array(
-            'id'   => $prefix . 'how_we_spend_our_funds_title',
-            'name' => __( 'How we spend our funds lines', 'nm' ),
-            'type' => 'title',
+            'id'         => $prefix . 'support_funds_lines',
+            'name'       => __( 'How we spend our funds lines', 'nm' ),
+            'type'       => 'text',
+            'repeatable' => true,
+            'options'    => array(
+                'sortable'     => true,
+                'add_row_text' => __( 'Add Another Line', 'nm' ),
+            ),
+            'desc'       => __( 'Add lines explaining how funds are spent, maximum 6 lines. You can reorder them.', 'nm' ),
         )
     );
-
-  for ( $i = 1; $i <= 6; $i++ ) {
-        $support_page_meta_boxes->add_field(
-            array(
-                'id'   => $prefix . 'support_funds_line_' . $i,
-                // translators: %d refers to the line number (e.g., Line 1, Line 2, etc.)
-                'name' => sprintf( __( 'Line %d', 'nm' ), $i ),
-                'type' => 'text',
-            )
-        );
-  }
   $support_page_meta_boxes->add_field(
     array(
         'name' => __( 'Our Story heading', 'cmb' ),
@@ -111,16 +106,19 @@ function nm_cmb_page_support_metaboxes() {
         'type' => 'textarea_small',
     )
   );
-  for ( $i = 1; $i <= 4; $i++ ) {
-    $support_page_meta_boxes->add_field(
-        array(
-            'id'              => $prefix . 'support_carousel_quote_' . $i,
-            // translators: %d refers to the quote number (e.g., Quote 1, Quote 2, etc.)
-            'name'            => sprintf( __( 'Supporters say quote %d', 'nm' ), $i ),
-            'type'            => 'textarea_small',
-            'sanitization_cb' => 'nm_limit_carousel_quote_length',
-            'desc'            => __( 'Max 95 characters.', 'nm' ),
-        )
-    );
-  }
+
+  // Repeatable carousel quotes
+  $support_page_meta_boxes->add_field(
+    array(
+        'id'         => $prefix . 'support_carousel_quotes',
+        'name'       => __( 'Supporters Say Quotes', 'nm' ),
+        'type'       => 'textarea_small',
+        'repeatable' => true,
+        'options'    => array(
+            'sortable'     => true,
+            'add_row_text' => __( 'Add Another Quote', 'nm' ),
+        ),
+        'desc'       => __( 'Add a maximum of 4 quotes from supporters. Max 95 characters each. You can reorder them.', 'nm' ),
+    )
+  );
 }
