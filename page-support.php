@@ -262,19 +262,11 @@ if ( have_posts() ) {
             <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12">
               <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
               <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>
-              <div class="mt-3 flex-grid-row flex-grid--nested-tight mb-3">
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3 mb-3">
-                  <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
-                </div>
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
-                <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
-                </div>
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
-                  <a class="ui-button ui-button--red ui-button--small" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
-                </div>
-                <div class="flex-grid-item flex-grid-item--tight flex-item-xxl-6 flex-item-s-3">
-                  <a class="ui-button ui-button--red ui-button--small mb-s-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
-                </div>
+              <div class="mt-3 mb-3">
+                <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
+                <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
+                <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
+                <a class="ui-button ui-button--red ui-button--small mb-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
               </div>
             </div>
           </div>
