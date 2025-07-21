@@ -29,22 +29,24 @@ if ( have_posts() ) {
     $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? $meta['_nm_support_carousel_quotes'][0] : array();
     // Filter out empty quotes
     $support_carousel_quotes = array_filter( $support_carousel_quotes );
-    }
-    ?>
+  }
+  ?>
   <article id="page" class="support-page">
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
       <div class="container">
-        <div class="grid-row">
-          <div class="support-page__tag-wrapper">
-            <h4 class="margin-top-small margin-bottom-tiny font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
-            <?php
-            if ( ! empty( $page_tag_override ) ) {
-              echo $page_tag_override;
-            } else {
-              echo 'Support Us';
-            }
-            ?>
-            </h4>
+        <div class="grid-item">
+          <div class="grid-row">
+            <div class="support-page__tag-wrapper">
+              <h4 class="mt-4 font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
+              <?php
+              if ( ! empty( $page_tag_override ) ) {
+                echo $page_tag_override;
+              } else {
+                echo 'Support Us';
+              }
+              ?>
+              </h4>
+            </div>
           </div>
         </div>
         <!-- heading -->
@@ -73,7 +75,7 @@ if ( have_posts() ) {
       </div>
       <!-- left column -->
       <div class="container">
-        <div class="grid-row" style="position: relative;">
+        <div class="grid-row u-relative">
           <div class="grid-item is-l-6 is-xxl-12 is-s-24 background-white text-copy font-serif support-page__left-radius">
             <div class="m-5 m-s-0 font-size-13 font-serif">
               <?php the_content(); ?>
@@ -312,7 +314,6 @@ if ( have_posts() ) {
   <!-- end post -->
   </article>
     <?php
-  }
 }
 ?>
 <!-- end main-content -->
