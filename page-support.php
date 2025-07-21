@@ -211,13 +211,13 @@ if ( have_posts() ) {
     <section class="ux-carousel mb-6 alt">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <?php foreach ( $all_quotes as $quote ) : ?>
+          <?php foreach ( $all_quotes as $quote ) { ?>
             <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
               <h5 class="font-weight-bold mb-5 text-uppercase font-color-black font-size-9">Supporters Say</h5>
               <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
               <p class="font-serif font-size-12"><?php echo esc_html( $quote ); ?></p>
             </div>
-          <?php endforeach; ?>
+          <?php } ?>
         </div>
         <div class="swiper-pagination"></div>
       </div>
