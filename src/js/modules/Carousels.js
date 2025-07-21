@@ -82,6 +82,25 @@ class Carousel {
   onResize() {}
 }
 
+/**
+ * CarouselAlt - Alternative carousel configuration for content showcases
+ *
+ * Key differences from regular Carousel:
+ * - No autoplay (user-controlled navigation only)
+ * - Includes pagination dots for direct slide access
+ * - Infinite loop navigation instead of rewind
+ * - Centered slides for better visual presentation
+ * - No free mode (discrete slide-by-slide movement)
+ *
+ * Usage examples:
+ * - Quote/testimonial carousels (like support page quotes)
+ * - Featured content showcases
+ * - Image galleries where user control is preferred
+ * - Any carousel where pagination dots add value
+ *
+ * HTML setup: Add 'alt' class to .ux-carousel element
+ * Example: <section class="ux-carousel alt">
+ */
 class CarouselAlt {
   constructor(carousel) {
     this.$carousel = $(carousel);
@@ -90,32 +109,52 @@ class CarouselAlt {
 
     this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
       modules: [Navigation, Mousewheel, Pagination],
+
+      // Navigation arrows (optional - carousel works without them)
       navigation: {
         nextEl: this.$navRight[0],
         prevEl: this.$navLeft[0],
       },
+
+      // Pagination dots for direct slide access
       pagination: {
         el: this.$carousel.find('.swiper-pagination')[0],
         clickable: true,
         bulletClass: 'swiper-pagination-bullet',
         bulletActiveClass: 'swiper-pagination-bullet-active',
       },
+
+      // No autoplay - user controls navigation
       autoplay: false,
+
+      // Mousewheel support with axis constraint
       mousewheel: {
         enabled: true,
         thresholdDelta: 4,
-        forceToAxis: true,
+        forceToAxis: true, // Prevents diagonal scrolling interference
       },
+
+      // Discrete slide movement (no free mode)
       freeMode: false,
+
+      // Auto width - slides sized by CSS (e.g., 500px quote cards)
       slidesPerView: 'auto',
+
+      // Infinite loop navigation
       loop: true,
+
+      // Center active slide for better visual hierarchy
       centeredSlides: true,
+
+      // Responsive behavior (currently identical to default)
       breakpoints: {
         480: {
           slidesPerView: 'auto',
         },
       },
     });
+
+    // Debug log for pagination element (can be removed in production)
     console.log(this.$carousel.find('.swiper-pagination')[0]);
   }
 
