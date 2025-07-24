@@ -35,7 +35,7 @@ if ( have_posts() ) {
     <div class="background-white background-support-texture-alt--fade-to-white pb-6">
       <div class="container">
         <div class="grid-item">
-              <h4 class=" pt-4 font-size-9 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
+              <h4 class=" pt-4 font-size-10 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
               <?php
               if ( ! empty( $page_tag_override ) ) {
                 echo $page_tag_override;
@@ -46,7 +46,7 @@ if ( have_posts() ) {
               </h4>
         </div>
         <!-- heading -->
-        <div class="grid-row pt-2 pb-2 font-weight-bold font-size-s-14 font-size-17">
+        <div class="grid-row pt-3 pb-3 font-weight-bold font-size-s-14 font-size-17">
           <div class="grid-item">
             <div class="font-color-white">
               <?php
@@ -72,8 +72,8 @@ if ( have_posts() ) {
       <!-- left column -->
       <div class="container">
         <div class="grid-row u-relative">
-          <div class="grid-item is-xxl-12 is-s-24 background-white text-copy font-serif support-page__left-radius">
-            <div class="m-5 m-s-0 font-size-13 font-serif">
+          <div class="grid-item is-xxl-12 is-s-24 background-white support-page__left-radius">
+            <div class="m-5 m-s-0 font-size-12">
               <?php the_content(); ?>
               <?php
               if ( $youtube_id ) {
@@ -98,7 +98,7 @@ if ( have_posts() ) {
       <!-- how we are funded -->
       <div class="container">
         <div class="grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9">
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10">
             <?php
             if ( ! empty( $how_we_are_funded_heading ) ) {
               echo $how_we_are_funded_heading;
@@ -110,7 +110,7 @@ if ( have_posts() ) {
           <br/>
           <div class="support-page__infographic"></div>
           <br/>
-          <div class="font-weight-bold is-xxl-13 is-s-18 text-align-center font-size-12">
+          <div class="font-weight-bold is-xxl-13 is-s-18 text-align-center font-size-13">
             <?php
             if ( ! empty( $how_we_are_funded_text ) ) {
               echo $how_we_are_funded_text;
@@ -124,7 +124,7 @@ if ( have_posts() ) {
       <!-- how we spend our funds -->
       <div class="container mb-6">
         <div class="grid-row pt-6 pb-6 support-page__text-container background-white ui-rounded-box-large">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-9 mb-5">
+          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10 mb-5">
              <?php
               if ( ! empty( $how_we_spend_our_funds_heading ) ) {
                 echo $how_we_spend_our_funds_heading;
