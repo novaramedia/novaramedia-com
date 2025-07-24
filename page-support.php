@@ -72,7 +72,7 @@ if ( have_posts() ) {
       <!-- left column -->
       <div class="container">
         <div class="grid-row u-relative">
-          <div class="grid-item is-l-6 is-xxl-12 is-s-24 background-white text-copy font-serif support-page__left-radius">
+          <div class="grid-item is-xxl-12 is-s-24 background-white text-copy font-serif support-page__left-radius">
             <div class="m-5 m-s-0 font-size-13 font-serif">
               <?php the_content(); ?>
               <?php
