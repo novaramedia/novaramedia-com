@@ -88,23 +88,31 @@ export class Support {
           function updateSupportSection(data, $form) {
             const $heading = $form.find('.support-form__dynamic-heading');
             const $text = $form.find('.support-form__dynamic-text');
-            const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-            const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
+            const overrideCopy =
+              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+            const defaultSectionCopy =
+              WP.supportSectionCopy && WP.supportSectionCopy['main'];
 
             function isNonEmptyString(val) {
               return typeof val === 'string' && val.trim() !== '';
             }
 
             // If overrideCopy exists and has content, update copy. Otherwise, do not change the copy (leave defaultSectionCopy or renderer value in place)
-            if (overrideCopy && (isNonEmptyString(overrideCopy.heading) || isNonEmptyString(overrideCopy.text))) {
+            if (
+              overrideCopy &&
+              (isNonEmptyString(overrideCopy.heading) ||
+                isNonEmptyString(overrideCopy.text))
+            ) {
               let headingText = isNonEmptyString(overrideCopy.heading)
                 ? overrideCopy.heading
-                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading))
+                : defaultSectionCopy &&
+                    isNonEmptyString(defaultSectionCopy.heading)
                   ? defaultSectionCopy.heading
                   : '';
               let textCopy = isNonEmptyString(overrideCopy.text)
                 ? overrideCopy.text
-                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text))
+                : defaultSectionCopy &&
+                    isNonEmptyString(defaultSectionCopy.text)
                   ? defaultSectionCopy.text
                   : '';
               if ($heading.length && headingText) {
