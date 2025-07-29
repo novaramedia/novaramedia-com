@@ -84,38 +84,7 @@ export class Support {
 
           const $button = $(this);
           const data = $button.data();
-          // function to update the support section copy depending on the type of donation
-          function updateSupportSection(data, $form) {
-            const $heading = $form.find('.support-form__dynamic-heading');
-            const $text = $form.find('.support-form__dynamic-text');
-            const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-            const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
 
-            function isNonEmptyString(val) {
-              return typeof val === 'string' && val.trim() !== '';
-            }
-
-            // If overrideCopy exists and has content, update copy. Otherwise, do not change the copy (leave defaultSectionCopy or renderer value in place)
-            if (overrideCopy && (isNonEmptyString(overrideCopy.heading) || isNonEmptyString(overrideCopy.text))) {
-              let headingText = isNonEmptyString(overrideCopy.heading)
-                ? overrideCopy.heading
-                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading))
-                  ? defaultSectionCopy.heading
-                  : '';
-              let textCopy = isNonEmptyString(overrideCopy.text)
-                ? overrideCopy.text
-                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text))
-                  ? defaultSectionCopy.text
-                  : '';
-              if ($heading.length && headingText) {
-                $heading.text(headingText);
-              }
-              if ($text.length && textCopy) {
-                $text.text(textCopy);
-              }
-            }
-            // If no override, do not update the copy (defaultSectionCopy or renderer value remains visible)
-          }
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
 
@@ -123,7 +92,7 @@ export class Support {
             $form.attr('action', _this.donationAppUrl + data.value);
             $button.addClass('ui-button--active');
 
-            updateSupportSection(data, $form);
+            _this.updateSupportSection(data, $form);
 
             $form.find('[data-action="set-type"]').each((i, btn) => {
               const isSelected = btn === $button[0];
@@ -135,9 +104,7 @@ export class Support {
             $valueInput.val(data.value);
 
             _this.clearActiveButtonState($form, 'set-value');
-
             $('.support-form__custom-input').removeClass('ui-button--active');
-
             $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
@@ -175,7 +142,6 @@ export class Support {
           event.preventDefault();
           $valueInput.val(event.target.value);
           _this.clearActiveButtonState($form, 'set-value');
-
           $(this).addClass('ui-button--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
@@ -210,6 +176,7 @@ export class Support {
           }
         },
       });
+
       $form.addClass('support-form--active ui-button--active');
     });
   }
@@ -267,9 +234,41 @@ export class Support {
 
       $valueInput.val($first.data('value'));
     }
+
     const $customInput = $form.find('.support-form__custom-input');
     $customInput.val('').removeClass('ui-button--active');
     $customInput.siblings('.support-form__input-prefix').css('color', '');
+  }
+
+  updateSupportSection(data, $form) {
+    const $heading = $form.find('.support-form__dynamic-heading');
+    const $text = $form.find('.support-form__dynamic-text');
+    const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
+
+    function isNonEmptyString(val) {
+      return typeof val === 'string' && val.trim() !== '';
+    }
+
+    if (overrideCopy && (isNonEmptyString(overrideCopy.heading) || isNonEmptyString(overrideCopy.text))) {
+      const headingText = isNonEmptyString(overrideCopy.heading)
+        ? overrideCopy.heading
+        : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading))
+          ? defaultSectionCopy.heading
+          : '';
+      const textCopy = isNonEmptyString(overrideCopy.text)
+        ? overrideCopy.text
+        : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text))
+          ? defaultSectionCopy.text
+          : '';
+
+      if ($heading.length && headingText) {
+        $heading.text(headingText);
+      }
+      if ($text.length && textCopy) {
+        $text.text(textCopy);
+      }
+    }
   }
 
   initSupportBar() {
@@ -290,7 +289,6 @@ export class Support {
     $barOpen.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         if (_this.hasApprovalCookie) {
@@ -304,7 +302,6 @@ export class Support {
     $barClose.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         if (_this.hasApprovalCookie) {
