@@ -84,7 +84,6 @@ export class Support {
 
           const $button = $(this);
           const data = $button.data();
-
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
 
