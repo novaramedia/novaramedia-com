@@ -242,22 +242,28 @@ export class Support {
   updateSupportSection(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
-    const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
+    const overrideCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+    const defaultSectionCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy['main'];
 
     function isNonEmptyString(val) {
       return typeof val === 'string' && val.trim() !== '';
     }
 
-    if (overrideCopy && (isNonEmptyString(overrideCopy.heading) || isNonEmptyString(overrideCopy.text))) {
+    if (
+      overrideCopy &&
+      (isNonEmptyString(overrideCopy.heading) ||
+        isNonEmptyString(overrideCopy.text))
+    ) {
       const headingText = isNonEmptyString(overrideCopy.heading)
         ? overrideCopy.heading
-        : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading))
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)
           ? defaultSectionCopy.heading
           : '';
       const textCopy = isNonEmptyString(overrideCopy.text)
         ? overrideCopy.text
-        : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text))
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)
           ? defaultSectionCopy.text
           : '';
 
