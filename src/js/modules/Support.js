@@ -86,29 +86,35 @@ export class Support {
           const data = $button.data();
           // function to update the support section copy depending on the type of donation
           function updateSupportSection(data, $form) {
-            const heading = $form.find('.support-form__dynamic-heading');
-            const text = $form.find('.support-form__dynamic-text');
-            const copy =
-              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+            const $heading = $form.find('.support-form__dynamic-heading');
+            const $text = $form.find('.support-form__dynamic-text');
+            const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+            const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
 
-            if (!copy) {
-              if (heading.length) {
-                heading.text('Support Us');
-              }
-              if (text.length) {
-                text.text(
-                  'You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today'
-                );
-              }
-              return;
+            function isNonEmptyString(val) {
+              return typeof val === 'string' && val.trim() !== '';
             }
 
-            if (heading.length) {
-              heading.text(copy.heading);
+            // If overrideCopy exists and has content, update copy. Otherwise, do not change the copy (leave defaultSectionCopy or renderer value in place)
+            if (overrideCopy && (isNonEmptyString(overrideCopy.heading) || isNonEmptyString(overrideCopy.text))) {
+              let headingText = isNonEmptyString(overrideCopy.heading)
+                ? overrideCopy.heading
+                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading))
+                  ? defaultSectionCopy.heading
+                  : '';
+              let textCopy = isNonEmptyString(overrideCopy.text)
+                ? overrideCopy.text
+                : (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text))
+                  ? defaultSectionCopy.text
+                  : '';
+              if ($heading.length && headingText) {
+                $heading.text(headingText);
+              }
+              if ($text.length && textCopy) {
+                $text.text(textCopy);
+              }
             }
-            if (text.length) {
-              text.text(copy.text);
-            }
+            // If no override, do not update the copy (defaultSectionCopy or renderer value remains visible)
           }
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
