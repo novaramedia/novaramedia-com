@@ -4,7 +4,7 @@ import { isString } from 'lodash';
 
 /**
  * Checks if a value is a non-empty string (after trimming whitespace)
- * 
+ *
  * @param {*} val - The value to check
  * @returns {boolean} - True if the value is a string with non-whitespace content
  */
