@@ -58,12 +58,18 @@
     color: var(--color-white-soft)
     &::placeholder
       color: var(--color-white-soft)
-    &.ui-button--active
-      background-color: var(--color-white-soft)
-      &::placeholder
-        color: var(--color-black-soft)
   &:hover
       opacity: .5
+  &--active
+    .support-form__custom-input
+      background-color: var(--color-white-soft)
+      color: var(--color-black-soft)
+      &::placeholder
+        color: var(--color-black-soft)
+    .support-form__custom-input-prefix
+      color: var(--color-black-soft)
+    &:hover
+      opacity: 1
 
 .support-form__payment-type
   vertical-align: bottom

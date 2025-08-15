@@ -104,7 +104,11 @@ export class Support {
             $valueInput.val(data.value);
 
             _this.clearActiveButtonState($form, 'set-value');
-            $('.support-form__custom-input').removeClass('ui-button--active');
+
+            $('.support-form__custom-input-container').removeClass(
+              'support-form__custom-input-container--active'
+            );
+
             $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
@@ -142,7 +146,8 @@ export class Support {
           event.preventDefault();
           $valueInput.val(event.target.value);
           _this.clearActiveButtonState($form, 'set-value');
-          $(this).addClass('ui-button--active');
+
+          $(this).closest('.support-form__custom-input-container').addClass('support-form__custom-input-container--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
           $form.find('[data-action="set-value"]').each((i, btn) => {
@@ -156,7 +161,9 @@ export class Support {
             const val = $(this).val().trim();
             if (val !== '') {
               _this.clearActiveButtonState($form, 'set-value');
-              $(this).addClass('ui-button--active');
+              $(this)
+                .closest('.support-form__custom-input-container')
+                .addClass('support-form__custom-input-container--active');
               $form.find('[data-action="set-value"]').each((i, btn) => {
                 btn.setAttribute('aria-checked', 'false');
                 btn.setAttribute('tabindex', '-1');
@@ -164,15 +171,16 @@ export class Support {
             }
           }
         },
-        focus() {
-          const $prefix = $(this).siblings('.support-form__custom-input-prefix');
-          $prefix.css('color', 'var(--color-black-soft)');
+        focus() { // on focus add active class to container
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
         },
-        blur() {
-          const $input = $(this);
-          const $prefix = $input.siblings('.support-form__custom-input-prefix');
-          if (!$input.hasClass('ui-button--active')) {
-            $prefix.css('color', '');
+        blur() { // on blur remove active class from container if input is empty
+          if (!$(this).val()) {
+            $(this).closest(
+              '.support-form__custom-input-container'
+            ).removeClass('support-form__custom-input-container--active');
           }
         },
       });
@@ -236,7 +244,9 @@ export class Support {
     }
 
     const $customInput = $form.find('.support-form__custom-input');
-    $customInput.val('').removeClass('ui-button--active');
+    const $customInputContainer = $form.find('.support-form__custom-input-container');
+    $customInput.val('');
+    $customInputContainer.removeClass('ui-button--active');
     $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
   }
 
