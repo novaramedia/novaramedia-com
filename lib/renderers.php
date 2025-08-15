@@ -35,7 +35,7 @@ function render_ui_tag( $label, $url, $variants = array() ) {
 function render_support_form_schedule_buttons( $schedule_classes = '' ) {
   ?>
     <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
-    <div class="grid-row mb-2 <?php echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
+    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
       <div class="is-xxl-12">
         <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
       </div>
@@ -59,18 +59,20 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
-    <div class="grid-row grid--nested-tight mb-5" role="radiogroup" aria-labelledby="donation-amount-label">
+    <div class="grid-row grid--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
         <div class="grid-item grid-item--tight is-xxl-3 is-s-8 mb-s-2">
-          <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__value-option"
-                  role="radio"
-                  aria-checked="false"
-                  tabindex="-1"
-                  data-action="set-value"
-                  data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
-                  data-name="<?php echo esc_attr( $tier ); ?>">
+          <button
+            class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__value-option"
+            role="radio"
+            aria-checked="false"
+            tabindex="-1"
+            data-action="set-value"
+            data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
+            data-name="<?php echo esc_attr( $tier ); ?>"
+          >
             £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
           </button>
         </div>
@@ -83,19 +85,23 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         </label>
         <div class="u-position-relative">
           <span class="support-form__input-prefix font-weight-bold font-size-11">£</span>
-          <input id="<?php echo esc_attr( $instance ); ?>__custom-input"
-                 class="support-form__custom-input ui-input ui-input--red-border-white"
-                 type="number"
-                 min="1"
-                 placeholder="Custom amount" />
+          <input
+            id="<?php echo esc_attr( $instance ); ?>__custom-input"
+            class="support-form__custom-input ui-input ui-input--red-border-white"
+            type="number"
+            min="1"
+            placeholder="Custom amount"
+          />
         </div>
       </div>
     </div>
     <div class="grid-row grid--nested-tight">
       <div class="grid-item grid-item--tight is-xxl-24">
-        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width"
-               type="submit"
-               value="Go" />
+        <input
+          class="support-form__submit ui-button ui-button--white ui-button--fill-width"
+          type="submit"
+          value="Go"
+        />
       </div>
     </div>
   </div>
@@ -126,15 +132,13 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
 
   ?>
   <div class="<?php echo esc_attr( $text_classes ); ?>" aria-live="polite">
-      <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
-        <?php echo esc_html( $heading ); ?>
-      </h4>
-     <?php if ( $text ) { ?>
-    <div class="mb-5">
-      <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text">
-        <?php echo esc_html( $text ); ?>
-      </a>
-    </div>
+    <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
+      <?php echo esc_html( $heading ); ?>
+    </h4>
+    <?php if ( $text ) { ?>
+    <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text u-display-block mb-4">
+      <?php echo esc_html( $text ); ?>
+    </a>
     <?php } ?>
   </div>
   <?php
@@ -145,12 +149,12 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
 function render_payment_icons( $payment_classes = '' ) {
   $img_base = get_template_directory_uri() . '/dist/img/support-form/';
   $payment_methods = array(
-      'Visa'       => 'visa icon',
-      'Mastercard' => 'mastercard icon',
-      'Stripe'     => 'stripe icon',
-      'PayPal'     => 'paypal icon',
-      'ApplePay'   => 'apple pay icon',
-      'GooglePay'  => 'google pay icon',
+      'Visa'       => 'Visa icon',
+      'Mastercard' => 'Mastercard icon',
+      'Stripe'     => 'Stripe icon',
+      'PayPal'     => 'PayPal icon',
+      'ApplePay'   => 'ApplePay icon',
+      'GooglePay'  => 'GooglePay icon',
   );
   ?>
   <div class="<?php echo esc_attr( $payment_classes ); ?>">
@@ -174,21 +178,21 @@ function render_support_form( $instance, $active_values, $donation_mode, $mode =
   if ( $is_condensed ) {
     $grid_classes = 'is-xxl-12 is-s-24';
   } else {
-      $grid_classes = 'is-xxl-24';
+    $grid_classes = 'is-xxl-24';
   }
   ?>
   <div class="background-red ui-rounded-box-large m-2 font-color-white <?php echo esc_attr( $mode . ' ' . $grid_classes ); ?>">
     <form class="support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile background-white support-form__tab-schedule-buttons' ); ?>
-      <div class="p-5">
-        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile is-s-24' ); ?>
-        <div class="grid-row">
-          <div class="grid-item is-xl-12 is-xxl-12 support-form__left-column-desktop">
-            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop is-l-12 is-xl-12 is-xxl-12 pr-6' ); ?>
-            <?php render_payment_icons( 'support-form__payment-type-desktop mt-2' ); ?>
+      <div class="support-form__padding-container">
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
+        <div class="support-form__desktop-container grid-row">
+          <div class="grid-item is-xxl-12 support-form__left-column-desktop">
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
+            <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
-          <div class="offset-xl-0 is-xxl-12 grid-item support-form__right-column-desktop">
+          <div class="grid-item is-xxl-12 support-form__right-column-desktop">
             <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
             <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
           </div>

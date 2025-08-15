@@ -5248,6 +5248,12 @@ html {
   filter: none;
   opacity: 1;
 }
+.support-form__padding-container {
+  padding: 2rem;
+}
+.condensed .support-form__padding-container {
+  padding: 1rem 2rem 2rem 2rem;
+}
 .support-form__schedule-option-right {
   border-radius: 0px var(--corner-radius-large) var(--corner-radius-large) 0px;
 }
@@ -5303,10 +5309,7 @@ html {
   vertical-align: bottom;
   height: 1.6rem;
 }
-.condensed .support-form__text-desktop,
-.condensed .support-form__schedule-desktop,
-.condensed .support-form__payment-type-desktop,
-.condensed .support-form__buttons-desktop {
+.condensed .support-form__desktop-container {
   display: none;
 }
 .condensed .support-form__schedule-mobile,
@@ -5332,10 +5335,6 @@ html {
 .support-form__left-column-desktop {
   display: flex;
 }
-.support-form__text-desktop,
-.support-form__buttons-desktop {
-  display: block;
-}
 .support-form__left-column-desktop {
   flex-direction: column;
   -ms-justify-content: space-between;
@@ -5357,6 +5356,9 @@ html {
   border-color: var(--color-white-soft);
 }
 @media (max-width: 759px) {
+  .support-form__padding-container {
+    padding: 1rem 2rem 2rem 2rem;
+  }
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile {
     display: flex;

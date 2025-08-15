@@ -8,6 +8,13 @@
     .support-form__inputs
       opacity: 1
 
+.support-form__padding-container
+  padding: 2rem
+
+.condensed
+  .support-form__padding-container
+    padding: 1rem 2rem 2rem 2rem
+
 .support-form__schedule-option-right
   border-radius:  0px var(--corner-radius-large) var(--corner-radius-large) 0px
 
@@ -56,10 +63,7 @@
   height: 1.6rem
 
 .condensed
-  .support-form__text-desktop,
-  .support-form__schedule-desktop,
-  .support-form__payment-type-desktop,
-  .support-form__buttons-desktop
+  .support-form__desktop-container
     display: none
 
   .support-form__schedule-mobile,
@@ -85,10 +89,6 @@
 .support-form__left-column-desktop
   display: flex
 
-.support-form__text-desktop,
-.support-form__buttons-desktop
-  display: block
-
 .support-form__left-column-desktop
   flex-direction: column
   justify-content: space-between
@@ -108,6 +108,9 @@
     border-color: var(--color-white-soft)
 
 @media (max-width: $breakpoint-s)
+  .support-form__padding-container
+    padding: 1rem 2rem 2rem 2rem
+
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile
     display: flex
