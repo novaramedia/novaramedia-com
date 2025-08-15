@@ -96,11 +96,11 @@ export class Support {
 
             _this.updateSupportSection(data, $form);
 
-            $form.find('[data-action="set-type"]').each((i, btn) => {
-              const $btn = $(btn);
-              const isSelected = $btn.data('value') === data.value;
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            $form.find('[data-action="set-type"]').each((index, button) => {
+              const $button = $(button);
+              const isSelected = $button.data('value') === data.value;
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
@@ -115,10 +115,10 @@ export class Support {
             $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
-            $form.find('[data-action="set-value"]').each((i, btn) => {
-              const isSelected = btn === $button[0];
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            $form.find('[data-action="set-value"]').each((index, button) => {
+              const isSelected = button === $button[0];
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           }
         },
@@ -152,23 +152,23 @@ export class Support {
           $(this).closest('.support-form__custom-input-container').addClass('support-form__custom-input-container--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
-          $form.find('[data-action="set-value"]').each((i, btn) => {
-            btn.setAttribute('aria-checked', 'false');
-            btn.setAttribute('tabindex', '-1');
+          $form.find('[data-action="set-value"]').each((index, button) => {
+            button.setAttribute('aria-checked', 'false');
+            button.setAttribute('tabindex', '-1');
           });
         },
         keydown(event) {
           if (event.key === 'Enter') {
             event.preventDefault();
-            const val = $(this).val().trim();
-            if (val !== '') {
+            const inputValue = $(this).val().trim();
+            if (inputValue !== '') {
               _this.clearActiveButtonState($form, 'set-value');
               $(this)
                 .closest('.support-form__custom-input-container')
                 .addClass('support-form__custom-input-container--active');
-              $form.find('[data-action="set-value"]').each((i, btn) => {
-                btn.setAttribute('aria-checked', 'false');
-                btn.setAttribute('tabindex', '-1');
+              $form.find('[data-action="set-value"]').each((index, button) => {
+                button.setAttribute('aria-checked', 'false');
+                button.setAttribute('tabindex', '-1');
               });
             }
           }
@@ -220,8 +220,8 @@ export class Support {
     _this.clearActiveButtonState($form, 'set-value');
 
     // Update each button with new values
-    $buttons.each((index, input) => {
-      const $input = $(input);
+    $buttons.each((index, inputElement) => {
+      const $input = $(inputElement);
       const name = $input.data('name');
       const value = _this.autovalues[`${donationType}_${name}`];
 
@@ -325,8 +325,8 @@ export class Support {
     });
   }
 
-  static numberWithCommas(x) {
+  static numberWithCommas(number) {
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }

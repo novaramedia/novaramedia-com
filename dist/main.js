@@ -49102,11 +49102,11 @@ class Support {
             // Set active class on all buttons with the same data-value (both visible and hidden)
             $form.find(`[data-action="set-type"][data-value="${data.value}"]`).addClass('ui-button--active');
             _this.updateSupportSection(data, $form);
-            $form.find('[data-action="set-type"]').each((i, btn) => {
-              const $btn = jquery__WEBPACK_IMPORTED_MODULE_0___default()(btn);
-              const isSelected = $btn.data('value') === data.value;
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            $form.find('[data-action="set-type"]').each((index, button) => {
+              const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(button);
+              const isSelected = $button.data('value') === data.value;
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
@@ -49116,10 +49116,10 @@ class Support {
             $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
-            $form.find('[data-action="set-value"]').each((i, btn) => {
-              const isSelected = btn === $button[0];
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            $form.find('[data-action="set-value"]').each((index, button) => {
+              const isSelected = button === $button[0];
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           }
         },
@@ -49149,21 +49149,21 @@ class Support {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.support-form__custom-input-container').addClass('support-form__custom-input-container--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
-          $form.find('[data-action="set-value"]').each((i, btn) => {
-            btn.setAttribute('aria-checked', 'false');
-            btn.setAttribute('tabindex', '-1');
+          $form.find('[data-action="set-value"]').each((index, button) => {
+            button.setAttribute('aria-checked', 'false');
+            button.setAttribute('tabindex', '-1');
           });
         },
         keydown(event) {
           if (event.key === 'Enter') {
             event.preventDefault();
-            const val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().trim();
-            if (val !== '') {
+            const inputValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().trim();
+            if (inputValue !== '') {
               _this.clearActiveButtonState($form, 'set-value');
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.support-form__custom-input-container').addClass('support-form__custom-input-container--active');
-              $form.find('[data-action="set-value"]').each((i, btn) => {
-                btn.setAttribute('aria-checked', 'false');
-                btn.setAttribute('tabindex', '-1');
+              $form.find('[data-action="set-value"]').each((index, button) => {
+                button.setAttribute('aria-checked', 'false');
+                button.setAttribute('tabindex', '-1');
               });
             }
           }
@@ -49212,8 +49212,8 @@ class Support {
     _this.clearActiveButtonState($form, 'set-value');
 
     // Update each button with new values
-    $buttons.each((index, input) => {
-      const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(input);
+    $buttons.each((index, inputElement) => {
+      const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputElement);
       const name = $input.data('name');
       const value = _this.autovalues[`${donationType}_${name}`];
       $input.data('value', value).text(`£${value}`).attr('aria-checked', 'false').attr('tabindex', '-1');
@@ -49280,9 +49280,9 @@ class Support {
       }
     });
   }
-  static numberWithCommas(x) {
+  static numberWithCommas(number) {
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
 
