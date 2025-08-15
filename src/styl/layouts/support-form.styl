@@ -30,7 +30,7 @@
     background-color: var(--color-white-soft)
     border-color: var(--color-white-soft)
 
-.support-form__input-prefix
+.support-form__custom-input-prefix
   position: absolute
   top: 50%
   left: 12px
@@ -50,13 +50,20 @@
       color: var(--color-white-soft)
       background-color: var(--color-red)
 
-.support-form__custom-input
-  padding-left: 30px
-  &::placeholder
-    color: var(--color-white-soft-transparent)
-  &:hover, &.ui-button--active
+.support-form__custom-input-container
+  .support-form__custom-input
+    text-align: center
+    padding-left: 30px
+    background-color: transparent
+    color: var(--color-white-soft)
     &::placeholder
       color: var(--color-white-soft)
+    &.ui-button--active
+      background-color: var(--color-white-soft)
+      &::placeholder
+        color: var(--color-black-soft)
+  &:hover
+      opacity: .5
 
 .support-form__payment-type
   vertical-align: bottom
@@ -82,7 +89,7 @@
 
 .support-form__tab-schedule-buttons button
   border: none !important
-  border-radius: 4px 4px 0 0
+  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
 
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,
@@ -127,7 +134,8 @@
   .support-form__buttons-desktop
     display: none
 
-  .ui-button:active // this is a global scope but should be just for support form
-    opacity: 1 !important
-    filter: none !important
-    -ms-filter: none !important
+  .support-form
+    .ui-button:active
+      opacity: 1 !important
+      filter: none !important
+      -ms-filter: none !important

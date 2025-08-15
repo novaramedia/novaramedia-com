@@ -48432,7 +48432,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * Checks if a value is a non-empty string (after trimming whitespace)
- * 
+ *
  * @param {*} val - The value to check
  * @returns {boolean} - True if the value is a string with non-whitespace content
  */
@@ -49166,12 +49166,12 @@ class Support {
           }
         },
         focus() {
-          const $prefix = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.support-form__input-prefix');
+          const $prefix = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.support-form__custom-input-prefix');
           $prefix.css('color', 'var(--color-black-soft)');
         },
         blur() {
           const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-          const $prefix = $input.siblings('.support-form__input-prefix');
+          const $prefix = $input.siblings('.support-form__custom-input-prefix');
           if (!$input.hasClass('ui-button--active')) {
             $prefix.css('color', '');
           }
@@ -49226,7 +49226,7 @@ class Support {
     }
     const $customInput = $form.find('.support-form__custom-input');
     $customInput.val('').removeClass('ui-button--active');
-    $customInput.siblings('.support-form__input-prefix').css('color', '');
+    $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
   }
   updateSupportSection(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');

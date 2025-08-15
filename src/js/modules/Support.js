@@ -165,12 +165,12 @@ export class Support {
           }
         },
         focus() {
-          const $prefix = $(this).siblings('.support-form__input-prefix');
+          const $prefix = $(this).siblings('.support-form__custom-input-prefix');
           $prefix.css('color', 'var(--color-black-soft)');
         },
         blur() {
           const $input = $(this);
-          const $prefix = $input.siblings('.support-form__input-prefix');
+          const $prefix = $input.siblings('.support-form__custom-input-prefix');
           if (!$input.hasClass('ui-button--active')) {
             $prefix.css('color', '');
           }
@@ -237,7 +237,7 @@ export class Support {
 
     const $customInput = $form.find('.support-form__custom-input');
     $customInput.val('').removeClass('ui-button--active');
-    $customInput.siblings('.support-form__input-prefix').css('color', '');
+    $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
   }
 
   updateSupportSection(data, $form) {
