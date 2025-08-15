@@ -90,12 +90,15 @@ export class Support {
 
             _this.setAutoValues($form, data.value);
             $form.attr('action', _this.donationAppUrl + data.value);
-            $button.addClass('ui-button--active');
+
+            // Set active class on all buttons with the same data-value (both visible and hidden)
+            $form.find(`[data-action="set-type"][data-value="${data.value}"]`).addClass('ui-button--active');
 
             _this.updateSupportSection(data, $form);
 
             $form.find('[data-action="set-type"]').each((i, btn) => {
-              const isSelected = btn === $button[0];
+              const $btn = $(btn);
+              const isSelected = $btn.data('value') === data.value;
               btn.setAttribute('aria-checked', isSelected.toString());
               btn.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
@@ -119,26 +122,25 @@ export class Support {
             });
           }
         },
-      });
+        keydown(event) {
+          const $buttons = $(this)
+            .closest('.support-form')
+            .find('.support-form__button');
+          let index = $buttons.index(this);
 
-      $form.find('.support-form__button').on('keydown', function (event) {
-        const $buttons = $(this)
-          .closest('.support-form')
-          .find('.support-form__button');
-        let index = $buttons.index(this);
-
-        if (event.key === 'ArrowRight') {
-          event.preventDefault();
-          index = (index + 1) % $buttons.length;
-          $buttons.eq(index).focus();
-        } else if (event.key === 'ArrowLeft') {
-          event.preventDefault();
-          index = (index - 1 + $buttons.length) % $buttons.length;
-          $buttons.eq(index).focus();
-        } else if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          $(this).trigger('click'); // Activate on Enter or Space
-        }
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            index = (index + 1) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            index = (index - 1 + $buttons.length) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            $(this).trigger('click'); // Activate on Enter or Space
+          }
+        },
       });
 
       $form.find('.support-form__custom-input').on({
@@ -184,8 +186,6 @@ export class Support {
           }
         },
       });
-
-      $form.addClass('support-form--active ui-button--active');
     });
   }
 
