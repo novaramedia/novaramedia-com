@@ -147,7 +147,9 @@ export class Support {
           $valueInput.val(event.target.value);
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).closest('.support-form__custom-input-container').addClass('support-form__custom-input-container--active');
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
           $form.find('[data-action="set-value"]').each((i, btn) => {
@@ -171,16 +173,18 @@ export class Support {
             }
           }
         },
-        focus() { // on focus add active class to container
+        focus() {
+          // on focus add active class to container
           $(this)
             .closest('.support-form__custom-input-container')
             .addClass('support-form__custom-input-container--active');
         },
-        blur() { // on blur remove active class from container if input is empty
+        blur() {
+          // on blur remove active class from container if input is empty
           if (!$(this).val()) {
-            $(this).closest(
-              '.support-form__custom-input-container'
-            ).removeClass('support-form__custom-input-container--active');
+            $(this)
+              .closest('.support-form__custom-input-container')
+              .removeClass('support-form__custom-input-container--active');
           }
         },
       });
@@ -244,10 +248,14 @@ export class Support {
     }
 
     const $customInput = $form.find('.support-form__custom-input');
-    const $customInputContainer = $form.find('.support-form__custom-input-container');
+    const $customInputContainer = $form.find(
+      '.support-form__custom-input-container'
+    );
     $customInput.val('');
     $customInputContainer.removeClass('ui-button--active');
-    $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
+    $customInput
+      .siblings('.support-form__custom-input-prefix')
+      .css('color', '');
   }
 
   updateSupportSection(data, $form) {
