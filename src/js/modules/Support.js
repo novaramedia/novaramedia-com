@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import Cookies from 'js-cookie';
+import isNonEmptyString from '../functions/isNonEmptyString.js';
 
 export class Support {
   constructor() {
@@ -246,10 +247,6 @@ export class Support {
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['main'];
-
-    function isNonEmptyString(val) {
-      return typeof val === 'string' && val.trim() !== '';
-    }
 
     if (
       overrideCopy &&
