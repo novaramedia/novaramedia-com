@@ -5295,6 +5295,25 @@ html {
   color: var(--color-white-soft);
   background-color: var(--color-red);
 }
+.support-form__schedule-mobile {
+  background-color: var(--color-gray-base);
+  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0;
+}
+.support-form__schedule-mobile .support-form__button {
+  background-color: var(--color-gray-base);
+}
+.support-form__schedule-mobile .support-form__button:hover:not(:focus):not(.ui-button--active) {
+  background-color: var(--color-gray-base);
+}
+.support-section--white-mobile-schedule .support-form__schedule-mobile {
+  background-color: var(--color-white-soft);
+}
+.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button {
+  background-color: var(--color-white-soft);
+}
+.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button:hover:not(:focus):not(.ui-button--active) {
+  background-color: var(--color-white-soft);
+}
 .support-form__custom-input-container .support-form__custom-input {
   text-align: center;
   padding-left: 30px;
@@ -5345,9 +5364,10 @@ html {
 .support-form__buttons-mobile {
   display: none;
 }
-.support-form__tab-schedule-buttons button {
+.support-form__schedule-option {
   border: none !important;
   border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0;
+  background: transparent;
 }
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,
@@ -7959,11 +7979,11 @@ html {
   }
 }
 html {
-  --colour-gray-base: #f8f5f5;
+  --color-gray-base: #f8f5f5;
   --corner-radius-large: 4px;
 }
 .background-gray-base {
-  background-color: var(--colour-gray-base);
+  background-color: var(--color-gray-base);
 }
 .background-gray-light-transparent {
   background-color: var(--color-gray-light-transparent);
