@@ -70,6 +70,14 @@ Follow a consistent order for class properties.
 - Then typography
 - Then color
 
+### Extending the library
+
+Sometimes the library is missing features, or sometimes designs add new features. In this circumstance we write the new styles in the `upstream-to-library.styl` file. During the release flow these styles will be moved over to the library and the dependency updated.
+
+### Project specific styles
+
+For features that are unique to the project and not needed in the library, we create specific styles for the layout in development in the `src/styl/layouts` directory in a new file.
+
 ## WordPress Template Patterns
 
 - **Partials system**: Reusable PHP components in `partials/` directory
