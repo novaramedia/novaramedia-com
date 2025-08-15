@@ -81,7 +81,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
           Custom donation amount in pounds
         </label>
-        <div class="support-form__input-wrapper">
+        <div class="u-position-relative">
           <span class="support-form__input-prefix font-weight-bold font-size-11">£</span>
           <input id="<?php echo esc_attr( $instance ); ?>__custom-input"
                  class="support-form__custom-input ui-input ui-input--red-border-white"
