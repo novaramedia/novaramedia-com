@@ -165,7 +165,9 @@ export class Support {
           }
         },
         focus() {
-          const $prefix = $(this).siblings('.support-form__custom-input-prefix');
+          const $prefix = $(this).siblings(
+            '.support-form__custom-input-prefix'
+          );
           $prefix.css('color', 'var(--color-black-soft)');
         },
         blur() {
@@ -237,7 +239,9 @@ export class Support {
 
     const $customInput = $form.find('.support-form__custom-input');
     $customInput.val('').removeClass('ui-button--active');
-    $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
+    $customInput
+      .siblings('.support-form__custom-input-prefix')
+      .css('color', '');
   }
 
   updateSupportSection(data, $form) {
