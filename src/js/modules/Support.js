@@ -92,7 +92,9 @@ export class Support {
             $form.attr('action', _this.donationAppUrl + data.value);
 
             // Set active class on all buttons with the same data-value (both visible and hidden)
-            $form.find(`[data-action="set-type"][data-value="${data.value}"]`).addClass('ui-button--active');
+            $form
+              .find(`[data-action="set-type"][data-value="${data.value}"]`)
+              .addClass('ui-button--active');
 
             _this.updateSupportSection(data, $form);
 
