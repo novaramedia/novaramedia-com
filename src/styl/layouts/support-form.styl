@@ -17,11 +17,11 @@
 .support-form__button
   &:hover:not(:focus):not(.ui-button--active)
       color: var(--color-white-soft-transparent)
-      border-color: var(--color-white-soft-transparent);
+      border-color: var(--color-white-soft-transparent)
   &.ui-button--active
     color: var(--color-black-soft);
-    background-color: var(--color-white-soft);
-    border-color: var(--color-white-soft);
+    background-color: var(--color-white-soft)
+    border-color: var(--color-white-soft)
 
 .support-form__input-prefix
   position: absolute
@@ -53,46 +53,46 @@
 
 .support-form__payment-type
   vertical-align: bottom
-  height: 1.6rem;
+  height: 1.6rem
 
 .condensed
   .support-form__text-desktop,
   .support-form__schedule-desktop,
   .support-form__payment-type-desktop,
   .support-form__buttons-desktop
-    display: none;
+    display: none
 
-  .support-form__schedule-mobile
-    display: flex;
+  .support-form__schedule-mobile,
+  .support-form__payment-type-mobile
+    display: flex
 
   .support-form__text-mobile,
-  .support-form__payment-type-mobile,
   .support-form__buttons-mobile
-    display: block;
+    display: block
 
 .support-form__text-mobile,
 .support-form__schedule-mobile,
 .support-form__payment-type-mobile,
 .support-form__buttons-mobile
-  display: none;
+  display: none
 
 .support-form__tab-schedule-buttons button
-  border: none !important;
-  border-radius: 4px 4px 0 0;
+  border: none !important
+  border-radius: 4px 4px 0 0
 
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,
 .support-form__left-column-desktop
-  display: flex;
+  display: flex
 
 .support-form__text-desktop,
 .support-form__buttons-desktop
-  display: block;
+  display: block
 
 .support-form__left-column-desktop
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column
+  justify-content: space-between
+  flex-wrap: wrap
 
 .support-form__button
   &:active
@@ -101,28 +101,28 @@
     border-color: var(--color-red)
   &:hover:not(:focus):not(.ui-button--active)
       color: var(--color-white-soft-transparent)
-      border-color: var(--color-white-soft-transparent);
+      border-color: var(--color-white-soft-transparent)
   &.ui-button--active
     color: var(--color-black-soft);
-    background-color: var(--color-white-soft);
-    border-color: var(--color-white-soft);
+    background-color: var(--color-white-soft)
+    border-color: var(--color-white-soft)
 
 @media (max-width: $breakpoint-s)
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: flex
+    flex-direction: row
+    justify-content: center
 
   .support-form__text-mobile,
   .support-form__buttons-mobile
-    display: block;
+    display: block
 
   .support-form__text-desktop,
   .support-form__schedule-desktop,
   .support-form__payment-type-desktop,
   .support-form__buttons-desktop
-    display: none;
+    display: none
 
   .ui-button:active // this is a global scope but should be just for support form
     opacity: 1 !important

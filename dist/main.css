@@ -5309,11 +5309,11 @@ html {
 .condensed .support-form__buttons-desktop {
   display: none;
 }
-.condensed .support-form__schedule-mobile {
+.condensed .support-form__schedule-mobile,
+.condensed .support-form__payment-type-mobile {
   display: flex;
 }
 .condensed .support-form__text-mobile,
-.condensed .support-form__payment-type-mobile,
 .condensed .support-form__buttons-mobile {
   display: block;
 }
