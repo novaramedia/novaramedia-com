@@ -191,16 +191,6 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
     $donation_mode = 'regular';
   }
 
-  // Set default container classes if none provided
-  if ( empty( $container_classes ) ) {
-    $is_condensed = ( $variant === 'condensed' );
-    if ( $is_condensed ) {
-      $container_classes = 'grid-item is-xxl-12 is-s-24';
-    } else {
-      $container_classes = 'grid-item is-xxl-24';
-    }
-  }
-
   $variant_classes = 'support-section--' . $variant;
 
   if ( $white_mobile_schedule ) {
