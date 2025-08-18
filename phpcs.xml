@@ -181,6 +181,11 @@
     <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
     <!-- For now dont bother with all global prefixed. It seems too much for variables -->
     <exclude name="WordPress.NamingConventions.PrefixAllGlobals" />
+    <!-- Exclude PEAR function call signature rules that conflict with 2-space indentation -->
+    <exclude name="PEAR.Functions.FunctionCallSignature.OpeningIndent" />
+    <exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
+    <!-- Exclude WordPress array indentation rules - they don't support 2-space config -->
+    <exclude name="WordPress.Arrays.ArrayIndentation" />
   </rule>
 
   <rule ref="WordPress-Docs">
@@ -237,9 +242,10 @@
     </properties>
   </rule>
 
-  <arg name="tab-width" value="2"/>
+  <!-- Add line indentation validation that works with 2-space -->
+  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
 
-  <rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+  <arg name="tab-width" value="2"/>
 
   <!-- Disable MultipleStatementAlignment sniff -->
   <rule ref="Generic.Formatting.MultipleStatementAlignment">

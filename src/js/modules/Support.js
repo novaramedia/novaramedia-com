@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import Cookies from 'js-cookie';
+import isNonEmptyString from '../functions/isNonEmptyString.js';
 
 export class Support {
   constructor() {
@@ -84,45 +85,24 @@ export class Support {
 
           const $button = $(this);
           const data = $button.data();
-          // function to update the support section copy depending on the type of donation
-          function updateSupportSection(data, $form) {
-            const heading = $form.find('.support-form__dynamic-heading');
-            const text = $form.find('.support-form__dynamic-text');
-            const copy =
-              WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-
-            if (!copy) {
-              if (heading.length) {
-                heading.text('Support Us');
-              }
-              if (text.length) {
-                text.text(
-                  'You make us strong. Help build people-powered media and donate one hour’s wage per month—or whatever you can afford—today'
-                );
-              }
-              return;
-            }
-
-            if (heading.length) {
-              heading.text(copy.heading);
-            }
-            if (text.length) {
-              text.text(copy.text);
-            }
-          }
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
 
             _this.setAutoValues($form, data.value);
             $form.attr('action', _this.donationAppUrl + data.value);
-            $button.addClass('ui-button--active');
 
-            updateSupportSection(data, $form);
+            // Set active class on all buttons with the same data-value (both visible and hidden)
+            $form
+              .find(`[data-action="set-type"][data-value="${data.value}"]`)
+              .addClass('ui-button--active');
 
-            $form.find('[data-action="set-type"]').each((i, btn) => {
-              const isSelected = btn === $button[0];
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            _this.updateSupportSection(data, $form);
+
+            $form.find('[data-action="set-type"]').each((index, button) => {
+              const $button = $(button);
+              const isSelected = $button.data('value') === data.value;
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
@@ -130,38 +110,39 @@ export class Support {
 
             _this.clearActiveButtonState($form, 'set-value');
 
-            $('.support-form__custom-input').removeClass('ui-button--active');
+            $('.support-form__custom-input-container').removeClass(
+              'support-form__custom-input-container--active'
+            );
 
             $button.addClass('ui-button--active');
 
             // Accessibility state management for custom radio buttons
-            $form.find('[data-action="set-value"]').each((i, btn) => {
-              const isSelected = btn === $button[0];
-              btn.setAttribute('aria-checked', isSelected.toString());
-              btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+            $form.find('[data-action="set-value"]').each((index, button) => {
+              const isSelected = button === $button[0];
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
           }
         },
-      });
+        keydown(event) {
+          const $buttons = $(this)
+            .closest('.support-form')
+            .find('.support-form__button');
+          let index = $buttons.index(this);
 
-      $form.find('.support-form__button').on('keydown', function (event) {
-        const $buttons = $(this)
-          .closest('.support-form')
-          .find('.support-form__button');
-        let index = $buttons.index(this);
-
-        if (event.key === 'ArrowRight') {
-          event.preventDefault();
-          index = (index + 1) % $buttons.length;
-          $buttons.eq(index).focus();
-        } else if (event.key === 'ArrowLeft') {
-          event.preventDefault();
-          index = (index - 1 + $buttons.length) % $buttons.length;
-          $buttons.eq(index).focus();
-        } else if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          $(this).trigger('click'); // Activate on Enter or Space
-        }
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            index = (index + 1) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            index = (index - 1 + $buttons.length) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            $(this).trigger('click'); // Activate on Enter or Space
+          }
+        },
       });
 
       $form.find('.support-form__custom-input').on({
@@ -170,41 +151,47 @@ export class Support {
           $valueInput.val(event.target.value);
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).addClass('ui-button--active');
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
 
           // Clear ARIA radio state for value buttons when custom input is used
-          $form.find('[data-action="set-value"]').each((i, btn) => {
-            btn.setAttribute('aria-checked', 'false');
-            btn.setAttribute('tabindex', '-1');
+          $form.find('[data-action="set-value"]').each((index, button) => {
+            button.setAttribute('aria-checked', 'false');
+            button.setAttribute('tabindex', '-1');
           });
         },
         keydown(event) {
           if (event.key === 'Enter') {
             event.preventDefault();
-            const val = $(this).val().trim();
-            if (val !== '') {
+            const inputValue = $(this).val().trim();
+            if (inputValue !== '') {
               _this.clearActiveButtonState($form, 'set-value');
-              $(this).addClass('ui-button--active');
-              $form.find('[data-action="set-value"]').each((i, btn) => {
-                btn.setAttribute('aria-checked', 'false');
-                btn.setAttribute('tabindex', '-1');
+              $(this)
+                .closest('.support-form__custom-input-container')
+                .addClass('support-form__custom-input-container--active');
+              $form.find('[data-action="set-value"]').each((index, button) => {
+                button.setAttribute('aria-checked', 'false');
+                button.setAttribute('tabindex', '-1');
               });
             }
           }
         },
         focus() {
-          const $prefix = $(this).siblings('.support-form__input-prefix');
-          $prefix.css('color', 'var(--color-black-soft)');
+          // on focus add active class to container
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
         },
         blur() {
-          const $input = $(this);
-          const $prefix = $input.siblings('.support-form__input-prefix');
-          if (!$input.hasClass('ui-button--active')) {
-            $prefix.css('color', '');
+          // on blur remove active class from container if input is empty
+          if (!$(this).val()) {
+            $(this)
+              .closest('.support-form__custom-input-container')
+              .removeClass('support-form__custom-input-container--active');
           }
         },
       });
-      $form.addClass('support-form--active ui-button--active');
     });
   }
 
@@ -239,8 +226,8 @@ export class Support {
     _this.clearActiveButtonState($form, 'set-value');
 
     // Update each button with new values
-    $buttons.each((index, input) => {
-      const $input = $(input);
+    $buttons.each((index, inputElement) => {
+      const $input = $(inputElement);
       const name = $input.data('name');
       const value = _this.autovalues[`${donationType}_${name}`];
 
@@ -261,9 +248,49 @@ export class Support {
 
       $valueInput.val($first.data('value'));
     }
+
     const $customInput = $form.find('.support-form__custom-input');
-    $customInput.val('').removeClass('ui-button--active');
-    $customInput.siblings('.support-form__input-prefix').css('color', '');
+    const $customInputContainer = $form.find(
+      '.support-form__custom-input-container'
+    );
+    $customInput.val('');
+    $customInputContainer.removeClass('ui-button--active');
+    $customInput
+      .siblings('.support-form__custom-input-prefix')
+      .css('color', '');
+  }
+
+  updateSupportSection(data, $form) {
+    const $heading = $form.find('.support-form__dynamic-heading');
+    const $text = $form.find('.support-form__dynamic-text');
+    const overrideCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+    const defaultSectionCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy['main'];
+
+    if (
+      overrideCopy &&
+      (isNonEmptyString(overrideCopy.heading) ||
+        isNonEmptyString(overrideCopy.text))
+    ) {
+      const headingText = isNonEmptyString(overrideCopy.heading)
+        ? overrideCopy.heading
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)
+          ? defaultSectionCopy.heading
+          : '';
+      const textCopy = isNonEmptyString(overrideCopy.text)
+        ? overrideCopy.text
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)
+          ? defaultSectionCopy.text
+          : '';
+
+      if ($heading.length && headingText) {
+        $heading.text(headingText);
+      }
+      if ($text.length && textCopy) {
+        $text.text(textCopy);
+      }
+    }
   }
 
   initSupportBar() {
@@ -284,7 +311,6 @@ export class Support {
     $barOpen.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         if (_this.hasApprovalCookie) {
@@ -298,7 +324,6 @@ export class Support {
     $barClose.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         if (_this.hasApprovalCookie) {
@@ -308,10 +333,5 @@ export class Support {
         }
       },
     });
-  }
-
-  static numberWithCommas(x) {
-    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }

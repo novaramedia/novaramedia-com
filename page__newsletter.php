@@ -131,13 +131,18 @@ if( have_posts() ) {
   }
 }
 
-  if ($support_override) {
-    get_template_part('partials/support-section', null, array(
+if ( $support_override ) {
+  get_template_part(
+    'partials/support-section',
+    null,
+    array(
+      'container_classes' => 'mb-4',
       'override_text' => $support_override,
-    ));
-  } else {
-    get_template_part('partials/support-section');
-  }
+    )
+  );
+} else {
+  get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
+}
 ?>
 </main>
 <?php
