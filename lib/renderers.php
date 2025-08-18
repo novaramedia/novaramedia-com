@@ -186,7 +186,8 @@ function render_support_form( $instance, $active_values, $donation_mode, $mode =
     $grid_classes = 'is-xxl-24';
   }
 
-  $support_section_classes = 'background-red ui-rounded-box-large m-2 font-color-white ' . $mode . ' ' . $grid_classes;
+  $support_section_classes = 'background-red ui-rounded-box-large mt-4 mb-4 font-color-white ' . $mode . ' ' . $grid_classes;
+
   if ( $white_mobile_schedule ) {
     $support_section_classes .= ' support-section--white-mobile-schedule';
   }

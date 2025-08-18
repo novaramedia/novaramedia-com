@@ -32,7 +32,7 @@
 
 .support-form__custom-input-prefix
   position: absolute
-  top: 50%
+  top: calc('50% - 1px')
   left: 12px
   transform: translateY(-50%)
   color: var(--color-white-soft)
@@ -57,6 +57,9 @@
     background-color: var(--color-gray-base)
     &:hover:not(:focus):not(.ui-button--active)
       background-color: var(--color-gray-base)
+  .support-form__schedule-option
+    border: none !important
+    border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
 
 // White background variant for parent support section
 .support-section--white-mobile-schedule
@@ -109,11 +112,6 @@
 .support-form__payment-type-mobile,
 .support-form__buttons-mobile
   display: none
-
-.support-form__schedule-option
-  border: none !important
-  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
-  background: transparent
 
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,

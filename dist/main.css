@@ -5271,7 +5271,7 @@ html {
 }
 .support-form__custom-input-prefix {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 1px);
   left: 12px;
   transform: translateY(-50%);
   color: var(--color-white-soft);
@@ -5304,6 +5304,10 @@ html {
 }
 .support-form__schedule-mobile .support-form__button:hover:not(:focus):not(.ui-button--active) {
   background-color: var(--color-gray-base);
+}
+.support-form__schedule-mobile .support-form__schedule-option {
+  border: none !important;
+  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0;
 }
 .support-section--white-mobile-schedule .support-form__schedule-mobile {
   background-color: var(--color-white-soft);
@@ -5363,11 +5367,6 @@ html {
 .support-form__payment-type-mobile,
 .support-form__buttons-mobile {
   display: none;
-}
-.support-form__schedule-option {
-  border: none !important;
-  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0;
-  background: transparent;
 }
 .support-form__schedule-desktop,
 .support-form__payment-type-desktop,
