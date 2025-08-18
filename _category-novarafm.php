@@ -243,7 +243,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
   </div>
 
   <?php
-    get_template_part('partials/support-section');
+    get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
   ?>
 
   <div class="background-green">

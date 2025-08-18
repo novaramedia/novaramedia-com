@@ -160,7 +160,7 @@ if( have_posts() ) {
 <?php
 } ?>
   <?php
-    get_template_part('partials/support-section');
+    get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
   ?>
 </main>
 <?php

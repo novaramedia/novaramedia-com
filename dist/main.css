@@ -5249,15 +5249,15 @@ html {
   opacity: 1;
 }
 .support-form__padding-container {
-  padding: 2rem;
+  padding: 1.5rem 1rem;
 }
 @media (max-width: 759px) {
   .support-form__padding-container {
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
   }
 }
 .condensed .support-form__padding-container {
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
 }
 .support-form__button {
   background-color: var(--color-red);
