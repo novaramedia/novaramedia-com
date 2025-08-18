@@ -5276,6 +5276,12 @@ html {
   transform: translateY(-50%);
   color: var(--color-white-soft);
 }
+.support-form__schedule-mobile,
+.support-form__payment-type-mobile {
+  flex-direction: row;
+  -ms-justify-content: center;
+  justify-content: center;
+}
 .support-form__schedule-mobile .support-form__button,
 .support-form__tab-schedule-buttons .support-form__button {
   color: var(--color-black-soft);
@@ -5400,9 +5406,6 @@ html {
   .support-form__schedule-mobile,
   .support-form__payment-type-mobile {
     display: flex;
-    flex-direction: row;
-    -ms-justify-content: center;
-    justify-content: center;
   }
   .support-form__text-mobile,
   .support-form__buttons-mobile {

@@ -100,7 +100,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         <input
           class="support-form__submit ui-button ui-button--white ui-button--fill-width"
           type="submit"
-          value="Go"
+          value="Donate"
         />
       </div>
     </div>
