@@ -16,6 +16,7 @@ function scripts_and_styles_method() {
       'isAdmin'                  => current_user_can( 'manage_options' ) ? 1 : 0,
       'supportSectionAutovalues' => nm_get_support_autovalues(),
       'liveCheckerData'          => nm_get_livechecker_data(),
+      'supportSectionCopy'       => nm_get_support_heading_text_data(),
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );

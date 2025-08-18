@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Rebuild the support form, with new condensed width version
 - Updated all dev and front end dependencies (`chalk` pinned at v4)
 
 ## [4.2.10] - 2025-05-22
