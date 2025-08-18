@@ -78,6 +78,10 @@ Sometimes the library is missing features, or sometimes designs add new features
 
 For features that are unique to the project and not needed in the library, we create specific styles for the layout in development in the `src/styl/layouts` directory in a new file.
 
+### Stylus and compilation specific details
+
+- Values for the use of the css `calc` function need to be escaped with quotes.
+
 ## WordPress Template Patterns
 
 - **Partials system**: Reusable PHP components in `partials/` directory
