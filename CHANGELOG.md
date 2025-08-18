@@ -10,6 +10,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Rebuild the support form, with new condensed width version
+- Updated all dev and front end dependencies (`chalk` pinned at v4)
+
+## [4.2.10] - 2025-05-22
+
+### Added
+
+- Function that accepts an array to support multiple external redirects to handle simple path-based redirects.
+- Redirect from https://novaramedia.com/asksophie to this google form https://docs.google.com/forms/d/e/1FAIpQLSegJV5jED2FhIUS7_rryZC6V2Y65W7W-kE3tXGMH7zr4sl_uQ/viewform
+
+## [4.2.9] - 2025-05-21
+
+### Added
+
+- Redirect to red-flags category https://novaramedia.com/redflags to https://novaramedia.com/category/articles/red-flags/
+
+## [4.2.8] - 2025-04-30
+
+### Fixed
+
+- Increased the margin under the committed archive post title
 
 ## [4.2.7] - 2025-04-21
 

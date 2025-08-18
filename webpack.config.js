@@ -82,7 +82,10 @@ var config = {
   },
 
   plugins: [
-    new ESLintPlugin(),
+    new ESLintPlugin({
+      configType: 'eslintrc',
+      failOnError: false,
+    }),
     new MiniCssExtractPlugin(),
     {
       apply: (compiler) => {
@@ -151,7 +154,7 @@ module.exports = (env, argv) => {
                       name: 'preset-default',
                       params: {
                         overrides: {
-                          cleanupIDs: false,
+                          cleanupIds: false,
                           removeViewBox: false,
                         },
                       },
