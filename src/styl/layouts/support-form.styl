@@ -28,6 +28,9 @@
 // =============================================================================
 
 .support-form__button
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
+
   &:hover:not(:focus):not(.ui-button--active)
     color: var(--color-white-soft-transparent)
     border-color: var(--color-white-soft-transparent)
@@ -48,6 +51,10 @@
 
 .support-form__schedule-desktop
   display: flex
+
+.support-form__schedule-option
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
 
 .support-form__schedule-mobile
   display: none
@@ -93,7 +100,6 @@
 .support-form__tab-schedule-buttons
   .support-form__button
     color: var(--color-black-soft)
-    background-color: var(--color-white-soft)
 
     &:hover:not(:focus):not(.ui-button--active)
       color: var(--color-gray)
@@ -116,6 +122,8 @@
     padding-left: 30px
     background-color: transparent
     color: var(--color-white-soft)
+    background-color: var(--color-red)
+    border-color: var(--color-white-soft)
 
     &::placeholder
       color: var(--color-white-soft)
@@ -127,6 +135,7 @@
     .support-form__custom-input
       background-color: var(--color-white-soft)
       color: var(--color-black-soft)
+      outline: none
 
       &::placeholder
         color: var(--color-black-soft)

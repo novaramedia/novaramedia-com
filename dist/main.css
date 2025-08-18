@@ -5259,6 +5259,10 @@ html {
 .condensed .support-form__padding-container {
   padding: 1rem 2rem 2rem 2rem;
 }
+.support-form__button {
+  background-color: var(--color-red);
+  color: var(--color-white-soft);
+}
 .support-form__button:hover:not(:focus):not(.ui-button--active) {
   color: var(--color-white-soft-transparent);
   border-color: var(--color-white-soft-transparent);
@@ -5275,6 +5279,10 @@ html {
 }
 .support-form__schedule-desktop {
   display: flex;
+}
+.support-form__schedule-option {
+  background-color: var(--color-red);
+  color: var(--color-white-soft);
 }
 .support-form__schedule-mobile {
   display: none;
@@ -5320,7 +5328,6 @@ html {
 }
 .support-form__tab-schedule-buttons .support-form__button {
   color: var(--color-black-soft);
-  background-color: var(--color-white-soft);
 }
 .support-form__tab-schedule-buttons .support-form__button:hover:not(:focus):not(.ui-button--active) {
   color: var(--color-gray);
@@ -5338,6 +5345,8 @@ html {
   padding-left: 30px;
   background-color: transparent;
   color: var(--color-white-soft);
+  background-color: var(--color-red);
+  border-color: var(--color-white-soft);
 }
 .support-form__custom-input-container .support-form__custom-input::placeholder {
   color: var(--color-white-soft);
@@ -5350,6 +5359,7 @@ html {
 .support-form__custom-input-container--active .support-form__custom-input {
   background-color: var(--color-white-soft);
   color: var(--color-black-soft);
+  outline: none;
 }
 .support-form__custom-input-container--active .support-form__custom-input::placeholder {
   color: var(--color-black-soft);
@@ -8053,21 +8063,6 @@ html {
 }
 .ui-button--red:hover {
   color: var(--color-red);
-}
-.ui-button--red-white-outline {
-  background-color: var(--color-red);
-  color: var(--color-white-soft);
-}
-.ui-button--red-border-white {
-  color: var(--color-white-soft);
-  background-color: var(--color-red);
-  border-color: var(--color-white-soft);
-}
-.ui-button--red-border-white.ui-input--active {
-  color: var(--color-white-soft);
-  background-color: var(--color-red);
-  border-color: var(--color-white-soft);
-  outline: none;
 }
 .ui-rounded-box-large,
 .ui-rounded-image-large {

@@ -37,10 +37,10 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
     <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
     <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
       <div class="is-xxl-12">
-        <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
+        <button class="support-form__button ui-button ui-button--fill-width support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
       </div>
       <div class="is-xxl-12">
-        <button class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline ui-button--active support-form__schedule-option support-form__schedule-option-right font-weight-bold grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
+        <button class="support-form__button ui-button ui-button--fill-width ui-button--active support-form__schedule-option support-form__schedule-option-right font-weight-bold grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
       </div>
     </div>
   <?php
@@ -65,7 +65,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         ?>
         <div class="grid-item grid-item--tight is-xxl-3 is-s-8 mb-s-2">
           <button
-            class="support-form__button ui-button ui-button--fill-width ui-button--red-white-outline support-form__value-option"
+            class="support-form__button ui-button ui-button--fill-width support-form__value-option"
             role="radio"
             aria-checked="false"
             tabindex="-1"
