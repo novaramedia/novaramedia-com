@@ -13,6 +13,6 @@ if ( ! isset( $args['on_colored_background'] ) || ! is_bool( $args['on_colored_b
 ?>
 <div class="container <?php echo esc_attr( $container_classes ); ?>">
   <div class="grid-row">
-      <?php render_support_form_dispatcher( 'banner', $on_colored_background ); ?>
+      <?php render_support_form( 'banner', $on_colored_background ); ?>
   </div>
 </div>

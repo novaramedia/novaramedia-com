@@ -171,14 +171,27 @@ function render_payment_icons( $payment_classes = '' ) {
 /**
  * Render the support donation form with the heading, text, and form elements.
  *
- * @param string $instance Unique form instance ID.
- * @param object $active_values Active donation values.
- * @param string $donation_mode Current donation mode.
- * @param string $mode Form display mode ('banner' or 'condensed').
+ * @param string $variant Form display variant ('banner' or 'condensed').
  * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $instance, $active_values, $donation_mode, $mode = 'banner', $white_mobile_schedule = false ) {
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false ) {
+  // Generate unique instance ID
+  $instance = uniqid( 'support-form-' );
+  
+  // Get support section values
+  $support_section_autovalues = nm_get_support_autovalues();
+  $active_values = $support_section_autovalues['default'];
+
+  // Determine donation mode
+  if ( isset( $active_values->show_first ) && in_array( $active_values->show_first, array( 'regular', 'oneoff' ), true ) ) {
+    $donation_mode = $active_values->show_first;
+  } else {
+    $donation_mode = 'regular';
+  }
+
+  // Handle variant modes
+  $mode = $variant;
   $is_condensed = ( $mode === 'condensed' );
   if ( $is_condensed ) {
     $grid_classes = 'is-xxl-12 is-s-24';
@@ -214,39 +227,6 @@ function render_support_form( $instance, $active_values, $donation_mode, $mode =
     </form>
   </div>
   <?php
-}
-/**
- * Render the appropriate support form version.
- * Add more cases here if needed.
- *
- * @uses render_support_heading_and_text() Render the heading and support section text.
- * @uses render_support_form_schedule_buttons() Render the schedule buttons (One-off / Monthly).
- * @uses render_support_form_amount_buttons() Render the amount buttons (Low, Medium, High, and Custom).
- * @uses NM_get_option() Get the option value as.
- * @param string $variant One of: 'banner', 'condensed'.
- * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
- */
-function render_support_form_dispatcher( $variant, $white_mobile_schedule = false ) {
-  $instance = uniqid( 'support-form-' );
-  $support_section_autovalues = nm_get_support_autovalues();
-  $active_values = $support_section_autovalues['default'];
-
-  if ( isset( $active_values->show_first ) && in_array( $active_values->show_first, array( 'regular', 'oneoff' ), true ) ) {
-        $donation_mode = $active_values->show_first;
-  } else {
-        $donation_mode = 'regular';
-  }
-
-  switch ( $variant ) {
-    case 'condensed':
-        render_support_form( $instance, $active_values, $donation_mode, 'condensed', $white_mobile_schedule );
-        break;
-
-    case 'banner':
-    default:
-        render_support_form( $instance, $active_values, $donation_mode, 'banner', $white_mobile_schedule );
-        break;
-  }
 }
 /**
  * Render the see also block
