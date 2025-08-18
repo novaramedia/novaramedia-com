@@ -173,12 +173,13 @@ function render_payment_icons( $payment_classes = '' ) {
  *
  * @param string $variant Form display variant ('banner' or 'condensed').
  * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
+ * @param string $container_classes Additional CSS classes for the container element.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $variant = 'banner', $white_mobile_schedule = false ) {
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '' ) {
   // Generate unique instance ID
   $instance = uniqid( 'support-form-' );
-  
+
   // Get support section values
   $support_section_autovalues = nm_get_support_autovalues();
   $active_values = $support_section_autovalues['default'];
@@ -190,16 +191,17 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
     $donation_mode = 'regular';
   }
 
-  // Handle variant modes
-  $mode = $variant;
-  $is_condensed = ( $mode === 'condensed' );
-  if ( $is_condensed ) {
-    $grid_classes = 'is-xxl-12 is-s-24';
-  } else {
-    $grid_classes = 'is-xxl-24';
+  // Set default container classes if none provided
+  if ( empty( $container_classes ) ) {
+    $is_condensed = ( $variant === 'condensed' );
+    if ( $is_condensed ) {
+      $container_classes = 'grid-item is-xxl-12 is-s-24';
+    } else {
+      $container_classes = 'grid-item is-xxl-24';
+    }
   }
 
-  $support_section_classes = 'font-color-white grid-item ' . $mode . ' ' . $grid_classes;
+  $support_section_classes = 'font-color-white ' . $variant . ' ' . $container_classes;
 
   if ( $white_mobile_schedule ) {
     $support_section_classes .= ' support-section--white-mobile-schedule';
