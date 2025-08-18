@@ -201,14 +201,16 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
     }
   }
 
-  $support_section_classes = 'font-color-white ' . $variant . ' ' . $container_classes;
+  $variant_classes = 'support-section--' . $variant;
 
   if ( $white_mobile_schedule ) {
-    $support_section_classes .= ' support-section--white-mobile-schedule';
+    $variant_classes .= ' support-section--white-mobile-schedule';
   }
+
+  $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
-  <div class="<?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-section support-form background-red ui-rounded-box-large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+  <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box-large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
