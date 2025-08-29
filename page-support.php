@@ -8,7 +8,6 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
 
-    $page_tag_override = ! empty( $meta['_nm_support_tag_override'] ) ? $meta['_nm_support_tag_override'][0] : false;
     $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
     $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
     $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
@@ -32,63 +31,72 @@ if ( have_posts() ) {
   }
   ?>
   <article id="page" class="support-page">
-    <div class="background-white background-support-texture-alt--fade-to-white pb-6">
+    <div class="background-white background-support-texture-alt--fade-to-white">
       <div class="container">
         <div class="grid-item">
-              <h4 class=" pt-4 font-size-10 font-weight-bold font-color-black ui-border-bottom ui-border--black pb-3">
-              <?php
-              if ( ! empty( $page_tag_override ) ) {
-                echo $page_tag_override;
-              } else {
-                echo 'Support Us';
-              }
-              ?>
-              </h4>
+          <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+            Support Us
+          </h4>
         </div>
-        <!-- heading -->
-        <div class="grid-row pt-3 pb-3 font-weight-bold font-size-s-14 font-size-17">
-          <div class="grid-item">
-            <div class="font-color-white">
+        <div class="grid-row mt-4 mb-5 font-weight-bold">
+          <div class="grid-item support-page__headline font-size-17">
+            <div class="font-color-black">
               <?php
               if ( ! empty( $header_first_line ) ) {
                 echo $header_first_line;
               } else {
-                echo 'Beat the billionaires.';
+                echo 'No owners.';
               }
               ?>
             </div>
-            <div class="font-color-black">
+            <div class="font-color-white">
               <?php
               if ( ! empty( $header_second_line ) ) {
                 echo $header_second_line;
               } else {
-                echo 'Unfuck the media.';
+                echo 'Only supporters.';
               }
               ?>
             </div>
           </div>
         </div>
       </div>
-      <!-- left column -->
       <div class="container">
         <div class="grid-row u-relative">
-          <div class="grid-item is-xxl-12 is-s-24 background-white support-page__left-radius">
-            <div class="m-5 m-s-0 font-size-12">
-              <?php the_content(); ?>
-              <?php
-              if ( $youtube_id ) {
+          <div class="grid-item is-xxl-24">
+            <div class="grid-row grid-row--nested u-relative">
+              <div class="grid-item is-xxl-12 is-s-24 background-white support-page__left-radius">
+                <div class="m-5 m-s-0 font-weight-bold">
+                  <div class="font-size-15 mb-4">
+                    Truthful, independent journalism <span class="font-color-red">funded by people like you</span>.
+                  </div>
+                  <div class="font-size-13 mb-4">
+                    Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics</span>.
+                  </div>
+                  <div class="font-size-13">
+                    Be part of the change.
+                  </div>
+                </div>
+              </div>
+              <div class="grid-item is-xxl-12 is-s-24 background-gray-base support-page__right-radius">
+                <div class="support-page__donation-form-sticky p-5 p-s-0 pt-s-3 pb-s-3">
+                  <?php render_support_form( 'condensed', true ); ?>
+                </div>
+              </div>
+
+              <div class="grid-item is-xxl-24 background-white p-5 ui-rounded-box">
+                <!-- TODO: revisit box rounding -->
+                <?php
+                if ( $youtube_id ) {
+                  ?>
+                  <div class="u-video-embed-container">
+                    <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
+                  </div>
+                  <?php
+                }
                 ?>
-              <div class="u-video-embed-container">
-                <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
               </div>
-              <?php } ?>
             </div>
-          </div>
-          <!-- right column -->
-          <div class="grid-item is-xxl-12 is-s-24 background-gray-base support-page__right-radius">
-              <div class="support-page__donation-form-sticky p-5 p-s-0 pt-s-3 pb-s-3">
-                   <?php render_support_form_dispatcher( 'condensed' ); ?>
-              </div>
           </div>
         </div>
       </div>
@@ -195,10 +203,10 @@ if ( have_posts() ) {
     <?php
     // Set fallback quotes
     $fallback_quotes = array(
-        'Novara tells the stories others won’t.',
-        'Independent journalism is vital — and Novara leads the way.',
-        'Supporting Novara feels like action, not charity.',
-        'They speak truth to power. That’s why I give.',
+      'Novara tells the stories others won’t.',
+      'Independent journalism is vital — and Novara leads the way.',
+      'Supporting Novara feels like action, not charity.',
+      'They speak truth to power. That’s why I give.',
     );
     // Merge stored quotes with fallback (max 4)
     $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, 4 - count( $support_carousel_quotes ) ) ) );
@@ -222,7 +230,7 @@ if ( have_posts() ) {
     <!-- donation form -->
     <div class="container">
       <div class="grid-row">
-        <?php render_support_form_dispatcher( 'banner' ); ?>
+        <?php render_support_form( 'banner' ); ?>
       </div>
     </div>
 
@@ -269,12 +277,10 @@ if ( have_posts() ) {
       </div>
     </div>
   </div>
-  <!-- end post -->
   </article>
     <?php
 }
 ?>
-<!-- end main-content -->
 </main>
 
 <?php

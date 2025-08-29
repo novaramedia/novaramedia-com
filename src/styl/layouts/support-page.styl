@@ -1,88 +1,85 @@
+.support-page__headline
+  font-size: 7.5rem
+  line-height: .825em
+  margin-left: -.05em
+
+
 .support-page__donation-form-sticky
-  position: sticky;
-  top: 100px;
-  z-index: 1;
+  position: sticky
+  top: 100px
+  z-index: 1
 
 .support-page__left-radius
   p
-    padding-bottom: 1rem;
+    padding-bottom: 1rem
 
 .support-page__left-radius
-  border-radius: var(--corner-radius) 0 0 var(--corner-radius);
+  border-radius: var(--corner-radius) 0 0 var(--corner-radius)
 
 .support-page__right-radius
-  border-radius: 0 var(--corner-radius) var(--corner-radius) 0;
+  border-radius: 0 var(--corner-radius) var(--corner-radius) 0
 
 .support-page__text-container
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex
+  flex-direction: column
+  align-items: center
 
 .support-page__our-story-background
-  position: relative;
-  height: auto;
-  background-size: 100% auto;
-  background-position:  center 40%;
-  background-repeat: no-repeat;
-  z-index: 1;
+  position: relative
+  height: auto
+  background-size: 100% auto
+  background-position:  center 40%
+  background-repeat: no-repeat
+  z-index: 1
 
 .avif .support-page__our-story-background
-  background-image: url('./img/pages/support-page/our-story-background.avif');
+  background-image: url('./img/pages/support-page/our-story-background.avif')
 
 .webp .support-page__our-story-background
-  background-image: url('./img/pages/support-page/our-story-background.webp');
+  background-image: url('./img/pages/support-page/our-story-background.webp')
 
 .fallback .support-page__our-story-background
-  background-image: url('./img/pages/support-page/our-story-background.avif');
+  background-image: url('./img/pages/support-page/our-story-background.avif')
 
 .support-page__our-story-background::before
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  border-radius: 4px
+  background-color: rgba(0, 0, 0, 0.5)
+  z-index: 2
 
 .support-page__our-story-background > *
-  position: relative;
-  z-index: 3;
+  position: relative
+  z-index: 3
 
 .support-page__quote-mark
-  font-size: 4rem;
-  line-height: 0.8;
-  margin: -0.5rem 0;
+  font-size: 4rem
+  line-height: 0.8
+  margin: -0.5rem 0
 
 .alt-ux-carousel__item
-  width: 500px;
+  width: 500px
 
 .support-page__direct-debit-logo, .support-page__paypal-logo
-  width: auto;
-  height: 30px;
+  width: auto
+  height: 30px
 
 .support-page__infographic
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 200px;
-  width: 100%;
-  background-image: url('./img/pages/support-page/desktop-how-we-are-funded-graphic.svg');
+  background-size: contain
+  background-repeat: no-repeat
+  background-position: center
+  height: 200px
+  width: 100%
+  background-image: url('./img/pages/support-page/desktop-how-we-are-funded-graphic.svg')
 
 @media screen and (max-width: $breakpoint-s)
-  .support-page__left-radius
-    order: 2;
-
-  .support-page__right-radius
-    order: 1;
-
-  .support-page__left-radius, .support-page__right-radius
-    background-color: transparent;
-
   .support-page__our-story-background
-    background-size: cover;
+    background-size: cover
 
   .support-page__infographic
-    background-image: url('./img/pages/support-page/mobile-how-we-are-funded-graphic.svg');
-    height: 400px;
+    background-image: url('./img/pages/support-page/mobile-how-we-are-funded-graphic.svg')
+    height: 400px
