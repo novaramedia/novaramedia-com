@@ -49360,53 +49360,42 @@ __webpack_require__.r(__webpack_exports__);
  * Highlighters - Scroll-based text highlighting component
  *
  * Creates a scroll-triggered highlighting effect where the text element closest
- * to the center of the viewport gets highlighted as the user scrolls. Perfect
- * for progressive content reveals like funding breakdowns, feature lists, or testimonials.
+ * to the center of the viewport gets an --active BEM modifier class as the user scrolls.
+ * Perfect for progressive content reveals like funding breakdowns, feature lists, or testimonials.
  *
  * How it works:
  * 1. Finds all elements matching the selector
- * 2. Initially highlights the first element
+ * 2. Initially activates the first element
  * 3. On scroll, calculates which element is closest to viewport center
- * 4. Removes highlight from all elements, adds it to the closest one
+ * 4. Removes --active class from all elements, adds it to the closest one
  *
  * Usage:
- * Basic usage with defaults (black highlight, gray reset)
  * new Highlighters('.ux-highlighter__line');
+ * new Highlighters('.feature__item');
+ * new Highlighters('.stat__number');
  *
- * Custom colors for different themes
- * new Highlighters('.feature__item', {
- *   highlight: 'font-color-red',
- *   reset: 'font-color-gray-light'
- * });
- *
- * Complex styling with multiple classes
- * new Highlighters('.stat__number', {
- *   highlight: 'font-color-white background-primary font-weight-bold',
- *   reset: 'font-color-gray background-transparent'
- * });
+ * The component will add/remove the --active BEM modifier:
+ * .ux-highlighter__line--active
+ * .feature__item--active
+ * .stat__number--active
  */
 class Highlighters {
   constructor() {
     let selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.ux-highlighter__line';
-    let colors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     this.$lines = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector);
-    this.$previous = null;
-
-    // Allow configurable color classes
-    this.highlightClass = colors.highlight || 'font-color-black';
-    this.resetClass = colors.reset || 'font-color-gray';
+    this.activeClass = `${selector.replace(/^\./, '')}--active`;
     this.init();
   }
   init() {
     this.resetAll();
-    this.highlight(this.$lines.eq(0));
+    this.activate(this.$lines.eq(0));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(() => this.updateHighlighting(), 16));
   }
   resetAll() {
-    this.$lines.removeClass(this.highlightClass).addClass(this.resetClass);
+    this.$lines.removeClass(this.activeClass);
   }
-  highlight($el) {
-    $el.removeClass(this.resetClass).addClass(this.highlightClass);
+  activate($el) {
+    $el.addClass(this.activeClass);
   }
   updateHighlighting() {
     const scrollTop = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollTop();
@@ -49425,7 +49414,7 @@ class Highlighters {
     });
     if (closest) {
       this.resetAll();
-      this.highlight(closest);
+      this.activate(closest);
     }
   }
 }

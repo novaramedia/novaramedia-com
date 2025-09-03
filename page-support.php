@@ -31,7 +31,7 @@ if ( have_posts() ) {
   }
   ?>
   <article id="page" class="support-page">
-    <div class="background-white background-support-texture-alt--fade-to-white">
+    <div class="background-white background-support-texture-alt background-support-texture-alt--fade-to-white">
       <div class="container">
         <div class="grid-item">
           <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
@@ -84,7 +84,7 @@ if ( have_posts() ) {
                 </div>
               </div>
 
-              <div class="grid-item is-xxl-24 background-white p-5 ui-rounded-box">
+              <div class="grid-item is-xxl-24 background-white p-5 ui-rounded-box--bottom">
                 <!-- TODO: revisit box rounding -->
                 <?php
                 if ( $youtube_id ) {
@@ -102,103 +102,121 @@ if ( have_posts() ) {
       </div>
     </div>
 
-    <div class="background-gray-base">
+    <div class="support-page__below-the-fold">
       <!-- how we are funded -->
       <div class="container">
-        <div class="grid-row pt-5 pb-6 support-page__text-container ui-border-top ui-border--black">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10">
-            <?php
-            if ( ! empty( $how_we_are_funded_heading ) ) {
-              echo $how_we_are_funded_heading;
-            } else {
-              echo 'How we are funded';
-            }
-            ?>
+        <div class="grid-row pt-5 pb-6 support-page__text-container">
+          <div class="grid-item is-xxl-24">
+            <hr class="mt-5 mb-7"/>
+          </div>
+
+          <div class="grid-item is-xxl-24 text-align-center">
+            <h3 class="font-size-10 font-weight-bold font-style-boxed">How we are funded</h3>
+
+            <div class="support-page__big-stats mt-4 mb-5">
+              <div class="support-page__big-stat">
+                <div class="font-size-17 font-weight-bold font-color-red">84%</div>
+                <div class="font-size-13 font-weight-bold">Supporter donations</div>
+              </div>
+              <div class="support-page__big-stat">
+                <div class="font-size-17 font-weight-bold font-color-pink">16%</div>
+                <div class="font-size-13 font-weight-bold">YouTube + Merch</div>
+              </div>
+              <div class="support-page__big-stat">
+                <div class="font-size-17 font-weight-bold">0%</div>
+                <div class="font-size-13 font-weight-bold">Murdoch</div>
+              </div>
             </div>
-          <br/>
-          <div class="support-page__infographic"></div>
-          <br/>
-          <div class="font-weight-bold is-xxl-13 is-s-18 text-align-center font-size-13">
-            <?php
-            if ( ! empty( $how_we_are_funded_text ) ) {
-              echo $how_we_are_funded_text;
-            } else {
-              echo 'Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has always underpinned our funding model.';
-            }
-            ?>
+          </div>
+        </div>
+
+        <div class="grid-row">
+          <div class="grid-item is-s-24 is-xxl-12">
+            <h3 class="font-size-16 font-weight-bold">
+              No Paywalls.<br/>
+              <span class="font-color-red">No Paymasters.</span>
+            </h3>
+          </div>
+          <div class="grid-item is-s-24 is-xxl-12 font-size-13 font-weight-bold">
+            Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has <em>always</em> underpinned our funding model.
+          </div>
+          <div class="grid-item is-xxl-24">
+            <hr class="mt-7 mb-7"/>
+          </div>
         </div>
       </div>
 
       <!-- how we spend our funds -->
-      <div class="container mb-6">
-        <div class="grid-row pt-6 pb-6 support-page__text-container background-white ui-rounded-box-large">
-          <div class="text-uppercase p-2 background-black font-color-white text-align-center font-size-10 mb-5">
-             <?php
-              if ( ! empty( $how_we_spend_our_funds_heading ) ) {
-                echo $how_we_spend_our_funds_heading;
-              } else {
-                echo 'How we spend our funds';
-              }
-              ?>
-            </div>
-            <div class="ux-highlighter is-xxl-13 is-s-18 text-align-center font-size-13 font-size-s-12 font-weight-bold">
+      <div class="container mb-7">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24 mb-6 text-align-center">
+            <h3 class="font-size-10 font-weight-bold font-style-boxed">How we spend our funds</h3>
+          </div>
+          <div class="grid-item is-s-24 is-xxl-10">
+            <h3 class="font-size-16 font-weight-bold">
+              <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism</span>.
+            </h3>
+          </div>
+          <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-13 font-weight-bold">
+            <div class="support-page__highlighter ux-highlighter is-xxl-13 is-s-18 font-size-13 font-size-s-12 font-weight-bold font-color-gray">
             <?php
             if ( ! empty( $how_we_spend_our_funds_lines ) ) {
               foreach ( $how_we_spend_our_funds_lines as $index => $line_text ) {
-                $color_class = ( $index === 0 ) ? 'font-color-black' : 'font-color-gray-light';
-                echo '<div class="ux-highlighter__line mb-5 ' . esc_attr( $color_class ) . '">'
-                    . esc_html( $line_text )
-                    . '</div>';
+                echo '<div class="ux-highlighter__line">'
+                  . esc_html( $line_text )
+                  . '</div>';
               }
             } else {
               ?>
-               <div class="ux-highlighter__line mb-5 font-color-black">Every penny Novara Media makes goes back into our journalism.</div>
-              <div class="ux-highlighter__line mb-5 font-color-gray-light">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
-              <div class="ux-highlighter__line mb-5 font-color-gray-light">It pays for the studio space where we film our live show.</div>
-              <div class="ux-highlighter__line mb-5 font-color-gray-light">It allows us to hire key roles, like a labour movement correspondent.</div>
-              <div class="ux-highlighter__line mb-5 font-color-gray-light">It helps us fight (and win) against the smears of the rightwing press.</div>
-              <div class="ux-highlighter__line font-color-gray-light">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
+              <div class="ux-highlighter__line">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
+              <div class="ux-highlighter__line">It pays for the studio space where we film our live show.</div>
+              <div class="ux-highlighter__line">It allows us to hire key roles, like a labour movement correspondent.</div>
+              <div class="ux-highlighter__line">It helps us fight (and win) against the smears of the rightwing press.</div>
+              <div class="ux-highlighter__line">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
               <?php
             }
             ?>
-        </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- our story -->
-      <div class="container pb-s-0 mb-6 ">
-        <div class="grid-row support-page__text-container support-page__our-story-background ui-rounded-box-large pt-6 pb-6">
-          <div class="text-uppercase font-weight-bold p-2 background-white font-color-black text-align-center font-size-9 mb-7">
-            <?php
-            if ( ! empty( $our_story_heading ) ) {
-              echo $our_story_heading;
-            } else {
-              echo 'Our Story';
-            }
-            ?>
-          </div>
-          <div class="is-xxl-13 is-s-18 font-color-white flex-grid-item flex-item-s-10 text-align-left pl-s-3 pr-s-3">
-            <div class="font-weight-bold mb-4 font-size-12 ">
-              <?php
-              if ( ! empty( $our_story_bold_text ) ) {
-                echo $our_story_bold_text;
-              } else {
-                echo "Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations. Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.";
-              }
-              ?>
+      <div class="container pb-s-0 mb-6">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="grid-row grid-row--nested background-black">
+              <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box--top"></div>
             </div>
-            <div class="font-size-11 pb-5">
-              <?php
-              if ( ! empty( $our_story_regular_text ) ) {
-                echo $our_story_regular_text;
-              } else {
-                echo "From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories. With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time. Every contribution helps us maintain our independence in a landscape dominated by powerful interests.";
-              }
-              ?>
+            <div class="grid-row grid-row--nested p-5 background-black font-color-white ui-rounded-box--bottom">
+              <div class="grid-item is-xxl-24 text-align-center mb-6">
+                <h3 class="font-size-10 font-weight-bold font-style-boxed font-style-boxed--white">
+                  Our Story
+                </h3>
+              </div>
+              <div class="grid-item is-s-24 is-xxl-12">
+                <h3 class="font-size-14 font-weight-bold">
+                  Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations.
+                </h3>
+              </div>
+              <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold">
+                <p class="mb-4">
+                  Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
+                </p>
+                <p class="mb-4">
+                  From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories.
+                </p>
+                <p class="mb-4">
+                  With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time.
+                </p>
+                <p>
+                  Every contribution helps us maintain our independence in a landscape dominated by powerful interests.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
       </div>
-    </div>
 
     <?php
     // Set fallback quotes

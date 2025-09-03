@@ -1415,7 +1415,8 @@ body {
 }
 .avif .background-support-texture-alt--fade-to-white,
 .webp .background-support-texture-alt--fade-to-white {
-  background-image: linear-gradient(to bottom,rgba(255,255,255,0) 25%,#fff 100%), url("img/specials/support-2023-texture-alt.webp");
+  background-blend-mode: normal;
+  background-image: linear-gradient(to bottom,transparent 25%,var(--color-white-soft) 100%), url("img/specials/support-2023-texture-alt.webp");
 }
 .fallback .background-support-texture {
   background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,var(--color-red) 100%), url("img/specials/support-2023-texture.png");
@@ -1424,7 +1425,8 @@ body {
   background-image: linear-gradient(0deg,var(--color-red) -3.61%,rgba(255,25,65,0) 99.91%), url("img/specials/support-2023-texture-alt.png");
 }
 .fallback .background-support-texture-alt--fade-to-white {
-  background-image: linear-gradient(to bottom,rgba(255,255,255,0) 25%,#fff 100%), url("img/specials/support-2023-texture-alt.png");
+  background-blend-mode: normal;
+  background-image: linear-gradient(to bottom,transparent 25%,var(--color-white-soft) 100%), url("img/specials/support-2023-texture-alt.png");
 }
 .component-quote {
   margin-top: 1rem;
@@ -5469,24 +5471,46 @@ html {
   padding-bottom: 1rem;
 }
 .support-page__left-radius {
-  border-radius: var(--corner-radius) 0 0 var(--corner-radius);
+  border-top-left-radius: var(--corner-radius);
 }
 .support-page__right-radius {
-  border-radius: 0 var(--corner-radius) var(--corner-radius) 0;
+  border-top-right-radius: var(--corner-radius);
 }
-.support-page__text-container {
+.support-page__below-the-fold {
+  background-image: linear-gradient(180deg,var(--color-white-soft) 0%,var(--color-gray-base) 25%);
+}
+.support-page__big-stats {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  -ms-justify-content: center;
+  justify-content: center;
   -ms-align-items: center;
   align-items: center;
+  text-align: center;
+}
+.support-page__big-stats .font-size-17 {
+  font-size: 7rem;
+}
+.support-page__big-stat {
+  padding: 1rem;
+}
+.support-page__highlighter .ux-highlighter__line {
+  transition: all var(--transition-speed-quick) ease-in-out;
+  margin-bottom: 2rem;
+}
+.support-page__highlighter .ux-highlighter__line--active {
+  transform: scale(1.02);
+  color: var(--color-black-soft);
+}
+.support-page__highlighter .ux-highlighter__line:last-child {
+  margin-bottom: 0;
 }
 .support-page__our-story-background {
   position: relative;
-  height: auto;
+  height: 450px;
   background-size: 100% auto;
   background-position: center 40%;
   background-repeat: no-repeat;
-  z-index: 1;
 }
 .avif .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.avif");
@@ -5495,22 +5519,7 @@ html {
   background-image: url("./img/pages/support-page/our-story-background.webp");
 }
 .fallback .support-page__our-story-background {
-  background-image: url("./img/pages/support-page/our-story-background.avif");
-}
-.support-page__our-story-background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-}
-.support-page__our-story-background > * {
-  position: relative;
-  z-index: 3;
+  background-image: url("./img/pages/support-page/our-story-background.jpg");
 }
 .support-page__quote-mark {
   font-size: 4rem;
@@ -8155,12 +8164,38 @@ html {
 .font-color-white-transparent {
   color: var(--color-white-soft-transparent);
 }
+.font-color-pink {
+  color: var(--color-pink);
+}
+.font-style-boxed {
+  background: var(--color-black-soft);
+  color: var(--color-white-soft);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
+  line-height: 1rem;
+  border-radius: var(--corner-radius);
+  text-transform: uppercase;
+  display: inline-block;
+}
+.font-style-boxed--white {
+  background: var(--color-white-soft);
+  color: var(--color-black-soft);
+}
 .ui-button--red:hover {
   color: var(--color-red);
 }
 .ui-rounded-box-large,
 .ui-rounded-image-large {
   border-radius: var(--corner-radius-large);
+}
+.ui-rounded-box--top {
+  border-top-left-radius: var(--corner-radius);
+  border-top-right-radius: var(--corner-radius);
+}
+.ui-rounded-box--bottom {
+  border-bottom-left-radius: var(--corner-radius);
+  border-bottom-right-radius: var(--corner-radius);
 }
 @keyframes sk-bounce {
   0%, 100% {
