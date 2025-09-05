@@ -256,30 +256,30 @@ if ( have_posts() ) {
 
     <div id="other-donation-methods" class="container">
       <!-- already a supporter -->
-      <div class="flex-grid-row mt-7">
-        <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-6 mb-4">
+      <div class="grid-row mt-7">
+        <div class="grid-item is-s-24 is-xxl-12 mb-4">
           <h4 class="font-size-11 font-weight-bold mb-3">Already a supporter?</h4>
           <p>Are you able to increase your monthly donation? Increasing by just £2 or £3 helps strengthen funding base and makes us even more secure for the future.</p>
           <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small mb-s-5">Log in to your account</a></p>
         </div>
 
         <!-- Other donation methods -->
-        <div class="flex-grid-item flex-item-xxl-6 flex-item-s-12">
-          <div class="flex-grid-item flex-item-s-12 flex-item-l-12 flex-item-s-12 mb-5 mb-s-4">
+        <div class="grid-item is-s-24 is-xxl-12">
+          <div class="mb-5 mb-s-4">
             <h4 class="font-size-11 font-weight-bold mb-3">Other Donation Methods</h4>
             <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal or UK Direct Debit.</p>
           </div>
 
-          <div class="flex-grid-row">
+          <div class="grid-row grid--nested">
             <!-- paypal -->
-            <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12">
+            <div class="grid-item is-xxl-12 is-s-24">
               <img class="support-page__paypal-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-paypal.svg" alt="PayPal logo" />
               <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
               <p><a class="mt-3 ui-button ui-button--red ui-button--small mb-m-5 mb-s-4" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
             </div>
 
             <!-- GoCardless -->
-            <div class="flex-grid-item flex-item-l-6 flex-item-xxl-6 flex-item-s-12">
+            <div class="grid-item is-xxl-12 is-s-24">
               <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
               <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>
               <div class="mt-3 mb-3">
