@@ -2,11 +2,7 @@
 
 import $ from 'jquery';
 import Swiper from 'swiper';
-import {
-  Navigation,
-  Mousewheel,
-  Pagination,
-} from 'swiper/modules';
+import { Navigation, Mousewheel, Pagination } from 'swiper/modules';
 
 /**
  * GalleryCarousels - User-controlled carousel component for content showcases
