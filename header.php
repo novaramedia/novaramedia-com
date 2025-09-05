@@ -33,8 +33,8 @@
     <header class="site-header background-black mb-4">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
         <div class="site-header__main container">
-          <div class="text-align-center grid-row">
-            <nav class="grid-item is-xxl-6" role="navigation" aria-label="Main">
+          <div class="grid-row">
+            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main">
               <ul class="site-header__navigation u-inline-list u-inline-block">
                 <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
                 <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
@@ -56,8 +56,8 @@
                 </div>
               </a>
             </div>
-            <div class="grid-item is-xxl-6 text-align-right font-weight-bold">
-              <a href="<?php echo home_url( 'support' ); ?>" class="only-desktop ui-button ui-button--red ui-button--small">Support Us</a>
+            <div class="grid-item is-xxl-6 layout-flex-align-center layout-flex-justify-right font-weight-bold">
+              <a href="<?php echo home_url( 'support' ); ?>" class="only-desktop ui-button ui-button--red ui-button--slimline">Support Us</a>
             </div>
           </div>
         </div>

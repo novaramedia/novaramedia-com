@@ -5011,10 +5011,6 @@ html {
   -ms-align-items: center;
   align-items: center;
 }
-.site-header__main {
-  padding-top: 12px;
-  padding-bottom: 10px;
-}
 .site-header__toggle {
   padding-right: 0.25rem;
 }
@@ -5027,9 +5023,6 @@ html {
   font-size: 1.4rem;
 }
 @media screen and (max-width: 759px) {
-  .site-header__main {
-    padding: 0;
-  }
   .site-header__toggle {
     padding-top: 12px;
     padding-bottom: 10px;
@@ -5046,6 +5039,7 @@ html {
 .site-header__logomark {
   position: relative;
   transition: opacity var(--transition-speed-medium);
+  margin-top: 2px;
 }
 .site-header__logomark svg {
   height: 19px;
@@ -8187,6 +8181,12 @@ html {
 .ui-button--red:hover {
   color: var(--color-red);
 }
+.ui-button--slimline {
+  height: auto;
+  font-size: 0.875rem;
+  line-height: 1em;
+  padding: 0.3rem 0.75rem 0.4375rem 0.75rem;
+}
 .ui-rounded-box-large,
 .ui-rounded-image-large {
   border-radius: var(--corner-radius-large);
@@ -8198,6 +8198,11 @@ html {
 .ui-rounded-box--bottom {
   border-bottom-left-radius: var(--corner-radius);
   border-bottom-right-radius: var(--corner-radius);
+}
+.layout-flex-justify-right {
+  display: flex;
+  -ms-justify-content: flex-end;
+  justify-content: flex-end;
 }
 @keyframes sk-bounce {
   0%, 100% {
