@@ -2,12 +2,7 @@
 
 import $ from 'jquery';
 import Swiper from 'swiper';
-import {
-  Navigation,
-  Autoplay,
-  Mousewheel,
-  FreeMode
-} from 'swiper/modules';
+import { Navigation, Autoplay, Mousewheel, FreeMode } from 'swiper/modules';
 
 export class Carousels {
   constructor() {
