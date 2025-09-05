@@ -47,7 +47,7 @@
 
 .support-page__our-story-background
   position: relative
-  height: 450px
+  height: 500px
   background-size: 100% auto
   background-position:  center 40%
   background-repeat: no-repeat
@@ -61,17 +61,33 @@
 .fallback .support-page__our-story-background
   background-image: url('./img/pages/support-page/our-story-background.jpg')
 
-.support-page__quote-mark
-  font-size: 4rem
-  line-height: 0.8
-  margin: -0.5rem 0
+.support-page__quote-carousel
 
-.alt-ux-carousel__item
-  width: 500px
+  .support-page__quote-mark
+    font-size: 4rem
+    line-height: 0.8
+    margin: -0.5rem 0
+
+  .swiper-slide
+    width: 500px
+    height: auto
+    margin: 0 4px
+    padding: 1.5rem
+    background-color: var(--color-white-soft)
+    opacity: 0.5
+    transition: opacity var(--transition-speed-quick) ease
+
+  .swiper-slide-active
+    opacity: 1
+
+  .support-page__quote-container
+    padding: 2.5rem
 
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto
   height: 30px
+
+// TODO: remove
 
 .support-page__infographic
   background-size: contain

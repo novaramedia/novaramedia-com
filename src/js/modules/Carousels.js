@@ -6,159 +6,65 @@ import {
   Navigation,
   Autoplay,
   Mousewheel,
-  FreeMode,
-  Pagination,
+  FreeMode
 } from 'swiper/modules';
 
 export class Carousels {
   constructor() {
-    this.carousels = [];
-
-    $('.ux-carousel').each((index, carousel) => {
-      $(carousel).attr('id', `ux-carousel-${index}`);
-
-      const carouselType = $(carousel).data('carousel-type') || 'default';
-
-      if (carouselType === 'alt') {
-        this.carousels.push(new CarouselAlt(carousel));
-      } else {
-        this.carousels.push(new Carousel(carousel));
-      }
-    });
+    this.swipers = [];
   }
 
   onReady() {
-    const _this = this;
+    $('.ux-carousel').each((index, carousel) => {
+      const $carousel = $(carousel);
+      $carousel.attr('id', `ux-carousel-${index}`);
 
-    _this.carousels.forEach((carousel) => {
-      carousel.onReady();
-    });
-  }
-}
+      const $navLeft = $carousel.find('.swiper-button-prev');
+      const $navRight = $carousel.find('.swiper-button-next');
 
-class Carousel {
-  constructor(carousel) {
-    this.$carousel = $(carousel);
-    this.$navLeft = this.$carousel.find('.swiper-button-prev');
-    this.$navRight = this.$carousel.find('.swiper-button-next');
-
-    this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
-      modules: [Navigation, Autoplay, Mousewheel, FreeMode],
-      navigation: {
-        nextEl: this.$navRight[0],
-        prevEl: this.$navLeft[0],
-      },
-      autoplay: {
-        delay: 4000,
-        pauseOnMouseEnter: true,
-      },
-      mousewheel: {
-        enabled: true,
-        thresholdDelta: 4,
-      },
-      freemode: {
-        enabled: true,
-        sticky: true,
-      },
-      slidesPerView: 'auto',
-      rewind: true,
-    });
-
-    this.swiper.on('slideChange', (event) => {
-      if (event.isBeginning) {
-        this.$navLeft.addClass('swiper-button-prev--disabled');
-      } else {
-        this.$navLeft.removeClass('swiper-button-prev--disabled');
-      }
-
-      if (event.isEnd) {
-        this.$navRight.addClass('swiper-button-next--disabled');
-      } else {
-        this.$navRight.removeClass('swiper-button-next--disabled');
-      }
-    });
-  }
-
-  onReady() {}
-
-  onResize() {}
-}
-
-/**
- * CarouselAlt - Alternative carousel configuration for content showcases
- *
- * Key differences from regular Carousel:
- * - No autoplay (user-controlled navigation only)
- * - Includes pagination dots for direct slide access
- * - Infinite loop navigation instead of rewind
- * - Centered slides for better visual presentation
- * - No free mode (discrete slide-by-slide movement)
- *
- * Usage examples:
- * - Quote/testimonial carousels (like support page quotes)
- * - Featured content showcases
- * - Image galleries where user control is preferred
- * - Any carousel where pagination dots add value
- *
- * HTML setup: Add 'alt' class to .ux-carousel element
- * Example: <section class="ux-carousel alt">
- */
-class CarouselAlt {
-  constructor(carousel) {
-    this.$carousel = $(carousel);
-    this.$navLeft = this.$carousel.find('.swiper-button-prev');
-    this.$navRight = this.$carousel.find('.swiper-button-next');
-
-    this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
-      modules: [Navigation, Mousewheel, Pagination],
-
-      // Navigation arrows (optional - carousel works without them)
-      navigation: {
-        nextEl: this.$navRight[0],
-        prevEl: this.$navLeft[0],
-      },
-
-      // Pagination dots for direct slide access
-      pagination: {
-        el: this.$carousel.find('.swiper-pagination')[0],
-        clickable: true,
-        bulletClass: 'swiper-pagination-bullet',
-        bulletActiveClass: 'swiper-pagination-bullet-active',
-      },
-
-      // No autoplay - user controls navigation
-      autoplay: false,
-
-      // Mousewheel support with axis constraint
-      mousewheel: {
-        enabled: true,
-        thresholdDelta: 4,
-        forceToAxis: true, // Prevents diagonal scrolling interference
-      },
-
-      // Discrete slide movement (no free mode)
-      freeMode: false,
-
-      // Auto width - slides sized by CSS (e.g., 500px quote cards)
-      slidesPerView: 'auto',
-
-      // Infinite loop navigation
-      loop: true,
-
-      // Center active slide for better visual hierarchy
-      centeredSlides: true,
-
-      // Responsive behavior (currently identical to default)
-      breakpoints: {
-        480: {
-          slidesPerView: 'auto',
+      const swiper = new Swiper($carousel.find('.swiper')[0], {
+        modules: [Navigation, Autoplay, Mousewheel, FreeMode],
+        navigation: {
+          nextEl: $navRight[0],
+          prevEl: $navLeft[0],
         },
-      },
-    });
+        autoplay: {
+          delay: 4000,
+          pauseOnMouseEnter: true,
+        },
+        mousewheel: {
+          enabled: true,
+          thresholdDelta: 4,
+        },
+        freemode: {
+          enabled: true,
+          sticky: true,
+        },
+        slidesPerView: 'auto',
+        rewind: true,
+      });
 
-    // Debug log for pagination element (can be removed in production)
-    console.log(this.$carousel.find('.swiper-pagination')[0]);
+      swiper.on('slideChange', (event) => {
+        if (event.isBeginning) {
+          $navLeft.addClass('swiper-button-prev--disabled');
+        } else {
+          $navLeft.removeClass('swiper-button-prev--disabled');
+        }
+
+        if (event.isEnd) {
+          $navRight.addClass('swiper-button-next--disabled');
+        } else {
+          $navRight.removeClass('swiper-button-next--disabled');
+        }
+      });
+
+      this.swipers.push(swiper);
+    });
   }
 
-  onReady() {}
+  onResize() {
+    this.swipers.forEach((swiper) => {
+      swiper.update();
+    });
+  }
 }

@@ -5507,7 +5507,7 @@ html {
 }
 .support-page__our-story-background {
   position: relative;
-  height: 450px;
+  height: 500px;
   background-size: 100% auto;
   background-position: center 40%;
   background-repeat: no-repeat;
@@ -5521,13 +5521,29 @@ html {
 .fallback .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.jpg");
 }
-.support-page__quote-mark {
+.support-page__quote-carousel .support-page__quote-mark {
   font-size: 4rem;
   line-height: 0.8;
   margin: -0.5rem 0;
 }
-.alt-ux-carousel__item {
+.support-page__quote-carousel .swiper-slide {
   width: 500px;
+  height: auto;
+  margin: 0 4px;
+  padding: 1.5rem;
+  background-color: var(--color-white-soft);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  transition: opacity var(--transition-speed-quick) ease;
+}
+.support-page__quote-carousel .swiper-slide-active {
+  -ms-filter: none;
+  filter: none;
+  opacity: 1;
+}
+.support-page__quote-carousel .support-page__quote-container {
+  padding: 2.5rem;
 }
 .support-page__direct-debit-logo,
 .support-page__paypal-logo {
@@ -8116,15 +8132,6 @@ html {
 .background-gray-light-transparent {
   background-color: var(--color-gray-light-transparent);
 }
-.alt-ux-carousel__item {
-  height: 250px;
-  margin: 0 4px;
-  box-sizing: border-box;
-  background-color: var(--color-white-soft);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-  opacity: 0.5;
-}
 .swiper-pagination-bullet {
   display: inline-block;
   width: 10px;
@@ -8153,11 +8160,6 @@ html {
   justify-content: center;
   pointer-events: auto;
 }
-.swiper-slide-active {
-  -ms-filter: none;
-  filter: none;
-  opacity: 1;
-}
 .font-color-gray {
   color: var(--color-gray);
 }
@@ -8173,7 +8175,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
-  line-height: 1rem;
+  line-height: 1em;
   border-radius: var(--corner-radius);
   text-transform: uppercase;
   display: inline-block;

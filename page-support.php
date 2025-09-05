@@ -105,13 +105,9 @@ if ( have_posts() ) {
     <div class="support-page__below-the-fold">
       <!-- how we are funded -->
       <div class="container">
-        <div class="grid-row pt-5 pb-6 support-page__text-container">
-          <div class="grid-item is-xxl-24">
-            <hr class="mt-5 mb-7"/>
-          </div>
-
+        <div class="grid-row mt-5 pt-5 pb-6 support-page__text-container">
           <div class="grid-item is-xxl-24 text-align-center">
-            <h3 class="font-size-10 font-weight-bold font-style-boxed">How we are funded</h3>
+            <h3 class="font-size-9 font-weight-bold font-style-boxed">How we are funded</h3>
 
             <div class="support-page__big-stats mt-4 mb-5">
               <div class="support-page__big-stat">
@@ -150,7 +146,7 @@ if ( have_posts() ) {
       <div class="container mb-7">
         <div class="grid-row">
           <div class="grid-item is-xxl-24 mb-6 text-align-center">
-            <h3 class="font-size-10 font-weight-bold font-style-boxed">How we spend our funds</h3>
+            <h3 class="font-size-9 font-weight-bold font-style-boxed">How we spend our funds</h3>
           </div>
           <div class="grid-item is-s-24 is-xxl-10">
             <h3 class="font-size-16 font-weight-bold">
@@ -182,7 +178,7 @@ if ( have_posts() ) {
       </div>
 
       <!-- our story -->
-      <div class="container pb-s-0 mb-6">
+      <div class="container mb-8">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black">
@@ -190,7 +186,7 @@ if ( have_posts() ) {
             </div>
             <div class="grid-row grid-row--nested p-5 background-black font-color-white ui-rounded-box--bottom">
               <div class="grid-item is-xxl-24 text-align-center mb-6">
-                <h3 class="font-size-10 font-weight-bold font-style-boxed font-style-boxed--white">
+                <h3 class="font-size-9 font-weight-bold font-style-boxed font-style-boxed--white">
                   Our Story
                 </h3>
               </div>
@@ -219,25 +215,31 @@ if ( have_posts() ) {
       </div>
 
     <?php
+    $max_quotes = 8;
     // Set fallback quotes
     $fallback_quotes = array(
       'Novara tells the stories others won’t.',
       'Independent journalism is vital — and Novara leads the way.',
       'Supporting Novara feels like action, not charity.',
       'They speak truth to power. That’s why I give.',
+      'Novara’s journalism is fearless and uncompromising.',
+      'I trust Novara to tell it like it is.',
+      'I support Novara because they challenge the status quo.',
     );
     // Merge stored quotes with fallback (max 4)
-    $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, 4 - count( $support_carousel_quotes ) ) ) );
+    $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, $max_quotes - count( $support_carousel_quotes ) ) ) );
     ?>
     <!-- carousel -->
-    <section class="ux-carousel mb-6" data-carousel-type="alt">
+    <section class="support-page__quote-carousel ux-gallery-carousel mb-8">
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
-            <div class="swiper-slide alt-ux-carousel__item text-align-center p-5 ui-rounded-box-large">
+            <div class="swiper-slide text-align-center ui-rounded-box-large">
               <h5 class="font-weight-bold mb-5 text-uppercase font-color-black font-size-9">Supporters Say</h5>
-              <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-              <p class="font-serif font-size-12"><?php echo esc_html( $quote ); ?></p>
+              <div class="support-page__quote-container">
+                <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+                <p class="font-serif font-size-12"><?php echo esc_html( $quote ); ?></p>
+              </div>
             </div>
           <?php } ?>
         </div>
@@ -254,14 +256,10 @@ if ( have_posts() ) {
 
     <div id="other-donation-methods" class="container">
       <!-- already a supporter -->
-      <div class="flex-grid-row pt-6 pb-6">
+      <div class="flex-grid-row mt-7">
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-6 mb-4">
           <h4 class="font-size-11 font-weight-bold mb-3">Already a supporter?</h4>
-          <?php
-          if ( ! empty( $meta['_cmb_page_extra'] ) ) {
-            echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0] );
-          }
-          ?>
+          <p>Are you able to increase your monthly donation? Increasing by just £2 or £3 helps strengthen funding base and makes us even more secure for the future.</p>
           <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small mb-s-5">Log in to your account</a></p>
         </div>
 
@@ -287,6 +285,7 @@ if ( have_posts() ) {
               <div class="mt-3 mb-3">
                 <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
                 <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
+                <br/>
                 <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
                 <a class="ui-button ui-button--red ui-button--small mb-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
               </div>
