@@ -49189,7 +49189,8 @@ __webpack_require__.r(__webpack_exports__);
  * and pagination are more important than automatic progression.
  *
  * Key features:
- * - No autoplay (user-controlled navigation only)
+ * - No autoplay by default (user-controlled navigation)
+ * - Optional autoplay via data-autoplay attribute
  * - Pagination dots for direct slide access
  * - Infinite loop navigation
  * - Centered slides for better visual presentation
@@ -49204,10 +49205,12 @@ __webpack_require__.r(__webpack_exports__);
  *
  * HTML setup: Use .ux-gallery-carousel class
  * Example: <section class="ux-gallery-carousel">
+ * With autoplay: <section class="ux-gallery-carousel" data-autoplay="5000">
  */
 class GalleryCarousels {
   constructor() {
     this.swipers = [];
+    this.autoplayDelay = 4000; // Default autoplay delay in milliseconds
   }
   onReady() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-gallery-carousel').each((index, carousel) => {
@@ -49215,8 +49218,11 @@ class GalleryCarousels {
       $carousel.attr('id', `ux-gallery-carousel-${index}`);
       const $navLeft = $carousel.find('.swiper-button-prev');
       const $navRight = $carousel.find('.swiper-button-next');
+
+      // Check for autoplay data attribute (boolean)
+      const hasAutoplay = $carousel.data('autoplay') === true || $carousel.data('autoplay') === '';
       const swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"]($carousel.find('.swiper')[0], {
-        modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Pagination],
+        modules: hasAutoplay ? [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Pagination] : [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Pagination],
         // Navigation arrows (optional - carousel works without them)
         navigation: {
           nextEl: $navRight[0],
@@ -49229,8 +49235,12 @@ class GalleryCarousels {
           bulletClass: 'swiper-pagination-bullet',
           bulletActiveClass: 'swiper-pagination-bullet-active'
         },
-        // No autoplay - user controls navigation
-        autoplay: false,
+        // Autoplay - configurable via data-autoplay boolean attribute
+        autoplay: hasAutoplay ? {
+          delay: this.autoplayDelay,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false
+        } : false,
         // Mousewheel support with axis constraint
         mousewheel: {
           enabled: true,

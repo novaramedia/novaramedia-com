@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Swiper from 'swiper';
 import {
   Navigation,
+  Autoplay,
   Mousewheel,
   Pagination,
 } from 'swiper/modules';
@@ -15,7 +16,8 @@ import {
  * and pagination are more important than automatic progression.
  *
  * Key features:
- * - No autoplay (user-controlled navigation only)
+ * - No autoplay by default (user-controlled navigation)
+ * - Optional autoplay via data-autoplay attribute
  * - Pagination dots for direct slide access
  * - Infinite loop navigation
  * - Centered slides for better visual presentation
@@ -30,10 +32,12 @@ import {
  *
  * HTML setup: Use .ux-gallery-carousel class
  * Example: <section class="ux-gallery-carousel">
+ * With autoplay: <section class="ux-gallery-carousel" data-autoplay="5000">
  */
 export class GalleryCarousels {
   constructor() {
     this.swipers = [];
+    this.autoplayDelay = 4000; // Default autoplay delay in milliseconds
   }
 
   onReady() {
@@ -44,8 +48,11 @@ export class GalleryCarousels {
       const $navLeft = $carousel.find('.swiper-button-prev');
       const $navRight = $carousel.find('.swiper-button-next');
 
+      // Check for autoplay data attribute (boolean)
+      const hasAutoplay = $carousel.data('autoplay') === true || $carousel.data('autoplay') === '';
+
       const swiper = new Swiper($carousel.find('.swiper')[0], {
-        modules: [Navigation, Mousewheel, Pagination],
+        modules: hasAutoplay ? [Navigation, Autoplay, Mousewheel, Pagination] : [Navigation, Mousewheel, Pagination],
 
         // Navigation arrows (optional - carousel works without them)
         navigation: {
@@ -61,8 +68,12 @@ export class GalleryCarousels {
           bulletActiveClass: 'swiper-pagination-bullet-active',
         },
 
-        // No autoplay - user controls navigation
-        autoplay: false,
+        // Autoplay - configurable via data-autoplay boolean attribute
+        autoplay: hasAutoplay ? {
+          delay: this.autoplayDelay,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false,
+        } : false,
 
         // Mousewheel support with axis constraint
         mousewheel: {
