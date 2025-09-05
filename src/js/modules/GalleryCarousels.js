@@ -2,12 +2,7 @@
 
 import $ from 'jquery';
 import Swiper from 'swiper';
-import {
-  Navigation,
-  Autoplay,
-  Mousewheel,
-  Pagination,
-} from 'swiper/modules';
+import { Navigation, Autoplay, Mousewheel, Pagination } from 'swiper/modules';
 
 /**
  * GalleryCarousels - User-controlled carousel component for content showcases
@@ -49,10 +44,14 @@ export class GalleryCarousels {
       const $navRight = $carousel.find('.swiper-button-next');
 
       // Check for autoplay data attribute (boolean)
-      const hasAutoplay = $carousel.data('autoplay') === true || $carousel.data('autoplay') === '';
+      const hasAutoplay =
+        $carousel.data('autoplay') === true ||
+        $carousel.data('autoplay') === '';
 
       const swiper = new Swiper($carousel.find('.swiper')[0], {
-        modules: hasAutoplay ? [Navigation, Autoplay, Mousewheel, Pagination] : [Navigation, Mousewheel, Pagination],
+        modules: hasAutoplay
+          ? [Navigation, Autoplay, Mousewheel, Pagination]
+          : [Navigation, Mousewheel, Pagination],
 
         // Navigation arrows (optional - carousel works without them)
         navigation: {
@@ -69,11 +68,13 @@ export class GalleryCarousels {
         },
 
         // Autoplay - configurable via data-autoplay boolean attribute
-        autoplay: hasAutoplay ? {
-          delay: this.autoplayDelay,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        } : false,
+        autoplay: hasAutoplay
+          ? {
+              delay: this.autoplayDelay,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: false,
+            }
+          : false,
 
         // Mousewheel support with axis constraint
         mousewheel: {
