@@ -65,26 +65,26 @@ if ( have_posts() ) {
         <div class="grid-row u-relative">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested u-relative">
-              <div class="grid-item is-xxl-12 is-s-24 background-white support-page__left-radius">
-                <div class="m-5 m-s-0 font-weight-bold">
-                  <div class="font-size-15 mb-4">
+              <div class="grid-item is-xxl-12 is-m-24 background-white support-page__left-radius">
+                <div class="p-5 p-l-4 font-weight-bold">
+                  <div class="font-size-15 font-size-l-14 mb-4">
                     Truthful, independent journalism <span class="font-color-red">funded by people like you</span>.
                   </div>
-                  <div class="font-size-13 mb-4">
+                  <div class="font-size-13 font-size-l-12 mb-4">
                     Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics</span>.
                   </div>
-                  <div class="font-size-13">
+                  <div class="font-size-13 font-size-l-12">
                     Be part of the change.
                   </div>
                 </div>
               </div>
-              <div class="grid-item is-xxl-12 is-s-24 background-gray-base support-page__right-radius">
-                <div class="support-page__donation-form-sticky p-5 p-s-0 pt-s-3 pb-s-3">
+              <div class="grid-item is-xxl-12 is-m-24 background-gray-base support-page__right-radius">
+                <div class="support-page__donation-form-sticky p-5 p-l-4">
                   <?php render_support_form( 'condensed', true ); ?>
                 </div>
               </div>
 
-              <div class="grid-item is-xxl-24 background-white p-5 ui-rounded-box--bottom">
+              <div class="grid-item is-xxl-24 background-white p-5 p-l-4 ui-rounded-box--bottom">
                 <!-- TODO: revisit box rounding -->
                 <?php
                 if ( $youtube_id ) {
@@ -112,15 +112,15 @@ if ( have_posts() ) {
             <div class="support-page__big-stats mt-4 mb-5">
               <div class="support-page__big-stat">
                 <div class="font-size-17 font-weight-bold font-color-red">84%</div>
-                <div class="font-size-13 font-weight-bold">Supporter donations</div>
+                <div class="font-size-13 font-size-s-11 font-weight-bold">Supporter donations</div>
               </div>
               <div class="support-page__big-stat">
                 <div class="font-size-17 font-weight-bold font-color-pink">16%</div>
-                <div class="font-size-13 font-weight-bold">YouTube + Merch</div>
+                <div class="font-size-13 font-size-s-11 font-weight-bold">YouTube + Merch</div>
               </div>
               <div class="support-page__big-stat">
                 <div class="font-size-17 font-weight-bold">0%</div>
-                <div class="font-size-13 font-weight-bold">Murdoch</div>
+                <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
               </div>
             </div>
           </div>
@@ -128,12 +128,12 @@ if ( have_posts() ) {
 
         <div class="grid-row">
           <div class="grid-item is-s-24 is-xxl-12">
-            <h3 class="font-size-16 font-weight-bold">
+            <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4">
               No Paywalls.<br/>
               <span class="font-color-red">No Paymasters.</span>
             </h3>
           </div>
-          <div class="grid-item is-s-24 is-xxl-12 font-size-13 font-weight-bold">
+          <div class="grid-item is-s-24 is-xxl-12 font-size-13 font-size-l-12 font-weight-bold">
             Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line. It’s a key principle that has <em>always</em> underpinned our funding model.
           </div>
           <div class="grid-item is-xxl-24">
@@ -149,12 +149,12 @@ if ( have_posts() ) {
             <h3 class="font-size-9 font-weight-bold font-style-boxed">How we spend our funds</h3>
           </div>
           <div class="grid-item is-s-24 is-xxl-10">
-            <h3 class="font-size-16 font-weight-bold">
+            <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4">
               <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism</span>.
             </h3>
           </div>
-          <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-13 font-weight-bold">
-            <div class="support-page__highlighter ux-highlighter is-xxl-13 is-s-18 font-size-13 font-size-s-12 font-weight-bold font-color-gray">
+          <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-13 font-size-l-12 font-weight-bold font-color-gray">
+            <div class="support-page__highlighter ux-highlighter">
             <?php
             if ( ! empty( $how_we_spend_our_funds_lines ) ) {
               foreach ( $how_we_spend_our_funds_lines as $index => $line_text ) {
@@ -191,11 +191,11 @@ if ( have_posts() ) {
                 </h3>
               </div>
               <div class="grid-item is-s-24 is-xxl-12">
-                <h3 class="font-size-14 font-weight-bold">
+                <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4">
                   Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations.
                 </h3>
               </div>
-              <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold">
+              <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-size-l-11 font-weight-bold">
                 <p class="mb-4">
                   Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
                 </p>

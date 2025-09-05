@@ -3,6 +3,12 @@
   line-height: .825em
   margin-left: -.05em
 
+  @media screen and (max-width: $breakpoint-m)
+    font-size: 5.5rem
+    line-height: .9em
+
+  @media screen and (max-width: $breakpoint-s)
+    font-size: 4rem
 
 .support-page__donation-form-sticky
   position: sticky
@@ -19,6 +25,14 @@
 .support-page__right-radius
   border-top-right-radius: var(--corner-radius)
 
+@media screen and (max-width: $breakpoint-m)
+  .support-page__left-radius
+    border-top-left-radius: var(--corner-radius)
+    border-top-right-radius: var(--corner-radius)
+
+  .support-page__right-radius
+    border-top-right-radius: 0
+
 .support-page__below-the-fold
   background-image: linear-gradient(180deg, var(--color-white-soft) 0%, var(--color-gray-base) 25%);
 
@@ -26,11 +40,15 @@
   display: flex
   flex-direction: row
   justify-content: center
-  align-items: center
+  align-items: flex-start
   text-align: center
   .font-size-17 // this seems a bad way to do this. time to add higher numbers to the library?
     // TODO: upstream this sensibly
     font-size: 7rem
+
+  @media screen and (max-width: $breakpoint-m)
+    .font-size-17
+      font-size: 3.5rem
 
 .support-page__big-stat
   padding: 1rem
@@ -40,17 +58,20 @@
     transition: all var(--transition-speed-quick) ease-in-out
     margin-bottom: 2rem
     &--active
-      transform: scale(1.02)
+      transform: scale(1.01)
       color: var(--color-black-soft)
     &:last-child
       margin-bottom: 0
 
 .support-page__our-story-background
   position: relative
-  height: 500px
+  height: 480px
   background-size: 100% auto
   background-position:  center 40%
   background-repeat: no-repeat
+
+  @media screen and (max-width: $breakpoint-m)
+    height: 260px
 
 .avif .support-page__our-story-background
   background-image: url('./img/pages/support-page/our-story-background.avif')
@@ -83,6 +104,17 @@
   .support-page__quote-container
     padding: 2.5rem
 
+  @media screen and (max-width: $breakpoint-m)
+    .swiper-slide
+      width: 300px
+
+  @media screen and (max-width: $breakpoint-s)
+    .swiper-slide
+      padding: 1rem
+
+    .support-page__quote-container
+      padding: 1.5rem
+
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto
   height: 30px
@@ -98,9 +130,6 @@
   background-image: url('./img/pages/support-page/desktop-how-we-are-funded-graphic.svg')
 
 @media screen and (max-width: $breakpoint-s)
-  .support-page__our-story-background
-    background-size: cover
-
   .support-page__infographic
     background-image: url('./img/pages/support-page/mobile-how-we-are-funded-graphic.svg')
     height: 400px
