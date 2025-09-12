@@ -1,16 +1,14 @@
 <?php
-/** TODO: Refactor this to use an array rather than repeating code.
- */
-
 // for redirects that send users to an external URL.
 // Add more path => URL pairs to the array as needed.
 // Format: 'path' => 'https://example.com/redirect-url'
 add_action(
     'template_redirect',
     function () {
-        handle_simple_redirects(
+        handle_external_redirects(
             array(
                 'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
+                'shop' => 'https://shop.novaramedia.com',
             )
         );
     }
@@ -23,7 +21,7 @@ add_action(
  *
  * @param array $redirects Associative array of path => destination URL.
  */
-function handle_simple_redirects( $redirects ) {
+function handle_external_redirects( $redirects ) {
   if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
       return;
   }
@@ -35,6 +33,9 @@ function handle_simple_redirects( $redirects ) {
       exit;
   }
 }
+
+/** TODO: Refactor this to use an array rather than repeating code.
+ */
 
 add_action( 'init', 'red_flag_rewrites' );
 /**
