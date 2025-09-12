@@ -1,5 +1,4 @@
 <?php
-
 /** EXTERNAL REDIRECTS
  * -------------------------------------------------------------
  */
@@ -8,15 +7,29 @@
 // Add more path => URL pairs to the array as needed.
 // Format: 'path' => 'https://example.com/redirect-url'
 add_action(
-    'template_redirect',
-    function () {
-        handle_external_redirects(
-            array(
-                'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
-                'shop'      => 'https://shop.novaramedia.com',
-            )
-        );
-    }
+  'template_redirect',
+  function () {
+    handle_external_redirects(
+      array(
+        'shop'      => 'https://shop.novaramedia.com',
+        'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
+      )
+    );
+  }
+);
+
+/**
+ * Allow external redirect hosts for wp_safe_redirect().
+ */
+add_filter(
+  'allowed_redirect_hosts',
+  function ( $hosts ) {
+    $external_hosts = array(
+      'docs.google.com',
+      'shop.novaramedia.com',
+    );
+    return array_merge( $hosts, $external_hosts );
+  }
 );
 /**
  * Handles simple path-based redirects.
@@ -28,14 +41,14 @@ add_action(
  */
 function handle_external_redirects( $redirects ) {
   if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
-      return;
+    return;
   }
 
   $request_uri = trim( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '/' );
 
   if ( isset( $redirects[ $request_uri ] ) ) {
-      wp_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
-      exit;
+    wp_safe_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
+    exit;
   }
 }
 
@@ -50,19 +63,16 @@ add_action( 'init', 'handle_internal_rewrites' );
  */
 function handle_internal_rewrites() {
   $internal_rewrites = array(
-    // Red flags - uses category path lookup
     array(
       'pattern'     => '^red-flags/?$',
       'category'    => 'red-flags',
       'lookup_type' => 'slug',
     ),
-    // Committed - uses category slug lookup
     array(
       'pattern'     => '^committed/?$',
       'category'    => 'committed',
       'lookup_type' => 'slug',
     ),
-    // Novara Live - multiple patterns for the same category
     array(
       'pattern'     => '^tyskysour/?$',
       'category'    => 'novara-live',
