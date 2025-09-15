@@ -271,14 +271,20 @@ export class Support {
     let headingText = '';
     if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
-    } else if (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)) {
+    } else if (
+      defaultSectionCopy &&
+      isNonEmptyString(defaultSectionCopy.heading)
+    ) {
       headingText = defaultSectionCopy.heading;
     }
 
     let textCopy = '';
     if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
       textCopy = overrideCopy.text;
-    } else if (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)) {
+    } else if (
+      defaultSectionCopy &&
+      isNonEmptyString(defaultSectionCopy.text)
+    ) {
       textCopy = defaultSectionCopy.text;
     }
 
