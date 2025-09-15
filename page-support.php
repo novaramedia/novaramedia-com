@@ -230,7 +230,9 @@ if ( have_posts() ) {
     $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, $max_quotes - count( $support_carousel_quotes ) ) ) );
     ?>
     <!-- carousel -->
-    <section class="support-page__quote-carousel ux-gallery-carousel mb-8" data-autoplay="true">
+    <section class="container support-page__quote-carousel ux-gallery-carousel mb-8" data-autoplay="true">
+      <div class="support-page__quote-carousel-fade-left"></div>
+      <div class="support-page__quote-carousel-fade-right"></div>
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
