@@ -116,18 +116,24 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
 function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   $data = nm_get_support_heading_text_data();
 
-  $heading = '';
-  $text = '';
+  // Set standard defaults
+  $heading = 'Support Novara Media';
+  $text = 'Help us fund independent journalism.';
 
-  if ( isset( $data[ $donation_mode ] ) && ! empty( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+  // Check for heading override in donation mode data
+  if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
     $heading = $data[ $donation_mode ]['heading'];
-    $text = $data[ $donation_mode ]['text'];
-  } elseif ( ! empty( $data['default']['heading'] ) && ! empty( $data['default']['text'] ) ) {
+  } elseif ( isset( $data['default']['heading'] ) && ! empty( $data['default']['heading'] ) ) {
+    // Fall back to default array heading if available
     $heading = $data['default']['heading'];
+  }
+
+  // Check for text override in donation mode data
+  if ( isset( $data[ $donation_mode ]['text'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+    $text = $data[ $donation_mode ]['text'];
+  } elseif ( isset( $data['default']['text'] ) && ! empty( $data['default']['text'] ) ) {
+    // Fall back to default array text if available
     $text = $data['default']['text'];
-  } else {
-    $heading = 'Support Novara Media';
-    $text = 'Help us fund independent journalism.';
   }
 
   ?>

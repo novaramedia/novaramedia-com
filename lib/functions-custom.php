@@ -216,7 +216,7 @@ function nm_get_support_heading_text_data() {
           'heading' => NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' ),
           'text'    => NM_get_option( 'nm_fundraising_settings_regular_text_override', 'nm_fundraising_options' ),
       ),
-      'oneoff' => array(
+      'oneoff'  => array(
           'heading' => NM_get_option( 'nm_fundraising_settings_oneoff_heading_override', 'nm_fundraising_options' ),
           'text'    => NM_get_option( 'nm_fundraising_settings_oneoff_text_override', 'nm_fundraising_options' ),
       ),

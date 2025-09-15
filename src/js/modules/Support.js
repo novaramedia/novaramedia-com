@@ -89,14 +89,14 @@ export class Support {
             _this.clearActiveButtonState($form);
 
             _this.setAutoValues($form, data.value);
+            _this.updateSupportSectionCopy(data, $form);
+
             $form.attr('action', _this.donationAppUrl + data.value);
 
             // Set active class on all buttons with the same data-value (both visible and hidden)
             $form
               .find(`[data-action="set-type"][data-value="${data.value}"]`)
               .addClass('ui-button--active');
-
-            _this.updateSupportSection(data, $form);
 
             $form.find('[data-action="set-type"]').each((index, button) => {
               const $button = $(button);
@@ -260,36 +260,34 @@ export class Support {
       .css('color', '');
   }
 
-  updateSupportSection(data, $form) {
+  updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
-      WP.supportSectionCopy && WP.supportSectionCopy['main'];
+      WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
-    if (
-      overrideCopy &&
-      (isNonEmptyString(overrideCopy.heading) ||
-        isNonEmptyString(overrideCopy.text))
-    ) {
-      const headingText = isNonEmptyString(overrideCopy.heading)
-        ? overrideCopy.heading
-        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)
-          ? defaultSectionCopy.heading
-          : '';
-      const textCopy = isNonEmptyString(overrideCopy.text)
-        ? overrideCopy.text
-        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)
-          ? defaultSectionCopy.text
-          : '';
+    let headingText = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+      headingText = overrideCopy.heading;
+    } else if (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)) {
+      headingText = defaultSectionCopy.heading;
+    }
 
-      if ($heading.length && headingText) {
-        $heading.text(headingText);
-      }
-      if ($text.length && textCopy) {
-        $text.text(textCopy);
-      }
+    let textCopy = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+      textCopy = overrideCopy.text;
+    } else if (defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)) {
+      textCopy = defaultSectionCopy.text;
+    }
+
+    // Update DOM elements if they exist and we have content
+    if ($heading.length && headingText) {
+      $heading.text(headingText);
+    }
+    if ($text.length && textCopy) {
+      $text.text(textCopy);
     }
   }
 

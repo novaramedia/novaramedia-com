@@ -49831,11 +49831,11 @@ class Support {
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
             _this.setAutoValues($form, data.value);
+            _this.updateSupportSectionCopy(data, $form);
             $form.attr('action', _this.donationAppUrl + data.value);
 
             // Set active class on all buttons with the same data-value (both visible and hidden)
             $form.find(`[data-action="set-type"][data-value="${data.value}"]`).addClass('ui-button--active');
-            _this.updateSupportSection(data, $form);
             $form.find('[data-action="set-type"]').each((index, button) => {
               const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(button);
               const isSelected = $button.data('value') === data.value;
@@ -49964,20 +49964,30 @@ class Support {
     $customInputContainer.removeClass('ui-button--active');
     $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
   }
-  updateSupportSection(data, $form) {
+  updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
     const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
-    if (overrideCopy && ((0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading) || (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text))) {
-      const headingText = (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading) ? overrideCopy.heading : defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.heading) ? defaultSectionCopy.heading : '';
-      const textCopy = (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text) ? overrideCopy.text : defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.text) ? defaultSectionCopy.text : '';
-      if ($heading.length && headingText) {
-        $heading.text(headingText);
-      }
-      if ($text.length && textCopy) {
-        $text.text(textCopy);
-      }
+    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['default'];
+    let headingText = '';
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading)) {
+      headingText = overrideCopy.heading;
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.heading)) {
+      headingText = defaultSectionCopy.heading;
+    }
+    let textCopy = '';
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text)) {
+      textCopy = overrideCopy.text;
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.text)) {
+      textCopy = defaultSectionCopy.text;
+    }
+
+    // Update DOM elements if they exist and we have content
+    if ($heading.length && headingText) {
+      $heading.text(headingText);
+    }
+    if ($text.length && textCopy) {
+      $text.text(textCopy);
     }
   }
   initSupportBar() {
