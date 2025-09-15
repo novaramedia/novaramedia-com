@@ -73,28 +73,24 @@ if ( have_posts() ) {
                   <div class="font-size-13 font-size-l-12 mb-4">
                     Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics</span>.
                   </div>
-                  <div class="font-size-13 font-size-l-12">
+                  <div class="font-size-13 font-size-l-12 mb-5">
                     Be part of the change.
                   </div>
+                  <?php
+                    if ( $youtube_id ) {
+                      ?>
+                    <div class="u-video-embed-container">
+                      <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
+                    </div>
+                      <?php
+                    }
+                  ?>
                 </div>
               </div>
               <div class="grid-item is-xxl-12 is-m-24 background-gray-base support-page__right-radius">
                 <div class="support-page__donation-form-sticky p-5 p-l-4">
                   <?php render_support_form( 'condensed', true ); ?>
                 </div>
-              </div>
-
-              <div class="grid-item is-xxl-24 background-white p-5 p-l-4 ui-rounded-box--bottom">
-                <!-- TODO: revisit box rounding -->
-                <?php
-                if ( $youtube_id ) {
-                  ?>
-                  <div class="u-video-embed-container">
-                    <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
-                  </div>
-                  <?php
-                }
-                ?>
               </div>
             </div>
           </div>
