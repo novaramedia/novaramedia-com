@@ -5445,10 +5445,10 @@ html {
 .support-section--white-mobile-schedule .support-form__schedule-mobile {
   background-color: var(--color-white-soft);
 }
-.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button {
+.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button:not(.ui-button--active) {
   background-color: var(--color-white-soft);
 }
-.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button:hover:not(:focus):not(.ui-button--active) {
+.support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button:not(.ui-button--active):hover:not(:focus):not(.ui-button--active) {
   background-color: var(--color-white-soft);
 }
 .support-page__headline {

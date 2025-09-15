@@ -252,7 +252,7 @@ if ( have_posts() ) {
     <!-- donation form -->
     <div class="container">
       <div class="grid-row">
-        <?php render_support_form( 'banner' ); ?>
+        <?php render_support_form( 'banner', true ); ?>
       </div>
     </div>
 
