@@ -5508,12 +5508,6 @@ html {
   }
 }
 .support-page__big-stats {
-  display: flex;
-  flex-direction: row;
-  -ms-justify-content: center;
-  justify-content: center;
-  -ms-align-items: flex-start;
-  align-items: flex-start;
   text-align: center;
 }
 .support-page__big-stats .font-size-17 {

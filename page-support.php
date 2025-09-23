@@ -111,23 +111,31 @@ if ( have_posts() ) {
               <h3 class="font-size-9 font-weight-bold font-style-boxed font-style-boxed--grey">How we are funded</h3>
 
               <div class="support-page__big-stats mt-4 mb-5">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold font-color-white">
-                    <span class="font-size-17">84</span><span class="font-size-15 font-size-s-14">%</span>
+                <div class="grid-row grid-row--nested">
+                  <div class="grid-item is-xxl-8">
+                    <div class="support-page__big-stat">
+                      <div class="font-weight-bold font-color-white">
+                        <span class="font-size-17">84</span><span class="font-size-15 font-size-s-14">%</span>
+                      </div>
+                      <div class="font-size-13 font-size-s-11 font-weight-bold">Supporter donations</div>
+                    </div>
                   </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">Supporter donations</div>
-                </div>
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold font-color-white">
-                    <span class="font-size-17">16</span><span class="font-size-15 font-size-s-14">%</span>
+                  <div class="grid-item is-xxl-8">
+                    <div class="support-page__big-stat">
+                      <div class="font-weight-bold font-color-white">
+                        <span class="font-size-17">16</span><span class="font-size-15 font-size-s-14">%</span>
+                      </div>
+                      <div class="font-size-13 font-size-s-11 font-weight-bold">YouTube + Merch</div>
+                    </div>
                   </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">YouTube + Merch</div>
-                </div>
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">0</span><span class="font-size-15 font-size-s-14">%</span>
+                  <div class="grid-item is-xxl-8">
+                    <div class="support-page__big-stat">
+                      <div class="font-weight-bold">
+                        <span class="font-size-17">0</span><span class="font-size-15 font-size-s-14">%</span>
+                      </div>
+                      <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
+                    </div>
                   </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
                 </div>
               </div>
             </div>
