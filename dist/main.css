@@ -1418,6 +1418,11 @@ body {
   background-blend-mode: normal;
   background-image: linear-gradient(to bottom,transparent 25%,var(--color-white-soft) 100%), url("img/specials/support-2023-texture-alt.webp");
 }
+.avif .background-support-texture-alt--fade-to-gray,
+.webp .background-support-texture-alt--fade-to-gray {
+  background-blend-mode: normal;
+  background-image: linear-gradient(to bottom,transparent 25%,var(--color-gray-base) 100%), url("img/specials/support-2023-texture-alt.webp");
+}
 .fallback .background-support-texture {
   background-image: linear-gradient(0deg,rgba(255,25,65,0) 20.45%,var(--color-red) 100%), url("img/specials/support-2023-texture.png");
 }
@@ -1427,6 +1432,10 @@ body {
 .fallback .background-support-texture-alt--fade-to-white {
   background-blend-mode: normal;
   background-image: linear-gradient(to bottom,transparent 25%,var(--color-white-soft) 100%), url("img/specials/support-2023-texture-alt.png");
+}
+.fallback .background-support-texture-alt--fade-to-gray {
+  background-blend-mode: normal;
+  background-image: linear-gradient(to bottom,transparent 25%,var(--color-gray-base) 100%), url("img/specials/support-2023-texture-alt.png");
 }
 .component-quote {
   margin-top: 1rem;
@@ -5451,10 +5460,18 @@ html {
 .support-section--white-mobile-schedule .support-form__schedule-mobile .support-form__button:not(.ui-button--active):hover:not(:focus):not(.ui-button--active) {
   background-color: var(--color-white-soft);
 }
+#page.support-page {
+  background-color: var(--color-gray-base);
+}
 .support-page__headline {
-  font-size: 7.5rem;
+  font-size: 9rem;
   line-height: 0.825em;
   margin-left: -0.05em;
+}
+@media screen and (max-width: 1408px) {
+  .support-page__headline {
+    font-size: 7rem;
+  }
 }
 @media screen and (max-width: 910px) {
   .support-page__headline {
@@ -5490,9 +5507,6 @@ html {
     border-top-right-radius: 0;
   }
 }
-.support-page__below-the-fold {
-  background-image: linear-gradient(180deg,var(--color-white-soft) 0%,var(--color-gray-base) 25%);
-}
 .support-page__big-stats {
   display: flex;
   flex-direction: row;
@@ -5515,7 +5529,7 @@ html {
 }
 .support-page__highlighter .ux-highlighter__line {
   transition: all var(--transition-speed-quick) ease-in-out;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .support-page__highlighter .ux-highlighter__line--active {
   transform: scale(1.01);
@@ -5526,7 +5540,7 @@ html {
 }
 .support-page__our-story-background {
   position: relative;
-  height: 480px;
+  height: 520px;
   background-size: 100% auto;
   background-position: center 40%;
   background-repeat: no-repeat;
@@ -5570,11 +5584,11 @@ html {
 }
 .support-page__quote-carousel .support-page__quote-mark {
   font-size: 4rem;
-  line-height: 0.8;
+  line-height: 0.5;
   margin: -0.5rem 0;
 }
 .support-page__quote-carousel .swiper-slide {
-  width: 500px;
+  width: 620px;
   height: auto;
   margin: 0 4px;
   padding: 1.5rem;
@@ -8239,6 +8253,10 @@ html {
 }
 .font-style-boxed--white {
   background: var(--color-white-soft);
+  color: var(--color-black-soft);
+}
+.font-style-boxed--grey {
+  background: var(--color-gray-base);
   color: var(--color-black-soft);
 }
 .ui-button--red:hover {

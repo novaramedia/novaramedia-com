@@ -1,7 +1,13 @@
+#page.support-page
+  background-color: var(--color-gray-base)
+
 .support-page__headline
-  font-size: 7.5rem
+  font-size: 9rem
   line-height: .825em
   margin-left: -.05em
+
+  @media screen and (max-width: $breakpoint-xl)
+    font-size: 7rem
 
   @media screen and (max-width: $breakpoint-m)
     font-size: 5.5rem
@@ -33,9 +39,6 @@
   .support-page__right-radius
     border-top-right-radius: 0
 
-.support-page__below-the-fold
-  background-image: linear-gradient(180deg, var(--color-white-soft) 0%, var(--color-gray-base) 25%);
-
 .support-page__big-stats
   display: flex
   flex-direction: row
@@ -56,7 +59,7 @@
 .support-page__highlighter
   .ux-highlighter__line
     transition: all var(--transition-speed-quick) ease-in-out
-    margin-bottom: 2rem
+    margin-bottom: 1rem
     &--active
       transform: scale(1.01)
       color: var(--color-black-soft)
@@ -65,7 +68,7 @@
 
 .support-page__our-story-background
   position: relative
-  height: 480px
+  height: 520px
   background-size: 100% auto
   background-position:  center 40%
   background-repeat: no-repeat
@@ -102,11 +105,11 @@
 
   .support-page__quote-mark
     font-size: 4rem
-    line-height: 0.8
+    line-height: 0.5
     margin: -0.5rem 0
 
   .swiper-slide
-    width: 500px
+    width: 620px
     height: auto
     margin: 0 4px
     padding: 1.5rem
