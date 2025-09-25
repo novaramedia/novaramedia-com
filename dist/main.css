@@ -8262,6 +8262,12 @@ html {
   line-height: 1em;
   padding: 0.3rem 0.75rem 0.4375rem 0.75rem;
 }
+.ui-dot--pink {
+  background-color: var(--color-acfm-pink);
+}
+.ui-dot--gray {
+  background-color: var(--color-gray-light);
+}
 .ui-rounded-box-large,
 .ui-rounded-image-large {
   border-radius: var(--corner-radius-large);

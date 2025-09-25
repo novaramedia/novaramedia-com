@@ -31,7 +31,7 @@ if ( have_posts() ) {
   }
   ?>
   <article id="page" class="support-page">
-    <div class="background-white background-support-texture-alt background-support-texture-alt--fade-to-gray">
+    <div class="background-support-texture-alt background-support-texture-alt--fade-to-gray">
       <div class="container">
         <div class="grid-item">
           <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
@@ -102,7 +102,7 @@ if ( have_posts() ) {
       </div>
     </div>
 
-    <div class="support-page__below-the-fold background-color-gray-base">
+    <div class="support-page__below-the-fold background-gray-base">
       <!-- how we are funded -->
       <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
         <div class="grid-row support-page__text-container">
