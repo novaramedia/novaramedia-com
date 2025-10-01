@@ -1,0 +1,139 @@
+name: Release Notification to Slack
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+      - main
+
+jobs:
+  notify-release:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Version ')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Extract version from PR title
+        id: extract_version
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          VERSION=$(echo "$PR_TITLE" | sed -n 's/^Version \([0-9]\+\.[0-9]\+\.[0-9]\+\).*$/\1/p')
+          if [ -z "$VERSION" ]; then
+            echo "Error: Could not extract version from PR title: $PR_TITLE"
+            exit 1
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+          
+      - name: Extract release notes from CHANGELOG
+        id: extract_notes
+        run: |
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          
+          # Find the release section in CHANGELOG.md
+          # Look for ## [VERSION] - DATE format
+          START_LINE=$(grep -n "^## \[$VERSION\]" CHANGELOG.md | cut -d: -f1)
+          
+          if [ -z "$START_LINE" ]; then
+            echo "Error: Could not find release notes for version $VERSION in CHANGELOG.md"
+            exit 1
+          fi
+          
+          # Find the next release section or end of file
+          NEXT_LINE=$(tail -n +$((START_LINE + 1)) CHANGELOG.md | grep -n "^## \[" | head -n 1 | cut -d: -f1)
+          
+          if [ -n "$NEXT_LINE" ]; then
+            END_LINE=$((START_LINE + NEXT_LINE - 1))
+            RELEASE_NOTES=$(sed -n "${START_LINE},${END_LINE}p" CHANGELOG.md | head -n -1)
+          else
+            RELEASE_NOTES=$(tail -n +$START_LINE CHANGELOG.md)
+          fi
+          
+          # Clean up the release notes - remove the version header line
+          RELEASE_NOTES=$(echo "$RELEASE_NOTES" | tail -n +2)
+          
+          # Save to file to handle multiline content
+          echo "$RELEASE_NOTES" > release_notes.txt
+          echo "Release notes extracted for version $VERSION"
+          
+      - name: Format Slack message
+        id: format_message
+        run: |
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          REPO_URL="${{ github.repository }}"
+          
+          # Read release notes from file and escape for JSON
+          RELEASE_NOTES=$(cat release_notes.txt | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          
+          # Create JSON message using jq for proper escaping
+          jq -n \
+            --arg version "$VERSION" \
+            --arg repo_url "$REPO_URL" \
+            --arg pr_url "$PR_URL" \
+            --arg release_notes "$RELEASE_NOTES" \
+            --arg commit_sha "${{ github.event.pull_request.merge_commit_sha }}" \
+            '{
+              "text": ("🚀 New release deployed: novaramedia.com v" + $version),
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ("🚀 New Release: novaramedia.com v" + $version)
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": ("*Repository:*\n<https://github.com/" + $repo_url + "|" + $repo_url + ">")
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": ("*Release PR:*\n<" + $pr_url + "|View PR>")
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Release Notes:*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": $release_notes
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": ("Deployed from <https://github.com/" + $repo_url + "/commit/" + $commit_sha + "|" + $commit_sha + ">")
+                    }
+                  ]
+                }
+              ]
+            }' > slack_message.json
+          
+          echo "Slack message formatted"
+          
+      - name: Send Slack notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload-file-path: slack_message.json
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
