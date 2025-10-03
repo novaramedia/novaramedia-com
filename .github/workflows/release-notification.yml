@@ -16,13 +16,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Extract version from PR title
+      - name: Extract version from package.json
         id: extract_version
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          VERSION=$(echo "$PR_TITLE" | sed -n 's/^Version \([0-9]\+\.[0-9]\+\.[0-9]\+\).*$/\1/p')
-          if [ -z "$VERSION" ]; then
-            echo "Error: Could not extract version from PR title: $PR_TITLE"
+          VERSION=$(jq -r '.version' package.json)
+          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
+            echo "Error: Could not extract version from package.json"
             exit 1
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -77,13 +76,13 @@ jobs:
             --arg release_notes "$RELEASE_NOTES" \
             --arg commit_sha "${{ github.event.pull_request.merge_commit_sha }}" \
             '{
-              "text": ("🚀 New release deployed: novaramedia.com v" + $version),
+              "text": ("New release deployed: novaramedia.com v" + $version),
               "blocks": [
                 {
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": ("🚀 New Release: novaramedia.com v" + $version)
+                    "text": ("New Release: novaramedia.com v" + $version)
                   }
                 },
                 {
