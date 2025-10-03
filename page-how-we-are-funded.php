@@ -14,6 +14,8 @@ if ( have_posts() ) {
     $youtube_id = 'v-3cksTJ8e4';
   }
 
+  // Get funding sources from CMB2 metabox
+  $our_funding_content = get_post_meta( $post->ID, '_nm_funding_sources', true );
   ?>
   <article id="page" class="how-we-are-funded-page">
       <div class="container">
@@ -277,42 +279,18 @@ if ( have_posts() ) {
             <div class="text-align-center mt-4 mb-6">
               <h3 class="font-weight-bold font-style-boxed">Other Sources</h3>
             </div>
-
             <?php
-              $our_funding_content = array(
-                array(
-                  'title'    => 'Our YouTube channel',
-                  'subtitle' => 'Growing from strength to strength.',
-                  'text'     => 'We get a small portion of income from YouTube Premium users who watch our videos, and from the ads that YouTube places at the beginning of and/or during some videos (16% of our annual income in 2022). This generic advertising is controlled by Google AdSense and allocated on the basis of real views.',
-                  'cta'      => 'Follow us on YouTube',
-                  'cta_url'  => 'https://www.youtube.com/novaramedia',
-                  'image'    => 'image',
-                ),
-                array(
-                  'title'    => 'Merch',
-                  'subtitle' => 'We sell a range of merchandise through the Novara Media shop.',
-                  'text'     => 'Our merchandise is sold directly from our Leeds office and produced to the highest labour and environmental standards. It all supports our journalism!',
-                  'cta'      => 'Check out our merch',
-                  'cta_url'  => 'https://shop.novaramedia.com/',
-                  'image'    => 'image',
-                ),
-                array(
-                  'title'    => 'Events',
-                  'subtitle' => 'We sell a range of merchandise through the Novara Media shop.',
-                  'text'     => 'Our merchandise is sold directly from our Leeds office and produced to the highest labour and environmental standards. It all supports our journalism!',
-                  'cta'      => 'Check out our merch',
-                  'cta_url'  => 'https://shop.novaramedia.com/',
-                  'image'    => 'image',
-                ),
-              );
-
-              foreach ( $our_funding_content as $index => $content ) {
-                ?>
+            foreach ( $our_funding_content as $index => $content ) {
+              ?>
                 <div class="grid-row grid-row--nested mb-5 <?php echo $index % 2 !== 0 ? 'grid-row--reverse' : ''; ?>">
                   <div class="grid-item is-xxl-8 is-m-24">
                     <h4 class="font-weight-semibold font-size-14 mb-3"><?php echo esc_html( $content['title'] ); ?></h4>
-                    <p class="font-weight-semibold font-size-12 mb-2"><?php echo esc_html( $content['subtitle'] ); ?></p>
-                    <p><?php echo esc_html( $content['text'] ); ?></p>
+                    <?php if ( ! empty( $content['subtitle'] ) ) { ?>
+                      <p class="font-weight-semibold font-size-12 mb-2"><?php echo esc_html( $content['subtitle'] ); ?></p>
+                    <?php } ?>
+                    <?php if ( ! empty( $content['text'] ) ) { ?>
+                      <p><?php echo esc_html( $content['text'] ); ?></p>
+                    <?php } ?>
                     <?php
                     if ( ! empty( $content['cta'] ) && ! empty( $content['cta_url'] ) ) {
                       ?>
@@ -322,12 +300,17 @@ if ( have_posts() ) {
                     ?>
                   </div>
                   <div class="grid-item is-xxl-16 is-m-24">
-                    <!-- <?php echo esc_html( $content['image'] ); ?> -->
+                    <?php
+                    if ( ! empty( $content['image_id'] ) ) {
+                      $image_id = $content['image_id'];
+                      echo wp_get_attachment_image( $image_id, 'col18-16to9', false, array( 'class' => 'ui-rounded-box' ) );
+                    }
+                    ?>
                   </div>
                 </div>
                 <?php
-              }
-              ?>
+            }
+            ?>
           </div>
         </div>
       </div>
