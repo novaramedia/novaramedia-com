@@ -8260,6 +8260,11 @@ html {
   background: var(--color-gray-base);
   color: var(--color-black-soft);
 }
+@media (max-width: 759px) {
+  .ui-boxed-title {
+    font-size: 0.85714286rem;
+  }
+}
 .ui-button--red:hover {
   color: var(--color-red);
 }
