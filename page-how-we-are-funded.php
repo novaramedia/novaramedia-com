@@ -83,7 +83,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24">
           <div class="background-white ui-rounded-box p-4">
             <div class="text-align-center mt-4 mb-6">
-              <h3 class="font-weight-bold font-style-boxed">Our Funding</h3>
+              <h3 class="ui-boxed-title">Our Funding</h3>
             </div>
 
             <div class="p-2 mb-5">
@@ -250,10 +250,10 @@ if ( have_posts() ) {
             </div>
 
             <div class="grid-row grid-row--nested">
-              <div class="grid-item is-xxl-12 is-m-24 pr-8 font-size-14 font-weight-bold">
+              <div class="grid-item is-m-24 is-xxl-11 font-size-14 font-weight-bold">
                 Because the vast majority of our income is raised directly from supporters, we can be <span class="font-color-red">editorially independent</span> without ever having to toe someone else’s line.
               </div>
-              <div class="grid-item is-xxl-12 is-m-24 font-size-12 font-weight-bold">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-weight-bold">
                 <p class="mb-3">It's a key principle that has always underpinned our funding model.</p>
                 <p class="mb-3">Our supporters are individuals who donate to us on a monthly or one-off basis. We ask for one hour’s wage a month, but you can become a supporter with whatever you can afford.</p>
                 <p>Supporter donations made via our website make up the vast majority of our annual income (around 89% in 2022). These donations are what we use to plan our future and grow the organisation, whether it’s taking on more staff or expanding our range of content.</p>
@@ -277,7 +277,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24">
           <div class="background-white ui-rounded-box p-4">
             <div class="text-align-center mt-4 mb-6">
-              <h3 class="font-weight-bold font-style-boxed">Other Sources</h3>
+              <h3 class="ui-boxed-title">Other Sources</h3>
             </div>
             <?php
             foreach ( $our_funding_content as $index => $content ) {

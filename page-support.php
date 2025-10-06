@@ -38,7 +38,7 @@ if ( have_posts() ) {
             Support Us
           </h4>
         </div>
-        <div class="grid-row mt-4 mb-5 font-weight-bold">
+        <div class="grid-row mt-4 mb-6 font-weight-bold">
           <div class="grid-item support-page__headline font-size-17">
             <div class="font-color-black">
               <?php
@@ -67,7 +67,7 @@ if ( have_posts() ) {
             <div class="grid-row grid-row--nested u-relative background-white ui-rounded-box--top">
               <div class="grid-item is-xxl-12 is-m-24">
                 <div class="p-5 p-l-4 font-weight-bold">
-                  <div class="font-size-15 font-size-l-14 mb-4">
+                  <div class="font-size-16 font-size-xl-15 mb-4">
                     Truthful, independent journalism <span class="font-color-red">funded by people like you</span>.
                   </div>
                   <div class="font-size-13 font-size-l-12 mb-4">
@@ -108,7 +108,7 @@ if ( have_posts() ) {
         <div class="grid-row support-page__text-container">
           <div class="grid-item is-xxl-24 ">
             <div class="background-red ui-rounded-box--top text-align-center p-5 p-l-4">
-              <h3 class="font-size-9 font-weight-bold font-style-boxed font-style-boxed--grey">How we are funded</h3>
+              <h3 class="ui-boxed-title ui-boxed-title--grey">How we are funded</h3>
 
               <div class="support-page__big-stats mt-4 mb-5">
                 <div class="grid-row grid-row--nested">
@@ -142,7 +142,7 @@ if ( have_posts() ) {
             <div class="background-white ui-rounded-box--bottom p-5 p-l-4">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
-                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4">
+                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4 mr-5 mr-s-0">
                     No Paywalls.<br/>
                     <span class="font-color-red">No Paymasters.</span>
                   </h3>
@@ -163,7 +163,7 @@ if ( have_posts() ) {
           <div class="grid-item is-xxl-24">
             <div class="background-white ui-rounded-box p-5 p-l-4">
               <div class="text-align-center mb-6">
-                <h3 class="font-size-9 font-weight-bold font-style-boxed">How we spend our funds</h3>
+                <h3 class="ui-boxed-title">How we spend our funds</h3>
               </div>
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
@@ -207,16 +207,16 @@ if ( have_posts() ) {
             </div>
             <div class="grid-row grid-row--nested p-6 p-l-5 background-black font-color-white ui-rounded-box--bottom">
               <div class="grid-item is-xxl-24 text-align-center mb-6">
-                <h3 class="font-size-9 font-weight-bold font-style-boxed font-style-boxed--white">
+                <h3 class="ui-boxed-title ui-boxed-title--white">
                   Our Story
                 </h3>
               </div>
-              <div class="grid-item is-s-24 is-xxl-12">
+              <div class="grid-item is-s-24 is-xxl-11">
                 <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4">
                   Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations.
                 </h3>
               </div>
-              <div class="grid-item is-s-24 is-xxl-12 font-size-11 font-weight-bold">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-11 font-weight-bold">
                 <p class="mb-4">
                   Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
                 </p>
@@ -258,7 +258,7 @@ if ( have_posts() ) {
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
             <div class="swiper-slide text-align-center ui-rounded-box-large">
-              <h5 class="font-size-9 font-weight-bold font-style-boxed font-style-boxed--grey">Supporters Say</h5>
+              <h5 class="ui-boxed-title ui-boxed-title--grey">Supporters Say</h5>
               <div class="support-page__quote-container">
                 <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
                 <p class="font-serif font-size-13 font-size-s-12"><?php echo esc_html( $quote ); ?></p>

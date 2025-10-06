@@ -94,6 +94,9 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
           />
         </div>
       </div>
+      <div class="grid-item grid-item--tight is-xxl-24 font-size-9 mt-2 mb-2">
+        You can log in and edit, or cancel your monthly donation at any time.
+      </div>
     </div>
     <div class="grid-row grid--nested-tight">
       <div class="grid-item grid-item--tight is-xxl-24">

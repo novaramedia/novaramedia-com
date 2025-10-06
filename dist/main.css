@@ -8234,22 +8234,29 @@ html {
 .font-color-pink {
   color: var(--color-pink);
 }
-.font-style-boxed {
+.ui-boxed-title {
+  font-weight: bold;
+  font-size: 0.875rem;
   background: var(--color-black-soft);
   color: var(--color-white-soft);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem;
+  padding: 0.625rem 0.875rem 0.5625rem 0.875rem;
   line-height: 1em;
   border-radius: var(--corner-radius);
   text-transform: uppercase;
-  display: inline-block;
+  display: -ms-inline-flex;
+  display: inline-flex;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
 }
-.font-style-boxed--white {
+.ui-boxed-title--white {
   background: var(--color-white-soft);
   color: var(--color-black-soft);
 }
-.font-style-boxed--grey {
+.ui-boxed-title--grey {
   background: var(--color-gray-base);
   color: var(--color-black-soft);
 }

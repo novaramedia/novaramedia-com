@@ -46,16 +46,22 @@ html
 .font-color-pink
   color: var(--color-pink)
 
-.font-style-boxed
+// *****
+
+.ui-boxed-title
+  font-weight: bold
+  font-size: $large-scale[2] * 1rem // mapped to size scale 9
   background: var(--color-black-soft)
   color: var(--color-white-soft)
-  -webkit-font-smoothing: antialiased
+  -webkit-font-smoothing: antialiased // this really is for white on black text. might need to remove for other color pairs
   -moz-osx-font-smoothing: grayscale
-  padding: 0.4375rem 0.8125rem 0.5625rem 0.8125rem
+  padding: 0.625rem 0.875rem 0.5625rem 0.875rem
   line-height: 1em
   border-radius: var(--corner-radius)
   text-transform: uppercase
-  display: inline-block
+  display: inline-flex
+  justify-content: center
+  align-items: center
   &--white
     background: var(--color-white-soft)
     color: var(--color-black-soft)
