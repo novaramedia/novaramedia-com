@@ -97,7 +97,7 @@ if ($category->slug === 'video') {
             <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
           </div>
           <a href="<?php the_permalink(); ?>">
-            <h6 class="js-fix-widows mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
+            <h6 class="text-wrap-pretty mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
             <h5 class="font-size-12 font-weight-bold mt-2">
               <?php render_standfirst($post->ID); ?>
             </h5>
@@ -127,7 +127,7 @@ if ($category->slug === 'video') {
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1"><?php the_title(); ?></h6>
+              <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1"><?php the_title(); ?></h6>
             </a>
           </div>
           <?php

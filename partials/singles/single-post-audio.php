@@ -20,7 +20,7 @@
 
 <header class="grid-row mb-4">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
-    <h1 class="font-size-15 font-weight-bold js-fix-widows mb-4"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4"><?php the_title(); ?></h1>
     <?php the_post_thumbnail([500, 400]); ?>
     <div class="font-size-8 mt-1">
       <?php the_post_thumbnail_caption(); ?>

@@ -172,7 +172,7 @@ if ( have_posts() ) {
       <article class="foreign-agent-archive__episode flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php the_title(); ?></h3>
+          <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>

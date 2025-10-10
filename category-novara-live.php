@@ -67,7 +67,7 @@ get_header();
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
             <h6 class="font-size-10 font-weight-semibold mt-1"><?php the_time('j F Y'); ?></h6>
-            <h6 class="js-fix-widows font-size-11 font-size-S-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
+            <h6 class="text-wrap-pretty font-size-11 font-size-s-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
           </a>
         </div>
         <?php
