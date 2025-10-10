@@ -170,6 +170,6 @@
             "install-path": "../webdevstudios/cmb2-post-search-field"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }

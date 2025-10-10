@@ -1,13 +1,13 @@
 <?php return array(
     'root' => array(
         'name' => 'novaramedia/novaramedia-com',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
+        'pretty_version' => 'dev-copilot/audit-php-security-practices',
+        'version' => 'dev-copilot/audit-php-security-practices',
+        'reference' => 'd96fd0aba2c76e1702033af14e409dd83de7358b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'cmb2/cmb2' => array(
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'novaramedia/novaramedia-com' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
+            'pretty_version' => 'dev-copilot/audit-php-security-practices',
+            'version' => 'dev-copilot/audit-php-security-practices',
+            'reference' => 'd96fd0aba2c76e1702033af14e409dd83de7358b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
