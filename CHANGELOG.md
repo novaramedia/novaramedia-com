@@ -7,15 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add Github Action workflow to notify to Slack on releases
+
 ### Changed
 
+- Rebuild the support form, with new condensed width version
+- Updated all dev and front end dependencies (`chalk` pinned at v4)
 - Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
 
 ## [4.2.10] - 2025-05-22
 
 ### Added
 
-- Function to handle simple path-based redirects with array to add more external redirects in future.
+- Function that accepts an array to support multiple external redirects to handle simple path-based redirects.
 - Redirect from https://novaramedia.com/asksophie to this google form https://docs.google.com/forms/d/e/1FAIpQLSegJV5jED2FhIUS7_rryZC6V2Y65W7W-kE3tXGMH7zr4sl_uQ/viewform
 
 ## [4.2.9] - 2025-05-21

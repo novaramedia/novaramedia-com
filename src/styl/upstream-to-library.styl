@@ -1,0 +1,66 @@
+html
+  --color-gray-base: #f8f5f5;
+  --corner-radius-large: 4px;
+
+.background-gray-base
+  background-color: var(--color-gray-base)
+
+.background-gray-light-transparent
+  background-color: var(--color-gray-light-transparent)
+
+// ***** ???
+
+.alt-ux-carousel__item
+  height: 250px;
+  margin: 0 4px;
+  box-sizing: border-box;
+  background-color: var(--color-white-soft);
+  opacity: 0.5;
+
+.swiper-pagination-bullet
+  display: inline-block;
+  width: 10px;
+  height: 2px;
+  background-color: var(--color-gray-light-transparent)
+  margin: 0 4px;
+  transition: opacity 0.3s ease;
+
+.swiper-pagination-bullet-active
+  background-color: var(--color-black-soft);
+  opacity: 1;
+
+.swiper
+  position: relative;
+
+.swiper-pagination
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+
+.swiper-slide-active
+  opacity: 1;
+
+// *****
+
+.font-color-gray
+  color: var(--color-gray)
+
+.font-color-white-transparent
+  color: var(--color-white-soft-transparent)
+
+// *****
+
+.ui-button
+  &--red
+    &:hover
+      color: var(--color-red) // this is correct, but it needs some pair option to have the red hover into white state
+
+// *****
+
+.ui-rounded-box-large, .ui-rounded-image-large
+  border-radius: var(--corner-radius-large)

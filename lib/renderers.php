@@ -10,13 +10,13 @@ function render_ui_tag( $label, $url, $variants = array() ) {
   $variant_classes = is_array( $variants ) ? $variants : explode( ' ', $variants );
   $classes =
     array_merge(
-        array( 'ui-tag-block' ),
-        array_map(
-            function ( $v ) {
-              return 'ui-tag-block--' . $v;
-            },
-            $variant_classes
-        )
+      array( 'ui-tag-block' ),
+      array_map(
+        function ( $v ) {
+          return 'ui-tag-block--' . $v;
+        },
+        $variant_classes
+      )
     );
 
   ?>
@@ -25,61 +25,203 @@ function render_ui_tag( $label, $url, $variants = array() ) {
   </a>
   <?php
 }
-
 /**
- * Render the support donation form.
+ * Renders the schedule buttons for the support form, one off or regular.
  *
- * Generates unique instance identifiers to manage multiple forms on a single page,
- * ensuring there are no conflicts with input labels or IDs.
- * This function should be used within a grid item and must account for holistic layout
- * requirements wherever it is called.
+ * This function outputs the schedule buttons for the support form.
  *
- * @uses nm_get_support_autovalues() Fetches predefined support values for donation levels.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form() {
-  // Generate unique ID for the form
-  $instance = uniqid( 'support-form-' );
-  $support_section_autovalues = nm_get_support_autovalues();
+function render_support_form_schedule_buttons( $schedule_classes = '' ) {
   ?>
-  <form class=" support-section support-form" action="https://donate.novaramedia.com/regular" id="<?php echo $instance; ?>">
-    <input class="support-form__value-input " type="hidden" value="<?php echo $support_section_autovalues['default']->regular_low; ?>" name="amount" />
-    <div class="grid-row grid--nested-tight margin-bottom-tiny">
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_low; ?>" data-name="low">
-          £<?php echo $support_section_autovalues['default']->regular_low; ?>
-        </button>
+    <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
+    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
+      <div class="is-xxl-12">
+        <button class="support-form__button ui-button ui-button--fill-width support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
       </div>
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_medium; ?>" data-name="medium">
-          £<?php echo $support_section_autovalues['default']->regular_medium; ?>
-        </button>
+      <div class="is-xxl-12">
+        <button class="support-form__button ui-button ui-button--fill-width ui-button--active support-form__schedule-option support-form__schedule-option-right font-weight-bold grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
       </div>
-      <div class="grid-item grid-item--tight is-xxl-4">
-        <button class="support-form__button support-form__value-option ui-input" data-action="set-value" data-value="<?php echo $support_section_autovalues['default']->regular_high; ?>" data-name="high">
-          £<?php echo $support_section_autovalues['default']->regular_high; ?>
-        </button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-12">
-        <label for="<?php echo $instance; ?>__custom-input" class="u-visuallyhidden">Custom donation amount in pounds</label>
-        <input id="<?php echo $instance; ?>__custom-input" class="support-form__custom-input ui-input" type="number" min="1" placeholder="£ Custom amount" />
+    </div>
+  <?php
+}
+/**
+ * Renders the amount and submit buttons for the support form.
+ *
+ * This function outputs the amount and submit buttons for the support form.
+ *
+ * @param object $values The values object containing the donation amounts.
+ * @param int $instance The unique instance identifier for the form.
+ *
+ * @return void Outputs the HTML form directly.
+ */
+function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
+  ?>
+  <div class="<?php echo esc_attr( $button_classes ); ?>">
+    <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
+    <div class="grid-row grid--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
+      <?php
+      foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
+        ?>
+        <div class="grid-item grid-item--tight is-xxl-3 is-s-8 mb-s-2">
+          <button
+            class="support-form__button ui-button ui-button--fill-width support-form__value-option"
+            role="radio"
+            aria-checked="false"
+            tabindex="-1"
+            data-action="set-value"
+            data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
+            data-name="<?php echo esc_attr( $tier ); ?>"
+          >
+            £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
+          </button>
+        </div>
+        <?php
+      }
+      ?>
+      <div class="grid-item grid-item--tight is-xxl-15 is-s-24">
+        <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
+          Custom donation amount in pounds
+        </label>
+        <div class="support-form__custom-input-container u-position-relative">
+          <span class="support-form__custom-input-prefix font-weight-bold font-size-11">£</span>
+          <input
+            id="<?php echo esc_attr( $instance ); ?>__custom-input"
+            class="support-form__custom-input ui-input ui-input--red-border-white"
+            type="number"
+            min="1"
+            placeholder="Custom amount"
+          />
+        </div>
       </div>
     </div>
     <div class="grid-row grid--nested-tight">
-      <div class="grid-item grid-item--tight is-xxl-6">
-        <button class="support-form__button support-form__schedule-option ui-input" data-action="set-type" data-value="oneoff">One-off</button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-6">
-        <button class="support-form__button support-form__button--active support-form__schedule-option ui-input" data-action="set-type" data-value="regular">Monthly</button>
-      </div>
-      <div class="grid-item grid-item--tight is-xxl-12">
-        <input class="support-form__submit ui-button ui-button--white ui-button--fill-width" type="submit" value="Go" />
+      <div class="grid-item grid-item--tight is-xxl-24">
+        <input
+          class="support-form__submit ui-button ui-button--white ui-button--fill-width"
+          type="submit"
+          value="Donate"
+        />
       </div>
     </div>
-  </form>
-<?php } ?>
+  </div>
+  <?php
+}
+/**
+ * Render the support section heading and text based on the donation mode.
+ *
+ * @param string $donation_mode The donation mode, either 'regular' or 'oneoff'.
+ * @param string $text_classes Optional additional classes for the text container.
+ */
+function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
+  $data = nm_get_support_heading_text_data();
 
-<?php
+  $heading = '';
+  $text = '';
+
+  if ( isset( $data[ $donation_mode ] ) && ! empty( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+    $heading = $data[ $donation_mode ]['heading'];
+    $text = $data[ $donation_mode ]['text'];
+  } elseif ( ! empty( $data['default']['heading'] ) && ! empty( $data['default']['text'] ) ) {
+    $heading = $data['default']['heading'];
+    $text = $data['default']['text'];
+  } else {
+    $heading = 'Support Novara Media';
+    $text = 'Help us fund independent journalism.';
+  }
+
+  ?>
+  <div class="<?php echo esc_attr( $text_classes ); ?>" aria-live="polite">
+    <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
+      <?php echo esc_html( $heading ); ?>
+    </h4>
+    <?php if ( $text ) { ?>
+    <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text u-display-block mb-4">
+      <?php echo esc_html( $text ); ?>
+    </a>
+    <?php } ?>
+  </div>
+  <?php
+}
+/**
+ * Render payment icons for the support section.
+ */
+function render_payment_icons( $payment_classes = '' ) {
+  $img_base = get_template_directory_uri() . '/dist/img/support-form/';
+  $payment_methods = array(
+    'Visa'       => 'Visa icon',
+    'Mastercard' => 'Mastercard icon',
+    'Stripe'     => 'Stripe icon',
+    'PayPal'     => 'PayPal icon',
+    'ApplePay'   => 'ApplePay icon',
+    'GooglePay'  => 'GooglePay icon',
+  );
+  ?>
+  <div class="<?php echo esc_attr( $payment_classes ); ?>">
+    <?php foreach ( $payment_methods as $filename => $alt_text ) { ?>
+      <img
+        class="support-form__payment-type ui-rounded-box-large mr-2"
+        src="<?php echo esc_url( $img_base . $filename . '.svg' ); ?>"
+        alt="<?php echo esc_attr( $alt_text ); ?>"
+      />
+    <?php } ?>
+  </div>
+  <?php
+}
+/**
+ * Render the support donation form with the heading, text, and form elements.
+ *
+ * @param string $variant Form display variant ('banner' or 'condensed').
+ * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
+ * @param string $container_classes Additional CSS classes for the container element.
+ * @return void Outputs the HTML form directly.
+ */
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '' ) {
+  // Generate unique instance ID
+  $instance = uniqid( 'support-form-' );
+
+  // Get support section values
+  $support_section_autovalues = nm_get_support_autovalues();
+  $active_values = $support_section_autovalues['default'];
+
+  // Determine donation mode
+  if ( isset( $active_values->show_first ) && in_array( $active_values->show_first, array( 'regular', 'oneoff' ), true ) ) {
+    $donation_mode = $active_values->show_first;
+  } else {
+    $donation_mode = 'regular';
+  }
+
+  $variant_classes = 'support-section--' . $variant;
+
+  if ( $white_mobile_schedule ) {
+    $variant_classes .= ' support-section--white-mobile-schedule';
+  }
+
+  $support_section_classes = $variant_classes . ' ' . $container_classes;
+  ?>
+  <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box-large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+      <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
+      <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
+      <div class="support-form__padding-container">
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
+        <div class="support-form__desktop-container grid-row">
+          <div class="grid-item is-xxl-12 support-form__left-column-desktop">
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
+            <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
+          </div>
+          <div class="grid-item is-xxl-12 support-form__right-column-desktop">
+            <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
+          </div>
+        </div>
+        <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
+        <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
+      </div>
+    </form>
+  </div>
+  <?php
+}
 /**
  * Render the see also block
  * Based on a passed query. Can render more than 1 post but will only show one on mobile
@@ -108,8 +250,8 @@ function render_see_also( $query, $number_of_posts = 1 ) {
         ?>
         <div class="mb-2
         <?php
-        if ( $i != 0 ) {
-                            echo 'only-desktop';
+        if ( $i !== 0 ) {
+          echo 'only-desktop';
         }
         ?>
         ">
@@ -137,10 +279,10 @@ function render_see_also( $query, $number_of_posts = 1 ) {
 /**
  * Renders post UI tags
  *
- * @param integer $post_id        Post ID
- * @param Boolean $show_text      If the rendered tag should show the text
- * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon
- * @param string $block_style_varient Additional BEM varient class
+ * @param integer $post_id        Post ID.
+ * @param Boolean $show_text      If the rendered tag should show the text.
+ * @param Boolean $show_av_icons  If the rendered tag should show the audio/video icon.
+ * @param string $block_style_varient Additional BEM varient class.
  */
 function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = false, $block_style_varient = false ) {
   $sub_category = get_the_sub_category( $post_id, true );
@@ -180,8 +322,8 @@ function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = fals
 /**
  * Renders a post thumbnail.
  *
- * @param integer $post_id Post ID
- * @param string  $size    Thumbnail size
+ * @param integer $post_id Post ID.
+ * @param string  $size    Thumbnail size.
  */
 function render_thumbnail( $post_id, $size = 'col12-16to9', $attributes = null ) {
   if ( ! is_numeric( $post_id ) ) {
@@ -204,14 +346,14 @@ function render_thumbnail( $post_id, $size = 'col12-16to9', $attributes = null )
 /**
  * Echos the standfirst for a post if set and not empty
  *
- * @param integer $postId Post ID
+ * @param integer $post_id Post ID.
  */
-function render_standfirst( $postId = null ) {
-  if ( $postId === null ) {
+function render_standfirst( $post_id = null ) {
+  if ( $post_id === null ) {
     return;
   }
 
-  $meta = get_post_meta( $postId );
+  $meta = get_post_meta( $post_id );
 
   if ( isset( $meta['_cmb_standfirst'] ) && ! empty( $meta['_cmb_standfirst'] ) ) {
     echo $meta['_cmb_standfirst'][0];
@@ -224,43 +366,43 @@ function render_standfirst( $postId = null ) {
  *
  * Conditionally adds a period if the title does not end with a letter or number
  *
- * @param integer $postId Post ID
+ * @param integer $post_id Post ID.
  */
-function render_video_title_and_standfirst( $postId = null ) {
-  if ( $postId === null ) {
+function render_video_title_and_standfirst( $post_id = null ) {
+  if ( $post_id === null ) {
     return;
   }
 
-  $meta = get_post_meta( $postId );
+  $meta = get_post_meta( $post_id );
 
-  echo get_the_title( $postId );
+  echo get_the_title( $post_id );
 
   if ( isset( $meta['_cmb_standfirst'] ) && ! empty( $meta['_cmb_standfirst'] ) ) {
-    if ( preg_match( '/[a-zA-Z0-9]$/', get_the_title( $postId ) ) !== 0 ) {
+    if ( preg_match( '/[a-zA-Z0-9]$/', get_the_title( $post_id ) ) !== 0 ) {
       echo '. ';
     } else {
       echo ' ';
     }
 
-    render_standfirst( $postId );
+    render_standfirst( $post_id );
   }
 }
 /**
  * Echo the meta short description. If not set then render the excerpt.
  *
- * @param integer $postId Post ID
+ * @param integer $post_id Post ID.
  */
-function render_short_description( $postId = null ) {
-  if ( $postId === null ) {
+function render_short_description( $post_id = null ) {
+  if ( $post_id === null ) {
     return;
   }
 
-  $meta = get_post_meta( $postId );
+  $meta = get_post_meta( $post_id );
 
   if ( isset( $meta['_cmb_short_desc'] ) && $meta['_cmb_short_desc'][0] ) {
     echo apply_filters( 'the_content', $meta['_cmb_short_desc'][0] );
   } else {
-    echo get_the_excerpt( $postId );
+    echo get_the_excerpt( $post_id );
   }
 }
 
@@ -269,8 +411,8 @@ function render_short_description( $postId = null ) {
  *
  * Checks post metadata for either contributors or authors. Prioritises contributors. Optionally can link the rendered bylines. Reverts to Novara Reporters if nothing found.
  *
- * @param integer $post_id   Post ID
- * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata
+ * @param integer $post_id   Post ID.
+ * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata.
  */
 function render_bylines( $post_id, $is_linked = false ) {
   $contributors_posts_array = get_contributors_array( $post_id );
@@ -288,7 +430,7 @@ function render_bylines( $post_id, $is_linked = false ) {
     }
   }
 
-  if ( $contributors_posts_array ) {
+  if ( is_array( $contributors_posts_array ) && ! empty( $contributors_posts_array ) ) {
     $number_of_contributors = count( $contributors_posts_array );
 
     foreach ( $contributors_posts_array as $index => $contributor ) {
@@ -336,31 +478,34 @@ function render_front_page_banner( $key ) {
             'partials/email-signup',
             null,
             array(
-                'newsletter_page_id' => $newsletter_id,
+              'newsletter_page_id' => $newsletter_id,
             )
-        );
+          );
         }
       }
+
         break;
     case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
       get_template_part(
         'partials/email-signup',
         null,
         array(
-            'newsletter' => 'The Cortado',
-            'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
+          'newsletter' => 'The Cortado',
+          'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
         )
-    );
+      );
+
         break;
     case 'email-the-pick': // depreciated 3.9.0
       get_template_part(
         'partials/email-signup',
         null,
         array(
-            'newsletter' => 'The Pick',
-            'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
+          'newsletter' => 'The Pick',
+          'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
         )
-    );
+      );
+
         break;
     default: // default behavior to render the template part from path provided
       get_template_part( $key );
@@ -373,15 +518,15 @@ function render_front_page_banner( $key ) {
  * If the post has a sub-category and the current page is not that sub-category,
  * it prepends the name of the sub-category to the title.
  *
- * @param int $postId The ID of the post.
+ * @param int $post_id The ID of the post.
  *
  * @return void
  * @deprecated 3.9.0
  */
-function render_post_title( $postId ) {
-  $title = get_the_title( $postId );
+function render_post_title( $post_id ) {
+  $title = get_the_title( $post_id );
 
-  $sub_category = get_the_sub_category( $postId, true );
+  $sub_category = get_the_sub_category( $post_id, true );
 
   if ( ! empty( $sub_category ) && ! is_category( $sub_category->term_id ) ) {
     $title = '<span class="font-size-8">' . $sub_category->name . ':</span> ' . $title;
@@ -443,11 +588,19 @@ function render_tweet_link( $url, $title = null, $link_text = 'Tweet', $hashtag 
     $twitter_url .= '&text=' . $title;
   }
 
-  $twitter_url .= '&url=' . urlencode( $url );
+  $twitter_url .= '&url=' . rawurlencode( $url );
 
   echo '<a class="ui-action-link ui-action-link--small share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
 }
 
+/**
+ * Renders a Facebook share link.
+ *
+ * @param string $url The URL to be shared.
+ * @param string $link_text The text to be displayed for the link. Default is 'Facebook share'.
+ *
+ * @return void
+ */
 function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
   if ( empty( $url ) ) {
     return;
@@ -455,21 +608,39 @@ function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
 
   $facebook_url = 'https://www.facebook.com/sharer/sharer.php?';
 
-  $facebook_url .= '&u=' . urlencode( $url );
+  $facebook_url .= '&u=' . rawurlencode( $url );
 
   echo '<a class="ui-action-link ui-action-link--small share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
 }
 
+/**
+ * Renders an email share link.
+ *
+ * @param string $url The URL to be shared.
+ * @param string $subject The subject of the email. Default is empty.
+ * @param string $link_text The text to be displayed for the link. Default is 'Email'.
+ *
+ * @return void
+ */
 function render_email_share_link( $url, $subject = '', $link_text = 'Email' ) {
   if ( empty( $url ) ) {
     return;
   }
 
-  $mailto_scheme = 'mailto:?subject=' . urlencode( $subject ) . '&body=' . urlencode( $url );
+  $mailto_scheme = 'mailto:?subject=' . rawurlencode( $subject ) . '&body=' . rawurlencode( $url );
 
   echo '<a class="ui-action-link ui-action-link--small share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
 }
 
+/**
+ * Renders a Reddit share link.
+ *
+ * @param string $url The URL to be shared.
+ * @param string|null $title The title of the Reddit post. Default is null.
+ * @param string $link_text The text to be displayed for the link. Default is 'Post to Reddit'.
+ *
+ * @return void
+ */
 function render_reddit_share_link( $url, $title = null, $link_text = 'Post to Reddit' ) {
   if ( empty( $url ) ) {
     return;
@@ -477,10 +648,10 @@ function render_reddit_share_link( $url, $title = null, $link_text = 'Post to Re
 
   $reddit_url = 'http://www.reddit.com/submit?';
 
-  $reddit_url .= '&url=' . urlencode( $url );
+  $reddit_url .= '&url=' . rawurlencode( $url );
 
   if ( $title ) {
-    $reddit_url .= '&title=' . urlencode( $title );
+    $reddit_url .= '&title=' . rawurlencode( $title );
   }
 
   echo '<a class="ui-action-link ui-action-link--small share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';

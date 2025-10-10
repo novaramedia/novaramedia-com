@@ -50,7 +50,7 @@ get_header();
   </section>
 </div>
 <div class="background-yellow">
-  <section class="container pt-4 pb-4">
+  <section class="container pt-5 pb-4">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <h2 class="font-size-12 font-weight-bold">Missed the show? Catch up here:</h2>
@@ -67,8 +67,8 @@ get_header();
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
             <h6 class="font-size-10 font-weight-semibold mt-1"><?php the_time('j F Y'); ?></h6>
-            <h6 class="text-wrap-pretty font-size-11 font-size-S-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
-          <a href="<?php the_permalink(); ?>">
+            <h6 class="text-wrap-pretty font-size-11 font-size-s-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
+          </a>
         </div>
         <?php
           $i++;
@@ -78,7 +78,7 @@ get_header();
     </div>
   </section>
 </div>
-<?php get_template_part('partials/support-section'); ?>
+<?php get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mt-5 mb-5' ) ); ?>
 <?php
   } // end if first page
 ?>
