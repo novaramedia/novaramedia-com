@@ -136,6 +136,52 @@ function nm_register_shortcodes() {
 }
 add_action( 'init', 'nm_register_shortcodes' );
 
+/**
+ * Add security headers for enhanced protection
+ */
+function nm_add_security_headers() {
+  // Only add headers on the frontend
+  if ( ! is_admin() ) {
+    // Prevent clickjacking
+    header( 'X-Frame-Options: SAMEORIGIN' );
+    
+    // Prevent MIME type sniffing
+    header( 'X-Content-Type-Options: nosniff' );
+    
+    // Enable XSS filtering
+    header( 'X-XSS-Protection: 1; mode=block' );
+    
+    // Referrer policy for privacy
+    header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+  }
+}
+add_action( 'send_headers', 'nm_add_security_headers' );
+
+/**
+ * Remove WordPress version from various locations for security
+ */
+function nm_remove_version_info() {
+  return '';
+}
+add_filter( 'the_generator', 'nm_remove_version_info' );
+
+/**
+ * Disable XML-RPC for security (unless specifically needed)
+ */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
+ * Remove WordPress version from CSS and JS files
+ */
+function nm_remove_version_scripts_styles( $src ) {
+  if ( strpos( $src, 'ver=' . get_bloginfo( 'version' ) ) ) {
+    $src = remove_query_arg( 'ver', $src );
+  }
+  return $src;
+}
+add_filter( 'style_loader_src', 'nm_remove_version_scripts_styles' );
+add_filter( 'script_loader_src', 'nm_remove_version_scripts_styles' );
+
 // Add custom functions
 
 get_template_part( 'lib/renderers' );

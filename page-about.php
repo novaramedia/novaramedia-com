@@ -2,13 +2,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 get_header();
 ?>
 <main id="main-content">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -29,18 +28,14 @@ if( have_posts() ) {
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-xxl-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_title(); ?></h4>
+ the_title(); ?></h4>
       </div>
     </div>
 
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10 page-copy">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_content(); ?>
+ the_content(); ?>
       </div>
     </div>
 
@@ -52,27 +47,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="grid-row margin-bottom-small mobile-margin-bottom-none">
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($team_1); ?>
+ render_about_group_field($team_1); ?>
       </div>
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($team_2); ?>
+ render_about_group_field($team_2); ?>
       </div>
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($team_3); ?>
+ render_about_group_field($team_3); ?>
       </div>
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($team_4); ?>
+ render_about_group_field($team_4); ?>
       </div>
     </div>
 
@@ -84,21 +71,15 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="grid-row margin-bottom-small mobile-margin-bottom-none">
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($associates_1); ?>
+ render_about_group_field($associates_1); ?>
       </div>
       <div class="grid-item is-m-12 is-xxl-6">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_about_group_field($associates_2); ?>
+ render_about_group_field($associates_2); ?>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     if ($contact) {
 ?>
     <div class="grid-row margin-bottom-small">
@@ -110,9 +91,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10">
         <ul>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
         foreach($contact as $contact_entry) {
          $link = get_permalink($contact_entry['link']);
 
@@ -121,31 +100,21 @@ if ( ! defined( 'ABSPATH' ) ) {
          }
 ?>
           <li><a href="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $link; ?>"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $contact_entry['title']; ?></a></li>
+ echo $link; ?>"><?php
+ echo $contact_entry['title']; ?></a></li>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
         }
 ?>
         </ul>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     }
 ?>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     if (!empty($meta['_cmb_about_funding'])) {
 ?>
     <div class="grid-row margin-bottom-small">
@@ -157,47 +126,33 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10 page-copy">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo apply_filters('the_content', $meta['_cmb_about_funding'][0]); ?>
+ echo apply_filters('the_content', $meta['_cmb_about_funding'][0]); ?>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
       if ($funding) {
 ?>
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
         foreach($funding as $fund) {
 ?>
         <div class="margin-bottom-tiny">
           <p><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $fund['text']; ?></p>
+ echo $fund['text']; ?></p>
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo wp_get_attachment_image($fund['image_id'], 'col4'); ?>
+ echo wp_get_attachment_image($fund['image_id'], 'col4'); ?>
         </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
         }
 ?>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
       }
     }
 
@@ -212,15 +167,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10 page-copy">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo apply_filters('the_content', $meta['_cmb_about_regulation'][0]); ?>
+ echo apply_filters('the_content', $meta['_cmb_about_regulation'][0]); ?>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     }
 
     if (!empty($meta['_cmb_about_legal'])) {
@@ -234,29 +185,21 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="grid-row margin-bottom-small">
       <div class="grid-item is-s-24 is-m-18 is-l-16 is-xxl-10 page-copy">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo apply_filters('the_content', $meta['_cmb_about_legal'][0]); ?>
+ echo apply_filters('the_content', $meta['_cmb_about_legal'][0]); ?>
       </div>
     </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     }
 ?>
   </article>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
   }
   wp_reset_postdata();
 } ?>
 </main>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 get_footer();
 ?>

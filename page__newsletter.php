@@ -2,14 +2,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 /* Template Name: Newsletter */
 get_header();
 ?>
 <main id="main-content">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -34,14 +33,10 @@ if( have_posts() ) {
           <div class="grid-item is-xxl-24">
             <h4 class="font-size-9 text-uppercase font-weight-bold">Newsletter</h4>
             <h1 class="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
               echo $title_size ? $settings_title_classes[$title_size] : $settings_title_classes['medium'];
             ?> font-weight-bold mt-4"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_title(); ?></h1>
+ the_title(); ?></h1>
           </div>
         </div>
       </div>
@@ -50,21 +45,15 @@ if ( ! defined( 'ABSPATH' ) ) {
       <div class="grid-row mt-4 mb-4">
         <div class="grid-item is-m-24 is-xxl-12">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             if ($youtube_id) {
           ?>
           <div class="u-video-embed-container mb-4">
             <iframe class="youtube-player" type="text/html" src="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo generate_youtube_embed_url($youtube_id, true); ?>" allow="autoplay" allowfullscreen></iframe>
+ echo generate_youtube_embed_url($youtube_id, true); ?>" allow="autoplay" allowfullscreen></iframe>
           </div>
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             } else {
               the_post_thumbnail('col8');
             }
@@ -73,14 +62,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="grid-item offset-s-0 is-s-24 offset-m-1 is-m-20 is-xxl-12">
           <div class="font-size-12 font-weight-semibold mb-4">
             <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_content(); ?>
+ the_content(); ?>
           </div>
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             //======================================================================
             // SIGNUP FORM
             //======================================================================
@@ -94,13 +79,9 @@ if ( ! defined( 'ABSPATH' ) ) {
             }
           ?>
           <form class="email-signup__form newsletter-page-email-signup__form" action="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $netlify; ?>" method="post" target="_blank">
+ echo $netlify; ?>" method="post" target="_blank">
             <input type="hidden" name="newsletter" value="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $mailchimp_key; ?>" />
+ echo $mailchimp_key; ?>" />
 
             <div class="newsletter-page-email-signup__inputs">
               <div class="form-group mb-2">
@@ -113,9 +94,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               </div>
               <div class="newsletter-page-email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
                 <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+ echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
                 <input name="gdpr" class="newsletter-page-email-signup__email-gdpr-input ui-checkbox ui-checkbox--border-gray ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
               </div>
 
@@ -157,9 +136,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
           </form>
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             } // end conditional for set Mailchimp newsletter key
           ?>
         </div>
@@ -167,9 +144,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
   </article>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
   }
 }
 
@@ -188,8 +163,6 @@ if ( $support_override ) {
 ?>
 </main>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 get_footer();
 ?>

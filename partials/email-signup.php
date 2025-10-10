@@ -21,9 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
   $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
 
-  if ($_SERVER['HTTP_HOST'] === 'localhost:8888' || $_SERVER['HTTP_HOST'] === 'novaramediacom.local') { // for local dev
+  $http_host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+  
+  if ( $http_host === 'localhost:8888' || $http_host === 'novaramediacom.local' ) { // for local dev
     $netlify = 'http://localhost:8888/.netlify/functions/mailchimp-signup';
-  } else if ($_SERVER['HTTP_HOST'] === 'stg-novaramediacom-staging.kinsta.cloud') { // for staging, will always fail. Could spin up the netlify function on staging to test
+  } elseif ( $http_host === 'stg-novaramediacom-staging.kinsta.cloud' ) { // for staging, will always fail. Could spin up the netlify function on staging to test
     $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
   }
 

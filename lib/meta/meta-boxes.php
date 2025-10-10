@@ -24,9 +24,9 @@ function be_metabox_show_on_slug( $display, $meta_box ) {
 
   // If we're showing it based on ID, get the current ID
   if ( isset( $_GET['post'] ) ) {
-    $post_id = $_GET['post'];
+    $post_id = absint( $_GET['post'] );
   } elseif ( isset( $_POST['post_ID'] ) ) {
-    $post_id = $_POST['post_ID'];
+    $post_id = absint( $_POST['post_ID'] );
   }
 
   if ( ! $post_id ) {

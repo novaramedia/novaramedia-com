@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 get_header();
 
 $credits_1 = array(
@@ -33,41 +34,29 @@ function nm_render_foreign_agent_credit( $credit ) {
   ?>
 <div class="podcast-credit mb-3">
   <div class="font-size-8"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $credit[0]; ?></div>
+ echo $credit[0]; ?></div>
   <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $credit[1]; ?>
+ echo $credit[1]; ?>
 </div>
   <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 }
 ?>
 <main id="main-content" class="category-archive foreign-agent-archive">
   <style type="text/css">
     .avif .foreign-agent-archive__container {
       background-image: url(<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.avif'; ?>);
+ echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.avif'; ?>);
     }
 
     .webp .foreign-agent-archive__container {
       background-image: url(<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.webp'; ?>);
+ echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.webp'; ?>);
     }
 
     .fallback .foreign-agent-archive__container {
       background-image: url(<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.jpg'; ?>);
+ echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/foreign-agent/foreign-agent-aerial-background.jpg'; ?>);
     }
 
     .foreign-agent-archive__title {
@@ -144,9 +133,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 mb-4">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
+ render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
@@ -188,51 +175,35 @@ if ( ! defined( 'ABSPATH' ) ) {
   <section id="posts" class="container">
     <div class="mb-6">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
       <article class="foreign-agent-archive__episode flex-grid-row pt-6 pt-s-4" id="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $post->post_name; ?>">
+ echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $meta['_cmb_standfirst'][0]; ?></h4>
+ echo $meta['_cmb_standfirst'][0]; ?></h4>
           <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_title(); ?></h3>
+ the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
+ the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
+ echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_content(); ?>
+ the_content(); ?>
         </div>
       </article>
     <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
   }
 }
 ?>
@@ -266,9 +237,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-3">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             for ( $i = 0, $size = count( $credits_1 ); $i < $size; $i++ ) {
                 nm_render_foreign_agent_credit( $credits_1[ $i ] );
             }
@@ -278,9 +247,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-4">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
             <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             for ( $i = 0, $size = count( $credits_2 ); $i < $size; $i++ ) {
                 nm_render_foreign_agent_credit( $credits_2[ $i ] );
             }
@@ -290,9 +257,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="flex-grid-item flex-offset-s-2 flex-item-s-7 flex-item-l-4 flex-item-xxl-3 mt-s-4">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             for ( $i = 0, $size = count( $credits_thanks ); $i < $size; $i++ ) {
                 nm_render_foreign_agent_credit( $credits_thanks[ $i ] );
             }
@@ -304,9 +269,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   </div>
 </main>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 get_template_part(
     'partials/support-section',
     null,

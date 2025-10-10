@@ -2,13 +2,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 get_header();
 ?>
 <main id="main-content" class="category-archive novaralive-archive">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
   $is_first_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
 
   $video = get_category_by_slug('video');
@@ -33,9 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
       <div class="grid-item offset-s-0 is-s-12 offset-l-0 is-l-6 offset-xl-6 is-xl-6 offset-xxl-10 is-xxl-4">
         <a class="ui-button ui-button--white ui-button--small ui-button--fill-width ui-button--auto-height" href="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
+ echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to<br/>the podcast</a>
       </div>
       <div class="grid-item offset-s-0 is-s-12 is-l-6 is-xl-6 is-xxl-4">
         <a class="ui-button ui-button--red ui-button--small ui-button--fill-width ui-button--auto-height" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow">Subscribe to our<br/>YouTube channel</a>
@@ -45,24 +42,18 @@ if ( ! defined( 'ABSPATH' ) ) {
       <div class="grid-item is-xxl-24">
         <div class="u-video-embed-container">
           <iframe class="youtube-player lazyload" data-src="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo generate_youtube_embed_url($embed_id, true); ?>" frameborder="0" allowfullscreen></iframe>
+ echo generate_youtube_embed_url($embed_id, true); ?>" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
     <div class="grid-row mt-4">
       <div class="grid-item is-s-24 is-m-18 is-l-12 is-xxl-10 pt-4 pt-s-0 font-size-11">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo category_description(); ?>
+ echo category_description(); ?>
       </div>
       <div class="grid-item offset-s-2 is-s-20 offset-m-6 is-m-14 offset-l-0 is-l-12 offset-xxl-4 is-xxl-10">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo wp_get_attachment_image($team_image_id, 'gallery', false, array('class' => 'novara-live-archive__about-team-image u-display-block')); ?>
+ echo wp_get_attachment_image($team_image_id, 'gallery', false, array('class' => 'novara-live-archive__about-team-image u-display-block')); ?>
       </div>
     </div>
   </section>
@@ -76,9 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
     <div class="grid-row">
       <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
         $i = 0;
         if (have_posts()) {
           while(have_posts() && $i < 4) {
@@ -86,27 +75,17 @@ if ( ! defined( 'ABSPATH' ) ) {
         ?>
         <div class="grid-item is-s-12 is-xxl-6 mb-4">
           <a href="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_permalink(); ?>">
+ the_permalink(); ?>">
             <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_post_thumbnail('col6-16to9'); ?>
+ the_post_thumbnail('col6-16to9'); ?>
             <h6 class="font-size-10 font-weight-semibold mt-1"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_time('j F Y'); ?></h6>
+ the_time('j F Y'); ?></h6>
             <h6 class="js-fix-widows font-size-11 font-size-S-10 font-weight-semibold mt-1"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} the_title(); ?></h6>
+ the_title(); ?></h6>
           </a>
         </div>
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
           $i++;
           }
         }
@@ -115,29 +94,21 @@ if ( ! defined( 'ABSPATH' ) ) {
   </section>
 </div>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mt-5 mb-5' ) ); ?>
+ get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mt-5 mb-5' ) ); ?>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
   } // end if first page
 ?>
   <section id="posts" class="container mt-6 mt-s-5">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
+ echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>
       </div>
     </div>
     <div class="grid-row mb-4">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -150,28 +121,20 @@ if( have_posts() ) {
 } else {
 ?>
     <article class="u-alert"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} _e('Sorry, no posts matched your criteria :{'); ?></article>
+ _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 } ?>
     </div>
     <div class="grid-row mb-5">
       <div class="grid-item is-s-24">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} get_template_part('partials/pagination'); ?>
+ get_template_part('partials/pagination'); ?>
       </div>
     </div>
   </section>
 </main>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 get_footer();
 ?>

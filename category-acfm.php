@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 get_header();
 
 $category = get_category(get_query_var('cat'));
@@ -41,35 +42,23 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       <div class="grid-row">
         <div class="grid-item is-s-16 is-xxl-8 mt-4 font-size-12 font-weight-bold text-paragraph-breaks">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo category_description(); ?>
+ echo category_description(); ?>
         </div>
         <div class="category-archive__acfm__logo grid-item is-s-8 is-xxl-8 text-align-center">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo nm_get_file('/dist/img/products/acfm/acfm-logo.svg'); ?>
+ echo nm_get_file('/dist/img/products/acfm/acfm-logo.svg'); ?>
         </div>
         <div class="grid-item is-s-24 is-xxl-8 mt-4">
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
               $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
           ?>
           <a class="ui-button ui-button--white ui-button--small mb-3" href="<?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} echo $podcast_copy; ?></a>
+ echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php
+ echo $podcast_copy; ?></a>
           <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
             }
           ?>
           <a class="ui-button ui-button--white ui-button--small" href="https://novara.media/ACFMnewsletter" target="_blank" rel="nofollow">Sign up to the mailing list</a>
@@ -81,9 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="container">
     <div class="grid-row mb-4">
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -96,28 +83,20 @@ if( have_posts() ) {
 } else {
 ?>
     <article class="grid-item is-s-24"><?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} _e('Sorry, nothing matched your criteria :/'); ?></article>
+ _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 } ?>
     </div>
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-} get_template_part('partials/pagination'); ?>
+ get_template_part('partials/pagination'); ?>
       </div>
     </div>
   </div>
   <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
     $newsletter = get_posts(
       array(
         'post_type'              => 'page',
@@ -141,8 +120,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   ?>
 </main>
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+
 get_footer();
 ?>

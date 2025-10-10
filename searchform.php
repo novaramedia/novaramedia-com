@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="pt-4 pb-5 font-size-11">
   <div class="container">
-    <form role="search" method="get" id="search-form" class="site-header-search__form" action="<?php echo site_url(); ?>" autocomplete="off">
+    <form role="search" method="get" id="search-form" class="site-header-search__form" action="<?php echo esc_url( site_url() ); ?>" autocomplete="off">
       <div class="grid-row">
         <div class="grid-item is-xxl-24 u-visuallyhidden">
           <label for="search-input">Search this site</label>
