@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 
 $category = get_category( get_query_var( 'cat' ) );
@@ -38,14 +41,20 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     }
 
     .avif .category-archive__if-i-speak__image, .webp .category-archive__if-i-speak__image {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.webp'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.webp'; ?>);
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
     }
 
     .fallback .category-archive__if-i-speak__image {
-      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.png'; ?>);
     }
 
     @media screen and (max-width: 1408px) {
@@ -105,18 +114,33 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
           <h1 class="category-archive__if-i-speak__title mb-5 mb-s-0">If I Speak...</h1>
         </div>
         <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold mb-m-3">
-          <?php echo category_description(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo category_description(); ?>
         </div>
         <div class="grid-item is-s-12 is-xxl-10">
           <div class="category-archive__if-i-speak__image"></div>
         </div>
         <div class="grid-item is-s-12 is-xxl-4 mt-4 text-align-right">
           <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) {
               $podcast_url = get_term_meta( $category->term_id, '_nm_podcast_url', true );
             ?>
-          <a class="ui-button ui-button--red ui-button--auto-height mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <a class="ui-button ui-button--red ui-button--auto-height mb-2" href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $podcast_copy; ?></a>
             <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
           ?>
         </div>
@@ -130,6 +154,9 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
   <div class="container">
     <div class="grid-row mb-4">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
@@ -145,18 +172,30 @@ if ( have_posts() ) {
   }
 } else {
   ?>
-    <article class="grid-item is-s-24"><?php esc_html_e( 'Sorry, nothing matched your criteria :/' ); ?></article>
+    <article class="grid-item is-s-24"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} esc_html_e( 'Sorry, nothing matched your criteria :/' ); ?></article>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 ?>
     </div>
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
-        <?php get_template_part( 'partials/pagination' ); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} get_template_part( 'partials/pagination' ); ?>
       </div>
     </div>
   </div>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

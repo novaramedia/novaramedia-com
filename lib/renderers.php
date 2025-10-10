@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 /**
  * Render a simplified UI tag link.
  *
@@ -20,10 +23,22 @@ function render_ui_tag( $label, $url, $variants = array() ) {
     );
 
   ?>
-  <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-    <span class="ui-tag"><?php echo esc_html( $label ); ?></span>
+  <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_url( $url ); ?>" class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( implode( ' ', $classes ) ); ?>">
+    <span class="ui-tag"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_html( $label ); ?></span>
   </a>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Renders the schedule buttons for the support form, one off or regular.
@@ -35,7 +50,10 @@ function render_ui_tag( $label, $url, $variants = array() ) {
 function render_support_form_schedule_buttons( $schedule_classes = '' ) {
   ?>
     <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
-    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
+    <div class="grid-row mb-3 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $schedule_classes ); ?>" role="radiogroup" aria-labelledby="donation-frequency-label">
       <div class="is-xxl-12">
         <button class="support-form__button ui-button ui-button--fill-width support-form__schedule-option support-form__schedule-option-left font-weight-bold grid-item--tight" data-action="set-type" data-value="oneoff" role="radio" tabindex="-1">One-off</button>
       </div>
@@ -44,6 +62,9 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
       </div>
     </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Renders the amount and submit buttons for the support form.
@@ -57,10 +78,16 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  */
 function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
-  <div class="<?php echo esc_attr( $button_classes ); ?>">
+  <div class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $button_classes ); ?>">
     <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
     <div class="grid-row grid--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
         <div class="grid-item grid-item--tight is-xxl-3 is-s-8 mb-s-2">
@@ -70,23 +97,41 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
             aria-checked="false"
             tabindex="-1"
             data-action="set-value"
-            data-value="<?php echo esc_attr( $values->{"regular_$tier"} ); ?>"
-            data-name="<?php echo esc_attr( $tier ); ?>"
+            data-value="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $values->{"regular_$tier"} ); ?>"
+            data-name="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $tier ); ?>"
           >
-            £<?php echo esc_html( $values->{"regular_$tier"} ); ?>
+            £<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_html( $values->{"regular_$tier"} ); ?>
           </button>
         </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
       ?>
       <div class="grid-item grid-item--tight is-xxl-15 is-s-24">
-        <label for="<?php echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
+        <label for="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $instance ); ?>__custom-input" class="u-visuallyhidden">
           Custom donation amount in pounds
         </label>
         <div class="support-form__custom-input-container u-position-relative">
           <span class="support-form__custom-input-prefix font-weight-bold font-size-11">£</span>
           <input
-            id="<?php echo esc_attr( $instance ); ?>__custom-input"
+            id="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $instance ); ?>__custom-input"
             class="support-form__custom-input ui-input ui-input--red-border-white"
             type="number"
             min="1"
@@ -106,6 +151,9 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
     </div>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Render the support section heading and text based on the donation mode.
@@ -131,17 +179,38 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   }
 
   ?>
-  <div class="<?php echo esc_attr( $text_classes ); ?>" aria-live="polite">
+  <div class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $text_classes ); ?>" aria-live="polite">
     <h4 class="support-form__dynamic-heading font-size-13 font-weight-bold mb-3">
-      <?php echo esc_html( $heading ); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_html( $heading ); ?>
     </h4>
-    <?php if ( $text ) { ?>
-    <a href="<?php echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text u-display-block mb-4">
-      <?php echo esc_html( $text ); ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ( $text ) { ?>
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_url( home_url( 'support/' ) ); ?>" class="support-form__dynamic-text u-display-block mb-4">
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_html( $text ); ?>
     </a>
-    <?php } ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Render payment icons for the support section.
@@ -157,16 +226,34 @@ function render_payment_icons( $payment_classes = '' ) {
     'GooglePay'  => 'GooglePay icon',
   );
   ?>
-  <div class="<?php echo esc_attr( $payment_classes ); ?>">
-    <?php foreach ( $payment_methods as $filename => $alt_text ) { ?>
+  <div class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $payment_classes ); ?>">
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} foreach ( $payment_methods as $filename => $alt_text ) { ?>
       <img
         class="support-form__payment-type ui-rounded-box-large mr-2"
-        src="<?php echo esc_url( $img_base . $filename . '.svg' ); ?>"
-        alt="<?php echo esc_attr( $alt_text ); ?>"
+        src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_url( $img_base . $filename . '.svg' ); ?>"
+        alt="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $alt_text ); ?>"
       />
-    <?php } ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Render the support donation form with the heading, text, and form elements.
@@ -199,28 +286,64 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
 
   $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
-  <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box-large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
-      <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-      <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
+  <div class="support-section <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $support_section_classes ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box-large" action="https://donate.novaramedia.com/regular" id="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $instance ); ?>">
+      <input type="hidden" name="amount" class="support-form__value-input" value="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_attr( $active_values->regular_low ); ?>" />
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
-        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
         <div class="support-form__desktop-container grid-row">
           <div class="grid-item is-xxl-12 support-form__left-column-desktop">
-            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
-            <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
           <div class="grid-item is-xxl-12 support-form__right-column-desktop">
-            <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
-        <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
-        <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 /**
  * Render the see also block
@@ -240,6 +363,9 @@ function render_see_also( $query, $number_of_posts = 1 ) {
     <h4 class="font-size-8 font-weight-bold text-uppercase mb-2 mb-s-1">See Also</h4>
     <div class="related-posts">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       $i = 0;
       while ( $query->have_posts() ) {
         if ( $i >= $number_of_posts ) {
@@ -250,15 +376,27 @@ function render_see_also( $query, $number_of_posts = 1 ) {
         ?>
         <div class="mb-2
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         if ( $i !== 0 ) {
           echo 'only-desktop';
         }
         ?>
         ">
-          <a href="<?php the_permalink(); ?>" class="ui-hover">
-            <h5 class="font-size-10 font-weight-bold"><?php the_title(); ?></h5>
+          <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_permalink(); ?>" class="ui-hover">
+            <h5 class="font-size-10 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?></h5>
             <h6 class="font-size-8 font-weight-bold text-uppercase mt-1">
               <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
               if ( nm_is_article( $post_id ) ) {
                 render_bylines( $post_id );
               } else {
@@ -269,11 +407,17 @@ function render_see_also( $query, $number_of_posts = 1 ) {
           </a>
         </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         ++$i;
       }
       ?>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 }
 /**
@@ -551,6 +695,9 @@ function render_resources_row( $resources ) {
     <div class="grid-item is-s-24">
       <ul class="inline-action-list">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         foreach ( $resources as $resource ) {
           if ( ! empty( $resource['title'] ) && ! empty( $resource['link'] ) ) {
             echo '<li><a target="_black" href="' . $resource['link'] . '">' . $resource['title'] . '</a><li>';
@@ -561,6 +708,9 @@ function render_resources_row( $resources ) {
     </div>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 
 /**
@@ -670,15 +820,30 @@ function render_about_group_field( $data ) {
   foreach ( $data as $person ) {
     ?>
     <div class="margin-bottom-small">
-      <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
+      <h6 class="font-size-8"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $person['title']; ?></h6>
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       foreach ( $person['name'] as $name ) {
         ?>
-        <div class="about-page__person"><?php echo $name; ?></div>
+        <div class="about-page__person"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $name; ?></div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
       ?>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 }

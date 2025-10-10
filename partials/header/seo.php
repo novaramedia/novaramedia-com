@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 $twitter = IGV_get_option('_igv_socialmedia_twitter');
 
 if ($twitter) {
@@ -12,10 +15,19 @@ if ($fb_app_id) {
 }
 
 ?>
-  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
-  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+  <meta property="og:title" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} wp_title('|', true, 'right'); bloginfo('name'); ?>" />
+  <meta property="og:site_name" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} bloginfo('name'); ?>" />
   <meta name="twitter:card" value="summary_large_image">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 global $post;
 
 $og_image_url = get_stylesheet_directory_uri() . '/dist/img/favicon-32x32.png'; // fallback to favicon
@@ -53,16 +65,28 @@ if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single
   $og_image_url = wp_get_attachment_image_src($thumb_id, 'opengraph')[0];
 }
 ?>
-  <meta property="og:image" content="<?php echo $og_image_url; ?>" />
+  <meta property="og:image" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $og_image_url; ?>" />
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 $og_description = get_bloginfo('description');
 
 if (is_home()) {
 ?>
-  <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
+  <meta property="og:url" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} bloginfo('url'); ?>"/>
   <meta property="og:type" content="website" />
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } else if (is_single()) {
   global $post;
 
@@ -93,19 +117,37 @@ if (is_home()) {
   // clean special cars
   $og_description = htmlspecialchars($excerpt);
 ?>
-  <meta property="og:url" content="<?php the_permalink(); ?>"/>
+  <meta property="og:url" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_permalink(); ?>"/>
   <meta property="og:type" content="article" />
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } else if (is_archive() && get_queried_object_id()) {
 ?>
-  <meta property="og:url" content="<?php echo get_term_link(get_queried_object_id()); ?>"/>
+  <meta property="og:url" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_term_link(get_queried_object_id()); ?>"/>
   <meta property="og:type" content="website" />
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } else {
 ?>
-  <meta property="og:url" content="<?php the_permalink() ?>"/>
+  <meta property="og:url" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_permalink() ?>"/>
   <meta property="og:type" content="website" />
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 
 if (is_archive()) {
@@ -127,5 +169,11 @@ if (is_page()) {
   }
 }
 ?>
-  <meta name="description" content="<?php echo $og_description; ?>">
-  <meta property="og:description" content="<?php echo $og_description; ?>" />
+  <meta name="description" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $og_description; ?>">
+  <meta property="og:description" content="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $og_description; ?>" />

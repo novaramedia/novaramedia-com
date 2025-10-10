@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (empty($args['grid-item-classes'])) { // if no classes set for grid item don't render
     return;
   }
@@ -15,21 +18,51 @@
   $description = !empty($meta['_cmb_short_desc'][0]) ? $meta['_cmb_short_desc'][0] : false;
   $render_description = isset($args['render-description']) && empty($args['render-description']) ? false : true; // $args array turns false on an index to an empty value and true to 1-so check if set but empty gives us the false value
 ?>
-<article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
-  <a href="<?php the_permalink() ?>">
-    <?php the_post_thumbnail($image_size, array('class' => 'index-post-thumbnail')); ?>
+<article <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} post_class($args['grid-item-classes']); ?> id="post-<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_ID(); ?>">
+  <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_permalink() ?>">
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail($image_size, array('class' => 'index-post-thumbnail')); ?>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     switch ($text_size) {
       case 'regular':
 ?>
-    <h5 class="index-post-title font-size-9 font-weight-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title font-size-9 font-weight-bold margin-top-tiny js-fix-widows"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_title($post->ID); ?></h5>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if ($is_article) {
     ?>
-    <h6 class="font-size-8 font-weight-bold text-uppercase margin-top-micro"><?php render_bylines($post->ID, false); ?></h6>
-    <?php } ?>
+    <h6 class="font-size-8 font-weight-bold text-uppercase margin-top-micro"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_bylines($post->ID, false); ?></h6>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
     <div class="index-post-description font-size-9 margin-top-tiny">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         if ($render_description) {
           if ($description) {
             echo $description;
@@ -40,17 +73,35 @@
       ?>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         break;
       case 'large':
 ?>
-    <h3 class="font-size-10 font-weight-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h3>
+    <h3 class="font-size-10 font-weight-bold margin-top-tiny js-fix-widows"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_title($post->ID); ?></h3>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if ($is_article) {
     ?>
-    <h3 class="font-size-10 font-weight-bold font-weight-bold">by <?php render_bylines($post->ID, false); ?></h3>
-    <?php } ?>
+    <h3 class="font-size-10 font-weight-bold font-weight-bold">by <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_bylines($post->ID, false); ?></h3>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
     <div class="index-post-description margin-top-tiny">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         if ($render_description) {
           if ($description) {
             echo $description;
@@ -61,6 +112,9 @@
       ?>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         break;
     }
 ?>

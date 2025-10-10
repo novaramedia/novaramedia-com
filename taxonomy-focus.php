@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 
 $term = $wp_query->get_queried_object();
@@ -18,30 +21,51 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
       <div class="grid-item is-s-24 is-l-12 is-xxl-8">
         <h4 class="font-size-10 font-weight-bold text-uppercase mb-2">Focus</h4>
         <div class="only-desktop">
-          <h1 class="font-size-15 font-weight-bold mb-2"><?php single_cat_title(); ?></h1>
+          <h1 class="font-size-15 font-weight-bold mb-2"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} single_cat_title(); ?></h1>
           <div class="font-size-12 font-weight-bold">
-            <?php echo category_description(); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo category_description(); ?>
           </div>
         </div>
       </div>
       <div class="grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-4 is-xxl-12">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($splash_image_id) {
             echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
 
             if ($splash_image_caption) {
           ?>
           <div class="font-size-8 font-weight-bold">
-            <?php echo $splash_image_caption; ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $splash_image_caption; ?>
           </div>
           <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
             }
           }
         ?>
         <div class="only-mobile">
-          <h1 class="font-size-13 font-weight-bold mt-1 mb-1"><?php single_cat_title(); ?></h1>
+          <h1 class="font-size-13 font-weight-bold mt-1 mb-1"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} single_cat_title(); ?></h1>
           <div class="font-size-12 font-weight-bold">
-            <?php echo category_description(); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo category_description(); ?>
           </div>
         </div>
       </div>
@@ -49,6 +73,9 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 
     <div class="grid-row mb-4">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   $i = 0;
   $post_grid_classes = 'grid-item is-s-24 is-xl-12 is-xxl-8 mb-4';
@@ -56,14 +83,32 @@ if( have_posts() ) {
     the_post();
 
     if ($i === 4 && isset($quotes[0])) { ?>
-    <div class="<?php echo $post_grid_classes; ?>">
-      <?php get_template_part('partials/components/quote', null, $quotes[0]); ?>
+    <div class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $post_grid_classes; ?>">
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} get_template_part('partials/components/quote', null, $quotes[0]); ?>
     </div>
-<?php } else if ($i === 11 && isset($quotes[1])) { ?>
-    <div class="<?php echo $post_grid_classes; ?>">
-      <?php get_template_part('partials/components/quote', null, $quotes[1]); ?>
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } else if ($i === 11 && isset($quotes[1])) { ?>
+    <div class="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $post_grid_classes; ?>">
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} get_template_part('partials/components/quote', null, $quotes[1]); ?>
     </div>
-<?php }
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} }
 
     $content_type = get_the_top_level_category(get_the_ID());
 
@@ -84,13 +129,22 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
+    <article class="grid-item is-s-24"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } ?>
     </div>
     <div class="grid-row mt-6 mb-4 font-size-8 font-weight-bold text-paragraph-breaks">
       <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);
           }
@@ -100,5 +154,8 @@ if( have_posts() ) {
   </section>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

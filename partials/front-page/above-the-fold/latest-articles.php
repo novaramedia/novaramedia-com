@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if ($args['latest_articles_posts_ids']) {
     $latest_articles_posts_ids = $args['latest_articles_posts_ids'];
   } else {
@@ -22,11 +25,20 @@
     <div class="layout-split-level font-size-8 font-weight-bold mb-1">
       <span class="ui-tag">Correction</span>
     </div>
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h4 class="post__title font-size-11 font-size-s-12 font-condensed"><?php echo get_the_title($post_id); ?></h4>
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+      <h4 class="post__title font-size-11 font-size-s-12 font-condensed"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_the_title($post_id); ?></h4>
     </a>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 
   if ($recent_articles->have_posts()) {

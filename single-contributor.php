@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 $is_full_archive = get_query_var('is_full_archive'); // get query var to see if in archive mode
 
 /**
@@ -16,9 +19,15 @@ function render_posts_section($query, $title, $is_full_archive) {
 ?>
   <div class="grid-row mb-4">
     <div class="grid-item is-xxl-24 mb-2">
-      <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $title; ?></h4>
+      <h4 class="font-size-9 text-uppercase font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $title; ?></h4>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       while( $query->have_posts() ) {
         $query->the_post();
 
@@ -41,10 +50,16 @@ function render_posts_section($query, $title, $is_full_archive) {
       <a href="?is_full_archive=true" class="ui-action-link">View full archive</a>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
 ?>
   </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 }
 
@@ -53,6 +68,9 @@ get_header();
 <main id="main-content">
   <div id="contributor" class="container mt-4 mb-4">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -66,28 +84,49 @@ if( have_posts() ) {
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24 is-xxl-8 mobile-margin-bottom-micro">
         <h1 class="font-size-12 font-weight-semibold">
-          <?php the_title(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?>
         </h1>
       </div>
       <div class="grid-item is-s-24 is-l-12 is-xxl-10">
-        <?php the_content(); ?>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if (!empty($link)) {
             echo '<div class="text-links-underlined mt-2"><a href="' . $link . '" target="_blank" ref="nofollow">' . $link . '</a></div>';
           }
         ?>
       </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if (has_post_thumbnail()) {
     ?>
       <div class="grid-item offset-l-0 is-l-4 offset-xxl-4 is-xxl-2 only-desktop">
-        <?php the_post_thumbnail('grid-item4-square'); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail('grid-item4-square'); ?>
       </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
     ?>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       $base_args = array(
         'post_type'    => 'post',
         'posts_per_page' => $is_full_archive ? -1 : 12,
@@ -129,11 +168,17 @@ if( have_posts() ) {
     ?>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 }
     get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
   ?>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

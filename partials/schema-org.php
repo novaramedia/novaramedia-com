@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if (is_single() && get_post_type() === 'job') {
   $meta = get_post_meta($post->ID);
 
@@ -128,4 +131,7 @@ if (is_single() && get_post_type() === 'job') {
   }
 }
 ?>
-<script type="application/ld+json"><?php echo json_encode($json_ld); ?></script>
+<script type="application/ld+json"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo json_encode($json_ld); ?></script>

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $settings = NM_get_option('all', 'nm_front_page_highlight_section_options');
 
   if (!isset($settings['nm_front_page_highlight_section_options_is_displayed']) || $settings['nm_front_page_highlight_section_options_is_displayed'] !== 'on') {
@@ -59,7 +62,13 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
-        <h3 class="font-size-13 layout-flex-no-shrink mr-4"><strong><?php echo $highlight_title; ?></strong> <?php echo $highlight_description; ?></h3>
+        <h3 class="font-size-13 layout-flex-no-shrink mr-4"><strong><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $highlight_title; ?></strong> <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $highlight_description; ?></h3>
       </div>
     </div>
   </div>
@@ -70,6 +79,9 @@
           <div class="grid-item is-s-24 is-xxl-16">
             <div class="ui-border-bottom pb-4 mb-4">
               <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                 if (is_numeric($latest_featured_posts_ids[0])) {
                   get_template_part('partials/front-page/above-the-fold/featured-post-primary', null, array(
                     'post_id' => $latest_featured_posts_ids[0],
@@ -82,6 +94,9 @@
             <div class="grid-row grid--nested">
               <div class="grid-item is-xxl-12">
                 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                   if (is_numeric($latest_featured_posts_ids[2])) {
                     get_template_part('partials/front-page/above-the-fold/latest-article--thumb-small', null, array(
                       'post_id' => $latest_featured_posts_ids[2],
@@ -91,6 +106,9 @@
               </div>
               <div class="grid-item is-xxl-12">
                 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                   if (is_numeric($latest_featured_posts_ids[3])) {
                     get_template_part('partials/front-page/above-the-fold/latest-article--thumb-small', null, array(
                       'post_id' => $latest_featured_posts_ids[3],
@@ -102,6 +120,9 @@
           </div>
           <div class=" grid-item is-s-24 is-xxl-8">
             <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
               if (is_numeric($latest_featured_posts_ids[1])) {
                 get_template_part('partials/front-page/above-the-fold/featured-post-secondary', null, array(
                   'post_id' => $latest_featured_posts_ids[1],
@@ -137,13 +158,25 @@
       </div>
       <div class="highlight-block__latest-posts">
           <div class="layout-split-level font-size-8 font-weight-bold mb-4">
-            <a href="<?php echo get_term_link($section_term); ?>">
-            <h5 class="font-weight-bold text-uppercase"><?php echo $section_term->name; ?></h5>
+            <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_term_link($section_term); ?>">
+            <h5 class="font-weight-bold text-uppercase"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $section_term->name; ?></h5>
             </a>
-            <a href="<?php echo get_term_link($section_term); ?>" class="ui-action-link ui-action-link--small">See All</a>
+            <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_term_link($section_term); ?>" class="ui-action-link ui-action-link--small">See All</a>
           </div>
         </a>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           $latest_others = new WP_Query($latest_others_args);
 
             if ($latest_others->have_posts()) {
@@ -153,26 +186,50 @@
                 $meta = get_post_meta($post->ID);
                 $timestamp = get_post_time('c');
           ?>
-            <div class="pb-3 mb-3 <?php if ($i < $latest_others_posts_to_show) {echo 'ui-border-bottom';} ?>">
+            <div class="pb-3 mb-3 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($i < $latest_others_posts_to_show) {echo 'ui-border-bottom';} ?>">
               <div class="mb-1">
-                <?php render_post_ui_tags($post->ID, true, true); ?>
+                <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_ui_tags($post->ID, true, true); ?>
               </div>
-              <a href="<?php the_permalink(); ?>" class="ui-hover">
+              <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_permalink(); ?>" class="ui-hover">
                 <h4 class="post__title font-size-9 font-weight-bold">
-                  <?php the_title(); ?>
+                  <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?>
                 </h4>
                 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                   if (nm_is_article($post->ID)) {
                 ?>
                 <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
-                  <?php render_bylines($post->ID, false); ?>
+                  <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_bylines($post->ID, false); ?>
                 </h5>
                 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                   }
                 ?>
               </a>
             </div>
           <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
                 $i++;
               }
             }

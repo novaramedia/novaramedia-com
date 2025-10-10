@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 
 $credits = array(
@@ -26,22 +29,40 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/committe
 function nm_render_committed_credit( $credit ) {
   ?>
 <div class="podcast-credit">
-  <div><?php echo $credit[0]; ?></div>
-  <?php echo $credit[1]; ?>
+  <div><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $credit[0]; ?></div>
+  <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $credit[1]; ?>
 </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 ?>
 <main id="main-content" class="catagory-archive">
   <style type="text/css">
     .webp .committed__backgrounded {
-      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.webp'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'catagory-committed-background.webp'; ?>);
     }
     .avif .committed__backgrounded {
-      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.avif'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'catagory-committed-background.avif'; ?>);
     }
     .fallback .committed__backgrounded {
-      background-image: url(<?php echo $base_image_path . 'catagory-committed-background.jpg'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'catagory-committed-background.jpg'; ?>);
     }
 
     .committed-archive__container {
@@ -52,7 +73,10 @@ function nm_render_committed_credit( $credit ) {
     }
 
     .committed-archive__logo,  .committed-credits__logo {
-      background-image: url(<?php echo $base_image_path . 'committed-logo-white.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-logo-white.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -67,7 +91,10 @@ function nm_render_committed_credit( $credit ) {
     }
 
     .committed-archive__subtitle {
-      background-image: url(<?php echo $base_image_path . 'committed-subtitle.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-subtitle.png'; ?>);
       height: 100px;
       background-size: contain;
       background-repeat: no-repeat;
@@ -86,13 +113,19 @@ function nm_render_committed_credit( $credit ) {
     }
 
     .committed-archive__box {
-      background-image: url(<?php echo $base_image_path . 'committed-listen-now-background.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-listen-now-background.png'; ?>);
       padding: 25px 30px;
       background-size: 100% 100%;
     }
 
     .committed-listen-now-title {
-      background-image: url(<?php echo $base_image_path . 'committed-listen-now-title.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-listen-now-title.png'; ?>);
       background-size: contain;
       background-repeat: no-repeat;
       height: 1.8rem;
@@ -113,7 +146,10 @@ function nm_render_committed_credit( $credit ) {
     }
 
     .committed-credits__background {
-      background-image: url(<?php echo $base_image_path . 'committed-credits-background__desktop.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-credits-background__desktop.png'; ?>);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       background-position: center;
@@ -161,7 +197,10 @@ function nm_render_committed_credit( $credit ) {
         font-size: 16px;
       }
       .committed-credits__background {
-      background-image: url(<?php echo $base_image_path . 'committed-credits-background-m.png'; ?>);
+      background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-credits-background-m.png'; ?>);
       }
     }
 
@@ -176,7 +215,10 @@ function nm_render_committed_credit( $credit ) {
           font-size: 18px;
       }
       .committed-credits__background {
-          background-image: url(<?php echo $base_image_path . 'committed-credits-background-s.png'; ?>);
+          background-image: url(<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-credits-background-s.png'; ?>);
       }
       .committed-credits__logo {
         height: 45px;
@@ -195,7 +237,10 @@ function nm_render_committed_credit( $credit ) {
   <section class="container">
     <div class="flex-grid-row mb-4">
       <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
-        <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
       </div>
       <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
@@ -235,27 +280,51 @@ function nm_render_committed_credit( $credit ) {
   <section id="posts" class="container">
     <div class="mb-6">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-      <article class="flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
+      <article class="flex-grid-row pt-6 pt-s-4" id="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $post->post_name; ?>">
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
-          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="font-size-13 font-weight-semibold mb-2"><?php the_title(); ?></h3>
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $meta['_cmb_standfirst'][0]; ?></h4>
+          <h3 class="font-size-13 font-weight-semibold mb-2"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?></h3>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
-          <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
-          <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
+          <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif mb-4 text-paragraph-breaks committed__serif-medium">
-          <?php the_content(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
         </div>
       </article>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 }
 ?>
@@ -264,7 +333,10 @@ if ( have_posts() ) {
   <div>
     <div class="committed-credits__background pb-6 pt-6 font-color-white">
       <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
-        <img src="<?php echo $base_image_path . 'committed-logo-white.png'; ?>" alt="committed credits logo" class="committed-credits__logo"/>
+        <img src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-logo-white.png'; ?>" alt="committed credits logo" class="committed-credits__logo"/>
       </div>
       <div class="flex-grid-row committed-credits__info-row font-size-10">
 
@@ -273,14 +345,26 @@ if ( have_posts() ) {
           <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
           <div class="committed-credits__reporters flex-grid-row">
             <div class="mr-2">
-              <a href="<?php echo home_url( 'contributor/rivkah-brown/' ); ?>" class="ui-hover">
-              <img src="<?php echo $base_image_path . 'committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
+              <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo home_url( 'contributor/rivkah-brown/' ); ?>" class="ui-hover">
+              <img src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
               </a>
               <p>Rivkah Brown</p>
             </div>
             <div class="">
-              <a href=<?php echo home_url( 'contributor/clare-hymer/' ); ?> class="ui-hover">
-              <img src="<?php echo $base_image_path . 'committed-clare.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
+              <a href=<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo home_url( 'contributor/clare-hymer/' ); ?> class="ui-hover">
+              <img src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $base_image_path . 'committed-clare.jpg'; ?>" alt="Portrait of Clare Hymer" class="committed-credits__logo"/>
               </a>
               <p>Clare Hymer</p>
             </div>
@@ -291,37 +375,67 @@ if ( have_posts() ) {
         <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
           <h6 class="font-weight-bold mb-1">Producers</h6>
           <div class="mb-2">
-            <?php echo wp_kses_post( $credits['producers'] ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['producers'] ); ?>
           </div>
           <h6 class="font-weight-bold mb-1">Music and sound editing</h6>
           <div class="mb-2">
-            <?php echo wp_kses_post( $credits['music_sound'] ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['music_sound'] ); ?>
           </div>
           <h6 class="font-weight-bold mb-1">Design and digital</h6>
           <div class="mb-2">
-            <?php echo wp_kses_post( $credits['design_digital'] ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['design_digital'] ); ?>
           </div>
           <h6 class="font-weight-bold mb-1">Social media production</h6>
           <div>
-            <?php echo wp_kses_post( $credits['social_media'] ); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['social_media'] ); ?>
           </div>
         </div>
 
         <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-5 mt-s-0 flex-item-s-8">
           <h6 class="font-weight-bold mb-1">Thanks to</h6>
-          <?php echo wp_kses_post( $credits['thanks'] ); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['thanks'] ); ?>
 
           <h6 class="font-weight-bold mt-5 mb-1">Image credits</h6>
-          <?php echo wp_kses_post( $credits['image_covers'] ); ?><br/>
-          <?php echo wp_kses_post( $credits['image_ep_three'] ); ?><br/>
-          <?php echo wp_kses_post( $credits['image_reporters'] ); ?><br/>
-          <?php echo wp_kses_post( $credits['image_misc'] ); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['image_covers'] ); ?><br/>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['image_ep_three'] ); ?><br/>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['image_reporters'] ); ?><br/>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_kses_post( $credits['image_misc'] ); ?>
         </div>
       </div>
     </div>
   </div>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_template_part(
     'partials/support-section',
     null,

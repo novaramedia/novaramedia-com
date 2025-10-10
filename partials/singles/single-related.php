@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $meta = get_post_meta($post->ID);
 
   if (!empty($meta['_cmb_related_posts'])) {
@@ -19,6 +22,9 @@
   </div>
   <div class="grid-row related-posts">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       while ($related_posts->have_posts()) {
         $related_posts->the_post();
           get_template_part('partials/post-layouts/archive-post', null, array(
@@ -31,6 +37,9 @@
   </div>
 </section>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     }
 
     wp_reset_postdata();

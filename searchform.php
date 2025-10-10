@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+?>
 <div class="pt-4 pb-5 font-size-11">
   <div class="container">
     <form role="search" method="get" id="search-form" class="site-header-search__form" action="<?php echo site_url(); ?>" autocomplete="off">

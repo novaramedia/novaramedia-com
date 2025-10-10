@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!is_numeric($args['post_id'])) {
     return;
   }
@@ -53,17 +56,32 @@
   if ($has_embed) {
 ?>
 <div class="u-video-embed-container background-black">
-  <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
+  <iframe class="youtube-player lazyload" data-src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   } else {
 ?>
 <div class="layout-thumbnail-frame">
   <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-    <?php render_post_ui_tags($post_id, true, true, 'no-border'); ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_ui_tags($post_id, true, true, 'no-border'); ?>
   </div>
-  <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-    <?php render_thumbnail($post_id, 'col24-16to9', array(
+  <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_thumbnail($post_id, 'col24-16to9', array(
       'class' => 'ui-rounded-image',
       'data-no-lazysizes' => true,
       'loading' => 'eager'
@@ -71,26 +89,56 @@
   </a>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 ?>
 <div class="grid-row grid--nested mt-3">
-  <div class="grid-item is-s-24 <?php echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h2 class="post__title <?php echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold mb-3"><?php echo $the_title; ?></h2>
+  <div class="grid-item is-s-24 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo ($show_related && !empty($meta['_cmb_related_posts'])) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+      <h2 class="post__title <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold mb-3"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $the_title; ?></h2>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!$has_related) {
   // surprizing conditional here: this is so that the title can either have it's own wider box or not depending on the display of related posts
 ?>
     </a>
   </div>
-  <div class="grid-item is-s-24 <?php echo ($has_related) ? 'is-m-16 is-xxl-18' : 'is-m-20 is-xxl-18'; ?>">
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
+  <div class="grid-item is-s-24 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo ($has_related) ? 'is-m-16 is-xxl-18' : 'is-m-20 is-xxl-18'; ?>">
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   // end of surprizing conditional
   }
 ?>
       <h5 class="font-size-8 font-weight-bold text-uppercase">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($is_article) {
             render_bylines($post_id);
           } else {
@@ -99,24 +147,39 @@
         ?>
       </h5>
       <div class="font-size-9 mt-2 mb-0">
-        <?php render_short_description($post_id); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_short_description($post_id); ?>
       </div>
     </a>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     if ($has_related) {
       if ($related_posts->have_posts()) {
   ?>
   <div class="grid-item is-s-24 is-m-8 is-xxl-6 ui-border-left mt-s-3 ui-border--not-s">
-    <?php render_see_also($related_posts); ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_see_also($related_posts); ?>
   </div>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
       wp_reset_postdata();
     }
   ?>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if ($is_product_linked || $more_on_section) {
   if ($is_product_linked) {
     $product_term_object = get_the_sub_category($post_id, true);
@@ -145,8 +208,17 @@ if ($is_product_linked || $more_on_section) {
   }
 ?>
 <div class="mt-2 font-size-8 font-weight-bold only-desktop">
-  <a href="<?php echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php echo $label; ?></a>
+  <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $link; ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $label; ?></a>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 ?>

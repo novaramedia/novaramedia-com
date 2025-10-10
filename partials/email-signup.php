@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   // Each newsletter has metadata set to make choices about how the signup block renders,
   // however there is also the ability to override some of those options by passing them in as arguments to the partial.
   // There are also defaults set for some of these options incase they are not set in the metadata.
@@ -46,61 +49,127 @@
     $button_color = $args['button-color'];
   }
 ?>
-<div class="email-signup <?php if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6 pt-s-5 pb-s-5'; } ?> background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
+<div class="email-signup <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($background_color == 'white') { echo 'mt-6 mb-5'; } else { echo 'pt-6 pb-6 pt-s-5 pb-s-5'; } ?> background-<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $background_color; ?> font-color-<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $text_color; ?>">
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
-        <h3 class="font-size-15 font-size-s-12 font-weight-bold mb-4 js-fix-widows"><?php echo $headline; ?></h3>
+        <h3 class="font-size-15 font-size-s-12 font-weight-bold mb-4 js-fix-widows"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $headline; ?></h3>
         <p class="font-size-12 font-size-s-10 font-weight-bold mr-6">
-          <?php echo $copy; ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $copy; ?>
         </p>
-        <?php if (!is_page('newsletters')) { ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if (!is_page('newsletters')) { ?>
           <div class="mt-3 font-size-8 font-weight-bold">
-            <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
+            <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
-        <?php } ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
       </div>
-      <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
-        <form class="email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
-          <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
+      <div class="grid-item offset-l-0 offset-xxl-2 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
+        <form class="email-signup__form" action="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $netlify; ?>" method="post" target="_blank">
+          <input type="hidden" name="newsletter" value="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $mailchimp_key; ?>" />
 
           <div class="email-signup__inputs">
             <div class="form-group mb-2">
               <label class="u-visuallyhidden" for="firstName">First name:</label>
-              <input name="firstName" class="email-signup__name-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
+              <input name="firstName" class="email-signup__name-input ui-input <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="firstName" type="text" autocomplete="given-name" placeholder="First name" />
             </div>
 
             <div class="form-group mb-2">
               <label class="u-visuallyhidden" for="email">Email:</label>
-              <input name="email" class="email-signup__email-input ui-input <?php if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="email" type="email" autocomplete="email" placeholder="Email" required />
+              <input name="email" class="email-signup__email-input ui-input <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($background_color === 'white') {echo 'ui-input--border-gray';} ?>" id="email" type="email" autocomplete="email" placeholder="Email" required />
             </div>
 
             <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
-              <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
-              <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
+              <label for="newsletter-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo site_url('privacy-policy/'); ?>">Privacy Policy</a></label>
+              <input name="gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($background_color === 'white') {echo 'ui-checkbox--border-gray';} ?> ml-2" id="newsletter-gdpr" type="checkbox" value="accepted" required/>
             </div>
 
-            <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Sign up" />
+            <input class="email-signup__submit ui-button ui-button--<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Sign up" />
 
             <span class="email-signup__feedback-processing ui-button ui-button--disabled font-size-12 font-weight-bold">Processing...</span>
             <span class="email-signup__feedback-completed ui-button ui-button--disabled font-size-12 font-weight-bold">Success</span>
             <div class="email-signup__feedback-failed layout-split-level">
-              <input class="ui-button ui-button--<?php echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Try again" />
+              <input class="ui-button ui-button--<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $button_color; ?> font-size-12 font-weight-bold" type="submit" value="Try again" />
               <p class="ml-2 font-size-8 font-weight-bold">Failed: <span class="email-signup__feedback-message"></span>.</p>
             </div>
           </div>
         </form>
       </div>
-      <?php if ($image_id) { ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($image_id) { ?>
         <div class="grid-item is-s-8 is-xxl-4">
-          <?php echo wp_get_attachment_image($image_id, 'col4-square', false, ['class' => 'email-signup__image']); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo wp_get_attachment_image($image_id, 'col4-square', false, ['class' => 'email-signup__image']); ?>
         </div>
-      <?php } ?>
-      <?php if ($background_color == 'white') { ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($background_color == 'white') { ?>
         <div class="grid-item is-xxl-24 mt-5">
           <hr />
         </div>
-      <?php } ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
     </div>
   </div>
 </div>

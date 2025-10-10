@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 /**
  * Hook in and register a metabox to handle a theme options page and adds a menu item.

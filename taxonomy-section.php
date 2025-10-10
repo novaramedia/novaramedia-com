@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 
 $section_term = get_queried_object();
@@ -20,17 +23,44 @@ $top_level_section = get_term($top_level_section_id, 'section');
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
         <h1 class="font-size-10 font-weight-bold">
-          <a href="<?php echo get_term_link($top_level_section->term_id); ?>"><?php echo $top_level_section->name; ?></a>
+          <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_term_link($top_level_section->term_id); ?>"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $top_level_section->name; ?></a>
         </h1>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           $second_level_sections = get_terms('section', array('parent' => $top_level_section->term_id, 'hide_empty' => true));
 
           if (count($second_level_sections) > 0) { // render section level sections as submenu. highlight active section (or ancestor) in menu
             ?><ul class="section-archive__submenu font-size-9 mt-2"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
             foreach($second_level_sections as $section) {
-              ?><li <?php if (in_array($section->term_id, $active_state_checklist)) {echo 'class="font-weight-bold"';} ?>><a href="<?php echo get_term_link($section->term_id); ?>"><?php echo $section->name; ?></a></li><?php
+              ?><li <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if (in_array($section->term_id, $active_state_checklist)) {echo 'class="font-weight-bold"';} ?>><a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_term_link($section->term_id); ?>"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $section->name; ?></a></li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
             }
             ?></ul><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
         ?>
       </div>
@@ -39,6 +69,9 @@ $top_level_section = get_term($top_level_section_id, 'section');
   <div class="container">
     <div class="grid-row mb-5">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -51,17 +84,29 @@ if( have_posts() ) {
   }
 } else {
 ?>
-    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
+    <article class="grid-item is-s-24"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} _e('Sorry, nothing matched your criteria :/'); ?></article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } ?>
     </div>
     <div class="grid-row mb-5">
       <div class="grid-item is-s-24">
-        <?php get_template_part('partials/pagination'); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} get_template_part('partials/pagination'); ?>
       </div>
     </div>
   </div>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

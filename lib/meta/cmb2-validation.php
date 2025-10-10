@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 /*
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set to 'required'
@@ -158,6 +161,9 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
   });
   </script>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 }
 
 add_action( 'cmb2_after_form', 'cmb2_after_form_do_js_validation', 10, 2 );

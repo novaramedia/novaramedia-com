@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!is_numeric($args['post_id'])) {
     return;
   }
@@ -15,22 +18,46 @@
 
   $is_article = nm_is_article($post_id);
 ?>
-<div class="margin-bottom-small padding-bottom-small <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
+<div class="margin-bottom-small padding-bottom-small <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
   <!-- <div class="layout-split-level font-size-8 font-weight-bold mb-1">
-    <?php render_post_ui_tags($post_id); ?>
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_ui_tags($post_id); ?>
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+      <span class="js-time-since" data-timestamp="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $timestamp; ?>"></span>
     </a>
   </div> -->
 
   <div class="grid-row grid--nested">
     <div class="grid-item is-xxl-16">
-      <?php render_post_ui_tags($post_id); ?>
-      <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed pt-1"><?php echo get_the_title($post_id); ?></h4>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_post_ui_tags($post_id); ?>
+      <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+      <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed pt-1"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_the_title($post_id); ?></h4>
 
       <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($is_article) {
             render_bylines($post_id);
           } else {
@@ -41,8 +68,14 @@
       </a>
     </div>
     <div class="grid-item is-xxl-8">
-      <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <?php render_thumbnail($post_id, 'col4-square', array(
+      <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo get_permalink($post_id); ?>" class="ui-hover">
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_thumbnail($post_id, 'col4-square', array(
         'class' => 'ui-rounded-image u-display-block',
         'data-no-lazysizes' => true,
         'loading' => 'eager'

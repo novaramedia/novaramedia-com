@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $copy = IGV_get_option('_igv_privacy_notice');
 
   if (empty($copy)) {
@@ -9,7 +12,10 @@
   <div class="container padding-top-tiny padding-bottom-tiny">
     <div class="flex-grid-row">
       <div class="flex-grid-item font-color-white text-links-underlined">
-        <?php echo apply_filters('the_content', $copy); ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo apply_filters('the_content', $copy); ?>
       </div>
       <div class="flex-grid-item">
         <a id="obligation-accept" class="obligation-button ui-button ui-button--white">Accept</a>

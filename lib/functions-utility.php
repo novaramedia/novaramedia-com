@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 /**
  * Get file contents
  *
@@ -9,8 +13,29 @@
  * @return string $file File contents as a string
  */
 function nm_get_file( $path ) {
+  // Sanitize path to prevent directory traversal
+  $path = sanitize_text_field( $path );
+  
+  // Remove any path traversal attempts
+  $path = str_replace( array( '../', '..\\', '..', '\\' ), '', $path );
+  
+  // Ensure path starts with forward slash
+  if ( substr( $path, 0, 1 ) !== '/' ) {
+    $path = '/' . $path;
+  }
+
   if ( function_exists( 'file_get_contents' ) ) {
-    $file = file_get_contents( __DIR__ . '/..' . $path );
+    $full_path = __DIR__ . '/..' . $path;
+    
+    // Validate the resolved path is within theme directory
+    $theme_dir = realpath( __DIR__ . '/..' );
+    $resolved_path = realpath( dirname( $full_path ) );
+    
+    if ( $resolved_path && strpos( $resolved_path, $theme_dir ) === 0 && file_exists( $full_path ) ) {
+      $file = file_get_contents( $full_path );
+    } else {
+      return '';
+    }
   } else {
     $file = url_get_contents( get_bloginfo( 'stylesheet_directory' ) . $path );
   }

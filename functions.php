@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 /**
  * Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some WordPress variables
  */

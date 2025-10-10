@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $meta = get_post_meta($post->ID);
   $resources = get_post_meta($post->ID, '_cmb_resources', true);
   $transcript = get_post_meta($post->ID, '_cmb_transcript', true);
@@ -20,28 +23,52 @@
 
 <header class="grid-row mb-4">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
-    <h1 class="font-size-15 font-weight-bold js-fix-widows mb-4"><?php the_title(); ?></h1>
-    <?php the_post_thumbnail([500, 400]); ?>
+    <h1 class="font-size-15 font-weight-bold js-fix-widows mb-4"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?></h1>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail([500, 400]); ?>
     <div class="font-size-8 mt-1">
-      <?php the_post_thumbnail_caption(); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail_caption(); ?>
     </div>
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
-    <?php the_content(); ?>
+    <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
   </div>
 </header>
 
 <div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-2">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('j F Y'); ?></li>
+      <li>Published <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_time('j F Y'); ?></li>
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
+      <li><a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if (!empty($meta['_cmb_dl_mp3'])) {
         echo '<li><a href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
       }
@@ -50,34 +77,64 @@
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
-      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
-      <li><?php render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
-      <li><?php render_email_share_link($share_url, $post->post_title, 'Email this episode');?></li>
-      <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+      <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
+      <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
+      <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_email_share_link($share_url, $post->post_title, 'Email this episode');?></li>
+      <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
     </ul>
   </div>
 </div>
 
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!empty($resources)) {
     render_resources_row($resources);
   }
 ?>
 
-<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>">
+<div class="grid-row <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>">
   <div class="grid-item is-xxl-24">
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if (!empty($meta['_cmb_sc'][0])) {
     ?>
-        <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="200" scrolling="no" frameborder="no"></iframe>
+        <iframe src="https://w.soundcloud.com/player/?url=<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="200" scrolling="no" frameborder="no"></iframe>
 
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
       ?>
         <div class="font-mono font-size-8 mt-1">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         }
       } else {
         echo 'Someone messed up :/';
@@ -87,6 +144,9 @@
 </div>
 
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!empty($transcript)) {
 ?>
 <div class="grid-row mb-6">
@@ -96,10 +156,16 @@
 
   <div class="grid-item is-m-24 is-xxl-18">
     <div class="text-copy mb-4">
-      <?php echo apply_filters('the_content', $transcript); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo apply_filters('the_content', $transcript); ?>
     </div>
   </div>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 ?>

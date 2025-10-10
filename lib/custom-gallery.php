@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 remove_shortcode('gallery', 'gallery_shortcode');
 function my_gallery_shortcode($attr) {
   $post = get_post();

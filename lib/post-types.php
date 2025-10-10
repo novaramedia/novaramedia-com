@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 function nm_register_post_type_contributor() {
   $args = [
     'label'  => esc_html__( 'Contributors', 'text-domain' ),

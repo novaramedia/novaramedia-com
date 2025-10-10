@@ -1,8 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 ?>
 <main id="main-content">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -12,16 +18,25 @@ if( have_posts() ) {
     <div class="container mt-4 mb-4">
       <div class="grid-row mb-4">
         <div class="flex-grid-item is-xxl-24">
-          <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?></h4>
         </div>
       </div>
       <div class="grid-row mb-4">
         <div class="flex-grid-item is-xxl-24 page-copy">
-          <?php the_content(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
         </div>
       </div>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       $child_pages_wp_query = new WP_Query();
       $all_wp_pages = $child_pages_wp_query->query(array('post_type' => 'page', 'orderby' => 'menu_order'));
 
@@ -56,12 +71,21 @@ if( have_posts() ) {
     ?>
   </article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 } ?>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
 ?>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

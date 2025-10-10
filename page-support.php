@@ -1,8 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 ?>
 <main id="main-content">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -21,6 +27,9 @@ if( have_posts() ) {
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12">
             <h4 class="margin-top-small margin-bottom-tiny font-size-9 text-uppercase font-weight-bold font-color-white"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
               if (!empty($page_tag_override)) {
                 echo $page_tag_override;
               } else {
@@ -45,6 +54,9 @@ if( have_posts() ) {
     </div>
 
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       get_template_part('partials/support-section', null, array(
         'heading_copy' => $form_tag_override,
         'override_text' => $form_copy_override
@@ -54,27 +66,54 @@ if( have_posts() ) {
     <div class="container">
       <div class="flex-grid-row margin-top-basic margin-bottom-basic">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($youtube_id) {
         ?>
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 margin-bottom-small">
           <div class="u-video-embed-container">
-            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
+            <iframe class="youtube-player" type="text/html" src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo generate_youtube_embed_url($youtube_id); ?>"></iframe>
           </div>
 
           <ul class="inline-action-list margin-top-small">
             <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
               $share_url = 'https://novaramedia.com/support/';
             ?>
-            <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet your support'); ?></li>
-            <li><?php render_facebook_share_link($share_url, 'Share this page on Facebook'); ?></li>
-            <li><?php render_email_share_link($share_url, $post->post_title, 'Email to a friend');?></li>
-            <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+            <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_tweet_link($share_url, $post->post_title, 'Tweet your support'); ?></li>
+            <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_facebook_share_link($share_url, 'Share this page on Facebook'); ?></li>
+            <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_email_share_link($share_url, $post->post_title, 'Email to a friend');?></li>
+            <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
           </ul>
         </div>
-        <?php } ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} } ?>
 
         <div class="flex-grid-item flex-item-m-12 flex-item-xxl-6 text-copy font-serif">
-          <?php the_content(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
         </div>
       </div>
     </div>
@@ -84,7 +123,10 @@ if( have_posts() ) {
         <div class="flex-grid-row">
           <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-4">
             <h4 class="font-size-9 text-uppercase font-weight-bold margin-bottom-small">Already a supporter?</h4>
-            <?php if (!empty($meta['_cmb_page_extra'])) {
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} if (!empty($meta['_cmb_page_extra'])) {
               echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]);
             } ?>
             <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--white ui-button--small">Log in to your account</a></p>
@@ -94,6 +136,9 @@ if( have_posts() ) {
     </div>
 
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       get_template_part('partials/support-section', null, array(
         'heading_copy' => $form_tag_override,
         'override_text' => $form_copy_override
@@ -111,7 +156,10 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-paypal.svg'); ?>
           </p>
           <p class="font-weight-bold mb-3">PayPal</p>
           <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
@@ -120,7 +168,10 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-directdebit.svg'); ?>
           </p>
           <p class="font-weight-bold mb-3"><strong>GoCardless</strong></p>
           <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform</p>
@@ -145,7 +196,10 @@ if( have_posts() ) {
 
         <div class="flex-grid-item flex-item-s-12 flex-item-l-6 flex-item-xxl-3">
           <p>
-            <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo url_get_contents(get_bloginfo('stylesheet_directory') . '/dist/img/support-logo-bitcoin.svg'); ?>
           </p>
           <p class="font-weight-bold mb-3"><strong>Crypto</strong></p>
           <p>We accept BTC at this address: <code class="font-size-smaller">1EtbqDDij5uT3jnAR5ihFqF3kJA5YZN1i</code> If you want to send to a one time address please email us at: <a href="mailto:donations@novaramedia.com?subject=BTC donation">donations@novaramedia.com</a> </p>
@@ -155,11 +209,17 @@ if( have_posts() ) {
   <!-- end post -->
   </article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 } ?>
 <!-- end main-content -->
 </main>
 
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

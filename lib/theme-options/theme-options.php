@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 /**
  * CMB2 Theme Options
@@ -78,11 +81,23 @@ class IGV_Admin {
    */
   public function admin_page_display() {
     ?>
-    <div class="wrap cmb2-options-page <?php echo $this->key; ?>">
-      <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-      <?php cmb2_metabox_form( $this->metabox_id, $this->key ); ?>
+    <div class="wrap cmb2-options-page <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $this->key; ?>">
+      <h2><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo esc_html( get_admin_page_title() ); ?></h2>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} cmb2_metabox_form( $this->metabox_id, $this->key ); ?>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 
   /**

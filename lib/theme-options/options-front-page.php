@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 /**
  * Returns a slug indexed array of all the Audio sub categories for use in select metaboxes

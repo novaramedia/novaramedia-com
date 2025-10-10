@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $meta = get_post_meta($post->ID);
 
   $layout = !empty($meta['_cmb_article_layout'][0]) ? $meta['_cmb_article_layout'][0] : 'basic';
@@ -17,11 +20,20 @@
 <div class="grid-row mt-5 mt-s-4 mb-6">
   <div class="grid-item only-desktop is-m-24 is-l-24 is-xxl-4 mb-4">
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if ($articles_support_box_text || $support_box_override_text) {
     ?>
-    <a href="<?php echo home_url('support'); ?>">
+    <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo home_url('support'); ?>">
       <div id="single-article-support-box">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($support_box_override_text) {
             echo $support_box_override_text;
           } else {
@@ -31,24 +43,42 @@
       </div>
     </a>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
     ?>
   </div>
   <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-3 is-xl-16 offset-xl-0 is-xxl-12 offset-xxl-2">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   if (!empty($meta['_cmb_sc'][0])) {
 ?>
     <div class="text-copy mb-4">
       <p class="font-size-8">Listen to this article as audio:</p>
-      <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
+      <iframe src="https://w.soundcloud.com/player/?url=<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 ?>
     <div id="single-articles-copy" class="text-copy mb-4">
-      <?php the_content(); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 /*
     Get contributors metadata and if set display in italics in a div below the main content.
     If there are multiple contributors set then each will have their own paragraph
@@ -59,6 +89,9 @@
 ?>
     <div class="text-copy font-italic mb-4">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       foreach ($contributors_posts_array as $contributor) {
         $bio = get_post_meta($contributor->ID, '_nm_contributor_short_bio', true);
 
@@ -69,14 +102,29 @@
 ?>
     </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 ?>
     <div>
       <ul class="inline-action-list font-size-10">
-        <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
-        <li><?php render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
-        <li><?php render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>
-        <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+        <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_tweet_link($share_url, $post->post_title, 'Tweet article'); ?></li>
+        <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_facebook_share_link($share_url, 'Share article on Facebook'); ?></li>
+        <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_email_share_link($share_url, $post->post_title, 'Email this article');?></li>
+        <li><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
       </ul>
     </div>
   </div>

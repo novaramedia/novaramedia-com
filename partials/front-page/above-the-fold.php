@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   /**  LOGIC/FUNCTION
    *
   @todo: Logic for recent articles bar images or not | custom cmb2 field option 1-5 radio buttons row or ?
@@ -21,6 +24,9 @@ if ( $args['latest_articles_posts_ids'] ) {
   <div class="above-the-fold layout-grid">
     <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-4">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         get_template_part(
             'partials/front-page/above-the-fold/featured-posts-block',
             null,
@@ -33,6 +39,9 @@ if ( $args['latest_articles_posts_ids'] ) {
     </div>
     <div class="above-the-fold__latest-articles">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         get_template_part(
             'partials/front-page/above-the-fold/latest-articles',
             null,
@@ -44,6 +53,9 @@ if ( $args['latest_articles_posts_ids'] ) {
     </div>
     <div class="above-the-fold__featured-2">
       <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
         get_template_part(
             'partials/front-page/above-the-fold/featured-posts-block',
             null,

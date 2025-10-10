@@ -1,8 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_header();
 ?>
 <main id="main-content">
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
@@ -39,25 +45,46 @@ if( have_posts() ) {
       </div>
       <div class="grid-row mb-5">
         <div class="grid-item is-xxl-24 text-align-center">
-          <h1 class="font-size-15 font-weight-bold"><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
+          <h1 class="font-size-15 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $time->format('j F Y'); ?>: <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_title(); ?></h1>
         </div>
       </div>
       <div class="grid-row mb-4">
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($youtube_id) {
         ?>
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-4 is-xxl-16">
           <div class="u-video-embed-container">
-            <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>" frameborder="0" allowfullscreen></iframe>
+            <iframe class="youtube-player lazyload" data-src="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo generate_youtube_embed_url($youtube_id); ?>" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           } else {
         ?>
         <div class="grid-item offset-s-2 is-s-20 offset-l-3 is-l-18 offset-xxl-6 is-xxl-12">
-          <?php the_post_thumbnail('is-xxl-12'); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_post_thumbnail('is-xxl-12'); ?>
         </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
         ?>
       </div>
@@ -65,24 +92,57 @@ if( have_posts() ) {
         <div class="grid-item offset-s-0 is-s-8 offset-xxl-2 is-xxl-8">
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Time:</h5>
-            <h3 class="font-size-11 font-weight-bold"><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?></h3>
-            <h3 class="font-size-11 font-weight-bold"><?php echo $time->format('H:i'); ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $time->format('j'); ?><sup><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $time->format('S'); ?></sup><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $time->format(' F Y'); ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $time->format('H:i'); ?></h3>
           </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           if ($venue_name) {
         ?>
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Venue:</h5>
-            <h3><?php echo $venue_name; ?></h3>
+            <h3><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $venue_name; ?></h3>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
             if ($venue_postcode) {
         ?>
-            <h3 class="font-size-11 font-weight-bold"><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
+            <h3 class="font-size-11 font-weight-bold"><a href="https://www.google.com/maps/search/<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $venue_postcode; ?></a></h3>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
             }
         ?>
           </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
 
           if ($speakers) {
@@ -90,44 +150,77 @@ if( have_posts() ) {
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Speakers:</h5>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           foreach ($speakers as $speaker) {
         ?>
-            <h3 class="font-size-11 font-weight-bold"><?php echo $speaker; ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $speaker; ?></h3>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
         ?>
           </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
 
           if ($host) {
         ?>
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Host:</h5>
-            <h3 class="font-size-11 font-weight-bold"><?php echo $host; ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $host; ?></h3>
           </div>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
 
           if ($is_sold_out) {
         ?>
             <h4 class="font-size-10 font-weight-bold">Sold Out!</h4>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
 
           if (!$is_sold_out && $tickets_url && $fromEvent->getDirection() !== 'past') {
         ?>
-            <a href="<?php echo $tickets_url; ?>" target="_blank" rel="nofollow" class="ui-button ui-button--black"><h4>Buy Tickets</h4></a>
+            <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $tickets_url; ?>" target="_blank" rel="nofollow" class="ui-button ui-button--black"><h4>Buy Tickets</h4></a>
         <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
           }
         ?>
         </div>
         <div class="grid-item is-s-16 is-xxl-12 text-copy font-size-10 font-serif">
-          <?php the_content(); ?>
+          <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} the_content(); ?>
         </div>
       </div>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       if ($gallery) {
     ?>
     <div class="background-black font-grid-itemor-white padding-top-mid padding-bottom-mid">
@@ -139,30 +232,51 @@ if( have_posts() ) {
         </div>
         <div class="grid-row mb-4">
           <div class="grid-item is-xxl-24">
-            <?php echo do_shortcode($gallery); ?>
+            <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo do_shortcode($gallery); ?>
           </div>
         </div>
       </div>
     </div>
     <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
       }
     ?>
   </article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   }
 } else {
 ?>
   <article id="event" class="container mb-4">
     <div class="grid-row">
-      <article class="grid-item is-xxl-24"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <article class="grid-item is-xxl-24"><?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} _e('Sorry, no posts matched your criteria :{'); ?></article>
     </div>
   </article>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 } ?>
   <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
   ?>
 </main>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 get_footer();
 ?>

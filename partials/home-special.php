@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $special = IGV_get_option('_igv_front_special');
 
   if (!empty($special)) {
@@ -13,12 +16,18 @@
   <div class="row">
     <div class="col col24">
       <div class="u-video-embed-container">
-        <?php echo $special; ?>
+        <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $special; ?>
       </div>
     </div>
   </div>
 </section>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     if ($fundraiser_expiration > time()) {
       get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
     }

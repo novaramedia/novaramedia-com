@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 /**
  * Hook cmb2_save_options-page_fields to flush the cache when theme options are saved
  * This is necessary because the front page is cached and the cache needs to be flushed when the front page options are saved

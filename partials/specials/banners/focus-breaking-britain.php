@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
   $term = get_term_by('slug', 'breaking-britain', 'focus');
 
   if ($term) {
@@ -8,13 +11,22 @@
 <div class="pt-6 pb-6 background-neon-blue font-color-white" style="overflow: hidden; position: relative">
   <div class="breaking-britain__bars-container" style="position: absolute; top: 0; width: 100%; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
     <div class="breaking-britain__bar-1">
-      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg'); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg'); ?>
     </div>
     <div class="breaking-britain__bar-2">
-      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg'); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg'); ?>
     </div>
     <div class="breaking-britain__bar-3">
-      <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg'); ?>
+      <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg'); ?>
     </div>
   </div>
   <style type="text/css">
@@ -93,21 +105,36 @@
   <div class="container">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <a href="<?php echo $url; ?>"><h4 class="font-size-9 text-uppercase font-weight-bold">Focus</h4></a>
+        <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $url; ?>"><h4 class="font-size-9 text-uppercase font-weight-bold">Focus</h4></a>
       </div>
     </div>
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-3">
-        <a href="<?php echo $url; ?>"><h3 class="font-size-15 font-weight-bold" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
+        <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $url; ?>"><h3 class="font-size-15 font-weight-bold" style="margin-left: -.05em;">Breaking<br/>Britain.</h3></a>
       </div>
       <div class="grid-item is-s-24 is-xxl-12">
-        <a href="<?php echo $url; ?>"><p class="font-size-11 mb-4">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
-        <a href="<?php echo $url; ?>" class="ui-button ui-button--white">Read more</a>
+        <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $url; ?>"><p class="font-size-11 mb-4">With growing rifts between its regions, how much longer can the UK survive? From the economic to the constitutional, this focus explores the divisions and contradictions within the union today.</p></a>
+        <a href="<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+} echo $url; ?>" class="ui-button ui-button--white">Read more</a>
       </div>
     </div>
   </div>
 </div>
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
     }
   }
 ?>

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'opengraph', 1200, 630, true );
 

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 /**
 * Registers CMB2 group fields to capture roles and persons assigned for the about page.
 *

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 add_action( 'cmb2_init', 'nm_cmb_post_metaboxes' );
 
