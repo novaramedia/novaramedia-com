@@ -5,22 +5,27 @@ This document outlines the security best practices implemented in the Novara Med
 ## Implemented Security Measures
 
 ### 1. Direct Access Protection
+
 All PHP files now include ABSPATH checks:
+
 ```php
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 ```
+
 This prevents direct file access outside the WordPress context.
 
 ### 2. Input Sanitization
+
 - All `$_GET`, `$_POST`, `$_SERVER` variables are properly sanitized
 - Use `absint()` for integer values from user input
 - Use `sanitize_text_field()` for text input
 - Use `wp_unslash()` when dealing with WordPress-slashed data
 
 **Examples:**
+
 ```php
 // Correct
 $post_id = absint( $_GET['post'] );
@@ -31,13 +36,16 @@ $post_id = $_GET['post']; // No sanitization
 ```
 
 ### 3. Output Escaping
+
 All dynamic output is properly escaped:
+
 - `esc_html()` for HTML content
 - `esc_attr()` for HTML attributes
 - `esc_url()` for URLs
 - `esc_js()` for JavaScript
 
 **Examples:**
+
 ```php
 // Correct
 echo esc_html( $job->post_title );
@@ -48,19 +56,24 @@ echo $job->post_title; // No escaping
 ```
 
 ### 4. File Inclusion Security
+
 The `nm_get_file()` function includes:
+
 - Path sanitization to remove traversal attempts
 - `realpath()` validation to ensure files are within theme directory
 - File existence checks
 
 ### 5. Security Headers
+
 The following security headers are automatically added:
+
 - `X-Frame-Options: SAMEORIGIN` - Prevents clickjacking
 - `X-Content-Type-Options: nosniff` - Prevents MIME sniffing
 - `X-XSS-Protection: 1; mode=block` - Enables XSS filtering
 - `Referrer-Policy: strict-origin-when-cross-origin` - Privacy protection
 
 ### 6. Attack Surface Reduction
+
 - XML-RPC disabled (reduces brute force vectors)
 - WordPress version info removed from HTML and assets
 - Generator meta tag removed
@@ -70,6 +83,7 @@ The following security headers are automatically added:
 ### Required Practices
 
 1. **Always add ABSPATH checks** to new PHP files:
+
    ```php
    <?php
    if ( ! defined( 'ABSPATH' ) ) {
@@ -78,11 +92,13 @@ The following security headers are automatically added:
    ```
 
 2. **Sanitize all input** from `$_GET`, `$_POST`, `$_SERVER`:
+
    ```php
    $user_input = sanitize_text_field( wp_unslash( $_POST['field_name'] ) );
    ```
 
 3. **Escape all output**:
+
    ```php
    echo esc_html( $variable );
    ```
@@ -93,6 +109,7 @@ The following security headers are automatically added:
    - WordPress database functions instead of raw SQL
 
 5. **Validate user capabilities** for admin functions:
+
    ```php
    if ( ! current_user_can( 'manage_options' ) ) {
        wp_die( 'Insufficient permissions' );
@@ -100,9 +117,10 @@ The following security headers are automatically added:
    ```
 
 6. **Use nonces** for forms and AJAX:
+
    ```php
    wp_nonce_field( 'action_name', 'nonce_name' );
-   
+
    if ( ! wp_verify_nonce( $_POST['nonce_name'], 'action_name' ) ) {
        wp_die( 'Security check failed' );
    }
@@ -111,6 +129,7 @@ The following security headers are automatically added:
 ### Code Review Checklist
 
 Before deploying code, verify:
+
 - [ ] ABSPATH check at top of all PHP files
 - [ ] All user input is sanitized
 - [ ] All output is escaped
@@ -122,6 +141,7 @@ Before deploying code, verify:
 ### PHPCS Security Rules
 
 The phpcs.xml configuration includes security-focused rules:
+
 - `WordPress.Security.EscapeOutput`
 - `WordPress.Security.NonceVerification`
 - `WordPress.Security.ValidatedSanitizedInput`
@@ -139,6 +159,7 @@ Run PHPCS regularly: `./vendor/bin/phpcs`
 ## Incident Response
 
 If a security vulnerability is discovered:
+
 1. Document the issue privately
 2. Implement a fix following these guidelines
 3. Test thoroughly in a staging environment
