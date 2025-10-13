@@ -142,3 +142,6 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
+
+// Newsletter migration - auto-runs on deployment
+get_template_part( 'lib/newsletter-migration' );

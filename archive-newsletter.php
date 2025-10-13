@@ -6,7 +6,7 @@ get_header();
     <div class="container mt-4 mb-4">
       <div class="grid-row mt-5 mb-5 mt-s-4 mb-s-4">
         <div class="flex-grid-item is-xxl-24 page-copy">
-          We have an expanding range of email newsletters that are free to subscribe to. Choose your options below. Post Type**
+          We have an expanding range of email newsletters that are free to subscribe to. Choose your options below.
         </div>
       </div>
     </div>
