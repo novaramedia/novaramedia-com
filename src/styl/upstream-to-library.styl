@@ -1,12 +1,20 @@
 html
-  --color-gray-base: #f8f5f5;
-  --corner-radius-large: 4px;
+  --color-gray-base: #f8f5f5
+  --color-gray-light--new: #EDEAEA // same as --color-gray-light--new
+  --color-gray-mid--new: #D4D4D4
+
+// gray audit:
+// --color-gray isn't used in this repo
+// --color-gray-transparent isn't used in this repo
+// --color-gray-light isn't used in this repo
+// --color-gray-light-transparent isn't used in this repo
+// --color-gray-extra-light is the same as --color-gray-light and is migrated
 
 .background-gray-base
   background-color: var(--color-gray-base)
 
-.background-gray-light-transparent
-  background-color: var(--color-gray-light-transparent)
+.background-gray-mid
+  background-color: var(--color-gray-mid--new)
 
 // ***** ???
 
@@ -14,7 +22,7 @@ html
   display: inline-block
   width: 10px
   height: 2px
-  background-color: var(--color-gray-light-transparent)
+  background-color: var(--color-gray-mid--new)
   margin: 0 4px
   transition: opacity 0.3s ease
 
@@ -90,7 +98,7 @@ html
   &--pink
     background-color: var(--color-acfm-pink)
   &--gray
-    background-color: var(--color-gray-light)
+    background-color: var(--color-gray-mid--new)
 
 // *****
 
