@@ -20,9 +20,9 @@
 
 <header class="grid-row mb-4">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
-    <h1 class="fs-8 js-fix-widows mb-4"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4"><?php the_title(); ?></h1>
     <?php the_post_thumbnail([500, 400]); ?>
-    <div class="fs-2 font-weight-regular mt-1">
+    <div class="font-size-8 mt-1">
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>
@@ -31,7 +31,7 @@
   </div>
 </header>
 
-<div class="grid-row mb-4 fs-3-sans">
+<div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-2">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
@@ -74,7 +74,7 @@
       <?php
         if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
       ?>
-        <div class="font-mono font-smaller mt-1">
+        <div class="font-mono font-size-8 mt-1">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php

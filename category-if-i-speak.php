@@ -1,12 +1,12 @@
 <?php
 get_header();
 
-$category = get_category(get_query_var('cat'));
+$category = get_category( get_query_var( 'cat' ) );
 
-$podcast_url = !empty(get_term_meta($category->term_id, '_nm_podcast_url', true)) ? get_term_meta($category->term_id, '_nm_podcast_url', true) : false;
-$podcast_copy_override = get_term_meta($category->term_id, '_nm_podcast_text', true);
+$podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
+$podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 
-$podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subscribe to the podcast';
+$podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe to the podcast';
 ?>
 <main id="main-content" class="category-archive category-archive__if-i-speak">
   <style type="text/css">
@@ -15,18 +15,21 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
 
     .category-archive__if-i-speak__title {
-      font-size: 18.5rem;
+      font-size: 17.5rem;
       line-height: .9;
       letter-spacing: -0.03em;
+      font-weight: 700;
     }
 
     .category-archive__if-i-speak__image {
-      background-size: cover;
       background-position: top;
-      height: 210px;
+      height: 300px;
       width: 360px;
       margin: 0 auto;
       margin-top: 0;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .category-archive__if-i-speak__border {
@@ -35,41 +38,39 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     }
 
     .avif .category-archive__if-i-speak__image, .webp .category-archive__if-i-speak__image {
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/banners/if-i-speak.webp'; ?>);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.webp'; ?>);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .fallback .category-archive__if-i-speak__image {
-      background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/banners/if-i-speak.png'; ?>);
+      background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/banners/if-i-speak.png'; ?>);
     }
 
     @media screen and (max-width: 1408px) {
       .category-archive__if-i-speak__title {
-        font-size: 14.5rem;
+        font-size: 13rem;
       }
 
       .category-archive__if-i-speak__image {
-        height: 220px;
-        width: 320px;
+        height: 300px;
       }
     }
 
     @media screen and (max-width: 1104px) {
       .category-archive__if-i-speak__title {
-        font-size: 12.5rem;
-      }
-
-      .category-archive__if-i-speak__image {
-        width: 280px;
+        font-size: 12rem;
       }
     }
 
     @media screen and (max-width: 910px) {
       .category-archive__if-i-speak__title {
-        font-size: 11.4rem;
+        font-size: 10.5rem;
       }
 
       .category-archive__if-i-speak__image {
-        height: 190px;
+        height: 210px;
         width: 290px;
       }
 
@@ -88,12 +89,12 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
 
     @media screen and (max-width: 759px) {
       .category-archive__if-i-speak__title {
-        font-size: 7rem;
+        font-size: 5rem;
       }
 
       .category-archive__if-i-speak__image {
         height: 160px;
-        width: 100%;
+        width: 200px;
       }
     }
   </style>
@@ -101,9 +102,9 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
     <section class="category-archive__if-i-speak__header container pt-4 pb-4 mb-4">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <h1 class="category-archive__if-i-speak__title">If I Speak...</h1>
+          <h1 class="category-archive__if-i-speak__title mb-5 mb-s-0">If I Speak...</h1>
         </div>
-        <div class="grid-item is-s-24 is-xxl-10 mt-4 font-weight-bold fs-6 fs-s-5-sans">
+        <div class="grid-item is-s-24 is-xxl-10 mt-4 font-size-12 font-size-s-11 font-weight-bold mb-m-3">
           <?php echo category_description(); ?>
         </div>
         <div class="grid-item is-s-12 is-xxl-10">
@@ -111,12 +112,12 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
         </div>
         <div class="grid-item is-s-12 is-xxl-4 mt-4 text-align-right">
           <?php
-            if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
-              $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
-          ?>
+          if ( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) {
+              $podcast_url = get_term_meta( $category->term_id, '_nm_podcast_url', true );
+            ?>
           <a class="ui-button ui-button--red ui-button--auto-height mb-2" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
-          <?php
-            }
+            <?php
+          }
           ?>
         </div>
         <div class="grid-item is-xxl-24">
@@ -129,24 +130,29 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
   <div class="container">
     <div class="grid-row mb-4">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
+if ( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
 
-    get_template_part('partials/post-layouts/flex-post', null, array(
-      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
-      'image-size' => 'col12-16to9',
-    ));
+    get_template_part(
+        'partials/post-layouts/flex-post',
+        null,
+        array(
+            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+            'image-size'        => 'col12-16to9',
+        )
+    );
   }
 } else {
+  ?>
+    <article class="grid-item is-s-24"><?php esc_html_e( 'Sorry, nothing matched your criteria :/' ); ?></article>
+  <?php
+}
 ?>
-    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
-<?php
-} ?>
     </div>
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
-        <?php get_template_part('partials/pagination'); ?>
+        <?php get_template_part( 'partials/pagination' ); ?>
       </div>
     </div>
   </div>

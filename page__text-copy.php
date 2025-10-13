@@ -16,21 +16,21 @@ if( have_posts() ) {
     ?>
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-offset-xxl-12">
-        <h4 class="fs-3-sans font-uppercase font-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
       </div>
     </div>
     <?php } ?>
 
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-10 flex-offset-m-1 flex-item-l-9 flex-offset-l-1 flex-item-xl-8 flex-offset-xl-2 flex-item-xxl-8 flex-offset-xxl-2">
-        <h1 id="single-articles-title" class="js-fix-widows"><?php the_title(); ?></h1>
+        <h1 id="single-articles-title" class="text-wrap-pretty"><?php the_title(); ?></h1>
       </div>
     </div>
 
     <div class="flex-grid-row margin-bottom-basic">
       <div class="flex-grid-item flex-item-s-12 flex-offset-s-0 flex-item-m-12 flex-offset-m-0 flex-item-l-10 flex-offset-l-1 flex-item-xl-10 flex-offset-xl-1 flex-item-xxl-10 flex-offset-xxl-1">
         <?php the_post_thumbnail('col20'); ?>
-        <div class="font-smaller">
+        <div class="font-size-8">
           <?php the_post_thumbnail_caption(); ?>
         </div>
       </div>
@@ -47,7 +47,7 @@ if( have_posts() ) {
         <?php
           if (!empty($meta['_nm_cta-link'][0]) && !empty($meta['_nm_cta-copy'][0])) {
         ?>
-          <p><a class="ui-button ui-button--black font-size-2" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
+          <p><a class="ui-button ui-button--black font-size-10 font-weight-bold" href="<?php echo $meta['_nm_cta-link'][0]; ?>"><?php echo $meta['_nm_cta-copy'][0]; ?></a></p>
         <?php } ?>
       </div>
 

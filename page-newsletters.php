@@ -16,7 +16,7 @@ if( have_posts() ) {
     <div class="container mt-4 mb-4">
       <div class="grid-row mb-4">
         <div class="flex-grid-item is-xxl-24">
-          <h4 class="fs-3-sans font-uppercase font-bold"><?php the_title(); ?></h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
         </div>
       </div>
       <div class="grid-row mb-4">
@@ -63,7 +63,7 @@ if( have_posts() ) {
   }
 } ?>
 <?php
-  get_template_part('partials/support-section');
+  get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
 ?>
 </main>
 <?php

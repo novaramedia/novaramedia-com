@@ -10,13 +10,13 @@
 ?>
 <header class="grid-row mb-4">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-4">
-    <h1 class="fs-8"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold"><?php the_title(); ?></h1>
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1">
     <?php the_content(); ?>
   </div>
 </header>
-<div class="grid-row mb-4 fs-3-sans">
+<div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-3">
     <ul class="inline-action-list">
       <li>Published <?php the_time('j F Y'); ?></li>
@@ -62,13 +62,14 @@
     ?>
   </div>
   <div class="grid-item is-s-24 is-xxl-4">
-    <div class="grid-row grid--nested fs-3-sans">
+    <div class="grid-row grid--nested font-size-9">
       <?php
         $related_video = get_related_posts(null, 'Video', 3);
 
         if ($related_video->have_posts()) {
           while ($related_video->have_posts()) {
             $related_video->the_post();
+            $meta = get_post_meta($post->ID);
       ?>
       <div class="grid-item is-s-8 is-xxl-24 mb-3">
         <div class="layout-thumbnail-frame">
@@ -82,7 +83,9 @@
           </a>
         </div>
         <a href="<?php the_permalink(); ?>" class="ui-hover">
-          <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?>. <?php render_standfirst($post->ID); ?></h6>
+          <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1">
+            <?php render_video_title_and_standfirst($post->ID); ?>
+          </h6>
         </a>
       </div>
       <?php

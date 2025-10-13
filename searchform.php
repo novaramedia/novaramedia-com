@@ -1,4 +1,4 @@
-<div class="pt-4 pb-5 fs-5-sans">
+<div class="pt-4 pb-5 font-size-11">
   <div class="container">
     <form role="search" method="get" id="search-form" class="site-header-search__form" action="<?php echo site_url(); ?>" autocomplete="off">
       <div class="grid-row">

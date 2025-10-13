@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import Cookies from 'js-cookie';
+import isNonEmptyString from '../functions/isNonEmptyString.js';
 
 export class Support {
   constructor() {
@@ -50,15 +51,31 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
-      _this.setAutoValues($form, this.autovalues['show_first']);
+      // Always call setAutoValues with the preferred initial type
+      const showFirst = this.autovalues['show_first'];
+      _this.setAutoValues($form, showFirst);
 
-      if (this.autovalues['show_first'] === 'oneoff') {
-        // if the setting is to show one off first then update buttons active state
-        _this.clearActiveButtonState($form);
+      // Ensure the first value button is also selected and active
+      const $firstValueBtn = $form
+        .find('.support-form__value-option:visible')
+        .first();
+      if ($firstValueBtn.length) {
+        $firstValueBtn
+          .addClass('ui-button--active')
+          .attr('aria-checked', 'true')
+          .attr('tabindex', '0');
+
         $form
-          .find('.support-form__schedule-option[data-value=oneoff]')
-          .addClass('support-form__button--active');
+          .find('.support-form__value-input')
+          .val($firstValueBtn.data('value'));
       }
+
+      // Highlight correct schedule option
+      $form
+        .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
+        .addClass('ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
 
       const $valueInput = $form.find('.support-form__value-input').first();
 
@@ -68,27 +85,62 @@ export class Support {
 
           const $button = $(this);
           const data = $button.data();
-
           if (data.action === 'set-type') {
-            // if the button is setting the type of donation
-            _this.setAutoValues($form, data.value);
-
-            $form.attr('action', _this.donationAppUrl + data.value);
-
             _this.clearActiveButtonState($form);
 
-            $button.addClass('support-form__button--active');
+            _this.setAutoValues($form, data.value);
+            $form.attr('action', _this.donationAppUrl + data.value);
+
+            // Set active class on all buttons with the same data-value (both visible and hidden)
+            $form
+              .find(`[data-action="set-type"][data-value="${data.value}"]`)
+              .addClass('ui-button--active');
+
+            _this.updateSupportSection(data, $form);
+
+            $form.find('[data-action="set-type"]').each((index, button) => {
+              const $button = $(button);
+              const isSelected = $button.data('value') === data.value;
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
           } else if (data.action === 'set-value') {
             // if the button is setting the donation value
             $valueInput.val(data.value);
 
             _this.clearActiveButtonState($form, 'set-value');
 
-            $('.support-form__custom-input').removeClass(
-              'support-form__button--active'
+            $('.support-form__custom-input-container').removeClass(
+              'support-form__custom-input-container--active'
             );
 
-            $button.addClass('support-form__button--active');
+            $button.addClass('ui-button--active');
+
+            // Accessibility state management for custom radio buttons
+            $form.find('[data-action="set-value"]').each((index, button) => {
+              const isSelected = button === $button[0];
+              button.setAttribute('aria-checked', isSelected.toString());
+              button.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
+          }
+        },
+        keydown(event) {
+          const $buttons = $(this)
+            .closest('.support-form')
+            .find('.support-form__button');
+          let index = $buttons.index(this);
+
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            index = (index + 1) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            index = (index - 1 + $buttons.length) % $buttons.length;
+            $buttons.eq(index).focus();
+          } else if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            $(this).trigger('click'); // Activate on Enter or Space
           }
         },
       });
@@ -96,16 +148,50 @@ export class Support {
       $form.find('.support-form__custom-input').on({
         input(event) {
           event.preventDefault();
-
           $valueInput.val(event.target.value);
-
           _this.clearActiveButtonState($form, 'set-value');
 
-          $(this).addClass('support-form__button--active');
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
+
+          // Clear ARIA radio state for value buttons when custom input is used
+          $form.find('[data-action="set-value"]').each((index, button) => {
+            button.setAttribute('aria-checked', 'false');
+            button.setAttribute('tabindex', '-1');
+          });
+        },
+        keydown(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            const inputValue = $(this).val().trim();
+            if (inputValue !== '') {
+              _this.clearActiveButtonState($form, 'set-value');
+              $(this)
+                .closest('.support-form__custom-input-container')
+                .addClass('support-form__custom-input-container--active');
+              $form.find('[data-action="set-value"]').each((index, button) => {
+                button.setAttribute('aria-checked', 'false');
+                button.setAttribute('tabindex', '-1');
+              });
+            }
+          }
+        },
+        focus() {
+          // on focus add active class to container
+          $(this)
+            .closest('.support-form__custom-input-container')
+            .addClass('support-form__custom-input-container--active');
+        },
+        blur() {
+          // on blur remove active class from container if input is empty
+          if (!$(this).val()) {
+            $(this)
+              .closest('.support-form__custom-input-container')
+              .removeClass('support-form__custom-input-container--active');
+          }
         },
       });
-
-      $form.addClass('support-form--active');
     });
   }
 
@@ -119,11 +205,9 @@ export class Support {
     if (actionType) {
       $form
         .find(`.support-form__button[data-action="${actionType}"]`)
-        .removeClass('support-form__button--active');
+        .removeClass('ui-button--active');
     } else {
-      $form
-        .find('.support-form__button')
-        .removeClass('support-form__button--active');
+      $form.find('.support-form__button').removeClass('ui-button--active');
     }
   }
 
@@ -135,13 +219,78 @@ export class Support {
    */
   setAutoValues($form, donationType = 'regular') {
     const _this = this;
+    const $buttons = $form.find('.support-form__value-option');
+    const $valueInput = $form.find('.support-form__value-input').first();
 
-    $form.find('.support-form__value-option').each((index, input) => {
-      const value =
-        _this.autovalues[`${donationType}_${$(input).data('name')}`];
+    // Clear old state before setting new one
+    _this.clearActiveButtonState($form, 'set-value');
 
-      $(input).data('value', value).text(`£${value}`);
+    // Update each button with new values
+    $buttons.each((index, inputElement) => {
+      const $input = $(inputElement);
+      const name = $input.data('name');
+      const value = _this.autovalues[`${donationType}_${name}`];
+
+      $input
+        .data('value', value)
+        .text(`£${value}`)
+        .attr('aria-checked', 'false')
+        .attr('tabindex', '-1');
     });
+
+    // Select the first button by default
+    const $first = $buttons.filter(':visible').first();
+    if ($first.length) {
+      $first
+        .addClass('ui-button--active')
+        .attr('aria-checked', 'true')
+        .attr('tabindex', '0');
+
+      $valueInput.val($first.data('value'));
+    }
+
+    const $customInput = $form.find('.support-form__custom-input');
+    const $customInputContainer = $form.find(
+      '.support-form__custom-input-container'
+    );
+    $customInput.val('');
+    $customInputContainer.removeClass('ui-button--active');
+    $customInput
+      .siblings('.support-form__custom-input-prefix')
+      .css('color', '');
+  }
+
+  updateSupportSection(data, $form) {
+    const $heading = $form.find('.support-form__dynamic-heading');
+    const $text = $form.find('.support-form__dynamic-text');
+    const overrideCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy[data.value];
+    const defaultSectionCopy =
+      WP.supportSectionCopy && WP.supportSectionCopy['main'];
+
+    if (
+      overrideCopy &&
+      (isNonEmptyString(overrideCopy.heading) ||
+        isNonEmptyString(overrideCopy.text))
+    ) {
+      const headingText = isNonEmptyString(overrideCopy.heading)
+        ? overrideCopy.heading
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)
+          ? defaultSectionCopy.heading
+          : '';
+      const textCopy = isNonEmptyString(overrideCopy.text)
+        ? overrideCopy.text
+        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)
+          ? defaultSectionCopy.text
+          : '';
+
+      if ($heading.length && headingText) {
+        $heading.text(headingText);
+      }
+      if ($text.length && textCopy) {
+        $text.text(textCopy);
+      }
+    }
   }
 
   initSupportBar() {
@@ -162,7 +311,6 @@ export class Support {
     $barOpen.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         if (_this.hasApprovalCookie) {
@@ -176,7 +324,6 @@ export class Support {
     $barClose.on({
       click(event) {
         event.preventDefault();
-
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         if (_this.hasApprovalCookie) {
@@ -186,10 +333,5 @@ export class Support {
         }
       },
     });
-  }
-
-  static numberWithCommas(x) {
-    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript#2901298
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }

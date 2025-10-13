@@ -105,20 +105,20 @@
   <div class="container">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <a href="<?php echo $url; ?>"><h4 class="fs-3-sans font-uppercase font-bold">Podcast</h4></a>
+        <a href="<?php echo $url; ?>"><h4 class="font-size-9 text-uppercase font-weight-bold">Podcast</h4></a>
       </div>
     </div>
     <div class="grid-row pb-4">
       <div class="grid-item is-xxl-24">
         <a href="<?php echo $url; ?>">
-          <h3 class="if-i-speak-banner__title">If I Speak...</h3>
+          <h3 class="if-i-speak-banner__title font-weight-bold">If I Speak...</h3>
         </a>
       </div>
     </div>
     <div class="grid-row pb-4">
-      <div class="if-i-speak-banner__off-smaller grid-item is-xxl-8 fs-6">
-        <span class="font-uppercase fs-4-sans">with</span> Moya Lothian-McLean<br>
-        <span class="font-uppercase fs-4-sans">and</span> Ash Sarkar
+      <div class="if-i-speak-banner__off-smaller grid-item is-xxl-8 font-size-12 font-weight-bold">
+        <span class="text-uppercase font-size-10">with</span> Moya Lothian-McLean<br>
+        <span class="text-uppercase font-size-10">and</span> Ash Sarkar
       </div>
       <div class="grid-item is-m-12 is-l-6 is-xxl-8">
         <a href="<?php echo $url; ?>">
@@ -126,12 +126,12 @@
         </a>
       </div>
       <div class="if-i-speak-banner__cta-container grid-item is-m-12 is-l-10 is-xxl-8 text-align-right">
-        <div class="if-i-speak-banner__on-smaller mb-2 fs-6 fs-s-5-sans font-weight-bold">
-          <span class="font-uppercase fs-4-sans">with</span> Moya Lothian-McLean<br>
-          <span class="font-uppercase fs-4-sans">and</span> Ash Sarkar
+        <div class="if-i-speak-banner__on-smaller mb-2 font-size-12 font-size-s-11 font-weight-bold">
+          <span class="text-uppercase font-size-10">with</span> Moya Lothian-McLean<br>
+          <span class="text-uppercase font-size-10">and</span> Ash Sarkar
         </div>
 
-        <a href="<?php echo $url; ?>"><p class="fs-6 font-weight-bold mb-3">New episodes out every Friday</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-12 font-weight-bold mb-3">New episodes out every Friday</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--red">Listen Now</a>
       </div>
       <div class="grid-item is-xxl-24">

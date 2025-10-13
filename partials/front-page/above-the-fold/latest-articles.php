@@ -15,6 +15,20 @@
   $number_of_articles = $recent_articles->post_count;
   $i = 0;
 
+  if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
+    $post_id = $apology_post[0]->ID;
+  ?>
+  <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
+    <div class="layout-split-level font-size-8 font-weight-bold mb-1">
+      <span class="ui-tag">Correction</span>
+    </div>
+    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
+      <h4 class="post__title font-size-11 font-size-s-12 font-condensed"><?php echo get_the_title($post_id); ?></h4>
+    </a>
+  </div>
+  <?php
+  }
+
   if ($recent_articles->have_posts()) {
     while ($recent_articles->have_posts()) {
       $recent_articles->the_post();

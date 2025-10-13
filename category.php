@@ -29,7 +29,7 @@ if ($category->slug === 'video') {
         if (in_array($category->slug, array('articles', 'audio', 'video'))) {
         ?>
       <div class="grid-item is-s-24 flex-item-xxl-6">
-        <span class="font-uppercase font-bold"><?php echo $category->name; ?></span> <?php
+        <span class="text-uppercase font-weight-bold"><?php echo $category->name; ?></span> <?php
           wp_nav_menu(
             array(
               'theme_location' => $category->slug . '-archive-menu',
@@ -50,7 +50,7 @@ if ($category->slug === 'video') {
             echo wp_get_attachment_image($logo_id, 'col12', false, array('class' => 'category-archive__logo'));
           } else {
         ?>
-        <h4 class="fs-4-sans"><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
+        <h4 class="font-size-10 font-weight-bold"><a href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a></h4>
       <?php
         }
       ?>
@@ -97,8 +97,8 @@ if ($category->slug === 'video') {
             <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
           </div>
           <a href="<?php the_permalink(); ?>">
-            <h6 class="js-fix-widows mt-2 fs-7"><?php the_title(); ?></h6>
-            <h5 class="fs-6 mt-2">
+            <h6 class="text-wrap-pretty mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
+            <h5 class="font-size-12 font-weight-bold mt-2">
               <?php render_standfirst($post->ID); ?>
             </h5>
           </a>
@@ -127,7 +127,7 @@ if ($category->slug === 'video') {
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows fs-3-sans font-bold mt-1"><?php the_title(); ?></h6>
+              <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1"><?php the_title(); ?></h6>
             </a>
           </div>
           <?php

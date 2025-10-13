@@ -34,12 +34,12 @@ if( have_posts() ) {
     <div class="container mt-4 mb-6">
       <div class="grid-row mb-4">
         <div class="grid-item is-xxl-24">
-          <h4 class="fs-3-sans font-uppercase font-bold">Events</h4>
+          <h4 class="font-size-9 text-uppercase font-weight-bold">Events</h4>
         </div>
       </div>
       <div class="grid-row mb-5">
         <div class="grid-item is-xxl-24 text-align-center">
-          <h1 class="fs-8"><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
+          <h1 class="font-size-15 font-weight-bold"><?php echo $time->format('j F Y'); ?>: <?php the_title(); ?></h1>
         </div>
       </div>
       <div class="grid-row mb-4">
@@ -64,20 +64,20 @@ if( have_posts() ) {
       <div class="grid-row mb-4">
         <div class="grid-item offset-s-0 is-s-8 offset-xxl-2 is-xxl-8">
           <div class="mb-4">
-            <h5 class="fs-4-sans mb-2">Time:</h5>
-            <h3 class="fs-5-sans font-weight-bold"><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?></h3>
-            <h3 class="fs-5-sans font-weight-bold"><?php echo $time->format('H:i'); ?></h3>
+            <h5 class="font-size-10 font-weight-bold mb-2">Time:</h5>
+            <h3 class="font-size-11 font-weight-bold"><?php echo $time->format('j'); ?><sup><?php echo $time->format('S'); ?></sup><?php echo $time->format(' F Y'); ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php echo $time->format('H:i'); ?></h3>
           </div>
         <?php
           if ($venue_name) {
         ?>
           <div class="mb-4">
-            <h5 class="fs-4-sans mb-2">Venue:</h5>
+            <h5 class="font-size-10 font-weight-bold mb-2">Venue:</h5>
             <h3><?php echo $venue_name; ?></h3>
         <?php
             if ($venue_postcode) {
         ?>
-            <h3 class="fs-5-sans font-weight-bold"><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
+            <h3 class="font-size-11 font-weight-bold"><a href="https://www.google.com/maps/search/<?php echo urlencode($venue_postcode); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a></h3>
         <?php
             }
         ?>
@@ -88,11 +88,11 @@ if( have_posts() ) {
           if ($speakers) {
         ?>
           <div class="mb-4">
-            <h5 class="fs-4-sans mb-2">Speakers:</h5>
+            <h5 class="font-size-10 font-weight-bold mb-2">Speakers:</h5>
         <?php
           foreach ($speakers as $speaker) {
         ?>
-            <h3 class="fs-5-sans font-weight-bold"><?php echo $speaker; ?></h3>
+            <h3 class="font-size-11 font-weight-bold"><?php echo $speaker; ?></h3>
         <?php
           }
         ?>
@@ -103,15 +103,15 @@ if( have_posts() ) {
           if ($host) {
         ?>
           <div class="mb-4">
-            <h5 class="fs-4-sans mb-2">Host:</h5>
-            <h3 class="fs-5-sans font-weight-bold"><?php echo $host; ?></h3>
+            <h5 class="font-size-10 font-weight-bold mb-2">Host:</h5>
+            <h3 class="font-size-11 font-weight-bold"><?php echo $host; ?></h3>
           </div>
         <?php
           }
 
           if ($is_sold_out) {
         ?>
-            <h4 class="fs-4-sans">Sold Out!</h4>
+            <h4 class="font-size-10 font-weight-bold">Sold Out!</h4>
         <?php
           }
 
@@ -122,7 +122,7 @@ if( have_posts() ) {
           }
         ?>
         </div>
-        <div class="grid-item is-s-16 is-xxl-12 text-copy fs-4-serif">
+        <div class="grid-item is-s-16 is-xxl-12 text-copy font-size-10 font-serif">
           <?php the_content(); ?>
         </div>
       </div>
@@ -160,7 +160,7 @@ if( have_posts() ) {
 <?php
 } ?>
   <?php
-    get_template_part('partials/support-section');
+    get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
   ?>
 </main>
 <?php

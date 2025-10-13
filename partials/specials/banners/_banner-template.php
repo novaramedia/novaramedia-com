@@ -44,11 +44,11 @@
     <div class="grid-row pb-4">
       <div class="grid-item is-xxl-24 is-m-8 is-xxl-10 mb-s-3">
         <a href="<?php echo $url; ?>">
-          <h3 class="fs-6">Title Text Here or SVG asset</h3>
+          <h3 class="font-size-12 font-weight-bold">Title Text Here or SVG asset</h3>
         </a>
       </div>
       <div class="grid-item is-xxl-24 is-m-8 is-xxl-10">
-        <a href="<?php echo $url; ?>"><p class="fs-5-sans font-bold">Strapline here</p></a>
+        <a href="<?php echo $url; ?>"><p class="font-size-11 font-weight-bold">Strapline here</p></a>
         <a href="<?php echo $url; ?>" class="ui-button ui-button--white">CTA Button</a>
       </div>
     </div>

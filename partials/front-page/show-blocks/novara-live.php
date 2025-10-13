@@ -18,8 +18,8 @@
       <div class="grid-item is-xxl-24 mb-4">
         <a href="<?php echo $category_link; ?>">
           <div class="layout-split-level">
-            <h3 class="fs-7 layout-flex-no-shrink mr-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
-            <div class="layout-flex-grow layout-overflow-hidden fs-7 font-weight-regular">
+            <h3 class="font-size-13 font-weight-bold layout-flex-no-shrink mr-4"><span class="ui-dot ui-dot--red"></span>Novara Live</h3>
+            <div class="layout-flex-grow layout-overflow-hidden font-size-13">
               <div class="ui-ticker">
                 <div class="ui-ticker__fade-left"></div>
                 <div class="ui-ticker__fade-right"></div>
@@ -52,8 +52,8 @@
             </div>
             <div class="grid-item is-l-24 is-xxl-8 mt-l-3">
               <a href="<?php the_permalink(); ?>" class="ui-hover">
-                <h6 class="fs-7"><?php the_title(); ?></h6>
-                <div class="fs-4-sans font-weight-regular text-paragraph-breaks mt-3">
+                <h6 class="font-size-13 font-weight-bold"><?php the_title(); ?></h6>
+                <div class="font-size-10 text-paragraph-breaks mt-3">
                   <?php render_short_description($post->ID); ?>
                 </div>
               </a>
@@ -80,8 +80,8 @@
       </div>
       <div class="grid-item is-s-24 is-l-9 is-xl-7 is-xxl-6 mt-s-5">
         <a href="<?php echo $category_link; ?>">
-          <div class="layout-split-level fs-2 mb-4">
-            <h5 class="font-bold font-uppercase">Full Episodes</h5>
+          <div class="layout-split-level font-size-8 font-weight-bold mb-4">
+            <h5 class="font-weight-bold text-uppercase">Full Episodes</h5>
             <span>See All</span>
           </div>
         </a>
@@ -107,7 +107,7 @@
                   </a>
                 </div>
                 <div class="grid-item is-s-14 is-xxl-16">
-                  <div class="layout-split-level fs-2 mb-1">
+                  <div class="layout-split-level font-size-8 font-weight-bold mb-1">
                     <?php render_post_ui_tags($post->ID, false, true, 'no-fill--white'); ?>
                     <a href="<?php the_permalink(); ?>" class="ui-hover"><?php if ($i < 6) { ?>
                       <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
@@ -116,7 +116,7 @@
                     <?php } ?></a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <h4 class="post__title fs-2 fs-s-4-sans font-bold">
+                    <h4 class="post__title font-size-8 font-size-S-10 font-weight-bold">
                       <?php the_title(); ?>
                     </h4>
                   </a>

@@ -1,7 +1,12 @@
+@import '../../node_modules/nm-stylus-library/variables.styl';
 @import '~kouto-swiss/index.styl'
-@import "helpers"
+@import '../../node_modules/nm-stylus-library/utility/helpers';
+@import '../../node_modules/nm-stylus-library/functions/grid-function-new';
+@import '../../node_modules/nm-stylus-library/modules/backgrounds.styl';
+
+
+// this should be deprecated as an implementation by @4.3.0
 @import "grid-functions"
-@import "grid-function-new"
 
 // ******************************************************
 
@@ -28,6 +33,9 @@ meyer-reset()
 box-sizing-reset()
 normalize()
 
+h1
+  margin: 0 // to counter normalize.css. maybe we can remove normalize.css?
+
 // ******************************************************
 
 // GRID
@@ -36,34 +44,6 @@ $cols = 24
 $col = 42px
 
 $gutter = 16px
-
-html
-  --grid-gutter: 1rem
-  --corner-radius: 2px
-  --color-white-soft: rgb(253, 253, 253)
-  --color-white-soft-transparent: rgba(253, 253, 253, .5)
-  --color-black-soft: rgb(14, 14, 14)
-  --color-black-soft-transparent: rgba(14, 14, 14, .5)
-  --color-red: #FF1941
-  --color-yellow: #EBB800
-  --color-green: #5FCC00
-  --color-green-neon: #CADB2A
-  --color-green-racing: #55846B
-  --color-blue: rgb(84, 144, 235)
-  --color-blue-neon: #0018F0
-  --color-blue-light: #CAE5FF
-  --color-teal: #E3FFFF
-  --color-lilac: #B1B1FF
-  --color-gray: rgb(150,150,150)
-  --color-gray-transparent: rgba(150,150,150, .5)
-  --color-gray-light: rgb(190,190,190) // Max suggesting #bab8b8 = rgb(186, 184, 184)
-  --color-gray-light-transparent: rgba(190,190,190, .5)
-  --color-gray-extra-light: #EDEAEA
-  --font-family-sans: font-stack('Helvetica Neue')
-  --transition-speed-slow: 1111ms
-  --transition-speed-medium: 420ms
-  --transition-speed-quick: 140ms
-  --transition-speed-ultra: 33ms
 
 body
   overscroll-behavior: none
@@ -88,252 +68,8 @@ for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
-// ******************************************************
-
-// VARIABLES
-
-$golden-ratio = 1.61803398875
-
-// START DEPRECATED
-$margin-small = ($gutter)
-$margin-tiny = ($gutter / 2)
-$margin-micro = ($gutter / (2 * $golden-ratio))
-$margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
-
-$font-size-basic = 14px
-$font-size-larger = 1.3rem
-$font-size-smaller = .8rem
-$font-size-h3 = golden-ratio(1rem , .7)
-$font-size-h2 = golden-ratio(1rem , 1.1)
-$font-size-h1 = golden-ratio(1rem , 2.1)
-
-$font-leading-basic = 1.4
-$font-leading-tighter = 1.15
-$font-leading-larger = 1.55
-
-$font-tracking-basic = 0
-$font-tracking-medium = 0.0075rem
-$font-tracking-wider = 0.025em
-
-$color-black-soft = rgb(14, 14, 14)
-$color-white-soft = rgb(253, 253, 253)
-$color-white-soft-transparent = rgba(253, 253, 253, .5)
-
-$color-black--hover = rgb(61, 61, 61)
-
-$color-red = rgb(220, 0, 5) // Mine
-$color-red-dark = #A80003
-$color-blue = rgb(84, 144, 235)
-
-$border-width = 2px
-
-$duration-medium-transitions = 420ms
-$duration-quick-transitions = $duration-medium-transitions * .333
-$duration-form-transitions = $duration-medium-transitions
-
-$font-serif = font-stack('Georgia')
-$font-sans = font-stack('Helvetica Neue')
-// END DEPRECATED
-
-$breakpoint-s = 759px
-$breakpoint-m = 910px
-$breakpoint-l = 1104px
-$breakpoint-xl = 1408px
-
-// ******************************************************
-
-// TYPOGRAPHY
-
-// now imported as modules/typography.styl
-
-  // COLOR RULES
-
-.font-color-white
-  color: var(--color-white-soft)
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-
-.font-color-black
-  color: var(--color-black-soft)
-
-.font-color-blue-neon
-  color: var(--color-blue-neon)
-
-.font-color-green-racing
-  color: var(--color-green-racing)
-
-.font-color-red
-  color: var(--color-red)
-
-  // SHADOWS
-
-.text-shadow-white
-  text-shadow: 0 0 20px var(--color-white-soft-transparent)
-
-.text-shadow-light-gray
-  text-shadow: 0 0 20px var(--color-gray-light-transparent)
-
-.text-shadow-gray
-  text-shadow: 0 0 20px var(--color-gray-transparent)
-
-  // TEXT RULES
-
-.text-overflow-ellipsis
-  overflow: ellipsis
-
-.text-align-left
-  text-align: left
-
-.text-align-right
-  text-align: right
-
-.text-align-center
-  text-align: center
-
-.text-links-underlined
-  a
-    text-decoration: underline
-    &:hover
-      text-decoration: none
-
-article
-  ul, ol
-    margin-top: 2rem
-    margin-bottom: 2rem
-  ul
-    li
-      list-style: disc inside
-  ol
-    li
-      list-style: decimal inside
-
-.text-copy
-  p
-    font-family: $font-serif
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-  ul, ol
-    font-size: $font-size-larger
-    line-height: $font-leading-larger
-
-.text-copy, .page-copy
-  .twitter-tweet, .instagram-media, .oembed-element
-    margin: 2rem auto !important
-  p
-    margin-bottom: 1rem
-  blockquote
-    font-family: $font-sans
-    margin: 2rem
-    p
-      font-family: $font-sans
-  h1,h2,h3,h4,h5,h6
-    margin-top: 1.5rem
-    margin-bottom: 1.5rem
-  a
-    color: $color-blue
-  img, figure, .wp-caption
-    max-width: 100% !important
-    display: block
-    margin: 2rem auto
-  .wp-caption
-    &.alignnone
-      text-align: center
-    img
-      margin: 0 auto
-    .wp-caption-text
-      text-align: left
-      font-family: $font-sans
-      font-size: $font-size-smaller
-      margin-top: $margin-tiny
-
-.wp-video + .wp-caption
-  margin-top: -1rem
-
-.text-copy-max-width
-  max-width: ( 18 * $col ) + ( 17  * $gutter )
-  margin: 0 auto
-
-// LISTS
-
-.list--links
-  li
-    list-style: none
-    margin-bottom: .5rem
-    &:last-child
-      margin-bottom: 0
-  a
-    text-decoration: underline
-    text-underline-offset: 2px
-    text-decoration-color: $color-red
-    transition: text-decoration-color $duration-form-transitions
-    &:hover
-      text-decoration-color: transparent
-
-  // LINKS
-
-a
-  color: inherit
-  text-decoration: none
-
-// ******************************************************
 
 // BACKGROUNDS
-
-.background-black
-  background-color: var(--color-black-soft)
-
-.background-white
-  background-color: var(--color-white-soft)
-
-.background-gray
-  background-color: var(--color-gray)
-
-.background-light-gray
-  background-color: var(--color-gray-light)
-
-.background-red
-  background-color: var(--color-red)
-
-.background-yellow
-  background-color: var(--color-yellow)
-
-.background-green
-  background-color: var(--color-green)
-
-.background-green-neon
-  background-color: var(--color-green-neon)
-
-.background-light-blue
-  background-color: var(--color-blue-light)
-
-.background-neon-blue
-  background-color: var(--color-blue-neon)
-
-.background-teal
-  background-color: var(--color-teal)
-
-.background-lilac
-  background-color: var(--color-lilac)
-
-.background-light-purple
-  background-color: var(--color-lilac)
-
-.background-acfm-pink
-  background-color: #FC16CB
-
-.background-cover-image
-  position: relative
-  background-size: cover
-  background-position: center
-  background-repeat: no-repeat
-
-.background-cover-overlay
-  position: absolute
-  top: 0
-  width: 100%
-  height: 100%
 
 .background-support-texture, .background-support-texture-alt
   background-size: cover
@@ -356,11 +92,24 @@ a
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
 
 // ******************************************************
+// START DEPRECATED
 
-// UI ELEMENTS / UX HELPERS
+$margin-small = ($gutter)
+$margin-tiny = ($gutter / 2)
+$margin-micro = ($gutter / (2 * $golden-ratio))
+$margin-basic = ($gutter * 2)
+$margin-mid = ($gutter * 3.5)
+$margin-large = ($gutter * 5)
 
-.icon-large:before // is this depreciated? check
-  font-size: $font-size-h3
+$color-black-soft = rgb(14, 14, 14)
+$color-white-soft = rgb(253, 253, 253)
+$color-white-soft-transparent = rgba(253, 253, 253, .5)
+
+$color-red = rgb(220, 0, 5) // Mine
+$color-red-dark = #A80003
+$color-blue = rgb(84, 144, 235)
+
+// END DEPRECATED
 
 // ******************************************************
 
@@ -404,7 +153,6 @@ img
 
 .only-mobile
   display: none
-
 // ******************************************************
 
 // MARGINS AND PADDING
@@ -536,55 +284,10 @@ img
 .support-page__hero-wrapper
   padding: 70px 0
 
-.support-page__content-copy
-  font-family: $font-serif
-  font-size: 18px
-  line-height: $font-leading-larger
-  h3
-    font-family: $font-sans
-    font-size: 31.5px
-    line-height: 38.46px
-    margin-bottom: 1rem
-
 #other-donation-methods
   svg
     height: 2rem
     width: auto
-
-// ******************************************************
-
-// RADIO PLAYER
-
-#radio-player
-  display: none
-
-.jp-controls-holder
-  margin-right: $margin-tiny
-
-.jp-block
-  display: block
-  height: $margin-basic
-  width: 100%
-  text-align: center
-  border: 2px solid $color-white-soft
-
-.jp-button
-  text-align: center
-
-.jp-stop
-  display: none
-
-.jp-volume-bar
-  position: relative
-
-.jp-button, .jp-volume-bar
-  &:hover
-    cursor: pointer
-
-.jp-volume-bar-value
-  background-color: white
-  position:relative
-  height: 100%
 
 // ******************************************************
 
@@ -622,35 +325,6 @@ img
 
 // ******************************************************
 
-// FRONT PAGE
-
-// SIGNUPS
-
-.front-page-signup
-  display: flex
-  align-items: flex-start
-
-.front-page-signup__image
-  width: 25%
-  padding-right: 1.25rem
-  max-width: 80px
-  img
-    display: block
-
-.front-page-signup__text
-  width: 73%
-  p
-    margin-bottom: 0
-
-// ABOVE THE FOLD
-
-.front-page-above-the-fold__column
-  .col
-    margin-left: 0
-    margin-right: 0
-
-// ******************************************************
-
 // INDEXES
 
 .post-col12-image
@@ -663,15 +337,6 @@ img
   top: 0
   right: 0
   background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%)
-
-.post-col12-text
-  position: absolute
-  bottom: 0
-  left: 0
-  padding: $margin-small + $margin-tiny
-  max-width: 550px
-  h3
-    font-size: $font-size-h2
 
 // ******************************************************
 
@@ -801,13 +466,21 @@ img
 
 // ******************************************************
 
+.text-wrap-pretty
+  text-wrap: pretty
+
+.text-wrap-balance
+  text-wrap: balance
+
+// ******************************************************
+
 // MODULES
 
-@import "modules/typography"
-@import "modules/spacing"
-@import "modules/layout"
-@import "modules/ui"
-@import "modules/carousel"
+@import '../../node_modules/nm-stylus-library/modules/typography';
+@import '../../node_modules/nm-stylus-library/modules/spacing';
+@import '../../node_modules/nm-stylus-library/modules/layout';
+@import '../../node_modules/nm-stylus-library/modules/ui';
+@import '../../node_modules/nm-stylus-library/modules/carousel';
 
 // LAYOUTS
 
@@ -858,3 +531,5 @@ img
   grid-maker('s')
 
   @import "responsive/s"
+
+@import "upstream-to-library"

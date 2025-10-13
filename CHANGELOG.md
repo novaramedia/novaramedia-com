@@ -9,11 +9,115 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add Github Action workflow to notify to Slack on releases
+
+### Changed
+
+- Rebuild the support form, with new condensed width version
+- Updated all dev and front end dependencies (`chalk` pinned at v4)
+- Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
+- Migrate newsletter functionality to custom post type not page templates
+
+## [4.2.10] - 2025-05-22
+
+### Added
+
+- Function that accepts an array to support multiple external redirects to handle simple path-based redirects.
+- Redirect from https://novaramedia.com/asksophie to this google form https://docs.google.com/forms/d/e/1FAIpQLSegJV5jED2FhIUS7_rryZC6V2Y65W7W-kE3tXGMH7zr4sl_uQ/viewform
+
+## [4.2.9] - 2025-05-21
+
+### Added
+
+- Redirect to red-flags category https://novaramedia.com/redflags to https://novaramedia.com/category/articles/red-flags/
+
+## [4.2.8] - 2025-04-30
+
+### Fixed
+
+- Increased the margin under the committed archive post title
+
+## [4.2.7] - 2025-04-21
+
+### Added
+
+- Committed (podcast series) archive page and banner
+
+## Changed
+
+- podcast_series_pre_get_posts() to look at series categories array
+- render_ui_tag() to render the UI tags
+
+## [4.2.6] - 2025-01-13
+
+### Fixed
+
+- If I Speak title onto one line and image to contain rather than cover
+
+## [4.2.5] - 2025-01-13
+
+### Fixed
+
+- Added a margin to the bottom of the heading on larger screens to stop it overlapping text below
+
+### Changed
+
+- included NM stylus library
+
+## [4.2.4] - 2024-12-02
+
+### Changed
+
+- Timestamp for job posts so they remain visible until 23:59:59 on deadline day
+- Removed the lines that told applicants to email in their application
+
+### Added
+
+- Support video section
+- Config for PHPCS that uses WP Standards with some of our own styles and a little more tolerance
+
+### Fixed
+
+- nm_is_articles() supports posts where Articles hasnt been selected but a child category has
+
+## [4.2.3] - 2024-11-01
+
+### Fixed
+
+- Uncaught false returns with get_the_sub_category()
+
+## [4.2.2] - 2024-10-14
+
+### Changed
+
+- Increase root type size to 16px
+- Have only 1 heading type size for latest articles section above the fold
+
+### Fixed
+
+- Incorrect letter spacing values on new type tooling
+
+## [4.2.1] - 2024-09-30
+
+### Fixed
+
+- Added styles for articles headings to fix missing function from type styles migration
+
+## [4.2.0] - 2024-09-22
+
+### Added
+
+- Hardcoded temporary apology notice. To automatically hide after term. Can potentially be recycled in future.
 - Wordpress core cache auto-flushed when front page options are updated. This should ideally improve cache busting for changing e.g. featured posts above the fold
 
 ### Changed
 
-- Migrate newsletter functionality to custom post type not page templates
+- Refactor typography declarations to separate sizes from weights and fonts
+- Refactor stylus to use nm-stylus-library via packages
+
+### Fixed
+
+- Video titles with standfirsts in same line now use a renderer and don't display stray full stops
 
 ## [4.1.1] - 2024-07-01
 

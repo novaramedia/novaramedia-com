@@ -20,7 +20,7 @@
 </section>
 <?php
     if ($fundraiser_expiration > time()) {
-      get_template_part('partials/support-section');
+      get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
     }
   }
 ?>

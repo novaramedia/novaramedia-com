@@ -62,12 +62,12 @@
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
-        <h3 class="fs-8 fs-s-6 mb-4 js-fix-widows"><?php echo $headline; ?></h3>
-        <p class="fs-6 fs-s-4-sans mr-6">
+        <h3 class="font-size-15 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo $headline; ?></h3>
+        <p class="font-size-12 font-size-s-10 font-weight-bold mr-6">
           <?php echo $copy; ?>
         </p>
         <?php if (!$hide_discover) { ?>
-          <div class="mt-3 fs-2">
+          <div class="mt-3 font-size-8 font-weight-bold">
             <a href="<?php echo site_url('newsletters/'); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
           </div>
         <?php } ?>

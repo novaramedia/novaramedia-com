@@ -1,30 +1,229 @@
-// SUPPORT SECTION
+// SUPPORT FORM LAYOUT
+
+// =============================================================================
+// Base Form Container
+// =============================================================================
 
 .support-form
   display: block
+
   .support-form__inputs
     opacity: 0
-    transition: opacity var(--transition-speed-medium)
+
   &--active
     .support-form__inputs
       opacity: 1
 
-.support-form__button, .support-form__custom-input, .support-form__submit
-  color: var(--color-red)
-  background-color: var(--color-white-soft)
-  font-weight: normal
-  text-align: center
-  &:hover, &--active
+.support-form__padding-container
+  padding: 1.5rem 1rem
+
+  @media (max-width: $breakpoint-s)
+    padding: .5rem 1.5rem 1.5rem 1.5rem
+
+  .support-section--condensed &
+    padding: .5rem 1.5rem 1.5rem 1.5rem
+
+// =============================================================================
+// Buttons (Base Styles)
+// =============================================================================
+
+.support-form__button
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
+
+  &:hover:not(:focus):not(.ui-button--active)
+    color: var(--color-white-soft-transparent)
+    border-color: var(--color-white-soft-transparent)
+
+  &:active
+    background-color: var(--color-red)
+    color: var(--color-white-soft)
+    border-color: var(--color-red)
+
+  &.ui-button--active
+    color: var(--color-black-soft)
+    background-color: var(--color-white-soft)
+    border-color: var(--color-white-soft)
+
+// =============================================================================
+// Schedule Components
+// =============================================================================
+
+.support-form__schedule-desktop
+  display: flex
+
+.support-form__schedule-option
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
+
+.support-form__schedule-mobile
+  display: none
+  background-color: var(--color-gray-base)
+  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
+  flex-direction: row
+  justify-content: center
+
+  .support-form__button
+    background-color: var(--color-gray-base)
+    color: var(--color-black-soft)
+
+    &:hover:not(:focus):not(.ui-button--active)
+      background-color: var(--color-gray-base)
+      color: var(--color-gray)
+
+    &.ui-button--active
+      color: var(--color-white-soft)
+      background-color: var(--color-red)
+
+      &:hover
+        color: var(--color-white-soft)
+        background-color: var(--color-red)
+
+  .support-form__schedule-option
+    border: none !important
+    border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
+
+  @media (max-width: $breakpoint-s)
+    display: flex
+
+  .support-section--condensed &
+    display: flex
+
+// Schedule option variants
+.support-form__schedule-option-left
+  border-radius: var(--corner-radius-large) 0px 0px var(--corner-radius-large)
+
+.support-form__schedule-option-right
+  border-radius: 0px var(--corner-radius-large) var(--corner-radius-large) 0px
+
+// Tab schedule buttons (desktop)
+.support-form__tab-schedule-buttons
+  .support-form__button
+    color: var(--color-black-soft)
+
+    &:hover:not(:focus):not(.ui-button--active)
+      color: var(--color-gray)
+
+    &.ui-button--active
+      color: var(--color-white-soft)
+      background-color: var(--color-red)
+
+      &:hover
+        color: var(--color-white-soft)
+        background-color: var(--color-red)
+
+// =============================================================================
+// Custom Input Component
+// =============================================================================
+
+.support-form__custom-input-container
+  .support-form__custom-input
+    text-align: center
+    padding-left: 30px
+    background-color: transparent
     color: var(--color-white-soft)
     background-color: var(--color-red)
     border-color: var(--color-white-soft)
 
-// .support-form__custom-input::placeholder
-//   padding-left: 5px
-
-.support-form__custom-input
-  &::placeholder
-    color: var(--color-red)
-  &:hover, &.support-form__button--active
     &::placeholder
       color: var(--color-white-soft)
+
+  &:hover
+    opacity: 0.5
+
+  &--active
+    .support-form__custom-input
+      background-color: var(--color-white-soft)
+      color: var(--color-black-soft)
+      outline: none
+
+      &::placeholder
+        color: var(--color-black-soft)
+
+    .support-form__custom-input-prefix
+      color: var(--color-black-soft)
+
+    &:hover
+      opacity: 1
+
+.support-form__custom-input-prefix
+  position: absolute
+  top: calc('50% - 1px')
+  left: 12px
+  transform: translateY(-50%)
+  color: var(--color-white-soft)
+
+// =============================================================================
+// Layout Components
+// =============================================================================
+
+.support-form__left-column-desktop
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  flex-wrap: wrap
+
+.support-form__payment-type-desktop
+  display: flex
+
+.support-form__payment-type-mobile
+  display: none
+  flex-direction: row
+  justify-content: center
+
+  @media (max-width: $breakpoint-s)
+    display: flex
+
+  .support-section--condensed &
+    display: flex
+
+.support-form__payment-type
+  vertical-align: bottom
+  height: 1.6rem
+
+// =============================================================================
+// Mobile/Responsive Display Controls
+// =============================================================================
+
+.support-form__text-mobile,
+.support-form__buttons-mobile
+  display: none
+
+  @media (max-width: $breakpoint-s)
+    display: block
+
+  .support-section--condensed &
+    display: block
+
+// Hide desktop elements on mobile
+@media (max-width: $breakpoint-s)
+  .support-form__text-desktop,
+  .support-form__schedule-desktop,
+  .support-form__payment-type-desktop,
+  .support-form__buttons-desktop
+    display: none
+
+  .support-form
+    .ui-button:active
+      opacity: 1 !important
+      filter: none !important
+      -ms-filter: none !important
+
+.support-section--condensed
+  .support-form__desktop-container
+    display: none
+
+// =============================================================================
+// Modifier Classes
+// =============================================================================
+
+// Shows a white background for the schedule tab in the mobile or condensed view. This is for usage on non-white backgrounds.
+.support-section--white-mobile-schedule
+  .support-form__schedule-mobile
+    background-color: var(--color-white-soft)
+
+    .support-form__button
+      background-color: var(--color-white-soft)
+
+      &:hover:not(:focus):not(.ui-button--active)
+        background-color: var(--color-white-soft)
