@@ -1,8 +1,30 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
+/**
+ * Get the correct Netlify function URL based on environment.
+ *
+ * @return string The Netlify function URL.
+ */
+function nm_get_netlify_url() {
+  $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
+
+  if ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === 'localhost:8888' ) { // for local dev
+    $netlify = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+  } elseif ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === 'stg-novaramediacom-staging.kinsta.cloud' ) { // for staging, will always fail. Could spin up the netlify function on staging to test
+    $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
+  }
+
+  return $netlify;
+}
+
 /**
  * Redirects /committed to /category/committed for SEO purposes.
  *
  * @return void
+ * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  */
 function redirect_committed_custom_url() {
   if ( isset( $_SERVER['REQUEST_URI'] ) ) {
