@@ -54,8 +54,14 @@ if ( ! empty( $args['hide-discover'] ) ) {
 <div class="email-signup mt-4 mb-4">
   <div class="container">
     <div class="grid-row">
+      <?php
+      if ( $background_color !== 'white' ) {
+        ?>
       <div class="grid-item is-xxl-24">
         <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box ui-backgrounded-box-padding">
+        <?php
+      }
+      ?>
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo $headline; ?></h3>
             <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
@@ -76,7 +82,13 @@ if ( ! empty( $args['hide-discover'] ) ) {
             </div>
           <?php } ?>
         </div>
+        <?php
+        if ( $background_color !== 'white' ) {
+          ?>
       </div>
     </div>
+          <?php
+        }
+        ?>
   </div>
 </div>
