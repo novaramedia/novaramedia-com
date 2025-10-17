@@ -19,10 +19,10 @@ if ( have_posts() ) {
     $support_override = ! empty( $meta['_nm_support_text'] ) ? $meta['_nm_support_text'][0] : false;
 
     $settings_title_classes = array(
-      'huge'    => 'font-size-s-7 font-size-m-6 font-size-l-7 font-size-8',
-      'big'     => 'font-size-s-7 font-size-m-5 font-size-xl-6 font-size-7',
-      'medium'  => 'font-size-s-7 font-size-6',
-      'smaller' => 'font-size-s-6 font-size-5',
+      'huge'    => 'font-size-17 font-size-s-15',
+      'big'     => 'font-size-17 font-size-s-15',
+      'medium'  => 'font-size-17 font-size-s-15',
+      'smaller' => 'font-size-17 font-size-s-15',
     );
     ?>
   <article id="page">
@@ -31,13 +31,13 @@ if ( have_posts() ) {
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <a href="<?php echo get_post_type_archive_link( 'newsletter' ); ?>">
-              <h4 class="fs-3-sans font-uppercase font-bold">Newsletter</h4>
+              <h4 class="font-size-10 font-weight-bold text-uppercase">Newsletter</h4>
             </a>
-            <h1 class="
+            <h1 class="font-weight-bold
             <?php
               echo $title_size ? $settings_title_classes[ $title_size ] : $settings_title_classes['medium'];
             ?>
-            mt-4"><?php the_title(); ?></h1>
+            mt-2"><?php the_title(); ?></h1>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ if ( have_posts() ) {
           ?>
         </div>
         <div class="grid-item offset-s-0 is-s-24 offset-m-1 is-m-20 is-xxl-12">
-          <div class="font-size-3 font-semibold mb-4">
+          <div class="font-size-12 font-weight-semibold mb-4">
             <?php the_content(); ?>
           </div>
           <?php
@@ -69,21 +69,29 @@ if ( have_posts() ) {
         </div>
       </div>
     </div>
-  </article>
     <?php
-  }
-}
-
-if ( $support_override ) {
-  get_template_part(
+    if ( $support_override ) {
+      get_template_part(
         'partials/support-section',
         null,
         array(
-    'override_text' => $support_override,
-  )
-        );
-} else {
-  get_template_part( 'partials/support-section' );
+          'override_text'     => $support_override,
+          'container_classes' => 'mb-4',
+        )
+      );
+    } else {
+      get_template_part(
+        'partials/support-section',
+        null,
+        array(
+          'container_classes' => 'mb-4',
+        )
+      );
+    }
+    ?>
+    </article>
+    <?php
+  }
 }
 ?>
 </main>
