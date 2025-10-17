@@ -63,9 +63,7 @@ if ( have_posts() ) {
           </div>
           <?php
           if ( $mailchimp_key ) {
-            $netlify_url = nm_get_netlify_url();
-
-            render_mailchimp_signup_form( $mailchimp_key, $netlify_url, 'white', 'black' );
+            render_mailchimp_signup_form( $mailchimp_key, 'white', 'black' );
           }
           ?>
         </div>

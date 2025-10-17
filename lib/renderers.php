@@ -2,15 +2,16 @@
 /**
  * Renders a Mailchimp signup form.
  *
- * @param string $netlify_url The Netlify URL.
  * @param string $mailchimp_key The Mailchimp key.
  * @param string $background_color The background color. Default is 'black'.
  * @param string $button_color The button color. Default is 'red'.
  */
-function render_mailchimp_signup_form( $netlify_url, $mailchimp_key, $background_color = 'black', $button_color = 'red' ) {
+function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red' ) {
   if ( ! $mailchimp_key ) {
     return;
   }
+
+  $netlify_url = nm_get_netlify_url();
   ?>
 <form class="email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
   <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />

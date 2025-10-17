@@ -22,8 +22,6 @@ if ( ! $mailchimp_key ) {
   return; // if there isn't a mailchimp key then don't render the signup block
 }
 
-  $netlify_url = nm_get_netlify_url();
-
   // get metadata with fallback defaults
   $background_color = ! empty( $meta['_nm_banner_background'] ) ? $meta['_nm_banner_background'][0] : 'black';
   $text_color = ! empty( $meta['_nm_banner_text_color'] ) ? $meta['_nm_banner_text_color'][0] : 'white';
@@ -80,7 +78,7 @@ background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?
         <?php } ?>
       </div>
       <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
-        <?php render_mailchimp_signup_form( $mailchimp_key, $netlify_url, $background_color, $button_color ); ?>
+        <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color ); ?>
       </div>
       <?php if ( $image_id ) { ?>
         <div class="grid-item is-s-8 is-xxl-4">
