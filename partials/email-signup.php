@@ -58,10 +58,10 @@ if ( ! empty( $args['hide-border'] ) ) {
 ?>
 <div class="email-signup
 <?php
-if ( $background_color == 'white' ) {
-  echo 'mt-6 mb-5';
+if ( $background_color === 'white' ) {
+  echo 'mt-6 mb-5 ';
 } else {
-  echo 'pt-6 pb-6 pt-s-5 pb-s-5'; }
+  echo 'pt-6 pb-6 pt-s-5 pb-s-5 '; }
 ?>
 background-<?php echo $background_color; ?> font-color-<?php echo $text_color; ?>">
   <div class="container">

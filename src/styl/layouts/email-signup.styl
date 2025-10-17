@@ -1,35 +1,47 @@
 // EMAIL SIGNUP SECTION
 
-.email-signup
-  label
-    a
-      text-decoration: underline
-      &:hover
-        text-decoration: none
-
-.email-signup__completion-section
-  display: flex
-  justify-content: space-between
-  align-items: center
+.email-signup__inputs
+  opacity: 1
+  transition: opacity var(--transition-speed-quick) ease-in-out
 
 .email-signup__feedback-processing
   padding: .4rem .8rem
 
 .email-signup__form
+  position: relative
+  .email-signup__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    padding: 1rem
+    color: var(--color-black-soft)
+    background-color: var(--color-gray-base)
+    align-items: center
+    justify-content: center
+  label
+    a
+      text-decoration: underline
+      &:hover
+        text-decoration: none
+  .email-signup__icon
+    height: 2rem
+    width 2rem
   .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
     display: none
   &--processing
     .email-signup__feedback-processing
-      display: inline-flex
-    .email-signup__submit
-      display: none
+      display: flex
+    .email-signup__inputs
+      opacity: 0
   &--failed
     .email-signup__feedback-failed
       display: flex
-    .email-signup__submit
-      display: none
+    .email-signup__inputs
+      opacity: 0
   &--completed
     .email-signup__feedback-completed
       display: inline-flex
-    .email-signup__submit
-      display: none
+    .email-signup__inputs
+      opacity: 0
