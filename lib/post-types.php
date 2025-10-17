@@ -48,6 +48,11 @@ function nm_register_post_type_contributor() {
 }
 add_action( 'init', 'nm_register_post_type_contributor', 0 );
 
+/**
+ * Register the Newsletter custom post type.
+ *
+ * @return void
+ */
 function nm_register_post_type_newsletter() {
   $args = [
     'label'  => esc_html__( 'Newsletters', 'text-domain' ),
@@ -81,16 +86,16 @@ function nm_register_post_type_newsletter() {
     'has_archive'         => true,
     'query_var'           => true,
     'can_export'          => true,
-    'rewrite'             => array('slug' => 'newsletters', 'feeds' => false),
+    'rewrite'             => array(
+      'slug' => 'newsletters',
+      'feeds' => false,
+    ),
     'show_in_menu'        => true,
-    'show_in_rest'        => true,
     'supports' => [
       'title',
       'editor',
       'thumbnail',
     ],
-
-    'rewrite' => true
   ];
 
   register_post_type( 'newsletter', $args );
