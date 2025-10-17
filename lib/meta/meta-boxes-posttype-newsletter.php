@@ -101,8 +101,8 @@ function nm_cmb_postype_newsletters_metaboxes() {
 
 
   $cmb_term->add_field( array(
-    'name' => esc_html__( 'Youtube embed code', 'cmb2' ),
-    'desc' => esc_html__( 'Id of Youtube video. for example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the Id is the value after the ?v= and before the &, for this link CmuDcXfBqTg. Overrides featured image with Youtube embed for promo video (optional)', 'cmb2' ),
+    'name' => esc_html__( 'YouTube embed code', 'cmb2' ),
+    'desc' => esc_html__( 'ID of YouTube video. For example, if this is the URL https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the ID is the value after the ?v= and before the &, for this link CmuDcXfBqTg. Overrides featured image with YouTube embed for promo video (optional)', 'cmb2' ),
     'id'   => $prefix . 'youtube_id',
     'type' => 'text',
   ) );
