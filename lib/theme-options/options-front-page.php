@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
 
 /**
  * Returns a slug indexed array of all the Audio sub categories for use in select metaboxes
@@ -10,12 +13,12 @@ function get_audio_categories_metabox_array() {
     return;
   }
 
-    $terms = get_terms(
-        array(
-            'taxonomy' => 'category',
-            'parent'   => $audio_category->term_id, // Use 'parent' instead of 'child_of'
-        )
-    );
+  $terms = get_terms(
+    array(
+      'taxonomy' => 'category',
+      'parent'   => $audio_category->term_id, // Use 'parent' instead of 'child_of'
+    )
+  );
 
   $return = array();
   $return['none'] = 'None';
@@ -31,11 +34,11 @@ function get_audio_categories_metabox_array() {
  * Returns a slug indexed array of all the Sections taxonomy options for use in select metaboxes
  */
 function get_all_theme_sections_array() {
-    $terms = get_terms(
-        array(
-            'taxonomy' => 'section',
-        )
-    );
+  $terms = get_terms(
+    array(
+      'taxonomy' => 'section',
+    )
+  );
 
   $return = array();
   $return['none'] = 'None';
@@ -48,70 +51,87 @@ function get_all_theme_sections_array() {
 }
 
 /**
+ * Get newsletter signup options from the newsletter custom post type.
+ *
+ * @return array Array of newsletter signup options for banner selection.
+ */
+function get_newsletter_signup_options() {
+  $newsletter_options = array();
+
+  $newsletters = get_posts(
+    array(
+      'post_type'      => 'newsletter',
+      'posts_per_page' => -1,
+      'post_status'    => 'publish',
+      'orderby'        => 'title',
+      'order'          => 'ASC',
+    )
+  );
+
+  if ( $newsletters ) {
+    foreach ( $newsletters as $newsletter ) {
+      $meta = get_post_meta( $newsletter->ID );
+      $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
+
+      if ( $mailchimp_key ) {
+        $newsletter_options[ 'newsletter-signup-' . $newsletter->ID ] = 'Newsletter signup: ' . $newsletter->post_title;
+      }
+    }
+  }
+
+  return $newsletter_options;
+}
+
+/**
  * Hook in and register a metabox to handle a theme options page and adds a menu item.
  */
 function nm_register_front_page_options_metabox() {
   $prefix = 'nm_';
 
   $banner_options = array(
-      false                                              => 'None',
-      'partials/support-section'                         => 'Support section',
-      'partials/specials/banners/support-video'          => 'Support Video',
-      'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
-      'partials/specials/banners/podcast-if-i-speak'     => 'Podcast: If I Speak',
-      'partials/specials/banners/focus-pro-rev-soccer'   => 'Focus: Pro Rev Soccer',
-      'partials/specials/banners/podcast-foreign-agent'  => 'Podcast: Foreign Agent',
-      'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
-      'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
-      'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
-      'partials/specials/banners/podcast-planet-b'       => 'Podcast: Planet B',
+    false                                              => 'None',
+    'partials/support-section'                         => 'Support section',
+    'partials/specials/banners/support-video'          => 'Support Video',
+    'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
+    'partials/specials/banners/podcast-if-i-speak'     => 'Podcast: If I Speak',
+    'partials/specials/banners/focus-pro-rev-soccer'   => 'Focus: Pro Rev Soccer',
+    'partials/specials/banners/podcast-foreign-agent'  => 'Podcast: Foreign Agent',
+    'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
+    'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
+    'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
+    'partials/specials/banners/podcast-planet-b'       => 'Podcast: Planet B',
   );
 
-  // Get all the newsletter pages and create signup options for all with correct settings
-
-  $child_pages_wp_query = new WP_Query();
-  $all_wp_pages = $child_pages_wp_query->query( array( 'post_type' => 'page' ) );
-  $newsletter_page = get_page_by_title( 'Newsletters' );
-  $newsletter_pages = get_page_children( $newsletter_page->ID, $all_wp_pages );
-
-  if ( $newsletter_pages ) {
-    foreach ( $newsletter_pages as $newsletter ) {
-      $meta = get_post_meta( $newsletter->ID );
-      $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
-
-      if ( $mailchimp_key ) {
-        $banner_options[ 'newsletter-signup-' . $newsletter->ID ] = 'Newsletter signup: ' . $newsletter->post_title;
-      }
-    }
-  }
+  // Merge with newsletter signup options from the newsletter custom post type
+  $banner_options = array_merge( $banner_options, get_newsletter_signup_options() );
 
   /**
    * Registers main options page menu item and form.
    */
-    $main_options = new_cmb2_box(
-        array(
-            'id'           => 'nm_front_page_options',
-            'title'        => 'Front Page',
-            'object_types' => array( 'options-page' ),
+  $main_options = new_cmb2_box(
+    array(
+      'id'           => 'nm_front_page_options',
+      'title'        => 'Front Page',
+      'object_types' => array( 'options-page' ),
 
-            /*
-            * The following parameters are specific to the options-page box
-            * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
-            */
+      /*
+      * The following parameters are specific to the options-page box
+      * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
+      */
 
-        'option_key'       => 'nm_front_page_options', // The option key and admin menu page slug.
-            'icon_url'     => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
-        // 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
-        // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
-            'capability'   => 'edit_posts', // Cap required to view options-page.
-        // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
-        // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-        // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
-        // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-        // 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
-        // 'message_cb'      => 'nm_options_page_message_callback',
-        )
-    );
+      'option_key'       => 'nm_front_page_options', // The option key and admin menu page slug.
+          'icon_url'     => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
+      // 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
+      // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
+          'capability'   => 'edit_posts', // Cap required to view options-page.
+      // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
+      // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
+      // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+      // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+      // 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
+      // 'message_cb'      => 'nm_options_page_message_callback',
+    )
+  );
 
   /**
    * Options fields ids only need
