@@ -1,6 +1,16 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 /**
- * Enqueues the compiled main.js file and site.css. main.js is registered with a global WP object parsing some WordPress variables
+ * Enqueues the compiled main.js and main.css files with localized WordPress data.
+ *
+ * Registers and enqueues the theme's main JavaScript file with a global WP object
+ * containing site configuration and dynamic data. Also enqueues the main stylesheet
+ * and conditionally loads dashicons for admin users.
+ *
+ * @return void
  */
 function scripts_and_styles_method() {
   $site_js = get_template_directory_uri() . '/dist/main.js';
@@ -8,15 +18,24 @@ function scripts_and_styles_method() {
   $current_theme = wp_get_theme();
   $theme_version = $current_theme->get( 'Version' );
 
-  wp_register_script( 'site-js', $site_js, array(), $theme_version );
+  wp_register_script(
+    'site-js',
+    $site_js,
+    array(),
+    $theme_version,
+    array(
+      'in_footer' => true,
+    )
+  );
 
   $global_javascript_variables = array(
-      'siteUrl'                  => home_url(),
-      'themeUrl'                 => get_template_directory_uri(),
-      'isAdmin'                  => current_user_can( 'manage_options' ) ? 1 : 0,
-      'supportSectionAutovalues' => nm_get_support_autovalues(),
-      'liveCheckerData'          => nm_get_livechecker_data(),
-      'supportSectionCopy'       => nm_get_support_heading_text_data(),
+    'siteUrl'                  => home_url(),
+    'themeUrl'                 => get_template_directory_uri(),
+    'isAdmin'                  => current_user_can( 'manage_options' ) ? 1 : 0,
+    'supportSectionAutovalues' => nm_get_support_autovalues(),
+    'liveCheckerData'          => nm_get_livechecker_data(),
+    'supportSectionCopy'       => nm_get_support_heading_text_data(),
+    'isDebug'                  => defined( 'WP_DEBUG' ) && WP_DEBUG ? 1 : 0,
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
@@ -41,7 +60,7 @@ if ( function_exists( 'add_theme_support' ) ) {
 // Set max width of main content area for oembed etc
 
 if ( ! isset( $content_width ) ) {
-    $content_width = 644;
+  $content_width = 644;
 }
 
 // Declare thumbnail sizes
@@ -52,22 +71,22 @@ get_template_part( 'lib/thumbnail-sizes' );
  * Register Nav Menus
  */
 function nm_register_menus() {
-    register_nav_menus(
-        array(
-            'header-general'        => __( 'Header: General' ),
-            'header-shows'          => __( 'Header: Shows' ),
-            'header-series'         => __( 'Header: Series' ),
-            'header-submenu'        => __( 'Header: Submenu' ),
-            'footer-podcasts'       => __( 'Footer: Podcasts' ),
-            'footer-focuses'        => __( 'Footer: Focuses' ),
-            'footer-articles'       => __( 'Footer: Articles' ),
-            'footer-shows'          => __( 'Footer: Shows' ),
-            'footer-social-media'   => __( 'Footer: Social Media' ),
-            'articles-archive-menu' => __( 'Articles archive' ),
-            'audio-archive-menu'    => __( 'Audio archive' ),
-            'video-archive-menu'    => __( 'Video archive' ),
-        )
-    );
+  register_nav_menus(
+    array(
+      'header-general'        => __( 'Header: General' ),
+      'header-shows'          => __( 'Header: Shows' ),
+      'header-series'         => __( 'Header: Series' ),
+      'header-submenu'        => __( 'Header: Submenu' ),
+      'footer-podcasts'       => __( 'Footer: Podcasts' ),
+      'footer-focuses'        => __( 'Footer: Focuses' ),
+      'footer-articles'       => __( 'Footer: Articles' ),
+      'footer-shows'          => __( 'Footer: Shows' ),
+      'footer-social-media'   => __( 'Footer: Social Media' ),
+      'articles-archive-menu' => __( 'Articles archive' ),
+      'audio-archive-menu'    => __( 'Audio archive' ),
+      'video-archive-menu'    => __( 'Video archive' ),
+    )
+  );
 }
 add_action( 'init', 'nm_register_menus' );
 
