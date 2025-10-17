@@ -8070,6 +8070,9 @@ html {
 .ui-rounded-image-large {
   border-radius: var(--corner-radius-large);
 }
+.ui-backgrounded-box-padding {
+  padding: 1.5rem 1rem;
+}
 @keyframes sk-bounce {
   0%, 100% {
     transform: scale(0);
