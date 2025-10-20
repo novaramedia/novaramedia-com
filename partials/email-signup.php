@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Each newsletter has metadata set to make choices about how the signup block renders,
  * however there is also the ability to override some of those options by passing them in as arguments to the partial.
  * There are also defaults set for some of these options in case they are not set in the metadata.
- * TODO: Migrate this to use the new post types.
  */
 
 $newsletter_post = get_post( $args['newsletter_post_id'] );

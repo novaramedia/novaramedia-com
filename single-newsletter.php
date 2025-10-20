@@ -17,6 +17,7 @@ if ( have_posts() ) {
     $youtube_id = ! empty( $meta['_nm_youtube_id'] ) ? $meta['_nm_youtube_id'][0] : false;
     $support_override = ! empty( $meta['_nm_support_text'] ) ? $meta['_nm_support_text'][0] : false;
 
+    // TODO: Use larger title sizes once they are introduced in the design system
     $settings_title_classes = array(
       'huge'    => 'font-size-17 font-size-s-15',
       'big'     => 'font-size-17 font-size-s-15',
@@ -32,7 +33,7 @@ if ( have_posts() ) {
             <a href="<?php echo get_post_type_archive_link( 'newsletter' ); ?>">
               <h4 class="font-size-10 font-weight-bold text-uppercase">Newsletter</h4>
             </a>
-            <h1 class="font-weight-bold
+            <h1 class="font-weight-bold text-wrap-pretty
             <?php
               echo $title_size ? $settings_title_classes[ $title_size ] : $settings_title_classes['medium'];
             ?>
@@ -52,7 +53,7 @@ if ( have_posts() ) {
           </div>
             <?php
           } else {
-            the_post_thumbnail( 'col8' );
+            the_post_thumbnail( 'col8', array( 'class' => 'ui-rounded-image' ) );
           }
           ?>
         </div>
