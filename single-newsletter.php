@@ -1,8 +1,7 @@
 <?php
-
-  // TODO
-  // - [ ] Generate the form input elements via a function and use in the email-signup.php partial also
-  // - [ ] Migrate font sizes to new system
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
 
 get_header();
 ?>
