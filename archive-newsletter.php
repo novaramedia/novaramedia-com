@@ -24,9 +24,9 @@ get_header();
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          $background_color = $index % 2 === 0 ? 'gray-base' : false; // this is to alternate the background colors
-          $text_color = $index % 2 === 0 ? 'black' : false;
-          $button_color = $index % 2 === 0 ? 'black' : false;
+          $background_color = $index % 2 === 0 ? 'gray-base' : null; // this is to alternate the background colors
+          $text_color = $index % 2 === 0 ? 'black' : null;
+          $button_color = $index % 2 === 0 ? 'black' : null;
 
           if ( $post->post_name === 'the-cortado' ) {
             $background_color = 'black';

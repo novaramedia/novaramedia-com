@@ -16,12 +16,12 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
   $netlify_url = nm_get_netlify_url();
   ?>
 <form id="<?php echo $form_unique_id; ?>" class="email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
-  <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
+  <input type="hidden" name="newsletter" value="<?php echo esc_attr( $mailchimp_key ); ?>" />
 
   <div class="email-signup__inputs">
     <div class="form-group mb-2">
       <label class="u-visuallyhidden" for="<?php echo $form_unique_id; ?>-firstName">First name:</label>
-      <input name="firstName" id="<?php echo $form_unique_id; ?>-firstName" class="email-signup__name-input ui-input <?php echo $background_color === 'white' ? 'ui-input--border-gray' : ''; ?>" type="text" autocomplete="given-name" placeholder="First name" />
+      <input name="firstName" id="<?php echo esc_attr( $form_unique_id ); ?>-firstName" class="email-signup__name-input ui-input <?php echo $background_color === 'white' ? 'ui-input--border-gray' : ''; ?>" type="text" autocomplete="given-name" placeholder="First name" />
     </div>
 
     <div class="form-group mb-2">
