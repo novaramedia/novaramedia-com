@@ -12,29 +12,28 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
   }
 
   $form_unique_id = wp_unique_id( 'email-signup-form-' );
-
   $netlify_url = nm_get_netlify_url();
   ?>
-<form id="<?php echo $form_unique_id; ?>" class="email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
+<form id="<?php echo esc_attr( $form_unique_id ); ?>" class="email-signup__form" action="<?php echo esc_url( $netlify_url ); ?>" method="post" target="_blank">
   <input type="hidden" name="newsletter" value="<?php echo esc_attr( $mailchimp_key ); ?>" />
 
   <div class="email-signup__inputs">
     <div class="form-group mb-2">
-      <label class="u-visuallyhidden" for="<?php echo $form_unique_id; ?>-firstName">First name:</label>
+      <label class="u-visuallyhidden" for="<?php echo esc_attr( $form_unique_id ); ?>-firstName">First name:</label>
       <input name="firstName" id="<?php echo esc_attr( $form_unique_id ); ?>-firstName" class="email-signup__name-input ui-input <?php echo $background_color === 'white' ? 'ui-input--border-gray' : ''; ?>" type="text" autocomplete="given-name" placeholder="First name" />
     </div>
 
     <div class="form-group mb-2">
-      <label class="u-visuallyhidden" for="<?php echo $form_unique_id; ?>-email">Email:</label>
-      <input name="email" id="<?php echo $form_unique_id; ?>-email" class="email-signup__email-input ui-input <?php echo $background_color === 'white' ? 'ui-input--border-gray' : ''; ?>" type="email" autocomplete="email" placeholder="Email" required />
+      <label class="u-visuallyhidden" for="<?php echo esc_attr( $form_unique_id ); ?>-email">Email:</label>
+      <input name="email" id="<?php echo esc_attr( $form_unique_id ); ?>-email" class="email-signup__email-input ui-input <?php echo $background_color === 'white' ? 'ui-input--border-gray' : ''; ?>" type="email" autocomplete="email" placeholder="Email" required />
     </div>
 
     <div class="email-signup__email-gdpr-group form-group layout-flex-align-center mb-2">
-      <label for="<?php echo $form_unique_id; ?>-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo site_url( 'privacy-policy/' ); ?>">Privacy Policy</a></label>
-      <input name="gdpr" id="<?php echo $form_unique_id; ?>-gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php echo $background_color === 'white' ? 'ui-checkbox--border-gray' : ''; ?> ml-2" type="checkbox" value="accepted" required/>
+      <label for="<?php echo esc_attr( $form_unique_id ); ?>-gdpr" class="font-size-8 font-weight-bold">I agree to the <a target="_blank" rel="noopener" href="<?php echo esc_url( site_url( 'privacy-policy/' ) ); ?>">Privacy Policy</a></label>
+      <input name="gdpr" id="<?php echo esc_attr( $form_unique_id ); ?>-gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php echo $background_color === 'white' ? 'ui-checkbox--border-gray' : ''; ?> ml-2" type="checkbox" value="accepted" required/>
     </div>
 
-    <input class="email-signup__submit ui-button ui-button--<?php echo $button_color; ?> fs-6" type="submit" value="Sign up" />
+    <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="Sign up" />
   </div>
   <div class="email-signup__feedback-processing email-signup__overlay ui-rounded-box">
     <div class="spinner spinner--black">
