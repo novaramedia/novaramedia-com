@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-add_action( 'cmb2_init', 'nm_cmb_postype_newsletters_metaboxes' );
+add_action( 'cmb2_init', 'nm_cmb_posttype_newsletters_metaboxes' );
 /**
  * Register CMB2 meta boxes for newsletter post type.
  *
@@ -12,7 +12,7 @@ add_action( 'cmb2_init', 'nm_cmb_postype_newsletters_metaboxes' );
  *
  * @return void
  */
-function nm_cmb_postype_newsletters_metaboxes() {
+function nm_cmb_posttype_newsletters_metaboxes() {
   $prefix = '_nm_';
 
   $cmb_term = new_cmb2_box(
