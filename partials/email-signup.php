@@ -58,7 +58,7 @@ if ( ! empty( $args['hide-discover'] ) ) {
       if ( $background_color !== 'white' ) {
         ?>
       <div class="grid-item is-xxl-24">
-        <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box ui-backgrounded-box-padding">
+        <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box-large ui-backgrounded-box-padding">
         <?php
       }
       ?>

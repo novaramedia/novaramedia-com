@@ -5,12 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" class="mb-4">
   <article id="page">
     <div class="container mt-4 mb-4">
-      <div class="grid-row mt-5 mb-5 mt-s-4 mb-s-4">
-        <div class="flex-grid-item is-xxl-24 page-copy">
-          We have an expanding range of email newsletters that are free to subscribe to. Choose your options below.
+      <div class="grid-row">
+        <div class="grid-item is-xxl-24">
+          <h1 class="font-size-9 font-weight-bold">Newsletters</h1>
         </div>
       </div>
     </div>
@@ -24,8 +24,9 @@ get_header();
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          $background_color = $index % 2 === 0 ? 'white' : false;
+          $background_color = $index % 2 === 0 ? 'gray-base' : false; // this is to alternate the background colors
           $text_color = $index % 2 === 0 ? 'black' : false;
+          $button_color = $index % 2 === 0 ? 'black' : false;
 
           if ( $post->post_name === 'the-cortado' ) {
             $background_color = 'black';
@@ -37,10 +38,11 @@ get_header();
             null,
             array(
               'newsletter_page_id' => $post->ID,
-              'background-color' => $background_color,
-              'text-color' => $text_color,
-              'hide-discover' => true,
-              'hide-border' => true,
+              'background-color'   => $background_color,
+              'text-color'         => $text_color,
+              'button-color'       => $button_color,
+              'hide-discover'      => true,
+              'hide-border'        => true,
             )
           );
         }
