@@ -64,7 +64,7 @@ function nm_register_post_type_newsletter() {
       'new_item'           => esc_html__( 'New Newsletter', '' ),
       'edit_item'          => esc_html__( 'Edit Newsletter', '' ),
       'view_item'          => esc_html__( 'View Newsletter', '' ),
-      'update_item'        => esc_html__( 'View Newsletter', '' ),
+      'update_item'        => esc_html__( 'Update Newsletter', '' ),
       'all_items'          => esc_html__( 'All Newsletters', '' ),
       'search_items'       => esc_html__( 'Search Newsletters', '' ),
       'parent_item_colon'  => esc_html__( 'Parent Newsletter', '' ),

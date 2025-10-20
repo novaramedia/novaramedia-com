@@ -74,7 +74,7 @@ function get_newsletter_signup_options() {
       $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
       if ( $mailchimp_key ) {
-        $newsletter_options[ 'newsletter-signup-' . $newsletter->ID ] = 'Newsletter signup: ' . $newsletter->post_title;
+        $newsletter_options[ 'newsletter-signup-' . $newsletter->ID ] = 'Newsletter signup: ' . esc_html( $newsletter->post_title );
       }
     }
   }

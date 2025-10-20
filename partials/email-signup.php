@@ -63,9 +63,9 @@ if ( ! empty( $args['hide-discover'] ) ) {
       }
       ?>
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
-            <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo $headline; ?></h3>
+            <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
             <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
-              <?php echo $copy; ?>
+              <?php echo wp_kses_post( $copy ); ?>
             </p>
             <?php if ( ! $hide_discover ) { ?>
               <div class="mt-3 font-size-8 font-weight-bold">
