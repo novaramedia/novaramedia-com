@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 ?>
-<main id="main-content" class="mb-4">
+<main id="main-content">
   <article id="page">
     <div class="container mt-4 mb-4">
       <div class="grid-row">
@@ -37,12 +37,11 @@ get_header();
             'partials/email-signup',
             null,
             array(
-              'newsletter_page_id' => $post->ID,
+              'newsletter_post_id' => $post->ID,
               'background-color'   => $background_color,
               'text-color'         => $text_color,
               'button-color'       => $button_color,
               'hide-discover'      => true,
-              'hide-border'        => true,
             )
           );
         }
@@ -51,8 +50,14 @@ get_header();
     ?>
   </article>
 <?php
-  get_template_part( 'partials/support-section' );
-?>
+  get_template_part(
+    'partials/support-section',
+    null,
+    array(
+      'container_classes' => 'mb-4',
+    )
+  );
+  ?>
 </main>
 <?php
 get_footer();

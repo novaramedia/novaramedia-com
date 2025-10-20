@@ -98,7 +98,7 @@ if( have_posts() ) {
 
       if ($mailchimp_key) {
         get_template_part('partials/email-signup', null, array(
-          'newsletter_page_id' => $newsletter[0]->ID
+          'newsletter_post_id' => $newsletter[0]->ID
         ));
       }
     }

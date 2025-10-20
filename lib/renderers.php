@@ -545,7 +545,7 @@ function render_front_page_banner( $key ) {
             'partials/email-signup',
             null,
             array(
-              'newsletter_page_id' => $newsletter_id,
+              'newsletter_post_id' => $newsletter_id,
             )
           );
         }

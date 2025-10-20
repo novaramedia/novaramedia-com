@@ -10,13 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * TODO: Migrate this to use the new post types.
  */
 
-  $newsletter_page = get_post( $args['newsletter_page_id'] );
+$newsletter_post = get_post( $args['newsletter_post_id'] );
 
-if ( ! $newsletter_page ) {
+if ( ! $newsletter_post ) {
   return;
 }
 
-$meta = get_post_meta( $newsletter_page->ID );
+$meta = get_post_meta( $newsletter_post->ID );
 $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
 if ( ! $mailchimp_key ) {
@@ -32,7 +32,7 @@ $headline = ! empty( $meta['_nm_banner_headline'] ) ? $meta['_nm_banner_headline
 $copy = ! empty( $meta['_nm_banner_text'] ) ? $meta['_nm_banner_text'][0] : false;
 $image_id = ! empty( $meta['_nm_banner_image_id'] ) ? $meta['_nm_banner_image_id'][0] : false;
 
-// override colours if set
+// override colours if set on the partial $args
 if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
 }
@@ -55,7 +55,7 @@ if ( ! empty( $args['hide-discover'] ) ) {
   <div class="container">
     <div class="grid-row">
       <?php
-      if ( $background_color !== 'white' ) {
+      if ( $background_color !== 'white' ) { // if the background color is not white, wrap in a box
         ?>
       <div class="grid-item is-xxl-24">
         <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box-large ui-backgrounded-box-padding">
@@ -83,7 +83,7 @@ if ( ! empty( $args['hide-discover'] ) ) {
           <?php } ?>
         </div>
         <?php
-        if ( $background_color !== 'white' ) {
+        if ( $background_color !== 'white' ) { // close the box divs if we opened them
           ?>
       </div>
     </div>
