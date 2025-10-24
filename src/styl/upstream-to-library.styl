@@ -1,8 +1,8 @@
 html
   --color-gray-base: #f8f5f5
-  --color-gray-light--new: #EDEAEA // same as --color-gray-light--new
-  --color-gray-mid--new: #D4D4D4
-  --color-pink: #FF19B4 // and remap --color-acfm-pink to this
+  --color-gray-light: #EDEAEA
+  --color-gray-mid: #D4D4D4
+  --color-pink: #FF19B4
   --color-red-900: #8C0E24
   --color-red-800: #B4122E
   --color-red-700: #D51536
@@ -23,17 +23,17 @@ html
   // teal
 
 // gray audit:
-// --color-gray isn't used in this repo // remap to --color-gray-mid--new
-// --color-gray-transparent isn't used in this repo // remap to --color-gray-mid--new
-// --color-gray-light isn't used in this repo, but might be in others, remap but note for migrations
-// --color-gray-light-transparent isn't used in this repo // remap to --color-gray-mid--new
-// --color-gray-extra-light is the same as --color-gray-light and is migrated [?]
+// --color-gray isn't used in this repo // remap to --color-gray-mid
+// --color-gray-transparent isn't used in this repo // remap to --color-gray-mid
+// --color-gray-light-old isn't used in this repo, but might be in others, remap but note for migrations
+// --color-gray-light-old-transparent isn't used in this repo // remap to --color-gray-mid
+// --color-gray-extra-light is the same as --color-gray-light-old and is migrated [?]
 
 .background-gray-base
   background-color: var(--color-gray-base)
 
 .background-gray-mid
-  background-color: var(--color-gray-mid--new)
+  background-color: var(--color-gray-mid)
 
 // ***** ???
 
@@ -41,7 +41,7 @@ html
   display: inline-block
   width: 10px
   height: 2px
-  background-color: var(--color-gray-mid--new)
+  background-color: var(--color-gray-mid)
   margin: 0 4px
   transition: opacity 0.3s ease
 
@@ -65,7 +65,7 @@ html
 // *****
 
 .font-color-gray
-  color: var(--color-gray)
+  color: var(--color-gray-mid)
 
 .font-color-white-transparent
   color: var(--color-white-soft-transparent)
@@ -118,13 +118,12 @@ html
   &--pink
     background-color: var(--color-acfm-pink)
   &--gray
-    background-color: var(--color-gray-mid--new)
+    background-color: var(--color-gray-mid)
 
 // *****
 
-.ui-rounded-box-large, .ui-rounded-image-large
+.ui-rounded-box--large, .ui-rounded-image--large
   border-radius: var(--corner-radius-large)
-
 
 .ui-rounded-box--top
   border-top-left-radius: var(--corner-radius)

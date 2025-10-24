@@ -257,7 +257,7 @@ if ( have_posts() ) {
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
-            <div class="swiper-slide text-align-center ui-rounded-box-large">
+            <div class="swiper-slide text-align-center ui-rounded-box--large">
               <h5 class="ui-boxed-title ui-boxed-title--grey">Supporters Say</h5>
               <div class="support-page__quote-container">
                 <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
