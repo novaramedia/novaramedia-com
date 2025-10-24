@@ -68,10 +68,10 @@ if ( have_posts() ) {
               <div class="grid-item is-xxl-12 is-m-24">
                 <div class="p-5 p-l-4 font-weight-bold">
                   <div class="font-size-16 font-size-xl-15 mb-4">
-                    Truthful, independent journalism <span class="font-color-red">funded by people like you</span>.
+                    Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
                   </div>
                   <div class="font-size-13 font-size-l-12 mb-4">
-                    Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics</span>.
+                    Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
                   </div>
                   <div class="font-size-13 font-size-l-12 mb-5">
                     Be part of the change.
@@ -168,7 +168,7 @@ if ( have_posts() ) {
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
                   <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4">
-                    <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism</span>.
+                    <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism.</span>
                   </h3>
                 </div>
                 <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-weight-bold font-color-gray">
