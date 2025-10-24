@@ -161,7 +161,7 @@ function render_payment_icons( $payment_classes = '' ) {
     'Visa'       => 'Visa icon',
     'Mastercard' => 'Mastercard icon',
     'Stripe'     => 'Stripe icon',
-    'PayPal'     => 'PayPal icon',
+    // 'PayPal'     => 'PayPal icon',
     'ApplePay'   => 'ApplePay icon',
     'GooglePay'  => 'GooglePay icon',
   );
