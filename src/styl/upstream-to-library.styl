@@ -2,13 +2,32 @@ html
   --color-gray-base: #f8f5f5
   --color-gray-light--new: #EDEAEA // same as --color-gray-light--new
   --color-gray-mid--new: #D4D4D4
+  --color-pink: #FF19B4 // and remap --color-acfm-pink to this
+  --color-red-900: #8C0E24
+  --color-red-800: #B4122E
+  --color-red-700: #D51536
+  --color-red-600: #F2183E
+  --color-red-500: var(--color-red)
+  --color-red-400: #FF8D96
+  --color-red-300: #FFB5BA
+  --color-red-200: #FFD6D8
+  --color-red-100: #FFE6E7
+
+  // colors to be depreciated
+  // --color-green-neon
+  // --color-green-racing
+  // --color-blue remap to neon?? this is the link highlight blue. do nothing for now
+  // --color-blue-neon remap to --color-blue?
+  // --color-blue-light
+  // blue light
+  // teal
 
 // gray audit:
-// --color-gray isn't used in this repo
-// --color-gray-transparent isn't used in this repo
-// --color-gray-light isn't used in this repo
-// --color-gray-light-transparent isn't used in this repo
-// --color-gray-extra-light is the same as --color-gray-light and is migrated
+// --color-gray isn't used in this repo // remap to --color-gray-mid--new
+// --color-gray-transparent isn't used in this repo // remap to --color-gray-mid--new
+// --color-gray-light isn't used in this repo, but might be in others, remap but note for migrations
+// --color-gray-light-transparent isn't used in this repo // remap to --color-gray-mid--new
+// --color-gray-extra-light is the same as --color-gray-light and is migrated [?]
 
 .background-gray-base
   background-color: var(--color-gray-base)

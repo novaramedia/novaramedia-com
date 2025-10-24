@@ -8191,6 +8191,16 @@ html {
   --color-gray-base: #f8f5f5;
   --color-gray-light--new: #edeaea;
   --color-gray-mid--new: #d4d4d4;
+  --color-pink: #ff19b4;
+  --color-red-900: #8c0e24;
+  --color-red-800: #b4122e;
+  --color-red-700: #d51536;
+  --color-red-600: #f2183e;
+  --color-red-500: var(--color-red);
+  --color-red-400: #ff8d96;
+  --color-red-300: #ffb5ba;
+  --color-red-200: #ffd6d8;
+  --color-red-100: #ffe6e7;
 }
 .background-gray-base {
   background-color: var(--color-gray-base);
