@@ -30,79 +30,77 @@ if ( have_posts() ) {
     $support_carousel_quotes = array_filter( $support_carousel_quotes );
   }
   ?>
-  <article id="page" class="support-page">
-    <div class="background-support-texture-alt background-support-texture-alt--fade-to-gray">
-      <div class="container">
-        <div class="grid-item">
-          <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
-            Support Us
-          </h4>
-        </div>
-        <div class="grid-row mt-4 mb-6 font-weight-bold">
-          <div class="grid-item support-page__headline font-size-17">
-            <div class="font-color-black">
-              <?php
-              if ( ! empty( $header_first_line ) ) {
-                echo $header_first_line;
-              } else {
-                echo 'No owners.';
-              }
-              ?>
-            </div>
-            <div class="font-color-white">
-              <?php
-              if ( ! empty( $header_second_line ) ) {
-                echo $header_second_line;
-              } else {
-                echo 'Only supporters.';
-              }
-              ?>
-            </div>
+  <article id="page" class="support-page background-gray-base support-page__background-cover-image">
+    <div class="container">
+      <div class="grid-item">
+        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+          Support Us
+        </h4>
+      </div>
+      <div class="grid-row mt-4 mb-6 font-weight-bold">
+        <div class="grid-item support-page__headline font-size-17">
+          <div class="font-color-black">
+            <?php
+            if ( ! empty( $header_first_line ) ) {
+              echo $header_first_line;
+            } else {
+              echo 'No owners.';
+            }
+            ?>
+          </div>
+          <div class="font-color-white">
+            <?php
+            if ( ! empty( $header_second_line ) ) {
+              echo $header_second_line;
+            } else {
+              echo 'Only supporters.';
+            }
+            ?>
           </div>
         </div>
       </div>
-      <div class="container">
-        <div class="grid-row u-relative">
-          <div class="grid-item is-xxl-24">
-            <div class="grid-row grid-row--nested u-relative background-white ui-rounded-box--top">
-              <div class="grid-item is-xxl-12 is-m-24">
-                <div class="p-5 p-l-4 font-weight-bold">
-                  <div class="font-size-16 font-size-xl-15 mb-4">
-                    Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
-                  </div>
-                  <div class="font-size-13 font-size-l-12 mb-4">
-                    Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
-                  </div>
-                  <div class="font-size-13 font-size-l-12 mb-5">
-                    Be part of the change.
-                  </div>
+    </div>
+    <div class="container">
+      <div class="grid-row u-relative">
+        <div class="grid-item is-xxl-24">
+          <div class="grid-row grid-row--nested u-relative background-white ui-rounded-box--top">
+            <div class="grid-item is-xxl-12 is-m-24">
+              <div class="p-5 p-l-4 font-weight-bold">
+                <div class="font-size-16 font-size-xl-15 mb-4">
+                  Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
+                </div>
+                <div class="font-size-13 font-size-l-12 mb-4">
+                  Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
+                </div>
+                <div class="font-size-13 font-size-l-12 mb-5">
+                  Be part of the change.
                 </div>
               </div>
-              <div class="grid-item is-xxl-12 is-m-24">
-                <div class="support-page__donation-form-sticky p-5 p-l-4">
-                  <?php render_support_form( 'condensed' ); ?>
-                </div>
+            </div>
+            <div class="grid-item is-xxl-12 is-m-24">
+              <div class="support-page__donation-form-sticky p-5 p-l-4">
+                <?php render_support_form( 'condensed' ); ?>
               </div>
             </div>
           </div>
-          <div class="grid-item is-xxl-24">
-            <div class="background-white ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
-            <?php
-            if ( $youtube_id ) {
-              ?>
-              <div class="u-video-embed-container">
-                <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
-              </div>
-                <?php
-            }
+        </div>
+        <div class="grid-item is-xxl-24">
+          <div class="background-white ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
+          <?php
+          if ( $youtube_id ) {
             ?>
+            <div class="u-video-embed-container">
+              <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
             </div>
+              <?php
+          }
+          ?>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="support-page__below-the-fold background-gray-base">
+    <div class="support-page__below-the-fold">
       <!-- how we are funded -->
       <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
         <div class="grid-row support-page__text-container">
