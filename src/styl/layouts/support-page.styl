@@ -27,24 +27,6 @@
   top: 100px
   z-index: 1
 
-.support-page__left-radius // TODO: fix this
-  p
-    padding-bottom: 1rem
-
-.support-page__left-radius
-  border-top-left-radius: var(--corner-radius)
-
-.support-page__right-radius
-  border-top-right-radius: var(--corner-radius)
-
-@media screen and (max-width: $breakpoint-m)
-  .support-page__left-radius
-    border-top-left-radius: var(--corner-radius)
-    border-top-right-radius: var(--corner-radius)
-
-  .support-page__right-radius
-    border-top-right-radius: 0
-
 .support-page__big-stats
   text-align: center
   .font-size-17 // this seems a bad way to do this. time to add higher numbers to the library?
@@ -139,18 +121,3 @@
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto
   height: 30px
-
-// TODO: remove
-
-.support-page__infographic
-  background-size: contain
-  background-repeat: no-repeat
-  background-position: center
-  height: 200px
-  width: 100%
-  background-image: url('./img/pages/support-page/desktop-how-we-are-funded-graphic.svg')
-
-@media screen and (max-width: $breakpoint-s)
-  .support-page__infographic
-    background-image: url('./img/pages/support-page/mobile-how-we-are-funded-graphic.svg')
-    height: 400px

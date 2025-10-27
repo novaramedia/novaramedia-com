@@ -78,13 +78,13 @@ function nm_cmb_page_support_metaboxes() {
         array(
             'id'         => $prefix . 'support_carousel_quotes',
             'name'       => __( 'Supporters Say Quotes', 'nm' ),
+            'desc'       => __( 'Add a maximum of 8 quotes from supporters. You can reorder them.', 'nm' ),
             'type'       => 'textarea_small',
             'repeatable' => true,
             'options'    => array(
                 'sortable'     => true,
                 'add_row_text' => __( 'Add Another Quote', 'nm' ),
             ),
-            'desc'       => __( 'Add a maximum of 4 quotes from supporters. Max 95 characters each. You can reorder them.', 'nm' ),
         )
     );
 }

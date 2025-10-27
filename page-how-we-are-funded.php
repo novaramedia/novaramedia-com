@@ -244,7 +244,7 @@ if ( have_posts() ) {
                   <div class="font-weight-bold">
                     <span class="font-size-17">0</span><span class="font-size-15 font-size-s-14">%</span>
                   </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">Murdock</div>
+                  <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
                 </div>
               </div>
             </div>
