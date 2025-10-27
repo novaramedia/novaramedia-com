@@ -11,21 +11,15 @@ if ( have_posts() ) {
     $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
     $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
     $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
-    $how_we_are_funded_heading = ! empty( $meta['_nm_support_how_we_are_funded_heading'] ) ? $meta['_nm_support_how_we_are_funded_heading'][0] : '';
-    $how_we_are_funded_text = ! empty( $meta['_nm_support_how_we_are_funded_text'] ) ? $meta['_nm_support_how_we_are_funded_text'][0] : '';
-    $how_we_spend_our_funds_heading = ! empty( $meta['_nm_support_how_we_spend_our_funds_heading'] ) ? $meta['_nm_support_how_we_spend_our_funds_heading'][0] : '';
 
-    // Get repeatable funds lines
-    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? $meta['_nm_support_funds_lines'][0] : array();
-    // Filter out empty lines
-    $how_we_spend_our_funds_lines = array_filter( $how_we_spend_our_funds_lines );
+    // Get repeatable funds lines - properly unserialize CMB2 repeatable fields
+    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
+    // Ensure it's an array and filter out empty lines
+    $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
 
-    $our_story_heading = ! empty( $meta['_nm_support_our_story_heading'] ) ? $meta['_nm_support_our_story_heading'][0] : '';
-    $our_story_bold_text = ! empty( $meta['_nm_support_our_story_bold_text'] ) ? $meta['_nm_support_our_story_bold_text'][0] : '';
-    $our_story_regular_text = ! empty( $meta['_nm_support_our_story_regular_text'] ) ? $meta['_nm_support_our_story_regular_text'][0] : '';
-
-    // Get repeatable carousel quotes
-    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? $meta['_nm_support_carousel_quotes'][0] : array();
+    // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
+    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array();
+    $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
     // Filter out empty quotes
     $support_carousel_quotes = array_filter( $support_carousel_quotes );
   }
@@ -65,7 +59,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24">
           <div class="grid-row grid-row--nested u-relative background-white ui-rounded-box--top">
             <div class="grid-item is-xxl-12 is-m-24">
-              <div class="p-5 p-l-4 font-weight-bold">
+              <div class="p-5 p-l-4 font-weight-bold text-wrap-balance">
                 <div class="font-size-16 font-size-xl-15 mb-4">
                   Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
                 </div>
@@ -90,7 +84,7 @@ if ( have_posts() ) {
           if ( $youtube_id ) {
             ?>
             <div class="u-video-embed-container">
-              <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>"></iframe>
+              <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
             </div>
               <?php
           }
@@ -145,7 +139,7 @@ if ( have_posts() ) {
                     <span class="font-color-red">No Paymasters.</span>
                   </h3>
                 </div>
-                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold">
+                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold text-wrap-balance">
                   <p>Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
                   <p class="mt-3">It’s a key principle that has <em>always</em> underpinned our funding model.</p>
                 </div>
@@ -165,27 +159,30 @@ if ( have_posts() ) {
               </div>
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
-                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4">
+                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4 text-wrap-balance">
                     <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism.</span>
                   </h3>
                 </div>
                 <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-weight-bold font-color-gray">
+                  <?php
+                  $max_funds_lines = 6;
+                  // Set fallback funds lines
+                  $fallback_funds_lines = array(
+                    'Your support pays for the hours it takes to research and meticulously check the claims in our articles.',
+                    'It pays for the studio space where we film our live show.',
+                    'It allows us to hire key roles, like a labour movement correspondent.',
+                    'It helps us fight (and win) against the smears of the rightwing press.',
+                    'Above all, it lets us break stories and challenge the establishment in ways mainstream media just won\'t.',
+                  );
+                  // Merge stored lines with fallback (max 6)
+                  $all_funds_lines = array_merge( $how_we_spend_our_funds_lines, array_slice( $fallback_funds_lines, 0, max( 0, $max_funds_lines - count( $how_we_spend_our_funds_lines ) ) ) );
+                  ?>
                   <div class="support-page__highlighter ux-highlighter">
                   <?php
-                  if ( ! empty( $how_we_spend_our_funds_lines ) ) {
-                    foreach ( $how_we_spend_our_funds_lines as $index => $line_text ) {
-                      echo '<div class="ux-highlighter__line">'
-                        . esc_html( $line_text )
-                        . '</div>';
-                    }
-                  } else {
-                    ?>
-                    <div class="ux-highlighter__line">Your support pays for the hours it takes to research and meticulously check the claims in our articles.</div>
-                    <div class="ux-highlighter__line">It pays for the studio space where we film our live show.</div>
-                    <div class="ux-highlighter__line">It allows us to hire key roles, like a labour movement correspondent.</div>
-                    <div class="ux-highlighter__line">It helps us fight (and win) against the smears of the rightwing press.</div>
-                    <div class="ux-highlighter__line">Above all, it lets us break stories and challenge the establishment in ways mainstream media just won’t.</div>
-                    <?php
+                  foreach ( $all_funds_lines as $index => $line_text ) {
+                    echo '<div class="ux-highlighter__line text-wrap-pretty">'
+                      . esc_html( $line_text )
+                      . '</div>';
                   }
                   ?>
                   </div>
@@ -210,11 +207,11 @@ if ( have_posts() ) {
                 </h3>
               </div>
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4">
+                <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4 text-wrap-balance">
                   Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations.
                 </h3>
               </div>
-              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-11 font-weight-bold">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-11 font-weight-bold text-wrap-pretty">
                 <p class="mb-4">
                   Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
                 </p>
@@ -259,7 +256,7 @@ if ( have_posts() ) {
               <h5 class="ui-boxed-title ui-boxed-title--grey">Supporters Say</h5>
               <div class="support-page__quote-container">
                 <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                <p class="font-serif font-size-13 font-size-s-12"><?php echo esc_html( $quote ); ?></p>
+                <p class="font-serif font-size-13 font-size-s-12 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
               </div>
             </div>
           <?php } ?>

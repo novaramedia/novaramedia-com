@@ -34,8 +34,8 @@ function nm_cmb_page_support_metaboxes() {
 
     $support_page_meta_boxes->add_field(
         array(
-            'name' => __( 'Header title first', 'cmb' ),
-            'desc' => __( 'Main title on page', 'cmb' ),
+            'name' => __( 'Header title (first line)', 'cmb' ),
+            'desc' => __( 'Main title on page. First line is in black', 'cmb' ),
             'id'   => $prefix . 'support_header_first_line',
             'type' => 'text',
         )
@@ -43,25 +43,10 @@ function nm_cmb_page_support_metaboxes() {
 
     $support_page_meta_boxes->add_field(
         array(
-            'name' => __( 'Header title second', 'cmb' ),
+            'name' => __( 'Header title (second line)', 'cmb' ),
+            'desc' => __( 'Main title on page. Second line is in white', 'cmb' ),
             'id'   => $prefix . 'support_header_second_line',
             'type' => 'text',
-        )
-    );
-
-    $support_page_meta_boxes->add_field(
-        array(
-            'name' => __( 'How we are funded heading', 'cmb' ),
-            'id'   => $prefix . 'support_how_we_are_funded_heading',
-            'type' => 'text',
-        )
-    );
-
-    $support_page_meta_boxes->add_field(
-        array(
-            'name' => __( 'How we are funded text', 'cmb' ),
-            'id'   => $prefix . 'support_how_we_are_funded_text',
-            'type' => 'textarea_small',
         )
     );
 
@@ -85,28 +70,6 @@ function nm_cmb_page_support_metaboxes() {
                 'add_row_text' => __( 'Add Another Line', 'nm' ),
             ),
             'desc'       => __( 'Add lines explaining how funds are spent, maximum 6 lines. You can reorder them.', 'nm' ),
-        )
-    );
-    $support_page_meta_boxes->add_field(
-        array(
-            'name' => __( 'Our Story heading', 'cmb' ),
-            'id'   => $prefix . 'support_our_story_heading',
-            'type' => 'text',
-        )
-    );
-
-    $support_page_meta_boxes->add_field(
-        array(
-            'name' => __( 'Our Story Bold text', 'cmb' ),
-            'id'   => $prefix . 'support_our_story_bold_text',
-            'type' => 'textarea_small',
-        )
-    );
-    $support_page_meta_boxes->add_field(
-        array(
-            'name' => __( 'Our Story regular text', 'cmb' ),
-            'id'   => $prefix . 'support_our_story_regular_text',
-            'type' => 'textarea_small',
         )
     );
 
