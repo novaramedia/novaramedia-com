@@ -242,7 +242,7 @@ if ( have_posts() ) {
       'I trust Novara to tell it like it is.',
       'I support Novara because they challenge the status quo.',
     );
-    // Merge stored quotes with fallback (max 4)
+    // Merge stored quotes with fallback (max 8)
     $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, $max_quotes - count( $support_carousel_quotes ) ) ) );
     ?>
     <!-- carousel -->
