@@ -41,7 +41,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24">
           <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
             <a href="<?php echo esc_url( get_post_type_archive_link( 'event' ) ); ?>" class="ui-hover">
-              Event
+              Events
             </a>
           </h4>
         </div>
@@ -72,7 +72,7 @@ if ( have_posts() ) {
         ?>
       </div>
       <div class="grid-row mb-4">
-        <div class="grid-item offset-s-0 is-s-8 offset-xxl-2 is-xxl-8">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8">
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Time:</h5>
             <h3 class="font-size-12 font-weight-bold"><?php echo $time->format( 'j F Y' ); ?></h3>
@@ -139,7 +139,7 @@ if ( have_posts() ) {
         }
         ?>
         </div>
-        <div class="grid-item is-s-16 is-xxl-12 text-copy font-size-10 font-serif">
+        <div class="grid-item is-s-24 is-xxl-12 text-copy font-size-10 font-serif">
           <?php the_content(); ?>
         </div>
       </div>
@@ -147,16 +147,16 @@ if ( have_posts() ) {
     <?php
     if ( $gallery ) {
       ?>
-    <div class="background-black font-grid-itemor-white padding-top-mid padding-bottom-mid">
-      <div class="container">
-        <div class="grid-row mb-4">
-          <div class="grid-item is-xxl-24">
-            <h4>Gallery: <span id="gallery-pagination"></span></h4>
-          </div>
-        </div>
-        <div class="grid-row mb-4">
-          <div class="grid-item is-xxl-24">
-            <?php echo do_shortcode( $gallery ); ?>
+    <div class="container">
+      <div class="grid-row mt-4 mb-4">
+        <div class="grid-item is-xxl-24">
+          <div class="grid-row background-black font-color-white ui-rounded-box ui-backgrounded-box-padding">
+            <div class="grid-item is-xxl-24">
+              <h4 class="font-weight-bold">Gallery</h4>
+              <div class="grid-item is-xxl-24">
+                <?php echo do_shortcode( $gallery ); ?>
+              </div>
+            </div>
           </div>
         </div>
       </div>
