@@ -17,12 +17,11 @@ if ( have_posts() ) {
     $youtube_id = ! empty( $meta['_nm_youtube_id'] ) ? $meta['_nm_youtube_id'][0] : false;
     $support_override = ! empty( $meta['_nm_support_text'] ) ? $meta['_nm_support_text'][0] : false;
 
-    // TODO: Use larger title sizes once they are introduced in the design system
     $settings_title_classes = array(
-      'huge'    => 'font-size-17 font-size-s-15',
-      'big'     => 'font-size-17 font-size-s-15',
+      'huge'    => 'font-size-21 font-size-s-18',
+      'big'     => 'font-size-19 font-size-s-16',
       'medium'  => 'font-size-17 font-size-s-15',
-      'smaller' => 'font-size-17 font-size-s-15',
+      'smaller' => 'font-size-15 font-size-s-13',
     );
     ?>
   <article id="page">
