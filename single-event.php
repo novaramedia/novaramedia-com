@@ -85,7 +85,7 @@ if ( have_posts() ) {
           <h5 class="font-size-10 font-weight-bold mb-2">Venue:</h5>
           <?php
           if ( $venue_google_maps_link || $venue_postcode ) {
-            $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . $venue_postcode;
+            $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
             ?>
           <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
             <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>
