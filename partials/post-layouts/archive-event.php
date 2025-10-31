@@ -12,6 +12,7 @@ if ( $timestamp ) {
 }
 
 $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
+$venue_google_maps_link = get_post_meta( $post->ID, '_cmb_venue_google_maps_link', true );
 $venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
 $speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
 $host = get_post_meta( $post->ID, '_cmb_host', true );
@@ -37,10 +38,19 @@ $host = get_post_meta( $post->ID, '_cmb_host', true );
     </a>
     <?php
     if ( $venue_name ) {
+      if ( $venue_google_maps_link || $venue_postcode ) {
+        $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . $venue_postcode;
+        ?>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+          </a>
+            <?php
+      } else {
+        ?>
+          <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+            <?php
+      }
       ?>
-      <a href="https://www.google.com/maps/search/<?php echo $venue_postcode; ?>" target="_blank" rel="nofollow" class="ui-hover">
-        <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
-      </a>
       <?php
     }
     ?>
