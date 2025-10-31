@@ -22,6 +22,7 @@ if ( have_posts() ) {
     $time_from_event = $time->fromNow();
 
     $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
+    $venue_google_maps_link = get_post_meta( $post->ID, '_cmb_venue_google_maps_link', true );
     $venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
 
     $speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
@@ -82,13 +83,18 @@ if ( have_posts() ) {
           ?>
         <div class="mb-4">
           <h5 class="font-size-10 font-weight-bold mb-2">Venue:</h5>
-          <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>
           <?php
-          if ( $venue_postcode ) {
+          if ( $venue_google_maps_link || $venue_postcode ) {
+            $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . $venue_postcode;
             ?>
-          <h3 class="font-size-11 font-weight-bold mt-1">
-            <a href="<?php echo esc_url( 'https://www.google.com/maps/search/' . $venue_postcode ); ?>" target="_blank" rel="nofollow"><?php echo $venue_postcode; ?></a>
-          </h3>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+            <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>
+            <h3 class="font-size-11 font-weight-bold mt-1"><?php echo $venue_postcode; ?></h3>
+          </a>
+            <?php
+          } else {
+            ?>
+          <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>
             <?php
           }
           ?>

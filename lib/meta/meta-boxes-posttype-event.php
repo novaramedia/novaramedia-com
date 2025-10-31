@@ -40,7 +40,17 @@ function nm_cmb_posttype_event_metaboxes() {
 
   $event_meta_boxes->add_field(
     array(
+      'name' => __( 'Venue Google Maps Link', 'cmb' ),
+      'desc' => __( 'Enter the Google Maps link for the venue.', 'cmb' ),
+      'id'   => $prefix . 'venue_google_maps_link',
+      'type' => 'text',
+    )
+  );
+
+  $event_meta_boxes->add_field(
+    array(
       'name' => __( 'Venue postcode', 'cmb' ),
+      'desc' => __( 'Enter the postcode for the venue.', 'cmb' ),
       'id'   => $prefix . 'venue_postcode',
       'type' => 'text',
     )
