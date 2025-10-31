@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add Github Action workflow to notify to Slack on releases
+
 ### Changed
 
 - Rebuild the support form, with new condensed width version
 - Updated all dev and front end dependencies (`chalk` pinned at v4)
+- Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
+- Migrate newsletter functionality to custom post type not page templates
 
 ## [4.2.10] - 2025-05-22
 

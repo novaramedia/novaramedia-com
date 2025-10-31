@@ -6,7 +6,7 @@
     <h1 id="single-articles-title" class="font-size-15 font-weight-bold mb-3"><?php the_title(); ?></h1>
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="font-size-12 font-weight-bold mb-3 js-fix-widows"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
+    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
     <?php
       }
     ?>

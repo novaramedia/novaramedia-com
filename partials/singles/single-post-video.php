@@ -83,7 +83,7 @@
           </a>
         </div>
         <a href="<?php the_permalink(); ?>" class="ui-hover">
-          <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1">
+          <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1">
             <?php render_video_title_and_standfirst($post->ID); ?>
           </h6>
         </a>

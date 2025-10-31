@@ -76,6 +76,13 @@
 	<!-- Add in some extra rules from other standards. -->
 	<rule ref="Generic.Commenting.Todo"/>
 
+  <!-- Security-focused rules -->
+	<rule ref="WordPress.Security.EscapeOutput"/>
+	<rule ref="WordPress.Security.NonceVerification"/>
+	<rule ref="WordPress.Security.ValidatedSanitizedInput"/>
+	<rule ref="WordPress.Security.PluginMenuSlug"/>
+	<rule ref="WordPress.Security.SafeRedirect"/>
+
 	<!-- Check for PHP cross-version compatibility. -->
 	<!--
 	To enable this, the PHPCompatibilityWP standard needs

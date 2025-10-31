@@ -1,8 +1,37 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
+/**
+ * Get the correct Netlify function URL based on environment.
+ *
+ * @return string The Netlify function URL.
+ */
+function nm_get_netlify_url() {
+  $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
+  $local_dev = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+
+  if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+    $http_host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+
+    if ( $http_host === 'localhost:8888' ) { // for local dev via MAMP
+      $netlify = $local_dev;
+    } elseif ( strpos( $http_host, '.local' ) !== false ) { // for DevKinsta and other .local dev environments
+      $netlify = $local_dev;
+    } elseif ( $http_host === 'stg-novaramediacom-staging.kinsta.cloud' ) { // for staging, will always fail. Could spin up the netlify function on staging to test
+      $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
+    }
+  }
+
+  return $netlify;
+}
+
 /**
  * Redirects /committed to /category/committed for SEO purposes.
  *
  * @return void
+ * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  */
 function redirect_committed_custom_url() {
   if ( isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -14,8 +43,10 @@ function redirect_committed_custom_url() {
   }
 }
 add_action( 'template_redirect', 'redirect_committed_custom_url' );
+
 /**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
+ * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  *
  * @return void Exits script execution after issuing a redirect.
  */
@@ -47,6 +78,8 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 /**
  * Check for apology notice and display it if it is in the future
  * This function will check if the apology notice is in the future and display it if it is
+ * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
+ * But can be adapted for future use
  *
  * @return array/Boolean Array of apology post or false if no apology post
  * @since 4.1.1
@@ -54,14 +87,14 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 function check_for_apology_notice() {
   $m = new \Moment\Moment( 1727035200 ); // Sun, 22 Sept 20:00:00 GMT
   $m->addWeeks( 8 ); // Time for notice to show
-  $momentFromVo = $m->fromNow();
+  $moment_from_vo = $m->fromNow();
 
-  if ( $momentFromVo->getDirection() === 'future' ) {
+  if ( $moment_from_vo->getDirection() === 'future' ) {
     $apology_post = get_posts(
-        array(
-            'name'      => 'gary-and-jack-lubner-apology',
-            'post_type' => 'notice',
-        )
+      array(
+        'name'      => 'gary-and-jack-lubner-apology',
+        'post_type' => 'notice',
+      )
     );
     if ( $apology_post ) {
       return $apology_post;
@@ -79,7 +112,7 @@ function check_for_apology_notice() {
  * If the latest articles are already in the featured posts, it will skip them
  * If there are no latest articles, it will return false
  *
- * @param array $featured_posts_ids Array of featured post ids
+ * @param array $featured_posts_ids Array of featured post ids.
  *
  * @return array/Boolean Array of latest articles ids or false if no latest articles
  */
@@ -174,7 +207,7 @@ function nm_get_livechecker_data() {
  * Takes content filterd by the_content and removes shortcodes and html in order to be useable for meta etc
  * This can be from both post content but also WYSIWYG meta fields.
  *
- * @param string
+ * @param string $content Content to clean.
  *
  * @return string
  */
@@ -186,20 +219,22 @@ function nm_clean_content_to_plaintext( $content ) {
 
   return $cleaned_content;
 }
+
 /**
  * Checks a string to see if it is set and also is a number
  *
- * @param string String to check
+ * @param string $value String to check.
  *
  * @return boolean
  */
-function nm_isset_and_numeric( $string ) {
-  if ( isset( $string ) && is_numeric( $string ) ) {
+function nm_isset_and_numeric( $value ) {
+  if ( isset( $value ) && is_numeric( $value ) ) {
     return true;
   }
 
   return false;
 }
+
 /**
  * Retrieves the support section heading and text content for different donation modes.
  *
@@ -311,7 +346,7 @@ function get_contributors_array( $post_id ) {
 /**
  * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Object/Boolean WP Term object or false if doesn't exist
  */
@@ -330,7 +365,7 @@ function get_child_level_child_category( $post_id ) {
 /**
  * Get the category at the top level. Should be either Articles, Audio or Video
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Object/Boolean WP Term object or false if isnt set
  */
@@ -364,7 +399,7 @@ function get_the_top_level_category( $post_id = null ) {
  * Does the post have set the Articles category? or is it a child of the Articles category?
  * Defaults to current $post context
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Boolean
  */
@@ -382,7 +417,7 @@ function nm_is_article( $post_id = null ) {
   }
 
   // check to see if any of the categories returned match the articles slug or have a parent with the articles id
-$found_in_categories = array_filter(
+  $found_in_categories = array_filter(
     $categories,
     function ( $category ) {
       if ( $category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id ) {
@@ -391,7 +426,7 @@ $found_in_categories = array_filter(
 
       return false;
     }
-); // check to see if any of the categories returned match the articles slug
+  ); // check to see if any of the categories returned match the articles slug
 
   if ( count( $found_in_categories ) > 0 ) {
     return true; // if articles slug was found return true
@@ -421,12 +456,12 @@ function nm_is_single_article() {
     return false;
   }
 
-$found_in_categories = array_filter(
+  $found_in_categories = array_filter(
     $categories,
     function ( $category ) {
       return $category->slug === 'articles';
     }
-); // check to see if any of the categories returned match the articles slug
+  ); // check to see if any of the categories returned match the articles slug
 
   if ( count( $found_in_categories ) > 0 ) {
     return true; // if articles slug was found return true
@@ -438,11 +473,11 @@ $found_in_categories = array_filter(
 /**
  * Get the first sub category assigned to the post
  *
- * @param integer $postId Post ID
- * @param boolean $object Return WP Term object or just the name
+ * @param integer $post_id Post ID.
+ * @param boolean $object Return WP Term object or just the name.
  */
-function get_the_sub_category( $postId, $object = false ) {
-  $categories = get_the_category( $postId );
+function get_the_sub_category( $post_id, $object = false ) {
+  $categories = get_the_category( $post_id );
 
   $child_categories = array_filter( $categories, 'only_child_category_filter' );
   $child_categories = array_values( $child_categories );
@@ -460,19 +495,37 @@ function get_the_sub_category( $postId, $object = false ) {
 
 // for array_filters
 
-// returns the id from a post object from a WP query
+/**
+ * Returns the id from a post object from a WP query
+ *
+ * @param object $post Post object from WP query.
+ *
+ * @return integer Post ID
+ */
 function nm_filter_query_ids( $post ) {
   return $post->ID;
 }
 
-// filters an array of post categories for just top level categories
+/**
+ * Filters an array of post categories for just top level categories
+ *
+ * @param object $var Category object.
+ *
+ * @return boolean True if category is top level
+ */
 function only_top_level_category_filter( $var ) {
   if ( $var->category_parent == 0 ) {
     return true;
   }
 }
 
-// filters an array of post categories for just child categories
+/**
+ * Filters an array of post categories for just child categories
+ *
+ * @param object $var Category object.
+ *
+ * @return boolean True if category is child level
+ */
 function only_child_category_filter( $var ) {
   if ( $var->category_parent !== 0 ) {
     return true;
@@ -484,8 +537,8 @@ function only_child_category_filter( $var ) {
  *
  * Note the option to use the lazysizes for lazyloading the iframe https://github.com/aFarkas/lazysizes
  *
- * @param string $id Youtube video ID
- * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy)
+ * @param string $id Youtube video ID.
+ * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
  *
  * @return string Valid youtube iframe src url
  */
@@ -499,7 +552,15 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
   return $url;
 }
 
-// obviously it gets related posts and returns a WP Query
+/**
+ * Get related posts based on tags and returns a WP Query
+ *
+ * @param array|null $excluded_ids_array Array of post IDs to exclude from results.
+ * @param string|null $category_name Category name to filter by.
+ * @param integer $number_of_posts Number of posts to return (default 4).
+ *
+ * @return WP_Query|Boolean WP_Query object or false if not on single post
+ */
 function get_related_posts( $excluded_ids_array = null, $category_name = null, $number_of_posts = 4 ) {
 
   // Check if we are on a single page, if not, return false
@@ -553,18 +614,22 @@ function get_related_posts( $excluded_ids_array = null, $category_name = null, $
   return new WP_Query( $args );
 }
 
-// for site options. Returns array for select
+/**
+ * For site options. Returns array for select
+ *
+ * @return array Array of focus terms for select options
+ */
 function home_focus_list() {
 
   $focuses = array(
-      null => 'No Focus Shown',
+    null => 'No Focus Shown',
   );
 
-$focus_terms = get_terms(
+  $focus_terms = get_terms(
     array(
-        'taxonomy' => 'focus',
+      'taxonomy' => 'focus',
     )
-);
+  );
 
   if ( $focus_terms ) {
     foreach ( $focus_terms as $term ) {
@@ -575,15 +640,20 @@ $focus_terms = get_terms(
   return $focuses;
 }
 
+/**
+ * Get all post tags formatted as an array for select options.
+ *
+ * @return array Array of tag IDs as keys and tag names as values
+ */
 function menu_tags_list() {
 
   $tags = array();
 
-$tags_all = get_terms(
+  $tags_all = get_terms(
     array(
         'taxonomy' => 'post_tag',
     )
-);
+  );
 
   if ( $tags_all ) {
     foreach ( $tags_all as $tag ) {

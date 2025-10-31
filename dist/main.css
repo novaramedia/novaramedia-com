@@ -1743,6 +1743,12 @@ img {
 #obligation-bar p {
   margin-bottom: 0;
 }
+.text-wrap-pretty {
+  text-wrap: pretty;
+}
+.text-wrap-balance {
+  text-wrap: balance;
+}
 html {
   font-family: var(--font-family-sans);
   font-size: 16px;
@@ -4843,23 +4849,43 @@ hr {
     display: block;
   }
 }
-.email-signup label a {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-.email-signup label a:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-.email-signup__completion-section {
-  display: flex;
-  -ms-justify-content: space-between;
-  justify-content: space-between;
-  -ms-align-items: center;
-  align-items: center;
+.email-signup__inputs {
+  -ms-filter: none;
+  filter: none;
+  opacity: 1;
+  transition: opacity var(--transition-speed-quick) ease-in-out;
 }
 .email-signup__feedback-processing {
   padding: 0.4rem 0.8rem;
+}
+.email-signup__form {
+  position: relative;
+}
+.email-signup__form .email-signup__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  color: var(--color-black-soft);
+  background-color: var(--color-gray-base);
+  -ms-align-items: center;
+  align-items: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+.email-signup__form label a {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+.email-signup__form label a:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+.email-signup__form .email-signup__icon {
+  height: 2rem;
+  width: 2rem;
 }
 .email-signup__form .email-signup__feedback-processing,
 .email-signup__form .email-signup__feedback-failed,
@@ -4867,53 +4893,29 @@ hr {
   display: none;
 }
 .email-signup__form--processing .email-signup__feedback-processing {
-  display: -ms-inline-flex;
-  display: inline-flex;
+  display: flex;
 }
-.email-signup__form--processing .email-signup__submit {
-  display: none;
+.email-signup__form--processing .email-signup__inputs {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
 }
 .email-signup__form--failed .email-signup__feedback-failed {
   display: flex;
 }
-.email-signup__form--failed .email-signup__submit {
-  display: none;
+.email-signup__form--failed .email-signup__inputs {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
 }
 .email-signup__form--completed .email-signup__feedback-completed {
   display: -ms-inline-flex;
   display: inline-flex;
 }
-.email-signup__form--completed .email-signup__submit {
-  display: none;
-}
-.newsletter-page-email-signup__form {
-  position: relative;
-}
-.newsletter-page-email-signup__form .email-signup__feedback-processing,
-.newsletter-page-email-signup__form .email-signup__feedback-failed,
-.newsletter-page-email-signup__form .email-signup__feedback-completed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.newsletter-page-email-signup__form.email-signup__form--processing,
-.newsletter-page-email-signup__form.email-signup__form--failed,
-.newsletter-page-email-signup__form.email-signup__form--completed {
-  background-color: var(--color-black-soft);
-  color: var(--color-white-soft);
-}
-.newsletter-page-email-signup__form.email-signup__form--processing .newsletter-page-email-signup__inputs,
-.newsletter-page-email-signup__form.email-signup__form--failed .newsletter-page-email-signup__inputs,
-.newsletter-page-email-signup__form.email-signup__form--completed .newsletter-page-email-signup__inputs {
+.email-signup__form--completed .email-signup__inputs {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
-}
-.email-signup__icon {
-  height: 3rem;
-  fill: var(--color-white-soft);
 }
 .front-page-novara-live__posts-scroller {
   height: 400px;
@@ -5497,24 +5499,6 @@ html {
   top: 100px;
   z-index: 1;
 }
-.support-page__left-radius p {
-  padding-bottom: 1rem;
-}
-.support-page__left-radius {
-  border-top-left-radius: var(--corner-radius);
-}
-.support-page__right-radius {
-  border-top-right-radius: var(--corner-radius);
-}
-@media screen and (max-width: 910px) {
-  .support-page__left-radius {
-    border-top-left-radius: var(--corner-radius);
-    border-top-right-radius: var(--corner-radius);
-  }
-  .support-page__right-radius {
-    border-top-right-radius: 0;
-  }
-}
 .support-page__big-stats {
   text-align: center;
 }
@@ -5625,20 +5609,6 @@ html {
 .support-page__paypal-logo {
   width: auto;
   height: 30px;
-}
-.support-page__infographic {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 200px;
-  width: 100%;
-  background-image: url("./img/pages/support-page/desktop-how-we-are-funded-graphic.svg");
-}
-@media screen and (max-width: 759px) {
-  .support-page__infographic {
-    background-image: url("./img/pages/support-page/mobile-how-we-are-funded-graphic.svg");
-    height: 400px;
-  }
 }
 @media screen and (max-width: 1408px) {
   .container {
@@ -8315,6 +8285,9 @@ html {
   display: flex;
   -ms-justify-content: flex-end;
   justify-content: flex-end;
+}
+.ui-backgrounded-box-padding {
+  padding: 1.5rem 1rem;
 }
 @keyframes sk-bounce {
   0%, 100% {

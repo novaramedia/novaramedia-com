@@ -1,63 +1,47 @@
 // EMAIL SIGNUP SECTION
 
-.email-signup
-  label
-    a
-      text-decoration: underline
-      &:hover
-        text-decoration: none
-
-.email-signup__completion-section
-  display: flex
-  justify-content: space-between
-  align-items: center
+.email-signup__inputs
+  opacity: 1
+  transition: opacity var(--transition-speed-quick) ease-in-out
 
 .email-signup__feedback-processing
   padding: .4rem .8rem
 
 .email-signup__form
-  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
-    display: none
-  &--processing
-    .email-signup__feedback-processing
-      display: inline-flex
-    .email-signup__submit
-      display: none
-  &--failed
-    .email-signup__feedback-failed
-      display: flex
-    .email-signup__submit
-      display: none
-  &--completed
-    .email-signup__feedback-completed
-      display: inline-flex
-    .email-signup__submit
-      display: none
-
-
-// ******************************************************
-
-// NEWSLETTER PAGE EMAIL SIGNUP
-// TODO: Refactor this when the single newsletter template is updated
-
-.newsletter-page-email-signup__form
   position: relative
-  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+  .email-signup__overlay
     position: absolute
     top: 0
     left: 0
     width: 100%
     height: 100%
-
-.newsletter-page-email-signup__form.email-signup__form--processing, .newsletter-page-email-signup__form.email-signup__form--failed, .newsletter-page-email-signup__form.email-signup__form--completed
-  background-color: var(--color-black-soft)
-  color: var(--color-white-soft)
-  .newsletter-page-email-signup__inputs
-    opacity: 0
-
-.email-signup__icon
-  height: 3rem
-  fill: var(--color-white-soft)
-
-// @media screen and (max-width: $breakpoint-s)
-
+    padding: 1rem
+    color: var(--color-black-soft)
+    background-color: var(--color-gray-base)
+    align-items: center
+    justify-content: center
+  label
+    a
+      text-decoration: underline
+      &:hover
+        text-decoration: none
+  .email-signup__icon
+    height: 2rem
+    width: 2rem
+  .email-signup__feedback-processing, .email-signup__feedback-failed, .email-signup__feedback-completed
+    display: none
+  &--processing
+    .email-signup__feedback-processing
+      display: flex
+    .email-signup__inputs
+      opacity: 0
+  &--failed
+    .email-signup__feedback-failed
+      display: flex
+    .email-signup__inputs
+      opacity: 0
+  &--completed
+    .email-signup__feedback-completed
+      display: inline-flex
+    .email-signup__inputs
+      opacity: 0

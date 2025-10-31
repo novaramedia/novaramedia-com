@@ -50057,7 +50057,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 class Utilities {
   constructor() {
-    this.fixWidows();
     this.displayTimeSince();
     this.checkGDPRApproval();
   }
@@ -50082,18 +50081,6 @@ class Utilities {
     const $resources = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-resources-section');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-resources-toggle').click(() => {
       $resources.toggle();
-    });
-  }
-
-  /**
-   * Utility css class mainly for use on headines to avoid widows [single words on a new line]
-   * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
-   */
-  fixWidows() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-fix-widows').each((index, element) => {
-      let string = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html();
-      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(string);
     });
   }
 
