@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
 - Migrate newsletter functionality to custom post type not page templates
 - Integrated nm-stylus-library 0.12.0-RC
+- Events views quickly updated to design system
 
 ## [4.2.10] - 2025-05-22
 
