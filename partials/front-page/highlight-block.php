@@ -188,7 +188,15 @@ $latest_others_args          = array(
               <h4 class="post__title font-size-9 font-weight-bold">
                 <?php the_title(); ?>
               </h4>
-              <?php echo nm_is_article( $post->ID ) ? '<h5 class="font-size-8 font-weight-bold text-uppercase mt-1">' . render_bylines( $post->ID, false ) . '</h5>' : ''; ?>
+              <?php
+              if ( nm_is_article( $post->ID ) ) {
+                ?>
+                <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
+                <?php render_bylines( $post->ID, false ); ?>
+                </h5>
+                <?php
+              }
+              ?>
               </a>
             </div>
             <?php
