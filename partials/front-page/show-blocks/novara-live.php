@@ -18,7 +18,7 @@ if ( $novara_live_category ) {
   ?>
 <section class="front-page-novara-live container mt-4 mb-4">
   <div class="grid-item is-xxl-24">
-    <div class="grid-row background-black font-color-white ui-rounded-box-large ui-backgrounded-box-padding">
+    <div class="grid-row background-black font-color-white ui-rounded-box ui-backgrounded-box-padding">
         <div class="grid-item is-xxl-24 mb-4">
           <a href="<?php echo $category_link; ?>">
             <div class="layout-split-level">

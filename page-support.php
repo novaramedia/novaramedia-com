@@ -32,7 +32,7 @@ if ( have_posts() ) {
         </h4>
       </div>
       <div class="grid-row mt-4 mb-6 font-weight-bold">
-        <div class="grid-item support-page__headline font-size-17">
+        <div class="grid-item support-page__headline font-size-20 font-size-xl-19 font-size-m-18 font-size-s-16">
           <div class="font-color-black">
             <?php
             if ( ! empty( $header_first_line ) ) {
@@ -107,7 +107,7 @@ if ( have_posts() ) {
                   <div class="grid-item is-xxl-8">
                     <div class="support-page__big-stat">
                       <div class="font-weight-bold font-color-white">
-                        <span class="font-size-17">84</span><span class="font-size-15 font-size-s-14">%</span>
+                        <span class="font-size-20 font-size-m-17">84</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
                       <div class="font-size-13 font-size-s-11 font-weight-bold">Supporter donations</div>
                     </div>
@@ -115,7 +115,7 @@ if ( have_posts() ) {
                   <div class="grid-item is-xxl-8">
                     <div class="support-page__big-stat">
                       <div class="font-weight-bold font-color-white">
-                        <span class="font-size-17">16</span><span class="font-size-15 font-size-s-14">%</span>
+                        <span class="font-size-20 font-size-m-17">16</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
                       <div class="font-size-13 font-size-s-11 font-weight-bold">YouTube + Merch</div>
                     </div>
@@ -123,7 +123,7 @@ if ( have_posts() ) {
                   <div class="grid-item is-xxl-8">
                     <div class="support-page__big-stat">
                       <div class="font-weight-bold">
-                        <span class="font-size-17">0</span><span class="font-size-15 font-size-s-14">%</span>
+                        <span class="font-size-20 font-size-m-17">0</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
                       <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
                     </div>
@@ -252,7 +252,7 @@ if ( have_posts() ) {
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
-            <div class="swiper-slide text-align-center ui-rounded-box--large">
+            <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
               <h5 class="ui-boxed-title ui-boxed-title--grey">Supporters Say</h5>
               <div class="support-page__quote-container">
                 <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
