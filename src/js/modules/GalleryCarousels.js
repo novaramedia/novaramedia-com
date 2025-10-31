@@ -27,7 +27,7 @@ import { Navigation, Autoplay, Mousewheel, Pagination } from 'swiper/modules';
  *
  * HTML setup: Use .ux-gallery-carousel class
  * Example: <section class="ux-gallery-carousel">
- * With autoplay: <section class="ux-gallery-carousel" data-autoplay="5000">
+ * With autoplay: <section class="ux-gallery-carousel" data-autoplay="true">
  */
 export class GalleryCarousels {
   constructor() {

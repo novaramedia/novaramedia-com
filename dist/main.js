@@ -49205,7 +49205,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * HTML setup: Use .ux-gallery-carousel class
  * Example: <section class="ux-gallery-carousel">
- * With autoplay: <section class="ux-gallery-carousel" data-autoplay="5000">
+ * With autoplay: <section class="ux-gallery-carousel" data-autoplay="true">
  */
 class GalleryCarousels {
   constructor() {
