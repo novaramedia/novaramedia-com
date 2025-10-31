@@ -1,0 +1,123 @@
+.support-page__background-cover-image
+  background-image: url('./img/pages/support-page/support-page-bg-2025.png')
+  background-size: 100% auto
+  background-position: top center
+  background-repeat: no-repeat
+
+  @media screen and (min-width: 1200px)
+    background-image: url('./img/pages/support-page/support-page-bg-2025--large.png')
+
+.support-page__headline
+  font-size: 9rem
+  line-height: .825em
+  margin-left: -.05em
+
+  @media screen and (max-width: $breakpoint-xl)
+    font-size: 7rem
+
+  @media screen and (max-width: $breakpoint-m)
+    font-size: 5.5rem
+    line-height: .9em
+
+  @media screen and (max-width: $breakpoint-s)
+    font-size: 4rem
+
+.support-page__donation-form-sticky
+  position: sticky
+  top: 100px
+  z-index: 1
+
+.support-page__big-stats
+  text-align: center
+  .font-size-17 // this seems a bad way to do this. time to add higher numbers to the library?
+    // TODO: upstream this sensibly
+    font-size: 7rem
+
+  @media screen and (max-width: $breakpoint-m)
+    .font-size-17
+      font-size: 3.5rem
+
+.support-page__big-stat
+  padding: 1rem
+
+.support-page__highlighter
+  .ux-highlighter__line
+    transition: all var(--transition-speed-quick) ease-in-out
+    margin-bottom: 1rem
+    &--active
+      transform: scale(1.01)
+      color: var(--color-black-soft)
+    &:last-child
+      margin-bottom: 0
+
+.support-page__our-story-background
+  position: relative
+  height: 520px
+  background-size: 100% auto
+  background-position: center 40%
+  background-repeat: no-repeat
+
+  @media screen and (max-width: $breakpoint-m)
+    height: 260px
+
+.avif .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.avif')
+
+.webp .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.webp')
+
+.fallback .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.jpg')
+
+.support-page__quote-carousel
+  position: relative
+
+  .support-page__quote-carousel-fade-left, .support-page__quote-carousel-fade-right
+    position: absolute
+    top: 0
+    width: 100px
+    height: 100%
+    z-index: 2
+    pointer-events: none
+    background-image: linear-gradient(to right, var(--color-gray-base), rgba(255, 255, 255, 0))
+    @media screen and (max-width: $breakpoint-m)
+      width: 50px
+
+  .support-page__quote-carousel-fade-right
+    right: 0
+    transform: rotate(180deg)
+
+  .support-page__quote-mark
+    font-size: 4rem
+    line-height: 0.5
+    margin: -0.5rem 0
+
+  .swiper-slide
+    width: 620px
+    height: auto
+    margin: 0 4px
+    padding: 1.5rem
+    background-color: var(--color-white-soft)
+    opacity: 0.5
+    transition: opacity var(--transition-speed-quick) ease
+
+  .swiper-slide-active
+    opacity: 1
+
+  .support-page__quote-container
+    padding: 2.5rem
+
+  @media screen and (max-width: $breakpoint-m)
+    .swiper-slide
+      width: 300px
+
+  @media screen and (max-width: $breakpoint-s)
+    .swiper-slide
+      padding: 1rem
+
+    .support-page__quote-container
+      padding: 1.5rem
+
+.support-page__direct-debit-logo, .support-page__paypal-logo
+  width: auto
+  height: 30px

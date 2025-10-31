@@ -70,7 +70,7 @@ function nm_register_fundraising_options_metabox() {
         $main_options->add_field(
             array(
                 'name' => 'Support Section Dynamic Copy',
-                'desc' => 'These fields dynamically update the form text based on whether the user selects a one-off or regular donation. Note: All fields in this section must be completed for the overrides to take effect. Leave blank if you do not want to override the text above.',
+                'desc' => 'These fields dynamically update the form text based on whether the user selects a one-off or regular donation. Leave blank if you do not want to override the text above.',
                 'id'   => $prefix . 'fundraising_settings_regular_override_title',
                 'type' => 'title',
             )
@@ -80,7 +80,6 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'Regular Heading Override',
-            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
             'id'   => $prefix . 'fundraising_settings_regular_heading_override',
             'type' => 'text',
         )
@@ -89,7 +88,6 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'Regular Text Override',
-            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
             'id'   => $prefix . 'fundraising_settings_regular_text_override',
             'type' => 'textarea_small',
         )
@@ -99,7 +97,6 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'One-off Heading Override',
-            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
             'id'   => $prefix . 'fundraising_settings_oneoff_heading_override',
             'type' => 'text',
         )
@@ -108,7 +105,6 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'One-off Text Override',
-            'desc' => 'NOTE: fill in all override fields (one-off and regular) for this to work.',
             'id'   => $prefix . 'fundraising_settings_oneoff_text_override',
             'type' => 'textarea_small',
         )

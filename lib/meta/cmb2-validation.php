@@ -1,28 +1,26 @@
 <?php
-/*
+/**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set to 'required'
  * Version: 0.2.0
- * 
- * Updated to also hook to our secondary options page form (Links Bar) 
+ *
+ * Updated to also hook to our secondary options page form (Links Bar)
  * Changed to take variable for validation via data attribute
  * Updated to also validate max words in field
- * 
+ *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
- * 
+ *
  * 'attributes' => array(
  *   'data-validation' => 'true',
  *   'data-validation-word-length' => 14
  *   'data-validation-required' => 'true'
  * )
- */
-
-/**
+ *
  * Reference documentation in the wiki:
+ *
  * @link https://github.com/WebDevStudios/CMB2/wiki/Plugin-code-to-add-JS-validation-of-%22required%22-fields
  */
-
 function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
   static $added = false;
 
@@ -32,7 +30,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
   }
 
   $added = true;
-?>
+  ?>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     let $form = false;
@@ -89,9 +87,9 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
         return; // Nothing to validate so give up
       }
 
-      const add_failure = ( $row, reason ) => {        
+      const add_failure = ( $row, reason ) => {
         $row.css({ 'background-color': 'rgb(255, 170, 170)' });
-        
+
         $first_error_row = $first_error_row ? $first_error_row : $row;
 
         labels.push({

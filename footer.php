@@ -6,7 +6,7 @@
             <ul class="font-weight-bold margin-bottom-small">
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
-              <li><a href="<?php echo site_url('about/how-were-funded/'); ?>">How We're Funded</a></li>
+              <li><a href="<?php echo site_url('about/how-we-are-funded/'); ?>">How We Are Funded</a></li>
               <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
               <li><a href="<?php echo site_url('jobs/'); ?>">Jobs</a></li>

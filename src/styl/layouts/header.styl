@@ -15,10 +15,8 @@ html
 .site-header__wrapper
   height: var(--header-height)
   overflow: hidden
-
-.site-header__main
-  padding-top: 12px
-  padding-bottom: 10px
+  display: flex
+  align-items: center;
 
 .site-header__toggle
   padding-right: .25rem
@@ -31,9 +29,6 @@ html
   font-size: 1.4rem
 
 @media screen and (max-width: $breakpoint-s)
-  .site-header__main
-    padding: 0
-
   .site-header__toggle
     padding-top: 12px
     padding-bottom: 10px
@@ -48,6 +43,7 @@ html
 .site-header__logomark
   position: relative
   transition: opacity var(--transition-speed-medium)
+  margin-top: 2px
   svg
     height: 19px
     width: 23px

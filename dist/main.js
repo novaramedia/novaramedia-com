@@ -49108,60 +49108,168 @@ __webpack_require__.r(__webpack_exports__);
 
 class Carousels {
   constructor() {
-    this.carousels = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel).attr('id', `ux-carousel-${index}`);
-      this.carousels.push(new Carousel(carousel));
-    });
+    this.swipers = [];
   }
   onReady() {
-    const _this = this;
-    _this.carousels.forEach(carousel => {
-      carousel.onReady();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-carousel').each((index, carousel) => {
+      const $carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
+      $carousel.attr('id', `ux-carousel-${index}`);
+      const $navLeft = $carousel.find('.swiper-button-prev');
+      const $navRight = $carousel.find('.swiper-button-next');
+      const swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"]($carousel.find('.swiper')[0], {
+        modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.FreeMode],
+        navigation: {
+          nextEl: $navRight[0],
+          prevEl: $navLeft[0]
+        },
+        autoplay: {
+          delay: 4000,
+          pauseOnMouseEnter: true
+        },
+        mousewheel: {
+          enabled: true,
+          thresholdDelta: 4
+        },
+        freemode: {
+          enabled: true,
+          sticky: true
+        },
+        slidesPerView: 'auto',
+        rewind: true
+      });
+      swiper.on('slideChange', event => {
+        if (event.isBeginning) {
+          $navLeft.addClass('swiper-button-prev--disabled');
+        } else {
+          $navLeft.removeClass('swiper-button-prev--disabled');
+        }
+        if (event.isEnd) {
+          $navRight.addClass('swiper-button-next--disabled');
+        } else {
+          $navRight.removeClass('swiper-button-next--disabled');
+        }
+      });
+      this.swipers.push(swiper);
+    });
+  }
+  onResize() {
+    this.swipers.forEach(swiper => {
+      swiper.update();
     });
   }
 }
-class Carousel {
-  constructor(carousel) {
-    this.$carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
-    this.$navLeft = this.$carousel.find('.swiper-button-prev');
-    this.$navRight = this.$carousel.find('.swiper-button-next');
-    this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"](this.$carousel.find('.swiper')[0], {
-      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.FreeMode],
-      navigation: {
-        nextEl: this.$navRight[0],
-        prevEl: this.$navLeft[0]
-      },
-      autoplay: {
-        delay: 4000,
-        pauseOnMouseEnter: true
-      },
-      mousewheel: {
-        enabled: true,
-        thresholdDelta: 4
-      },
-      freemode: {
-        enabled: true,
-        sticky: true
-      },
-      slidesPerView: 'auto',
-      rewind: true
-    });
-    this.swiper.on('slideChange', event => {
-      if (event.isBeginning) {
-        this.$navLeft.addClass('swiper-button-prev--disabled');
-      } else {
-        this.$navLeft.removeClass('swiper-button-prev--disabled');
-      }
-      if (event.isEnd) {
-        this.$navRight.addClass('swiper-button-next--disabled');
-      } else {
-        this.$navRight.removeClass('swiper-button-next--disabled');
-      }
+
+/***/ }),
+
+/***/ "./src/js/modules/GalleryCarousels.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/GalleryCarousels.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GalleryCarousels: () => (/* binding */ GalleryCarousels)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.mjs");
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+
+
+
+
+/**
+ * GalleryCarousels - User-controlled carousel component for content showcases
+ *
+ * Optimized for galleries, testimonials, and featured content where user control
+ * and pagination are more important than automatic progression.
+ *
+ * Key features:
+ * - No autoplay by default (user-controlled navigation)
+ * - Optional autoplay via data-autoplay attribute
+ * - Pagination dots for direct slide access
+ * - Infinite loop navigation
+ * - Centered slides for better visual presentation
+ * - Discrete slide-by-slide movement (no free mode)
+ * - Mousewheel support with axis constraint
+ *
+ * Usage examples:
+ * - Quote/testimonial carousels (like support page quotes)
+ * - Featured content showcases
+ * - Image galleries where user control is preferred
+ * - Any carousel where pagination dots add value
+ *
+ * HTML setup: Use .ux-gallery-carousel class
+ * Example: <section class="ux-gallery-carousel">
+ * With autoplay: <section class="ux-gallery-carousel" data-autoplay="5000">
+ */
+class GalleryCarousels {
+  constructor() {
+    this.swipers = [];
+    this.autoplayDelay = 4000; // Default autoplay delay in milliseconds
+  }
+  onReady() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ux-gallery-carousel').each((index, carousel) => {
+      const $carousel = jquery__WEBPACK_IMPORTED_MODULE_0___default()(carousel);
+      $carousel.attr('id', `ux-gallery-carousel-${index}`);
+      const $navLeft = $carousel.find('.swiper-button-prev');
+      const $navRight = $carousel.find('.swiper-button-next');
+
+      // Check for autoplay data attribute (boolean)
+      const hasAutoplay = $carousel.data('autoplay') === true || $carousel.data('autoplay') === '';
+      const swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__["default"]($carousel.find('.swiper')[0], {
+        modules: hasAutoplay ? [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Pagination] : [swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_2__.Pagination],
+        // Navigation arrows (optional - carousel works without them)
+        navigation: {
+          nextEl: $navRight[0],
+          prevEl: $navLeft[0]
+        },
+        // Pagination dots for direct slide access
+        pagination: {
+          el: $carousel.find('.swiper-pagination')[0],
+          clickable: true,
+          bulletClass: 'swiper-pagination-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active'
+        },
+        // Autoplay - configurable via data-autoplay boolean attribute
+        autoplay: hasAutoplay ? {
+          delay: this.autoplayDelay,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false
+        } : false,
+        // Mousewheel support with axis constraint
+        mousewheel: {
+          enabled: true,
+          thresholdDelta: 4,
+          forceToAxis: true // Prevents diagonal scrolling interference
+        },
+        // Discrete slide movement (no free mode)
+        freeMode: false,
+        // Auto width - slides sized by CSS (e.g., 500px quote cards)
+        slidesPerView: 'auto',
+        // Infinite loop navigation
+        loop: true,
+        // Center active slide for better visual hierarchy
+        centeredSlides: true,
+        // Responsive behavior
+        breakpoints: {
+          480: {
+            slidesPerView: 'auto'
+          }
+        }
+      });
+      this.swipers.push(swiper);
     });
   }
-  onReady() {}
-  onResize() {}
+  onResize() {
+    this.swipers.forEach(swiper => {
+      swiper.update();
+    });
+  }
 }
 
 /***/ }),
@@ -49259,6 +49367,90 @@ class Header {
       this.scrollThreshold = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').offset().top + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single-articles-title').height();
     } else {
       this.scrollThreshold = 150;
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/Highlighters.js":
+/*!****************************************!*\
+  !*** ./src/js/modules/Highlighters.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Highlighters: () => (/* binding */ Highlighters)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+/**
+ * Highlighters - Scroll-based text highlighting component
+ *
+ * Creates a scroll-triggered highlighting effect where the text element closest
+ * to the center of the viewport gets an --active BEM modifier class as the user scrolls.
+ * Perfect for progressive content reveals like funding breakdowns, feature lists, or testimonials.
+ *
+ * How it works:
+ * 1. Finds all elements matching the selector
+ * 2. Initially activates the first element
+ * 3. On scroll, calculates which element is closest to viewport center
+ * 4. Removes --active class from all elements, adds it to the closest one
+ *
+ * Usage:
+ * new Highlighters('.ux-highlighter__line');
+ * new Highlighters('.feature__item');
+ * new Highlighters('.stat__number');
+ *
+ * The component will add/remove the --active BEM modifier:
+ * .ux-highlighter__line--active
+ * .feature__item--active
+ * .stat__number--active
+ */
+class Highlighters {
+  constructor() {
+    let selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.ux-highlighter__line';
+    this.$lines = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector);
+    this.activeClass = `${selector.replace(/^\./, '')}--active`;
+    this.init();
+  }
+  init() {
+    this.activate(this.$lines.eq(0));
+  }
+  onReady() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('scroll', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(() => this.updateHighlighting(), 16));
+  }
+  resetAll() {
+    this.$lines.removeClass(this.activeClass);
+  }
+  activate($element) {
+    $element.addClass(this.activeClass);
+  }
+  updateHighlighting() {
+    const scrollTop = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollTop();
+    const viewportHeight = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height();
+    const centerY = scrollTop + viewportHeight / 2;
+    let closest = null;
+    let closestDistance = Infinity;
+    this.$lines.each((index, element) => {
+      const $element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element);
+      const elementCenter = $element.offset().top + $element.outerHeight() / 2;
+      const distance = Math.abs(centerY - elementCenter);
+      if (distance < closestDistance) {
+        closest = $element;
+        closestDistance = distance;
+      }
+    });
+    if (closest) {
+      this.resetAll();
+      this.activate(closest);
     }
   }
 }
@@ -49639,11 +49831,11 @@ class Support {
           if (data.action === 'set-type') {
             _this.clearActiveButtonState($form);
             _this.setAutoValues($form, data.value);
+            _this.updateSupportSectionCopy(data, $form);
             $form.attr('action', _this.donationAppUrl + data.value);
 
             // Set active class on all buttons with the same data-value (both visible and hidden)
             $form.find(`[data-action="set-type"][data-value="${data.value}"]`).addClass('ui-button--active');
-            _this.updateSupportSection(data, $form);
             $form.find('[data-action="set-type"]').each((index, button) => {
               const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(button);
               const isSelected = $button.data('value') === data.value;
@@ -49772,20 +49964,30 @@ class Support {
     $customInputContainer.removeClass('ui-button--active');
     $customInput.siblings('.support-form__custom-input-prefix').css('color', '');
   }
-  updateSupportSection(data, $form) {
+  updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
     const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['main'];
-    if (overrideCopy && ((0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading) || (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text))) {
-      const headingText = (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading) ? overrideCopy.heading : defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.heading) ? defaultSectionCopy.heading : '';
-      const textCopy = (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text) ? overrideCopy.text : defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.text) ? defaultSectionCopy.text : '';
-      if ($heading.length && headingText) {
-        $heading.text(headingText);
-      }
-      if ($text.length && textCopy) {
-        $text.text(textCopy);
-      }
+    const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['default'];
+    let headingText = '';
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading)) {
+      headingText = overrideCopy.heading;
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.heading)) {
+      headingText = defaultSectionCopy.heading;
+    }
+    let textCopy = '';
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text)) {
+      textCopy = overrideCopy.text;
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.text)) {
+      textCopy = defaultSectionCopy.text;
+    }
+
+    // Update DOM elements if they exist and we have content
+    if ($heading.length && headingText) {
+      $heading.text(headingText);
+    }
+    if ($text.length && textCopy) {
+      $text.text(textCopy);
     }
   }
   initSupportBar() {
@@ -50039,12 +50241,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Search_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Search.js */ "./src/js/modules/Search.js");
 /* harmony import */ var _modules_Support_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Support.js */ "./src/js/modules/Support.js");
 /* harmony import */ var _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/Carousels.js */ "./src/js/modules/Carousels.js");
-/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
-/* harmony import */ var _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Scrollers.js */ "./src/js/modules/Scrollers.js");
-/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_GalleryCarousels_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/GalleryCarousels.js */ "./src/js/modules/GalleryCarousels.js");
+/* harmony import */ var _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/MailchimpSignup.js */ "./src/js/modules/MailchimpSignup.js");
+/* harmony import */ var _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/Scrollers.js */ "./src/js/modules/Scrollers.js");
+/* harmony import */ var _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/Utilities.js */ "./src/js/modules/Utilities.js");
+/* harmony import */ var _modules_Highlighters_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/Highlighters.js */ "./src/js/modules/Highlighters.js");
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 
  // import styl for webpack
+
+
 
 
 
@@ -50065,9 +50271,11 @@ class Site {
     this.search = new _modules_Search_js__WEBPACK_IMPORTED_MODULE_6__.Search();
     this.support = new _modules_Support_js__WEBPACK_IMPORTED_MODULE_7__.Support();
     this.carousels = new _modules_Carousels_js__WEBPACK_IMPORTED_MODULE_8__.Carousels();
-    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_9__.MailchimpSignup();
-    this.scrollers = new _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_10__.Scrollers();
-    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_11__.Utilities();
+    this.galleryCarousels = new _modules_GalleryCarousels_js__WEBPACK_IMPORTED_MODULE_9__.GalleryCarousels();
+    this.mailchimpSignup = new _modules_MailchimpSignup_js__WEBPACK_IMPORTED_MODULE_10__.MailchimpSignup();
+    this.scrollers = new _modules_Scrollers_js__WEBPACK_IMPORTED_MODULE_11__.Scrollers();
+    this.utilties = new _modules_Utilities_js__WEBPACK_IMPORTED_MODULE_12__.Utilities();
+    this.highlighters = new _modules_Highlighters_js__WEBPACK_IMPORTED_MODULE_13__.Highlighters();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(this.onReady.bind(this));
   }
   onReady() {
@@ -50077,8 +50285,10 @@ class Site {
     this.search.onReady();
     this.support.onReady();
     this.carousels.onReady();
+    this.galleryCarousels.onReady();
     this.scrollers.onReady();
     this.utilties.onReady();
+    this.highlighters.onReady();
   }
 }
 new Site();

@@ -84,12 +84,28 @@ for col in 1..$cols
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
 
+    &--fade-to-white
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-white-soft) 100%), url('img/specials/support-2023-texture-alt.webp')
+
+    &--fade-to-gray
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-gray-base) 100%), url('img/specials/support-2023-texture-alt.webp')
+
 .fallback
   .background-support-texture
     background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
 
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+
+    &--fade-to-white
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-white-soft) 100%), url('img/specials/support-2023-texture-alt.png')
+
+    &--fade-to-gray
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-gray-base) 100%), url('img/specials/support-2023-texture-alt.png')
 
 // ******************************************************
 // START DEPRECATED
@@ -280,10 +296,6 @@ img
 // ******************************************************
 
 // SUPPORT PAGE
-
-.support-page__hero-wrapper
-  padding: 70px 0
-
 #other-donation-methods
   svg
     height: 2rem
@@ -493,6 +505,7 @@ img
 @import "layouts/novara-fm-archive"
 @import "layouts/products-bar"
 @import "layouts/support-form"
+@import "layouts/support-page"
 
 // ******************************************************
 
