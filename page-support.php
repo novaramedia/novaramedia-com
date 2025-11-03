@@ -31,8 +31,8 @@ if ( have_posts() ) {
           Support Us
         </h4>
       </div>
-      <div class="grid-row mt-4 mb-6 font-weight-bold">
-        <div class="grid-item support-page__headline font-size-20 font-size-xl-19 font-size-m-18 font-size-s-16">
+      <div class="grid-row mt-4 mb-6 mb-s-5 font-weight-bold">
+        <div class="grid-item support-page__headline font-size-20 font-size-xl-19 font-size-m-18 font-size-s-17">
           <div class="font-color-black">
             <?php
             if ( ! empty( $header_first_line ) ) {
@@ -56,17 +56,45 @@ if ( have_posts() ) {
     </div>
     <div class="container">
       <div class="grid-row u-relative">
-        <div class="grid-item is-xxl-24">
-          <div class="grid-row grid-row--nested u-relative background-white ui-rounded-box--top">
+        <div class="grid-item is-xxl-24 only-mobile">
+          <div class="mb-4">
+            <?php render_support_form( 'condensed' ); ?>
+          </div>
+          <div class="grid-row grid-row--nested background-white ui-rounded-box">
+            <div class="grid-item is-xxl-24">
+              <div class="pt-4 pb-4 pl-2 pr-2 font-weight-bold text-wrap-balance">
+                <div class="font-size-14 mb-4">
+                  Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
+                </div>
+                <div class="font-size-12 mb-4">
+                  Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
+                </div>
+                <div class="font-size-12 mb-3">
+                  Be part of the change.
+                </div>
+                <?php
+                if ( $youtube_id ) {
+                  ?>
+                <div class="u-video-embed-container">
+                  <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
+                </div>
+                  <?php
+                }
+                ?>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-row grid-row--nested u-relative only-desktop background-white ui-rounded-box ui-rounded-box--top">
             <div class="grid-item is-xxl-12 is-m-24">
-              <div class="p-5 p-l-4 font-weight-bold text-wrap-balance">
-                <div class="font-size-16 font-size-xl-15 mb-4">
+              <div class="p-5 p-l-4 pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
+                <div class="font-size-16 font-size-xl-15 font-size-s-14 mb-4">
                   Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
                 </div>
                 <div class="font-size-13 font-size-l-12 mb-4">
                   Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
                 </div>
-                <div class="font-size-13 font-size-l-12 mb-5">
+                <div class="font-size-13 font-size-l-12 mb-5 mb-s-3">
                   Be part of the change.
                 </div>
               </div>
@@ -78,8 +106,8 @@ if ( have_posts() ) {
             </div>
           </div>
         </div>
-        <div class="grid-item is-xxl-24">
-          <div class="background-white ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
+        <div class="grid-item is-xxl-24 only-desktop">
+          <div class="background-white ui-rounded-box ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
           <?php
           if ( $youtube_id ) {
             ?>
@@ -99,42 +127,42 @@ if ( have_posts() ) {
       <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
         <div class="grid-row support-page__text-container">
           <div class="grid-item is-xxl-24 ">
-            <div class="background-red ui-rounded-box--top text-align-center p-5 p-l-4">
+            <div class="background-red ui-rounded-box ui-rounded-box--top text-align-center p-5 p-l-4">
               <h3 class="ui-boxed-title ui-boxed-title--grey">How we are funded</h3>
 
-              <div class="support-page__big-stats mt-4 mb-5">
+              <div class="support-page__big-stats mt-4 mb-5 mb-s-0">
                 <div class="grid-row grid-row--nested">
-                  <div class="grid-item is-xxl-8">
-                    <div class="support-page__big-stat">
+                  <div class="grid-item is-xxl-8 is-s-24">
+                    <div class="support-page__big-stat p-4 p-s-3">
                       <div class="font-weight-bold font-color-white">
                         <span class="font-size-20 font-size-m-17">84</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
-                      <div class="font-size-13 font-size-s-11 font-weight-bold">Supporter donations</div>
+                      <div class="font-size-13 font-size-s-12 font-weight-bold">Supporter donations</div>
                     </div>
                   </div>
-                  <div class="grid-item is-xxl-8">
-                    <div class="support-page__big-stat">
+                  <div class="grid-item is-xxl-8 is-s-24">
+                    <div class="support-page__big-stat p-4 p-s-3">
                       <div class="font-weight-bold font-color-white">
                         <span class="font-size-20 font-size-m-17">16</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
-                      <div class="font-size-13 font-size-s-11 font-weight-bold">YouTube + Merch</div>
+                      <div class="font-size-13 font-size-s-12 font-weight-bold">YouTube + Merch</div>
                     </div>
                   </div>
-                  <div class="grid-item is-xxl-8">
-                    <div class="support-page__big-stat">
+                  <div class="grid-item is-xxl-8 is-s-24">
+                    <div class="support-page__big-stat p-4 p-s-3">
                       <div class="font-weight-bold">
                         <span class="font-size-20 font-size-m-17">0</span><span class="font-size-15 font-size-s-14">%</span>
                       </div>
-                      <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
+                      <div class="font-size-13 font-size-s-12 font-weight-bold">Murdoch</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="background-white ui-rounded-box--bottom p-5 p-l-4">
+            <div class="background-white ui-rounded-box ui-rounded-box--bottom p-5 p-l-4">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
-                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4 mr-5 mr-s-0">
+                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 mr-5 mr-s-0">
                     No Paywalls.<br/>
                     <span class="font-color-red">No Paymasters.</span>
                   </h3>
@@ -154,12 +182,12 @@ if ( have_posts() ) {
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="background-white ui-rounded-box p-5 p-l-4">
-              <div class="text-align-center mb-6">
+              <div class="text-align-center mb-6 mb-s-5">
                 <h3 class="ui-boxed-title">How we spend our funds</h3>
               </div>
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
-                  <h3 class="font-size-16 font-size-l-15 font-weight-bold mb-s-4 text-wrap-balance">
+                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
                     <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism.</span>
                   </h3>
                 </div>
@@ -194,14 +222,14 @@ if ( have_posts() ) {
       </div>
 
       <!-- our story -->
-      <div class="container mb-6">
+      <div class="container mb-6 mb-s-4">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black">
-              <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box--top"></div>
+              <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box ui-rounded-box--top"></div>
             </div>
-            <div class="grid-row grid-row--nested p-6 p-l-5 background-black font-color-white ui-rounded-box--bottom">
-              <div class="grid-item is-xxl-24 text-align-center mb-6">
+            <div class="grid-row grid-row--nested p-6 p-l-5 p-s-4 pt-s-5 pb-s-5 background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
+              <div class="grid-item is-xxl-24 text-align-center mb-6 mb-s-5">
                 <h3 class="ui-boxed-title ui-boxed-title--white">
                   Our Story
                 </h3>
@@ -246,17 +274,17 @@ if ( have_posts() ) {
     $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, $max_quotes - count( $support_carousel_quotes ) ) ) );
     ?>
     <!-- carousel -->
-    <section class="container support-page__quote-carousel ux-gallery-carousel mb-6" data-autoplay="true">
+    <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
       <div class="support-page__quote-carousel-fade-left"></div>
       <div class="support-page__quote-carousel-fade-right"></div>
       <div class="swiper">
         <div class="swiper-wrapper">
           <?php foreach ( $all_quotes as $quote ) { ?>
             <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
-              <h5 class="ui-boxed-title ui-boxed-title--grey">Supporters Say</h5>
+              <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
               <div class="support-page__quote-container">
                 <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                <p class="font-serif font-size-13 font-size-s-12 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
               </div>
             </div>
           <?php } ?>
@@ -277,15 +305,15 @@ if ( have_posts() ) {
       <!-- already a supporter -->
       <div class="grid-row mt-5">
         <div class="grid-item is-s-24 is-xxl-12 mb-4">
-          <h4 class="font-size-13 font-weight-bold mb-3">Already a supporter?</h4>
+          <h4 class="font-size-13 font-size-s-14 font-weight-bold mb-3">Already a supporter?</h4>
           <p>Are you able to increase your monthly donation? Increasing by just £2 or £3 helps strengthen funding base and makes us even more secure for the future.</p>
-          <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small mb-s-5">Log in to your account</a></p>
+          <p class="mt-4"><a href="https://donate.novaramedia.com/login" class="ui-button ui-button--red ui-button--small">Log in to your account</a></p>
         </div>
 
         <!-- Other donation methods -->
         <div class="grid-item is-s-24 is-xxl-12">
           <div class="mb-5 mb-s-4">
-            <h4 class="font-size-13 font-weight-bold mb-3">Other Donation Methods</h4>
+            <h4 class="font-size-13 font-size-s-14 font-weight-bold mb-3">Other Donation Methods</h4>
             <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal or UK Direct Debit.</p>
           </div>
 
