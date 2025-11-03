@@ -76,7 +76,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                 <div class="u-video-embed-container">
-                  <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
+                  <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>" allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
                 </div>
                   <?php
                 }
@@ -112,7 +112,7 @@ if ( have_posts() ) {
           if ( $youtube_id ) {
             ?>
             <div class="u-video-embed-container">
-              <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
+              <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>" allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
             </div>
               <?php
           }

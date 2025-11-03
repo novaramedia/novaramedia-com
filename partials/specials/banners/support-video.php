@@ -30,7 +30,7 @@ if ( ! $support_page === null ) {
             echo generate_youtube_embed_url( 'c6hfjBmzt5c' );
           }
           ?>
-      " frameborder="0" allowfullscreen></iframe>
+      " allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
         </div>
       </div>
       <?php

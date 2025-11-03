@@ -35,7 +35,7 @@ get_header();
     <div class="novara-live-archive__liveplayer grid-row">
       <div class="grid-item is-xxl-24">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($embed_id, true); ?>" frameborder="0" allowfullscreen></iframe>
+          <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($embed_id, true); ?>" allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
         </div>
       </div>
     </div>

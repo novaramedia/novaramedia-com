@@ -553,6 +553,16 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
 }
 
 /**
+ * Get standard YouTube iframe allow attributes to fix Safari compatibility issues.
+ * Safari requires explicit permissions for various features to prevent Error 153.
+ *
+ * @return string Space-separated list of allowed features for YouTube iframes
+ */
+function get_youtube_iframe_allow_attr() {
+  return 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+}
+
+/**
  * Get related posts based on tags and returns a WP Query
  *
  * @param array|null $excluded_ids_array Array of post IDs to exclude from results.

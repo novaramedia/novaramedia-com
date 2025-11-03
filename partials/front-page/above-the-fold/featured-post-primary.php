@@ -53,7 +53,7 @@
   if ($has_embed) {
 ?>
 <div class="u-video-embed-container background-black">
-  <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
+  <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
 </div>
 <?php
   } else {
