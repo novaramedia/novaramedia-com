@@ -1,9 +1,4 @@
-@import '../../node_modules/nm-stylus-library/variables.styl';
-@import '~kouto-swiss/index.styl'
-@import '../../node_modules/nm-stylus-library/utility/helpers';
-@import '../../node_modules/nm-stylus-library/functions/grid-function-new';
-@import '../../node_modules/nm-stylus-library/modules/backgrounds.styl';
-
+@import '../../node_modules/nm-stylus-library/index.styl';
 
 // this should be deprecated as an implementation by @4.3.0
 @import "grid-functions"
@@ -29,10 +24,6 @@
 
 // ******************************************************
 
-meyer-reset()
-box-sizing-reset()
-normalize()
-
 h1
   margin: 0 // to counter normalize.css. maybe we can remove normalize.css?
 
@@ -52,7 +43,8 @@ flex-grid-maker('xxl')
 grid-maker('xxl')
 
 .container
-  margin: 0 auto
+  margin-left: auto
+  margin-right: auto
   width: 1400px
 
 .row
@@ -485,14 +477,6 @@ img
   text-wrap: balance
 
 // ******************************************************
-
-// MODULES
-
-@import '../../node_modules/nm-stylus-library/modules/typography';
-@import '../../node_modules/nm-stylus-library/modules/spacing';
-@import '../../node_modules/nm-stylus-library/modules/layout';
-@import '../../node_modules/nm-stylus-library/modules/ui';
-@import '../../node_modules/nm-stylus-library/modules/carousel';
 
 // LAYOUTS
 
