@@ -20,17 +20,10 @@ if ( ! $support_page === null ) {
       ?>
       <div class="grid-item is-m-24 is-xxl-12 mb-4">
         <div class="u-video-embed-container background-black">
-          <iframe class="youtube-player lazyload" data-src="
           <?php
-          if ( $custom_youtube_id ) {
-            echo generate_youtube_embed_url( $custom_youtube_id );
-          } elseif ( $support_page_youtube_id ) {
-            echo generate_youtube_embed_url( $support_page_youtube_id );
-          } else {
-            echo generate_youtube_embed_url( 'c6hfjBmzt5c' );
-          }
+          $video_id = $custom_youtube_id ?: ( $support_page_youtube_id ?: 'c6hfjBmzt5c' );
+          echo render_youtube_embed_iframe( $video_id, false, true );
           ?>
-      " allow="<?php echo get_youtube_iframe_allow_attr(); ?>" allowfullscreen></iframe>
         </div>
       </div>
       <?php
