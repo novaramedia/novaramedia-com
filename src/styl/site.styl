@@ -109,12 +109,6 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$color-black-soft = rgb(14, 14, 14)
-$color-white-soft = rgb(253, 253, 253)
-$color-white-soft-transparent = rgba(253, 253, 253, .5)
-
-$color-red = rgb(220, 0, 5) // Mine
-$color-red-dark = #A80003
 $color-blue = rgb(84, 144, 235)
 
 // END DEPRECATED
@@ -161,6 +155,7 @@ img
 
 .only-mobile
   display: none
+
 // ******************************************************
 
 // MARGINS AND PADDING
@@ -307,7 +302,7 @@ img
   width: 100%
   height: 100%
   border-radius: 50%
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
   opacity: 0.6
   position: absolute
   top: 0
@@ -316,7 +311,7 @@ img
 
 .spinner--white
   .double-bounce1, .double-bounce2
-    background-color: $color-white-soft
+    background-color: var(--color-white-soft)
 
 .double-bounce2
   animation-delay: -1.0s
@@ -391,14 +386,14 @@ img
   // ARTICLE
 
 #single-article-support-box
-  border: 1px solid $color-red
+  border: 1px solid var(--color-red)
   padding: 1rem
 
   // LIVEBLOG
 
 .text-copy
   .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
+    border-top: 1px solid var(--color-black-soft)
     padding-top: $margin-basic
     margin-top: $margin-mid
     margin-bottom: $margin-small
@@ -456,7 +451,7 @@ img
 
 #obligation-bar
   display: none
-  background-color: $color-black-soft
+  background-color: var(--color-black-soft)
 
   .flex-grid-row
     flex-wrap: nowrap
