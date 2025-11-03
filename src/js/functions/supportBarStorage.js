@@ -5,6 +5,7 @@
  */
 
 const STORAGE_KEY = 'support-bar-state';
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 
 /**
  * Get the support bar state from localStorage
@@ -42,12 +43,9 @@ export function getSupportBarState() {
 export function setSupportBarState(closed, expirationDays) {
   try {
     const now = Date.now();
-    const expiresAt = now + expirationDays * 24 * 60 * 60 * 1000;
+    const expiresAt = now + (expirationDays * MILLISECONDS_PER_DAY);
 
-    const state = {
-      closed: closed,
-      expiresAt: expiresAt,
-    };
+    const state = { closed, expiresAt };
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (error) {
