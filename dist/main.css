@@ -5704,6 +5704,11 @@ html {
     background-image: url("./img/pages/support-page/support-page-bg-2025--large.png");
   }
 }
+@media screen and (max-width: 759px) {
+  .support-page__background-cover-image {
+    background-image: url("./img/pages/support-page/support-page-bg-2025--small.png");
+  }
+}
 .support-page__headline {
   line-height: 0.825em;
   margin-left: -0.05em;
@@ -5720,9 +5725,6 @@ html {
 }
 .support-page__big-stats {
   text-align: center;
-}
-.support-page__big-stat {
-  padding: 1rem;
 }
 .support-page__highlighter .ux-highlighter__line {
   transition: all var(--transition-speed-quick) ease-in-out;
@@ -5810,10 +5812,14 @@ html {
 }
 @media screen and (max-width: 759px) {
   .support-page__quote-carousel .swiper-slide {
-    padding: 1rem;
+    width: 100%;
+    padding: 2.5rem 0 3rem;
   }
   .support-page__quote-carousel .support-page__quote-container {
     padding: 1.5rem;
+  }
+  .support-page__quote-carousel .swiper-pagination {
+    bottom: 1.5rem;
   }
 }
 .support-page__direct-debit-logo,
@@ -8375,6 +8381,17 @@ html {
   #obligation-bar .flex-grid-row .flex-grid-item:first-child {
     margin-bottom: 0.5rem;
   }
+}
+.ui-rounded-box--top {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui-rounded-box--bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+html {
+  --color-gray-mid: var(--color-gray-mid-new);
 }
 @keyframes sk-bounce {
   0%, 100% {

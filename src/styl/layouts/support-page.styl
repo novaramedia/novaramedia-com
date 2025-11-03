@@ -7,6 +7,10 @@
   @media screen and (min-width: 1200px)
     background-image: url('./img/pages/support-page/support-page-bg-2025--large.png')
 
+  @media screen and (max-width: $breakpoint-s)
+    background-image: url('./img/pages/support-page/support-page-bg-2025--small.png')
+
+
 .support-page__headline
   line-height: .825em
   margin-left: -.05em
@@ -20,9 +24,6 @@
 
 .support-page__big-stats
   text-align: center
-
-.support-page__big-stat
-  padding: 1rem
 
 .support-page__highlighter
   .ux-highlighter__line
@@ -97,10 +98,14 @@
 
   @media screen and (max-width: $breakpoint-s)
     .swiper-slide
-      padding: 1rem
+      width: 100%
+      padding: 2.5rem 0 3rem
 
     .support-page__quote-container
       padding: 1.5rem
+
+    .swiper-pagination
+      bottom: 1.5rem
 
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto
