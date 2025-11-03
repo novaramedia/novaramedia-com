@@ -84,8 +84,16 @@ if ( have_posts() ) {
         <div class="mb-4">
           <h5 class="font-size-10 font-weight-bold mb-2">Venue:</h5>
           <?php
-          if ( $venue_google_maps_link || $venue_postcode ) {
-            $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
+          if ( $venue_google_maps_link ) {
+            $venue_link = $venue_google_maps_link;
+            ?>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+            <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>
+            <h3 class="font-size-11 font-weight-bold mt-1"><?php echo $venue_postcode; ?></h3>
+          </a>
+            <?php
+          } elseif ( $venue_postcode ) {
+            $venue_link = 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
             ?>
           <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
             <h3 class="font-size-12 font-weight-bold"><?php echo $venue_name; ?></h3>

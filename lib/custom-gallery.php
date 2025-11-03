@@ -143,7 +143,7 @@ function my_gallery_shortcode( $attr ) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='ux-gallery-carousel gallery gallery-id-{$id} padding-top-small padding-bottom-small' data-autoplay='true'>
+  $gallery_div = "<div id='$selector' class='ux-gallery-carousel gallery gallery-id-" . esc_attr($id) . " padding-top-small padding-bottom-small' data-autoplay='true'>
     <div class='swiper'>
       <div class='swiper-wrapper'>";
   $output = $gallery_div;

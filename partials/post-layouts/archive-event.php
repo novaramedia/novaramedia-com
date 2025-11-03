@@ -38,8 +38,15 @@ $host = get_post_meta( $post->ID, '_cmb_host', true );
     </a>
     <?php
     if ( $venue_name ) {
-      if ( $venue_google_maps_link || $venue_postcode ) {
-        $venue_link = $venue_google_maps_link ? $venue_google_maps_link : 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
+      if ( !empty( $venue_google_maps_link ) ) {
+        $venue_link = $venue_google_maps_link;
+        ?>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+          </a>
+            <?php
+      } elseif ( !empty( $venue_postcode ) ) {
+        $venue_link = 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
         ?>
           <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
             <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
