@@ -11,7 +11,20 @@ if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
 
-    $timestamp = get_post_meta( $post->ID, '_cmb_time', true );
+    // Get all event meta in a single database call
+    $event_meta = get_post_meta( $post->ID );
+
+    // Extract individual meta values with defaults
+    $timestamp = isset( $event_meta['_cmb_time'][0] ) ? $event_meta['_cmb_time'][0] : '';
+    $venue_name = isset( $event_meta['_cmb_venue_name'][0] ) ? $event_meta['_cmb_venue_name'][0] : '';
+    $venue_google_maps_link = isset( $event_meta['_cmb_venue_google_maps_link'][0] ) ? $event_meta['_cmb_venue_google_maps_link'][0] : '';
+    $venue_postcode = isset( $event_meta['_cmb_venue_postcode'][0] ) ? $event_meta['_cmb_venue_postcode'][0] : '';
+    $speakers = isset( $event_meta['_cmb_speakers'][0] ) ? maybe_unserialize( $event_meta['_cmb_speakers'][0] ) : array();
+    $host = isset( $event_meta['_cmb_host'][0] ) ? $event_meta['_cmb_host'][0] : '';
+    $is_sold_out = isset( $event_meta['_cmb_tickets_sold_out'][0] ) ? $event_meta['_cmb_tickets_sold_out'][0] : '';
+    $tickets_url = isset( $event_meta['_cmb_tickets'][0] ) ? $event_meta['_cmb_tickets'][0] : '';
+    $youtube_id = isset( $event_meta['_cmb_youtube'][0] ) ? $event_meta['_cmb_youtube'][0] : '';
+    $gallery = isset( $event_meta['_cmb_gallery'][0] ) ? $event_meta['_cmb_gallery'][0] : '';
 
     if ( $timestamp ) {
       $time = new \Moment\Moment( '@' . $timestamp );
@@ -20,20 +33,6 @@ if ( have_posts() ) {
     }
 
     $time_from_event = $time->fromNow();
-
-    $venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
-    $venue_google_maps_link = get_post_meta( $post->ID, '_cmb_venue_google_maps_link', true );
-    $venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
-
-    $speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
-    $host = get_post_meta( $post->ID, '_cmb_host', true );
-
-    $is_sold_out = get_post_meta( $post->ID, '_cmb_tickets_sold_out', true );
-    $tickets_url = get_post_meta( $post->ID, '_cmb_tickets', true );
-
-    $youtube_id = get_post_meta( $post->ID, '_cmb_youtube', true );
-
-    $gallery = get_post_meta( $post->ID, '_cmb_gallery', true );
     ?>
   <article id="event">
     <div class="container">

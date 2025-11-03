@@ -3,19 +3,22 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit;
 }
 
-$timestamp = get_post_meta( $post->ID, '_cmb_time', true );
+// Get all event meta in a single database call
+$event_meta = get_post_meta( $post->ID );
+
+// Extract individual meta values with defaults
+$timestamp = isset( $event_meta['_cmb_time'][0] ) ? $event_meta['_cmb_time'][0] : '';
+$venue_name = isset( $event_meta['_cmb_venue_name'][0] ) ? $event_meta['_cmb_venue_name'][0] : '';
+$venue_google_maps_link = isset( $event_meta['_cmb_venue_google_maps_link'][0] ) ? $event_meta['_cmb_venue_google_maps_link'][0] : '';
+$venue_postcode = isset( $event_meta['_cmb_venue_postcode'][0] ) ? $event_meta['_cmb_venue_postcode'][0] : '';
+$speakers = isset( $event_meta['_cmb_speakers'][0] ) ? maybe_unserialize( $event_meta['_cmb_speakers'][0] ) : array();
+$host = isset( $event_meta['_cmb_host'][0] ) ? $event_meta['_cmb_host'][0] : '';
 
 if ( $timestamp ) {
   $time = new \Moment\Moment( '@' . $timestamp );
 } else {
   $time = new \Moment\Moment( '@' . get_the_time( 'U' ) );
 }
-
-$venue_name = get_post_meta( $post->ID, '_cmb_venue_name', true );
-$venue_google_maps_link = get_post_meta( $post->ID, '_cmb_venue_google_maps_link', true );
-$venue_postcode = get_post_meta( $post->ID, '_cmb_venue_postcode', true );
-$speakers = get_post_meta( $post->ID, '_cmb_speakers', true );
-$host = get_post_meta( $post->ID, '_cmb_host', true );
 ?>
 <div class="grid-row mb-5">
   <div class="grid-item is-xxl-10 is-s-24 mb-s-2 text-align-center">
@@ -38,14 +41,14 @@ $host = get_post_meta( $post->ID, '_cmb_host', true );
     </a>
     <?php
     if ( $venue_name ) {
-      if ( !empty( $venue_google_maps_link ) ) {
+      if ( ! empty( $venue_google_maps_link ) ) {
         $venue_link = $venue_google_maps_link;
         ?>
           <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
             <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
           </a>
             <?php
-      } elseif ( !empty( $venue_postcode ) ) {
+      } elseif ( ! empty( $venue_postcode ) ) {
         $venue_link = 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
         ?>
           <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
