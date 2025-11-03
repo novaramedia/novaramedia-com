@@ -161,6 +161,7 @@ function event_post_type() {
     'publicly_queryable'  => true,
     'capability_type'     => 'page',
     'show_in_rest'        => true,
+    'rewrite'             => array( 'slug' => 'events' ),
   );
   register_post_type( 'event', $args );
 }
