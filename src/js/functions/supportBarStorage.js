@@ -43,7 +43,7 @@ export function getSupportBarState() {
 export function setSupportBarState(closed, expirationDays) {
   try {
     const now = Date.now();
-    const expiresAt = now + (expirationDays * MILLISECONDS_PER_DAY);
+    const expiresAt = now + expirationDays * MILLISECONDS_PER_DAY;
 
     const state = { closed, expiresAt };
 
