@@ -21,7 +21,7 @@ export function getItem(key) {
     const data = JSON.parse(stored);
 
     // If data has an expiresAt property, check if it's expired
-    if (data.expiresAt !== undefined) {
+    if ('expiresAt' in data) {
       const now = Date.now();
       if (now > data.expiresAt) {
         // Expired - remove and return null
@@ -50,7 +50,7 @@ export function setItem(key, value, expirationDays) {
   try {
     let dataToStore;
 
-    if (expirationDays !== undefined) {
+    if (typeof expirationDays === 'number') {
       const now = Date.now();
       const expiresAt = now + expirationDays * MILLISECONDS_PER_DAY;
       dataToStore = { value, expiresAt };
