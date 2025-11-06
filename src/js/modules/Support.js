@@ -3,15 +3,13 @@
 
 import $ from 'jquery';
 import isNonEmptyString from '../functions/isNonEmptyString.js';
-import {
-  getSupportBarState,
-  setSupportBarState,
-} from '../functions/supportBarStorage.js';
+import { getItem, setItem } from '../functions/localStorage.js';
 
 export class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
+    this.supportBarStorageKey = 'support-bar-state';
   }
 
   onReady() {
@@ -305,7 +303,7 @@ export class Support {
     const $barOpen = $bar.find('.support-bar__open-trigger');
 
     // Get the support bar state from localStorage
-    const state = getSupportBarState();
+    const state = getItem(_this.supportBarStorageKey);
     const isClosed = state && state.closed;
 
     if (!isClosed) {
@@ -320,7 +318,11 @@ export class Support {
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         // Save open state to localStorage
-        setSupportBarState(false, _this.saveClosedStateTimeout);
+        setItem(
+          _this.supportBarStorageKey,
+          { closed: false },
+          _this.saveClosedStateTimeout
+        );
       },
     });
 
@@ -330,7 +332,11 @@ export class Support {
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         // Save closed state to localStorage
-        setSupportBarState(true, _this.saveClosedStateTimeout);
+        setItem(
+          _this.supportBarStorageKey,
+          { closed: true },
+          _this.saveClosedStateTimeout
+        );
       },
     });
   }
