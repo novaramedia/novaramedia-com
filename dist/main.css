@@ -1479,13 +1479,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-.inline-action-list {
-  margin: 0;
-}
-.inline-action-list li {
-  display: inline-block;
-  margin-right: 16px;
-}
 .margin-micro {
   margin: 4.944271909998838px;
 }
@@ -1752,12 +1745,6 @@ img {
 }
 #obligation-bar p {
   margin-bottom: 0;
-}
-.text-wrap-pretty {
-  text-wrap: pretty;
-}
-.text-wrap-balance {
-  text-wrap: balance;
 }
 html {
   font-family: var(--font-family-sans);
@@ -8401,6 +8388,19 @@ html {
 html {
   background-color: var(--color-white-soft);
   color: var(--color-black-soft);
+}
+.text-wrap-pretty {
+  text-wrap: pretty;
+}
+.text-wrap-balance {
+  text-wrap: balance;
+}
+.inline-action-list {
+  margin: 0;
+}
+.inline-action-list li {
+  display: inline-block;
+  margin-right: 1rem;
 }
 @keyframes sk-bounce {
   0%, 100% {
