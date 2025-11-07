@@ -3,7 +3,10 @@
 
 import $ from 'jquery';
 import isNonEmptyString from '../functions/isNonEmptyString.js';
-import { getItem, setItem } from '../functions/localStorage.js';
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../functions/localStorage.js';
 
 export class Support {
   constructor() {
@@ -303,7 +306,7 @@ export class Support {
     const $barOpen = $bar.find('.support-bar__open-trigger');
 
     // Get the support bar state from localStorage
-    const state = getItem(_this.supportBarStorageKey);
+    const state = getLocalStorageItem(_this.supportBarStorageKey);
     const isClosed = state && state.closed;
 
     if (!isClosed) {
@@ -318,7 +321,7 @@ export class Support {
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
         // Save open state to localStorage
-        setItem(
+        setLocalStorageItem(
           _this.supportBarStorageKey,
           { closed: false },
           _this.saveClosedStateTimeout
@@ -332,7 +335,7 @@ export class Support {
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
         // Save closed state to localStorage
-        setItem(
+        setLocalStorageItem(
           _this.supportBarStorageKey,
           { closed: true },
           _this.saveClosedStateTimeout

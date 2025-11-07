@@ -11,7 +11,7 @@ const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
  * @param {string} key - The localStorage key
  * @returns {*} The stored value or null if not found/expired
  */
-export function getItem(key) {
+export function getLocalStorageItem(key) {
   try {
     const stored = localStorage.getItem(key);
     if (!stored) {
@@ -46,7 +46,7 @@ export function getItem(key) {
  * @param {*} value - The value to store
  * @param {number} [expirationDays] - Optional number of days until expiration
  */
-export function setItem(key, value, expirationDays) {
+export function setLocalStorageItem(key, value, expirationDays) {
   try {
     let dataToStore;
 
@@ -68,7 +68,7 @@ export function setItem(key, value, expirationDays) {
  * Remove an item from localStorage
  * @param {string} key - The localStorage key
  */
-export function removeItem(key) {
+export function removeLocalStorageItem(key) {
   try {
     localStorage.removeItem(key);
   } catch (error) {
@@ -81,14 +81,14 @@ export function removeItem(key) {
  * @param {string} key - The localStorage key
  * @returns {boolean} True if the item exists and is not expired
  */
-export function hasItem(key) {
-  return getItem(key) !== null;
+export function hasLocalStorageItem(key) {
+  return getLocalStorageItem(key) !== null;
 }
 
 /**
  * Clear all items from localStorage
  */
-export function clear() {
+export function clearLocalStorage() {
   try {
     localStorage.clear();
   } catch (error) {
