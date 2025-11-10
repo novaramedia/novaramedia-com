@@ -4,12 +4,12 @@
  * Handles both lazy loading and regular loading scenarios.
  *
  * @param string $youtube_id YouTube video ID.
- * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
  * @param boolean $lazyload Set true to use lazy loading via lazysizes library (uses data-src instead of src).
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
  *
  * @return string Complete iframe HTML element for YouTube embed
  */
-function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $lazyload = false ) {
+function render_youtube_embed_iframe( $youtube_id, $lazyload = false, $autoplay = false ) {
   $url = generate_youtube_embed_url( $youtube_id, $autoplay );
   $allow_attr = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
 

@@ -13,7 +13,7 @@
     if ($youtube_id) {
   ?>
     <div class="u-video-embed-container background-black">
-      <?php echo render_youtube_embed_iframe( $youtube_id, false, true ); ?>
+      <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
     </div>
   <?php
     }

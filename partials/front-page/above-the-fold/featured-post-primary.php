@@ -53,7 +53,7 @@
   if ($has_embed) {
 ?>
 <div class="u-video-embed-container background-black">
-  <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], false, true ); ?>
+  <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true ); ?>
 </div>
 <?php
   } else {
