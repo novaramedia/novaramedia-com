@@ -76,7 +76,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                 <div class="u-video-embed-container">
-                  <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
+                  <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
                 </div>
                   <?php
                 }
@@ -112,7 +112,7 @@ if ( have_posts() ) {
           if ( $youtube_id ) {
             ?>
             <div class="u-video-embed-container">
-              <iframe class="youtube-player" type="text/html" src="<?php echo esc_url( generate_youtube_embed_url( $youtube_id ) ); ?>"></iframe>
+              <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
             </div>
               <?php
           }

@@ -57,7 +57,7 @@ if ( have_posts() ) {
           ?>
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-4 is-xxl-16">
           <div class="u-video-embed-container">
-            <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url( $youtube_id ); ?>" frameborder="0" allowfullscreen></iframe>
+            <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
           </div>
         </div>
           <?php
