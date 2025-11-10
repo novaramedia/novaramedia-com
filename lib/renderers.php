@@ -1,5 +1,37 @@
 <?php
 /**
+ * Generate complete YouTube embed iframe HTML.
+ * Handles both lazy loading and regular loading scenarios.
+ *
+ * @param string $youtube_id YouTube video ID.
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
+ * @param boolean $lazyload Set true to use lazy loading via lazysizes library (uses data-src instead of src).
+ *
+ * @return string Complete iframe HTML element for YouTube embed
+ */
+function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $lazyload = false ) {
+  $url = generate_youtube_embed_url( $youtube_id, $autoplay );
+  $allow_attr = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
+  $classes = 'youtube-player';
+  if ( $lazyload ) {
+    $classes .= ' lazyload';
+  }
+
+  $src_attr = $lazyload ? 'data-src' : 'src';
+
+  $iframe = sprintf(
+    '<iframe class="%s" type="text/html" %s="%s" allow="%s" allowfullscreen></iframe>',
+    esc_attr( $classes ),
+    $src_attr,
+    esc_url( $url ),
+    esc_attr( $allow_attr )
+  );
+
+  return $iframe;
+}
+
+/**
  * Renders a Mailchimp signup form.
  *
  * @param string $mailchimp_key The Mailchimp key.
