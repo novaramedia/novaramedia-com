@@ -48984,6 +48984,121 @@ function isNonEmptyString(val) {
 
 /***/ }),
 
+/***/ "./src/js/functions/localStorage.js":
+/*!******************************************!*\
+  !*** ./src/js/functions/localStorage.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   clearLocalStorage: () => (/* binding */ clearLocalStorage),
+/* harmony export */   getLocalStorageItem: () => (/* binding */ getLocalStorageItem),
+/* harmony export */   hasLocalStorageItem: () => (/* binding */ hasLocalStorageItem),
+/* harmony export */   removeLocalStorageItem: () => (/* binding */ removeLocalStorageItem),
+/* harmony export */   setLocalStorageItem: () => (/* binding */ setLocalStorageItem)
+/* harmony export */ });
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+
+/**
+ * General-purpose localStorage utility functions with expiration support
+ */
+
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+
+/**
+ * Get an item from localStorage with automatic expiration handling
+ * @param {string} key - The localStorage key
+ * @returns {*} The stored value or null if not found/expired
+ */
+function getLocalStorageItem(key) {
+  try {
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      return null;
+    }
+    const data = JSON.parse(stored);
+
+    // If data has an expiresAt property, check if it's expired
+    if ('expiresAt' in data) {
+      const now = Date.now();
+      if (now > data.expiresAt) {
+        // Expired - remove and return null
+        localStorage.removeItem(key);
+        return null;
+      }
+      // Return the value without the expiration metadata
+      return data.value;
+    }
+
+    // No expiration, return as-is
+    return data;
+  } catch (error) {
+    console.warn(`Error reading from localStorage (key: ${key}):`, error);
+    return null;
+  }
+}
+
+/**
+ * Set an item in localStorage with optional expiration
+ * @param {string} key - The localStorage key
+ * @param {*} value - The value to store
+ * @param {number} [expirationDays] - Optional number of days until expiration
+ */
+function setLocalStorageItem(key, value, expirationDays) {
+  try {
+    let dataToStore;
+    if (typeof expirationDays === 'number') {
+      const now = Date.now();
+      const expiresAt = now + expirationDays * MILLISECONDS_PER_DAY;
+      dataToStore = {
+        value,
+        expiresAt
+      };
+    } else {
+      dataToStore = value;
+    }
+    localStorage.setItem(key, JSON.stringify(dataToStore));
+  } catch (error) {
+    console.warn(`Error saving to localStorage (key: ${key}):`, error);
+  }
+}
+
+/**
+ * Remove an item from localStorage
+ * @param {string} key - The localStorage key
+ */
+function removeLocalStorageItem(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    console.warn(`Error removing from localStorage (key: ${key}):`, error);
+  }
+}
+
+/**
+ * Check if an item exists in localStorage (and is not expired)
+ * @param {string} key - The localStorage key
+ * @returns {boolean} True if the item exists and is not expired
+ */
+function hasLocalStorageItem(key) {
+  return getLocalStorageItem(key) !== null;
+}
+
+/**
+ * Clear all items from localStorage
+ */
+function clearLocalStorage() {
+  try {
+    localStorage.clear();
+  } catch (error) {
+    console.warn('Error clearing localStorage:', error);
+  }
+}
+
+/***/ }),
+
 /***/ "./src/js/functions/selectText.js":
 /*!****************************************!*\
   !*** ./src/js/functions/selectText.js ***!
@@ -49765,8 +49880,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* harmony import */ var _functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../functions/isNonEmptyString.js */ "./src/js/functions/isNonEmptyString.js");
+/* harmony import */ var _functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../functions/isNonEmptyString.js */ "./src/js/functions/isNonEmptyString.js");
+/* harmony import */ var _functions_localStorage_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../functions/localStorage.js */ "./src/js/functions/localStorage.js");
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global WP */
 
@@ -49777,7 +49892,7 @@ class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
-    this.hasApprovalCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('cookie-approval') === 'true' ? true : false;
+    this.supportBarStorageKey = 'support-bar-state';
   }
   onReady() {
     const _this = this;
@@ -49970,15 +50085,15 @@ class Support {
     const overrideCopy = WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy = WP.supportSectionCopy && WP.supportSectionCopy['default'];
     let headingText = '';
-    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.heading)) {
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_1__["default"])(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
-    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.heading)) {
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultSectionCopy.heading)) {
       headingText = defaultSectionCopy.heading;
     }
     let textCopy = '';
-    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(overrideCopy.text)) {
+    if (overrideCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_1__["default"])(overrideCopy.text)) {
       textCopy = overrideCopy.text;
-    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultSectionCopy.text)) {
+    } else if (defaultSectionCopy && (0,_functions_isNonEmptyString_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultSectionCopy.text)) {
       textCopy = defaultSectionCopy.text;
     }
 
@@ -49995,8 +50110,11 @@ class Support {
     const $bar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-bar');
     const $barClose = $bar.find('.support-bar__close-trigger');
     const $barOpen = $bar.find('.support-bar__open-trigger');
-    _this.hasClosedSupportBarCookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('support-bar-closed') === 'true' ? true : false;
-    if (!_this.hasClosedSupportBarCookie) {
+
+    // Get the support bar state from localStorage
+    const state = (0,_functions_localStorage_js__WEBPACK_IMPORTED_MODULE_2__.getLocalStorageItem)(_this.supportBarStorageKey);
+    const isClosed = state && state.closed;
+    if (!isClosed) {
       $bar.removeClass('support-bar--closed').addClass('support-bar--open');
     }
     $bar.addClass('support-bar--active');
@@ -50004,22 +50122,22 @@ class Support {
       click(event) {
         event.preventDefault();
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
-        if (_this.hasApprovalCookie) {
-          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'false', {
-            expires: _this.saveClosedStateTimeout
-          });
-        }
+
+        // Save open state to localStorage
+        (0,_functions_localStorage_js__WEBPACK_IMPORTED_MODULE_2__.setLocalStorageItem)(_this.supportBarStorageKey, {
+          closed: false
+        }, _this.saveClosedStateTimeout);
       }
     });
     $barClose.on({
       click(event) {
         event.preventDefault();
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
-        if (_this.hasApprovalCookie) {
-          js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('support-bar-closed', 'true', {
-            expires: _this.saveClosedStateTimeout
-          });
-        }
+
+        // Save closed state to localStorage
+        (0,_functions_localStorage_js__WEBPACK_IMPORTED_MODULE_2__.setLocalStorageItem)(_this.supportBarStorageKey, {
+          closed: true
+        }, _this.saveClosedStateTimeout);
       }
     });
   }

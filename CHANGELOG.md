@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrate newsletter functionality to custom post type not page templates
 - Integrated nm-stylus-library 0.12.0-RC
 - Events views quickly updated to design system
+- Use localstorage not cookies for non-identified functional browser prefs
 
 ## [4.2.10] - 2025-05-22
 
