@@ -66,7 +66,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                   <div class="u-video-embed-container">
-                    <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
+                    <?php echo render_youtube_embed_iframe( $youtube_id, false, true ); ?>
                   </div>
                   <?php
                 }
