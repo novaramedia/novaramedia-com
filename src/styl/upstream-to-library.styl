@@ -8,5 +8,74 @@
   border-top-left-radius: 0
   border-top-right-radius: 0
 
+// tf!
 html
   --color-gray-mid: var(--color-gray-mid-new)
+
+// this is utility init
+.only-mobile
+  display: none
+
+@media screen and (max-width: $breakpoint-s)
+  .only-mobile
+    display: var(--mobile-display, revert)
+
+  .display-s-block
+    display: block
+
+  .only-desktop
+    display: none
+
+  .grid-row.only-mobile // but also we wanna specifcally set a few key classes
+    --mobile-display: flex
+
+  // and also some other flex display classes?
+
+
+// this feels like default:
+html
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
+
+// **type scale
+
+// does this need to happen before the override class declaration so that the other scale is in effect first?
+
+// @media screen and (max-width: $breakpoint-s)
+//   font-size-maker(false, false)
+
+// ** container widths variables
+
+// @media screen and (max-width: $breakpoint-xl)
+//   .container
+//     width: 1056px
+
+// @media screen and (max-width: $breakpoint-l)
+//   .container
+//     width: 888px
+
+// @media screen and (max-width: $breakpoint-m)
+//   .container
+//     width: 744px
+
+// @media screen and (max-width: $breakpoint-s)
+//   .container
+//     width: 98%
+
+// ******************************************************
+
+// already in yh?
+
+.text-wrap-pretty
+  text-wrap: pretty
+
+.text-wrap-balance
+  text-wrap: balance
+
+// Lists
+
+.inline-action-list // rename this to ux-inline-list?
+  margin: 0
+  li
+    display: inline-block
+    margin-right: 1rem
