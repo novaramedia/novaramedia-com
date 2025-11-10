@@ -2,15 +2,17 @@
 /* global WP */
 
 import $ from 'jquery';
-import Cookies from 'js-cookie';
 import isNonEmptyString from '../functions/isNonEmptyString.js';
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../functions/localStorage.js';
 
 export class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
-    this.hasApprovalCookie =
-      Cookies.get('cookie-approval') === 'true' ? true : false;
+    this.supportBarStorageKey = 'support-bar-state';
   }
 
   onReady() {
@@ -303,10 +305,11 @@ export class Support {
     const $barClose = $bar.find('.support-bar__close-trigger');
     const $barOpen = $bar.find('.support-bar__open-trigger');
 
-    _this.hasClosedSupportBarCookie =
-      Cookies.get('support-bar-closed') === 'true' ? true : false;
+    // Get the support bar state from localStorage
+    const state = getLocalStorageItem(_this.supportBarStorageKey);
+    const isClosed = state && state.closed;
 
-    if (!_this.hasClosedSupportBarCookie) {
+    if (!isClosed) {
       $bar.removeClass('support-bar--closed').addClass('support-bar--open');
     }
 
@@ -317,11 +320,12 @@ export class Support {
         event.preventDefault();
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
-        if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'false', {
-            expires: _this.saveClosedStateTimeout,
-          });
-        }
+        // Save open state to localStorage
+        setLocalStorageItem(
+          _this.supportBarStorageKey,
+          { closed: false },
+          _this.saveClosedStateTimeout
+        );
       },
     });
 
@@ -330,11 +334,12 @@ export class Support {
         event.preventDefault();
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
-        if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'true', {
-            expires: _this.saveClosedStateTimeout,
-          });
-        }
+        // Save closed state to localStorage
+        setLocalStorageItem(
+          _this.supportBarStorageKey,
+          { closed: true },
+          _this.saveClosedStateTimeout
+        );
       },
     });
   }

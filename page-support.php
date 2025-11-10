@@ -56,11 +56,11 @@ if ( have_posts() ) {
     </div>
     <div class="container">
       <div class="grid-row u-relative">
-        <div class="grid-item is-xxl-24 only-mobile">
-          <div class="mb-4">
+        <div class="grid-item is-xxl-24 ">
+          <div class="mb-4 only-mobile">
             <?php render_support_form( 'condensed' ); ?>
           </div>
-          <div class="grid-row grid-row--nested background-white ui-rounded-box">
+          <div class="grid-row grid-row--nested only-mobile background-white ui-rounded-box">
             <div class="grid-item is-xxl-24">
               <div class="pt-4 pb-4 pl-2 pr-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-14 mb-4">
