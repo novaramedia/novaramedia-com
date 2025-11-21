@@ -185,7 +185,7 @@ npm run build
 ## Common Pitfalls and Troubleshooting
 
 ### Stylus Compilation Issues
-- **calc() values**: Stylus doesn't play well with calc - use literal values when possible, or use calc with CSS variables: `calc(var(--grid-gutter) / 2)`
+- **calc() values**: Wrap calc expressions in quotes when used in Stylus: `calc('100vh - var(--header-height)')`
 - **Import order**: Make sure to import from `nm-stylus-library` before custom styles
 - **Grid classes**: Always use correct order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
 
