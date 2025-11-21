@@ -14,6 +14,9 @@ if ( have_posts() ) {
     $youtube_id = 'v-3cksTJ8e4';
   }
 
+  $above_the_fold_content = '<p class="mb-3">We are a <span class="font-color-red">not-for-profit</span> organisation <span class="font-color-red">directly powered by our supporters.</span></p>
+                  <p class="mb-3">Every penny we make flows directly into producing <span class="font-color-red">independent journalism</span> and expanding our coverage.</p>
+                  <p><span class="font-color-red">We maintain our editorial autonomy</span> by refusing corporate sponsorships, venture capital, subscription barriers, and paid content.</p>';
   $our_funding_content = get_post_meta( $post->ID, '_nm_funding_sources', true );
   ?>
   <article id="page" class="how-we-are-funded-page">
@@ -37,30 +40,31 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <div class="grid-row grid-row--nested background-white ui-rounded-box--top">
+            <div class="grid-row grid-row--nested background-white ui-rounded-box">
               <div class="grid-item is-xxl-12 is-m-24">
-                <div class="p-4 font-weight-bold">
+                <div class="p-4 p-s-3 font-weight-bold">
+                  <div class="u-video-embed-container only-mobile mt-2 mb-4">
+                    <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+                  </div>
                   <div class="font-size-15 font-size-l-14 font-size-s-14 mb-4">
                     <span class="font-color-red">We believe in the power of people</span> to build a new media for a different politics.
                   </div>
-                  <div class="font-size-12 mr-8 mr-s-0 background-gray-base ui-rounded-box p-4">
+                  <div class="font-size-s-12 font-weight-bold mb-4 only-mobile">
+                    <?php echo $above_the_fold_content; ?>
+                  </div>
+                  <div class="font-size-12 font-size-s-12 mr-8 mr-s-0 background-gray-base ui-rounded-box p-4">
                     <p class="mb-3">Thousands of people like you are already supporting our vision of a free media. You can join them today.</p>
-                    <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--red ui-button--small">Be part of the change</a>
+                    <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--red ui-button">Be part of the change</a>
                   </div>
                 </div>
               </div>
-              <div class="grid-item is-xxl-12 is-m-24">
-                <div class="p-4 font-size-13 font-size-s-13 font-weight-bold">
-                  <p class="mb-3">We are a <span class="font-color-red">not-for-profit</span> organisation <span class="font-color-red">directly powered by our supporters.</span></p>
-                  <p class="mb-3">Every penny we make flows directly into producing <span class="font-color-red">independent journalism</span> and expanding our coverage.</p>
-                  <p><span class="font-color-red">We maintain our editorial autonomy</span> by refusing corporate sponsorships, venture capital, subscription barriers, and paid content.</p>
+              <div class="grid-item is-xxl-12 is-m-24 only-desktop">
+                <div class="p-4 font-size-13 font-weight-bold">
+                  <?php echo $above_the_fold_content; ?>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="grid-item is-xxl-24">
-            <div class="background-white ui-rounded-box--bottom pl-4 pr-4 pb-4">
-              <div class="p-2">
+              <div class="grid-item is-xxl-24 only-desktop">
+                <div class="pl-4 pr-4 pb-5">
                 <?php
                 if ( $youtube_id ) {
                   ?>
@@ -70,6 +74,7 @@ if ( have_posts() ) {
                   <?php
                 }
                 ?>
+                </div>
               </div>
             </div>
           </div>
@@ -291,9 +296,9 @@ if ( have_posts() ) {
               ?>
                 <div class="grid-row grid-row--nested mb-5 <?php echo $index % 2 !== 0 ? 'grid-row--reverse' : ''; ?>">
                   <div class="grid-item is-xxl-8 is-m-24 mb-s-4">
-                    <h4 class="font-weight-semibold font-size-14 font-size-s-13 mb-3"><?php echo esc_html( $content['title'] ); ?></h4>
+                    <h4 class="font-weight-bold font-size-14 font-size-s-14 mb-3"><?php echo esc_html( $content['title'] ); ?></h4>
                     <?php if ( ! empty( $content['subtitle'] ) ) { ?>
-                      <p class="font-weight-semibold font-size-12 font-size-s-12 mb-2"><?php echo esc_html( $content['subtitle'] ); ?></p>
+                      <p class="font-weight-bold font-size-12 font-size-s-12 mb-2"><?php echo esc_html( $content['subtitle'] ); ?></p>
                     <?php } ?>
                     <?php if ( ! empty( $content['text'] ) ) { ?>
                       <p><?php echo esc_html( $content['text'] ); ?></p>
