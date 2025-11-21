@@ -148,7 +148,7 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 ### Building Code
 Always build the project to verify JavaScript and CSS changes:
 ```bash
-npm run dev    # Development build (faster, with source maps)
+npm run dev    # Development build with watch mode (rebuilds on file changes)
 npm run build  # Production build (minified, optimized)
 ```
 
@@ -185,7 +185,7 @@ npm run build
 ## Common Pitfalls and Troubleshooting
 
 ### Stylus Compilation Issues
-- **calc() values**: Must be escaped with quotes: `calc("100% - 20px")`
+- **calc() values**: Stylus doesn't play well with calc - use literal values when possible, or use calc with CSS variables: `calc(var(--grid-gutter) / 2)`
 - **Import order**: Make sure to import from `nm-stylus-library` before custom styles
 - **Grid classes**: Always use correct order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
 
@@ -198,7 +198,7 @@ npm run build
 - **Don't modify**: Webpack configuration without team approval
 - **node_modules**: Never commit this directory (already in .gitignore)
 - **dist directory**: Contains built files, should be committed after build
-- **Watch mode**: Use `npm run dev` for development, but note it doesn't have watch mode configured
+- **Watch mode**: `npm run dev` enables watch mode which automatically rebuilds on file changes
 
 ### WordPress Integration
 - **WP global object**: PHP data is localized via `wp_localize_script` - check `functions.php` for available properties
