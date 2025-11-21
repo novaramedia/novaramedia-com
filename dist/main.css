@@ -8365,6 +8365,9 @@ html {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.ui-dot--red-300 {
+  background-color: var(--color-red-300);
+}
 html {
   --color-gray-mid: var(--color-gray-mid-new);
 }

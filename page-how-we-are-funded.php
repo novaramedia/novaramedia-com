@@ -14,7 +14,6 @@ if ( have_posts() ) {
     $youtube_id = 'v-3cksTJ8e4';
   }
 
-  // Get funding sources from CMB2 metabox
   $our_funding_content = get_post_meta( $post->ID, '_nm_funding_sources', true );
   ?>
   <article id="page" class="how-we-are-funded-page">
@@ -198,55 +197,63 @@ if ( have_posts() ) {
                 </svg>
             </div>
 
-            <div class="grid-row grid-row--nested mb-6 text-align-center">
-              <div class="grid-item is-xxl-4 offset-xxl-2 is-s-12 offset-s-0">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">89</span><span class="font-size-15 font-size-s-14">%</span>
+            <div class="grid-row grid-row--nested mb-6 mb-s-4 text-align-center">
+              <?php
+              $funding_stats = array(
+                array(
+                  'percentage' => 89,
+                  'label'      => 'Direct',
+                  'dot_class'  => 'ui-dot--red',
+                ),
+                array(
+                  'percentage' => 6,
+                  'label'      => 'YouTube',
+                  'dot_class'  => '', // Default dot styling
+                ),
+                array(
+                  'percentage' => 4,
+                  'label'      => 'Merch',
+                  'dot_class'  => 'ui-dot--red-300',
+                ),
+                array(
+                  'percentage' => 2,
+                  'label'      => 'Other',
+                  'dot_class'  => 'ui-dot--gray',
+                ),
+                array(
+                  'percentage' => 0,
+                  'label'      => 'Murdoch',
+                  'dot_class'  => null, // No dot for Murdoch
+                ),
+              );
+
+              foreach ( $funding_stats as $index => $stat ) {
+                $grid_classes = 'grid-item mb-s-4 ';
+
+                // First item gets offset on larger screens
+                if ( $index === 0 ) {
+                  $grid_classes .= ' is-s-6 is-xxl-4 offset-xxl-2 offset-s-0';
+                } elseif ( $index === count( $funding_stats ) - 1 ) {
+                  $grid_classes .= ' is-s-24 is-xxl-4';
+                } else {
+                  $grid_classes .= ' is-s-6 is-xxl-4';
+                }
+                ?>
+                <div class="<?php echo $grid_classes; ?>">
+                  <div class="font-weight-bold mb-4 mb-s-1">
+                    <span class="font-size-19 font-size-xl-18 font-size-m-17 font-size-s-16"><?php echo esc_html( $stat['percentage'] ); ?></span>
+                    <span class="font-size-15 font-size-l-13 font-size-s-12">%</span>
                   </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">
-                    <span class="ui-dot ui-dot--red"></span> Direct
+                  <div class="font-size-13 font-size-xl-12 font-size-m-11 font-size-s-10 font-weight-bold">
+                    <?php if ( $stat['dot_class'] !== null ) : ?>
+                      <span class="ui-dot <?php echo esc_attr( $stat['dot_class'] ); ?>"></span>
+                    <?php endif; ?>
+                    <?php echo esc_html( $stat['label'] ); ?>
                   </div>
                 </div>
-              </div>
-              <div class="grid-item is-xxl-4 is-s-12">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">6</span><span class="font-size-15 font-size-s-14">%</span>
-                  </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">
-                    <span class="ui-dot"></span> YouTube
-                  </div>
-                </div>
-              </div>
-              <div class="grid-item is-xxl-4 is-s-12">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">4</span><span class="font-size-15 font-size-s-14">%</span>
-                  </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">
-                    <span class="ui-dot ui-dot--pink"></span> Merch
-                  </div>
-                </div>
-              </div>
-              <div class="grid-item is-xxl-4 is-s-12">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">2</span><span class="font-size-15 font-size-s-14">%</span>
-                  </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">
-                    <span class="ui-dot ui-dot--gray"></span> Other
-                  </div>
-                </div>
-              </div>
-              <div class="grid-item is-xxl-4 is-s-12">
-                <div class="support-page__big-stat">
-                  <div class="font-weight-bold">
-                    <span class="font-size-17">0</span><span class="font-size-15 font-size-s-14">%</span>
-                  </div>
-                  <div class="font-size-13 font-size-s-11 font-weight-bold">Murdoch</div>
-                </div>
-              </div>
+                <?php
+              }
+              ?>
             </div>
 
             <div class="grid-row grid-row--nested">
