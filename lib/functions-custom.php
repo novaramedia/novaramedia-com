@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nm_get_netlify_url() {
   $production_url = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
-  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
   $staging_url = 'https://fake.com/.netlify/functions/mailchimp-signup';
+  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
 
   $environment = wp_get_environment_type();
 
