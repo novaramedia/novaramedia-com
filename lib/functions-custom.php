@@ -6,25 +6,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Get the correct Netlify function URL based on environment.
  *
+ * Uses WordPress's wp_get_environment_type() to determine the environment.
+ * Kinsta automatically sets the WP_ENVIRONMENT_TYPE constant for production and staging.
+ *
  * @return string The Netlify function URL.
  */
 function nm_get_netlify_url() {
-  $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
-  $local_dev = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+  $production_url = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
+  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+  $staging_url = 'https://fake.com/.netlify/functions/mailchimp-signup';
 
-  if ( isset( $_SERVER['HTTP_HOST'] ) ) {
-    $http_host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+  $environment = wp_get_environment_type();
 
-    if ( $http_host === 'localhost:8888' ) { // for local dev via MAMP
-      $netlify = $local_dev;
-    } elseif ( strpos( $http_host, '.local' ) !== false ) { // for DevKinsta and other .local dev environments
-      $netlify = $local_dev;
-    } elseif ( $http_host === 'stg-novaramediacom-staging.kinsta.cloud' ) { // for staging, will always fail. Could spin up the netlify function on staging to test
-      $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
-    }
+  switch ( $environment ) {
+    case 'local':
+    case 'development':
+      return $local_dev_url;
+
+    case 'staging':
+      // Staging will always fail. Could spin up the netlify function on staging to test
+      return $staging_url;
+
+    case 'production':
+    default:
+      return $production_url;
   }
-
-  return $netlify;
 }
 
 /**

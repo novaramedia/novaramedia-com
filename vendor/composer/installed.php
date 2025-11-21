@@ -3,7 +3,7 @@
         'name' => 'novaramedia/novaramedia-com',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
+        'reference' => '4968ca1a3b86e56efc8d69ef8ac15c00b3d41fe7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'novaramedia/novaramedia-com' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'acd2be9cc543e19e5bf2d5a96a47b658986ec3f5',
+            'reference' => '4968ca1a3b86e56efc8d69ef8ac15c00b3d41fe7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
