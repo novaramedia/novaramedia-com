@@ -182,6 +182,13 @@ git diff
 npm run build
 ```
 
+**IMPORTANT: Committing Changes**
+- Only commit source files that you intentionally modified (e.g., `.php`, `.js`, `.styl`, `.md` files)
+- **DO NOT** commit `dist/` files unless you made actual source code changes that affect the build output
+- If `dist/` files appear as changed but you only modified documentation or config files, do not commit them
+- Use `git diff dist/` to verify if dist files have actual meaningful changes before committing
+- When in doubt, check if your changes should affect the build output - if not, exclude dist files from your commit
+
 ## Common Pitfalls and Troubleshooting
 
 ### Stylus Compilation Issues
@@ -197,7 +204,8 @@ npm run build
 ### Build System
 - **Don't modify**: Webpack configuration without team approval
 - **node_modules**: Never commit this directory (already in .gitignore)
-- **dist directory**: Contains built files, should be committed after build
+- **dist directory**: Contains built files. Only commit dist files when you've made actual source code changes (JS, Stylus, etc.) that affect the build output
+- **Avoid committing unchanged dist files**: Building the project for testing purposes should not result in dist file commits unless the build output actually changed
 - **Watch mode**: `npm run dev` enables watch mode which automatically rebuilds on file changes
 
 ### WordPress Integration
