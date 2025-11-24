@@ -4,6 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /**
  * Generate custom titles for web and social with conditional author/standfirst
+ *
+ * @since 4.2.0
+ *
+ * @param bool $for_social Whether the title is for social media (true) or web (false).
+ * @return string Generated title string.
  */
 function nm_generate_custom_title( $for_social = false ) {
   global $post;
@@ -89,6 +94,10 @@ function nm_generate_custom_title( $for_social = false ) {
 
 /**
  * Hook into WordPress document title system for web titles
+ *
+ * @since 4.2.0
+ *
+ * @return string Customized document title.
  */
 function nm_customize_document_title() {
   return nm_generate_custom_title( false ); // false = for web (include site name)
@@ -97,6 +106,10 @@ add_filter( 'pre_get_document_title', 'nm_customize_document_title' );
 
 /**
  * Generate social media title (without site name)
+ *
+ * @since 4.2.0
+ *
+ * @return string Generated title string.
  */
 function nm_get_social_title() {
   return nm_generate_custom_title( true ); // true = for social (no site name)

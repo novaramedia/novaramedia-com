@@ -1,9 +1,15 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
 
 add_action( 'cmb2_init', 'nm_cmb_seo_metaboxes' );
 
 /**
  * Define SEO meta box for posts and pages
+ *
+ * @since 4.2.0
+ * @return void
  */
 function nm_cmb_seo_metaboxes() {
   $prefix = '_cmb_';

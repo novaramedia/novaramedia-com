@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Get post authors with proper fallback logic (based on render_bylines implementation)
  *
+ * @since 4.2.0
+ *
  * @param int    $post_id Post ID to get authors for.
  * @param string $format  Output format ('html' for links or 'text' for plain text).
  * @return string|false Author string or false if no authors found.
