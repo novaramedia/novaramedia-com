@@ -28,30 +28,31 @@ function nm_generate_custom_title( $for_social = false ) {
 
     if ( ! empty( $seo_title ) ) {
       $title_parts[] = $seo_title;
+      // Skip standfirst and author when SEO title is manually set
     } else {
       $title_parts[] = get_the_title( $post );
-    }
 
-    // Get post categories for conditional logic
-    $post_categories = wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) );
+      // Get post categories for conditional logic
+      $post_categories = wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) );
 
-    // Get meta in single query for performance
-    $meta = get_post_meta( $post->ID );
+      // Get meta in single query for performance
+      $meta = get_post_meta( $post->ID );
 
-    // Check for standfirst first
-    $should_add_standfirst = array_intersect( $standfirst_categories, $post_categories );
+      // Check for standfirst first
+      $should_add_standfirst = array_intersect( $standfirst_categories, $post_categories );
 
-    if ( $should_add_standfirst && ! empty( $meta['_cmb_standfirst'][0] ) ) {
-      $title_parts[] = trim( $meta['_cmb_standfirst'][0] );
-    }
+      if ( $should_add_standfirst && ! empty( $meta['_cmb_standfirst'][0] ) ) {
+        $title_parts[] = trim( $meta['_cmb_standfirst'][0] );
+      }
 
-    // Check for author second
-    $should_add_author = array_intersect( $author_categories, $post_categories );
+      // Check for author second
+      $should_add_author = array_intersect( $author_categories, $post_categories );
 
-    if ( $should_add_author ) {
-      $author_text = nm_get_post_authors( $post->ID, 'text' );
-      if ( $author_text !== false ) { // Only add if we have a specific author
-        $title_parts[] = $author_text;
+      if ( $should_add_author ) {
+        $author_text = nm_get_post_authors( $post->ID, 'text' );
+        if ( $author_text !== false ) { // Only add if we have a specific author
+          $title_parts[] = $author_text;
+        }
       }
     }
   } elseif ( is_home() || is_front_page() ) {
