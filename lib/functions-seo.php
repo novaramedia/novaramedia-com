@@ -12,6 +12,7 @@ function nm_generate_custom_title( $for_social = false ) {
   $author_categories = array(
     'opinion',
     'analysis',
+    'feature',
   );
 
   // Categories that should include standfirst in title

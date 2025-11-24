@@ -2,6 +2,9 @@
 
 add_action( 'cmb2_init', 'nm_cmb_post_metaboxes' );
 
+/**
+ * Define CMB2 meta boxes for post post type
+ */
 function nm_cmb_post_metaboxes() {
   $prefix = '_cmb_';
 
@@ -134,7 +137,7 @@ function nm_cmb_post_metaboxes() {
   $audio_metabox->add_field(
        array(
     'name' => __( 'Is a Resonance show?', 'cmb' ),
-    'desc' => __( '', 'cmb' ),
+    'desc' => __( 'Check if this is a Resonance FM show.', 'cmb' ),
     'id'   => $prefix . 'is_resonance',
     'type' => 'checkbox',
   )
