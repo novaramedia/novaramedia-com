@@ -1,127 +1,127 @@
 <?php
-$twitter = IGV_get_option('_igv_socialmedia_twitter');
+$twitter = IGV_get_option( '_igv_socialmedia_twitter' );
 
-if ($twitter) {
+if ( $twitter ) {
   echo '<meta name="twitter:site" value="' . $twitter . '">';
 }
 
-$fb_app_id = IGV_get_option('_igv_og_fb_app_id');
+$fb_app_id = IGV_get_option( '_igv_og_fb_app_id' );
 
-if ($fb_app_id) {
+if ( $fb_app_id ) {
   echo '<meta name="fb:app_id" value="' . $fb_app_id . '">';
 }
 
 ?>
-  <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>" />
-  <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+  <meta property="og:title" content="<?php echo esc_attr( nm_get_social_title() ); ?>" />
+  <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>" />
   <meta name="twitter:card" value="summary_large_image">
 <?php
 global $post;
 
 $og_image_url = get_stylesheet_directory_uri() . '/dist/img/favicon-32x32.png'; // fallback to favicon
-$og_image_default_setting = wp_get_attachment_image_src(IGV_get_option('_igv_og_image_id'), 'opengraph');
+$og_image_default_setting = wp_get_attachment_image_src( IGV_get_option( '_igv_og_image_id' ), 'opengraph' );
 
-if (!empty($og_image_default_setting)) { // try settings default
+if ( ! empty( $og_image_default_setting ) ) { // try settings default
   $og_image_url = $og_image_default_setting[0];
 }
 
-if (is_tax('focus')) { // if is focus archive get the splash image
-  $splash_image_id = get_term_meta(get_queried_object_id(), '_nm_focus_splash_id', true);
+if ( is_tax( 'focus' ) ) { // if is focus archive get the splash image
+  $splash_image_id = get_term_meta( get_queried_object_id(), '_nm_focus_splash_id', true );
 
-  if (!empty($splash_image_id)) {
-    $og_image_url = wp_get_attachment_image_src($splash_image_id, 'opengraph')[0];
+  if ( ! empty( $splash_image_id ) ) {
+    $og_image_url = wp_get_attachment_image_src( $splash_image_id, 'opengraph' )[0];
   }
 }
 
-if (is_archive()) { // if is archive get any open graph images
-  $og_image_ig = get_term_meta(get_queried_object_id(), '_nm_category_og_image_id', true);
+if ( is_archive() ) { // if is archive get any open graph images
+  $og_image_ig = get_term_meta( get_queried_object_id(), '_nm_category_og_image_id', true );
 
-  if (!empty($og_image_ig)) {
-    $og_image_url = wp_get_attachment_image_src($og_image_ig, 'opengraph')[0];
+  if ( ! empty( $og_image_ig ) ) {
+    $og_image_url = wp_get_attachment_image_src( $og_image_ig, 'opengraph' )[0];
   }
 }
 
-if ((is_single() || is_page()) && has_post_thumbnail($post)) { // if is a single post with a thumbnail get that
-  $alt_thumb = get_post_meta($post->ID, '_cmb_alt_social_id', true); // try alternative thumbnail meta
+if ( ( is_single() || is_page() ) && has_post_thumbnail( $post ) ) { // if is a single post with a thumbnail get that
+  $alt_thumb = get_post_meta( $post->ID, '_cmb_alt_social_id', true ); // try alternative thumbnail meta
 
-  if (!empty($alt_thumb)) {
+  if ( ! empty( $alt_thumb ) ) {
     $thumb_id = $alt_thumb; // if alt thumb is set we use it
   } else {
-    $thumb_id = get_post_thumbnail_id($post->ID); // otherwise use the default
+    $thumb_id = get_post_thumbnail_id( $post->ID ); // otherwise use the default
   }
 
-  $og_image_url = wp_get_attachment_image_src($thumb_id, 'opengraph')[0];
+  $og_image_url = wp_get_attachment_image_src( $thumb_id, 'opengraph' )[0];
 }
 ?>
   <meta property="og:image" content="<?php echo $og_image_url; ?>" />
 <?php
 
-$og_description = get_bloginfo('description');
+$og_description = get_bloginfo( 'description' );
 
-if (is_home()) {
-?>
-  <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
+if ( is_home() ) {
+  ?>
+  <meta property="og:url" content="<?php bloginfo( 'url' ); ?>"/>
   <meta property="og:type" content="website" />
-<?php
-} else if (is_single()) {
+  <?php
+} elseif ( is_single() ) {
   global $post;
 
-  $twitterAuthor = get_post_meta($post->ID, '_cmb_author_twitter', true);
+  $twitter_author = get_post_meta( $post->ID, '_cmb_author_twitter', true );
 
-  if ($twitterAuthor) {
-    if (!is_array($twitterAuthor)) { // if this isn't an array then make into array
-      $twitterAuthor = array($twitterAuthor);
+  if ( $twitter_author ) {
+    if ( ! is_array( $twitter_author ) ) { // if this isn't an array then make into array
+      $twitter_author = array( $twitter_author );
     }
 
-    if (count($twitterAuthor) === 1) { // if there is only one author then set the twitter creator og tag. tag doesn't support multiple authors
-      echo '<meta name="twitter:creator" value="' . $twitterAuthor[0] . '">';
+    if ( count( $twitter_author ) === 1 ) { // if there is only one author then set the twitter creator og tag. tag doesn't support multiple authors
+      echo '<meta name="twitter:creator" value="' . $twitter_author[0] . '">';
     }
   }
 
-  $description = get_post_meta($post->ID, '_cmb_short_desc', true);
+  $description = get_post_meta( $post->ID, '_cmb_short_desc', true );
 
-  if ($description) {
-    $excerpt = nm_clean_content_to_plaintext($description);
+  if ( $description ) {
+    $excerpt = nm_clean_content_to_plaintext( $description );
   } else {
-    $excerpt = nm_clean_content_to_plaintext($post->post_content);
+    $excerpt = nm_clean_content_to_plaintext( $post->post_content );
     // trim post content by 600 chars
-    $excerpt = substr($excerpt, 0, 600);
+    $excerpt = substr( $excerpt, 0, 600 );
     // add ... to end
     $excerpt = $excerpt . '…';
   }
 
   // clean special cars
-  $og_description = htmlspecialchars($excerpt);
-?>
+  $og_description = htmlspecialchars( $excerpt );
+  ?>
   <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:type" content="article" />
-<?php
-} else if (is_archive() && get_queried_object_id()) {
-?>
-  <meta property="og:url" content="<?php echo get_term_link(get_queried_object_id()); ?>"/>
+  <?php
+} elseif ( is_archive() && get_queried_object_id() ) {
+  ?>
+  <meta property="og:url" content="<?php echo get_term_link( get_queried_object_id() ); ?>"/>
   <meta property="og:type" content="website" />
-<?php
+  <?php
 } else {
-?>
-  <meta property="og:url" content="<?php the_permalink() ?>"/>
+  ?>
+  <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:type" content="website" />
-<?php
+  <?php
 }
 
-if (is_archive()) {
+if ( is_archive() ) {
   $raw_term_description = get_term_field( 'description', get_queried_object_id(), null, $context = 'raw' );
 
-  if (!is_wp_error($raw_term_description) && !empty($raw_term_description)) {
+  if ( ! is_wp_error( $raw_term_description ) && ! empty( $raw_term_description ) ) {
     $og_description = $raw_term_description;
   }
 }
 
-if (is_page()) {
-  $short_description = get_post_meta($post->ID, '_cmb_short_desc', true);
+if ( is_page() ) {
+  $short_description = get_post_meta( $post->ID, '_cmb_short_desc', true );
 
-  if (!empty($short_description)) {
-    $short_description = nm_clean_content_to_plaintext($short_description);
-    $short_description = htmlspecialchars($short_description);
+  if ( ! empty( $short_description ) ) {
+    $short_description = nm_clean_content_to_plaintext( $short_description );
+    $short_description = htmlspecialchars( $short_description );
 
     $og_description = $short_description;
   }

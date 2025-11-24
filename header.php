@@ -2,12 +2,7 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <title>
-  <?php
-  wp_title( '|', true, 'right' );
-  bloginfo( 'name' );
-  ?>
-  </title>
+  <title><?php echo esc_html( wp_get_document_title() ); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>

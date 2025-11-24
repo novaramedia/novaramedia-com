@@ -23,6 +23,17 @@ function nm_cmb_post_metaboxes() {
   ) );
 
   $meta_boxes->add_field( array(
+    'name' => __( 'SEO Title Override', 'cmb2' ),
+    'desc' => __( 'Custom title for search engines and social sharing. Leave blank to auto-generate.', 'cmb2' ),
+    'id'   => $prefix . 'seo_title',
+    'type' => 'text',
+    'attributes' => array(
+      'maxlength' => 60,
+      'placeholder' => 'Custom SEO title (optional)',
+    ),
+  ) );
+
+  $meta_boxes->add_field( array(
     'name'    => __( 'Short description', 'cmb' ),
     'desc'    => __( '...', 'cmb' ),
     'id'      => $prefix . 'short_desc',
