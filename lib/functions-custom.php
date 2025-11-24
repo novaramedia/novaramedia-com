@@ -4,6 +4,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get post authors with proper fallback logic (based on render_bylines implementation)
+ *
+ * @since 4.2.0
+ *
+ * @param int    $post_id Post ID to get authors for.
+ * @param string $format  Output format ('html' for links or 'text' for plain text).
+ * @return string|false Author string or false if no authors found.
+ */
+function nm_get_post_authors( $post_id, $format = 'text' ) {
+  // Primary method: Use get_contributors_array if available
+  if ( function_exists( 'get_contributors_array' ) ) {
+    $contributors = get_contributors_array( $post_id );
+
+    if ( ! empty( $contributors ) ) {
+      $author_names = array();
+
+      foreach ( $contributors as $contributor ) {
+        if ( $format === 'html' ) {
+          $author_names[] = '<a href="' . esc_url( get_permalink( $contributor->ID ) ) . '">' . esc_html( $contributor->post_title ) . '</a>';
+        } else {
+          $author_names[] = $contributor->post_title;
+        }
+      }
+
+      // Always use ampersand formatting for multiple contributors
+      if ( count( $author_names ) > 1 ) {
+        $last_author = array_pop( $author_names );
+        return implode( ', ', $author_names ) . ' & ' . $last_author;
+      }
+
+      return implode( ', ', $author_names );
+    }
+  }
+
+  // Fallback: Legacy _cmb_author meta field
+  $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
+  if ( ! empty( $legacy_author ) ) {
+    // Check for Twitter URL integration for legacy authors when HTML format requested
+    if ( $format === 'html' ) {
+      $twitter = get_post_meta( $post_id, '_cmb_author_twitter', true );
+      $twitter_url = false;
+
+      if ( $twitter && ( ! is_array( $twitter ) || count( $twitter ) === 1 ) ) {
+        if ( is_array( $twitter ) ) {
+          $twitter_url = $twitter[0];
+        } else {
+          $twitter_url = $twitter;
+        }
+      }
+
+      if ( $twitter_url ) {
+        return '<a href="https://twitter.com/' . esc_attr( $twitter_url ) . '" target="_blank" rel="nofollow">' . esc_html( $legacy_author ) . '</a>';
+      }
+    }
+
+    return $legacy_author;
+  }
+
+  // Return false if no authors found
+  return false;
+}
+
+/**
  * Get the correct Netlify function URL based on environment.
  *
  * @return string The Netlify function URL.
