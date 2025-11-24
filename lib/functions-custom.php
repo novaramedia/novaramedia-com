@@ -23,15 +23,15 @@ function nm_get_netlify_url() {
   switch ( $environment ) {
     case 'local':
     case 'development':
-      return $local_dev_url;
+        return $local_dev_url;
 
     case 'staging':
       // Staging will always fail. Could spin up the netlify function on staging to test
-      return $staging_url;
+        return $staging_url;
 
     case 'production':
     default:
-      return $production_url;
+        return $production_url;
   }
 }
 
@@ -45,7 +45,7 @@ function redirect_committed_custom_url() {
   if ( isset( $_SERVER['REQUEST_URI'] ) ) {
         $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
     if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_redirect( home_url( 'category/audio/committed/' ), 301 );
+            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
             exit;
     }
   }
@@ -69,14 +69,14 @@ function nm_serial_podcast_redirect() {
     $match = array_filter(
         $categories,
         function ( $cat ) use ( $serial_slugs ) {
-          return in_array( $cat->slug, $serial_slugs );
+          return in_array( $cat->slug, $serial_slugs, true );
         }
     );
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
     if ( $link && isset( $post->post_name ) ) {
-      wp_redirect( $link . '#' . $post->post_name, 301 );
+      wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
   }
@@ -174,7 +174,7 @@ function get_above_the_fold_featured_post_ids() {
   for ( $i = 0; $i < 8; $i++ ) {
     if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
-        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids ) ) { // ensure fallback latest is not already in the theme options featured posts
+        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
         }
 
@@ -223,7 +223,7 @@ function nm_clean_content_to_plaintext( $content ) {
   // strip shortcodes from content
   $content = strip_shortcodes( $content );
   // strip html tags
-  $cleaned_content = strip_tags( html_entity_decode( $content ) );
+  $cleaned_content = wp_strip_all_tags( html_entity_decode( $content ) );
 
   return $cleaned_content;
 }
@@ -482,16 +482,16 @@ function nm_is_single_article() {
  * Get the first sub category assigned to the post
  *
  * @param integer $post_id Post ID.
- * @param boolean $object Return WP Term object or just the name.
+ * @param boolean $return_object Return WP Term object or just the name.
  */
-function get_the_sub_category( $post_id, $object = false ) {
+function get_the_sub_category( $post_id, $return_object = false ) {
   $categories = get_the_category( $post_id );
 
   $child_categories = array_filter( $categories, 'only_child_category_filter' );
   $child_categories = array_values( $child_categories );
 
   if ( isset( $child_categories[0] ) ) {
-    if ( $object ) {
+    if ( $return_object ) {
       return $child_categories[0];
     } else {
       return $child_categories[0]->name;
@@ -517,12 +517,12 @@ function nm_filter_query_ids( $post ) {
 /**
  * Filters an array of post categories for just top level categories
  *
- * @param object $var Category object.
+ * @param object $category Category object.
  *
  * @return boolean True if category is top level
  */
-function only_top_level_category_filter( $var ) {
-  if ( $var->category_parent == 0 ) {
+function only_top_level_category_filter( $category ) {
+  if ( $category->category_parent === 0 ) {
     return true;
   }
 }
@@ -530,12 +530,12 @@ function only_top_level_category_filter( $var ) {
 /**
  * Filters an array of post categories for just child categories
  *
- * @param object $var Category object.
+ * @param object $category Category object.
  *
  * @return boolean True if category is child level
  */
-function only_child_category_filter( $var ) {
-  if ( $var->category_parent !== 0 ) {
+function only_child_category_filter( $category ) {
+  if ( $category->category_parent !== 0 ) {
     return true;
   }
 }
