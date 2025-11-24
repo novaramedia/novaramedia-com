@@ -14,7 +14,7 @@ function nm_generate_custom_title( $for_social = false ) {
     'analysis',
   );
 
-  // Categories that should include standfirst (only if no author)
+  // Categories that should include standfirst in title
   $standfirst_categories = array(
     'downstream',
   );
@@ -38,24 +38,20 @@ function nm_generate_custom_title( $for_social = false ) {
     // Get meta in single query for performance
     $meta = get_post_meta( $post->ID );
 
-    // Check for author (priority over standfirst)
+    // Check for standfirst first
+    $should_add_standfirst = array_intersect( $standfirst_categories, $post_categories );
+
+    if ( $should_add_standfirst && ! empty( $meta['_cmb_standfirst'][0] ) ) {
+      $title_parts[] = trim( $meta['_cmb_standfirst'][0] );
+    }
+
+    // Check for author second
     $should_add_author = array_intersect( $author_categories, $post_categories );
-    $author_added = false;
 
     if ( $should_add_author ) {
       $author_text = nm_get_post_authors( $post->ID, 'text' );
       if ( $author_text !== false ) { // Only add if we have a specific author
         $title_parts[] = $author_text;
-        $author_added = true;
-      }
-    }
-
-    // Check for standfirst (only if no author was added)
-    if ( ! $author_added ) {
-      $should_add_standfirst = array_intersect( $standfirst_categories, $post_categories );
-
-      if ( $should_add_standfirst && ! empty( $meta['_cmb_standfirst'][0] ) ) {
-        $title_parts[] = trim( $meta['_cmb_standfirst'][0] );
       }
     }
   } elseif ( is_home() || is_front_page() ) {
