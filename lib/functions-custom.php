@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Uses WordPress's wp_get_environment_type() to determine the environment.
  * Kinsta automatically sets the WP_ENVIRONMENT_TYPE constant for production and staging.
  *
+ * @since 4.2.0
+ *
  * @return string The Netlify function URL.
  */
 function nm_get_netlify_url() {
