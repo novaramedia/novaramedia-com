@@ -12,7 +12,7 @@ if ( $local_term && $url ) {
           .committed-banner__backgrounded {
             background-color:rgb(254, 105, 25);
             overflow: hidden;
-            position: relative
+            position: relative;
           }
           .fallback .committed-banner__backgrounded {
             background-image: url(<?php echo $base_image_path . 'committed-background.jpg'; ?>);
