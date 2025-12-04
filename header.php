@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
+<html <?php language_attributes(); ?> prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
   <title><?php echo esc_html( wp_get_document_title() ); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="dns-prefetch" href="https://googletagmanager.com"/>
+  <link rel="dns-prefetch" href="https://shop.novaramedia.com"/>
+  <link rel="preconnect" href="https://donate.novaramedia.com" crossorigin />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
-  <link rel="preload" as="image" href="https://novaramedia.com/wp-content/themes/novaramedia-com/dist/img/specials/support-2023-texture.webp">
   <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
   <?php
     get_template_part( 'partials/header/google-tag-manager' );
@@ -24,6 +25,7 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+  <?php wp_body_open(); ?>
   <section id="main-container">
     <header class="site-header background-black mb-4">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
