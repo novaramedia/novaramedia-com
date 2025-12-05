@@ -179,7 +179,7 @@ function nm_get_custom_metadata_for_datalayer() {
   }
 
   $post_id = get_queried_object_id();
-  
+
   if ( ! $post_id ) {
     return $data;
   }
@@ -188,14 +188,14 @@ function nm_get_custom_metadata_for_datalayer() {
 
   // Add basic post data
   $data['postId'] = $post_id;
-  $data['postTitle'] = $post->post_title;
+  $data['postTitle'] = sanitize_text_field( $post->post_title );
   $data['postDate'] = $post->post_date;
 
   // Get authors from contributors (custom post type relation)
   $authors = array();
   if ( function_exists( 'get_contributors_array' ) ) {
     $contributors = get_contributors_array( $post_id );
-    
+
     if ( $contributors && is_array( $contributors ) ) {
       foreach ( $contributors as $contributor ) {
         if ( isset( $contributor->post_title ) ) {
@@ -204,7 +204,7 @@ function nm_get_custom_metadata_for_datalayer() {
       }
     }
   }
-  
+
   // Fallback to legacy author meta field if no contributors
   if ( empty( $authors ) ) {
     $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
@@ -217,10 +217,10 @@ function nm_get_custom_metadata_for_datalayer() {
     $data['authors'] = $authors;
   }
 
-  // Get standfirst
+  // Get standfirst (strip all HTML for security)
   $standfirst = get_post_meta( $post_id, '_cmb_standfirst', true );
   if ( ! empty( $standfirst ) ) {
-    $data['standfirst'] = wp_strip_all_tags( $standfirst );
+    $data['standfirst'] = sanitize_text_field( wp_strip_all_tags( $standfirst ) );
   }
 
   // Get categories
