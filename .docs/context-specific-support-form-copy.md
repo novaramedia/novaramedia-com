@@ -10,7 +10,7 @@ Pass an array of copy overrides to the `render_support_form` function via the `$
 
 ```php
 <?php
-render_support_form( 
+render_support_form(
   'banner',  // $variant
   false,     // $white_mobile_schedule
   '',        // $container_classes
@@ -50,7 +50,6 @@ array(
 - **`regular`** (array, optional): Copy for monthly/regular donations
   - **`heading`** (string, optional): Heading text
   - **`text`** (string, optional): Body/description text
-  
 - **`oneoff`** (array, optional): Copy for one-off donations
   - **`heading`** (string, optional): Heading text
   - **`text`** (string, optional): Body/description text
@@ -79,10 +78,10 @@ The function validates all copy overrides:
 
 ```php
 <?php
-get_template_part( 
-  'partials/support-section', 
-  null, 
-  array( 
+get_template_part(
+  'partials/support-section',
+  null,
+  array(
     'container_classes' => 'mb-4',
     'copy' => array(
       'regular' => array(
@@ -94,7 +93,7 @@ get_template_part(
         'text'    => 'Make a single contribution to our work.'
       )
     )
-  ) 
+  )
 );
 ?>
 ```
@@ -148,10 +147,10 @@ When using `get_template_part` with the `partials/support-section` partial, pass
 
 ```php
 <?php
-get_template_part( 
-  'partials/support-section', 
-  null, 
-  array( 
+get_template_part(
+  'partials/support-section',
+  null,
+  array(
     'container_classes' => 'mb-4',
     'copy' => array(
       'regular' => array(
@@ -159,7 +158,7 @@ get_template_part(
         'text'    => 'Your text'
       )
     )
-  ) 
+  )
 );
 ?>
 ```
