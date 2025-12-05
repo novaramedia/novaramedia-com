@@ -76,20 +76,26 @@ export class Support {
                 typeof parsed[key] === 'object' &&
                 !Array.isArray(parsed[key])
               ) {
-                filteredOverride[key] = {};
+                const modeData = {};
+                
                 if (
                   typeof parsed[key].heading === 'string' &&
                   parsed[key].heading.length > 0 &&
                   parsed[key].heading.length <= 500
                 ) {
-                  filteredOverride[key].heading = parsed[key].heading;
+                  modeData.heading = parsed[key].heading;
                 }
                 if (
                   typeof parsed[key].text === 'string' &&
                   parsed[key].text.length > 0 &&
                   parsed[key].text.length <= 1000
                 ) {
-                  filteredOverride[key].text = parsed[key].text;
+                  modeData.text = parsed[key].text;
+                }
+                
+                // Only add mode if it has at least one valid field
+                if (Object.keys(modeData).length > 0) {
+                  filteredOverride[key] = modeData;
                 }
               }
             }

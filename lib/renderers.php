@@ -328,13 +328,13 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   if ( is_array( $copy ) && ! empty( $copy ) ) {
     foreach ( array( 'regular', 'oneoff' ) as $mode ) {
       if ( isset( $copy[ $mode ] ) && is_array( $copy[ $mode ] ) ) {
-        $validated_copy[ $mode ] = array();
+        $mode_data = array();
         
         // Validate heading with length limit (max 500 characters)
         if ( isset( $copy[ $mode ]['heading'] ) && is_string( $copy[ $mode ]['heading'] ) ) {
           $heading = trim( $copy[ $mode ]['heading'] );
           if ( ! empty( $heading ) && mb_strlen( $heading ) <= 500 ) {
-            $validated_copy[ $mode ]['heading'] = $heading;
+            $mode_data['heading'] = $heading;
           }
         }
         
@@ -342,13 +342,13 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
         if ( isset( $copy[ $mode ]['text'] ) && is_string( $copy[ $mode ]['text'] ) ) {
           $text = trim( $copy[ $mode ]['text'] );
           if ( ! empty( $text ) && mb_strlen( $text ) <= 1000 ) {
-            $validated_copy[ $mode ]['text'] = $text;
+            $mode_data['text'] = $text;
           }
         }
         
-        // Remove empty mode arrays
-        if ( empty( $validated_copy[ $mode ] ) ) {
-          unset( $validated_copy[ $mode ] );
+        // Only add mode if it has at least one valid field
+        if ( ! empty( $mode_data ) ) {
+          $validated_copy[ $mode ] = $mode_data;
         }
       }
     }
