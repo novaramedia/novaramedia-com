@@ -69,7 +69,7 @@ export class Support {
             // Only accept valid donation mode keys
             const validKeys = ['regular', 'oneoff'];
             const filteredOverride = {};
-            
+
             for (const key of validKeys) {
               if (
                 parsed[key] &&
@@ -93,7 +93,7 @@ export class Support {
                 }
               }
             }
-            
+
             // Only use override if it has valid content
             if (Object.keys(filteredOverride).length > 0) {
               copyOverride = filteredOverride;
