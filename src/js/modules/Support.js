@@ -64,7 +64,7 @@ export class Support {
           console.warn('Invalid copy override data:', e);
         }
       }
-      
+
       // Store copy override on the form element for later use
       if (copyOverride) {
         $form.data('copy-override', copyOverride);
@@ -282,11 +282,11 @@ export class Support {
   updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
-    
+
     // Check for context-specific overrides first (highest priority)
     const contextOverride = $form.data('copy-override');
     const contextModeCopy = contextOverride && contextOverride[data.value];
-    
+
     // Fall back to global configuration
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
