@@ -73,7 +73,8 @@ export class Support {
             for (const key of validKeys) {
               if (
                 key in parsed &&
-                parsed[key] != null &&
+                parsed[key] !== null &&
+                parsed[key] !== undefined &&
                 typeof parsed[key] === 'object' &&
                 !Array.isArray(parsed[key])
               ) {
