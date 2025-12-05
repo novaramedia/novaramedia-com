@@ -53,6 +53,71 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
+      // Check for context-specific copy overrides via data attribute
+      const copyOverrideAttr = $form.attr('data-copy-override');
+      let copyOverride = null;
+      if (copyOverrideAttr) {
+        try {
+          const parsed = JSON.parse(copyOverrideAttr);
+          // Validate parsed object structure to prevent prototype pollution
+          if (
+            parsed &&
+            typeof parsed === 'object' &&
+            !Array.isArray(parsed) &&
+            Object.getPrototypeOf(parsed) === Object.prototype
+          ) {
+            // Only accept valid donation mode keys
+            const validKeys = ['regular', 'oneoff'];
+            const filteredOverride = {};
+
+            for (const key of validKeys) {
+              if (
+                key in parsed &&
+                parsed[key] !== null &&
+                parsed[key] !== undefined &&
+                typeof parsed[key] === 'object' &&
+                !Array.isArray(parsed[key])
+              ) {
+                const modeData = {};
+
+                if (
+                  typeof parsed[key].heading === 'string' &&
+                  parsed[key].heading.length > 0 &&
+                  parsed[key].heading.length <= 500
+                ) {
+                  modeData.heading = parsed[key].heading;
+                }
+                if (
+                  typeof parsed[key].text === 'string' &&
+                  parsed[key].text.length > 0 &&
+                  parsed[key].text.length <= 1000
+                ) {
+                  modeData.text = parsed[key].text;
+                }
+
+                // Only add mode if it has at least one valid field
+                if (Object.keys(modeData).length > 0) {
+                  filteredOverride[key] = modeData;
+                }
+              }
+            }
+
+            // Only use override if it has valid content
+            if (Object.keys(filteredOverride).length > 0) {
+              copyOverride = filteredOverride;
+            }
+          }
+        } catch (e) {
+          // Invalid JSON, ignore override
+          console.warn('Invalid copy override data:', e);
+        }
+      }
+
+      // Store copy override on the form element for later use
+      if (copyOverride) {
+        $form.data('copy-override', copyOverride);
+      }
+
       // Always call setAutoValues with the preferred initial type
       const showFirst = this.autovalues['show_first'];
       _this.setAutoValues($form, showFirst);
@@ -265,13 +330,22 @@ export class Support {
   updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
+
+    // Check for context-specific overrides first (highest priority)
+    const contextOverride = $form.data('copy-override');
+    const contextModeCopy = contextOverride && contextOverride[data.value];
+
+    // Fall back to global configuration
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
     let headingText = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+    // Check context-specific override first
+    if (contextModeCopy && isNonEmptyString(contextModeCopy.heading)) {
+      headingText = contextModeCopy.heading;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
     } else if (
       defaultSectionCopy &&
@@ -281,7 +355,10 @@ export class Support {
     }
 
     let textCopy = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+    // Check context-specific override first
+    if (contextModeCopy && isNonEmptyString(contextModeCopy.text)) {
+      textCopy = contextModeCopy.text;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
       textCopy = overrideCopy.text;
     } else if (
       defaultSectionCopy &&
