@@ -214,28 +214,41 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
  *
  * @param string $donation_mode The donation mode, either 'regular' or 'oneoff'.
  * @param string $text_classes Optional additional classes for the text container.
+ * @param array $copy_overrides Optional context-specific copy overrides. Takes precedence over global settings.
  */
-function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
-  $data = nm_get_support_heading_text_data();
-
-  // Set standard defaults
+function render_support_heading_and_text( $donation_mode, $text_classes = '', $copy_overrides = array() ) {
+  // Start with standard defaults
   $heading = 'Support Novara Media';
   $text = 'Help us fund independent journalism.';
 
-  // Check for heading override in donation mode data
-  if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
-    $heading = $data[ $donation_mode ]['heading'];
-  } elseif ( isset( $data['default']['heading'] ) && ! empty( $data['default']['heading'] ) ) {
-    // Fall back to default array heading if available
-    $heading = $data['default']['heading'];
-  }
+  // Get global configuration data
+  $data = nm_get_support_heading_text_data();
 
-  // Check for text override in donation mode data
-  if ( isset( $data[ $donation_mode ]['text'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
-    $text = $data[ $donation_mode ]['text'];
-  } elseif ( isset( $data['default']['text'] ) && ! empty( $data['default']['text'] ) ) {
-    // Fall back to default array text if available
-    $text = $data['default']['text'];
+  // Check for context-specific override first (highest priority)
+  if ( ! empty( $copy_overrides ) && isset( $copy_overrides[ $donation_mode ] ) ) {
+    if ( isset( $copy_overrides[ $donation_mode ]['heading'] ) && ! empty( $copy_overrides[ $donation_mode ]['heading'] ) ) {
+      $heading = $copy_overrides[ $donation_mode ]['heading'];
+    }
+    if ( isset( $copy_overrides[ $donation_mode ]['text'] ) && ! empty( $copy_overrides[ $donation_mode ]['text'] ) ) {
+      $text = $copy_overrides[ $donation_mode ]['text'];
+    }
+  } else {
+    // Fall back to global configuration
+    // Check for heading override in donation mode data
+    if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
+      $heading = $data[ $donation_mode ]['heading'];
+    } elseif ( isset( $data['default']['heading'] ) && ! empty( $data['default']['heading'] ) ) {
+      // Fall back to default array heading if available
+      $heading = $data['default']['heading'];
+    }
+
+    // Check for text override in donation mode data
+    if ( isset( $data[ $donation_mode ]['text'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+      $text = $data[ $donation_mode ]['text'];
+    } elseif ( isset( $data['default']['text'] ) && ! empty( $data['default']['text'] ) ) {
+      // Fall back to default array text if available
+      $text = $data['default']['text'];
+    }
   }
 
   ?>
@@ -282,9 +295,20 @@ function render_payment_icons( $payment_classes = '' ) {
  * @param string $variant Form display variant ('banner' or 'condensed').
  * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
  * @param string $container_classes Additional CSS classes for the container element.
+ * @param array $copy Optional context-specific copy overrides. Structure:
+ *   array(
+ *     'regular' => array(
+ *       'heading' => 'Heading for regular donations',
+ *       'text' => 'Text for regular donations'
+ *     ),
+ *     'oneoff' => array(
+ *       'heading' => 'Heading for one-off donations',
+ *       'text' => 'Text for one-off donations'
+ *     )
+ *   )
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '' ) {
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '', $copy = array() ) {
   // Generate unique instance ID
   $instance = uniqid( 'support-form-' );
 
@@ -299,6 +323,22 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
     $donation_mode = 'regular';
   }
 
+  // Validate and prepare copy overrides
+  $validated_copy = array();
+  if ( is_array( $copy ) && ! empty( $copy ) ) {
+    foreach ( array( 'regular', 'oneoff' ) as $mode ) {
+      if ( isset( $copy[ $mode ] ) && is_array( $copy[ $mode ] ) ) {
+        $validated_copy[ $mode ] = array();
+        if ( isset( $copy[ $mode ]['heading'] ) && is_string( $copy[ $mode ]['heading'] ) && ! empty( trim( $copy[ $mode ]['heading'] ) ) ) {
+          $validated_copy[ $mode ]['heading'] = $copy[ $mode ]['heading'];
+        }
+        if ( isset( $copy[ $mode ]['text'] ) && is_string( $copy[ $mode ]['text'] ) && ! empty( trim( $copy[ $mode ]['text'] ) ) ) {
+          $validated_copy[ $mode ]['text'] = $copy[ $mode ]['text'];
+        }
+      }
+    }
+  }
+
   $variant_classes = 'support-section--' . $variant;
 
   if ( $white_mobile_schedule ) {
@@ -306,16 +346,22 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   }
 
   $support_section_classes = $variant_classes . ' ' . $container_classes;
+
+  // Prepare data attributes for JavaScript
+  $data_attrs = '';
+  if ( ! empty( $validated_copy ) ) {
+    $data_attrs = ' data-copy-override="' . esc_attr( wp_json_encode( $validated_copy ) ) . '"';
+  }
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php echo $data_attrs; ?>>
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
-        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile', $validated_copy ); ?>
         <div class="support-form__desktop-container grid-row">
           <div class="grid-item is-xxl-12 support-form__left-column-desktop">
-            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6', $validated_copy ); ?>
             <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
           <div class="grid-item is-xxl-12 support-form__right-column-desktop">

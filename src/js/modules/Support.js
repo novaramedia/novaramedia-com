@@ -53,6 +53,23 @@ export class Support {
     $('.support-form').each((index, value) => {
       const $form = $(value);
 
+      // Check for context-specific copy overrides via data attribute
+      const copyOverrideAttr = $form.attr('data-copy-override');
+      let copyOverride = null;
+      if (copyOverrideAttr) {
+        try {
+          copyOverride = JSON.parse(copyOverrideAttr);
+        } catch (e) {
+          // Invalid JSON, ignore override
+          console.warn('Invalid copy override data:', e);
+        }
+      }
+      
+      // Store copy override on the form element for later use
+      if (copyOverride) {
+        $form.data('copy-override', copyOverride);
+      }
+
       // Always call setAutoValues with the preferred initial type
       const showFirst = this.autovalues['show_first'];
       _this.setAutoValues($form, showFirst);
@@ -265,13 +282,22 @@ export class Support {
   updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
+    
+    // Check for context-specific overrides first (highest priority)
+    const contextOverride = $form.data('copy-override');
+    const contextModeCopy = contextOverride && contextOverride[data.value];
+    
+    // Fall back to global configuration
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
     let headingText = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+    // Check context-specific override first
+    if (contextModeCopy && isNonEmptyString(contextModeCopy.heading)) {
+      headingText = contextModeCopy.heading;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
     } else if (
       defaultSectionCopy &&
@@ -281,7 +307,10 @@ export class Support {
     }
 
     let textCopy = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+    // Check context-specific override first
+    if (contextModeCopy && isNonEmptyString(contextModeCopy.text)) {
+      textCopy = contextModeCopy.text;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
       textCopy = overrideCopy.text;
     } else if (
       defaultSectionCopy &&
