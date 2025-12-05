@@ -219,8 +219,8 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   $data = nm_get_support_heading_text_data();
 
   // Set standard defaults
-  $heading = 'Support Novara Media';
-  $text = 'Help us fund independent journalism.';
+  $heading = 'Help build people-powered media';
+  $text = 'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
 
   // Check for heading override in donation mode data
   if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {

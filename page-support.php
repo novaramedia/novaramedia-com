@@ -1,4 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
+/**
+ * The template for displaying the Support Us page.
+ *
+ * @package Novara_Media
+ */
+
 get_header();
 ?>
 <main id="main-content">
@@ -18,7 +28,7 @@ if ( have_posts() ) {
     $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
 
     // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
-    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array();
+    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
     $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
     // Filter out empty quotes
     $support_carousel_quotes = array_filter( $support_carousel_quotes );
@@ -32,13 +42,13 @@ if ( have_posts() ) {
         </h4>
       </div>
       <div class="grid-row mt-4 mb-6 mb-s-5 font-weight-bold">
-        <div class="grid-item support-page__headline font-size-20 font-size-xl-19 font-size-m-18 font-size-s-17">
+        <div class="grid-item support-page__headline font-size-19 font-size-xl-18 font-size-l-17 font-size-s-16 text-wrap-balance">
           <div class="font-color-black">
             <?php
             if ( ! empty( $header_first_line ) ) {
               echo $header_first_line;
             } else {
-              echo 'No owners.';
+              echo 'Help build a new media';
             }
             ?>
           </div>
@@ -47,7 +57,7 @@ if ( have_posts() ) {
             if ( ! empty( $header_second_line ) ) {
               echo $header_second_line;
             } else {
-              echo 'Only supporters.';
+              echo 'for a different politics.';
             }
             ?>
           </div>
@@ -64,13 +74,10 @@ if ( have_posts() ) {
             <div class="grid-item is-xxl-24">
               <div class="pt-4 pb-4 pl-2 pr-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-14 mb-4">
-                  Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
+                  We’re up against <span class="font-color-red">huge power and influence.</span>
                 </div>
                 <div class="font-size-12 mb-4">
-                  Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
-                </div>
-                <div class="font-size-12 mb-3">
-                  Be part of the change.
+                  Join our supporters and back <span class="font-color-red">truthful, independent journalism today.</span>
                 </div>
                 <?php
                 if ( $youtube_id ) {
@@ -89,13 +96,10 @@ if ( have_posts() ) {
             <div class="grid-item is-xxl-12 is-m-24">
               <div class="p-5 p-l-4 pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-16 font-size-xl-15 font-size-s-14 mb-4">
-                  Truthful, independent journalism <span class="font-color-red">funded by people like you.</span>
+                  We’re up against <span class="font-color-red">huge power and influence.</span>
                 </div>
                 <div class="font-size-13 font-size-l-12 mb-4">
-                  Outside the manufactured narratives that serve the rich and powerful, we are building <span class="font-color-red">a new media for different politics.</span>
-                </div>
-                <div class="font-size-13 font-size-l-12 mb-5 mb-s-3">
-                  Be part of the change.
+                  Join our supporters and back <span class="font-color-red">truthful, independent journalism today.</span>
                 </div>
               </div>
             </div>
@@ -123,53 +127,21 @@ if ( have_posts() ) {
     </div>
 
     <div class="support-page__below-the-fold">
-      <!-- how we are funded -->
+      <!-- Block 1 -->
       <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
         <div class="grid-row support-page__text-container">
           <div class="grid-item is-xxl-24 ">
-            <div class="background-red ui-rounded-box ui-rounded-box--top text-align-center p-5 p-l-4">
-              <h3 class="ui-boxed-title ui-boxed-title--grey">How we are funded</h3>
-
-              <div class="support-page__big-stats mt-4 mb-5 mb-s-0">
-                <div class="grid-row grid-row--nested">
-                  <div class="grid-item is-xxl-8 is-s-24">
-                    <div class="support-page__big-stat p-4 p-s-3">
-                      <div class="font-weight-bold font-color-white">
-                        <span class="font-size-20 font-size-m-17">84</span><span class="font-size-15 font-size-s-14">%</span>
-                      </div>
-                      <div class="font-size-13 font-size-s-12 font-weight-bold">Supporter donations</div>
-                    </div>
-                  </div>
-                  <div class="grid-item is-xxl-8 is-s-24">
-                    <div class="support-page__big-stat p-4 p-s-3">
-                      <div class="font-weight-bold font-color-white">
-                        <span class="font-size-20 font-size-m-17">16</span><span class="font-size-15 font-size-s-14">%</span>
-                      </div>
-                      <div class="font-size-13 font-size-s-12 font-weight-bold">YouTube + Merch</div>
-                    </div>
-                  </div>
-                  <div class="grid-item is-xxl-8 is-s-24">
-                    <div class="support-page__big-stat p-4 p-s-3">
-                      <div class="font-weight-bold">
-                        <span class="font-size-20 font-size-m-17">0</span><span class="font-size-15 font-size-s-14">%</span>
-                      </div>
-                      <div class="font-size-13 font-size-s-12 font-weight-bold">Murdoch</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="background-white ui-rounded-box ui-rounded-box--bottom p-5 p-l-4">
+            <div class="background-white ui-rounded-box p-5 p-l-4">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
                   <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 mr-5 mr-s-0">
-                    No Paywalls.<br/>
-                    <span class="font-color-red">No Paymasters.</span>
+                    Billionaire-backed?<br/>
+                    <span class="font-color-red">Not us.</span>
                   </h3>
                 </div>
                 <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold text-wrap-balance">
-                  <p>Because the vast majority of our income is raised directly from supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
-                  <p class="mt-3">It’s a key principle that has <em>always</em> underpinned our funding model.</p>
+                  <p>Outlets funded by billionaires are obliged to push narratives that serve the obscenely wealthy.</p>
+                  <p class="mt-3">Because the vast majority of our income is from our supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
                 </div>
               </div>
             </div>
@@ -177,43 +149,53 @@ if ( have_posts() ) {
         </div>
       </div>
 
-      <!-- how we spend our funds -->
+      <!-- Quotes 1 -->
+      <?php
+      $quotes_block_1 = array(
+        'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
+        'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
+        'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
+        'It takes lots of little people to counter one Murdoch.',
+      );
+      ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
+        <div class="support-page__quote-carousel-fade-left"></div>
+        <div class="support-page__quote-carousel-fade-right"></div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <?php foreach ( $quotes_block_1 as $quote ) { ?>
+              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
+                <div class="support-page__quote-container">
+                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+
+      <!-- Block 2 -->
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="background-white ui-rounded-box p-5 p-l-4">
               <div class="text-align-center mb-6 mb-s-5">
-                <h3 class="ui-boxed-title">How we spend our funds</h3>
+                <h3 class="ui-boxed-title">People-powered Media</h3>
               </div>
               <div class="grid-row grid-row--nested">
-                <div class="grid-item is-s-24 is-xxl-10">
+                <div class="grid-item is-s-24 is-xxl-12">
                   <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
-                    <span class="font-color-red">Every penny</span> Novara Media makes <span class="font-color-red">goes back into our journalism.</span>
+                    Our <span class="font-color-red">supporter-funded model</span> continues to defy expectations and buck industry trends.
                   </h3>
                 </div>
-                <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-weight-bold font-color-gray">
-                  <?php
-                  $max_funds_lines = 6;
-                  // Set fallback funds lines
-                  $fallback_funds_lines = array(
-                    'Your support pays for the hours it takes to research and meticulously check the claims in our articles.',
-                    'It pays for the studio space where we film our live show.',
-                    'It allows us to hire key roles, like a labour movement correspondent.',
-                    'It helps us fight (and win) against the smears of the rightwing press.',
-                    'Above all, it lets us break stories and challenge the establishment in ways mainstream media just won\'t.',
-                  );
-                  // Merge stored lines with fallback (max 6)
-                  $all_funds_lines = array_merge( $how_we_spend_our_funds_lines, array_slice( $fallback_funds_lines, 0, max( 0, $max_funds_lines - count( $how_we_spend_our_funds_lines ) ) ) );
-                  ?>
-                  <div class="support-page__highlighter ux-highlighter">
-                  <?php
-                  foreach ( $all_funds_lines as $index => $line_text ) {
-                    echo '<div class="ux-highlighter__line text-wrap-pretty">'
-                      . esc_html( $line_text )
-                      . '</div>';
-                  }
-                  ?>
-                  </div>
+                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold text-wrap-balance">
+                  <p>You might think giving a small amount per month won’t have much impact.</p>
+                  <p class="mt-3">But many people chipping in builds a sturdy foundation.</p>
+                  <p class="mt-3">Having lots of small, regular donations means we don’t waste valuable time pitching for highly competitive and admin-heavy grants. Plus, no large funder can pull the rug from underneath us and threaten the whole organisation.</p>
+                  <p class="mt-3">And we never, ever accept funding that threatens our editorial independence.</p>
                 </div>
               </div>
             </div>
@@ -221,8 +203,96 @@ if ( have_posts() ) {
         </div>
       </div>
 
+      <!-- Quotes 2 -->
+      <?php
+      $quotes_block_2 = array(
+        'It takes lots of little people to counter one Murdoch.',
+        'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
+        'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
+        'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+      );
+      ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
+        <div class="support-page__quote-carousel-fade-left"></div>
+        <div class="support-page__quote-carousel-fade-right"></div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <?php foreach ( $quotes_block_2 as $quote ) { ?>
+              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
+                <div class="support-page__quote-container">
+                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+
+      <!-- donation form -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <?php render_support_form( 'banner', true ); ?>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 3 -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="background-white ui-rounded-box p-5 p-l-4">
+              <div class="grid-row grid-row--nested">
+                <div class="grid-item is-s-24 is-xxl-10">
+                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
+                    No ads, no distractions.<br/>
+                    <span class="font-color-red">Just quality journalism.</span>
+                  </h3>
+                </div>
+                <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-weight-bold">
+                  <p>Paywalls prevent ordinary people from accessing the news. Many outlets have you dodging obnoxious pop ups and whack-a-mole-ing ads left, right and centre.</p>
+                  <p class="mt-3">But we don’t have any ad partnerships or sponsored content. We don’t ask for your data to read an article in full. Absolutely none of our content is behind a paywall.</p>
+                  <p class="mt-3">Thanks to our supporters, we’re one of a tiny number of outlets that are entirely free for all to access. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quotes 3 -->
+      <?php
+      $quotes_block_3 = array(
+        'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+        'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
+        'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
+        'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
+      );
+      ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
+        <div class="support-page__quote-carousel-fade-left"></div>
+        <div class="support-page__quote-carousel-fade-right"></div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <?php foreach ( $quotes_block_2 as $quote ) { ?>
+              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
+                <div class="support-page__quote-container">
+                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+
       <!-- our story -->
-      <div class="container mb-6 mb-s-4">
+      <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black">
@@ -236,21 +306,21 @@ if ( have_posts() ) {
               </div>
               <div class="grid-item is-s-24 is-xxl-11">
                 <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4 text-wrap-balance">
-                  Novara Media has grown from a humble radio show in 2011 to one of Britain’s most influential independent media organizations.
+                  Born amid anti-austerity movements as a show on community radio, our supporters are the reason we’ve grown to be one of Britain’s most influential media organisations.
                 </h3>
               </div>
               <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-11 font-weight-bold text-wrap-pretty">
                 <p class="mb-4">
-                  Born amid anti-austerity movements with nothing but passion, we've consistently punched above our weight in the national conversation.
+                  From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, Novara Media cuts through the bullshit to provide clear, rigorous analysis, drawing hundreds of thousands of viewers, readers and listeners each and every day.
                 </p>
                 <p class="mb-4">
-                  From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, we've remained committed to principled journalism that centers overlooked voices and stories.
+                  While mainstream media exist to serve the ultra-wealthy, Novara Media stays committed to uncovering the truth to report on what it takes to build a society that works for everybody.
                 </p>
                 <p class="mb-4">
-                  With your support, we can continue expanding our investigative capacity and building media that truly addresses the challenges of our time.
+                  Funded by our audience, the Novara team is now 25 people-strong, working tirelessly to provide independent, thorough analysis you just can’t find anywhere else.
                 </p>
                 <p>
-                  Every contribution helps us maintain our independence in a landscape dominated by powerful interests.
+                  Novara Media is a not-for-profit organisation. We don’t have any shareholders, so the funds we raise from all income streams go directly into supporting our journalism and creating new content.
                 </p>
               </div>
             </div>
@@ -258,48 +328,14 @@ if ( have_posts() ) {
         </div>
       </div>
 
-    <?php
-    $max_quotes = 8;
-    // Set fallback quotes
-    $fallback_quotes = array(
-      'Novara tells the stories others won’t.',
-      'Independent journalism is vital — and Novara leads the way.',
-      'Supporting Novara feels like action, not charity.',
-      'They speak truth to power. That’s why I give.',
-      'Novara’s journalism is fearless and uncompromising.',
-      'I trust Novara to tell it like it is.',
-      'I support Novara because they challenge the status quo.',
-    );
-    // Merge stored quotes with fallback (max 8)
-    $all_quotes = array_merge( $support_carousel_quotes, array_slice( $fallback_quotes, 0, max( 0, $max_quotes - count( $support_carousel_quotes ) ) ) );
-    ?>
-    <!-- carousel -->
-    <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
-      <div class="support-page__quote-carousel-fade-left"></div>
-      <div class="support-page__quote-carousel-fade-right"></div>
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <?php foreach ( $all_quotes as $quote ) { ?>
-            <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
-              <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
-              <div class="support-page__quote-container">
-                <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
-              </div>
-            </div>
-          <?php } ?>
+      <!-- donation form -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <?php render_support_form( 'banner', true ); ?>
+          </div>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
-    </section>
-
-    <!-- donation form -->
-    <div class="container">
-      <div class="grid-row">
-        <div class="grid-item is-xxl-24">
-        <?php render_support_form( 'banner', true ); ?>
-      </div>
-    </div>
 
     <div id="other-donation-methods" class="container">
       <!-- already a supporter -->
