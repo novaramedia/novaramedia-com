@@ -58,7 +58,47 @@ export class Support {
       let copyOverride = null;
       if (copyOverrideAttr) {
         try {
-          copyOverride = JSON.parse(copyOverrideAttr);
+          const parsed = JSON.parse(copyOverrideAttr);
+          // Validate parsed object structure to prevent prototype pollution
+          if (
+            parsed &&
+            typeof parsed === 'object' &&
+            !Array.isArray(parsed) &&
+            Object.getPrototypeOf(parsed) === Object.prototype
+          ) {
+            // Only accept valid donation mode keys
+            const validKeys = ['regular', 'oneoff'];
+            const filteredOverride = {};
+            
+            for (const key of validKeys) {
+              if (
+                parsed[key] &&
+                typeof parsed[key] === 'object' &&
+                !Array.isArray(parsed[key])
+              ) {
+                filteredOverride[key] = {};
+                if (
+                  typeof parsed[key].heading === 'string' &&
+                  parsed[key].heading.length > 0 &&
+                  parsed[key].heading.length < 500
+                ) {
+                  filteredOverride[key].heading = parsed[key].heading;
+                }
+                if (
+                  typeof parsed[key].text === 'string' &&
+                  parsed[key].text.length > 0 &&
+                  parsed[key].text.length < 1000
+                ) {
+                  filteredOverride[key].text = parsed[key].text;
+                }
+              }
+            }
+            
+            // Only use override if it has valid content
+            if (Object.keys(filteredOverride).length > 0) {
+              copyOverride = filteredOverride;
+            }
+          }
         } catch (e) {
           // Invalid JSON, ignore override
           console.warn('Invalid copy override data:', e);
