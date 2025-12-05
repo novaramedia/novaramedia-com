@@ -366,14 +366,14 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   $data_attrs = '';
   if ( ! empty( $validated_copy ) ) {
     $json_data = wp_json_encode( $validated_copy );
-    // Only add attribute if JSON is reasonably sized (max 5KB)
-    if ( $json_data && strlen( $json_data ) <= 5120 ) {
+    // Only add attribute if JSON encoding succeeded and is reasonably sized (max 5KB)
+    if ( false !== $json_data && is_string( $json_data ) && strlen( $json_data ) <= 5120 ) {
       $data_attrs = ' data-copy-override="' . esc_attr( $json_data ) . '"';
     }
   }
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php echo $data_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped above ?>>
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php echo $data_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $data_attrs is safely constructed above with esc_attr() ?>>
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">

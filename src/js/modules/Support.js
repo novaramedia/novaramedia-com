@@ -80,14 +80,14 @@ export class Support {
                 if (
                   typeof parsed[key].heading === 'string' &&
                   parsed[key].heading.length > 0 &&
-                  parsed[key].heading.length < 500
+                  parsed[key].heading.length <= 500
                 ) {
                   filteredOverride[key].heading = parsed[key].heading;
                 }
                 if (
                   typeof parsed[key].text === 'string' &&
                   parsed[key].text.length > 0 &&
-                  parsed[key].text.length < 1000
+                  parsed[key].text.length <= 1000
                 ) {
                   filteredOverride[key].text = parsed[key].text;
                 }
