@@ -77,7 +77,7 @@ export class Support {
                 !Array.isArray(parsed[key])
               ) {
                 const modeData = {};
-                
+
                 if (
                   typeof parsed[key].heading === 'string' &&
                   parsed[key].heading.length > 0 &&
@@ -92,7 +92,7 @@ export class Support {
                 ) {
                   modeData.text = parsed[key].text;
                 }
-                
+
                 // Only add mode if it has at least one valid field
                 if (Object.keys(modeData).length > 0) {
                   filteredOverride[key] = modeData;
