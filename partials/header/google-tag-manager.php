@@ -1,18 +1,16 @@
 <?php
-  $google_tag_manager_id = IGV_get_option('_igv_gtm_id');
-
-  if (!empty($google_tag_manager_id)) {
-    // Get custom metadata for dataLayer
-    $custom_data = nm_get_custom_metadata_for_datalayer();
-?>
+// Check if dataLayer exists (GTM4WP plugin is active)
+// If so, push custom metadata that the plugin doesn't handle
+if ( function_exists( 'nm_get_custom_metadata_for_datalayer' ) ) {
+  $custom_data = nm_get_custom_metadata_for_datalayer();
+  if ( ! empty( $custom_data ) ) {
+    ?>
 <script>
-  dataLayer = [<?php echo wp_json_encode( $custom_data ); ?>];
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','<?php echo $google_tag_manager_id; ?>');
-</script>
-<?php
+  if (typeof dataLayer !== 'undefined') {
+    dataLayer.push(<?php echo wp_json_encode( $custom_data ); ?>);
   }
+</script>
+    <?php
+  }
+}
 ?>

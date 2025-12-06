@@ -159,14 +159,12 @@ add_action( 'pre_get_posts', 'order_events_by_meta' );
 
 /**
  * Get custom metadata for GTM dataLayer.
- * Returns custom post metadata including:
+ * Returns only custom metadata that GTM4WP plugin doesn't provide:
  * - Authors array from contributor post type relation
  * - Standfirst
- * - Categories
- * - Tags
- * - Focus taxonomy
- * - Content type (Articles, Audio, Video)
- * - Post ID and title
+ * - Reading age (nm_readability_age meta value)
+ *
+ * GTM4WP plugin already handles: postId, postTitle, postDate, categories, tags
  *
  * @return array Array of custom metadata for dataLayer.
  */
@@ -183,13 +181,6 @@ function nm_get_custom_metadata_for_datalayer() {
   if ( ! $post_id ) {
     return $data;
   }
-
-  $post = get_post( $post_id );
-
-  // Add basic post data
-  $data['postId'] = $post_id;
-  $data['postTitle'] = sanitize_text_field( $post->post_title );
-  $data['postDate'] = $post->post_date;
 
   // Get authors from contributors (custom post type relation)
   $authors = array();
@@ -223,48 +214,10 @@ function nm_get_custom_metadata_for_datalayer() {
     $data['standfirst'] = sanitize_text_field( wp_strip_all_tags( $standfirst ) );
   }
 
-  // Get categories
-  $categories = get_the_category( $post_id );
-  $category_names = array();
-  if ( $categories ) {
-    foreach ( $categories as $category ) {
-      $category_names[] = $category->name;
-    }
-  }
-  if ( ! empty( $category_names ) ) {
-    $data['categories'] = $category_names;
-  }
-
-  // Get tags
-  $tags = get_the_tags( $post_id );
-  $tag_names = array();
-  if ( $tags ) {
-    foreach ( $tags as $tag ) {
-      $tag_names[] = $tag->name;
-    }
-  }
-  if ( ! empty( $tag_names ) ) {
-    $data['tags'] = $tag_names;
-  }
-
-  // Get focus taxonomy
-  $focus_terms = wp_get_post_terms( $post_id, 'focus' );
-  $focus_names = array();
-  if ( $focus_terms && ! is_wp_error( $focus_terms ) ) {
-    foreach ( $focus_terms as $focus ) {
-      $focus_names[] = $focus->name;
-    }
-  }
-  if ( ! empty( $focus_names ) ) {
-    $data['focus'] = $focus_names;
-  }
-
-  // Get top-level category (Articles, Audio, or Video)
-  if ( function_exists( 'get_the_top_level_category' ) ) {
-    $top_level_category = get_the_top_level_category( $post_id );
-    if ( $top_level_category ) {
-      $data['contentType'] = $top_level_category->name;
-    }
+  // Get reading age if set
+  $reading_age = get_post_meta( $post_id, 'nm_readability_age', true );
+  if ( ! empty( $reading_age ) ) {
+    $data['readingAge'] = sanitize_text_field( $reading_age );
   }
 
   return $data;
