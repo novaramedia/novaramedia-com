@@ -14,26 +14,26 @@ get_header();
 <main id="main-content">
 <?php
 if ( have_posts() ) {
-  while ( have_posts() ) {
-    the_post();
-    $meta = get_post_meta( $post->ID );
+while ( have_posts() ) {
+  the_post();
+  $meta = get_post_meta( $post->ID );
 
-    $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
-    $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
-    $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
+  $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
+  $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
+  $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
 
-    // Get repeatable funds lines - properly unserialize CMB2 repeatable fields
-    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
-    // Ensure it's an array and filter out empty lines
-    $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
+  // Get repeatable funds lines - properly unserialize CMB2 repeatable fields
+  $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
+  // Ensure it's an array and filter out empty lines
+  $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
 
-    // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
-    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
-    $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
-    // Filter out empty quotes
-    $support_carousel_quotes = array_filter( $support_carousel_quotes );
-  }
-  ?>
+  // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
+  $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
+  $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
+  // Filter out empty quotes
+  $support_carousel_quotes = array_filter( $support_carousel_quotes );
+}
+?>
   <article id="page" class="support-page background-gray-base support-page__background-cover-image">
     <div class="container">
       <div class="grid-item">
@@ -110,19 +110,19 @@ if ( have_posts() ) {
             </div>
           </div>
         </div>
+        <?php
+        if ( $youtube_id ) {
+          ?>
         <div class="grid-item is-xxl-24 only-desktop">
           <div class="background-white ui-rounded-box ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
-          <?php
-          if ( $youtube_id ) {
-            ?>
             <div class="u-video-embed-container">
-              <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
             </div>
-              <?php
-          }
-          ?>
           </div>
         </div>
+          <?php
+        }
+        ?>
       </div>
     </div>
 
@@ -150,20 +150,20 @@ if ( have_posts() ) {
       </div>
 
       <!-- Quotes 1 -->
-      <?php
-      $quotes_block_1 = array(
-        'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
-        'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
-        'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
-        'It takes lots of little people to counter one Murdoch.',
-      );
-      ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
-        <div class="support-page__quote-carousel-fade-left"></div>
-        <div class="support-page__quote-carousel-fade-right"></div>
+          <?php
+          $quotes_block_1 = array(
+          'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
+          'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
+          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
+          'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
+          'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
+          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
+          );
+          ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
         <div class="swiper">
           <div class="swiper-wrapper">
-            <?php foreach ( $quotes_block_1 as $quote ) { ?>
+          <?php foreach ( $quotes_block_1 as $quote ) { ?>
               <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
                 <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
                 <div class="support-page__quote-container">
@@ -204,20 +204,20 @@ if ( have_posts() ) {
       </div>
 
       <!-- Quotes 2 -->
-      <?php
-      $quotes_block_2 = array(
-        'It takes lots of little people to counter one Murdoch.',
-        'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
-        'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
-        'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
-      );
-      ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
-        <div class="support-page__quote-carousel-fade-left"></div>
-        <div class="support-page__quote-carousel-fade-right"></div>
+          <?php
+          $quotes_block_2 = array(
+          'It takes lots of little people to counter one Murdoch.',
+          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
+          'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
+          'It takes lots of little people to counter one Murdoch.',
+          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
+          'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
+          );
+          ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
         <div class="swiper">
           <div class="swiper-wrapper">
-            <?php foreach ( $quotes_block_2 as $quote ) { ?>
+          <?php foreach ( $quotes_block_2 as $quote ) { ?>
               <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
                 <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
                 <div class="support-page__quote-container">
@@ -235,7 +235,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true ); ?>
           </div>
         </div>
       </div>
@@ -264,20 +264,20 @@ if ( have_posts() ) {
       </div>
 
       <!-- Quotes 3 -->
-      <?php
-      $quotes_block_3 = array(
-        'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
-        'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
-        'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
-        'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
-      );
-      ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-6 mb-s-4" data-autoplay="true">
-        <div class="support-page__quote-carousel-fade-left"></div>
-        <div class="support-page__quote-carousel-fade-right"></div>
+          <?php
+          $quotes_block_3 = array(
+          'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+          'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
+          'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
+          'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+          'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
+          'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
+          );
+          ?>
+      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
         <div class="swiper">
           <div class="swiper-wrapper">
-            <?php foreach ( $quotes_block_2 as $quote ) { ?>
+          <?php foreach ( $quotes_block_2 as $quote ) { ?>
               <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
                 <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
                 <div class="support-page__quote-container">
@@ -332,7 +332,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true ); ?>
           </div>
         </div>
       </div>
@@ -378,9 +378,9 @@ if ( have_posts() ) {
     </div>
   </div>
   </article>
-    <?php
-}
-?>
+          <?php
+        }
+        ?>
 </main>
 
 <?php
