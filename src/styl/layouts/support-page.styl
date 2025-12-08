@@ -56,21 +56,7 @@
 
 .support-page__quote-carousel
   position: relative
-
-  .support-page__quote-carousel-fade-left, .support-page__quote-carousel-fade-right
-    position: absolute
-    top: 0
-    width: 100px
-    height: 100%
-    z-index: 2
-    pointer-events: none
-    background-image: linear-gradient(to right, var(--color-gray-base), rgba(255, 255, 255, 0))
-    @media screen and (max-width: $breakpoint-m)
-      width: 50px
-
-  .support-page__quote-carousel-fade-right
-    right: 0
-    transform: rotate(180deg)
+  mask-image: unquote('linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%)')
 
   .support-page__quote-mark
     font-size: 4rem
@@ -83,7 +69,7 @@
     margin: 0 4px
     padding: 1.5rem
     background-color: var(--color-white-soft)
-    opacity: 0.5
+    opacity: .85
     transition: opacity var(--transition-speed-quick) ease
 
   .swiper-slide-active
@@ -92,14 +78,11 @@
   .support-page__quote-container
     padding: 2.5rem
 
-  @media screen and (max-width: $breakpoint-m)
-    .swiper-slide
-      width: 300px
-
   @media screen and (max-width: $breakpoint-s)
     .swiper-slide
-      width: 100%
+      width: unquote('calc(100% - 1rem)')
       padding: 2.5rem 0 3rem
+      margin: 0 1rem
 
     .support-page__quote-container
       padding: 1.5rem

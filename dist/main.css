@@ -230,9 +230,9 @@
 }
 /* Slide styles end */
 
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/stylus-native-loader/dist/cjs.js!./src/styl/site.styl ***!
-  \************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/stylus-native-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/styl/site.styl ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 html {
   --grid-gutter: 1rem;
   --corner-radius: 2px;
@@ -5740,26 +5740,8 @@ html {
 }
 .support-page__quote-carousel {
   position: relative;
-}
-.support-page__quote-carousel .support-page__quote-carousel-fade-left,
-.support-page__quote-carousel .support-page__quote-carousel-fade-right {
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  background-image: linear-gradient(to right,var(--color-gray-base),rgba(255,255,255,0));
-}
-@media screen and (max-width: 910px) {
-  .support-page__quote-carousel .support-page__quote-carousel-fade-left,
-  .support-page__quote-carousel .support-page__quote-carousel-fade-right {
-    width: 50px;
-  }
-}
-.support-page__quote-carousel .support-page__quote-carousel-fade-right {
-  right: 0;
-  transform: rotate(180deg);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%);
+          mask-image: linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 .support-page__quote-carousel .support-page__quote-mark {
   font-size: 4rem;
@@ -5772,9 +5754,9 @@ html {
   margin: 0 4px;
   padding: 1.5rem;
   background-color: var(--color-white-soft);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+  filter: alpha(opacity=85);
+  opacity: 0.85;
   transition: opacity var(--transition-speed-quick) ease;
 }
 .support-page__quote-carousel .swiper-slide-active {
@@ -5785,15 +5767,11 @@ html {
 .support-page__quote-carousel .support-page__quote-container {
   padding: 2.5rem;
 }
-@media screen and (max-width: 910px) {
-  .support-page__quote-carousel .swiper-slide {
-    width: 300px;
-  }
-}
 @media screen and (max-width: 759px) {
   .support-page__quote-carousel .swiper-slide {
-    width: 100%;
+    width: calc(100% - 1rem);
     padding: 2.5rem 0 3rem;
+    margin: 0 1rem;
   }
   .support-page__quote-carousel .support-page__quote-container {
     padding: 1.5rem;
