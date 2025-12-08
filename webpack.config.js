@@ -59,11 +59,13 @@ var config = {
             loader: 'css-loader',
             options: {
               url: false,
+              sourceMap: true,
             },
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               postcssOptions: {
                 plugins: [postcssPresetEnv(/* pluginOptions */)],
               },
@@ -71,6 +73,10 @@ var config = {
           },
           {
             loader: 'stylus-native-loader',
+            options: {
+              sourceMap: true,
+              preferPathResolver: 'webpack',
+            },
           },
         ],
       },
@@ -85,10 +91,16 @@ var config = {
     new ESLintPlugin({
       configType: 'eslintrc',
       failOnError: false,
+      failOnWarning: false,
+      emitError: true,
+      emitWarning: true,
+      quiet: false,
+      outputReport: false,
     }),
     new MiniCssExtractPlugin(),
     {
       apply: (compiler) => {
+        // Timestamp plugin
         compiler.hooks.compilation.tap('TimestampPlugin', () => {
           console.log(
             chalk.inverse.red(
@@ -96,6 +108,36 @@ var config = {
             )
           );
           console.log(chalk.inverse.greenBright(new Date().toString()));
+        });
+
+        // Enhanced error handling
+        compiler.hooks.done.tap('ErrorHandlingPlugin', (stats) => {
+          if (stats.hasErrors()) {
+            console.log(chalk.red('\nCompilation failed with errors :{\n'));
+            stats.compilation.errors.forEach((error) => {
+              console.log(chalk.red('Error:'), error.message);
+              if (error.module && error.module.resource) {
+                console.log(chalk.yellow('File:'), error.module.resource);
+              }
+              if (error.details) {
+                console.log(chalk.gray('Details:'), error.details);
+              }
+              console.log(''); // Empty line for separation
+            });
+          } else if (stats.hasWarnings()) {
+            console.log(chalk.yellow('\nCompilation completed with warnings :\n'));
+            stats.compilation.warnings.forEach((warning) => {
+              console.log(chalk.yellow('Warning:'), warning.message);
+            });
+          } else {
+            console.log(chalk.green('\nCompilation successful :]\n'));
+          }
+        });
+
+        // Handle watch mode recompilation
+        compiler.hooks.invalid.tap('WatchInvalidPlugin', (fileName) => {
+          console.log(chalk.blue(`\nFile changed: ${fileName}`));
+          console.log(chalk.blue('Recompiling...\n'));
         });
       },
     },
@@ -118,6 +160,14 @@ var config = {
   stats: {
     preset: 'normal',
     colors: true,
+    errors: true,
+    errorDetails: true,
+    warnings: true,
+    moduleTrace: true,
+    errorStack: true,
+    chunks: false,
+    modules: false,
+    assets: false,
   },
 };
 
@@ -125,7 +175,31 @@ module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.devtool = 'source-map';
     config.watch = true;
+    config.bail = false; // Don't stop on errors in development
+
+    // Enhanced watch options
+    config.watchOptions = {
+      aggregateTimeout: 300,
+      poll: false,
+      ignored: /node_modules/,
+    };
+
+    // Development-specific stats
+    config.stats = {
+      preset: 'minimal',
+      colors: true,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
+      moduleTrace: true,
+      timings: true,
+      modules: false,
+      chunks: false,
+      assets: false,
+    };
+
   } else {
+    config.bail = true; // Stop on first error in production
     config.optimization.minimizer.push(
       new ImageMinimizerPlugin({
         minimizer: {
