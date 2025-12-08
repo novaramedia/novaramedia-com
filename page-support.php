@@ -14,26 +14,26 @@ get_header();
 <main id="main-content">
 <?php
 if ( have_posts() ) {
-while ( have_posts() ) {
-  the_post();
-  $meta = get_post_meta( $post->ID );
+  while ( have_posts() ) {
+    the_post();
+    $meta = get_post_meta( $post->ID );
 
-  $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
-  $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
-  $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
+    $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
+    $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
+    $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
 
-  // Get repeatable funds lines - properly unserialize CMB2 repeatable fields
-  $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
-  // Ensure it's an array and filter out empty lines
-  $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
+    // Get repeatable funds lines - properly unserialize CMB2 repeatable fields
+    $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
+    // Ensure it's an array and filter out empty lines
+    $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
 
-  // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
-  $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
-  $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
-  // Filter out empty quotes
-  $support_carousel_quotes = array_filter( $support_carousel_quotes );
-}
-?>
+    // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
+    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
+    $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
+    // Filter out empty quotes
+    $support_carousel_quotes = array_filter( $support_carousel_quotes );
+  }
+  ?>
   <article id="page" class="support-page background-gray-base support-page__background-cover-image">
     <div class="container">
       <div class="grid-item">
@@ -376,13 +376,11 @@ while ( have_posts() ) {
           </div>
       </div>
     </div>
-  </div>
   </article>
-          <?php
-        }
-        ?>
+  <?php
+}
+?>
 </main>
-
 <?php
 get_footer();
 ?>
