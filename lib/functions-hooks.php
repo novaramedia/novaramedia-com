@@ -190,7 +190,7 @@ function nm_get_custom_metadata_for_datalayer() {
     if ( $contributors && is_array( $contributors ) ) {
       foreach ( $contributors as $contributor ) {
         if ( isset( $contributor->post_title ) ) {
-          $authors[] = $contributor->post_title;
+          $authors[] = sanitize_text_field( $contributor->post_title );
         }
       }
     }
@@ -200,7 +200,7 @@ function nm_get_custom_metadata_for_datalayer() {
   if ( empty( $authors ) ) {
     $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
     if ( ! empty( $legacy_author ) ) {
-      $authors[] = $legacy_author;
+      $authors[] = sanitize_text_field( $legacy_author );
     }
   }
 
