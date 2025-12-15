@@ -66,7 +66,7 @@ function nm_display_post_thumbnail_column( $col, $id ) {
       }
         break;
     case 'nm_post_id':
-      echo '<span class="nm-post-id-copy" onclick="nmCopyPostId(this, ' . esc_attr( $id ) . ')" style="cursor:pointer;padding:2px 6px;border-radius:3px;background:#f0f0f1;border:1px solid #c3c4c7;" title="Click to copy ID">' . esc_html( $id ) . '</span>';
+      echo '<span class="nm-post-id-copy" onclick="nmCopyPostId(this, ' . esc_attr( $id ) . ')" title="Click to copy ID">' . esc_html( $id ) . '</span>';
       break;
   }
 }
@@ -81,6 +81,19 @@ function nm_add_copy_post_id_script() {
   $screen = get_current_screen();
   if ( $screen && $screen->base === 'edit' ) {
     ?>
+    <style>
+      .nm-post-id-copy {
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: #f0f0f1;
+        border: 1px solid #c3c4c7;
+        transition: all 0.3s ease;
+      }
+      .nm-post-id-copy:hover {
+        background: #e5e5e5;
+      }
+    </style>
     <script>
       function nmCopyPostId(element, id) {
         navigator.clipboard.writeText(id).then(function() {
