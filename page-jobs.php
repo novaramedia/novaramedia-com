@@ -1,7 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 get_header();
 ?>
-<!-- main content -->
 <main id="main-content">
 <?php
 if ( have_posts() ) {
@@ -18,11 +21,11 @@ if ( have_posts() ) {
       </div>
     </div>
 
-    <div class="flex-grid-row flex-grid-row-m--reverse margin-bottom-small">
-      <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-7 flex-item-xxl-6 page-copy">
+    <div class="grid-row grid-row-m--reverse mb-4">
+      <div class="grid-item is-xxl-12 is-xl-14 is-l-16 is-m-24 page-copy">
         <?php the_content(); ?>
       </div>
-      <div class="flex-grid-item flex-item-m-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-6">
+      <div class="grid-item is-xxl-12 is-xl-10 is-l-8 is-m-24">
         <?php
         $start_of_day = strtotime( 'today midnight' );
         $jobs = get_posts(
@@ -62,7 +65,6 @@ if ( have_posts() ) {
   }
 }
 ?>
-<!-- end main-content -->
 </main>
 <?php
 get_footer();
