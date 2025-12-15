@@ -92,7 +92,7 @@ if ( have_posts() ) {
             </div>
           </div>
 
-          <div class="grid-row grid-row--nested u-relative only-desktop background-white ui-rounded-box ui-rounded-box--top">
+          <div class="grid-row grid-row--nested u-relative only-desktop background-white ui-rounded-box">
             <div class="grid-item is-xxl-12 is-m-24">
               <div class="p-5 p-l-4 pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-16 font-size-xl-15 font-size-s-14 mb-4">
@@ -153,11 +153,11 @@ if ( have_posts() ) {
           <?php
           $quotes_block_1 = array(
           'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
-          'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
-          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
-          'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
-          'In a time where misinformation and swank is omnipresent, Novara Media provides much needed clarity and nuance.',
-          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations/individuals who will control and direct the narratives.',
+          'In a time where misinformation is omnipresent, Novara Media provides much needed clarity and nuance.',
+          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations or individuals who will control and direct the narratives.',
+          'It takes lots of little people to counter one Murdoch.',
+          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
+          'I have never supported anything financially really, but when you had your recent push for new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
           );
           ?>
       <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
@@ -202,34 +202,6 @@ if ( have_posts() ) {
           </div>
         </div>
       </div>
-
-      <!-- Quotes 2 -->
-          <?php
-          $quotes_block_2 = array(
-          'It takes lots of little people to counter one Murdoch.',
-          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
-          'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
-          'It takes lots of little people to counter one Murdoch.',
-          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
-          'Well I have never supported anything financially really, but when you had your recent push for 2000 new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
-          );
-          ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
-        <div class="swiper">
-          <div class="swiper-wrapper">
-          <?php foreach ( $quotes_block_2 as $quote ) { ?>
-              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
-                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
-                <div class="support-page__quote-container">
-                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
-                </div>
-              </div>
-            <?php } ?>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
 
       <!-- donation form -->
       <div class="container mb-5">
@@ -295,7 +267,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <div class="grid-row grid-row--nested background-black">
+            <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
               <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box ui-rounded-box--top"></div>
             </div>
             <div class="grid-row grid-row--nested p-6 p-l-5 p-s-4 pt-s-5 pb-s-5 background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
