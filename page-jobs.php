@@ -9,10 +9,12 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-  <article id="page-jobs" class="container margin-top-small margin-bottom-large">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
-        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
+  <article id="page-jobs" class="container">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24 mb-5">
+        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+          Jobs
+        </h4>
       </div>
     </div>
 
@@ -39,7 +41,7 @@ if ( have_posts() ) {
         if ( ! empty( $jobs ) ) {
           ?>
         <h5 class="font-size-10">We are currently hiring:</h5>
-        <ul>
+        <ul class="mt-4 mb-4">
           <?php
           foreach ( $jobs as $job ) {
             $deadline = get_post_meta( $job->ID, '_nm_deadline', true );
@@ -49,7 +51,7 @@ if ( have_posts() ) {
           }
         } else {
           ?>
-        <h5 class="mobile-padding-bottom-small">There are currently no available positions</h5>
+        <h5 class="mb-s-4">There are currently no available positions</h5>
           <?php
         }
         ?>
