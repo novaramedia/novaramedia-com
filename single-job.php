@@ -22,10 +22,8 @@ if ( have_posts() ) {
           Job listing
         </h4>
       </div>
-      <div class="grid-row">
-        <div class="grid-item is-xxl-24 mb-5">
-          <h1 class="font-size-13 font-weight-bold"><?php the_title(); ?></h1>
-        </div>
+      <div class="grid-item is-xxl-24 mb-5">
+        <h1 class="font-size-13 font-weight-bold"><?php the_title(); ?></h1>
       </div>
     </div>
     <div class="grid-row mb-4">
