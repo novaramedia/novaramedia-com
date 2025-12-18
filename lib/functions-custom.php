@@ -734,3 +734,43 @@ function menu_tags_list() {
 
   return $tags;
 }
+
+/**
+ * Generate SoundCloud embed URL with parameters.
+ *
+ * @param string $soundcloud_url The SoundCloud track URL.
+ * @param array $params Optional parameters for the embed.
+ * @return string Complete SoundCloud embed URL.
+ */
+function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
+  $base_url = 'https://w.soundcloud.com/player/';
+
+  $default_params = array(
+    'url' => urlencode( $soundcloud_url ),
+    'auto_play' => 'false',
+    'show_user' => 'true',
+    'inverse' => 'false',
+  );
+
+  $params = wp_parse_args( $params, $default_params );
+
+  return $base_url . '?' . http_build_query( $params );
+}
+
+/**
+ * Get SoundCloud player height by semantic size name.
+ *
+ * @param string $size The semantic size name.
+ * @return string The height value in pixels.
+ */
+function get_soundcloud_player_height( $size ) {
+  $heights = array(
+    'mini' => '20',      // Front page audio blocks, category listings
+    'small' => '115',    // Category archive players
+    'medium' => '120',   // Single post articles
+    'large' => '166',    // Category featured players
+    'full' => '200',     // Single post audio (full player)
+  );
+
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['large'];
+}

@@ -56,10 +56,13 @@
           </a>
           <?php
             if (!empty($meta['_cmb_sc'][0])) {
-          ?>
-            <iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>&inverse=false&auto_play=false&show_user=true"></iframe>
-          <?php
-          }
+              render_soundcloud_embed_iframe(
+                $meta['_cmb_sc'][0],
+                'mini',
+                true,
+                array( 'inverse' => 'false', 'show_user' => 'true' )
+              );
+            }
           ?>
         </div>
       </div>

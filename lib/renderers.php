@@ -758,3 +758,45 @@ function render_about_group_field( $data ) {
     <?php
   }
 }
+
+/**
+ * Render complete SoundCloud embed iframe HTML.
+ * Handles both lazy loading and regular loading scenarios.
+ *
+ * @param string $soundcloud_url SoundCloud track URL.
+ * @param string $size Player size: 'mini', 'small', 'medium', 'large', 'full'.
+ * @param boolean $lazyload Set true to use lazy loading (uses data-src instead of src).
+ * @param array $params Optional SoundCloud embed parameters.
+ */
+function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'large', $lazyload = false, $params = array() ) {
+  if ( empty( $soundcloud_url ) ) {
+    return;
+  }
+
+  $height = get_soundcloud_player_height( $size );
+  $url = generate_soundcloud_embed_url( $soundcloud_url, $params );
+
+  if ( $lazyload ) {
+    // Lazy loading placeholder with fallback
+    ?>
+    <div class="soundcloud-lazy"
+      data-src="<?php echo esc_url( $url ); ?>"
+      data-width="100%"
+      data-height="<?php echo esc_attr( $height ); ?>"
+      style="min-height: <?php echo esc_attr( $height ); ?>px;">
+      <noscript>
+        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener">Listen on SoundCloud</a>
+      </noscript>
+    </div>
+    <?php
+  } else {
+    ?>
+    <iframe src="<?php echo esc_url( $url ); ?>"
+            width="100%"
+            height="<?php echo esc_attr( $height ); ?>"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"></iframe>
+    <?php
+  }
+}
