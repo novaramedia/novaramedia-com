@@ -761,7 +761,7 @@ function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
  * Get SoundCloud player height by semantic size name.
  *
  * @param string $size The semantic size name.
- * @return string The height value in pixels.
+ * @return string The height value as a numeric string (without unit suffix).
  */
 function get_soundcloud_player_height( $size ) {
   $heights = array(

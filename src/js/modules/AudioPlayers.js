@@ -43,7 +43,7 @@ export class AudioPlayers {
     iframe.width = playerElement.getAttribute('data-width') || '100%';
     iframe.height = playerElement.getAttribute('data-height') || '166';
     iframe.scrolling = 'no';
-    iframe.frameBorder = 'no';
+    iframe.setAttribute('frameborder', 'no');
     iframe.allow = 'autoplay';
 
     // Replace the placeholder with the iframe
