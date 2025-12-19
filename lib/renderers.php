@@ -792,10 +792,9 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'large', $lazy
   } else {
     ?>
     <iframe src="<?php echo esc_url( $url ); ?>"
-            width="100%"
-            height="<?php echo esc_attr( $height ); ?>"
-            scrolling="no"
-            allow="autoplay"></iframe>
+      width="100%"
+      height="<?php echo esc_attr( $height ); ?>"
+      allow="autoplay"></iframe>
     <?php
   }
 }

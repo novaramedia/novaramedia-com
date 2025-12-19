@@ -36,14 +36,26 @@
   </div>
   <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-3 is-xl-16 offset-xl-0 is-xxl-12 offset-xxl-2">
 <?php
-  if (!empty($meta['_cmb_sc'][0])) {
-?>
+if ( ! empty( $meta['_cmb_sc'][0] ) ) {
+  ?>
     <div class="text-copy mb-4">
       <p class="font-size-8">Listen to this article as audio:</p>
-      <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
+      <?php
+        render_soundcloud_embed_iframe(
+          $meta['_cmb_sc'][0],
+          'medium',
+          true,
+          array(
+            'show_related'  => 'false',
+            'show_comments' => 'false',
+            'show_user'     => 'false',
+            'show_reposts'  => 'false',
+          )
+        );
+      ?>
     </div>
-<?php
-  }
+  <?php
+}
 ?>
     <div id="single-articles-copy" class="text-copy mb-4">
       <?php the_content(); ?>
