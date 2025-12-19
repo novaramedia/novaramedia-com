@@ -37,9 +37,30 @@ export class AudioPlayers {
     const dataSrc = playerElement.getAttribute('data-src');
     if (!dataSrc) return;
 
+    // Validate the data-src URL before using it for the iframe src
+    let url;
+    try {
+      url = new URL(dataSrc, window.location.href);
+    } catch (e) {
+      // Malformed URL, do not create the iframe
+      return;
+    }
+
+    const allowedHosts = new Set([
+      'soundcloud.com',
+      'www.soundcloud.com',
+      'w.soundcloud.com'
+    ]);
+
+    if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
+        !allowedHosts.has(url.hostname)) {
+      // Disallow unexpected protocols or hosts
+      return;
+    }
+
     // Create iframe element
     const iframe = document.createElement('iframe');
-    iframe.src = dataSrc;
+    iframe.src = url.toString();
     iframe.width = playerElement.getAttribute('data-width') || '100%';
     iframe.height = playerElement.getAttribute('data-height') || '166';
     iframe.scrolling = 'no';
