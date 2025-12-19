@@ -49,11 +49,13 @@ export class AudioPlayers {
     const allowedHosts = new Set([
       'soundcloud.com',
       'www.soundcloud.com',
-      'w.soundcloud.com'
+      'w.soundcloud.com',
     ]);
 
-    if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
-        !allowedHosts.has(url.hostname)) {
+    if (
+      (url.protocol !== 'https:' && url.protocol !== 'http:') ||
+      !allowedHosts.has(url.hostname)
+    ) {
       // Disallow unexpected protocols or hosts
       return;
     }
