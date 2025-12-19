@@ -213,7 +213,7 @@ function nm_render_committed_credit( $credit ) {
         <?php
           render_soundcloud_embed_iframe(
             'https://api.soundcloud.com/tracks/2081003709',
-            'large',
+            'full',
             true,
             array(
               'color'         => '#ffab70',

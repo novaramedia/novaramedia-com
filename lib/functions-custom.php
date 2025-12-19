@@ -766,11 +766,10 @@ function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
 function get_soundcloud_player_height( $size ) {
   $heights = array(
     'mini'   => '20',      // Front page audio blocks, category listings
-    'small'  => '115',    // Category archive players
-    'medium' => '120',   // Single post articles
-    'large'  => '166',    // Category featured players
-    'full'   => '200',     // Single post audio (full player)
+    'small'  => '115',    // Category archive players, single post articles
+    'medium' => '145',   // Reserved for future use
+    'full'   => '166',    // Category featured players, single post audio
   );
 
-  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['large'];
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
 }

@@ -43,7 +43,7 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
       <?php
         render_soundcloud_embed_iframe(
           $meta['_cmb_sc'][0],
-          'medium',
+          'small',
           true,
           array(
             'show_related'  => 'false',

@@ -146,7 +146,7 @@ function nm_render_foreign_agent_credit( $credit ) {
         <?php
           render_soundcloud_embed_iframe(
             'https://api.soundcloud.com/tracks/1270698601',
-            'large',
+            'full',
             true,
             array(
               'color'         => '#ffab70',
