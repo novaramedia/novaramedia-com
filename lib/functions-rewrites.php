@@ -64,46 +64,43 @@ add_action( 'init', 'handle_internal_rewrites' );
 function handle_internal_rewrites() {
   $internal_rewrites = array(
     array(
-      'pattern'     => '^red-flags/?$',
-      'category'    => 'red-flags',
-      'lookup_type' => 'slug',
+      'pattern'  => '^red-flags/?$',
+      'category' => 'red-flags',
     ),
     array(
-      'pattern'     => '^committed/?$',
-      'category'    => 'committed',
-      'lookup_type' => 'slug',
+      'pattern'  => '^committed/?$',
+      'category' => 'committed',
     ),
     array(
-      'pattern'     => '^tyskysour/?$',
-      'category'    => 'novara-live',
-      'lookup_type' => 'slug',
+      'pattern'  => '^tyskysour/?$',
+      'category' => 'novara-live',
     ),
     array(
-      'pattern'     => '^novara-live/?$',
-      'category'    => 'novara-live',
-      'lookup_type' => 'slug',
+      'pattern'  => '^novara-live/?$',
+      'category' => 'novara-live',
+    ),
+    array(
+      'pattern'  => '^downstream/?$',
+      'category' => 'downstream',
+    ),
+    array(
+      'pattern'  => '^if-i-speak/?$',
+      'category' => 'if-i-speak',
+    ),
+    array(
+      'pattern'  => '^acfm/?$',
+      'category' => 'acfm',
     ),
   );
 
   foreach ( $internal_rewrites as $rewrite ) {
-    $cat = null;
-
-    // Get category based on lookup type
-    if ( $rewrite['lookup_type'] === 'path' ) {
-      $cat = get_category_by_path( $rewrite['category'] );
-    } elseif ( $rewrite['lookup_type'] === 'slug' ) {
-      $cat = get_category_by_slug( $rewrite['category'] );
-    }
+    $cat = get_category_by_slug( $rewrite['category'] );
 
     // Add rewrite rule if category exists
     if ( $cat ) {
-      $category_name = ( $rewrite['lookup_type'] === 'path' )
-        ? 'articles/' . $cat->slug
-        : $cat->slug;
-
       add_rewrite_rule(
         $rewrite['pattern'],
-        'index.php?category_name=' . $category_name,
+        'index.php?category_name=' . $cat->slug,
         'top'
       );
     }
