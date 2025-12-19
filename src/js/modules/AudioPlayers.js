@@ -51,7 +51,7 @@ export class AudioPlayers {
       'soundcloud.com',
       'www.soundcloud.com',
       'w.soundcloud.com',
-    ]);
+    ];
 
     if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
         !allowedHosts.includes(url.hostname)) {
@@ -64,7 +64,7 @@ export class AudioPlayers {
     iframe.src = url.toString();
     iframe.width = playerElement.getAttribute('data-width') || '100%';
     iframe.height = playerElement.getAttribute('data-height') || '166';
-    iframe.scrolling = 'no';
+    iframe.style.overflow = 'hidden';
     iframe.setAttribute('frameborder', 'no');
     iframe.allow = 'autoplay';
 
