@@ -795,7 +795,6 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'large', $lazy
             width="100%"
             height="<?php echo esc_attr( $height ); ?>"
             scrolling="no"
-            frameborder="no"
             allow="autoplay"></iframe>
     <?php
   }
