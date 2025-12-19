@@ -9,6 +9,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Novara_Media
  */
 
+$quotes_block_1 = array(
+  'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
+  'In a time where misinformation is omnipresent, Novara Media provides much needed clarity and nuance.',
+  'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations or individuals who will control and direct the narratives.',
+  'It takes lots of little people to counter one Murdoch.',
+  'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
+  'I have never supported anything financially really, but when you had your recent push for new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
+);
+
+$quotes_block_2 = array(
+  'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
+  'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don\'t have to compromise your content.',
+  'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
+  'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
+  'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don\'t have to compromise your content.',
+  'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
+);
+
 get_header();
 ?>
 <main id="main-content">
@@ -150,32 +168,7 @@ if ( have_posts() ) {
       </div>
 
       <!-- Quotes 1 -->
-          <?php
-          $quotes_block_1 = array(
-          'I support because I enjoy Ash Sarkar\'s writing, but also to support a media source which doesn\'t simply exist to amplify the concerns of the wealthy.',
-          'In a time where misinformation is omnipresent, Novara Media provides much needed clarity and nuance.',
-          'I support because you are one of the few media outlets that can claim independence as you are financed by members of the community and not corporations or individuals who will control and direct the narratives.',
-          'It takes lots of little people to counter one Murdoch.',
-          'I want a strong left-wing view so decided to support you properly with a bit of my own money.',
-          'I have never supported anything financially really, but when you had your recent push for new backers it occurred to me that I consume Novara content more than that of other media providers I actually pay for. ',
-          );
-          ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
-        <div class="swiper">
-          <div class="swiper-wrapper">
-          <?php foreach ( $quotes_block_1 as $quote ) { ?>
-              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
-                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
-                <div class="support-page__quote-container">
-                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                  <p class="font-serif font-size-13 font-size-s-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
-                </div>
-              </div>
-            <?php } ?>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
+      <?php render_support_quotes_carousel( $quotes_block_1 ); ?>
 
       <!-- Block 2 -->
       <div class="container mb-5">
@@ -235,33 +228,8 @@ if ( have_posts() ) {
         </div>
       </div>
 
-      <!-- Quotes 3 -->
-          <?php
-          $quotes_block_2 = array(
-          'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
-          'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
-          'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
-          'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
-          'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
-          'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
-          );
-          ?>
-      <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
-        <div class="swiper">
-          <div class="swiper-wrapper">
-          <?php foreach ( $quotes_block_2 as $quote ) { ?>
-              <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
-                <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
-                <div class="support-page__quote-container">
-                  <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                  <p class="font-serif font-size-13 font-size-s-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
-                </div>
-              </div>
-            <?php } ?>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
+      <!-- Quotes 2 -->
+      <?php render_support_quotes_carousel( $quotes_block_2 ); ?>
 
       <!-- our story -->
       <div class="container mb-5">

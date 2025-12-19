@@ -5744,15 +5744,14 @@ html {
           mask-image: linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 .support-page__quote-carousel .support-page__quote-mark {
-  font-size: 4rem;
+  font-size: 4.5rem;
   line-height: 0.5;
-  margin: -0.5rem 0;
 }
 .support-page__quote-carousel .swiper-slide {
-  width: 620px;
+  width: 820px;
   height: auto;
   margin: 0 4px;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
   background-color: var(--color-white-soft);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
   filter: alpha(opacity=85);
@@ -5765,9 +5764,21 @@ html {
   opacity: 1;
 }
 .support-page__quote-carousel .support-page__quote-container {
-  padding: 2.5rem;
+  padding: 2rem;
+}
+.support-page__quote-carousel .swiper-pagination {
+  bottom: 1.5rem;
+}
+@media screen and (max-width: 1104px) {
+  .support-page__quote-carousel .swiper-slide {
+    width: 620px;
+  }
 }
 @media screen and (max-width: 759px) {
+  .support-page__quote-carousel {
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+  }
   .support-page__quote-carousel .swiper-slide {
     width: calc(100% - 1rem);
     padding: 1.5rem 0 2rem;
@@ -8382,6 +8393,13 @@ html {
 .inline-action-list li {
   display: inline-block;
   margin-right: 1rem;
+}
+.text-extra-leading {
+  line-height: 1.2;
+}
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 3px;
 }
 @keyframes sk-bounce {
   0%, 100% {

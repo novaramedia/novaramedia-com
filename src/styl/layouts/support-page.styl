@@ -10,7 +10,6 @@
   @media screen and (max-width: $breakpoint-s)
     background-image: url('./img/pages/support-page/support-page-bg-2025--small.png')
 
-
 .support-page__headline
   line-height: .825em
   margin-left: -.05em
@@ -59,15 +58,14 @@
   mask-image: unquote('linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%)')
 
   .support-page__quote-mark
-    font-size: 4rem
+    font-size: 4.5rem
     line-height: 0.5
-    margin: -0.5rem 0
 
   .swiper-slide
-    width: 620px
+    width: 820px
     height: auto
     margin: 0 4px
-    padding: 1.5rem
+    padding: 1.5rem 1.5rem 2rem 1.5rem
     background-color: var(--color-white-soft)
     opacity: .85
     transition: opacity var(--transition-speed-quick) ease
@@ -76,9 +74,18 @@
     opacity: 1
 
   .support-page__quote-container
-    padding: 2.5rem
+    padding: 2rem
+
+  .swiper-pagination
+    bottom: 1.5rem
+
+  @media screen and (max-width: $breakpoint-l)
+    .swiper-slide
+      width: 620px
 
   @media screen and (max-width: $breakpoint-s)
+    mask-image: unquote('linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%)')
+
     .swiper-slide
       width: unquote('calc(100% - 1rem)')
       padding: 1.5rem 0 2rem

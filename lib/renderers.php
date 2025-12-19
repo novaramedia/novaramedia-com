@@ -758,3 +758,42 @@ function render_about_group_field( $data ) {
     <?php
   }
 }
+
+/**
+ * Render a quotes carousel for the Support page
+ *
+ * @since 4.2.1
+ *
+ * @param array $quotes Array of quote strings to display in the carousel.
+ * @return void Outputs the carousel HTML directly.
+ */
+function render_support_quotes_carousel( $quotes ) {
+  if ( empty( $quotes ) || ! is_array( $quotes ) ) {
+    return;
+  }
+
+  // Filter out empty quotes
+  $quotes = array_filter( $quotes );
+
+  if ( empty( $quotes ) ) {
+    return;
+  }
+  ?>
+  <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+      <?php foreach ( $quotes as $quote ) { ?>
+          <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+            <h5 class="ui-boxed-title ui-boxed-title--grey mb-s-2">Supporters Say</h5>
+            <div class="support-page__quote-container">
+              <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+              <p class="font-serif font-size-13 font-size-s-13 text-extra-leading text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <?php
+}
