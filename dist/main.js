@@ -49247,13 +49247,28 @@ class AudioPlayers {
     const dataSrc = playerElement.getAttribute('data-src');
     if (!dataSrc) return;
 
+    // Validate the data-src URL before using it for the iframe src
+    let url;
+    try {
+      url = new URL(dataSrc, window.location.href);
+    } catch (error) {
+      // Malformed URL, do not create the iframe
+      console.log('Invalid SoundCloud URL:', dataSrc, error);
+      return;
+    }
+    const allowedHosts = ['soundcloud.com', 'www.soundcloud.com', 'w.soundcloud.com'];
+    if (url.protocol !== 'https:' && url.protocol !== 'http:' || !allowedHosts.includes(url.hostname)) {
+      // Disallow unexpected protocols or hosts
+      return;
+    }
+
     // Create iframe element
     const iframe = document.createElement('iframe');
-    iframe.src = dataSrc;
+    iframe.src = url.toString();
     iframe.width = playerElement.getAttribute('data-width') || '100%';
     iframe.height = playerElement.getAttribute('data-height') || '166';
     iframe.scrolling = 'no';
-    iframe.frameBorder = 'no';
+    iframe.setAttribute('frameborder', 'no');
     iframe.allow = 'autoplay';
 
     // Replace the placeholder with the iframe

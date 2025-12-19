@@ -41,19 +41,20 @@ export class AudioPlayers {
     let url;
     try {
       url = new URL(dataSrc, window.location.href);
-    } catch (e) {
+    } catch (error) {
       // Malformed URL, do not create the iframe
+      console.log('Invalid SoundCloud URL:', dataSrc, error);
       return;
     }
 
-    const allowedHosts = new Set([
+    const allowedHosts = [
       'soundcloud.com',
       'www.soundcloud.com',
       'w.soundcloud.com'
-    ]);
+    ];
 
     if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
-        !allowedHosts.has(url.hostname)) {
+        !allowedHosts.includes(url.hostname)) {
       // Disallow unexpected protocols or hosts
       return;
     }
