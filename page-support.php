@@ -168,7 +168,7 @@ if ( have_posts() ) {
                 <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
                 <div class="support-page__quote-container">
                   <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                  <p class="font-serif font-size-13 font-size-s-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
                 </div>
               </div>
             <?php } ?>
@@ -237,11 +237,11 @@ if ( have_posts() ) {
 
       <!-- Quotes 3 -->
           <?php
-          $quotes_block_3 = array(
-          'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+          $quotes_block_2 = array(
+          'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
           'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
           'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
-          'We need bodies such as Novara to really challenge ideas and make sure that we are supporting policies that can really work. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information around valid and workable ideas that people can get behind.',
+          'We need bodies such as Novara to really challenge ideas. Economics can be complex (at least to me) so Novara can really play a role in providing accessible information.',
           'I give a small amount to help ensure access to a different perspective and, hopefully, it will help ensure you don’t have to compromise your content.',
           'Novara is essential. We need an independent, honest media environment with robust journalism to have any hope of a just and visionary society. I\'m supporting because I hope it continues to grow.',
           );
@@ -254,7 +254,7 @@ if ( have_posts() ) {
                 <h5 class="ui-boxed-title ui-boxed-title--black mb-s-5">Supporters Say</h5>
                 <div class="support-page__quote-container">
                   <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
-                  <p class="font-serif font-size-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+                  <p class="font-serif font-size-13 font-size-s-13 text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
                 </div>
               </div>
             <?php } ?>
