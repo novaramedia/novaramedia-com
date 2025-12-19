@@ -50,8 +50,8 @@ export class AudioPlayers {
     const allowedHosts = [
       'soundcloud.com',
       'www.soundcloud.com',
-      'w.soundcloud.com'
-    ];
+      'w.soundcloud.com',
+    ]);
 
     if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
         !allowedHosts.includes(url.hostname)) {
