@@ -766,9 +766,9 @@ function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
 function get_soundcloud_player_height( $size ) {
   $heights = array(
     'mini'   => '20',      // Front page audio blocks, category listings
-    'small'  => '115',    // Category archive players, single post articles
+    'small'  => '115',    // Category archive players, single post articles (consolidated from former medium)
     'medium' => '145',   // Reserved for future use
-    'full'   => '166',    // Category featured players, single post audio
+    'full'   => '166',    // Category featured players, single post audio (consolidated from former large/full)
   );
 
   return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
