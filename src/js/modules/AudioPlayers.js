@@ -53,8 +53,10 @@ export class AudioPlayers {
       'w.soundcloud.com',
     ];
 
-    if ((url.protocol !== 'https:' && url.protocol !== 'http:') ||
-        !allowedHosts.includes(url.hostname)) {
+    if (
+      (url.protocol !== 'https:' && url.protocol !== 'http:') ||
+      !allowedHosts.includes(url.hostname)
+    ) {
       // Disallow unexpected protocols or hosts
       return;
     }
