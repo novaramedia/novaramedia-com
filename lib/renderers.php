@@ -764,11 +764,11 @@ function render_about_group_field( $data ) {
  * Handles both lazy loading and regular loading scenarios.
  *
  * @param string $soundcloud_url SoundCloud track URL.
- * @param string $size Player size: 'mini', 'small', 'medium', 'large', 'full'.
+ * @param string $size Player size: 'mini', 'small', 'medium', 'full'.
  * @param boolean $lazyload Set true to use lazy loading (uses data-src instead of src).
  * @param array $params Optional SoundCloud embed parameters.
  */
-function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'large', $lazyload = false, $params = array() ) {
+function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyload = false, $params = array() ) {
   if ( empty( $soundcloud_url ) ) {
     return;
   }
