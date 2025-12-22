@@ -16,6 +16,9 @@ const BundleAnalyzerPlugin =
 const TerserPlugin = require('terser-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 
+const sharp = require('sharp');
+const fs = require('fs').promises;
+
 var config = {
   entry: './src/js/main.js',
 
@@ -197,9 +200,10 @@ module.exports = (env, argv) => {
       chunks: false,
       assets: false,
     };
-
   } else {
-    config.bail = true; // Stop on first error in production
+    config.bail = true;
+
+    // Enhanced image optimization with format conversion
     config.optimization.minimizer.push(
       new ImageMinimizerPlugin({
         minimizer: {
@@ -241,6 +245,7 @@ module.exports = (env, argv) => {
         },
       })
     );
+
     config.plugins.push(
       new CopyPlugin({
         patterns: [
@@ -250,6 +255,77 @@ module.exports = (env, argv) => {
             globOptions: {
               ignore: ['**/*.DS_Store'],
             },
+            // Transform function to generate WebP and AVIF
+            async transform(content, absoluteFrom) {
+              const ext = path.extname(absoluteFrom).toLowerCase();
+
+              // Only process JPG and PNG
+              if (!['.jpg', '.jpeg', '.png'].includes(ext)) {
+                return content;
+              }
+
+              const dir = path.dirname(absoluteFrom);
+              const filename = path.basename(absoluteFrom, ext);
+
+              // Skip specific files that shouldn't be converted
+              const skipFiles = ['apple-touch-icon', 'favicon-16x16', 'favicon-32x32'];
+              if (skipFiles.some(skip => filename.includes(skip))) {
+                return content;
+              }
+
+              const outputDir = absoluteFrom
+                .replace('src/img/', 'dist/img/')
+                .replace(path.basename(absoluteFrom), '');
+
+              // Check if files already exist
+              const webpPath = path.join(outputDir, `${filename}.webp`);
+              const avifPath = path.join(outputDir, `${filename}.avif`);
+              const originalPath = path.join(outputDir, `${filename}${ext}`);
+
+              try {
+                const [webpExists, avifExists, originalExists] = await Promise.all([
+                  fs.access(webpPath).then(() => true).catch(() => false),
+                  fs.access(avifPath).then(() => true).catch(() => false),
+                  fs.access(originalPath).then(() => true).catch(() => false),
+                ]);
+
+                // Skip if all files already exist
+                if (webpExists && avifExists && originalExists) {
+                  console.log(
+                    chalk.gray(`⊙ Skipping ${filename}${ext} (already exists)`)
+                  );
+                  return content;
+                }
+
+                // Generate WebP if missing
+                if (!webpExists) {
+                  await sharp(absoluteFrom)
+                    .webp({ quality: 85 })
+                    .toFile(webpPath);
+                }
+
+                // Generate AVIF if missing
+                if (!avifExists) {
+                  await sharp(absoluteFrom)
+                    .avif({ quality: 70 })
+                    .toFile(avifPath);
+                }
+
+                console.log(
+                  chalk.green(
+                    `✓ Generated WebP and AVIF for ${filename}${ext}`
+                  )
+                );
+              } catch (err) {
+                console.log(
+                  chalk.yellow(
+                    `⚠ Could not process ${filename}${ext}: ${err.message}`
+                  )
+                );
+              }
+
+              return content; // Return original for copying
+            },
           },
           {
             from: path.resolve(__dirname, 'src/styl/fonts/'),
@@ -258,6 +334,7 @@ module.exports = (env, argv) => {
         ],
       })
     );
+
     config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
     config.performance.hints = 'warning';
     config.stats.preset = 'detailed';
