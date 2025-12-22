@@ -261,7 +261,7 @@ if ( have_posts() ) {
           <?php
           if ( isset( $meta['_cmb_sc'][0] ) && ! empty( $meta['_cmb_sc'][0] ) ) {
             render_soundcloud_embed_iframe(
-              esc_url( $meta['_cmb_sc'][0] ),
+              $meta['_cmb_sc'][0],
               'small',
               true,
               array(
@@ -344,11 +344,11 @@ if ( have_posts() ) {
 </main>
 <?php
 get_template_part(
-    'partials/support-section',
-    null,
-    array(
-        'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
-    )
+  'partials/support-section',
+  null,
+  array(
+    'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
+  )
 );
 
 get_footer();

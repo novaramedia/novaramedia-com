@@ -20,7 +20,9 @@ export class AudioPlayers {
   }
 
   loadPlayersWithThrottling() {
-    if (this.players.length === 0) return;
+    if (this.players.length === 0) {
+      return;
+    }
 
     // Load first player immediately
     this.loadPlayer(this.players[0]);
@@ -35,7 +37,9 @@ export class AudioPlayers {
 
   loadPlayer(playerElement) {
     const dataSrc = playerElement.getAttribute('data-src');
-    if (!dataSrc) return;
+    if (!dataSrc) {
+      return;
+    }
 
     // Validate the data-src URL before using it for the iframe src
     let url;

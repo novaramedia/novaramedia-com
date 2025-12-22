@@ -194,14 +194,13 @@ if ( have_posts() ) {
               'small',
               true,
               array(
-                'color'         => '#ffab70',
-                'show_artwork'  => 'false',
+                'color'        => '#ffab70',
+                'show_artwork' => 'false',
               )
             );
           }
           ?>
-          </div>
-          <div class='flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks'>
+          <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mt-4 mb-4 text-paragraph-breaks">
             <?php the_content(); ?>
           </div>
         </div>
