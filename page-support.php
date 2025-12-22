@@ -146,21 +146,22 @@ if ( have_posts() ) {
 
     <div class="support-page__below-the-fold">
       <!-- Block 1 -->
-      <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
-        <div class="grid-row support-page__text-container">
-          <div class="grid-item is-xxl-24 ">
-            <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
-              <div class="grid-row grid-row--nested">
-                <div class="grid-item is-s-24 is-xxl-12">
-                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 mr-5 mr-s-0">
-                    Billionaire-backed?<br/>
-                    <span class="font-color-red">Not us.</span>
-                  </h3>
-                </div>
-                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold text-wrap-balance">
-                  <p>Outlets funded by billionaires are obliged to push narratives that serve the obscenely wealthy.</p>
-                  <p class="mt-3">Because the vast majority of our income is from our supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
-                </div>
+      <div class="container mt-5 mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
+              <div class="grid-item is-xxl-24 support-page__invert-section-background support-page__crowd-background ui-rounded-box ui-rounded-box--top"></div>
+            </div>
+            <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
+              <div class="grid-item is-s-24 is-xxl-11">
+                <h3 class="font-size-15 font-size-l-14 font-weight-bold mb-s-4">
+                  Billionaire-backed?<br/>
+                  Not us.
+                </h3>
+              </div>
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-weight-bold text-wrap-pretty">
+                <p>Outlets funded by billionaires are obliged to push narratives that serve the obscenely wealthy.</p>
+                <p class="mt-3">Because the vast majority of our income is from our supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
               </div>
             </div>
           </div>
@@ -236,7 +237,7 @@ if ( have_posts() ) {
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
-              <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box ui-rounded-box--top"></div>
+              <div class="grid-item is-xxl-24 support-page__invert-section-background support-page__our-story-background ui-rounded-box ui-rounded-box--top"></div>
             </div>
             <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-xxl-24 text-align-center mb-6 mb-s-5">

@@ -1,3 +1,5 @@
+// Header styles
+
 .support-page__background-cover-image
   background-image: url('./img/pages/support-page/support-page-bg-2025.png')
   background-size: 100% auto
@@ -21,6 +23,8 @@
   top: 100px
   z-index: 1
 
+// Big stats section
+
 .support-page__big-stats
   text-align: center
 
@@ -34,15 +38,32 @@
     &:last-child
       margin-bottom: 0
 
-.support-page__our-story-background
+// Inverted sections
+
+.support-page__invert-section-background
   position: relative
-  height: 520px
   background-size: 100% auto
-  background-position: center 40%
   background-repeat: no-repeat
 
+  @supports not (aspect-ratio)
+    height: 520px
+
+  @supports (aspect-ratio: 1)
+    height: auto
+    aspect-ratio: 1384 / 520
+
   @media screen and (max-width: $breakpoint-m)
-    height: 260px
+    @supports not (aspect-ratio)
+      height: 260px
+
+    @supports (aspect-ratio: 1)
+      aspect-ratio: 446 / 260
+
+.support-page__our-story-background
+  background-position: center 40%
+
+.support-page__crowd-background
+  background-position: center 60%
 
 .avif .support-page__our-story-background
   background-image: url('./img/pages/support-page/our-story-background.avif')
@@ -52,6 +73,17 @@
 
 .fallback .support-page__our-story-background
   background-image: url('./img/pages/support-page/our-story-background.jpg')
+
+.avif .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.avif')
+
+.webp .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.webp')
+
+.fallback .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.jpg')
+
+// Quote carousels
 
 .support-page__quote-carousel
   position: relative
@@ -98,6 +130,8 @@
 
     .swiper-pagination
       bottom: 1.5rem
+
+// Payment method logos
 
 .support-page__direct-debit-logo, .support-page__paypal-logo
   width: auto

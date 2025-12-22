@@ -5717,17 +5717,39 @@ html {
 .support-page__highlighter .ux-highlighter__line:last-child {
   margin-bottom: 0;
 }
-.support-page__our-story-background {
+.support-page__invert-section-background {
   position: relative;
-  height: 520px;
   background-size: 100% auto;
-  background-position: center 40%;
   background-repeat: no-repeat;
 }
-@media screen and (max-width: 910px) {
-  .support-page__our-story-background {
-    height: 260px;
+@supports not (aspect-ratio) {
+  .support-page__invert-section-background {
+    height: 520px;
   }
+}
+@supports (aspect-ratio: 1) {
+  .support-page__invert-section-background {
+    height: auto;
+    aspect-ratio: 1384/520;
+  }
+}
+@media screen and (max-width: 910px) {
+  @supports not (aspect-ratio) {
+    .support-page__invert-section-background {
+      height: 260px;
+    }
+  }
+  @supports (aspect-ratio: 1) {
+    .support-page__invert-section-background {
+      aspect-ratio: 446/260;
+    }
+  }
+}
+.support-page__our-story-background {
+  background-position: center 40%;
+}
+.support-page__crowd-background {
+  background-position: center 60%;
 }
 .avif .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.avif");
@@ -5737,6 +5759,15 @@ html {
 }
 .fallback .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.jpg");
+}
+.avif .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.avif");
+}
+.webp .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.webp");
+}
+.fallback .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.jpg");
 }
 .support-page__quote-carousel {
   position: relative;
