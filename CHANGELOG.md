@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Github Action workflow to notify to Slack on releases
 - Additional SEO title content. Downstream shows standfirst. Opinion, Features & Analysis show the author. Complete override option available via meta box.
+- .avif and .webp generation via build script
 
 ### Changed
 
