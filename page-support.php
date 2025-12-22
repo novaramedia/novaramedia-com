@@ -154,12 +154,12 @@ if ( have_posts() ) {
             </div>
             <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-weight-bold mb-s-4">
+                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4">
                   Billionaire-backed?<br/>
                   Not us.
                 </h3>
               </div>
-              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-weight-bold text-wrap-pretty">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
                 <p>Outlets funded by billionaires are obliged to push narratives that serve the obscenely wealthy.</p>
                 <p class="mt-3">Because the vast majority of our income is from our supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
               </div>
@@ -185,7 +185,7 @@ if ( have_posts() ) {
                     Our <span class="font-color-red">supporter-funded model</span> continues to defy expectations and buck industry trends.
                   </h3>
                 </div>
-                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-weight-bold text-wrap-balance">
+                <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-size-s-12 font-weight-bold text-wrap-balance">
                   <p>You might think giving a small amount per month won’t have much impact.</p>
                   <p class="mt-3">But many people chipping in builds a sturdy foundation.</p>
                   <p class="mt-3">Having lots of small, regular donations means we don’t waste valuable time pitching for highly competitive and admin-heavy grants. Plus, no large funder can pull the rug from underneath us and threaten the whole organisation.</p>
@@ -218,7 +218,7 @@ if ( have_posts() ) {
                     <span class="font-color-red">Just quality journalism.</span>
                   </h3>
                 </div>
-                <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-weight-bold">
+                <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-12 font-size-12 font-size-s-12 font-weight-bold">
                   <p>Paywalls prevent ordinary people from accessing the news. Many outlets have you dodging obnoxious pop ups and whack-a-mole-ing ads left, right and centre.</p>
                   <p class="mt-3">But we don’t have any ad partnerships or sponsored content. We don’t ask for your data to read an article in full. Absolutely none of our content is behind a paywall.</p>
                   <p class="mt-3">Thanks to our supporters, we’re one of a tiny number of outlets that are entirely free for all to access. </p>
@@ -246,11 +246,11 @@ if ( have_posts() ) {
                 </h3>
               </div>
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-weight-bold mb-s-4 text-wrap-balance">
+                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
                   Born amid anti-austerity movements as a show on community radio, our supporters are the reason we’ve grown to be one of Britain’s most influential media organisations.
                 </h3>
               </div>
-              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-weight-bold text-wrap-pretty">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
                 <p class="mb-4">
                   From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, Novara Media cuts through the bullshit to provide clear, rigorous analysis, drawing hundreds of thousands of viewers, readers and listeners each and every day.
                 </p>

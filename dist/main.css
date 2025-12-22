@@ -5719,7 +5719,7 @@ html {
 }
 .support-page__invert-section-background {
   position: relative;
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 @supports not (aspect-ratio) {
@@ -5741,7 +5741,8 @@ html {
   }
   @supports (aspect-ratio: 1) {
     .support-page__invert-section-background {
-      aspect-ratio: 446/260;
+      height: auto;
+      aspect-ratio: 16/9;
     }
   }
 }
