@@ -128,7 +128,9 @@ var config = {
               console.log(''); // Empty line for separation
             });
           } else if (stats.hasWarnings()) {
-            console.log(chalk.yellow('\nCompilation completed with warnings :\n'));
+            console.log(
+              chalk.yellow('\nCompilation completed with warnings :\n')
+            );
             stats.compilation.warnings.forEach((warning) => {
               console.log(chalk.yellow('Warning:'), warning.message);
             });
@@ -268,8 +270,12 @@ module.exports = (env, argv) => {
               const filename = path.basename(absoluteFrom, ext);
 
               // Skip specific files that shouldn't be converted
-              const skipFiles = ['apple-touch-icon', 'favicon-16x16', 'favicon-32x32'];
-              if (skipFiles.some(skip => filename.includes(skip))) {
+              const skipFiles = [
+                'apple-touch-icon',
+                'favicon-16x16',
+                'favicon-32x32',
+              ];
+              if (skipFiles.some((skip) => filename.includes(skip))) {
                 return content;
               }
 
@@ -283,11 +289,21 @@ module.exports = (env, argv) => {
               const originalPath = path.join(outputDir, `${filename}${ext}`);
 
               try {
-                const [webpExists, avifExists, originalExists] = await Promise.all([
-                  fs.access(webpPath).then(() => true).catch(() => false),
-                  fs.access(avifPath).then(() => true).catch(() => false),
-                  fs.access(originalPath).then(() => true).catch(() => false),
-                ]);
+                const [webpExists, avifExists, originalExists] =
+                  await Promise.all([
+                    fs
+                      .access(webpPath)
+                      .then(() => true)
+                      .catch(() => false),
+                    fs
+                      .access(avifPath)
+                      .then(() => true)
+                      .catch(() => false),
+                    fs
+                      .access(originalPath)
+                      .then(() => true)
+                      .catch(() => false),
+                  ]);
 
                 // Skip if all files already exist
                 if (webpExists && avifExists && originalExists) {
@@ -312,9 +328,7 @@ module.exports = (env, argv) => {
                 }
 
                 console.log(
-                  chalk.green(
-                    `✓ Generated WebP and AVIF for ${filename}${ext}`
-                  )
+                  chalk.green(`✓ Generated WebP and AVIF for ${filename}${ext}`)
                 );
               } catch (err) {
                 console.log(
