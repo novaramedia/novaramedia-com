@@ -55,7 +55,7 @@ if ( have_posts() ) {
   <article id="page" class="support-page background-gray-base support-page__background-cover-image">
     <div class="container">
       <div class="grid-item">
-        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+        <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
           Support Us
         </h4>
       </div>

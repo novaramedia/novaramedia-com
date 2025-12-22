@@ -9,7 +9,7 @@ get_header();
   <section id="posts" class="container">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+        <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
           Events
         </h4>
       </div>
