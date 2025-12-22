@@ -112,17 +112,17 @@ if ( have_posts() ) {
 
           <div class="grid-row grid-row--nested u-relative only-desktop background-white ui-rounded-box">
             <div class="grid-item is-xxl-12 is-m-24">
-              <div class="p-5 p-l-4 pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
+              <div class="ui-backgrounded-box-padding pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-16 font-size-xl-15 font-size-s-14 mb-4">
                   We’re up against <span class="font-color-red">huge power and influence.</span>
                 </div>
-                <div class="font-size-13 font-size-l-12 mb-4">
+                <div class="font-size-13 font-size-l-12 mb-4 mb-m-0">
                   Join our supporters and back <span class="font-color-red">truthful, independent journalism today.</span>
                 </div>
               </div>
             </div>
             <div class="grid-item is-xxl-12 is-m-24">
-              <div class="support-page__donation-form-sticky p-5 p-l-4">
+              <div class="support-page__donation-form-sticky ui-backgrounded-box-padding">
                 <?php render_support_form( 'condensed' ); ?>
               </div>
             </div>
@@ -149,7 +149,7 @@ if ( have_posts() ) {
       <div class="container mt-5 mt-l-4 mb-5 mb-l-4">
         <div class="grid-row support-page__text-container">
           <div class="grid-item is-xxl-24 ">
-            <div class="background-white ui-rounded-box p-5 p-l-4">
+            <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
                   <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 mr-5 mr-s-0">
@@ -174,7 +174,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <div class="background-white ui-rounded-box p-5 p-l-4">
+            <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
               <div class="text-align-center mb-6 mb-s-5">
                 <h3 class="ui-boxed-title">People-powered Media</h3>
               </div>
@@ -209,7 +209,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <div class="background-white ui-rounded-box p-5 p-l-4">
+            <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
                   <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
@@ -238,18 +238,18 @@ if ( have_posts() ) {
             <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
               <div class="grid-item is-xxl-24 support-page__our-story-background ui-rounded-box ui-rounded-box--top"></div>
             </div>
-            <div class="grid-row grid-row--nested p-6 p-l-5 p-s-4 pt-s-5 pb-s-5 background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
+            <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-xxl-24 text-align-center mb-6 mb-s-5">
                 <h3 class="ui-boxed-title ui-boxed-title--white">
                   Our Story
                 </h3>
               </div>
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-14 font-size-l-13 font-weight-bold mb-s-4 text-wrap-balance">
+                <h3 class="font-size-15 font-size-l-14 font-weight-bold mb-s-4 text-wrap-balance">
                   Born amid anti-austerity movements as a show on community radio, our supporters are the reason we’ve grown to be one of Britain’s most influential media organisations.
                 </h3>
               </div>
-              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-11 font-weight-bold text-wrap-pretty">
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-weight-bold text-wrap-pretty">
                 <p class="mb-4">
                   From our breakthrough coverage during the 2017 General Election to our vital reporting during the COVID-19 pandemic and on Israel's actions in Gaza, Novara Media cuts through the bullshit to provide clear, rigorous analysis, drawing hundreds of thousands of viewers, readers and listeners each and every day.
                 </p>

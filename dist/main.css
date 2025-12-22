@@ -5765,6 +5765,8 @@ html {
 }
 .support-page__quote-carousel .support-page__quote-container {
   padding: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .support-page__quote-carousel .swiper-pagination {
   bottom: 1.5rem;
