@@ -216,12 +216,7 @@ function nm_render_committed_credit( $credit ) {
             'full',
             true,
             array(
-              'color'         => '#ffab70',
-              'hide_related'  => 'true',
-              'show_comments' => 'false',
-              'show_user'     => 'false',
-              'show_reposts'  => 'false',
-              'show_teaser'   => 'false',
+              'color' => '#ffab70',
             )
           );
           ?>
@@ -270,14 +265,8 @@ if ( have_posts() ) {
               'small',
               true,
               array(
-                'color'         => '#ffab70',
-                'inverse'       => 'true',
-                'auto_play'     => 'false',
-                'hide_related'  => 'true',
-                'show_comments' => 'false',
-                'show_user'     => 'false',
-                'show_reposts'  => 'false',
-                'show_teaser'   => 'false',
+                'color'        => '#ffab70',
+                'show_artwork' => 'false',
               )
             );
           }

@@ -150,12 +150,6 @@ function nm_render_foreign_agent_credit( $credit ) {
             true,
             array(
               'color'         => '#ffab70',
-              'auto_play'     => 'false',
-              'hide_related'  => 'true',
-              'show_comments' => 'false',
-              'show_user'     => 'false',
-              'show_reposts'  => 'false',
-              'show_teaser'   => 'false',
             )
           );
           ?>
@@ -201,12 +195,6 @@ if ( have_posts() ) {
               true,
               array(
                 'color'         => '#ffab70',
-                'auto_play'     => 'false',
-                'hide_related'  => 'true',
-                'show_comments' => 'false',
-                'show_user'     => 'false',
-                'show_reposts'  => 'false',
-                'show_teaser'   => 'false',
                 'show_artwork'  => 'false',
               )
             );

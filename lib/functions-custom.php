@@ -746,10 +746,16 @@ function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
   $base_url = 'https://w.soundcloud.com/player/';
 
   $default_params = array(
-    'url' => urlencode( $soundcloud_url ),
-    'auto_play' => 'false',
-    'show_user' => 'true',
-    'inverse' => 'false',
+    'url'           => urlencode( $soundcloud_url ),
+    'auto_play'     => 'false',
+    'buying'        => 'false',
+    'color'         => '#0e0e0e',
+    'show_artwork'  => 'true',
+    'show_user'     => 'false',
+    'show_comments' => 'false', // may be obsolete
+    'show_reposts'  => 'false', // may be obsolete
+    'show_teaser'   => 'false', // may be obsolete
+    'inverse'       => 'false', // may be obsolete
   );
 
   $params = wp_parse_args( $params, $default_params );

@@ -75,7 +75,6 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
                   true,
                   array(
                     'inverse'   => 'false',
-                    'show_user' => 'true',
                   )
                 );
               }

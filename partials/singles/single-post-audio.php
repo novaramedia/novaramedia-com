@@ -72,11 +72,6 @@
         $meta['_cmb_sc'][0],
         'full',
         true,
-        array(
-          'show_comments' => 'false',
-          'show_user'     => 'false',
-          'show_reposts'  => 'false',
-        )
       );
 
       if ( ! empty( $meta['_cmb_is_resonance'] ) && $meta['_cmb_is_resonance'][0] ) {

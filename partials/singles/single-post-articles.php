@@ -46,10 +46,7 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
           'small',
           true,
           array(
-            'show_related'  => 'false',
-            'show_comments' => 'false',
-            'show_user'     => 'false',
-            'show_reposts'  => 'false',
+            'show_artwork' => 'false',
           )
         );
       ?>
