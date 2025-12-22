@@ -16,6 +16,7 @@ import { MailchimpSignup } from './modules/MailchimpSignup.js';
 import { Scrollers } from './modules/Scrollers.js';
 import { Utilities } from './modules/Utilities.js';
 import { Highlighters } from './modules/Highlighters.js';
+import { AudioPlayers } from './modules/AudioPlayers.js';
 
 class Site {
   constructor() {
@@ -30,6 +31,7 @@ class Site {
     this.scrollers = new Scrollers();
     this.utilties = new Utilities();
     this.highlighters = new Highlighters();
+    this.audioPlayers = new AudioPlayers();
 
     $(document).ready(this.onReady.bind(this));
   }
@@ -46,6 +48,7 @@ class Site {
     this.scrollers.onReady();
     this.utilties.onReady();
     this.highlighters.onReady();
+    this.audioPlayers.onReady();
   }
 }
 

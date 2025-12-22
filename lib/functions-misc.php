@@ -67,7 +67,7 @@ function nm_display_post_thumbnail_column( $col, $id ) {
         break;
     case 'nm_post_id':
       echo '<span class="nm-post-id-copy" onclick="nmCopyPostId(this, ' . esc_attr( $id ) . ')" title="Click to copy ID">' . esc_html( $id ) . '</span>';
-      break;
+        break;
   }
 }
 add_action( 'manage_posts_custom_column', 'nm_display_post_thumbnail_column', 5, 2 );
