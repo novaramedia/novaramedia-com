@@ -266,7 +266,6 @@ module.exports = (env, argv) => {
                 return content;
               }
 
-              const dir = path.dirname(absoluteFrom);
               const filename = path.basename(absoluteFrom, ext);
 
               // Skip specific files that shouldn't be converted
@@ -275,7 +274,7 @@ module.exports = (env, argv) => {
                 'favicon-16x16',
                 'favicon-32x32',
               ];
-              if (skipFiles.some((skip) => filename.includes(skip))) {
+              if (skipFiles.some((skipPattern) => filename.includes(skipPattern))) {
                 return content;
               }
 
