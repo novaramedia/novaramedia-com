@@ -274,7 +274,9 @@ module.exports = (env, argv) => {
                 'favicon-16x16',
                 'favicon-32x32',
               ];
-              if (skipFiles.some((skipPattern) => filename.includes(skipPattern))) {
+              if (
+                skipFiles.some((skipPattern) => filename.includes(skipPattern))
+              ) {
                 return content;
               }
 
