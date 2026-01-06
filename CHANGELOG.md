@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Github Action workflow to notify to Slack on releases
 - Additional SEO title content. Downstream shows standfirst. Opinion, Features & Analysis show the author. Complete override option available via meta box.
+- .avif and .webp generation via build script
 - Push custom metadata (authors, standfirst, reading age) to GTM dataLayer via GTM4WP plugin integration
 - Click to copy post ID column in admin views
 
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use localstorage not cookies for non-identified functional browser prefs
 - Very basic jobs views design update
 - Lazyload SoundCloud players
+- Update design and copy on Support & How We Are Funded pages
 
 ## [4.2.10] - 2025-05-22
 

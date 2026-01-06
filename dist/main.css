@@ -5717,17 +5717,40 @@ html {
 .support-page__highlighter .ux-highlighter__line:last-child {
   margin-bottom: 0;
 }
-.support-page__our-story-background {
+.support-page__invert-section-background {
   position: relative;
-  height: 520px;
-  background-size: 100% auto;
-  background-position: center 40%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
-@media screen and (max-width: 910px) {
-  .support-page__our-story-background {
-    height: 260px;
+@supports not (aspect-ratio) {
+  .support-page__invert-section-background {
+    height: 520px;
   }
+}
+@supports (aspect-ratio: 1) {
+  .support-page__invert-section-background {
+    height: auto;
+    aspect-ratio: 1384/520;
+  }
+}
+@media screen and (max-width: 910px) {
+  @supports not (aspect-ratio) {
+    .support-page__invert-section-background {
+      height: 260px;
+    }
+  }
+  @supports (aspect-ratio: 1) {
+    .support-page__invert-section-background {
+      height: auto;
+      aspect-ratio: 16/9;
+    }
+  }
+}
+.support-page__our-story-background {
+  background-position: center 40%;
+}
+.support-page__crowd-background {
+  background-position: center 60%;
 }
 .avif .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.avif");
@@ -5738,43 +5761,33 @@ html {
 .fallback .support-page__our-story-background {
   background-image: url("./img/pages/support-page/our-story-background.jpg");
 }
+.avif .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.avif");
+}
+.webp .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.webp");
+}
+.fallback .support-page__crowd-background {
+  background-image: url("./img/pages/support-page/support-page_crowd-background.jpg");
+}
 .support-page__quote-carousel {
   position: relative;
-}
-.support-page__quote-carousel .support-page__quote-carousel-fade-left,
-.support-page__quote-carousel .support-page__quote-carousel-fade-right {
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  background-image: linear-gradient(to right,var(--color-gray-base),rgba(255,255,255,0));
-}
-@media screen and (max-width: 910px) {
-  .support-page__quote-carousel .support-page__quote-carousel-fade-left,
-  .support-page__quote-carousel .support-page__quote-carousel-fade-right {
-    width: 50px;
-  }
-}
-.support-page__quote-carousel .support-page__quote-carousel-fade-right {
-  right: 0;
-  transform: rotate(180deg);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%);
+          mask-image: linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 .support-page__quote-carousel .support-page__quote-mark {
-  font-size: 4rem;
+  font-size: 4.5rem;
   line-height: 0.5;
-  margin: -0.5rem 0;
 }
 .support-page__quote-carousel .swiper-slide {
-  width: 620px;
+  width: 820px;
   height: auto;
   margin: 0 4px;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
   background-color: var(--color-white-soft);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+  filter: alpha(opacity=85);
+  opacity: 0.85;
   transition: opacity var(--transition-speed-quick) ease;
 }
 .support-page__quote-carousel .swiper-slide-active {
@@ -5783,17 +5796,27 @@ html {
   opacity: 1;
 }
 .support-page__quote-carousel .support-page__quote-container {
-  padding: 2.5rem;
+  padding: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-@media screen and (max-width: 910px) {
+.support-page__quote-carousel .swiper-pagination {
+  bottom: 1.5rem;
+}
+@media screen and (max-width: 1104px) {
   .support-page__quote-carousel .swiper-slide {
-    width: 300px;
+    width: 620px;
   }
 }
 @media screen and (max-width: 759px) {
+  .support-page__quote-carousel {
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+  }
   .support-page__quote-carousel .swiper-slide {
-    width: 100%;
-    padding: 2.5rem 0 3rem;
+    width: calc(100% - 1rem);
+    padding: 1.5rem 0 2rem;
+    margin: 0 1rem;
   }
   .support-page__quote-carousel .support-page__quote-container {
     padding: 1.5rem;
@@ -8404,6 +8427,13 @@ html {
 .inline-action-list li {
   display: inline-block;
   margin-right: 1rem;
+}
+.text-extra-leading {
+  line-height: 1.2;
+}
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 3px;
 }
 @keyframes sk-bounce {
   0%, 100% {
