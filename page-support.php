@@ -44,12 +44,6 @@ if ( have_posts() ) {
     $how_we_spend_our_funds_lines = ! empty( $meta['_nm_support_funds_lines'] ) ? maybe_unserialize( $meta['_nm_support_funds_lines'][0] ) : array();
     // Ensure it's an array and filter out empty lines
     $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
-
-    // Get repeatable carousel quotes - properly unserialize CMB2 repeatable fields
-    $support_carousel_quotes = ! empty( $meta['_nm_support_carousel_quotes'] ) ? maybe_unserialize( $meta['_nm_support_carousel_quotes'][0] ) : array(); // TODO: remove this meta as mutliple blocks means hardcoded for now
-    $support_carousel_quotes = is_array( $support_carousel_quotes ) ? array_filter( $support_carousel_quotes ) : array();
-    // Filter out empty quotes
-    $support_carousel_quotes = array_filter( $support_carousel_quotes );
   }
   ?>
   <article id="page" class="support-page background-gray-base support-page__background-cover-image">

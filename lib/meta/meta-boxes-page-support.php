@@ -72,19 +72,4 @@ function nm_cmb_page_support_metaboxes() {
             'desc'       => __( 'Add lines explaining how funds are spent, maximum 6 lines. You can reorder them.', 'nm' ),
         )
     );
-
-  // Repeatable carousel quotes
-    $support_page_meta_boxes->add_field(
-        array(
-            'id'         => $prefix . 'support_carousel_quotes',
-            'name'       => __( 'Supporters Say Quotes', 'nm' ),
-            'desc'       => __( 'Add a maximum of 8 quotes from supporters. You can reorder them.', 'nm' ),
-            'type'       => 'textarea_small',
-            'repeatable' => true,
-            'options'    => array(
-                'sortable'     => true,
-                'add_row_text' => __( 'Add Another Quote', 'nm' ),
-            ),
-        )
-    );
 }
