@@ -258,6 +258,17 @@ module.exports = (env, argv) => {
               ignore: ['**/*.DS_Store'],
             },
             // Transform function to generate WebP and AVIF
+            /**
+             * Transform callback used by copy-webpack-plugin to process image assets.
+             *
+             * For JPEG and PNG images, this function generates corresponding WebP and AVIF
+             * files in the output directory if they do not already exist. The original
+             * image content is always returned so that the source file is still copied.
+             *
+             * @param {Buffer} content - The original file contents being copied.
+             * @param {string} absoluteFrom - The absolute path to the source file.
+             * @returns {Promise<Buffer>} A promise that resolves to the original file content.
+             */
             async transform(content, absoluteFrom) {
               const ext = path.extname(absoluteFrom).toLowerCase();
 
@@ -274,7 +285,9 @@ module.exports = (env, argv) => {
                 'favicon-16x16',
                 'favicon-32x32',
               ];
-              if (skipFiles.some((skipPattern) => filename.includes(skipPattern))) {
+              if (
+                skipFiles.some((skipPattern) => filename.includes(skipPattern))
+              ) {
                 return content;
               }
 
