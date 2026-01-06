@@ -156,3 +156,69 @@ function order_events_by_meta( $query ) {
 }
 
 add_action( 'pre_get_posts', 'order_events_by_meta' );
+
+/**
+ * Get custom metadata for GTM dataLayer.
+ * Returns only custom metadata that GTM4WP plugin doesn't provide:
+ * - Authors array from contributor post type relation
+ * - Standfirst
+ * - Reading age (nm_readability_age meta value)
+ *
+ * GTM4WP plugin already handles: postId, postTitle, postDate, categories, tags
+ *
+ * @return array Array of custom metadata for dataLayer.
+ */
+function nm_get_custom_metadata_for_datalayer() {
+  $data = array();
+
+  // Only add custom metadata on single posts
+  if ( ! is_singular( 'post' ) ) {
+    return $data;
+  }
+
+  $post_id = get_queried_object_id();
+
+  if ( ! $post_id ) {
+    return $data;
+  }
+
+  // Get authors from contributors (custom post type relation)
+  $authors = array();
+  if ( function_exists( 'get_contributors_array' ) ) {
+    $contributors = get_contributors_array( $post_id );
+
+    if ( $contributors && is_array( $contributors ) ) {
+      foreach ( $contributors as $contributor ) {
+        if ( isset( $contributor->post_title ) ) {
+          $authors[] = sanitize_text_field( $contributor->post_title );
+        }
+      }
+    }
+  }
+
+  // Fallback to legacy author meta field if no contributors
+  if ( empty( $authors ) ) {
+    $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
+    if ( ! empty( $legacy_author ) ) {
+      $authors[] = sanitize_text_field( $legacy_author );
+    }
+  }
+
+  if ( ! empty( $authors ) ) {
+    $data['authors'] = $authors;
+  }
+
+  // Get standfirst (strip all HTML for security)
+  $standfirst = get_post_meta( $post_id, '_cmb_standfirst', true );
+  if ( ! empty( $standfirst ) ) {
+    $data['standfirst'] = sanitize_text_field( wp_strip_all_tags( $standfirst ) );
+  }
+
+  // Get reading age if set
+  $reading_age = get_post_meta( $post_id, 'nm_readability_age', true );
+  if ( ! empty( $reading_age ) ) {
+    $data['readingAge'] = sanitize_text_field( $reading_age );
+  }
+
+  return $data;
+}

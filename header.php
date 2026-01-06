@@ -13,7 +13,6 @@
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
   <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
   <?php
-    get_template_part( 'partials/header/google-tag-manager' );
     get_template_part( 'partials/header/seo' );
     get_template_part( 'partials/header/favicon' );
     get_template_part( 'partials/header/feature-detect' );
@@ -22,7 +21,9 @@
   <?php if ( is_singular() && pings_open( get_queried_object() ) ) { ?>
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
   <?php } ?>
-  <?php wp_head(); ?>
+  <?php
+    wp_head();
+  ?>
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>

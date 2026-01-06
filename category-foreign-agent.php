@@ -143,7 +143,16 @@ function nm_render_foreign_agent_credit( $credit ) {
     <div class="flex-grid-row mt-4 mb-4">
       <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1270698601&color=%23ffab70&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+        <?php
+          render_soundcloud_embed_iframe(
+            'https://api.soundcloud.com/tracks/1270698601',
+            'full',
+            true,
+            array(
+              'color'         => '#ffab70',
+            )
+          );
+          ?>
       </div>
     </div>
     <div class="flex-grid-row mt-4 mb-5">
@@ -178,10 +187,22 @@ if ( have_posts() ) {
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
         </div>
         <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
-          <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
-        </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks">
-          <?php the_content(); ?>
+          <?php
+          if ( isset( $meta['_cmb_sc'] ) && ! empty( $meta['_cmb_sc'][0] ) ) {
+            render_soundcloud_embed_iframe(
+              $meta['_cmb_sc'][0],
+              'small',
+              true,
+              array(
+                'color'        => '#ffab70',
+                'show_artwork' => 'false',
+              )
+            );
+          }
+          ?>
+          <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mt-4 mb-4 text-paragraph-breaks">
+            <?php the_content(); ?>
+          </div>
         </div>
       </article>
     <?php
@@ -248,11 +269,12 @@ if ( have_posts() ) {
 </main>
 <?php
 get_template_part(
-    'partials/support-section',
-    null,
-    array(
-        'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
-    )
+  'partials/support-section',
+  null,
+  array(
+    'container_classes' => 'mt-4 mb-4',
+    'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
+  )
 );
 
 get_footer();

@@ -734,3 +734,48 @@ function menu_tags_list() {
 
   return $tags;
 }
+
+/**
+ * Generate SoundCloud embed URL with parameters.
+ *
+ * @param string $soundcloud_url The SoundCloud track URL.
+ * @param array $params Optional parameters for the embed.
+ * @return string Complete SoundCloud embed URL.
+ */
+function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
+  $base_url = 'https://w.soundcloud.com/player/';
+
+  $default_params = array(
+    'url'           => urlencode( $soundcloud_url ),
+    'auto_play'     => 'false',
+    'buying'        => 'false',
+    'color'         => '#0e0e0e',
+    'show_artwork'  => 'true',
+    'show_user'     => 'false',
+    'show_comments' => 'false', // may be obsolete
+    'show_reposts'  => 'false', // may be obsolete
+    'show_teaser'   => 'false', // may be obsolete
+    'inverse'       => 'false', // may be obsolete
+  );
+
+  $params = wp_parse_args( $params, $default_params );
+
+  return $base_url . '?' . http_build_query( $params );
+}
+
+/**
+ * Get SoundCloud player height by semantic size name.
+ *
+ * @param string $size The semantic size name.
+ * @return string The height value as a numeric string (without unit suffix).
+ */
+function get_soundcloud_player_height( $size ) {
+  $heights = array(
+    'mini'   => '20',      // Front page audio blocks, category listings
+    'small'  => '115',    // Category archive players, single post articles (consolidated from former medium)
+    'medium' => '145',   // Reserved for future use
+    'full'   => '166',    // Category featured players, single post audio (consolidated from former large/full)
+  );
+
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
+}

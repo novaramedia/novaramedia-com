@@ -50,6 +50,26 @@ function scripts_and_styles_method() {
 }
 add_action( 'wp_enqueue_scripts', 'scripts_and_styles_method' );
 
+/**
+ * Adds custom metadata to GTM4WP plugin's dataLayer content.
+ *
+ * Uses GTM4WP's own filter system to add custom data to the dataLayer
+ * before the plugin outputs it, ensuring proper integration timing.
+ *
+ * @param array $data_layer The existing dataLayer content from GTM4WP.
+ * @return array Modified dataLayer content with custom metadata.
+ */
+function nm_add_custom_gtm_datalayer_data( $data_layer ) {
+  if ( function_exists( 'nm_get_custom_metadata_for_datalayer' ) ) {
+    $custom_data = nm_get_custom_metadata_for_datalayer();
+    if ( ! empty( $custom_data ) ) {
+      $data_layer = array_merge( $data_layer, $custom_data );
+    }
+  }
+  return $data_layer;
+}
+add_filter( 'gtm4wp_compile_datalayer', 'nm_add_custom_gtm_datalayer_data' );
+
 // Theme supports
 
 if ( function_exists( 'add_theme_support' ) ) {
