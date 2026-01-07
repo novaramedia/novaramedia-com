@@ -75,7 +75,7 @@
                 <li><a href="<?php echo site_url( 'about/' ); ?>">About Us</a></li>
                 <li><a href="<?php echo site_url( 'support/' ); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url( 'newsletters/' ); ?>">Newsletters</a></li>
-                <li><a href="<?php echo site_url( 'about/how-were-funded/' ); ?>">How We're Funded</a></li>
+                <li><a href="<?php echo site_url( 'about/how-we-are-funded/' ); ?>">How We Are Funded</a></li>
                 <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               </ul>
                           <?php
