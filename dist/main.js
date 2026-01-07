@@ -49161,20 +49161,20 @@ class Analytics {
     const _this = this;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form-slider').on('input', _this.debounce(function () {
       dataLayer.push({
-        'event': 'sliderChanged',
-        'target': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target'),
-        'amount': this.value
+        event: 'sliderChanged',
+        target: jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target'),
+        amount: this.value
       });
     }, 250));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#menu-toggle').click(function () {
       // bind hamburger click
       dataLayer.push({
-        'event': 'headerToggled'
+        event: 'headerToggled'
       });
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.related-posts .post').click(function () {
       dataLayer.push({
-        'event': 'relatedPostClicked'
+        event: 'relatedPostClicked'
       });
     });
   }

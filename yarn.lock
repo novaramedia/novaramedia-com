@@ -4889,10 +4889,9 @@ nice-try@^1.0.4:
   resolved "https://registry.npmjs.org/nice-try/-/nice-try-1.0.5.tgz"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-"nm-stylus-library@github:novaramedia/nm-stylus-library#99dcecb38568cb2df512881ed7d2783faac1310f":
-  version "0.11.0"
-  resolved "git+ssh://git@github.com/novaramedia/nm-stylus-library.git#99dcecb38568cb2df512881ed7d2783faac1310f"
-  integrity sha512-lsBIGIJTvVJldAa/au9RjwXOxDDm9FbfCFCceM/l9z5XIJC7ZZ5pONjI0lCMi20zFNv+mI32dCYzHHbUhLv+Fw==
+"nm-stylus-library@github:novaramedia/nm-stylus-library#v0.12.0":
+  version "0.12.0"
+  resolved "git+ssh://git@github.com/novaramedia/nm-stylus-library.git#2fae8da28db83935d47a04befe901b446f7dcc52"
 
 node-fetch-native@^1.6.6:
   version "1.6.7"
