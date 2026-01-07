@@ -10,6 +10,8 @@ on:
 jobs:
   notify-release:
     if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Version ')
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     
     steps:
