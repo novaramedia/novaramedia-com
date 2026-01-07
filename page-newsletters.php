@@ -1,4 +1,8 @@
 <?php
+/*
+  DEPRECATED @ VERSION 4.2.0
+  TO BE REMOVED AFTER MIGRATION
+*/
 get_header();
 ?>
 <main id="main-content">
@@ -44,7 +48,7 @@ if( have_posts() ) {
             }
 
             get_template_part('partials/email-signup', null, array(
-              'newsletter_page_id' => $newsletter->ID,
+              'newsletter_post_id' => $newsletter->ID,
               'background-color' => $background_color,
               'text-color' => $text_color
             ));
@@ -59,7 +63,7 @@ if( have_posts() ) {
   }
 } ?>
 <?php
-  get_template_part('partials/support-section');
+  get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
 ?>
 </main>
 <?php

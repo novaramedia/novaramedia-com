@@ -1,9 +1,8 @@
-@import '../../node_modules/nm-stylus-library/variables.styl';
-@import '~kouto-swiss/index.styl'
-@import '../../node_modules/nm-stylus-library/utility/helpers';
-@import '../../node_modules/nm-stylus-library/functions/grid-function-new';
-@import '../../node_modules/nm-stylus-library/modules/backgrounds.styl';
+// LIBRARIES
 
+// we should extract anything of use from kuto-swiss into nm-stylus-library and then remove kouto-swiss entirely
+@import '~kouto-swiss/index.styl'
+@import '../../node_modules/nm-stylus-library/index.styl';
 
 // this should be deprecated as an implementation by @4.3.0
 @import "grid-functions"
@@ -29,12 +28,10 @@
 
 // ******************************************************
 
-meyer-reset()
-box-sizing-reset()
-normalize()
+box-sizing-reset() // this is in kouto-swiss but not in the nm library
 
 h1
-  margin: 0 // to counter normalize.css. maybe we can remove normalize.css?
+  margin: 0 // to counter normalize.css. maybe we can remove normalize.css?. maybe this isnt essential? otherwise should be in nm-stylus-library
 
 // ******************************************************
 
@@ -52,7 +49,8 @@ flex-grid-maker('xxl')
 grid-maker('xxl')
 
 .container
-  margin: 0 auto
+  margin-left: auto
+  margin-right: auto
   width: 1400px
 
 .row
@@ -69,7 +67,7 @@ for col in 1..$cols
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
 
 
-// BACKGROUNDS 
+// BACKGROUNDS
 
 .background-support-texture, .background-support-texture-alt
   background-size: cover
@@ -84,12 +82,28 @@ for col in 1..$cols
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
 
+    &--fade-to-white
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-white-soft) 100%), url('img/specials/support-2023-texture-alt.webp')
+
+    &--fade-to-gray
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-gray-base) 100%), url('img/specials/support-2023-texture-alt.webp')
+
 .fallback
   .background-support-texture
     background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
 
   .background-support-texture-alt
     background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
+
+    &--fade-to-white
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-white-soft) 100%), url('img/specials/support-2023-texture-alt.png')
+
+    &--fade-to-gray
+      background-blend-mode: normal
+      background-image: linear-gradient(to bottom, transparent 25%, var(--color-gray-base) 100%), url('img/specials/support-2023-texture-alt.png')
 
 // ******************************************************
 // START DEPRECATED
@@ -145,18 +159,9 @@ img
   max-width: 100%
   height: auto
 
-.inline-action-list
-  margin: 0
-  li
-    display: inline-block
-    margin-right: $margin-small
-
-.only-mobile
-  display: none
-
 // ******************************************************
 
-// MARGINS AND PADDING
+// MARGINS AND PADDING deprecated - to be removed by @4.3.0
 
   // MARGIN
 
@@ -278,17 +283,6 @@ img
 .padding-bottom-large
   padding-bottom: $margin-large
 
-// ******************************************************
-
-// SUPPORT PAGE
-
-.support-page__hero-wrapper
-  padding: 70px 0
-
-#other-donation-methods
-  svg
-    height: 2rem
-    width: auto
 
 // ******************************************************
 
@@ -467,14 +461,6 @@ img
 
 // ******************************************************
 
-// MODULES
-
-@import '../../node_modules/nm-stylus-library/modules/typography';
-@import '../../node_modules/nm-stylus-library/modules/spacing';
-@import '../../node_modules/nm-stylus-library/modules/layout';
-@import '../../node_modules/nm-stylus-library/modules/ui';
-@import '../../node_modules/nm-stylus-library/modules/carousel';
-
 // LAYOUTS
 
 @import "layouts/above-the-fold"
@@ -486,6 +472,7 @@ img
 @import "layouts/novara-fm-archive"
 @import "layouts/products-bar"
 @import "layouts/support-form"
+@import "layouts/support-page"
 
 // ******************************************************
 
@@ -524,3 +511,7 @@ img
   grid-maker('s')
 
   @import "responsive/s"
+
+@import "upstream-to-library"
+
+

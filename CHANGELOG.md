@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.3.0] - 2026-01-07
+
+### Added
+
+- Add Github Action workflow to notify to Slack on releases
+- Additional SEO title content. Downstream shows standfirst. Opinion, Features & Analysis show the author. Complete override option available via meta box.
+- .avif and .webp generation via build script
+- Push custom metadata (authors, standfirst, reading age) to GTM dataLayer via GTM4WP plugin integration
+- Click to copy post ID column in admin views
+
+### Changed
+
+- Replace HTTP_HOST environment checks with wp_get_environment_type() for improved reliability
+- Rebuild the support form, with new condensed width version
+- Updated all dev and front end dependencies (`chalk` pinned at v4)
+- Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
+- Migrate newsletter functionality to custom post type not page templates
+- Integrated nm-stylus-library 0.12.0-RC
+- Events views quickly updated to design system
+- Updated YouTube embed generation to support modern Safari and use helper
+- Use localstorage not cookies for non-identified functional browser prefs
+- Very basic jobs views design update
+- Lazyload SoundCloud players
+- Update design and copy on Support & How We Are Funded pages
+
 ## [4.2.10] - 2025-05-22
 
 ### Added

@@ -1,12 +1,12 @@
 <?php
-remove_shortcode('gallery', 'gallery_shortcode');
-function my_gallery_shortcode($attr) {
+remove_shortcode( 'gallery', 'gallery_shortcode' );
+function my_gallery_shortcode( $attr ) {
   $post = get_post();
 
   static $instance = 0;
-  $instance++;
+  ++$instance;
 
-  if ( !empty( $attr['ids'] ) ) {
+  if ( ! empty( $attr['ids'] ) ) {
 
     // 'ids' is explicitly ordered, unless you specify otherwise.
     if ( empty( $attr['orderby'] ) ) {
@@ -17,7 +17,7 @@ function my_gallery_shortcode($attr) {
   }
 
   // Allow plugins/themes to override the default gallery template.
-  $output = apply_filters('post_gallery', '', $attr);
+  $output = apply_filters( 'post_gallery', '', $attr );
   if ( $output != '' ) {
     return $output;
   }
@@ -25,55 +25,88 @@ function my_gallery_shortcode($attr) {
   // We're trusting author input, so let's at least make sure it looks like a valid orderby statement
   if ( isset( $attr['orderby'] ) ) {
     $attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-    if ( !$attr['orderby'] ) {
+    if ( ! $attr['orderby'] ) {
       unset( $attr['orderby'] );
     }
   }
 
   // Setup attributes from options reverting to default
 
-  extract(shortcode_atts(array(
-    'order'      => 'ASC',
-    'orderby'    => 'menu_order ID',
-    'id'         => $post->ID,
-    'itemtag'    => 'li',
-    'icontag'    => 'li',
-    'captiontag' => 'div',
-    'columns'    => 3,
-    'size'       => 'gallery',
-    'include'    => '',
-    'exclude'    => ''
-  ), $attr));
+  extract(
+       shortcode_atts(
+    array(
+      'order'      => 'ASC',
+      'orderby'    => 'menu_order ID',
+      'id'         => $post->ID,
+      'itemtag'    => 'li',
+      'icontag'    => 'li',
+      'captiontag' => 'div',
+      'columns'    => 3,
+      'size'       => 'gallery',
+      'include'    => '',
+      'exclude'    => '',
+       ),
+       $attr,
+  )
+  );
 
-  $id = intval($id);
+  $id = intval( $id );
 
-  if ( 'RAND' == $order ) {
+  if ( $order === 'RAND' ) {
     $orderby = 'none';
   }
 
   // Get array of attachments from gallery options
 
-  if ( !empty($include) ) {
-    $_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+  if ( ! empty( $include ) ) {
+    $_attachments = get_posts(
+      array(
+        'include'        => $include,
+        'post_status'    => 'inherit',
+        'post_type'      => 'attachment',
+        'post_mime_type' => 'image',
+        'order'          => $order,
+        'orderby'        => $orderby,
+      )
+    );
 
     $attachments = array();
 
     foreach ( $_attachments as $key => $val ) {
-      $attachments[$val->ID] = $_attachments[$key];
+      $attachments[ $val->ID ] = $_attachments[ $key ];
     }
-  } elseif ( !empty($exclude) ) {
+  } elseif ( ! empty( $exclude ) ) {
 
-    $attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+    $attachments = get_children(
+      array(
+        'post_parent'    => $id,
+        'exclude'        => $exclude,
+        'post_status'    => 'inherit',
+        'post_type'      => 'attachment',
+        'post_mime_type' => 'image',
+        'order'          => $order,
+        'orderby'        => $orderby,
+      )
+    );
 
   } else {
 
-    $attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+    $attachments = get_children(
+      array(
+        'post_parent'    => $id,
+        'post_status'    => 'inherit',
+        'post_type'      => 'attachment',
+        'post_mime_type' => 'image',
+        'order'          => $order,
+        'orderby'        => $orderby,
+      )
+    );
 
   }
 
   // If no attachments return empty string
 
-  if ( empty($attachments) ) {
+  if ( empty( $attachments ) ) {
     return '';
   }
 
@@ -81,53 +114,62 @@ function my_gallery_shortcode($attr) {
 
   if ( is_feed() ) {
     $output = "\n";
-    foreach ( $attachments as $att_id => $attachment )
-      $output .= wp_get_attachment_link($att_id, $size, true) . "\n";
+    foreach ( $attachments as $att_id => $attachment ) {
+      $output .= wp_get_attachment_link( $att_id, $size, true ) . "\n";
+    }
     return $output;
   }
 
   // Set default values if options are invalid
 
-  $itemtag = tag_escape($itemtag);
-  $captiontag = tag_escape($captiontag);
-  $icontag = tag_escape($icontag);
-  $valid_tags = wp_kses_allowed_html('post');
+  $itemtag = tag_escape( $itemtag );
+  $captiontag = tag_escape( $captiontag );
+  $icontag = tag_escape( $icontag );
+  $valid_tags = wp_kses_allowed_html( 'post' );
 
-  if ( !isset( $valid_tags[$itemtag] ) ) {
+  if ( ! isset( $valid_tags[ $itemtag ] ) ) {
     $itemtag = 'dl';
   }
 
-  if ( !isset( $valid_tags[$captiontag] ) ) {
+  if ( ! isset( $valid_tags[ $captiontag ] ) ) {
     $captiontag = 'dd';
   }
 
-  if ( !isset( $valid_tags[$icontag] ) ) {
+  if ( ! isset( $valid_tags[ $icontag ] ) ) {
     $icontag = 'dt';
   }
 
-  // Setup gallery containing markup
+  // Setup gallery containing markup compatible with GalleryCarousels
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='swiper-container gallery gallery-id-{$id} padding-top-small padding-bottom-small'><div class='swiper-wrapper'>";
+  $gallery_div = "<div id='$selector' class='ux-gallery-carousel gallery gallery-id-" . esc_attr($id) . " padding-top-small padding-bottom-small' data-autoplay='true'>
+    <div class='swiper'>
+      <div class='swiper-wrapper'>";
   $output = $gallery_div;
-
-  $i = 0;
 
   // Build markup from attachments array
 
-  foreach ($attachments as $id => $attachment) {
+  foreach ( $attachments as $id => $attachment ) {
 
     $tag = '';
 
-    $img = wp_get_attachment_image($id, $size, false, array('class' => 'swiper-slide-image', 'style' => 'margin:0'));
+    $img = wp_get_attachment_image(
+      $id,
+      $size,
+      false,
+      array(
+        'class' => 'swiper-slide-image',
+        'style' => 'margin:0',
+      )
+    );
 
     // If caption is set make a variable of it
 
-    if ( $captiontag && trim($attachment->post_excerpt) ) {
+    if ( $captiontag && trim( $attachment->post_excerpt ) ) {
       $tag = "
         <{$captiontag} class='margin-top-tiny font-size-8'>
-        " . wptexturize($attachment->post_excerpt) . "
+        " . wptexturize( $attachment->post_excerpt ) . "
         </{$captiontag}>";
     } else {
       $tag = null;
@@ -136,10 +178,16 @@ function my_gallery_shortcode($attr) {
     $output .= "<div class='swiper-slide text-align-center u-pointer'>{$img}{$tag}</div>";
   }
 
-  // Finish markup and return
+  // Finish markup with navigation and pagination elements
 
-  $output .= "</div></div>\n";
+  $output .= "
+      </div>
+    </div>
+    <div class='swiper-button-prev'></div>
+    <div class='swiper-button-next'></div>
+    <div class='swiper-pagination'></div>
+  </div>\n";
 
   return $output;
 }
-add_shortcode('gallery', 'my_gallery_shortcode');
+add_shortcode( 'gallery', 'my_gallery_shortcode' );

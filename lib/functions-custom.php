@@ -1,21 +1,123 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
+/**
+ * Get post authors with proper fallback logic (based on render_bylines implementation)
+ *
+ * @since 4.2.0
+ *
+ * @param int    $post_id Post ID to get authors for.
+ * @param string $format  Output format ('html' for links or 'text' for plain text).
+ * @return string|false Author string or false if no authors found.
+ */
+function nm_get_post_authors( $post_id, $format = 'text' ) {
+  // Primary method: Use get_contributors_array if available
+  if ( function_exists( 'get_contributors_array' ) ) {
+    $contributors = get_contributors_array( $post_id );
+
+    if ( ! empty( $contributors ) ) {
+      $author_names = array();
+
+      foreach ( $contributors as $contributor ) {
+        if ( $format === 'html' ) {
+          $author_names[] = '<a href="' . esc_url( get_permalink( $contributor->ID ) ) . '">' . esc_html( $contributor->post_title ) . '</a>';
+        } else {
+          $author_names[] = $contributor->post_title;
+        }
+      }
+
+      // Always use ampersand formatting for multiple contributors
+      if ( count( $author_names ) > 1 ) {
+        $last_author = array_pop( $author_names );
+        return implode( ', ', $author_names ) . ' & ' . $last_author;
+      }
+
+      return implode( ', ', $author_names );
+    }
+  }
+
+  // Fallback: Legacy _cmb_author meta field
+  $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
+  if ( ! empty( $legacy_author ) ) {
+    // Check for Twitter URL integration for legacy authors when HTML format requested
+    if ( $format === 'html' ) {
+      $twitter = get_post_meta( $post_id, '_cmb_author_twitter', true );
+      $twitter_url = false;
+
+      if ( $twitter && ( ! is_array( $twitter ) || count( $twitter ) === 1 ) ) {
+        if ( is_array( $twitter ) ) {
+          $twitter_url = $twitter[0];
+        } else {
+          $twitter_url = $twitter;
+        }
+      }
+
+      if ( $twitter_url ) {
+        return '<a href="https://twitter.com/' . esc_attr( $twitter_url ) . '" target="_blank" rel="nofollow">' . esc_html( $legacy_author ) . '</a>';
+      }
+    }
+
+    return $legacy_author;
+  }
+
+  // Return false if no authors found
+  return false;
+}
+
+/**
+ * Get the correct Netlify function URL based on environment.
+ *
+ * Uses WordPress's wp_get_environment_type() to determine the environment.
+ * Kinsta automatically sets the WP_ENVIRONMENT_TYPE constant for production and staging.
+ *
+ * @since 4.2.0
+ *
+ * @return string The Netlify function URL.
+ */
+function nm_get_netlify_url() {
+  $production_url = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
+  $staging_url = 'https://fake.com/.netlify/functions/mailchimp-signup';
+  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+
+  $environment = wp_get_environment_type();
+
+  switch ( $environment ) {
+    case 'local':
+    case 'development':
+        return $local_dev_url;
+
+    case 'staging':
+      // Staging will always fail. Could spin up the netlify function on staging to test
+        return $staging_url;
+
+    case 'production':
+    default:
+        return $production_url;
+  }
+}
+
 /**
  * Redirects /committed to /category/committed for SEO purposes.
  *
  * @return void
+ * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  */
 function redirect_committed_custom_url() {
   if ( isset( $_SERVER['REQUEST_URI'] ) ) {
         $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
     if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_redirect( home_url( 'category/audio/committed/' ), 301 );
+            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
             exit;
     }
   }
 }
 add_action( 'template_redirect', 'redirect_committed_custom_url' );
+
 /**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
+ * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  *
  * @return void Exits script execution after issuing a redirect.
  */
@@ -30,14 +132,14 @@ function nm_serial_podcast_redirect() {
     $match = array_filter(
         $categories,
         function ( $cat ) use ( $serial_slugs ) {
-          return in_array( $cat->slug, $serial_slugs );
+          return in_array( $cat->slug, $serial_slugs, true );
         }
     );
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
     if ( $link && isset( $post->post_name ) ) {
-      wp_redirect( $link . '#' . $post->post_name, 301 );
+      wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
   }
@@ -47,6 +149,8 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 /**
  * Check for apology notice and display it if it is in the future
  * This function will check if the apology notice is in the future and display it if it is
+ * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
+ * But can be adapted for future use
  *
  * @return array/Boolean Array of apology post or false if no apology post
  * @since 4.1.1
@@ -54,14 +158,14 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 function check_for_apology_notice() {
   $m = new \Moment\Moment( 1727035200 ); // Sun, 22 Sept 20:00:00 GMT
   $m->addWeeks( 8 ); // Time for notice to show
-  $momentFromVo = $m->fromNow();
+  $moment_from_vo = $m->fromNow();
 
-  if ( $momentFromVo->getDirection() === 'future' ) {
+  if ( $moment_from_vo->getDirection() === 'future' ) {
     $apology_post = get_posts(
-        array(
-            'name'      => 'gary-and-jack-lubner-apology',
-            'post_type' => 'notice',
-        )
+      array(
+        'name'      => 'gary-and-jack-lubner-apology',
+        'post_type' => 'notice',
+      )
     );
     if ( $apology_post ) {
       return $apology_post;
@@ -79,7 +183,7 @@ function check_for_apology_notice() {
  * If the latest articles are already in the featured posts, it will skip them
  * If there are no latest articles, it will return false
  *
- * @param array $featured_posts_ids Array of featured post ids
+ * @param array $featured_posts_ids Array of featured post ids.
  *
  * @return array/Boolean Array of latest articles ids or false if no latest articles
  */
@@ -133,7 +237,7 @@ function get_above_the_fold_featured_post_ids() {
   for ( $i = 0; $i < 8; $i++ ) {
     if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
-        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids ) ) { // ensure fallback latest is not already in the theme options featured posts
+        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
         }
 
@@ -174,7 +278,7 @@ function nm_get_livechecker_data() {
  * Takes content filterd by the_content and removes shortcodes and html in order to be useable for meta etc
  * This can be from both post content but also WYSIWYG meta fields.
  *
- * @param string
+ * @param string $content Content to clean.
  *
  * @return string
  */
@@ -182,23 +286,51 @@ function nm_clean_content_to_plaintext( $content ) {
   // strip shortcodes from content
   $content = strip_shortcodes( $content );
   // strip html tags
-  $cleaned_content = strip_tags( html_entity_decode( $content ) );
+  $cleaned_content = wp_strip_all_tags( html_entity_decode( $content ) );
 
   return $cleaned_content;
 }
+
 /**
  * Checks a string to see if it is set and also is a number
  *
- * @param string String to check
+ * @param string $value String to check.
  *
  * @return boolean
  */
-function nm_isset_and_numeric( $string ) {
-  if ( isset( $string ) && is_numeric( $string ) ) {
+function nm_isset_and_numeric( $value ) {
+  if ( isset( $value ) && is_numeric( $value ) ) {
     return true;
   }
 
   return false;
+}
+
+/**
+ * Retrieves the support section heading and text content for different donation modes.
+ *
+ * Returns an associative array containing heading and text pairs for:
+ * - 'regular' donations
+ * - 'oneoff' donations
+ * - 'default' fallback values
+ *
+ * These values are pulled from the fundraising options.
+ */
+function nm_get_support_heading_text_data() {
+  return array(
+      'regular' => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_regular_heading_override', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_regular_text_override', 'nm_fundraising_options' ),
+      ),
+      'oneoff'  => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_oneoff_heading_override', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_oneoff_text_override', 'nm_fundraising_options' ),
+      ),
+      'default' => array(
+          'heading' => NM_get_option( 'nm_fundraising_settings_support_section_title', 'nm_fundraising_options' ),
+          'text'    => NM_get_option( 'nm_fundraising_settings_support_section_text', 'nm_fundraising_options' ),
+      ),
+  );
 }
 /**
  * Gets metadata for support form autovalues, validates and returns correctly structured array
@@ -207,9 +339,7 @@ function nm_isset_and_numeric( $string ) {
  */
 function nm_get_support_autovalues() {
   $meta = NM_get_option( 'nm_fundraising_settings_support_section_autovalues', 'nm_fundraising_options' );
-
   $return = array();
-
   if ( ! empty( $meta ) ) {
     foreach ( $meta as $index => $autovalues_set ) {
       if ( $index === 0 ) {
@@ -256,7 +386,7 @@ function nm_get_support_autovalues() {
 /**
  * Gets contributors on a post and returns an array of post objects, or false if nothing set
  *
- * @param integer $post_id Post ID to check for contributors
+ * @param integer $post_id Post ID to check for contributors.
  *
  * @return array/Boolean Array of contributor post objects
  */
@@ -287,7 +417,7 @@ function get_contributors_array( $post_id ) {
 /**
  * Get the category at the show/brand AKA child level. Meaning get the first child of the top level category.
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Object/Boolean WP Term object or false if doesn't exist
  */
@@ -306,7 +436,7 @@ function get_child_level_child_category( $post_id ) {
 /**
  * Get the category at the top level. Should be either Articles, Audio or Video
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Object/Boolean WP Term object or false if isnt set
  */
@@ -340,7 +470,7 @@ function get_the_top_level_category( $post_id = null ) {
  * Does the post have set the Articles category? or is it a child of the Articles category?
  * Defaults to current $post context
  *
- * @param integer $post_id Post ID
+ * @param integer $post_id Post ID.
  *
  * @return Boolean
  */
@@ -358,7 +488,7 @@ function nm_is_article( $post_id = null ) {
   }
 
   // check to see if any of the categories returned match the articles slug or have a parent with the articles id
-$found_in_categories = array_filter(
+  $found_in_categories = array_filter(
     $categories,
     function ( $category ) {
       if ( $category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id ) {
@@ -367,7 +497,7 @@ $found_in_categories = array_filter(
 
       return false;
     }
-); // check to see if any of the categories returned match the articles slug
+  ); // check to see if any of the categories returned match the articles slug
 
   if ( count( $found_in_categories ) > 0 ) {
     return true; // if articles slug was found return true
@@ -397,12 +527,12 @@ function nm_is_single_article() {
     return false;
   }
 
-$found_in_categories = array_filter(
+  $found_in_categories = array_filter(
     $categories,
     function ( $category ) {
       return $category->slug === 'articles';
     }
-); // check to see if any of the categories returned match the articles slug
+  ); // check to see if any of the categories returned match the articles slug
 
   if ( count( $found_in_categories ) > 0 ) {
     return true; // if articles slug was found return true
@@ -414,17 +544,17 @@ $found_in_categories = array_filter(
 /**
  * Get the first sub category assigned to the post
  *
- * @param integer $postId Post ID
- * @param boolean $object Return WP Term object or just the name
+ * @param integer $post_id Post ID.
+ * @param boolean $return_object Return WP Term object or just the name.
  */
-function get_the_sub_category( $postId, $object = false ) {
-  $categories = get_the_category( $postId );
+function get_the_sub_category( $post_id, $return_object = false ) {
+  $categories = get_the_category( $post_id );
 
   $child_categories = array_filter( $categories, 'only_child_category_filter' );
   $child_categories = array_values( $child_categories );
 
   if ( isset( $child_categories[0] ) ) {
-    if ( $object ) {
+    if ( $return_object ) {
       return $child_categories[0];
     } else {
       return $child_categories[0]->name;
@@ -436,21 +566,39 @@ function get_the_sub_category( $postId, $object = false ) {
 
 // for array_filters
 
-// returns the id from a post object from a WP query
+/**
+ * Returns the id from a post object from a WP query
+ *
+ * @param object $post Post object from WP query.
+ *
+ * @return integer Post ID
+ */
 function nm_filter_query_ids( $post ) {
   return $post->ID;
 }
 
-// filters an array of post categories for just top level categories
-function only_top_level_category_filter( $var ) {
-  if ( $var->category_parent == 0 ) {
+/**
+ * Filters an array of post categories for just top level categories
+ *
+ * @param object $category Category object.
+ *
+ * @return boolean True if category is top level
+ */
+function only_top_level_category_filter( $category ) {
+  if ( $category->category_parent === 0 ) {
     return true;
   }
 }
 
-// filters an array of post categories for just child categories
-function only_child_category_filter( $var ) {
-  if ( $var->category_parent !== 0 ) {
+/**
+ * Filters an array of post categories for just child categories
+ *
+ * @param object $category Category object.
+ *
+ * @return boolean True if category is child level
+ */
+function only_child_category_filter( $category ) {
+  if ( $category->category_parent !== 0 ) {
     return true;
   }
 }
@@ -460,8 +608,8 @@ function only_child_category_filter( $var ) {
  *
  * Note the option to use the lazysizes for lazyloading the iframe https://github.com/aFarkas/lazysizes
  *
- * @param string $id Youtube video ID
- * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy)
+ * @param string $id Youtube video ID.
+ * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
  *
  * @return string Valid youtube iframe src url
  */
@@ -475,7 +623,15 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
   return $url;
 }
 
-// obviously it gets related posts and returns a WP Query
+/**
+ * Get related posts based on tags and returns a WP Query
+ *
+ * @param array|null $excluded_ids_array Array of post IDs to exclude from results.
+ * @param string|null $category_name Category name to filter by.
+ * @param integer $number_of_posts Number of posts to return (default 4).
+ *
+ * @return WP_Query|Boolean WP_Query object or false if not on single post
+ */
 function get_related_posts( $excluded_ids_array = null, $category_name = null, $number_of_posts = 4 ) {
 
   // Check if we are on a single page, if not, return false
@@ -529,18 +685,22 @@ function get_related_posts( $excluded_ids_array = null, $category_name = null, $
   return new WP_Query( $args );
 }
 
-// for site options. Returns array for select
+/**
+ * For site options. Returns array for select
+ *
+ * @return array Array of focus terms for select options
+ */
 function home_focus_list() {
 
   $focuses = array(
-      null => 'No Focus Shown',
+    null => 'No Focus Shown',
   );
 
-$focus_terms = get_terms(
+  $focus_terms = get_terms(
     array(
-        'taxonomy' => 'focus',
+      'taxonomy' => 'focus',
     )
-);
+  );
 
   if ( $focus_terms ) {
     foreach ( $focus_terms as $term ) {
@@ -551,15 +711,20 @@ $focus_terms = get_terms(
   return $focuses;
 }
 
+/**
+ * Get all post tags formatted as an array for select options.
+ *
+ * @return array Array of tag IDs as keys and tag names as values
+ */
 function menu_tags_list() {
 
   $tags = array();
 
-$tags_all = get_terms(
+  $tags_all = get_terms(
     array(
         'taxonomy' => 'post_tag',
     )
-);
+  );
 
   if ( $tags_all ) {
     foreach ( $tags_all as $tag ) {
@@ -568,4 +733,49 @@ $tags_all = get_terms(
   }
 
   return $tags;
+}
+
+/**
+ * Generate SoundCloud embed URL with parameters.
+ *
+ * @param string $soundcloud_url The SoundCloud track URL.
+ * @param array $params Optional parameters for the embed.
+ * @return string Complete SoundCloud embed URL.
+ */
+function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
+  $base_url = 'https://w.soundcloud.com/player/';
+
+  $default_params = array(
+    'url'           => urlencode( $soundcloud_url ),
+    'auto_play'     => 'false',
+    'buying'        => 'false',
+    'color'         => '#0e0e0e',
+    'show_artwork'  => 'true',
+    'show_user'     => 'false',
+    'show_comments' => 'false', // may be obsolete
+    'show_reposts'  => 'false', // may be obsolete
+    'show_teaser'   => 'false', // may be obsolete
+    'inverse'       => 'false', // may be obsolete
+  );
+
+  $params = wp_parse_args( $params, $default_params );
+
+  return $base_url . '?' . http_build_query( $params );
+}
+
+/**
+ * Get SoundCloud player height by semantic size name.
+ *
+ * @param string $size The semantic size name.
+ * @return string The height value as a numeric string (without unit suffix).
+ */
+function get_soundcloud_player_height( $size ) {
+  $heights = array(
+    'mini'   => '20',      // Front page audio blocks, category listings
+    'small'  => '115',    // Category archive players, single post articles (consolidated from former medium)
+    'medium' => '145',   // Reserved for future use
+    'full'   => '166',    // Category featured players, single post audio (consolidated from former large/full)
+  );
+
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
 }

@@ -1,5 +1,9 @@
 <?php
 /* Template Name: Newsletter */
+/*
+  DEPRECATED @ VERSION 4.2.0
+  TO BE REMOVED AFTER MIGRATION
+*/
 get_header();
 ?>
 <main id="main-content">
@@ -41,7 +45,7 @@ if( have_posts() ) {
             if ($youtube_id) {
           ?>
           <div class="u-video-embed-container mb-4">
-            <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($youtube_id, true); ?>" allow="autoplay" allowfullscreen></iframe>
+            <?php echo render_youtube_embed_iframe( $youtube_id, false, true ); ?>
           </div>
           <?php
             } else {
@@ -58,15 +62,11 @@ if( have_posts() ) {
             // SIGNUP FORM
             //======================================================================
 
-            if ($mailchimp_key) {
+            if ( $mailchimp_key ) {
 
-            $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
-
-            if ($_SERVER['HTTP_HOST'] === 'localhost:8888') { // for local dev
-              $netlify = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
-            }
+            $netlify_url = nm_get_netlify_url();
           ?>
-          <form class="email-signup__form newsletter-page-email-signup__form" action="<?php echo $netlify; ?>" method="post" target="_blank">
+          <form class="email-signup__form newsletter-page-email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
             <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
 
             <div class="newsletter-page-email-signup__inputs">
@@ -131,13 +131,18 @@ if( have_posts() ) {
   }
 }
 
-  if ($support_override) {
-    get_template_part('partials/support-section', null, array(
+if ( $support_override ) {
+  get_template_part(
+    'partials/support-section',
+    null,
+    array(
+      'container_classes' => 'mb-4',
       'override_text' => $support_override,
-    ));
-  } else {
-    get_template_part('partials/support-section');
-  }
+    )
+  );
+} else {
+  get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-4' ) );
+}
 ?>
 </main>
 <?php

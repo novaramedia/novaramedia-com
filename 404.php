@@ -39,7 +39,7 @@ if( have_posts() ) {
 
         <?php the_post_thumbnail('col8-16to9', array('class' => 'index-post-thumbnail')); ?>
 
-        <h5 class="index-post-title margin-top-tiny margin-bottom-tiny js-fix-widows"><?php the_title(); ?></h5>
+        <h5 class="index-post-title margin-top-tiny margin-bottom-tiny text-wrap-pretty"><?php the_title(); ?></h5>
 
         <div class="index-post-description">
           <?php

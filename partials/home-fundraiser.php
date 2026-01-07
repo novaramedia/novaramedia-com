@@ -12,14 +12,14 @@
   <div class="row">
     <div class="col col24">
       <div class="u-video-embed-container">
-        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($fundraiser_youtube_id); ?>"></iframe>
+        <?php echo render_youtube_embed_iframe( $fundraiser_youtube_id ); ?>
       </div>
     </div>
   </div>
 </section>
 <?php
 
-  get_template_part('partials/support-section');
+  get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
 
   }
 ?>

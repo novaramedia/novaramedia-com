@@ -22,7 +22,7 @@
     switch ($text_size) {
       case 'regular':
 ?>
-    <h5 class="index-post-title font-size-9 font-weight-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title font-size-9 font-weight-bold margin-top-tiny text-wrap-pretty"><?php render_post_title($post->ID); ?></h5>
     <?php
       if ($is_article) {
     ?>
@@ -43,7 +43,7 @@
         break;
       case 'large':
 ?>
-    <h3 class="font-size-10 font-weight-bold margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h3>
+    <h3 class="font-size-10 font-weight-bold margin-top-tiny text-wrap-pretty"><?php render_post_title($post->ID); ?></h3>
     <?php
       if ($is_article) {
     ?>

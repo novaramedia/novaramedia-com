@@ -1,0 +1,144 @@
+// Header styles
+
+.support-page__background-cover-image
+  background-image: url('./img/pages/support-page/support-page-bg-2025.png')
+  background-size: 100% auto
+  background-position: top center
+  background-repeat: no-repeat
+
+  @media screen and (min-width: 1200px)
+    background-image: url('./img/pages/support-page/support-page-bg-2025--large.png')
+
+  @media screen and (max-width: $breakpoint-s)
+    background-image: url('./img/pages/support-page/support-page-bg-2025--small.png')
+
+.support-page__headline
+  line-height: .825em
+  margin-left: -.05em
+  @media screen and (max-width: $breakpoint-m)
+    line-height: .9em
+
+.support-page__donation-form-sticky
+  position: sticky
+  top: 100px
+  z-index: 1
+
+// Big stats section
+
+.support-page__big-stats
+  text-align: center
+
+.support-page__highlighter
+  .ux-highlighter__line
+    transition: all var(--transition-speed-quick) ease-in-out
+    margin-bottom: 1rem
+    &--active
+      transform: scale(1.01)
+      color: var(--color-black-soft)
+    &:last-child
+      margin-bottom: 0
+
+// Inverted sections
+
+.support-page__invert-section-background
+  position: relative
+  background-size: cover
+  background-repeat: no-repeat
+
+  @supports not (aspect-ratio)
+    height: 520px
+
+  @supports (aspect-ratio: 1)
+    height: auto
+    aspect-ratio: 1384 / 520
+
+  @media screen and (max-width: $breakpoint-m)
+    @supports not (aspect-ratio)
+      height: 260px
+
+    @supports (aspect-ratio: 1)
+      height: auto
+      aspect-ratio: 16 / 9
+
+.support-page__our-story-background
+  background-position: center 40%
+
+.support-page__crowd-background
+  background-position: center 60%
+
+.avif .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.avif')
+
+.webp .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.webp')
+
+.fallback .support-page__our-story-background
+  background-image: url('./img/pages/support-page/our-story-background.jpg')
+
+.avif .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.avif')
+
+.webp .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.webp')
+
+.fallback .support-page__crowd-background
+  background-image: url('./img/pages/support-page/support-page_crowd-background.jpg')
+
+// Quote carousels
+
+.support-page__quote-carousel
+  position: relative
+  mask-image: unquote('linear-gradient(to left, transparent 0%, black 10%, black 90%, transparent 100%)')
+
+  .support-page__quote-mark
+    font-size: 4.5rem
+    line-height: 0.5
+
+  .swiper-slide
+    width: 820px
+    height: auto
+    margin: 0 4px
+    padding: 1.5rem 1.5rem 2rem 1.5rem
+    background-color: var(--color-white-soft)
+    opacity: .85
+    transition: opacity var(--transition-speed-quick) ease
+
+  .swiper-slide-active
+    opacity: 1
+
+  .support-page__quote-container
+    padding: 2rem
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+  .swiper-pagination
+    bottom: 1.5rem
+
+  @media screen and (max-width: $breakpoint-l)
+    .swiper-slide
+      width: 620px
+
+  @media screen and (max-width: $breakpoint-s)
+    mask-image: unquote('linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%)')
+
+    .swiper-slide
+      width: unquote('calc(100% - 1rem)')
+      padding: 1.5rem 0 2rem
+      margin: 0 1rem
+
+    .support-page__quote-container
+      padding: 1.5rem
+
+    .swiper-pagination
+      bottom: 1.5rem
+
+// Payment method logos
+
+.support-page__direct-debit-logo, .support-page__paypal-logo
+  width: auto
+  height: 30px
+
+#other-donation-methods
+  svg
+    height: 2rem
+    width: auto
