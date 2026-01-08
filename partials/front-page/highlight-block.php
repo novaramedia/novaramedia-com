@@ -20,9 +20,12 @@ if ( isset( $args['excluded_posts_ids'] ) ) {
   $posts_above_the_fold_ids = $args['excluded_posts_ids'];
 }
 
+// Filter out non-numeric values to ensure only valid post IDs are used for exclusion
+$valid_excluded_ids = array_filter( $posts_above_the_fold_ids, 'is_numeric' );
+
 // Featured posts from query
 $latest_featured_args = array(
-  'post__not_in'   => $posts_above_the_fold_ids,
+  'post__not_in'   => $valid_excluded_ids,
   'posts_per_page' => 7,
   'fields'         => 'ids',
   'category_name'  => 'articles,video,audio',
@@ -43,7 +46,7 @@ $latest_featured_posts_ids = $latest_featured_posts->posts;
 // Non-featured posts from query
 $latest_others_posts_to_show = 7;
 $latest_others_args          = array(
-  'post__not_in'   => array_merge( $posts_above_the_fold_ids, $latest_featured_posts_ids ),
+  'post__not_in'   => array_merge( $valid_excluded_ids, $latest_featured_posts_ids ),
   'posts_per_page' => $latest_others_posts_to_show,
   'category_name'  => 'articles,video,audio',
   'tax_query'      => array(

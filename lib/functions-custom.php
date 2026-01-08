@@ -195,7 +195,11 @@ function get_latest_articles_ids( $featured_posts_ids = false ) {
   );
 
   if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    $query_args = array_merge( $query_args, array( 'post__not_in' => $featured_posts_ids ) );
+    // Filter out non-numeric values to ensure only valid post IDs are excluded
+    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+    if ( ! empty( $valid_ids ) ) {
+      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+    }
   }
 
   $recent_articles = new WP_Query( $query_args );
