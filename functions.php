@@ -39,10 +39,11 @@ function scripts_and_styles_method() {
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
-
   wp_enqueue_script( 'site-js', $site_js, array(), $theme_version, true );
 
   wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, $theme_version );
+
+  wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 
   if ( is_admin() ) {
     wp_enqueue_style( 'dashicons' );
