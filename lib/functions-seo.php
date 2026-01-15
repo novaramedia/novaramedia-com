@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string Generated title string.
  */
 function nm_generate_custom_title( $for_social = false ) {
+  // Don't override feed titles - let WordPress handle them
+  if ( is_feed() ) {
+    return false;
+  }
+
   global $post;
 
   // Categories that should include author in title
