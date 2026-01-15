@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string Generated title string.
  */
 function nm_generate_custom_title( $for_social = false ) {
+  // Don't override feed titles - let WordPress handle them
+  if ( is_feed() ) {
+    return false;
+  }
+
   global $post;
 
   // Categories that should include author in title
@@ -66,7 +71,7 @@ function nm_generate_custom_title( $for_social = false ) {
 
     if ( ! $for_social ) {
       $title_parts[] = get_bloginfo( 'description' );
-      return implode( ' | ', $title_parts ); // Early return for homepage
+      return wp_strip_all_tags( implode( ' | ', $title_parts ) ); // Early return for homepage
     }
   } elseif ( is_archive() ) {
     if ( is_category() || is_tag() || is_tax() ) {
@@ -75,7 +80,7 @@ function nm_generate_custom_title( $for_social = false ) {
       $title_parts[] = get_the_archive_title();
     }
   } elseif ( is_search() ) {
-    $title_parts[] = 'Search: ' . get_search_query();
+    $title_parts[] = 'Search: ' . esc_html( get_search_query() );
 
   } elseif ( is_404() ) {
     $title_parts[] = 'Page Not Found';
@@ -89,7 +94,7 @@ function nm_generate_custom_title( $for_social = false ) {
     $title_parts[] = get_bloginfo( 'name' );
   }
 
-  return implode( ' | ', $title_parts );
+  return wp_strip_all_tags( implode( ' | ', $title_parts ) );
 }
 
 /**

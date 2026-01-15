@@ -164,17 +164,22 @@ function add_featured_image_to_feed( $content ) {
 add_filter( 'the_excerpt_rss', 'add_featured_image_to_feed', 1000, 1 );
 add_filter( 'the_content_feed', 'add_featured_image_to_feed', 1000, 1 );
 
-// WARNING: This needs to be updated to work with contributors
-function feed_author($name) { // return the value of the author meta field (this is just for feed readers as author tag is not used in the theme)
-  if (is_feed()) {
-    global $post;
-    $meta = get_post_meta($post->ID);
-
-    if (!empty($meta['_cmb_author'])) {
-      return $meta['_cmb_author'][0];
-    } else {
-      return 'Novara Media';
-    }
+/**
+ * Override author name in RSS feeds with contributor data
+ *
+ * Uses nm_get_post_authors() to fetch author names from contributor posts
+ * or legacy _cmb_author meta field, with fallback to 'Novara Media'.
+ *
+ * @since 4.3.0
+ *
+ * @param string $name Default author name.
+ * @return string Author name for feed.
+ */
+function feed_author( $name ) {
+  if ( is_feed() ) {
+    $author = nm_get_post_authors( get_the_ID(), 'text' );
+    return $author !== false ? $author : 'Novara Media';
   }
+  return $name;
 }
 add_filter( 'the_author', 'feed_author' );
