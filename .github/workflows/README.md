@@ -1,5 +1,49 @@
 # GitHub Actions Workflows
 
+## Cypress Tests
+
+The `cypress.yml` workflow runs automated end-to-end tests for the WordPress theme using Cypress.
+
+### How it works
+
+1. **Trigger**: Runs on Pull Requests and pushes to `master`, `main`, or `development` branches
+2. **Environment**: Ubuntu with Node.js 18 and Chrome browser
+3. **Test Execution**: Runs all Cypress tests in headless mode
+4. **Artifacts**: Uploads test videos and screenshots (especially on failure)
+
+### Test Configuration
+
+- **Base URL**: Tests run against production (`https://novaramedia.com`) by default
+- **Override**: Set `CYPRESS_BASE_URL` repository secret to test against staging
+- **Timeout**: 15-minute maximum per test run
+- **Retries**: Failed tests automatically retry 2 times
+
+### Success Criteria
+
+For a PR to be mergeable:
+- ✅ All Cypress tests must pass
+- ✅ No critical console errors
+- ✅ All priority pages load successfully
+
+### Viewing Test Results
+
+When tests fail:
+1. Click on the failed GitHub Actions run
+2. Go to "Summary" tab
+3. Download "cypress-artifacts" or "cypress-results"
+4. Videos show full test execution
+5. Screenshots capture failure state
+
+### Local Testing
+
+Before pushing, run tests locally:
+```bash
+npm test              # Run all tests
+npm run cy:open       # Interactive debugging
+```
+
+See the main [README.md](../../README.md#howto-testing) and [TESTING.md](../../TESTING.md) for detailed testing documentation.
+
 ## Release Notification to Slack
 
 The `release-notification.yml` workflow automatically sends structured notifications to the public digital team Slack channel when a new version is released.
