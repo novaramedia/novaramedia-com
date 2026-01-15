@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Add explicit `post_status` filter to featured post queries above the fold
+- Fixed featured post duplication by filtering non-numeric values from exclusion arrays and adding explicit `post_status` filter
 
 ## [4.3.0] - 2026-01-07
 
