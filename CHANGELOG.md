@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Improved line breaking for titles on homepage above the fold
+- Removed Yarn from repository, standardized on NPM as single package manager
+
 ### Fixed
 
 - Add explicit `post_status` filter to featured post queries above the fold
