@@ -11,19 +11,23 @@ This project uses [Cypress](https://www.cypress.io/) for end-to-end testing of t
 #### Running Tests Locally
 
 1. **Install dependencies** (if not already done):
+
    ```bash
    npm install
    ```
 
 2. **Run tests in headless mode** (same as CI):
+
    ```bash
    npm test
    ```
 
 3. **Run tests with interactive UI**:
+
    ```bash
    npm run cy:open
    ```
+
    This opens the Cypress Test Runner where you can:
    - See tests run in a real browser
    - Debug failing tests
@@ -54,11 +58,13 @@ This project uses [Cypress](https://www.cypress.io/) for end-to-end testing of t
 #### Test Coverage
 
 Current test suites cover:
+
 - **Homepage** - Main landing page loads with key elements
 - **Support Page** - Donation/support page functionality
 - **Single Post** - Individual article display and navigation
 
 Each test validates:
+
 - Page loads without errors
 - Critical DOM elements are present
 - Responsive behavior across mobile/tablet/desktop
@@ -68,17 +74,20 @@ Each test validates:
 #### Troubleshooting
 
 **Cypress binary not found:**
+
 ```bash
 npx cypress install
 npm run cy:verify
 ```
 
 **Tests timeout:**
+
 - Check your internet connection
 - Verify the base URL is accessible
 - Increase timeout in `cypress.config.js` if needed
 
 **Test failures:**
+
 - Review screenshots in `cypress/screenshots/`
 - Watch videos in `cypress/videos/`
 - Run tests with `npm run cy:open` for interactive debugging

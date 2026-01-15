@@ -23,7 +23,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   // Returning false here prevents Cypress from failing the test
   // We log the error but don't fail on third-party script errors
   console.log('Uncaught exception:', err.message);
-  
+
   // Don't fail tests on common third-party script errors
   if (
     err.message.includes('ResizeObserver') ||
@@ -34,7 +34,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   ) {
     return false;
   }
-  
+
   // Allow other errors to fail the test
   return true;
 });

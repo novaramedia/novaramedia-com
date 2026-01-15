@@ -33,7 +33,7 @@ Cypress.Commands.add('verifyNoConsoleErrors', () => {
         errorMsg.includes('fbq')
       );
     });
-    
+
     expect(relevantErrors).to.have.length(0);
   });
 });
@@ -65,10 +65,12 @@ Cypress.Commands.add('testResponsive', (callback) => {
     { name: 'tablet', width: 768, height: 1024 },
     { name: 'desktop', width: 1280, height: 720 },
   ];
-  
+
   viewports.forEach((viewport) => {
     cy.viewport(viewport.width, viewport.height);
-    cy.log(`Testing at ${viewport.name} viewport: ${viewport.width}x${viewport.height}`);
+    cy.log(
+      `Testing at ${viewport.name} viewport: ${viewport.width}x${viewport.height}`
+    );
     callback(viewport);
   });
 });
@@ -80,7 +82,7 @@ Cypress.Commands.add('waitForWordPress', () => {
   // Wait for common WordPress elements
   cy.get('body').should('exist');
   cy.get('body').should('have.class', 'wordpress');
-  
+
   // Wait for any loading states to complete
   cy.get('.loading, .loader', { timeout: 10000 }).should('not.exist');
 });

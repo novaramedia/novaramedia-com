@@ -9,6 +9,7 @@ We use [Cypress](https://www.cypress.io/) for automated end-to-end testing of cr
 ## Test Philosophy
 
 Our tests follow a **smoke testing** approach, focusing on:
+
 - **Page loading** - Verify pages load without errors
 - **Critical elements** - Ensure key DOM elements are present
 - **Responsive design** - Test across mobile, tablet, and desktop viewports
@@ -16,6 +17,7 @@ Our tests follow a **smoke testing** approach, focusing on:
 - **JavaScript errors** - Catch console errors (excluding third-party scripts)
 
 We **intentionally avoid**:
+
 - Visual regression testing (planned for Phase 2)
 - Complex user interaction flows (planned for Phase 2)
 - Backend/PHP unit tests (separate concern)
@@ -42,6 +44,7 @@ cypress/
 ### Configuration
 
 See `cypress.config.js` for:
+
 - Base URL configuration
 - Viewport settings
 - Timeout values
@@ -53,15 +56,17 @@ See `cypress.config.js` for:
 ### Locally
 
 **Quick Start:**
+
 ```bash
 npm test                  # Run all tests (headless)
 npm run cy:open          # Open Cypress UI
 ```
 
 **Advanced Options:**
+
 ```bash
 npm run test:chrome      # Run in Chrome
-npm run test:firefox     # Run in Firefox  
+npm run test:firefox     # Run in Firefox
 npm run test:headed      # See browser while running
 
 # Test against different environment
@@ -71,12 +76,14 @@ CYPRESS_BASE_URL=https://staging.example.com npm test
 ### In CI (GitHub Actions)
 
 Tests run automatically on:
+
 - Pull requests to `master`, `main`, or `development` branches
 - Direct pushes to these branches
 
 **Workflow configuration:** `.github/workflows/cypress.yml`
 
 **Key features:**
+
 - Runs in Ubuntu with Chrome browser
 - 15-minute timeout per job
 - Uploads videos/screenshots on failure
@@ -87,14 +94,18 @@ Tests run automatically on:
 We've created several helper commands to make tests more maintainable:
 
 ### `cy.checkPageLoad()`
+
 Sets up console error monitoring for the page.
+
 ```javascript
 cy.checkPageLoad();
 cy.visit('/');
 ```
 
 ### `cy.verifyNoConsoleErrors()`
+
 Verifies no relevant console errors occurred (filters out third-party script errors).
+
 ```javascript
 cy.checkPageLoad();
 cy.visit('/some-page');
@@ -102,13 +113,17 @@ cy.verifyNoConsoleErrors();
 ```
 
 ### `cy.checkImages()`
+
 Validates that images loaded successfully (skips lazy-loaded placeholders).
+
 ```javascript
 cy.checkImages();
 ```
 
 ### `cy.testResponsive(callback)`
+
 Tests behavior across mobile, tablet, and desktop viewports.
+
 ```javascript
 cy.testResponsive((viewport) => {
   cy.get('.menu').should('be.visible');
@@ -116,7 +131,9 @@ cy.testResponsive((viewport) => {
 ```
 
 ### `cy.waitForWordPress()`
+
 Waits for WordPress-specific elements to be ready.
+
 ```javascript
 cy.waitForWordPress();
 ```
@@ -149,9 +166,9 @@ describe('Page Name', () => {
 
   it('should be responsive', () => {
     const viewports = [
-      { width: 375, height: 667 },   // Mobile
-      { width: 768, height: 1024 },  // Tablet
-      { width: 1280, height: 720 },  // Desktop
+      { width: 375, height: 667 }, // Mobile
+      { width: 768, height: 1024 }, // Tablet
+      { width: 1280, height: 720 }, // Desktop
     ];
 
     viewports.forEach((viewport) => {
@@ -175,14 +192,17 @@ describe('Page Name', () => {
 ### Local Debugging
 
 1. **Run with Test Runner:**
+
    ```bash
    npm run cy:open
    ```
+
    - Click on failed test
    - Use time-travel debugging
    - Inspect DOM at failure point
 
 2. **View screenshots:**
+
    ```bash
    open cypress/screenshots/
    ```
@@ -202,14 +222,17 @@ describe('Page Name', () => {
 ### Common Issues
 
 **"Timed out retrying" errors:**
+
 - Element selector changed - update test
 - Page loads slowly - increase timeout in config
 - Element is hidden - check CSS/responsive behavior
 
 **"ResizeObserver" or analytics errors:**
+
 - These are filtered automatically - if test fails, it's something else
 
 **Flaky tests:**
+
 - Tests retry 2x in CI automatically
 - Consider adding explicit waits: `cy.get('.element').should('be.visible')`
 - Check for race conditions in page load
@@ -225,18 +248,21 @@ describe('Page Name', () => {
 ### GitHub Secrets
 
 For CI, you can configure:
+
 - `CYPRESS_BASE_URL` - Test against staging instead of production
 - Add as repository secret in Settings → Secrets and variables → Actions
 
 ## Test Coverage Roadmap
 
 ### Phase 1: Core Tests ✅ (Current)
+
 - [x] Homepage
-- [x] Support page  
+- [x] Support page
 - [x] Single post (article)
 - [x] GitHub Actions CI
 
 ### Phase 2: Secondary Views (Planned)
+
 - [ ] Single post (video category)
 - [ ] Single post (audio category)
 - [ ] About page
@@ -244,6 +270,7 @@ For CI, you can configure:
 - [ ] Novara Live category archive
 
 ### Phase 3: Future Enhancements (Planned)
+
 - [ ] Visual regression testing
 - [ ] Accessibility testing (pa11y, axe)
 - [ ] Performance benchmarks
