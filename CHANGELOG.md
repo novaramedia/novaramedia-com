@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved line breaking for titles on homepage above the fold
 - Removed Yarn from repository, standardized on NPM as single package manager
 
+### Fixed
+
+- Fixed featured post duplication by filtering non-numeric values from exclusion arrays and adding explicit `post_status` filter
+
 ## [4.3.0] - 2026-01-07
 
 ### Added
