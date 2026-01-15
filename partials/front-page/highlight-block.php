@@ -31,6 +31,7 @@ $latest_featured_args = array(
   'category_name'  => 'articles,video,audio',
   'meta_key'       => '_cmb_featurable',
   'meta_value'     => 'on',
+  'post_status'    => 'publish',
   'tax_query'      => array(
     array(
       'taxonomy' => 'section',
@@ -49,6 +50,7 @@ $latest_others_args          = array(
   'post__not_in'   => array_merge( $valid_excluded_ids, $latest_featured_posts_ids ),
   'posts_per_page' => $latest_others_posts_to_show,
   'category_name'  => 'articles,video,audio',
+  'post_status'    => 'publish',
   'tax_query'      => array(
     array(
       'taxonomy' => 'section',

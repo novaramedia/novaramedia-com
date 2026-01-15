@@ -192,6 +192,7 @@ function get_latest_articles_ids( $featured_posts_ids = false ) {
       'category_name'  => 'articles',
       'posts_per_page' => 7,
       'fields'         => 'ids',
+      'post_status'    => 'publish',
   );
 
   if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
@@ -227,6 +228,7 @@ function get_above_the_fold_featured_post_ids() {
       'category_name'  => 'articles,video,audio',
       'meta_key'       => '_cmb_featurable',
       'meta_value'     => 'on',
+      'post_status'    => 'publish',
   );
 
   $latest_featured_posts = new WP_Query( $latest_args );
