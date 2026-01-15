@@ -8,3 +8,6 @@ cypress/screenshots
 cypress/downloads
 .cypress_cache
 cypress.env.json
+
+# Build artifacts
+dist/report.html
