@@ -7,7 +7,7 @@ novaramedia.com
 ### Howto: release
 
 - Pull `development`
-- `yarn release`
+- `npm run release`
 - Don't commit, tag or push in release-it process
 - After post release-it scripts are run commit in format `Build: x.x.x`
 - Create PR to master branch in format `Version x.x.x` with changelog entries as description
