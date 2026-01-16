@@ -49,14 +49,16 @@ jobs:
       - name: Deploy PR branch to staging via WP Pusher
         id: deploy
         run: |
-          echo "Deploying branch '${{ github.head_ref }}' to staging..."
+          # github.head_ref is set for pull_request, github.ref_name for push
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          echo "Deploying branch '${BRANCH_NAME}' to staging..."
 
           # The WP_PUSHER_WEBHOOK_URL secret contains the full URL with token and package:
           # https://staging-site.com/?wppusher-hook&token=xxx&package=yyy
           #
           # We append &branch=<pr-branch> to pull the PR branch instead of default
 
-          WEBHOOK_WITH_BRANCH="${WP_PUSHER_WEBHOOK_URL}&branch=${{ github.head_ref }}"
+          WEBHOOK_WITH_BRANCH="${WP_PUSHER_WEBHOOK_URL}&branch=${BRANCH_NAME}"
 
           echo "Triggering webhook (branch parameter appended)..."
 
