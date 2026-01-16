@@ -1,14 +1,17 @@
 # Cypress Tests with Staging Deployment
 #
 # This workflow:
-# 1. Deploys the PR branch to Kinsta staging via WP Pusher
+# 1. Deploys the PR branch to Kinsta staging via SFTP
 # 2. Clears Kinsta cache
 # 3. Verifies staging is accessible
 # 4. Runs Cypress tests against staging
 # 5. Resets staging back to development branch (cleanup)
 #
 # Required GitHub Secrets:
-# - WP_PUSHER_WEBHOOK_URL: WP Pusher push-to-deploy URL for staging theme
+# - KINSTA_SFTP_HOST: SFTP hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+# - KINSTA_SFTP_USER: SFTP username (sandboxed user with theme folder access)
+# - KINSTA_SFTP_PASSWORD: SFTP password
+# - KINSTA_SFTP_PORT: SFTP port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
@@ -43,51 +46,47 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for branch checkout during cleanup
 
       # ========================================
-      # DEPLOY TO STAGING
+      # DEPLOY TO STAGING VIA SFTP
       # ========================================
 
-      - name: Deploy PR branch to staging via WP Pusher
-        id: deploy
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy to staging via SFTP
         run: |
-          # github.head_ref is set for pull_request, github.ref_name for push
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
           echo "Deploying branch '${BRANCH_NAME}' to staging..."
 
-          # The WP_PUSHER_WEBHOOK_URL secret contains the full URL with token and package:
-          # https://staging-site.com/?wppusher-hook&token=xxx&package=yyy
-          #
-          # We append &branch=<pr-branch> to pull the PR branch instead of default
+          # Use lftp for SFTP mirror with password auth
+          # --reverse: upload local to remote (mirror in reverse)
+          # --delete: remove remote files not present locally
+          # --verbose: show progress
+          # --exclude patterns: skip unnecessary files
+          lftp -c "
+            set sftp:auto-confirm yes
+            set ssl:verify-certificate no
+            open -u ${{ secrets.KINSTA_SFTP_USER }},${{ secrets.KINSTA_SFTP_PASSWORD }} \
+              sftp://${{ secrets.KINSTA_SFTP_HOST }}:${{ secrets.KINSTA_SFTP_PORT }}
+            mirror --reverse --delete --verbose \
+              --exclude ^\.git/$ \
+              --exclude ^\.github/$ \
+              --exclude ^node_modules/$ \
+              --exclude ^\.DS_Store$ \
+              --exclude ^cypress/videos/$ \
+              --exclude ^cypress/screenshots/$ \
+              --exclude \.log$ \
+              --exclude ^\.env \
+              ./ ./
+            quit
+          "
 
-          WEBHOOK_WITH_BRANCH="${WP_PUSHER_WEBHOOK_URL}&branch=${BRANCH_NAME}"
+          echo "✅ Deployment complete"
 
-          echo "Triggering webhook (branch parameter appended)..."
-
-          response=$(curl -s -w "\n%{http_code}" -X GET "$WEBHOOK_WITH_BRANCH")
-
-          http_code=$(echo "$response" | tail -n1)
-          body=$(echo "$response" | sed '$d')
-
-          echo "Response code: $http_code"
-          echo "Response body: $body"
-
-          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
-            echo "✅ Deployment triggered successfully"
-          else
-            echo "❌ Failed to trigger deployment (HTTP $http_code)"
-            echo "Check that the webhook URL and token are correct"
-            exit 1
-          fi
-        env:
-          WP_PUSHER_WEBHOOK_URL: ${{ secrets.WP_PUSHER_WEBHOOK_URL }}
-
-      - name: Wait for deployment to propagate
-        run: |
-          echo "Waiting 45 seconds for WP Pusher to pull and deploy..."
-          sleep 45
-
-      - name: Clear Kinsta cache (optional)
+      - name: Clear Kinsta cache
         continue-on-error: true
         run: |
           # Skip if required secrets aren't configured
@@ -97,12 +96,18 @@ jobs:
           fi
 
           echo "Clearing Kinsta cache..."
-          curl -s -X POST \
+          response=$(curl -s -w "\n%{http_code}" -X POST \
             "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_STAGING_ENV_ID}/clear-cache" \
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
-            -H "Content-Type: application/json"
+            -H "Content-Type: application/json")
 
-          # Additional wait for cache to clear
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Cache clear response: $http_code"
+          echo "$body"
+
+          # Wait for cache to clear
           sleep 10
         env:
           KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
@@ -130,8 +135,6 @@ jobs:
 
           echo "❌ Staging site not accessible after $max_attempts attempts"
           exit 1
-        env:
-          STAGING_URL: ${{ secrets.STAGING_URL }}
 
       # ========================================
       # RUN CYPRESS TESTS
@@ -194,10 +197,26 @@ jobs:
         run: |
           echo "Resetting staging back to development branch..."
 
-          # Append branch=development to reset staging
-          WEBHOOK_RESET="${WP_PUSHER_WEBHOOK_URL}&branch=development"
-          curl -s -X GET "$WEBHOOK_RESET"
+          # Checkout development branch
+          git checkout development
 
-          echo "✅ Staging reset triggered"
-        env:
-          WP_PUSHER_WEBHOOK_URL: ${{ secrets.WP_PUSHER_WEBHOOK_URL }}
+          # Mirror development branch to staging via SFTP
+          lftp -c "
+            set sftp:auto-confirm yes
+            set ssl:verify-certificate no
+            open -u ${{ secrets.KINSTA_SFTP_USER }},${{ secrets.KINSTA_SFTP_PASSWORD }} \
+              sftp://${{ secrets.KINSTA_SFTP_HOST }}:${{ secrets.KINSTA_SFTP_PORT }}
+            mirror --reverse --delete --verbose \
+              --exclude ^\.git/$ \
+              --exclude ^\.github/$ \
+              --exclude ^node_modules/$ \
+              --exclude ^\.DS_Store$ \
+              --exclude ^cypress/videos/$ \
+              --exclude ^cypress/screenshots/$ \
+              --exclude \.log$ \
+              --exclude ^\.env \
+              ./ ./
+            quit
+          "
+
+          echo "✅ Staging reset to development branch"
