@@ -1,4 +1,4 @@
-# DRAFT: Cypress Tests with Staging Deployment
+# Cypress Tests with Staging Deployment
 #
 # This workflow:
 # 1. Deploys the PR branch to Kinsta staging via WP Pusher
@@ -79,13 +79,18 @@ jobs:
           sleep 45
 
       - name: Clear Kinsta cache (optional)
-        if: ${{ secrets.KINSTA_API_KEY != '' }}
         continue-on-error: true
         run: |
+          # Skip if required secrets aren't configured
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+            echo "⏭️ Skipping cache clear - Kinsta API secrets not configured"
+            exit 0
+          fi
+
           echo "Clearing Kinsta cache..."
           curl -s -X POST \
-            "https://api.kinsta.com/v2/sites/${{ secrets.KINSTA_SITE_ID }}/environments/${{ secrets.KINSTA_STAGING_ENV_ID }}/clear-cache" \
-            -H "Authorization: Bearer ${{ secrets.KINSTA_API_KEY }}" \
+            "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_STAGING_ENV_ID}/clear-cache" \
+            -H "Authorization: Bearer ${KINSTA_API_KEY}" \
             -H "Content-Type: application/json"
 
           # Additional wait for cache to clear
