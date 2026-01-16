@@ -27,6 +27,8 @@ on:
   push:
     branches:
       - copilot/add-cypress-testing-ci
+  # Allow manual triggering for testing
+  workflow_dispatch:
 
 # Ensure only one PR tests against staging at a time
 concurrency:
