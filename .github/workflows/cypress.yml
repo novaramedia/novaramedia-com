@@ -1,4 +1,20 @@
-name: Cypress Tests
+# DRAFT: Cypress Tests with Staging Deployment
+#
+# This workflow:
+# 1. Deploys the PR branch to Kinsta staging via WP Pusher
+# 2. Clears Kinsta cache
+# 3. Verifies staging is accessible
+# 4. Runs Cypress tests against staging
+# 5. Resets staging back to development branch (cleanup)
+#
+# Required GitHub Secrets:
+# - WP_PUSHER_WEBHOOK_URL: WP Pusher push-to-deploy URL for staging theme
+# - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
+# - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
+# - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
+# - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
+
+name: Cypress Tests (Staging)
 
 on:
   pull_request:
@@ -6,20 +22,106 @@ on:
       - master
       - main
       - development
-  push:
-    branches:
-      - master
-      - main
-      - development
+
+# Ensure only one PR tests against staging at a time
+concurrency:
+  group: staging-cypress-tests
+  cancel-in-progress: false
 
 jobs:
-  cypress-tests:
+  deploy-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    
+    timeout-minutes: 20
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # ========================================
+      # DEPLOY TO STAGING
+      # ========================================
+
+      - name: Deploy PR branch to staging via WP Pusher
+        id: deploy
+        run: |
+          echo "Deploying branch '${{ github.head_ref }}' to staging..."
+
+          # The WP_PUSHER_WEBHOOK_URL secret contains the full URL with token and package:
+          # https://staging-site.com/?wppusher-hook&token=xxx&package=yyy
+          #
+          # We append &branch=<pr-branch> to pull the PR branch instead of default
+
+          WEBHOOK_WITH_BRANCH="${WP_PUSHER_WEBHOOK_URL}&branch=${{ github.head_ref }}"
+
+          echo "Triggering webhook (branch parameter appended)..."
+
+          response=$(curl -s -w "\n%{http_code}" -X GET "$WEBHOOK_WITH_BRANCH")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Response code: $http_code"
+          echo "Response body: $body"
+
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+            echo "✅ Deployment triggered successfully"
+          else
+            echo "❌ Failed to trigger deployment (HTTP $http_code)"
+            echo "Check that the webhook URL and token are correct"
+            exit 1
+          fi
+        env:
+          WP_PUSHER_WEBHOOK_URL: ${{ secrets.WP_PUSHER_WEBHOOK_URL }}
+
+      - name: Wait for deployment to propagate
+        run: |
+          echo "Waiting 45 seconds for WP Pusher to pull and deploy..."
+          sleep 45
+
+      - name: Clear Kinsta cache (optional)
+        if: ${{ secrets.KINSTA_API_KEY != '' }}
+        continue-on-error: true
+        run: |
+          echo "Clearing Kinsta cache..."
+          curl -s -X POST \
+            "https://api.kinsta.com/v2/sites/${{ secrets.KINSTA_SITE_ID }}/environments/${{ secrets.KINSTA_STAGING_ENV_ID }}/clear-cache" \
+            -H "Authorization: Bearer ${{ secrets.KINSTA_API_KEY }}" \
+            -H "Content-Type: application/json"
+
+          # Additional wait for cache to clear
+          sleep 10
+        env:
+          KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
+          KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
+          KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
+
+      - name: Verify staging is accessible
+        run: |
+          echo "Checking if staging site is accessible..."
+          max_attempts=12
+          attempt=1
+
+          while [ $attempt -le $max_attempts ]; do
+            http_code=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.STAGING_URL }}")
+
+            if [ "$http_code" = "200" ]; then
+              echo "✅ Staging site is accessible (HTTP $http_code)"
+              exit 0
+            fi
+
+            echo "Attempt $attempt/$max_attempts: HTTP $http_code - waiting..."
+            sleep 10
+            attempt=$((attempt + 1))
+          done
+
+          echo "❌ Staging site not accessible after $max_attempts attempts"
+          exit 1
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+      # ========================================
+      # RUN CYPRESS TESTS
+      # ========================================
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,25 +135,26 @@ jobs:
       - name: Verify Cypress installation
         run: npx cypress verify
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests against staging
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           headed: false
           config: video=true,screenshotOnRunFailure=true
         env:
-          # Test against production site by default
-          # Can be overridden with repository secret CYPRESS_BASE_URL
-          CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL || 'https://novaramedia.com' }}
-          # Cypress environment variables
+          CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
           CYPRESS_VIDEO: true
           CYPRESS_SCREENSHOT_ON_FAILURE: true
+
+      # ========================================
+      # UPLOAD ARTIFACTS
+      # ========================================
 
       - name: Upload test artifacts on failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-artifacts
+          name: cypress-artifacts-${{ github.run_id }}
           path: |
             cypress/videos
             cypress/screenshots
@@ -61,8 +164,26 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cypress-results
+          name: cypress-results-${{ github.run_id }}
           path: |
             cypress/videos
             cypress/screenshots
           retention-days: 7
+
+      # ========================================
+      # CLEANUP: Reset staging to development
+      # ========================================
+
+      - name: Reset staging to development branch
+        if: always()
+        continue-on-error: true
+        run: |
+          echo "Resetting staging back to development branch..."
+
+          # Append branch=development to reset staging
+          WEBHOOK_RESET="${WP_PUSHER_WEBHOOK_URL}&branch=development"
+          curl -s -X GET "$WEBHOOK_RESET"
+
+          echo "✅ Staging reset triggered"
+        env:
+          WP_PUSHER_WEBHOOK_URL: ${{ secrets.WP_PUSHER_WEBHOOK_URL }}
