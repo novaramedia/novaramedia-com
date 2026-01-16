@@ -2,16 +2,20 @@
 #
 # This workflow:
 # 1. Deploys the PR branch to Kinsta staging via SFTP
-# 2. Clears Kinsta cache
-# 3. Verifies staging is accessible
-# 4. Runs Cypress tests against staging
-# 5. Resets staging back to development branch (cleanup)
+# 2. Activates the theme via WP-CLI over SSH
+# 3. Clears Kinsta cache
+# 4. Verifies staging is accessible
+# 5. Runs Cypress tests against staging
+# 6. Resets staging back to development branch (cleanup)
 #
 # Required GitHub Secrets:
 # - KINSTA_SFTP_HOST: SFTP hostname (from MyKinsta → Sites → Info → SFTP/SSH)
 # - KINSTA_SFTP_USER: SFTP username (sandboxed user with theme folder access)
 # - KINSTA_SFTP_PASSWORD: SFTP password
 # - KINSTA_SFTP_PORT: SFTP port (Kinsta uses non-standard ports)
+# - KINSTA_SSH_KEY: SSH private key for WP-CLI access (main Kinsta user)
+# - KINSTA_SSH_USER: SSH username for WP-CLI (main Kinsta user)
+# - KINSTA_SSH_PORT: SSH port for WP-CLI (may differ from SFTP port)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
@@ -56,6 +60,13 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
+      - name: Setup SSH for WP-CLI
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KINSTA_SSH_KEY }}" > ~/.ssh/kinsta_key
+          chmod 600 ~/.ssh/kinsta_key
+          ssh-keyscan -p ${{ secrets.KINSTA_SSH_PORT }} ${{ secrets.KINSTA_SFTP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
       - name: Deploy to staging via SFTP
         run: |
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
@@ -85,6 +96,14 @@ jobs:
           "
 
           echo "✅ Deployment complete"
+
+      - name: Activate theme via WP-CLI
+        run: |
+          echo "Activating theme via WP-CLI..."
+          ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
+            ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
+            "cd public && wp theme activate novaramedia-com"
+          echo "✅ Theme activated"
 
       - name: Clear Kinsta cache
         continue-on-error: true
@@ -219,4 +238,13 @@ jobs:
             quit
           "
 
+          # Reactivate theme after reset
+          ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
+            ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
+            "cd public && wp theme activate novaramedia-com"
+
           echo "✅ Staging reset to development branch"
+
+      - name: Cleanup SSH keys
+        if: always()
+        run: rm -f ~/.ssh/kinsta_key
