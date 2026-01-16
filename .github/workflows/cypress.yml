@@ -176,6 +176,7 @@ jobs:
         with:
           browser: chrome
           headed: false
+          install: false  # Already installed via npm ci
           config: video=true,screenshotOnRunFailure=true
         env:
           CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
