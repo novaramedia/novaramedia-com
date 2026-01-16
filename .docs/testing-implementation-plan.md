@@ -7,6 +7,7 @@ This document outlines the plan to implement automated Cypress testing against a
 ## Current State
 
 ### What We Have
+
 - ✅ Cypress testing framework configured with Priority 1 tests
 - ✅ GitHub Actions workflow for running tests
 - ✅ Kinsta hosting with a permanent staging environment
@@ -15,6 +16,7 @@ This document outlines the plan to implement automated Cypress testing against a
 - ✅ Kinsta API access available
 
 ### The Problem
+
 - Tests currently run against **production** by default
 - No automated deployment to staging on PR creation
 - Can't test breaking changes before they hit production
@@ -56,22 +58,26 @@ This document outlines the plan to implement automated Cypress testing against a
 Use WP Pusher's built-in webhook to trigger theme sync from the PR branch to staging.
 
 **How WP Pusher Webhooks Work:**
+
 1. WP Pusher provides a unique push-to-deploy URL for each theme
 2. When the webhook is called, WP Pusher pulls the latest code from the configured branch
 3. The webhook can include a `branch` parameter to pull from a specific branch
 
 **Pros:**
+
 - Uses existing deployment mechanism (WP Pusher already configured)
 - Simple webhook call from GitHub Actions
 - No complex API integration needed
 - Already proven to work for your setup
 
 **Cons:**
+
 - Need to expose/configure WP Pusher webhook
 - Less visibility into deployment status (no detailed progress)
 - Need to reset branch after tests complete
 
 **Required Setup:**
+
 1. Get WP Pusher webhook URL from staging site (WP Admin → WP Pusher → Themes)
 2. Store webhook URL in GitHub Secrets
 3. Add workflow step to call webhook with PR branch name
@@ -79,6 +85,7 @@ Use WP Pusher's built-in webhook to trigger theme sync from the PR branch to sta
 5. Clear Kinsta cache via API (optional but recommended)
 
 **Implementation:**
+
 ```yaml
 - name: Deploy PR branch to staging via WP Pusher
   run: |
@@ -101,15 +108,18 @@ Use WP Pusher's built-in webhook to trigger theme sync from the PR branch to sta
 Use Kinsta's REST API to trigger theme deployment to staging directly from GitHub Actions.
 
 **Pros:**
+
 - Direct control over deployment timing
 - Can verify deployment completed before running tests
 - No dependency on WordPress plugin for CI/CD
 
 **Cons:**
+
 - Requires Kinsta API credentials in GitHub Secrets
 - Single staging environment (queue contention if multiple PRs)
 
 **Implementation:**
+
 1. Create Kinsta API credentials
 2. Store credentials in GitHub Secrets
 3. Add deployment job to GitHub workflow
@@ -121,10 +131,12 @@ Use Kinsta's REST API to trigger theme deployment to staging directly from GitHu
 Trigger the existing WordPress plugin to sync from the PR branch.
 
 **Pros:**
+
 - Uses existing deployment mechanism
 - Less configuration needed
 
 **Cons:**
+
 - Dependent on plugin availability/reliability
 - Less control over timing and verification
 - Need to expose webhook endpoint
@@ -134,10 +146,12 @@ Trigger the existing WordPress plugin to sync from the PR branch.
 Use GitHub Actions to deploy theme files directly to staging via SSH/SFTP.
 
 **Pros:**
+
 - Full control over what gets deployed
 - Fast deployment (only theme files)
 
 **Cons:**
+
 - Need to manage SSH keys
 - Bypass existing deployment flow
 - May cause inconsistencies with production deployment
@@ -235,6 +249,7 @@ jobs:
 #### Step 2: Kinsta API Integration Script
 
 Create a deployment script that:
+
 1. Pushes theme files to staging via Kinsta API
 2. Waits for deployment to complete
 3. Verifies the site is accessible
@@ -288,6 +303,7 @@ Kinsta has a feature for **Preview Environments** (ephemeral staging per PR). Th
 With a single staging environment, multiple simultaneous PRs could conflict. Options:
 
 ### Option 1: Queue-based (Simple)
+
 - Use GitHub Actions concurrency groups
 - Only one PR can deploy/test at a time
 - Other PRs wait in queue
@@ -299,10 +315,12 @@ concurrency:
 ```
 
 ### Option 2: Branch-aware deployment
+
 - Staging always reflects the PR branch being tested
 - Reset staging to development after tests complete
 
 ### Option 3: Scheduled batching
+
 - Batch test runs during off-hours
 - Reduces contention for active development
 
@@ -313,18 +331,21 @@ concurrency:
 ## Timeline & Phases
 
 ### Phase 1: Foundation (Week 1)
+
 - [ ] Create Kinsta API credentials
 - [ ] Add GitHub Secrets
 - [ ] Create deployment script
 - [ ] Update workflow for staging deployment
 
 ### Phase 2: Integration (Week 2)
+
 - [ ] Add health check step
 - [ ] Configure concurrency groups
 - [ ] Test end-to-end pipeline
 - [ ] Update documentation
 
 ### Phase 3: Refinement (Week 3)
+
 - [ ] Add PR comment with test results
 - [ ] Implement staging reset after tests
 - [ ] Monitor and tune timeouts
@@ -336,13 +357,13 @@ concurrency:
 
 Configure these in: **Repository Settings → Secrets and Variables → Actions**
 
-| Secret Name | Required | Description | Where to Find |
-|-------------|----------|-------------|---------------|
-| `WP_PUSHER_WEBHOOK_URL` | **Yes** | WP Pusher push-to-deploy URL | Staging WP Admin → WP Pusher → Themes → Click theme → Push-to-deploy URL |
-| `STAGING_URL` | **Yes** | Full staging site URL | e.g., `https://staging-novaramedia.kinsta.cloud` |
-| `KINSTA_API_KEY` | Optional | Kinsta API key for cache clearing | MyKinsta → API Keys → Create new |
-| `KINSTA_SITE_ID` | Optional | Site ID for API calls | MyKinsta → Sites → Site Info |
-| `KINSTA_STAGING_ENV_ID` | Optional | Staging environment ID | MyKinsta → Sites → Environments |
+| Secret Name             | Required | Description                       | Where to Find                                                            |
+| ----------------------- | -------- | --------------------------------- | ------------------------------------------------------------------------ |
+| `WP_PUSHER_WEBHOOK_URL` | **Yes**  | WP Pusher push-to-deploy URL      | Staging WP Admin → WP Pusher → Themes → Click theme → Push-to-deploy URL |
+| `STAGING_URL`           | **Yes**  | Full staging site URL             | e.g., `https://staging-novaramedia.kinsta.cloud`                         |
+| `KINSTA_API_KEY`        | Optional | Kinsta API key for cache clearing | MyKinsta → API Keys → Create new                                         |
+| `KINSTA_SITE_ID`        | Optional | Site ID for API calls             | MyKinsta → Sites → Site Info                                             |
+| `KINSTA_STAGING_ENV_ID` | Optional | Staging environment ID            | MyKinsta → Sites → Environments                                          |
 
 ### How to Get WP Pusher Webhook URL
 
@@ -424,4 +445,3 @@ Configure these in: **Repository Settings → Secrets and Variables → Actions*
 2. **Then:** Gather Kinsta API credentials and site IDs
 3. **Then:** Implement Phase 1 workflow changes
 4. **Finally:** Test and iterate on the pipeline
-
