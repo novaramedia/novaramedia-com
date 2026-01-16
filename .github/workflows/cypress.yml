@@ -80,7 +80,7 @@ jobs:
               --exclude ^cypress/screenshots/$ \
               --exclude \.log$ \
               --exclude ^\.env \
-              ./ ./
+              ./ ./novaramedia-com/
             quit
           "
 
@@ -215,7 +215,7 @@ jobs:
               --exclude ^cypress/screenshots/$ \
               --exclude \.log$ \
               --exclude ^\.env \
-              ./ ./
+              ./ ./novaramedia-com/
             quit
           "
 
