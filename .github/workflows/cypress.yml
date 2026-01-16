@@ -22,6 +22,11 @@ on:
       - master
       - main
       - development
+  # Temporary: trigger on push to this branch while developing the workflow
+  # Remove this after merging to development
+  push:
+    branches:
+      - copilot/add-cypress-testing-ci
 
 # Ensure only one PR tests against staging at a time
 concurrency:
