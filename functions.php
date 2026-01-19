@@ -187,6 +187,7 @@ get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-seo' );
+get_template_part( 'lib/functions-capabilities' );
 
 // Newsletter migration - auto-runs on deployment
 get_template_part( 'lib/newsletter-migration' );
