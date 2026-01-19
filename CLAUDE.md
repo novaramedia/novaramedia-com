@@ -12,7 +12,7 @@ This file provides guidance to Claude Code when working in this repository.
 ### Notion (Novara Media Workspace)
 
 - **Project Record:** [novaramedia-com v4.4.0](https://www.notion.so/novaramedia/novaramedia-com-v4-4-0-4982b2ecfcb64fd8b2583b409a7a0276)
-  - *Note: This is in the Novara Media Notion workspace. Access manually via browser.*
+  - _Note: This is in the Novara Media Notion workspace. Access manually via browser._
 
 ### GitHub
 
@@ -38,6 +38,7 @@ See [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for det
 - Git workflow and commit guidelines
 
 **Key points:**
+
 - Modern WordPress theme with modular JavaScript (Webpack)
 - 24-column grid system with responsive breakpoints
 - BEM-like CSS naming conventions
@@ -47,6 +48,7 @@ See [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for det
 ## Working With Other Agents
 
 This codebase is worked on by:
+
 - Claude Code (terminal-based AI)
 - GitHub Copilot (editor-based AI)
 - Human developers
@@ -60,4 +62,4 @@ This codebase is worked on by:
 
 ---
 
-*This file is compatible with GitHub Copilot instructions format.*
+_This file is compatible with GitHub Copilot instructions format._
