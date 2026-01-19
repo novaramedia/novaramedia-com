@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Editor role users can now edit navigation menus in Appearance > Menus
+- New capability management system in `lib/functions-capabilities.php`
+
+### Security
+
+- Restricted editor role from accessing themes, widgets, customizer, and theme file editor
+- Only menu editing is allowed for editors under Appearance menu
+
 ## [4.3.1] - 2026-01-15
 
 ### Changed
