@@ -63,9 +63,10 @@ describe('Single Post (Article)', () => {
       .and('not.be.empty');
 
     // Content should have paragraphs
-    cy.get(
-      '#single-articles-copy p, article .text-copy p, article p'
-    ).should('have.length.greaterThan', 0);
+    cy.get('#single-articles-copy p, article .text-copy p, article p').should(
+      'have.length.greaterThan',
+      0
+    );
   });
 
   it('should display post metadata', () => {
@@ -115,7 +116,9 @@ describe('Single Post (Article)', () => {
       cy.get('main, .main, #main').should('be.visible');
 
       // Title should be visible
-      cy.get('#single-articles-title, article h1, h1.entry-title, h1.post-title')
+      cy.get(
+        '#single-articles-title, article h1, h1.entry-title, h1.post-title'
+      )
         .first()
         .should('be.visible');
     });
