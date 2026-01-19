@@ -33,37 +33,37 @@ $podcast_copy = !empty($podcast_copy_override) ? $podcast_copy_override : 'Subsc
       }
     }
   </style>
-  <div class="background-acfm-pink">
-    <section class="container pt-5 pb-5 mb-4 font-color-white">
-      <div class="grid-row">
-        <div class="grid-item is-s-16 is-xxl-8 mt-4 font-size-12 font-weight-bold text-paragraph-breaks">
-          <?php echo category_description(); ?>
-        </div>
-        <div class="category-archive__acfm__logo grid-item is-s-8 is-xxl-8 text-align-center">
-          <?php echo nm_get_file('/dist/img/products/acfm/acfm-logo.svg'); ?>
-        </div>
-        <div class="grid-item is-s-24 is-xxl-8 mt-4">
-          <?php
-            if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
-              $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
-          ?>
-          <a class="ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
-          <?php
-            }
-          ?>
+  <div class="container">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
+        <div class="grid-row grid-row--nested background-acfm-pink font-color-white ui-rounded-box ui-backgrounded-box-padding">
+          <div class="grid-item is-s-16 is-xxl-8 font-size-12 font-weight-bold text-paragraph-breaks">
+            <?php echo category_description(); ?>
+          </div>
+          <div class="category-archive__acfm__logo grid-item is-s-8 is-xxl-8 text-align-center">
+            <?php echo nm_get_file('/dist/img/products/acfm/acfm-logo.svg'); ?>
+          </div>
+          <div class="grid-item is-s-24 is-xxl-8">
+            <?php
+              if (get_term_meta($category->term_id, '_nm_podcast_url', true)) {
+                $podcast_url = get_term_meta($category->term_id, '_nm_podcast_url', true);
+            ?>
+            <a class="ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <?php
+              }
+            ?>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 
   <?php
     $newsletter = get_posts(
       array(
-        'post_type'              => 'page',
-        'title'                  => 'ACFM Newsletter',
-        'numberposts'            => 1,
-        'update_post_term_cache' => false,
-        'update_post_meta_cache' => false,
+        'post_type'  => 'page',
+        'title'      => 'ACFM',
+        'numberposts' => 1,
       )
     );
 
