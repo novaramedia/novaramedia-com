@@ -13,10 +13,9 @@ describe('Single Post (Article)', () => {
     // Visit homepage to find a recent article link
     cy.visit('/');
 
-    // Find first article link (not in header/footer/nav)
-    cy.get(
-      'main article a, .main article a, #main article a, article h2 a, article h3 a'
-    )
+    // Find first post link from the main content area
+    // Homepage uses .post__title wrapped in <a class="ui-hover"> links
+    cy.get('#main-content a.ui-hover')
       .first()
       .then(($link) => {
         articleUrl = $link.prop('href');
@@ -49,25 +48,24 @@ describe('Single Post (Article)', () => {
   });
 
   it('should display article content', () => {
-    // Article should have a title
-    cy.get('article h1, .article h1, .post h1, h1.entry-title, h1.post-title')
+    // Article should have a title (h1 with id="single-articles-title" or similar)
+    cy.get(
+      '#single-articles-title, article h1, h1.entry-title, h1.post-title, #post h1'
+    )
       .should('have.length.greaterThan', 0)
       .first()
       .should('be.visible')
       .and('not.be.empty');
 
-    // Article should have body content
-    cy.get(
-      'article .entry-content, article .post-content, article .content, .article-content, .post-body'
-    )
+    // Article should have body content (in .text-copy container)
+    cy.get('#single-articles-copy, article .text-copy, article .content')
       .should('exist')
       .and('not.be.empty');
 
     // Content should have paragraphs
-    cy.get('article p, .entry-content p, .post-content p, .content p').should(
-      'have.length.greaterThan',
-      0
-    );
+    cy.get(
+      '#single-articles-copy p, article .text-copy p, article p'
+    ).should('have.length.greaterThan', 0);
   });
 
   it('should display post metadata', () => {
@@ -117,7 +115,7 @@ describe('Single Post (Article)', () => {
       cy.get('main, .main, #main').should('be.visible');
 
       // Title should be visible
-      cy.get('article h1, .article h1, h1.entry-title, h1.post-title')
+      cy.get('#single-articles-title, article h1, h1.entry-title, h1.post-title')
         .first()
         .should('be.visible');
     });

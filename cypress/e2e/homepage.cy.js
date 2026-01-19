@@ -44,13 +44,12 @@ describe('Homepage', () => {
   });
 
   it('should display post content', () => {
-    // Homepage should display posts/articles
-    cy.get('article, .article, .post').should('have.length.greaterThan', 0);
+    // Homepage displays posts with .post__title class (h2 or h4 elements)
+    // This theme doesn't use <article> tags on the homepage
+    cy.get('#main-content .post__title').should('have.length.greaterThan', 0);
 
-    // Posts should have titles
-    cy.get(
-      'article h2, article h3, .article h2, .article h3, .post h2, .post h3'
-    )
+    // Posts should have visible titles
+    cy.get('#main-content .post__title')
       .first()
       .should('be.visible')
       .and('not.be.empty');
