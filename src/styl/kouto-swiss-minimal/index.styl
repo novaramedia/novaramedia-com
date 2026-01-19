@@ -1,0 +1,561 @@
+// ============================================================================
+// Kouto Swiss - Minimal Version
+// ============================================================================
+// This is a curated subset of Kouto Swiss utilities without:
+// - Browser vendor prefixing (handled by autoprefixer)
+// - Meyer reset and Normalize (included in nm-stylus-library)
+// - Outdated browser support utilities
+// ============================================================================
+
+// Global Configuration
+// ============================================================================
+ks-no-conflict ?= false
+
+// Internal Utilities
+// ============================================================================
+
+// _replace
+// internal search and replace in expr
+_replace( expr, str, val )
+    expr = clone( expr )
+    for e, i in expr
+        if str == e
+            expr[ i ] = val
+    expr
+
+// _strip-units
+// remove units of a number
+_strip-units( val )
+    unit( val, "" )
+
+// Functions
+// ============================================================================
+
+// em() - Convert px to em
+ks-em( value, base = 16 )
+    value = _strip-units( value )
+    base = _strip-units( base )
+    value / base * 1em
+
+em = ks-em unless ks-no-conflict
+
+// rem() - Convert px to rem
+ks-rem-base = 16px
+
+ks-rem( values )
+    base = ks-rem-base is a "unit" ? ks-rem-base : 16
+    result = null
+    for value in values
+        if type( value ) == "unit" && ( unit( value ) == "px" || unit( value ) == "" )
+            value = unit( round( value / base, 3 ), "rem" )
+            if value == "0rem" { value = 0 }
+        result = result != null ? result value : value
+    result
+
+rem = ks-rem unless ks-no-conflict
+
+// percent() - Calculate percentage
+ks-percent( value, total )
+    value = _strip-units( value )
+    total = _strip-units( total )
+    value / total * 100%
+
+percent = ks-percent unless ks-no-conflict
+
+// Color Functions
+// ============================================================================
+
+// monochrome() - Returns monochrome variations of given color
+ks-monochrome( color )
+    result = ()
+    for i in 1..5
+        push( result, lighten( color, i * 10% ) )
+        push( result, darken( color, i * 10% ) )
+    result
+
+monochrome = ks-monochrome unless ks-no-conflict
+
+// split-complements() - Returns split-complement variations of given color
+ks-split-complements( color, angle = 30 )
+    first = spin( color, ( 180 - angle ) )
+    second = spin( color, ( 180 + angle ) )
+    ( first second )
+
+split-complements = ks-split-complements unless ks-no-conflict
+
+// analogous() - Returns analogous variations of given color
+ks-analogous( color, angle = 30 )
+    first = spin( color, angle )
+    second = spin( color, -angle )
+    ( first second )
+
+analogous = ks-analogous unless ks-no-conflict
+
+// triad() - Returns triad variations of given color
+ks-triad( color )
+    first = spin( color, 120 )
+    second = spin( color, -120 )
+    ( first second )
+
+triad = ks-triad unless ks-no-conflict
+
+// quad() - Returns quad (tetrad) variations of given color
+ks-quad( color )
+    first = spin( color, 90 )
+    second = spin( color, -90 )
+    third = spin( color, 180 )
+    ( first second third )
+
+quad = ks-quad unless ks-no-conflict
+ks-tetrad = ks-quad
+tetrad = ks-quad unless ks-no-conflict
+
+// luminosity() - Returns luminosity of a color
+ks-luminosity( color )
+    _r = red( color ) / 255
+    _g = green( color ) / 255
+    _b = blue( color ) / 255
+
+    _r = _r <= 0.03928 ? _r / 12.92 : ( ( _r + 0.055 ) / 1.055 ) ** 2.4
+    _g = _g <= 0.03928 ? _g / 12.92 : ( ( _g + 0.055 ) / 1.055 ) ** 2.4
+    _b = _b <= 0.03928 ? _b / 12.92 : ( ( _b + 0.055 ) / 1.055 ) ** 2.4
+
+    ( 0.2126 * _r ) + ( 0.7152 * _g ) + ( 0.0722 * _b )
+
+luminosity = ks-luminosity unless ks-no-conflict
+
+// color-fallback() - Provide a fallback color
+ks-color-fallback( color, fallback = false )
+    if fallback
+        color: fallback
+    color: color
+
+color-fallback = ks-color-fallback unless ks-no-conflict
+
+// Utilities - Clearfix
+// ============================================================================
+
+ks-clearfix()
+    &:before
+    &:after
+        content: " "
+        display: table
+    &:after
+        clear: both
+
+clearfix = ks-clearfix unless ks-no-conflict
+
+ks-clear( value, args... )
+    if value == fix
+        clearfix()
+    else
+        clear: value args
+
+clear = ks-clear unless ks-no-conflict
+
+_ks-fix-processing( current-property )
+    if( current-property[ 0 ] == "clear" )
+        fix
+    else
+        error( "fix() must be used within a clear property" )
+
+ks-fix()
+    if( current-property )
+        _ks-fix-processing( current-property )
+    else
+        error( "ks-fix() must be used within a clear property" )
+
+unless ks-no-conflict
+    fix()
+        if( current-property )
+            _ks-fix-processing( current-property )
+        else
+            error( "fix() must be used within a clear property" )
+
+// Utilities - Position
+// ============================================================================
+
+ks-position( type, args )
+    position: unquote( type )
+    if length( args ) == 1
+        args = args[ 0 ]
+    
+    if( length( args ) == 1 )
+        {args[0]}: args[ 1 ]
+    else if( length( args ) == 2 )
+        top: args[ 0 ]
+        left: args[ 1 ]
+        bottom: args[ 0 ]
+        right: args[ 1 ]
+    else if( length( args ) == 3 )
+        top: args[ 0 ]
+        left: args[ 1 ]
+        bottom: args[ 2 ]
+        right: args[ 1 ]
+    else if( length( args ) >= 4 )
+        top: args[ 0 ]
+        right: args[ 1 ]
+        bottom: args[ 2 ]
+        left: args[ 3 ]
+
+ks-absolute( args... )
+    ks-position( "absolute", args )
+
+absolute = ks-absolute unless ks-no-conflict
+
+ks-fixed( args... )
+    ks-position( "fixed", args )
+
+fixed = ks-fixed unless ks-no-conflict
+
+ks-relative( args... )
+    if( length( arguments ) > 0 )
+        ks-position( "relative", args )
+    else
+        position: relative
+
+relative = ks-relative unless ks-no-conflict
+
+// Utilities - Size
+// ============================================================================
+
+ks-size( width, height = width )
+    width: width
+    height: height
+
+size = ks-size unless ks-no-conflict
+
+// Utilities - Overflow
+// ============================================================================
+
+ks-ellipsis( type = null )
+    if type
+        overflow: type
+    else
+        overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+ellipsis = ks-ellipsis unless ks-no-conflict
+
+ks-nowrap()
+    white-space: nowrap
+
+nowrap = ks-nowrap unless ks-no-conflict
+
+ks-overflow( args... )
+    if args[ 0 ] == "ellipsis"
+        ks-ellipsis()
+    else
+        overflow: args
+
+overflow = ks-overflow unless ks-no-conflict
+
+// Utilities - Modular Scale & Golden Ratio
+// ============================================================================
+
+ks-modular-scale-ratio = 1.618 // golden ratio by default
+ks-modular-scale-base = 1em
+
+ks-modular-scale( increment = 0, base = ks-modular-scale-base, ratio = ks-modular-scale-ratio )
+    if base is a "unit"
+        unit( ( base * ( ratio ** increment ) ), "" ) * 1unit( base )
+    else
+        base * ( ratio ** increment )
+
+modular-scale = ks-modular-scale unless ks-no-conflict
+ms = ks-modular-scale unless ks-no-conflict
+
+ks-golden-ratio = 1.618
+golden-ratio = ks-golden-ratio unless ks-no-conflict
+
+// Utilities - Hide Text
+// ============================================================================
+
+ks-hide-text()
+    overflow: hidden
+    text-indent: 101%
+    white-space: nowrap
+
+hide-text = ks-hide-text unless ks-no-conflict
+
+// Utilities - Triangle
+// ============================================================================
+
+ks-triangle( direction = up, size = 10px, color = #000 )
+    width: 0
+    height: 0
+    border-style: solid
+    
+    if direction == up
+        border-width: 0 ( size / 2 ) size ( size / 2 )
+        border-color: transparent transparent color transparent
+    else if direction == down
+        border-width: size ( size / 2 ) 0 ( size / 2 )
+        border-color: color transparent transparent transparent
+    else if direction == left
+        border-width: ( size / 2 ) size ( size / 2 ) 0
+        border-color: transparent color transparent transparent
+    else if direction == right
+        border-width: ( size / 2 ) 0 ( size / 2 ) size
+        border-color: transparent transparent transparent color
+    else if direction == up-right || direction == right-up
+        border-width: 0 size size 0
+        border-color: transparent color transparent transparent
+    else if direction == up-left || direction == left-up
+        border-width: size size 0 0
+        border-color: color transparent transparent transparent
+    else if direction == down-right || direction == right-down
+        border-width: 0 0 size size
+        border-color: transparent transparent color transparent
+    else if direction == down-left || direction == left-down
+        border-width: size 0 0 size
+        border-color: transparent transparent transparent color
+
+triangle = ks-triangle unless ks-no-conflict
+
+// Utilities - Easing
+// ============================================================================
+
+// Easing curves
+ks-ease-in-quad = cubic-bezier( 0.550,  0.085, 0.680, 0.530 )
+ks-ease-in-cubic = cubic-bezier( 0.550,  0.055, 0.675, 0.190 )
+ks-ease-in-quart = cubic-bezier( 0.895,  0.030, 0.685, 0.220 )
+ks-ease-in-quint = cubic-bezier( 0.755,  0.050, 0.855, 0.060 )
+ks-ease-in-sine = cubic-bezier( 0.470,  0.000, 0.745, 0.715 )
+ks-ease-in-expo = cubic-bezier( 0.950,  0.050, 0.795, 0.035 )
+ks-ease-in-circ = cubic-bezier( 0.600,  0.040, 0.980, 0.335 )
+ks-ease-in-back = cubic-bezier( 0.600, -0.280, 0.735, 0.045 )
+
+ks-ease-out-quad = cubic-bezier( 0.250,  0.460, 0.450, 0.940 )
+ks-ease-out-cubic = cubic-bezier( 0.215,  0.610, 0.355, 1.000 )
+ks-ease-out-quart = cubic-bezier( 0.165,  0.840, 0.440, 1.000 )
+ks-ease-out-quint = cubic-bezier( 0.230,  1.000, 0.320, 1.000 )
+ks-ease-out-sine = cubic-bezier( 0.390,  0.575, 0.565, 1.000 )
+ks-ease-out-expo = cubic-bezier( 0.190,  1.000, 0.220, 1.000 )
+ks-ease-out-circ = cubic-bezier( 0.075,  0.820, 0.165, 1.000 )
+ks-ease-out-back = cubic-bezier( 0.175,  0.885, 0.320, 1.275 )
+
+ks-ease-in-out-quad = cubic-bezier( 0.455,  0.030, 0.515, 0.955 )
+ks-ease-in-out-cubic = cubic-bezier( 0.645,  0.045, 0.355, 1.000 )
+ks-ease-in-out-quart = cubic-bezier( 0.770,  0.000, 0.175, 1.000 )
+ks-ease-in-out-quint = cubic-bezier( 0.860,  0.000, 0.070, 1.000 )
+ks-ease-in-out-sine = cubic-bezier( 0.445,  0.050, 0.550, 0.950 )
+ks-ease-in-out-expo = cubic-bezier( 1.000,  0.000, 0.000, 1.000 )
+ks-ease-in-out-circ = cubic-bezier( 0.785,  0.135, 0.150, 0.860 )
+ks-ease-in-out-back = cubic-bezier( 0.680, -0.550, 0.265, 1.550 )
+
+unless ks-no-conflict
+    ease-in-quad = ks-ease-in-quad
+    ease-in-cubic = ks-ease-in-cubic
+    ease-in-quart = ks-ease-in-quart
+    ease-in-quint = ks-ease-in-quint
+    ease-in-sine = ks-ease-in-sine
+    ease-in-expo = ks-ease-in-expo
+    ease-in-circ = ks-ease-in-circ
+    ease-in-back = ks-ease-in-back
+    
+    ease-out-quad = ks-ease-out-quad
+    ease-out-cubic = ks-ease-out-cubic
+    ease-out-quart = ks-ease-out-quart
+    ease-out-quint = ks-ease-out-quint
+    ease-out-sine = ks-ease-out-sine
+    ease-out-expo = ks-ease-out-expo
+    ease-out-circ = ks-ease-out-circ
+    ease-out-back = ks-ease-out-back
+    
+    ease-in-out-quad = ks-ease-in-out-quad
+    ease-in-out-cubic = ks-ease-in-out-cubic
+    ease-in-out-quart = ks-ease-in-out-quart
+    ease-in-out-quint = ks-ease-in-out-quint
+    ease-in-out-sine = ks-ease-in-out-sine
+    ease-in-out-expo = ks-ease-in-out-expo
+    ease-in-out-circ = ks-ease-in-out-circ
+    ease-in-out-back = ks-ease-in-out-back
+
+// Utilities - Font Stacks
+// ============================================================================
+
+ks-ff-helvetica = "Helvetica Neue", Helvetica, Arial, sans-serif
+ks-ff-lucida-grande = "Lucida Grande", Tahoma, Verdana, Arial, sans-serif
+ks-ff-verdana = Verdana, Geneva, Arial, Helvetica, sans-serif
+ks-ff-georgia = Georgia, Times, "Times New Roman", serif
+ks-ff-cambria = Cambria, Georgia, Times, "Times New Roman", serif
+ks-ff-garamond = Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif
+ks-ff-monospace = "Consolas", "Monaco", "Courier New", Courier, monospace
+
+unless ks-no-conflict
+    ff-helvetica = ks-ff-helvetica
+    ff-lucida-grande = ks-ff-lucida-grande
+    ff-verdana = ks-ff-verdana
+    ff-georgia = ks-ff-georgia
+    ff-cambria = ks-ff-cambria
+    ff-garamond = ks-ff-garamond
+    ff-monospace = ks-ff-monospace
+
+// Mixins - calc()
+// ============================================================================
+// Note: This mixin is for generating calc() with vendor prefixes historically
+// Modern browsers don't need this, so we keep it minimal
+// Don't override native calc() to avoid conflicts
+
+ks-calc( property, value )
+    {property}: "calc(%s)" % value
+    {property}: unquote( "calc(" + value + ")" )
+
+// Don't create calc alias to avoid conflicts with native CSS calc()
+// calc = ks-calc unless ks-no-conflict
+
+// Mixins - Gradients (modern syntax only, no vendor prefixes)
+// ============================================================================
+
+ks-linear-gradient( args... )
+    unquote( "linear-gradient(" + args + ")" )
+
+linear-gradient = ks-linear-gradient unless ks-no-conflict
+
+ks-radial-gradient( args... )
+    unquote( "radial-gradient(" + args + ")" )
+
+radial-gradient = ks-radial-gradient unless ks-no-conflict
+
+ks-repeating-linear-gradient( args... )
+    unquote( "repeating-linear-gradient(" + args + ")" )
+
+repeating-linear-gradient = ks-repeating-linear-gradient unless ks-no-conflict
+
+ks-repeating-radial-gradient( args... )
+    unquote( "repeating-radial-gradient(" + args + ")" )
+
+repeating-radial-gradient = ks-repeating-radial-gradient unless ks-no-conflict
+
+// Mixins - placeholder()
+// ============================================================================
+
+ks-placeholder()
+    &::-webkit-input-placeholder
+        {block}
+    &:-moz-placeholder
+        {block}
+    &::-moz-placeholder
+        {block}
+    &:-ms-input-placeholder
+        {block}
+    &::placeholder
+        {block}
+
+placeholder = ks-placeholder unless ks-no-conflict
+
+// Mixins - font-face()
+// ============================================================================
+
+ks-font-face( family, files, weight = "normal", style = "normal" )
+    @font-face
+        font-family: family
+        src: files
+        font-weight: unquote( weight )
+        font-style: unquote( style )
+
+font-face = ks-font-face unless ks-no-conflict
+
+// Mixins - ratio-box()
+// ============================================================================
+
+ks-ratio-box( ratio = 1/1 )
+    overflow: hidden
+    position: relative
+    &:before
+        content: ''
+        display: block
+        padding-top: ( 1 / ratio * 100% )
+    & > *
+        bottom: 0
+        left: 0
+        position: absolute
+        right: 0
+        top: 0
+
+ratio-box = ks-ratio-box unless ks-no-conflict
+
+// Colors
+// ============================================================================
+
+// Basic color keywords
+ks-aqua = #00ffff
+ks-blue = #0000ff
+ks-fuchsia = #ff00ff
+ks-gray = #808080
+ks-green = #008000
+ks-lime = #00ff00
+ks-maroon = #800000
+ks-navy = #000080
+ks-olive = #808000
+ks-orange = #ffa500
+ks-purple = #800080
+ks-red = #ff0000
+ks-silver = #c0c0c0
+ks-teal = #008080
+ks-white = #ffffff
+ks-yellow = #ffff00
+
+unless ks-no-conflict
+    aqua = ks-aqua
+    blue = ks-blue
+    fuchsia = ks-fuchsia
+    gray = ks-gray
+    green = ks-green
+    lime = ks-lime
+    maroon = ks-maroon
+    navy = ks-navy
+    olive = ks-olive
+    orange = ks-orange
+    purple = ks-purple
+    red = ks-red
+    silver = ks-silver
+    teal = ks-teal
+    white = ks-white
+    yellow = ks-yellow
+
+// Media Query Utilities
+// ============================================================================
+
+ks-min-screen( width )
+    @media screen and ( min-width: width )
+        {block}
+
+ks-max-screen( width )
+    @media screen and ( max-width: width )
+        {block}
+
+ks-screen( min-width, max-width = null )
+    if max-width
+        @media screen and ( min-width: min-width ) and ( max-width: max-width )
+            {block}
+    else
+        @media screen and ( min-width: min-width )
+            {block}
+
+unless ks-no-conflict
+    min-screen = ks-min-screen
+    max-screen = ks-max-screen
+    screen = ks-screen
+
+// Retina Query
+// ============================================================================
+
+ks-retina()
+    @media only screen and ( -webkit-min-device-pixel-ratio: 2 ), only screen and ( min-device-pixel-ratio: 2 )
+        {block}
+
+retina = ks-retina unless ks-no-conflict
+
+// Retina Image
+// ============================================================================
+
+ks-retina-image( file, width, height, extension = "png" )
+    background-image: url( file + "." + extension )
+    ks-retina()
+        background-image: url( file + "@2x." + extension )
+        background-size: width height
+
+retina-image = ks-retina-image unless ks-no-conflict
