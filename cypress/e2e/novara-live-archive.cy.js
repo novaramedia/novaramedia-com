@@ -32,10 +32,15 @@ describe('Novara Live Category Archive', () => {
 
   it('should display Novara Live posts', () => {
     // Should have post listings
-    cy.get('article, .post, .entry, [class*="post"]').should('have.length.greaterThan', 0);
+    cy.get('article, .post, .entry, [class*="post"]').should(
+      'have.length.greaterThan',
+      0
+    );
 
     // Posts should have titles
-    cy.get('article h2, article h3, .post h2, .post h3, .entry-title, .post-title')
+    cy.get(
+      'article h2, article h3, .post h2, .post h3, .entry-title, .post-title'
+    )
       .should('have.length.greaterThan', 0)
       .first()
       .should('be.visible');
@@ -43,7 +48,10 @@ describe('Novara Live Category Archive', () => {
 
   it('should have post links', () => {
     // Each post should link to its single page
-    cy.get('article a, .post a, a.ui-hover').should('have.length.greaterThan', 0);
+    cy.get('article a, .post a, a.ui-hover').should(
+      'have.length.greaterThan',
+      0
+    );
 
     // At least one link should have an href
     cy.get('article a, .post a, a.ui-hover')
@@ -56,7 +64,8 @@ describe('Novara Live Category Archive', () => {
     // Page should indicate it's the Novara Live category
     cy.get('body').then(($body) => {
       const text = $body.text().toLowerCase();
-      const hasNovaraLive = text.includes('novara live') || text.includes('novara-live');
+      const hasNovaraLive =
+        text.includes('novara live') || text.includes('novara-live');
 
       expect(hasNovaraLive).to.be.true;
     });
@@ -67,7 +76,9 @@ describe('Novara Live Category Archive', () => {
     cy.get('body').then(($body) => {
       // Check if there's substantial content beyond just post listings
       const hasCategoryInfo =
-        $body.find('.category-description, .archive-description, .term-description').length > 0 ||
+        $body.find(
+          '.category-description, .archive-description, .term-description'
+        ).length > 0 ||
         $body.find('section, .intro, [class*="description"]').length > 0;
 
       // It's okay if there's no explicit description section
@@ -105,11 +116,13 @@ describe('Novara Live Category Archive', () => {
 
   it('should display post metadata', () => {
     // Posts in archive should have some metadata
-    cy.get('article, .post').first().within(() => {
-      cy.get(
-        'time, .date, .author, .meta, [class*="meta"], .byline, .posted-on, [datetime]'
-      ).should('exist');
-    });
+    cy.get('article, .post')
+      .first()
+      .within(() => {
+        cy.get(
+          'time, .date, .author, .meta, [class*="meta"], .byline, .posted-on, [datetime]'
+        ).should('exist');
+      });
   });
 
   it('should have pagination or load more if many posts', () => {

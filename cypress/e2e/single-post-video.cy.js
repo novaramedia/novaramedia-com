@@ -67,10 +67,9 @@ describe('Single Post (Video Category)', () => {
 
   it('should display post metadata', () => {
     cy.get('article').within(() => {
-      cy.get('.author, .byline, .posted-by, time, .date, .category, .meta, [class*="meta"]').should(
-        'have.length.greaterThan',
-        0
-      );
+      cy.get(
+        '.author, .byline, .posted-by, time, .date, .category, .meta, [class*="meta"]'
+      ).should('have.length.greaterThan', 0);
     });
   });
 
@@ -104,7 +103,9 @@ describe('Single Post (Video Category)', () => {
       cy.get('main, .main, #main').should('be.visible');
 
       // Title should remain visible
-      cy.get('article h1, .article h1, h1.entry-title, h1.post-title').first().should('be.visible');
+      cy.get('article h1, .article h1, h1.entry-title, h1.post-title')
+        .first()
+        .should('be.visible');
     });
   });
 

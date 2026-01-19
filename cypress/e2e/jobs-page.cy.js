@@ -33,7 +33,10 @@ describe('Jobs Page', () => {
       cy.get('h1, h2, h3').should('have.length.greaterThan', 0);
 
       // Should have content - either job listings or informational text
-      cy.get('p, article, .job, .listing, section').should('have.length.greaterThan', 0);
+      cy.get('p, article, .job, .listing, section').should(
+        'have.length.greaterThan',
+        0
+      );
     });
   });
 

@@ -58,10 +58,9 @@ describe('About Page', () => {
   it('should have proper content structure', () => {
     // About pages typically have sections or content blocks
     cy.get('main, .main, #main').within(() => {
-      cy.get('section, article, .section, .content-block, div[class*="grid"]').should(
-        'have.length.greaterThan',
-        0
-      );
+      cy.get(
+        'section, article, .section, .content-block, div[class*="grid"]'
+      ).should('have.length.greaterThan', 0);
     });
   });
 

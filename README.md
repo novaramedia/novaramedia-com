@@ -60,11 +60,13 @@ This project uses [Cypress](https://www.cypress.io/) for end-to-end testing of t
 Current test suites cover:
 
 **Priority 1 (Core Tests):**
+
 - **Homepage** - Main landing page loads with key elements
 - **Support Page** - Donation/support page functionality
 - **Single Post (Article)** - Individual article display and navigation
 
 **Priority 2 (Secondary Views):**
+
 - **Single Post (Video)** - Video category posts with media player
 - **Single Post (Audio)** - Audio/podcast posts with audio player
 - **About Page** - Organizational information and content
