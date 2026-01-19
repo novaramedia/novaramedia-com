@@ -42,8 +42,15 @@ add_action( 'admin_init', 'nm_add_editor_menu_capability' );
  */
 function nm_restrict_editor_theme_options( $caps, $cap, $user_id ) {
   // Only apply restrictions to users with editor role
-  $user = get_userdata( $user_id );
-  if ( ! $user || ! in_array( 'editor', $user->roles, true ) ) {
+  // Cache role check as this filter runs frequently
+  static $editor_users = array();
+  
+  if ( ! isset( $editor_users[ $user_id ] ) ) {
+    $user = get_userdata( $user_id );
+    $editor_users[ $user_id ] = $user && in_array( 'editor', $user->roles, true );
+  }
+  
+  if ( ! $editor_users[ $user_id ] ) {
     return $caps;
   }
   
@@ -62,17 +69,24 @@ function nm_restrict_editor_theme_options( $caps, $cap, $user_id ) {
       $is_menu_page = $pagenow === 'nav-menus.php';
       
       // Check for menu-related AJAX actions
+      // Note: WordPress handles nonce verification in the actual AJAX handlers
+      // This capability check only determines if the user has permission
       $is_menu_ajax = false;
       if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) ) {
         $action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
-        $menu_actions = array(
-          'add-menu-item',
-          'delete-menu-item',
-          'update-menu-item',
-          'menu-quick-search',
-          'menu-locations-save',
-          'menu-get-metabox',
-          'add-menu',
+        
+        // Allow filtering of menu actions for extensibility
+        $menu_actions = apply_filters(
+          'nm_editor_allowed_menu_actions',
+          array(
+            'add-menu-item',
+            'delete-menu-item',
+            'update-menu-item',
+            'menu-quick-search',
+            'menu-locations-save',
+            'menu-get-metabox',
+            'add-menu',
+          )
         );
         $is_menu_ajax = in_array( $action, $menu_actions, true );
       }
