@@ -37,6 +37,9 @@ on:
   # Allow manual triggering for testing
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 # Ensure only one PR tests against staging at a time
 concurrency:
   group: staging-cypress-tests
