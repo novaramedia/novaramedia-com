@@ -47,7 +47,7 @@ This document summarizes the Cypress testing framework implementation for the No
    - Responsive behavior
    - Proper heading structure
 
-3. **Single Post** (`cypress/e2e/single-post.cy.js`)
+3. **Single Post (Article)** (`cypress/e2e/single-post.cy.js`)
    - Dynamically finds recent article from homepage
    - Page loads successfully
    - Article content displays with title and body
@@ -56,6 +56,49 @@ This document summarizes the Cypress testing framework implementation for the No
    - No console errors
    - Responsive behavior
    - Proper heading hierarchy
+
+#### Test Suites (Priority 2)
+
+4. **Single Post (Video)** (`cypress/e2e/single-post-video.cy.js`)
+   - Finds video post from video category archive
+   - Page loads successfully
+   - Video player or embed present
+   - Video post content displays
+   - Post metadata and category indicator
+   - No console errors
+   - Responsive behavior
+
+5. **Single Post (Audio)** (`cypress/e2e/single-post-audio.cy.js`)
+   - Finds audio post from audio category archive
+   - Page loads successfully
+   - Audio player or embed present
+   - Audio post content displays
+   - Post metadata and category indicator
+   - No console errors
+   - Responsive behavior
+
+6. **About Page** (`cypress/e2e/about-page.cy.js`)
+   - Page loads successfully
+   - Critical elements present
+   - Organizational information displays
+   - Proper content structure
+   - No console errors
+   - Responsive behavior
+
+7. **Jobs Page** (`cypress/e2e/jobs-page.cy.js`)
+   - Page loads successfully
+   - Job listings or information displays
+   - Handles empty state gracefully
+   - No console errors
+   - Responsive behavior
+
+8. **Novara Live Archive** (`cypress/e2e/novara-live-archive.cy.js`)
+   - Category archive loads successfully
+   - Post listings display
+   - Post links work
+   - Category branding present
+   - No console errors
+   - Responsive behavior
 
 ### 3. GitHub Actions CI
 
@@ -195,7 +238,17 @@ To view test results:
 
 ✅ **Cypress suite covers all Priority 1 pages**
 
-- Homepage, Support page, Single post all tested
+- Homepage ✅
+- Support page ✅
+- Single post (article) ✅
+
+✅ **Cypress suite covers all Priority 2 pages**
+
+- Single post (video category) ✅
+- Single post (audio category) ✅
+- About page ✅
+- Jobs page ✅
+- Novara Live category archive ✅
 
 ✅ **GitHub Actions runs tests on every PR**
 
@@ -210,29 +263,21 @@ To view test results:
 - Comprehensive documentation in README and TESTING.md
 - Multiple run modes supported (headless, interactive, browsers)
 
-✅ **Foundation exists for adding Priority 2 tests incrementally**
+✅ **Foundation exists for adding additional tests incrementally**
 
 - Test structure supports easy addition of new test files
 - Custom commands provide reusable test patterns
-- Documentation includes Phase 2 roadmap
+- Documentation includes future enhancement roadmap
 
-## What's Next (Phase 2 - Future Work)
+## What's Next (Phase 3 - Future Work)
 
-### Priority 2 Tests
-
-- Single post (video category)
-- Single post (audio category)
-- About page
-- Jobs page
-- Novara Live category archive
-
-### Phase 3 Enhancements
+### Future Enhancements
 
 - Visual regression testing
 - Accessibility testing (pa11y, axe)
 - Performance benchmarks
-- User interaction flows
-- Backend PHP unit tests
+- User interaction flows (comments, search, etc.)
+- Backend PHP unit tests (PHPUnit)
 
 ## Technical Notes
 
@@ -265,7 +310,12 @@ To view test results:
 - `cypress.config.js` - Cypress configuration
 - `cypress/e2e/homepage.cy.js` - Homepage tests
 - `cypress/e2e/support-page.cy.js` - Support page tests
-- `cypress/e2e/single-post.cy.js` - Single post tests
+- `cypress/e2e/single-post.cy.js` - Single post (article) tests
+- `cypress/e2e/single-post-video.cy.js` - Video post tests
+- `cypress/e2e/single-post-audio.cy.js` - Audio post tests
+- `cypress/e2e/about-page.cy.js` - About page tests
+- `cypress/e2e/jobs-page.cy.js` - Jobs page tests
+- `cypress/e2e/novara-live-archive.cy.js` - Novara Live archive tests
 - `cypress/support/e2e.js` - Global test setup
 - `cypress/support/commands.js` - Custom commands
 - `cypress.env.json.example` - Config example

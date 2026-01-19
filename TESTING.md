@@ -254,20 +254,20 @@ For CI, you can configure:
 
 ## Test Coverage Roadmap
 
-### Phase 1: Core Tests ✅ (Current)
+### Phase 1: Core Tests ✅ (Complete)
 
 - [x] Homepage
 - [x] Support page
 - [x] Single post (article)
 - [x] GitHub Actions CI
 
-### Phase 2: Secondary Views (Planned)
+### Phase 2: Secondary Views ✅ (Complete)
 
-- [ ] Single post (video category)
-- [ ] Single post (audio category)
-- [ ] About page
-- [ ] Jobs page
-- [ ] Novara Live category archive
+- [x] Single post (video category)
+- [x] Single post (audio category)
+- [x] About page
+- [x] Jobs page
+- [x] Novara Live category archive
 
 ### Phase 3: Future Enhancements (Planned)
 
