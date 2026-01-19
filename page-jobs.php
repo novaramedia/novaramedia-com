@@ -10,17 +10,17 @@ if ( have_posts() ) {
     $meta = get_post_meta( $post->ID );
     ?>
   <article id="page-jobs" class="container margin-top-small margin-bottom-large">
-    <div class="flex-grid-row margin-bottom-small">
-      <div class="flex-grid-item flex-item-s-12">
+    <div class="grid-row margin-bottom-small">
+      <div class="grid-item is-s-12">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 
-    <div class="flex-grid-row flex-grid-row-m--reverse margin-bottom-small">
-      <div class="flex-grid-item flex-item-m-12 flex-item-l-8 flex-item-xl-7 flex-item-xxl-6 page-copy">
+    <div class="grid-row grid-row-m--reverse margin-bottom-small">
+      <div class="grid-item is-m-12 is-l-8 is-xl-7 is-xxl-6 page-copy">
         <?php the_content(); ?>
       </div>
-      <div class="flex-grid-item flex-item-m-12 flex-item-l-4 flex-item-xl-5 flex-item-xxl-6">
+      <div class="grid-item is-m-12 is-l-4 is-xl-5 is-xxl-6">
         <?php
         $start_of_day = strtotime( 'today midnight' );
         $jobs = get_posts(
