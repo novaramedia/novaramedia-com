@@ -7,6 +7,25 @@ $podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', tr
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 
 $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe to the podcast';
+
+$newsletter = get_posts(
+  array(
+    'post_type'   => 'newsletter',
+    'title'       => 'ACFM',
+    'numberposts' => 1,
+  )
+);
+
+$newsletter_post_id = false;
+$newsletter_mailchimp_key = false;
+
+if ( ! empty( $newsletter ) ) {
+  $newsletter_post_id = $newsletter[0]->ID;
+  $newsletter_meta    = get_post_meta( $newsletter_post_id );
+  $newsletter_mailchimp_key = ! empty( $newsletter_meta['_nm_mailchimp_key'] ) ? $newsletter_meta['_nm_mailchimp_key'][0] : false;
+}
+
+$should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
 ?>
 <main id="main-content" class="category-archive category-archive__acfm">
   <style type="text/css">
@@ -58,37 +77,18 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     </div>
   </div>
 
-  <?php
-    $newsletter = get_posts(
-      array(
-        'post_type'   => 'page',
-        'title'       => 'ACFM',
-        'numberposts' => 1,
-      )
-    );
-
-    if ( $newsletter ) {
-      $meta = get_post_meta( $newsletter[0]->ID );
-      $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
-
-      if ( $mailchimp_key ) {
-        get_template_part(
-            'partials/email-signup',
-            null,
-            array(
-          'newsletter_post_id' => $newsletter[0]->ID,
-        )
-            );
-      }
-    }
-    ?>
-
   <div class="container">
     <div class="grid-row mb-4">
 <?php
+$newsletter_inserted = false;
+$has_posts = false;
+
 if ( have_posts() ) {
+  $has_posts = true;
+  $post_count = 0;
   while ( have_posts() ) {
     the_post();
+    ++$post_count;
 
     get_template_part(
         'partials/post-layouts/flex-post',
@@ -98,6 +98,26 @@ if ( have_posts() ) {
       'image-size'        => 'col12-16to9',
     )
         );
+
+    // Display newsletter signup after 6th post.
+    if ( $post_count === 6 && $should_render_newsletter && ! $newsletter_inserted ) {
+      ?>
+    </div>
+  </div>
+      <?php
+      get_template_part(
+          'partials/email-signup',
+          null,
+          array(
+        'newsletter_post_id' => $newsletter_post_id,
+      )
+          );
+      $newsletter_inserted = true;
+      ?>
+  <div class="container">
+    <div class="grid-row mb-4">
+      <?php
+    }
   }
 } else {
   ?>
@@ -106,6 +126,24 @@ if ( have_posts() ) {
 }
 ?>
     </div>
+  <?php
+  if ( $has_posts && $should_render_newsletter && ! $newsletter_inserted ) {
+    ?>
+      </div>
+    <?php
+    get_template_part(
+        'partials/email-signup',
+        null,
+        array(
+      'newsletter_post_id' => $newsletter_post_id,
+    )
+        );
+    $newsletter_inserted = true;
+    ?>
+    <div class="container">
+    <?php
+  }
+  ?>
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <?php get_template_part( 'partials/pagination' ); ?>
