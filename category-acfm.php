@@ -6,7 +6,7 @@ $category = get_category( get_query_var( 'cat' ) );
 $podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 
-$podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe to the podcast';
+$podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe in your podcast app';
 
 $newsletter = get_posts(
   array(
@@ -53,16 +53,11 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
     }
   </style>
   <div class="container">
-    <div class="grid-row mb-4">
+    <div class="grid-row mt-4 mb-4">
       <div class="grid-item is-xxl-24">
         <div class="grid-row grid-row--nested background-acfm-pink font-color-white ui-rounded-box ui-backgrounded-box-padding">
-          <div class="grid-item is-s-16 is-xxl-8 font-size-12 font-weight-bold text-paragraph-breaks">
+          <div class="grid-item is-s-16 is-l-14 is-xxl-10 font-size-12 font-weight-bold text-paragraph-breaks">
             <?php echo category_description(); ?>
-          </div>
-          <div class="category-archive__acfm__logo grid-item is-s-8 is-xxl-8 text-align-center">
-            <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
-          </div>
-          <div class="grid-item is-s-24 is-xxl-8">
             <?php
             if ( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) {
               $podcast_url = get_term_meta( $category->term_id, '_nm_podcast_url', true );
@@ -71,6 +66,9 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
               <?php
             }
             ?>
+          </div>
+          <div class="category-archive__acfm__logo grid-item is-s-8 is-l-10 is-xxl-14 text-align-right">
+            <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
           </div>
         </div>
       </div>
