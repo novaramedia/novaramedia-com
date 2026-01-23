@@ -11,7 +11,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 $newsletter = get_posts(
   array(
     'post_type'   => 'newsletter',
-    'title'       => 'ACFM',
+    'name'        => 'acfm',
     'numberposts' => 1,
   )
 );
