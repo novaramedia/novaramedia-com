@@ -33,17 +33,21 @@ See `/wp-content/plugins/nm-wpblock-newsletter-signup/ARCHITECTURE-DECISION.md` 
 - [x] Block registration via `lib/blocks.php`
 - [x] Build process integrated into theme (`npm run build:blocks`)
 - [x] Migration from plugin to theme
+- [x] **Dynamic PHP rendering implemented** - Using `render.php` for server-side rendering
+- [x] Pull newsletter meta fields (mailchimp_key, headline, copy) dynamically at render time
+- [x] Form action URL wired up via `nm_get_netlify_url()` helper
+- [x] Integrated with theme's `render_mailchimp_signup_form()` helper for consistency
 
-### In Progress
+### Ready for Testing
 
-- [ ] **save.js** - Currently outputs placeholder form, needs to use newsletter post data
-
-### TODO
-
-- [ ] Pull newsletter meta fields (mailchimp_key, headline, copy) into save output
-- [ ] Wire up form action URL (Netlify function endpoint)
-- [ ] Test with theme's `MailchimpSignup.js` form handler
-- [ ] Consider dynamic rendering (PHP) vs static save if data changes frequently
+- [ ] Test block appears in editor inserter (Embed category)
+- [ ] Test newsletter dropdown populates with newsletter posts
+- [ ] Test selecting newsletter updates block attributes
+- [ ] Test saved block displays form on frontend with correct data
+- [ ] Test form submission works (processes through MailchimpSignup.js)
+- [ ] Test success/error states display correctly
+- [ ] Test form is accessible (labels, focus states)
+- [ ] Test responsive layout works
 
 ---
 
@@ -107,11 +111,11 @@ Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 
 ## Implementation Notes
 
-### Dynamic PHP Render (Recommended Approach)
+### Dynamic PHP Render (✅ Implemented)
 
-**Current state:** Static `save()` bakes HTML into post content at save time.
+**Previous state:** Static `save()` baked HTML into post content at save time.
 
-**Recommended:** Switch to dynamic PHP render using `render.php`.
+**Current implementation:** Dynamic PHP render using `render.php`.
 
 #### Why dynamic render makes sense here
 
@@ -121,9 +125,9 @@ Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 4. **Easier maintenance** - Change output without re-saving every post containing the block
 5. **Server-side logic** - Could check subscription status, A/B test, or conditionally show
 
-#### Implementation outline
+#### Implementation details
 
-**1. Update block.json:**
+**1. ✅ Updated block.json:**
 
 ```json
 {
@@ -131,7 +135,7 @@ Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 }
 ```
 
-**2. Simplify save.js to return null:**
+**2. ✅ Simplified save.js to return null:**
 
 ```js
 export default function save() {
@@ -139,89 +143,15 @@ export default function save() {
 }
 ```
 
-**3. Create render.php:**
+**3. ✅ Created render.php:**
 
-```php
-<?php
-/**
- * Newsletter Signup Block - Server-side render
- *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block content (empty for dynamic blocks).
- * @param WP_Block $block      Block instance.
- */
+The implementation pulls fresh newsletter meta data and uses the theme's existing `render_mailchimp_signup_form()` helper. This ensures:
+- Consistent styling with other newsletter forms
+- Automatic integration with `MailchimpSignup.js` module
+- Correct form action URL via `nm_get_netlify_url()`
+- Fresh data on every page load (no stale content)
 
-$newsletter = $attributes['newsletter'] ?? null;
-
-if ( ! $newsletter || empty( $newsletter['id'] ) ) {
-    return; // No newsletter selected
-}
-
-$newsletter_id = $newsletter['id'];
-
-// Pull fresh meta from newsletter post
-$mailchimp_key = get_post_meta( $newsletter_id, 'mailchimp_key', true );
-$headline      = get_post_meta( $newsletter_id, 'banner_headline', true );
-$description   = get_post_meta( $newsletter_id, 'banner_text', true );
-$form_action   = get_theme_mod( 'newsletter_form_endpoint', '' );
-
-// Fallbacks
-if ( empty( $headline ) ) {
-    $headline = get_the_title( $newsletter_id );
-}
-
-// Use theme helper if available
-if ( function_exists( 'nm_render_email_signup_form' ) ) {
-    nm_render_email_signup_form( $mailchimp_key, $headline, $description );
-    return;
-}
-
-// Otherwise render inline (structure matches theme's email-signup partial)
-?>
-<div <?php echo get_block_wrapper_attributes(); ?>>
-    <div class="grid-row">
-        <div class="grid-item is-xxl-24">
-            <h3 class="fs-8 fs-s-6 mb-4 js-fix-widows"><?php echo esc_html( $headline ); ?></h3>
-            <?php if ( $description ) : ?>
-                <p class="fs-6 fs-s-4-sans mr-6"><?php echo esc_html( $description ); ?></p>
-            <?php endif; ?>
-        </div>
-        <div class="grid-item is-xxl-24">
-            <form class="email-signup__form" action="<?php echo esc_url( $form_action ); ?>" method="post">
-                <input type="hidden" name="newsletter" value="<?php echo esc_attr( $mailchimp_key ); ?>" />
-                <!-- Form fields... -->
-            </form>
-        </div>
-    </div>
-</div>
-<?php
-```
-
-**4. Consider creating theme helper:**
-
-Add to `lib/renderers.php`:
-
-```php
-function nm_render_email_signup_form( $mailchimp_key, $headline, $description = '' ) {
-    // Centralised form rendering used by block and existing templates
-    get_template_part( 'partials/email-signup-form', null, [
-        'mailchimp_key' => $mailchimp_key,
-        'headline'      => $headline,
-        'description'   => $description,
-    ] );
-}
-```
-
-This lets both the block and existing theme templates share the same form markup.
-
-#### Migration steps
-
-1. Create `render.php` in `src/blocks/newsletter-signup/`
-2. Add `"render": "file:./render.php"` to `block.json`
-3. Change `save.js` to return `null`
-4. Rebuild blocks (`npm run build:blocks`)
-5. Test - existing blocks should render correctly without re-saving
-6. Optionally extract shared helper to `lib/renderers.php`
+See `src/blocks/newsletter-signup/render.php` for the complete implementation.
 
 #### Attributes note
 
