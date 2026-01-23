@@ -15,6 +15,7 @@ Gutenberg block for inserting inline newsletter signup forms into post/page cont
 This block was migrated from a standalone plugin (`nm-wpblock-newsletter-signup`) into the theme on 2025-01-23.
 
 **Rationale:**
+
 - Block output relies on 20+ theme CSS classes (`.email-signup__*`, `.ui-button`, `.grid-row`, etc.)
 - Theme's `MailchimpSignup.js` module already handles form submission for `.email-signup__form`
 - Same team maintains both, only used on this site
@@ -27,15 +28,18 @@ See `/wp-content/plugins/nm-wpblock-newsletter-signup/ARCHITECTURE-DECISION.md` 
 ## Current Status
 
 ### Completed
+
 - [x] Editor component - select newsletter from dropdown
 - [x] Block registration via `lib/blocks.php`
 - [x] Build process integrated into theme (`npm run build:blocks`)
 - [x] Migration from plugin to theme
 
 ### In Progress
+
 - [ ] **save.js** - Currently outputs placeholder form, needs to use newsletter post data
 
 ### TODO
+
 - [ ] Pull newsletter meta fields (mailchimp_key, headline, copy) into save output
 - [ ] Wire up form action URL (Netlify function endpoint)
 - [ ] Test with theme's `MailchimpSignup.js` form handler
@@ -71,15 +75,16 @@ Frontend (save.js)
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `block.json` | Block metadata, attributes, asset registration |
-| `index.js` | Block registration entry point |
-| `edit.js` | Editor UI (React component) |
-| `save.js` | Frontend HTML output |
-| `editor.scss` | Editor-only styles |
+| File          | Purpose                                        |
+| ------------- | ---------------------------------------------- |
+| `block.json`  | Block metadata, attributes, asset registration |
+| `index.js`    | Block registration entry point                 |
+| `edit.js`     | Editor UI (React component)                    |
+| `save.js`     | Frontend HTML output                           |
+| `editor.scss` | Editor-only styles                             |
 
 **Theme integration:**
+
 - `lib/blocks.php` - Registers all blocks in `/blocks/*/`
 - `src/js/modules/MailchimpSignup.js` - Form submission handler
 - `src/styl/layouts/email-signup.styl` - Form styles
@@ -90,11 +95,11 @@ Frontend (save.js)
 
 Defined in `lib/post-types.php`. Key meta fields (CMB2):
 
-| Field | Key | Purpose |
-|-------|-----|---------|
-| Mailchimp Key | `mailchimp_key` | Newsletter identifier for signup |
-| Banner Headline | `banner_headline` | Optional headline text |
-| Banner Text | `banner_text` | Optional description |
+| Field           | Key               | Purpose                          |
+| --------------- | ----------------- | -------------------------------- |
+| Mailchimp Key   | `mailchimp_key`   | Newsletter identifier for signup |
+| Banner Headline | `banner_headline` | Optional headline text           |
+| Banner Text     | `banner_text`     | Optional description             |
 
 Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 
@@ -119,6 +124,7 @@ Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 #### Implementation outline
 
 **1. Update block.json:**
+
 ```json
 {
   "render": "file:./render.php"
@@ -126,6 +132,7 @@ Meta boxes defined in `lib/meta/meta-boxes-posttype-newsletter.php`.
 ```
 
 **2. Simplify save.js to return null:**
+
 ```js
 export default function save() {
   return null; // PHP handles rendering
@@ -133,6 +140,7 @@ export default function save() {
 ```
 
 **3. Create render.php:**
+
 ```php
 <?php
 /**
@@ -192,6 +200,7 @@ if ( function_exists( 'nm_render_email_signup_form' ) ) {
 **4. Consider creating theme helper:**
 
 Add to `lib/renderers.php`:
+
 ```php
 function nm_render_email_signup_form( $mailchimp_key, $headline, $description = '' ) {
     // Centralised form rendering used by block and existing templates
@@ -217,6 +226,7 @@ This lets both the block and existing theme templates share the same form markup
 #### Attributes note
 
 With dynamic render, `save()` returns null but attributes are still saved to post content as a JSON comment:
+
 ```html
 <!-- wp:flavor3/newsletter-signup {"newsletter":{"id":123,"title":{"rendered":"Weekly"}}} /-->
 ```
@@ -230,6 +240,7 @@ The form uses class `.email-signup__form` which the theme's `MailchimpSignup.js`
 ### CSS classes used
 
 From `save.js` output:
+
 ```
 .grid-row, .grid-item, .is-xxl-24     // Grid layout
 .fs-8, .fs-6, .fs-4-sans, .fs-2       // Font sizes
