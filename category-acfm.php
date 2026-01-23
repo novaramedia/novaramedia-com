@@ -32,12 +32,12 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
   <style type="text/css">
     .category-archive__acfm__logo svg {
       width: auto;
-      max-height: 200px;
+      max-height: 180px;
     }
 
     @media screen and (max-width: 1104px) {
       .category-archive__acfm__logo svg {
-        max-height: 180px;
+        max-height: 160px;
       }
     }
 
@@ -57,20 +57,20 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
     <div class="grid-row mt-4 mb-4">
       <div class="grid-item is-xxl-24">
         <div class="grid-row grid-row--nested background-acfm-pink font-color-white ui-rounded-box ui-backgrounded-box-padding">
-          <div class="grid-item is-s-16 is-l-14 is-xxl-10 font-size-12 font-weight-bold text-paragraph-breaks">
+          <div class="grid-item is-s-16 is-l-14 is-xxl-10 font-size-s-11 font-size-12 font-weight-bold text-paragraph-breaks text-wrap-pretty">
             <?php echo category_description(); ?>
-            <?php
-            if ( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) {
-              $podcast_url = get_term_meta( $category->term_id, '_nm_podcast_url', true );
-              ?>
-            <a class="ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
-              <?php
-            }
-            ?>
+            <?php if ( $podcast_url ) { ?>
+            <a class="only-desktop ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <?php } ?>
           </div>
           <div class="category-archive__acfm__logo grid-item is-s-8 is-l-10 is-xxl-14 text-align-right">
             <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
           </div>
+          <div class="grid-item is-xxl-24 only-mobile">
+          <?php if ( $podcast_url ) { ?>
+            <a class="ui-button ui-button--white ui-button--small" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <?php } ?>
+        </div>
         </div>
       </div>
     </div>
