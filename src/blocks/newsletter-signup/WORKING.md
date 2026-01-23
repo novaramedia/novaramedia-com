@@ -146,6 +146,7 @@ export default function save() {
 **3. ✅ Created render.php:**
 
 The implementation pulls fresh newsletter meta data and uses the theme's existing `render_mailchimp_signup_form()` helper. This ensures:
+
 - Consistent styling with other newsletter forms
 - Automatic integration with `MailchimpSignup.js` module
 - Correct form action URL via `nm_get_netlify_url()`
