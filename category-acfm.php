@@ -10,9 +10,9 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 
 $newsletter = get_posts(
   array(
-    'post_type'   => 'newsletter',
-    'name'        => 'acfm',
-    'numberposts' => 1,
+    'post_type'      => 'newsletter',
+    'name'           => 'acfm',
+    'posts_per_page' => 1,
   )
 );
 
