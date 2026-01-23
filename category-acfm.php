@@ -18,6 +18,7 @@ $newsletter = get_posts(
 
 $newsletter_post_id = false;
 $newsletter_mailchimp_key = false;
+$display_newsletter_after = 6; // Display newsletter signup after this many posts.
 
 if ( ! empty( $newsletter ) ) {
   $newsletter_post_id = $newsletter[0]->ID;
@@ -98,7 +99,7 @@ if ( have_posts() ) {
         );
 
     // Display newsletter signup after 6th post.
-    if ( $post_count === 6 && $should_render_newsletter && ! $newsletter_inserted ) {
+    if ( $post_count === $display_newsletter_after && $should_render_newsletter && ! $newsletter_inserted ) {
       ?>
     </div>
   </div>
