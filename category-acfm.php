@@ -22,7 +22,7 @@ $display_newsletter_after = 6; // Display newsletter signup after this many post
 
 if ( ! empty( $newsletter ) ) {
   $newsletter_post_id = $newsletter[0]->ID;
-  $newsletter_meta    = get_post_meta( $newsletter_post_id );
+  $newsletter_meta = get_post_meta( $newsletter_post_id );
   $newsletter_mailchimp_key = ! empty( $newsletter_meta['_nm_mailchimp_key'] ) ? $newsletter_meta['_nm_mailchimp_key'][0] : false;
 }
 
@@ -90,27 +90,27 @@ if ( have_posts() ) {
     ++$post_count;
 
     get_template_part(
-        'partials/post-layouts/flex-post',
-        null,
-        array(
-      'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
-      'image-size'        => 'col12-16to9',
-    )
-        );
+      'partials/post-layouts/flex-post',
+      null,
+      array(
+        'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+        'image-size'        => 'col12-16to9',
+      )
+    );
 
-    // Display newsletter signup after 6th post.
     if ( $post_count === $display_newsletter_after && $should_render_newsletter && ! $newsletter_inserted ) {
       ?>
     </div>
   </div>
       <?php
       get_template_part(
-          'partials/email-signup',
-          null,
-          array(
-        'newsletter_post_id' => $newsletter_post_id,
-      )
-          );
+        'partials/email-signup',
+        null,
+        array(
+          'newsletter_post_id' => $newsletter_post_id,
+        )
+      );
+
       $newsletter_inserted = true;
       ?>
   <div class="container">
@@ -131,12 +131,13 @@ if ( have_posts() ) {
       </div>
     <?php
     get_template_part(
-        'partials/email-signup',
-        null,
-        array(
+      'partials/email-signup',
+      null,
+      array(
       'newsletter_post_id' => $newsletter_post_id,
-    )
-        );
+      )
+    );
+
     $newsletter_inserted = true;
     ?>
     <div class="container">
