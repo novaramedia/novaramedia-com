@@ -4,7 +4,7 @@
   "name": "flavor3/newsletter-signup",
   "version": "0.1.0",
   "title": "Newsletter Signup",
-  "category": "embed",
+  "category": "widgets",
   "icon": "email-alt2",
   "description": "Inline newsletter signup form.",
   "example": {},
