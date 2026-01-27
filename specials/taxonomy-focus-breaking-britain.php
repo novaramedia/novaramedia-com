@@ -196,10 +196,11 @@ if( have_posts() ) {
       $post_arguments = array(
         'grid-item-classes' => 'grid-item is-s-24 is-xxl-8 mb-4',
         'image-size' => 'col12-16to9',
+        'text-size' => 'regular',
       );
     }
 
-    get_template_part('partials/post-layouts/flex-post', null, $post_arguments);
+    get_template_part('partials/post-layouts/archive-post', null, $post_arguments);
 
     $i++;
   }

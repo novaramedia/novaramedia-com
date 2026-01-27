@@ -149,13 +149,23 @@ if ($category->slug === 'video') {
   <div class="container">
     <div class="grid-row mb-4">
 <?php
+// Show tags on:
+// - Top-level audio, video, or articles categories
+// - All child categories of articles
+// Hide tags on child categories of audio or video
+$is_top_level_category = $category->parent == 0 && in_array($category->slug, array('audio', 'video', 'articles'));
+$articles_category = get_category_by_slug('articles');
+$is_articles_child = $articles_category && ($category->parent == $articles_category->term_id || $category->slug === 'articles');
+$show_tags = $is_top_level_category || $is_articles_child;
+
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
-    get_template_part('partials/post-layouts/flex-post', null, array(
+    get_template_part('partials/post-layouts/archive-post', null, array(
       'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
       'image-size' => 'col12-16to9',
+      'show-tags' => $show_tags,
     ));
   }
 } else {
@@ -166,7 +176,7 @@ if( have_posts() ) {
     </div>
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <?php get_template_part('partials/pagination'); ?>
+        <?php get_template_part( 'partials/pagination' ); ?>
       </div>
     </div>
   </div>

@@ -74,9 +74,10 @@ if( have_posts() ) {
         ));
         break;
       default:
-        get_template_part('partials/post-layouts/flex-post', null, array(
+        get_template_part('partials/post-layouts/archive-post', null, array(
           'grid-item-classes' => $post_grid_classes,
           'image-size' => 'col12-16to9',
+          'text-size' => 'regular',
         ));
     }
 

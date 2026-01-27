@@ -135,11 +135,12 @@ if ( have_posts() ) {
     the_post();
 
     get_template_part(
-        'partials/post-layouts/flex-post',
+        'partials/post-layouts/archive-post',
         null,
         array(
             'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
             'image-size'        => 'col12-16to9',
+            'text-size'         => 'regular',
         )
     );
   }
