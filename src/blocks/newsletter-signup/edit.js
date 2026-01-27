@@ -1,6 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { TextControl, TextareaControl } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 
@@ -76,10 +77,32 @@ export default function Edit({ attributes, setAttributes }) {
         </select>
       </form>
       {attributes.newsletter && (
-        <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
-          {__('Selected:', 'novaramedia-com')}{' '}
-          {attributes.newsletter.title?.rendered}
-        </p>
+        <>
+          <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
+            {__('Selected:', 'novaramedia-com')}{' '}
+            {attributes.newsletter.title?.rendered}
+          </p>
+          <div style={{ marginTop: '1.5rem' }}>
+            <h4 style={{ marginBottom: '0.5rem', fontSize: '0.875rem' }}>
+              {__('Custom Overrides (Optional)', 'novaramedia-com')}
+            </h4>
+            <TextControl
+              label={__('Custom Title', 'novaramedia-com')}
+              value={attributes.customTitle}
+              onChange={(value) => setAttributes({ customTitle: value })}
+              placeholder={__('Leave empty to use newsletter default', 'novaramedia-com')}
+              help={__('Override the title/headline for this newsletter signup', 'novaramedia-com')}
+            />
+            <TextareaControl
+              label={__('Custom Text', 'novaramedia-com')}
+              value={attributes.customText}
+              onChange={(value) => setAttributes({ customText: value })}
+              placeholder={__('Leave empty to use newsletter default', 'novaramedia-com')}
+              help={__('Override the description text for this newsletter signup', 'novaramedia-com')}
+              rows={3}
+            />
+          </div>
+        </>
       )}
     </div>
   );

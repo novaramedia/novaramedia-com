@@ -15,6 +15,14 @@
 		"newsletter": {
 			"type": "object",
 			"default": null
+		},
+		"customTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"customText": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "novaramedia-com",

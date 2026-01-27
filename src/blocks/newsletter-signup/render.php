@@ -30,9 +30,16 @@ $mailchimp_key = get_post_meta( $newsletter_id, '_nm_mailchimp_key', true );
 $headline      = get_post_meta( $newsletter_id, '_nm_banner_headline', true );
 $description   = get_post_meta( $newsletter_id, '_nm_banner_text', true );
 
-// Fallback to newsletter title if no custom headline set
-if ( empty( $headline ) ) {
+// Check for custom overrides from block attributes
+if ( ! empty( $attributes['customTitle'] ) ) {
+	$headline = $attributes['customTitle'];
+} elseif ( empty( $headline ) ) {
+	// Fallback to newsletter title if no custom headline or override set
 	$headline = get_the_title( $newsletter_id );
+}
+
+if ( ! empty( $attributes['customText'] ) ) {
+	$description = $attributes['customText'];
 }
 
 // If no mailchimp key, don't render anything
