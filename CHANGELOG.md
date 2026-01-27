@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated ACFM archive page for better newsletter signup integration and newer header style
+- Updated the Downstream archive page for better newsletter signup integration and newer header style
 
 ## [4.3.1] - 2026-01-15
 
