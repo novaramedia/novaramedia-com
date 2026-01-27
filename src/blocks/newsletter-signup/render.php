@@ -53,7 +53,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
   <div class="background-gray-base ui-rounded-box p-4">
     <h3 class="font-size-12 font-weight-bold mb-2 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
     <?php if ( ! empty( $description ) ) { ?>
-      <p class="font-size-11 font-weight-bold text-wrap-balance"><?php echo esc_html( $description ); ?></p>
+      <p class="font-size-10 mb-3 text-wrap-balance"><?php echo esc_html( $description ); ?></p>
       <?php
     }
 

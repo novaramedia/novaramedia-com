@@ -5771,11 +5771,6 @@ html {
   height: 2rem;
   width: auto;
 }
-.wp-block-nm-wp-newsletter-signup h3,
-.wp-block-nm-wp-newsletter-signup p {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
 @media screen and (max-width: 1408px) {
   .container {
     width: 1056px;
