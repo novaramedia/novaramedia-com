@@ -8,6 +8,9 @@ $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', 
 
 $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe in your podcast app';
 
+$query_var_paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+$is_first_page = ( $query_var_paged === 1 );
+
 $newsletter = get_posts(
   array(
     'post_type'      => 'newsletter',
@@ -19,6 +22,10 @@ $newsletter = get_posts(
 $newsletter_post_id = false;
 $newsletter_mailchimp_key = false;
 $display_newsletter_after = 6; // Display newsletter signup after this many posts.
+
+if ( $is_first_page ) {
+  ++$display_newsletter_after; // On first page, display after one more (to account for featured post).
+}
 
 if ( ! empty( $newsletter ) ) {
   $newsletter_post_id = $newsletter[0]->ID;
@@ -49,8 +56,6 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
     </div>
   </div>
 
-  <div class="container">
-    <div class="grid-row mb-4">
 <?php
 $newsletter_inserted = false;
 $has_posts = false;
@@ -58,16 +63,83 @@ $has_posts = false;
 if ( have_posts() ) {
   $has_posts = true;
   $post_count = 0;
+
+  // First page: Show featured layout for the first post
+  if ( $is_first_page ) {
+    ?>
+  <div class="container">
+    <div class="grid-row">
+      <?php
+      the_post();
+      ++$post_count;
+      $featured_post_id = get_the_ID();
+      $featured_meta = get_post_meta( $featured_post_id );
+      $featured_youtube_id = ! empty( $featured_meta['_cmb_utube'] ) ? $featured_meta['_cmb_utube'][0] : false;
+
+      $has_related = false;
+      if ( ! empty( $featured_meta['_cmb_related_posts'] ) ) {
+        $related_args = array(
+          'posts_per_page' => 1,
+          'post__in'       => explode( ', ', $featured_meta['_cmb_related_posts'][0] ),
+          'orderby'        => 'rand',
+        );
+        $related_posts = new WP_Query( $related_args );
+        $has_related = $related_posts->have_posts();
+      }
+
+      ?>
+      <div class="grid-item is-s-24 is-l-14 is-xxl-16 mb-s-4">
+        <?php if ( $featured_youtube_id ) { ?>
+          <div class="u-video-embed-container ui-rounded-image">
+            <?php echo render_youtube_embed_iframe( $featured_youtube_id, false, false ); ?>
+          </div>
+        <?php } else { ?>
+          <div class="layout-thumbnail-frame">
+            <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+              <?php render_post_ui_tags( $featured_post_id, true, true, 'no-border' ); ?>
+            </div>
+            <a href="<?php the_permalink(); ?>" class="ui-hover">
+              <?php render_thumbnail( $featured_post_id, 'col24-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+            </a>
+          </div>
+        <?php } ?>
+      </div>
+      <div class="grid-item is-s-24 is-l-10 is-xxl-8">
+        <a href="<?php the_permalink(); ?>" class="ui-hover">
+          <h6 class="font-size-15 font-weight-bold font-size-m-13 text-wrap-pretty"><?php the_title(); ?></h6>
+          <h5 class="font-size-12 font-weight-bold mt-2 text-wrap-balance">
+            <?php render_standfirst( $featured_post_id ); ?>
+          </h5>
+        </a>
+
+        <div class="mt-4 font-size-11">
+          <?php the_content(); ?>
+        </div>
+      </div>
+      <div class="grid-item is-xxl-24 mt-4 mb-4">
+        <hr />
+      </div>
+    </div>
+  </div>
+    <?php
+  }
+  ?>
+
+  <div class="container">
+    <div class="grid-row mb-4">
+  <?php
+  // Continue with remaining posts in grid layout
   while ( have_posts() ) {
     the_post();
     ++$post_count;
 
     get_template_part(
-      'partials/post-layouts/flex-post',
+      'partials/post-layouts/archive-post',
       null,
       array(
         'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
         'image-size'        => 'col12-16to9',
+        'text-size'         => 'regular',
       )
     );
 
