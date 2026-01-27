@@ -4,7 +4,7 @@
 
 Gutenberg block for inserting inline newsletter signup forms into post/page content. Editors select a newsletter from the `newsletter` custom post type, and the block renders a signup form styled with the theme's existing CSS.
 
-**Block name:** `flavor3/newsletter-signup`
+**Block name:** `nm-wp/newsletter-signup`
 **Category:** Embed
 **Status:** In development
 
@@ -159,7 +159,7 @@ See `src/blocks/newsletter-signup/render.php` for the complete implementation.
 With dynamic render, `save()` returns null but attributes are still saved to post content as a JSON comment:
 
 ```html
-<!-- wp:flavor3/newsletter-signup {"newsletter":{"id":123,"title":{"rendered":"Weekly"}}} /-->
+<!-- wp:nm-wp/newsletter-signup {"newsletter":{"id":123,"title":{"rendered":"Weekly"}}} /-->
 ```
 
 PHP receives these via `$attributes` parameter.

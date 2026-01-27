@@ -19,7 +19,7 @@ export default function Edit({ attributes, setAttributes }) {
   const [newsletterPosts, setNewsletterPosts] = useState(null);
 
   const blockProps = useBlockProps({
-    className: 'wp-block-flavor3-newsletter-signup',
+    className: 'wp-block-nm-wp-newsletter-signup',
     style: {
       color: '#222222',
       backgroundColor: '#eeeeee',

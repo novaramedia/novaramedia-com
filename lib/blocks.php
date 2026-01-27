@@ -5,7 +5,7 @@
  * Registers all custom Gutenberg blocks defined in the theme's blocks directory.
  * Each block should have a block.json file in its directory.
  *
- * @package flavor3
+ * @package novaramedia-com
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
