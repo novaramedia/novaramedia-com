@@ -1,76 +1,76 @@
 (() => {
   'use strict';
   var e = {
-      20: (e, s, i) => {
-        var a = i(609),
-          t = Symbol.for('react.element'),
-          l = (Symbol.for('react.fragment'), Object.prototype.hasOwnProperty),
-          r =
-            a.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+      20: (e, r, t) => {
+        var n = t(609),
+          o = Symbol.for('react.element'),
+          s = (Symbol.for('react.fragment'), Object.prototype.hasOwnProperty),
+          l =
+            n.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
               .ReactCurrentOwner,
-          n = { key: !0, ref: !0, __self: !0, __source: !0 };
-        function o(e, s, i) {
-          var a,
-            o = {},
+          a = { key: !0, ref: !0, __self: !0, __source: !0 };
+        function i(e, r, t) {
+          var n,
+            i = {},
             c = null,
             d = null;
-          for (a in (void 0 !== i && (c = '' + i),
-          void 0 !== s.key && (c = '' + s.key),
-          void 0 !== s.ref && (d = s.ref),
-          s))
-            l.call(s, a) && !n.hasOwnProperty(a) && (o[a] = s[a]);
+          for (n in (void 0 !== t && (c = '' + t),
+          void 0 !== r.key && (c = '' + r.key),
+          void 0 !== r.ref && (d = r.ref),
+          r))
+            s.call(r, n) && !a.hasOwnProperty(n) && (i[n] = r[n]);
           if (e && e.defaultProps)
-            for (a in (s = e.defaultProps)) void 0 === o[a] && (o[a] = s[a]);
+            for (n in (r = e.defaultProps)) void 0 === i[n] && (i[n] = r[n]);
           return {
-            $$typeof: t,
+            $$typeof: o,
             type: e,
             key: c,
             ref: d,
-            props: o,
-            _owner: r.current,
+            props: i,
+            _owner: l.current,
           };
         }
-        ((s.jsx = o), (s.jsxs = o));
+        ((r.jsx = i), (r.jsxs = i));
       },
       609: (e) => {
         e.exports = window.React;
       },
-      848: (e, s, i) => {
-        e.exports = i(20);
+      848: (e, r, t) => {
+        e.exports = t(20);
       },
     },
-    s = {};
-  function i(a) {
-    var t = s[a];
-    if (void 0 !== t) return t.exports;
-    var l = (s[a] = { exports: {} });
-    return (e[a](l, l.exports, i), l.exports);
+    r = {};
+  function t(n) {
+    var o = r[n];
+    if (void 0 !== o) return o.exports;
+    var s = (r[n] = { exports: {} });
+    return (e[n](s, s.exports, t), s.exports);
   }
-  ((i.n = (e) => {
-    var s = e && e.__esModule ? () => e.default : () => e;
-    return (i.d(s, { a: s }), s);
+  ((t.n = (e) => {
+    var r = e && e.__esModule ? () => e.default : () => e;
+    return (t.d(r, { a: r }), r);
   }),
-    (i.d = (e, s) => {
-      for (var a in s)
-        i.o(s, a) &&
-          !i.o(e, a) &&
-          Object.defineProperty(e, a, { enumerable: !0, get: s[a] });
+    (t.d = (e, r) => {
+      for (var n in r)
+        t.o(r, n) &&
+          !t.o(e, n) &&
+          Object.defineProperty(e, n, { enumerable: !0, get: r[n] });
     }),
-    (i.o = (e, s) => Object.prototype.hasOwnProperty.call(e, s)));
-  const a = window.wp.blocks,
-    t = window.wp.element,
-    l = window.wp.i18n,
-    r = window.wp.blockEditor,
-    n = window.wp.apiFetch;
-  var o = i.n(n);
+    (t.o = (e, r) => Object.prototype.hasOwnProperty.call(e, r)));
+  const n = window.wp.blocks,
+    o = window.wp.element,
+    s = window.wp.i18n,
+    l = window.wp.blockEditor,
+    a = window.wp.apiFetch;
+  var i = t.n(a);
   const c = window.wp.url;
-  var d = i(848);
+  var d = t(848);
   const p = JSON.parse('{"UU":"flavor3/newsletter-signup"}');
-  (0, a.registerBlockType)(p.UU, {
+  (0, n.registerBlockType)(p.UU, {
     edit: function (e) {
-      let { attributes: s, setAttributes: i } = e;
-      const [a, n] = (0, t.useState)(null),
-        p = (0, r.useBlockProps)({
+      let { attributes: r, setAttributes: t } = e;
+      const [n, a] = (0, o.useState)(null),
+        p = (0, l.useBlockProps)({
           className: 'wp-block-flavor3-newsletter-signup',
           style: {
             color: '#222222',
@@ -79,24 +79,24 @@
             padding: '2rem',
           },
         });
-      (0, t.useEffect)(() => {
+      (0, o.useEffect)(() => {
         (async () => {
-          const e = await o()({
+          const e = await i()({
             path: (0, c.addQueryArgs)('/wp/v2/newsletter', { per_page: 100 }),
           });
-          n(e);
+          a(e);
         })();
       }, []);
-      const u = s.newsletter?.id || '';
+      const u = r.newsletter?.id || '';
       return (0, d.jsxs)('div', {
         ...p,
         children: [
           (0, d.jsx)('h3', {
             style: { marginTop: 0 },
-            children: (0, l.__)('Newsletter Signup', 'novaramedia-com'),
+            children: (0, s.__)('Newsletter Signup', 'novaramedia-com'),
           }),
           (0, d.jsx)('p', {
-            children: (0, l.__)(
+            children: (0, s.__)(
               'Select a newsletter. Displays an inline signup form in the content.',
               'novaramedia-com'
             ),
@@ -105,20 +105,20 @@
             children: (0, d.jsxs)('select', {
               className: 'nm-block-newsletter-signup__select',
               onChange: (e) => {
-                const s = a.find((s) => s.id === parseInt(e.target.value));
-                i({ newsletter: s });
+                const r = n.find((r) => r.id === parseInt(e.target.value));
+                t({ newsletter: r });
               },
               value: u,
               children: [
                 (0, d.jsx)('option', {
                   value: '',
-                  children: (0, l.__)(
+                  children: (0, s.__)(
                     '-- Select newsletter --',
                     'novaramedia-com'
                   ),
                 }),
-                a &&
-                  a.map((e) =>
+                n &&
+                  n.map((e) =>
                     (0, d.jsx)(
                       'option',
                       { value: e.id, children: e.title.rendered },
@@ -128,167 +128,20 @@
               ],
             }),
           }),
-          s.newsletter &&
+          r.newsletter &&
             (0, d.jsxs)('p', {
               style: { marginTop: '1rem', fontSize: '0.875rem', color: '#666' },
               children: [
-                (0, l.__)('Selected:', 'novaramedia-com'),
+                (0, s.__)('Selected:', 'novaramedia-com'),
                 ' ',
-                s.newsletter.title?.rendered,
+                r.newsletter.title?.rendered,
               ],
             }),
         ],
       });
     },
-    save: function (e) {
-      let { attributes: s } = e;
-      return s.newsletter
-        ? (0, d.jsx)('div', {
-            ...r.useBlockProps.save(),
-            children: (0, d.jsxs)('div', {
-              className: 'grid-row',
-              children: [
-                (0, d.jsxs)('div', {
-                  className: 'grid-item is-xxl-24',
-                  children: [
-                    (0, d.jsx)('h3', {
-                      className: 'fs-8 fs-s-6 mb-4 js-fix-widows',
-                      children: 'Headline',
-                    }),
-                    (0, d.jsx)('p', {
-                      className: 'fs-6 fs-s-4-sans mr-6',
-                      children: 'Copy',
-                    }),
-                  ],
-                }),
-                (0, d.jsx)('div', {
-                  className: 'grid-item is-xxl-24',
-                  children: (0, d.jsxs)('form', {
-                    className: 'email-signup__form',
-                    action: 'netlify_url',
-                    method: 'post',
-                    target: '_blank',
-                    children: [
-                      (0, d.jsx)('input', {
-                        type: 'hidden',
-                        name: 'newsletter',
-                        value: 'mailchimp_key',
-                      }),
-                      (0, d.jsxs)('div', {
-                        className: 'email-signup__inputs',
-                        children: [
-                          (0, d.jsxs)('div', {
-                            className: 'form-group mb-2',
-                            children: [
-                              (0, d.jsx)('label', {
-                                className: 'u-visuallyhidden',
-                                htmlFor: 'firstName',
-                                children: 'First name:',
-                              }),
-                              (0, d.jsx)('input', {
-                                name: 'firstName',
-                                className: 'email-signup__name-input ui-input',
-                                id: 'firstName',
-                                type: 'text',
-                                autoComplete: 'given-name',
-                                placeholder: 'First name',
-                              }),
-                            ],
-                          }),
-                          (0, d.jsxs)('div', {
-                            className: 'form-group mb-2',
-                            children: [
-                              (0, d.jsx)('label', {
-                                className: 'u-visuallyhidden',
-                                htmlFor: 'email',
-                                children: 'Email:',
-                              }),
-                              (0, d.jsx)('input', {
-                                name: 'email',
-                                className: 'email-signup__email-input ui-input',
-                                id: 'email',
-                                type: 'email',
-                                autoComplete: 'email',
-                                placeholder: 'Email',
-                                required: !0,
-                              }),
-                            ],
-                          }),
-                          (0, d.jsxs)('div', {
-                            className:
-                              'email-signup__email-gdpr-group form-group layout-flex-align-center mb-2',
-                            children: [
-                              (0, d.jsxs)('label', {
-                                htmlFor: 'newsletter-gdpr',
-                                className: 'fs-2',
-                                children: [
-                                  'I agree to the',
-                                  ' ',
-                                  (0, d.jsx)('a', {
-                                    target: '_blank',
-                                    rel: 'noopener noreferrer',
-                                    href: '/privacy-policy',
-                                    children: 'Privacy Policy',
-                                  }),
-                                ],
-                              }),
-                              (0, d.jsx)('input', {
-                                name: 'gdpr',
-                                className:
-                                  'email-signup__email-gdpr-input ui-checkbox ml-2',
-                                id: 'newsletter-gdpr',
-                                type: 'checkbox',
-                                value: 'accepted',
-                                required: !0,
-                              }),
-                            ],
-                          }),
-                          (0, d.jsx)('input', {
-                            className:
-                              'email-signup__submit ui-button ui-button--black fs-6',
-                            type: 'submit',
-                            value: 'Sign up',
-                          }),
-                          (0, d.jsx)('span', {
-                            className:
-                              'email-signup__feedback-processing ui-button ui-button--disabled fs-6',
-                            children: 'Processing...',
-                          }),
-                          (0, d.jsx)('span', {
-                            className:
-                              'email-signup__feedback-completed ui-button ui-button--disabled fs-6',
-                            children: 'Success',
-                          }),
-                          (0, d.jsxs)('div', {
-                            className:
-                              'email-signup__feedback-failed layout-split-level',
-                            children: [
-                              (0, d.jsx)('input', {
-                                className: 'ui-button ui-button--black fs-6',
-                                type: 'submit',
-                                value: 'Try again',
-                              }),
-                              (0, d.jsxs)('p', {
-                                className: 'ml-2 fs-2',
-                                children: [
-                                  'Failed: ',
-                                  (0, d.jsx)('span', {
-                                    className: 'email-signup__feedback-message',
-                                  }),
-                                  '.',
-                                ],
-                              }),
-                            ],
-                          }),
-                        ],
-                      }),
-                    ],
-                  }),
-                }),
-              ],
-            }),
-          })
-        : null;
+    save: function () {
+      return null;
     },
   });
 })();

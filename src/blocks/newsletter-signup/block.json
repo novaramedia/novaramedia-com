@@ -4,7 +4,7 @@
 	"name": "flavor3/newsletter-signup",
 	"version": "0.1.0",
 	"title": "Newsletter Signup",
-	"category": "embed",
+	"category": "widgets",
 	"icon": "email-alt2",
 	"description": "Inline newsletter signup form.",
 	"example": {},
@@ -19,5 +19,6 @@
 	},
 	"textdomain": "novaramedia-com",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php"
 }
