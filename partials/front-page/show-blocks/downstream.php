@@ -104,13 +104,13 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <?php
-                render_thumbnail(
+                  render_thumbnail(
                     $post->ID,
                     'col24-16to9',
                     array(
-                  'class' => 'ui-rounded-image',
-                  )
-                    );
+                      'class' => 'ui-rounded-image',
+                    )
+                  );
                 ?>
               </a>
             </div>
