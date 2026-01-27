@@ -90,15 +90,27 @@ export default function Edit({ attributes, setAttributes }) {
               label={__('Custom Title', 'novaramedia-com')}
               value={attributes.customTitle}
               onChange={(value) => setAttributes({ customTitle: value })}
-              placeholder={__('Leave empty to use newsletter default', 'novaramedia-com')}
-              help={__('Override the title/headline for this newsletter signup', 'novaramedia-com')}
+              placeholder={__(
+                'Leave empty to use newsletter default',
+                'novaramedia-com'
+              )}
+              help={__(
+                'Override the title/headline for this newsletter signup',
+                'novaramedia-com'
+              )}
             />
             <TextareaControl
               label={__('Custom Text', 'novaramedia-com')}
               value={attributes.customText}
               onChange={(value) => setAttributes({ customText: value })}
-              placeholder={__('Leave empty to use newsletter default', 'novaramedia-com')}
-              help={__('Override the description text for this newsletter signup', 'novaramedia-com')}
+              placeholder={__(
+                'Leave empty to use newsletter default',
+                'novaramedia-com'
+              )}
+              help={__(
+                'Override the description text for this newsletter signup',
+                'novaramedia-com'
+              )}
               rows={3}
             />
           </div>
