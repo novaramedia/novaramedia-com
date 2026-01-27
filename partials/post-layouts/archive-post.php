@@ -9,12 +9,18 @@
   $image_size = !empty($args['image-size']) ? $args['image-size'] : 'col24-16to9'; // get image size parameter, with max possible size as fallback default. string name of image size
 
   $is_show_tags = !empty($args['show-tags']) ? $args['show-tags'] : false;
+  $is_show_embed = !empty($args['show-embed']) ? $args['show-embed'] : false;
   $is_article = nm_is_article($post_id); // check if post is article
 
   $meta = get_post_meta($post->ID);
+  $youtube_id = !empty($meta['_cmb_utube'][0]) ? $meta['_cmb_utube'][0] : false;
 ?>
 <article <?php post_class($args['grid-item-classes']); ?> id="post-<?php the_ID(); ?>">
-  <?php if ($is_show_tags) { ?>
+  <?php if ($is_show_embed && $youtube_id) { ?>
+    <div class="u-video-embed-container background-black">
+      <?php echo render_youtube_embed_iframe($youtube_id, true); ?>
+    </div>
+  <?php } else if ($is_show_tags) { ?>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
         <?php render_post_ui_tags($post_id, true, true); ?>

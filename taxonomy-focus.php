@@ -66,20 +66,14 @@ if( have_posts() ) {
 <?php }
 
     $content_type = get_the_top_level_category(get_the_ID());
+    $is_video = $content_type->category_nicename === 'video';
 
-    switch ($content_type->category_nicename) {
-      case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array(
-          'grid-item-classes' => $post_grid_classes
-        ));
-        break;
-      default:
-        get_template_part('partials/post-layouts/archive-post', null, array(
-          'grid-item-classes' => $post_grid_classes,
-          'image-size' => 'col12-16to9',
-          'text-size' => 'regular',
-        ));
-    }
+    get_template_part('partials/post-layouts/archive-post', null, array(
+      'grid-item-classes' => $post_grid_classes,
+      'image-size' => 'col12-16to9',
+      'text-size' => 'regular',
+      'show-embed' => $is_video,
+    ));
 
     $i++;
   }
