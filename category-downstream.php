@@ -37,11 +37,24 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
 ?>
 <main id="main-content" class="category-archive category-archive__downstream">
   <div class="container">
-    <div class="grid-row mt-5 mb-5">
+    <div class="grid-row mt-4 mb-4">
       <div class="grid-item is-xxl-24">
-        <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
+        <div class="grid-row grid-row--nested background-gray-base ui-rounded-box ui-backgrounded-box-padding">
+          <div class="grid-item is-xxl-24">
+            <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
+            <?php if ( $podcast_url ) { ?>
+            <a class="only-desktop ui-button ui-button--black ui-button--small mt-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <?php } ?>
+          </div>
+          <div class="grid-item is-xxl-24 only-mobile">
+          <?php if ( $podcast_url ) { ?>
+            <a class="ui-button ui-button--black ui-button--small" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+          <?php } ?>
+        </div>
+        </div>
       </div>
     </div>
+  </div>
 
 <?php
 $newsletter_inserted = false;
@@ -54,6 +67,7 @@ if ( have_posts() ) {
   // First page: Show featured layout for the first post
   if ( $is_first_page ) {
     ?>
+  <div class="container">
     <div class="grid-row">
       <?php
       the_post();
@@ -106,10 +120,10 @@ if ( have_posts() ) {
         <hr />
       </div>
     </div>
+  </div>
     <?php
   }
   ?>
-  </div>
 
   <div class="container">
     <div class="grid-row mb-4">
@@ -120,11 +134,12 @@ if ( have_posts() ) {
     ++$post_count;
 
     get_template_part(
-      'partials/post-layouts/flex-post',
+      'partials/post-layouts/archive-post',
       null,
       array(
         'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
         'image-size'        => 'col12-16to9',
+        'text-size'         => 'regular',
       )
     );
 

@@ -62,7 +62,7 @@
           <div class="grid-item <?php echo $title_classes; ?>">
             <a href="<?php the_permalink(); ?>" class="ui-hover">
               <h6 class="font-size-15 font-weight-bold font-size-m-13"><?php the_title(); ?></h6>
-              <h5 class="font-size-12 font-weight-bold mt-3 mt-s-2">
+              <h5 class="font-size-12 font-weight-bold mt-2">
                 <?php render_standfirst($post->ID); ?>
               </h5>
             </a>
