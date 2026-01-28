@@ -29,6 +29,10 @@ function nm_register_theme_blocks() {
 
 	$block_directories = glob( $blocks_dir . '/*/block.json' );
 
+	if ( false === $block_directories ) {
+		return;
+	}
+
 	foreach ( $block_directories as $block_json ) {
 		register_block_type( dirname( $block_json ) );
 	}

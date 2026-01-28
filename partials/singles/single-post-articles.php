@@ -56,17 +56,31 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
 ?>
     <div id="single-articles-copy" class="mb-4">
       <?php
-      // Parse blocks and classic content separately
       $content = get_the_content();
-      $blocks = parse_blocks( $content );
+      $blocks  = parse_blocks( $content );
 
-      foreach ( $blocks as $block ) {
-        if ( $block['blockName'] === 'nm-wp/newsletter-signup' ) {
-          // nm-wp/newsletter-signup Block - render without text-copy wrapper
-          echo render_block( $block );
-        } else {
-          // Classic content - wrap in text-copy
-          echo '<div class="text-copy">' . apply_filters( 'the_content', $block['innerHTML'] ) . '</div>';
+      // Check if content has any real Gutenberg blocks
+      $has_blocks = false;
+      foreach ( $blocks as $b ) {
+        if ( ! empty( $b['blockName'] ) ) {
+          $has_blocks = true;
+          break;
+        }
+      }
+
+      if ( ! $has_blocks ) {
+        // Classic editor content - apply the_content filter once
+        echo '<div class="text-copy">' . apply_filters( 'the_content', $content ) . '</div>';
+      } else {
+        // Block editor content - render each block properly
+        foreach ( $blocks as $block ) {
+          if ( 'nm-wp/newsletter-signup' === $block['blockName'] ) {
+            // Newsletter block - render without text-copy wrapper
+            echo render_block( $block );
+          } else {
+            // Other blocks - wrap in text-copy
+            echo '<div class="text-copy">' . render_block( $block ) . '</div>';
+          }
         }
       }
       ?>

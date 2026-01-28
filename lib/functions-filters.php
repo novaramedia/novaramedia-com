@@ -195,19 +195,22 @@ function nm_add_caption_class( $block_content, $block ) {
   }
 
   // Add font-size-8 to wp-element-caption (modern WordPress captions)
-  if ( strpos( $block_content, 'wp-element-caption' ) !== false ) {
+  // Check font-size-8 doesn't already exist anywhere in content to avoid duplicates
+  if ( strpos( $block_content, 'wp-element-caption' ) !== false
+       && strpos( $block_content, 'font-size-8' ) === false ) {
     // Handle both single and double quotes, preserve quote style with backreference
     $block_content = preg_replace(
-      '/class=(["\'])([^"\']*?)wp-element-caption(?!\s+font-size-8)([^"\']*?)\1/i',
+      '/class=(["\'])([^"\']*?)wp-element-caption([^"\']*?)\1/i',
       'class=$1$2wp-element-caption font-size-8$3$1',
       $block_content
     );
   }
 
   // Also handle legacy wp-caption-text if present
-  if ( strpos( $block_content, 'wp-caption-text' ) !== false ) {
+  if ( strpos( $block_content, 'wp-caption-text' ) !== false
+       && strpos( $block_content, 'font-size-8' ) === false ) {
     $block_content = preg_replace(
-      '/class=(["\'])([^"\']*?)wp-caption-text(?!\s+font-size-8)([^"\']*?)\1/i',
+      '/class=(["\'])([^"\']*?)wp-caption-text([^"\']*?)\1/i',
       'class=$1$2wp-caption-text font-size-8$3$1',
       $block_content
     );
