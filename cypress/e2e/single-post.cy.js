@@ -135,9 +135,11 @@ describe('Single Post (Article)', () => {
 
   it('should display article content with proper formatting', () => {
     // Content area should have text
-    cy.get('article, .article, .post').first().within(() => {
-      cy.get('p').first().should('have.length.greaterThan', 0);
-    });
+    cy.get('article, .article, .post')
+      .first()
+      .within(() => {
+        cy.get('p').first().should('have.length.greaterThan', 0);
+      });
   });
 
   it('should have social sharing or interaction elements', () => {

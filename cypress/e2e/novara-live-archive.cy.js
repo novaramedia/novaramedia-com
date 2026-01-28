@@ -123,9 +123,9 @@ describe('Novara Live Category Archive', () => {
 
       // Metadata is common but not strictly required for archive pages
       // Just verify posts are present
-      expect($body.find('article, .post, [class*="post"]').length).to.be.greaterThan(
-        0
-      );
+      expect(
+        $body.find('article, .post, [class*="post"]').length
+      ).to.be.greaterThan(0);
     });
   });
 

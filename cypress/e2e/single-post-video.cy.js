@@ -59,7 +59,9 @@ describe('Single Post (Video Category)', () => {
         $body.find('iframe[src*="youtube"]').length > 0 ||
         $body.find('iframe[src*="vimeo"]').length > 0 ||
         $body.find('iframe').length > 0 ||
-        $body.find('.video-player, .video-container, .video-embed, [class*="video"], [class*="player"]').length > 0;
+        $body.find(
+          '.video-player, .video-container, .video-embed, [class*="video"], [class*="player"]'
+        ).length > 0;
 
       // Video posts may have video player, or just be categorized as video
       // Just verify the page loaded successfully
