@@ -30,10 +30,15 @@ export default function Edit({ attributes, setAttributes }) {
 
   useEffect(() => {
     const fetchNewsletterPosts = async () => {
-      const posts = await apiFetch({
-        path: addQueryArgs('/wp/v2/newsletter', { per_page: 100 }),
-      });
-      setNewsletterPosts(posts);
+      try {
+        const posts = await apiFetch({
+          path: addQueryArgs('/wp/v2/newsletter', { per_page: 100 }),
+        });
+        setNewsletterPosts(posts);
+      } catch (error) {
+        console.error('Failed to fetch newsletters:', error);
+        setNewsletterPosts([]);
+      }
     };
 
     fetchNewsletterPosts();

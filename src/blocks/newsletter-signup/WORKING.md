@@ -5,7 +5,7 @@
 Gutenberg block for inserting inline newsletter signup forms into post/page content. Editors select a newsletter from the `newsletter` custom post type, and the block renders a signup form styled with the theme's existing CSS.
 
 **Block name:** `nm-wp/newsletter-signup`
-**Category:** Embed
+**Category:** Widgets
 **Status:** In development
 
 ---
