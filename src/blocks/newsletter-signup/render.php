@@ -47,7 +47,11 @@ if ( empty( $mailchimp_key ) ) {
   return;
 }
 
-$wrapper_attributes = get_block_wrapper_attributes();
+$wrapper_attributes = get_block_wrapper_attributes(
+    array(
+    'class' => 'mb-4',
+  )
+);
 ?>
 <div <?php echo $wrapper_attributes; ?>>
   <div class="background-gray-base ui-rounded-box p-4">

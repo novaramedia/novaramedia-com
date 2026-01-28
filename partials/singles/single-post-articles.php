@@ -74,12 +74,15 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
       } else {
         // Block editor content - render each block properly
         foreach ( $blocks as $block ) {
-          if ( 'nm-wp/newsletter-signup' === $block['blockName'] ) {
+          if ( $block['blockName'] === 'nm-wp/newsletter-signup' ) {
             // Newsletter block - render without text-copy wrapper
             echo render_block( $block );
           } else {
-            // Other blocks - wrap in text-copy
-            echo '<div class="text-copy">' . render_block( $block ) . '</div>';
+            // Other blocks - wrap in text-copy only if not empty
+            $rendered_content = render_block( $block );
+            if ( trim( $rendered_content ) !== '' ) {
+              echo '<div class="text-copy">' . $rendered_content . '</div>';
+            }
           }
         }
       }
