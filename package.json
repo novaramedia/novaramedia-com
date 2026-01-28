@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode=development",
-    "build": "webpack --mode=production",
+    "dev:blocks": "wp-scripts start --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build:theme": "webpack --mode=production",
+    "build:blocks": "wp-scripts build --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build": "npm run build:theme && npm run build:blocks",
     "release": "release-it"
   },
   "repository": {
@@ -59,7 +62,8 @@
     "webpack": "~5.99.5",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "~6.0.1",
-    "webpack-notifier": "~1.15.0"
+    "webpack-notifier": "~1.15.0",
+    "@wordpress/scripts": "^27.9.0"
   },
   "dependencies": {
     "jquery": "~3.7.1",
