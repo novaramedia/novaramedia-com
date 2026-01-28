@@ -14,25 +14,25 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+  exit; // Exit if accessed directly
 }
 
 $newsletter = $attributes['newsletter'] ?? null;
 
 if ( ! $newsletter || empty( $newsletter['id'] ) ) {
-    return; // No newsletter selected
+  return; // No newsletter selected
 }
 
 $newsletter_id = $newsletter['id'];
 
 // Pull fresh meta from newsletter post
 $mailchimp_key = get_post_meta( $newsletter_id, '_nm_mailchimp_key', true );
-$headline      = get_post_meta( $newsletter_id, '_nm_banner_headline', true );
-$description   = get_post_meta( $newsletter_id, '_nm_banner_text', true );
+$headline = get_post_meta( $newsletter_id, '_nm_banner_headline', true );
+$description = get_post_meta( $newsletter_id, '_nm_banner_text', true );
 
 // Check for custom overrides from block attributes
 if ( ! empty( $attributes['customTitle'] ) ) {
-    $headline = $attributes['customTitle'];
+  $headline = $attributes['customTitle'];
 } elseif ( empty( $headline ) ) {
   // Fallback to newsletter title if no custom headline or override set
   $headline = get_the_title( $newsletter_id );
