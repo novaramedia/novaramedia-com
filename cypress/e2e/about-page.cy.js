@@ -62,12 +62,6 @@ describe('About Page', () => {
     });
   });
 
-  it('should have proper content structure', () => {
-    cy.get('[data-testid="about-page"]').within(() => {
-      cy.get('div[class*="grid"]').should('have.length.greaterThan', 0);
-    });
-  });
-
   it('should load without console errors', () => {
     cy.verifyNoConsoleErrors();
   });

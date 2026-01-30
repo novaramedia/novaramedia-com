@@ -47,10 +47,11 @@ describe('Support Page', () => {
     });
   });
 
-  it('should have clickable donation/support options', () => {
-    cy.get(
-      '[data-testid="support-page"] a, [data-testid="support-page"] button'
-    ).should('have.length.greaterThan', 0);
+  it('should have support form submit button', () => {
+    // Check specifically for the support form submit button
+    cy.get('[data-testid="support-page"]').within(() => {
+      cy.get('form button[type="submit"], form input[type="submit"]').should('exist');
+    });
   });
 
   it('should load without console errors', () => {
