@@ -50,7 +50,9 @@ describe('Support Page', () => {
   it('should have support form submit button', () => {
     // Check specifically for the support form submit button
     cy.get('[data-testid="support-page"]').within(() => {
-      cy.get('form button[type="submit"], form input[type="submit"]').should('exist');
+      cy.get('form button[type="submit"], form input[type="submit"]').should(
+        'exist'
+      );
     });
   });
 
