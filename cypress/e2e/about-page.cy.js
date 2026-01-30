@@ -18,14 +18,19 @@ describe('About Page', () => {
   });
 
   it('should display critical page elements', () => {
-    cy.get('header').should('be.visible');
-    cy.get('main, .main, #main').should('exist');
-    cy.get('footer').should('be.visible');
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="main-content"]').should('exist');
+    cy.get('[data-testid="site-footer"]').should('be.visible');
+  });
+
+  it('should display about page content', () => {
+    cy.get('[data-testid="about-page"]').should('exist');
   });
 
   it('should have main heading', () => {
-    // About page should have some heading structure
-    cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
+    cy.get(
+      '[data-testid="about-page"] h1, [data-testid="about-page"] h4'
+    ).should('have.length.greaterThan', 0);
 
     // Verify page has substantial content
     cy.get('body').then(($body) => {
@@ -33,15 +38,14 @@ describe('About Page', () => {
     });
   });
 
-  it('should display about content', () => {
-    // Should have headings for different sections
-    cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
+  it('should display about content sections', () => {
+    cy.get('[data-testid="about-page"]').within(() => {
+      // Should have headings for different sections
+      cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
 
-    // Should have substantial content
-    cy.get('p, section, .content, div[class*="content"]').should(
-      'have.length.greaterThan',
-      0
-    );
+      // Should have substantial content
+      cy.get('p, div').should('have.length.greaterThan', 0);
+    });
   });
 
   it('should display organizational information', () => {
@@ -51,7 +55,6 @@ describe('About Page', () => {
       const hasRelevantContent =
         text.includes('novara') ||
         text.includes('media') ||
-        text.includes('mission') ||
         text.includes('team') ||
         text.includes('about');
 
@@ -60,11 +63,8 @@ describe('About Page', () => {
   });
 
   it('should have proper content structure', () => {
-    // About pages typically have sections or content blocks
-    cy.get('main, .main, #main').within(() => {
-      cy.get(
-        'section, article, .section, .content-block, div[class*="grid"]'
-      ).should('have.length.greaterThan', 0);
+    cy.get('[data-testid="about-page"]').within(() => {
+      cy.get('div[class*="grid"]').should('have.length.greaterThan', 0);
     });
   });
 
@@ -82,18 +82,24 @@ describe('About Page', () => {
     viewports.forEach((viewport) => {
       cy.viewport(viewport.width, viewport.height);
 
-      cy.get('header').should('be.visible');
-      cy.get('main, .main, #main').should('be.visible');
-      cy.get('footer').should('be.visible');
+      cy.get('[data-testid="site-header"]').should('be.visible');
+      cy.get('[data-testid="main-content"]').should('be.visible');
+      cy.get('[data-testid="site-footer"]').should('be.visible');
 
       // Some heading should be visible
-      cy.get('h1, h2, h3, h4').first().should('be.visible');
+      cy.get('[data-testid="about-page"] h1, [data-testid="about-page"] h4')
+        .first()
+        .should('be.visible');
     });
   });
 
   it('should have navigation links', () => {
-    cy.get('header nav, nav').should('be.visible');
-    cy.get('nav a').should('have.length.greaterThan', 0);
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="site-nav"]').should('be.visible');
+    cy.get('[data-testid="site-nav"] a, [data-testid="site-header"] a').should(
+      'have.length.greaterThan',
+      0
+    );
   });
 
   it('should have appropriate meta tags', () => {

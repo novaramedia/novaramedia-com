@@ -29,7 +29,7 @@ $quotes_block_2 = array(
 
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
 if ( have_posts() ) {
   while ( have_posts() ) {
@@ -46,7 +46,7 @@ if ( have_posts() ) {
     $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
   }
   ?>
-  <article id="page" class="support-page background-gray-base support-page__background-cover-image">
+  <article id="page" class="support-page background-gray-base support-page__background-cover-image" data-testid="support-page">
     <div class="container">
       <div class="grid-item">
         <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">

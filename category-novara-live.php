@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content" class="category-archive novaralive-archive">
+<main id="main-content" class="category-archive novaralive-archive" data-testid="main-content">
 <?php
   $is_first_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
 
@@ -82,7 +82,7 @@ get_header();
 <?php
   } // end if first page
 ?>
-  <section id="posts" class="container mt-6 mt-s-5">
+  <section id="posts" class="container mt-6 mt-s-5" data-testid="post-list">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>

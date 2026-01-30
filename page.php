@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {

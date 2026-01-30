@@ -7,49 +7,35 @@
 
 describe('Homepage', () => {
   beforeEach(() => {
-    // Visit homepage and check for console errors
     cy.checkPageLoad();
     cy.visit('/');
   });
 
   it('should load successfully', () => {
-    // Verify page loaded
     cy.url().should('eq', Cypress.config('baseUrl') + '/');
-
-    // Check page title
     cy.title().should('not.be.empty');
     cy.title().should('include', 'Novara Media');
   });
 
   it('should display critical page elements', () => {
-    // Header should be present
-    cy.get('header').should('be.visible');
-
-    // Main navigation should exist
-    cy.get('nav').should('be.visible');
-
-    // Main content area should exist
-    cy.get('main, .main, #main').should('exist');
-
-    // Footer should be present
-    cy.get('footer').should('be.visible');
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="site-nav"]').should('be.visible');
+    cy.get('[data-testid="main-content"]').should('exist');
+    cy.get('[data-testid="site-footer"]').should('be.visible');
   });
 
   it('should have working navigation links', () => {
-    // Check main nav has links
-    cy.get('nav a').should('have.length.greaterThan', 0);
-
-    // Verify at least one nav link works
-    cy.get('nav a').first().should('have.attr', 'href').and('not.be.empty');
+    cy.get('[data-testid="site-nav"] a').should('have.length.greaterThan', 0);
+    cy.get('[data-testid="site-header"] a')
+      .first()
+      .should('have.attr', 'href')
+      .and('not.be.empty');
   });
 
   it('should display post content', () => {
-    // Homepage displays posts with .post__title class (h2 or h4 elements)
-    // This theme doesn't use <article> tags on the homepage
-    cy.get('#main-content .post__title').should('have.length.greaterThan', 0);
-
-    // Posts should have visible titles
-    cy.get('#main-content .post__title')
+    cy.get('[data-testid="post-list"]').should('exist');
+    cy.get('[data-testid="post-title"]').should('have.length.greaterThan', 0);
+    cy.get('[data-testid="post-title"]')
       .first()
       .should('be.visible')
       .and('not.be.empty');
@@ -60,10 +46,8 @@ describe('Homepage', () => {
   });
 
   it('should not have broken images in critical content', () => {
-    // Check images in main content area
-    cy.get('main img, .main img, #main img').then(($images) => {
+    cy.get('[data-testid="main-content"] img').then(($images) => {
       if ($images.length > 0) {
-        // Only check first few images to avoid timeout
         cy.wrap($images.slice(0, 5)).each(($img) => {
           const src = $img.attr('src');
           if (src && !src.startsWith('data:') && !src.includes('placeholder')) {
@@ -84,15 +68,13 @@ describe('Homepage', () => {
     viewports.forEach((viewport) => {
       cy.viewport(viewport.width, viewport.height);
 
-      // Verify critical elements still visible
-      cy.get('header').should('be.visible');
-      cy.get('main, .main, #main').should('be.visible');
-      cy.get('footer').should('be.visible');
+      cy.get('[data-testid="site-header"]').should('be.visible');
+      cy.get('[data-testid="main-content"]').should('be.visible');
+      cy.get('[data-testid="site-footer"]').should('be.visible');
     });
   });
 
   it('should have meta tags for SEO', () => {
-    // Check for essential meta tags
     cy.get('head meta[name="description"]').should('exist');
     cy.get('head meta[property="og:title"]').should('exist');
   });

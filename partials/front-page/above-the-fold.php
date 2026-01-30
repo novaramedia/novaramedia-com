@@ -17,7 +17,7 @@ if ( $args['latest_articles_posts_ids'] ) {
     return;
 }
 ?>
-<section class="front-page__above-the-fold container container--padded mt-2 mb-6 mb-s-5">
+<section class="front-page__above-the-fold container container--padded mt-2 mb-6 mb-s-5" data-testid="post-list">
   <div class="above-the-fold layout-grid">
     <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-4">
       <?php

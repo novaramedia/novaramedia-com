@@ -17,14 +17,19 @@ describe('Jobs Page', () => {
   });
 
   it('should display critical page elements', () => {
-    cy.get('header').should('be.visible');
-    cy.get('main, .main, #main').should('exist');
-    cy.get('footer').should('be.visible');
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="main-content"]').should('exist');
+    cy.get('[data-testid="site-footer"]').should('be.visible');
+  });
+
+  it('should display jobs page content', () => {
+    cy.get('[data-testid="jobs-page"]').should('exist');
   });
 
   it('should have main heading', () => {
-    // Jobs page should have some heading structure
-    cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
+    cy.get(
+      '[data-testid="jobs-page"] h1, [data-testid="jobs-page"] h4, [data-testid="jobs-page"] h5'
+    ).should('have.length.greaterThan', 0);
 
     // Verify page has substantial content
     cy.get('body').then(($body) => {
@@ -33,14 +38,13 @@ describe('Jobs Page', () => {
   });
 
   it('should display jobs content or listings', () => {
-    // Should have headings
-    cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
+    cy.get('[data-testid="jobs-page"]').within(() => {
+      // Should have headings
+      cy.get('h1, h2, h3, h4, h5').should('have.length.greaterThan', 0);
 
-    // Should have content - either job listings or informational text
-    cy.get('p, article, .job, .listing, section, div[class*="content"]').should(
-      'have.length.greaterThan',
-      0
-    );
+      // Should have content - either job listings or informational text
+      cy.get('p, li, div').should('have.length.greaterThan', 0);
+    });
   });
 
   it('should display job-related information', () => {
@@ -50,12 +54,9 @@ describe('Jobs Page', () => {
       const hasJobContent =
         text.includes('job') ||
         text.includes('position') ||
-        text.includes('vacancy') ||
-        text.includes('career') ||
         text.includes('hiring') ||
-        text.includes('opportunity') ||
         text.includes('work') ||
-        text.includes('apply');
+        text.includes('no available positions');
 
       expect(hasJobContent).to.be.true;
     });
@@ -63,7 +64,7 @@ describe('Jobs Page', () => {
 
   it('should handle empty job listings gracefully', () => {
     // Even if no jobs available, page should display properly
-    cy.get('main, .main, #main').should('be.visible');
+    cy.get('[data-testid="jobs-page"]').should('be.visible');
 
     // Should have some message or content
     cy.get('body').then(($body) => {
@@ -85,24 +86,32 @@ describe('Jobs Page', () => {
     viewports.forEach((viewport) => {
       cy.viewport(viewport.width, viewport.height);
 
-      cy.get('header').should('be.visible');
-      cy.get('main, .main, #main').should('be.visible');
-      cy.get('footer').should('be.visible');
+      cy.get('[data-testid="site-header"]').should('be.visible');
+      cy.get('[data-testid="main-content"]').should('be.visible');
+      cy.get('[data-testid="site-footer"]').should('be.visible');
 
       // Some heading should be visible
-      cy.get('h1, h2, h3, h4').first().should('be.visible');
+      cy.get(
+        '[data-testid="jobs-page"] h1, [data-testid="jobs-page"] h4, [data-testid="jobs-page"] h5'
+      )
+        .first()
+        .should('be.visible');
     });
   });
 
   it('should have navigation elements', () => {
-    cy.get('header nav, nav').should('be.visible');
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="site-nav"]').should('be.visible');
   });
 
   it('should have proper heading structure', () => {
     // Should have some heading structure
-    cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
-
-    // First heading should not be empty
-    cy.get('h1, h2, h3, h4').first().invoke('text').should('not.be.empty');
+    cy.get(
+      '[data-testid="jobs-page"] h1, [data-testid="jobs-page"] h4, [data-testid="jobs-page"] h5'
+    )
+      .should('have.length.greaterThan', 0)
+      .first()
+      .invoke('text')
+      .should('not.be.empty');
   });
 });

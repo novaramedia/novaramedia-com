@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
   $post_status = get_post_status();
 if ( $post_status === 'draft' || $post_status === 'pending' ) {
@@ -20,7 +20,7 @@ if ( $post_status === 'draft' || $post_status === 'pending' ) {
   <?php
 }
 ?>
-  <article id="post" class="container mt-4 mb-4">
+  <article id="post" class="container mt-4 mb-4" data-testid="single-post">
 <?php
 if ( have_posts() ) {
   while ( have_posts() ) {

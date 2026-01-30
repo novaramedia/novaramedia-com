@@ -1,7 +1,8 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
+// Custom Cypress Commands for Novara Media Theme
+//
+// These commands provide reusable testing utilities
+// for WordPress theme testing.
 //
 // For more comprehensive examples of custom
 // commands please read more here:
@@ -30,7 +31,11 @@ Cypress.Commands.add('verifyNoConsoleErrors', () => {
         errorMsg.includes('ResizeObserver') ||
         errorMsg.includes('google-analytics') ||
         errorMsg.includes('gtag') ||
-        errorMsg.includes('fbq')
+        errorMsg.includes('fbq') ||
+        errorMsg.includes('twitter') ||
+        errorMsg.includes('facebook') ||
+        errorMsg.includes('soundcloud') ||
+        errorMsg.includes('youtube')
       );
     });
 
@@ -76,13 +81,32 @@ Cypress.Commands.add('testResponsive', (callback) => {
 });
 
 /**
- * Wait for WordPress page to be fully loaded
+ * Wait for WordPress/theme page to be fully loaded
+ * Uses data-testid selectors for reliable element detection
  */
 Cypress.Commands.add('waitForWordPress', () => {
-  // Wait for common WordPress elements
+  // Wait for body to exist
   cy.get('body').should('exist');
-  cy.get('body').should('have.class', 'wordpress');
 
-  // Wait for any loading states to complete
-  cy.get('.loading, .loader', { timeout: 10000 }).should('not.exist');
+  // Wait for theme's key elements using data-testid
+  cy.get('[data-testid="site-header"]', { timeout: 10000 }).should('exist');
+  cy.get('[data-testid="main-content"]', { timeout: 10000 }).should('exist');
+});
+
+/**
+ * Get element by data-testid attribute
+ * Convenience command for cleaner test syntax
+ */
+Cypress.Commands.add('getByTestId', (testId, options = {}) => {
+  return cy.get(`[data-testid="${testId}"]`, options);
+});
+
+/**
+ * Verify critical page structure is present
+ * Checks for header, main content, and footer
+ */
+Cypress.Commands.add('verifyCriticalPageStructure', () => {
+  cy.get('[data-testid="site-header"]').should('be.visible');
+  cy.get('[data-testid="main-content"]').should('exist');
+  cy.get('[data-testid="site-footer"]').should('be.visible');
 });

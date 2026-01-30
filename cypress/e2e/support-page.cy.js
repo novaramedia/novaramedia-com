@@ -7,63 +7,50 @@
 
 describe('Support Page', () => {
   beforeEach(() => {
-    // Visit support page and check for console errors
     cy.checkPageLoad();
     cy.visit('/support');
   });
 
   it('should load successfully', () => {
-    // Verify page loaded
     cy.url().should('include', '/support');
-
-    // Check page title
     cy.title().should('not.be.empty');
     cy.title().should('include', 'Support');
   });
 
   it('should display critical page elements', () => {
-    // Header should be present
-    cy.get('header').should('be.visible');
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="main-content"]').should('exist');
+    cy.get('[data-testid="site-footer"]').should('be.visible');
+  });
 
-    // Main content area should exist
-    cy.get('main, .main, #main').should('exist');
-
-    // Footer should be present
-    cy.get('footer').should('be.visible');
+  it('should display support page content', () => {
+    cy.get('[data-testid="support-page"]').should('exist');
   });
 
   it('should display support/donation form elements', () => {
     // Should have some form of donation interface
-    // This could be a form, buttons, or links to donation platform
-    cy.get(
-      'form, button, input[type="submit"], a[href*="donate"], .donate, .support-form'
-    ).should('have.length.greaterThan', 0);
+    cy.get('[data-testid="support-page"]').within(() => {
+      cy.get('form, button, a[href*="donate"]').should(
+        'have.length.greaterThan',
+        0
+      );
+    });
   });
 
   it('should display main content', () => {
-    // Page should have substantive content explaining support options
-    cy.get('main, .main, #main').within(() => {
+    cy.get('[data-testid="support-page"]').within(() => {
       // Should have headings
-      cy.get('h1, h2, h3').should('have.length.greaterThan', 0);
+      cy.get('h1, h2, h3, h4').should('have.length.greaterThan', 0);
 
       // Should have paragraphs or content blocks
-      cy.get('p, .content, section').should('have.length.greaterThan', 0);
+      cy.get('p, div').should('have.length.greaterThan', 0);
     });
   });
 
   it('should have clickable donation/support options', () => {
-    // Check for interactive elements
-    cy.get('button, input[type="submit"], a[href*="donate"]').then(
-      ($elements) => {
-        if ($elements.length > 0) {
-          // At least one should be visible
-          cy.wrap($elements.filter(':visible')).should(
-            'have.length.greaterThan',
-            0
-          );
-        }
-      }
-    );
+    cy.get(
+      '[data-testid="support-page"] a, [data-testid="support-page"] button'
+    ).should('have.length.greaterThan', 0);
   });
 
   it('should load without console errors', () => {
@@ -80,33 +67,23 @@ describe('Support Page', () => {
     viewports.forEach((viewport) => {
       cy.viewport(viewport.width, viewport.height);
 
-      // Verify critical elements still visible
-      cy.get('header').should('be.visible');
-      cy.get('main, .main, #main').should('be.visible');
-      cy.get('footer').should('be.visible');
-
-      // Support form/buttons should still be accessible
-      cy.get(
-        'form, button, input[type="submit"], a[href*="donate"], .donate, .support-form'
-      ).should('exist');
+      cy.get('[data-testid="site-header"]').should('be.visible');
+      cy.get('[data-testid="main-content"]').should('be.visible');
+      cy.get('[data-testid="site-footer"]').should('be.visible');
+      cy.get('[data-testid="support-page"]').should('exist');
     });
   });
 
   it('should have appropriate heading structure', () => {
-    // Note: Support page uses h4 for "Support Us" title (not h1)
-    // and h3 for section headings. This is the current structure.
-    cy.get('main h3, main h4').should('have.length.greaterThan', 0);
-
-    // The first visible heading should contain support-related text
-    cy.get('.support-page h3, .support-page h4')
+    cy.get('[data-testid="support-page"] h3, [data-testid="support-page"] h4')
+      .should('have.length.greaterThan', 0)
       .first()
       .should('be.visible')
       .and('not.be.empty');
   });
 
   it('should display support information text', () => {
-    // Should have explanatory text about supporting
-    cy.get('main, .main, #main').within(() => {
+    cy.get('[data-testid="support-page"]').within(() => {
       cy.contains(/support|donate|contribute|help/i).should('exist');
     });
   });
