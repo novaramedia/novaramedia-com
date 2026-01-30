@@ -106,9 +106,7 @@ export class Support {
       }
 
       // Only return override if it has valid content
-      return Object.keys(filteredOverride).length > 0
-        ? filteredOverride
-        : null;
+      return Object.keys(filteredOverride).length > 0 ? filteredOverride : null;
     } catch (e) {
       // Invalid JSON, ignore override
       console.warn('Invalid copy override data:', e);
@@ -379,10 +377,7 @@ export class Support {
       isNonEmptyString(globalModeOverride.text)
     ) {
       bodyText = globalModeOverride.text;
-    } else if (
-      globalDefaultCopy &&
-      isNonEmptyString(globalDefaultCopy.text)
-    ) {
+    } else if (globalDefaultCopy && isNonEmptyString(globalDefaultCopy.text)) {
       bodyText = globalDefaultCopy.text;
     }
 
