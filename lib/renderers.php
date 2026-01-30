@@ -330,18 +330,18 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
       if ( isset( $copy[ $mode ] ) && is_array( $copy[ $mode ] ) ) {
         $mode_data = array();
         
-        // Validate heading with length limit (max 500 characters)
+        // Validate heading - accept any non-empty string
         if ( isset( $copy[ $mode ]['heading'] ) && is_string( $copy[ $mode ]['heading'] ) ) {
           $heading = trim( $copy[ $mode ]['heading'] );
-          if ( ! empty( $heading ) && mb_strlen( $heading ) <= 500 ) {
+          if ( ! empty( $heading ) ) {
             $mode_data['heading'] = $heading;
           }
         }
         
-        // Validate text with length limit (max 1000 characters)
+        // Validate text - accept any non-empty string
         if ( isset( $copy[ $mode ]['text'] ) && is_string( $copy[ $mode ]['text'] ) ) {
           $text = trim( $copy[ $mode ]['text'] );
-          if ( ! empty( $text ) && mb_strlen( $text ) <= 1000 ) {
+          if ( ! empty( $text ) ) {
             $mode_data['text'] = $text;
           }
         }
@@ -361,21 +361,16 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   }
 
   $support_section_classes = $variant_classes . ' ' . $container_classes;
-
-  // Prepare data attributes for JavaScript with size validation
-  // Note: $data_attrs will contain pre-escaped HTML attribute string
-  $data_attrs = '';
-  if ( ! empty( $validated_copy ) ) {
-    $json_data = wp_json_encode( $validated_copy );
-    // Only add attribute if JSON encoding succeeded and is reasonably sized (max 5KB)
-    if ( false !== $json_data && is_string( $json_data ) && strlen( $json_data ) <= 5120 ) {
-      // Pre-escape the entire attribute string for output
-      $data_attrs = ' data-copy-override="' . esc_attr( $json_data ) . '"';
-    }
-  }
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php echo $data_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Variable $data_attrs contains pre-escaped HTML constructed with esc_attr() above ?>>
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php
+      if ( ! empty( $validated_copy ) ) {
+        $json_data = wp_json_encode( $validated_copy );
+        if ( false !== $json_data && is_string( $json_data ) ) {
+          echo ' data-copy-override="' . esc_attr( $json_data ) . '"';
+        }
+      }
+    ?>>
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">

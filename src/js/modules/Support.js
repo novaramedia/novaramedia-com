@@ -47,6 +47,75 @@ export class Support {
     this.autovalues = WP.supportSectionAutovalues[autovaluesKey];
   }
 
+  /**
+   * Validates and parses copy override data from JSON attribute
+   * @param {string} jsonString - JSON string from data attribute
+   * @returns {Object|null} Validated copy override object or null if invalid
+   */
+  validateCopyOverride(jsonString) {
+    if (!jsonString) {
+      return null;
+    }
+
+    try {
+      const parsed = JSON.parse(jsonString);
+
+      // Validate parsed object structure to prevent prototype pollution
+      if (
+        !parsed ||
+        typeof parsed !== 'object' ||
+        Array.isArray(parsed) ||
+        Object.getPrototypeOf(parsed) !== Object.prototype
+      ) {
+        return null;
+      }
+
+      // Only accept valid donation mode keys
+      const validKeys = ['regular', 'oneoff'];
+      const filteredOverride = {};
+
+      for (const key of validKeys) {
+        if (
+          key in parsed &&
+          parsed[key] !== null &&
+          parsed[key] !== undefined &&
+          typeof parsed[key] === 'object' &&
+          !Array.isArray(parsed[key])
+        ) {
+          const modeData = {};
+
+          if (
+            typeof parsed[key].heading === 'string' &&
+            parsed[key].heading.length > 0
+          ) {
+            modeData.heading = parsed[key].heading;
+          }
+
+          if (
+            typeof parsed[key].text === 'string' &&
+            parsed[key].text.length > 0
+          ) {
+            modeData.text = parsed[key].text;
+          }
+
+          // Only add mode if it has at least one valid field
+          if (Object.keys(modeData).length > 0) {
+            filteredOverride[key] = modeData;
+          }
+        }
+      }
+
+      // Only return override if it has valid content
+      return Object.keys(filteredOverride).length > 0
+        ? filteredOverride
+        : null;
+    } catch (e) {
+      // Invalid JSON, ignore override
+      console.warn('Invalid copy override data:', e);
+      return null;
+    }
+  }
+
   bind() {
     const _this = this;
 
@@ -55,63 +124,7 @@ export class Support {
 
       // Check for context-specific copy overrides via data attribute
       const copyOverrideAttr = $form.attr('data-copy-override');
-      let copyOverride = null;
-      if (copyOverrideAttr) {
-        try {
-          const parsed = JSON.parse(copyOverrideAttr);
-          // Validate parsed object structure to prevent prototype pollution
-          if (
-            parsed &&
-            typeof parsed === 'object' &&
-            !Array.isArray(parsed) &&
-            Object.getPrototypeOf(parsed) === Object.prototype
-          ) {
-            // Only accept valid donation mode keys
-            const validKeys = ['regular', 'oneoff'];
-            const filteredOverride = {};
-
-            for (const key of validKeys) {
-              if (
-                key in parsed &&
-                parsed[key] !== null &&
-                parsed[key] !== undefined &&
-                typeof parsed[key] === 'object' &&
-                !Array.isArray(parsed[key])
-              ) {
-                const modeData = {};
-
-                if (
-                  typeof parsed[key].heading === 'string' &&
-                  parsed[key].heading.length > 0 &&
-                  parsed[key].heading.length <= 500
-                ) {
-                  modeData.heading = parsed[key].heading;
-                }
-                if (
-                  typeof parsed[key].text === 'string' &&
-                  parsed[key].text.length > 0 &&
-                  parsed[key].text.length <= 1000
-                ) {
-                  modeData.text = parsed[key].text;
-                }
-
-                // Only add mode if it has at least one valid field
-                if (Object.keys(modeData).length > 0) {
-                  filteredOverride[key] = modeData;
-                }
-              }
-            }
-
-            // Only use override if it has valid content
-            if (Object.keys(filteredOverride).length > 0) {
-              copyOverride = filteredOverride;
-            }
-          }
-        } catch (e) {
-          // Invalid JSON, ignore override
-          console.warn('Invalid copy override data:', e);
-        }
-      }
+      const copyOverride = _this.validateCopyOverride(copyOverrideAttr);
 
       // Store copy override on the form element for later use
       if (copyOverride) {
@@ -331,48 +344,54 @@ export class Support {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
 
-    // Check for context-specific overrides first (highest priority)
-    const contextOverride = $form.data('copy-override');
-    const contextModeCopy = contextOverride && contextOverride[data.value];
+    // Get copy sources in priority order
+    const contextSpecificOverride = $form.data('copy-override');
+    const contextCopyForMode =
+      contextSpecificOverride && contextSpecificOverride[data.value];
 
-    // Fall back to global configuration
-    const overrideCopy =
+    const globalModeOverride =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
-    const defaultSectionCopy =
+    const globalDefaultCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
+    // Determine heading text with priority: context > global mode > global default
     let headingText = '';
-    // Check context-specific override first
-    if (contextModeCopy && isNonEmptyString(contextModeCopy.heading)) {
-      headingText = contextModeCopy.heading;
-    } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
-      headingText = overrideCopy.heading;
+    if (contextCopyForMode && isNonEmptyString(contextCopyForMode.heading)) {
+      headingText = contextCopyForMode.heading;
     } else if (
-      defaultSectionCopy &&
-      isNonEmptyString(defaultSectionCopy.heading)
+      globalModeOverride &&
+      isNonEmptyString(globalModeOverride.heading)
     ) {
-      headingText = defaultSectionCopy.heading;
+      headingText = globalModeOverride.heading;
+    } else if (
+      globalDefaultCopy &&
+      isNonEmptyString(globalDefaultCopy.heading)
+    ) {
+      headingText = globalDefaultCopy.heading;
     }
 
-    let textCopy = '';
-    // Check context-specific override first
-    if (contextModeCopy && isNonEmptyString(contextModeCopy.text)) {
-      textCopy = contextModeCopy.text;
-    } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
-      textCopy = overrideCopy.text;
+    // Determine body text with priority: context > global mode > global default
+    let bodyText = '';
+    if (contextCopyForMode && isNonEmptyString(contextCopyForMode.text)) {
+      bodyText = contextCopyForMode.text;
     } else if (
-      defaultSectionCopy &&
-      isNonEmptyString(defaultSectionCopy.text)
+      globalModeOverride &&
+      isNonEmptyString(globalModeOverride.text)
     ) {
-      textCopy = defaultSectionCopy.text;
+      bodyText = globalModeOverride.text;
+    } else if (
+      globalDefaultCopy &&
+      isNonEmptyString(globalDefaultCopy.text)
+    ) {
+      bodyText = globalDefaultCopy.text;
     }
 
     // Update DOM elements if they exist and we have content
     if ($heading.length && headingText) {
       $heading.text(headingText);
     }
-    if ($text.length && textCopy) {
-      $text.text(textCopy);
+    if ($text.length && bodyText) {
+      $text.text(bodyText);
     }
   }
 
