@@ -12,6 +12,7 @@ function pagination_posts_link_attributes( $attributes ) {
 }
 add_filter( 'previous_posts_link_attributes', 'pagination_posts_link_attributes' );
 add_filter( 'next_posts_link_attributes', 'pagination_posts_link_attributes' );
+
 /**
  * Filters the admin columns.
  *
@@ -28,24 +29,6 @@ function nm_filter_admin_columns( $columns ) {
 }
 add_filter( 'manage_posts_columns', 'nm_filter_admin_columns' );
 add_filter( 'manage_pages_columns', 'nm_filter_admin_columns' );
-
-/**
- * Wrap images in the_content with a div for styling.
- * However this wasn't needed so currently not used. Left here in case of future utility.
- */
-function nm_wrap_post_images( $content ) {
-  preg_match_all( '/<figure.*>.*?<\/figure>/i', $content, $images );
-
-  if ( ! is_null( $images ) ) {
-    foreach ( $images[0] as $image ) {
-      $replacement = '<div class="content-image">' . $image . '</div>';
-      $content = str_replace( $image, $replacement, $content );
-    }
-  }
-
-  return $content;
-}
-// add_filter('the_content', 'nm_wrap_post_images', 20, 1);
 
 /**
  * Change the return values when oembedding one of our articles.
@@ -80,7 +63,7 @@ function tax_focus_specials_template_path( $template ) {
     $term = get_query_var( 'term' );
     $new_template = locate_template( array( 'specials/taxonomy-focus-' . $term . '.php' ) );
 
-    if ( '' != $new_template ) {
+    if ( $new_template !== '' ) {
       return $new_template;
     }
   }
@@ -89,7 +72,15 @@ function tax_focus_specials_template_path( $template ) {
 }
 add_filter( 'template_include', 'tax_focus_specials_template_path', 99 );
 
-// add category nicenames in body class
+/**
+ * Add category nicenames to body classes for single posts.
+ *
+ * Loops through all categories assigned to the current post and adds
+ * a 'category-{nicename}' class for each to the body_class array.
+ *
+ * @param array $classes Array of existing body classes.
+ * @return array Modified array of body classes with category nicenames added.
+ */
 function nm_category_id_class( $classes ) {
   if ( is_single() ) {
     global $post;
@@ -103,17 +94,44 @@ function nm_category_id_class( $classes ) {
 
 add_filter( 'body_class', 'nm_category_id_class' );
 
-// Add classes to oembed elements
-function my_embed_oembed_html( $html, $url, $attr, $post_id ) {
-  if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) || str_contains( $url, 'vimeo.com/' ) ) {
+/**
+ * Add wrapper classes to oEmbed elements and use privacy-enhanced YouTube embeds.
+ *
+ * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
+ * the original URL was youtube.com or youtu.be. The str_replace works for both
+ * because it operates on the returned iframe HTML, not the original URL.
+ *
+ * @param string $html    The oEmbed HTML.
+ * @param string $url     The original URL that was embedded.
+ * @param array  $attr    Embed attributes.
+ * @param int    $post_id The post ID.
+ * @return string Modified HTML with wrapper classes and privacy-enhanced URLs.
+ */
+function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
+  if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
+    // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
+    $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
+    return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+  }
+
+  if ( str_contains( $url, 'vimeo.com/' ) ) {
     return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
   }
 
   return $html;
 }
-add_filter( 'embed_oembed_html', 'my_embed_oembed_html', 99, 4 );
+add_filter( 'embed_oembed_html', 'nm_embed_oembed_html', 99, 4 );
 
-// Custom img attributes to be compatible with lazysize
+/**
+ * Modify image attributes to enable lazy loading via lazysizes library.
+ *
+ * Converts standard src/srcset attributes to data-src/data-srcset for lazy loading,
+ * adds the 'lazyload' class, and sets a placeholder image. Images with the
+ * data-no-lazysizes attribute are excluded from this transformation.
+ *
+ * @param array $attr Array of image attributes.
+ * @return array Modified array of image attributes with lazysizes data attributes.
+ */
 function add_lazysize_on_srcset( $attr ) {
 
   if ( ! is_admin() ) {
@@ -146,8 +164,18 @@ function add_lazysize_on_srcset( $attr ) {
 }
 add_filter( 'wp_get_attachment_image_attributes', 'add_lazysize_on_srcset' );
 
-// add image to the RSS feeds
-// https://wordpress.org/plugins/add-featured-image-to-rss-feed/#developers
+/**
+ * Add featured image to RSS feed content.
+ *
+ * Prepends the post's featured image (if it exists) to the RSS feed content.
+ * The image uses the 'large' thumbnail size and includes the data-no-lazysizes
+ * attribute to prevent lazy loading in feed readers.
+ *
+ * @see https://wordpress.org/plugins/add-featured-image-to-rss-feed/#developers
+ *
+ * @param string $content The RSS feed content.
+ * @return string Content with featured image prepended if available.
+ */
 function add_featured_image_to_feed( $content ) {
   global $post;
 
