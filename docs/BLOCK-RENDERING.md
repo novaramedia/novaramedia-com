@@ -4,7 +4,7 @@
 
 Single posts use custom block rendering logic to wrap content blocks in `.text-copy` containers while allowing certain blocks (like the newsletter signup) to render full-width.
 
-**File:** `partials/singles/single-post-articles.php:57-90`
+**File:** `partials/singles/single-post-articles.php`
 
 ## How It Works
 

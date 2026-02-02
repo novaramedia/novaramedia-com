@@ -63,14 +63,14 @@ All oEmbed embeds currently load **without checking user consent** and set track
 
 **Where embeds are rendered:**
 
-- `partials/singles/single-post-articles.php:77-88`
+- `partials/singles/single-post-articles.php` - Block rendering loop
 - Uses `render_block()` then `apply_filters('the_content', ...)`
 
 **Where embed HTML is modified:**
 
-- `lib/functions-filters.php:107-114` - `embed_oembed_html` filter
+- `lib/functions-filters.php` - `nm_embed_oembed_html()` filter
 - Wraps YouTube/Vimeo in responsive container
-- Does NOT modify embed source URLs
+- Switches YouTube to nocookie domain
 
 ---
 
@@ -84,7 +84,7 @@ YouTube oEmbed URLs are now switched from `youtube.com/embed` to `youtube-nocook
 
 ### Implementation Details
 
-**File:** `lib/functions-filters.php:106-131`
+**File:** `lib/functions-filters.php`
 
 **Function:** `nm_embed_oembed_html()`
 
@@ -241,12 +241,12 @@ export class EmbedConsent {
 
 **Embed rendering:**
 
-- `partials/singles/single-post-articles.php:77-88` - Block rendering loop
-- `lib/functions-filters.php:106-131` - `nm_embed_oembed_html()` filter (YouTube nocookie + responsive wrapper)
+- `partials/singles/single-post-articles.php` - Block rendering loop
+- `lib/functions-filters.php` - `nm_embed_oembed_html()` filter (YouTube nocookie + responsive wrapper)
 
 **Cookie consent system:**
 
-- `src/js/modules/Utilities.js:64-82` - `checkGDPRApproval()` method
+- `src/js/modules/Utilities.js` - `checkGDPRApproval()` method
 - `partials/bottom-bar/cookie-notice.php` - Consent banner HTML
 - Cookie name: `cookie-approval`
 
