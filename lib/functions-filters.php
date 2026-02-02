@@ -103,15 +103,33 @@ function nm_category_id_class( $classes ) {
 
 add_filter( 'body_class', 'nm_category_id_class' );
 
-// Add classes to oembed elements
-function my_embed_oembed_html( $html, $url, $attr, $post_id ) {
-  if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) || str_contains( $url, 'vimeo.com/' ) ) {
+/**
+ * Add wrapper classes to oEmbed elements and use privacy-enhanced YouTube embeds.
+ *
+ * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
+ * the original URL was youtube.com or youtu.be. The str_replace works for both
+ * because it operates on the returned iframe HTML, not the original URL.
+ *
+ * @param string $html    The oEmbed HTML.
+ * @param string $url     The original URL that was embedded.
+ * @param array  $attr    Embed attributes.
+ * @param int    $post_id The post ID.
+ * @return string Modified HTML with wrapper classes and privacy-enhanced URLs.
+ */
+function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
+  if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
+    // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
+    $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
+    return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+  }
+
+  if ( str_contains( $url, 'vimeo.com/' ) ) {
     return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
   }
 
   return $html;
 }
-add_filter( 'embed_oembed_html', 'my_embed_oembed_html', 99, 4 );
+add_filter( 'embed_oembed_html', 'nm_embed_oembed_html', 99, 4 );
 
 // Custom img attributes to be compatible with lazysize
 function add_lazysize_on_srcset( $attr ) {
