@@ -72,7 +72,11 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
         // Classic editor content - apply the_content filter once
         echo '<div class="text-copy">' . apply_filters( 'the_content', $content ) . '</div>';
       } else {
-        // Block editor content - render each block properly
+        // Block editor content - render each block properly.
+        // We apply the_content filter to ensure embeds, shortcodes, etc. work correctly.
+        // Note: WordPress core removes wpautop when processing blocks, but since most
+        // block output is block-level HTML elements, wpautop typically won't affect it.
+        // See docs/BLOCK-RENDERING.md for details and potential optimisation.
         foreach ( $blocks as $block ) {
           if ( $block['blockName'] === 'nm-wp/newsletter-signup' ) {
             // Newsletter block - render without text-copy wrapper
