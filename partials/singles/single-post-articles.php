@@ -81,7 +81,7 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
             // Other blocks - wrap in text-copy only if not empty
             $rendered_content = render_block( $block );
             if ( trim( $rendered_content ) !== '' ) {
-              echo '<div class="text-copy">' . $rendered_content . '</div>';
+              echo '<div class="text-copy">' . apply_filters( 'the_content', $rendered_content ) . '</div>';
             }
           }
         }
