@@ -27,6 +27,7 @@ function nm_filter_admin_columns( $columns ) {
 
   return $columns;
 }
+add_filter( 'manage_posts_columns', 'nm_filter_admin_columns' );
 add_filter( 'manage_pages_columns', 'nm_filter_admin_columns' );
 
 /**
