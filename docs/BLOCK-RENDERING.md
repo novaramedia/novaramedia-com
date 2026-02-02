@@ -17,6 +17,7 @@ Single posts use custom block rendering logic to wrap content blocks in `.text-c
 ## The `the_content` Filter
 
 We apply `apply_filters('the_content', $rendered_content)` to each rendered block to ensure:
+
 - Embeds are processed correctly
 - Shortcodes work in Custom HTML blocks
 - Content enhancement filters run (lazy loading, etc.)
@@ -32,6 +33,7 @@ We apply `the_content` filter to already-rendered block HTML. This means `wpauto
 ### Why This Works (Usually)
 
 `wpautop()` is designed to add `<p>` tags to plain text content. It's smart enough not to wrap block-level HTML elements like:
+
 - `<figure>` (images, embeds)
 - `<div>` (groups, columns)
 - `<blockquote>` (quotes)
@@ -57,6 +59,7 @@ if ( false !== $priority && doing_filter( 'the_content' ) && has_blocks( $conten
 ### Why We Don't Do This (Yet)
 
 Our implementation applies `the_content` to **already-rendered HTML**, so:
+
 - `has_blocks()` returns `false` (it's HTML, not block markup)
 - WordPress doesn't automatically remove `wpautop`
 
