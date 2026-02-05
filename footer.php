@@ -1,7 +1,7 @@
     <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white padding-top-basic padding-bottom-large text-uppercase ui-hover-links-inside">
       <div class="container">
-        <div class="flex-grid-row">
-          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+        <div class="grid-row">
+          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
             <h6 class="margin-bottom-small">NM</h6>
             <ul class="font-weight-bold margin-bottom-small">
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
@@ -19,7 +19,7 @@
               <li><a href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></li>
             </ul>
           </div>
-          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
             <h6 class="margin-bottom-small">Podcasts</h6>
             <?php
               wp_nav_menu(
@@ -41,7 +41,7 @@
               );
             ?>
           </div>
-          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
             <h6 class="margin-bottom-small">Articles</h6>
             <?php
               wp_nav_menu(
@@ -63,7 +63,7 @@
               );
             ?>
           </div>
-          <div class="flex-grid-item flex-item-s-6 flex-item-xxl-3 margin-bottom-basic">
+          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
             <h6 class="margin-bottom-small">Social Media</h6>
             <?php
               wp_nav_menu(

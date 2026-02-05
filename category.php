@@ -19,7 +19,7 @@ $is_one_button = $is_video === false || $podcast_url === false ? true : false;
 $button_grid_item_classes = $is_one_button ? 'grid-item offset-s-0 offset-l-12 is-s-12 is-l-12 offset-xxl-6 is-xxl-6' : 'grid-item is-s-12 is-l-12 is-xxl-6';
 
 if ($category->slug === 'video') {
-  $button_grid_item_classes = 'mobile-margin-top-tiny grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-4 flex-item-xxl-4';
+  $button_grid_item_classes = 'mobile-margin-top-tiny grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-8 is-xxl-8';
 }
 ?>
 <main id="main-content" class="category-archive">
@@ -28,7 +28,7 @@ if ($category->slug === 'video') {
       <?php
         if (in_array($category->slug, array('articles', 'audio', 'video'))) {
         ?>
-      <div class="grid-item is-s-24 flex-item-xxl-6">
+      <div class="grid-item is-s-24 is-xxl-12">
         <span class="text-uppercase font-weight-bold"><?php echo $category->name; ?></span> <?php
           wp_nav_menu(
             array(
@@ -62,7 +62,7 @@ if ($category->slug === 'video') {
       <?php
         if ($is_video) {
       ?>
-      <div class="<?php echo $button_grid_item_classes; ?>">
+      <div class="<?php echo $button_grid_item_classes; ?> text-align-right">
         <a class="ui-button ui-button--red ui-button--small" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo $youtube_copy; ?></a>
       </div>
       <?php

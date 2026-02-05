@@ -193,11 +193,11 @@ function nm_render_committed_credit( $credit ) {
   </style>
 <div class="committed-archive__container committed__backgrounded">
   <section class="container">
-    <div class="flex-grid-row mb-4">
-      <div class="flex-grid-item flex-item-xxl-12 flex-item-m-10 mb-4 mt-4">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24 is-m-20 mb-4 mt-4">
         <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
       </div>
-      <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-10 pt-l-7 pt-s-12">
+      <div class="grid-item is-xxl-24 text-align-center pt-10 pt-l-7 pt-s-12">
         <h1 class="u-visuallyhidden">Committed</h1>
         <h3 class="u-visuallyhidden">Would you go to prison for your politics?</h3>
         <div class="committed-archive__logo"></div>
@@ -207,20 +207,20 @@ function nm_render_committed_credit( $credit ) {
   </section>
 </div>
   <section class="container">
-    <div class="flex-grid-row mt-4 mb-4">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
+    <div class="grid-row mt-4 mb-4">
+      <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16">
         <h3 class="mb-2 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2081003709&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
     </div>
-    <div class="flex-grid-row mt-4 mb-5">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif committed__serif-large text-paragraph-breaks">
+    <div class="grid-row mt-4 mb-5">
+      <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16 font-serif committed__serif-large text-paragraph-breaks">
         <p>Britain is locking up climate activists. You’ve probably heard of some of them – they’re the road-blockers, soup-throwers and spray-painters who made headlines around the world as Just Stop Oil. Some of them are now facing years in prison, caught under the wheels of a crackdown on protest. But what type of person risks their freedom for a cause they believe in?</P>
         <p>Committed is a new podcast series from Novara Media about Britain's political prisoners. Over four episodes, reporters Rivkah Brown and Clare Hymer follow five young people into jail and out again, asking how a concerned citizen could become a convicted criminal. We speak directly to activists in prison to find out how Just Stop Oil persuaded so many of them to take direct action against the climate crisis.</p>
         <p>Now that the orange paint has dried, how do Just Stop Oil prisoners make sense of what they’ve done? What’s it really like in prison, and is life on the inside any different for political prisoners? How does jail-time strain the relationships with the people they love most? And with Just Stop Oil’s actions slowing to a halt, was it all worth it?</p>
       </div>
     </div>
-    <div class="flex-grid-row mb-6 mb-s-4 committed-archive-listen__container">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 font-color-white committed-archive-listen__box">
+    <div class="grid-row mb-6 mb-s-4 committed-archive-listen__container">
+      <div class="grid-item is-s-24 is-xxl-24 font-color-white committed-archive-listen__box">
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
@@ -240,18 +240,18 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-      <article class="flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
+      <article class="grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
           <h3 class="font-size-13 font-weight-semibold mb-2"><?php the_title(); ?></h3>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
+        <div class="grid-item offset-s-0 is-s-24 is-xxl-12">
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
+        <div class="grid-item offset-s-0 is-s-24 offset-l-4 is-l-16 offset-xl-6 is-xl-14 offset-xxl-6 is-xxl-12 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
           <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif mb-4 text-paragraph-breaks committed__serif-medium">
+        <div class="grid-item offset-s-0 is-s-24 offset-l-4 is-l-16 offset-xl-6 is-xl-14 offset-xxl-6 is-xxl-12 font-serif mb-4 text-paragraph-breaks committed__serif-medium">
           <?php the_content(); ?>
         </div>
       </article>
@@ -262,16 +262,16 @@ if ( have_posts() ) {
     </div>
   </section>
   <div>
-    <div class="committed-credits__background pb-6 pt-6 font-color-white">
-      <div class="flex-grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
+    <div class="committed-credits__background pb-6 pt-6 mb-4 font-color-white">
+      <div class="grid-row mb-6 mb-s-5 mt-m-0 mt-4 committed-credits__logo-row">
         <img src="<?php echo $base_image_path . 'committed-logo-white.png'; ?>" alt="committed credits logo" class="committed-credits__logo"/>
       </div>
-      <div class="flex-grid-row committed-credits__info-row font-size-10">
+      <div class="grid-row committed-credits__info-row font-size-10">
 
         <!-- Reporters -->
-        <div class="flex-grid-item flex-item-m-4 flex-item-xxl-4 flex-item-s-8 mb-s-5">
-          <div class="flex-grid-row font-weight-bold mb-1">Reporters</div>
-          <div class="committed-credits__reporters flex-grid-row">
+        <div class="grid-item is-m-8 is-xxl-8 is-s-16 mb-s-5">
+          <div class="grid-row font-weight-bold mb-1">Reporters</div>
+          <div class="committed-credits__reporters grid-row">
             <div class="mr-2">
               <a href="<?php echo home_url( 'contributor/rivkah-brown/' ); ?>" class="ui-hover">
               <img src="<?php echo $base_image_path . 'committed-rivkah.jpg'; ?>" alt="Portrait of Rivkah Brown" class="committed-credits__logo"/>
@@ -288,7 +288,7 @@ if ( have_posts() ) {
         </div>
 
         <!-- Producers -->
-        <div class="flex-grid-item flex-item-m-4 flex-item-l-3 flex-item-xxl-3 flex-item-s-8 mb-s-5">
+        <div class="grid-item is-m-8 is-l-6 is-xxl-6 is-s-16 mb-s-5">
           <h6 class="font-weight-bold mb-1">Producers</h6>
           <div class="mb-2">
             <?php echo wp_kses_post( $credits['producers'] ); ?>
@@ -307,7 +307,7 @@ if ( have_posts() ) {
           </div>
         </div>
 
-        <div class="flex-grid-item flex-item-m-8 flex-item-l-4 flex-item-xxl-3 mt-m-5 mt-s-0 flex-item-s-8">
+        <div class="grid-item is-m-16 is-l-8 is-xxl-6 mt-m-5 mt-s-0 is-s-16">
           <h6 class="font-weight-bold mb-1">Thanks to</h6>
           <?php echo wp_kses_post( $credits['thanks'] ); ?>
 
@@ -323,11 +323,12 @@ if ( have_posts() ) {
 </main>
 <?php
 get_template_part(
-    'partials/support-section',
-    null,
-    array(
-        'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
-    )
+  'partials/support-section',
+  null,
+  array(
+    'container_classes' => 'mb-4',
+    'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
+  )
 );
 
 get_footer();
