@@ -19,7 +19,7 @@ $is_one_button = $is_video === false || $podcast_url === false ? true : false;
 $button_grid_item_classes = $is_one_button ? 'grid-item offset-s-0 offset-l-12 is-s-12 is-l-12 offset-xxl-6 is-xxl-6' : 'grid-item is-s-12 is-l-12 is-xxl-6';
 
 if ($category->slug === 'video') {
-  $button_grid_item_classes = 'mobile-margin-top-tiny grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-8 is-xxl-8';
+  $button_grid_item_classes = 'mt-s-2 grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-8 is-xxl-8';
 }
 ?>
 <main id="main-content" class="category-archive">

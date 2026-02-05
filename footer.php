@@ -1,9 +1,9 @@
-    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white padding-top-basic padding-bottom-large text-uppercase ui-hover-links-inside">
+    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white pt-5 pb-8 text-uppercase ui-hover-links-inside">
       <div class="container">
         <div class="grid-row">
-          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
-            <h6 class="margin-bottom-small">NM</h6>
-            <ul class="font-weight-bold margin-bottom-small">
+          <div class="grid-item is-s-12 is-xxl-6 mb-5">
+            <h6 class="mb-4">NM</h6>
+            <ul class="font-weight-bold mb-4">
               <li><a href="<?php echo site_url('about/'); ?>">About</a></li>
               <li><a href="<?php echo site_url('support/'); ?>">Support Us</a></li>
               <li><a href="<?php echo site_url('about/how-we-are-funded/'); ?>">How We Are Funded</a></li>
@@ -11,7 +11,7 @@
               <li><a href="<?php echo site_url('pitching/'); ?>">Pitching</a></li>
               <li><a href="<?php echo site_url('jobs/'); ?>">Jobs</a></li>
             </ul>
-            <ul class="font-weight-bold margin-bottom-small">
+            <ul class="font-weight-bold mb-4">
               <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
             </ul>
             <ul class="font-weight-bold">
@@ -19,18 +19,18 @@
               <li><a href="<?php echo site_url('privacy-policy/'); ?>">Privacy Policy</a></li>
             </ul>
           </div>
-          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
-            <h6 class="margin-bottom-small">Podcasts</h6>
+          <div class="grid-item is-s-12 is-xxl-6 mb-5">
+            <h6 class="mb-4">Podcasts</h6>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-podcasts',
                   'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold margin-bottom-small'
+                  'menu_class' => 'font-weight-bold mb-4'
                 )
               );
             ?>
-            <h6 class="margin-bottom-small">Focuses</h6>
+            <h6 class="mb-4">Focuses</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -41,18 +41,18 @@
               );
             ?>
           </div>
-          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
-            <h6 class="margin-bottom-small">Articles</h6>
+          <div class="grid-item is-s-12 is-xxl-6 mb-5">
+            <h6 class="mb-4">Articles</h6>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-articles',
                   'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold margin-bottom-small'
+                  'menu_class' => 'font-weight-bold mb-4'
                 )
               );
             ?>
-            <h6 class="margin-bottom-small">Shows</h6>
+            <h6 class="mb-4">Shows</h6>
             <?php
               wp_nav_menu(
                 array(
@@ -63,8 +63,8 @@
               );
             ?>
           </div>
-          <div class="grid-item is-s-12 is-xxl-6 margin-bottom-basic">
-            <h6 class="margin-bottom-small">Social Media</h6>
+          <div class="grid-item is-s-12 is-xxl-6 mb-5">
+            <h6 class="mb-4">Social Media</h6>
             <?php
               wp_nav_menu(
                 array(

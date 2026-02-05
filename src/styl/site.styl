@@ -82,20 +82,6 @@ grid-maker('xxl')
       background-image: linear-gradient(to bottom, transparent 25%, var(--color-gray-base) 100%), url('img/specials/support-2023-texture-alt.png')
 
 // ******************************************************
-// START DEPRECATED
-
-$margin-small = ($gutter)
-$margin-tiny = ($gutter / 2)
-$margin-micro = ($gutter / (2 * $golden-ratio))
-$margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
-
-$color-blue = rgb(84, 144, 235)
-
-// END DEPRECATED
-
-// ******************************************************
 
 // COMPONENTS
 
@@ -133,134 +119,10 @@ img
   margin: 0
   li
     display: inline-block
-    margin-right: $margin-small
+    margin-right: 1rem
 
 .only-mobile
   display: none
-
-// ******************************************************
-
-// MARGINS AND PADDING
-
-  // MARGIN
-
-.margin-micro
-  margin: $margin-micro
-
-.margin-tiny
-  margin: $margin-tiny
-
-.margin-small
-  margin: $margin-small
-
-.margin-basic
-  margin: $margin-basic
-
-.margin-mid
-  margin: $margin-mid
-
-.margin-large
-  margin: $margin-large
-
-  // MARGIN TOP
-
-.margin-top-micro
-  margin-top: $margin-micro
-
-.margin-top-tiny
-  margin-top: $margin-tiny
-
-.margin-top-small
-  margin-top: $margin-small
-
-.margin-top-basic
-  margin-top: $margin-basic
-
-.margin-top-mid
-  margin-top: $margin-mid
-
-.margin-top-large
-  margin-top: $margin-large
-
-  // MARGIN BOTTOM
-
-.margin-bottom-micro
-  margin-bottom: $margin-micro
-
-.margin-bottom-tiny
-  margin-bottom: $margin-tiny
-
-.margin-bottom-small
-  margin-bottom: $margin-small
-
-.margin-bottom-basic
-  margin-bottom: $margin-basic
-
-.margin-bottom-mid
-  margin-bottom: $margin-mid
-
-.margin-bottom-large
-  margin-bottom: $margin-large
-
-  // PADDING
-
-.padding-micro
-  padding: $margin-micro
-
-.padding-tiny
-  padding: $margin-tiny
-
-.padding-small
-  padding: $margin-small
-
-.padding-basic
-  padding: $margin-basic
-
-.padding-mid
-  padding: $margin-mid
-
-.padding-large
-  padding: $margin-large
-
-  // PADDING TOP
-
-.padding-top-micro
-  padding-top: $margin-micro
-
-.padding-top-tiny
-  padding-top: $margin-tiny
-
-.padding-top-small
-  padding-top: $margin-small
-
-.padding-top-basic
-  padding-top: $margin-basic
-
-.padding-top-mid
-  padding-top: $margin-mid
-
-.padding-top-large
-  padding-top: $margin-large
-
-  // PADDING BOTTOM
-
-.padding-bottom-micro
-  padding-bottom: $margin-micro
-
-.padding-bottom-tiny
-  padding-bottom: $margin-tiny
-
-.padding-bottom-small
-  padding-bottom: $margin-small
-
-.padding-bottom-basic
-  padding-bottom: $margin-basic
-
-.padding-bottom-mid
-  padding-bottom: $margin-mid
-
-.padding-bottom-large
-  padding-bottom: $margin-large
 
 // ******************************************************
 
@@ -376,11 +238,11 @@ img
 .text-copy
   .liveblog-update-heading
     border-top: 1px solid var(--color-black-soft)
-    padding-top: $margin-basic
-    margin-top: $margin-mid
-    margin-bottom: $margin-small
+    padding-top: 2rem
+    margin-top: 3rem
+    margin-bottom: 1rem
     &:first-of-type
-      margin-top: $margin-basic
+      margin-top: 2rem
 
 // ******************************************************
 

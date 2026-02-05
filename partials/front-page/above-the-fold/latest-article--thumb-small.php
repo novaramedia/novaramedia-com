@@ -15,7 +15,7 @@
 
   $is_article = nm_is_article($post_id);
 ?>
-<div class="margin-bottom-small padding-bottom-small <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
+<div class="mb-4 pb-4 <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
   <!-- <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags($post_id); ?>
     <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">

@@ -745,7 +745,7 @@ function render_about_group_field( $data ) {
 
   foreach ( $data as $person ) {
     ?>
-    <div class="margin-bottom-small">
+    <div class="mb-4">
       <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
       <?php
       foreach ( $person['name'] as $name ) {

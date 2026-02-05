@@ -8,11 +8,11 @@
 <a href="<?php the_permalink() ?>">
   <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
     <?php the_post_thumbnail('col8-16to9', array('class' => 'index-post-thumbnail')); ?>
-    <h5 class="index-post-title margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title mt-2 js-fix-widows"><?php render_post_title($post->ID); ?></h5>
     <?php if ($is_article) { ?>
     <h6 class="margin-top-micro font-weight-bold">by <?php render_bylines($post->ID, false); ?></h6>
     <?php } ?>
-    <div class="index-post-description margin-top-tiny">
+    <div class="index-post-description mt-2">
       <?php
         if ($description) {
           echo $description;

@@ -6,7 +6,7 @@
   }
 ?>
 <div id="obligation-bar">
-  <div class="container padding-top-tiny padding-bottom-tiny">
+  <div class="container pt-2 pb-2">
     <div class="grid-row">
       <div class="grid-item font-color-white text-links-underlined">
         <?php echo apply_filters('the_content', $copy); ?>

@@ -9,14 +9,14 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-  <article id="page-jobs" class="container margin-top-small margin-bottom-large">
-    <div class="grid-row margin-bottom-small">
+  <article id="page-jobs" class="container mt-4 mb-8">
+    <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 
-    <div class="grid-row grid-row-m--reverse margin-bottom-small">
+    <div class="grid-row grid-row-m--reverse mb-4">
       <div class="grid-item is-m-24 is-l-16 is-xl-14 is-xxl-12 page-copy">
         <?php the_content(); ?>
       </div>
@@ -49,7 +49,7 @@ if ( have_posts() ) {
           }
         } else {
           ?>
-        <h5 class="mobile-padding-bottom-small">There are currently no available positions</h5>
+        <h5 class="pb-s-4">There are currently no available positions</h5>
           <?php
         }
         ?>
