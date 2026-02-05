@@ -28,12 +28,9 @@ h1
 
 // GRID
 
-body
-  overscroll-behavior: none
-
 grid-maker('xxl')
 
-.container
+.container // do we assume from library? no we need to explicitly do this for projects so we dont always have full width.
   margin-left: auto
   margin-right: auto
   width: 1400px
@@ -102,20 +99,6 @@ grid-maker('xxl')
 
 // BASIC
 
-html
-  background-color: var(--color-white-soft)
-  color: var(--color-black-soft)
-
-img
-  max-width: 100%
-  height: auto
-
-.inline-action-list
-  margin: 0
-  li
-    display: inline-block
-    margin-right: 1rem
-
 .only-mobile
   display: none
 
@@ -123,7 +106,7 @@ img
 
 // UI ELEMENTS
 
-.button
+.button // i think this is obsolete
   padding: 1rem
 
 // ******************************************************
@@ -137,7 +120,7 @@ img
 
 // ******************************************************
 
-// SUPPORT FORM (base styles - widths set per breakpoint)
+// SUPPORT FORM (base styles - widths set per breakpoint) I think these are obsolete but the slider needs to be check becasue it is still in the js
 
 .support-form-holder
   min-height: 5rem
@@ -332,14 +315,6 @@ img
 
   p
     margin-bottom: 0
-
-// ******************************************************
-
-.text-wrap-pretty
-  text-wrap: pretty
-
-.text-wrap-balance
-  text-wrap: balance
 
 // ******************************************************
 

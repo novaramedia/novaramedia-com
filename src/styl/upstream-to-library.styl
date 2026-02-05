@@ -10,3 +10,49 @@
 
 html
   --color-gray-mid: var(--color-gray-mid-new)
+
+// there is a $margin-tiny that needs to be removed
+
+// do we need this tho?
+
+box-sizing-reset()
+  if selector() is "&"
+    html
+      box-sizing: border-box
+
+    *, *:before, *:after
+      box-sizing: inherit
+  else
+    *, *:before, *:after
+      box-sizing: border-box
+
+// *
+
+body
+  overscroll-behavior: none
+
+// **
+
+.text-wrap-pretty
+  text-wrap: pretty
+
+.text-wrap-balance
+  text-wrap: balance
+
+// ******************************************************
+
+html
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
+
+img
+  max-width: 100%
+  height: auto
+
+// ******************************************************
+
+.inline-action-list // but we will call it ux-inline-action-list in the library and migrate usage in projects.
+  margin: 0
+  li
+    display: inline-block
+    margin-right: 1rem
