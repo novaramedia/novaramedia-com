@@ -9,50 +9,26 @@ $col = 19px
 html
   font-size: 14px
 
-.text-copy // this is very confusing. Surely this needs to happen for all sizes?
+.text-copy
   p
     font-size: 1.3rem
     line-height: 1.55
   a
-    color: $color-blue
+    color: var(--color-blue)
   img
     display: block
-  .wp-caption
-    .wp-caption-text
-      margin-top: 0.5rem
 
 // ******************************************************
 
-// UI ELEMENTS
-
-.button
-  padding: 1rem
-
-// ******************************************************
-
-// BASIC
-
-.inline-action-list
-  li
-    display: inline-block
-    margin-right: 1rem
-
-// ******************************************************
-
-// SUPPORT SECTION
-
-.support-form-holder
-  min-height: 5rem
-  padding: 1rem
+// SUPPORT FORM
 
 .support-form-slider
   width: 55%
-  margin-right: 2%
 
 .support-form-submit
   width: 23%
-  margin-left: 2%
-  padding: 0.5rem 1rem
+
+// ******************************************************
 
 // SUPPORT PAGE
 
@@ -61,13 +37,11 @@ html
 
 // ******************************************************
 
-// SINGLE
-
-  // LIVEBLOG
+// SINGLE - LIVEBLOG
 
 .text-copy
   .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
+    border-top: 1px solid var(--color-black-soft)
     padding-top: 2rem
     margin-top: 3rem
     margin-bottom: 1rem
