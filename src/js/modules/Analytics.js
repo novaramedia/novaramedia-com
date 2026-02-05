@@ -11,9 +11,9 @@ export class Analytics {
   }
 
   bind() {
-    $('.site-header__nav-toggle').on('click', function() {
+    $('.site-header__nav-toggle').on('click', function () {
       dataLayer.push({
-        event: 'headerToggled'
+        event: 'headerToggled',
       });
     });
 
