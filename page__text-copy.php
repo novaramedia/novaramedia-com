@@ -15,20 +15,20 @@ if( have_posts() ) {
       if (!empty($meta['_nm_subtitle'][0])) {
     ?>
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item offset-xxl-12">
+      <div class="grid-item offset-xxl-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
       </div>
     </div>
     <?php } ?>
 
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item is-s-12 offset-s-0 is-m-10 offset-m-1 is-l-9 offset-l-1 is-xl-8 offset-xl-2 is-xxl-8 offset-xxl-2">
+      <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-2 is-xl-16 offset-xl-4 is-xxl-16 offset-xxl-4">
         <h1 id="single-articles-title" class="text-wrap-pretty"><?php the_title(); ?></h1>
       </div>
     </div>
 
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item is-s-12 offset-s-0 is-m-12 offset-m-0 is-l-10 offset-l-1 is-xl-10 offset-xl-1 is-xxl-10 offset-xxl-1">
+      <div class="grid-item is-s-24 offset-s-0 is-m-24 offset-m-0 is-l-20 offset-l-2 is-xl-20 offset-xl-2 is-xxl-20 offset-xxl-2">
         <?php the_post_thumbnail('col20'); ?>
         <div class="font-size-8">
           <?php the_post_thumbnail_caption(); ?>
@@ -37,10 +37,10 @@ if( have_posts() ) {
     </div>
 
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item is-s-12 offset-s-0 is-m-8 offset-m-2 is-l-10 offset-l-1 is-xl-2 is-xxl-2">
+      <div class="grid-item is-s-24 offset-s-0 is-m-16 offset-m-4 is-l-20 offset-l-2 is-xl-4 is-xxl-4">
       </div>
 
-      <div class="grid-item is-s-12 offset-s-0 is-m-10 offset-m-1 is-l-10 offset-l-1 is-xl-8 offset-xl-0 is-xxl-6 offset-xxl-1">
+      <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-20 offset-l-2 is-xl-16 offset-xl-0 is-xxl-12 offset-xxl-2">
         <div class="text-copy">
           <?php the_content(); ?>
         </div>
@@ -52,7 +52,7 @@ if( have_posts() ) {
       </div>
 
       <?php if (!empty($meta['_cmb_page_extra'])) { ?>
-        <div class="grid-item is-s-12 offset-s-0 is-m-8 offset-m-2 is-l-10 offset-l-1 is-xl-2 offset-xl-0 is-xxl-2 offset-xxl-1">
+        <div class="grid-item is-s-24 offset-s-0 is-m-16 offset-m-4 is-l-20 offset-l-2 is-xl-4 offset-xl-0 is-xxl-4 offset-xxl-2">
           <?php echo apply_filters( 'the_content', $meta['_cmb_page_extra'][0]); ?>
         </div>
       <?php } ?>
@@ -64,7 +64,7 @@ if( have_posts() ) {
 ?>
   <div class="container">
     <div class="grid-row margin-top-mid margin-bottom-basic">
-      <article class="grid-item is-s-12 offset-s-0 is-m-10 offset-m-1 is-l-10 offset-l-1 is-xl-8 offset-xl-0 is-xxl-6 offset-xxl-1">
+      <article class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-20 offset-l-2 is-xl-16 offset-xl-0 is-xxl-12 offset-xxl-2">
         <?php _e('Sorry, no posts matched your criteria :{'); ?>
       </article>
     </div>

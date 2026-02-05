@@ -11,16 +11,16 @@ if ( have_posts() ) {
     ?>
   <article id="page-jobs" class="container margin-top-small margin-bottom-large">
     <div class="grid-row margin-bottom-small">
-      <div class="grid-item is-s-12">
+      <div class="grid-item is-s-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
     </div>
 
     <div class="grid-row grid-row-m--reverse margin-bottom-small">
-      <div class="grid-item is-m-12 is-l-8 is-xl-7 is-xxl-6 page-copy">
+      <div class="grid-item is-m-24 is-l-16 is-xl-14 is-xxl-12 page-copy">
         <?php the_content(); ?>
       </div>
-      <div class="grid-item is-m-12 is-l-4 is-xl-5 is-xxl-6">
+      <div class="grid-item is-m-24 is-l-8 is-xl-10 is-xxl-12">
         <?php
         $start_of_day = strtotime( 'today midnight' );
         $jobs = get_posts(

@@ -22,7 +22,7 @@
           <h3 class="font-color-white font-size-11 font-weight-bold mb-2">Build people-powered media.</h3>
         </a>
       </div>
-      <div class="grid-item is-s-24 is-xxl-6 font-color-white font-size-11 only-desktop">
+      <div class="grid-item is-s-24 is-xxl-12 font-color-white font-size-11 only-desktop">
         <div class="ml-m-4">
           <p class="mb-2"><?php echo ($open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.'); ?></p>
           <strong><?php echo ($open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.'); ?></strong>

@@ -208,7 +208,7 @@ if( have_posts() ) {
     </div>
 
     <div class="grid-row mt-5 mb-5 font-size-8">
-      <div class="grid-item is-s-24 is-m-6 is-xxl-8">
+      <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);
