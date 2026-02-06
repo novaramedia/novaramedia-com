@@ -37,17 +37,17 @@ describe('Single Post (Audio Category)', () => {
       return;
     }
 
-    // Stub SoundCloud embeds to prevent them from blocking the page load event.
-    // AudioPlayers.js injects a SoundCloud iframe on DOMContentLoaded, and the
-    // browser waits for that iframe to fully load before firing the page `load`
-    // event. SoundCloud servers are slow/unreliable in CI, causing timeouts.
-    cy.intercept('**/w.soundcloud.com/**', {
-      statusCode: 200,
-      body: '<html><body>SoundCloud stubbed</body></html>',
-      headers: { 'content-type': 'text/html' },
+    // Block all third-party requests to prevent them from blocking the page
+    // load event. The page loads many external scripts (analytics, social
+    // widgets, SoundCloud embeds, ad trackers) that are slow or unreliable in
+    // CI. We only need the site's own HTML/CSS/JS for structural testing.
+    // Note: cy.intercept does not affect the top-level cy.visit() navigation.
+    cy.intercept('**', (req) => {
+      const { hostname } = new URL(req.url);
+      if (!hostname.includes('novaramedia') && !hostname.includes('kinsta')) {
+        req.reply({ statusCode: 200, body: '' });
+      }
     });
-    cy.intercept('**/api.soundcloud.com/**', { statusCode: 200, body: '{}' });
-    cy.intercept('**/api-v2.soundcloud.com/**', { statusCode: 200, body: '{}' });
 
     cy.checkPageLoad();
     cy.visit(audioPostUrl, { timeout: 60000 });
