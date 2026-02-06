@@ -37,20 +37,11 @@ describe('Single Post (Audio Category)', () => {
       return;
     }
 
-    // Block all third-party requests to prevent them from blocking the page
-    // load event. The page loads many external scripts (analytics, social
-    // widgets, SoundCloud embeds, ad trackers) that are slow or unreliable in
-    // CI. We only need the site's own HTML/CSS/JS for structural testing.
-    // Note: cy.intercept does not affect the top-level cy.visit() navigation.
-    cy.intercept('**', (req) => {
-      const { hostname } = new URL(req.url);
-      if (!hostname.includes('novaramedia') && !hostname.includes('kinsta')) {
-        req.reply({ statusCode: 200, body: '' });
-      }
-    });
-
     cy.checkPageLoad();
-    cy.visit(audioPostUrl, { timeout: 60000 });
+    // Audio posts load many third-party resources (SoundCloud, analytics, social
+    // widgets) that delay the browser's load event. Use a long timeout to allow
+    // the page to fully load in CI where network is slower.
+    cy.visit(audioPostUrl, { timeout: 120000 });
   });
 
   it('should load successfully', () => {
