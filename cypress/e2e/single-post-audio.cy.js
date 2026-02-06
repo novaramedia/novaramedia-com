@@ -38,6 +38,14 @@ describe('Single Post (Audio Category)', () => {
     }
 
     cy.checkPageLoad();
+    // SoundCloud embeds block the load event indefinitely in CI.
+    // Stub the SoundCloud widget so the iframe loads instantly but still
+    // exists in the DOM for the audio player test.
+    cy.intercept('https://w.soundcloud.com/**', {
+      statusCode: 200,
+      headers: { 'content-type': 'text/html' },
+      body: '<html><body>SoundCloud stub</body></html>',
+    });
     cy.visit(audioPostUrl, { timeout: 60000 });
   });
 
