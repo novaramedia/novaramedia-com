@@ -243,11 +243,13 @@ function get_above_the_fold_featured_post_ids() {
   for ( $i = 0; $i < 8; $i++ ) {
     if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
-        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
+        while ( ! empty( $latest_featured_posts_ids ) && in_array( $latest_featured_posts_ids[0], $featured_posts_ids, false ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
         }
 
-        $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        if ( ! empty( $latest_featured_posts_ids ) ) {
+          $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        }
       }
     }
   }
