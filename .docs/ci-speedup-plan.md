@@ -7,11 +7,13 @@ The workflow uses `git pull` over SSH to deploy. The theme directory on Kinsta s
 ### Steps
 
 1. **SSH into the Kinsta staging server:**
+
    ```bash
    ssh -p $PORT $USER@$HOST
    ```
 
 2. **Back up and replace the theme directory with a git clone:**
+
    ```bash
    cd public/wp-content/themes
    mv novaramedia-com novaramedia-com.bak
@@ -25,6 +27,7 @@ The workflow uses `git pull` over SSH to deploy. The theme directory on Kinsta s
    - **Option B: HTTPS with token** — Create a fine-grained personal access token with read-only repo access, configure it: `git remote set-url origin https://<token>@github.com/novaramedia/novaramedia-com.git`
 
 4. **Verify it works:**
+
    ```bash
    git fetch origin
    git checkout development
@@ -32,6 +35,7 @@ The workflow uses `git pull` over SSH to deploy. The theme directory on Kinsta s
    ```
 
 5. **Clean up backup once confirmed working:**
+
    ```bash
    rm -rf /path/to/themes/novaramedia-com.bak
    ```
@@ -49,14 +53,14 @@ The `.git` directory will exist on the server. Ensure it's not web-accessible. K
 
 ## Current State (before optimisation)
 
-| Step | Duration | % of total |
-|------|----------|------------|
-| SFTP deploy (PR branch) | ~10-12 min | 60% |
-| WP-CLI + cache clear | ~30 sec | 3% |
-| npm ci | ~25 sec | 2% |
-| Cypress tests | ~2 min | 11% |
-| SFTP cleanup (reset to dev) | ~5 min | 28% |
-| **Total** | **~18 min** | |
+| Step                        | Duration    | % of total |
+| --------------------------- | ----------- | ---------- |
+| SFTP deploy (PR branch)     | ~10-12 min  | 60%        |
+| WP-CLI + cache clear        | ~30 sec     | 3%         |
+| npm ci                      | ~25 sec     | 2%         |
+| Cypress tests               | ~2 min      | 11%        |
+| SFTP cleanup (reset to dev) | ~5 min      | 28%        |
+| **Total**                   | **~18 min** |            |
 
 The SFTP mirror transfers the entire theme directory (~50MB with dist/) on every run, twice — once to deploy, once to reset. This accounts for ~88% of the total time.
 
@@ -78,20 +82,21 @@ If git is available, we replace the entire SFTP workflow with:
 
 **Projected times:**
 
-| Step | Duration |
-|------|----------|
-| SSH + git pull (deploy) | ~10-15 sec |
-| WP-CLI + cache clear | ~30 sec |
-| npm ci | ~25 sec |
-| Cypress tests | ~2 min |
-| SSH + git checkout development (cleanup) | ~10 sec |
-| **Total** | **~4 min** |
+| Step                                     | Duration   |
+| ---------------------------------------- | ---------- |
+| SSH + git pull (deploy)                  | ~10-15 sec |
+| WP-CLI + cache clear                     | ~30 sec    |
+| npm ci                                   | ~25 sec    |
+| Cypress tests                            | ~2 min     |
+| SSH + git checkout development (cleanup) | ~10 sec    |
+| **Total**                                | **~4 min** |
 
 **Implementation:**
 
 1. **One-time setup:** Clone the repo into the theme directory on staging, or set the existing directory as a git working tree. This requires the server to have read access to the GitHub repo (deploy key or HTTPS token).
 
 2. **Deploy step becomes:**
+
 ```yaml
 - name: Deploy PR branch to staging
   run: |
@@ -104,6 +109,7 @@ If git is available, we replace the entire SFTP workflow with:
 ```
 
 3. **Cleanup step becomes:**
+
 ```yaml
 - name: Reset staging to development
   run: |
@@ -119,6 +125,7 @@ If git is available, we replace the entire SFTP workflow with:
    - Or: add a read-only deploy key to the repo and install it on the server
 
 **Risks:**
+
 - Server might not have git
 - Need to manage git credentials on the server
 - `.git` directory exists on the server (small security consideration — ensure it's not web-accessible)
@@ -165,16 +172,17 @@ Instead of mirroring the entire directory, only upload files that changed:
 
 **Projected times:**
 
-| Step | Duration |
-|------|----------|
+| Step                   | Duration        |
+| ---------------------- | --------------- |
 | Diff-based SFTP deploy | ~30 sec - 2 min |
-| WP-CLI + cache clear | ~30 sec |
-| npm ci | ~25 sec |
-| Cypress tests | ~2 min |
-| No cleanup | — |
-| **Total** | **~4-5 min** |
+| WP-CLI + cache clear   | ~30 sec         |
+| npm ci                 | ~25 sec         |
+| Cypress tests          | ~2 min          |
+| No cleanup             | —               |
+| **Total**              | **~4-5 min**    |
 
 **Caveats:**
+
 - More complex script, need to handle directory creation for new files
 - Need to handle binary files (images) carefully
 - First run still needs full mirror if theme directory doesn't exist
