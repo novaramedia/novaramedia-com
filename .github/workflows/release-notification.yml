@@ -9,7 +9,7 @@ on:
 
 jobs:
   notify-release:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Version ')
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Version')
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -66,70 +66,31 @@ jobs:
           VERSION="${{ steps.extract_version.outputs.version }}"
           PR_URL="${{ github.event.pull_request.html_url }}"
           REPO_URL="${{ github.repository }}"
+          COMMIT_SHA="${{ github.event.pull_request.merge_commit_sha }}"
 
-          # Read release notes from file and escape for JSON
-          RELEASE_NOTES=$(cat release_notes.txt | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          # Read release notes from file
+          RELEASE_NOTES=$(cat release_notes.txt)
+
+          # Format the complete message for the text field
+          # Incoming webhooks only use the 'text' field, not 'blocks'
+          MESSAGE="*New release deployed: novaramedia.com v${VERSION}*
+
+*Repository:* https://github.com/${REPO_URL}
+*Release PR:* ${PR_URL}
+*Commit:* https://github.com/${REPO_URL}/commit/${COMMIT_SHA}
+
+*Release Notes:*
+${RELEASE_NOTES}"
 
           # Create JSON message using jq for proper escaping
           jq -n \
-            --arg version "$VERSION" \
-            --arg repo_url "$REPO_URL" \
-            --arg pr_url "$PR_URL" \
-            --arg release_notes "$RELEASE_NOTES" \
-            --arg commit_sha "${{ github.event.pull_request.merge_commit_sha }}" \
+            --arg text "$MESSAGE" \
             '{
-              "text": ("New release deployed: novaramedia.com v" + $version),
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": ("New Release: novaramedia.com v" + $version)
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": ("*Repository:*\n<https://github.com/" + $repo_url + "|" + $repo_url + ">")
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": ("*Release PR:*\n<" + $pr_url + "|View PR>")
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Release Notes:*"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": $release_notes
-                  }
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": ("Deployed from <https://github.com/" + $repo_url + "/commit/" + $commit_sha + "|" + $commit_sha + ">")
-                    }
-                  ]
-                }
-              ]
+              "text": $text
             }' > slack_message.json
 
           echo "Slack message formatted"
+          cat slack_message.json
 
       - name: Send Slack notification
         id: slack

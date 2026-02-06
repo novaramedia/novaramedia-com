@@ -38,29 +38,7 @@ describe('Single Post (Audio Category)', () => {
     }
 
     cy.checkPageLoad();
-    // SoundCloud embeds block the page load event indefinitely in CI.
-    // Use a MutationObserver to neutralise SoundCloud iframes as soon as
-    // the browser parses them, so the page load event fires normally.
-    // The iframe elements remain in the DOM for test assertions.
-    cy.visit(audioPostUrl, {
-      timeout: 60000,
-      onBeforeLoad(win) {
-        const observer = new win.MutationObserver((mutations) => {
-          for (const mutation of mutations) {
-            for (const node of mutation.addedNodes) {
-              if (node.tagName === 'IFRAME' && node.src?.includes('soundcloud')) {
-                node.src = 'about:blank';
-              }
-            }
-          }
-        });
-        // Start observing once <html> exists
-        observer.observe(win.document.documentElement, {
-          childList: true,
-          subtree: true,
-        });
-      },
-    });
+    cy.visit(audioPostUrl);
   });
 
   it('should load successfully', () => {
@@ -88,8 +66,9 @@ describe('Single Post (Audio Category)', () => {
     // Check for audio player section
     cy.get('[data-testid="audio-player"]').should('exist');
 
-    // Should contain a SoundCloud iframe (theme's audio implementation)
-    cy.get('[data-testid="audio-player"] iframe').should('exist');
+    // SoundCloud player is lazy-loaded: rendered as a placeholder div
+    // with data-src, then hydrated to an iframe by JS on scroll
+    cy.get('[data-testid="audio-player"] .soundcloud-lazy').should('exist');
   });
 
   it('should display post metadata', () => {

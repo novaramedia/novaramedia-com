@@ -9,7 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated ACFM archive page for better newsletter signup integration and newer header style
+- Updated the Downstream archive page for better newsletter signup integration and newer header style
+
+## [4.3.1] - 2026-01-15
+
+### Added
+
+- Wordpress Block for inline newsletter signup forms
+
+### Changed
+
 - Improved line breaking for titles on homepage above the fold
+- Removed Yarn from repository, standardized on NPM as single package manager
+
+### Fixed
+
+- Fixed featured post duplication by filtering non-numeric values from exclusion arrays and adding explicit `post_status` filter
+- RSS feed title and post author incorrect values
+- Strip tags from page title html
 
 ## [4.3.0] - 2026-01-07
 
