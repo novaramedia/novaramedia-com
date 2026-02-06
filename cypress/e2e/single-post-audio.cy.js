@@ -48,7 +48,10 @@ describe('Single Post (Audio Category)', () => {
         const observer = new win.MutationObserver((mutations) => {
           for (const mutation of mutations) {
             for (const node of mutation.addedNodes) {
-              if (node.tagName === 'IFRAME' && node.src?.includes('soundcloud')) {
+              if (
+                node.tagName === 'IFRAME' &&
+                node.src?.includes('soundcloud')
+              ) {
                 node.src = 'about:blank';
               }
             }
