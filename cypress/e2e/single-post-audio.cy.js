@@ -37,6 +37,18 @@ describe('Single Post (Audio Category)', () => {
       return;
     }
 
+    // Stub SoundCloud embeds to prevent them from blocking the page load event.
+    // AudioPlayers.js injects a SoundCloud iframe on DOMContentLoaded, and the
+    // browser waits for that iframe to fully load before firing the page `load`
+    // event. SoundCloud servers are slow/unreliable in CI, causing timeouts.
+    cy.intercept('**/w.soundcloud.com/**', {
+      statusCode: 200,
+      body: '<html><body>SoundCloud stubbed</body></html>',
+      headers: { 'content-type': 'text/html' },
+    });
+    cy.intercept('**/api.soundcloud.com/**', { statusCode: 200, body: '{}' });
+    cy.intercept('**/api-v2.soundcloud.com/**', { statusCode: 200, body: '{}' });
+
     cy.checkPageLoad();
     cy.visit(audioPostUrl, { timeout: 60000 });
   });
@@ -66,9 +78,9 @@ describe('Single Post (Audio Category)', () => {
     // Check for audio player section
     cy.get('[data-testid="audio-player"]').should('exist');
 
-    // SoundCloud player is lazy-loaded: rendered as a placeholder div
-    // with data-src, then hydrated to an iframe by JS on scroll
-    cy.get('[data-testid="audio-player"] .soundcloud-lazy').should('exist');
+    // AudioPlayers.js hydrates the .soundcloud-lazy placeholder into an iframe
+    // on DOMContentLoaded, so by the time Cypress runs we expect the iframe
+    cy.get('[data-testid="audio-player"] iframe').should('exist');
   });
 
   it('should display post metadata', () => {
