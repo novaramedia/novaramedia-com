@@ -2,234 +2,218 @@
 
 ## One-Time Server Setup (REQUIRED)
 
-The workflow uses `git pull` over SSH to deploy. The theme directory on Kinsta staging needs to be a git clone.
+The CI workflow deploys by running `git fetch` + `git checkout` over SSH on the Kinsta staging server. For this to work, the theme directory on the server needs to be a git clone of the repo with read access to GitHub.
 
-### Steps
+This setup only needs to be done once. After that, the CI workflow handles everything automatically.
 
-1. **SSH into the Kinsta staging server:**
-   ```bash
-   ssh -p $PORT $USER@$HOST
-   ```
+### Prerequisites
 
-2. **Back up and replace the theme directory with a git clone:**
-   ```bash
-   cd public/wp-content/themes
-   mv novaramedia-com novaramedia-com.bak
-   git clone https://github.com/novaramedia/novaramedia-com.git
-   cd novaramedia-com
-   git checkout development
-   ```
+- SSH access to the Kinsta **staging** environment
+- Your SSH credentials from MyKinsta (Settings > SFTP/SSH on the staging environment)
+- Admin access to the GitHub repo (to add a deploy key)
 
-3. **Set up GitHub access on the server** (one of these options):
-   - **Option A: Deploy key (recommended)** — Generate an SSH key on the server, add the public key as a read-only deploy key in GitHub repo settings (Settings > Deploy keys). Then set the clone URL to SSH: `git remote set-url origin git@github.com:novaramedia/novaramedia-com.git`
-   - **Option B: HTTPS with token** — Create a fine-grained personal access token with read-only repo access, configure it: `git remote set-url origin https://<token>@github.com/novaramedia/novaramedia-com.git`
+### Step 1: Find your Kinsta SSH credentials
 
-4. **Verify it works:**
-   ```bash
-   git fetch origin
-   git checkout development
-   git pull origin development
-   ```
+1. Log into [MyKinsta](https://my.kinsta.com/)
+2. Go to **Sites** > select the site > **Info** tab
+3. Make sure you're looking at the **Staging** environment (toggle at top)
+4. Under **SFTP/SSH**, note these values:
+   - **Host** (e.g., `ssh.kinsta.cloud` or similar)
+   - **Port** (Kinsta uses non-standard ports, e.g., `12345`)
+   - **Username** (e.g., `ssh-user-abc123`)
 
-5. **Clean up backup once confirmed working:**
-   ```bash
-   rm -rf /path/to/themes/novaramedia-com.bak
-   ```
-
-6. **Update GitHub Secrets** — The secret names changed slightly:
-   - `KINSTA_SSH_HOST` (was `KINSTA_SFTP_HOST`) — can be the same value
-   - `KINSTA_SSH_USER`, `KINSTA_SSH_KEY`, `KINSTA_SSH_PORT` — same as before
-   - Remove: `KINSTA_SFTP_USER`, `KINSTA_SFTP_PASSWORD`, `KINSTA_SFTP_PORT` (no longer needed)
-
-### Security Note
-
-The `.git` directory will exist on the server. Ensure it's not web-accessible. Kinsta typically blocks dotfile access at the nginx level, but verify by visiting `https://staging-site.kinsta.cloud/.git/HEAD` — it should return 403/404, not the file contents.
-
----
-
-## Current State (before optimisation)
-
-| Step | Duration | % of total |
-|------|----------|------------|
-| SFTP deploy (PR branch) | ~10-12 min | 60% |
-| WP-CLI + cache clear | ~30 sec | 3% |
-| npm ci | ~25 sec | 2% |
-| Cypress tests | ~2 min | 11% |
-| SFTP cleanup (reset to dev) | ~5 min | 28% |
-| **Total** | **~18 min** | |
-
-The SFTP mirror transfers the entire theme directory (~50MB with dist/) on every run, twice — once to deploy, once to reset. This accounts for ~88% of the total time.
-
-## Plan: Two Tiers
-
-### Tier 1: Git Pull on Server (target: ~4 min total)
-
-**Prerequisite:** Git is available on Kinsta staging SSH. Needs a one-time check.
-
-If git is available, we replace the entire SFTP workflow with:
-
-```
-1. SSH into server
-2. cd to theme directory
-3. git fetch origin
-4. git checkout <PR branch>
-5. git pull
-```
-
-**Projected times:**
-
-| Step | Duration |
-|------|----------|
-| SSH + git pull (deploy) | ~10-15 sec |
-| WP-CLI + cache clear | ~30 sec |
-| npm ci | ~25 sec |
-| Cypress tests | ~2 min |
-| SSH + git checkout development (cleanup) | ~10 sec |
-| **Total** | **~4 min** |
-
-**Implementation:**
-
-1. **One-time setup:** Clone the repo into the theme directory on staging, or set the existing directory as a git working tree. This requires the server to have read access to the GitHub repo (deploy key or HTTPS token).
-
-2. **Deploy step becomes:**
-```yaml
-- name: Deploy PR branch to staging
-  run: |
-    ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
-      ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
-      "cd public/wp-content/themes/novaramedia-com && \
-       git fetch origin && \
-       git checkout ${{ github.head_ref || github.ref_name }} && \
-       git pull origin ${{ github.head_ref || github.ref_name }}"
-```
-
-3. **Cleanup step becomes:**
-```yaml
-- name: Reset staging to development
-  run: |
-    ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
-      ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
-      "cd public/wp-content/themes/novaramedia-com && \
-       git checkout development && \
-       git pull origin development"
-```
-
-4. **GitHub Secrets needed:**
-   - `KINSTA_GIT_TOKEN` — GitHub personal access token or deploy key for the repo (so the server can `git fetch`)
-   - Or: add a read-only deploy key to the repo and install it on the server
-
-**Risks:**
-- Server might not have git
-- Need to manage git credentials on the server
-- `.git` directory exists on the server (small security consideration — ensure it's not web-accessible)
-
----
-
-### Tier 2: Optimised SFTP (target: ~8-10 min total)
-
-If git is not available, optimise the current SFTP approach:
-
-#### 2a. Remove cleanup step (saves ~5 min immediately)
-
-Staging stays on the PR branch between runs. Since there's a concurrency group, it always gets overwritten by the next run anyway.
-
-**Projected total: ~13 min → saving 5 min**
-
-#### 2b. Diff-based upload (saves ~8-10 min on deploy)
-
-Instead of mirroring the entire directory, only upload files that changed:
-
-```yaml
-- name: Deploy changed files to staging
-  run: |
-    # Get list of changed files compared to what's on staging (development)
-    CHANGED_FILES=$(git diff --name-only development...HEAD)
-    DELETED_FILES=$(git diff --name-only --diff-filter=D development...HEAD)
-
-    # Upload only changed files via SFTP
-    for file in $CHANGED_FILES; do
-      lftp -c "
-        open -u $USER,$PASS sftp://$HOST:$PORT
-        put $file -o novaramedia-com/$file
-      "
-    done
-
-    # Delete removed files
-    for file in $DELETED_FILES; do
-      lftp -c "
-        open -u $USER,$PASS sftp://$HOST:$PORT
-        rm novaramedia-com/$file
-      "
-    done
-```
-
-**Projected times:**
-
-| Step | Duration |
-|------|----------|
-| Diff-based SFTP deploy | ~30 sec - 2 min |
-| WP-CLI + cache clear | ~30 sec |
-| npm ci | ~25 sec |
-| Cypress tests | ~2 min |
-| No cleanup | — |
-| **Total** | **~4-5 min** |
-
-**Caveats:**
-- More complex script, need to handle directory creation for new files
-- Need to handle binary files (images) carefully
-- First run still needs full mirror if theme directory doesn't exist
-- Edge case: if staging was manually modified, diff won't capture that
-
-#### 2c. rsync over SSH (saves ~8-10 min, simpler than 2b)
-
-rsync does efficient delta transfers automatically. Only transfers bytes that changed.
-
-```yaml
-- name: Deploy to staging via rsync
-  run: |
-    rsync -avz --delete \
-      --exclude '.git/' \
-      --exclude '.github/' \
-      --exclude 'node_modules/' \
-      --exclude 'cypress/videos/' \
-      --exclude 'cypress/screenshots/' \
-      -e "ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }}" \
-      ./ ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }}:public/wp-content/themes/novaramedia-com/
-```
-
-**Prerequisite:** rsync available on the Kinsta server (likely, since most Linux servers have it).
-
-**Projected total: ~5-6 min** (rsync is fast for incremental updates but still needs to checksum all files on first comparison)
-
----
-
-## Recommended Approach
-
-```
-1. Check if git is available on Kinsta staging SSH
-   → If YES: implement Tier 1 (git pull). Target: ~4 min.
-   → If NO: check if rsync is available
-     → If YES: implement Tier 2c (rsync). Target: ~5-6 min.
-     → If NO: implement Tier 2a + 2b (remove cleanup + diff SFTP). Target: ~4-5 min.
-```
-
-## Quick Verification Commands
-
-Run these to check server capabilities:
+### Step 2: SSH into the staging server
 
 ```bash
-# Check for git
-ssh -i ~/.ssh/kinsta_key -p $KINSTA_SSH_PORT $KINSTA_SSH_USER@$KINSTA_SFTP_HOST "which git && git --version"
-
-# Check for rsync
-ssh -i ~/.ssh/kinsta_key -p $KINSTA_SSH_PORT $KINSTA_SSH_USER@$KINSTA_SFTP_HOST "which rsync && rsync --version | head -1"
+ssh -p PORT USERNAME@HOST
 ```
 
-## Other Minor Optimisations
+Replace `PORT`, `USERNAME`, and `HOST` with the values from Step 1.
 
-These are small wins regardless of deploy strategy:
+Once connected, verify git is available:
 
-- **npm ci caching:** Already using `setup-node` with `cache: 'npm'` — good
-- **Cypress binary caching:** Could cache `~/.cache/Cypress` between runs (saves ~10 sec)
-- **Parallel test specs:** Cypress Cloud or `cypress-split` to run specs in parallel across containers (overkill for 2 min of tests)
+```bash
+which git && git --version
+```
+
+You should see something like `/usr/bin/git` and `git version 2.x.x`.
+
+### Step 3: Generate a deploy key on the server
+
+While still SSH'd into the server, generate an SSH keypair that git will use to talk to GitHub:
+
+```bash
+ssh-keygen -t ed25519 -C "kinsta-staging-deploy" -f ~/.ssh/github_deploy_key -N ""
+```
+
+This creates two files:
+- `~/.ssh/github_deploy_key` (private key — stays on the server)
+- `~/.ssh/github_deploy_key.pub` (public key — goes to GitHub)
+
+Configure SSH to use this key for GitHub connections:
+
+```bash
+cat >> ~/.ssh/config << 'EOF'
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_deploy_key
+  IdentitiesOnly yes
+EOF
+chmod 600 ~/.ssh/config
+```
+
+Print the public key — you'll need it in the next step:
+
+```bash
+cat ~/.ssh/github_deploy_key.pub
+```
+
+Copy the output (starts with `ssh-ed25519 ...`).
+
+### Step 4: Add the deploy key to GitHub
+
+1. Go to https://github.com/novaramedia/novaramedia-com/settings/keys
+2. Click **Add deploy key**
+3. **Title:** `Kinsta Staging`
+4. **Key:** Paste the public key from Step 3
+5. **Allow write access:** Leave unchecked (read-only is sufficient)
+6. Click **Add key**
+
+### Step 5: Test GitHub access from the server
+
+Back on the server SSH session:
+
+```bash
+ssh -T git@github.com
+```
+
+You should see: `Hi novaramedia/novaramedia-com! You've successfully authenticated...`
+
+If you see `Permission denied`, double-check the deploy key was added correctly and the `~/.ssh/config` file is correct.
+
+### Step 6: Replace the theme directory with a git clone
+
+```bash
+cd ~/public/wp-content/themes
+
+# Back up the current theme directory
+mv novaramedia-com novaramedia-com.bak
+
+# Clone the repo (uses the deploy key via SSH)
+git clone git@github.com:novaramedia/novaramedia-com.git
+
+# Switch to the development branch
+cd novaramedia-com
+git checkout development
+```
+
+Verify the site still works by visiting the staging URL in your browser. If something is broken, you can roll back immediately:
+
+```bash
+cd ~/public/wp-content/themes
+rm -rf novaramedia-com
+mv novaramedia-com.bak novaramedia-com
+```
+
+### Step 7: Verify git operations work
+
+Run the same commands the CI workflow will use:
+
+```bash
+cd ~/public/wp-content/themes/novaramedia-com
+
+# This is what the deploy step does:
+git fetch origin
+git checkout development
+git reset --hard origin/development
+```
+
+All three commands should complete without errors or password prompts.
+
+### Step 8: Clean up and exit
+
+Once everything is confirmed working:
+
+```bash
+rm -rf ~/public/wp-content/themes/novaramedia-com.bak
+exit
+```
+
+### Step 9: Update GitHub Secrets
+
+Go to https://github.com/novaramedia/novaramedia-com/settings/secrets/actions
+
+**Ensure these secrets exist** (the workflow needs them):
+
+| Secret | Value | Notes |
+|--------|-------|-------|
+| `KINSTA_SSH_KEY` | SSH private key for CI to connect to Kinsta | Same key used before for WP-CLI |
+| `KINSTA_SSH_USER` | SSH username from Step 1 | Was previously `KINSTA_SSH_USER` — no change needed |
+| `KINSTA_SSH_HOST` | SSH host from Step 1 | If you previously had `KINSTA_SFTP_HOST`, create `KINSTA_SSH_HOST` with the same value |
+| `KINSTA_SSH_PORT` | SSH port from Step 1 | Same as before |
+| `STAGING_URL` | Full staging URL (e.g., `https://staging-novaramedia.kinsta.cloud`) | Same as before |
+
+**Optional but recommended** (for cache clearing):
+
+| Secret | Value |
+|--------|-------|
+| `KINSTA_API_KEY` | Kinsta API key (from MyKinsta > Company > API Keys) |
+| `KINSTA_SITE_ID` | Site ID (visible in MyKinsta URL or via API) |
+| `KINSTA_STAGING_ENV_ID` | Staging environment ID (via Kinsta API) |
+
+**Can be removed** (no longer needed):
+
+- `KINSTA_SFTP_USER`
+- `KINSTA_SFTP_PASSWORD`
+- `KINSTA_SFTP_PORT`
+
+### Step 10: Verify CI works
+
+Trigger a workflow run to confirm everything is connected:
+
+1. Go to https://github.com/novaramedia/novaramedia-com/actions/workflows/cypress.yml
+2. Click **Run workflow** > select the branch > **Run workflow**
+3. Watch the "Deploy PR branch to staging" step — it should complete in ~10-15 seconds
+
+### Security: Verify .git is not web-accessible
+
+The `.git` directory will exist on the staging server. Kinsta blocks dotfile access at the nginx level by default, but verify this:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" https://YOUR-STAGING-URL/.git/HEAD
+```
+
+This should return `403` or `404`. If it returns `200`, contact Kinsta support to block dotfile access.
+
+### Troubleshooting
+
+**`Permission denied (publickey)`** when running `git fetch`:
+- Check `~/.ssh/config` exists and points to the correct key file
+- Check the deploy key is added to the GitHub repo (not your personal account)
+- Run `ssh -vT git@github.com` for verbose debugging output
+
+**`fatal: not a git repository`** during CI:
+- The theme directory wasn't replaced with a git clone
+- SSH into the server and check: `cd ~/public/wp-content/themes/novaramedia-com && git status`
+
+**CI deploy step hangs:**
+- Git might be prompting for credentials (deploy key not configured)
+- SSH into the server manually and run `git fetch origin` to see what happens
+
+---
+
+## Background: Why Git Deploy?
+
+The previous SFTP-based workflow mirrored the entire theme directory (~50MB) twice per run — once to deploy, once to reset. This took ~15 min of the ~18 min total CI time (88%).
+
+| Before (SFTP) | After (git) |
+|----------------|-------------|
+| SFTP deploy: ~10-12 min | git deploy: ~10-15 sec |
+| SFTP cleanup: ~5 min | git reset: ~10 sec |
+| **Total: ~18 min** | **Total: ~4 min** |
+
+## Future Optimisations
+
+- **Cypress binary caching:** Cache `~/.cache/Cypress` between runs (saves ~10 sec)
 - **Remove temporary push trigger:** The `push: branches: [copilot/add-cypress-testing-ci]` trigger should be removed after merging to development
