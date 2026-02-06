@@ -38,7 +38,7 @@ describe('Single Post (Audio Category)', () => {
     }
 
     cy.checkPageLoad();
-    cy.visit(audioPostUrl);
+    cy.visit(audioPostUrl, { timeout: 60000 });
   });
 
   it('should load successfully', () => {

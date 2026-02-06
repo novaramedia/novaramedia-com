@@ -1,7 +1,7 @@
 # Cypress Tests with Staging Deployment
 #
 # This workflow:
-# 1. Deploys the PR branch to Kinsta staging via SFTP
+# 1. Deploys the PR branch to Kinsta staging via git pull over SSH
 # 2. Activates the theme via WP-CLI over SSH
 # 3. Clears Kinsta cache
 # 4. Verifies staging is accessible
@@ -9,17 +9,16 @@
 # 6. Resets staging back to development branch (cleanup)
 #
 # Required GitHub Secrets:
-# - KINSTA_SFTP_HOST: SFTP hostname (from MyKinsta → Sites → Info → SFTP/SSH)
-# - KINSTA_SFTP_USER: SFTP username (sandboxed user with theme folder access)
-# - KINSTA_SFTP_PASSWORD: SFTP password
-# - KINSTA_SFTP_PORT: SFTP port (Kinsta uses non-standard ports)
-# - KINSTA_SSH_KEY: SSH private key for WP-CLI access (main Kinsta user)
-# - KINSTA_SSH_USER: SSH username for WP-CLI (main Kinsta user)
-# - KINSTA_SSH_PORT: SSH port for WP-CLI (may differ from SFTP port)
+# - KINSTA_SSH_KEY: SSH private key for server access
+# - KINSTA_SSH_USER: SSH username (main Kinsta user)
+# - KINSTA_SSH_HOST: SSH hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+# - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
+#
+# One-time server setup required — see .docs/ci-speedup-plan.md
 
 name: Cypress Tests (Staging)
 
@@ -48,72 +47,61 @@ concurrency:
 jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Need full history for branch checkout during cleanup
 
       # ========================================
-      # DEPLOY TO STAGING VIA SFTP
+      # DEPLOY TO STAGING VIA GIT PULL
       # ========================================
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      - name: Setup SSH for WP-CLI
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.KINSTA_SSH_KEY }}" > ~/.ssh/kinsta_key
+          echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
           chmod 600 ~/.ssh/kinsta_key
-          ssh-keyscan -p ${{ secrets.KINSTA_SSH_PORT }} ${{ secrets.KINSTA_SFTP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
 
-      - name: Deploy to staging via SFTP
+      - name: Deploy PR branch to staging
         run: |
-          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
-          echo "Deploying branch '${BRANCH_NAME}' to staging..."
+          echo "Deploying branch '${BRANCH_NAME}' to staging via git..."
 
-          # Use lftp for SFTP mirror with password auth
-          # --reverse: upload local to remote (mirror in reverse)
-          # --delete: remove remote files not present locally
-          # --verbose: show progress
-          # --exclude patterns: skip unnecessary files
-          lftp -c "
-            set sftp:auto-confirm yes
-            set ssl:verify-certificate no
-            open -u ${{ secrets.KINSTA_SFTP_USER }},${{ secrets.KINSTA_SFTP_PASSWORD }} \
-              sftp://${{ secrets.KINSTA_SFTP_HOST }}:${{ secrets.KINSTA_SFTP_PORT }}
-            mirror --reverse --delete --verbose \
-              --exclude ^\.git/$ \
-              --exclude ^\.github/$ \
-              --exclude ^node_modules/$ \
-              --exclude ^\.DS_Store$ \
-              --exclude ^cypress/videos/$ \
-              --exclude ^cypress/screenshots/$ \
-              --exclude \.log$ \
-              --exclude ^\.env \
-              ./ ./novaramedia-com/
-            quit
-          "
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git fetch origin && \
+             git checkout '${BRANCH_NAME}' && \
+             git reset --hard 'origin/${BRANCH_NAME}'"
 
-          echo "✅ Deployment complete"
+          echo "Deployment complete"
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
 
       - name: Activate theme via WP-CLI
         run: |
-          echo "Activating theme via WP-CLI..."
-          ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
-            ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "cd public && wp theme activate novaramedia-com"
-          echo "✅ Theme activated"
+          echo "Theme activated"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
 
       - name: Clear Kinsta cache
         continue-on-error: true
         run: |
-          # Skip if required secrets aren't configured
           if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
-            echo "⏭️ Skipping cache clear - Kinsta API secrets not configured"
+            echo "Skipping cache clear - Kinsta API secrets not configured"
             exit 0
           fi
 
@@ -129,7 +117,6 @@ jobs:
           echo "Cache clear response: $http_code"
           echo "$body"
 
-          # Wait for cache to clear
           sleep 10
         env:
           KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
@@ -143,10 +130,10 @@ jobs:
           attempt=1
 
           while [ $attempt -le $max_attempts ]; do
-            http_code=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.STAGING_URL }}")
+            http_code=$(curl -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
 
             if [ "$http_code" = "200" ]; then
-              echo "✅ Staging site is accessible (HTTP $http_code)"
+              echo "Staging site is accessible (HTTP $http_code)"
               exit 0
             fi
 
@@ -155,8 +142,10 @@ jobs:
             attempt=$((attempt + 1))
           done
 
-          echo "❌ Staging site not accessible after $max_attempts attempts"
+          echo "Staging site not accessible after $max_attempts attempts"
           exit 1
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
 
       # ========================================
       # RUN CYPRESS TESTS
@@ -179,7 +168,7 @@ jobs:
         with:
           browser: chrome
           headed: false
-          install: false  # Already installed via npm ci
+          install: false
           config: video=true,screenshotOnRunFailure=true
         env:
           CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
@@ -220,34 +209,21 @@ jobs:
         run: |
           echo "Resetting staging back to development branch..."
 
-          # Checkout development branch
-          git checkout development
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git checkout development && \
+             git reset --hard origin/development"
 
-          # Mirror development branch to staging via SFTP
-          lftp -c "
-            set sftp:auto-confirm yes
-            set ssl:verify-certificate no
-            open -u ${{ secrets.KINSTA_SFTP_USER }},${{ secrets.KINSTA_SFTP_PASSWORD }} \
-              sftp://${{ secrets.KINSTA_SFTP_HOST }}:${{ secrets.KINSTA_SFTP_PORT }}
-            mirror --reverse --delete --verbose \
-              --exclude ^\.git/$ \
-              --exclude ^\.github/$ \
-              --exclude ^node_modules/$ \
-              --exclude ^\.DS_Store$ \
-              --exclude ^cypress/videos/$ \
-              --exclude ^cypress/screenshots/$ \
-              --exclude \.log$ \
-              --exclude ^\.env \
-              ./ ./novaramedia-com/
-            quit
-          "
-
-          # Reactivate theme after reset
-          ssh -i ~/.ssh/kinsta_key -p ${{ secrets.KINSTA_SSH_PORT }} \
-            ${{ secrets.KINSTA_SSH_USER }}@${{ secrets.KINSTA_SFTP_HOST }} \
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "cd public && wp theme activate novaramedia-com"
 
-          echo "✅ Staging reset to development branch"
+          echo "Staging reset to development branch"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
 
       - name: Cleanup SSH keys
         if: always()
