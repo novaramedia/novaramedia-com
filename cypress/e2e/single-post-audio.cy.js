@@ -47,7 +47,10 @@ describe('Single Post (Audio Category)', () => {
       headers: { 'content-type': 'text/html' },
     });
     cy.intercept('**/api.soundcloud.com/**', { statusCode: 200, body: '{}' });
-    cy.intercept('**/api-v2.soundcloud.com/**', { statusCode: 200, body: '{}' });
+    cy.intercept('**/api-v2.soundcloud.com/**', {
+      statusCode: 200,
+      body: '{}',
+    });
 
     cy.checkPageLoad();
     cy.visit(audioPostUrl, { timeout: 60000 });
