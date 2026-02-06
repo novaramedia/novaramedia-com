@@ -11,7 +11,7 @@
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
 # - KINSTA_SSH_USER: SSH username (main Kinsta user)
-# - KINSTA_SSH_HOST: SSH hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+# - KINSTA_SFTP_HOST: SSH/SFTP hostname (from MyKinsta → Sites → Info → SFTP/SSH)
 # - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
@@ -66,7 +66,7 @@ jobs:
         env:
           KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
-          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
       - name: Deploy PR branch to staging
         run: |
@@ -84,7 +84,7 @@ jobs:
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
-          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
       - name: Activate theme via WP-CLI
         run: |
@@ -95,7 +95,7 @@ jobs:
         env:
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
-          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
       - name: Clear Kinsta cache
         continue-on-error: true
@@ -223,7 +223,7 @@ jobs:
         env:
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
-          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SSH_HOST }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
       - name: Cleanup SSH keys
         if: always()
