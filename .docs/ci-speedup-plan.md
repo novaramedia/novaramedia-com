@@ -47,6 +47,7 @@ ssh-keygen -t ed25519 -C "kinsta-staging-deploy" -f ~/.ssh/github_deploy_key -N 
 ```
 
 This creates two files:
+
 - `~/.ssh/github_deploy_key` (private key — stays on the server)
 - `~/.ssh/github_deploy_key.pub` (public key — goes to GitHub)
 
@@ -146,21 +147,21 @@ Go to https://github.com/novaramedia/novaramedia-com/settings/secrets/actions
 
 **Ensure these secrets exist** (the workflow needs them):
 
-| Secret | Value | Notes |
-|--------|-------|-------|
-| `KINSTA_SSH_KEY` | SSH private key for CI to connect to Kinsta | Same key used before for WP-CLI |
-| `KINSTA_SSH_USER` | SSH username from Step 1 | Was previously `KINSTA_SSH_USER` — no change needed |
-| `KINSTA_SSH_HOST` | SSH host from Step 1 | If you previously had `KINSTA_SFTP_HOST`, create `KINSTA_SSH_HOST` with the same value |
-| `KINSTA_SSH_PORT` | SSH port from Step 1 | Same as before |
-| `STAGING_URL` | Full staging URL (e.g., `https://staging-novaramedia.kinsta.cloud`) | Same as before |
+| Secret            | Value                                                               | Notes                                                                                  |
+| ----------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `KINSTA_SSH_KEY`  | SSH private key for CI to connect to Kinsta                         | Same key used before for WP-CLI                                                        |
+| `KINSTA_SSH_USER` | SSH username from Step 1                                            | Was previously `KINSTA_SSH_USER` — no change needed                                    |
+| `KINSTA_SSH_HOST` | SSH host from Step 1                                                | If you previously had `KINSTA_SFTP_HOST`, create `KINSTA_SSH_HOST` with the same value |
+| `KINSTA_SSH_PORT` | SSH port from Step 1                                                | Same as before                                                                         |
+| `STAGING_URL`     | Full staging URL (e.g., `https://staging-novaramedia.kinsta.cloud`) | Same as before                                                                         |
 
 **Optional but recommended** (for cache clearing):
 
-| Secret | Value |
-|--------|-------|
-| `KINSTA_API_KEY` | Kinsta API key (from MyKinsta > Company > API Keys) |
-| `KINSTA_SITE_ID` | Site ID (visible in MyKinsta URL or via API) |
-| `KINSTA_STAGING_ENV_ID` | Staging environment ID (via Kinsta API) |
+| Secret                  | Value                                               |
+| ----------------------- | --------------------------------------------------- |
+| `KINSTA_API_KEY`        | Kinsta API key (from MyKinsta > Company > API Keys) |
+| `KINSTA_SITE_ID`        | Site ID (visible in MyKinsta URL or via API)        |
+| `KINSTA_STAGING_ENV_ID` | Staging environment ID (via Kinsta API)             |
 
 **Can be removed** (no longer needed):
 
@@ -189,15 +190,18 @@ This should return `403` or `404`. If it returns `200`, contact Kinsta support t
 ### Troubleshooting
 
 **`Permission denied (publickey)`** when running `git fetch`:
+
 - Check `~/.ssh/config` exists and points to the correct key file
 - Check the deploy key is added to the GitHub repo (not your personal account)
 - Run `ssh -vT git@github.com` for verbose debugging output
 
 **`fatal: not a git repository`** during CI:
+
 - The theme directory wasn't replaced with a git clone
 - SSH into the server and check: `cd ~/public/wp-content/themes/novaramedia-com && git status`
 
 **CI deploy step hangs:**
+
 - Git might be prompting for credentials (deploy key not configured)
 - SSH into the server manually and run `git fetch origin` to see what happens
 
@@ -207,11 +211,11 @@ This should return `403` or `404`. If it returns `200`, contact Kinsta support t
 
 The previous SFTP-based workflow mirrored the entire theme directory (~50MB) twice per run — once to deploy, once to reset. This took ~15 min of the ~18 min total CI time (88%).
 
-| Before (SFTP) | After (git) |
-|----------------|-------------|
+| Before (SFTP)           | After (git)            |
+| ----------------------- | ---------------------- |
 | SFTP deploy: ~10-12 min | git deploy: ~10-15 sec |
-| SFTP cleanup: ~5 min | git reset: ~10 sec |
-| **Total: ~18 min** | **Total: ~4 min** |
+| SFTP cleanup: ~5 min    | git reset: ~10 sec     |
+| **Total: ~18 min**      | **Total: ~4 min**      |
 
 ## Future Optimisations
 
