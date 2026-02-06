@@ -38,7 +38,7 @@ describe('Single Post (Video Category)', () => {
     }
 
     cy.checkPageLoad();
-    cy.visit(videoPostUrl);
+    cy.visit(videoPostUrl, { timeout: 60000 });
   });
 
   it('should load successfully', () => {

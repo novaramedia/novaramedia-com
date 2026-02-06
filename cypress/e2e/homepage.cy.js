@@ -25,8 +25,10 @@ describe('Homepage', () => {
   });
 
   it('should have working navigation links', () => {
-    cy.get('[data-testid="site-nav"] a').should('have.length.greaterThan', 0);
-    cy.get('[data-testid="site-header"] a')
+    cy.get('[data-testid="site-nav"] .site-header__nav-toggle').click();
+    cy.get('[data-testid="site-nav-panel"]').should('be.visible');
+    cy.get('[data-testid="site-nav-panel"] a')
+      .should('have.length.greaterThan', 0)
       .first()
       .should('have.attr', 'href')
       .and('not.be.empty');

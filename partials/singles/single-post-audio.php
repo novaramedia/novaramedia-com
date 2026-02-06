@@ -26,7 +26,7 @@
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>

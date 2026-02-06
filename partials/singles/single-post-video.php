@@ -12,7 +12,7 @@
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-4">
     <h1 class="font-size-15 font-weight-bold" data-testid="post-title"><?php the_title(); ?></h1>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>

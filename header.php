@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <nav class="site-header-nav" role="navigation" aria-label="Sections">
+      <nav class="site-header-nav" role="navigation" aria-label="Sections" data-testid="site-nav-panel">
         <div class="container font-size-12 font-size-s-13 font-weight-bold font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
