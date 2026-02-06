@@ -9,22 +9,12 @@ describe('Single Post (Article)', () => {
   let articleUrl;
 
   before(() => {
-    // Visit homepage to find a recent article link
-    cy.visit('/', { failOnStatusCode: false });
-
-    // Wait for page to load and find post links
-    cy.get('body').then(($body) => {
-      // Try multiple selectors to find post links
-      const $links = $body.find(
-        '[data-testid="post-list"] a[href*="/20"], [data-testid="main-content"] a[href*="/20"], article a[href*="/20"], .post a[href*="/20"]'
-      );
-
-      if ($links.length > 0) {
-        articleUrl = $links.first().attr('href');
-        cy.log('Testing article:', articleUrl);
+    cy.findPostUrlFromArchive('/category/articles').then((url) => {
+      articleUrl = url;
+      if (url) {
+        cy.log('Testing article:', url);
       } else {
-        // If no posts found, skip tests by not setting URL
-        cy.log('No articles found on homepage - tests will be skipped');
+        cy.log('No articles found - tests will be skipped');
       }
     });
   });

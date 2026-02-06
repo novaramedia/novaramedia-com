@@ -9,22 +9,12 @@ describe('Single Post (Video Category)', () => {
   let videoPostUrl;
 
   before(() => {
-    // Visit video category archive to find a video post
-    cy.visit('/category/video', { failOnStatusCode: false });
-
-    // Wait for page to load and find post links
-    cy.get('body').then(($body) => {
-      // Try multiple selectors to find post links
-      const $links = $body.find(
-        '[data-testid="post-list"] a[href*="/20"], [data-testid="main-content"] a[href*="/20"], article a[href*="/20"], .post a[href*="/20"]'
-      );
-
-      if ($links.length > 0) {
-        videoPostUrl = $links.first().attr('href');
-        cy.log('Testing video post:', videoPostUrl);
+    cy.findPostUrlFromArchive('/category/video').then((url) => {
+      videoPostUrl = url;
+      if (url) {
+        cy.log('Testing video post:', url);
       } else {
-        // If no posts found, skip tests by not setting URL
-        cy.log('No video posts found on category page - tests will be skipped');
+        cy.log('No video posts found - tests will be skipped');
       }
     });
   });

@@ -110,3 +110,34 @@ Cypress.Commands.add('verifyCriticalPageStructure', () => {
   cy.get('[data-testid="main-content"]').should('exist');
   cy.get('[data-testid="site-footer"]').should('be.visible');
 });
+
+/**
+ * Find a single post URL from a category archive page.
+ *
+ * Visits the given archive URL and finds the first post card link that matches
+ * a WordPress year/month/day permalink pattern. Targets article.type-post
+ * elements rendered by flex-post.php to avoid show page or nav menu links.
+ *
+ * @param {string} archiveUrl - The category archive path to visit (e.g. '/category/audio')
+ * @returns {Cypress.Chainable<string|null>} The post URL or null if none found
+ */
+Cypress.Commands.add('findPostUrlFromArchive', (archiveUrl) => {
+  cy.visit(archiveUrl, { failOnStatusCode: false });
+
+  return cy.get('body').then(($body) => {
+    const postUrlPattern = /\/\d{4}\/\d{2}\/\d{2}\//;
+    const $links = $body.find(
+      '[data-testid="post-list"] article.type-post a, [data-testid="main-content"] article.type-post a'
+    );
+
+    let postUrl = null;
+    $links.each((i, el) => {
+      const href = Cypress.$(el).attr('href');
+      if (!postUrl && href && postUrlPattern.test(href)) {
+        postUrl = href;
+      }
+    });
+
+    return postUrl;
+  });
+});
