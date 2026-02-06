@@ -38,15 +38,29 @@ describe('Single Post (Audio Category)', () => {
     }
 
     cy.checkPageLoad();
-    // SoundCloud embeds block the load event indefinitely in CI.
-    // Stub the SoundCloud widget so the iframe loads instantly but still
-    // exists in the DOM for the audio player test.
-    cy.intercept('https://w.soundcloud.com/**', {
-      statusCode: 200,
-      headers: { 'content-type': 'text/html' },
-      body: '<html><body>SoundCloud stub</body></html>',
+    // SoundCloud embeds block the page load event indefinitely in CI.
+    // Use a MutationObserver to neutralise SoundCloud iframes as soon as
+    // the browser parses them, so the page load event fires normally.
+    // The iframe elements remain in the DOM for test assertions.
+    cy.visit(audioPostUrl, {
+      timeout: 60000,
+      onBeforeLoad(win) {
+        const observer = new win.MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+              if (node.tagName === 'IFRAME' && node.src?.includes('soundcloud')) {
+                node.src = 'about:blank';
+              }
+            }
+          }
+        });
+        // Start observing once <html> exists
+        observer.observe(win.document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      },
     });
-    cy.visit(audioPostUrl, { timeout: 60000 });
   });
 
   it('should load successfully', () => {
