@@ -8,8 +8,8 @@ if ( empty( $copy ) ) {
 <div id="obligation-bar">
   <div class="container pt-2 pb-2">
     <div class="grid-row">
-      <div class="grid-item is-xxl-18 font-color-white font-size-8 text-wrap-balance text-links-underlined">
-        <p>
+      <div class="grid-item is-xxl-18 font-color-white font-size-8 text-links-underlined">
+        <p class="text-wrap-balance">
           <?php
           echo wp_kses(
             $copy,

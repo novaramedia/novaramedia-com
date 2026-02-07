@@ -15,7 +15,7 @@ if( have_posts() ) {
       if (!empty($meta['_nm_subtitle'][0])) {
     ?>
     <div class="grid-row mb-5">
-      <div class="grid-item offset-xxl-24">
+      <div class="grid-item is-xxl-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $meta['_nm_subtitle'][0]; ?></h4>
       </div>
     </div>
