@@ -18,7 +18,7 @@
   if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
     $post_id = $apology_post[0]->ID;
   ?>
-  <div class="margin-bottom-small padding-bottom-small ui-border-bottom">
+  <div class="mb-4 pb-4 ui-border-bottom">
     <div class="layout-split-level font-size-8 font-weight-bold mb-1">
       <span class="ui-tag">Correction</span>
     </div>
