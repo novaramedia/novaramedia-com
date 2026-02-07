@@ -1,7 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 get_header();
 ?>
-<!-- main content -->
 <main id="main-content">
 <?php
 if ( have_posts() ) {
@@ -9,18 +12,20 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-  <article id="page-jobs" class="container mt-4 mb-8">
-    <div class="grid-row mb-4">
-      <div class="grid-item is-s-24">
-        <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
+  <article id="page-jobs" class="container">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24 mb-5">
+        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+          Jobs
+        </h4>
       </div>
     </div>
 
     <div class="grid-row grid-row-m--reverse mb-4">
-      <div class="grid-item is-m-24 is-l-16 is-xl-14 is-xxl-12 page-copy">
+      <div class="grid-item is-xxl-12 is-xl-14 is-l-16 is-m-24 page-copy">
         <?php the_content(); ?>
       </div>
-      <div class="grid-item is-m-24 is-l-8 is-xl-10 is-xxl-12">
+      <div class="grid-item is-xxl-12 is-xl-10 is-l-8 is-m-24">
         <?php
         $start_of_day = strtotime( 'today midnight' );
         $jobs = get_posts(
@@ -39,7 +44,7 @@ if ( have_posts() ) {
         if ( ! empty( $jobs ) ) {
           ?>
         <h5 class="font-size-10">We are currently hiring:</h5>
-        <ul>
+        <ul class="mt-4 mb-4">
           <?php
           foreach ( $jobs as $job ) {
             $deadline = get_post_meta( $job->ID, '_nm_deadline', true );
@@ -49,7 +54,7 @@ if ( have_posts() ) {
           }
         } else {
           ?>
-        <h5 class="pb-s-4">There are currently no available positions</h5>
+        <h5 class="mb-s-4">There are currently no available positions</h5>
           <?php
         }
         ?>
@@ -60,7 +65,6 @@ if ( have_posts() ) {
   }
 }
 ?>
-<!-- end main-content -->
 </main>
 <?php
 get_footer();

@@ -1,5 +1,37 @@
 <?php
 /**
+ * Generate complete YouTube embed iframe HTML.
+ * Handles both lazy loading and regular loading scenarios.
+ *
+ * @param string $youtube_id YouTube video ID.
+ * @param boolean $lazyload Set true to use lazy loading via lazysizes library (uses data-src instead of src).
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
+ *
+ * @return string Complete iframe HTML element for YouTube embed
+ */
+function render_youtube_embed_iframe( $youtube_id, $lazyload = false, $autoplay = false ) {
+  $url = generate_youtube_embed_url( $youtube_id, $autoplay );
+  $allow_attr = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
+  $classes = 'youtube-player';
+  if ( $lazyload ) {
+    $classes .= ' lazyload';
+  }
+
+  $src_attr = $lazyload ? 'data-src' : 'src';
+
+  $iframe = sprintf(
+    '<iframe class="%s" type="text/html" %s="%s" allow="%s" allowfullscreen></iframe>',
+    esc_attr( $classes ),
+    $src_attr,
+    esc_url( $url ),
+    esc_attr( $allow_attr )
+  );
+
+  return $iframe;
+}
+
+/**
  * Renders a Mailchimp signup form.
  *
  * @param string $mailchimp_key The Mailchimp key.
@@ -187,8 +219,8 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   $data = nm_get_support_heading_text_data();
 
   // Set standard defaults
-  $heading = 'Support Novara Media';
-  $text = 'Help us fund independent journalism.';
+  $heading = 'Help build people-powered media';
+  $text = 'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
 
   // Check for heading override in donation mode data
   if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
@@ -491,44 +523,12 @@ function render_short_description( $post_id = null ) {
  * @param Boolean $is_linked If the rendered bylines should be linked, to either contributor page or Twitter metadata.
  */
 function render_bylines( $post_id, $is_linked = false ) {
-  $contributors_posts_array = get_contributors_array( $post_id );
+  // Use the shared nm_get_post_authors function with simplified interface
+  $format = $is_linked ? 'html' : 'text';
+  $authors = nm_get_post_authors( $post_id, $format );
 
-  $author = get_post_meta( $post_id, '_cmb_author', true );
-  $twitter = get_post_meta( $post_id, '_cmb_author_twitter', true );
-
-  $twitter_url = false;
-
-  if ( $twitter && ( ! is_array( $twitter ) || count( $twitter ) === 1 ) ) { // if twitter is set and it either isn't an array (old support) or it only has 1 value then we can display it
-    if ( is_array( $twitter ) ) {
-      $twitter_url = $twitter[0];
-    } else {
-      $twitter_url = $twitter;
-    }
-  }
-
-  if ( is_array( $contributors_posts_array ) && ! empty( $contributors_posts_array ) ) {
-    $number_of_contributors = count( $contributors_posts_array );
-
-    foreach ( $contributors_posts_array as $index => $contributor ) {
-      if ( $number_of_contributors > 1 ) {
-        if ( $number_of_contributors === $index + 1 ) {
-          echo ' & ';
-        } elseif ( $index !== 0 ) {
-          echo ', ';
-        }
-      }
-
-      echo $is_linked ? '<a href="' . get_the_permalink( $contributor->ID ) . '">' . $contributor->post_title . '</a>' : $contributor->post_title;
-    }
-  } elseif ( ! empty( $author ) ) {
-    if ( $twitter_url && $is_linked ) {
-      echo '<a href="https://twitter.com/' . $twitter_url . '" target="_blank" rel="nofollow">' . $author . '</a>';
-    } else {
-      echo $author;
-    }
-  } else {
-    echo 'Novara Reporters';
-  }
+  // Display fallback if no authors found
+  echo $authors !== false ? $authors : 'Novara Reporters';
 }
 
 /**
@@ -755,6 +755,85 @@ function render_about_group_field( $data ) {
       }
       ?>
     </div>
+    <?php
+  }
+}
+
+/**
+ * Render a quotes carousel for the Support page
+ *
+ * @since 4.2.1
+ *
+ * @param array $quotes Array of quote strings to display in the carousel.
+ * @return void Outputs the carousel HTML directly.
+ */
+function render_support_quotes_carousel( $quotes ) {
+  if ( empty( $quotes ) || ! is_array( $quotes ) ) {
+    return;
+  }
+
+  // Filter out empty quotes
+  $quotes = array_filter( $quotes );
+
+  if ( empty( $quotes ) ) {
+    return;
+  }
+  ?>
+  <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+      <?php foreach ( $quotes as $quote ) { ?>
+          <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+            <h5 class="ui-boxed-title ui-boxed-title--grey mb-s-2">Supporters Say</h5>
+            <div class="support-page__quote-container">
+              <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+              <p class="font-serif font-size-13 font-size-s-13 text-extra-leading text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <?php
+}
+
+/**
+ * Render complete SoundCloud embed iframe HTML.
+ * Handles both lazy loading and regular loading scenarios.
+ *
+ * @param string $soundcloud_url SoundCloud track URL.
+ * @param string $size Player size: 'mini', 'small', 'medium', 'full'.
+ * @param boolean $lazyload Set true to use lazy loading (uses data-src instead of src).
+ * @param array $params Optional SoundCloud embed parameters.
+ */
+function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyload = false, $params = array() ) {
+  if ( empty( $soundcloud_url ) ) {
+    return;
+  }
+
+  $height = get_soundcloud_player_height( $size );
+  $url = generate_soundcloud_embed_url( $soundcloud_url, $params );
+
+  if ( $lazyload ) {
+    // Lazy loading placeholder with fallback
+    ?>
+    <div class="soundcloud-lazy"
+      data-src="<?php echo esc_url( $url ); ?>"
+      data-width="100%"
+      data-height="<?php echo esc_attr( $height ); ?>"
+      style="min-height: <?php echo esc_attr( $height ); ?>px;">
+      <noscript>
+        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener">Listen on SoundCloud</a>
+      </noscript>
+    </div>
+    <?php
+  } else {
+    ?>
+    <iframe src="<?php echo esc_url( $url ); ?>"
+      width="100%"
+      height="<?php echo esc_attr( $height ); ?>"
+      allow="autoplay"></iframe>
     <?php
   }
 }

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 get_header();
 ?>
 <main id="main-content">
@@ -11,10 +15,15 @@ if ( have_posts() ) {
     $start_of_day = strtotime( 'today midnight' );
     $is_open = $meta['_nm_deadline'][0] >= $start_of_day;
     ?>
-  <article id="job" class="container mt-4 mb-6">
-    <div class="grid-row mb-4">
-      <div class="grid-item is-xxl-24">
-        <h4 class="font-size-9 text-uppercase font-weight-bold mb-4">Job: <?php the_title(); ?></h4>
+  <article id="job" class="container">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24 mb-4">
+        <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+          Job listing
+        </h4>
+      </div>
+      <div class="grid-item is-xxl-24 mb-5">
+        <h1 class="font-size-13 font-weight-bold"><?php the_title(); ?></h1>
       </div>
     </div>
     <div class="grid-row mb-4">
@@ -37,7 +46,7 @@ if ( have_posts() ) {
   ?>
   <div class="container">
     <div class="grid-row">
-      <article class="grid-item is-xxl-24"><?php esc_html_e( 'Sorry, no posts matched your criteria :{' ); ?></article>
+      <article class="grid-item is-xxl-24"><?php esc_html_e( 'Sorry, no jobs matched your criteria :{' ); ?></article>
     </div>
   </div>
   <?php

@@ -1,12 +1,15 @@
 {
   "name": "novaramedia-com",
-  "version": "4.2.10",
+  "version": "4.3.1",
   "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode=development",
-    "build": "webpack --mode=production",
+    "dev:blocks": "wp-scripts start --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build:theme": "webpack --mode=production",
+    "build:blocks": "wp-scripts build --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build": "npm run build:theme && npm run build:blocks",
     "release": "release-it"
   },
   "repository": {
@@ -51,6 +54,7 @@
     "postcss-loader": "~8.1.1",
     "postcss-preset-env": "~10.2.3",
     "release-it": "^19.0.3",
+    "sharp": "^0.34.5",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
     "stylus-native-loader": "~1.4.3",
@@ -58,15 +62,16 @@
     "webpack": "~5.99.5",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "~6.0.1",
-    "webpack-notifier": "~1.15.0"
+    "webpack-notifier": "~1.15.0",
+    "@wordpress/scripts": "^27.9.0"
   },
   "dependencies": {
     "jquery": "~3.7.1",
     "js-cookie": "~3.0.1",
     "lazysizes": "~5.3.2",
-    "lodash": "~4.17.21",
+    "lodash": "~4.17.23",
     "luxon": "~3.6.1",
-    "nm-stylus-library": "github:novaramedia/nm-stylus-library#99dcecb38568cb2df512881ed7d2783faac1310f",
+    "nm-stylus-library": "github:novaramedia/nm-stylus-library#v0.12.0",
     "swiper": "^11.2.10"
   },
   "release-it": {
@@ -84,7 +89,7 @@
       }
     },
     "hooks": {
-      "before:release": "yarn build",
+      "before:release": "npm run build",
       "after:release": "sed -i '' 's/${latestVersion}/${version}/' style.css"
     }
   }

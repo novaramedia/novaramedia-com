@@ -39,10 +39,11 @@ function scripts_and_styles_method() {
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
-
   wp_enqueue_script( 'site-js', $site_js, array(), $theme_version, true );
 
   wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, $theme_version );
+
+  wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 
   if ( is_admin() ) {
     wp_enqueue_style( 'dashicons' );
@@ -50,9 +51,30 @@ function scripts_and_styles_method() {
 }
 add_action( 'wp_enqueue_scripts', 'scripts_and_styles_method' );
 
+/**
+ * Adds custom metadata to GTM4WP plugin's dataLayer content.
+ *
+ * Uses GTM4WP's own filter system to add custom data to the dataLayer
+ * before the plugin outputs it, ensuring proper integration timing.
+ *
+ * @param array $data_layer The existing dataLayer content from GTM4WP.
+ * @return array Modified dataLayer content with custom metadata.
+ */
+function nm_add_custom_gtm_datalayer_data( $data_layer ) {
+  if ( function_exists( 'nm_get_custom_metadata_for_datalayer' ) ) {
+    $custom_data = nm_get_custom_metadata_for_datalayer();
+    if ( ! empty( $custom_data ) ) {
+      $data_layer = array_merge( $data_layer, $custom_data );
+    }
+  }
+  return $data_layer;
+}
+add_filter( 'gtm4wp_compile_datalayer', 'nm_add_custom_gtm_datalayer_data' );
+
 // Theme supports
 
 if ( function_exists( 'add_theme_support' ) ) {
+  add_theme_support( 'title-tag' );
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 }
@@ -98,6 +120,7 @@ get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
+get_template_part( 'lib/meta/meta-boxes-seo' );
 get_template_part( 'lib/meta/meta-boxes-post' );
 get_template_part( 'lib/meta/meta-boxes-page' );
 get_template_part( 'lib/meta/meta-boxes-page-about' );
@@ -156,6 +179,7 @@ add_action( 'init', 'nm_register_shortcodes' );
 
 // Add custom functions
 
+get_template_part( 'lib/blocks' );
 get_template_part( 'lib/renderers' );
 get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
@@ -163,6 +187,7 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
+get_template_part( 'lib/functions-seo' );
 
 // Newsletter migration - auto-runs on deployment
 get_template_part( 'lib/newsletter-migration' );

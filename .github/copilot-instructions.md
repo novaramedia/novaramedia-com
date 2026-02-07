@@ -142,3 +142,108 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 - **ARIA states**: `aria-checked`, `aria-pressed` for custom form controls
 - **Keyboard navigation**: Arrow keys for form controls, focus management
 - **Screen readers**: Proper labeling and state announcements
+
+## Testing and Verification
+
+### Building Code
+Always build the project to verify JavaScript and CSS changes:
+```bash
+npm run dev    # Development build with watch mode (rebuilds on file changes)
+npm run build  # Production build (minified, optimized)
+```
+
+### Linting
+- **JavaScript**: ESLint is configured with `eslint:recommended` and Prettier integration
+  - ESLint runs automatically during webpack builds via `eslint-webpack-plugin`
+  - Configuration: `.eslintrc.json`
+  - Supports ES6 modules and browser environment
+- **PHP**: WordPress Coding Standards via PHPCS
+  - Configuration: `phpcs.xml`
+  - Excludes Yoda conditionals and doc comment requirements for small functions
+  - Run manually if phpcs is available: `phpcs`
+
+### Manual Verification
+Since this is a WordPress theme without automated tests:
+1. **Build the code** after making changes
+2. **Check webpack output** for errors or warnings
+3. **Review compiled files** in `dist/` directory
+4. **Test in WordPress** if possible, or review the generated HTML/CSS/JS
+5. **Verify accessibility** features if modifying interactive components
+
+### Checking Your Changes
+```bash
+# See what files changed
+git status
+
+# Review your changes
+git diff
+
+# Check webpack output
+npm run build
+```
+
+**IMPORTANT: Committing Changes**
+- Only commit source files that you intentionally modified (e.g., `.php`, `.js`, `.styl`, `.md` files)
+- **DO NOT** commit `dist/` files unless you made actual source code changes that affect the build output
+- If `dist/` files appear as changed but you only modified documentation or config files, do not commit them
+- Use `git diff dist/` to verify if dist files have actual meaningful changes before committing
+- When in doubt, check if your changes should affect the build output - if not, exclude dist files from your commit
+
+## Common Pitfalls and Troubleshooting
+
+### Stylus Compilation Issues
+- **calc() values**: Wrap calc expressions in quotes when used in Stylus: `calc('100vh - var(--header-height)')`
+- **Import order**: Make sure to import from `nm-stylus-library` before custom styles
+- **Grid classes**: Always use correct order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
+
+### JavaScript Module Issues
+- **Import paths**: Use relative paths with `.js` extension: `import func from '../functions/func.js'`
+- **Module loading**: Ensure modules are imported in `main.js` and have proper `onReady()` and `bind()` methods
+- **jQuery**: Available globally as `$` and `jQuery`, but prefer ES6 imports where possible
+
+### Build System
+- **Don't modify**: Webpack configuration without team approval
+- **node_modules**: Never commit this directory (already in .gitignore)
+- **dist directory**: Contains built files. Only commit dist files when you've made actual source code changes (JS, Stylus, etc.) that affect the build output
+- **Avoid committing unchanged dist files**: Building the project for testing purposes should not result in dist file commits unless the build output actually changed
+- **Watch mode**: `npm run dev` enables watch mode which automatically rebuilds on file changes
+
+### WordPress Integration
+- **WP global object**: PHP data is localized via `wp_localize_script` - check `functions.php` for available properties
+- **Template hierarchy**: WordPress looks for most specific template first (e.g., `single-event.php` before `single.php`)
+- **CMB2 fields**: Custom meta boxes are defined in `lib/meta/` - check existing patterns before creating new ones
+
+## Development Workflow
+
+### Making Changes
+
+1. **Start with understanding**: Review related files before making changes
+2. **Follow patterns**: Use existing code as a guide (e.g., look at similar modules or layouts)
+3. **Build frequently**: Run `npm run build` to catch errors early
+4. **Keep changes minimal**: Only modify what's necessary to achieve the goal
+5. **Test the build**: Ensure webpack compiles without errors
+
+### File Modifications
+
+**JavaScript**: 
+- New modules: Create in `src/js/modules/` and import in `main.js`
+- Utility functions: Add to `src/js/functions/` as standalone exports
+- Follow the module class pattern with `constructor()`, `onReady()`, `bind()` methods
+
+**Stylus/CSS**:
+- New layouts: Create in `src/styl/layouts/` and import in `site.styl`
+- Library extensions: Add to `upstream-to-library.styl` for features that should be shared
+- Use existing utility classes from `nm-stylus-library` when possible
+
+**PHP**:
+- Templates: Create in theme root following WordPress template hierarchy
+- Functions: Add to appropriate `lib/functions-*.php` file or create new one
+- Meta boxes: Add to `lib/meta/` directory
+- Partials: Reusable components go in `partials/` directory
+
+### Git Workflow
+
+- Work on feature branches (not `master` or `development`)
+- Keep commits focused and descriptive
+- Don't commit during release process
+- The `dist/` directory should be committed after building

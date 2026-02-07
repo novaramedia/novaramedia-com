@@ -4,27 +4,98 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get post authors with proper fallback logic (based on render_bylines implementation)
+ *
+ * @since 4.2.0
+ *
+ * @param int    $post_id Post ID to get authors for.
+ * @param string $format  Output format ('html' for links or 'text' for plain text).
+ * @return string|false Author string or false if no authors found.
+ */
+function nm_get_post_authors( $post_id, $format = 'text' ) {
+  // Primary method: Use get_contributors_array if available
+  if ( function_exists( 'get_contributors_array' ) ) {
+    $contributors = get_contributors_array( $post_id );
+
+    if ( ! empty( $contributors ) ) {
+      $author_names = array();
+
+      foreach ( $contributors as $contributor ) {
+        if ( $format === 'html' ) {
+          $author_names[] = '<a href="' . esc_url( get_permalink( $contributor->ID ) ) . '">' . esc_html( $contributor->post_title ) . '</a>';
+        } else {
+          $author_names[] = $contributor->post_title;
+        }
+      }
+
+      // Always use ampersand formatting for multiple contributors
+      if ( count( $author_names ) > 1 ) {
+        $last_author = array_pop( $author_names );
+        return implode( ', ', $author_names ) . ' & ' . $last_author;
+      }
+
+      return implode( ', ', $author_names );
+    }
+  }
+
+  // Fallback: Legacy _cmb_author meta field
+  $legacy_author = get_post_meta( $post_id, '_cmb_author', true );
+  if ( ! empty( $legacy_author ) ) {
+    // Check for Twitter URL integration for legacy authors when HTML format requested
+    if ( $format === 'html' ) {
+      $twitter = get_post_meta( $post_id, '_cmb_author_twitter', true );
+      $twitter_url = false;
+
+      if ( $twitter && ( ! is_array( $twitter ) || count( $twitter ) === 1 ) ) {
+        if ( is_array( $twitter ) ) {
+          $twitter_url = $twitter[0];
+        } else {
+          $twitter_url = $twitter;
+        }
+      }
+
+      if ( $twitter_url ) {
+        return '<a href="https://twitter.com/' . esc_attr( $twitter_url ) . '" target="_blank" rel="nofollow">' . esc_html( $legacy_author ) . '</a>';
+      }
+    }
+
+    return $legacy_author;
+  }
+
+  // Return false if no authors found
+  return false;
+}
+
+/**
  * Get the correct Netlify function URL based on environment.
+ *
+ * Uses WordPress's wp_get_environment_type() to determine the environment.
+ * Kinsta automatically sets the WP_ENVIRONMENT_TYPE constant for production and staging.
+ *
+ * @since 4.2.0
  *
  * @return string The Netlify function URL.
  */
 function nm_get_netlify_url() {
-  $netlify = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
-  $local_dev = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+  $production_url = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
+  $staging_url = 'https://fake.com/.netlify/functions/mailchimp-signup';
+  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
 
-  if ( isset( $_SERVER['HTTP_HOST'] ) ) {
-    $http_host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+  $environment = wp_get_environment_type();
 
-    if ( $http_host === 'localhost:8888' ) { // for local dev via MAMP
-      $netlify = $local_dev;
-    } elseif ( strpos( $http_host, '.local' ) !== false ) { // for DevKinsta and other .local dev environments
-      $netlify = $local_dev;
-    } elseif ( $http_host === 'stg-novaramediacom-staging.kinsta.cloud' ) { // for staging, will always fail. Could spin up the netlify function on staging to test
-      $netlify = 'https://fake.com/.netlify/functions/mailchimp-signup';
-    }
+  switch ( $environment ) {
+    case 'local':
+    case 'development':
+        return $local_dev_url;
+
+    case 'staging':
+      // Staging will always fail. Could spin up the netlify function on staging to test
+        return $staging_url;
+
+    case 'production':
+    default:
+        return $production_url;
   }
-
-  return $netlify;
 }
 
 /**
@@ -37,7 +108,7 @@ function redirect_committed_custom_url() {
   if ( isset( $_SERVER['REQUEST_URI'] ) ) {
         $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
     if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_redirect( home_url( 'category/audio/committed/' ), 301 );
+            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
             exit;
     }
   }
@@ -61,14 +132,14 @@ function nm_serial_podcast_redirect() {
     $match = array_filter(
         $categories,
         function ( $cat ) use ( $serial_slugs ) {
-          return in_array( $cat->slug, $serial_slugs );
+          return in_array( $cat->slug, $serial_slugs, true );
         }
     );
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
     if ( $link && isset( $post->post_name ) ) {
-      wp_redirect( $link . '#' . $post->post_name, 301 );
+      wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
   }
@@ -121,10 +192,15 @@ function get_latest_articles_ids( $featured_posts_ids = false ) {
       'category_name'  => 'articles',
       'posts_per_page' => 7,
       'fields'         => 'ids',
+      'post_status'    => 'publish',
   );
 
   if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    $query_args = array_merge( $query_args, array( 'post__not_in' => $featured_posts_ids ) );
+    // Filter out non-numeric values to ensure only valid post IDs are excluded
+    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+    if ( ! empty( $valid_ids ) ) {
+      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+    }
   }
 
   $recent_articles = new WP_Query( $query_args );
@@ -152,6 +228,7 @@ function get_above_the_fold_featured_post_ids() {
       'category_name'  => 'articles,video,audio',
       'meta_key'       => '_cmb_featurable',
       'meta_value'     => 'on',
+      'post_status'    => 'publish',
   );
 
   $latest_featured_posts = new WP_Query( $latest_args );
@@ -166,11 +243,13 @@ function get_above_the_fold_featured_post_ids() {
   for ( $i = 0; $i < 8; $i++ ) {
     if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
-        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids ) ) { // ensure fallback latest is not already in the theme options featured posts
+        while ( ! empty( $latest_featured_posts_ids ) && in_array( $latest_featured_posts_ids[0], $featured_posts_ids, false ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
         }
 
-        $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        if ( ! empty( $latest_featured_posts_ids ) ) {
+          $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        }
       }
     }
   }
@@ -215,7 +294,7 @@ function nm_clean_content_to_plaintext( $content ) {
   // strip shortcodes from content
   $content = strip_shortcodes( $content );
   // strip html tags
-  $cleaned_content = strip_tags( html_entity_decode( $content ) );
+  $cleaned_content = wp_strip_all_tags( html_entity_decode( $content ) );
 
   return $cleaned_content;
 }
@@ -474,16 +553,16 @@ function nm_is_single_article() {
  * Get the first sub category assigned to the post
  *
  * @param integer $post_id Post ID.
- * @param boolean $object Return WP Term object or just the name.
+ * @param boolean $return_object Return WP Term object or just the name.
  */
-function get_the_sub_category( $post_id, $object = false ) {
+function get_the_sub_category( $post_id, $return_object = false ) {
   $categories = get_the_category( $post_id );
 
   $child_categories = array_filter( $categories, 'only_child_category_filter' );
   $child_categories = array_values( $child_categories );
 
   if ( isset( $child_categories[0] ) ) {
-    if ( $object ) {
+    if ( $return_object ) {
       return $child_categories[0];
     } else {
       return $child_categories[0]->name;
@@ -509,12 +588,12 @@ function nm_filter_query_ids( $post ) {
 /**
  * Filters an array of post categories for just top level categories
  *
- * @param object $var Category object.
+ * @param object $category Category object.
  *
  * @return boolean True if category is top level
  */
-function only_top_level_category_filter( $var ) {
-  if ( $var->category_parent == 0 ) {
+function only_top_level_category_filter( $category ) {
+  if ( $category->category_parent === 0 ) {
     return true;
   }
 }
@@ -522,12 +601,12 @@ function only_top_level_category_filter( $var ) {
 /**
  * Filters an array of post categories for just child categories
  *
- * @param object $var Category object.
+ * @param object $category Category object.
  *
  * @return boolean True if category is child level
  */
-function only_child_category_filter( $var ) {
-  if ( $var->category_parent !== 0 ) {
+function only_child_category_filter( $category ) {
+  if ( $category->category_parent !== 0 ) {
     return true;
   }
 }
@@ -662,4 +741,49 @@ function menu_tags_list() {
   }
 
   return $tags;
+}
+
+/**
+ * Generate SoundCloud embed URL with parameters.
+ *
+ * @param string $soundcloud_url The SoundCloud track URL.
+ * @param array $params Optional parameters for the embed.
+ * @return string Complete SoundCloud embed URL.
+ */
+function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
+  $base_url = 'https://w.soundcloud.com/player/';
+
+  $default_params = array(
+    'url'           => urlencode( $soundcloud_url ),
+    'auto_play'     => 'false',
+    'buying'        => 'false',
+    'color'         => '#0e0e0e',
+    'show_artwork'  => 'true',
+    'show_user'     => 'false',
+    'show_comments' => 'false', // may be obsolete
+    'show_reposts'  => 'false', // may be obsolete
+    'show_teaser'   => 'false', // may be obsolete
+    'inverse'       => 'false', // may be obsolete
+  );
+
+  $params = wp_parse_args( $params, $default_params );
+
+  return $base_url . '?' . http_build_query( $params );
+}
+
+/**
+ * Get SoundCloud player height by semantic size name.
+ *
+ * @param string $size The semantic size name.
+ * @return string The height value as a numeric string (without unit suffix).
+ */
+function get_soundcloud_player_height( $size ) {
+  $heights = array(
+    'mini'   => '20',      // Front page audio blocks, category listings
+    'small'  => '115',    // Category archive players, single post articles (consolidated from former medium)
+    'medium' => '145',   // Reserved for future use
+    'full'   => '166',    // Category featured players, single post audio (consolidated from former large/full)
+  );
+
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
 }
