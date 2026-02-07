@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold due to type mismatch (int vs string) in `in_array` comparison
+
 ## [4.3.1] - 2026-01-15
 
 ### Added
