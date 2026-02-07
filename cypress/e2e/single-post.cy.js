@@ -19,12 +19,9 @@ describe('Single Post (Article)', () => {
     });
   });
 
-  beforeEach(() => {
-    // Skip test if no URL was found
+  beforeEach(function () {
     if (!articleUrl) {
-      cy.log('Skipping test - no article URL available');
-      // This will cause the test to pass but be marked as pending
-      return;
+      this.skip();
     }
 
     cy.checkPageLoad();

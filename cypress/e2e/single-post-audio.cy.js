@@ -19,12 +19,9 @@ describe('Single Post (Audio Category)', () => {
     });
   });
 
-  beforeEach(() => {
-    // Skip test if no URL was found
+  beforeEach(function () {
     if (!audioPostUrl) {
-      cy.log('Skipping test - no audio post URL available');
-      // This will cause the test to pass but be marked as pending
-      return;
+      this.skip();
     }
 
     cy.checkPageLoad();

@@ -10,11 +10,12 @@
 // ***********************************************
 
 /**
- * Check if page loaded without console errors
- * This command checks for JavaScript errors in the console
+ * Check if page loaded without console errors.
+ * Uses window:before:load so it is safe to call before cy.visit()
+ * and will attach the spy to the next page that loads.
  */
 Cypress.Commands.add('checkPageLoad', () => {
-  cy.window().then((win) => {
+  cy.on('window:before:load', (win) => {
     cy.spy(win.console, 'error').as('consoleError');
   });
 });

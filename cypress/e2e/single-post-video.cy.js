@@ -19,12 +19,9 @@ describe('Single Post (Video Category)', () => {
     });
   });
 
-  beforeEach(() => {
-    // Skip test if no URL was found
+  beforeEach(function () {
     if (!videoPostUrl) {
-      cy.log('Skipping test - no video post URL available');
-      // This will cause the test to pass but be marked as pending
-      return;
+      this.skip();
     }
 
     cy.checkPageLoad();

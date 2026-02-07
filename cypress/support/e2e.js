@@ -11,13 +11,6 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-// Global before hook to set up test environment
-before(() => {
-  // Clear any previous test artifacts
-  cy.clearCookies();
-  cy.clearLocalStorage();
-});
-
 // Handle uncaught exceptions to prevent test failures from third-party scripts
 Cypress.on('uncaught:exception', (err, runnable) => {
   // Returning false here prevents Cypress from failing the test
