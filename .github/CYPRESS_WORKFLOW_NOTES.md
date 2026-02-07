@@ -119,27 +119,6 @@ on:
 
 ---
 
-## Test Selector Issues (Need Fixing)
-
-The Cypress tests run but some fail due to CSS selectors not matching actual DOM:
-
-### homepage.cy.js (7/8 passing)
-- **Failed**: "should display post content"
-- **Issue**: `article, .article, .post` not found
-- **Fix**: Update selector to match actual homepage article elements
-
-### single-post.cy.js (0/10 - before all hook failed)
-- **Failed**: before all hook couldn't find article links
-- **Issue**: `main article a, .main article a, #main article a, article h2 a, article h3 a` not found
-- **Fix**: Update selector to match actual homepage article link structure
-
-### support-page.cy.js (8/9 passing)
-- **Failed**: "should have appropriate heading structure"
-- **Issue**: `h1` element not found on support page
-- **Fix**: Check if support page has h1 or uses different heading structure
-
----
-
 ## Time Breakdown (Observed)
 
 | Step | Duration |

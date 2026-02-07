@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Cypress end-to-end testing with 8 test suites, CI via GitHub Actions, and `data-testid` selectors across PHP templates
+
 ### Changed
 
 - Updated ACFM archive page for better newsletter signup integration and newer header style

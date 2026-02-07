@@ -9,7 +9,7 @@ This document consolidates all documentation for the Cypress testing implementat
 ### Infrastructure
 
 - **Cypress 13.17.0** added as dev dependency
-- **8 test suites** covering homepage, support page, about page, jobs page, single post (article/video/audio), and Novara Live archive
+- **8 test suites (89 tests)** covering homepage, support page, about page, jobs page, single post (article/video/audio), and Novara Live archive
 - **Custom Cypress commands** in `cypress/support/commands.js` for page load checking, console error filtering, image validation, responsive testing, and WordPress-specific waits
 - **GitHub Actions workflow** (`.github/workflows/cypress.yml`) that deploys the PR branch to Kinsta staging via SFTP, runs tests, then resets staging to development
 - **`data-testid` attributes** added to PHP templates for stable test selectors
@@ -19,14 +19,14 @@ This document consolidates all documentation for the Cypress testing implementat
 | File                                    | Purpose                                            |
 | --------------------------------------- | -------------------------------------------------- |
 | `cypress.config.js`                     | Cypress configuration (baseUrl, timeouts, retries) |
-| `cypress/e2e/homepage.cy.js`            | Homepage tests (8 tests)                           |
-| `cypress/e2e/support-page.cy.js`        | Support page tests (10 tests)                      |
-| `cypress/e2e/single-post.cy.js`         | Article single post tests (10 tests)               |
-| `cypress/e2e/single-post-video.cy.js`   | Video post tests (10 tests)                        |
-| `cypress/e2e/single-post-audio.cy.js`   | Audio post tests (10 tests)                        |
-| `cypress/e2e/about-page.cy.js`          | About page tests (10 tests)                        |
-| `cypress/e2e/jobs-page.cy.js`           | Jobs page tests (11 tests)                         |
-| `cypress/e2e/novara-live-archive.cy.js` | Novara Live category archive tests (12 tests)      |
+| `cypress/e2e/homepage.cy.js`            | Homepage tests (9 tests)                           |
+| `cypress/e2e/support-page.cy.js`        | Support page tests (11 tests)                      |
+| `cypress/e2e/single-post.cy.js`         | Article single post tests (11 tests)               |
+| `cypress/e2e/single-post-video.cy.js`   | Video post tests (11 tests)                        |
+| `cypress/e2e/single-post-audio.cy.js`   | Audio post tests (11 tests)                        |
+| `cypress/e2e/about-page.cy.js`          | About page tests (11 tests)                        |
+| `cypress/e2e/jobs-page.cy.js`           | Jobs page tests (12 tests)                         |
+| `cypress/e2e/novara-live-archive.cy.js` | Novara Live category archive tests (13 tests)      |
 | `cypress/support/commands.js`           | Custom Cypress commands                            |
 | `cypress/support/e2e.js`                | Global test setup, uncaught exception handling     |
 | `.github/workflows/cypress.yml`         | CI workflow with staging deployment                |
@@ -74,51 +74,9 @@ PR opened → SFTP deploy to staging → WP-CLI activate theme → Clear cache �
 
 ---
 
-## Current Status: 3 Failing Tests
+## Current Status: All Tests Passing
 
-Last CI run (2026-01-30, run #21527304743): **69 passing, 3 failing**
-
-### Failure 1: Homepage — "should have working navigation links"
-
-**Error:** `Timed out retrying after 10000ms: Expected to find element: [data-testid="site-nav"] a, but never found it.`
-
-**Root cause:** The `data-testid="site-nav"` is on the `<nav>` at `header.php:34`. This nav only contains icon buttons (hamburger menu toggle, search toggle) wrapped in `<li>` elements — no `<a>` tags. The actual navigation links live in a separate `<nav class="site-header-nav">` element that is hidden by default (revealed by clicking the hamburger).
-
-**Fix:** The test looks for `[data-testid="site-nav"] a` but should instead verify the nav toggle elements exist, or check for links in the header more broadly. The simplest fix is to check for `[data-testid="site-header"] a` instead, since the header does contain links (logo link, "Support Us" button).
-
-### Failure 2: Single Post (Article) — "should display article content"
-
-**Error:** `Timed out retrying after 10000ms: Expected to find element: [data-testid="post-content"], but never found it.`
-
-**Root cause:** The `data-testid="post-content"` attribute only exists in `partials/singles/single-post-articles.php:57`. But `single.php` routes to different partials based on the post's top-level category:
-
-- `articles` → `single-post-articles.php` (has `post-content`)
-- `audio` → `single-post-audio.php` (does NOT have `post-content`)
-- `video` → `single-post-video.php` (does NOT have `post-content`)
-
-The `before()` hook finds a post URL from the homepage using `a[href*="/20"]`. If the first link found is a video or audio post, the test navigates to a post that doesn't use the articles template, so `[data-testid="post-content"]` won't exist.
-
-**Fix options:**
-
-1. Make the test more resilient by accepting either `post-content` or the general article body content
-2. Add `data-testid="post-content"` to the video and audio single post templates too (in their content sections)
-3. Filter the homepage links to only grab article posts (harder to do reliably)
-
-**Recommended:** Option 2 — add `data-testid="post-content"` to the content sections in `single-post-video.php` and `single-post-audio.php`. This makes all single post types have a consistent testid for their body content.
-
-### Failure 3: Single Post (Audio) — page load timeout
-
-**Error:** `CypressError: Timed out after waiting 30000ms for your remote page to load.`
-
-**Root cause:** Audio posts embed SoundCloud iframes. The `load` event won't fire until all resources (including third-party embeds) finish loading. SoundCloud embeds can be slow or unreliable, especially in CI environments.
-
-**Fix:** The `before()` hook visits `/category/audio` to find an audio post URL. That page load is fine. The timeout happens in `beforeEach()` when visiting the actual audio post. Options:
-
-1. Increase `pageLoadTimeout` for this spec
-2. Add `{ timeout: 60000 }` to the visit call
-3. Use `cy.visit(url, { failOnStatusCode: false, timeout: 60000 })` to be more tolerant
-
-**Recommended:** Increase the timeout for the audio (and video) post specs since they embed third-party media players that slow the `load` event. A 60-second timeout is more reasonable for these pages.
+All 8 test suites passing in CI.
 
 ---
 
@@ -148,9 +106,20 @@ Added `data-testid="post-content"` to the `the_content()` div in:
 
 Now all three post type templates (articles, video, audio) have a consistent `post-content` testid.
 
-### Fix 3: Audio/video post timeout — increased visit timeout
+### Fix 3: Single post URL discovery — `findPostUrlFromArchive` command
 
-Added `{ timeout: 60000 }` to `cy.visit()` in both `single-post-audio.cy.js` and `single-post-video.cy.js` to handle slow third-party embed loading (SoundCloud/YouTube).
+The original tests found post URLs using broad selectors (`a[href*="/20"]`) from the homepage. This picked up links to show pages (serial podcast category templates like `category-foreign-agent.php` and `category-committed.php`) that are heavy and don't use the single post template.
+
+**Changes:**
+
+- Each single post test now navigates via its own top-level category archive (`/category/articles`, `/category/audio`, `/category/video`)
+- Added `cy.findPostUrlFromArchive(archiveUrl)` custom command in `cypress/support/commands.js` that:
+  - Visits the given category archive
+  - Finds links inside `<article>` elements (from `flex-post.php` post cards)
+  - Excludes posts from serial podcast categories (`.category-foreign-agent`, `.category-committed`) that redirect to show pages — keep in sync with `$serial_categories` in `lib/functions-hooks.php`
+  - Filters to WordPress year/month/day permalink patterns (`/YYYY/MM/DD/`)
+- Increased `cy.visit()` timeout to `120000ms` for audio posts due to SoundCloud embed loading
+- Updated audio player test to check for the hydrated `iframe` rather than the `.soundcloud-lazy` placeholder
 
 ---
 

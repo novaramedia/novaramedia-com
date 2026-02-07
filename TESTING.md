@@ -29,16 +29,21 @@ We **intentionally avoid**:
 
 ```
 cypress/
-├── e2e/                  # Test files
+├── e2e/                          # Test files
 │   ├── homepage.cy.js
 │   ├── support-page.cy.js
-│   └── single-post.cy.js
-├── support/              # Helper files
-│   ├── commands.js       # Custom Cypress commands
-│   └── e2e.js           # Global configuration
-├── fixtures/             # Test data (currently unused)
-├── videos/               # Test recordings (git-ignored)
-└── screenshots/          # Failure screenshots (git-ignored)
+│   ├── about-page.cy.js
+│   ├── jobs-page.cy.js
+│   ├── single-post.cy.js        # Article single posts
+│   ├── single-post-audio.cy.js  # Audio/podcast single posts
+│   ├── single-post-video.cy.js  # Video single posts
+│   └── novara-live-archive.cy.js
+├── support/                      # Helper files
+│   ├── commands.js               # Custom Cypress commands
+│   └── e2e.js                   # Global configuration
+├── fixtures/                     # Test data (currently unused)
+├── videos/                       # Test recordings (git-ignored)
+└── screenshots/                  # Failure screenshots (git-ignored)
 ```
 
 ### Configuration
@@ -55,11 +60,19 @@ See `cypress.config.js` for:
 
 ### Locally
 
+Tests must run against a site with the branch's `data-testid` template attributes deployed. Use your local DevKinsta instance or the CI staging site.
+
 **Quick Start:**
 
 ```bash
-npm test                  # Run all tests (headless)
-npm run cy:open          # Open Cypress UI
+# Run against local DevKinsta (recommended)
+CYPRESS_BASE_URL=https://novaramediacom.local npm test
+
+# Open Cypress UI for interactive debugging
+CYPRESS_BASE_URL=https://novaramediacom.local npm run cy:open
+
+# Run a single spec
+CYPRESS_BASE_URL=https://novaramediacom.local npx cypress run --spec cypress/e2e/single-post-audio.cy.js
 ```
 
 **Advanced Options:**
@@ -68,9 +81,6 @@ npm run cy:open          # Open Cypress UI
 npm run test:chrome      # Run in Chrome
 npm run test:firefox     # Run in Firefox
 npm run test:headed      # See browser while running
-
-# Test against different environment
-CYPRESS_BASE_URL=https://staging.example.com npm test
 ```
 
 ### In CI (GitHub Actions)
@@ -138,6 +148,16 @@ Waits for WordPress-specific elements to be ready.
 cy.waitForWordPress();
 ```
 
+### `cy.findPostUrlFromArchive(archiveUrl)`
+
+Visits a category archive page and finds the first single post URL from the post cards. Excludes serial podcast categories that redirect to show pages.
+
+```javascript
+cy.findPostUrlFromArchive('/category/audio').then((url) => {
+  // url is a string like '/2026/01/27/episode-title/' or null if none found
+});
+```
+
 ## Writing New Tests
 
 ### Test File Template
@@ -182,7 +202,7 @@ describe('Page Name', () => {
 ### Best Practices
 
 1. **Keep tests simple** - Focus on critical path, not edge cases
-2. **Use data attributes** - Add `data-cy="element-name"` for stable selectors
+2. **Use data attributes** - Add `data-testid="element-name"` for stable selectors
 3. **Avoid hard-coded delays** - Use `cy.wait()` with aliases, not arbitrary timeouts
 4. **Be resilient** - Tests should work against live content that changes
 5. **Filter third-party errors** - Don't fail on Google Analytics, social media widgets, etc.
