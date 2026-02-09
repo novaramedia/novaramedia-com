@@ -1,5 +1,5 @@
 <?php
-if ( ! is_numeric( $args['post_id'] ) ) {
+if ( ! isset( $args['post_id'] ) || ! is_numeric( $args['post_id'] ) ) {
   return;
 }
 
@@ -15,21 +15,21 @@ $article_post_id = $args['post_id'];
 $has_bottom_border = $args['has_bottom_border'];
 $show_image = $args['show_image'];
 
-$meta = get_post_meta( $article_post_id );
 $timestamp = get_post_time( 'c', false, $article_post_id );
 
 $is_article = nm_is_article( $article_post_id );
 $is_news = has_category( 'news', $article_post_id );
 
-$permalink = get_permalink( $article_post_id );
-$title = get_the_title( $article_post_id );
+$permalink = esc_url( get_permalink( $article_post_id ) );
+$timestamp_attr = esc_attr( $timestamp );
+$title = esc_html( get_the_title( $article_post_id ) );
 ?>
 <div class="mb-4 pb-4 <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
 <?php if ( $show_image === 'small' ) : ?>
   <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags( $article_post_id ); ?>
     <a href="<?php echo $permalink; ?>" class="ui-hover">
-      <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
+      <span class="js-time-since" data-timestamp="<?php echo $timestamp_attr; ?>"></span>
     </a>
   </div>
   <div class="grid-row grid--nested">
@@ -70,7 +70,7 @@ $title = get_the_title( $article_post_id );
   <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags( $article_post_id ); ?>
     <a href="<?php echo $permalink; ?>" class="ui-hover">
-      <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
+      <span class="js-time-since" data-timestamp="<?php echo $timestamp_attr; ?>"></span>
     </a>
   </div>
   <a href="<?php echo $permalink; ?>" class="ui-hover">

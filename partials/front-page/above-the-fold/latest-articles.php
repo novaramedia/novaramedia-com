@@ -13,6 +13,11 @@
 
   $number_of_articles = $recent_articles->post_count;
 
+  // Derive the ID list from the query results so indices align with the
+  // render loop. This avoids index drift if WP_Query filters out any
+  // deleted or unpublished posts from the input IDs.
+  $rendered_post_ids = wp_list_pluck( $recent_articles->posts, 'ID' );
+
   // Image slot assignment
   // ----------------------
   // The latest articles list shows 3 thumbnail images spread across the posts.
@@ -35,7 +40,7 @@
   $non_news_indices = array();
   $default_image_positions = array( 1, 3, 6 );
 
-  foreach ( $latest_articles_posts_ids as $idx => $pid ) {
+  foreach ( $rendered_post_ids as $idx => $pid ) {
     if ( ! has_category( 'news', $pid ) ) {
       $non_news_indices[] = $idx;
     }
