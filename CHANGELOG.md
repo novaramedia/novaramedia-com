@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.4.0] - 2026-02-09
 
 ### Added
 
@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update latest articles front page bar to support News type posts with new image and layout logics
+- Updated nm-stylus-library (with pure Helv Neue sans fonts)
+- Update latest articles front page column to support News type posts with new image and layout logics
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 - Refactored stylus files for max DRY
