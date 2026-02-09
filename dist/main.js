@@ -12275,7 +12275,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.21';
+  var VERSION = '4.17.23';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -16029,7 +16029,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
           if (isArray(iteratee)) {
             return function(value) {
               return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
-            }
+            };
           }
           return iteratee;
         });
@@ -16633,8 +16633,47 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      */
     function baseUnset(object, path) {
       path = castPath(path, object);
-      object = parent(object, path);
-      return object == null || delete object[toKey(last(path))];
+
+      // Prevent prototype pollution, see: https://github.com/lodash/lodash/security/advisories/GHSA-xxjr-mmjv-4gpg
+      var index = -1,
+          length = path.length;
+
+      if (!length) {
+        return true;
+      }
+
+      var isRootPrimitive = object == null || (typeof object !== 'object' && typeof object !== 'function');
+
+      while (++index < length) {
+        var key = path[index];
+
+        // skip non-string keys (e.g., Symbols, numbers)
+        if (typeof key !== 'string') {
+          continue;
+        }
+
+        // Always block "__proto__" anywhere in the path if it's not expected
+        if (key === '__proto__' && !hasOwnProperty.call(object, '__proto__')) {
+          return false;
+        }
+
+        // Block "constructor.prototype" chains
+        if (key === 'constructor' &&
+            (index + 1) < length &&
+            typeof path[index + 1] === 'string' &&
+            path[index + 1] === 'prototype') {
+
+          // Allow ONLY when the path starts at a primitive root, e.g., _.unset(0, 'constructor.prototype.a')
+          if (isRootPrimitive && index === 0) {
+            continue;
+          }
+
+          return false;
+        }
+      }
+
+      var obj = parent(object, path);
+      return obj == null || delete obj[toKey(last(path))];
     }
 
     /**
@@ -49158,44 +49197,16 @@ class Analytics {
     }
   }
   bind() {
-    const _this = this;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.support-form-slider').on('input', _this.debounce(function () {
-      dataLayer.push({
-        event: 'sliderChanged',
-        target: jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target'),
-        amount: this.value
-      });
-    }, 250));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#menu-toggle').click(function () {
-      // bind hamburger click
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.site-header__nav-toggle').on('click', function () {
       dataLayer.push({
         event: 'headerToggled'
       });
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.related-posts .post').click(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.related-posts .post').on('click', function () {
       dataLayer.push({
         event: 'relatedPostClicked'
       });
     });
-  }
-  debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-      var context = this,
-        args = arguments;
-      var later = function () {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) {
-        func.apply(context, args);
-      }
-    };
   }
 }
 
