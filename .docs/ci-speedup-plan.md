@@ -151,7 +151,7 @@ Go to https://github.com/novaramedia/novaramedia-com/settings/secrets/actions
 | ----------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `KINSTA_SSH_KEY`  | SSH private key for CI to connect to Kinsta                         | Same key used before for WP-CLI                                                        |
 | `KINSTA_SSH_USER` | SSH username from Step 1                                            | Was previously `KINSTA_SSH_USER` — no change needed                                    |
-| `KINSTA_SSH_HOST` | SSH host from Step 1                                                | If you previously had `KINSTA_SFTP_HOST`, create `KINSTA_SSH_HOST` with the same value |
+| `KINSTA_SFTP_HOST` | SSH host from Step 1                                               | Legacy name — the workflow reads `secrets.KINSTA_SFTP_HOST`. On a fresh setup, rename to `KINSTA_SSH_HOST` and update the workflow to match. |
 | `KINSTA_SSH_PORT` | SSH port from Step 1                                                | Same as before                                                                         |
 | `STAGING_URL`     | Full staging URL (e.g., `https://staging-novaramedia.kinsta.cloud`) | Same as before                                                                         |
 

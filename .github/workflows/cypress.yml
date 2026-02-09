@@ -11,7 +11,9 @@
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
 # - KINSTA_SSH_USER: SSH username (main Kinsta user)
-# - KINSTA_SFTP_HOST: SSH/SFTP hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+# - KINSTA_SFTP_HOST: SSH hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+#     NOTE: This secret is named KINSTA_SFTP_HOST for legacy reasons. On a fresh
+#     setup, name it KINSTA_SSH_HOST and update the references below to match.
 # - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
