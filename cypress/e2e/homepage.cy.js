@@ -61,19 +61,7 @@ describe('Homepage', () => {
   });
 
   it('should be responsive at different viewports', () => {
-    const viewports = [
-      { width: 375, height: 667 }, // Mobile
-      { width: 768, height: 1024 }, // Tablet
-      { width: 1280, height: 720 }, // Desktop
-    ];
-
-    viewports.forEach((viewport) => {
-      cy.viewport(viewport.width, viewport.height);
-
-      cy.get('[data-testid="site-header"]').should('be.visible');
-      cy.get('[data-testid="main-content"]').should('be.visible');
-      cy.get('[data-testid="site-footer"]').should('be.visible');
-    });
+    cy.testResponsive();
   });
 
   it('should have meta tags for SEO', () => {

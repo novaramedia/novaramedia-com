@@ -63,7 +63,9 @@ Cypress.Commands.add('checkImages', () => {
 });
 
 /**
- * Test responsive behavior at different viewports
+ * Test responsive behavior at different viewports.
+ * Asserts critical page structure (header, main-content, footer) at each
+ * breakpoint. Pass an optional callback for page-specific assertions.
  */
 Cypress.Commands.add('testResponsive', (callback) => {
   const viewports = [
@@ -72,12 +74,19 @@ Cypress.Commands.add('testResponsive', (callback) => {
     { name: 'desktop', width: 1280, height: 720 },
   ];
 
-  viewports.forEach((viewport) => {
+  cy.wrap(viewports).each((viewport) => {
     cy.viewport(viewport.width, viewport.height);
     cy.log(
       `Testing at ${viewport.name} viewport: ${viewport.width}x${viewport.height}`
     );
-    callback(viewport);
+
+    cy.get('[data-testid="site-header"]').should('be.visible');
+    cy.get('[data-testid="main-content"]').should('be.visible');
+    cy.get('[data-testid="site-footer"]').should('be.visible');
+
+    if (callback) {
+      callback(viewport);
+    }
   });
 });
 
