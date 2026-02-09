@@ -19,6 +19,7 @@ $args = [
 ```
 
 The partial handles:
+
 - **Tag + time-since** — always shown, full-width row via `layout-split-level`
 - **Title** — always shown
 - **Image** — small square thumb (side-by-side with title), large 16:9 thumb (stacked below title), or none
@@ -58,14 +59,14 @@ Located in `latest-articles.php`. Assigns up to 3 image slots across the post li
 
 ### Examples with 8 posts
 
-| Scenario | Non-news at | Image slots | Sizes |
-|---|---|---|---|
-| All non-news | 0,1,2,3,4,5,6,7 | 0,1,2 | small, **large**, small |
-| News at 0,1 | 2,3,4,5,6,7 | 2,3,4 | small, **large**, small |
-| News at 0,1,2,3 | 4,5,6,7 | 4,5,6 | small, **large**, small |
-| Only 2 non-news (at 0,4) | 0,4 | 0,4,6 | **large** (non-news), small, small |
-| Only 1 non-news (at 2) | 2 | 2,6 | **large** (non-news), small — pos 1,3 rejected (too close to 2) |
-| All news | none | 1,3,6 | small, small, small |
+| Scenario                 | Non-news at     | Image slots | Sizes                                                           |
+| ------------------------ | --------------- | ----------- | --------------------------------------------------------------- |
+| All non-news             | 0,1,2,3,4,5,6,7 | 0,1,2       | small, **large**, small                                         |
+| News at 0,1              | 2,3,4,5,6,7     | 2,3,4       | small, **large**, small                                         |
+| News at 0,1,2,3          | 4,5,6,7         | 4,5,6       | small, **large**, small                                         |
+| Only 2 non-news (at 0,4) | 0,4             | 0,4,6       | **large** (non-news), small, small                              |
+| Only 1 non-news (at 2)   | 2               | 2,6         | **large** (non-news), small — pos 1,3 rejected (too close to 2) |
+| All news                 | none            | 1,3,6       | small, small, small                                             |
 
 ### Key behaviours
 
