@@ -9,6 +9,10 @@
     <div class="swiper-button-next"><span class="only-desktop ui-chevron ui-chevron--right"></span></div>
     <div class="swiper-wrapper">
       <?php
+        // TODO: Deprecate and remove apology_notice functionality
+        // This is a hardcoded temporary solution for a specific incident from Sept 2024.
+        // Related: check_for_apology_notice() in lib/functions-custom.php
+        // Also used in: partials/front-page/above-the-fold/latest-articles.php
         if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
           $post_id = $apology_post[0]->ID;
         ?>

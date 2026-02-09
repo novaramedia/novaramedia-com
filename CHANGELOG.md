@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Update latest articles front page bar to support News type posts with new image and layout logics
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 - Refactored stylus files for max DRY
