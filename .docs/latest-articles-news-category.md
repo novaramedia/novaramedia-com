@@ -4,11 +4,11 @@
 
 The front page "latest articles" section uses 3 partials for different layouts:
 
-| Partial | Used at index | Layout |
-|---------|--------------|--------|
-| `latest-article--default.php` | 0, 2, 4, 5, 7 | Title + byline, no image |
-| `latest-article--thumb-small.php` | 1, 6 | Title + byline + small square thumb (side-by-side) |
-| `latest-article--thumb-large.php` | 3 | Title + byline + large 16:9 thumb (stacked) |
+| Partial                           | Used at index | Layout                                             |
+| --------------------------------- | ------------- | -------------------------------------------------- |
+| `latest-article--default.php`     | 0, 2, 4, 5, 7 | Title + byline, no image                           |
+| `latest-article--thumb-small.php` | 1, 6          | Title + byline + small square thumb (side-by-side) |
+| `latest-article--thumb-large.php` | 3             | Title + byline + large 16:9 thumb (stacked)        |
 
 All three partials share ~90% identical code (validation, meta fetching, UI tag, byline/standfirst logic). The `js-time-since` element exists in all three but is currently **commented out**.
 
@@ -80,6 +80,7 @@ $args = [
 ```
 
 The partial handles:
+
 - UI tag + time-since (always)
 - Title (always)
 - Image: small thumb / large thumb / none (based on `show_image`)
@@ -101,24 +102,24 @@ Notes from session:
 
 Algorithm (lines 17-58):
 
-  1. Pre-scans $latest_articles_posts_ids to find which indices are non-news posts (line 22-26)
-  2. If 3+ non-news posts exist: first 3 non-news indices get images (line 28-29)
-  3. If fewer than 3 non-news: uses all non-news posts, fills remaining slots from default positions [1, 3, 6] — which will be news posts (lines 31-42)
-  4. Sorts the chosen indices so they're in display order (line 45)
-  5. Assigns types: 1st = small, 2nd = large, 3rd = small (lines 49-52)
+1. Pre-scans $latest_articles_posts_ids to find which indices are non-news posts (line 22-26)
+2. If 3+ non-news posts exist: first 3 non-news indices get images (line 28-29)
+3. If fewer than 3 non-news: uses all non-news posts, fills remaining slots from default positions [1, 3, 6] — which will be news posts (lines 31-42)
+4. Sorts the chosen indices so they're in display order (line 45)
+5. Assigns types: 1st = small, 2nd = large, 3rd = small (lines 49-52)
 
-  Examples with 8 posts:
-  ┌──────────────────────────┬─────────────────┬─────────────┬────────────────────────────────────────┐
-  │         Scenario         │   Non-news at   │ Image slots │                 Result                 │
-  ├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-  │ All non-news             │ 0,1,2,3,4,5,6,7 │ 0,1,2       │ First 3 posts get images               │
-  ├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-  │ News at 0,1              │ 2,3,4,5,6,7     │ 2,3,4       │ First 3 non-news get images            │
-  ├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-  │ News at 0,1,2,3          │ 4,5,6,7         │ 4,5,6       │ First 3 non-news get images            │
-  ├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-  │ Only 2 non-news (at 0,4) │ 0,4             │ 0,1,4       │ Both non-news + fallback at position 1 │
-  ├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-  │ All news                 │ none            │ 1,3,6       │ Falls back to original positions       │
-  └──────────────────────────┴─────────────────┴─────────────┴────────────────────────────────────────┘
-  The render loop (lines 76-89) just looks up each index in the $image_map — clean and simple.
+Examples with 8 posts:
+┌──────────────────────────┬─────────────────┬─────────────┬────────────────────────────────────────┐
+│ Scenario │ Non-news at │ Image slots │ Result │
+├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
+│ All non-news │ 0,1,2,3,4,5,6,7 │ 0,1,2 │ First 3 posts get images │
+├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
+│ News at 0,1 │ 2,3,4,5,6,7 │ 2,3,4 │ First 3 non-news get images │
+├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
+│ News at 0,1,2,3 │ 4,5,6,7 │ 4,5,6 │ First 3 non-news get images │
+├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
+│ Only 2 non-news (at 0,4) │ 0,4 │ 0,1,4 │ Both non-news + fallback at position 1 │
+├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
+│ All news │ none │ 1,3,6 │ Falls back to original positions │
+└──────────────────────────┴─────────────────┴─────────────┴────────────────────────────────────────┘
+The render loop (lines 76-89) just looks up each index in the $image_map — clean and simple.
