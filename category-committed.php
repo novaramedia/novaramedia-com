@@ -348,7 +348,7 @@ get_template_part(
   null,
   array(
     'container_classes' => 'mb-4',
-    'override_text' => 'With your help, we're making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
+    'override_text' => 'With your help, we\'re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
   )
 );
 
