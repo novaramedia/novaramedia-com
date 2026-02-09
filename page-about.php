@@ -19,13 +19,8 @@ if( have_posts() ) {
     $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
     $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
 ?>
-<<<<<<< copilot/add-cypress-testing-ci
-  <article id="page" class="container margin-top-small margin-bottom-large" data-testid="about-page">
-    <div class="grid-row margin-bottom-small">
-=======
-  <article id="page" class="container mt-4 mb-8">
+  <article id="page" class="container mt-4 mb-8" data-testid="about-page">
     <div class="grid-row mb-4">
->>>>>>> development
       <div class="grid-item is-xxl-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
       </div>
