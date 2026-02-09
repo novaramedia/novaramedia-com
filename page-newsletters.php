@@ -15,12 +15,12 @@ if( have_posts() ) {
   <article id="page">
     <div class="container mt-4 mb-4">
       <div class="grid-row mb-4">
-        <div class="flex-grid-item is-xxl-24">
+        <div class="grid-item is-xxl-24">
           <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
         </div>
       </div>
       <div class="grid-row mb-4">
-        <div class="flex-grid-item is-xxl-24 page-copy">
+        <div class="grid-item is-xxl-24 page-copy">
           <?php the_content(); ?>
         </div>
       </div>

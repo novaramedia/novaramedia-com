@@ -6,7 +6,7 @@
     $url = get_term_link($term);
     if ($url) {
 ?>
-<div class="if-i-speak-banner__container padding-top-basic padding-bottom-basic">
+<div class="if-i-speak-banner__container pt-5 pb-5">
   <style type="text/css">
     .if-i-speak-banner__container {
       color: var(--color-red);

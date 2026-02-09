@@ -15,12 +15,7 @@ $timestamp = get_post_time( 'c', false, $article_post_id );
 
 $is_article = nm_is_article( $article_post_id );
 ?>
-<div class="margin-bottom-small padding-bottom-small
-<?php
-if ( $has_bottom_border ) {
-  echo 'ui-border-bottom';}
-?>
-">
+<div class="mb-4 pb-4 <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
   <!-- <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags( $article_post_id ); ?>
     <a href="<?php echo get_permalink( $article_post_id ); ?>" class="ui-hover">

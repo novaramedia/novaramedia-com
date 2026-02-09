@@ -9,18 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+<<<<<<< copilot/add-cypress-testing-ci
 - Cypress end-to-end testing with 8 test suites, CI via GitHub Actions, and `data-testid` selectors across PHP templates
+=======
+- Wordpress Block for inline newsletter signup forms
+>>>>>>> development
 
 ### Changed
 
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
+- Refactored stylus files for max DRY
+
+### Removed
+
+- Old style 12 col grid, old style margin and padding helpers, kouto swiss
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold due to type mismatch (int vs string) in `in_array` comparison
 
 ## [4.3.1] - 2026-01-15
-
-### Added
-
-- Wordpress Block for inline newsletter signup forms
 
 ### Changed
 

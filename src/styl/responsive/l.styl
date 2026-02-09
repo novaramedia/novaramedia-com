@@ -1,196 +1,19 @@
-// GRID
-
-$col = 25px
-$gutter = 12px
-
-.col
-  margin-left: ($gutter/2)
-  margin-right: ($gutter/2)
-
-for col in 1..$cols
-  .col{col}
-    width: ( col * $col ) + ( ( col - 1 ) * $gutter )
-
-flex-grid-maker('l')
-
-// ******************************************************
-
-// VARIABLES
-
-$margin-small = ($gutter)
-$margin-tiny = ($gutter / 2)
-$margin-micro = ($gutter / (2 * $golden-ratio))
-$margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
-
-// ******************************************************
-
 // TYPOGRAPHY
 
 html
   font-size: 15px
 
-.text-copy
-  .wp-caption
-    .wp-caption-text, .wp-element-caption
-      margin-top: $margin-tiny
-
 // ******************************************************
 
-// UI ELEMENTS
-
-.button
-  padding: $margin-small
-
-// ******************************************************
-
-// BASIC
-
-.inline-action-list
-  li
-    margin-right: $margin-small
-
-// ******************************************************
-
-// MARGINS AND PADDING
-
-  // MARGIN
-
-.margin-micro
-  margin: $margin-micro
-
-.margin-tiny
-  margin: $margin-tiny
-
-.margin-small
-  margin: $margin-small
-
-.margin-basic
-  margin: $margin-basic
-
-.margin-mid
-  margin: $margin-mid
-
-.margin-large
-  margin: $margin-large
-
-  // MARGIN TOP
-
-.margin-top-micro
-  margin-top: $margin-micro
-
-.margin-top-tiny
-  margin-top: $margin-tiny
-
-.margin-top-small
-  margin-top: $margin-small
-
-.margin-top-basic
-  margin-top: $margin-basic
-
-.margin-top-mid
-  margin-top: $margin-mid
-
-.margin-top-large
-  margin-top: $margin-large
-
-  // MARGIN BOTTOM
-
-.margin-bottom-micro
-  margin-bottom: $margin-micro
-
-.margin-bottom-tiny
-  margin-bottom: $margin-tiny
-
-.margin-bottom-small
-  margin-bottom: $margin-small
-
-.margin-bottom-basic
-  margin-bottom: $margin-basic
-
-.margin-bottom-mid
-  margin-bottom: $margin-mid
-
-.margin-bottom-large
-  margin-bottom: $margin-large
-
-  // PADDING
-
-.padding-micro
-  padding: $margin-micro
-
-.padding-tiny
-  padding: $margin-tiny
-
-.padding-small
-  padding: $margin-small
-
-.padding-basic
-  padding: $margin-basic
-
-.padding-mid
-  padding: $margin-mid
-
-.padding-large
-  padding: $margin-large
-
-  // PADDING TOP
-
-.padding-top-micro
-  padding-top: $margin-micro
-
-.padding-top-tiny
-  padding-top: $margin-tiny
-
-.padding-top-small
-  padding-top: $margin-small
-
-.padding-top-basic
-  padding-top: $margin-basic
-
-.padding-top-mid
-  padding-top: $margin-mid
-
-.padding-top-large
-  padding-top: $margin-large
-
-  // PADDING BOTTOM
-
-.padding-bottom-micro
-  padding-bottom: $margin-micro
-
-.padding-bottom-tiny
-  padding-bottom: $margin-tiny
-
-.padding-bottom-small
-  padding-bottom: $margin-small
-
-.padding-bottom-basic
-  padding-bottom: $margin-basic
-
-.padding-bottom-mid
-  padding-bottom: $margin-mid
-
-.padding-bottom-large
-  padding-bottom: $margin-large
-
-// ******************************************************
-
-// SUPPORT SECTION
-
-.support-form-holder
-  min-height: 5rem
-  padding: $margin-small
+// SUPPORT FORM
 
 .support-form-slider
   width: 60%
-  margin-right: 2%
 
 .support-form-submit
   width: 20%
-  margin-left: 2%
-  padding: $margin-tiny $margin-small
+
+// ******************************************************
 
 // SIGNUPS
 

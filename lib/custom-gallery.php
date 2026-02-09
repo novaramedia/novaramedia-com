@@ -143,7 +143,7 @@ function my_gallery_shortcode( $attr ) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='ux-gallery-carousel gallery gallery-id-" . esc_attr($id) . " padding-top-small padding-bottom-small' data-autoplay='true'>
+  $gallery_div = "<div id='$selector' class='ux-gallery-carousel gallery gallery-id-" . esc_attr($id) . " pt-4 pb-4' data-autoplay='true'>
     <div class='swiper'>
       <div class='swiper-wrapper'>";
   $output = $gallery_div;
@@ -168,7 +168,7 @@ function my_gallery_shortcode( $attr ) {
 
     if ( $captiontag && trim( $attachment->post_excerpt ) ) {
       $tag = "
-        <{$captiontag} class='margin-top-tiny font-size-8'>
+        <{$captiontag} class='mt-2 font-size-8'>
         " . wptexturize( $attachment->post_excerpt ) . "
         </{$captiontag}>";
     } else {

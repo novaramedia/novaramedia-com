@@ -4,3 +4,81 @@
 
 // migrate u-video-embed-container to ui-responsive-video-container
 
+.ui-rounded-box--bottom
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+
+html
+  --color-gray-mid: var(--color-gray-mid-new)
+
+// there is a $margin-tiny that needs to be removed
+
+// TODO: Confirm whether this box-sizing-reset() mixin is still required.
+
+box-sizing-reset()
+  if selector() is "&"
+    html
+      box-sizing: border-box
+
+    *, *:before, *:after
+      box-sizing: inherit
+  else
+    *, *:before, *:after
+      box-sizing: border-box
+
+// *
+
+body
+  overscroll-behavior: none
+
+// **
+
+.text-wrap-pretty
+  text-wrap: pretty
+
+.text-wrap-balance
+  text-wrap: balance
+
+// ******************************************************
+
+html
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
+
+img
+  max-width: 100%
+  height: auto
+
+// ******************************************************
+
+.inline-action-list // but we will call it ux-inline-action-list in the library and migrate usage in projects.
+  margin: 0
+  li
+    display: inline-block
+    margin-right: 1rem
+
+// ******************************************************
+
+// Normalize.css counter - maybe we can remove normalize.css?
+h1
+  margin: 0
+
+// Mobile visibility toggle
+.only-mobile
+  display: none
+
+// Fix for $margin-tiny library bug (undefined variable outputs literally)
+.text-copy, .page-copy
+  .wp-caption
+    .wp-caption-text
+      margin-top: 0.5rem
+
+// ******************************************************
+
+// we need container width variables for the lib not just breakpoints. define them and bring back to here
+
+// $container-width-xxl: 1400px
+// $container-width-xl: 1056px
+// $container-width-l: 888px
+// $container-width-m: 744px
+// $container-width-s: 98% (max-width: 460px)

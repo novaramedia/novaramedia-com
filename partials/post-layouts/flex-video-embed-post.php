@@ -20,9 +20,9 @@
   ?>
 
   <a href="<?php the_permalink() ?>">
-    <h5 class="index-post-title margin-top-tiny text-wrap-pretty"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title mt-2 text-wrap-pretty"><?php render_post_title($post->ID); ?></h5>
 
-    <div class="index-post-description margin-top-tiny">
+    <div class="index-post-description mt-2">
       <?php
         if ($description) {
           echo $description;
