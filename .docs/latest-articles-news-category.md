@@ -1,75 +1,14 @@
 # Latest Articles: News Category Support
 
-## Current State
+## Overview
 
-The front page "latest articles" section uses 3 partials for different layouts:
+The front page "latest articles" section displays a list of posts with up to 3 thumbnail images. A smart image slot algorithm shifts images away from news posts (which typically lack strong imagery) onto non-news posts (features, opinion, analysis).
 
-| Partial                           | Used at index | Layout                                             |
-| --------------------------------- | ------------- | -------------------------------------------------- |
-| `latest-article--default.php`     | 0, 2, 4, 5, 7 | Title + byline, no image                           |
-| `latest-article--thumb-small.php` | 1, 6          | Title + byline + small square thumb (side-by-side) |
-| `latest-article--thumb-large.php` | 3             | Title + byline + large 16:9 thumb (stacked)        |
+## Architecture
 
-All three partials share ~90% identical code (validation, meta fetching, UI tag, byline/standfirst logic). The `js-time-since` element exists in all three but is currently **commented out**.
+### Single unified partial
 
-Image assignment is **hard-coded by index** (positions 1, 3, 6 get images).
-
-## Changes Needed
-
-### 1. Hide byline for 'news' category posts
-
-In the byline section of each partial, skip `render_bylines()` when the post has the `news` category. Currently:
-
-```php
-if ( $is_article ) {
-  render_bylines( $article_post_id );
-} else {
-  render_standfirst( $article_post_id );
-}
-```
-
-Needs to become:
-
-```php
-if ( $is_news ) {
-  // no byline for news posts
-} elseif ( $is_article ) {
-  render_bylines( $article_post_id );
-} else {
-  render_standfirst( $article_post_id );
-}
-```
-
-Detection: `has_category( 'news', $article_post_id )`.
-
-### 2. Restore time-since display
-
-Uncomment the `js-time-since` span in all three partials. The JS (`Utilities.js:displayTimeSince()`) already handles `.js-time-since` elements with `data-timestamp` — it calls Luxon's `toRelative()`. No JS changes needed.
-
-```php
-<div class="layout-split-level font-size-8 font-weight-bold mb-1">
-  <?php render_post_ui_tags( $article_post_id ); ?>
-  <a href="<?php echo get_permalink( $article_post_id ); ?>" class="ui-hover">
-    <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
-  </a>
-</div>
-```
-
-### 3. Smart image assignment (prefer non-news posts)
-
-Currently images are at fixed indices (1, 3, 6). Instead:
-
-- In `latest-articles.php`, before the loop, sort/partition the post IDs so that non-news posts land on the image slots (1, 3, 6) when possible
-- OR: pass a `show_image` flag to each partial based on whether the post should show an image, decided by a simple algorithm:
-  1. Assign image slots to the first 3 non-news posts encountered (1 large + 2 small)
-  2. If fewer than 3 non-news posts exist, fill remaining image slots with news posts
-  3. Always end up with exactly 2 small + 1 large image
-
-**Approach: flag-based** (simpler, no reordering). Pre-scan the posts in `latest-articles.php`, decide which 3 get images, then pass `'show_image' => 'small'|'large'|false` to the single unified partial.
-
-### 4. Refactor: single partial
-
-All three partials are nearly identical. Merge into one `latest-article.php` that accepts:
+Previously three separate partials (`--default`, `--thumb-small`, `--thumb-large`), now merged into a single `latest-article.php` controlled by args:
 
 ```php
 $args = [
@@ -80,46 +19,57 @@ $args = [
 ```
 
 The partial handles:
+- **Tag + time-since** — always shown, full-width row via `layout-split-level`
+- **Title** — always shown
+- **Image** — small square thumb (side-by-side with title), large 16:9 thumb (stacked below title), or none
+- **Byline** — skipped for news posts, `render_bylines()` for articles, `render_standfirst()` for others
 
-- UI tag + time-since (always)
-- Title (always)
-- Image: small thumb / large thumb / none (based on `show_image`)
-- Byline: skip for news, render_bylines for articles, render_standfirst for others
+### Small image layout
 
-Delete the three old partials after.
+Tag and time-since sit at full width above the text+image grid:
 
-## Implementation Order
+```
+[tag ·················· time-since]   ← full width
+[title                    ][image]   ← grid: 16col + 8col
+[byline                   ]
+```
 
-1. **Add `is_news` helper** or use `has_category('news', $post_id)` inline
-2. **Create unified `latest-article.php`** partial with all three layouts in one file, controlled by `show_image` arg
-3. **Update `latest-articles.php`** loop: pre-scan posts for news category, assign image slots preferring non-news, call single partial with appropriate args
-4. **Delete old partials** (`--default`, `--thumb-small`, `--thumb-large`)
-5. **Test** on DevKinsta — verify 2 small + 1 large image always renders, news posts have no byline, time-since displays
+### Time-since
 
----
+The `js-time-since` span uses `data-timestamp` and is hydrated client-side by `Utilities.js:displayTimeSince()` via Luxon's `toRelative()`. No server-side rendering needed.
 
-Notes from session:
+## Image Slot Algorithm
 
-Algorithm (lines 17-58):
+Located in `latest-articles.php`. Assigns up to 3 image slots across the post list.
 
-1. Pre-scans $latest_articles_posts_ids to find which indices are non-news posts (line 22-26)
-2. If 3+ non-news posts exist: first 3 non-news indices get images (line 28-29)
-3. If fewer than 3 non-news: uses all non-news posts, fills remaining slots from default positions [1, 3, 6] — which will be news posts (lines 31-42)
-4. Sorts the chosen indices so they're in display order (line 45)
-5. Assigns types: 1st = small, 2nd = large, 3rd = small (lines 49-52)
+### Normal path (3+ non-news posts available)
 
-Examples with 8 posts:
-┌──────────────────────────┬─────────────────┬─────────────┬────────────────────────────────────────┐
-│ Scenario │ Non-news at │ Image slots │ Result │
-├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-│ All non-news │ 0,1,2,3,4,5,6,7 │ 0,1,2 │ First 3 posts get images │
-├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-│ News at 0,1 │ 2,3,4,5,6,7 │ 2,3,4 │ First 3 non-news get images │
-├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-│ News at 0,1,2,3 │ 4,5,6,7 │ 4,5,6 │ First 3 non-news get images │
-├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-│ Only 2 non-news (at 0,4) │ 0,4 │ 0,1,4 │ Both non-news + fallback at position 1 │
-├──────────────────────────┼─────────────────┼─────────────┼────────────────────────────────────────┤
-│ All news │ none │ 1,3,6 │ Falls back to original positions │
-└──────────────────────────┴─────────────────┴─────────────┴────────────────────────────────────────┘
-The render loop (lines 76-89) just looks up each index in the $image_map — clean and simple.
+1. Collect indices of all non-news posts in display order
+2. First 3 non-news indices get image slots
+3. Sizes: small — **LARGE** — small (middle slot gets hero image)
+
+### Fallback path (fewer than 3 non-news posts)
+
+1. Start with all non-news post indices
+2. Fill remaining slots from fallback positions `[1, 3, 6]` (2nd, 4th, 7th post)
+3. **Gap enforcement**: fallback candidates must be at least 2 positions from any existing image slot (minimum gap of 1 post between images)
+4. **Size restriction**: news posts only ever get `small`. The first non-news post (in display order) gets `large`, regardless of its array position
+5. If gap enforcement eliminates candidates, the total may be fewer than 3 images
+
+### Examples with 8 posts
+
+| Scenario | Non-news at | Image slots | Sizes |
+|---|---|---|---|
+| All non-news | 0,1,2,3,4,5,6,7 | 0,1,2 | small, **large**, small |
+| News at 0,1 | 2,3,4,5,6,7 | 2,3,4 | small, **large**, small |
+| News at 0,1,2,3 | 4,5,6,7 | 4,5,6 | small, **large**, small |
+| Only 2 non-news (at 0,4) | 0,4 | 0,4,6 | **large** (non-news), small, small |
+| Only 1 non-news (at 2) | 2 | 2,6 | **large** (non-news), small — pos 1,3 rejected (too close to 2) |
+| All news | none | 1,3,6 | small, small, small |
+
+### Key behaviours
+
+- Non-news posts are always preferred for image slots
+- In the fallback path, news posts never receive the large image
+- The first non-news post in display order always gets `large` in the fallback path, even if it's the only image
+- Gap enforcement can reduce the total below 3 — this is acceptable as it avoids visually cluttered adjacent images
