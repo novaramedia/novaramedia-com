@@ -22,8 +22,8 @@ if ($category->slug === 'video') {
   $button_grid_item_classes = 'mt-s-2 grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-8 is-xxl-8';
 }
 ?>
-<main id="main-content" class="category-archive">
-  <section id="posts" class="container mt-3">
+<main id="main-content" class="category-archive" data-testid="main-content">
+  <section id="posts" class="container mt-3" data-testid="post-list">
     <div class="grid-row mb-4">
       <?php
         if (in_array($category->slug, array('articles', 'audio', 'video'))) {

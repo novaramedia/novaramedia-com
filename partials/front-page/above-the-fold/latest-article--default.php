@@ -23,7 +23,7 @@ if ( ! isset( $args['has_bottom_border'] ) ) {
     </a> -->
   </div>
   <a href="<?php echo get_permalink( $article_post_id ); ?>" class="ui-hover">
-    <h4 class="post__title font-size-11 font-size-s-12 font-condensed text-wrap-pretty"><?php echo get_the_title( $article_post_id ); ?></h4>
+    <h4 class="post__title font-size-11 font-size-s-12 font-condensed text-wrap-pretty" data-testid="post-title"><?php echo get_the_title( $article_post_id ); ?></h4>
     <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
       <?php
       if ( $is_article ) {

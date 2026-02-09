@@ -5,14 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-  <article id="page-jobs" class="container">
+  <article id="page-jobs" class="container" data-testid="jobs-page">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
         <h4 class="font-size-10 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">

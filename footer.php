@@ -1,4 +1,4 @@
-    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white pt-5 pb-8 text-uppercase ui-hover-links-inside">
+    <footer id="footer" role="contentinfo" aria-label="Footer" class="background-black font-color-white pt-5 pb-8 text-uppercase ui-hover-links-inside" data-testid="site-footer">
       <div class="container">
         <div class="grid-row">
           <div class="grid-item is-s-12 is-xxl-6 mb-5">

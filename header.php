@@ -27,11 +27,11 @@
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
   <section id="main-container">
-    <header class="site-header background-black mb-4">
+    <header class="site-header background-black mb-4" data-testid="site-header">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
         <div class="site-header__main container">
           <div class="grid-row">
-            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main">
+            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main" data-testid="site-nav">
               <ul class="site-header__navigation u-inline-list u-inline-block">
                 <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
                 <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <nav class="site-header-nav" role="navigation" aria-label="Sections">
+      <nav class="site-header-nav" role="navigation" aria-label="Sections" data-testid="site-nav-panel">
         <div class="container font-size-12 font-size-s-13 font-weight-bold font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">

@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -19,7 +19,7 @@ if( have_posts() ) {
     $contact = get_post_meta($post->ID, 'about_page_contact_group', true);
     $funding = get_post_meta($post->ID, 'about_page_funding_group', true);
 ?>
-  <article id="page" class="container mt-4 mb-8">
+  <article id="page" class="container mt-4 mb-8" data-testid="about-page">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>

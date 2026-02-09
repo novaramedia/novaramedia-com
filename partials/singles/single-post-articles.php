@@ -54,7 +54,7 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
   <?php
 }
 ?>
-    <div id="single-articles-copy" class="mb-4">
+    <div id="single-articles-copy" class="mb-4" data-testid="post-content">
       <?php
       $content = get_the_content();
       $blocks  = parse_blocks( $content );
