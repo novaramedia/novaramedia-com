@@ -104,6 +104,13 @@
 
   $i = 0;
 
+  // TODO: Deprecate and remove apology_notice functionality
+  // This is a hardcoded temporary solution for a specific incident from Sept 2024.
+  // The apology_notice injection causes index drift in the image_map, making image
+  // slots shift onto wrong posts. Consider removing this entirely or refactoring
+  // image_map to use post IDs as keys instead of numeric positions.
+  // Related: check_for_apology_notice() in lib/functions-custom.php
+  // Also used in: partials/front-page/products-bar.php
   if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
     $post_id = $apology_post[0]->ID;
   ?>
