@@ -80,7 +80,7 @@ For features that are unique to the project and not needed in the library, we cr
 
 ### Stylus and compilation specific details
 
-- Values for the use of the css `calc` function need to be escaped with quotes.
+- Stylus tries to evaluate arithmetic inside `calc()`, which breaks the CSS output. Wrap the entire value (including `calc`) in a quoted string and pass it through the built-in `unquote()` function: `unquote('calc(100vh - var(--header-height))')`. Do **not** quote just the inside of calc — e.g. `calc('100vh - 2rem')` — as the quotes will leak into the compiled CSS.
 
 ## WordPress Template Patterns
 
@@ -192,7 +192,7 @@ npm run build
 ## Common Pitfalls and Troubleshooting
 
 ### Stylus Compilation Issues
-- **calc() values**: Wrap calc expressions in quotes when used in Stylus: `calc('100vh - var(--header-height)')`
+- **calc() values**: Use the built-in `unquote()` to prevent Stylus evaluating arithmetic inside calc: `unquote('calc(100vh - var(--header-height))')`. Quoting only the inside of calc (e.g. `calc('...')`) leaks quotes into the CSS output.
 - **Import order**: Make sure to import from `nm-stylus-library` before custom styles
 - **Grid classes**: Always use correct order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
 
