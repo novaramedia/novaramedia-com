@@ -6,17 +6,18 @@ The `cypress.yml` workflow runs automated end-to-end tests for the WordPress the
 
 ### How it works
 
-1. **Trigger**: Runs on Pull Requests and pushes to `master`, `main`, or `development` branches
-2. **Environment**: Ubuntu with Node.js 18 and Chrome browser
-3. **Test Execution**: Runs all Cypress tests in headless mode
-4. **Artifacts**: Uploads test videos and screenshots (especially on failure)
+1. **Trigger**: Runs on Pull Requests to `master`, `main`, or `development` branches, and on manual `workflow_dispatch`
+2. **Deploy**: Deploys the PR commit to Kinsta staging via SSH + git
+3. **Test**: Runs all Cypress tests in headless Chrome against staging
+4. **Cleanup**: Resets staging back to the `development` branch
+5. **Artifacts**: Uploads test videos and screenshots (especially on failure)
 
 ### Test Configuration
 
-- **Base URL**: Tests run against production (`https://novaramedia.com`) by default
-- **Override**: Set `CYPRESS_BASE_URL` repository secret to test against staging
-- **Timeout**: 15-minute maximum per test run
+- **Base URL**: Tests run against Kinsta staging (set via `STAGING_URL` secret)
+- **Timeout**: 10-minute maximum per job
 - **Retries**: Failed tests automatically retry 2 times
+- **Fork PRs**: Skipped automatically (secrets not available)
 
 ### Success Criteria
 

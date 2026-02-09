@@ -7,7 +7,6 @@
 
 describe('Novara Live Category Archive', () => {
   beforeEach(() => {
-    cy.checkPageLoad();
     cy.visit('/category/novara-live');
   });
 

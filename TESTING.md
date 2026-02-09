@@ -88,36 +88,29 @@ npm run test:headed      # See browser while running
 Tests run automatically on:
 
 - Pull requests to `master`, `main`, or `development` branches
-- Direct pushes to these branches
+- Manual trigger via `workflow_dispatch`
 
 **Workflow configuration:** `.github/workflows/cypress.yml`
 
 **Key features:**
 
+- Deploys PR branch to Kinsta staging via SSH + git, then runs tests
 - Runs in Ubuntu with Chrome browser
-- 15-minute timeout per job
+- 10-minute timeout per job
 - Uploads videos/screenshots on failure
 - Uses npm caching for faster runs
+- Skips fork PRs (secrets not available)
 
 ## Custom Commands
 
 We've created several helper commands to make tests more maintainable:
 
-### `cy.checkPageLoad()`
-
-Sets up console error monitoring for the page.
-
-```javascript
-cy.checkPageLoad();
-cy.visit('/');
-```
-
 ### `cy.verifyNoConsoleErrors()`
 
 Verifies no relevant console errors occurred (filters out third-party script errors).
+Console error monitoring is set up automatically via a global `beforeEach` in `e2e.js`.
 
 ```javascript
-cy.checkPageLoad();
 cy.visit('/some-page');
 cy.verifyNoConsoleErrors();
 ```
@@ -165,7 +158,6 @@ cy.findPostUrlFromArchive('/category/audio').then((url) => {
 ```javascript
 describe('Page Name', () => {
   beforeEach(() => {
-    cy.checkPageLoad();
     cy.visit('/page-url');
   });
 
@@ -175,9 +167,7 @@ describe('Page Name', () => {
   });
 
   it('should display critical elements', () => {
-    cy.get('header').should('be.visible');
-    cy.get('main').should('exist');
-    cy.get('footer').should('be.visible');
+    cy.verifyCriticalPageStructure();
   });
 
   it('should load without console errors', () => {
@@ -185,16 +175,7 @@ describe('Page Name', () => {
   });
 
   it('should be responsive', () => {
-    const viewports = [
-      { width: 375, height: 667 }, // Mobile
-      { width: 768, height: 1024 }, // Tablet
-      { width: 1280, height: 720 }, // Desktop
-    ];
-
-    viewports.forEach((viewport) => {
-      cy.viewport(viewport.width, viewport.height);
-      cy.get('main').should('be.visible');
-    });
+    cy.testResponsive();
   });
 });
 ```

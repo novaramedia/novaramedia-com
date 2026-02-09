@@ -24,7 +24,6 @@ describe('Single Post (Article)', () => {
       this.skip();
     }
 
-    cy.checkPageLoad();
     cy.visit(articleUrl);
   });
 

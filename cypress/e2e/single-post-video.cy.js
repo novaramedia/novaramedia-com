@@ -24,7 +24,6 @@ describe('Single Post (Video Category)', () => {
       this.skip();
     }
 
-    cy.checkPageLoad();
     cy.visit(videoPostUrl, { timeout: 60000 });
   });
 

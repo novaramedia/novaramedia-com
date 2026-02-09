@@ -7,7 +7,6 @@
 
 describe('About Page', () => {
   beforeEach(() => {
-    cy.checkPageLoad();
     cy.visit('/about');
   });
 

@@ -7,7 +7,6 @@
 
 describe('Support Page', () => {
   beforeEach(() => {
-    cy.checkPageLoad();
     cy.visit('/support');
   });
 

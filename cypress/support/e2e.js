@@ -11,6 +11,15 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// Set up console error spy before every test so verifyNoConsoleErrors() works.
+// Using cy.on() ensures the listener is scoped to the current test and cleaned
+// up automatically, preventing listener stacking across tests.
+beforeEach(() => {
+  cy.on('window:before:load', (win) => {
+    cy.spy(win.console, 'error').as('consoleError');
+  });
+});
+
 // Handle uncaught exceptions to prevent test failures from third-party scripts
 Cypress.on('uncaught:exception', (err, runnable) => {
   // Returning false here prevents Cypress from failing the test

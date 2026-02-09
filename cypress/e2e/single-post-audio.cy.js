@@ -24,7 +24,6 @@ describe('Single Post (Audio Category)', () => {
       this.skip();
     }
 
-    cy.checkPageLoad();
     // Audio posts load many third-party resources (SoundCloud, analytics, social
     // widgets) that delay the browser's load event. Use a long timeout to allow
     // the page to fully load in CI where network is slower.

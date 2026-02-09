@@ -41,6 +41,8 @@ concurrency:
 
 jobs:
   deploy-and-test:
+    # Skip fork PRs — secrets are not available and the job would fail
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -63,20 +65,19 @@ jobs:
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
           KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
-      - name: Deploy PR branch to staging
+      - name: Deploy PR commit to staging
         run: |
-          echo "Deploying branch '${BRANCH_NAME}' to staging via git..."
+          echo "Deploying commit ${COMMIT_SHA} to staging via git..."
 
           ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "cd public/wp-content/themes/novaramedia-com && \
              git fetch origin && \
-             git checkout '${BRANCH_NAME}' && \
-             git reset --hard 'origin/${BRANCH_NAME}'"
+             git checkout ${COMMIT_SHA}"
 
           echo "Deployment complete"
         env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
           KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}

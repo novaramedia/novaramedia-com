@@ -11,7 +11,7 @@ This document consolidates all documentation for the Cypress testing implementat
 - **Cypress 13.17.0** added as dev dependency
 - **8 test suites (89 tests)** covering homepage, support page, about page, jobs page, single post (article/video/audio), and Novara Live archive
 - **Custom Cypress commands** in `cypress/support/commands.js` for page load checking, console error filtering, image validation, responsive testing, and WordPress-specific waits
-- **GitHub Actions workflow** (`.github/workflows/cypress.yml`) that deploys the PR branch to Kinsta staging via SFTP, runs tests, then resets staging to development
+- **GitHub Actions workflow** (`.github/workflows/cypress.yml`) that deploys the PR commit to Kinsta staging via SSH + git, runs tests, then resets staging to development
 - **`data-testid` attributes** added to PHP templates for stable test selectors
 
 ### Files Added
@@ -58,19 +58,13 @@ This document consolidates all documentation for the Cypress testing implementat
 ### CI Workflow Architecture
 
 ```
-PR opened → SFTP deploy to staging → WP-CLI activate theme → Clear cache →
+PR opened → SSH + git deploy to staging → WP-CLI activate theme → Clear cache →
   → Verify staging accessible → npm ci → Cypress tests → Upload artifacts →
-  → SFTP reset staging to development
+  → SSH + git reset staging to development
 ```
 
-**CI performance breakdown** (observed):
-
-- SFTP deploy: ~10-12 min
-- WP-CLI + cache: ~30 sec
-- npm ci: ~25 sec
-- Cypress tests: ~2 min
-- SFTP cleanup: ~5 min
-- **Total: ~18 min**
+Deploys by checking out the PR's commit SHA on the staging server (detached HEAD),
+avoiding branch name interpolation for security.
 
 ---
 
@@ -125,12 +119,10 @@ The original tests found post URLs using broad selectors (`a[href*="/20"]`) from
 
 ## Future Considerations
 
-### Workflow Optimizations (from CYPRESS_WORKFLOW_NOTES.md)
+### Workflow Optimizations
 
-- SFTP transfers are the bottleneck (~15 min of 18 min total)
-- Consider rsync over SSH or diff-based uploads
-- Remove temporary push trigger for feature branch after merge
-- Consider restricting to PRs to master/main only
+- Consider restricting triggers to PRs to master/main only
+- Consider path filtering to skip doc-only changes
 
 ### Test Expansion (Phase 3)
 
