@@ -152,6 +152,13 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
  * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
  * But can be adapted for future use
  *
+ * TODO: Deprecate and remove this apology_notice functionality
+ * This is a temporary solution that should be removed. The hardcoded date logic
+ * (8 weeks from Sept 22, 2024) means this feature has limited lifespan. Consider
+ * removing this function and all its usages once the notice period expires.
+ * Used in: partials/front-page/above-the-fold/latest-articles.php
+ *          partials/front-page/products-bar.php
+ *
  * @return array/Boolean Array of apology post or false if no apology post
  * @since 4.1.1
  */
