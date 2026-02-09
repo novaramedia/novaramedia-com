@@ -4,7 +4,7 @@ novaramedia.com
 
 ## We are Dev[0]
 
-### Howto: Testing
+### How to: Testing
 
 This project uses [Cypress](https://www.cypress.io/) for end-to-end testing of the WordPress theme.
 

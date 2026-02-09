@@ -37,6 +37,5 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   }
 
-  // Allow other errors to fail the test
-  return true;
+  // All other errors fail the test (Cypress default behaviour)
 });

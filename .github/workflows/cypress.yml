@@ -75,6 +75,8 @@ jobs:
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "cd public/wp-content/themes/novaramedia-com && \
              git fetch origin && \
+             git reset --hard HEAD && \
+             git clean -fd && \
              git checkout ${COMMIT_SHA}"
 
           echo "Deployment complete"

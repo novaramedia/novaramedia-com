@@ -74,7 +74,7 @@ Cypress.Commands.add('testResponsive', (callback) => {
     cy.get('[data-testid="site-footer"]').should('be.visible');
 
     if (callback) {
-      callback(viewport);
+      cy.then(() => callback(viewport));
     }
   });
 });
