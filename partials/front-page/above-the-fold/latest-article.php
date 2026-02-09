@@ -26,16 +26,16 @@ $title = get_the_title( $article_post_id );
 ?>
 <div class="mb-4 pb-4 <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
 <?php if ( $show_image === 'small' ) : ?>
+  <div class="layout-split-level font-size-8 font-weight-bold mb-1">
+    <?php render_post_ui_tags( $article_post_id ); ?>
+    <a href="<?php echo $permalink; ?>" class="ui-hover">
+      <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
+    </a>
+  </div>
   <div class="grid-row grid--nested">
     <div class="grid-item is-xxl-16">
-      <div class="layout-split-level font-size-8 font-weight-bold mb-1">
-        <?php render_post_ui_tags( $article_post_id ); ?>
-        <a href="<?php echo $permalink; ?>" class="ui-hover">
-          <span class="js-time-since" data-timestamp="<?php echo $timestamp; ?>"></span>
-        </a>
-      </div>
       <a href="<?php echo $permalink; ?>" class="ui-hover">
-      <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed text-wrap-pretty pt-1" data-testid="post-title"><?php echo $title; ?></h4>
+      <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed text-wrap-pretty" data-testid="post-title"><?php echo $title; ?></h4>
 
       <h5 class="font-size-8 font-weight-bold text-uppercase mt-1">
         <?php
