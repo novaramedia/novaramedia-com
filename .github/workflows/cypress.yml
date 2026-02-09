@@ -126,9 +126,9 @@ jobs:
           attempt=1
 
           while [ $attempt -le $max_attempts ]; do
-            http_code=$(curl -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
+            http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
 
-            if [ "$http_code" = "200" ]; then
+            if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
               echo "Staging site is accessible (HTTP $http_code)"
               exit 0
             fi
