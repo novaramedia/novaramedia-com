@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
@@ -28,7 +28,7 @@ if( have_posts() ) {
     if (!empty($meta['_cmb_page_extra_section'])) {
       if (!empty($meta['_cmb_page_extra_section_title'])) {
 ?>
-    <div class="grid-row margin-top-large mb-4">
+    <div class="grid-row mt-8 mb-4">
       <div class="grid-item is-xxl-24">
         <h5 class="font-size-9 text-uppercase font-weight-bold"><?php echo $meta['_cmb_page_extra_section_title'][0]; ?></h5>
       </div>

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nm-wp/newsletter-signup",
+	"version": "0.1.0",
+	"title": "Newsletter Signup",
+	"category": "widgets",
+	"icon": "email-alt2",
+	"description": "Inline newsletter signup form.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"newsletter": {
+			"type": "object",
+			"default": null
+		},
+		"customTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"customText": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "novaramedia-com",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php"
+}

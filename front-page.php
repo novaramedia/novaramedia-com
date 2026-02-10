@@ -10,7 +10,7 @@ $banners = array(
 ?>
 
 <!-- main content -->
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
   <?php
     get_template_part('partials/front-page/submenu');
 

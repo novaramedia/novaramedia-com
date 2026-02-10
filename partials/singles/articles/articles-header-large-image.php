@@ -5,7 +5,7 @@
 
 <div class="grid-row mb-4">
   <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-18 offset-l-2 is-xl-16 offset-xl-4 is-xxl-16 offset-xxl-4">
-    <h1 id="single-articles-title" class="font-size-15 font-weight-bold text-wrap-pretty"><?php the_title(); ?></h1>
+    <h1 id="single-articles-title" class="font-size-15 font-weight-bold text-wrap-pretty" data-testid="post-title"><?php the_title(); ?></h1>
   </div>
 </div>
 <div class="grid-row mb-5">

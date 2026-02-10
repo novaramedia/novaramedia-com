@@ -61,7 +61,7 @@ html
   max-width: 100%
   vertical-align: middle
 
-// @media screen and (max-width: ($col * $cols) + ($gutter * ($cols + 1)))
+// @media screen and (max-width: $breakpoint-xl)
 //   html
 //     --header-height: 46px
 
@@ -100,7 +100,7 @@ html
 @media screen and (max-width: $breakpoint-m)
 
   .site-header-nav
-    height: calc('100vh - var(--header-height)')
+    height: unquote('calc(100vh - var(--header-height))')
     overflow-y: auto
 
 // ******************************************************
