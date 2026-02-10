@@ -113,7 +113,7 @@ if ( have_posts() ) {
         </a>
 
         <div class="mt-4 font-size-11">
-          <?php the_content(); ?>
+          <?php render_short_description( $featured_post_id ); ?>
         </div>
       </div>
       <div class="grid-item is-xxl-24 mt-4 mb-4">
