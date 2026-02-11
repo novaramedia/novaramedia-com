@@ -11,12 +11,14 @@ Both the theme and the Netlify microservice need changes. The microservice curre
 ## How the current system works
 
 **Theme side:**
+
 - Newsletter CPT stores `_nm_mailchimp_key` (the interest group name in Mailchimp, e.g. "The Cortado")
 - `render_mailchimp_signup_form()` in `lib/renderers.php` generates a form with a hidden `newsletter` field set to one key
 - `MailchimpSignup.js` intercepts form submit, POSTs form-encoded data to the Netlify function
 - Form data: `firstName`, `email`, `gdpr`, `newsletter` (single value)
 
 **Microservice side** (`novaramedia/novara-media-mailchimp-signup`):
+
 - Single Mailchimp audience list (env: `MAILCHIMP_LIST_ID`)
 - Newsletters are "interests" (groups) within the first interest category on the list
 - Matches the `newsletter` form value to an interest name
@@ -116,6 +118,7 @@ A reusable partial that renders the multi-signup form. Accepts arguments to cont
 | `layout` | string | "compact" | "compact" (Option A) or "cards" (Option B, future) |
 
 **Logic:**
+
 1. If `newsletter_ids` is null, query all published newsletters: `get_posts(['post_type' => 'newsletter', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'])`
 2. Filter out any without a `_nm_mailchimp_key`
 3. Render newsletter selection list (checkboxes with name + description)
@@ -125,19 +128,26 @@ A reusable partial that renders the multi-signup form. Accepts arguments to cont
 7. Include processing/success/error feedback states (same pattern as existing `render_mailchimp_signup_form()`)
 
 **HTML structure:**
+
 ```html
 <div class="multi-newsletter-signup {background/color classes}">
   <div class="container">
     <h3 class="multi-newsletter-signup__headline">{headline}</h3>
     <p class="multi-newsletter-signup__description">{description}</p>
 
-    <form class="multi-newsletter-signup__form" action="{netlify-url}" method="post">
+    <form
+      class="multi-newsletter-signup__form"
+      action="{netlify-url}"
+      method="post"
+    >
       <!-- Newsletter selection -->
       <div class="multi-newsletter-signup__options">
         <label class="multi-newsletter-signup__option">
           <input type="checkbox" name="newsletters[]" value="{mailchimp_key}" />
           <span class="multi-newsletter-signup__option-name">{headline}</span>
-          <span class="multi-newsletter-signup__option-description">{banner_text}</span>
+          <span class="multi-newsletter-signup__option-description"
+            >{banner_text}</span
+          >
         </label>
         <!-- repeat for each newsletter -->
       </div>
@@ -176,6 +186,7 @@ The existing module binds to `.email-signup__form`. The multi-signup form uses a
 **Recommendation:** Extend `MailchimpSignup.js` to also handle `.multi-newsletter-signup__form`. The submission logic is nearly identical - the only difference is that jQuery's `$form.serialize()` will automatically serialize `newsletters[]` checkboxes as `newsletters[]=key1&newsletters[]=key2`. The microservice will need to handle this format.
 
 Changes to `MailchimpSignup.js`:
+
 - Add validation: at least one newsletter must be checked before submit
 - Show a validation message if no newsletters are selected
 - Bind to both `.email-signup__form` and `.multi-newsletter-signup__form`
@@ -219,22 +230,30 @@ This is optional and can be done as a follow-up. The archive page can continue w
 #### 1. Accept multiple newsletter names
 
 Currently the handler destructures `newsletter` as a single string. Change to support both:
+
 - Single: `newsletter=The+Cortado` (existing format, backwards compatible)
 - Multiple: `newsletters[]=The+Cortado&newsletters[]=Novara+FM` (new format from multi-signup)
 
 ```javascript
-const { email, newsletter, 'newsletters[]': newslettersArray, firstName } = querystring.decode(body)
+const {
+  email,
+  newsletter,
+  'newsletters[]': newslettersArray,
+  firstName,
+} = querystring.decode(body);
 
 // Normalise to array
-let newsletterNames = []
+let newsletterNames = [];
 if (newslettersArray) {
-    newsletterNames = Array.isArray(newslettersArray) ? newslettersArray : [newslettersArray]
+  newsletterNames = Array.isArray(newslettersArray)
+    ? newslettersArray
+    : [newslettersArray];
 } else if (newsletter) {
-    newsletterNames = [newsletter]
+  newsletterNames = [newsletter];
 }
 
 if (email === '' || newsletterNames.length === 0) {
-    return output(400, 'No data')
+  return output(400, 'No data');
 }
 ```
 
@@ -246,18 +265,18 @@ Instead of finding one `signupInterest`, find all:
 
 ```javascript
 const signupInterests = interests.interests.filter((interest) => {
-    return newsletterNames.includes(interest.name)
-})
+  return newsletterNames.includes(interest.name);
+});
 
 if (signupInterests.length === 0) {
-    return output(400, 'Form configuration issue. Newsletter(s) not found')
+  return output(400, 'Form configuration issue. Newsletter(s) not found');
 }
 
 if (signupInterests.length !== newsletterNames.length) {
-    // Some newsletters didn't match - log warning but continue with what we found
-    const found = signupInterests.map(i => i.name)
-    const missing = newsletterNames.filter(n => !found.includes(n))
-    console.warn('Unmatched newsletters:', missing)
+  // Some newsletters didn't match - log warning but continue with what we found
+  const found = signupInterests.map((i) => i.name);
+  const missing = newsletterNames.filter((n) => !found.includes(n));
+  console.warn('Unmatched newsletters:', missing);
 }
 ```
 
@@ -266,10 +285,10 @@ if (signupInterests.length !== newsletterNames.length) {
 Build the interests object with all selected newsletters:
 
 ```javascript
-const interestUpdates = {}
+const interestUpdates = {};
 signupInterests.forEach((interest) => {
-    interestUpdates[interest.id] = true
-})
+  interestUpdates[interest.id] = true;
+});
 ```
 
 Then use `interestUpdates` where the current code uses `{ [signupInterest.id]: true }`.
@@ -285,8 +304,8 @@ Then use `interestUpdates` where the current code uses `{ [signupInterest.id]: t
 Add a note listing all newsletters:
 
 ```javascript
-const names = signupInterests.map(i => i.name).join(', ')
-const note = `Signed up for ${names} on the website`
+const names = signupInterests.map((i) => i.name).join(', ');
+const note = `Signed up for ${names} on the website`;
 ```
 
 #### 5. Fix existing bugs (while we're here)
@@ -323,21 +342,24 @@ Add note with all newsletter names → return 200
 ## Files Summary
 
 ### Theme - New
-| File | Purpose |
-|------|---------|
-| `partials/multi-newsletter-signup.php` | Reusable template partial |
-| `src/styl/components/multi-newsletter-signup.styl` | Component styles |
+
+| File                                               | Purpose                   |
+| -------------------------------------------------- | ------------------------- |
+| `partials/multi-newsletter-signup.php`             | Reusable template partial |
+| `src/styl/components/multi-newsletter-signup.styl` | Component styles          |
 
 ### Theme - Modified
-| File | Change |
-|------|--------|
+
+| File                                | Change                                                                       |
+| ----------------------------------- | ---------------------------------------------------------------------------- |
 | `src/js/modules/MailchimpSignup.js` | Add binding for multi-signup form, validate at least one newsletter selected |
-| `src/styl/site.styl` | Add `@import "components/multi-newsletter-signup"` |
-| `archive-newsletter.php` | (Optional) Replace stacked forms with multi-signup partial |
+| `src/styl/site.styl`                | Add `@import "components/multi-newsletter-signup"`                           |
+| `archive-newsletter.php`            | (Optional) Replace stacked forms with multi-signup partial                   |
 
 ### Microservice - Modified
-| File | Change |
-|------|--------|
+
+| File                                             | Change                                                                                                                             |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `functions/mailchimp-signup/mailchimp-signup.js` | Accept newsletter array, look up multiple interests, set all in one update. Fix `output()` bug. Remove unused `setMailchimpTags()` |
 
 ---
@@ -358,6 +380,7 @@ Steps 1 is independent and can be deployed first. Steps 2-5 are one theme PR. St
 ## Usage Examples
 
 **On the newsletter archive page:**
+
 ```php
 get_template_part('partials/multi-newsletter-signup', null, [
     'headline' => 'Sign up to our newsletters',
@@ -366,6 +389,7 @@ get_template_part('partials/multi-newsletter-signup', null, [
 ```
 
 **Embedded in a specific page with curated newsletters:**
+
 ```php
 get_template_part('partials/multi-newsletter-signup', null, [
     'newsletter_ids' => [123, 456, 789],
@@ -375,6 +399,7 @@ get_template_part('partials/multi-newsletter-signup', null, [
 ```
 
 **In a support/about page:**
+
 ```php
 get_template_part('partials/multi-newsletter-signup', null, [
     'headline' => 'Never miss a story',
