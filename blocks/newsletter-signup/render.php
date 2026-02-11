@@ -23,7 +23,10 @@ if ( ! $newsletter || empty( $newsletter['id'] ) ) {
   return; // No newsletter selected
 }
 
-$newsletter_id = $newsletter['id'];
+$newsletter_id = absint( $newsletter['id'] );
+if ( ! $newsletter_id ) {
+  return;
+}
 
 // Pull fresh meta from newsletter post
 $mailchimp_key = get_post_meta( $newsletter_id, '_nm_mailchimp_key', true );

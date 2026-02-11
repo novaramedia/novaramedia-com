@@ -45,8 +45,13 @@ export default function Edit({ attributes, setAttributes }) {
   }, []);
 
   const handleNewsletterChange = (event) => {
+    const value = event.target.value;
+    if (!value) {
+      setAttributes({ newsletter: null });
+      return;
+    }
     const newsletter = newsletterPosts.find(
-      (post) => post.id === parseInt(event.target.value)
+      (post) => post.id === parseInt(value, 10)
     );
     setAttributes({ newsletter });
   };

@@ -43,12 +43,12 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
           <div class="grid-item is-xxl-24">
             <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
             <?php if ( $podcast_url ) { ?>
-            <a class="only-desktop ui-button ui-button--black ui-button--small mt-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <a class="only-desktop ui-button ui-button--black ui-button--small mt-3" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
             <?php } ?>
           </div>
           <div class="grid-item is-xxl-24 only-mobile">
           <?php if ( $podcast_url ) { ?>
-            <a class="ui-button ui-button--black ui-button--small" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <a class="ui-button ui-button--black ui-button--small" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
         </div>

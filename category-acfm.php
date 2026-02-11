@@ -60,7 +60,7 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
           <div class="grid-item is-s-16 is-l-14 is-xxl-10 font-size-s-11 font-size-12 font-weight-bold text-paragraph-breaks text-wrap-pretty">
             <?php echo category_description(); ?>
             <?php if ( $podcast_url ) { ?>
-            <a class="only-desktop ui-button ui-button--white ui-button--small mb-3" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <a class="only-desktop ui-button ui-button--white ui-button--small mb-3" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
             <?php } ?>
           </div>
           <div class="category-archive__acfm__logo grid-item is-s-8 is-l-10 is-xxl-14 text-align-right">
@@ -68,7 +68,7 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
           </div>
           <div class="grid-item is-xxl-24 only-mobile">
           <?php if ( $podcast_url ) { ?>
-            <a class="ui-button ui-button--white ui-button--small" href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow"><?php echo $podcast_copy; ?></a>
+            <a class="ui-button ui-button--white ui-button--small" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
         </div>
