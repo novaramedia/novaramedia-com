@@ -68,24 +68,20 @@
                 wp_nav_menu(
                     array(
                         'theme_location' => 'header-general',
-                        'fallback_cb'    => function () {
-                          ?>
-              <ul class="font-weight-bold mb-3">
-                <li><a href="<?php echo site_url( 'about/' ); ?>">About Us</a></li>
-                <li><a href="<?php echo site_url( 'support/' ); ?>">Support Us</a></li>
-                <li><a href="<?php echo site_url( 'newsletters/' ); ?>">Newsletters</a></li>
-                <li><a href="<?php echo site_url( 'about/how-we-are-funded/' ); ?>">How We Are Funded</a></li>
-                <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
-              </ul>
-                          <?php
-                        },
+                        'fallback_cb'    => 'nm_header_general_fallback',
                         'menu_class'     => 'font-weight-bold mb-3',
                     )
                 );
                 ?>
-              <ul class="font-weight-bold mb-3">
-                <li><a href="https://donate.novaramedia.com/profile">&#10142; Manage Donation</a></li>
-              </ul>
+              <?php
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'footer-manage-donation',
+                        'fallback_cb'    => 'nm_manage_donation_fallback',
+                        'menu_class'     => 'font-weight-bold mb-3',
+                    )
+                );
+                ?>
             </div>
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
               <h6 class="font-weight-regular font-size-9 text-uppercase mb-3">Shows</h6>
