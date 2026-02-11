@@ -17,7 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-$newsletter_id = absint( $attributes['newsletter']['id'] ?? 0 );
+$newsletter    = $attributes['newsletter'] ?? array();
+$newsletter_id = absint( $newsletter['id'] ?? 0 );
 if ( ! $newsletter_id ) {
   return;
 }
