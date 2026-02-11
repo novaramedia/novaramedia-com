@@ -50,9 +50,7 @@ export default function Edit({ attributes, setAttributes }) {
       setAttributes({ newsletter: null });
       return;
     }
-    const post = newsletterPosts.find(
-      (p) => p.id === parseInt(value, 10)
-    );
+    const post = newsletterPosts.find((p) => p.id === parseInt(value, 10));
     setAttributes({ newsletter: { id: post.id, title: post.title.rendered } });
   };
 
@@ -89,8 +87,7 @@ export default function Edit({ attributes, setAttributes }) {
       {attributes.newsletter && (
         <>
           <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
-            {__('Selected:', 'novaramedia-com')}{' '}
-            {attributes.newsletter.title}
+            {__('Selected:', 'novaramedia-com')} {attributes.newsletter.title}
           </p>
           <div style={{ marginTop: '1.5rem' }}>
             <h4 style={{ marginBottom: '0.5rem', fontSize: '0.875rem' }}>
