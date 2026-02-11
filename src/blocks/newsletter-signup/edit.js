@@ -51,6 +51,10 @@ export default function Edit({ attributes, setAttributes }) {
       return;
     }
     const post = newsletterPosts.find((p) => p.id === parseInt(value, 10));
+    if (!post) {
+      setAttributes({ newsletter: null });
+      return;
+    }
     setAttributes({ newsletter: { id: post.id, title: post.title.rendered } });
   };
 
