@@ -35,14 +35,16 @@ function nm_header_general_fallback() {
  * Fallback for footer general menu.
  *
  * Displays default navigation links for the footer general section.
+ * Uses the same links as header general, plus Pitching and Jobs.
  *
  * @return void
  */
 function nm_footer_general_fallback() {
 	?>
 	<ul class="font-weight-bold mb-4">
-		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About Us</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support Us</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>">Newsletters</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'about/how-we-are-funded/' ) ); ?>">How We Are Funded</a></li>
 		<li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'pitching/' ) ); ?>">Pitching</a></li>
