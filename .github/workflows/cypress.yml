@@ -30,6 +30,12 @@ on:
       - master
       - main
       - development
+    paths-ignore:
+      - '.github/**'
+      - '.docs/**'
+      - '*.md'
+      - '.editorconfig'
+      - '.gitignore'
   # Allow manual triggering
   workflow_dispatch:
 
