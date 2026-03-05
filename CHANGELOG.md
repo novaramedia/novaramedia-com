@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Deploy to Staging GitHub Actions workflow for manually deploying any branch to Kinsta staging persistently
+- `paths-ignore` filter on Cypress workflow to skip test runs for non-frontend changes (docs, workflows, config files)
+
 ### Changed
 
 - Optimise inline newsletter WP block data flow
