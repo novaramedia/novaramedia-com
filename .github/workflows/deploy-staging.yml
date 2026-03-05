@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Validate ref input
         run: |
-          if ! echo "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9._/-]+$'; then
+          if ! echo "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9][a-zA-Z0-9._/-]*$'; then
             echo "Error: invalid ref '${DEPLOY_REF}'"
             exit 1
           fi
@@ -94,7 +94,13 @@ jobs:
             -H "Content-Type: application/json")
 
           http_code=$(echo "$response" | tail -n1)
-          echo "Cache clear response: $http_code"
+          body=$(echo "$response" | sed '$d')
+
+          echo "Cache clear HTTP status: $http_code"
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "Cache clear response body:"
+            echo "$body"
+          fi
         env:
           KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
           KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
