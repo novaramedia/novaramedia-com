@@ -110,16 +110,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     }
 
     /* Breakpoints */
-    @media screen and (max-width: 1440px) {
-      .diw-archive__hero {
-        height: 470px;
-      }
-
-      .diw-archive__title {
-        font-size: 6.5rem;
-      }
-    }
-    @media screen and (max-width: 1336px) {
+    @media screen and (max-width: 1408px) {
       .diw-archive__hero {
         height: 420px;
       }
@@ -129,7 +120,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
       }
 
       .diw-archive__title {
-        font-size: 6.8rem;
+        font-size: 6.5rem;
       }
 
       .diw__serif-large {
