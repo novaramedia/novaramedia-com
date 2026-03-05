@@ -23,8 +23,9 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
       background-image: url(<?php echo $base_image_path . 'diw-header-background.jpg'; ?>);
     }
 
+    /* Hero */
     .diw-archive__hero {
-      height: 590px;
+      height: 550px;
       position: relative;
       overflow: hidden;
     }
@@ -49,28 +50,29 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
       padding-bottom: 2rem;
     }
 
+    /* Typography */
     .diw-archive__title {
+      font-size: 8.5rem;
       letter-spacing: -6%;
-      line-height: 0.95;
+      margin-bottom: .75rem;
     }
 
     .diw-archive__subtitle {
+      color: var(--diw-red);
       letter-spacing: -4%;
     }
 
-    .diw-archive__portrait {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 1px solid var(--diw-white-muted);
-      object-fit: cover;
-      position: relative;
+    .diw__serif-large {
+      font-size: 27px;
+      line-height: 1.25;
     }
 
-    .diw-archive__portrait + .diw-archive__portrait {
-      margin-left: -30px;
+    .diw__serif-medium {
+      font-size: 21px;
+      line-height: 1.25;
     }
 
+    /* Credits */
     .diw-archive__credits {
       background-color: var(--diw-red);
     }
@@ -87,17 +89,40 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
       color: var(--diw-white-muted);
     }
 
-    .diw__serif-large {
-      font-size: 27px;
-      line-height: 1.25;
+    .diw-archive__credit-col {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+      text-wrap: balance;
     }
 
-    .diw__serif-medium {
-      font-size: 21px;
-      line-height: 1.25;
+    .diw-archive__portrait {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid var(--diw-white-muted);
+      object-fit: cover;
+      position: relative;
     }
 
+    .diw-archive__portrait + .diw-archive__portrait {
+      margin-left: -30px;
+    }
+
+    /* Breakpoints */
     @media screen and (max-width: 1336px) {
+      .diw-archive__hero {
+        height: 420px;
+      }
+
+      .diw-archive__artwork {
+        height: 67%;
+      }
+
+      .diw-archive__title {
+        font-size: 6.8rem;
+      }
+
       .diw__serif-large {
         font-size: 23px;
       }
@@ -105,7 +130,11 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     @media screen and (max-width: 1104px) {
       .diw-archive__hero {
-        height: 480px;
+        height: 365px;
+      }
+
+      .diw-archive__title {
+        font-size: 6rem;
       }
 
       .diw__serif-medium {
@@ -115,7 +144,11 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     @media screen and (max-width: 910px) {
       .diw-archive__hero {
-        height: 420px;
+        height: 330px;
+      }
+
+      .diw-archive__title {
+        font-size: 5.5rem;
       }
 
       .diw__serif-large {
@@ -134,11 +167,16 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     @media screen and (max-width: 759px) {
       .diw-archive__hero {
-        height: 380px;
+        height: 450px;
       }
 
       .diw-archive__artwork {
-        height: 75%;
+        height: 65%;
+      }
+
+      .diw-archive__title {
+        font-size: 4.3rem;
+        margin-bottom: .5rem;
       }
 
       .diw__serif-large {
@@ -151,7 +189,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
       }
     }
   </style>
-<div class="container mt-4 mb-5">
+<div class="container mt-4 mb-5 mb-s-4">
   <div class="grid-row">
     <div class="grid-item is-xxl-24">
       <div class="diw-archive__hero background-cover-image ui-rounded-box">
@@ -160,18 +198,16 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
           alt="Death in Westminster artwork"
           class="diw-archive__artwork"
         />
-        <div class="diw-archive__hero-content">
-          <div class="text-align-center mb-4">
-            <h1 class="diw-archive__title font-weight-bold font-size-20">Death in Westminster</h1>
-            <h3 class="diw-archive__subtitle font-weight-bold font-size-14" style="color: var(--diw-red);">How Britain became butler for the world's illicit money</h3>
-          </div>
+        <div class="diw-archive__hero-content text-align-center">
+          <h1 class="diw-archive__title font-weight-bold font-size-20">Death in Westminster</h1>
+          <h3 class="diw-archive__subtitle font-weight-bold font-size-14 font-size-xl-13 font-size-s-12 text-wrap-balance">How Britain became butler for the world's illicit money</h3>
         </div>
       </div>
     </div>
   </div>
 </div>
   <section class="container">
-    <div class="grid-row mt-4 mb-4">
+    <div class="grid-row mb-4">
       <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <?php
@@ -247,53 +283,61 @@ if ( have_posts() ) {
   <div class="container mb-4">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
-        <div class="diw-archive__credits grid-row grid-row--nested ui-rounded-box ui-backgrounded-box-padding font-size-11 text-align-center">
-          <div class="grid-item is-xxl-24">
-            <h3 class="diw-archive__credits-title diw-archive__title font-weight-bold font-size-20 mb-4">Death in Westminster</h3>
-          </div>
-          <div class="grid-item is-xxl-8 is-m-12 is-s-24 mb-4">
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Produced by</h6>
-            <div class="diw-archive__credit-value mb-3">Planet B Productions</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Distributed by</h6>
-            <div class="diw-archive__credit-value mb-3">Novara Media</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Hosted by</h6>
-            <div class="diw-archive__credit-value mb-3">Kojo Koram and Dalia Gebrial</div>
-            <div>
-              <img
-                src="<?php echo esc_url( $base_image_path . 'diw-kojo.png' ); ?>"
-                alt="Portrait of Kojo Koram"
-                class="diw-archive__portrait"
-              />
-              <img
-                src="<?php echo esc_url( $base_image_path . 'diw-dalia.png' ); ?>"
-                alt="Portrait of Dalia Gebrial"
-                class="diw-archive__portrait"
-              />
+        <div class="diw-archive__credits ui-rounded-box ui-backgrounded-box-padding font-size-11 font-size-s-10 text-align-center">
+          <div class="grid-row grid-row--nested pt-5 pb-6">
+            <div class="grid-item is-xxl-24 mb-5">
+              <h3 class="diw-archive__credits-title diw-archive__title font-weight-bold font-size-20 mb-4">Death in Westminster</h3>
             </div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Written by</h6>
-            <div class="diw-archive__credit-value">Kojo Koram, Daniel Trilling, Eleanor Penny and Max Packman-Walder</div>
-          </div>
-          <div class="grid-item is-xxl-8 is-m-12 is-s-24 mb-4">
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Producers</h6>
-            <div class="diw-archive__credit-value mb-3">Max Packman-Walder, Daniel Norman, Ben Heyderman and Aaron White</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Editor</h6>
-            <div class="diw-archive__credit-value mb-3">James Fox</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Executive Producer</h6>
-            <div class="diw-archive__credit-value mb-3">Freddie Stuart</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Sound design</h6>
-            <div class="diw-archive__credit-value mb-3">Josh Farmer</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Original music</h6>
-            <div class="diw-archive__credit-value mb-3">Aron Kyne</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Voice acting</h6>
-            <div class="diw-archive__credit-value mb-3">Max Packman-Walder</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Design</h6>
-            <div class="diw-archive__credit-value mb-3">Pietro Garrone and Filippo Marra</div>
-          </div>
-          <div class="grid-item is-xxl-8 is-m-24 is-s-24 mb-4">
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">Based on</h6>
-            <div class="diw-archive__credit-value mb-3">Uncommon Wealth: Britain and the Aftermath of Empire by Kojo Koram</div>
-            <h6 class="diw-archive__credit-label font-weight-bold mb-1">With support from</h6>
-            <div class="diw-archive__credit-value">The Joffe Trust and Friends Provident Foundation</div>
+            <div class="grid-item is-xxl-8 is-m-12 is-s-24">
+              <div class="diw-archive__credit-col">
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Produced by</h6>
+                <div class="diw-archive__credit-value mb-3">Planet B Productions</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Distributed by</h6>
+                <div class="diw-archive__credit-value mb-3">Novara Media</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Hosted by</h6>
+                <div class="diw-archive__credit-value mb-3">Kojo Koram and Dalia Gebrial</div>
+                <div class="mb-2">
+                  <img
+                    src="<?php echo esc_url( $base_image_path . 'diw-kojo.png' ); ?>"
+                    alt="Portrait of Kojo Koram"
+                    class="diw-archive__portrait"
+                  />
+                  <img
+                    src="<?php echo esc_url( $base_image_path . 'diw-dalia.png' ); ?>"
+                    alt="Portrait of Dalia Gebrial"
+                    class="diw-archive__portrait"
+                  />
+                </div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Written by</h6>
+                <div class="diw-archive__credit-value mb-3">Kojo Koram, Daniel Trilling, Eleanor Penny and Max Packman-Walder</div>
+              </div>
+            </div>
+            <div class="grid-item is-xxl-8 is-m-12 is-s-24">
+              <div class="diw-archive__credit-col">
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Producers</h6>
+                <div class="diw-archive__credit-value mb-3">Max Packman-Walder, Daniel Norman, Ben Heyderman and Aaron White</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Editor</h6>
+                <div class="diw-archive__credit-value mb-3">James Fox</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Executive Producer</h6>
+                <div class="diw-archive__credit-value mb-3">Freddie Stuart</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Sound design</h6>
+                <div class="diw-archive__credit-value mb-3">Josh Farmer</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Original music</h6>
+                <div class="diw-archive__credit-value mb-3">Aron Kyne</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Voice acting</h6>
+                <div class="diw-archive__credit-value mb-3">Max Packman-Walder</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Design</h6>
+                <div class="diw-archive__credit-value mb-3">Pietro Garrone and Filippo Marra</div>
+              </div>
+            </div>
+            <div class="grid-item is-xxl-8 is-m-12 offset-m-12 is-s-24 offset-s-0">
+              <div class="diw-archive__credit-col">
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">Based on</h6>
+                <div class="diw-archive__credit-value mb-3">Uncommon Wealth: Britain and the Aftermath of Empire by Kojo Koram</div>
+                <h6 class="diw-archive__credit-label font-weight-bold mb-1">With support from</h6>
+                <div class="diw-archive__credit-value">The Joffe Trust and Friends Provident Foundation</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
