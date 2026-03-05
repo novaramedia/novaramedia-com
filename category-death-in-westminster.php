@@ -25,7 +25,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     /* Hero */
     .diw-archive__hero {
-      height: 550px;
+      height: 535px;
       position: relative;
       overflow: hidden;
     }
@@ -110,6 +110,15 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     }
 
     /* Breakpoints */
+    @media screen and (max-width: 1440px) {
+      .diw-archive__hero {
+        height: 470px;
+      }
+
+      .diw-archive__title {
+        font-size: 6.5rem;
+      }
+    }
     @media screen and (max-width: 1336px) {
       .diw-archive__hero {
         height: 420px;
@@ -193,11 +202,15 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
   <div class="grid-row">
     <div class="grid-item is-xxl-24">
       <div class="diw-archive__hero background-cover-image ui-rounded-box">
-        <img
-          src="<?php echo esc_url( $base_image_path . 'diw-artwork.svg' ); ?>"
-          alt="Death in Westminster artwork"
-          class="diw-archive__artwork"
-        />
+        <picture>
+          <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.avif' ); ?>" type="image/avif">
+          <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.webp' ); ?>" type="image/webp">
+          <img
+            src="<?php echo esc_url( $base_image_path . 'diw-artwork.png' ); ?>"
+            alt="Death in Westminster artwork"
+            class="diw-archive__artwork"
+          />
+        </picture>
         <div class="diw-archive__hero-content text-align-center">
           <h1 class="diw-archive__title font-weight-bold font-size-20">Death in Westminster</h1>
           <h3 class="diw-archive__subtitle font-weight-bold font-size-14 font-size-xl-13 font-size-s-12 text-wrap-balance">How Britain became butler for the world's illicit money</h3>
