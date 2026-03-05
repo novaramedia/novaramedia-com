@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold when theme option slots are empty — `intval()` normalisation converted unset values to `0` before the fallback loop could fill them
+
 ### Changed
 
 - Optimise inline newsletter WP block data flow
