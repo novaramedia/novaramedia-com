@@ -30,6 +30,15 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - name: Validate ref input
+        run: |
+          if ! echo "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9._/-]+$'; then
+            echo "Error: invalid ref '${DEPLOY_REF}'"
+            exit 1
+          fi
+        env:
+          DEPLOY_REF: ${{ github.event.inputs.ref }}
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -51,8 +60,7 @@ jobs:
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
-             git checkout ${DEPLOY_REF} && \
-             git pull origin ${DEPLOY_REF} || true"
+             git checkout ${DEPLOY_REF}"
 
           echo "Deploy complete"
         env:
