@@ -36,9 +36,9 @@ on:
 permissions:
   contents: read
 
-# Ensure only one PR tests against staging at a time
+# Ensure only one workflow interacts with staging at a time
 concurrency:
-  group: staging-cypress-tests
+  group: kinsta-staging
   cancel-in-progress: false
 
 jobs:

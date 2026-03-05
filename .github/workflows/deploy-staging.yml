@@ -1,0 +1,111 @@
+# Deploy Branch to Staging
+#
+# Manually deploy a branch or PR to Kinsta staging for review.
+# Unlike the Cypress workflow, this does NOT reset staging afterwards —
+# the deployed branch persists until another deploy replaces it.
+#
+# Uses the same secrets as the Cypress workflow — no additional setup needed.
+
+name: Deploy to Staging
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch name or commit SHA to deploy'
+        required: true
+        default: 'development'
+
+permissions:
+  contents: read
+
+# Ensure only one workflow interacts with staging at a time
+concurrency:
+  group: kinsta-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
+          chmod 600 ~/.ssh/kinsta_key
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Deploy to staging
+        run: |
+          echo "Deploying ref to staging..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git fetch origin && \
+             git reset --hard HEAD && \
+             git clean -fd && \
+             git checkout ${DEPLOY_REF} && \
+             git pull origin ${DEPLOY_REF} || true"
+
+          echo "Deploy complete"
+        env:
+          DEPLOY_REF: ${{ github.event.inputs.ref }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Activate theme
+        run: |
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Clear Kinsta cache
+        continue-on-error: true
+        run: |
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+            echo "Skipping cache clear - Kinsta API secrets not configured"
+            exit 0
+          fi
+
+          echo "Clearing Kinsta cache..."
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_STAGING_ENV_ID}/clear-cache" \
+            -H "Authorization: Bearer ${KINSTA_API_KEY}" \
+            -H "Content-Type: application/json")
+
+          http_code=$(echo "$response" | tail -n1)
+          echo "Cache clear response: $http_code"
+        env:
+          KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
+          KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
+          KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
+
+      - name: Verify staging is accessible
+        run: |
+          echo "Checking staging site..."
+          sleep 5
+          http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
+
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
+            echo "Staging is live (HTTP $http_code)"
+          else
+            echo "Warning: staging returned HTTP $http_code"
+          fi
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+      - name: Cleanup SSH keys
+        if: always()
+        run: rm -f ~/.ssh/kinsta_key
