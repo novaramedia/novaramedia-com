@@ -118,7 +118,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
           <h1 class="breaking-britain__title mb-2 font-color-blue-neon" style="margin-bottom: 0;margin-left: -0.06em;">Breaking Britain.</h1>
         </div>
         <div class="grid-item is-s-24 is-m-18 is-xl-12 is-xxl-10">
-          <div class="font-size-11 font-weight-bold font-color-blue-neon margin-top-small">
+          <div class="font-size-11 font-weight-bold font-color-blue-neon mt-4">
             <?php echo get_term_field( 'description', $term, null, $context = 'raw' ); // getting like this to avoid the filters that add <p> tags ?>
           </div>
         </div>
@@ -168,7 +168,7 @@ if( have_posts() ) {
 
     if ($i === 5 || $i === 10) { ?>
     </div>
-    <div class="grid-row margin-top-mid mb-5 mt-s-0 mb-s-0" style="justify-content: center;">
+    <div class="grid-row mt-6 mb-5 mt-s-0 mb-s-0" style="justify-content: center;">
 <?php }
 
     if ($i === 7|| $i === 12) { ?>
@@ -208,7 +208,7 @@ if( have_posts() ) {
     </div>
 
     <div class="grid-row mt-5 mb-5 font-size-8">
-      <div class="grid-item is-s-24 flex-item-m-6 is-xxl-8">
+      <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
           if (!empty($credits)) {
             echo apply_filters('the_content', $credits);

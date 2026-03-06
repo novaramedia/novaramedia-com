@@ -75,12 +75,12 @@ jobs:
           # Incoming webhooks only use the 'text' field, not 'blocks'
           MESSAGE="*New release deployed: novaramedia.com v${VERSION}*
 
-*Repository:* https://github.com/${REPO_URL}
-*Release PR:* ${PR_URL}
-*Commit:* https://github.com/${REPO_URL}/commit/${COMMIT_SHA}
+          *Repository:* https://github.com/${REPO_URL}
+          *Release PR:* ${PR_URL}
+          *Commit:* https://github.com/${REPO_URL}/commit/${COMMIT_SHA}
 
-*Release Notes:*
-${RELEASE_NOTES}"
+          *Release Notes:*
+          ${RELEASE_NOTES}"
 
           # Create JSON message using jq for proper escaping
           jq -n \

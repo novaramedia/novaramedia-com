@@ -18,15 +18,15 @@
   }
 ?>
 
-<header class="grid-row mb-4">
+<header class="grid-row mb-4" data-testid="audio-post-header">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
-    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4" data-testid="post-title"><?php the_title(); ?></h1>
     <?php the_post_thumbnail([500, 400]); ?>
     <div class="font-size-8 mt-1">
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>
@@ -64,7 +64,7 @@
   }
 ?>
 
-<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>">
+<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>" data-testid="audio-player">
   <div class="grid-item is-xxl-24">
     <?php
     if ( ! empty( $meta['_cmb_sc'][0] ) ) {

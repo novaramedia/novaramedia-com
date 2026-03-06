@@ -12,10 +12,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Editor role users can now edit navigation menus in Appearance > Menus
 - New capability management system in `lib/functions-capabilities.php`
 
+### Changed
+
+- Optimise inline newsletter WP block data flow
+
 ### Security
 
 - Restricted editor role from accessing themes, widgets, customizer, and theme file editor
 - Only menu editing is allowed for editors under Appearance menu
+
+## [4.4.0] - 2026-02-09
+
+### Added
+
+- Cypress end-to-end testing with 8 test suites, CI via GitHub Actions, and `data-testid` selectors across PHP templates
+- Wordpress Block for inline newsletter signup forms
+
+### Changed
+
+- Updated nm-stylus-library (with pure Helv Neue sans fonts)
+- Update latest articles front page column to support News type posts with new image and layout logics
+- Updated ACFM archive page for better newsletter signup integration and newer header style
+- Updated the Downstream archive page for better newsletter signup integration and newer header style
+- Refactored stylus files for max DRY
+
+### Removed
+
+- Old style 12 col grid, old style margin and padding helpers, kouto swiss
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold due to type mismatch (int vs string) in `in_array` comparison
+>>>>>>> origin/development
 
 ## [4.3.1] - 2026-01-15
 

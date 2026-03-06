@@ -179,6 +179,7 @@ add_action( 'init', 'nm_register_shortcodes' );
 
 // Add custom functions
 
+get_template_part( 'lib/blocks' );
 get_template_part( 'lib/renderers' );
 get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
@@ -188,6 +189,3 @@ get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-seo' );
 get_template_part( 'lib/functions-capabilities' );
-
-// Newsletter migration - auto-runs on deployment
-get_template_part( 'lib/newsletter-migration' );

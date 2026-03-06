@@ -1,3 +1,14 @@
 config.codekit
 .DS_Store
 /node_modules
+
+# Cypress
+cypress/videos
+cypress/screenshots
+cypress/downloads
+.cypress_cache
+cypress.env.json
+test*.log
+
+# Build artifacts
+dist/report.html
