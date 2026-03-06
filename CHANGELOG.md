@@ -31,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 - Refactored stylus files for max DRY
 
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold when theme option slots are empty — `intval()` normalisation converted unset values to `0` before the fallback loop could fill them
+
 ### Removed
 
 - Old style 12 col grid, old style margin and padding helpers, kouto swiss
