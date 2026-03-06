@@ -100,7 +100,7 @@ function nm_register_menus() {
       'header-series'         => __( 'Header: Series' ),
       'header-submenu'        => __( 'Header: Submenu' ),
       'footer-general'        => __( 'Footer: General' ),
-      'footer-manage-donation' => __( 'Footer: Manage Donation' ),
+      'manage-donation'       => __( 'Manage Donation' ),
       'footer-legal'          => __( 'Footer: Legal' ),
       'footer-podcasts'       => __( 'Footer: Podcasts' ),
       'footer-focuses'        => __( 'Footer: Focuses' ),
