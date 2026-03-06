@@ -20,13 +20,13 @@ if ( $local_term && $url ) {
             background-repeat: no-repeat;
           }
           .avif .diw-banner__backgrounded {
-            background-image: url(<?php echo $base_image_path . 'diw-header-background.avif'; ?>);
+            background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.avif' ); ?>);
           }
           .webp .diw-banner__backgrounded {
-            background-image: url(<?php echo $base_image_path . 'diw-header-background.webp'; ?>);
+            background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.webp' ); ?>);
           }
           .fallback .diw-banner__backgrounded {
-            background-image: url(<?php echo $base_image_path . 'diw-header-background.jpg'; ?>);
+            background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.jpg' ); ?>);
           }
           .diw-banner__artwork {
             position: absolute;

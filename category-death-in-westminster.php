@@ -12,15 +12,15 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     }
 
     .avif .diw-archive__hero {
-      background-image: url(<?php echo $base_image_path . 'diw-header-background.avif'; ?>);
+      background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.avif' ); ?>);
     }
 
     .webp .diw-archive__hero {
-      background-image: url(<?php echo $base_image_path . 'diw-header-background.webp'; ?>);
+      background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.webp' ); ?>);
     }
 
     .fallback .diw-archive__hero {
-      background-image: url(<?php echo $base_image_path . 'diw-header-background.jpg'; ?>);
+      background-image: url(<?php echo esc_url( $base_image_path . 'diw-header-background.jpg' ); ?>);
     }
 
     /* Hero */
@@ -42,6 +42,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     .diw-archive__hero-content {
       position: relative;
+      z-index: 0;
       height: 100%;
       display: flex;
       flex-direction: column;

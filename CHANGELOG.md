@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Optimise inline newsletter WP block data flow
-- PHPCS config for Claude to hook linting
+- PHPCS config: added Claude hook for automated lint enforcement
 
 ## [4.4.0] - 2026-02-09
 

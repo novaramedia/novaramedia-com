@@ -74,9 +74,9 @@ function death_in_westminster_rewrites() {
   $cat = get_category_by_slug( 'death-in-westminster' );
   if ( $cat ) {
     add_rewrite_rule(
-        '^death-in-westminster/?$',
-        'index.php?category_name=' . $cat->slug,
-        'top'
+      '^death-in-westminster/?$',
+      'index.php?category_name=' . $cat->slug,
+      'top'
     );
   }
 }
