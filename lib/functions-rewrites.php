@@ -11,8 +11,7 @@ add_action(
   function () {
     handle_external_redirects(
       array(
-        'shop'      => 'https://shop.novaramedia.com',
-        'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
+        'shop' => 'https://shop.novaramedia.com',
       )
     );
   }
@@ -25,7 +24,6 @@ add_filter(
   'allowed_redirect_hosts',
   function ( $hosts ) {
     $external_hosts = array(
-      'docs.google.com',
       'shop.novaramedia.com',
     );
     return array_merge( $hosts, $external_hosts );
