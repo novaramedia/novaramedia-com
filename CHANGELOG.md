@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Death in Westminster podcast support (archive, banner, rewrites)
+
 ### Changed
 
 - Optimise inline newsletter WP block data flow
+- PHPCS config for Claude to hook linting
 
 ## [4.4.0] - 2026-02-09
 
