@@ -247,11 +247,11 @@ function get_above_the_fold_featured_post_ids() {
     $featured_posts_ids[ $i - 1 ] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
   }
 
-  // Normalize latest featured post IDs to integers for strict comparison
+  // Normalize all IDs to integers for strict comparison
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
+  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
 
   for ( $i = 0; $i < 8; $i++ ) {
-    $featured_posts_ids[ $i ] = intval( $featured_posts_ids[ $i ] );
 
     if ( empty( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
