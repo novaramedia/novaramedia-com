@@ -35,7 +35,7 @@ if ( $local_term && $url ) {
             transform: translateX(-50%);
             height: 95%;
             width: auto;
-            z-index: 1;
+            z-index: 2;
           }
           .diw-banner__grid-row {
             position: relative;
@@ -43,6 +43,7 @@ if ( $local_term && $url ) {
             align-items: center;
             min-height: 240px;
             padding: 1.5rem;
+            z-index: 0;
           }
           .diw-banner__title {
             font-size: 5.35rem;
@@ -96,15 +97,17 @@ if ( $local_term && $url ) {
             }
           }
         </style>
-        <picture>
-          <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.avif' ); ?>" type="image/avif">
-          <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.webp' ); ?>" type="image/webp">
-          <img
-            src="<?php echo esc_url( $base_image_path . 'diw-artwork.png' ); ?>"
-            alt="Death in Westminster artwork"
-            class="diw-banner__artwork"
-          />
-        </picture>
+        <a href="<?php echo esc_url( $url ); ?>">
+          <picture>
+            <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.avif' ); ?>" type="image/avif">
+            <source srcset="<?php echo esc_url( $base_image_path . 'diw-artwork.webp' ); ?>" type="image/webp">
+            <img
+              src="<?php echo esc_url( $base_image_path . 'diw-artwork.png' ); ?>"
+              alt="Death in Westminster artwork"
+              class="diw-banner__artwork"
+            />
+          </picture>
+        </a>
           <div class="grid-row diw-banner__grid-row">
             <div class="grid-item is-xxl-9 is-m-24 is-s-24">
               <a href="<?php echo esc_url( $url ); ?>" class="ui-hover">

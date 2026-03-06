@@ -74,19 +74,19 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
 
     /* Credits */
     .diw-archive__credits {
-      background-color: var(--diw-red);
+      background-color: var(--diw-white-muted);
     }
 
     .diw-archive__credits-title {
-      color: var(--diw-white-muted);
+      color: var(--diw-red);
     }
 
     .diw-archive__credit-label {
-      color: var(--diw-black-muted);
+      color: var(--diw-red);
     }
 
     .diw-archive__credit-value {
-      color: var(--diw-white-muted);
+      color: var(--diw-black-muted);
     }
 
     .diw-archive__credit-col {
@@ -257,7 +257,7 @@ if ( have_posts() ) {
           <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
         <div class="grid-item offset-s-0 is-s-24 is-xxl-12">
-          <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
+          <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail ui-rounded-box' ) ); ?>
         </div>
         <div class="grid-item offset-s-0 is-s-24 offset-l-4 is-l-16 offset-xl-6 is-xl-14 offset-xxl-6 is-xxl-12 mt-4 mb-4">
           <?php
