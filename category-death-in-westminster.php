@@ -211,13 +211,17 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
   </div>
 </div>
   <section class="container">
+    <?php
+    $diw_term = get_queried_object();
+    $diw_trailer_url = get_term_meta( $diw_term->term_id, '_nm_soundcloud_trailer', true );
+    if ( ! empty( $diw_trailer_url ) ) {
+    ?>
     <div class="grid-row mb-4">
       <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <?php
-          // TODO: Replace with actual SoundCloud trailer URL
           render_soundcloud_embed_iframe(
-            'https://api.soundcloud.com/tracks/PLACEHOLDER',
+            $diw_trailer_url,
             'full',
             true,
             array(
@@ -227,19 +231,24 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
           ?>
       </div>
     </div>
+    <?php } ?>
     <div class="grid-row mt-4 mb-5">
       <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16 font-serif diw__serif-large text-paragraph-breaks">
-        <!-- TODO: Replace with actual description copy -->
-        <p>Death in Westminster is a new podcast series from Novara Media, hosted by Kojo Koram and Dalia Gebrial, investigating how Britain became butler for the world's illicit money.</p>
+        <?php
+        $diw_description = category_description();
+        if ( empty( $diw_description ) ) {
+          $diw_description = '<p>Death in Westminster is a new podcast series from Novara Media, hosted by Kojo Koram and Dalia Gebrial, investigating how Britain became butler for the world\'s illicit money.</p>';
+        }
+        echo $diw_description;
+        ?>
       </div>
     </div>
     <div class="grid-row mb-6">
       <div class="grid-item is-s-24 is-xxl-24 text-align-center font-size-13 text-links-underlined">
-        <!-- TODO: Replace with actual listen links -->
         Listen now on:<br/>
-        <a href="#">Apple Podcasts</a>,
-        <a href="#">Spotify</a>,
-        <a href="#">RSS</a>
+        <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,
+        <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,
+        <a href="https://podfollow.com/novaramedia/view">RSS</a>
       </div>
     </div>
   </section>
