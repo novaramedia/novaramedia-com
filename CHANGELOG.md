@@ -43,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix duplicate featured posts appearing above the fold due to type mismatch (int vs string) in `in_array` comparison
->>>>>>> origin/development
+  > > > > > > > origin/development
 
 ## [4.3.1] - 2026-01-15
 
