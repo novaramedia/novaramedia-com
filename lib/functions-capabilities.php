@@ -20,13 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nm_add_editor_menu_capability() {
   $role = get_role( 'editor' );
-  
+
   if ( $role && ! $role->has_cap( 'edit_theme_options' ) ) {
     $role->add_cap( 'edit_theme_options' );
   }
 }
 add_action( 'after_switch_theme', 'nm_add_editor_menu_capability' );
-add_action( 'admin_init', 'nm_add_editor_menu_capability' );
 
 /**
  * Restrict editors from accessing theme and appearance options except menus.
@@ -54,53 +53,39 @@ function nm_restrict_editor_theme_options( $caps, $cap, $user_id ) {
     return $caps;
   }
   
-  // Block access to theme/widget/customizer capabilities for editors
-  $restricted_caps = array(
-    'switch_themes',        // Prevents theme switching
-    'edit_themes',          // Prevents theme file editing
-    'edit_theme_options',   // We'll handle this contextually below
-  );
-  
-  if ( in_array( $cap, $restricted_caps, true ) ) {
-    // Allow edit_theme_options only for nav menus
-    if ( $cap === 'edit_theme_options' ) {
-      // Check if we're on the nav-menus page
-      global $pagenow;
-      $is_menu_page = $pagenow === 'nav-menus.php';
-      
-      // Check for menu-related AJAX actions
-      // Note: WordPress handles nonce verification in the actual AJAX handlers
-      // This capability check only determines if the user has permission
-      $is_menu_ajax = false;
-      if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) ) {
-        $action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
-        
-        // Allow filtering of menu actions for extensibility
-        $menu_actions = apply_filters(
-          'nm_editor_allowed_menu_actions',
-          array(
-            'add-menu-item',
-            'delete-menu-item',
-            'update-menu-item',
-            'menu-quick-search',
-            'menu-locations-save',
-            'menu-get-metabox',
-            'add-menu',
-          )
-        );
-        $is_menu_ajax = in_array( $action, $menu_actions, true );
-      }
-      
-      if ( $is_menu_page || $is_menu_ajax ) {
-        // Allow access to menus
-        return $caps;
-      }
+  // Contextually restrict edit_theme_options for editors to menu pages only
+  if ( $cap === 'edit_theme_options' ) {
+    global $pagenow;
+    $is_menu_page = $pagenow === 'nav-menus.php';
+
+    // Check for menu-related AJAX actions
+    // Note: WordPress handles nonce verification in the actual AJAX handlers
+    $is_menu_ajax = false;
+    if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) ) {
+      $action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+
+      $menu_actions = apply_filters(
+        'nm_editor_allowed_menu_actions',
+        array(
+          'add-menu-item',
+          'delete-menu-item',
+          'update-menu-item',
+          'menu-quick-search',
+          'menu-locations-save',
+          'menu-get-metabox',
+          'add-menu',
+        )
+      );
+      $is_menu_ajax = in_array( $action, $menu_actions, true );
     }
-    
-    // Block all other theme options
+
+    if ( $is_menu_page || $is_menu_ajax ) {
+      return $caps;
+    }
+
     return array( 'do_not_allow' );
   }
-  
+
   return $caps;
 }
 add_filter( 'map_meta_cap', 'nm_restrict_editor_theme_options', 10, 3 );
