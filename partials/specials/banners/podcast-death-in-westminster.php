@@ -39,7 +39,6 @@ if ( $local_term && $url ) {
           }
           .diw-banner__grid-row {
             position: relative;
-            z-index: 2;
             align-items: center;
             min-height: 240px;
             padding: 1.5rem;
