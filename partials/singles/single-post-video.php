@@ -8,11 +8,11 @@
     $share_url = get_the_permalink($post->ID);
   }
 ?>
-<header class="grid-row mb-4">
+<header class="grid-row mb-4" data-testid="video-post-header">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-4">
-    <h1 class="font-size-15 font-weight-bold"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold" data-testid="post-title"><?php the_title(); ?></h1>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>
@@ -41,7 +41,7 @@
     render_resources_row($resources);
   }
 ?>
-<div class="grid-row mb-6">
+<div class="grid-row mb-6" data-testid="video-player">
   <div class="grid-item is-s-24 is-xxl-20 mb-4">
     <?php
       if (!empty($meta['_cmb_utube'])) {

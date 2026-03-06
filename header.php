@@ -11,9 +11,7 @@
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
-  <link rel="stylesheet" href="https://use.typekit.net/aki7elm.css">
   <?php
-    get_template_part( 'partials/header/google-tag-manager' );
     get_template_part( 'partials/header/seo' );
     get_template_part( 'partials/header/favicon' );
     get_template_part( 'partials/header/feature-detect' );
@@ -22,16 +20,18 @@
   <?php if ( is_singular() && pings_open( get_queried_object() ) ) { ?>
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
   <?php } ?>
-  <?php wp_head(); ?>
+  <?php
+    wp_head();
+  ?>
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
   <section id="main-container">
-    <header class="site-header background-black mb-4">
+    <header class="site-header background-black mb-4" data-testid="site-header">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
         <div class="site-header__main container">
           <div class="grid-row">
-            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main">
+            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main" data-testid="site-nav">
               <ul class="site-header__navigation u-inline-list u-inline-block">
                 <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
                 <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <nav class="site-header-nav" role="navigation" aria-label="Sections">
+      <nav class="site-header-nav" role="navigation" aria-label="Sections" data-testid="site-nav-panel">
         <div class="container font-size-12 font-size-s-13 font-weight-bold font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
@@ -74,7 +74,7 @@
                 <li><a href="<?php echo site_url( 'about/' ); ?>">About Us</a></li>
                 <li><a href="<?php echo site_url( 'support/' ); ?>">Support Us</a></li>
                 <li><a href="<?php echo site_url( 'newsletters/' ); ?>">Newsletters</a></li>
-                <li><a href="<?php echo site_url( 'about/how-were-funded/' ); ?>">How We're Funded</a></li>
+                <li><a href="<?php echo site_url( 'about/how-we-are-funded/' ); ?>">How We Are Funded</a></li>
                 <li><a href="https://shop.novaramedia.com">Merch Shop</a></li>
               </ul>
                           <?php

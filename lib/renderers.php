@@ -217,9 +217,9 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
  * @param array $copy_overrides Optional context-specific copy overrides. Takes precedence over global settings.
  */
 function render_support_heading_and_text( $donation_mode, $text_classes = '', $copy_overrides = array() ) {
-  // Start with standard defaults
-  $heading = 'Support Novara Media';
-  $text = 'Help us fund independent journalism.';
+  // Set standard defaults
+  $heading = 'Help build people-powered media';
+  $text = 'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
 
   // Get global configuration data
   $data = nm_get_support_heading_text_data();
@@ -807,7 +807,7 @@ function render_about_group_field( $data ) {
 
   foreach ( $data as $person ) {
     ?>
-    <div class="margin-bottom-small">
+    <div class="mb-4">
       <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
       <?php
       foreach ( $person['name'] as $name ) {
@@ -817,6 +817,85 @@ function render_about_group_field( $data ) {
       }
       ?>
     </div>
+    <?php
+  }
+}
+
+/**
+ * Render a quotes carousel for the Support page
+ *
+ * @since 4.2.1
+ *
+ * @param array $quotes Array of quote strings to display in the carousel.
+ * @return void Outputs the carousel HTML directly.
+ */
+function render_support_quotes_carousel( $quotes ) {
+  if ( empty( $quotes ) || ! is_array( $quotes ) ) {
+    return;
+  }
+
+  // Filter out empty quotes
+  $quotes = array_filter( $quotes );
+
+  if ( empty( $quotes ) ) {
+    return;
+  }
+  ?>
+  <section class="container support-page__quote-carousel ux-gallery-carousel mb-5" data-autoplay="true">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+      <?php foreach ( $quotes as $quote ) { ?>
+          <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+            <h5 class="ui-boxed-title ui-boxed-title--grey mb-s-2">Supporters Say</h5>
+            <div class="support-page__quote-container">
+              <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
+              <p class="font-serif font-size-13 font-size-s-13 text-extra-leading text-wrap-balance"><?php echo esc_html( $quote ); ?></p>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <?php
+}
+
+/**
+ * Render complete SoundCloud embed iframe HTML.
+ * Handles both lazy loading and regular loading scenarios.
+ *
+ * @param string $soundcloud_url SoundCloud track URL.
+ * @param string $size Player size: 'mini', 'small', 'medium', 'full'.
+ * @param boolean $lazyload Set true to use lazy loading (uses data-src instead of src).
+ * @param array $params Optional SoundCloud embed parameters.
+ */
+function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyload = false, $params = array() ) {
+  if ( empty( $soundcloud_url ) ) {
+    return;
+  }
+
+  $height = get_soundcloud_player_height( $size );
+  $url = generate_soundcloud_embed_url( $soundcloud_url, $params );
+
+  if ( $lazyload ) {
+    // Lazy loading placeholder with fallback
+    ?>
+    <div class="soundcloud-lazy"
+      data-src="<?php echo esc_url( $url ); ?>"
+      data-width="100%"
+      data-height="<?php echo esc_attr( $height ); ?>"
+      style="min-height: <?php echo esc_attr( $height ); ?>px;">
+      <noscript>
+        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener">Listen on SoundCloud</a>
+      </noscript>
+    </div>
+    <?php
+  } else {
+    ?>
+    <iframe src="<?php echo esc_url( $url ); ?>"
+      width="100%"
+      height="<?php echo esc_attr( $height ); ?>"
+      allow="autoplay"></iframe>
     <?php
   }
 }

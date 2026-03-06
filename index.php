@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 ?>
-<main id="main-content">
-  <section id="posts" class="container mt-3">
+<main id="main-content" data-testid="main-content">
+  <section id="posts" class="container mt-3" data-testid="post-list">
 <?php
 if ( is_search() || is_tag() ) {
   ?>

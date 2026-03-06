@@ -18,15 +18,15 @@
   }
 ?>
 
-<header class="grid-row mb-4">
+<header class="grid-row mb-4" data-testid="audio-post-header">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12">
-    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold text-wrap-pretty mb-4" data-testid="post-title"><?php the_title(); ?></h1>
     <?php the_post_thumbnail([500, 400]); ?>
     <div class="font-size-8 mt-1">
       <?php the_post_thumbnail_caption(); ?>
     </div>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy mt-1 mt-s-4" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>
@@ -64,16 +64,18 @@
   }
 ?>
 
-<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>">
+<div class="grid-row <?php if (empty($transcript)) { echo 'mb-6'; } else { echo 'mb-4'; } ?>" data-testid="audio-player">
   <div class="grid-item is-xxl-24">
     <?php
-      if (!empty($meta['_cmb_sc'][0])) {
-    ?>
-        <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($meta['_cmb_sc'][0]); ?>" width="100%" height="200" scrolling="no" frameborder="no"></iframe>
+    if ( ! empty( $meta['_cmb_sc'][0] ) ) {
+      render_soundcloud_embed_iframe(
+        $meta['_cmb_sc'][0],
+        'full',
+        true,
+      );
 
-      <?php
-        if (!empty($meta['_cmb_is_resonance']) && $meta['_cmb_is_resonance'][0]) {
-      ?>
+      if ( ! empty( $meta['_cmb_is_resonance'] ) && $meta['_cmb_is_resonance'][0] ) {
+        ?>
         <div class="font-mono font-size-8 mt-1">
         	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
         </div>

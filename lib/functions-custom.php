@@ -152,6 +152,13 @@ add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
  * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
  * But can be adapted for future use
  *
+ * TODO: Deprecate and remove this apology_notice functionality
+ * This is a temporary solution that should be removed. The hardcoded date logic
+ * (8 weeks from Sept 22, 2024) means this feature has limited lifespan. Consider
+ * removing this function and all its usages once the notice period expires.
+ * Used in: partials/front-page/above-the-fold/latest-articles.php
+ *          partials/front-page/products-bar.php
+ *
  * @return array/Boolean Array of apology post or false if no apology post
  * @since 4.1.1
  */
@@ -192,10 +199,15 @@ function get_latest_articles_ids( $featured_posts_ids = false ) {
       'category_name'  => 'articles',
       'posts_per_page' => 7,
       'fields'         => 'ids',
+      'post_status'    => 'publish',
   );
 
   if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    $query_args = array_merge( $query_args, array( 'post__not_in' => $featured_posts_ids ) );
+    // Filter out non-numeric values to ensure only valid post IDs are excluded
+    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+    if ( ! empty( $valid_ids ) ) {
+      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+    }
   }
 
   $recent_articles = new WP_Query( $query_args );
@@ -223,6 +235,7 @@ function get_above_the_fold_featured_post_ids() {
       'category_name'  => 'articles,video,audio',
       'meta_key'       => '_cmb_featurable',
       'meta_value'     => 'on',
+      'post_status'    => 'publish',
   );
 
   $latest_featured_posts = new WP_Query( $latest_args );
@@ -234,14 +247,20 @@ function get_above_the_fold_featured_post_ids() {
     $featured_posts_ids[ $i - 1 ] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
   }
 
+  // Normalize featured post IDs to integers for strict comparison
+  $featured_posts_ids = array_map( 'intval', $featured_posts_ids );
+  $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
+
   for ( $i = 0; $i < 8; $i++ ) {
     if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
-        while ( in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
+        while ( ! empty( $latest_featured_posts_ids ) && in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
         }
 
-        $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        if ( ! empty( $latest_featured_posts_ids ) ) {
+          $featured_posts_ids[ $i ] = array_shift( $latest_featured_posts_ids );
+        }
       }
     }
   }
@@ -733,4 +752,49 @@ function menu_tags_list() {
   }
 
   return $tags;
+}
+
+/**
+ * Generate SoundCloud embed URL with parameters.
+ *
+ * @param string $soundcloud_url The SoundCloud track URL.
+ * @param array $params Optional parameters for the embed.
+ * @return string Complete SoundCloud embed URL.
+ */
+function generate_soundcloud_embed_url( $soundcloud_url, $params = array() ) {
+  $base_url = 'https://w.soundcloud.com/player/';
+
+  $default_params = array(
+    'url'           => urlencode( $soundcloud_url ),
+    'auto_play'     => 'false',
+    'buying'        => 'false',
+    'color'         => '#0e0e0e',
+    'show_artwork'  => 'true',
+    'show_user'     => 'false',
+    'show_comments' => 'false', // may be obsolete
+    'show_reposts'  => 'false', // may be obsolete
+    'show_teaser'   => 'false', // may be obsolete
+    'inverse'       => 'false', // may be obsolete
+  );
+
+  $params = wp_parse_args( $params, $default_params );
+
+  return $base_url . '?' . http_build_query( $params );
+}
+
+/**
+ * Get SoundCloud player height by semantic size name.
+ *
+ * @param string $size The semantic size name.
+ * @return string The height value as a numeric string (without unit suffix).
+ */
+function get_soundcloud_player_height( $size ) {
+  $heights = array(
+    'mini'   => '20',      // Front page audio blocks, category listings
+    'small'  => '115',    // Category archive players, single post articles (consolidated from former medium)
+    'medium' => '145',   // Reserved for future use
+    'full'   => '166',    // Category featured players, single post audio (consolidated from former large/full)
+  );
+
+  return isset( $heights[ $size ] ) ? $heights[ $size ] : $heights['full'];
 }
