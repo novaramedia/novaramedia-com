@@ -66,6 +66,21 @@ function committed_rewrites() {
   }
 }
 
+add_action( 'init', 'death_in_westminster_rewrites' );
+/**
+ * Redirects /death-in-westminster to /category/audio/death-in-westminster.
+ */
+function death_in_westminster_rewrites() {
+  $cat = get_category_by_slug( 'death-in-westminster' );
+  if ( $cat ) {
+    add_rewrite_rule(
+      '^death-in-westminster/?$',
+      'index.php?category_name=' . $cat->slug,
+      'top'
+    );
+  }
+}
+
 add_action( 'init', 'novara_live_rewrites' );
 /**
  * Adds rewrite rules for Novara Live category.

@@ -92,6 +92,7 @@ function nm_register_front_page_options_metabox() {
     false                                              => 'None',
     'partials/support-section'                         => 'Support section',
     'partials/specials/banners/support-video'          => 'Support Video',
+    'partials/specials/banners/podcast-death-in-westminster' => 'Podcast: Death in Westminster',
     'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
     'partials/specials/banners/podcast-if-i-speak'     => 'Podcast: If I Speak',
     'partials/specials/banners/focus-pro-rev-soccer'   => 'Focus: Pro Rev Soccer',

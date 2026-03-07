@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Death in Westminster podcast support (archive, banner, rewrites)
 - Deploy to Staging GitHub Actions workflow for manually deploying any branch to Kinsta staging persistently
 - `paths-ignore` filter on Cypress workflow to skip test runs for non-frontend changes (docs, workflows, config files)
 
 ### Changed
 
 - Optimise inline newsletter WP block data flow
+- PHPCS config: added Claude hook for automated lint enforcement
 
 ## [4.4.0] - 2026-02-09
 

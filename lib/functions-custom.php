@@ -127,7 +127,7 @@ function nm_serial_podcast_redirect() {
   }
   global $post;
   // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed' );
+  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,
