@@ -54,13 +54,13 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     /* Typography */
     .diw-archive__title {
       font-size: 8.5rem;
-      letter-spacing: -6%;
+      letter-spacing: -0.06em;
       margin-bottom: .75rem;
     }
 
     .diw-archive__subtitle {
       color: var(--diw-red);
-      letter-spacing: -4%;
+      letter-spacing: -0.04em;
     }
 
     .diw__serif-large {

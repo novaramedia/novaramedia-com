@@ -46,7 +46,7 @@ if ( $local_term && $url ) {
           }
           .diw-banner__title {
             font-size: 5.35rem;
-            letter-spacing: -6%;
+            letter-spacing: -0.06em;
             line-height: 0.8;
             color: var(--diw-black-muted);
             text-align: center;
