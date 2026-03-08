@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Optimise inline newsletter WP block data flow
 - PHPCS config: added Claude hook for automated lint enforcement
+- Non-interactive release script (`scripts/release.sh`) for automated versioning and PR creation
 
 ## [4.4.0] - 2026-02-09
 

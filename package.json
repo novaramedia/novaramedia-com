@@ -15,7 +15,8 @@
     "build:theme": "webpack --mode=production",
     "build:blocks": "wp-scripts build --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
     "build": "npm run build:theme && npm run build:blocks",
-    "release": "release-it"
+    "release": "release-it",
+    "release:ci": "./scripts/release.sh"
   },
   "repository": {
     "type": "git",
