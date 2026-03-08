@@ -8,18 +8,29 @@
 #   4. Optionally creates PR to master
 #
 # Usage:
-#   ./scripts/release.sh [increment]
+#   ./scripts/release.sh [increment] [--pr]
 #
 #   increment: major | minor | patch (default: minor)
+#   --pr:      create PR to master without prompting
 #
 # Examples:
-#   ./scripts/release.sh           # minor bump (4.4.0 → 4.5.0)
-#   ./scripts/release.sh patch     # patch bump (4.4.0 → 4.4.1)
-#   ./scripts/release.sh major     # major bump (4.4.0 → 5.0.0)
+#   ./scripts/release.sh                # minor bump, prompt for PR
+#   ./scripts/release.sh patch          # patch bump, prompt for PR
+#   ./scripts/release.sh minor --pr     # minor bump, auto-create PR
+#   ./scripts/release.sh --pr           # minor bump, auto-create PR
 
 set -euo pipefail
 
-INCREMENT="${1:-minor}"
+INCREMENT="minor"
+AUTO_PR=false
+
+for arg in "$@"; do
+  case "$arg" in
+    --pr) AUTO_PR=true ;;
+    major|minor|patch) INCREMENT="$arg" ;;
+    *) echo "Unknown argument: $arg"; exit 1 ;;
+  esac
+done
 BRANCH=$(git branch --show-current)
 
 # --- Preflight checks ---
@@ -63,9 +74,16 @@ git push origin development
 
 # --- Create PR ---
 
-echo ""
-read -r -p "Create PR to master? [y/N] " CREATE_PR
-if [[ "$CREATE_PR" =~ ^[Yy]$ ]]; then
+CREATE_PR=false
+if [ "$AUTO_PR" = true ]; then
+  CREATE_PR=true
+elif [ -t 0 ]; then
+  echo ""
+  read -r -p "Create PR to master? [y/N] " REPLY
+  [[ "$REPLY" =~ ^[Yy]$ ]] && CREATE_PR=true
+fi
+
+if [ "$CREATE_PR" = true ]; then
   CHANGELOG_ENTRY=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d')
 
   gh pr create \
