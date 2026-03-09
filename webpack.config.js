@@ -235,9 +235,12 @@ module.exports = (env, argv) => {
                       params: {
                         overrides: {
                           cleanupIds: false,
-                          removeViewBox: false,
                         },
                       },
+                    },
+                    {
+                      name: 'removeViewBox',
+                      active: false,
                     },
                   ],
                 },
