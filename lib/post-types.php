@@ -1,24 +1,29 @@
 <?php
+/**
+ * Register the Contributor custom post type.
+ *
+ * @return void
+ */
 function nm_register_post_type_contributor() {
-  $args = [
-    'label'  => esc_html__( 'Contributors', 'text-domain' ),
-    'labels' => [
-      'menu_name'          => esc_html__( 'Contributors', '' ),
-      'name_admin_bar'     => esc_html__( 'Contributor', '' ),
-      'add_new'            => esc_html__( 'Add Contributor', '' ),
-      'add_new_item'       => esc_html__( 'Add new Contributor', '' ),
-      'new_item'           => esc_html__( 'New Contributor', '' ),
-      'edit_item'          => esc_html__( 'Edit Contributor', '' ),
-      'view_item'          => esc_html__( 'View Contributor', '' ),
-      'update_item'        => esc_html__( 'View Contributor', '' ),
-      'all_items'          => esc_html__( 'All Contributors', '' ),
-      'search_items'       => esc_html__( 'Search Contributors', '' ),
-      'parent_item_colon'  => esc_html__( 'Parent Contributor', '' ),
-      'not_found'          => esc_html__( 'No Contributors found', '' ),
-      'not_found_in_trash' => esc_html__( 'No Contributors found in Trash', '' ),
-      'name'               => esc_html__( 'Contributors', '' ),
-      'singular_name'      => esc_html__( 'Contributor', '' ),
-    ],
+  $args = array(
+    'label'               => 'Contributors',
+    'labels'              => array(
+      'menu_name'          => 'Contributors',
+      'name_admin_bar'     => 'Contributor',
+      'add_new'            => 'Add Contributor',
+      'add_new_item'       => 'Add new Contributor',
+      'new_item'           => 'New Contributor',
+      'edit_item'          => 'Edit Contributor',
+      'view_item'          => 'View Contributor',
+      'update_item'        => 'Update Contributor',
+      'all_items'          => 'All Contributors',
+      'search_items'       => 'Search Contributors',
+      'parent_item_colon'  => 'Parent Contributor',
+      'not_found'          => 'No Contributors found',
+      'not_found_in_trash' => 'No Contributors found in Trash',
+      'name'               => 'Contributors',
+      'singular_name'      => 'Contributor',
+    ),
     'public'              => true,
     'exclude_from_search' => false,
     'menu_position'       => 10,
@@ -33,23 +38,80 @@ function nm_register_post_type_contributor() {
     'has_archive'         => false,
     'query_var'           => true,
     'can_export'          => true,
+    'rewrite'             => true,
     'rewrite_no_front'    => false,
     'show_in_menu'        => true,
-    'supports' => [
+    'supports'            => array(
       'title',
       'editor',
       'thumbnail',
-    ],
-
-    'rewrite' => true
-  ];
+    ),
+  );
 
   register_post_type( 'contributor', $args );
 }
 add_action( 'init', 'nm_register_post_type_contributor', 0 );
 
-function event_post_type() {
+/**
+ * Register the Newsletter custom post type.
+ *
+ * @return void
+ */
+function nm_register_post_type_newsletter() {
+  $args = array(
+    'label'               => 'Newsletters',
+    'labels'              => array(
+      'menu_name'          => 'Newsletters',
+      'name_admin_bar'     => 'Newsletter',
+      'add_new'            => 'Add Newsletter',
+      'add_new_item'       => 'Add new Newsletter',
+      'new_item'           => 'New Newsletter',
+      'edit_item'          => 'Edit Newsletter',
+      'view_item'          => 'View Newsletter',
+      'update_item'        => 'Update Newsletter',
+      'all_items'          => 'All Newsletters',
+      'search_items'       => 'Search Newsletters',
+      'parent_item_colon'  => 'Parent Newsletter:',
+      'not_found'          => 'No Newsletters found',
+      'not_found_in_trash' => 'No Newsletters found in Trash',
+      'name'               => 'Newsletters',
+      'singular_name'      => 'Newsletter',
+    ),
+    'public'              => true,
+    'exclude_from_search' => false,
+    'publicly_queryable'  => true,
+    'show_ui'             => true,
+    'show_in_nav_menus'   => true,
+    'show_in_admin_bar'   => true,
+    'show_in_rest'        => true,
+    'menu_icon'           => 'dashicons-email',
+    'capability_type'     => 'post',
+    'hierarchical'        => false,
+    'has_archive'         => true,
+    'query_var'           => true,
+    'can_export'          => true,
+    'rewrite'             => array(
+      'slug'  => 'newsletters',
+      'feeds' => false,
+    ),
+    'show_in_menu'        => true,
+    'supports'            => array(
+      'title',
+      'editor',
+      'thumbnail',
+    ),
+  );
 
+  register_post_type( 'newsletter', $args );
+}
+add_action( 'init', 'nm_register_post_type_newsletter', 0 );
+
+/**
+ * Register the Event custom post type.
+ *
+ * @return void
+ */
+function event_post_type() {
   $labels = array(
     'name'                  => 'Events',
     'singular_name'         => 'Event',
@@ -80,34 +142,37 @@ function event_post_type() {
     'filter_items_list'     => 'Filter items list',
   );
   $args = array(
-    'label'                 => 'Event',
-    'description'           => 'IRL Events',
-    'labels'                => $labels,
-    'supports'              => array( 'title', 'editor', 'thumbnail', ),
-    'taxonomies'            => array( 'post_tag' ),
-    'hierarchical'          => false,
-    'public'                => true,
-    'show_ui'               => true,
-    'show_in_menu'          => true,
-    'menu_icon'             => 'dashicons-calendar',
-    'menu_position'         => null,
-    'show_in_admin_bar'     => true,
-    'show_in_nav_menus'     => true,
-    'can_export'            => true,
-    'has_archive'           => true,
-    'exclude_from_search'   => false,
-    'publicly_queryable'    => true,
-    'capability_type'       => 'page',
-    'show_in_rest'          => true,
+    'label'               => 'Event',
+    'description'         => 'IRL Events',
+    'labels'              => $labels,
+    'supports'            => array( 'title', 'editor', 'thumbnail' ),
+    'taxonomies'          => array( 'post_tag' ),
+    'hierarchical'        => false,
+    'public'              => true,
+    'show_ui'             => true,
+    'show_in_menu'        => true,
+    'menu_icon'           => 'dashicons-calendar',
+    'menu_position'       => null,
+    'show_in_admin_bar'   => true,
+    'show_in_nav_menus'   => true,
+    'can_export'          => true,
+    'has_archive'         => true,
+    'exclude_from_search' => false,
+    'publicly_queryable'  => true,
+    'capability_type'     => 'page',
+    'show_in_rest'        => true,
+    'rewrite'             => array( 'slug' => 'events' ),
   );
   register_post_type( 'event', $args );
-
 }
 add_action( 'init', 'event_post_type', 0 );
 
-// Register Notices
+/**
+ * Register the Notice custom post type.
+ *
+ * @return void
+ */
 function notices_post_type() {
-
   $labels = array(
     'name'                  => 'Notices',
     'singular_name'         => 'Notice',
@@ -136,49 +201,53 @@ function notices_post_type() {
     'filter_items_list'     => 'Filter items list',
   );
   $args = array(
-    'label'                 => 'Notice',
-    'description'           => 'Simple notices with no archive',
-    'labels'                => $labels,
-    'supports'              => array( 'title', 'editor', 'thumbnail'),
-    'hierarchical'          => false,
-    'public'                => true,
-    'show_ui'               => true,
-    'show_in_menu'          => true,
-    'menu_position'         => null,
-    'show_in_admin_bar'     => true,
-    'show_in_nav_menus'     => true,
-    'can_export'            => true,
-    'has_archive'           => false,
-    'exclude_from_search'   => false,
-    'publicly_queryable'    => true,
-    'capability_type'       => 'page',
-    'show_in_rest'          => true,
+    'label'               => 'Notice',
+    'description'         => 'Simple notices with no archive',
+    'labels'              => $labels,
+    'supports'            => array( 'title', 'editor', 'thumbnail' ),
+    'hierarchical'        => false,
+    'public'              => true,
+    'show_ui'             => true,
+    'show_in_menu'        => true,
+    'menu_position'       => null,
+    'show_in_admin_bar'   => true,
+    'show_in_nav_menus'   => true,
+    'can_export'          => true,
+    'has_archive'         => false,
+    'exclude_from_search' => true,
+    'publicly_queryable'  => true,
+    'capability_type'     => 'page',
+    'show_in_rest'        => true,
   );
   register_post_type( 'notice', $args );
-
 }
 add_action( 'init', 'notices_post_type', 0 );
 
+/**
+ * Register the Job custom post type.
+ *
+ * @return void
+ */
 function nm_register_post_type_job() {
-  $args = [
-    'label'  => esc_html__( 'Jobs', 'text-domain' ),
-    'labels' => [
-      'menu_name'          => esc_html__( 'Jobs', '' ),
-      'name_admin_bar'     => esc_html__( 'Job', '' ),
-      'add_new'            => esc_html__( 'Add Job', '' ),
-      'add_new_item'       => esc_html__( 'Add new Job', '' ),
-      'new_item'           => esc_html__( 'New Job', '' ),
-      'edit_item'          => esc_html__( 'Edit Job', '' ),
-      'view_item'          => esc_html__( 'View Job', '' ),
-      'update_item'        => esc_html__( 'View Job', '' ),
-      'all_items'          => esc_html__( 'All Jobs', '' ),
-      'search_items'       => esc_html__( 'Search Jobs', '' ),
-      'parent_item_colon'  => esc_html__( 'Parent Job', '' ),
-      'not_found'          => esc_html__( 'No Jobs found', '' ),
-      'not_found_in_trash' => esc_html__( 'No Jobs found in Trash', '' ),
-      'name'               => esc_html__( 'Jobs', '' ),
-      'singular_name'      => esc_html__( 'Job', '' ),
-    ],
+  $args = array(
+    'label'               => 'Jobs',
+    'labels'              => array(
+      'menu_name'          => 'Jobs',
+      'name_admin_bar'     => 'Job',
+      'add_new'            => 'Add Job',
+      'add_new_item'       => 'Add new Job',
+      'new_item'           => 'New Job',
+      'edit_item'          => 'Edit Job',
+      'view_item'          => 'View Job',
+      'update_item'        => 'View Job',
+      'all_items'          => 'All Jobs',
+      'search_items'       => 'Search Jobs',
+      'parent_item_colon'  => 'Parent Job:',
+      'not_found'          => 'No Jobs found',
+      'not_found_in_trash' => 'No Jobs found in Trash',
+      'name'               => 'Jobs',
+      'singular_name'      => 'Job',
+    ),
     'public'              => true,
     'exclude_from_search' => false,
     'publicly_queryable'  => true,
@@ -193,16 +262,15 @@ function nm_register_post_type_job() {
     'can_export'          => true,
     'rewrite_no_front'    => false,
     'show_in_menu'        => true,
-    'supports' => [
+    'supports'            => array(
       'title',
       'editor',
       'thumbnail',
-    ],
+    ),
 
-    'rewrite' => true
-  ];
+    'rewrite'             => true,
+  );
 
   register_post_type( 'job', $args );
 }
 add_action( 'init', 'nm_register_post_type_job', 0 );
-?>

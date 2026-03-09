@@ -5,12 +5,84 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.5.0] - 2026-03-07
+
+### Added
+
+- Death in Westminster podcast support (archive, banner, rewrites)
+- Deploy to Staging GitHub Actions workflow for manually deploying any branch to Kinsta staging persistently
+- `paths-ignore` filter on Cypress workflow to skip test runs for non-frontend changes (docs, workflows, config files)
 
 ### Changed
 
+- Optimise inline newsletter WP block data flow
+- PHPCS config: added Claude hook for automated lint enforcement
+- Non-interactive release script (`scripts/release.sh`) for automated versioning and PR creation
+
+## [4.4.0] - 2026-02-09
+
+### Added
+
+- Cypress end-to-end testing with 8 test suites, CI via GitHub Actions, and `data-testid` selectors across PHP templates
+- Wordpress Block for inline newsletter signup forms
+
+### Changed
+
+- Updated nm-stylus-library (with pure Helv Neue sans fonts)
+- Update latest articles front page column to support News type posts with new image and layout logics
+- Updated ACFM archive page for better newsletter signup integration and newer header style
+- Updated the Downstream archive page for better newsletter signup integration and newer header style
+- Refactored stylus files for max DRY
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold when theme option slots are empty — `intval()` normalisation converted unset values to `0` before the fallback loop could fill them
+
+### Removed
+
+- Old style 12 col grid, old style margin and padding helpers, kouto swiss
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold due to type mismatch (int vs string) in `in_array` comparison
+
+## [4.3.1] - 2026-01-15
+
+### Changed
+
+- Improved line breaking for titles on homepage above the fold
+- Removed Yarn from repository, standardized on NPM as single package manager
+
+### Fixed
+
+- Fixed featured post duplication by filtering non-numeric values from exclusion arrays and adding explicit `post_status` filter
+- RSS feed title and post author incorrect values
+- Strip tags from page title html
+
+## [4.3.0] - 2026-01-07
+
+### Added
+
+- Add Github Action workflow to notify to Slack on releases
+- Additional SEO title content. Downstream shows standfirst. Opinion, Features & Analysis show the author. Complete override option available via meta box.
+- .avif and .webp generation via build script
+- Push custom metadata (authors, standfirst, reading age) to GTM dataLayer via GTM4WP plugin integration
+- Click to copy post ID column in admin views
+
+### Changed
+
+- Replace HTTP_HOST environment checks with wp_get_environment_type() for improved reliability
 - Rebuild the support form, with new condensed width version
 - Updated all dev and front end dependencies (`chalk` pinned at v4)
+- Migrate the .js-fix-widows helper into a css utility class based progressive enhancement based on text-wrap
+- Migrate newsletter functionality to custom post type not page templates
+- Integrated nm-stylus-library 0.12.0-RC
+- Events views quickly updated to design system
+- Updated YouTube embed generation to support modern Safari and use helper
+- Use localstorage not cookies for non-identified functional browser prefs
+- Very basic jobs views design update
+- Lazyload SoundCloud players
+- Update design and copy on Support & How We Are Funded pages
 
 ## [4.2.10] - 2025-05-22
 

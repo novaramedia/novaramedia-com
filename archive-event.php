@@ -1,45 +1,38 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 get_header();
 ?>
-
-<!-- main content -->
-
 <main id="main-content">
-
-  <!-- main posts loop -->
-  <section id="posts" class="container margin-top-small">
-
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
-        <h4>Events</h4>
+  <section id="posts" class="container">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
+        <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
+          Events
+        </h4>
       </div>
     </div>
-
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
+if ( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
-
-    get_template_part('partials/post-layouts/archive-event');
+    get_template_part( 'partials/post-layouts/archive-event' );
   }
 } else {
+  ?>
+    <article class="u-alert">Sorry, no posts matched your criteria :{</article>
+  <?php
+}
 ?>
-    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
-} ?>
-    <div class="row margin-bottom-basic">
-      <div class="col col24">
-        <?php get_template_part('partials/pagination'); ?>
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24">
+        <?php get_template_part( 'partials/pagination' ); ?>
       </div>
     </div>
-
-  <!-- end posts -->
   </section>
-
-<!-- end main-content -->
-
 </main>
-
 <?php
 get_footer();
 ?>

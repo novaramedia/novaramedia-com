@@ -3,6 +3,7 @@
     $sections_to_render = array(
       'UK',
       'World',
+      'Green Party',
       'Labour Party',
       'Organised Labour',
       'Conservative Party',

@@ -1,22 +1,12 @@
-@import '../../node_modules/nm-stylus-library/variables.styl';
-@import '~kouto-swiss/index.styl'
-@import '../../node_modules/nm-stylus-library/utility/helpers';
-@import '../../node_modules/nm-stylus-library/functions/grid-function-new';
-@import '../../node_modules/nm-stylus-library/modules/backgrounds.styl';
-
-
-// this should be deprecated as an implementation by @4.3.0
-@import "grid-functions"
+@import '../../node_modules/nm-stylus-library/index.styl';
 
 // ******************************************************
 
 @import '../../node_modules/swiper/swiper.css';
 
-// FONTS
-
 // ******************************************************
 
-// ICONS FONTS
+// FONTS
 
 // ** https://genericons.com WP icon font set
 // @import "fonts/icons/genericons"
@@ -29,462 +19,48 @@
 
 // ******************************************************
 
-meyer-reset()
-box-sizing-reset()
-normalize()
-
-h1
-  margin: 0 // to counter normalize.css. maybe we can remove normalize.css?
-
-// ******************************************************
-
-// GRID
-
-$cols = 24
-$col = 42px
-
-$gutter = 16px
-
-body
-  overscroll-behavior: none
-
-flex-grid-maker('xxl')
-grid-maker('xxl')
-
-.container
-  margin: 0 auto
-  width: 1400px
-
-.row
-  clearfix()
-
-.col
-  float: left
-  margin-left: ($gutter/2)
-  margin-right: ($gutter/2)
-  min-height: 1px
-
-for col in 1..$cols
-  .col{col}
-    width: ( col * $col ) + ( ( col - 1 ) * $gutter )
-
-
-// BACKGROUNDS
-
-.background-support-texture, .background-support-texture-alt
-  background-size: cover
-  background-position: center
-  background-repeat: no-repeat
-  background-blend-mode: overlay, normal
-
-.avif, .webp
-  .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.webp)
-
-  .background-support-texture-alt
-    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.webp)
-
-.fallback
-  .background-support-texture
-    background-image: linear-gradient(0deg, rgba(255, 25, 65, 0) 20.45%, var(--color-red) 100%), url(img/specials/support-2023-texture.png)
-
-  .background-support-texture-alt
-    background-image: linear-gradient(0deg, var(--color-red) -3.61%, rgba(255, 25, 65, 0) 99.91%), url(img/specials/support-2023-texture-alt.png)
-
-// ******************************************************
-// START DEPRECATED
-
-$margin-small = ($gutter)
-$margin-tiny = ($gutter / 2)
-$margin-micro = ($gutter / (2 * $golden-ratio))
-$margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
-
-$color-black-soft = rgb(14, 14, 14)
-$color-white-soft = rgb(253, 253, 253)
-$color-white-soft-transparent = rgba(253, 253, 253, .5)
-
-$color-red = rgb(220, 0, 5) // Mine
-$color-red-dark = #A80003
-$color-blue = rgb(84, 144, 235)
-
-// END DEPRECATED
-
-// ******************************************************
-
 // COMPONENTS
 
-// QUOTE
-
-.component-quote
-  margin-top: 1rem
-
-.component-quote__image-holder
-  position: absolute
-  bottom: 0
-  right: 2rem
-  z-index: -10
-  width: 50%
-  max-height: 100%
-  overflow: hidden
-
-@media screen and (max-width: $breakpoint-s)
-  .component-quote
-    margin-bottom: 2rem
+@import "components/spinner"
+@import "components/quote"
 
 // ******************************************************
-
-// BASIC
-
-html
-  background-color: var(--color-white-soft)
-  color: var(--color-black-soft)
-
-img
-  max-width: 100%
-  height: auto
-
-.inline-action-list
-  margin: 0
-  li
-    display: inline-block
-    margin-right: $margin-small
-
-.only-mobile
-  display: none
-// ******************************************************
-
-// MARGINS AND PADDING
-
-  // MARGIN
-
-.margin-micro
-  margin: $margin-micro
-
-.margin-tiny
-  margin: $margin-tiny
-
-.margin-small
-  margin: $margin-small
-
-.margin-basic
-  margin: $margin-basic
-
-.margin-mid
-  margin: $margin-mid
-
-.margin-large
-  margin: $margin-large
-
-  // MARGIN TOP
-
-.margin-top-micro
-  margin-top: $margin-micro
-
-.margin-top-tiny
-  margin-top: $margin-tiny
-
-.margin-top-small
-  margin-top: $margin-small
-
-.margin-top-basic
-  margin-top: $margin-basic
-
-.margin-top-mid
-  margin-top: $margin-mid
-
-.margin-top-large
-  margin-top: $margin-large
-
-  // MARGIN BOTTOM
-
-.margin-bottom-micro
-  margin-bottom: $margin-micro
-
-.margin-bottom-tiny
-  margin-bottom: $margin-tiny
-
-.margin-bottom-small
-  margin-bottom: $margin-small
-
-.margin-bottom-basic
-  margin-bottom: $margin-basic
-
-.margin-bottom-mid
-  margin-bottom: $margin-mid
-
-.margin-bottom-large
-  margin-bottom: $margin-large
-
-  // PADDING
-
-.padding-micro
-  padding: $margin-micro
-
-.padding-tiny
-  padding: $margin-tiny
-
-.padding-small
-  padding: $margin-small
-
-.padding-basic
-  padding: $margin-basic
-
-.padding-mid
-  padding: $margin-mid
-
-.padding-large
-  padding: $margin-large
-
-  // PADDING TOP
-
-.padding-top-micro
-  padding-top: $margin-micro
-
-.padding-top-tiny
-  padding-top: $margin-tiny
-
-.padding-top-small
-  padding-top: $margin-small
-
-.padding-top-basic
-  padding-top: $margin-basic
-
-.padding-top-mid
-  padding-top: $margin-mid
-
-.padding-top-large
-  padding-top: $margin-large
-
-  // PADDING BOTTOM
-
-.padding-bottom-micro
-  padding-bottom: $margin-micro
-
-.padding-bottom-tiny
-  padding-bottom: $margin-tiny
-
-.padding-bottom-small
-  padding-bottom: $margin-small
-
-.padding-bottom-basic
-  padding-bottom: $margin-basic
-
-.padding-bottom-mid
-  padding-bottom: $margin-mid
-
-.padding-bottom-large
-  padding-bottom: $margin-large
-
-// ******************************************************
-
-// SUPPORT PAGE
-
-.support-page__hero-wrapper
-  padding: 70px 0
-
-#other-donation-methods
-  svg
-    height: 2rem
-    width: auto
-
-// ******************************************************
-
-// SPINNER
-
-.spinner
-  width: 1em
-  height: 1em
-  margin: 0 auto
-  position: relative
-
-.double-bounce1, .double-bounce2
-  width: 100%
-  height: 100%
-  border-radius: 50%
-  background-color: $color-black-soft
-  opacity: 0.6
-  position: absolute
-  top: 0
-  left: 0
-  animation: sk-bounce 2.0s infinite ease-in-out
-
-.spinner--white
-  .double-bounce1, .double-bounce2
-    background-color: $color-white-soft
-
-.double-bounce2
-  animation-delay: -1.0s
-
-@keyframes sk-bounce
-  0%, 100%
-    transform: scale(0.0)
-  50%
-    transform: scale(1.0)
-
-// ******************************************************
-
-// INDEXES
-
-.post-col12-image
-  position: relative
-
-.post-col12-image-overlay
-  position: absolute
-  bottom: 0
-  left: 0
-  top: 0
-  right: 0
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%)
-
-// ******************************************************
-
-// ARCHIVES
-
-.category-archive__logo
-  width: 220px
-
-.category-archive__submenu
-  display: inline-block
-  li
-    display: inline-block
-    &:before
-      content: '| '
-
-// ******************************************************
-
-// SECTIONS
-
-.section-archive__submenu
-  display: inline-block
-  li
-    display: inline-block
-    margin-right: .5rem
-    &:after
-      content: ' | '
-    &:last-child:after
-      content: none
-
-// ******************************************************
-
-// PAGE: ABOUT
-
-.about-page__person
-  a:after
-    content: '\219D'
-    position: relative
-    top: -.2em
-    left: .2em
-
-// ******************************************************
-
-// SINGLE
-
-#single-resources-section
-  display: none
-
-  // ARTICLE
-
-#single-article-support-box
-  border: 1px solid $color-red
-  padding: 1rem
-
-  // LIVEBLOG
-
-.text-copy
-  .liveblog-update-heading
-    border-top: 1px solid $color-black-soft
-    padding-top: $margin-basic
-    margin-top: $margin-mid
-    margin-bottom: $margin-small
-    &:first-of-type
-      margin-top: $margin-basic
-
-// ******************************************************
-
-// BOTTOM BAR
-
-#bottom-bar
-  position: fixed
-  bottom: 0
-  left 0
-  width: 100%
-  z-index: 100
-
-// BAR SUPPORT
-
-.support-bar
-  opacity: 0
-  transition: opacity var(--transition-speed-medium)
-  .support-bar__open-view
-    align-items: center
-  .grid-row.is-one-even-line-grid
-    flex-wrap: nowrap
-    justify-content: space-between
-    align-items: center
-    .grid-item
-      min-width: auto
-  &--active
-    opacity: 1
-  &--open
-    .support-bar__open-view
-      display: flex
-    .support-bar__closed-view
-      display: none
-  &--closed
-    .support-bar__open-view
-      display: none
-    .support-bar__closed-view
-      display: flex
-
-.support-bar__open-actions-column
-  align-self: stretch
-
-.support-bar__open-actions-wrapper
-  display: flex
-  flex-direction: column
-  height: 100%
-  align-items: flex-end
-  justify-content: space-between
-
-// Privacy & cookie notice
-
-#obligation-bar
-  display: none
-  background-color: $color-black-soft
-
-  .flex-grid-row
-    flex-wrap: nowrap
-    justify-content: space-between
-    align-items: center
-    .flex-grid-item
-      min-width: auto
-
-  p
-    margin-bottom: 0
-
-// ******************************************************
-
-// MODULES
-
-@import '../../node_modules/nm-stylus-library/modules/typography';
-@import '../../node_modules/nm-stylus-library/modules/spacing';
-@import '../../node_modules/nm-stylus-library/modules/layout';
-@import '../../node_modules/nm-stylus-library/modules/ui';
-@import '../../node_modules/nm-stylus-library/modules/carousel';
 
 // LAYOUTS
 
 @import "layouts/above-the-fold"
+@import "layouts/archives"
+@import "layouts/bottom-bar"
 @import "layouts/email-signup"
 @import "layouts/front-page-product-blocks"
 @import "layouts/header-submenu"
 @import "layouts/header"
 @import "layouts/highlight-block"
-@import "layouts/novara-fm-archive"
+@import "layouts/post-indexes"
 @import "layouts/products-bar"
+@import "layouts/single"
 @import "layouts/support-form"
+@import "layouts/wp-blocks"
+
+// ******************************************************
+
+// PAGES
+
+@import "pages/about"
+@import "pages/novara-fm-archive"
+@import "pages/support-page"
+
+// ******************************************************
+
+// GRID
+
+// Generate grid classes for xxl breakpoint (other breakpoints handled in responsive files)
+grid-maker('xxl')
+
+.container
+  margin-left: auto
+  margin-right: auto
+  width: 1400px
 
 // ******************************************************
 
@@ -524,4 +100,10 @@ img
 
   @import "responsive/s"
 
+// ******************************************************
+
+// PROJECT OVERRIDES FOR LIBRARY
+
 @import "upstream-to-library"
+
+

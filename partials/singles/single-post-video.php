@@ -8,11 +8,11 @@
     $share_url = get_the_permalink($post->ID);
   }
 ?>
-<header class="grid-row mb-4">
+<header class="grid-row mb-4" data-testid="video-post-header">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-4">
-    <h1 class="font-size-15 font-weight-bold"><?php the_title(); ?></h1>
+    <h1 class="font-size-15 font-weight-bold" data-testid="post-title"><?php the_title(); ?></h1>
   </div>
-  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1">
+  <div class="grid-item is-s-24 is-m-14 is-xxl-12 text-copy pt-1" data-testid="post-content">
     <?php the_content(); ?>
   </div>
 </header>
@@ -41,7 +41,7 @@
     render_resources_row($resources);
   }
 ?>
-<div class="grid-row mb-6">
+<div class="grid-row mb-6" data-testid="video-player">
   <div class="grid-item is-s-24 is-xxl-20 mb-4">
     <?php
       if (!empty($meta['_cmb_utube'])) {
@@ -53,7 +53,7 @@
         }
     ?>
       <div class="u-video-embed-container">
-        <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0], $autoplay); ?>" frameborder="0" allowfullscreen></iframe>
+        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true, $autoplay ); ?>
       </div>
     <?php
       } else {
@@ -83,7 +83,7 @@
           </a>
         </div>
         <a href="<?php the_permalink(); ?>" class="ui-hover">
-          <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1">
+          <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1">
             <?php render_video_title_and_standfirst($post->ID); ?>
           </h6>
         </a>

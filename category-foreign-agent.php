@@ -120,11 +120,11 @@ function nm_render_foreign_agent_credit( $credit ) {
   </style>
 <div class="foreign-agent-archive__container background-teal font-color-black background-cover-image">
   <section class="container pt-4 pb-4">
-    <div class="flex-grid-row mb-4">
-      <div class="flex-grid-item flex-item-xxl-12 mb-4">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-24 mb-4">
         <?php render_ui_tag( 'Podcast', home_url( 'category/audio/' ), 'no-border' ); ?>
       </div>
-      <div class="flex-grid-item flex-item-xxl-12 text-align-center pt-6 pb-6">
+      <div class="grid-item is-xxl-24 text-align-center pt-6 pb-6">
         <h1 class="u-visuallyhidden">Foreign Agent</h1>
         <h3 class="u-visuallyhidden">The IRA’s American connection</h3>
         <div class="foreign-agent-archive__title-holder text-align-center">
@@ -140,21 +140,30 @@ function nm_render_foreign_agent_credit( $credit ) {
   </section>
 </div>
   <section class="container">
-    <div class="flex-grid-row mt-4 mb-4">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8">
+    <div class="grid-row mt-4 mb-4">
+      <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1270698601&color=%23ffab70&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+        <?php
+          render_soundcloud_embed_iframe(
+            'https://api.soundcloud.com/tracks/1270698601',
+            'full',
+            true,
+            array(
+              'color'         => '#ffab70',
+            )
+          );
+          ?>
       </div>
     </div>
-    <div class="flex-grid-row mt-4 mb-5">
-      <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-1 flex-item-l-10 flex-offset-xxl-2 flex-item-xxl-8 font-serif foreign-agent__serif-large text-paragraph-breaks">
+    <div class="grid-row mt-4 mb-5">
+      <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16 font-serif foreign-agent__serif-large text-paragraph-breaks">
         <p>In the 1970s, the Provisional IRA was in the early days of its armed campaign to end British rule on the island of Ireland. In the United States, a small group of activists began organising on their behalf. They called themselves the Irish Northern Aid Committee, or Noraid—and they were looking for a fight.</p>
         <p>Hosted by documentary filmmaker Nate Lavey, Foreign Agent is a podcast series about the connection between ordinary Irish Americans and a revolutionary socialist guerrilla group. In six episodes, travelling back and forth across the Atlantic over three decades of conflict, Foreign Agent explores how regular Americans became militant advocates for the cause of Irish freedom.</p>
         <p>It’s a story of guns smuggled in furniture and wild plots to build homemade missiles. But it’s also about the political and material power that the Irish American community wielded, and how the intoxicating spell of nationalism created a movement out of seemingly irreconcilable social and political positions. And at every step of the way, the US government tried to shut them down. This is the story of the Troubles—as seen through American eyes.</p>
       </div>
     </div>
-    <div class="flex-grid-row mb-6">
-      <div class="flex-grid-item flex-item-s-12 flex-item-xxl-12 text-align-center font-size-13 text-links-underlined">
+    <div class="grid-row mb-6">
+      <div class="grid-item is-s-12 is-xxl-24 text-align-center font-size-13 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
           Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,<br/><a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
         </div>
@@ -169,18 +178,30 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
     ?>
-      <article class="foreign-agent-archive__episode flex-grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-4 mobile-mb-4">
+      <article class="foreign-agent-archive__episode grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mobile-mb-4">
           <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
-          <h3 class="font-size-13 font-weight-semibold js-fix-widows"><?php the_title(); ?></h3>
+          <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-item-xxl-6">
+        <div class="grid-item offset-s-0 is-s-24 is-xxl-12">
           <?php the_post_thumbnail( 'col12-16to9', array( 'class' => 'index-post-thumbnail' ) ); ?>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 mt-4 mb-4 mobile-mt-4 mobile-mb-4">
-          <iframe width="100%" height="115" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<?php echo urlencode( $meta['_cmb_sc'][0] ); ?>&color=%23ffab70&inverse=true&auto_play=false&show_user=false&show_artwork=false"></iframe>
+        <div class="grid-item offset-s-0 is-s-24 offset-l-4 is-l-16 offset-xl-6 is-xl-14 offset-xxl-6 is-xxl-12 mt-4 mb-4">
+          <?php
+          if ( isset( $meta['_cmb_sc'] ) && ! empty( $meta['_cmb_sc'][0] ) ) {
+            render_soundcloud_embed_iframe(
+              $meta['_cmb_sc'][0],
+              'small',
+              true,
+              array(
+                'color'        => '#ffab70',
+                'show_artwork' => 'false',
+              )
+            );
+          }
+          ?>
         </div>
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-l-2 flex-item-l-8 flex-offset-xl-3 flex-item-xl-7 flex-offset-xxl-3 flex-item-xxl-6 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks">
+        <div class="grid-item offset-s-0 is-s-24 offset-l-4 is-l-16 offset-xl-6 is-xl-14 offset-xxl-6 is-xxl-12 font-serif foreign-agent__serif-medium mb-4 text-paragraph-breaks">
           <?php the_content(); ?>
         </div>
       </article>
@@ -191,31 +212,31 @@ if ( have_posts() ) {
     </div>
   </section>
   <div style="background-color: #FFAB70;">
-    <div class="foreign-agent-archive__credits container font-size-10 pt-6 pb-6">
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
+    <div class="foreign-agent-archive__credits container font-size-10 pt-6 pb-6 mb-4">
+      <div class="grid-row mb-5">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-20">
           <h4 class="font-size-9 text-uppercase font-weight-bold">The producers</h4>
         </div>
       </div>
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-5">
+      <div class="grid-row mb-5">
+        <div class="grid-item offset-s-0 is-s-12 offset-xxl-2 is-xxl-10">
           <div class="foreign-agent-archive__box" style="transform: rotate(-2deg);">
             <span class="font-weight-semibold">Nate Lavey</span> is a documentary filmmaker and video journalist based in New York. He has covered social struggle in the aftermath of the Tunisian revolution, student uprisings in Quebec, and depleted nuclear production facilities in New York City. His first feature film, <em>Those Who Heard and Those Who Saw</em>, is about a network of internment camps that were built in Canada in the 1940s to imprison Jewish refugees.
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-xxl-5">
+        <div class="grid-item is-s-12 is-xxl-10">
           <div class="foreign-agent-archive__box" style="transform: rotate(1deg);">
             <span class="font-weight-semibold">Michael McCanne</span> is a writer based in New York. His work has been published by Art in America, Jacobin, The New Inquiry, Boston Review, Jewish Currents, and Dissent. His first film <em>A Minor Figure</em>, a collaboration with Jamie Weiss, was selected to premiere as part of the 2021 edition of Documenta Madrid.
           </div>
         </div>
       </div>
-      <div class="flex-grid-row mb-5">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-12 flex-offset-xxl-1 flex-item-xxl-10">
+      <div class="grid-row mb-5">
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-20">
           <h4 class="font-size-9 text-uppercase font-weight-bold">Credits</h4>
         </div>
       </div>
-      <div class="flex-grid-row">
-        <div class="flex-grid-item flex-offset-s-0 flex-item-s-6 flex-offset-xxl-1 flex-item-xxl-3">
+      <div class="grid-row">
+        <div class="grid-item offset-s-0 is-s-12 offset-xxl-2 is-xxl-6">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_1 ); $i < $size; $i++ ) {
@@ -224,7 +245,7 @@ if ( have_posts() ) {
             ?>
           </div>
         </div>
-        <div class="flex-grid-item flex-item-s-6 flex-item-l-3 flex-item-xxl-4">
+        <div class="grid-item is-s-12 is-l-6 is-xxl-8">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(-1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_2 ); $i < $size; $i++ ) {
@@ -233,7 +254,7 @@ if ( have_posts() ) {
             ?>
           </div>
         </div>
-        <div class="flex-grid-item flex-offset-s-2 flex-item-s-7 flex-item-l-4 flex-item-xxl-3 mt-s-4">
+        <div class="grid-item offset-s-4 is-s-14 is-l-8 is-xxl-6 mt-s-4">
           <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
             <?php
             for ( $i = 0, $size = count( $credits_thanks ); $i < $size; $i++ ) {
@@ -248,11 +269,12 @@ if ( have_posts() ) {
 </main>
 <?php
 get_template_part(
-    'partials/support-section',
-    null,
-    array(
-        'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
-    )
+  'partials/support-section',
+  null,
+  array(
+    'container_classes' => 'mt-4 mb-4',
+    'override_text' => 'With your help, we’re making our podcasts bigger and better. Support independent journalism and set up a regular donation from just £1 a month.',
+  )
 );
 
 get_footer();

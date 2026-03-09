@@ -1,4 +1,8 @@
 <?php
+/*
+  DEPRECATED @ VERSION 4.2.0
+  TO BE REMOVED AFTER MIGRATION
+*/
 get_header();
 ?>
 <main id="main-content">
@@ -11,12 +15,12 @@ if( have_posts() ) {
   <article id="page">
     <div class="container mt-4 mb-4">
       <div class="grid-row mb-4">
-        <div class="flex-grid-item is-xxl-24">
+        <div class="grid-item is-xxl-24">
           <h4 class="font-size-9 text-uppercase font-weight-bold"><?php the_title(); ?></h4>
         </div>
       </div>
       <div class="grid-row mb-4">
-        <div class="flex-grid-item is-xxl-24 page-copy">
+        <div class="grid-item is-xxl-24 page-copy">
           <?php the_content(); ?>
         </div>
       </div>
@@ -44,7 +48,7 @@ if( have_posts() ) {
             }
 
             get_template_part('partials/email-signup', null, array(
-              'newsletter_page_id' => $newsletter->ID,
+              'newsletter_post_id' => $newsletter->ID,
               'background-color' => $background_color,
               'text-color' => $text_color
             ));

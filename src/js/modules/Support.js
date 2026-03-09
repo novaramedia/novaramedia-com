@@ -2,15 +2,17 @@
 /* global WP */
 
 import $ from 'jquery';
-import Cookies from 'js-cookie';
 import isNonEmptyString from '../functions/isNonEmptyString.js';
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../functions/localStorage.js';
 
 export class Support {
   constructor() {
     this.donationAppUrl = 'https://donate.novaramedia.com/';
     this.saveClosedStateTimeout = 21; // days
-    this.hasApprovalCookie =
-      Cookies.get('cookie-approval') === 'true' ? true : false;
+    this.supportBarStorageKey = 'support-bar-state';
   }
 
   onReady() {
@@ -89,14 +91,14 @@ export class Support {
             _this.clearActiveButtonState($form);
 
             _this.setAutoValues($form, data.value);
+            _this.updateSupportSectionCopy(data, $form);
+
             $form.attr('action', _this.donationAppUrl + data.value);
 
             // Set active class on all buttons with the same data-value (both visible and hidden)
             $form
               .find(`[data-action="set-type"][data-value="${data.value}"]`)
               .addClass('ui-button--active');
-
-            _this.updateSupportSection(data, $form);
 
             $form.find('[data-action="set-type"]').each((index, button) => {
               const $button = $(button);
@@ -260,36 +262,40 @@ export class Support {
       .css('color', '');
   }
 
-  updateSupportSection(data, $form) {
+  updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
-      WP.supportSectionCopy && WP.supportSectionCopy['main'];
+      WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
-    if (
-      overrideCopy &&
-      (isNonEmptyString(overrideCopy.heading) ||
-        isNonEmptyString(overrideCopy.text))
+    let headingText = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+      headingText = overrideCopy.heading;
+    } else if (
+      defaultSectionCopy &&
+      isNonEmptyString(defaultSectionCopy.heading)
     ) {
-      const headingText = isNonEmptyString(overrideCopy.heading)
-        ? overrideCopy.heading
-        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.heading)
-          ? defaultSectionCopy.heading
-          : '';
-      const textCopy = isNonEmptyString(overrideCopy.text)
-        ? overrideCopy.text
-        : defaultSectionCopy && isNonEmptyString(defaultSectionCopy.text)
-          ? defaultSectionCopy.text
-          : '';
+      headingText = defaultSectionCopy.heading;
+    }
 
-      if ($heading.length && headingText) {
-        $heading.text(headingText);
-      }
-      if ($text.length && textCopy) {
-        $text.text(textCopy);
-      }
+    let textCopy = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+      textCopy = overrideCopy.text;
+    } else if (
+      defaultSectionCopy &&
+      isNonEmptyString(defaultSectionCopy.text)
+    ) {
+      textCopy = defaultSectionCopy.text;
+    }
+
+    // Update DOM elements if they exist and we have content
+    if ($heading.length && headingText) {
+      $heading.text(headingText);
+    }
+    if ($text.length && textCopy) {
+      $text.text(textCopy);
     }
   }
 
@@ -299,10 +305,11 @@ export class Support {
     const $barClose = $bar.find('.support-bar__close-trigger');
     const $barOpen = $bar.find('.support-bar__open-trigger');
 
-    _this.hasClosedSupportBarCookie =
-      Cookies.get('support-bar-closed') === 'true' ? true : false;
+    // Get the support bar state from localStorage
+    const state = getLocalStorageItem(_this.supportBarStorageKey);
+    const isClosed = state && state.closed;
 
-    if (!_this.hasClosedSupportBarCookie) {
+    if (!isClosed) {
       $bar.removeClass('support-bar--closed').addClass('support-bar--open');
     }
 
@@ -313,11 +320,12 @@ export class Support {
         event.preventDefault();
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
 
-        if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'false', {
-            expires: _this.saveClosedStateTimeout,
-          });
-        }
+        // Save open state to localStorage
+        setLocalStorageItem(
+          _this.supportBarStorageKey,
+          { closed: false },
+          _this.saveClosedStateTimeout
+        );
       },
     });
 
@@ -326,11 +334,12 @@ export class Support {
         event.preventDefault();
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
 
-        if (_this.hasApprovalCookie) {
-          Cookies.set('support-bar-closed', 'true', {
-            expires: _this.saveClosedStateTimeout,
-          });
-        }
+        // Save closed state to localStorage
+        setLocalStorageItem(
+          _this.supportBarStorageKey,
+          { closed: true },
+          _this.saveClosedStateTimeout
+        );
       },
     });
   }

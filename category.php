@@ -19,16 +19,16 @@ $is_one_button = $is_video === false || $podcast_url === false ? true : false;
 $button_grid_item_classes = $is_one_button ? 'grid-item offset-s-0 offset-l-12 is-s-12 is-l-12 offset-xxl-6 is-xxl-6' : 'grid-item is-s-12 is-l-12 is-xxl-6';
 
 if ($category->slug === 'video') {
-  $button_grid_item_classes = 'mobile-margin-top-tiny grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-4 flex-item-xxl-4';
+  $button_grid_item_classes = 'mt-s-2 grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-8 is-xxl-8';
 }
 ?>
-<main id="main-content" class="category-archive">
-  <section id="posts" class="container mt-3">
+<main id="main-content" class="category-archive" data-testid="main-content">
+  <section id="posts" class="container mt-3" data-testid="post-list">
     <div class="grid-row mb-4">
       <?php
         if (in_array($category->slug, array('articles', 'audio', 'video'))) {
         ?>
-      <div class="grid-item is-s-24 flex-item-xxl-6">
+      <div class="grid-item is-s-24 is-xxl-12">
         <span class="text-uppercase font-weight-bold"><?php echo $category->name; ?></span> <?php
           wp_nav_menu(
             array(
@@ -62,7 +62,7 @@ if ($category->slug === 'video') {
       <?php
         if ($is_video) {
       ?>
-      <div class="<?php echo $button_grid_item_classes; ?>">
+      <div class="<?php echo $button_grid_item_classes; ?> text-align-right">
         <a class="ui-button ui-button--red ui-button--small" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo $youtube_copy; ?></a>
       </div>
       <?php
@@ -94,10 +94,10 @@ if ($category->slug === 'video') {
           if (!empty($meta['_cmb_utube'])) {
           ?>
           <div class="u-video-embed-container">
-            <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($meta['_cmb_utube'][0]); ?>" frameborder="0" allowfullscreen></iframe>
+            <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true ); ?>
           </div>
           <a href="<?php the_permalink(); ?>">
-            <h6 class="js-fix-widows mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
+            <h6 class="text-wrap-pretty mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
             <h5 class="font-size-12 font-weight-bold mt-2">
               <?php render_standfirst($post->ID); ?>
             </h5>
@@ -127,7 +127,7 @@ if ($category->slug === 'video') {
               </a>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <h6 class="js-fix-widows font-size-9 font-weight-bold mt-1"><?php the_title(); ?></h6>
+              <h6 class="text-wrap-pretty font-size-9 font-weight-bold mt-1"><?php the_title(); ?></h6>
             </a>
           </div>
           <?php

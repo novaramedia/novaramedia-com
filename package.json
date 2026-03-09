@@ -1,13 +1,22 @@
 {
   "name": "novaramedia-com",
-  "version": "4.2.10",
+  "version": "4.5.0",
   "description": "No Future, Utopia Now",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "cy:open": "cypress open",
+    "cy:verify": "cypress verify",
     "dev": "webpack --mode=development",
-    "build": "webpack --mode=production",
-    "release": "release-it"
+    "dev:blocks": "wp-scripts start --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build:theme": "webpack --mode=production",
+    "build:blocks": "wp-scripts build --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "build": "npm run build:theme && npm run build:blocks",
+    "release": "release-it",
+    "release:ci": "./scripts/release.sh"
   },
   "repository": {
     "type": "git",
@@ -23,6 +32,7 @@
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@release-it/keep-a-changelog": "^7.0.0",
+    "@wordpress/scripts": "^27.9.0",
     "autoprefixer": "^10.4.21",
     "babel-loader": "~10.0.0",
     "chalk": "^4.0.0",
@@ -31,6 +41,7 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "cssnano": "^7.0.7",
+    "cypress": "^13.17.0",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-webpack-plugin": "^5.0.2",
@@ -51,6 +62,7 @@
     "postcss-loader": "~8.1.1",
     "postcss-preset-env": "~10.2.3",
     "release-it": "^19.0.3",
+    "sharp": "^0.34.5",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
     "stylus-native-loader": "~1.4.3",
@@ -64,9 +76,9 @@
     "jquery": "~3.7.1",
     "js-cookie": "~3.0.1",
     "lazysizes": "~5.3.2",
-    "lodash": "~4.17.21",
+    "lodash": "~4.17.23",
     "luxon": "~3.6.1",
-    "nm-stylus-library": "github:novaramedia/nm-stylus-library#v0.10.0",
+    "nm-stylus-library": "github:novaramedia/nm-stylus-library#v0.13.0",
     "swiper": "^11.2.10"
   },
   "release-it": {
@@ -84,7 +96,7 @@
       }
     },
     "hooks": {
-      "before:release": "yarn build",
+      "before:release": "npm run build",
       "after:release": "sed -i '' 's/${latestVersion}/${version}/' style.css"
     }
   }

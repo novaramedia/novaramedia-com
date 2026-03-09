@@ -1,25 +1,22 @@
 <?php
-  $fundraiser_youtube_id = IGV_get_option('_igv_fundraiser_youtube_id');
-  if ($fundraiser_youtube_id) {
-?>
-
-<section id="home-featured" class="container margin-bottom-basic mobile-margin-bottom-basic">
+$fundraiser_youtube_id = IGV_get_option( '_igv_fundraiser_youtube_id' );
+if ( $fundraiser_youtube_id ) {
+  ?>
+<section id="home-featured" class="container mb-5">
   <div class="row">
-     <div class="col col24 margin-bottom-small">
+     <div class="col col24 mb-4">
       <h4><a href="http://support.novaramedia.com">Fundraiser</a></h4>
     </div>
   </div>
   <div class="row">
     <div class="col col24">
       <div class="u-video-embed-container">
-        <iframe class="youtube-player" type="text/html" src="<?php echo generate_youtube_embed_url($fundraiser_youtube_id); ?>"></iframe>
+        <?php echo render_youtube_embed_iframe( $fundraiser_youtube_id ); ?>
       </div>
     </div>
   </div>
 </section>
-<?php
-
+  <?php
   get_template_part( 'partials/support-section', null, array( 'container_classes' => 'mb-5' ) );
-
-  }
+}
 ?>

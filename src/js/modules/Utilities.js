@@ -13,7 +13,6 @@ import selectText from '../functions/selectText.js';
  */
 export class Utilities {
   constructor() {
-    this.fixWidows();
     this.displayTimeSince();
     this.checkGDPRApproval();
   }
@@ -41,18 +40,6 @@ export class Utilities {
 
     $('#js-resources-toggle').click(() => {
       $resources.toggle();
-    });
-  }
-
-  /**
-   * Utility css class mainly for use on headines to avoid widows [single words on a new line]
-   * Regex matches the last space character between the last 2 words and replaces the space with non breaking space
-   */
-  fixWidows() {
-    $('.js-fix-widows').each((index, element) => {
-      let string = $(element).html();
-      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-      $(element).html(string);
     });
   }
 

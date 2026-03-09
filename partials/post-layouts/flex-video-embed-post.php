@@ -13,16 +13,16 @@
     if ($youtube_id) {
   ?>
     <div class="u-video-embed-container background-black">
-      <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($youtube_id); ?>" frameborder="0" allowfullscreen></iframe>
+      <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
     </div>
   <?php
     }
   ?>
 
   <a href="<?php the_permalink() ?>">
-    <h5 class="index-post-title margin-top-tiny js-fix-widows"><?php render_post_title($post->ID); ?></h5>
+    <h5 class="index-post-title mt-2 text-wrap-pretty"><?php render_post_title($post->ID); ?></h5>
 
-    <div class="index-post-description margin-top-tiny">
+    <div class="index-post-description mt-2">
       <?php
         if ($description) {
           echo $description;

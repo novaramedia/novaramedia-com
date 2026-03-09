@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content" class="category-archive novaralive-archive">
+<main id="main-content" class="category-archive novaralive-archive" data-testid="main-content">
 <?php
   $is_first_page = get_query_var( 'paged', 0 ) === 0 ? true : false;
 
@@ -35,7 +35,7 @@ get_header();
     <div class="novara-live-archive__liveplayer grid-row">
       <div class="grid-item is-xxl-24">
         <div class="u-video-embed-container">
-          <iframe class="youtube-player lazyload" data-src="<?php echo generate_youtube_embed_url($embed_id, true); ?>" frameborder="0" allowfullscreen></iframe>
+          <?php echo render_youtube_embed_iframe( $embed_id, true, true ); ?>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ get_header();
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
             <h6 class="font-size-10 font-weight-semibold mt-1"><?php the_time('j F Y'); ?></h6>
-            <h6 class="js-fix-widows font-size-11 font-size-S-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
+            <h6 class="text-wrap-pretty font-size-11 font-size-s-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
           </a>
         </div>
         <?php
@@ -82,7 +82,7 @@ get_header();
 <?php
   } // end if first page
 ?>
-  <section id="posts" class="container mt-6 mt-s-5">
+  <section id="posts" class="container mt-6 mt-s-5" data-testid="post-list">
     <div class="grid-row mb-4">
       <div class="grid-item is-s-24">
         <h4 class="font-size-9 text-uppercase font-weight-bold"><?php echo $is_first_page ? 'More Novara Live' : 'Novara Live'; ?></h4>

@@ -6,67 +6,60 @@ import { Navigation, Autoplay, Mousewheel, FreeMode } from 'swiper/modules';
 
 export class Carousels {
   constructor() {
-    this.carousels = [];
-
-    $('.ux-carousel').each((index, carousel) => {
-      $(carousel).attr('id', `ux-carousel-${index}`);
-      this.carousels.push(new Carousel(carousel));
-    });
+    this.swipers = [];
   }
 
   onReady() {
-    const _this = this;
+    $('.ux-carousel').each((index, carousel) => {
+      const $carousel = $(carousel);
+      $carousel.attr('id', `ux-carousel-${index}`);
 
-    _this.carousels.forEach((carousel) => {
-      carousel.onReady();
-    });
-  }
-}
+      const $navLeft = $carousel.find('.swiper-button-prev');
+      const $navRight = $carousel.find('.swiper-button-next');
 
-class Carousel {
-  constructor(carousel) {
-    this.$carousel = $(carousel);
-    this.$navLeft = this.$carousel.find('.swiper-button-prev');
-    this.$navRight = this.$carousel.find('.swiper-button-next');
+      const swiper = new Swiper($carousel.find('.swiper')[0], {
+        modules: [Navigation, Autoplay, Mousewheel, FreeMode],
+        navigation: {
+          nextEl: $navRight[0],
+          prevEl: $navLeft[0],
+        },
+        autoplay: {
+          delay: 4000,
+          pauseOnMouseEnter: true,
+        },
+        mousewheel: {
+          enabled: true,
+          thresholdDelta: 4,
+        },
+        freemode: {
+          enabled: true,
+          sticky: true,
+        },
+        slidesPerView: 'auto',
+        rewind: true,
+      });
 
-    this.swiper = new Swiper(this.$carousel.find('.swiper')[0], {
-      modules: [Navigation, Autoplay, Mousewheel, FreeMode],
-      navigation: {
-        nextEl: this.$navRight[0],
-        prevEl: this.$navLeft[0],
-      },
-      autoplay: {
-        delay: 4000,
-        pauseOnMouseEnter: true,
-      },
-      mousewheel: {
-        enabled: true,
-        thresholdDelta: 4,
-      },
-      freemode: {
-        enabled: true,
-        sticky: true,
-      },
-      slidesPerView: 'auto',
-      rewind: true,
-    });
+      swiper.on('slideChange', (event) => {
+        if (event.isBeginning) {
+          $navLeft.addClass('swiper-button-prev--disabled');
+        } else {
+          $navLeft.removeClass('swiper-button-prev--disabled');
+        }
 
-    this.swiper.on('slideChange', (event) => {
-      if (event.isBeginning) {
-        this.$navLeft.addClass('swiper-button-prev--disabled');
-      } else {
-        this.$navLeft.removeClass('swiper-button-prev--disabled');
-      }
+        if (event.isEnd) {
+          $navRight.addClass('swiper-button-next--disabled');
+        } else {
+          $navRight.removeClass('swiper-button-next--disabled');
+        }
+      });
 
-      if (event.isEnd) {
-        this.$navRight.addClass('swiper-button-next--disabled');
-      } else {
-        this.$navRight.removeClass('swiper-button-next--disabled');
-      }
+      this.swipers.push(swiper);
     });
   }
 
-  onReady() {}
-
-  onResize() {}
+  onResize() {
+    this.swipers.forEach((swiper) => {
+      swiper.update();
+    });
+  }
 }

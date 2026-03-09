@@ -89,6 +89,10 @@ function handle_internal_rewrites() {
       'pattern'  => '^acfm/?$',
       'category' => 'acfm',
     ),
+    array(
+      'pattern'  => '^death-in-westminster/?$',
+      'category' => 'death-in-westminster',
+    ),
   );
 
   foreach ( $internal_rewrites as $rewrite ) {
