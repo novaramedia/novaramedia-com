@@ -2,7 +2,7 @@
   $local_term = get_term_by( 'slug', 'death-in-westminster', 'category' );
   $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in-westminster/';
   $url = $local_term ? get_term_link( $local_term ) : false;
-if ( $local_term && $url ) {
+if ( $local_term && $url && ! is_wp_error( $url ) ) {
   ?>
 <div class="diw-banner container">
   <div class="grid-row">
