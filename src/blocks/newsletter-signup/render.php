@@ -17,13 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly
 }
 
-$newsletter = $attributes['newsletter'] ?? null;
-
-if ( ! $newsletter || empty( $newsletter['id'] ) ) {
-  return; // No newsletter selected
+$newsletter    = $attributes['newsletter'] ?? array();
+$newsletter_id = absint( $newsletter['id'] ?? 0 );
+if ( ! $newsletter_id ) {
+  return;
 }
-
-$newsletter_id = $newsletter['id'];
 
 // Pull fresh meta from newsletter post
 $mailchimp_key = get_post_meta( $newsletter_id, '_nm_mailchimp_key', true );

@@ -78,7 +78,8 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
         // block output is block-level HTML elements, wpautop typically won't affect it.
         // See docs/BLOCK-RENDERING.md for details and potential optimisation.
         foreach ( $blocks as $block ) {
-          if ( $block['blockName'] === 'nm-wp/newsletter-signup' ) {
+          $block_name = $block['blockName'] ?? null;
+          if ( $block_name === 'nm-wp/newsletter-signup' ) {
             // Newsletter block - render without text-copy wrapper
             echo render_block( $block );
           } else {
