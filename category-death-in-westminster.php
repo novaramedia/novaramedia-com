@@ -205,7 +205,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
         </picture>
         <div class="diw-archive__hero-content text-align-center">
           <h1 class="diw-archive__title font-weight-bold font-size-20">Death in Westminster</h1>
-          <h3 class="diw-archive__subtitle font-weight-bold font-size-14 font-size-xl-13 font-size-s-12 text-wrap-balance">How Britain became butler for the world's illicit money</h3>
+          <h3 class="diw-archive__subtitle font-weight-bold font-size-14 font-size-xl-13 font-size-s-12 text-wrap-balance">Who’s hiding behind London’s empty mansions?</h3>
         </div>
       </div>
     </div>
@@ -216,20 +216,21 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     $diw_term = get_queried_object();
     $diw_trailer_url = get_term_meta( $diw_term->term_id, '_nm_soundcloud_trailer', true );
     if ( ! empty( $diw_trailer_url ) ) {
-    ?>
+      ?>
     <div class="grid-row mb-4">
       <div class="grid-item offset-s-0 is-s-24 offset-l-2 is-l-20 offset-xxl-4 is-xxl-16">
         <h3 class="mb-4 font-size-12 font-weight-bold">Listen to the trailer:</h3>
         <?php
           render_soundcloud_embed_iframe(
             $diw_trailer_url,
-            'full',
+            'medium',
             true,
             array(
-              'color' => '#FF3817',
+              'color'        => '#FF3817',
+              'show_artwork' => 'false',
             )
           );
-          ?>
+        ?>
       </div>
     </div>
     <?php } ?>
@@ -238,7 +239,7 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
         <?php
         $diw_description = category_description();
         if ( empty( $diw_description ) ) {
-          $diw_description = '<p>Death in Westminster is a new podcast series from Novara Media, hosted by Kojo Koram and Dalia Gebrial, investigating how Britain became butler for the world\'s illicit money.</p>';
+          $diw_description = 'Death in Westminster is a new podcast series from Novara Media, hosted by Kojo Koram and Dalia Gebrial, investigating how Britain became butler for the world\'s illicit money.';
         }
         echo $diw_description;
         ?>
@@ -262,8 +263,8 @@ if ( have_posts() ) {
     $meta = get_post_meta( $post->ID );
     ?>
       <article class="diw-archive__episode grid-row pt-6 pt-s-4" id="<?php echo esc_attr( $post->post_name ); ?>">
-        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mobile-mb-4">
-          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo esc_html( $meta['_cmb_standfirst'][0] ); ?></h4>
+        <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mb-s-4">
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-1"><?php echo esc_html( $meta['_cmb_standfirst'][0] ); ?></h4>
           <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
         <div class="grid-item offset-s-0 is-s-24 is-xxl-12">

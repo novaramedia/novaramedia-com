@@ -115,7 +115,7 @@ if ( $local_term && $url ) {
             </div>
             <div class="grid-item is-xxl-7 is-m-24 is-s-24"></div>
             <div class="grid-item is-xxl-8 is-m-24 is-s-24 mt-m-3">
-              <p class="diw-banner__cta-text font-weight-bold font-size-11 font-size-s-11 text-wrap-balance mb-3">What death on Parliament's doorstep reveals about Britain's hidden wealth.</p>
+              <p class="diw-banner__cta-text font-weight-bold font-size-11 font-size-s-11 text-wrap-balance mb-3">Who’s hiding behind London’s empty mansions?</p>
               <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--small ui-button--white">Listen now</a>
             </div>
           </div>
