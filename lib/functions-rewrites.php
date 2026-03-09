@@ -6,25 +6,31 @@
 // for redirects that send users to an external URL.
 // Add more path => URL pairs to the array as needed.
 // Format: 'path' => 'https://example.com/redirect-url'
+$nm_external_redirects = array(
+  'shop' => 'https://shop.novaramedia.com',
+);
+
 add_action(
   'template_redirect',
-  function () {
-    handle_external_redirects(
-      array(
-        'shop' => 'https://shop.novaramedia.com',
-      )
-    );
+  function () use ( $nm_external_redirects ) {
+    handle_external_redirects( $nm_external_redirects );
   }
 );
 
 /**
  * Allow external redirect hosts for wp_safe_redirect().
+ * Derived automatically from the redirects array above.
  */
 add_filter(
   'allowed_redirect_hosts',
-  function ( $hosts ) {
-    $external_hosts = array(
-      'shop.novaramedia.com',
+  function ( $hosts ) use ( $nm_external_redirects ) {
+    $external_hosts = array_unique(
+      array_map(
+        function ( $url ) {
+          return wp_parse_url( $url, PHP_URL_HOST );
+        },
+        array_values( $nm_external_redirects )
+      )
     );
     return array_merge( $hosts, $external_hosts );
   }
@@ -102,7 +108,7 @@ function handle_internal_rewrites() {
     if ( $cat ) {
       add_rewrite_rule(
         $rewrite['pattern'],
-        'index.php?category_name=' . $cat->slug,
+        'index.php?cat=' . $cat->term_id,
         'top'
       );
     }
