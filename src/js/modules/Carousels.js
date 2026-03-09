@@ -31,7 +31,7 @@ export class Carousels {
           enabled: true,
           thresholdDelta: 4,
         },
-        freemode: {
+        freeMode: {
           enabled: true,
           sticky: true,
         },

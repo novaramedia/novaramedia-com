@@ -44,18 +44,19 @@ function render_large_cross($color = 'black') {
 $episode_block_posts_number = 9; // how many episodes to show in the sidescroll blocks
 
 // renders a carousel of episodes
+// UNTESTED: markup updated to standard Swiper classes for v12 compatibility, but this template is stale/unused and needs design review
 function render_episode_block($posts) {
 ?>
-<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel ux-carousel--autoplay">
-  <div class="ux-carousel__wrapper">
-    <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled ui-rounded-box"></div>
-    <div class="ux-carousel__nav-right ui-rounded-box"></div>
-    <div class="ux-carousel__inner ux-carousel__inner">
+<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
+  <div class="swiper">
+    <div class="swiper-button-prev swiper-button-prev--disabled ui-rounded-box"></div>
+    <div class="swiper-button-next ui-rounded-box"></div>
+    <div class="swiper-wrapper">
       <?php
         foreach ($posts as $post) {
           $post_id = $post->ID;
       ?>
-        <div class="ux-carousel__item">
+        <div class="swiper-slide">
           <a href="<?php echo get_permalink($post_id); ?>">
             <?php render_thumbnail($post_id, 'col12-16to9', array(
               'class' => 'ui-rounded-image'
