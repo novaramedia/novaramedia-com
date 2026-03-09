@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
 
+### Removed
+
+- /asksophie redirect as it should be a Bitly
+
 ## [4.5.0] - 2026-03-07
 
 ### Added
