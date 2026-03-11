@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
+- Use correct post layout (with UI tags) on Articles and other category archives and search/tag index (`category.php`, `index.php`)
 
 ### Removed
 
