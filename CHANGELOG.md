@@ -9,7 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
+
+### Removed
+
+- /asksophie redirect as it should be a Bitly
+
+## [4.5.0] - 2026-03-07
+
+### Added
+
+- Death in Westminster podcast support (archive, banner, rewrites)
+- Deploy to Staging GitHub Actions workflow for manually deploying any branch to Kinsta staging persistently
+- `paths-ignore` filter on Cypress workflow to skip test runs for non-frontend changes (docs, workflows, config files)
+
+### Changed
+
 - Optimise inline newsletter WP block data flow
+- PHPCS config: added Claude hook for automated lint enforcement
+- Non-interactive release script (`scripts/release.sh`) for automated versioning and PR creation
 
 ## [4.4.0] - 2026-02-09
 
@@ -25,6 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 - Refactored stylus files for max DRY
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold when theme option slots are empty — `intval()` normalisation converted unset values to `0` before the fallback loop could fill them
 
 ### Removed
 

@@ -18,38 +18,40 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 
 ### Platform classification
 
-| Platform | Status | Reason |
-|----------|--------|--------|
-| YouTube | Exempt | Uses `youtube-nocookie.com`, minimal cookie exposure |
-| SoundCloud | Gated | Sets tracking cookies via `w.soundcloud.com` |
-| Twitter/X | Gated | Loads `platform.twitter.com/widgets.js`, heavy tracking |
-| Vimeo | Gated | Sets analytics cookies |
-| Spotify | Gated | Sets tracking cookies |
-| Instagram | Gated | Loads Meta tracking |
-| Facebook | Gated | Loads Meta tracking |
-| TikTok | Gated | Sets tracking cookies |
-| Any other | Gated | Whitelist approach - only YouTube exempt |
+| Platform   | Status | Reason                                                  |
+| ---------- | ------ | ------------------------------------------------------- |
+| YouTube    | Exempt | Uses `youtube-nocookie.com`, minimal cookie exposure    |
+| SoundCloud | Gated  | Sets tracking cookies via `w.soundcloud.com`            |
+| Twitter/X  | Gated  | Loads `platform.twitter.com/widgets.js`, heavy tracking |
+| Vimeo      | Gated  | Sets analytics cookies                                  |
+| Spotify    | Gated  | Sets tracking cookies                                   |
+| Instagram  | Gated  | Loads Meta tracking                                     |
+| Facebook   | Gated  | Loads Meta tracking                                     |
+| TikTok     | Gated  | Sets tracking cookies                                   |
+| Any other  | Gated  | Whitelist approach - only YouTube exempt                |
 
 ---
 
 ## Files
 
 ### New
-| File | Purpose |
-|------|---------|
-| `src/js/modules/EmbedConsent.js` | Consent gate hydration, cookie setting, event coordination |
-| `src/styl/components/embed-consent.styl` | Placeholder styles |
+
+| File                                     | Purpose                                                    |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| `src/js/modules/EmbedConsent.js`         | Consent gate hydration, cookie setting, event coordination |
+| `src/styl/components/embed-consent.styl` | Placeholder styles                                         |
 
 ### Modified
-| File | Change |
-|------|--------|
-| `lib/functions-filters.php` | Add `nm_consent_gate_wrap()` helper + detection helpers. Modify `nm_embed_oembed_html()` to gate non-YouTube oEmbeds. Add `nm_consent_gate_block_embeds()` `render_block` filter for block editor embeds |
-| `lib/renderers.php` | Modify `render_soundcloud_embed_iframe()` to wrap output in consent gate |
-| `src/js/modules/Utilities.js` | Dispatch `cookie-consent-granted` event on accept; listen for same event to hide bar |
-| `src/js/modules/AudioPlayers.js` | Extract `findAndLoadPlayers()` method; listen for `embed-consent-hydrated` event to re-scan |
-| `src/js/main.js` | Import/instantiate `EmbedConsent` before `AudioPlayers` in `onReady()` |
-| `src/styl/site.styl` | Add `@import "components/embed-consent"` under COMPONENTS |
-| `docs/OEMBED-PRIVACY.md` | Update to reflect implemented system |
+
+| File                             | Change                                                                                                                                                                                                   |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lib/functions-filters.php`      | Add `nm_consent_gate_wrap()` helper + detection helpers. Modify `nm_embed_oembed_html()` to gate non-YouTube oEmbeds. Add `nm_consent_gate_block_embeds()` `render_block` filter for block editor embeds |
+| `lib/renderers.php`              | Modify `render_soundcloud_embed_iframe()` to wrap output in consent gate                                                                                                                                 |
+| `src/js/modules/Utilities.js`    | Dispatch `cookie-consent-granted` event on accept; listen for same event to hide bar                                                                                                                     |
+| `src/js/modules/AudioPlayers.js` | Extract `findAndLoadPlayers()` method; listen for `embed-consent-hydrated` event to re-scan                                                                                                              |
+| `src/js/main.js`                 | Import/instantiate `EmbedConsent` before `AudioPlayers` in `onReady()`                                                                                                                                   |
+| `src/styl/site.styl`             | Add `@import "components/embed-consent"` under COMPONENTS                                                                                                                                                |
+| `docs/OEMBED-PRIVACY.md`         | Update to reflect implemented system                                                                                                                                                                     |
 
 ---
 
@@ -72,6 +74,7 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 ### Step 2: CSS
 
 **New file `src/styl/components/embed-consent.styl`:**
+
 - `.embed-consent-gate` - vertical margin
 - `.embed-consent-gate__placeholder` - light grey background (`var(--color-gray-light)`), border, centered flexbox layout, `min-height: 100px`, border-radius
 - `.embed-consent-gate__content` - max-width 400px for readability
@@ -80,6 +83,7 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 - `.embed-consent-gate__privacy-link` - subtle underlined link, `font-size-8`
 
 **`src/styl/site.styl`** - Add import under COMPONENTS section (after `quote`):
+
 ```stylus
 @import "components/embed-consent"
 ```
@@ -89,6 +93,7 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 **New file `src/js/modules/EmbedConsent.js`:**
 
 Key methods:
+
 - `onReady()` - Checks `cookie-approval` cookie via js-cookie. If consented: calls `hydrateAllGates()` immediately. If not: binds click handlers on `.embed-consent-gate__accept` buttons and listens for `cookie-consent-granted` event
 - `hydrateAllGates()` - Finds all `.embed-consent-gate` elements, decodes base64 `data-embed-html`, replaces gate with real HTML. After all gates hydrated, dispatches `embed-consent-hydrated` event (for AudioPlayers). **Script re-execution**: scripts injected via `innerHTML` don't auto-execute, so any `<script>` elements are recreated as new DOM nodes to trigger browser execution (critical for Twitter/X `widgets.js`)
 - `hydrateGate(gate)` - Single gate hydration with base64 decode, DOM replacement, and script re-creation
@@ -98,15 +103,18 @@ Key methods:
 ### Step 4: Modify existing JS modules
 
 **`src/js/modules/Utilities.js`** - In `checkGDPRApproval()`:
+
 - After setting cookie on `#obligation-accept` click, add: `document.dispatchEvent(new CustomEvent('cookie-consent-granted'))`
 - Add listener for `cookie-consent-granted` to hide `#obligation-bar` (handles consent from embed gate buttons)
 
 **`src/js/modules/AudioPlayers.js`**:
+
 - Extract `findPlayers()` + `loadPlayersWithThrottling()` into a new `findAndLoadPlayers()` method
 - Call `findAndLoadPlayers()` from `onReady()` (preserves current behaviour)
 - Add `document.addEventListener('embed-consent-hydrated', () => this.findAndLoadPlayers())` to re-scan for newly-revealed SoundCloud placeholders after consent gate hydration
 
 **`src/js/main.js`**:
+
 - Import `EmbedConsent` from `./modules/EmbedConsent.js`
 - Instantiate `this.embedConsent = new EmbedConsent()` in `Site` constructor
 - Call `this.embedConsent.onReady()` **before** `this.audioPlayers.onReady()` in `onReady()` (ensures consent gates are hydrated before AudioPlayers scans for SoundCloud placeholders)
@@ -114,6 +122,7 @@ Key methods:
 ### Step 5: Activate consent gating - oEmbed filter (classic editor)
 
 **`lib/functions-filters.php`** - Modify existing `nm_embed_oembed_html()`:
+
 - YouTube branch: **unchanged** (exempt - nocookie switch + responsive wrapper)
 - Vimeo branch: wrap in responsive container first, then wrap in `nm_consent_gate_wrap($wrapped, 'Vimeo')`
 - New catch-all: detect platform via `nm_detect_embed_platform()`, gate if `nm_html_has_iframe_or_script()` returns true
@@ -123,6 +132,7 @@ This catches classic editor embeds processed at display time via `the_content` f
 ### Step 6: Activate consent gating - block editor filter
 
 **`lib/functions-filters.php`** - New function `nm_consent_gate_block_embeds($block_content, $block)`:
+
 - Hooked to `render_block` filter at priority 5 (before existing `nm_add_caption_class` at priority 10)
 - Only processes blocks where `$block['blockName'] === 'core/embed'`
 - Guards: `is_admin()` returns early (no gating in block editor preview), empty content returns early
@@ -132,6 +142,7 @@ This catches classic editor embeds processed at display time via `the_content` f
 ### Step 7: Activate consent gating - hardcoded SoundCloud
 
 **`lib/renderers.php`** - Modify `render_soundcloud_embed_iframe()`:
+
 - Use `ob_start()` before existing output and `ob_get_clean()` after to capture the embed HTML (both lazy and non-lazy paths)
 - Wrap captured HTML: `echo nm_consent_gate_wrap($embed_html, 'SoundCloud')`
 - Preserves existing calling convention (function echoes output, callers don't expect a return value)
@@ -174,16 +185,16 @@ User clicks embed "Accept"     User clicks cookie bar "Accept"
 
 ## Edge Cases Handled
 
-| Case | Solution |
-|------|----------|
-| **RSS feeds** | `nm_consent_gate_wrap()` returns raw HTML when `is_feed()` is true |
-| **Admin/editor preview** | `nm_consent_gate_block_embeds()` returns raw HTML when `is_admin()` is true |
-| **Script execution** | Twitter/X embeds include `<script>` tags that won't execute via `innerHTML` - `hydrateGate()` recreates script elements to trigger browser execution |
-| **Flash of placeholder for consented users** | Minimal - `EmbedConsent.onReady()` hydrates synchronously at DOM ready before meaningful paint. Acceptable trade-off for cache compatibility |
-| **Multiple embeds on one page** | Clicking accept on any one gate loads ALL embeds on the page |
-| **Old YouTube block embeds** | `nm_consent_gate_block_embeds()` applies nocookie switch as safety net for posts saved before the oEmbed filter existed |
-| **Page caching** | HTML is always the same (consent gate wrapper). JS handles dynamic behaviour client-side. No cache invalidation needed |
-| **SoundCloud two-step loading** | Consent gate hydration reveals `.soundcloud-lazy` placeholder, then AudioPlayers hydrates to iframe. Both happen near-instantly for consented users |
+| Case                                         | Solution                                                                                                                                             |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RSS feeds**                                | `nm_consent_gate_wrap()` returns raw HTML when `is_feed()` is true                                                                                   |
+| **Admin/editor preview**                     | `nm_consent_gate_block_embeds()` returns raw HTML when `is_admin()` is true                                                                          |
+| **Script execution**                         | Twitter/X embeds include `<script>` tags that won't execute via `innerHTML` - `hydrateGate()` recreates script elements to trigger browser execution |
+| **Flash of placeholder for consented users** | Minimal - `EmbedConsent.onReady()` hydrates synchronously at DOM ready before meaningful paint. Acceptable trade-off for cache compatibility         |
+| **Multiple embeds on one page**              | Clicking accept on any one gate loads ALL embeds on the page                                                                                         |
+| **Old YouTube block embeds**                 | `nm_consent_gate_block_embeds()` applies nocookie switch as safety net for posts saved before the oEmbed filter existed                              |
+| **Page caching**                             | HTML is always the same (consent gate wrapper). JS handles dynamic behaviour client-side. No cache invalidation needed                               |
+| **SoundCloud two-step loading**              | Consent gate hydration reveals `.soundcloud-lazy` placeholder, then AudioPlayers hydrates to iframe. Both happen near-instantly for consented users  |
 
 ---
 
