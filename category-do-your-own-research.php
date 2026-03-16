@@ -104,7 +104,8 @@ get_header();
     </div>
   </section>
 
-  <?php // ── Section 3: Latest Episode ── ?>
+  <?php // ── Section 3: Latest Episode (page 1 only) ── ?>
+  <?php if ( ! is_paged() ) { ?>
   <section class="container mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 text-align-center mb-4">
@@ -149,6 +150,7 @@ get_header();
         }
         ?>
   </section>
+  <?php } ?>
 
   <?php // ── Section 4: Explore the Map ── ?>
   <section class="container mb-5">
@@ -198,7 +200,11 @@ get_header();
       ?>
     </div>
 
-      <?php // ── TODO: add pagination solution ── ?>
+    <div class="grid-row mt-4 mb-5">
+      <div class="grid-item is-xxl-24">
+        <?php get_template_part( 'partials/pagination' ); ?>
+      </div>
+    </div>
   </section>
 
   <?php // ── Section 7: Support Module ── ?>
