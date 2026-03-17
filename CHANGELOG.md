@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Modernised 404 page with search form pre-filled from failed URL path
 - Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
+- Use correct post layout (with UI tags) on Articles and other category archives and search/tag index (`category.php`, `index.php`)
+- Migrate all remaining category/taxonomy archives to archive-post layout (ACFM, If I Speak, Focus, Breaking Britain)
+- Consolidate video embed into archive-post via `show-video-embed` flag
 
 ### Fixed
 
@@ -22,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - /asksophie redirect as it should be a Bitly
+- Legacy post layout partials (flex-post, flex-video-embed-post, post-col6, post-col8)
 
 ## [4.5.0] - 2026-03-07
 

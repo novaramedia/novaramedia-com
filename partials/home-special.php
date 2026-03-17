@@ -1,4 +1,5 @@
 <?php
+// @deprecated Not referenced anywhere in the theme. Uses legacy col grid. Safe to delete.
 $special = IGV_get_option( '_igv_front_special' );
 
 if ( ! empty( $special ) ) {

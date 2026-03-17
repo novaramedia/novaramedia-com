@@ -1,4 +1,5 @@
 <?php
+// @deprecated Not referenced anywhere in the theme. Uses legacy col grid. Safe to delete.
 $fundraiser_youtube_id = IGV_get_option( '_igv_fundraiser_youtube_id' );
 if ( $fundraiser_youtube_id ) {
   ?>

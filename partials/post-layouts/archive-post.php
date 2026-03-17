@@ -11,12 +11,19 @@ $image_size = ! empty( $args['image-size'] ) ? $args['image-size'] : 'col24-16to
 $is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
 $is_article = nm_is_article( $this_post_id ); // check if post is article
 
+$show_video_embed = ! empty( $args['show-video-embed'] ) ? $args['show-video-embed'] : false;
+$youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', true ) : false;
+
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">
-  <?php if ( $is_show_tags ) { ?>
+  <?php if ( $youtube_id ) { ?>
+    <div class="u-video-embed-container ui-rounded-image">
+      <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+    </div>
+  <?php } elseif ( $is_show_tags ) { ?>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-        <?php render_post_ui_tags( $this_post_id, true, true ); ?>
+        <?php render_post_ui_tags( $this_post_id, true, true, 'no-border' ); ?>
       </div>
       <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
         <?php
@@ -49,8 +56,6 @@ switch ( $text_size ) {
   case 'regular':
     ?>
     <h5 class="index-post-title font-size-9 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h5>
-    <?php
-    ?>
     <h6 class="font-size-8 font-weight-bold text-uppercase mt-1 text-wrap-pretty">
       <?php
       if ( $is_article ) {
@@ -74,9 +79,7 @@ switch ( $text_size ) {
   case 'large':
     ?>
     <h3 class="font-size-10 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h3>
-    <?php
-    ?>
-  <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
+    <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
       <?php
       if ( $is_article ) {
         render_bylines( $this_post_id );
