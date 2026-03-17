@@ -5,7 +5,7 @@ get_header();
 $request_path = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 $parsed_path  = wp_parse_url( trim( $request_path, '/' ), PHP_URL_PATH );
 $last_segment = basename( $parsed_path ? $parsed_path : '' );
-$search_hint  = str_replace( array( '-', '_' ), ' ', $last_segment );
+$search_hint  = str_replace( array( '-', '_' ), ' ', rawurldecode( $last_segment ) );
 ?>
 
 <main id="main-content" data-testid="main-content">
@@ -55,8 +55,9 @@ $search_hint  = str_replace( array( '-', '_' ), ' ', $last_segment );
 <?php
 $recent_posts = new WP_Query(
   array(
-    'posts_per_page' => 9,
-    'post_status'    => 'publish',
+    'posts_per_page'   => 9,
+    'post_status'      => 'publish',
+    'no_found_rows'    => true,
   )
 );
 if ( $recent_posts->have_posts() ) {
