@@ -19,36 +19,36 @@ $meta = get_post_meta( $this_post_id );
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
         <?php render_post_ui_tags( $this_post_id, true, true ); ?>
       </div>
-      <a href="<?php the_permalink(); ?>" class="ui-hover">
+      <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
         <?php
         render_thumbnail(
             $this_post_id,
             $image_size,
             array(
-          'class' => 'ui-rounded-image',
+          'class' => 'ui-rounded-image u-block',
         )
             );
         ?>
       </a>
     </div>
   <?php } else { ?>
-    <a href="<?php the_permalink(); ?>" class="ui-hover">
+    <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
       <?php
       render_thumbnail(
           $this_post_id,
           $image_size,
           array(
-        'class' => 'ui-rounded-image',
+        'class' => 'ui-rounded-image u-display-block',
       )
           );
       ?>
     </a>
   <?php } ?>
+  <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
 <?php
 switch ( $text_size ) {
   case 'regular':
     ?>
-  <a href="<?php the_permalink(); ?>" class="ui-hover">
     <h5 class="index-post-title font-size-9 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h5>
     <?php
     if ( $is_article ) {
