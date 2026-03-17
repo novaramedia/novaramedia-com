@@ -12,8 +12,7 @@ $is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
 $is_article = nm_is_article( $this_post_id ); // check if post is article
 
 $show_video_embed = ! empty( $args['show-video-embed'] ) ? $args['show-video-embed'] : false;
-$meta = get_post_meta( $post->ID );
-$youtube_id = $show_video_embed && ! empty( $meta['_cmb_utube'][0] ) ? $meta['_cmb_utube'][0] : false;
+$youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', true ) : false;
 
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">

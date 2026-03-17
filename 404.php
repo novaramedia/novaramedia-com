@@ -3,7 +3,8 @@ get_header();
 
 // Extract the last path segment from the failed URL and convert slug to search terms
 $request_path = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-$last_segment = basename( wp_parse_url( trim( $request_path, '/' ), PHP_URL_PATH ) );
+$parsed_path  = wp_parse_url( trim( $request_path, '/' ), PHP_URL_PATH );
+$last_segment = basename( $parsed_path ? $parsed_path : '' );
 $search_hint  = str_replace( array( '-', '_' ), ' ', $last_segment );
 ?>
 
@@ -22,7 +23,7 @@ $search_hint  = str_replace( array( '-', '_' ), ' ', $last_segment );
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
         <div class="background-gray ui-rounded-box ui-backgrounded-box-padding font-color-white">
-          <form role="search" method="get" class="site-header-search__form font-size-11" action="<?php echo site_url(); ?>" autocomplete="off">
+          <form role="search" method="get" class="site-header-search__form font-size-11" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
             <div class="grid-row">
               <div class="grid-item is-xxl-24">
                 <h3 class="mb-4">Search for something</h3>
