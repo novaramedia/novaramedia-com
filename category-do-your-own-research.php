@@ -71,14 +71,13 @@ get_header();
           ?>
           <div class="dyor-archive__latest-episode grid-row">
             <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
-              <a href="<?php the_permalink(); ?>">
-                  <?php // ── TODO: make this default to youtube embed ── ?>
-                <?php the_post_thumbnail( 'col16-16to9', array( 'class' => 'index-post-thumbnail ui-rounded-box' ) ); ?>
-              </a>
+              <div class="u-video-embed-container ui-rounded-image">
+                <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], true, false ); ?>
+              </div>
             </div>
             <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
               <h2 class="font-size-14 font-size-s-13 font-weight-bold text-wrap-pretty">
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <?php the_title(); ?>
               </h2>
               <h3 class="font-size-12 font-size-s-11 font-weight-bold mt-3 mt-s-2 text-wrap-pretty">
                 <?php render_standfirst( get_the_ID() ); ?>
