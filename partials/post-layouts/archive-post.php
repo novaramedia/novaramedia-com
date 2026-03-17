@@ -11,7 +11,6 @@ $image_size = ! empty( $args['image-size'] ) ? $args['image-size'] : 'col24-16to
 $is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
 $is_article = nm_is_article( $this_post_id ); // check if post is article
 
-$meta = get_post_meta( $this_post_id );
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">
   <?php if ( $is_show_tags ) { ?>
@@ -54,13 +53,7 @@ switch ( $text_size ) {
     if ( $is_article ) {
       ?>
     <h6 class="font-size-8 font-weight-bold text-uppercase mt-1 text-wrap-pretty">
-      <?php
-      if ( $is_article ) {
-        render_bylines( $this_post_id );
-      } else {
-        render_standfirst( $this_post_id );
-      }
-      ?>
+      <?php render_bylines( $this_post_id ); ?>
     </h6>
     <?php } ?>
     <div class="font-size-9 mt-1">
@@ -81,13 +74,7 @@ switch ( $text_size ) {
     if ( $is_article ) {
       ?>
   <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
-      <?php
-      if ( $is_article ) {
-        render_bylines( $this_post_id );
-      } else {
-        render_standfirst( $this_post_id );
-      }
-      ?>
+      <?php render_bylines( $this_post_id ); ?>
     </h3>
     <?php } ?>
     <div class="mt-1">

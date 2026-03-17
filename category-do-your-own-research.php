@@ -8,7 +8,8 @@ $category = get_category( get_query_var( 'cat' ) );
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 $youtube_copy_override = get_term_meta( $category->term_id, '_nm_youtube_text', true );
 
-$podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
+$podcast_url_meta = get_term_meta( $category->term_id, '_nm_podcast_url', true );
+$podcast_url = ! empty( $podcast_url_meta ) ? $podcast_url_meta : false;
 
 $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Listen to the podcast';
 $youtube_copy = ! empty( $youtube_copy_override ) ? $youtube_copy_override : 'Watch on YouTube';
@@ -27,7 +28,6 @@ get_header();
         <div class="grid-row--nested dyor-archive__hero-background ui-rounded-box ui-rounded-box--top">
           <div class="grid-item is-xxl-24">
             <div class="dyor-archive__hero">
-              <?php // ── TODO: render assets and add here ── ?>
               <picture>
                 <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.avif' ); ?>" type="image/avif">
                 <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.webp' ); ?>" type="image/webp">
