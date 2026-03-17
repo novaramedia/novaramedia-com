@@ -50,12 +50,16 @@ switch ( $text_size ) {
     ?>
     <h5 class="index-post-title font-size-9 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h5>
     <?php
-    if ( $is_article ) {
-      ?>
+    ?>
     <h6 class="font-size-8 font-weight-bold text-uppercase mt-1 text-wrap-pretty">
-      <?php render_bylines( $this_post_id ); ?>
+      <?php
+      if ( $is_article ) {
+        render_bylines( $this_post_id );
+      } else {
+        render_standfirst( $this_post_id );
+      }
+      ?>
     </h6>
-    <?php } ?>
     <div class="font-size-9 mt-1">
     <?php
     if ( $is_article ) {
@@ -71,12 +75,16 @@ switch ( $text_size ) {
     ?>
     <h3 class="font-size-10 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h3>
     <?php
-    if ( $is_article ) {
-      ?>
+    ?>
   <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
-      <?php render_bylines( $this_post_id ); ?>
+      <?php
+      if ( $is_article ) {
+        render_bylines( $this_post_id );
+      } else {
+        render_standfirst( $this_post_id );
+      }
+      ?>
     </h3>
-    <?php } ?>
     <div class="mt-1">
     <?php
     if ( $is_article ) {
