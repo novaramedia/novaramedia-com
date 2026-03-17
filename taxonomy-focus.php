@@ -1,16 +1,16 @@
 <?php
 get_header();
 
-$term = $wp_query->get_queried_object();
+$this_term = $wp_query->get_queried_object();
 
-$splash_override_image_id = get_term_meta( $term->term_id, '_nm_focus_splash_override_id', true );
-$splash_image_id = ! empty( $splash_override_image_id ) ? $splash_override_image_id : get_term_meta( $term->term_id, '_nm_focus_splash_id', true ); // if there is an override us it, otherwise get the open graph & splash combo image
+$splash_override_image_id = get_term_meta( $this_term->term_id, '_nm_focus_splash_override_id', true );
+$splash_image_id = ! empty( $splash_override_image_id ) ? $splash_override_image_id : get_term_meta( $this_term->term_id, '_nm_focus_splash_id', true ); // if there is an override us it, otherwise get the open graph & splash combo image
 
 $splash_image_caption = ! empty( $splash_image_id ) ? wp_get_attachment_caption( $splash_image_id ) : false;
 
-$quotes = get_term_meta( $term->term_id, '_nm_focus_quotes', true );
+$quotes = get_term_meta( $this_term->term_id, '_nm_focus_quotes', true );
 
-$credits = get_term_meta( $term->term_id, '_nm_focus_credits', true );
+$credits = get_term_meta( $this_term->term_id, '_nm_focus_credits', true );
 ?>
 <main id="main-content">
   <section id="posts" class="container">
@@ -74,10 +74,10 @@ if ( have_posts() ) {
       'partials/post-layouts/archive-post',
       null,
       array(
-        'grid-item-classes'  => $post_grid_classes,
-        'image-size'         => 'col12-16to9',
-        'show-tags'          => true,
-        'show-video-embed'   => $is_video,
+        'grid-item-classes' => $post_grid_classes,
+        'image-size'        => 'col12-16to9',
+        'show-tags'         => true,
+        'show-video-embed'  => $is_video,
       )
     );
 
@@ -85,7 +85,7 @@ if ( have_posts() ) {
   }
 } else {
   ?>
-    <article class="grid-item is-s-24"><?php _e( 'Sorry, nothing matched your criteria :/' ); ?></article>
+    <article class="grid-item is-s-24">Sorry, nothing matched your criteria :/</article>
   <?php
 }
 ?>

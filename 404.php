@@ -2,8 +2,8 @@
 get_header();
 
 // Extract the last path segment from the failed URL and convert slug to search terms
-$request_path = trim( $_SERVER['REQUEST_URI'], '/' );
-$last_segment = basename( parse_url( $request_path, PHP_URL_PATH ) );
+$request_path = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+$last_segment = basename( wp_parse_url( trim( $request_path, '/' ), PHP_URL_PATH ) );
 $search_hint  = str_replace( array( '-', '_' ), ' ', $last_segment );
 ?>
 
