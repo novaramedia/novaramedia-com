@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Do Your Own Research category archive template
+
 ### Changed
 
 - Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
+
+### Fixed
+
+- Archive post partial layout creep from non-block image and link elements
 
 ### Removed
 
