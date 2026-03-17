@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Do Your Own Research category archive template
+- Merge `novaramedia-title-tool` plugin into theme (`lib/admin/title-tool.js`)
 
 ### Changed
 

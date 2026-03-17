@@ -128,6 +128,28 @@ function nm_add_copy_post_id_script() {
 add_action( 'admin_footer', 'nm_add_copy_post_id_script' );
 
 /**
+ * Enqueue the AP title style enforcement script on post editor pages.
+ *
+ * Ported from the novaramedia-title-tool plugin.
+ *
+ * @param string $hook The current admin page hook.
+ */
+function nm_enqueue_title_tool_script( $hook ) {
+  if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+    return;
+  }
+
+  wp_enqueue_script(
+    'nm-title-tool',
+    get_template_directory_uri() . '/lib/admin/title-tool.js',
+    array( 'jquery' ),
+    wp_get_theme()->get( 'Version' ),
+    true
+  );
+}
+add_action( 'admin_enqueue_scripts', 'nm_enqueue_title_tool_script' );
+
+/**
  * Remove automatic links from images in blog posts.
  *
  * Sets the default image link type to 'none' to prevent automatic linking.
