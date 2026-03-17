@@ -3,17 +3,18 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
   return;
 }
 
-  $this_post_id = get_the_ID();
+$this_post_id = get_the_ID();
 
-  $text_size = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular'; // get size size parameter with regular text size as default. string matching descriptive values
-  $image_size = ! empty( $args['image-size'] ) ? $args['image-size'] : 'col24-16to9'; // get image size parameter, with max possible size as fallback default. string name of image size
+$text_size = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular'; // get size size parameter with regular text size as default. string matching descriptive values
+$image_size = ! empty( $args['image-size'] ) ? $args['image-size'] : 'col24-16to9'; // get image size parameter, with max possible size as fallback default. string name of image size
 
-  $is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
-  $is_article = nm_is_article( $this_post_id ); // check if post is article
+$is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
+$is_article = nm_is_article( $this_post_id ); // check if post is article
 
-  $show_video_embed = ! empty( $args['show-video-embed'] ) ? $args['show-video-embed'] : false;
-  $meta = get_post_meta( $post->ID );
-  $youtube_id = $show_video_embed && ! empty( $meta['_cmb_utube'][0] ) ? $meta['_cmb_utube'][0] : false;
+$show_video_embed = ! empty( $args['show-video-embed'] ) ? $args['show-video-embed'] : false;
+$meta = get_post_meta( $post->ID );
+$youtube_id = $show_video_embed && ! empty( $meta['_cmb_utube'][0] ) ? $meta['_cmb_utube'][0] : false;
+
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">
   <?php if ( $youtube_id ) { ?>
@@ -23,26 +24,41 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
   <?php } elseif ( $is_show_tags ) { ?>
     <div class="layout-thumbnail-frame">
       <div class="layout-thumbnail-frame__inner mt-1 ml-1">
-        <?php render_post_ui_tags( $this_post_id, true, true, 'no-border' ); ?>
+        <?php render_post_ui_tags( $this_post_id, true, true ); ?>
       </div>
-      <a href="<?php the_permalink(); ?>" class="ui-hover">
-        <?php render_thumbnail( $this_post_id, $image_size, array( 'class' => 'ui-rounded-image' ) ); ?>
+      <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
+        <?php
+        render_thumbnail(
+            $this_post_id,
+            $image_size,
+            array(
+          'class' => 'ui-rounded-image u-display-block',
+        )
+            );
+        ?>
       </a>
     </div>
   <?php } else { ?>
-    <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <?php render_thumbnail( $this_post_id, $image_size, array( 'class' => 'ui-rounded-image' ) ); ?>
+    <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
+      <?php
+      render_thumbnail(
+          $this_post_id,
+          $image_size,
+          array(
+        'class' => 'ui-rounded-image u-display-block',
+      )
+          );
+      ?>
     </a>
   <?php } ?>
+  <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
 <?php
 switch ( $text_size ) {
   case 'regular':
     ?>
-  <a href="<?php the_permalink(); ?>" class="ui-hover">
     <h5 class="index-post-title font-size-9 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h5>
     <?php
-    if ( $is_article ) {
-      ?>
+    ?>
     <h6 class="font-size-8 font-weight-bold text-uppercase mt-1 text-wrap-pretty">
       <?php
       if ( $is_article ) {
@@ -52,7 +68,6 @@ switch ( $text_size ) {
       }
       ?>
     </h6>
-    <?php } ?>
     <div class="font-size-9 mt-1">
     <?php
     if ( $is_article ) {
@@ -68,8 +83,7 @@ switch ( $text_size ) {
     ?>
     <h3 class="font-size-10 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h3>
     <?php
-    if ( $is_article ) {
-      ?>
+    ?>
   <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
       <?php
       if ( $is_article ) {
@@ -79,7 +93,6 @@ switch ( $text_size ) {
       }
       ?>
     </h3>
-    <?php } ?>
     <div class="mt-1">
     <?php
     if ( $is_article ) {

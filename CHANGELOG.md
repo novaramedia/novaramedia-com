@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Do Your Own Research category archive template
 - Modernised 404 page with search form pre-filled from failed URL path
 
 ### Changed
@@ -17,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use correct post layout (with UI tags) on Articles and other category archives and search/tag index (`category.php`, `index.php`)
 - Migrate all remaining category/taxonomy archives to archive-post layout (ACFM, If I Speak, Focus, Breaking Britain)
 - Consolidate video embed into archive-post via `show-video-embed` flag
+
+### Fixed
+
+- Archive post partial layout creep from non-block image and link elements
 
 ### Removed
 

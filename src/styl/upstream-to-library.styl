@@ -6,3 +6,21 @@
 // $container-width-m: 744px
 // $container-width-s: 98%
 // ******************************************************
+
+// Fix: ui-tag dot circles squeezed/distorted across browsers
+// The library uses `1cap` (CSS cap-height unit) for the dot's width/height,
+// but `cap` has inconsistent browser support — Chromium squeezes the circle,
+// Safari renders it too wide. Replace with 0.7em, which approximates cap-height
+// as a ratio of em-size (~72% for Helvetica Neue). This is stable everywhere.
+// Upstream fix: change `width`/`height` in .ui-tag:before to use em in nm-stylus-library.
+.ui-tag:before
+  width: 0.7em
+  height: 0.7em
+
+// button gray mode
+.ui-button--gray
+  background-color: var(--color-gray-mid)
+  color: var(--color-black-soft)
+  &:hover
+    border-color: var(--color-gray-mid)
+    color: var(--color-black-soft)

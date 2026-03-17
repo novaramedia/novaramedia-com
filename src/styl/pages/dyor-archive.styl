@@ -1,0 +1,65 @@
+body.category-do-your-own-research
+  background-color: var(--color-gray-base)
+
+.dyor-archive
+  --dyor-green: #10E920
+
+// Hero
+.avif .dyor-archive__hero-background
+  background-image: url('./img/products/dyor/dyor-background.avif')
+
+.webp .dyor-archive__hero-background
+  background-image: url('./img/products/dyor/dyor-background.webp')
+
+.fallback .dyor-archive__hero-background
+  background-image: url('./img/products/dyor/dyor-background.jpg')
+
+.dyor-archive__hero
+  position: relative
+  overflow: hidden
+
+.dyor-archive__hero-image
+  width: 100%
+  max-width: 900px
+  margin-left: auto
+  margin-right: auto
+  height: auto
+  display: block
+  aspect-ratio: 1410 / 561
+  object-fit: cover
+
+.dyor-archive__hero-overlay
+  position: absolute
+  inset: 0
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  pointer-events: none
+
+// Intro
+.dyor-archive__intro-text
+  max-width: 897px
+  margin-left: auto
+  margin-right: auto
+
+.dyor-archive__intro-buttons
+  display: flex
+  gap: 1rem
+  justify-content: center
+  flex-wrap: wrap
+
+@media screen and (max-width: $breakpoint-m)
+  .dyor-archive__intro-buttons
+    gap: 0.5rem
+
+// Map embed
+.dyor-archive__map-embed
+  width: 100%
+  min-height: 450px
+
+  iframe
+    width: 100%
+    height: 100%
+    min-height: 450px
+    max-height: 85vh
+    border: 1px solid rgba(0, 0, 0, 0.1)
