@@ -28,7 +28,11 @@ get_header();
           <div class="grid-item is-xxl-24">
             <div class="dyor-archive__hero">
               <?php // ── TODO: render assets and add here ── ?>
-              <img class="dyor-archive__hero-image" src="<?php echo esc_url( $base_image_path . 'dyor-hero.png' ); ?>" alt="Do Your Own Research" />
+              <picture>
+                <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.avif' ); ?>" type="image/avif">
+                <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.webp' ); ?>" type="image/webp">
+                <img class="dyor-archive__hero-image" src="<?php echo esc_url( $base_image_path . 'dyor-hero.png' ); ?>" alt="Do Your Own Research" />
+              </picture>
             </div>
           </div>
         </div>
