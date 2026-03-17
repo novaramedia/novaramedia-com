@@ -8,6 +8,8 @@ $category = get_category( get_query_var( 'cat' ) );
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 $youtube_copy_override = get_term_meta( $category->term_id, '_nm_youtube_text', true );
 
+$podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
+
 $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Listen to the podcast';
 $youtube_copy = ! empty( $youtube_copy_override ) ? $youtube_copy_override : 'Watch on YouTube';
 
@@ -37,8 +39,10 @@ get_header();
                 <?php echo category_description(); ?>
               </div>
               <div class="dyor-archive__intro-buttons">
-                <a class="ui-button ui-button--black" href="<?php echo esc_url( $podcast_url ?? '#' ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
-                <a class="ui-button ui-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow"><?php echo esc_html( $youtube_copy ); ?></a>
+                <?php if ( $podcast_url ) { ?>
+                <a class="ui-button ui-button--black" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener"><?php echo esc_html( $podcast_copy ); ?></a>
+                <?php } ?>
+                <a class="ui-button ui-button--red" href="https://www.youtube.com/subscription_center?add_user=novaramedia" target="_blank" rel="nofollow noopener"><?php echo esc_html( $youtube_copy ); ?></a>
               </div>
             </div>
           </div>
@@ -72,7 +76,11 @@ get_header();
           <div class="dyor-archive__latest-episode grid-row">
             <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
               <div class="u-video-embed-container ui-rounded-image">
-                <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], true, false ); ?>
+                <?php if ( ! empty( $latest_meta['_cmb_utube'][0] ) ) { ?>
+                  <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], true, false ); ?>
+                <?php } else { ?>
+                  <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                <?php } ?>
               </div>
             </div>
             <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
@@ -106,6 +114,8 @@ get_header();
             <div class="dyor-archive__map-embed">
               <iframe
                 src="https://embed.figma.com/board/Twc9z7w8yaEzaO6m0PM1Kj/Do-Your-Own-Research--Map?&footer=false&page-selector=false&node-id=125-70&embed-host=share"
+                title="Do Your Own Research – Interactive Map"
+                loading="lazy"
                 allowfullscreen
               ></iframe>
             </div>

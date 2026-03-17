@@ -25,7 +25,7 @@ $meta = get_post_meta( $this_post_id );
             $this_post_id,
             $image_size,
             array(
-          'class' => 'ui-rounded-image u-block',
+          'class' => 'ui-rounded-image u-display-block',
         )
             );
         ?>
