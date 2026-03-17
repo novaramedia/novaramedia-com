@@ -15,75 +15,6 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/dyor/';
 
 get_header();
 ?>
-<style type="text/css">
-  body.category-do-your-own-research {
-    background-color: var(--color-gray-base);
-  }
-
-  .dyor-archive {
-    --dyor-green: #10E920;
-    --dyor-bg: #F8F5F5;
-  }
-
-  /* Hero */
-  .dyor-archive__hero {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dyor-archive__hero-background {
-    background-image: url('<?php echo esc_url( $base_image_path . 'dyor-background.jpg' ); ?>');
-  }
-
-  .dyor-archive__hero-image {
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    height: auto;
-    display: block;
-    aspect-ratio: 1410 / 561;
-    object-fit: cover;
-  }
-
-  .dyor-archive__hero-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    pointer-events: none;
-  }
-
-  .dyor-archive__intro-text {
-    max-width: 897px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .dyor-archive__intro-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* Map embed section */
-  .dyor-archive__map-embed {
-    width: 100%;
-    border-radius: 4px;
-    min-height: 450px;
-  }
-
-  .dyor-archive__map-embed iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 450px;
-    max-height: 85vh;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-  }
-</style>
 
 <main id="main-content" class="dyor-archive" data-testid="main-content">
 
@@ -100,9 +31,9 @@ get_header();
           </div>
         </div>
         <div class="grid-row background-white ui-rounded-box ui-rounded-box--bottom">
-          <div class="grid-item is-xxl-24 mt-5 mb-5">
+          <div class="grid-item is-xxl-24 mt-5 mt-s-4 mb-5 mb-s-4">
             <div class="dyor-archive__intro">
-              <div class="dyor-archive__intro-text font-size-13 mb-4 text-align-center">
+              <div class="dyor-archive__intro-text font-size-13 font-size-s-12 mb-4 text-align-center">
                 <?php echo category_description(); ?>
               </div>
               <div class="dyor-archive__intro-buttons">
@@ -204,7 +135,7 @@ get_header();
           array(
             'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
             'image-size'        => 'col12-16to9',
-            'text-size'         => 'regular',
+            'text-size'         => 'large',
           )
           );
         }
@@ -214,9 +145,6 @@ get_header();
         <?php
       }
       ?>
-    </div>
-
-    <div class="grid-row mt-4 mb-5">
       <div class="grid-item is-xxl-24">
         <?php get_template_part( 'partials/pagination' ); ?>
       </div>
@@ -229,7 +157,7 @@ get_header();
     'partials/support-section',
     null,
     array(
-      'container_classes'     => 'mt-5 mb-5',
+      'container_classes'     => 'mt-4 mb-4',
       'on_colored_background' => false,
     )
   );
