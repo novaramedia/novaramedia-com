@@ -14,7 +14,8 @@ add_action(
   'template_redirect',
   function () use ( $nm_external_redirects ) {
     handle_external_redirects( $nm_external_redirects );
-  }
+  },
+  1
 );
 
 /**
