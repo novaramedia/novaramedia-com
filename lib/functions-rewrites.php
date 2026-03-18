@@ -1,19 +1,40 @@
 <?php
-/** TODO: Refactor this to use an array rather than repeating code.
+/** EXTERNAL REDIRECTS
+ * -------------------------------------------------------------
  */
 
 // for redirects that send users to an external URL.
 // Add more path => URL pairs to the array as needed.
 // Format: 'path' => 'https://example.com/redirect-url'
+$nm_external_redirects = array(
+  'shop' => 'https://shop.novaramedia.com',
+);
+
 add_action(
-    'template_redirect',
-    function () {
-        handle_simple_redirects(
-            array(
-                'asksophie' => 'https://docs.google.com/forms/d/17qKQIMyYNdYEq0Uh4wcRSEhV6EGgamBaoFt_vfMlVd0/viewform',
-            )
-        );
-    }
+  'template_redirect',
+  function () use ( $nm_external_redirects ) {
+    handle_external_redirects( $nm_external_redirects );
+  },
+  1
+);
+
+/**
+ * Allow external redirect hosts for wp_safe_redirect().
+ * Derived automatically from the redirects array above.
+ */
+add_filter(
+  'allowed_redirect_hosts',
+  function ( $hosts ) use ( $nm_external_redirects ) {
+    $external_hosts = array_unique(
+      array_map(
+        function ( $url ) {
+          return wp_parse_url( $url, PHP_URL_HOST );
+        },
+        array_values( $nm_external_redirects )
+      )
+    );
+    return array_merge( $hosts, $external_hosts );
+  }
 );
 /**
  * Handles simple path-based redirects.
@@ -23,82 +44,74 @@ add_action(
  *
  * @param array $redirects Associative array of path => destination URL.
  */
-function handle_simple_redirects( $redirects ) {
+function handle_external_redirects( $redirects ) {
   if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
-      return;
+    return;
   }
 
   $request_uri = trim( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '/' );
 
   if ( isset( $redirects[ $request_uri ] ) ) {
-      wp_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
-      exit;
+    wp_safe_redirect( esc_url_raw( $redirects[ $request_uri ] ), 301 );
+    exit;
   }
 }
 
-add_action( 'init', 'red_flag_rewrites' );
-/**
- * Redirects /red-flags to /category/articles/red-flags/
- * Internal rewrite rule.
+/** INTERNAL REDIRECTS
+ * -------------------------------------------------------------
  */
-function red_flag_rewrites() {
-  $cat = get_category_by_path( 'articles/red-flags' );
-  if ( $cat ) {
-    add_rewrite_rule(
-        '^red-flags/?$',
-        'index.php?category_name=articles/' . $cat->slug,
-        'top'
-    );
-  }
-}
-add_action( 'init', 'committed_rewrites' );
+
+add_action( 'init', 'handle_internal_rewrites' );
 /**
- * Redirects /committed to /category/audio/committed.
+ * Handles internal rewrite rules for category redirects.
+ * Add more redirects to the array as needed.
  */
-function committed_rewrites() {
-  $cat = get_category_by_slug( 'committed' );
-  if ( $cat ) {
-    add_rewrite_rule(
-        '^committed/?$',
-        'index.php?category_name=' . $cat->slug,
+function handle_internal_rewrites() {
+  $internal_rewrites = array(
+    array(
+      'pattern'  => '^red-flags/?$',
+      'category' => 'red-flags',
+    ),
+    array(
+      'pattern'  => '^committed/?$',
+      'category' => 'committed',
+    ),
+    array(
+      'pattern'  => '^tyskysour/?$',
+      'category' => 'novara-live',
+    ),
+    array(
+      'pattern'  => '^novara-live/?$',
+      'category' => 'novara-live',
+    ),
+    array(
+      'pattern'  => '^downstream/?$',
+      'category' => 'downstream',
+    ),
+    array(
+      'pattern'  => '^if-i-speak/?$',
+      'category' => 'if-i-speak',
+    ),
+    array(
+      'pattern'  => '^acfm/?$',
+      'category' => 'acfm',
+    ),
+    array(
+      'pattern'  => '^death-in-westminster/?$',
+      'category' => 'death-in-westminster',
+    ),
+  );
+
+  foreach ( $internal_rewrites as $rewrite ) {
+    $cat = get_category_by_slug( $rewrite['category'] );
+
+    // Add rewrite rule if category exists
+    if ( $cat ) {
+      add_rewrite_rule(
+        $rewrite['pattern'],
+        'index.php?cat=' . $cat->term_id,
         'top'
-    );
-  }
-}
-
-add_action( 'init', 'death_in_westminster_rewrites' );
-/**
- * Redirects /death-in-westminster to /category/audio/death-in-westminster.
- */
-function death_in_westminster_rewrites() {
-  $cat = get_category_by_slug( 'death-in-westminster' );
-  if ( $cat ) {
-    add_rewrite_rule(
-      '^death-in-westminster/?$',
-      'index.php?category_name=' . $cat->slug,
-      'top'
-    );
-  }
-}
-
-add_action( 'init', 'novara_live_rewrites' );
-/**
- * Adds rewrite rules for Novara Live category.
- */
-function novara_live_rewrites() {
-  $novara_live_cat = get_category_by_slug( 'novara-live' );
-
-  if ( $novara_live_cat ) {
-    add_rewrite_rule(
-        'tyskysour',
-        'index.php?category_name=' . $novara_live_cat->slug,
-        'top'
-    );
-
-    add_rewrite_rule(
-        'novara-live',
-        'index.php?category_name=' . $novara_live_cat->slug,
-        'top'
-    );
+      );
+    }
   }
 }
