@@ -107,6 +107,10 @@ get_header();
   <?php } ?>
 
   <?php // ── Section 4: Explore the Map ── ?>
+  <?php
+  $map_embed_url = get_term_meta( $category->term_id, '_nm_dyor_map_embed_url', true );
+  if ( ! empty( $map_embed_url ) ) {
+  ?>
   <section class="container mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
@@ -117,7 +121,7 @@ get_header();
           <div class="grid-item is-xxl-24">
             <div class="dyor-archive__map-embed">
               <iframe
-                src="https://embed.figma.com/board/Twc9z7w8yaEzaO6m0PM1Kj/Do-Your-Own-Research--Map?&footer=false&page-selector=false&node-id=125-70&embed-host=share"
+                src="<?php echo esc_url( $map_embed_url ); ?>"
                 title="Do Your Own Research – Interactive Map"
                 loading="lazy"
                 allowfullscreen
@@ -128,6 +132,7 @@ get_header();
       </div>
     </div>
   </section>
+  <?php } ?>
 
   <?php // ── Section 5: Newsletter Signup ──  But just via partial, and only once it actually exists ?>
 
