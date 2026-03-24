@@ -16,6 +16,31 @@ $youtube_copy = ! empty( $youtube_copy_override ) ? $youtube_copy_override : 'Wa
 
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/dyor/';
 
+// Map embed settings
+$figma_file_key     = get_term_meta( $category->term_id, '_nm_dyor_figma_file_key', true );
+$figma_default_node = get_term_meta( $category->term_id, '_nm_dyor_figma_default_node_id', true );
+
+// Node ID priority: latest episode's node > default node > none
+$map_node_id = '';
+if ( ! empty( $figma_file_key ) ) {
+  $latest_node_query = new WP_Query( array(
+    'cat'            => $category->term_id,
+    'posts_per_page' => 1,
+    'post_status'    => 'publish',
+    'meta_key'       => '_nm_dyor_figma_node_id',
+    'meta_compare'   => '!=',
+    'meta_value'     => '',
+  ) );
+  if ( $latest_node_query->have_posts() ) {
+    $latest_node_query->the_post();
+    $map_node_id = get_post_meta( get_the_ID(), '_nm_dyor_figma_node_id', true );
+    wp_reset_postdata();
+  }
+  if ( empty( $map_node_id ) && ! empty( $figma_default_node ) ) {
+    $map_node_id = $figma_default_node;
+  }
+}
+
 get_header();
 ?>
 
@@ -107,9 +132,18 @@ get_header();
   <?php } ?>
 
   <?php // ── Section 4: Explore the Map ── ?>
+  <?php // TODO: When cookie consent gate is implemented, this Figma embed must be gated behind it (third-party iframe). ?>
   <?php
-  $map_embed_url = get_term_meta( $category->term_id, '_nm_dyor_map_embed_url', true );
-  if ( ! empty( $map_embed_url ) ) {
+  if ( ! empty( $figma_file_key ) ) {
+    $embed_params = array(
+      'embed-host'    => 'share',
+      'footer'        => 'false',
+      'page-selector' => 'false',
+    );
+    if ( ! empty( $map_node_id ) ) {
+      $embed_params['node-id'] = $map_node_id;
+    }
+    $map_src = 'https://embed.figma.com/board/' . rawurlencode( $figma_file_key ) . '/Do-Your-Own-Research-Map?' . http_build_query( $embed_params );
   ?>
   <section class="container mb-5">
     <div class="grid-row">
@@ -121,7 +155,7 @@ get_header();
           <div class="grid-item is-xxl-24">
             <div class="dyor-archive__map-embed">
               <iframe
-                src="<?php echo esc_url( $map_embed_url ); ?>"
+                src="<?php echo esc_url( $map_src ); ?>"
                 title="Do Your Own Research – Interactive Map"
                 loading="lazy"
                 allowfullscreen
