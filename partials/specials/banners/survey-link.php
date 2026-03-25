@@ -62,13 +62,13 @@ $url = 'https://novaramedia.com/survey2026';
         </style>
         <div class="grid-row">
           <div class="grid-item is-s-24 is-xxl-12 survey-link-banner__svg-col">
-            <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="nofollow">
+            <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="nofollow noopener noreferrer" aria-label="Take the Audience Survey 2026">
               <?php echo nm_get_file( '/dist/img/specials/banners/survey-link-banner.svg' ); ?>
             </a>
           </div>
           <div class="grid-item is-s-24 is-xxl-12 survey-link-banner__text-col">
             <p class="font-size-12 font-size-m-11 font-size-s-11 font-weight-bold mb-4">Where do you think Novara Media is at? And most importantly, where do you think it should go? We have ideas, and would like to hear yours.</p>
-            <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow">Take the survey</a>
+            <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Take the survey</a>
           </div>
         </div>
       </div>
