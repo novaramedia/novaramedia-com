@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Admin meta box for DYOR map embed URL (editable per-category in wp-admin)
+- Audience Survey 2026 front page banner
 
 ## [4.5.1] - 2026-03-17
 

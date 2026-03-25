@@ -101,6 +101,7 @@ function nm_register_front_page_options_metabox() {
     'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
     'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
     'partials/specials/banners/podcast-planet-b'       => 'Podcast: Planet B',
+    'partials/specials/banners/survey-link'            => 'Audience Survey 2026',
   );
 
   // Merge with newsletter signup options from the newsletter custom post type
