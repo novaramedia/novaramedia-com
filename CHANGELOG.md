@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - DYOR map embed with configurable file key, default zoom node, and per-episode node targeting
 - Per-post Figma node ID meta box for DYOR episodes
 
+### Changed
+
+- DYOR map config replaced: old embed URL field removed, now uses Figma file key + default node ID
+
 ## [4.5.1] - 2026-03-17
 
 ### Added

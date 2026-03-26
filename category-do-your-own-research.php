@@ -27,6 +27,8 @@ if ( ! empty( $figma_file_key ) ) {
     'cat'            => $category->term_id,
     'posts_per_page' => 1,
     'post_status'    => 'publish',
+    'orderby'        => 'date',
+    'order'          => 'DESC',
     'meta_key'       => '_nm_dyor_figma_node_id',
     'meta_compare'   => '!=',
     'meta_value'     => '',

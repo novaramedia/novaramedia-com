@@ -36,17 +36,20 @@ The current simple embed iframe is upgraded to use Embed Kit 2.0:
 
 ### Data Model
 
+> **Note:** The data model below was the original Embed Kit 2.0 design. The implemented version uses only the post meta field and two of the category meta fields (file key + default node ID). `_nm_dyor_map_embed_url` was removed and `_nm_dyor_figma_client_id` was never added. The map requires a file key to render — there is no fallback URL.
+
 **Post meta field:** `_nm_dyor_figma_node_id` (text, CMB2)
 - Added to posts in the "do-your-own-research" category only (via `show_on_cb`)
 - Contains the FigJam node ID (e.g. `125-70`)
 - Optional — posts without a node ID don't participate in map interactions
 
 **Category meta fields (on the DYOR category term):**
-- `_nm_dyor_map_embed_url` — existing field, kept as the simple embed fallback URL
+- ~~`_nm_dyor_map_embed_url` — existing field, kept as the simple embed fallback URL~~ *(removed)*
 - `_nm_dyor_figma_file_key` — the Figma file key (extracted from the board URL)
-- `_nm_dyor_figma_client_id` — the OAuth app client ID
+- ~~`_nm_dyor_figma_client_id` — the OAuth app client ID~~ *(not implemented)*
+- `_nm_dyor_figma_default_node_id` — default node ID fallback when no episode has a node set *(added in implementation)*
 
-PHP constructs the Embed Kit 2.0 URL from the file key and client ID. If either is missing, falls back to `_nm_dyor_map_embed_url`.
+~~PHP constructs the Embed Kit 2.0 URL from the file key and client ID. If either is missing, falls back to `_nm_dyor_map_embed_url`.~~ PHP constructs a simple embed URL from the file key. If the file key is not set, no map is rendered.
 
 ### PHP Changes
 
