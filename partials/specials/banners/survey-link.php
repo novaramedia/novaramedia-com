@@ -61,14 +61,16 @@ $url = 'https://novaramedia.com/survey2026';
           }
         </style>
         <div class="grid-row">
-          <div class="grid-item is-s-24 is-xxl-12 survey-link-banner__svg-col">
+          <div class="grid-item is-s-24 is-xl-14 is-xxl-14 survey-link-banner__svg-col">
             <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="nofollow noopener noreferrer" aria-label="Take the Audience Survey 2026">
               <?php echo nm_get_file( '/dist/img/specials/banners/survey-link-banner.svg' ); ?>
             </a>
           </div>
-          <div class="grid-item is-s-24 is-xxl-12 survey-link-banner__text-col">
-            <p class="font-size-12 font-size-m-11 font-size-s-11 font-weight-bold mb-4">Where do you think Novara Media is at? And most importantly, where do you think it should go? We have ideas, and would like to hear yours.</p>
-            <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Take the survey</a>
+          <div class="grid-item is-s-24 is-xl-10 is-xxl-10 survey-link-banner__text-col">
+            <div class="font-size-12 font-size-l-11 font-size-s-11 font-weight-bold">
+            <p class="mb-2 text-wrap-pretty">The next few years are critical. As we grow, we want to hear from you.</p>
+            <p class="mb-4 text-wrap-pretty">How do you find Novara? What matters to you? What could we do better?</p>
+            <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Tell us what you think</a>
           </div>
         </div>
       </div>
