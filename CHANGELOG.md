@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- DYOR map embed with configurable file key, default zoom node, and per-episode node targeting
 - Per-post Figma node ID meta box for DYOR episodes
+- Audience Survey 2026 front page banner
 
 ### Changed
 
