@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - DYOR map config replaced: old embed URL field removed, now uses Figma file key + default node ID
 
+### Fixed
+
+- Mobile on-scroll header title truncates with ellipsis when text overflows
+
 ## [4.5.1] - 2026-03-17
 
 ### Added
