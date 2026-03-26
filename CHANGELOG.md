@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Admin meta box for DYOR map embed URL (editable per-category in wp-admin)
+- Per-post Figma node ID meta box for DYOR episodes
 - Audience Survey 2026 front page banner
+
+### Changed
+
+- DYOR map config replaced: old embed URL field removed, now uses Figma file key + default node ID
 
 ## [4.5.1] - 2026-03-17
 

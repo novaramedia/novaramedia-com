@@ -31,9 +31,16 @@ function nm_cmb_dyor_metaboxes() {
   ) );
 
   $cmb_category_dyor->add_field( array(
-    'name' => esc_html__( 'Map embed URL', 'cmb2' ),
-    'desc' => esc_html__( 'Figma embed URL for the interactive map section', 'cmb2' ),
-    'id'   => $prefix . 'dyor_map_embed_url',
-    'type' => 'text_url',
+    'name' => esc_html__( 'Figma file key', 'cmb2' ),
+    'desc' => esc_html__( 'The file key from the FigJam board URL (e.g. Twc9z7w8yaEzaO6m0PM1Kj). Required for the map embed to display.', 'cmb2' ),
+    'id'   => $prefix . 'dyor_figma_file_key',
+    'type' => 'text',
+  ) );
+
+  $cmb_category_dyor->add_field( array(
+    'name' => esc_html__( 'Default map node ID', 'cmb2' ),
+    'desc' => esc_html__( 'Figma node ID for the default map view. Use an invisible bounding rectangle to control the zoom level.', 'cmb2' ),
+    'id'   => $prefix . 'dyor_figma_default_node_id',
+    'type' => 'text',
   ) );
 }
