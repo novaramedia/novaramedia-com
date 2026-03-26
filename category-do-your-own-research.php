@@ -23,18 +23,18 @@ $figma_default_node = get_term_meta( $category->term_id, '_nm_dyor_figma_default
 // Node ID priority: latest episode's node > default node > none
 $map_node_id = '';
 if ( ! empty( $figma_file_key ) ) {
-  $latest_node_query = new WP_Query( array(
+  $latest_node_posts = get_posts( array(
     'cat'            => $category->term_id,
     'posts_per_page' => 1,
     'post_status'    => 'publish',
     'meta_key'       => '_nm_dyor_figma_node_id',
     'meta_compare'   => '!=',
     'meta_value'     => '',
+    'fields'         => 'ids',
+    'no_found_rows'  => true,
   ) );
-  if ( $latest_node_query->have_posts() ) {
-    $latest_node_query->the_post();
-    $map_node_id = get_post_meta( get_the_ID(), '_nm_dyor_figma_node_id', true );
-    wp_reset_postdata();
+  if ( ! empty( $latest_node_posts ) ) {
+    $map_node_id = get_post_meta( $latest_node_posts[0], '_nm_dyor_figma_node_id', true );
   }
   if ( empty( $map_node_id ) && ! empty( $figma_default_node ) ) {
     $map_node_id = $figma_default_node;

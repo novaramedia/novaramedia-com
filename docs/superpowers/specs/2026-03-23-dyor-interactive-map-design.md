@@ -1,5 +1,13 @@
 # DYOR Interactive Map — Design Spec
 
+> **Status: Partially implemented (descoped)**
+>
+> This spec was the original design for an interactive map using Figma Embed Kit 2.0 with postMessage-driven navigation. During implementation, the Embed Kit 2.0 approach was descoped because `NAVIGATE_TO_FRAME_AND_CLOSE_OVERLAYS` could not be verified against FigJam board embeds, and the OAuth client-id requirement added unnecessary complexity for the initial release.
+>
+> **What was actually implemented:** A simple Figma iframe embed with `node-id` targeting. Each post stores a FigJam node ID in post meta, and the archive page constructs the iframe URL with the latest episode's node ID to set the initial viewport. There is no JS module, no postMessage communication, and no hover-to-navigate interaction. The category meta stores only the file key and a default node ID (not an embed URL or client ID).
+>
+> The interactive features described below remain a potential future enhancement if Embed Kit 2.0 support for FigJam boards is confirmed.
+
 ## Overview
 
 Replace the static Figma iframe embed on the Do Your Own Research category archive with an interactive map using Figma Embed Kit 2.0. Episodes link to map nodes, and the map navigates to relevant positions via the postMessage API.

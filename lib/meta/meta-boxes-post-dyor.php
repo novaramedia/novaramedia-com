@@ -6,14 +6,14 @@ add_action( 'cmb2_init', 'nm_cmb_dyor_post_metaboxes' );
  * @param  object $cmb Current box object
  * @return bool
  */
-function nm_cmb_is_post_in_dyor_category() {
-  global $post;
+function nm_cmb_is_post_in_dyor_category( $cmb ) {
+  $post_id = isset( $cmb->object_id ) ? $cmb->object_id : 0;
 
-  if ( ! $post ) {
+  if ( ! $post_id ) {
     return false;
   }
 
-  return has_category( 'do-your-own-research', $post->ID );
+  return has_category( 'do-your-own-research', $post_id );
 }
 
 /**
