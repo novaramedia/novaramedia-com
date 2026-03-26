@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Per-post Figma node ID meta box for DYOR episodes
+- Audience Survey 2026 front page banner
+
+### Changed
+
+- DYOR map config replaced: old embed URL field removed, now uses Figma file key + default node ID
+
 ### Fixed
 
 - Mobile on-scroll header title truncates with ellipsis when text overflows
