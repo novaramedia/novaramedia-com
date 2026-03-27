@@ -17,6 +17,14 @@
   width: 0.7em
   height: 0.7em
 
+// Fix: text-overflow-ellipsis utility has invalid CSS (`overflow: ellipsis`).
+// Correct implementation needs white-space + overflow + text-overflow together.
+// Upstream fix: replace `overflow: ellipsis` with the three properties below in nm-stylus-library.
+.text-overflow-ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
 // button gray mode
 .ui-button--gray
   background-color: var(--color-gray-mid)
