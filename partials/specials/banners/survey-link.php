@@ -72,6 +72,7 @@ $url = 'https://novaramedia.com/survey2026';
               <p class="mb-4 text-wrap-pretty">How do you find Novara? What matters to you? What could we do better?</p>
               <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Tell us what you think</a>
             </div>
+          </div>
         </div>
       </div>
     </div>

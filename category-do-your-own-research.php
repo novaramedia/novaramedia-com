@@ -29,9 +29,18 @@ if ( ! empty( $figma_file_key ) ) {
     'post_status'    => 'publish',
     'orderby'        => 'date',
     'order'          => 'DESC',
-    'meta_key'       => '_nm_dyor_figma_node_id',
-    'meta_compare'   => '!=',
-    'meta_value'     => '',
+    'meta_query'     => array(
+      'relation' => 'AND',
+      array(
+        'key'     => '_nm_dyor_figma_node_id',
+        'compare' => 'EXISTS',
+      ),
+      array(
+        'key'     => '_nm_dyor_figma_node_id',
+        'value'   => '',
+        'compare' => '!=',
+      ),
+    ),
     'fields'         => 'ids',
     'no_found_rows'  => true,
   ) );
