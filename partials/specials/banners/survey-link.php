@@ -68,10 +68,10 @@ $url = 'https://novaramedia.com/survey2026';
           </div>
           <div class="grid-item is-s-24 is-xl-10 is-xxl-10 survey-link-banner__text-col">
             <div class="font-size-12 font-size-l-11 font-size-s-11 font-weight-bold">
-            <p class="mb-2 text-wrap-pretty">The next few years are critical. As we grow, we want to hear from you.</p>
-            <p class="mb-4 text-wrap-pretty">How do you find Novara? What matters to you? What could we do better?</p>
-            <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Tell us what you think</a>
-          </div>
+              <p class="mb-2 text-wrap-pretty">The next few years are critical. As we grow, we want to hear from you.</p>
+              <p class="mb-4 text-wrap-pretty">How do you find Novara? What matters to you? What could we do better?</p>
+              <a href="<?php echo esc_url( $url ); ?>" class="ui-button ui-button--white" target="_blank" rel="nofollow noopener noreferrer">Tell us what you think</a>
+            </div>
         </div>
       </div>
     </div>

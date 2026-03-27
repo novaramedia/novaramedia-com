@@ -39,7 +39,7 @@
             </nav>
             <div class="header-main__middle grid-item is-xxl-14 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                <nav class="site-header__logomark" class="u-inline-block"><?php echo nm_get_file( '/dist/img/logomark-white.svg' ); ?></nav>
+                <nav class="site-header__logomark u-inline-block"><?php echo nm_get_file( '/dist/img/logomark-white.svg' ); ?></nav>
                 <div class="site-header__scroll-reveal font-size-9 font-size-s-8">
                   <span class="site-header__scroll-reveal-text text-overflow-ellipsis">
                   <?php
