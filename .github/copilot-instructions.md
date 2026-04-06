@@ -38,10 +38,10 @@ import isNonEmptyString from '../functions/isNonEmptyString.js';
 
 ### Release Process
 1. Pull `development` branch
-2. Run `release` action
+2. Run `./scripts/release.sh [patch|minor|major]`
 3. **Don't commit during release-it prompts**
 4. After scripts complete, commit as `Build: x.x.x`
-5. Create PR to `master` with changelog entries
+5. Script pushes tag and creates GitHub Release → auto-deploys to production
 
 ### Webpack Configuration
 - **Entry**: `src/js/main.js` (imports `src/styl/site.styl`)
@@ -243,7 +243,7 @@ npm run build
 
 ### Git Workflow
 
-- Work on feature branches (not `master` or `development`)
+- Work on feature branches (not `development`)
 - Keep commits focused and descriptive
 - Don't commit during release process
 - The `dist/` directory should be committed after building
