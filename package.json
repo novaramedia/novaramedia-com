@@ -84,11 +84,16 @@
   "release-it": {
     "git": {
       "commit": false,
-      "tag": false,
+      "tag": true,
+      "tagName": "v${version}",
       "push": false
     },
     "npm": {
       "publish": false
+    },
+    "github": {
+      "release": true,
+      "releaseName": "v${version}"
     },
     "plugins": {
       "@release-it/keep-a-changelog": {
