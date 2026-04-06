@@ -1,0 +1,144 @@
+# Deploy to Production on GitHub Release
+#
+# Triggered when a GitHub Release is published.
+# SSHes into the Kinsta production server, checks out the release tag,
+# clears cache, and verifies the site is up.
+#
+# Required secrets: KINSTA_SSH_KEY, KINSTA_PROD_SSH_HOST, KINSTA_PROD_SSH_PORT,
+# KINSTA_PROD_SSH_USER, KINSTA_API_KEY, KINSTA_SITE_ID, KINSTA_PROD_ENV_ID, PROD_URL
+
+name: Deploy Production
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kinsta-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
+          chmod 600 ~/.ssh/kinsta_key
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_PROD_SSH_PORT }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_PROD_SSH_HOST }}
+
+      - name: Deploy release tag to production
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          echo "Deploying $TAG to production..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git fetch origin --tags && \
+             git checkout $TAG"
+
+          echo "Deploy complete: $TAG"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_PROD_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_PROD_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_PROD_SSH_HOST }}
+
+      - name: Activate theme
+        run: |
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_PROD_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_PROD_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_PROD_SSH_HOST }}
+
+      - name: Clear Kinsta cache
+        continue-on-error: true
+        run: |
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_PROD_ENV_ID" ]; then
+            echo "Skipping cache clear - Kinsta API secrets not configured"
+            exit 0
+          fi
+
+          echo "Clearing Kinsta production cache..."
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_PROD_ENV_ID}/clear-cache" \
+            -H "Authorization: Bearer ${KINSTA_API_KEY}" \
+            -H "Content-Type: application/json")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Cache clear HTTP status: $http_code"
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "Cache clear response body:"
+            echo "$body"
+          fi
+        env:
+          KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
+          KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
+          KINSTA_PROD_ENV_ID: ${{ secrets.KINSTA_PROD_ENV_ID }}
+
+      - name: Verify production is accessible
+        run: |
+          echo "Checking production site..."
+          sleep 5
+          http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$PROD_URL")
+
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
+            echo "Production is live (HTTP $http_code)"
+          else
+            echo "WARNING: production returned HTTP $http_code"
+            exit 1
+          fi
+        env:
+          PROD_URL: ${{ secrets.PROD_URL }}
+
+      - name: Cleanup SSH keys
+        if: always()
+        run: rm -f ~/.ssh/kinsta_key
+
+  notify-slack-success:
+    needs: deploy
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        with:
+          payload: >
+            {
+              "text": "*Deployed: novaramedia.com ${{ github.event.release.tag_name }}*\n\n${{ github.event.release.body }}\n\n*Release:* ${{ github.event.release.html_url }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify-slack-failure:
+    needs: deploy
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack failure notification
+        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        with:
+          payload: >
+            {
+              "text": "*FAILED: novaramedia.com ${{ github.event.release.tag_name }} deploy failed*\n\n@patrick check the workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
