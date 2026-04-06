@@ -65,10 +65,27 @@ echo "Committing all changes as 'Build: $VERSION' ..."
 git add -A
 git commit -m "Build: $VERSION"
 
+# --- Tag and release ---
+
+echo ""
+echo "Creating tag $TAG..."
+git tag "$TAG"
+
 echo ""
 echo "Pushing development and tag..."
 git push origin development
 git push origin "$TAG"
+
+# --- Create GitHub Release (triggers production deploy) ---
+
+echo ""
+echo "Creating GitHub Release..."
+CHANGELOG_ENTRY=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d' | tail -n +2)
+
+gh release create "$TAG" \
+  --title "$TAG" \
+  --notes "$CHANGELOG_ENTRY" \
+  --target development
 
 echo ""
 echo "Release $VERSION complete."

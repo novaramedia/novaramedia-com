@@ -39,8 +39,8 @@ import isNonEmptyString from '../functions/isNonEmptyString.js';
 ### Release Process
 1. Pull `development` branch
 2. Run `./scripts/release.sh [patch|minor|major]`
-3. **Don't commit during release-it prompts**
-4. After scripts complete, commit as `Build: x.x.x`
+3. The script runs `release-it --ci`, so there are no interactive prompts or manual release steps during execution
+4. The script creates the `Build: x.x.x` commit automatically
 5. Script pushes tag and creates GitHub Release → auto-deploys to production
 
 ### Webpack Configuration

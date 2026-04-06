@@ -5,7 +5,8 @@
 # clears cache, and verifies the site is up.
 #
 # Required secrets: KINSTA_SSH_KEY, KINSTA_PROD_SSH_HOST, KINSTA_PROD_SSH_PORT,
-# KINSTA_PROD_SSH_USER, KINSTA_API_KEY, KINSTA_SITE_ID, KINSTA_PROD_ENV_ID, PROD_URL
+# KINSTA_PROD_SSH_USER, KINSTA_PROD_ENV_ID, PROD_URL, SLACK_WEBHOOK_URL
+# Optional secrets (cache clearing): KINSTA_API_KEY, KINSTA_SITE_ID
 
 name: Deploy Production
 
@@ -40,6 +41,12 @@ jobs:
       - name: Deploy release tag to production
         run: |
           TAG="${{ github.event.release.tag_name }}"
+
+          if ! printf '%s\n' "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "Invalid release tag: $TAG"
+            exit 1
+          fi
+
           echo "Deploying $TAG to production..."
 
           ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
@@ -115,18 +122,19 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Send Slack notification
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
-        with:
-          payload: >
-            {
-              "text": "*Deployed: novaramedia.com ${{ github.event.release.tag_name }}*\n\n${{ github.event.release.body }}\n\n*Release:* ${{ github.event.release.html_url }}"
-            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          jq -n \
+            --arg tag "$RELEASE_TAG" \
+            --arg body "$RELEASE_BODY" \
+            --arg url "$RELEASE_URL" \
+            '{text: ("*Deployed: novaramedia.com " + $tag + "*\n\n" + $body + "\n\n*Release:* " + $url)}' \
+          | curl -s -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
 
   notify-slack-failure:
     needs: deploy
@@ -134,11 +142,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack failure notification
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
-        with:
-          payload: >
-            {
-              "text": "*FAILED: novaramedia.com ${{ github.event.release.tag_name }} deploy failed*\n\n@patrick check the workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          jq -n \
+            --arg tag "$RELEASE_TAG" \
+            --arg url "$RUN_URL" \
+            '{text: ("*FAILED: novaramedia.com " + $tag + " deploy failed*\n\n@patrick check the workflow run: " + $url)}' \
+          | curl -s -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
