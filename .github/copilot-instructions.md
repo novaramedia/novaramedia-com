@@ -34,7 +34,7 @@ import isNonEmptyString from '../functions/isNonEmptyString.js';
 ### Commands
 - `dev` - Development build with watch mode
 - `build` - Production build with minification
-- `release` - Automated versioning (don't commit/tag/push during process)
+- `release:ci` - Automated versioning, tagging, and deploy via `./scripts/release.sh`
 
 ### Release Process
 1. Pull `development` branch
@@ -245,5 +245,5 @@ npm run build
 
 - Work on feature branches (not `development`)
 - Keep commits focused and descriptive
-- Don't commit during release process
+- Don't manually commit/tag during release — `release.sh` handles it
 - The `dist/` directory should be committed after building

@@ -3,10 +3,10 @@
 # Automated release script for novaramedia-com theme.
 # Runs the full release flow non-interactively:
 #   1. Validates branch state
-#   2. Runs release-it (bumps version, updates changelog, builds, updates style.css, creates tag)
+#   2. Runs release-it (bumps version, updates changelog, builds, updates style.css)
 #   3. Commits all changes as "Build: x.x.x"
-#   4. Pushes development branch and tag
-#   5. Creates GitHub Release (triggers production deploy)
+#   4. Creates git tag and pushes development branch + tag
+#   5. Creates GitHub Release via gh CLI (triggers production deploy)
 #
 # Usage:
 #   ./scripts/release.sh [increment]

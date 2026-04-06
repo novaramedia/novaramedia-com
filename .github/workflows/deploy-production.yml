@@ -53,6 +53,8 @@ jobs:
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "cd public/wp-content/themes/novaramedia-com && \
              git fetch origin --tags && \
+             git reset --hard && \
+             git clean -fd && \
              git checkout $TAG"
 
           echo "Deploy complete: $TAG"
