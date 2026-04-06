@@ -6,7 +6,7 @@
  * preset text with a CTA button on the other.
  */
 
-$url = 'https://novaramedia.com/survey2026';
+$url = 'https://novara.media/survey2026';
 ?>
 <div class="survey-link-banner container">
   <div class="grid-row">
