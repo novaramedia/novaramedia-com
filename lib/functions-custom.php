@@ -192,7 +192,7 @@ function check_for_apology_notice() {
  *
  * @param array $featured_posts_ids Array of featured post ids.
  *
- * @return array/Boolean Array of latest articles ids or false if no latest articles
+ * @return array|false Array of latest News article IDs or false if none found
  */
 function get_latest_articles_ids( $featured_posts_ids = false ) {
   $query_args = array(
