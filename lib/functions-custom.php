@@ -184,11 +184,11 @@ function check_for_apology_notice() {
   }
 }
 /**
- * Get the latest articles ids
- * This function will get the latest articles ids, excluding the featured posts if set
- * If the featured posts are not set, it will return the latest articles ids
- * If the latest articles are already in the featured posts, it will skip them
- * If there are no latest articles, it will return false
+ * Get the latest News article IDs
+ * Queries only the 'news' category, excluding the featured posts if set.
+ * If the featured posts are not set, it will return the latest news article IDs.
+ * If the latest articles are already in the featured posts, it will skip them.
+ * If there are no matching articles, it will return false.
  *
  * @param array $featured_posts_ids Array of featured post ids.
  *
