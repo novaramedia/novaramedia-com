@@ -196,7 +196,7 @@ function check_for_apology_notice() {
  */
 function get_latest_articles_ids( $featured_posts_ids = false ) {
   $query_args = array(
-      'category_name'  => 'articles',
+      'category_name'  => 'news',
       'posts_per_page' => 7,
       'fields'         => 'ids',
       'post_status'    => 'publish',

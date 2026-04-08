@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Front page latest articles column (above the fold) now shows only News posts
+
 ### Fixed
 
 - Survey 2026 banner link pointing to wrong domain
