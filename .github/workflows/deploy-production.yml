@@ -104,14 +104,21 @@ jobs:
         run: |
           echo "Checking production site..."
           sleep 5
-          http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$PROD_URL")
 
-          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
-            echo "Production is live (HTTP $http_code)"
-          else
-            echo "WARNING: production returned HTTP $http_code"
-            exit 1
-          fi
+          attempts=3
+          delay=10
+          for i in $(seq 1 $attempts); do
+            http_code=$(curl -L -sS -o /dev/null -w "%{http_code}" --max-time 30 "$PROD_URL" || echo "000")
+            if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
+              echo "Production is live (HTTP $http_code)"
+              exit 0
+            fi
+            echo "Attempt $i/$attempts: HTTP $http_code — retrying in ${delay}s"
+            sleep $delay
+          done
+
+          echo "WARNING: production verification failed after $attempts attempts"
+          exit 1
         env:
           PROD_URL: ${{ secrets.PROD_URL }}
 

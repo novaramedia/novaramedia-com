@@ -28,7 +28,7 @@
 1. Add production SSH secrets to GitHub
 2. Create `deploy-production.yml` (triggered on GitHub Release)
 3. Update `release.sh` to tag and create a GitHub Release instead of PRing to master
-4. Update release-it config to create git tags
+4. Keep release-it git tagging disabled — tagging owned by `release.sh` (see implementation note above)
 5. Update Slack notification to trigger on releases
 6. Update Cypress workflow to trigger on PRs to development
 7. Remove master branch and its protections
