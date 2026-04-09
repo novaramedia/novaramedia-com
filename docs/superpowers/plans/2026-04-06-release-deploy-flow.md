@@ -2,6 +2,8 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **Implementation note (post-review):** During Copilot review on PR #461, the tagging responsibility was moved out of release-it and into `scripts/release.sh`. Release-it now *only* handles version bump, changelog, and build (`git.commit`/`git.tag`/`git.push` all `false`). The script owns `git tag`, `git push --tags`, and `gh release create`. Task 3 and Task 4 below have been updated to reflect the final implementation — the release-it config block is intentionally *not* enabling `git.tag` or `github.release`.
+
 **Goal:** Replace the master-branch deploy flow with GitHub Release-triggered auto-deploy to production, removing the master branch entirely.
 
 **Architecture:** All work merges to `development`. When ready to ship, `release.sh` bumps version, tags, and creates a GitHub Release. A new workflow `deploy-production.yml` triggers on `release: published`, SSHes into the Kinsta production server, checks out the release tag, and clears cache. The existing Slack notification moves to trigger on releases instead of PR merges.
@@ -235,31 +237,24 @@ git commit -m "Add production deploy workflow triggered by GitHub Release"
 
 ---
 
-### Task 3: Update release-it Config to Create Git Tags
+### Task 3: Leave release-it Config as Version-Bump-Only
 
 **Files:**
-- Modify: `package.json:84-102` (release-it config section)
+- `package.json:84-102` (release-it config section) — **no changes**
 
-Currently release-it is configured with `git.commit: false, git.tag: false, git.push: false` — everything is handled by `release.sh`. We need to enable tagging so release-it creates the version tag that triggers the deploy.
+> **Final implementation note:** This task originally proposed enabling `git.tag: true` and `github.release: true` in release-it so it would create the tag and GitHub Release. During Copilot review, this was reverted — `scripts/release.sh` now owns tagging and release creation (see Task 4). Release-it stays version-bump-only, which keeps a single source of truth for the tag/release step.
 
-- [ ] **Step 1: Update the release-it config in package.json**
-
-Replace the `release-it` section with:
+The release-it config remains:
 
 ```json
 "release-it": {
   "git": {
     "commit": false,
-    "tag": true,
-    "tagName": "v${version}",
+    "tag": false,
     "push": false
   },
   "npm": {
     "publish": false
-  },
-  "github": {
-    "release": true,
-    "releaseName": "v${version}"
   },
   "plugins": {
     "@release-it/keep-a-changelog": {
@@ -273,17 +268,10 @@ Replace the `release-it` section with:
 }
 ```
 
-Key changes:
-- `git.tag: true` — release-it creates the tag
-- `git.tagName: "v${version}"` — tags as `v4.5.3` etc.
-- `github.release: true` — release-it creates the GitHub Release (which triggers deploy)
-
-- [ ] **Step 2: Commit**
-
-```bash
-git add package.json
-git commit -m "Enable git tagging and GitHub Release creation in release-it"
-```
+Rationale:
+- Release-it handles: version bump, changelog update, build, style.css bump
+- `release.sh` handles: commit, tag, push, GitHub Release creation
+- Single source of truth for tagging avoids duplicate-tag errors if release-it and the script both try to create the same tag
 
 ---
 
@@ -295,95 +283,18 @@ git commit -m "Enable git tagging and GitHub Release creation in release-it"
 The script currently creates a "Build: x.x.x" commit, pushes development, and optionally creates a PR to master. The new flow:
 1. Same preflight checks and build
 2. Same commit and push to development
-3. Push the tag that release-it created
-4. No more PR to master — the GitHub Release (created by release-it) triggers the deploy
+3. Create and push the `v${version}` tag
+4. Create the GitHub Release via `gh release create` — the `release: published` event triggers the production deploy workflow
 
-- [ ] **Step 1: Replace the release script**
+> **Final implementation note:** This task originally assumed release-it would create the tag and GitHub Release (see Task 3). During review, responsibility shifted entirely to `release.sh`. The current script creates the tag itself, pushes it, and runs `gh release create` with `--notes-file` pointing at a temp file containing the extracted changelog entry. It also guards against a pre-existing tag (local or remote) to make the flow retry-safe after a partial failure. See `scripts/release.sh` for the canonical implementation — a full copy is intentionally not embedded here to avoid drift.
 
-```bash
-#!/usr/bin/env bash
-#
-# Automated release script for novaramedia-com theme.
-# Runs the full release flow non-interactively:
-#   1. Validates branch state
-#   2. Runs release-it (bumps version, updates changelog, builds, updates style.css, creates tag)
-#   3. Commits all changes as "Build: x.x.x"
-#   4. Pushes development branch and tag
-#   5. Creates GitHub Release (triggers production deploy)
-#
-# Usage:
-#   ./scripts/release.sh [increment]
-#
-#   increment: major | minor | patch (default: minor)
-#
-# Examples:
-#   ./scripts/release.sh           # minor bump
-#   ./scripts/release.sh patch     # patch bump
-
-set -euo pipefail
-
-INCREMENT="minor"
-
-for arg in "$@"; do
-  case "$arg" in
-    major|minor|patch) INCREMENT="$arg" ;;
-    *) echo "Unknown argument: $arg"; exit 1 ;;
-  esac
-done
-BRANCH=$(git branch --show-current)
-
-# --- Preflight checks ---
-
-if [ "$BRANCH" != "development" ]; then
-  echo "Error: Must be on 'development' branch (currently on '$BRANCH')"
-  exit 1
-fi
-
-if ! git diff --quiet || ! git diff --cached --quiet; then
-  echo "Error: Working tree has uncommitted changes. Commit or stash them first."
-  exit 1
-fi
-
-echo "Pulling latest development..."
-git pull --ff-only origin development
-
-# --- Run release-it ---
-
-echo ""
-echo "Running release-it --ci --increment=$INCREMENT ..."
-echo ""
-npx release-it "$INCREMENT" --ci
-
-# --- Read new version ---
-
-VERSION=$(node -p "require('./package.json').version")
-TAG="v$VERSION"
-echo ""
-echo "Version bumped to $VERSION"
-
-# --- Commit ---
-
-echo ""
-echo "Committing all changes as 'Build: $VERSION' ..."
-git add -A
-git commit -m "Build: $VERSION"
-
-echo ""
-echo "Pushing development and tag..."
-git push origin development
-git push origin "$TAG"
-
-echo ""
-echo "Release $VERSION complete."
-echo "GitHub Release created → production deploy will trigger automatically."
-```
-
-- [ ] **Step 2: Commit**
-
-```bash
-git add scripts/release.sh
-git commit -m "Update release script: tag-based flow, remove PR-to-master step"
-```
+**Script responsibilities (final):**
+- Preflight: branch check, clean working tree, pull latest
+- Run `release-it --ci` (bumps version, updates changelog, runs build)
+- Commit all changes as `Build: x.x.x`
+- Guard against existing tag, then `git tag` + `git push` both development and the tag
+- Extract the changelog entry for this version into a temp file
+- `gh release create` with `--notes-file` (triggers production deploy via the release workflow)
 
 ---
 

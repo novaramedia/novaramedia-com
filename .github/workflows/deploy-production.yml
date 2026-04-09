@@ -140,7 +140,7 @@ jobs:
 
   notify-slack-failure:
     needs: deploy
-    if: failure()
+    if: ${{ always() && needs.deploy.result == 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack failure notification
