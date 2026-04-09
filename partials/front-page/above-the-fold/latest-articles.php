@@ -1,12 +1,12 @@
 <?php
-  if ( empty( $args['latest_articles_posts_ids'] ) ) {
+  if ( empty( $args['latest_news_posts_ids'] ) ) {
     return;
   }
-  $latest_articles_posts_ids = $args['latest_articles_posts_ids'];
+  $latest_news_posts_ids = $args['latest_news_posts_ids'];
 
   $recent_articles = new WP_Query(
     array(
-      'post__in' => $latest_articles_posts_ids,
+      'post__in' => $latest_news_posts_ids,
       'orderby' => 'post__in',
     )
   );

@@ -184,17 +184,16 @@ function check_for_apology_notice() {
   }
 }
 /**
- * Get the latest News article IDs
+ * Get the latest News article IDs.
  * Queries only the 'news' category, excluding the featured posts if set.
- * If the featured posts are not set, it will return the latest news article IDs.
- * If the latest articles are already in the featured posts, it will skip them.
- * If there are no matching articles, it will return false.
+ * Always returns an array — empty if there are no matching posts — so callers
+ * can safely pass the result to array_merge() and similar array functions.
  *
- * @param array $featured_posts_ids Array of featured post ids.
+ * @param array $featured_posts_ids Array of featured post ids to exclude.
  *
- * @return array|false Array of latest News article IDs or false if none found
+ * @return int[] Array of latest News post IDs (empty if none found).
  */
-function get_latest_articles_ids( $featured_posts_ids = false ) {
+function get_latest_news_ids( $featured_posts_ids = false ) {
   $query_args = array(
       'category_name'  => 'news',
       'posts_per_page' => 7,
@@ -213,12 +212,10 @@ function get_latest_articles_ids( $featured_posts_ids = false ) {
   $recent_articles = new WP_Query( $query_args );
 
   if ( ! $recent_articles->have_posts() ) {
-    return false;
+    return array();
   }
 
-  $latest_articles_ids = $recent_articles->posts;
-
-  return $latest_articles_ids;
+  return $recent_articles->posts;
 }
 /**
  * Get the featured post ids for the above the fold section
