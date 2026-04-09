@@ -18,7 +18,7 @@ This file provides guidance to Claude Code when working in this repository.
 
 - **Repository:** [novaramedia/novaramedia-com](https://github.com/novaramedia/novaramedia-com)
 - **Primary Branch:** development
-- **PR Target:** development (then merge to master for releases)
+- **PR Target:** development (releases are tagged and auto-deployed via GitHub Release)
 
 ## Restrictions
 
