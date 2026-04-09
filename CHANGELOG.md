@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.3] - 2026-04-08
+
+### Changed
+
+- Front page latest articles column (above the fold) now shows only News posts
+
+### Fixed
+
+- Survey 2026 banner link pointing to wrong domain
+
 ## [4.5.2] - 2026-03-26
 
 ### Added

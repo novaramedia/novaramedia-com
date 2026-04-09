@@ -11,8 +11,8 @@ if ( $args['featured_posts_ids'] ) {
     return;
 }
 
-if ( $args['latest_articles_posts_ids'] ) {
-    $latest_articles_posts_ids = $args['latest_articles_posts_ids'];
+if ( $args['latest_news_posts_ids'] ) {
+    $latest_news_posts_ids = $args['latest_news_posts_ids'];
 } else {
     return;
 }
@@ -37,7 +37,7 @@ if ( $args['latest_articles_posts_ids'] ) {
             'partials/front-page/above-the-fold/latest-articles',
             null,
             array(
-                'latest_articles_posts_ids' => $latest_articles_posts_ids,
+                'latest_news_posts_ids' => $latest_news_posts_ids,
             )
         );
         ?>
