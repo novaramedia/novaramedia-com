@@ -67,6 +67,21 @@ git commit -m "Build: $VERSION"
 
 # --- Tag and release ---
 
+if git rev-parse "$TAG" >/dev/null 2>&1; then
+  echo "Error: Tag $TAG already exists locally."
+  echo "If this is from a previous failed release, delete it with:"
+  echo "  git tag -d $TAG"
+  echo "  git push origin :refs/tags/$TAG   # only if it was already pushed"
+  exit 1
+fi
+
+if git ls-remote --exit-code --tags origin "$TAG" >/dev/null 2>&1; then
+  echo "Error: Tag $TAG already exists on remote origin."
+  echo "If this is from a previous failed release, delete it with:"
+  echo "  git push origin :refs/tags/$TAG"
+  exit 1
+fi
+
 echo ""
 echo "Creating tag $TAG..."
 git tag "$TAG"
@@ -80,11 +95,13 @@ git push origin "$TAG"
 
 echo ""
 echo "Creating GitHub Release..."
-CHANGELOG_ENTRY=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d' | tail -n +2)
+NOTES_FILE=$(mktemp)
+trap 'rm -f "$NOTES_FILE"' EXIT
+sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d' | tail -n +2 > "$NOTES_FILE"
 
 gh release create "$TAG" \
   --title "$TAG" \
-  --notes "$CHANGELOG_ENTRY" \
+  --notes-file "$NOTES_FILE" \
   --target development
 
 echo ""

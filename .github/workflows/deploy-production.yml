@@ -136,7 +136,7 @@ jobs:
             --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
             '{text: ("*Deployed: novaramedia.com " + $tag + "*\n\n" + $body + "\n\n*Release:* " + $url)}' \
-          | curl -s -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
+          | curl -f -sS -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
 
   notify-slack-failure:
     needs: deploy
@@ -153,4 +153,4 @@ jobs:
             --arg tag "$RELEASE_TAG" \
             --arg url "$RUN_URL" \
             '{text: ("*FAILED: novaramedia.com " + $tag + " deploy failed*\n\n@patrick check the workflow run: " + $url)}' \
-          | curl -s -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
+          | curl -f -sS -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK_URL"
