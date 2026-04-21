@@ -108,30 +108,33 @@ jobs:
       # always fetch fresh HTML even if this step fails. Warnings here are
       # surfaced via ::warning:: annotations so stale IDs are visible in the
       # GitHub UI without blocking the workflow.
+      # Cache clear is best-effort - cypress/support/e2e.js appends a
+      # ?cypress_cache_bust=... query string to every cy.visit() so tests
+      # always fetch fresh HTML even if this step fails. Warnings here are
+      # surfaced via ::warning:: annotations so issues are visible in the
+      # GitHub UI without blocking the workflow.
+      #
+      # Endpoint reference: https://api-docs.kinsta.com/api-reference/wordpress-site-tools/clear-site-cache
       - name: Clear Kinsta cache
         continue-on-error: true
         run: |
-          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
             echo "::warning::Kinsta API secrets not configured - skipping cache clear (cypress cache-bust will handle freshness)"
             exit 0
           fi
 
           echo "Clearing Kinsta cache..."
           response=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_STAGING_ENV_ID}/clear-cache" \
+            "https://api.kinsta.com/v2/sites/tools/clear-cache" \
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
-            -H "Content-Type: application/json")
+            -H "Content-Type: application/json" \
+            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}")
 
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
 
           echo "Cache clear response: $http_code"
           echo "$body"
-
-          if [ "$http_code" = "404" ]; then
-            echo "::warning::Kinsta returned 404 - KINSTA_SITE_ID or KINSTA_STAGING_ENV_ID is stale. Refresh from https://api.kinsta.com/v2/sites"
-            exit 0
-          fi
 
           if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
             echo "::warning::Kinsta cache clear returned HTTP $http_code"
