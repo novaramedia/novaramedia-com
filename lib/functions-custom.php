@@ -624,7 +624,7 @@ function only_child_category_filter( $category ) {
  * Create youtube embed url with consistent parameters
  *
  * @param string $id Youtube video ID.
- * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
  *
  * @return string Valid youtube iframe src url
  */
