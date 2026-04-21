@@ -18,7 +18,7 @@ $youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', tr
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">
   <?php if ( $youtube_id ) { ?>
     <div class="u-video-embed-container ui-rounded-image">
-      <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+      <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
     </div>
   <?php } elseif ( $is_show_tags ) { ?>
     <div class="layout-thumbnail-frame">

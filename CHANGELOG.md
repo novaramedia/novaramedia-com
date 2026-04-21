@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- YouTube embeds use native `loading="lazy"` instead of lazysizes `data-src` swap
+
 ### Fixed
 
 - Header menu spacing on mobile
+- YouTube embeds failing to load in Safari
 
 ## [4.5.3] - 2026-04-08
 

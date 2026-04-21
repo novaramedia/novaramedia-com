@@ -35,7 +35,7 @@ get_header();
     <div class="novara-live-archive__liveplayer grid-row">
       <div class="grid-item is-xxl-24">
         <div class="u-video-embed-container">
-          <?php echo render_youtube_embed_iframe( $embed_id, true, true ); ?>
+          <?php echo render_youtube_embed_iframe( $embed_id, true ); ?>
         </div>
       </div>
     </div>
