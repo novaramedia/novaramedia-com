@@ -155,6 +155,17 @@ jobs:
 
             if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
               echo "Staging site is accessible (HTTP $http_code)"
+
+              # Diagnostic: list data-testid values present on the homepage.
+              # Helps debug cases where a test asserts a testid but the
+              # template branch that emits it is skipped (e.g. above-the-fold
+              # returns early when no featured posts are configured).
+              echo "--- data-testid values on staging homepage ---"
+              curl -L -s "${STAGING_URL}/?cypress_cache_bust=$(date +%s)" \
+                | grep -oE 'data-testid="[^"]+"' \
+                | sort -u \
+                || echo "(no data-testid attributes found)"
+              echo "--- end testid diagnostic ---"
               exit 0
             fi
 
