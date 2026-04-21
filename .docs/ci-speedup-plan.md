@@ -221,3 +221,39 @@ The previous SFTP-based workflow mirrored the entire theme directory (~50MB) twi
 
 - **Cypress binary caching:** Cache `~/.cache/Cypress` between runs (saves ~10 sec)
 - **Remove temporary push trigger:** The `push: branches: [copilot/add-cypress-testing-ci]` trigger should be removed after merging to development
+
+---
+
+## Future: Staging + Production Secret Split
+
+Current secrets are Kinsta-staging-only and carry legacy `SFTP` naming from the pre-git deploy era. When the full deploy flow (staging + production) lands, secrets should be renamed + split by environment so the workflows read the same clearly.
+
+### Proposed naming
+
+Prefix every env-specific secret with the environment:
+
+| Current                   | Future (staging)             | Future (production)          |
+| ------------------------- | ---------------------------- | ---------------------------- |
+| `KINSTA_SFTP_HOST`        | `KINSTA_STAGING_SSH_HOST`    | `KINSTA_PROD_SSH_HOST`       |
+| `KINSTA_SSH_PORT`         | `KINSTA_STAGING_SSH_PORT`    | `KINSTA_PROD_SSH_PORT`       |
+| `KINSTA_SSH_USER`         | `KINSTA_STAGING_SSH_USER`    | `KINSTA_PROD_SSH_USER`       |
+| `KINSTA_SSH_KEY`          | `KINSTA_STAGING_SSH_KEY`     | `KINSTA_PROD_SSH_KEY`        |
+| `STAGING_URL`             | `KINSTA_STAGING_URL`         | `KINSTA_PROD_URL`            |
+| `KINSTA_STAGING_ENV_ID`   | `KINSTA_STAGING_ENV_ID`      | `KINSTA_PROD_ENV_ID`         |
+
+Shared (not env-specific):
+
+- `KINSTA_API_KEY`
+- `KINSTA_SITE_ID`
+
+### Migration steps
+
+1. Create new staging secrets with the `KINSTA_STAGING_*` prefix (copy values from existing secrets).
+2. Update `.github/workflows/cypress.yml` to read the new names.
+3. Verify CI green on a test PR.
+4. Delete the legacy `KINSTA_SFTP_*` / unprefixed secrets.
+5. When production deploy workflow is added, create `KINSTA_PROD_*` secrets following the same convention.
+
+### Reminder
+
+There is likely an existing deploy-flow plan elsewhere (Notion or a planning doc). Reconcile this naming with it before starting the migration.
