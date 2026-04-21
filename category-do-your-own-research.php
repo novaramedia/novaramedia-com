@@ -117,7 +117,7 @@ get_header();
             <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
               <div class="u-video-embed-container ui-rounded-image">
                 <?php if ( ! empty( $latest_meta['_cmb_utube'][0] ) ) { ?>
-                  <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0] ); ?>
+                  <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], false, 'lazy', get_the_title() ); ?>
                 <?php } else { ?>
                   <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
                 <?php } ?>

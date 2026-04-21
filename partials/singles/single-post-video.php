@@ -53,7 +53,7 @@
         }
     ?>
       <div class="u-video-embed-container">
-        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], $autoplay ); ?>
+        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], $autoplay, 'eager', get_the_title() ); ?>
       </div>
     <?php
       } else {

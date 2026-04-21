@@ -10,7 +10,11 @@
   <link rel="preconnect" href="https://donate.novaramedia.com" crossorigin />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin />
+  <?php if ( nm_known_video_page() ) { ?>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+  <?php } else { ?>
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
+  <?php } ?>
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
   <?php
     get_template_part( 'partials/header/seo' );

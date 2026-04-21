@@ -623,8 +623,6 @@ function only_child_category_filter( $category ) {
 /**
  * Create youtube embed url with consistent parameters
  *
- * Note the option to use the lazysizes for lazyloading the iframe https://github.com/aFarkas/lazysizes
- *
  * @param string $id Youtube video ID.
  * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
  *
@@ -638,6 +636,39 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
   }
 
   return $url;
+}
+
+/**
+ * Fuzzy whitelist of contexts where a YouTube embed is likely present.
+ *
+ * Used by header.php to decide between `preconnect` (when we're confident a
+ * YouTube iframe will load) and `dns-prefetch` (everywhere else). False
+ * negatives fall through to dns-prefetch, which is safe — the iframe still
+ * loads, just without an open TLS connection waiting for it.
+ *
+ * @return boolean True if the current request is likely to render a YouTube embed.
+ */
+function nm_known_video_page() {
+  if ( is_singular() ) {
+    $queried = get_queried_object();
+    if ( $queried && ! empty( get_post_meta( $queried->ID, '_cmb_utube', true ) ) ) {
+      return true;
+    }
+  }
+
+  if ( is_category( array( 'downstream', 'do-your-own-research', 'novara-live' ) ) ) {
+    return true;
+  }
+
+  if ( is_page( array( 'how-we-are-funded', 'support' ) ) ) {
+    return true;
+  }
+
+  if ( is_front_page() ) {
+    return true;
+  }
+
+  return false;
 }
 
 /**

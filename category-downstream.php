@@ -91,7 +91,7 @@ if ( have_posts() ) {
       <div class="grid-item is-s-24 is-l-14 is-xxl-16 mb-s-4">
         <?php if ( $featured_youtube_id ) { ?>
           <div class="u-video-embed-container ui-rounded-image">
-            <?php echo render_youtube_embed_iframe( $featured_youtube_id ); ?>
+            <?php echo render_youtube_embed_iframe( $featured_youtube_id, false, 'lazy', get_the_title( $featured_post_id ) ); ?>
           </div>
         <?php } else { ?>
           <div class="layout-thumbnail-frame">

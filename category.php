@@ -94,7 +94,7 @@ if ($category->slug === 'video') {
           if (!empty($meta['_cmb_utube'])) {
           ?>
           <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0] ); ?>
+            <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], false, 'lazy', get_the_title() ); ?>
           </div>
           <a href="<?php the_permalink(); ?>">
             <h6 class="text-wrap-pretty mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
