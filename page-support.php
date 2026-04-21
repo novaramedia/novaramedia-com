@@ -95,7 +95,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                 <div class="u-video-embed-container">
-                  <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', get_the_title() ); ?>
+                  <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                 </div>
                   <?php
                 }
@@ -128,7 +128,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24 only-desktop">
           <div class="background-white ui-rounded-box ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
             <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', get_the_title() ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
             </div>
           </div>
         </div>

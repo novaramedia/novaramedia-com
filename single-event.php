@@ -57,7 +57,7 @@ if ( have_posts() ) {
           ?>
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-4 is-xxl-16">
           <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', get_the_title() ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
           </div>
         </div>
           <?php
