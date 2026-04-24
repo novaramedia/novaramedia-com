@@ -7,15 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
-- `nm_known_video_page()` helper drives conditional `preconnect`/`dns-prefetch` for the YouTube embed origin
-- YouTube embed iframe accepts optional `$loading` ('lazy' default, 'eager' for above-the-fold) and `$title` (context for accessible title attribute) arguments
-
-### Changed
-
-- YouTube embeds use native `loading="lazy"` instead of lazysizes `data-src` swap
-
 ### Fixed
 
 - Header menu spacing on mobile
