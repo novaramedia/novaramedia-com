@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
+- YouTube embeds failing to load in Safari
+- YouTube embed iframes missing accessible `title` attribute
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
 
 ### Removed
