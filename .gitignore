@@ -11,4 +11,4 @@ cypress.env.json
 test*.log
 
 # Build artifacts
-dist/report.html
+dist/report.html.claude/
