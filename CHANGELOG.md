@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `noindex, follow` on internal search result pages (meta tag + HTTP header)
+
 ### Fixed
 
 - Header menu spacing on mobile
