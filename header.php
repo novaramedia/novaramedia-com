@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <?php if ( nm_known_video_page() ) { ?>
-  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin />
   <?php } else { ?>
   <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
   <?php } ?>

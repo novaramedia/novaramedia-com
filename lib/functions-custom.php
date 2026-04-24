@@ -651,17 +651,26 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
 function nm_known_video_page() {
   if ( is_singular() ) {
     $queried = get_queried_object();
-    if ( $queried && ! empty( get_post_meta( $queried->ID, '_cmb_utube', true ) ) ) {
-      return true;
+    if ( $queried ) {
+      if ( ! empty( get_post_meta( $queried->ID, '_cmb_utube', true ) ) ) {
+        return true;
+      }
+      if ( ! empty( get_post_meta( $queried->ID, '_nm_support_youtube', true ) ) ) {
+        return true;
+      }
+      // page-how-we-are-funded.php hardcodes a fallback video ID when meta is empty.
+      if ( is_page( 'how-we-are-funded' ) ) {
+        return true;
+      }
     }
   }
 
-  if ( is_category( array( 'downstream', 'do-your-own-research', 'novara-live' ) ) ) {
-    return true;
-  }
-
-  if ( is_page( array( 'how-we-are-funded', 'support' ) ) ) {
-    return true;
+  if ( is_category() ) {
+    $term       = get_queried_object();
+    $video_term = get_term_by( 'slug', 'video', 'category' );
+    if ( $term && $video_term && ( $term->term_id === $video_term->term_id || cat_is_ancestor_of( $video_term, $term ) ) ) {
+      return true;
+    }
   }
 
   if ( is_front_page() ) {
