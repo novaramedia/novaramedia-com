@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `noindex, follow` on internal search result pages (meta tag + HTTP header)
+
 ### Fixed
 
 - Header menu spacing on mobile
 - YouTube embeds failing to load in Safari
 - YouTube embed iframes missing accessible `title` attribute
+- Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
 
 ## [4.5.3] - 2026-04-08
 
