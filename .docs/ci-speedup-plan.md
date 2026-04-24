@@ -160,8 +160,9 @@ Go to https://github.com/novaramedia/novaramedia-com/settings/secrets/actions
 | Secret                  | Value                                               |
 | ----------------------- | --------------------------------------------------- |
 | `KINSTA_API_KEY`        | Kinsta API key (from MyKinsta > Company > API Keys) |
-| `KINSTA_SITE_ID`        | Site ID (visible in MyKinsta URL or via API)        |
 | `KINSTA_STAGING_ENV_ID` | Staging environment ID (via Kinsta API)             |
+
+The cache-clear step calls `POST /v2/sites/tools/clear-cache` with the environment ID in the request body, so `KINSTA_SITE_ID` is no longer required.
 
 **Can be removed** (no longer needed):
 
@@ -244,7 +245,6 @@ Prefix every env-specific secret with the environment:
 Shared (not env-specific):
 
 - `KINSTA_API_KEY`
-- `KINSTA_SITE_ID`
 
 ### Migration steps
 

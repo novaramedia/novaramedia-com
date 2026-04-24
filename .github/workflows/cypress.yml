@@ -160,12 +160,15 @@ jobs:
               # template branch that emits it is skipped (e.g. above-the-fold
               # returns early when no featured posts are configured).
               echo "--- data-testid values on staging homepage ---"
-              testid_html=$(curl -L -s "${STAGING_URL}/?cypress_cache_bust=$(date +%s)")
-              testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
-              if [ -n "$testid_matches" ]; then
-                printf '%s\n' "$testid_matches"
+              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cypress_cache_bust=$(date +%s)"); then
+                echo "::warning::testid diagnostic curl failed (network/timeout) - skipping"
               else
-                echo "(no data-testid attributes found)"
+                testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
+                if [ -n "$testid_matches" ]; then
+                  printf '%s\n' "$testid_matches"
+                else
+                  echo "(no data-testid attributes found)"
+                fi
               fi
               echo "--- end testid diagnostic ---"
               exit 0
