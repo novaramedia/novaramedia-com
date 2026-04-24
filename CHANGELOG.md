@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Header menu spacing on mobile
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
 
+### Removed
+
+- Remove PayPal donation link section on Support page
+
 ## [4.5.3] - 2026-04-08
 
 ### Changed
