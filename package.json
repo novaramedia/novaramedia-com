@@ -58,7 +58,7 @@
     "kouto-swiss": "^1.1.0",
     "mini-css-extract-plugin": "^2.9.2",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "postcss": "~8.5.3",
+    "postcss": "~8.5.10",
     "postcss-loader": "^8.2.1",
     "postcss-preset-env": "~10.2.3",
     "release-it": "^19.0.3",
