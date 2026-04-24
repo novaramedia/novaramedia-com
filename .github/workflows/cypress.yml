@@ -118,12 +118,12 @@ jobs:
           fi
 
           echo "Clearing Kinsta cache..."
-          if ! response=$(curl -s -w "\n%{http_code}" -X POST \
+          if ! response=$(curl -sS --connect-timeout 10 --max-time 30 -w "\n%{http_code}" -X POST \
             "https://api.kinsta.com/v2/sites/tools/clear-cache" \
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
             -H "Content-Type: application/json" \
             -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
-            echo "::warning::Kinsta cache clear curl failed (network/DNS error) - continuing, cypress cache-bust will handle freshness"
+            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; cypress cache-bust will handle freshness"
             exit 0
           fi
 
@@ -134,7 +134,7 @@ jobs:
           echo "$body"
 
           if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
-            echo "::warning::Kinsta cache clear returned HTTP $http_code"
+            echo "::warning::Kinsta cache clear returned HTTP $http_code - check KINSTA_STAGING_ENV_ID and KINSTA_API_KEY secrets / endpoint path"
             exit 0
           fi
 
