@@ -17,7 +17,6 @@
 # - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
-# - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
 #
 # One-time server setup required — see .docs/ci-speedup-plan.md
@@ -106,11 +105,6 @@ jobs:
       # Cache clear is best-effort - cypress/support/e2e.js appends a
       # ?cypress_cache_bust=... query string to every cy.visit() so tests
       # always fetch fresh HTML even if this step fails. Warnings here are
-      # surfaced via ::warning:: annotations so stale IDs are visible in the
-      # GitHub UI without blocking the workflow.
-      # Cache clear is best-effort - cypress/support/e2e.js appends a
-      # ?cypress_cache_bust=... query string to every cy.visit() so tests
-      # always fetch fresh HTML even if this step fails. Warnings here are
       # surfaced via ::warning:: annotations so issues are visible in the
       # GitHub UI without blocking the workflow.
       #
@@ -124,11 +118,14 @@ jobs:
           fi
 
           echo "Clearing Kinsta cache..."
-          response=$(curl -s -w "\n%{http_code}" -X POST \
+          if ! response=$(curl -s -w "\n%{http_code}" -X POST \
             "https://api.kinsta.com/v2/sites/tools/clear-cache" \
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
             -H "Content-Type: application/json" \
-            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}")
+            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
+            echo "::warning::Kinsta cache clear curl failed (network/DNS error) - continuing, cypress cache-bust will handle freshness"
+            exit 0
+          fi
 
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
@@ -144,7 +141,6 @@ jobs:
           sleep 10
         env:
           KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
-          KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
           KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
 
       - name: Verify staging is accessible

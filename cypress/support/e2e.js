@@ -17,9 +17,12 @@ import './commands';
 // cache clear fails or the IDs drift.
 Cypress.Commands.overwrite('visit', (originalVisit, url, options) => {
   if (typeof url === 'string') {
-    const separator = url.includes('?') ? '&' : '?';
+    const hashIndex = url.indexOf('#');
+    const base = hashIndex === -1 ? url : url.slice(0, hashIndex);
+    const fragment = hashIndex === -1 ? '' : url.slice(hashIndex);
+    const separator = base.includes('?') ? '&' : '?';
     const cacheBuster = `cypress_cache_bust=${Date.now()}`;
-    return originalVisit(`${url}${separator}${cacheBuster}`, options);
+    return originalVisit(`${base}${separator}${cacheBuster}${fragment}`, options);
   }
   return originalVisit(url, options);
 });
