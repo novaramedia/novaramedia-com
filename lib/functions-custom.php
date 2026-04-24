@@ -185,37 +185,62 @@ function check_for_apology_notice() {
 }
 /**
  * Get the latest News article IDs.
- * Queries only the 'news' category, excluding the featured posts if set.
- * Always returns an array — empty if there are no matching posts — so callers
- * can safely pass the result to array_merge() and similar array functions.
+ * Queries the 'news' category first, excluding the featured posts if set.
+ * If News has no published posts, falls back to recent posts from
+ * 'articles,video,audio' so the latest-articles column still fills on
+ * low-content environments (staging, fresh installs).
+ * Always returns an array — empty only when no posts exist at all.
  *
  * @param array $featured_posts_ids Array of featured post ids to exclude.
  *
- * @return int[] Array of latest News post IDs (empty if none found).
+ * @return int[] Array of latest News (or fallback) post IDs.
  */
 function get_latest_news_ids( $featured_posts_ids = false ) {
-  $query_args = array(
-      'category_name'  => 'news',
-      'posts_per_page' => 7,
-      'fields'         => 'ids',
-      'post_status'    => 'publish',
-  );
+  $exclusion_args = array();
 
   if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
     // Filter out non-numeric values to ensure only valid post IDs are excluded
     $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
     if ( ! empty( $valid_ids ) ) {
-      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+      $exclusion_args = array( 'post__not_in' => $valid_ids );
     }
   }
 
+  $query_args = array_merge(
+    array(
+      'category_name'  => 'news',
+      'posts_per_page' => 7,
+      'fields'         => 'ids',
+      'post_status'    => 'publish',
+    ),
+    $exclusion_args
+  );
+
   $recent_articles = new WP_Query( $query_args );
 
-  if ( ! $recent_articles->have_posts() ) {
+  if ( $recent_articles->have_posts() ) {
+    return $recent_articles->posts;
+  }
+
+  // Fallback: News is empty (e.g. staging or fresh install) — return recent
+  // posts from articles/video/audio so the above-the-fold column still fills.
+  $fallback_args = array_merge(
+    array(
+      'category_name'  => 'articles,video,audio',
+      'posts_per_page' => 7,
+      'fields'         => 'ids',
+      'post_status'    => 'publish',
+    ),
+    $exclusion_args
+  );
+
+  $fallback_articles = new WP_Query( $fallback_args );
+
+  if ( ! $fallback_articles->have_posts() ) {
     return array();
   }
 
-  return $recent_articles->posts;
+  return $fallback_articles->posts;
 }
 /**
  * Get the featured post ids for the above the fold section
