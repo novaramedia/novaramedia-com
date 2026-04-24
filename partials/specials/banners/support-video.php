@@ -27,7 +27,7 @@ if ( $support_page !== null ) {
         } else {
           $video_id = 'c6hfjBmzt5c';
         }
-        echo render_youtube_embed_iframe( $video_id, true );
+        echo render_youtube_embed_iframe( $video_id, false, 'eager', 'Support video' );
         ?>
       </div>
     </div>

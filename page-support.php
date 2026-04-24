@@ -95,7 +95,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                 <div class="u-video-embed-container">
-                  <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
+                  <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                 </div>
                   <?php
                 }
@@ -128,7 +128,7 @@ if ( have_posts() ) {
         <div class="grid-item is-xxl-24 only-desktop">
           <div class="background-white ui-rounded-box ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
             <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $youtube_id ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
             </div>
           </div>
         </div>
@@ -283,24 +283,19 @@ if ( have_posts() ) {
 
         <!-- Other donation methods -->
         <div class="grid-item is-s-24 is-xxl-12">
-          <div class="mb-5 mb-s-4">
+          <div class="mb-4 mb-s-4">
             <h4 class="font-size-13 font-size-s-14 font-weight-bold mb-3">Other Donation Methods</h4>
-            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our website, however we also have options for PayPal or UK Direct Debit.</p>
+            <p>The best way to ensure we receive as much of your donation as possible after processing fees is to make a payment directly through our donation website, however we also have an option for UK Direct Debits.</p>
           </div>
 
-          <div class="grid-row grid--nested">
-            <!-- paypal -->
-            <div class="grid-item is-xxl-12 is-s-24">
-              <img class="support-page__paypal-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-paypal.svg" alt="PayPal logo" />
-              <p>You can donate to us via PayPal. You can set a recurring donation or just give a one-off for any amount.</p>
-              <p><a class="mt-3 ui-button ui-button--red ui-button--small mb-m-5 mb-s-4" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3R58SXSEWNAKE&source=url" target="_blank" rel="noopener">Donate to us via PayPal</a></p>
-            </div>
-
-            <!-- GoCardless -->
-            <div class="grid-item is-xxl-12 is-s-24">
+           <!-- GoCardless -->
+          <div class="grid-row grid--nested mb-5">
+            <div class="grid-item is-xxl-12 is-s-24 mb-3">
               <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
               <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>
-              <div class="mt-3 mb-3">
+            </div>
+            <div class="grid-item is-xxl-12 is-s-24">
+              <div class="mb-3">
                 <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
                 <a class="ui-button ui-button--red ui-button--small mr-2 mb-3" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
                 <br/>

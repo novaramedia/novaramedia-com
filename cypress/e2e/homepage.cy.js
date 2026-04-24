@@ -11,7 +11,7 @@ describe('Homepage', () => {
   });
 
   it('should load successfully', () => {
-    cy.url().should('eq', Cypress.config('baseUrl') + '/');
+    cy.location('pathname').should('eq', '/');
     cy.title().should('not.be.empty');
     cy.title().should('include', 'Novara Media');
   });

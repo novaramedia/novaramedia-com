@@ -1,4 +1,8 @@
 <?php
+if ( is_search() ) {
+  echo '<meta name="robots" content="noindex, follow">' . "\n";
+}
+
 $twitter = IGV_get_option( '_igv_socialmedia_twitter' );
 
 if ( $twitter ) {

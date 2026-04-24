@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.4] - 2026-04-24
+
+### Added
+
+- `noindex, follow` on internal search result pages (meta tag + HTTP header)
+
+### Fixed
+
+- Header menu spacing on mobile
+- YouTube embeds failing to load in Safari
+- YouTube embed iframes missing accessible `title` attribute
+- Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
+
+### Removed
+
+- Remove PayPal donation link section on Support page
+
 ## [4.5.3] - 2026-04-08
 
 ### Changed

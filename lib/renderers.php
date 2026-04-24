@@ -1,31 +1,27 @@
 <?php
 /**
  * Generate complete YouTube embed iframe HTML.
- * Handles both lazy loading and regular loading scenarios.
+ * Defaults to native iframe lazy loading; pass 'eager' for above-the-fold embeds.
  *
- * @param string $youtube_id YouTube video ID.
- * @param boolean $lazyload Set true to use lazy loading via lazysizes library (uses data-src instead of src).
- * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
+ * @param string  $youtube_id YouTube video ID.
+ * @param boolean $autoplay   Set true to enable autoplay (only effective when browser policy allows, typically after internal navigation).
+ * @param string  $loading    Iframe loading strategy: 'lazy' (default) or 'eager'.
+ * @param string  $title      Optional context for the iframe title attribute (e.g. the post title). A "YouTube video player" prefix is applied automatically.
  *
- * @return string Complete iframe HTML element for YouTube embed
+ * @return string Complete iframe HTML element for YouTube embed.
  */
-function render_youtube_embed_iframe( $youtube_id, $lazyload = false, $autoplay = false ) {
-  $url = generate_youtube_embed_url( $youtube_id, $autoplay );
+function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $loading = 'lazy', $title = '' ) {
+  $url        = generate_youtube_embed_url( $youtube_id, $autoplay );
   $allow_attr = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-
-  $classes = 'youtube-player';
-  if ( $lazyload ) {
-    $classes .= ' lazyload';
-  }
-
-  $src_attr = $lazyload ? 'data-src' : 'src';
+  $loading    = $loading === 'eager' ? 'eager' : 'lazy';
+  $title_attr = $title !== '' ? 'YouTube video player: ' . $title : 'YouTube video player';
 
   $iframe = sprintf(
-    '<iframe class="%s" type="text/html" %s="%s" allow="%s" allowfullscreen></iframe>',
-    esc_attr( $classes ),
-    $src_attr,
+    '<iframe class="youtube-player" type="text/html" src="%s" title="%s" allow="%s" loading="%s" allowfullscreen></iframe>',
     esc_url( $url ),
-    esc_attr( $allow_attr )
+    esc_attr( $title_attr ),
+    esc_attr( $allow_attr ),
+    esc_attr( $loading )
   );
 
   return $iframe;
