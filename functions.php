@@ -99,6 +99,9 @@ function nm_register_menus() {
       'header-shows'          => __( 'Header: Shows' ),
       'header-series'         => __( 'Header: Series' ),
       'header-submenu'        => __( 'Header: Submenu' ),
+      'footer-general'        => __( 'Footer: General' ),
+      'manage-donation'       => __( 'Manage Donation' ),
+      'footer-legal'          => __( 'Footer: Legal' ),
       'footer-podcasts'       => __( 'Footer: Podcasts' ),
       'footer-focuses'        => __( 'Footer: Focuses' ),
       'footer-articles'       => __( 'Footer: Articles' ),
@@ -186,6 +189,7 @@ get_template_part( 'lib/renderers' );
 get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
 get_template_part( 'lib/functions-custom' );
+get_template_part( 'lib/functions-menu-fallbacks' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
