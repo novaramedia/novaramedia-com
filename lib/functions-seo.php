@@ -126,7 +126,7 @@ function nm_get_social_title() {
  * Prevents search engines from indexing /?s=... pages, which are internal
  * search results with no unique value for indexing.
  *
- * @since 4.4.0
+ * @since 4.5.4
  *
  * @param array $headers Existing HTTP headers.
  * @return array Modified HTTP headers.
