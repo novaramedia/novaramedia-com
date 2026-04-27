@@ -97,7 +97,7 @@
     },
     "hooks": {
       "before:release": "npm run build",
-      "after:release": "perl -i -pe 's/${latestVersion}/${version}/g' style.css"
+      "after:release": "perl -i -pe 's/\\Q${latestVersion}\\E/${version}/g' style.css"
     }
   }
 }
