@@ -44,7 +44,7 @@
     "cypress": "^13.17.0",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-webpack-plugin": "^5.0.2",
+    "eslint-webpack-plugin": "^6.0.0",
     "file-loader": "^6.2.0",
     "image-minimizer-webpack-plugin": "^5.0.0",
     "imagemin": "^9.0.1",
