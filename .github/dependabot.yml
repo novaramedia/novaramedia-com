@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    target-branch: development
+    open-pull-requests-limit: 10
+    groups:
+      dev-deps:
+        applies-to: version-updates
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      prod-deps:
+        applies-to: version-updates
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      security-dev-deps:
+        applies-to: security-updates
+        dependency-type: development
+      security-prod-deps:
+        applies-to: security-updates
+        dependency-type: production
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    target-branch: development
+    groups:
+      gh-actions:
+        update-types:
+          - minor
+          - patch
