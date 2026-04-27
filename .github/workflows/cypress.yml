@@ -17,7 +17,6 @@
 # - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
 # - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
-# - KINSTA_SITE_ID: Kinsta site ID (optional, for cache clearing)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
 #
 # One-time server setup required — see .docs/ci-speedup-plan.md
@@ -103,19 +102,30 @@ jobs:
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
           KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
+      # Cache clear is best-effort - cypress/support/e2e.js appends a
+      # ?cypress_cache_bust=... query string to every cy.visit() so tests
+      # always fetch fresh HTML even if this step fails. Warnings here are
+      # surfaced via ::warning:: annotations so issues are visible in the
+      # GitHub UI without blocking the workflow.
+      #
+      # Endpoint reference: https://api-docs.kinsta.com/api-reference/wordpress-site-tools/clear-site-cache
       - name: Clear Kinsta cache
         continue-on-error: true
         run: |
-          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_SITE_ID" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
-            echo "Skipping cache clear - Kinsta API secrets not configured"
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+            echo "::warning::Kinsta API secrets not configured - skipping cache clear (cypress cache-bust will handle freshness)"
             exit 0
           fi
 
           echo "Clearing Kinsta cache..."
-          response=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://api.kinsta.com/v2/sites/${KINSTA_SITE_ID}/environments/${KINSTA_STAGING_ENV_ID}/clear-cache" \
+          if ! response=$(curl -sS --connect-timeout 10 --max-time 30 -w "\n%{http_code}" -X POST \
+            "https://api.kinsta.com/v2/sites/tools/clear-cache" \
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
-            -H "Content-Type: application/json")
+            -H "Content-Type: application/json" \
+            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
+            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; cypress cache-bust will handle freshness"
+            exit 0
+          fi
 
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
@@ -123,10 +133,14 @@ jobs:
           echo "Cache clear response: $http_code"
           echo "$body"
 
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "::warning::Kinsta cache clear returned HTTP $http_code - check KINSTA_STAGING_ENV_ID and KINSTA_API_KEY secrets / endpoint path"
+            exit 0
+          fi
+
           sleep 10
         env:
           KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
-          KINSTA_SITE_ID: ${{ secrets.KINSTA_SITE_ID }}
           KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
 
       - name: Verify staging is accessible
@@ -140,6 +154,23 @@ jobs:
 
             if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
               echo "Staging site is accessible (HTTP $http_code)"
+
+              # Diagnostic: list data-testid values present on the homepage.
+              # Helps debug cases where a test asserts a testid but the
+              # template branch that emits it is skipped (e.g. above-the-fold
+              # returns early when no featured posts are configured).
+              echo "--- data-testid values on staging homepage ---"
+              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cypress_cache_bust=$(date +%s)"); then
+                echo "::warning::testid diagnostic curl failed (network/timeout) - skipping"
+              else
+                testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
+                if [ -n "$testid_matches" ]; then
+                  printf '%s\n' "$testid_matches"
+                else
+                  echo "(no data-testid attributes found)"
+                fi
+              fi
+              echo "--- end testid diagnostic ---"
               exit 0
             fi
 

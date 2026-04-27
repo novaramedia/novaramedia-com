@@ -44,7 +44,7 @@ if ( have_posts() ) {
               <div class="grid-item is-xxl-12 is-m-24">
                 <div class="p-4 p-s-3 font-weight-bold">
                   <div class="u-video-embed-container only-mobile mt-2 mb-4">
-                    <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+                    <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                   </div>
                   <div class="font-size-15 font-size-l-14 font-size-s-14 mb-4">
                     <span class="font-color-red">We believe in the power of people</span> to build a new media for a different politics.
@@ -69,7 +69,7 @@ if ( have_posts() ) {
                 if ( $youtube_id ) {
                   ?>
                   <div class="u-video-embed-container">
-                    <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+                    <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                   </div>
                   <?php
                 }

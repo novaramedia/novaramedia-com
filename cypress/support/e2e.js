@@ -11,6 +11,30 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// Bypass Kinsta full-page cache by appending a unique query string to every
+// cy.visit(). Kinsta skips the page cache when a query string is present, so
+// this guarantees the test fetches freshly-deployed HTML even if the API-based
+// cache clear fails or the IDs drift. Handles both cy.visit(url, options) and
+// cy.visit({ url, ... }) signatures.
+const appendCacheBust = (url) => {
+  const hashIndex = url.indexOf('#');
+  const base = hashIndex === -1 ? url : url.slice(0, hashIndex);
+  const fragment = hashIndex === -1 ? '' : url.slice(hashIndex);
+  const separator = base.includes('?') ? '&' : '?';
+  const cacheBuster = `cypress_cache_bust=${Date.now()}`;
+  return `${base}${separator}${cacheBuster}${fragment}`;
+};
+
+Cypress.Commands.overwrite('visit', (originalVisit, urlOrOptions, options) => {
+  if (typeof urlOrOptions === 'string') {
+    return originalVisit(appendCacheBust(urlOrOptions), options);
+  }
+  if (urlOrOptions && typeof urlOrOptions === 'object' && typeof urlOrOptions.url === 'string') {
+    return originalVisit({ ...urlOrOptions, url: appendCacheBust(urlOrOptions.url) });
+  }
+  return originalVisit(urlOrOptions, options);
+});
+
 // Set up console error spy before every test so verifyNoConsoleErrors() works.
 // Using cy.on() ensures the listener is scoped to the current test and cleaned
 // up automatically, preventing listener stacking across tests.

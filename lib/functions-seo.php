@@ -119,3 +119,22 @@ add_filter( 'pre_get_document_title', 'nm_customize_document_title' );
 function nm_get_social_title() {
   return nm_generate_custom_title( true ); // true = for social (no site name)
 }
+
+/**
+ * Add X-Robots-Tag: noindex, follow header for internal search result pages.
+ *
+ * Prevents search engines from indexing /?s=... pages, which are internal
+ * search results with no unique value for indexing.
+ *
+ * @since 4.5.4
+ *
+ * @param array $headers Existing HTTP headers.
+ * @return array Modified HTTP headers.
+ */
+function nm_noindex_search_headers( $headers ) {
+  if ( is_search() ) {
+    $headers['X-Robots-Tag'] = 'noindex, follow';
+  }
+  return $headers;
+}
+add_filter( 'wp_headers', 'nm_noindex_search_headers' );
