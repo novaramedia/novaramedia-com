@@ -201,7 +201,7 @@ jobs:
         run: npx cypress verify
 
       - name: Run Cypress tests against staging
-        uses: cypress-io/github-action@f790eee7a50d9505912f50c2095510be7de06aa7 # v6.10.9
+        uses: cypress-io/github-action@783cb3f07983868532cabaedaa1e6c00ff4786a8 # v7.1.9
         with:
           browser: chrome
           headed: false
