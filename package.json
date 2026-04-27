@@ -60,7 +60,7 @@
     "moment-locales-webpack-plugin": "^1.2.0",
     "postcss": "~8.5.3",
     "postcss-loader": "^8.2.1",
-    "postcss-preset-env": "~10.2.3",
+    "postcss-preset-env": "~11.2.1",
     "release-it": "^19.0.3",
     "sharp": "^0.34.5",
     "style-loader": "~4.0.0",
