@@ -32,7 +32,7 @@
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@release-it/keep-a-changelog": "^7.0.0",
-    "@wordpress/scripts": "^27.9.0",
+    "@wordpress/scripts": "^32.0.0",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.1.0",
     "chalk": "^4.0.0",
