@@ -97,7 +97,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
       if ( $timestamp ) {
         $time = new \Moment\Moment( '@' . $timestamp );
         ?>
-        <p class="font-size-10 mb-0"><?php echo esc_html( $time->format( 'j F Y' ) ); ?></p>
+        <p class="font-size-10 mb-0"><?php echo esc_html( $time->format( NM_DATE_FORMAT_LONG ) ); ?></p>
         <?php
       }
       ?>

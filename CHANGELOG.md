@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
 
+### Changed
+
+- Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
+
 ## [4.5.5] - 2026-04-27
 
 ### Added
