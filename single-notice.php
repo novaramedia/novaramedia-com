@@ -17,7 +17,7 @@ if( have_posts() ) {
       <article class="grid-item is-s-24 is-xl-14 is-xxl-10">
         <header class="mb-4">
           <h5 class="font-weight-bold"><?php the_title(); ?></h5>
-          <h5><?php the_time('j F Y'); ?></h5>
+          <h5><?php the_time(NM_DATE_FORMAT_LONG); ?></h5>
         </header>
         <div class="page-copy">
           <?php the_content(); ?>
