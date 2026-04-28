@@ -17,7 +17,7 @@
       }
     ?>
     <h3 class="font-size-11 font-weight-bold">by <?php render_bylines($post->ID, true); ?></h3>
-    <h3 class="font-size-11 font-weight-bold"><?php the_time('j F Y'); ?></h3>
+    <h3 class="font-size-11 font-weight-bold"><?php the_time(NM_DATE_FORMAT_LONG); ?></h3>
   </div>
 </div>
 <div class="grid-row mb-4">

@@ -36,7 +36,7 @@ if ( have_posts() ) {
         }
           the_content();
         ?>
-        <p>Closing date: <?php echo gmdate( 'j F Y', $meta['_nm_deadline'][0] ); ?></p>
+        <p>Closing date: <?php echo gmdate( NM_DATE_FORMAT_LONG, $meta['_nm_deadline'][0] ); ?></p>
       </div>
     </div>
   </article>

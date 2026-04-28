@@ -4,6 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Long-form date display format (e.g. "12 June 2010") used across event,
+ * post and archive templates. Single source of truth — see issue #499.
+ */
+define( 'NM_DATE_FORMAT_LONG', 'j F Y' );
+
+/**
  * Enqueues the compiled main.js and main.css files with localized WordPress data.
  *
  * Registers and enqueues the theme's main JavaScript file with a global WP object
