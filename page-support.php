@@ -194,7 +194,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-            <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
+            <div class="background-red ui-rounded-box ui-backgrounded-box-padding font-color-white">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-11">
                   <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
@@ -203,10 +203,10 @@ if ( have_posts() ) {
                 </div>
                 <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold">
                   <div class="mt-s-3">
-                    <a class="ui-button ui-button--red mr-3 mb-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5/mo</a>
-                    <a class="ui-button ui-button--red mr-3 mb-3" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10/mo</a>
-                    <a class="ui-button ui-button--red mr-3 mb-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20/mo</a>
-                    <a class="ui-button ui-button--red mb-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50/mo</a>
+                    <a class="ui-button ui-button--white mr-3 mb-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+                    <a class="ui-button ui-button--white mr-3 mb-3" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+                    <a class="ui-button ui-button--white mr-3 mb-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+                    <a class="ui-button ui-button--white mb-3" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
                   </div>
                 </div>
               </div>
