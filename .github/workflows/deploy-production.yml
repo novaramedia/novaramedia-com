@@ -5,8 +5,8 @@
 # clears cache, and verifies the site is up.
 #
 # Required secrets: KINSTA_SSH_KEY, KINSTA_PROD_SSH_HOST, KINSTA_PROD_SSH_PORT,
-# KINSTA_PROD_SSH_USER, KINSTA_PROD_ENV_ID, PROD_URL, SLACK_WEBHOOK_URL
-# Optional secrets (cache clearing): KINSTA_API_KEY, KINSTA_SITE_ID
+# KINSTA_PROD_SSH_USER, PROD_URL, SLACK_WEBHOOK_URL
+# Optional secrets (cache clearing): KINSTA_API_KEY, KINSTA_SITE_ID, KINSTA_PROD_ENV_ID
 
 name: Deploy Production
 
@@ -40,8 +40,6 @@ jobs:
 
       - name: Deploy release tag to production
         run: |
-          TAG="${{ github.event.release.tag_name }}"
-
           if ! printf '%s\n' "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
             echo "Invalid release tag: $TAG"
             exit 1
@@ -59,6 +57,7 @@ jobs:
 
           echo "Deploy complete: $TAG"
         env:
+          TAG: ${{ github.event.release.tag_name }}
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_PROD_SSH_PORT }}
           KINSTA_SSH_USER: ${{ secrets.KINSTA_PROD_SSH_USER }}
           KINSTA_SSH_HOST: ${{ secrets.KINSTA_PROD_SSH_HOST }}
@@ -108,7 +107,7 @@ jobs:
           attempts=3
           delay=10
           for i in $(seq 1 $attempts); do
-            http_code=$(curl -L -sS -o /dev/null -w "%{http_code}" --max-time 30 "$PROD_URL" || echo "000")
+            http_code=$(curl -L -sS -o /dev/null -w "%{http_code}" --max-time 30 "$PROD_URL") || http_code="000"
             if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
               echo "Production is live (HTTP $http_code)"
               exit 0
@@ -147,7 +146,7 @@ jobs:
 
   notify-slack-failure:
     needs: deploy
-    if: ${{ always() && needs.deploy.result == 'failure' }}
+    if: ${{ always() && needs.deploy.result != 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack failure notification
