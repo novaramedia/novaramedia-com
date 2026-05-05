@@ -107,10 +107,9 @@ For more information, see the [Cypress documentation](https://docs.cypress.io/).
 ### Howto: release
 
 - Pull `development`
-- `npm run release`
-- Don't commit, tag or push in release-it process
-- After post release-it scripts are run commit in format `Build: x.x.x`
-- Create PR to master branch in format `Version x.x.x` with changelog entries as description
+- `./scripts/release.sh [patch|minor|major]`
+- `release-it` runs non-interactively: bumps version, updates CHANGELOG, makes `Build: x.x.x` commit, creates tag, pushes to `development`
+- Creating the GitHub Release triggers the production deploy automatically
 
 ### Semver
 

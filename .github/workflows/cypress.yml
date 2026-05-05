@@ -26,8 +26,6 @@ name: Cypress Tests (Staging)
 on:
   pull_request:
     branches:
-      - master
-      - main
       - development
     paths-ignore:
       - '.github/**'

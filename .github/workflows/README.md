@@ -6,7 +6,7 @@ The `cypress.yml` workflow runs automated end-to-end tests for the WordPress the
 
 ### How it works
 
-1. **Trigger**: Runs on Pull Requests to `master`, `main`, or `development` branches, and on manual `workflow_dispatch`
+1. **Trigger**: Runs on Pull Requests to `development` branch, and on manual `workflow_dispatch`
 2. **Deploy**: Deploys the PR commit to Kinsta staging via SSH + git
 3. **Test**: Runs all Cypress tests in headless Chrome against staging
 4. **Cleanup**: Resets staging back to the `development` branch
@@ -45,46 +45,21 @@ npm run cy:open       # Interactive debugging
 
 See the main [README.md](../../README.md#howto-testing) and [TESTING.md](../../TESTING.md) for detailed testing documentation.
 
-## Release Notification to Slack
+## Deploy Production
 
-The `release-notification.yml` workflow automatically sends structured notifications to the public digital team Slack channel when a new version is released.
+The `deploy-production.yml` workflow deploys to the Kinsta production server when a GitHub Release is published.
 
 ### How it works
 
-1. **Trigger**: Activates when a Pull Request with title starting with "Version " is merged into the `master` or `main` branch
-2. **Version Extraction**: Extracts the version number from `package.json` in the merged code
-3. **Release Notes**: Parses `CHANGELOG.md` to extract the release notes for that specific version
-4. **Slack Notification**: Sends a structured message with:
-   - Release version and repository info
-   - Link to the merged PR
-   - Complete release notes from changelog
-   - Commit SHA for deployment tracking
+1. **Trigger**: Activates when a GitHub Release is published (created by `scripts/release.sh`)
+2. **Deploy**: SSHes into Kinsta production, checks out the release tag
+3. **Activate**: Runs `wp theme activate` via SSH
+4. **Cache clear**: Clears Kinsta cache via API (optional — skipped if secrets not configured)
+5. **Verify**: Polls the production URL to confirm the site is accessible
+6. **Slack**: Posts success or failure notification to the team channel
 
 ### Setup Requirements
 
-To enable Slack notifications, you need to:
+Required secrets: `KINSTA_SSH_KEY`, `KINSTA_PROD_SSH_HOST`, `KINSTA_PROD_SSH_PORT`, `KINSTA_PROD_SSH_USER`, `PROD_URL`, `SLACK_WEBHOOK_URL`
 
-1. **Create a Slack Webhook URL**:
-   - Go to your Slack workspace settings
-   - Navigate to "Incoming Webhooks" 
-   - Create a new webhook for the target channel
-   - Copy the webhook URL
-
-2. **Add the webhook as a GitHub secret**:
-   - Go to repository Settings → Secrets and variables → Actions
-   - Add a new repository secret named `SLACK_WEBHOOK_URL`
-   - Paste the webhook URL as the value
-
-### Message Format
-
-The Slack notification includes:
-- Header with release version
-- Repository and PR links
-- Full release notes from CHANGELOG.md
-- Deployment commit information
-
-### Troubleshooting
-
-- Ensure PR titles start with "Version " to trigger the workflow
-- Verify the version exists in CHANGELOG.md with format: `## [X.Y.Z] - DATE`
-- Check that the `SLACK_WEBHOOK_URL` secret is properly configured
+Optional secrets (cache clearing): `KINSTA_API_KEY`, `KINSTA_SITE_ID`, `KINSTA_PROD_ENV_ID`
