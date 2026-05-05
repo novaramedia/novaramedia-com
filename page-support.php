@@ -143,11 +143,9 @@ if ( have_posts() ) {
               <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
                 <p>That’s why we’re expanding. We’re moving into a space with a longer, more secure lease and making plans to grow the team.</p>
                 <p class="mt-3">Take a look at what we’ve got planned.</p>
-                <?php if ( $youtube_id ) { ?>
                 <p class="mt-4">
-                  <a href="https://www.youtube.com/watch?v=<?php echo esc_attr( $youtube_id ); ?>" class="ui-button ui-button--red ui-button--small" target="_blank" rel="noopener">Watch the short film</a>
+                  <a href="#" class="ui-button ui-button--red ui-button--small" target="_blank" rel="noopener">Watch the short film</a>
                 </p>
-                <?php } ?>
               </div>
             </div>
           </div>

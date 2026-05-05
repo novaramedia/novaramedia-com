@@ -26,7 +26,7 @@ function nm_cmb_page_support_metaboxes() {
     $support_page_meta_boxes->add_field(
         array(
             'name' => __( 'Youtube video', 'cmb' ),
-            'desc' => __( '(optional)', 'cmb' ),
+            'desc' => __( 'Enter the YouTube video ID only (e.g. dQw4w9WgXcQ, not the full URL). Optional.', 'cmb' ),
             'id'   => $prefix . 'support_youtube',
             'type' => 'text',
         )
