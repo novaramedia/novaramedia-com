@@ -153,6 +153,36 @@ if ( have_posts() ) {
       <!-- Quotes 1 -->
       <?php render_support_quotes_carousel( $quotes_block_1 ); ?>
 
+      <!-- Direct debit block -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="background-red ui-rounded-box ui-backgrounded-box-padding font-color-white">
+              <div class="grid-row grid-row--nested">
+                <div class="grid-item is-s-24 is-xxl-11">
+                  <img class="mb-4" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit" style="filter: brightness(0) invert(1); height: 2em;" />
+                  <h3 class="font-size-13 font-size-l-12 font-size-s-11 font-weight-bold text-wrap-balance">
+                    In the UK? Set up a direct debit today.
+                  </h3>
+                </div>
+                <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold">
+                  <div class="mt-s-3">
+                    <div class="mb-3">
+                      <a class="ui-button ui-button--white mr-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+                      <a class="ui-button ui-button--white" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+                    </div>
+                    <div>
+                      <a class="ui-button ui-button--white mr-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+                      <a class="ui-button ui-button--white" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Block 2 -->
       <div class="container mb-5">
         <div class="grid-row">
