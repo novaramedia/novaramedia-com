@@ -137,12 +137,12 @@ if ( have_posts() ) {
             </div>
             <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
+                <h3 class="font-size-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
                   To protect their power, elites are throwing their money into media that makes leftwing politics seem impossible.
                 </h3>
               </div>
               <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
-                <p>That’s why we’re expanding. We’re moving into a space with a longer, more secure lease and making plans to grow the team.</p>
+                <p>We’re expanding ahead of the next general election, and moving to a new space.</p>
                 <p class="mt-3">Take a look at what we’ve got planned.</p>
               </div>
             </div>
@@ -193,7 +193,7 @@ if ( have_posts() ) {
               </div>
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
-                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
+                  <h3 class="font-size-16 font-size-xl-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
                     Small, regular donations <span class="font-color-red">make us strong.</span>
                   </h3>
                 </div>
@@ -225,7 +225,7 @@ if ( have_posts() ) {
             <div class="background-white ui-rounded-box ui-backgrounded-box-padding">
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-10">
-                  <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
+                  <h3 class="font-size-16 font-size-xl-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
                     No ads, no distractions.<br/>
                     <span class="font-color-red">Just quality journalism.</span>
                   </h3>
@@ -260,7 +260,7 @@ if ( have_posts() ) {
             </div>
             <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
+                <h3 class="font-size-15 font-size-xl-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
                   Want to see what we've got planned?
                 </h3>
               </div>
@@ -287,7 +287,7 @@ if ( have_posts() ) {
                 </h3>
               </div>
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
+                <h3 class="font-size-15 font-size-xl-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
                   Born amid anti-austerity movements as a show on community radio, our supporters are the reason we’ve grown to be one of Britain’s most influential media organisations.
                 </h3>
               </div>
