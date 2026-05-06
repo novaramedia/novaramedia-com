@@ -60,7 +60,8 @@ jobs:
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
-             git checkout ${DEPLOY_REF}"
+             git checkout ${DEPLOY_REF} && \
+             (git reset --hard origin/${DEPLOY_REF} 2>/dev/null || git reset --hard ${DEPLOY_REF})"
 
           echo "Deploy complete"
         env:
