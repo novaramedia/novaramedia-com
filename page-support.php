@@ -36,7 +36,8 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
 
-    $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
+    $youtube_short_id = ! empty( $meta['_nm_support_youtube_short'] ) ? $meta['_nm_support_youtube_short'][0] : false;
+    $youtube_long_id  = ! empty( $meta['_nm_support_youtube_long'] ) ? $meta['_nm_support_youtube_long'][0] : false;
     $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
     $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
 
@@ -122,11 +123,11 @@ if ( have_posts() ) {
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
-              <?php if ( $youtube_id ) { ?>
+              <?php if ( $youtube_short_id ) { ?>
               <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
                 <div class="pt-4 pl-2 pr-2">
                   <div class="u-video-embed-container">
-                    <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
+                    <?php echo render_youtube_embed_iframe( $youtube_short_id, false, 'eager', get_the_title() ); ?>
                   </div>
                 </div>
               </div>
@@ -143,9 +144,6 @@ if ( have_posts() ) {
               <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
                 <p>That’s why we’re expanding. We’re moving into a space with a longer, more secure lease and making plans to grow the team.</p>
                 <p class="mt-3">Take a look at what we’ve got planned.</p>
-                <p class="mt-4">
-                  <a href="#" class="ui-button ui-button--red ui-button--small" target="_blank" rel="noopener">Watch the short film</a>
-                </p>
               </div>
             </div>
           </div>
@@ -216,7 +214,7 @@ if ( have_posts() ) {
       <!-- Quotes 2 -->
       <?php render_support_quotes_carousel( $quotes_block_2 ); ?>
 
-      <?php if ( $youtube_id ) { ?>
+      <?php if ( $youtube_long_id ) { ?>
       <!-- YouTube block -->
       <div class="container mb-5">
         <div class="grid-row">
@@ -225,7 +223,7 @@ if ( have_posts() ) {
               <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
                 <div class="pt-4 pl-2 pr-2">
                   <div class="u-video-embed-container">
-                    <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', get_the_title() ); ?>
+                    <?php echo render_youtube_embed_iframe( $youtube_long_id, false, 'lazy', get_the_title() ); ?>
                   </div>
                 </div>
               </div>
