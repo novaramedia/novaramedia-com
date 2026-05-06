@@ -19,7 +19,7 @@
 <div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-3">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('j F Y'); ?></li>
+      <li>Published <?php the_time(NM_DATE_FORMAT_LONG); ?></li>
       <?php
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';

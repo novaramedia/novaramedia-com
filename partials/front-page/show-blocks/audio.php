@@ -102,7 +102,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
               <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
                 <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover">
                   <div class="font-size-8 font-weight-bold mb-2">
-                    <?php echo esc_html( get_the_time( 'j F Y', $post_id ) ); ?>
+                    <?php echo esc_html( get_the_time( NM_DATE_FORMAT_LONG, $post_id ) ); ?>
                   </div>
                 </a>
                 <h4 class="font-size-10 font-weight-bold mb-2">

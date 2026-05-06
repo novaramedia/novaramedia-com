@@ -248,8 +248,8 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     <div class="grid-row mb-6">
       <div class="grid-item is-s-24 is-xxl-24 text-align-center font-size-13 text-links-underlined">
         Listen now on:<br/>
-        <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,
-        <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,
+        <a href="https://podcasts.apple.com/gb/podcast/death-in-westminster/id1884434680">Apple Podcasts</a>,
+        <a href="https://open.spotify.com/show/59ofghgIWjZ5VDcYE3loaD">Spotify</a>,
         <a href="https://podfollow.com/novaramedia/view">RSS</a>
       </div>
     </div>

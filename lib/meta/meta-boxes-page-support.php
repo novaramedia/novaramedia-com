@@ -25,9 +25,18 @@ function nm_cmb_page_support_metaboxes() {
 
     $support_page_meta_boxes->add_field(
         array(
-            'name' => __( 'Youtube video', 'cmb' ),
-            'desc' => __( '(optional)', 'cmb' ),
-            'id'   => $prefix . 'support_youtube',
+            'name' => __( 'Short video (top of page)', 'cmb' ),
+            'desc' => __( 'YouTube video ID only (e.g. dQw4w9WgXcQ). Shows at top of page. Falls back to crowd image if empty.', 'cmb' ),
+            'id'   => $prefix . 'support_youtube_short',
+            'type' => 'text',
+        )
+    );
+
+    $support_page_meta_boxes->add_field(
+        array(
+            'name' => __( 'Long video (bottom block)', 'cmb' ),
+            'desc' => __( 'YouTube video ID only (e.g. dQw4w9WgXcQ). Shows the long-form video block near the bottom. Entire block hidden if empty.', 'cmb' ),
+            'id'   => $prefix . 'support_youtube_long',
             'type' => 'text',
         )
     );

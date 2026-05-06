@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [4.6.0] - 2026-05-06
+
+### Changed
+
+- Reorganise developer docs into `docs/` directory structure; update AI coding guidelines and trim `CLAUDE.md`
+
+- Update support page copy and layout for May 2026 fundraiser campaign
+- Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
+- Update DIW podcast urls (except the plain RSS one)
+
+### Fixed
+
+- Fix schedule tab active state when pre-selected via URL parameter
+
 ## [4.5.5] - 2026-04-27
 
 ### Added
