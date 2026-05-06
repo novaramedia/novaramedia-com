@@ -36,7 +36,8 @@ if ( have_posts() ) {
     the_post();
     $meta = get_post_meta( $post->ID );
 
-    $youtube_id = ! empty( $meta['_nm_support_youtube'] ) ? $meta['_nm_support_youtube'][0] : false;
+    $youtube_short_id = ! empty( $meta['_nm_support_youtube_short'] ) ? $meta['_nm_support_youtube_short'][0] : false;
+    $youtube_long_id  = ! empty( $meta['_nm_support_youtube_long'] ) ? $meta['_nm_support_youtube_long'][0] : false;
     $header_first_line = ! empty( $meta['_nm_support_header_first_line'] ) ? $meta['_nm_support_header_first_line'][0] : '';
     $header_second_line = ! empty( $meta['_nm_support_header_second_line'] ) ? $meta['_nm_support_header_second_line'][0] : '';
 
@@ -60,7 +61,7 @@ if ( have_posts() ) {
             if ( ! empty( $header_first_line ) ) {
               echo $header_first_line;
             } else {
-              echo 'Help build a new media';
+              echo 'We need to get bigger.';
             }
             ?>
           </div>
@@ -69,7 +70,7 @@ if ( have_posts() ) {
             if ( ! empty( $header_second_line ) ) {
               echo $header_second_line;
             } else {
-              echo 'for a different politics.';
+              echo 'Much bigger.';
             }
             ?>
           </div>
@@ -86,20 +87,11 @@ if ( have_posts() ) {
             <div class="grid-item is-xxl-24">
               <div class="pt-4 pb-4 pl-2 pr-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-14 mb-4">
-                  We’re up against <span class="font-color-red">huge power and influence.</span>
+                  The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-12 mb-4">
-                  Join our supporters and back <span class="font-color-red">truthful, independent journalism today.</span>
+                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
-                <?php
-                if ( $youtube_id ) {
-                  ?>
-                <div class="u-video-embed-container">
-                  <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
-                </div>
-                  <?php
-                }
-                ?>
               </div>
             </div>
           </div>
@@ -108,10 +100,10 @@ if ( have_posts() ) {
             <div class="grid-item is-xxl-12 is-m-24">
               <div class="ui-backgrounded-box-padding pl-s-2 pr-s-2 font-weight-bold text-wrap-balance">
                 <div class="font-size-16 font-size-xl-15 font-size-s-14 mb-4">
-                  We’re up against <span class="font-color-red">huge power and influence.</span>
+                  The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-13 font-size-l-12 mb-4 mb-m-0">
-                  Join our supporters and back <span class="font-color-red">truthful, independent journalism today.</span>
+                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
               </div>
             </div>
@@ -122,19 +114,6 @@ if ( have_posts() ) {
             </div>
           </div>
         </div>
-        <?php
-        if ( $youtube_id ) {
-          ?>
-        <div class="grid-item is-xxl-24 only-desktop">
-          <div class="background-white ui-rounded-box ui-rounded-box--bottom pl-5 pl-l-4 pr-5 pr-l-4 pb-5 pb-l-4">
-            <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
-            </div>
-          </div>
-        </div>
-          <?php
-        }
-        ?>
       </div>
     </div>
 
@@ -144,18 +123,27 @@ if ( have_posts() ) {
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
             <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
+              <?php if ( $youtube_short_id ) { ?>
+              <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
+                <div class="pt-4 pl-2 pr-2">
+                  <div class="u-video-embed-container">
+                    <?php echo render_youtube_embed_iframe( $youtube_short_id, false, 'eager', get_the_title() ); ?>
+                  </div>
+                </div>
+              </div>
+              <?php } else { ?>
               <div class="grid-item is-xxl-24 support-page__invert-section-background support-page__crowd-background ui-rounded-box ui-rounded-box--top"></div>
+              <?php } ?>
             </div>
             <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
               <div class="grid-item is-s-24 is-xxl-11">
-                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4">
-                  Billionaire-backed?<br/>
-                  Not us.
+                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
+                  To protect their power, elites are throwing their money into media that makes leftwing politics seem impossible.
                 </h3>
               </div>
               <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
-                <p>Outlets funded by billionaires are obliged to push narratives that serve the obscenely wealthy.</p>
-                <p class="mt-3">Because the vast majority of our income is from our supporters, we can be editorially independent without ever having to toe someone else’s editorial line.</p>
+                <p>That’s why we’re expanding. We’re moving into a space with a longer, more secure lease and making plans to grow the team.</p>
+                <p class="mt-3">Take a look at what we’ve got planned.</p>
               </div>
             </div>
           </div>
@@ -164,6 +152,36 @@ if ( have_posts() ) {
 
       <!-- Quotes 1 -->
       <?php render_support_quotes_carousel( $quotes_block_1 ); ?>
+
+      <!-- Direct debit block -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="background-red ui-rounded-box ui-backgrounded-box-padding font-color-white">
+              <div class="grid-row grid-row--nested">
+                <div class="grid-item is-s-24 is-xxl-11">
+                  <img class="mb-4" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit" style="filter: brightness(0) invert(1); height: 2em;" />
+                  <h3 class="font-size-13 font-size-l-12 font-size-s-11 font-weight-bold text-wrap-balance">
+                    In the UK? Set up a direct debit today.
+                  </h3>
+                </div>
+                <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold">
+                  <div class="mt-s-3">
+                    <div class="mb-3">
+                      <a class="ui-button ui-button--white mr-3" href="https://pay.gocardless.com/AL00033222M0PQ" target="_blank" rel="noopener">£5 per month</a>
+                      <a class="ui-button ui-button--white" href="https://pay.gocardless.com/AL00033226P4MM" target="_blank" rel="noopener">£10 per month</a>
+                    </div>
+                    <div>
+                      <a class="ui-button ui-button--white mr-3" href="https://pay.gocardless.com/AL00033228M1D0" target="_blank" rel="noopener">£20 per month</a>
+                      <a class="ui-button ui-button--white" href="https://pay.gocardless.com/AL00033229Y952" target="_blank" rel="noopener">£50 per month</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Block 2 -->
       <div class="container mb-5">
@@ -176,7 +194,7 @@ if ( have_posts() ) {
               <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-24 is-xxl-12">
                   <h3 class="font-size-16 font-size-l-15 font-size-s-14 font-weight-bold mb-s-4 text-wrap-balance">
-                    Our <span class="font-color-red">supporter-funded model</span> continues to defy expectations and buck industry trends.
+                    Small, regular donations <span class="font-color-red">make us strong.</span>
                   </h3>
                 </div>
                 <div class="grid-item is-s-24 is-xxl-12 font-size-12 font-size-s-12 font-weight-bold text-wrap-balance">
@@ -225,6 +243,35 @@ if ( have_posts() ) {
 
       <!-- Quotes 2 -->
       <?php render_support_quotes_carousel( $quotes_block_2 ); ?>
+
+      <?php if ( $youtube_long_id ) { ?>
+      <!-- YouTube block -->
+      <div class="container mb-5">
+        <div class="grid-row">
+          <div class="grid-item is-xxl-24">
+            <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
+              <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
+                <div class="pt-4 pl-2 pr-2">
+                  <div class="u-video-embed-container">
+                    <?php echo render_youtube_embed_iframe( $youtube_long_id, false, 'lazy', get_the_title() ); ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid-row grid-row--nested ui-backgrounded-box-padding background-black font-color-white ui-rounded-box ui-rounded-box--bottom">
+              <div class="grid-item is-s-24 is-xxl-11">
+                <h3 class="font-size-15 font-size-l-14 font-size-s-13 font-weight-bold mb-s-4 text-wrap-balance">
+                  Want to see what we've got planned?
+                </h3>
+              </div>
+              <div class="grid-item offset-s-0 is-s-24 offset-xxl-1 is-xxl-12 font-size-12 font-size-s-11 font-weight-bold text-wrap-pretty">
+                <p>Go behind the scenes with the team to find out more about the new space, and what it will mean for our journalism.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php } ?>
 
       <!-- our story -->
       <div class="container mb-5">

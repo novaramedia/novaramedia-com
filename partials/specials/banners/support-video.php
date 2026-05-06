@@ -12,7 +12,7 @@ $support_page = get_page_by_path( 'support' );
 $support_page_youtube_id = false;
 
 if ( $support_page !== null ) {
-  $support_page_youtube_id = get_post_meta( $support_page->ID, '_nm_support_youtube', true );
+  $support_page_youtube_id = get_post_meta( $support_page->ID, '_nm_support_youtube_short', true );
 }
 ?>
 <div class="container pt-6 pb-6 pt-s-5 pb-s-5">
