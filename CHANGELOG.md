@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Reorganise developer docs into `docs/` directory structure; update AI coding guidelines and trim `CLAUDE.md`
+
 - Update support page copy and layout for May 2026 fundraiser campaign
 - Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
 - Update DIW podcast urls (except the plain RSS one)
