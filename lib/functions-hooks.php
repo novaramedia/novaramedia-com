@@ -86,7 +86,7 @@ function nm_purge_contributor_pages_on_post_publish( $purge_request ) {
     if ( ! $url ) {
       continue;
     }
-    // group| purges the contributor URL and all paginated sub-pages (/page/2/ etc).
+    // group| purges the contributor URL and all sub-paths beneath it.
     $purge_request[ 'group|contributor_' . $contributor_id ] = str_replace( array( 'http://', 'https://' ), '', $url );
   }
 
