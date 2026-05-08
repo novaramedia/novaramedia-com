@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
+
 ## [4.6.0] - 2026-05-06
 
 ### Changed
