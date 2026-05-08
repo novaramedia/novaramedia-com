@@ -10,7 +10,10 @@
  */
 function nm_search_include_cpts( WP_Query $query ) {
   if ( $query->is_search() && $query->is_main_query() && ! is_admin() ) {
-    $query->set( 'post_type', array( 'post', 'contributor', 'event', 'job' ) );
+    $existing = $query->get( 'post_type' );
+    if ( empty( $existing ) ) {
+      $query->set( 'post_type', array( 'post', 'contributor', 'event', 'job' ) );
+    }
   }
 }
 add_action( 'pre_get_posts', 'nm_search_include_cpts' );
