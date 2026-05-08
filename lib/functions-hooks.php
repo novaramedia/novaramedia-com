@@ -119,6 +119,7 @@ function nm_purge_contributor_pages_cloudflare( $urls, $post_id ) {
     $url = get_permalink( $contributor_id );
     if ( $url ) {
       $urls[] = $url;
+      $urls[] = add_query_arg( 'is_full_archive', 'true', $url );
     }
   }
 
