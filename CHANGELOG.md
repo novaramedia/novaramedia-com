@@ -7,18 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-<<<<<<< feature/related-post-block
 ### Added
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
-=======
+
 ### Fixed
 
 - Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
 - Include contributor, event, and job post types in site search results
 
 ## [4.6.0] - 2026-05-06
->>>>>>> development
 
 ### Changed
 

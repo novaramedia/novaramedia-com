@@ -177,6 +177,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
           </div>
           <?php
         }
+        ?>
       </div>
     </div>
             <?php
