@@ -7,13 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<<<<<<< feature/related-post-block
 ### Added
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+=======
+### Fixed
+
+- Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
+- Include contributor, event, and job post types in site search results
+
+## [4.6.0] - 2026-05-06
+>>>>>>> development
 
 ### Changed
 
+- Reorganise developer docs into `docs/` directory structure; update AI coding guidelines and trim `CLAUDE.md`
+
+- Update support page copy and layout for May 2026 fundraiser campaign
 - Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
+- Update DIW podcast urls (except the plain RSS one)
+
+### Fixed
+
+- Fix schedule tab active state when pre-selected via URL parameter
 
 ## [4.5.5] - 2026-04-27
 
