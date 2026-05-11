@@ -36,8 +36,8 @@
 // grid-row--nested should be the helper for nest grids, not grid--nested
 
 .grid-row--nested
-  margin-left: calc(var(--grid-gutter) / 2 * -1)
-  margin-right: calc(var(--grid-gutter) / 2 * -1)
+  margin-left: unquote('calc(var(--grid-gutter) / 2 * -1)')
+  margin-right: unquote('calc(var(--grid-gutter) / 2 * -1)')
 
 
 // should be under ui prefix not u prefix, and should be a helper for video embeds, not just youtube embeds

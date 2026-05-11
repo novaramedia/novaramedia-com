@@ -53,6 +53,14 @@ if ( $layout === 'unknown' ) {
   return;
 }
 
+// Validate video-specific data before opening any HTML.
+if ( $layout === 'video' ) {
+  $youtube_id = get_post_meta( $related_id, '_cmb_utube', true );
+  if ( empty( $youtube_id ) ) {
+    return;
+  }
+}
+
 $wrapper_attributes = get_block_wrapper_attributes(
   array(
     'class' => 'nm-block-related-post nm-block-related-post--' . esc_attr( $layout ) . ' background-black font-color-white ui-rounded-box p-4 mb-4',
@@ -62,10 +70,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <div <?php echo $wrapper_attributes; ?>>
   <?php
   if ( $layout === 'video' ) {
-    $youtube_id = get_post_meta( $related_id, '_cmb_utube', true );
-    if ( empty( $youtube_id ) ) {
-      return;
-    }
+    // $youtube_id validated and set before wrapper div.
     ?>
     <div class="u-video-embed-container">
       <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', $related_title ); ?>
@@ -116,7 +121,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
         <?php
         if ( $is_future_event && ! empty( $tickets_url ) ) {
           ?>
-          <a href="<?php echo esc_url( $tickets_url ); ?>" target="_blank" rel="nofollow" class="ui-button ui-button--red ui-button--small mt-2">Buy Tickets</a>
+          <a href="<?php echo esc_url( $tickets_url ); ?>" target="_blank" rel="nofollow noopener noreferrer" class="ui-button ui-button--red ui-button--small mt-2">Buy Tickets</a>
           <?php
         }
         ?>
@@ -162,15 +167,16 @@ $wrapper_attributes = get_block_wrapper_attributes(
             <?php
           }
 
-          if ( $layout === 'audio' ) {
-            ?>
-            <div class="font-size-9 mt-1 text-wrap-balance">
-              <?php render_short_description( $related_id ); ?>
-            </div>
-            <?php
-          }
           ?>
         </a>
+        <?php
+        if ( $layout === 'audio' ) {
+          ?>
+          <div class="font-size-9 mt-1 text-wrap-balance">
+            <?php render_short_description( $related_id ); ?>
+          </div>
+          <?php
+        }
       </div>
     </div>
             <?php
