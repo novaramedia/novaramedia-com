@@ -76,7 +76,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
       <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', $related_title ); ?>
     </div>
     <a href="<?php echo esc_url( $permalink ); ?>" class="ui-hover">
-      <h3 class="font-size-9 font-weight-bold text-wrap-pretty mt-2 "><?php echo esc_html( $related_title ); ?></h3>
+      <h3 class="font-size-9 font-weight-bold text-wrap-pretty mt-2"><?php echo esc_html( $related_title ); ?></h3>
     </a>
     <?php
   } elseif ( $layout === 'event' ) {
