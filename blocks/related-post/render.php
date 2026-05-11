@@ -94,10 +94,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
             <?php
               render_thumbnail(
                 $related_id,
-                array(
-                  'width'  => 600,
-                  'height' => 600,
-                ),
+                array( 600, 600 ),
                 array(
                   'class' => 'ui-rounded-image u-display-block',
                 )
