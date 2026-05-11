@@ -60,7 +60,7 @@ jobs:
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
-             git switch -- \"${DEPLOY_REF}\" && \
+             git checkout \"${DEPLOY_REF}\" && \
              if git show-ref --verify --quiet refs/remotes/origin/${DEPLOY_REF}; then \
                git reset --hard \"origin/${DEPLOY_REF}\"; \
              else \
