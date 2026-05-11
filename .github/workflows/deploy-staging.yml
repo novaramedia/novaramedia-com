@@ -60,11 +60,11 @@ jobs:
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
-             git checkout -- \"${DEPLOY_REF}\" && \
+             git switch -- \"${DEPLOY_REF}\" && \
              if git show-ref --verify --quiet refs/remotes/origin/${DEPLOY_REF}; then \
-               git reset --hard -- \"origin/${DEPLOY_REF}\"; \
+               git reset --hard \"origin/${DEPLOY_REF}\"; \
              else \
-               git reset --hard -- \"${DEPLOY_REF}\"; \
+               git reset --hard \"${DEPLOY_REF}\"; \
              fi"
 
           echo "Deploy complete"
