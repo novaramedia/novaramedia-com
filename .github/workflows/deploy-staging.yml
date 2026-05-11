@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Validate ref input
         run: |
-          if ! echo "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9][a-zA-Z0-9._/-]*$'; then
+          if ! printf '%s' "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9][a-zA-Z0-9._/-]*$'; then
             echo "Error: invalid ref '${DEPLOY_REF}'"
             exit 1
           fi
@@ -60,11 +60,11 @@ jobs:
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
-             git checkout ${DEPLOY_REF} && \
+             git checkout -- \"${DEPLOY_REF}\" && \
              if git show-ref --verify --quiet refs/remotes/origin/${DEPLOY_REF}; then \
-               git reset --hard origin/${DEPLOY_REF}; \
+               git reset --hard -- \"origin/${DEPLOY_REF}\"; \
              else \
-               git reset --hard ${DEPLOY_REF}; \
+               git reset --hard -- \"${DEPLOY_REF}\"; \
              fi"
 
           echo "Deploy complete"
