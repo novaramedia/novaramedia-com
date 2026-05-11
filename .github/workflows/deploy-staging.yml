@@ -61,7 +61,11 @@ jobs:
              git reset --hard HEAD && \
              git clean -fd && \
              git checkout ${DEPLOY_REF} && \
-             (git reset --hard origin/${DEPLOY_REF} 2>/dev/null || git reset --hard ${DEPLOY_REF})"
+             if git show-ref --verify --quiet refs/remotes/origin/${DEPLOY_REF}; then \
+               git reset --hard origin/${DEPLOY_REF}; \
+             else \
+               git reset --hard ${DEPLOY_REF}; \
+             fi"
 
           echo "Deploy complete"
         env:
