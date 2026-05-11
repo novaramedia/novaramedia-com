@@ -35,6 +35,7 @@ export default function Edit({ attributes, setAttributes }) {
     }
 
     if (!query || query.trim().length < 2) {
+      ++requestRef.current;
       setResults([]);
       setIsSearching(false);
       return undefined;
