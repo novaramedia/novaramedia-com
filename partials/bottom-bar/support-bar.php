@@ -12,21 +12,21 @@
     <div class="support-bar__open-view grid-row pb-2">
       <div class="grid-item is-xxl-6 only-desktop">
         <a href="<?php echo site_url( 'support/' ); ?>">
-          <h3 class="font-color-white font-size-l-13 font-size-15 font-weight-bold" style="line-height: .95;">Build<br/>&nbsp;people-<br/>&nbsp;&nbsp;powered<br/>&nbsp;&nbsp;&nbsp;media.</h3>
+          <h3 class="font-color-white font-size-l-11 font-size-12 font-weight-bold" style="line-height: .95;">Build a<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media<br/>for a<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;different<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;politics.</h3>
         </a>
       </div>
       <div class="grid-item is-xxl-20 only-mobile">
         <a href="<?php echo site_url( 'support/' ); ?>">
-          <h3 class="font-color-white font-size-11 font-weight-bold mb-2">Build people-powered media.</h3>
+          <h3 class="font-color-white font-size-11 font-weight-bold mb-2 text-wrap-balance">Build a new media.</h3>
         </a>
       </div>
-      <div class="grid-item is-s-24 is-xxl-12 font-color-white font-size-11 only-desktop">
+      <div class="grid-item is-s-24 is-xxl-10 font-color-white font-size-11 only-desktop">
         <div class="ml-m-4">
-          <p class="mb-2"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
-          <strong><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></strong>
+          <p class="mb-2 text-wrap-pretty"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
+          <p class="font-weight-bold text-wrap-pretty"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
         </div>
       </div>
-      <div class="support-bar__open-actions-column grid-item is-s-4 is-xxl-6">
+      <div class="support-bar__open-actions-column grid-item is-s-4 is-xxl-8">
         <div class="support-bar__open-actions-wrapper">
           <nav class="support-bar__close-trigger ui-hit-area ui-hit-area--top-right">
             <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white"></span>
@@ -37,8 +37,8 @@
         </div>
       </div>
       <div class="grid-item is-s-24 font-color-white only-mobile">
-        <p class="mb-2"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
-        <strong><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></strong>
+        <p class="mb-2 text-wrap-pretty"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
+        <strong class="text-wrap-pretty"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></strong>
         <div class="mt-3">
           <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--white ui-button--small">
             <?php echo ( $open_button ? $open_button : 'Join our supporters' ); ?>
@@ -50,10 +50,10 @@
       <div class="grid-item">
         <span class="only-desktop">
           <a href="<?php echo site_url( 'support/' ); ?>">
-            <strong>Build people-powered media.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
+            <strong>Build a new media.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
           </a>
         </span>
-        <a href="<?php echo site_url( 'support/' ); ?>" class="font-size-10 font-weight-bold only-mobile">
+        <a href="<?php echo site_url( 'support/' ); ?>" class="font-size-10 font-weight-bold only-mobile text-wrap-balance">
           <?php echo ( $mobile_closed_cta ? $mobile_closed_cta : 'Fund independent, truthful journalism' ); ?>
         </a>
       </div>
