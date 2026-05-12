@@ -90,7 +90,7 @@ if ( have_posts() ) {
                   The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-12 mb-4">
-                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
+                  Help us grow our supporter base by <span class="font-color-red">2,000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@ if ( have_posts() ) {
                   The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-13 font-size-l-12 mb-4 mb-m-0">
-                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
+                  Help us grow our supporter base by <span class="font-color-red">2,000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
               </div>
             </div>
