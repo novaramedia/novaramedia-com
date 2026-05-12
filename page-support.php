@@ -34,7 +34,7 @@ get_header();
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
-    $meta = get_post_meta( $post->ID );
+    $meta = get_post_meta( get_the_ID() );
 
     $youtube_short_id = ! empty( $meta['_nm_support_youtube_short'] ) ? $meta['_nm_support_youtube_short'][0] : false;
     $youtube_long_id  = ! empty( $meta['_nm_support_youtube_long'] ) ? $meta['_nm_support_youtube_long'][0] : false;
