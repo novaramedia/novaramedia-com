@@ -48,11 +48,11 @@
     </div>
     <div class="support-bar__closed-view grid-row is-one-even-line-grid font-color-white">
       <div class="grid-item">
-        <span class="only-desktop">
+        <p class="text-wrap-balance only-desktop">
           <a href="<?php echo site_url( 'support/' ); ?>">
             <strong>Build a new media.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
           </a>
-        </span>
+</p>
         <a href="<?php echo site_url( 'support/' ); ?>" class="font-size-10 font-weight-bold only-mobile text-wrap-balance">
           <?php echo ( $mobile_closed_cta ? $mobile_closed_cta : 'Fund independent, truthful journalism' ); ?>
         </a>
