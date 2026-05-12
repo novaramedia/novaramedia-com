@@ -19,13 +19,13 @@
       </div>
       <div class="grid-item is-xxl-20 only-mobile">
         <a href="<?php echo site_url( 'support/' ); ?>">
-          <h3 class="font-color-white font-size-11 font-weight-bold mb-2 text-wrap-balance"><?php echo ( $open_mobile_heading ? $open_mobile_heading : 'Build a new media' ); ?>.</h3>
+          <h3 class="font-color-white font-size-11 font-weight-bold mb-2 text-wrap-balance"><?php echo esc_html( $open_mobile_heading ? $open_mobile_heading : 'Build a new media' ); ?>.</h3>
         </a>
       </div>
       <div class="grid-item is-s-24 is-xxl-10 font-color-white font-size-11 only-desktop">
         <div class="ml-m-4">
-          <p class="mb-2 text-wrap-pretty"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
-          <p class="font-weight-bold text-wrap-pretty"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
+          <p class="mb-2 text-wrap-pretty"><?php echo wp_kses_post( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
+          <p class="font-weight-bold text-wrap-pretty"><?php echo wp_kses_post( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
         </div>
       </div>
       <div class="support-bar__open-actions-column grid-item is-s-4 is-xxl-8">
@@ -34,16 +34,16 @@
             <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white"></span>
           </nav>
           <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--white ui-button--small only-desktop">
-            <?php echo ( $open_button ? $open_button : 'Join our supporters' ); ?>
+            <?php echo esc_html( $open_button ? $open_button : 'Join our supporters' ); ?>
           </a>
         </div>
       </div>
       <div class="grid-item is-s-24 font-color-white only-mobile">
-        <p class="mb-2 text-wrap-balance"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
-        <p class="font-weight-bold text-wrap-balance"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
+        <p class="mb-2 text-wrap-balance"><?php echo wp_kses_post( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
+        <p class="font-weight-bold text-wrap-balance"><?php echo wp_kses_post( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
         <div class="mt-3">
           <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--white ui-button--small">
-            <?php echo ( $open_button ? $open_button : 'Join our supporters' ); ?>
+            <?php echo esc_html( $open_button ? $open_button : 'Join our supporters' ); ?>
           </a>
         </div>
       </div>
@@ -52,16 +52,16 @@
       <div class="grid-item">
         <p class="text-wrap-balance only-desktop">
           <a href="<?php echo site_url( 'support/' ); ?>">
-            <strong><?php echo ( $closed_desktop_heading ? $closed_desktop_heading : 'Build a new media' ); ?>.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
+            <strong><?php echo esc_html( $closed_desktop_heading ? $closed_desktop_heading : 'Build a new media' ); ?>.</strong> <?php echo wp_kses_post( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
           </a>
-</p>
+        </p>
         <a href="<?php echo site_url( 'support/' ); ?>" class="font-size-10 font-weight-bold only-mobile text-wrap-balance">
-          <?php echo ( $mobile_closed_cta ? $mobile_closed_cta : 'Fund independent, truthful journalism' ); ?>
+          <?php echo esc_html( $mobile_closed_cta ? $mobile_closed_cta : 'Fund independent, truthful journalism' ); ?>
         </a>
       </div>
       <div class="grid-item">
         <a href="<?php echo site_url( 'support/' ); ?>" class="ui-action-link only-desktop">
-          <?php echo ( $desktop_closed_cta ? $desktop_closed_cta : 'Fund something better' ); ?>
+          <?php echo esc_html( $desktop_closed_cta ? $desktop_closed_cta : 'Fund something better' ); ?>
         </a>
         <span class="support-bar__open-trigger ux-pointer pl-3">
           <span class="ui-chevron ui-chevron--up ui-chevron--white"></span>
