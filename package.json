@@ -79,7 +79,7 @@
     "lodash": "~4.18.1",
     "luxon": "^3.7.2",
     "nm-stylus-library": "github:novaramedia/nm-stylus-library#v0.13.0",
-    "swiper": "^12.1.3"
+    "swiper": "^12.1.4"
   },
   "release-it": {
     "git": {
