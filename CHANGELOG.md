@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update sticky support bar copy and layout for second round of May 2026 fundraiser campaign
+- Expand sticky support bar admin options with separate heading fields for mobile open state and desktop closed state
+
 ### Fixed
 
 - Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
