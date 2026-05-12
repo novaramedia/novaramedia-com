@@ -328,7 +328,7 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'Front page video block CTA',
-            'desc' => 'This is the video embed CTA block used as a banner option on the front page',
+            'desc' => '***This doesnt work anymore? Do you want it back?***',
             'id'   => $prefix . 'fundraising_settings_video_banner_cta_title',
             'type' => 'title',
         )
