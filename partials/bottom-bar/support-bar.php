@@ -1,5 +1,7 @@
 <?php
-  $open_copy = NM_get_option( 'nm_fundraising_settings_support_bar_open_paragraph', 'nm_fundraising_options' );
+  $open_mobile_heading    = NM_get_option( 'nm_fundraising_settings_support_bar_open_mobile_heading', 'nm_fundraising_options' );
+  $closed_desktop_heading = NM_get_option( 'nm_fundraising_settings_support_bar_closed_desktop_heading', 'nm_fundraising_options' );
+  $open_copy              = NM_get_option( 'nm_fundraising_settings_support_bar_open_paragraph', 'nm_fundraising_options' );
   $open_cta = NM_get_option( 'nm_fundraising_settings_support_bar_open_cta', 'nm_fundraising_options' );
   $open_button = NM_get_option( 'nm_fundraising_settings_support_bar_open_button', 'nm_fundraising_options' );
 
@@ -17,7 +19,7 @@
       </div>
       <div class="grid-item is-xxl-20 only-mobile">
         <a href="<?php echo site_url( 'support/' ); ?>">
-          <h3 class="font-color-white font-size-11 font-weight-bold mb-2 text-wrap-balance">Build a new media.</h3>
+          <h3 class="font-color-white font-size-11 font-weight-bold mb-2 text-wrap-balance"><?php echo ( $open_mobile_heading ? $open_mobile_heading : 'Build a new media' ); ?>.</h3>
         </a>
       </div>
       <div class="grid-item is-s-24 is-xxl-10 font-color-white font-size-11 only-desktop">
@@ -37,8 +39,8 @@
         </div>
       </div>
       <div class="grid-item is-s-24 font-color-white only-mobile">
-        <p class="mb-2 text-wrap-pretty"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
-        <strong class="text-wrap-pretty"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></strong>
+        <p class="mb-2 text-wrap-balance"><?php echo ( $open_copy ? $open_copy : 'We’re up against obscene wealth and influence in the media. Our supporters keep us entirely free to access. We don’t have any ad partnerships or sponsored content.' ); ?></p>
+        <p class="font-weight-bold text-wrap-balance"><?php echo ( $open_cta ? $open_cta : 'If you can, donate one hour’s wage per month or whatever you can afford today.' ); ?></p>
         <div class="mt-3">
           <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--white ui-button--small">
             <?php echo ( $open_button ? $open_button : 'Join our supporters' ); ?>
@@ -50,7 +52,7 @@
       <div class="grid-item">
         <p class="text-wrap-balance only-desktop">
           <a href="<?php echo site_url( 'support/' ); ?>">
-            <strong>Build a new media.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
+            <strong><?php echo ( $closed_desktop_heading ? $closed_desktop_heading : 'Build a new media' ); ?>.</strong> <?php echo ( $desktop_closed_copy ? $desktop_closed_copy : 'We’re up against obscene wealth and influence in the media.' ); ?>
           </a>
 </p>
         <a href="<?php echo site_url( 'support/' ); ?>" class="font-size-10 font-weight-bold only-mobile text-wrap-balance">
