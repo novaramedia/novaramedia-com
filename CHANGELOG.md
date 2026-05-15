@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
 
+### Changed
+
+- Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
+
+## [4.6.1] - 2026-05-13
+
+### Changed
+
+- Update sticky support bar copy and layout for second round of May 2026 fundraiser campaign
+- Expand sticky support bar admin options with separate heading fields for mobile open state and desktop closed state
+
 ### Fixed
 
 - Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)

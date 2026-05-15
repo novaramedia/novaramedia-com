@@ -246,9 +246,18 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'Sticky support bar',
-            'desc' => 'This is the bar at the bottom of the window that has an open and closed state',
+            'desc' => 'This is the bar at the bottom of the window that has an open and closed state. Everything except the key typographic element on the left of the desktop state can be changed from here.',
             'id'   => $prefix . 'fundraising_settings_support_bar_title',
             'type' => 'title',
+        )
+    );
+
+    $main_options->add_field(
+        array(
+            'name' => __( 'Open state, mobile heading', 'NM' ),
+            'desc' => 'Slogan shown as the heading on mobile in the open state. Defaults to "Build a new media"',
+            'id'   => $prefix . 'fundraising_settings_support_bar_open_mobile_heading',
+            'type' => 'text',
         )
     );
 
@@ -266,7 +275,7 @@ function nm_register_fundraising_options_metabox() {
             'name' => __( 'Open state bold CTA', 'NM' ),
             'desc' => 'Single sentence that shows below the main copy and in bold',
             'id'   => $prefix . 'fundraising_settings_support_bar_open_cta',
-            'type' => 'text',
+            'type' => 'textarea_small',
         )
     );
 
@@ -281,10 +290,19 @@ function nm_register_fundraising_options_metabox() {
 
     $main_options->add_field(
         array(
+            'name' => __( 'Closed state, desktop heading', 'NM' ),
+            'desc' => 'Slogan shown in bold in the closed bar on desktop. Defaults to "Build a new media"',
+            'id'   => $prefix . 'fundraising_settings_support_bar_closed_desktop_heading',
+            'type' => 'text',
+        )
+    );
+
+    $main_options->add_field(
+        array(
             'name' => __( 'Closed state, desktop only copy', 'NM' ),
             'desc' => 'Single sentence shown after slogan',
             'id'   => $prefix . 'fundraising_settings_support_bar_desktop_closed_copy',
-            'type' => 'text',
+            'type' => 'textarea_small',
         )
     );
 
@@ -310,7 +328,7 @@ function nm_register_fundraising_options_metabox() {
     $main_options->add_field(
         array(
             'name' => 'Front page video block CTA',
-            'desc' => 'This is the video embed CTA block used as a banner option on the front page',
+            'desc' => '***This doesnt work anymore? Do you want it back?***',
             'id'   => $prefix . 'fundraising_settings_video_banner_cta_title',
             'type' => 'title',
         )

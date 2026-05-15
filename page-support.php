@@ -34,7 +34,7 @@ get_header();
 if ( have_posts() ) {
   while ( have_posts() ) {
     the_post();
-    $meta = get_post_meta( $post->ID );
+    $meta = get_post_meta( get_the_ID() );
 
     $youtube_short_id = ! empty( $meta['_nm_support_youtube_short'] ) ? $meta['_nm_support_youtube_short'][0] : false;
     $youtube_long_id  = ! empty( $meta['_nm_support_youtube_long'] ) ? $meta['_nm_support_youtube_long'][0] : false;
@@ -90,7 +90,7 @@ if ( have_posts() ) {
                   The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-12 mb-4">
-                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
+                  Help us grow our supporter base by <span class="font-color-red">2,000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@ if ( have_posts() ) {
                   The next few years are critical. We need to <span class="font-color-red">make more space for the left.</span>
                 </div>
                 <div class="font-size-13 font-size-l-12 mb-4 mb-m-0">
-                  Help us grow our supporter base by <span class="font-color-red">2000 people.</span> Use your card or scroll down to set up a direct debit.
+                  Help us grow our supporter base by <span class="font-color-red">2,000 people.</span> Use your card or scroll down to set up a direct debit.
                 </div>
               </div>
             </div>

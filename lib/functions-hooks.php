@@ -88,6 +88,8 @@ function nm_purge_contributor_pages_on_post_publish( $purge_request ) {
     }
     // group| purges the contributor URL and all sub-paths beneath it.
     $purge_request[ 'group|contributor_' . $contributor_id ] = str_replace( array( 'http://', 'https://' ), '', $url );
+    // single| purges the query string variant not covered by prefix purge.
+    $purge_request[ 'single|contributor_' . $contributor_id . '_full_archive' ] = str_replace( array( 'http://', 'https://' ), '', add_query_arg( 'is_full_archive', 'true', $url ) );
   }
 
   return $purge_request;
