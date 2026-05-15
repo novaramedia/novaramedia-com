@@ -156,7 +156,7 @@ get_header();
     }
     $map_src = 'https://embed.figma.com/board/' . rawurlencode( $figma_file_key ) . '/Do-Your-Own-Research-Map?' . http_build_query( $embed_params );
   ?>
-  <section class="container mb-5">
+  <section id="map" class="container mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
         <div class="grid-row--nested background-white ui-rounded-box pt-4 pb-4">

@@ -38,6 +38,8 @@ $banners = array(
 
     render_front_page_banner($banners[1]);
 
+    get_template_part('partials/front-page/show-blocks/dyor');
+
     get_template_part('partials/front-page/show-blocks/audio');
 
     render_front_page_banner($banners[2]);
