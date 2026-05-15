@@ -82,10 +82,11 @@ $wrapper_attributes = get_block_wrapper_attributes(
   } elseif ( $layout === 'event' ) {
     $timestamp = get_post_meta( $related_id, '_cmb_time', true );
     $tickets_url = get_post_meta( $related_id, '_cmb_tickets', true );
+    $venue_name = get_post_meta( $related_id, '_cmb_venue_name', true );
     $is_future_event = $timestamp && $timestamp > time();
     ?>
     <div class="grid-row grid--nested">
-      <div class="grid-item is-xxl-10 is-s-10">
+      <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
             <?php render_post_ui_tags( $related_id, true, true, 'no-border' ); ?>
@@ -103,17 +104,27 @@ $wrapper_attributes = get_block_wrapper_attributes(
           </a>
         </div>
       </div>
-      <div class="grid-item is-xxl-14 is-s-14">
+      <div class="grid-item is-xxl-16 is-s-14">
         <a href="<?php echo esc_url( $permalink ); ?>" class="ui-hover">
           <h3 class="font-size-11 font-weight-bold text-wrap-balance"><?php echo esc_html( $related_title ); ?></h3>
           <?php
           if ( $timestamp ) {
             $time = new \Moment\Moment( '@' . $timestamp );
             ?>
-            <p class="font-size-9 mt-1"><?php echo esc_html( $time->format( NM_DATE_FORMAT_LONG ) ); ?></p>
+            <p class="font-size-10 font-weight-bold mt-1"><?php echo esc_html( $time->format( NM_DATE_FORMAT_LONG ) ); ?></p>
+            <?php
+            if ( ! empty( $venue_name ) ) {
+              ?>
+            <p class="font-size-10 font-weight-bold mt-1"><?php echo esc_html( $venue_name ); ?></p>
+              <?php
+            }
+            ?>
             <?php
           }
           ?>
+          <div class="font-size-9 mt-1 text-wrap-balance">
+            <?php render_short_description( $related_id ); ?>
+          </div>
         </a>
         <?php
         if ( $is_future_event && ! empty( $tickets_url ) ) {
@@ -127,9 +138,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
     <?php
   } else {
     // articles + audio share the same shell; only bylines differ.
-  ?>
+    ?>
     <div class="grid-row grid--nested">
-      <div class="grid-item is-xxl-10 is-s-10">
+      <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
             <?php render_post_ui_tags( $related_id, true, true, 'no-border' ); ?>
@@ -143,13 +154,13 @@ $wrapper_attributes = get_block_wrapper_attributes(
                   'class' => 'ui-rounded-image u-display-block',
                 )
               );
-              ?>
+            ?>
           </a>
         </div>
       </div>
-      <div class="grid-item is-xxl-14 is-s-14">
+      <div class="grid-item is-xxl-16 is-s-14">
         <a href="<?php echo esc_url( $permalink ); ?>" class="ui-hover">
-          <h3 class="font-size-11 font-weight-bold text-wrap-pretty"><?php echo esc_html( $related_title ); ?></h3>
+          <h3 class="font-size-11 font-weight-bold text-wrap-balance"><?php echo esc_html( $related_title ); ?></h3>
           <?php
           if ( $layout === 'articles' ) {
             ?>
@@ -165,7 +176,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
           }
 
           ?>
-        </a>
         <?php
         if ( $layout === 'audio' ) {
           ?>
@@ -175,9 +185,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
           <?php
         }
         ?>
+        </a>
       </div>
     </div>
             <?php
-          }
-          ?>
+  }
+  ?>
 </div>
