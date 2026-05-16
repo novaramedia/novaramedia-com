@@ -264,7 +264,7 @@ function render_payment_icons( $payment_classes = '' ) {
   <div class="<?php echo esc_attr( $payment_classes ); ?>">
     <?php foreach ( $payment_methods as $filename => $alt_text ) { ?>
       <img
-        class="support-form__payment-type ui-rounded-box ui-rounded-box--large mr-2"
+        class="support-form__payment-type ui-rounded-box mr-2"
         src="<?php echo esc_url( $img_base . $filename . '.svg' ); ?>"
         alt="<?php echo esc_attr( $alt_text ); ?>"
       />
@@ -304,7 +304,7 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--large" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
@@ -779,7 +779,7 @@ function render_support_quotes_carousel( $quotes ) {
     <div class="swiper">
       <div class="swiper-wrapper">
       <?php foreach ( $quotes as $quote ) { ?>
-          <div class="swiper-slide text-align-center ui-rounded-box ui-rounded-box--large">
+          <div class="swiper-slide text-align-center ui-rounded-box">
             <h5 class="ui-boxed-title ui-boxed-title--grey mb-s-2">Supporters Say</h5>
             <div class="support-page__quote-container">
               <div class="font-serif quote support-page__quote-mark text-align-center">“</div>
