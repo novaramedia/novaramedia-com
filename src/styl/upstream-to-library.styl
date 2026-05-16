@@ -43,3 +43,22 @@
 // should be under ui prefix not u prefix, and should be a helper for video embeds, not just youtube embeds
 
 // .ui-16-9-embed-container
+
+// Rounded corner nesting rule:
+// Inner color-blocked boxes (ui-rounded-box inside another ui-rounded-box)
+// need a larger radius (4px) to look optically parallel with outer corners.
+// Visual rule: outer color-blocked box → ui-rounded-box (2px, default)
+//              inner color-blocked box → ui-rounded-box--nested (4px)
+// Images/thumbnails use ui-rounded-box too — same 2px as outer boxes.
+// Upstream: add --nested modifier to nm-stylus-library ui-rounded-box block.
+.ui-rounded-box--nested
+  --ui-border-radius: var(--corner-radius-large)
+
+// Deprecated: ui-rounded-image is CSS-identical to ui-rounded-box at default.
+// Element-type distinction is misleading — border-radius applies to all elements.
+// Replaced by ui-rounded-box throughout this theme.
+// Upstream: remove ui-rounded-image from nm-stylus-library, consolidate into ui-rounded-box.
+
+// Deprecated: ui-rounded-box--large has no semantic meaning.
+// Replaced by ui-rounded-box--nested which describes the actual use case.
+// Upstream: rename --large to --nested in nm-stylus-library ui-rounded-box block.
