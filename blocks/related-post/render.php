@@ -97,7 +97,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 array( 600, 600 ),
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
             ?>
@@ -151,7 +151,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 'col24-16to9',
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
               ?>
