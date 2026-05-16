@@ -7,21 +7,22 @@ if ( ! $dyor_category ) {
 
 $category_link   = get_category_link( $dyor_category->term_id );
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/dyor/';
+$figma_file_key  = get_term_meta( $dyor_category->term_id, '_nm_dyor_figma_file_key', true );
 
 $dyor_posts = get_posts(
-     array(
-  'posts_per_page' => 5,
-  'category'       => $dyor_category->term_id,
-)
-    );
+  array(
+    'posts_per_page' => 5,
+    'category'       => $dyor_category->term_id,
+  )
+);
 
 if ( empty( $dyor_posts ) ) {
   return;
 }
 
-$featured      = $dyor_posts[0];
-$featured_meta = get_post_meta( $featured->ID );
-$recent        = array_slice( $dyor_posts, 1 );
+$featured         = $dyor_posts[0];
+$featured_youtube = get_post_meta( $featured->ID, '_cmb_utube', true );
+$recent           = array_slice( $dyor_posts, 1 );
 ?>
 <section class="container mt-4 mb-4">
   <div class="grid-item is-xxl-24">
@@ -40,15 +41,17 @@ $recent        = array_slice( $dyor_posts, 1 );
         <?php if ( $dyor_category->description ) { ?>
         <div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
           <p class="font-size-12 font-size-s-11 font-weight-bold mb-2"><?php echo esc_html( wp_strip_all_tags( $dyor_category->description ) ); ?></p>
+          <?php if ( ! empty( $figma_file_key ) ) { ?>
           <a href="<?php echo esc_url( $category_link . '#map' ); ?>" class="ui-button ui-button--black">Explore the Map</a>
+          <?php } ?>
         </div>
         <?php } ?>
       </div>
 
       <div class="grid-item is-s-24 is-xxl-12 mb-4">
-        <?php if ( ! empty( $featured_meta['_cmb_utube'][0] ) ) { ?>
+        <?php if ( ! empty( $featured_youtube ) ) { ?>
         <div class="u-video-embed-container ui-rounded-image mb-3">
-          <?php echo render_youtube_embed_iframe( $featured_meta['_cmb_utube'][0], false, 'lazy', get_the_title( $featured->ID ) ); ?>
+          <?php echo render_youtube_embed_iframe( $featured_youtube, false, 'lazy', get_the_title( $featured->ID ) ); ?>
         </div>
         <?php } else { ?>
         <div class="mb-3">
@@ -58,8 +61,8 @@ $recent        = array_slice( $dyor_posts, 1 );
         </div>
         <?php } ?>
         <a href="<?php echo esc_url( get_the_permalink( $featured->ID ) ); ?>" class="ui-hover">
-          <h6 class="font-size-13 font-weight-bold text-wrap-pretty mb-1"><?php echo esc_html( get_the_title( $featured->ID ) ); ?></h6>
-          <p class="font-size-11 mb-0"><?php render_standfirst( $featured->ID ); ?></p>
+          <h3 class="font-size-13 font-weight-bold text-wrap-pretty mb-1"><?php echo esc_html( get_the_title( $featured->ID ) ); ?></h3>
+          <div class="font-size-11 mb-0"><?php render_standfirst( $featured->ID ); ?></div>
         </a>
       </div>
 
@@ -71,16 +74,16 @@ $recent        = array_slice( $dyor_posts, 1 );
           <div class="grid-item is-xxl-24">
             <a href="<?php echo esc_url( $category_link ); ?>" class="ui-hover">
               <div class="layout-split-level font-size-8 font-weight-bold">
-                <h5 class="font-weight-bold text-uppercase">Recent Episodes</h5>
+                <h4 class="font-weight-bold text-uppercase">Recent Episodes</h4>
                 <span>See All</span>
               </div>
             </a>
           </div>
-          <?php foreach ( $recent as $post ) { ?>
+          <?php foreach ( $recent as $recent_post ) { ?>
           <div class="grid-item is-s-12 is-xxl-6 mt-3">
-            <a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" class="ui-hover">
-              <?php render_thumbnail( $post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image mb-2' ) ); ?>
-              <h6 class="font-size-10 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h6>
+            <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="ui-hover">
+              <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image mb-2' ) ); ?>
+              <h4 class="font-size-10 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h4>
             </a>
           </div>
           <?php } ?>

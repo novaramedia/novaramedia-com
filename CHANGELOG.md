@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+- DYOR front-page section — 50:50 layout with show hero, description, and map CTA left; latest episode embed right; row of 4 recent episodes below
 
 ### Changed
 
