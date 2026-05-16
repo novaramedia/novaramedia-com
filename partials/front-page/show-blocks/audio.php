@@ -53,7 +53,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
                     $post_id,
                     'col12',
                     array(
-                      'class' => 'ui-rounded-image',
+                      'class' => 'ui-rounded-box',
                     )
                   );
                   ?>

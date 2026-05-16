@@ -28,7 +28,7 @@ if ( $timestamp ) {
         array( 600, 400 ),
         array(
           'alt'   => get_the_title(),
-          'class' => 'ui-rounded-image',
+          'class' => 'ui-rounded-box',
         )
       );
       ?>

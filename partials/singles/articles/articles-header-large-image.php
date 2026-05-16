@@ -23,7 +23,7 @@
 <div class="grid-row mb-4">
   <div class="grid-item is-s-24 offset-s-0 is-m-24 offset-m-0 is-l-20 offset-l-2 is-xl-20 offset-xl-2 is-xxl-20 offset-xxl-2">
     <?php render_thumbnail($post->ID, 'col20', array(
-      'class' => 'ui-rounded-image',
+      'class' => 'ui-rounded-box',
       'data-no-lazysizes' => true,
       'loading' => 'eager'
     )); ?>

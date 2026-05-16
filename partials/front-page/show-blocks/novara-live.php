@@ -53,7 +53,7 @@ if ( $novara_live_category ) {
                       $post->ID,
                       'col24-16to9',
                       array(
-                        'class' => 'ui-rounded-image',
+                        'class' => 'ui-rounded-box',
                       )
                     );
                   ?>
@@ -116,7 +116,7 @@ if ( $novara_live_category ) {
                     $post->ID,
                     'col24-16to9',
                     array(
-                    'class' => 'ui-rounded-image',
+                    'class' => 'ui-rounded-box',
                     )
                   );
                   ?>
