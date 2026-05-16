@@ -51,9 +51,11 @@
 //              inner color-blocked box → ui-rounded-box--nested (4px)
 // Images/thumbnails use ui-rounded-box too — same 2px as outer boxes.
 // Upstream: add --nested modifier to nm-stylus-library ui-rounded-box block.
+// Usage: always pair with base class — <div class="ui-rounded-box ui-rounded-box--nested">
+// The modifier overrides --ui-border-radius; ui-rounded-box applies border-radius.
+// This follows the library convention: modifier classes set variables, base class applies them.
 .ui-rounded-box--nested
   --ui-border-radius: var(--corner-radius-large)
-  border-radius: var(--ui-border-radius)
 
 // Deprecated: ui-rounded-image is CSS-identical to ui-rounded-box at default.
 // Element-type distinction is misleading — border-radius applies to all elements.
