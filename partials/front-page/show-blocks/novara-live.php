@@ -130,7 +130,7 @@ if ( $novara_live_category ) {
                   </a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                  <h4 class="post__title font-size-8 font-size-S-10 font-weight-bold text-wrap-pretty">
+                  <h4 class="post__title font-size-8 font-size-s-10 font-weight-bold text-wrap-pretty">
                     <?php the_title(); ?>
                   </h4>
                   </a>
