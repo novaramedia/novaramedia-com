@@ -136,7 +136,7 @@ function nm_consent_gate_wrap( $html, $platform ) {
   // browser-parsed but never rendered or executed until explicitly cloned by JS.
   // Neutralise any </template sequences so adversarial oEmbed output cannot
   // prematurely close the wrapper and execute without consent.
-  $html_safe = str_replace( '</template', '&lt;/template', $html );
+  $html_safe = preg_replace( '/<\/\s*template\b/i', '&lt;/template', $html );
 
   return sprintf(
     '<div class="embed-consent-gate">
@@ -175,10 +175,15 @@ function nm_is_embed_exempt( $html ) {
  * @return string Platform name, or 'Third-party' if unrecognised.
  */
 function nm_detect_embed_platform( $html ) {
+  // x.com needs a domain-boundary check: str_contains('x.com') also matches box.com.
+  // Match ://x.com (bare domain) and .x.com (any subdomain like www/platform).
+  if ( preg_match( '/[.\\/]x\.com/', $html ) ) {
+    return 'Twitter/X';
+  }
+
   $platforms = array(
     'soundcloud.com' => 'SoundCloud',
     'twitter.com'    => 'Twitter/X',
-    'x.com'          => 'Twitter/X',
     'vimeo.com'      => 'Vimeo',
     'spotify.com'    => 'Spotify',
     'instagram.com'  => 'Instagram',
