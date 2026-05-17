@@ -135,7 +135,7 @@ function nm_consent_gate_wrap( $html, $platform ) {
       <div class="embed-consent-gate__placeholder">
         <div class="embed-consent-gate__content">
           <p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p>
-          <button class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>
+          <button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>
           <a href="%s" class="embed-consent-gate__privacy-link font-size-8">Privacy policy</a>
         </div>
       </div>
@@ -354,7 +354,8 @@ add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
 
 /**
  * Gate block editor embeds (core/embed blocks) behind the consent placeholder.
- * Runs at priority 5, before nm_add_caption_class at priority 10.
+ * Runs at priority 11, after nm_add_caption_class at priority 10, so captions
+ * inside embed blocks are styled before being base64-encoded into data-embed-html.
  * YouTube blocks get the nocookie switch applied but are not gated.
  *
  * @param string $block_content Rendered block HTML.
@@ -386,4 +387,4 @@ function nm_consent_gate_block_embeds( $block_content, $block ) {
 
   return nm_consent_gate_wrap( $block_content, $platform );
 }
-add_filter( 'render_block', 'nm_consent_gate_block_embeds', 5, 2 );
+add_filter( 'render_block', 'nm_consent_gate_block_embeds', 11, 2 );

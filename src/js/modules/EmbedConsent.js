@@ -11,7 +11,7 @@ export class EmbedConsent {
       this.hydrateAllGates();
     } else {
       this.bindGateButtons();
-      document.addEventListener('cookie-consent-granted', () => this.hydrateAllGates());
+      document.addEventListener('cookie-consent-granted', () => this.hydrateAllGates(), { once: true });
     }
   }
 
@@ -31,9 +31,11 @@ export class EmbedConsent {
     // Content is server-generated WordPress oEmbed HTML, base64-encoded at render time.
     // We parse it via DOMParser to extract and re-execute script elements (required for
     // Twitter/X widget.js which won't run via innerHTML assignment in modern browsers).
+    // Trust boundary: data-embed-html is only ever written by PHP (nm_consent_gate_wrap),
+    // never from user input — the lgtm suppression below is intentional.
     const html = atob(encoded);
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(html, 'text/html'); // lgtm[js/xss-through-dom]
 
     // Scripts parsed via DOMParser don't auto-execute when inserted — recreate them
     doc.body.querySelectorAll('script').forEach(oldScript => {
@@ -49,7 +51,6 @@ export class EmbedConsent {
   handleAccept() {
     Cookies.set('cookie-approval', 'true', { expires: 365 });
     document.dispatchEvent(new CustomEvent('cookie-consent-granted'));
-    this.hydrateAllGates();
   }
 
   bindGateButtons() {
