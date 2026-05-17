@@ -804,7 +804,7 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyl
       data-height="<?php echo esc_attr( $height ); ?>"
       style="min-height: <?php echo esc_attr( $height ); ?>px;">
       <noscript>
-        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener">Listen on SoundCloud</a>
+        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener noreferrer">Listen on SoundCloud</a>
       </noscript>
     </div>
     <?php
