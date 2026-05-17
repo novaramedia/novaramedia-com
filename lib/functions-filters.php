@@ -134,7 +134,10 @@ function nm_consent_gate_wrap( $html, $platform ) {
 
   // Embed HTML is placed inside <template> — an inert element whose content is
   // browser-parsed but never rendered or executed until explicitly cloned by JS.
-  // No base64 encoding needed; scripts inside <template> do not run.
+  // Neutralise any </template sequences so adversarial oEmbed output cannot
+  // prematurely close the wrapper and execute without consent.
+  $html_safe = str_replace( '</template', '&lt;/template', $html );
+
   return sprintf(
     '<div class="embed-consent-gate">
       <template class="embed-consent-gate__template">%s</template>
@@ -146,7 +149,7 @@ function nm_consent_gate_wrap( $html, $platform ) {
         </div>
       </div>
     </div>',
-    $html,
+    $html_safe,
     $platform_esc,
     $platform_esc,
     $privacy_link
