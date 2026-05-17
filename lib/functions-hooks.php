@@ -150,7 +150,7 @@ add_action( 'template_redirect', 'nm_disable_author_page' );
  * Changes the main query to display reverse chronological and all posts for serial podcasts
  */
 function podcast_series_pre_get_posts( $query ) {
-  if ( is_admin() ) {
+  if ( is_admin() || ! $query->is_main_query() ) {
     return;
   }
 
@@ -171,7 +171,7 @@ add_action( 'pre_get_posts', 'podcast_series_pre_get_posts' );
  * Hook pre_get_posts to show all posts on Focus archive pages
  */
 function focus_pre_get_posts( $query ) {
-  if ( $query->is_admin() ) {
+  if ( is_admin() || ! $query->is_main_query() ) {
     return;
   }
 
