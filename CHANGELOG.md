@@ -15,6 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
 
+### Fixed
+
+- OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
+- Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
+- Favicon link used `rel="shortcut"` (invalid); corrected to `rel="shortcut icon"`
+- Schema.org `validThrough` on job posts emitted `1970-01-01` when no deadline was set; field now only added when a deadline exists
+- `render_show()` in audio partial declared at file scope without guard, causing fatal redeclare on second include
+- `font-size-S-10` CSS class typo (capital S) on Novara Live block; corrected to `font-size-s-10`
+- Path traversal: `_cmb_article_layout` post meta now validated against known layout values before use in `get_template_part()`
+
 ## [4.6.1] - 2026-05-13
 
 ### Changed
