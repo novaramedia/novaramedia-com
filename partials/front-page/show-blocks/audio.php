@@ -40,7 +40,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
         $post_id = $latest[0]->ID;
         $meta    = get_post_meta( $post_id );
         ?>
-        <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box">
+        <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box ui-rounded-box--nested">
           <div class="grid-row grid--nested">
             <div class="grid-item is-xxl-10">
               <div class="layout-thumbnail-frame">
@@ -53,7 +53,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
                     $post_id,
                     'col12',
                     array(
-                      'class' => 'ui-rounded-image',
+                      'class' => 'ui-rounded-box',
                     )
                   );
                   ?>

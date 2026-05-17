@@ -115,11 +115,11 @@ get_header();
           ?>
           <div class="dyor-archive__latest-episode grid-row">
             <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
-              <div class="u-video-embed-container ui-rounded-image">
+              <div class="u-video-embed-container ui-rounded-box">
                 <?php if ( ! empty( $latest_meta['_cmb_utube'][0] ) ) { ?>
                   <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], false, 'eager', get_the_title() ); ?>
                 <?php } else { ?>
-                  <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                  <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
                 <?php } ?>
               </div>
             </div>

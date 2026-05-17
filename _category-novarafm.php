@@ -59,7 +59,7 @@ function render_episode_block($posts) {
         <div class="swiper-slide">
           <a href="<?php echo get_permalink($post_id); ?>">
             <?php render_thumbnail($post_id, 'col12-16to9', array(
-              'class' => 'ui-rounded-image'
+              'class' => 'ui-rounded-box'
             )); ?>
             <h2 class="font-size-9 font-weight-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
             <p class="font-size-9"><?php render_short_description($post_id); ?></p>

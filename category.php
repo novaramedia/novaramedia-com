@@ -122,7 +122,7 @@ if ($category->slug === 'video') {
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
-                  'class' => 'ui-rounded-image'
+                  'class' => 'ui-rounded-box'
                 )); ?>
               </a>
             </div>
