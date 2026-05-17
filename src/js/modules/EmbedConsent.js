@@ -39,7 +39,8 @@ export class EmbedConsent {
       oldScript.replaceWith(newScript);
     });
 
-    gate.replaceWith(frag);
+    // Keep the gate wrapper (preserves margin-top/bottom from embed-consent.styl).
+    gate.replaceChildren(frag);
   }
 
   handleAccept() {
