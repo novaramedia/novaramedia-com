@@ -138,7 +138,7 @@ function nm_serial_podcast_redirect() {
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
-    if ( $link && isset( $post->post_name ) ) {
+    if ( ! is_wp_error( $link ) && isset( $post->post_name ) ) {
       wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
@@ -504,15 +504,15 @@ function nm_is_article( $post_id = null ) {
     return false;
   }
 
+  // Resolve articles term ID once outside the closure to avoid N+1 DB calls per category.
+  $articles_term    = get_term_by( 'slug', 'articles', 'category' );
+  $articles_term_id = $articles_term ? $articles_term->term_id : 0;
+
   // check to see if any of the categories returned match the articles slug or have a parent with the articles id
   $found_in_categories = array_filter(
     $categories,
-    function ( $category ) {
-      if ( $category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id ) {
-        return true;
-      }
-
-      return false;
+    function ( $category ) use ( $articles_term_id ) {
+      return $category->slug === 'articles' || ( $articles_term_id && $category->parent === $articles_term_id );
     }
   ); // check to see if any of the categories returned match the articles slug
 

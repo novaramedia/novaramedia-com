@@ -23,6 +23,10 @@ function get_audio_categories_metabox_array() {
   $return = array();
   $return['none'] = 'None';
 
+  if ( is_wp_error( $terms ) || empty( $terms ) ) {
+    return $return;
+  }
+
   foreach ( $terms as $term ) {
     $return[ $term->slug ] = $term->name; // created slug indexed array of categories names
   }
@@ -42,6 +46,10 @@ function get_all_theme_sections_array() {
 
   $return = array();
   $return['none'] = 'None';
+
+  if ( is_wp_error( $terms ) || empty( $terms ) ) {
+    return $return;
+  }
 
   foreach ( $terms as $term ) {
     $return[ $term->term_id ] = $term->name;
