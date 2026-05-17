@@ -23,9 +23,9 @@ if ( ! empty( $meta['bitly_url'] ) ) {
       <div id="single-article-support-box">
       <?php
       if ( $support_box_override_text ) {
-        echo $support_box_override_text;
+        echo wp_kses_post( $support_box_override_text );
       } else {
-        echo $articles_support_box_text;
+        echo wp_kses_post( $articles_support_box_text );
       }
       ?>
       </div>
