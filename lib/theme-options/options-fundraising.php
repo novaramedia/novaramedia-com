@@ -43,7 +43,7 @@ function nm_register_fundraising_options_metabox() {
         array(
             'name' => 'Support section',
             'desc' => 'This is the common element with the form to start the donate process',
-            'id'   => $prefix . 'fundraising_settings_support_section_title',
+            'id'   => $prefix . 'fundraising_settings_support_section_separator',
             'type' => 'title',
         )
     );
