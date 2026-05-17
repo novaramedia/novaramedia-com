@@ -29,10 +29,10 @@
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
-      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet video'); ?></li>
-      <li><?php render_facebook_share_link($share_url, 'Share this video on Facebook'); ?></li>
-      <li><?php render_email_share_link($share_url, $post->post_title, 'Email this video');?></li>
-      <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+      <li><?php render_share_link( 'twitter', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Tweet video' ) ); ?></li>
+      <li><?php render_share_link( 'facebook', $share_url, array( 'link_text' => 'Share this video on Facebook' ) ); ?></li>
+      <li><?php render_share_link( 'email', $share_url, array( 'subject' => $post->post_title, 'link_text' => 'Email this video' ) ); ?></li>
+      <li><?php render_share_link( 'reddit', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Post to Reddit' ) ); ?></li>
     </ul>
   </div>
 </div>

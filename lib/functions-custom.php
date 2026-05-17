@@ -147,43 +147,6 @@ function nm_serial_podcast_redirect() {
 add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 
 /**
- * Check for apology notice and display it if it is in the future
- * This function will check if the apology notice is in the future and display it if it is
- * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
- * But can be adapted for future use
- *
- * TODO: Deprecate and remove this apology_notice functionality
- * This is a temporary solution that should be removed. The hardcoded date logic
- * (8 weeks from Sept 22, 2024) means this feature has limited lifespan. Consider
- * removing this function and all its usages once the notice period expires.
- * Used in: partials/front-page/above-the-fold/latest-articles.php
- *          partials/front-page/products-bar.php
- *
- * @return array/Boolean Array of apology post or false if no apology post
- * @since 4.1.1
- */
-function check_for_apology_notice() {
-  $m = new \Moment\Moment( 1727035200 ); // Sun, 22 Sept 20:00:00 GMT
-  $m->addWeeks( 8 ); // Time for notice to show
-  $moment_from_vo = $m->fromNow();
-
-  if ( $moment_from_vo->getDirection() === 'future' ) {
-    $apology_post = get_posts(
-      array(
-        'name'      => 'gary-and-jack-lubner-apology',
-        'post_type' => 'notice',
-      )
-    );
-    if ( $apology_post ) {
-      return $apology_post;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-}
-/**
  * Get the latest News article IDs.
  * Queries only the 'news' category, excluding the featured posts if set.
  * Always returns an array — empty if there are no matching posts — so callers
@@ -513,41 +476,6 @@ function nm_is_article( $post_id = null ) {
     $categories,
     function ( $category ) use ( $articles_term_id ) {
       return $category->slug === 'articles' || ( $articles_term_id && $category->parent === $articles_term_id );
-    }
-  ); // check to see if any of the categories returned match the articles slug
-
-  if ( count( $found_in_categories ) > 0 ) {
-    return true; // if articles slug was found return true
-  }
-
-  return false;
-}
-
-/**
- * @deprecated 4.0.0 Replaced by nm_is_article()
- * @see nm_is_article()
- *
- * Answer the question is this a single post in the articles category?
- *
- * @return Boolean
- */
-function nm_is_single_article() {
-  if ( ! is_single() ) { // if not single return straight away
-    return false;
-  }
-
-  global $post;
-
-  $categories = get_the_terms( $post->ID, 'category' ); // get the categories for the post
-
-  if ( ! $categories ) {
-    return false;
-  }
-
-  $found_in_categories = array_filter(
-    $categories,
-    function ( $category ) {
-      return $category->slug === 'articles';
     }
   ); // check to see if any of the categories returned match the articles slug
 
