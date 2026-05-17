@@ -24,28 +24,22 @@ export class EmbedConsent {
   }
 
   hydrateGate(gate) {
-    const encoded = gate.getAttribute('data-embed-html');
-    if (!encoded) {
+    const template = gate.querySelector('template.embed-consent-gate__template');
+    if (!template) {
       return;
     }
-    // Content is server-generated WordPress oEmbed HTML, base64-encoded at render time.
-    // We parse it via DOMParser to extract and re-execute script elements (required for
-    // Twitter/X widget.js which won't run via innerHTML assignment in modern browsers).
-    // Trust boundary: data-embed-html is only ever written by PHP (nm_consent_gate_wrap),
-    // never from user input — the lgtm suppression below is intentional.
-    const html = atob(encoded);
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html'); // lgtm[js/xss-through-dom]
 
-    // Scripts parsed via DOMParser don't auto-execute when inserted — recreate them
-    doc.body.querySelectorAll('script').forEach(oldScript => {
+    // Clone the inert template content (already browser-parsed, no string→HTML step).
+    // Scripts inside <template> don't auto-execute when cloned — recreate them as live elements.
+    const frag = template.content.cloneNode(true);
+    frag.querySelectorAll('script').forEach(oldScript => {
       const newScript = document.createElement('script');
       Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
       newScript.textContent = oldScript.textContent;
       oldScript.replaceWith(newScript);
     });
 
-    gate.replaceWith(...Array.from(doc.body.childNodes));
+    gate.replaceWith(frag);
   }
 
   handleAccept() {

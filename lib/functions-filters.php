@@ -126,12 +126,15 @@ function nm_consent_gate_wrap( $html, $platform ) {
     return $html;
   }
 
-  $encoded      = base64_encode( $html );
   $platform_esc = esc_html( $platform );
   $privacy_url  = esc_url( get_privacy_policy_url() );
 
+  // Embed HTML is placed inside <template> — an inert element whose content is
+  // browser-parsed but never rendered or executed until explicitly cloned by JS.
+  // No base64 encoding needed; scripts inside <template> do not run.
   return sprintf(
-    '<div class="embed-consent-gate" data-embed-html="%s">
+    '<div class="embed-consent-gate">
+      <template class="embed-consent-gate__template">%s</template>
       <div class="embed-consent-gate__placeholder">
         <div class="embed-consent-gate__content">
           <p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p>
@@ -140,7 +143,7 @@ function nm_consent_gate_wrap( $html, $platform ) {
         </div>
       </div>
     </div>',
-    esc_attr( $encoded ),
+    $html,
     $platform_esc,
     $platform_esc,
     $privacy_url
