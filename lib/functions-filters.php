@@ -154,7 +154,9 @@ function nm_consent_gate_wrap( $html, $platform ) {
 }
 
 /**
- * Returns true for YouTube/nocookie embeds which are already privacy-safe.
+ * Returns true for YouTube embeds (youtube.com/embed or youtube-nocookie.com).
+ * These are exempt from the consent gate because callers swap them to the
+ * privacy-enhanced youtube-nocookie.com URL before displaying.
  *
  * @param string $html Embed HTML.
  * @return bool
@@ -213,6 +215,10 @@ function nm_html_has_iframe_or_script( $html ) {
  * @return string Modified HTML with wrapper classes and privacy-enhanced URLs.
  */
 function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
+  if ( is_admin() ) {
+    return $html;
+  }
+
   if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
     // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
     $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
