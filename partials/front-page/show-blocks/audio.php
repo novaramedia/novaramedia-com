@@ -8,6 +8,7 @@
  * @param string $background_color Background color class.
  * @param string $font_color Font color class.
  */
+if ( ! function_exists( 'render_show' ) ) {
 function render_show( $slug, $description, $logo_url = null, $background_color = 'black', $font_color = 'white' ) {
   $category = get_term_by( 'slug', $slug, 'category' );
 
@@ -123,6 +124,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
     </div>
     <?php
   }
+}
 }
 ?>
 <section class="front-page__audio-products container mt-4 mb-4">
