@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; inline-only `wp_kses` (strips block tags and anchors where nesting would be invalid) for standfirst, quote copy, and support box content; `rel="noopener noreferrer"` on all `target="_blank"` external links
+
 ### Added
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend

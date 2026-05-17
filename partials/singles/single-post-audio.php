@@ -40,7 +40,7 @@
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
+      <li><a href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
         echo '<li><a href="' . esc_url( $meta['_cmb_dl_mp3'][0] ) . '">Download mp3</a></li>';

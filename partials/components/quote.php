@@ -5,7 +5,7 @@
   $image_id = !empty($args['image_id']) ? $args['image_id'] : false;
 ?>
 <div class="component-quote">
-  <h3 class="font-condensed font-size-13 font-weight-bold"><?php echo wp_kses_post( $copy ); ?></h3>
+  <h3 class="font-condensed font-size-13 font-weight-bold"><?php echo wp_kses( $copy, array( 'a' => array( 'href' => array(), 'title' => array(), 'rel' => array(), 'target' => array() ), 'em' => array(), 'strong' => array(), 'span' => array( 'class' => array() ) ) ); ?></h3>
   <h5 class="font-size-11 mt-3"><?php echo esc_html( $attribution ); ?></h5>
   <?php
     if ($image_id) {

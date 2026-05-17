@@ -6,7 +6,7 @@
     <h1 id="single-articles-title" class="font-size-15 font-weight-bold mb-3" data-testid="post-title"><?php the_title(); ?></h1>
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo wp_kses_post( $meta['_cmb_standfirst'][0] ); ?></h2>
+    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo wp_kses( $meta['_cmb_standfirst'][0], array( 'a' => array( 'href' => array(), 'title' => array(), 'rel' => array(), 'target' => array() ), 'em' => array(), 'strong' => array(), 'span' => array( 'class' => array() ) ) ); ?></h2>
     <?php
       }
     ?>

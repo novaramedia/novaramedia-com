@@ -44,14 +44,14 @@ if ( $timestamp ) {
       if ( ! empty( $venue_google_maps_link ) ) {
         $venue_link = $venue_google_maps_link;
         ?>
-          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow noopener noreferrer">
             <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo esc_html( $venue_name ); ?></h3>
           </a>
             <?php
       } elseif ( ! empty( $venue_postcode ) ) {
         $venue_link = 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
         ?>
-          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow noopener noreferrer">
             <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo esc_html( $venue_name ); ?></h3>
           </a>
             <?php
