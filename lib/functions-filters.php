@@ -114,6 +114,86 @@ function nm_category_id_class( $classes ) {
 add_filter( 'body_class', 'nm_category_id_class' );
 
 /**
+ * Wraps embed HTML in a consent gate placeholder.
+ * Returns raw HTML in RSS feeds so feed readers get working embeds.
+ *
+ * @param string $html     The embed HTML to gate.
+ * @param string $platform Human-readable platform name shown in the placeholder.
+ * @return string Consent gate wrapper HTML, or raw $html in feeds.
+ */
+function nm_consent_gate_wrap( $html, $platform ) {
+  if ( is_feed() ) {
+    return $html;
+  }
+
+  $encoded      = base64_encode( $html );
+  $platform_esc = esc_html( $platform );
+  $privacy_url  = esc_url( get_privacy_policy_url() );
+
+  return sprintf(
+    '<div class="embed-consent-gate" data-embed-html="%s">
+      <div class="embed-consent-gate__placeholder">
+        <div class="embed-consent-gate__content">
+          <p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p>
+          <button class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>
+          <a href="%s" class="embed-consent-gate__privacy-link font-size-8">Privacy policy</a>
+        </div>
+      </div>
+    </div>',
+    esc_attr( $encoded ),
+    $platform_esc,
+    $platform_esc,
+    $privacy_url
+  );
+}
+
+/**
+ * Returns true for YouTube/nocookie embeds which are already privacy-safe.
+ *
+ * @param string $html Embed HTML.
+ * @return bool
+ */
+function nm_is_embed_exempt( $html ) {
+  return str_contains( $html, 'youtube-nocookie.com' ) || str_contains( $html, 'youtube.com/embed' );
+}
+
+/**
+ * Maps embed HTML to a human-readable platform name.
+ *
+ * @param string $html Embed HTML.
+ * @return string Platform name, or 'Third-party' if unrecognised.
+ */
+function nm_detect_embed_platform( $html ) {
+  $platforms = array(
+    'soundcloud.com' => 'SoundCloud',
+    'twitter.com'    => 'Twitter/X',
+    'x.com'          => 'Twitter/X',
+    'vimeo.com'      => 'Vimeo',
+    'spotify.com'    => 'Spotify',
+    'instagram.com'  => 'Instagram',
+    'facebook.com'   => 'Facebook',
+    'tiktok.com'     => 'TikTok',
+  );
+  foreach ( $platforms as $domain => $name ) {
+    if ( str_contains( $html, $domain ) ) {
+      return $name;
+    }
+  }
+  return 'Third-party';
+}
+
+/**
+ * Returns true if HTML contains an iframe or script tag.
+ * Used to avoid gating plain-text oEmbed responses (e.g. link cards).
+ *
+ * @param string $html Embed HTML.
+ * @return bool
+ */
+function nm_html_has_iframe_or_script( $html ) {
+  return str_contains( $html, '<iframe' ) || str_contains( $html, '<script' );
+}
+
+/**
  * Add wrapper classes to oEmbed elements and use privacy-enhanced YouTube embeds.
  *
  * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
@@ -134,7 +214,12 @@ function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
   }
 
   if ( str_contains( $url, 'vimeo.com/' ) ) {
-    return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+    $wrapped = '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+    return nm_consent_gate_wrap( $wrapped, 'Vimeo' );
+  }
+
+  if ( nm_html_has_iframe_or_script( $html ) ) {
+    return nm_consent_gate_wrap( $html, nm_detect_embed_platform( $html ) );
   }
 
   return $html;
@@ -266,3 +351,39 @@ function nm_add_caption_class( $block_content, $block ) {
   return $block_content;
 }
 add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
+
+/**
+ * Gate block editor embeds (core/embed blocks) behind the consent placeholder.
+ * Runs at priority 5, before nm_add_caption_class at priority 10.
+ * YouTube blocks get the nocookie switch applied but are not gated.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @param array  $block         Block data including name and attributes.
+ * @return string Modified block HTML.
+ */
+function nm_consent_gate_block_embeds( $block_content, $block ) {
+  if ( $block['blockName'] !== 'core/embed' ) {
+    return $block_content;
+  }
+  if ( is_admin() || empty( $block_content ) ) {
+    return $block_content;
+  }
+  if ( nm_is_embed_exempt( $block_content ) ) {
+    return str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $block_content );
+  }
+
+  $provider_slug = $block['attrs']['providerNameSlug'] ?? '';
+  $platform_map  = array(
+    'soundcloud' => 'SoundCloud',
+    'twitter'    => 'Twitter/X',
+    'vimeo'      => 'Vimeo',
+    'spotify'    => 'Spotify',
+    'instagram'  => 'Instagram',
+    'facebook'   => 'Facebook',
+    'tiktok'     => 'TikTok',
+  );
+  $platform = $platform_map[ $provider_slug ] ?? nm_detect_embed_platform( $block_content );
+
+  return nm_consent_gate_wrap( $block_content, $platform );
+}
+add_filter( 'render_block', 'nm_consent_gate_block_embeds', 5, 2 );
