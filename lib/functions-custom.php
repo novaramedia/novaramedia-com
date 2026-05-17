@@ -59,7 +59,7 @@ function nm_get_post_authors( $post_id, $format = 'text' ) {
       }
     }
 
-    return $legacy_author;
+    return esc_html( $legacy_author );
   }
 
   // Return false if no authors found

@@ -397,12 +397,12 @@ function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = fals
 
   $category_link = get_category_link( $sub_category->term_id );
 
-  echo '<a href="' . $category_link . '" class="ui-tag-block';
-  echo $block_style_varient ? ' ui-tag-block--' . $block_style_varient : '';
+  echo '<a href="' . esc_url( $category_link ) . '" class="ui-tag-block';
+  echo $block_style_varient ? ' ui-tag-block--' . esc_attr( $block_style_varient ) : '';
   echo '">';
 
   if ( $show_text ) {
-    echo '<span class="ui-tag">' . $sub_category->name . '</span>';
+    echo '<span class="ui-tag">' . esc_html( $sub_category->name ) . '</span>';
   }
 
   if ( $show_av_icons ) {
@@ -460,7 +460,7 @@ function render_standfirst( $post_id = null ) {
   $meta = get_post_meta( $post_id );
 
   if ( isset( $meta['_cmb_standfirst'] ) && ! empty( $meta['_cmb_standfirst'] ) ) {
-    echo $meta['_cmb_standfirst'][0];
+    echo wp_kses_post( $meta['_cmb_standfirst'][0] );
   } else {
     return;
   }
@@ -504,7 +504,7 @@ function render_short_description( $post_id = null ) {
   $meta = get_post_meta( $post_id );
 
   if ( isset( $meta['_cmb_short_desc'] ) && $meta['_cmb_short_desc'][0] ) {
-    echo apply_filters( 'the_content', $meta['_cmb_short_desc'][0] );
+    echo wp_kses_post( apply_filters( 'the_content', $meta['_cmb_short_desc'][0] ) );
   } else {
     echo get_the_excerpt( $post_id );
   }
@@ -533,55 +533,42 @@ function render_bylines( $post_id, $is_linked = false ) {
  * @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
  */
 function render_front_page_banner( $key ) {
-  switch ( $key ) {
-    case ( false || '0' ): // if empty or set none
-        break;
-    case ( preg_match( '/^newsletter-signup-/', $key ) ? true : false ): // if key has newsletter signup prefix
-      $newsletter_id = str_replace( 'newsletter-signup-', '', $key );
-      $newsletter = get_post( $newsletter_id );
-
-      if ( $newsletter ) {
-        $meta = get_post_meta( $newsletter->ID );
-
-        $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
-
-        if ( $mailchimp_key ) {
-          get_template_part(
-            'partials/email-signup',
-            null,
-            array(
-              'newsletter_post_id' => $newsletter_id,
-            )
-          );
-        }
-      }
-
-        break;
-    case 'email-the-cortado': // custom logic for email sign ups with variables depreciated 3.9.0
-      get_template_part(
-        'partials/email-signup',
-        null,
-        array(
-          'newsletter' => 'The Cortado',
-          'copy'       => 'Sign up to The Cortado—your weekly shot of political analysis from Ash Sarkar, plus a round up of the week’s content. It’s brewed every Friday morning.',
-        )
-      );
-
-        break;
-    case 'email-the-pick': // depreciated 3.9.0
-      get_template_part(
-        'partials/email-signup',
-        null,
-        array(
-          'newsletter' => 'The Pick',
-          'copy'       => 'Novara Media’s best articles, every week, straight to your inbox.',
-        )
-      );
-
-        break;
-    default: // default behavior to render the template part from path provided
-      get_template_part( $key );
+  if ( ! $key || $key === '0' ) {
+    return;
   }
+
+  if ( str_starts_with( $key, 'newsletter-signup-' ) ) {
+    $newsletter_id = (int) str_replace( 'newsletter-signup-', '', $key );
+    $newsletter    = get_post( $newsletter_id );
+
+    if ( ! $newsletter || $newsletter->post_type !== 'newsletter' ) {
+      return;
+    }
+
+    $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
+
+    if ( $mailchimp_key ) {
+      get_template_part( 'partials/email-signup', null, array( 'newsletter_post_id' => $newsletter->ID ) );
+    }
+
+    return;
+  }
+
+  // Deprecated email-signup variants (3.9.0) — kept for backwards compat with saved options
+  if ( $key === 'email-the-cortado' ) {
+    return;
+  }
+
+  if ( $key === 'email-the-pick' ) {
+    return;
+  }
+
+  // Only allow template parts under partials/ with no path traversal
+  if ( ! str_starts_with( $key, 'partials/' ) || str_contains( $key, '..' ) ) {
+    return;
+  }
+
+  get_template_part( $key );
 }
 /**
  * Renders the title of a post.
@@ -625,7 +612,11 @@ function render_resources_row( $resources ) {
         <?php
         foreach ( $resources as $resource ) {
           if ( ! empty( $resource['title'] ) && ! empty( $resource['link'] ) ) {
-            echo '<li><a target="_black" href="' . $resource['link'] . '">' . $resource['title'] . '</a><li>';
+            printf(
+              '<li><a target="_blank" rel="noopener noreferrer" href="%s">%s</a></li>',
+              esc_url( $resource['link'] ),
+              esc_html( $resource['title'] )
+            );
           }
         }
         ?>
@@ -636,33 +627,47 @@ function render_resources_row( $resources ) {
 }
 
 /**
+ * Shared share link renderer. Fixes tabnabbing (rel="noopener noreferrer") and escapes output.
+ *
+ * @param string $platform CSS modifier suffix (twitter, facebook, email, reddit).
+ * @param string $href     Full share URL.
+ * @param string $link_text Link label.
+ */
+function nm_render_share_link( string $platform, string $href, string $link_text ): void {
+  printf(
+    '<a class="ui-action-link ui-action-link--small share-action-%s" href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+    esc_attr( $platform ),
+    esc_url( $href ),
+    esc_html( $link_text )
+  );
+}
+
+/**
  * Renders a Twitter share link.
  *
  * @param string $url The URL to be shared.
  * @param string|null $title The title of the tweet. Default is null.
  * @param string $link_text The text to be displayed for the link. Default is 'Tweet'.
  * @param string|null $hashtag The hashtag to be included in the tweet. Default is null.
- *
- * @return void
  */
 function render_tweet_link( $url, $title = null, $link_text = 'Tweet', $hashtag = null ) {
   if ( empty( $url ) ) {
     return;
   }
 
-  $twitter_url = 'https://twitter.com/intent/tweet?via=novaramedia';
+  $href = 'https://twitter.com/intent/tweet?via=novaramedia';
 
   if ( $hashtag ) {
-    $twitter_url .= '&hashtags=' . $hashtag;
+    $href .= '&hashtags=' . rawurlencode( $hashtag );
   }
 
   if ( $title ) {
-    $twitter_url .= '&text=' . $title;
+    $href .= '&text=' . rawurlencode( $title );
   }
 
-  $twitter_url .= '&url=' . rawurlencode( $url );
+  $href .= '&url=' . rawurlencode( $url );
 
-  echo '<a class="ui-action-link ui-action-link--small share-action-twitter" href="' . $twitter_url . '" target="_blank">' . $link_text . '</a>';
+  nm_render_share_link( 'twitter', $href, $link_text );
 }
 
 /**
@@ -670,19 +675,15 @@ function render_tweet_link( $url, $title = null, $link_text = 'Tweet', $hashtag 
  *
  * @param string $url The URL to be shared.
  * @param string $link_text The text to be displayed for the link. Default is 'Facebook share'.
- *
- * @return void
  */
 function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
   if ( empty( $url ) ) {
     return;
   }
 
-  $facebook_url = 'https://www.facebook.com/sharer/sharer.php?';
+  $href = 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $url );
 
-  $facebook_url .= '&u=' . rawurlencode( $url );
-
-  echo '<a class="ui-action-link ui-action-link--small share-action-facebook" href="' . $facebook_url . '" target="_blank">' . $link_text . '</a>';
+  nm_render_share_link( 'facebook', $href, $link_text );
 }
 
 /**
@@ -691,17 +692,15 @@ function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
  * @param string $url The URL to be shared.
  * @param string $subject The subject of the email. Default is empty.
  * @param string $link_text The text to be displayed for the link. Default is 'Email'.
- *
- * @return void
  */
 function render_email_share_link( $url, $subject = '', $link_text = 'Email' ) {
   if ( empty( $url ) ) {
     return;
   }
 
-  $mailto_scheme = 'mailto:?subject=' . rawurlencode( $subject ) . '&body=' . rawurlencode( $url );
+  $href = 'mailto:?subject=' . rawurlencode( $subject ) . '&body=' . rawurlencode( $url );
 
-  echo '<a class="ui-action-link ui-action-link--small share-action-email" href="' . $mailto_scheme . '" target="_blank">' . $link_text . '</a>';
+  nm_render_share_link( 'email', $href, $link_text );
 }
 
 /**
@@ -710,23 +709,19 @@ function render_email_share_link( $url, $subject = '', $link_text = 'Email' ) {
  * @param string $url The URL to be shared.
  * @param string|null $title The title of the Reddit post. Default is null.
  * @param string $link_text The text to be displayed for the link. Default is 'Post to Reddit'.
- *
- * @return void
  */
 function render_reddit_share_link( $url, $title = null, $link_text = 'Post to Reddit' ) {
   if ( empty( $url ) ) {
     return;
   }
 
-  $reddit_url = 'http://www.reddit.com/submit?';
-
-  $reddit_url .= '&url=' . rawurlencode( $url );
+  $href = 'https://www.reddit.com/submit?url=' . rawurlencode( $url );
 
   if ( $title ) {
-    $reddit_url .= '&title=' . rawurlencode( $title );
+    $href .= '&title=' . rawurlencode( $title );
   }
 
-  echo '<a class="ui-action-link ui-action-link--small share-action-reddit" href="' . $reddit_url . '" target="_blank">' . $link_text . '</a>';
+  nm_render_share_link( 'reddit', $href, $link_text );
 }
 
 /**
@@ -742,11 +737,11 @@ function render_about_group_field( $data ) {
   foreach ( $data as $person ) {
     ?>
     <div class="mb-4">
-      <h6 class="font-size-8"><?php echo $person['title']; ?></h6>
+      <h6 class="font-size-8"><?php echo esc_html( $person['title'] ); ?></h6>
       <?php
       foreach ( $person['name'] as $name ) {
         ?>
-        <div class="about-page__person"><?php echo $name; ?></div>
+        <div class="about-page__person"><?php echo esc_html( $name ); ?></div>
         <?php
       }
       ?>
