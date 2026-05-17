@@ -77,7 +77,7 @@
       if ( ! empty( $meta['_cmb_is_resonance'] ) && $meta['_cmb_is_resonance'][0] ) {
         ?>
         <div class="font-mono font-size-8 mt-1">
-        	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
+        	<a target="_blank" rel="noopener noreferrer" href="https://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
         }

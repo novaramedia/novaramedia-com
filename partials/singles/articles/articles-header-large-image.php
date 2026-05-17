@@ -12,7 +12,7 @@
   <div class="grid-item is-s-24 offset-s-0 is-m-20 offset-m-2 is-l-16 offset-l-4 is-xl-12 offset-xl-6 is-xxl-12 offset-xxl-6">
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo wp_kses( $meta['_cmb_standfirst'][0], array( 'a' => array( 'href' => array(), 'title' => array(), 'rel' => array(), 'target' => array() ), 'em' => array(), 'strong' => array(), 'span' => array( 'class' => array() ) ) ); ?></h2>
+    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo esc_html( $meta['_cmb_standfirst'][0] ); ?></h2>
     <?php
       }
     ?>
