@@ -397,9 +397,11 @@ function render_post_ui_tags( $post_id, $show_text = true, $show_av_icons = fals
 
   $category_link = get_category_link( $sub_category->term_id );
 
-  echo '<a href="' . esc_url( $category_link ) . '" class="ui-tag-block';
-  echo $block_style_varient ? ' ui-tag-block--' . esc_attr( $block_style_varient ) : '';
-  echo '">';
+  $tag_class = 'ui-tag-block';
+  if ( $block_style_varient ) {
+    $tag_class .= ' ui-tag-block--' . $block_style_varient;
+  }
+  echo '<a href="' . esc_url( $category_link ) . '" class="' . esc_attr( $tag_class ) . '">';
 
   if ( $show_text ) {
     echo '<span class="ui-tag">' . esc_html( $sub_category->name ) . '</span>';
@@ -523,8 +525,8 @@ function render_bylines( $post_id, $is_linked = false ) {
   $format = $is_linked ? 'html' : 'text';
   $authors = nm_get_post_authors( $post_id, $format );
 
-  // Display fallback if no authors found
-  echo $authors !== false ? $authors : 'Novara Reporters';
+  // Display fallback if no authors found. Text format returns raw string — escape here.
+  echo $authors !== false ? esc_html( $authors ) : 'Novara Reporters';
 }
 
 /**
@@ -554,12 +556,8 @@ function render_front_page_banner( $key ) {
     return;
   }
 
-  // Deprecated email-signup variants (3.9.0) — kept for backwards compat with saved options
-  if ( $key === 'email-the-cortado' ) {
-    return;
-  }
-
-  if ( $key === 'email-the-pick' ) {
+  // Retired option values (deprecated in 3.9.0) — silently no-op; these slugs are no longer supported
+  if ( $key === 'email-the-cortado' || $key === 'email-the-pick' ) {
     return;
   }
 
@@ -627,13 +625,66 @@ function render_resources_row( $resources ) {
 }
 
 /**
- * Shared share link renderer. Fixes tabnabbing (rel="noopener noreferrer") and escapes output.
+ * Renders a social share link for a given platform.
  *
- * @param string $platform CSS modifier suffix (twitter, facebook, email, reddit).
- * @param string $href     Full share URL.
- * @param string $link_text Link label.
+ * Builds the platform-specific share URL and outputs the anchor with
+ * rel="noopener noreferrer" and escaped attributes.
+ *
+ * @param string $platform  One of: twitter, facebook, email, reddit.
+ * @param string $url       The URL to share.
+ * @param array  $args {
+ *     Optional. Platform-specific arguments.
+ *     @type string $title     Tweet text or Reddit post title.
+ *     @type string $hashtag   Twitter hashtag (without #).
+ *     @type string $subject   Email subject line.
+ *     @type string $link_text Anchor label. Falls back to platform default.
+ * }
  */
-function nm_render_share_link( string $platform, string $href, string $link_text ): void {
+function render_share_link( string $platform, string $url, array $args = [] ): void {
+  if ( empty( $url ) ) {
+    return;
+  }
+
+  $title     = $args['title'] ?? null;
+  $hashtag   = $args['hashtag'] ?? null;
+  $subject   = $args['subject'] ?? '';
+  $link_text = $args['link_text'] ?? null;
+
+  switch ( $platform ) {
+    case 'twitter':
+      $href = 'https://twitter.com/intent/tweet?via=novaramedia';
+      if ( $hashtag ) {
+        $href .= '&hashtags=' . rawurlencode( $hashtag );
+      }
+      if ( $title ) {
+        $href .= '&text=' . rawurlencode( $title );
+      }
+      $href .= '&url=' . rawurlencode( $url );
+      $link_text = $link_text ?? 'Tweet';
+      break;
+
+    case 'facebook':
+      $href      = 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $url );
+      $link_text = $link_text ?? 'Facebook share';
+      break;
+
+    case 'email':
+      $href      = 'mailto:?subject=' . rawurlencode( $subject ) . '&body=' . rawurlencode( $url );
+      $link_text = $link_text ?? 'Email';
+      break;
+
+    case 'reddit':
+      $href = 'https://www.reddit.com/submit?url=' . rawurlencode( $url );
+      if ( $title ) {
+        $href .= '&title=' . rawurlencode( $title );
+      }
+      $link_text = $link_text ?? 'Post to Reddit';
+      break;
+
+    default:
+      return;
+  }
+
   printf(
     '<a class="ui-action-link ui-action-link--small share-action-%s" href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
     esc_attr( $platform ),
@@ -642,86 +693,24 @@ function nm_render_share_link( string $platform, string $href, string $link_text
   );
 }
 
-/**
- * Renders a Twitter share link.
- *
- * @param string $url The URL to be shared.
- * @param string|null $title The title of the tweet. Default is null.
- * @param string $link_text The text to be displayed for the link. Default is 'Tweet'.
- * @param string|null $hashtag The hashtag to be included in the tweet. Default is null.
- */
+/** @deprecated Use render_share_link( 'twitter', $url, [ 'title' => $title, 'link_text' => $link_text, 'hashtag' => $hashtag ] ) */
 function render_tweet_link( $url, $title = null, $link_text = 'Tweet', $hashtag = null ) {
-  if ( empty( $url ) ) {
-    return;
-  }
-
-  $href = 'https://twitter.com/intent/tweet?via=novaramedia';
-
-  if ( $hashtag ) {
-    $href .= '&hashtags=' . rawurlencode( $hashtag );
-  }
-
-  if ( $title ) {
-    $href .= '&text=' . rawurlencode( $title );
-  }
-
-  $href .= '&url=' . rawurlencode( $url );
-
-  nm_render_share_link( 'twitter', $href, $link_text );
+  render_share_link( 'twitter', $url, compact( 'title', 'link_text', 'hashtag' ) );
 }
 
-/**
- * Renders a Facebook share link.
- *
- * @param string $url The URL to be shared.
- * @param string $link_text The text to be displayed for the link. Default is 'Facebook share'.
- */
+/** @deprecated Use render_share_link( 'facebook', $url, [ 'link_text' => $link_text ] ) */
 function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
-  if ( empty( $url ) ) {
-    return;
-  }
-
-  $href = 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $url );
-
-  nm_render_share_link( 'facebook', $href, $link_text );
+  render_share_link( 'facebook', $url, compact( 'link_text' ) );
 }
 
-/**
- * Renders an email share link.
- *
- * @param string $url The URL to be shared.
- * @param string $subject The subject of the email. Default is empty.
- * @param string $link_text The text to be displayed for the link. Default is 'Email'.
- */
+/** @deprecated Use render_share_link( 'email', $url, [ 'subject' => $subject, 'link_text' => $link_text ] ) */
 function render_email_share_link( $url, $subject = '', $link_text = 'Email' ) {
-  if ( empty( $url ) ) {
-    return;
-  }
-
-  $href = 'mailto:?subject=' . rawurlencode( $subject ) . '&body=' . rawurlencode( $url );
-
-  nm_render_share_link( 'email', $href, $link_text );
+  render_share_link( 'email', $url, compact( 'subject', 'link_text' ) );
 }
 
-/**
- * Renders a Reddit share link.
- *
- * @param string $url The URL to be shared.
- * @param string|null $title The title of the Reddit post. Default is null.
- * @param string $link_text The text to be displayed for the link. Default is 'Post to Reddit'.
- */
+/** @deprecated Use render_share_link( 'reddit', $url, [ 'title' => $title, 'link_text' => $link_text ] ) */
 function render_reddit_share_link( $url, $title = null, $link_text = 'Post to Reddit' ) {
-  if ( empty( $url ) ) {
-    return;
-  }
-
-  $href = 'https://www.reddit.com/submit?url=' . rawurlencode( $url );
-
-  if ( $title ) {
-    $href .= '&title=' . rawurlencode( $title );
-  }
-
-  nm_render_share_link( 'reddit', $href, $link_text );
+  render_share_link( 'reddit', $url, compact( 'title', 'link_text' ) );
 }
 
 /**
