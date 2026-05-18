@@ -186,7 +186,7 @@ function check_for_apology_notice() {
 /**
  * Get the latest News article IDs.
  * Queries the 'news' category first, excluding the featured posts if set.
- * If News has no published posts, falls back to recent posts from the
+ * If the News query returns no posts, falls back to recent posts from the
  * 'articles' category so the latest-articles column still fills on
  * low-content environments (staging, fresh installs).
  * Always returns an array — empty only when both the News query and the
@@ -199,9 +199,9 @@ function check_for_apology_notice() {
 function get_latest_news_ids( $featured_posts_ids = false ) {
   $exclusion_args = array();
 
-  if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    // Filter out non-numeric values to ensure only valid post IDs are excluded
-    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+  if ( is_array( $featured_posts_ids ) ) {
+    // Normalise to positive integer IDs — WP_Query post__not_in expects those.
+    $valid_ids = array_filter( array_map( 'absint', $featured_posts_ids ) );
     if ( ! empty( $valid_ids ) ) {
       $exclusion_args = array( 'post__not_in' => $valid_ids );
     }
@@ -221,21 +221,21 @@ function get_latest_news_ids( $featured_posts_ids = false ) {
     );
   };
 
-  $recent_articles = new WP_Query( $build_args( 'news' ) );
+  $news_query = new WP_Query( $build_args( 'news' ) );
 
-  if ( $recent_articles->have_posts() ) {
-    return $recent_articles->posts;
+  if ( $news_query->have_posts() ) {
+    return $news_query->posts;
   }
 
   // Fallback: News is empty (e.g. staging or fresh install) — return recent
   // posts from the 'articles' category so the above-the-fold column still fills.
-  $fallback_articles = new WP_Query( $build_args( 'articles' ) );
+  $fallback_query = new WP_Query( $build_args( 'articles' ) );
 
-  if ( ! $fallback_articles->have_posts() ) {
+  if ( ! $fallback_query->have_posts() ) {
     return array();
   }
 
-  return $fallback_articles->posts;
+  return $fallback_query->posts;
 }
 /**
  * Get the featured post ids for the above the fold section
