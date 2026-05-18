@@ -189,7 +189,8 @@ function check_for_apology_notice() {
  * If News has no published posts, falls back to recent posts from the
  * 'articles' category so the latest-articles column still fills on
  * low-content environments (staging, fresh installs).
- * Always returns an array — empty only when no posts exist at all.
+ * Always returns an array — empty only when both the News query and the
+ * 'articles' fallback yield no posts after exclusions.
  *
  * @param array $featured_posts_ids Array of featured post ids to exclude.
  *
