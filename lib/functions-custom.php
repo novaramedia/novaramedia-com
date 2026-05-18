@@ -192,7 +192,7 @@ function check_for_apology_notice() {
  * Always returns an array — empty only when both the News query and the
  * 'articles' fallback yield no posts after exclusions.
  *
- * @param array $featured_posts_ids Array of featured post ids to exclude.
+ * @param int[]|false $featured_posts_ids Array of featured post ids to exclude, or false for none.
  *
  * @return int[] Array of latest News (or fallback) post IDs.
  */
