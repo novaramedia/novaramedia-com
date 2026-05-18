@@ -186,8 +186,8 @@ function check_for_apology_notice() {
 /**
  * Get the latest News article IDs.
  * Queries the 'news' category first, excluding the featured posts if set.
- * If News has no published posts, falls back to recent posts from
- * 'articles,video,audio' so the latest-articles column still fills on
+ * If News has no published posts, falls back to recent posts from the
+ * 'articles' category so the latest-articles column still fills on
  * low-content environments (staging, fresh installs).
  * Always returns an array — empty only when no posts exist at all.
  *
@@ -206,35 +206,29 @@ function get_latest_news_ids( $featured_posts_ids = false ) {
     }
   }
 
-  $query_args = array_merge(
-    array(
-      'category_name'  => 'news',
-      'posts_per_page' => 7,
-      'fields'         => 'ids',
-      'post_status'    => 'publish',
-    ),
-    $exclusion_args
-  );
+  // Builds query args for a category, sharing the common limit/fields/status
+  // and the featured-post exclusion.
+  $build_args = function( $category_name ) use ( $exclusion_args ) {
+    return array_merge(
+      array(
+        'category_name'  => $category_name,
+        'posts_per_page' => 7,
+        'fields'         => 'ids',
+        'post_status'    => 'publish',
+      ),
+      $exclusion_args
+    );
+  };
 
-  $recent_articles = new WP_Query( $query_args );
+  $recent_articles = new WP_Query( $build_args( 'news' ) );
 
   if ( $recent_articles->have_posts() ) {
     return $recent_articles->posts;
   }
 
   // Fallback: News is empty (e.g. staging or fresh install) — return recent
-  // posts from articles/video/audio so the above-the-fold column still fills.
-  $fallback_args = array_merge(
-    array(
-      'category_name'  => 'articles,video,audio',
-      'posts_per_page' => 7,
-      'fields'         => 'ids',
-      'post_status'    => 'publish',
-    ),
-    $exclusion_args
-  );
-
-  $fallback_articles = new WP_Query( $fallback_args );
+  // posts from the 'articles' category so the above-the-fold column still fills.
+  $fallback_articles = new WP_Query( $build_args( 'articles' ) );
 
   if ( ! $fallback_articles->have_posts() ) {
     return array();
