@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
+- Empty News category no longer breaks front page above-the-fold render
 
 ## [4.5.3] - 2026-04-08
 
