@@ -78,6 +78,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
+<<<<<<< copilot/fix-empty-news-category-render
+- Empty News category no longer breaks front page above-the-fold render
+=======
 - YouTube embeds failing to load in Safari
 - YouTube embed iframes missing accessible `title` attribute
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
@@ -85,6 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove PayPal donation link section on Support page
+>>>>>>> development
 
 ## [4.5.3] - 2026-04-08
 

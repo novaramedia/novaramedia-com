@@ -185,37 +185,57 @@ function check_for_apology_notice() {
 }
 /**
  * Get the latest News article IDs.
- * Queries only the 'news' category, excluding the featured posts if set.
- * Always returns an array — empty if there are no matching posts — so callers
- * can safely pass the result to array_merge() and similar array functions.
+ * Queries the 'news' category first, excluding the featured posts if set.
+ * If the News query returns no posts, falls back to recent posts from the
+ * 'articles' category so the latest-articles column still fills on
+ * low-content environments (staging, fresh installs).
+ * Always returns an array — empty only when both the News query and the
+ * 'articles' fallback yield no posts after exclusions.
  *
- * @param array $featured_posts_ids Array of featured post ids to exclude.
+ * @param int[]|false $featured_posts_ids Array of featured post ids to exclude, or false for none.
  *
- * @return int[] Array of latest News post IDs (empty if none found).
+ * @return int[] Array of latest News (or fallback) post IDs.
  */
 function get_latest_news_ids( $featured_posts_ids = false ) {
-  $query_args = array(
-      'category_name'  => 'news',
-      'posts_per_page' => 7,
-      'fields'         => 'ids',
-      'post_status'    => 'publish',
-  );
+  $exclusion_args = array();
 
-  if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    // Filter out non-numeric values to ensure only valid post IDs are excluded
-    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+  if ( is_array( $featured_posts_ids ) ) {
+    // Normalise to positive integer IDs — WP_Query post__not_in expects those.
+    $valid_ids = array_filter( array_map( 'absint', $featured_posts_ids ) );
     if ( ! empty( $valid_ids ) ) {
-      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+      $exclusion_args = array( 'post__not_in' => $valid_ids );
     }
   }
 
-  $recent_articles = new WP_Query( $query_args );
+  // Builds query args for a category, sharing the common limit/fields/status
+  // and the featured-post exclusion.
+  $build_args = function( $category_name ) use ( $exclusion_args ) {
+    return array_merge(
+      array(
+        'category_name'  => $category_name,
+        'posts_per_page' => 7,
+        'fields'         => 'ids',
+        'post_status'    => 'publish',
+      ),
+      $exclusion_args
+    );
+  };
 
-  if ( ! $recent_articles->have_posts() ) {
+  $news_query = new WP_Query( $build_args( 'news' ) );
+
+  if ( $news_query->have_posts() ) {
+    return $news_query->posts;
+  }
+
+  // Fallback: News is empty (e.g. staging or fresh install) — return recent
+  // posts from the 'articles' category so the above-the-fold column still fills.
+  $fallback_query = new WP_Query( $build_args( 'articles' ) );
+
+  if ( ! $fallback_query->have_posts() ) {
     return array();
   }
 
-  return $recent_articles->posts;
+  return $fallback_query->posts;
 }
 /**
  * Get the featured post ids for the above the fold section
