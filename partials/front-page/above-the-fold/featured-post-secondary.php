@@ -19,7 +19,7 @@ $is_article = nm_is_article( $featured_post_id );
         $featured_post_id,
         'col12-16to9',
         array(
-          'class'             => 'ui-rounded-image',
+          'class'             => 'ui-rounded-box',
           'data-no-lazysizes' => true,
           'loading'           => 'eager',
         )

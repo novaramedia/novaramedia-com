@@ -18,6 +18,9 @@
     align-items: center
     .grid-item
       min-width: auto
+    .grid-item:last-child
+      flex-shrink: 0
+      white-space: nowrap
   &--active
     opacity: 1
   &--open

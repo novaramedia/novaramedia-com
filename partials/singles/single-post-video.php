@@ -19,7 +19,7 @@
 <div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-3">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('j F Y'); ?></li>
+      <li>Published <?php the_time(NM_DATE_FORMAT_LONG); ?></li>
       <?php
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
@@ -53,7 +53,7 @@
         }
     ?>
       <div class="u-video-embed-container">
-        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true, $autoplay ); ?>
+        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], $autoplay, 'eager', get_the_title() ); ?>
       </div>
     <?php
       } else {
@@ -78,7 +78,7 @@
           </div>
           <a href="<?php the_permalink(); ?>" class="ui-hover">
             <?php render_thumbnail($post->ID, 'col24-16to9', array(
-              'class' => 'ui-rounded-image'
+              'class' => 'ui-rounded-box'
             )); ?>
           </a>
         </div>

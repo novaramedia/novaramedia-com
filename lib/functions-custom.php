@@ -138,7 +138,7 @@ function nm_serial_podcast_redirect() {
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
-    if ( $link && isset( $post->post_name ) ) {
+    if ( ! is_wp_error( $link ) && isset( $post->post_name ) ) {
       wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
@@ -524,15 +524,15 @@ function nm_is_article( $post_id = null ) {
     return false;
   }
 
+  // Resolve articles term ID once outside the closure to avoid N+1 DB calls per category.
+  $articles_term    = get_term_by( 'slug', 'articles', 'category' );
+  $articles_term_id = $articles_term ? $articles_term->term_id : 0;
+
   // check to see if any of the categories returned match the articles slug or have a parent with the articles id
   $found_in_categories = array_filter(
     $categories,
-    function ( $category ) {
-      if ( $category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id ) {
-        return true;
-      }
-
-      return false;
+    function ( $category ) use ( $articles_term_id ) {
+      return $category->slug === 'articles' || ( $articles_term_id && $category->parent === $articles_term_id );
     }
   ); // check to see if any of the categories returned match the articles slug
 
@@ -643,10 +643,8 @@ function only_child_category_filter( $category ) {
 /**
  * Create youtube embed url with consistent parameters
  *
- * Note the option to use the lazysizes for lazyloading the iframe https://github.com/aFarkas/lazysizes
- *
  * @param string $id Youtube video ID.
- * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
  *
  * @return string Valid youtube iframe src url
  */
@@ -658,6 +656,48 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
   }
 
   return $url;
+}
+
+/**
+ * Fuzzy whitelist of contexts where a YouTube embed is likely present.
+ *
+ * Used by header.php to decide between `preconnect` (when we're confident a
+ * YouTube iframe will load) and `dns-prefetch` (everywhere else). False
+ * negatives fall through to dns-prefetch, which is safe — the iframe still
+ * loads, just without an open TLS connection waiting for it.
+ *
+ * @return boolean True if the current request is likely to render a YouTube embed.
+ */
+function nm_known_video_page() {
+  if ( is_singular() ) {
+    $queried = get_queried_object();
+    if ( $queried ) {
+      if ( ! empty( get_post_meta( $queried->ID, '_cmb_utube', true ) ) ) {
+        return true;
+      }
+      if ( ! empty( get_post_meta( $queried->ID, '_nm_support_youtube', true ) ) ) {
+        return true;
+      }
+      // page-how-we-are-funded.php hardcodes a fallback video ID when meta is empty.
+      if ( is_page( 'how-we-are-funded' ) ) {
+        return true;
+      }
+    }
+  }
+
+  if ( is_category() ) {
+    $term       = get_queried_object();
+    $video_term = get_term_by( 'slug', 'video', 'category' );
+    if ( $term && $video_term && ( $term->term_id === $video_term->term_id || cat_is_ancestor_of( $video_term, $term ) ) ) {
+      return true;
+    }
+  }
+
+  if ( is_front_page() ) {
+    return true;
+  }
+
+  return false;
 }
 
 /**

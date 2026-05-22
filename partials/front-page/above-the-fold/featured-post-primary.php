@@ -53,7 +53,7 @@ if ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) {
 if ( $has_embed ) {
   ?>
 <div class="u-video-embed-container background-black">
-  <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true ); ?>
+  <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], false, 'eager', get_the_title() ); ?>
 </div>
   <?php
 } else {
@@ -68,7 +68,7 @@ if ( $has_embed ) {
       $featured_post_id,
       'col24-16to9',
       array(
-        'class'             => 'ui-rounded-image',
+        'class'             => 'ui-rounded-box',
         'data-no-lazysizes' => true,
         'loading'           => 'eager',
         )

@@ -20,7 +20,7 @@
           <a href="<?php echo get_permalink($post_id); ?>">
             <div class="products-bar__item-inner" style="width: 100%;">
               <div class="products-bar__item-image mr-2">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=" alt="Blank image" class="ui-rounded-image" data-no-lazysizes="true" loading="eager">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=" alt="Blank image" class="ui-rounded-box" data-no-lazysizes="true" loading="eager">
               </div>
               <div class="products-bar__item-text font-size-9">
                 <h5 class="font-weight-bold">Correction</h5>
@@ -44,7 +44,7 @@
             <div class="products-bar__item-image mr-2">
               <?php
                 if ($image_id) {
-                  echo wp_get_attachment_image($image_id, 'col4-square', false, array('class' => 'ui-rounded-image', 'data-no-lazysizes' => true, 'loading' => 'eager'));
+                  echo wp_get_attachment_image($image_id, 'col4-square', false, array('class' => 'ui-rounded-box', 'data-no-lazysizes' => true, 'loading' => 'eager'));
                 }
               ?>
             </div>

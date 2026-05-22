@@ -8,6 +8,7 @@
  * @param string $background_color Background color class.
  * @param string $font_color Font color class.
  */
+if ( ! function_exists( 'render_show' ) ) {
 function render_show( $slug, $description, $logo_url = null, $background_color = 'black', $font_color = 'white' ) {
   $category = get_term_by( 'slug', $slug, 'category' );
 
@@ -40,7 +41,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
         $post_id = $latest[0]->ID;
         $meta    = get_post_meta( $post_id );
         ?>
-        <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box">
+        <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box ui-rounded-box--nested">
           <div class="grid-row grid--nested">
             <div class="grid-item is-xxl-10">
               <div class="layout-thumbnail-frame">
@@ -53,7 +54,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
                     $post_id,
                     'col12',
                     array(
-                      'class' => 'ui-rounded-image',
+                      'class' => 'ui-rounded-box',
                     )
                   );
                   ?>
@@ -102,7 +103,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
               <div class="grid-item is-m-24 is-xxl-12 mt-2 mb-2">
                 <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover">
                   <div class="font-size-8 font-weight-bold mb-2">
-                    <?php echo esc_html( get_the_time( 'j F Y', $post_id ) ); ?>
+                    <?php echo esc_html( get_the_time( NM_DATE_FORMAT_LONG, $post_id ) ); ?>
                   </div>
                 </a>
                 <h4 class="font-size-10 font-weight-bold mb-2">
@@ -123,6 +124,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
     </div>
     <?php
   }
+}
 }
 ?>
 <section class="front-page__audio-products container mt-4 mb-4">

@@ -1,7 +1,9 @@
 <?php
   $meta = get_post_meta( $post->ID );
 
-  $layout = ! empty( $meta['_cmb_article_layout'][0] ) ? $meta['_cmb_article_layout'][0] : 'basic';
+  $allowed_layouts = array( 'basic', 'basic-no-image', 'large-image' );
+  $raw_layout      = ! empty( $meta['_cmb_article_layout'][0] ) ? $meta['_cmb_article_layout'][0] : 'basic';
+  $layout          = in_array( $raw_layout, $allowed_layouts, true ) ? $raw_layout : 'basic';
 
   $articles_support_box_text = NM_get_option( 'nm_articles_support_box_text', 'nm_fundraising_options' );
   $support_box_override_text = ! empty( $meta['_cmb_support_box_override'][0] ) ? $meta['_cmb_support_box_override'][0] : false;
@@ -79,8 +81,8 @@ if ( ! empty( $meta['_cmb_sc'][0] ) ) {
         // See docs/BLOCK-RENDERING.md for details and potential optimisation.
         foreach ( $blocks as $block ) {
           $block_name = $block['blockName'] ?? null;
-          if ( $block_name === 'nm-wp/newsletter-signup' ) {
-            // Newsletter block - render without text-copy wrapper
+          if ( in_array( $block_name, array( 'nm-wp/newsletter-signup', 'nm-wp/related-post' ), true ) ) {
+            // Theme blocks with their own layout - render without text-copy wrapper
             echo render_block( $block );
           } else {
             // Other blocks - wrap in text-copy only if not empty

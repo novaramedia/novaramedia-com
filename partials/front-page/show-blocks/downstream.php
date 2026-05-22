@@ -37,7 +37,7 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
                 $post->ID,
                 'col24-16to9',
                 array(
-                  'class' => 'ui-rounded-image',
+                  'class' => 'ui-rounded-box',
                 )
               );
             ?>
@@ -108,7 +108,7 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
                     $post->ID,
                     'col24-16to9',
                     array(
-                      'class' => 'ui-rounded-image',
+                      'class' => 'ui-rounded-box',
                     )
                   );
                 ?>

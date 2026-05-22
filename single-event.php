@@ -47,7 +47,7 @@ if ( have_posts() ) {
       </div>
       <div class="grid-row mb-4">
         <div class="grid-item is-xxl-24 text-align-center">
-          <h3 class="font-size-10 font-weight-bold mb-2"><?php echo $time->format( 'j F Y' ); ?></h3>
+          <h3 class="font-size-10 font-weight-bold mb-2"><?php echo $time->format( NM_DATE_FORMAT_LONG ); ?></h3>
           <h1 class="font-size-15 font-weight-bold text-wrap-balance"><?php the_title(); ?></h1>
         </div>
       </div>
@@ -57,7 +57,7 @@ if ( have_posts() ) {
           ?>
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-4 is-xxl-16">
           <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $youtube_id, true ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
           </div>
         </div>
           <?php
@@ -74,7 +74,7 @@ if ( have_posts() ) {
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8">
           <div class="mb-4">
             <h5 class="font-size-10 font-weight-bold mb-2">Time:</h5>
-            <h3 class="font-size-12 font-weight-bold"><?php echo $time->format( 'j F Y' ); ?></h3>
+            <h3 class="font-size-12 font-weight-bold"><?php echo $time->format( NM_DATE_FORMAT_LONG ); ?></h3>
             <h3 class="font-size-12 font-weight-bold"><?php echo $time->format( 'H:i' ); ?></h3>
           </div>
         <?php

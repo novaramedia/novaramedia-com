@@ -36,6 +36,9 @@ import isNonEmptyString from '../functions/isNonEmptyString.js';
 - `build` - Production build with minification
 - `release` - Automated versioning (don't commit/tag/push during process)
 
+### dist/ commits
+Only commit `dist/` when source files actually changed. Run `npm run build` to verify. Do not commit dist files when only modifying documentation or config.
+
 ### Release Process
 1. Pull `development` branch
 2. Run `release` action
@@ -143,85 +146,28 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 - **Keyboard navigation**: Arrow keys for form controls, focus management
 - **Screen readers**: Proper labeling and state announcements
 
-## Testing and Verification
+## Testing
 
-### Building Code
-Always build the project to verify JavaScript and CSS changes:
-```bash
-npm run dev    # Development build with watch mode (rebuilds on file changes)
-npm run build  # Production build (minified, optimized)
-```
+Run `npm run build` to verify JS/CSS changes compile without errors. See `docs/testing/` for full Cypress testing guide.
 
-### Linting
-- **JavaScript**: ESLint is configured with `eslint:recommended` and Prettier integration
-  - ESLint runs automatically during webpack builds via `eslint-webpack-plugin`
-  - Configuration: `.eslintrc.json`
-  - Supports ES6 modules and browser environment
-- **PHP**: WordPress Coding Standards via PHPCS
-  - Configuration: `phpcs.xml`
-  - Excludes Yoda conditionals and doc comment requirements for small functions
-  - Run manually if phpcs is available: `phpcs`
+## Development Notes
 
-### Manual Verification
-Since this is a WordPress theme without automated tests:
-1. **Build the code** after making changes
-2. **Check webpack output** for errors or warnings
-3. **Review compiled files** in `dist/` directory
-4. **Test in WordPress** if possible, or review the generated HTML/CSS/JS
-5. **Verify accessibility** features if modifying interactive components
+### Stylus
+- Wrap `calc()` values in `unquote()`: `unquote('calc(100vh - var(--header-height))')` — Stylus evaluates arithmetic inside calc otherwise. Quoting only the inside (e.g. `calc('...')`) leaks quotes into CSS output.
+- Import from `nm-stylus-library` before custom styles
+- Grid class order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
 
-### Checking Your Changes
-```bash
-# See what files changed
-git status
+### JavaScript modules
+- Import paths need `.js` extension: `import func from '../functions/func.js'`
+- All modules need `onReady()` and `bind()` methods; import in `main.js`
+- jQuery available globally as `$`/`jQuery`, but prefer ES6 imports
 
-# Review your changes
-git diff
-
-# Check webpack output
-npm run build
-```
-
-**IMPORTANT: Committing Changes**
-- Only commit source files that you intentionally modified (e.g., `.php`, `.js`, `.styl`, `.md` files)
-- **DO NOT** commit `dist/` files unless you made actual source code changes that affect the build output
-- If `dist/` files appear as changed but you only modified documentation or config files, do not commit them
-- Use `git diff dist/` to verify if dist files have actual meaningful changes before committing
-- When in doubt, check if your changes should affect the build output - if not, exclude dist files from your commit
-
-## Common Pitfalls and Troubleshooting
-
-### Stylus Compilation Issues
-- **calc() values**: Use the built-in `unquote()` to prevent Stylus evaluating arithmetic inside calc: `unquote('calc(100vh - var(--header-height))')`. Quoting only the inside of calc (e.g. `calc('...')`) leaks quotes into the CSS output.
-- **Import order**: Make sure to import from `nm-stylus-library` before custom styles
-- **Grid classes**: Always use correct order: `.grid-item`, then breakpoint sizes (xxl→s), then offsets
-
-### JavaScript Module Issues
-- **Import paths**: Use relative paths with `.js` extension: `import func from '../functions/func.js'`
-- **Module loading**: Ensure modules are imported in `main.js` and have proper `onReady()` and `bind()` methods
-- **jQuery**: Available globally as `$` and `jQuery`, but prefer ES6 imports where possible
-
-### Build System
-- **Don't modify**: Webpack configuration without team approval
-- **node_modules**: Never commit this directory (already in .gitignore)
-- **dist directory**: Contains built files. Only commit dist files when you've made actual source code changes (JS, Stylus, etc.) that affect the build output
-- **Avoid committing unchanged dist files**: Building the project for testing purposes should not result in dist file commits unless the build output actually changed
-- **Watch mode**: `npm run dev` enables watch mode which automatically rebuilds on file changes
-
-### WordPress Integration
-- **WP global object**: PHP data is localized via `wp_localize_script` - check `functions.php` for available properties
-- **Template hierarchy**: WordPress looks for most specific template first (e.g., `single-event.php` before `single.php`)
-- **CMB2 fields**: Custom meta boxes are defined in `lib/meta/` - check existing patterns before creating new ones
+### WordPress integration
+- PHP data is localized via `wp_localize_script` — check `functions.php` for available `WP` global properties
+- Template hierarchy resolves most specific first (e.g. `single-event.php` before `single.php`)
+- CMB2 meta boxes defined in `lib/meta/` — check existing patterns before creating new ones
 
 ## Development Workflow
-
-### Making Changes
-
-1. **Start with understanding**: Review related files before making changes
-2. **Follow patterns**: Use existing code as a guide (e.g., look at similar modules or layouts)
-3. **Build frequently**: Run `npm run build` to catch errors early
-4. **Keep changes minimal**: Only modify what's necessary to achieve the goal
-5. **Test the build**: Ensure webpack compiles without errors
 
 ### File Modifications
 
@@ -247,3 +193,39 @@ npm run build
 - Keep commits focused and descriptive
 - Don't commit during release process
 - The `dist/` directory should be committed after building
+
+## Code Review
+
+Flag these in every PR:
+
+- **Changelog missing** — `CHANGELOG.md` must have an entry under `[Unreleased]` (Keep a Changelog format). One entry per meaningful change, not per commit.
+- **PR title format** — must be `<Type>: <Short description>`. Valid types: `Fix`, `Feature`, `Release`, `Refactor`, `Chore`, `Content`, `Docs`.
+- **Debug artifacts** — no `console.log`, `var_dump`, `dd()`, or similar left in production code.
+- **TODO without issue ref** — any TODO comment must reference a GitHub issue: `TODO(#123): ...`
+- **TypeScript `any`** — flag implicit or unjustified `any`. A comment explaining why is acceptable.
+- **New dependency** — flag any new package/import not already in the project. PR description should justify it.
+- **Frontend CSS** — flag custom CSS that duplicates nm-stylus-library utility classes. Use the library.
+- **Pattern deviation** — flag code that diverges from existing patterns in the same file or module without explanation.
+
+Don't suggest architectural changes in review — raise a new issue instead.
+
+## Generating Code from Issues
+
+Before generating:
+
+1. Read the full issue including all comments.
+2. Check for linked issues or PRs — understand prior attempts.
+3. Read the files most likely to be affected before writing anything.
+
+When generating:
+
+- Match existing file structure, naming conventions, and abstractions.
+- Prefer extending existing patterns over introducing new ones.
+- Match the project's stack — check `CLAUDE.md` before assuming TypeScript, PHP, etc.
+- For any frontend work, use nm-stylus-library utility classes.
+- Don't add error handling or validation beyond what the issue describes.
+
+After generating:
+
+- Update `CHANGELOG.md` under `[Unreleased]`.
+- Ensure PR title follows format above.

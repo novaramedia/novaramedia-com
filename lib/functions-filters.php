@@ -1,5 +1,24 @@
 <?php
 /**
+ * Include custom post types in front-end search results.
+ *
+ * WP main query defaults to post_type='post' for search even when CPTs are
+ * registered with exclude_from_search=false. This hook makes the intent explicit.
+ * notice is excluded (registered with exclude_from_search=true; no standalone value).
+ *
+ * @param WP_Query $query The current query.
+ */
+function nm_search_include_cpts( WP_Query $query ) {
+  if ( $query->is_search() && $query->is_main_query() && ! is_admin() ) {
+    $existing = $query->get( 'post_type' );
+    if ( empty( $existing ) ) {
+      $query->set( 'post_type', array( 'post', 'contributor', 'event', 'job' ) );
+    }
+  }
+}
+add_action( 'pre_get_posts', 'nm_search_include_cpts' );
+
+/**
  * Add classes to pagination links
  *
  * @param string $attributes Existing link attributes.
@@ -180,7 +199,7 @@ function add_featured_image_to_feed( $content ) {
   global $post;
 
   if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ) {
-    return get_the_post_thumbnail( $post->ID, apply_filters( 'rss_featured_image_thumbnail_size', 'large' ), 'data-no-lazysizes' ) . $content;
+    return get_the_post_thumbnail( $post->ID, apply_filters( 'rss_featured_image_thumbnail_size', 'large' ), array( 'data-no-lazysizes' => 'true' ) ) . $content;
   }
   return $content;
 }

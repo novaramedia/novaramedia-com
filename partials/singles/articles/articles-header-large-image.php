@@ -17,13 +17,13 @@
       }
     ?>
     <h3 class="font-size-11 font-weight-bold">by <?php render_bylines($post->ID, true); ?></h3>
-    <h3 class="font-size-11 font-weight-bold"><?php the_time('j F Y'); ?></h3>
+    <h3 class="font-size-11 font-weight-bold"><?php the_time(NM_DATE_FORMAT_LONG); ?></h3>
   </div>
 </div>
 <div class="grid-row mb-4">
   <div class="grid-item is-s-24 offset-s-0 is-m-24 offset-m-0 is-l-20 offset-l-2 is-xl-20 offset-xl-2 is-xxl-20 offset-xxl-2">
     <?php render_thumbnail($post->ID, 'col20', array(
-      'class' => 'ui-rounded-image',
+      'class' => 'ui-rounded-box',
       'data-no-lazysizes' => true,
       'loading' => 'eager'
     )); ?>

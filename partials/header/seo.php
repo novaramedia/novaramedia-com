@@ -1,20 +1,24 @@
 <?php
+if ( is_search() ) {
+  echo '<meta name="robots" content="noindex, follow">' . "\n";
+}
+
 $twitter = IGV_get_option( '_igv_socialmedia_twitter' );
 
 if ( $twitter ) {
-  echo '<meta name="twitter:site" value="' . $twitter . '">';
+  echo '<meta name="twitter:site" content="' . esc_attr( $twitter ) . '">';
 }
 
 $fb_app_id = IGV_get_option( '_igv_og_fb_app_id' );
 
 if ( $fb_app_id ) {
-  echo '<meta name="fb:app_id" value="' . $fb_app_id . '">';
+  echo '<meta name="fb:app_id" content="' . esc_attr( $fb_app_id ) . '">';
 }
 
 ?>
   <meta property="og:title" content="<?php echo esc_attr( nm_get_social_title() ); ?>" />
   <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>" />
-  <meta name="twitter:card" value="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image">
 <?php
 global $post;
 
@@ -53,7 +57,7 @@ if ( ( is_single() || is_page() ) && has_post_thumbnail( $post ) ) { // if is a 
   $og_image_url = wp_get_attachment_image_src( $thumb_id, 'opengraph' )[0];
 }
 ?>
-  <meta property="og:image" content="<?php echo $og_image_url; ?>" />
+  <meta property="og:image" content="<?php echo esc_url( $og_image_url ); ?>" />
 <?php
 
 $og_description = get_bloginfo( 'description' );
@@ -74,7 +78,7 @@ if ( is_home() ) {
     }
 
     if ( count( $twitter_author ) === 1 ) { // if there is only one author then set the twitter creator og tag. tag doesn't support multiple authors
-      echo '<meta name="twitter:creator" value="' . $twitter_author[0] . '">';
+      echo '<meta name="twitter:creator" content="' . esc_attr( $twitter_author[0] ) . '">';
     }
   }
 
@@ -127,5 +131,5 @@ if ( is_page() ) {
   }
 }
 ?>
-  <meta name="description" content="<?php echo $og_description; ?>">
-  <meta property="og:description" content="<?php echo $og_description; ?>" />
+  <meta name="description" content="<?php echo esc_attr( $og_description ); ?>">
+  <meta property="og:description" content="<?php echo esc_attr( $og_description ); ?>" />

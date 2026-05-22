@@ -90,8 +90,8 @@ if ( have_posts() ) {
       ?>
       <div class="grid-item is-s-24 is-l-14 is-xxl-16 mb-s-4">
         <?php if ( $featured_youtube_id ) { ?>
-          <div class="u-video-embed-container ui-rounded-image">
-            <?php echo render_youtube_embed_iframe( $featured_youtube_id, false, false ); ?>
+          <div class="u-video-embed-container ui-rounded-box">
+            <?php echo render_youtube_embed_iframe( $featured_youtube_id, false, 'eager', get_the_title( $featured_post_id ) ); ?>
           </div>
         <?php } else { ?>
           <div class="layout-thumbnail-frame">
@@ -99,7 +99,7 @@ if ( have_posts() ) {
               <?php render_post_ui_tags( $featured_post_id, true, true, 'no-border' ); ?>
             </div>
             <a href="<?php the_permalink(); ?>" class="ui-hover">
-              <?php render_thumbnail( $featured_post_id, 'col24-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+              <?php render_thumbnail( $featured_post_id, 'col24-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
             </a>
           </div>
         <?php } ?>

@@ -48,29 +48,31 @@ function is_single_type( $type, $post ) {
  *
  * @return void
  */
-function pr( $var, $title = null ) {
-  if ( $title ) {
-    echo '<strong>' . $title . '</strong><br>';
+if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+  function nm_pr( $var, $title = null ) {
+    if ( $title ) {
+      echo '<strong>' . esc_html( $title ) . '</strong><br>';
+    }
+    echo '<pre>';
+    print_r( $var ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+    echo '</pre>';
   }
-  echo '<pre>';
-  print_r( $var );
-  echo '</pre>';
-}
 
-/** Debug page and template request */
-function debug_page_request() {
-  global $wp, $template;
-  define( 'D4P_EOL', "\r\n" );
-  echo '<!-- Request: ';
-  echo empty( $wp->request ) ? 'None' : esc_html( $wp->request );
-  echo ' -->' . D4P_EOL;
-  echo '<!-- Matched Rewrite Rule: ';
-  echo empty( $wp->matched_rule ) ? 'None' : esc_html( $wp->matched_rule );
-  echo ' -->' . D4P_EOL;
-  echo '<!-- Matched Rewrite Query: ';
-  echo empty( $wp->matched_query ) ? 'None' : esc_html( $wp->matched_query );
-  echo ' -->' . D4P_EOL;
-  echo '<!-- Loaded Template: ';
-  echo basename( $template );
-  echo ' -->' . D4P_EOL;
+  /** Debug page and template request */
+  function debug_page_request() {
+    global $wp, $template;
+    define( 'D4P_EOL', "\r\n" );
+    echo '<!-- Request: ';
+    echo empty( $wp->request ) ? 'None' : esc_html( $wp->request );
+    echo ' -->' . D4P_EOL;
+    echo '<!-- Matched Rewrite Rule: ';
+    echo empty( $wp->matched_rule ) ? 'None' : esc_html( $wp->matched_rule );
+    echo ' -->' . D4P_EOL;
+    echo '<!-- Matched Rewrite Query: ';
+    echo empty( $wp->matched_query ) ? 'None' : esc_html( $wp->matched_query );
+    echo ' -->' . D4P_EOL;
+    echo '<!-- Loaded Template: ';
+    echo basename( $template );
+    echo ' -->' . D4P_EOL;
+  }
 }

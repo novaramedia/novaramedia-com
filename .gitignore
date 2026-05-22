@@ -11,4 +11,7 @@ cypress.env.json
 test*.log
 
 # Build artifacts
-dist/report.html.claude/
+dist/report.html
+
+# Claude Code local state
+.claude/

@@ -48,11 +48,11 @@ if ( have_posts() ) {
           if ( $youtube_id ) {
             ?>
           <div class="u-video-embed-container mb-4">
-            <?php echo render_youtube_embed_iframe( $youtube_id, true, true ); ?>
+            <?php echo render_youtube_embed_iframe( $youtube_id, true, 'eager', get_the_title() ); ?>
           </div>
             <?php
           } else {
-            the_post_thumbnail( 'col8', array( 'class' => 'ui-rounded-image' ) );
+            the_post_thumbnail( 'col8', array( 'class' => 'ui-rounded-box' ) );
           }
           ?>
         </div>

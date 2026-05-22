@@ -7,10 +7,88 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+
+### Changed
+
+- Consolidate rounded-corner CSS helpers: introduce `ui-rounded-box--nested` (4px) for nested inner colour-blocked elements; replace `ui-rounded-image` with `ui-rounded-box` throughout templates
+
+- Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
+- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function; old per-platform functions kept as deprecated wrappers
+
+### Fixed
+
+- XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
+- Share links missing `rel="noopener noreferrer"` (tabnabbing)
+- Reddit share URL used `http://`; corrected to `https://`
+- Facebook share URL had malformed query string (`?&u=`); corrected to `?u=`
+- Front-page banner switch used `switch(preg_match())` loose comparison; rewritten as explicit `if/elseif`
+- Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
+
+### Fixed
+
+- OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
+- Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
+- Favicon link used `rel="shortcut"` (invalid); corrected to `rel="shortcut icon"`
+- Schema.org `validThrough` on job posts emitted `1970-01-01` when no deadline was set; field now only added when a deadline exists
+- `render_show()` in audio partial declared at file scope without guard, causing fatal redeclare on second include
+- `font-size-S-10` CSS class typo (capital S) on Novara Live block; corrected to `font-size-s-10`
+- Path traversal: `_cmb_article_layout` post meta now validated against known layout values before use in `get_template_part()`
+
+## [4.6.1] - 2026-05-13
+
+### Changed
+
+- Update sticky support bar copy and layout for second round of May 2026 fundraiser campaign
+- Expand sticky support bar admin options with separate heading fields for mobile open state and desktop closed state
+
+### Fixed
+
+- Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
+- Include contributor, event, and job post types in site search results
+
+## [4.6.0] - 2026-05-06
+
+### Changed
+
+- Reorganise developer docs into `docs/` directory structure; update AI coding guidelines and trim `CLAUDE.md`
+
+- Update support page copy and layout for May 2026 fundraiser campaign
+- Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
+- Update DIW podcast urls (except the plain RSS one)
+
+### Fixed
+
+- Fix schedule tab active state when pre-selected via URL parameter
+
+## [4.5.5] - 2026-04-27
+
+### Added
+
+- IMPRESS logomark to footer with link to complaints page
+
+## [4.5.4] - 2026-04-24
+
+### Added
+
+- `noindex, follow` on internal search result pages (meta tag + HTTP header)
+
 ### Fixed
 
 - Header menu spacing on mobile
+<<<<<<< copilot/fix-empty-news-category-render
 - Empty News category no longer breaks front page above-the-fold render
+=======
+- YouTube embeds failing to load in Safari
+- YouTube embed iframes missing accessible `title` attribute
+- Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
+
+### Removed
+
+- Remove PayPal donation link section on Support page
+>>>>>>> development
 
 ## [4.5.3] - 2026-04-08
 

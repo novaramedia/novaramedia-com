@@ -28,7 +28,7 @@ if ( $timestamp ) {
         array( 600, 400 ),
         array(
           'alt'   => get_the_title(),
-          'class' => 'ui-rounded-image',
+          'class' => 'ui-rounded-box',
         )
       );
       ?>
@@ -36,7 +36,7 @@ if ( $timestamp ) {
   </div>
   <div class="grid-item is-xxl-14 is-s-24">
     <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <h3 class="font-weight-bold mb-2"><?php echo $time->format( 'j F Y' ); ?>:</h3>
+      <h3 class="font-weight-bold mb-2"><?php echo $time->format( NM_DATE_FORMAT_LONG ); ?>:</h3>
       <h2 class="font-size-13 font-weight-bold text-wrap-balance mb-3"><?php the_title(); ?></h2>
     </a>
     <?php

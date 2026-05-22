@@ -53,7 +53,7 @@ if ( $novara_live_category ) {
                       $post->ID,
                       'col24-16to9',
                       array(
-                        'class' => 'ui-rounded-image',
+                        'class' => 'ui-rounded-box',
                       )
                     );
                   ?>
@@ -116,7 +116,7 @@ if ( $novara_live_category ) {
                     $post->ID,
                     'col24-16to9',
                     array(
-                    'class' => 'ui-rounded-image',
+                    'class' => 'ui-rounded-box',
                     )
                   );
                   ?>
@@ -126,11 +126,11 @@ if ( $novara_live_category ) {
                   <div class="layout-split-level font-size-8 font-weight-bold mb-1">
                   <?php render_post_ui_tags( $post->ID, false, true, 'no-fill--white' ); ?>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                    <span><?php echo ( $i < 6 ) ? '<span class="js-time-since" data-timestamp="' . $timestamp . '"></span>' : get_the_time( 'j F Y' ); ?></span>
+                    <span><?php echo ( $i < 6 ) ? '<span class="js-time-since" data-timestamp="' . $timestamp . '"></span>' : get_the_time( NM_DATE_FORMAT_LONG ); ?></span>
                   </a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                  <h4 class="post__title font-size-8 font-size-S-10 font-weight-bold text-wrap-pretty">
+                  <h4 class="post__title font-size-8 font-size-s-10 font-weight-bold text-wrap-pretty">
                     <?php the_title(); ?>
                   </h4>
                   </a>
