@@ -4,11 +4,11 @@
 
 **Remove after 4 minor releases, or the next major version, whichever is later.**
 
-| Deprecated in | Earliest removal |
+| Deprecated in | Earliest removal (later of 4 minors / next major) |
 |---------------|-----------------|
-| 4.3.x | 4.7.0 (4 minors) or 5.0.0 if that comes first |
-| 4.6.x | 4.10.0 or 5.0.0 |
-| 5.0.x | 5.4.0 or 6.0.0 |
+| 4.3.x | 5.0.0 (later of 4.7.0 and 5.0.0) |
+| 4.6.x | 5.0.0 (later of 4.10.0 and 5.0.0) |
+| 5.0.x | 6.0.0 (later of 5.4.0 and 6.0.0) |
 
 The 4-minor / next-major rule provides:
 - Enough deploy cycles for content migrations in the DB to have run

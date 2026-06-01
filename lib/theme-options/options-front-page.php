@@ -98,9 +98,19 @@ function get_newsletter_signup_options() {
  * options. The `false => 'None'` entry is only meaningful for the legacy
  * single-banner selects; the registry skips it.
  *
+ * Cached per request — get_newsletter_signup_options() runs DB queries and this
+ * is called repeatedly during front-page rendering (once per layout row via the
+ * registry) and on admin screens.
+ *
  * @return array
  */
 function nm_get_front_page_banner_options() {
+  static $options = null;
+
+  if ( $options !== null ) {
+    return $options;
+  }
+
   $banner_options = array(
     false                                              => 'None',
     'partials/support-section'                         => 'Support section',
@@ -117,14 +127,21 @@ function nm_get_front_page_banner_options() {
     'partials/specials/banners/survey-link'            => 'Audience Survey 2026',
   );
 
-  return array_merge( $banner_options, get_newsletter_signup_options() );
+  $options = array_merge( $banner_options, get_newsletter_signup_options() );
+
+  return $options;
 }
 
 /**
  * Returns the front-page block registry: every section that can be placed in
  * the Layout editor, keyed by a stable slug.
  *
- * Product blocks are arg-less singleton partials rendered via get_template_part.
+ * Product blocks are singleton partials rendered via get_template_part. Most are
+ * arg-less; the render loop passes a shared context array (see
+ * nm_render_front_page_block()) so blocks that need it — e.g. the highlight
+ * section, which dedupes against the above-the-fold posts — can read it. Their
+ * own content config lives on their existing settings subpages.
+ *
  * Banners reuse the banner options map and carry the original banner `key`,
  * rendered via render_front_page_banner() (which handles newsletter signups,
  * retired-option no-ops and a path-traversal guard).
@@ -136,17 +153,22 @@ function nm_get_front_page_banner_options() {
  */
 function nm_get_front_page_block_registry() {
   $blocks = array(
-    'novara-live' => array(
+    'highlight-block' => array(
+      'label'   => 'Highlight section (configured on its own subpage)',
+      'partial' => 'partials/front-page/highlight-block',
+      'type'    => 'product',
+    ),
+    'novara-live'     => array(
       'label'   => 'Show block: Novara Live',
       'partial' => 'partials/front-page/show-blocks/novara-live',
       'type'    => 'product',
     ),
-    'audio'       => array(
+    'audio'           => array(
       'label'   => 'Show block: Audio (Novara FM + ACFM)',
       'partial' => 'partials/front-page/show-blocks/audio',
       'type'    => 'product',
     ),
-    'downstream'  => array(
+    'downstream'      => array(
       'label'   => 'Show block: Downstream',
       'partial' => 'partials/front-page/show-blocks/downstream',
       'type'    => 'product',
@@ -215,9 +237,12 @@ function nm_get_front_page_layout() {
 
 /**
  * Default layout seed reproducing the historic hardcoded order:
- * banner 1, Novara Live, banner 2, Audio, banner 3, Downstream, banner 4.
+ * banner 1, highlight section, Novara Live, banner 2, Audio, banner 3,
+ * Downstream, banner 4.
  *
  * Reads the legacy banner option values; banner slots set to None are skipped.
+ * The highlight section is included in its historic position but stays hidden
+ * until enabled on its own settings subpage.
  *
  * @deprecated 4.7.0 Transitional migration shim. Remove together with the
  *   legacy banner selects once a layout has been saved in production; after
@@ -238,6 +263,7 @@ function nm_get_front_page_default_layout() {
 
   $layout = array(
     $banner_slug( 'nm_front_page_banner_option_1' ),
+    'highlight-block',
     'novara-live',
     $banner_slug( 'nm_front_page_banner_option_2' ),
     'audio',
@@ -253,12 +279,15 @@ function nm_get_front_page_default_layout() {
  * Renders a single front-page block by its registry slug.
  *
  * Banner blocks route through render_front_page_banner(); product blocks render
- * their partial directly. Unknown slugs are ignored.
+ * their partial directly, receiving the shared $context array as template args
+ * (blocks that don't need it simply ignore it). Unknown slugs are ignored.
  *
- * @param string $slug Registry slug.
+ * @param string $slug    Registry slug.
+ * @param array  $context Shared render context passed to product partials
+ *                        (e.g. 'excluded_posts_ids' for the highlight section).
  * @return void
  */
-function nm_render_front_page_block( $slug ) {
+function nm_render_front_page_block( $slug, $context = array() ) {
   $registry = nm_get_front_page_block_registry();
 
   if ( ! isset( $registry[ $slug ] ) ) {
@@ -272,7 +301,7 @@ function nm_render_front_page_block( $slug ) {
     return;
   }
 
-  get_template_part( $block['partial'] );
+  get_template_part( $block['partial'], null, $context );
 }
 
 /**
@@ -844,12 +873,12 @@ function nm_register_front_page_options_metabox() {
         )
     );
 
-  /**
-   * Registers the Layout subpage: an ordered, sortable list of the sections
-   * (banners + product blocks) shown between the Above the Fold area and the
-   * Mega Block. Falls back to the historic order when empty (see
-   * nm_get_front_page_layout()).
-   */
+    /**
+     * Registers the Layout subpage: an ordered, sortable list of the sections
+     * (banners + product blocks) shown between the Above the Fold area and the
+     * Mega Block. Falls back to the historic order when empty (see
+     * nm_get_front_page_layout()).
+     */
     $layout_options = new_cmb2_box(
         array(
             'id'           => 'nm_front_page_layout_options_page',

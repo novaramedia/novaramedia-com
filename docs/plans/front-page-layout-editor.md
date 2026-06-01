@@ -23,9 +23,12 @@ audio
 banner 3         (…option_3)
 downstream
 banner 4         (…option_4)
-acfm             (partials/front-page/show-blocks/audio-acfm.php)
 mega-block       (permanent)
 ```
+
+(A standalone ACFM show-block is being built in parallel on
+`feature/front-page-acfm-block`; it will be added to the registry when that
+branch is rebuilt on top of this editor. It does not exist on this branch.)
 
 Two relevant existing mechanics we reuse:
 
@@ -56,20 +59,25 @@ Section taxonomy term):
   custom JS, and repeatable-group + conditional + reorder is the fiddliest corner
   of CMB2.
 
-**Decision:** ship Option 1. Every product block today is a singleton (one audio,
-one acfm) so per-type config covers every real case. The **block registry**
-(below) is the backbone — moving from Option 1 to Option 2 later sources the
-config field from a different place, not a rewrite. Picking cheap now is not a trap.
+**Decision:** ship Option 1. Every product block today is a singleton (one audio
+block, one downstream, etc.) so per-type config covers every real case. The
+**block registry** (below) is the backbone — moving from Option 1 to Option 2
+later sources the config field from a different place, not a rewrite. Picking
+cheap now is not a trap.
 
-### Highlight block: out of scope for v1
+### Highlight block: included as a registry block
 
-It is off by default, has never been used, has no editorial capacity behind it,
-and is the only block with awkward arg-passing (`excluded_posts_ids` dedupe
-against above-the-fold). Leave it hardcoded-and-disabled where it is. Do **not**
-put it in the v1 registry. Fold it in later only if someone actually wants it.
+Earlier draft kept highlight-block hardcoded and out of the registry. Reversed
+during review: leaving it pinned outside the list meant enabling it would change
+the historic order relative to the seed. Instead it is a normal registry block
+(Option 1): it appears in the Layout list, its content config stays on its
+existing Highlight Section subpage, and its on/off toggle there still governs
+visibility (disabled → renders nothing).
 
-That removes the single hard case from v1: every block in the picker is an
-**arg-less singleton partial**.
+Its one wrinkle — it needs `excluded_posts_ids` to dedupe against the
+above-the-fold posts — is handled generically: the render loop passes a shared
+`$context` array to every product block via `get_template_part`'s args, and
+blocks that don't need it simply ignore it. No per-block special-casing.
 
 ## The block registry (backbone)
 
@@ -79,11 +87,16 @@ select options from it; rendering loops the saved order and calls each partial.
 ```php
 /**
  * @return array<string, array{label:string, partial:string, type:string}>
- *   Keyed by stable slug. `type` is just for optgroup grouping in the select.
+ *   Keyed by stable slug. `type` routes rendering (product vs banner).
  */
 function nm_get_front_page_block_registry() {
   $blocks = array(
-    // Product show-blocks (arg-less singleton partials)
+    // Product blocks (singleton partials; receive the shared render context)
+    'highlight-block' => array(
+      'label'   => 'Highlight section (configured on its own subpage)',
+      'partial' => 'partials/front-page/highlight-block',
+      'type'    => 'product',
+    ),
     'novara-live' => array(
       'label'   => 'Show block: Novara Live',
       'partial' => 'partials/front-page/show-blocks/novara-live',
@@ -94,16 +107,12 @@ function nm_get_front_page_block_registry() {
       'partial' => 'partials/front-page/show-blocks/audio',
       'type'    => 'product',
     ),
-    'audio-acfm' => array(
-      'label'   => 'Show block: ACFM',
-      'partial' => 'partials/front-page/show-blocks/audio-acfm',
-      'type'    => 'product',
-    ),
     'downstream' => array(
       'label'   => 'Show block: Downstream',
       'partial' => 'partials/front-page/show-blocks/downstream',
       'type'    => 'product',
     ),
+    // 'audio-acfm' added later from feature/front-page-acfm-block.
   );
 
   // Banners: fold the existing $banner_options map in under type 'banner',
@@ -190,14 +199,13 @@ The current layout must seed the new group so nothing changes visually on launch
    `nm_front_page_banner_option_1..4` values for the banner rows:
 
    ```
-   [highlight-block is excluded — stays hardcoded/disabled]
-   novara-live
    banner_option_1 value  (if not 'None')
-   audio
+   highlight-block
+   novara-live
    banner_option_2 value
-   downstream
+   audio
    banner_option_3 value
-   audio-acfm
+   downstream
    banner_option_4 value
    ```
 
@@ -212,19 +220,20 @@ The current layout must seed the new group so nothing changes visually on launch
 - Block registry.
 - `nm_get_front_page_banner_options()` refactor.
 - Layout subpage: one sortable group, single select per row.
-- `front-page.php` loops the layout between above-the-fold and mega-block.
+- `front-page.php` loops the layout between above-the-fold and mega-block,
+  passing a shared `$context` (incl. `excluded_posts_ids`) to product blocks.
 - Default-seed migration preserving current order.
-- highlight-block stays hardcoded + disabled, NOT in the registry.
+- highlight-block included as a registry block; config stays on its subpage,
+  visibility still governed by its existing toggle.
 
 **v2 (later, only if needed):**
 - Per-instance / conditional config (Option 2) via `cmb2-conditionals` or custom
   JS — only if a real need for per-instance config or duplicate configured blocks
   appears.
-- Fold highlight-block into the registry with its Section-taxonomy config (decide:
-  per-type subpage vs inline conditional). Resolve the `excluded_posts_ids` dedupe
-  (e.g. always pass the above-the-fold IDs regardless of the block's position).
+- Add the standalone `audio-acfm` block to the registry once
+  `feature/front-page-acfm-block` is rebuilt on top of this editor.
 - Possibly split the `audio` block (currently hardcodes Novara FM + ACFM) now that
-  ACFM is its own selectable block.
+  ACFM is becoming its own selectable block.
 
 ## Resolved decisions
 
@@ -234,6 +243,8 @@ The current layout must seed the new group so nothing changes visually on launch
 - **Disable a slot by removing its row** — no per-row "None".
 - **Capped at ~12 rows** — soft limit (no native CMB2 max; hide Add button via JS
   or document as soft cap).
+- **highlight-block is a registry block**, not pinned/hardcoded — config on its
+  subpage, `excluded_posts_ids` passed via the shared render context.
 
 ## Risk / cost
 
