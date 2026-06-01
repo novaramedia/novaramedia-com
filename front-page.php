@@ -40,6 +40,10 @@ $banners = array(
 
     get_template_part('partials/front-page/show-blocks/audio');
 
+    // ACFM-only product section — placed directly below the audio block for
+    // visual comparison while Novara FM is discontinued.
+    get_template_part('partials/front-page/show-blocks/audio-acfm');
+
     render_front_page_banner($banners[2]);
 
     get_template_part('partials/front-page/show-blocks/downstream');
