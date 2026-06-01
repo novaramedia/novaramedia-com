@@ -91,11 +91,16 @@ function get_newsletter_signup_options() {
 }
 
 /**
- * Hook in and register a metabox to handle a theme options page and adds a menu item.
+ * Returns the banner options map ( banner key => label ) used by both the
+ * legacy banner selects and the front-page block registry.
+ *
+ * Includes the static banner partials plus the dynamic newsletter-signup
+ * options. The `false => 'None'` entry is only meaningful for the legacy
+ * single-banner selects; the registry skips it.
+ *
+ * @return array
  */
-function nm_register_front_page_options_metabox() {
-  $prefix = 'nm_';
-
+function nm_get_front_page_banner_options() {
   $banner_options = array(
     false                                              => 'None',
     'partials/support-section'                         => 'Support section',
@@ -112,8 +117,167 @@ function nm_register_front_page_options_metabox() {
     'partials/specials/banners/survey-link'            => 'Audience Survey 2026',
   );
 
-  // Merge with newsletter signup options from the newsletter custom post type
-  $banner_options = array_merge( $banner_options, get_newsletter_signup_options() );
+  return array_merge( $banner_options, get_newsletter_signup_options() );
+}
+
+/**
+ * Returns the front-page block registry: every section that can be placed in
+ * the Layout editor, keyed by a stable slug.
+ *
+ * Product blocks are arg-less singleton partials rendered via get_template_part.
+ * Banners reuse the banner options map and carry the original banner `key`,
+ * rendered via render_front_page_banner() (which handles newsletter signups,
+ * retired-option no-ops and a path-traversal guard).
+ *
+ * Slugs are stable identifiers — saved layouts reference slugs, not labels or
+ * indices, so relabelling or reordering the registry never corrupts a layout.
+ *
+ * @return array<string, array{label:string, partial:string, type:string, key?:string}>
+ */
+function nm_get_front_page_block_registry() {
+  $blocks = array(
+    'novara-live' => array(
+      'label'   => 'Show block: Novara Live',
+      'partial' => 'partials/front-page/show-blocks/novara-live',
+      'type'    => 'product',
+    ),
+    'audio'       => array(
+      'label'   => 'Show block: Audio (Novara FM + ACFM)',
+      'partial' => 'partials/front-page/show-blocks/audio',
+      'type'    => 'product',
+    ),
+    'downstream'  => array(
+      'label'   => 'Show block: Downstream',
+      'partial' => 'partials/front-page/show-blocks/downstream',
+      'type'    => 'product',
+    ),
+  );
+
+  foreach ( nm_get_front_page_banner_options() as $key => $label ) {
+    if ( ! $key ) {
+      continue; // skip the 'None' entry
+    }
+    $blocks[ 'banner:' . $key ] = array(
+      'label'   => 'Banner: ' . $label,
+      'partial' => $key,
+      'key'     => $key,
+      'type'    => 'banner',
+    );
+  }
+
+  return $blocks;
+}
+
+/**
+ * Builds the select options ( slug => label ) for a Layout editor row from the
+ * block registry, prefixed with an empty placeholder.
+ *
+ * @return array
+ */
+function nm_get_front_page_layout_select_options() {
+  $options = array( '' => '— Select a section —' );
+
+  foreach ( nm_get_front_page_block_registry() as $slug => $block ) {
+    $options[ $slug ] = $block['label'];
+  }
+
+  return $options;
+}
+
+/**
+ * Returns the ordered front-page layout as an array of registry slugs.
+ *
+ * Falls back to a default seed reproducing the historic hardcoded order when no
+ * layout has been saved. Computed on read (never written), so the migration is
+ * non-destructive and reversible.
+ *
+ * @return string[]
+ */
+function nm_get_front_page_layout() {
+  $saved = NM_get_option( 'nm_front_page_layout', 'nm_front_page_layout_options', array() );
+
+  if ( is_array( $saved ) && ! empty( $saved ) ) {
+    $slugs = array();
+
+    foreach ( $saved as $row ) {
+      if ( ! empty( $row['block'] ) ) {
+        $slugs[] = $row['block'];
+      }
+    }
+
+    if ( ! empty( $slugs ) ) {
+      return $slugs;
+    }
+  }
+
+  return nm_get_front_page_default_layout();
+}
+
+/**
+ * Default layout seed reproducing the historic hardcoded order:
+ * banner 1, Novara Live, banner 2, Audio, banner 3, Downstream, banner 4.
+ *
+ * Reads the legacy banner option values; banner slots set to None are skipped.
+ *
+ * @return string[]
+ */
+function nm_get_front_page_default_layout() {
+  $banner_slug = function ( $option_key ) {
+    $value = NM_get_option( $option_key );
+
+    if ( ! $value || $value === '0' ) {
+      return null;
+    }
+
+    return 'banner:' . $value;
+  };
+
+  $layout = array(
+    $banner_slug( 'nm_front_page_banner_option_1' ),
+    'novara-live',
+    $banner_slug( 'nm_front_page_banner_option_2' ),
+    'audio',
+    $banner_slug( 'nm_front_page_banner_option_3' ),
+    'downstream',
+    $banner_slug( 'nm_front_page_banner_option_4' ),
+  );
+
+  return array_values( array_filter( $layout ) );
+}
+
+/**
+ * Renders a single front-page block by its registry slug.
+ *
+ * Banner blocks route through render_front_page_banner(); product blocks render
+ * their partial directly. Unknown slugs are ignored.
+ *
+ * @param string $slug Registry slug.
+ * @return void
+ */
+function nm_render_front_page_block( $slug ) {
+  $registry = nm_get_front_page_block_registry();
+
+  if ( ! isset( $registry[ $slug ] ) ) {
+    return;
+  }
+
+  $block = $registry[ $slug ];
+
+  if ( $block['type'] === 'banner' ) {
+    render_front_page_banner( $block['key'] );
+    return;
+  }
+
+  get_template_part( $block['partial'] );
+}
+
+/**
+ * Hook in and register a metabox to handle a theme options page and adds a menu item.
+ */
+function nm_register_front_page_options_metabox() {
+  $prefix = 'nm_';
+
+  $banner_options = nm_get_front_page_banner_options();
 
   /**
    * Registers main options page menu item and form.
@@ -663,6 +827,55 @@ function nm_register_front_page_options_metabox() {
             'id'           => 'image',
             'type'         => 'file',
             'preview_size' => 'thumbnail',
+        )
+    );
+
+  /**
+   * Registers the Layout subpage: an ordered, sortable list of the sections
+   * (banners + product blocks) shown between the Above the Fold area and the
+   * Mega Block. Falls back to the historic order when empty (see
+   * nm_get_front_page_layout()).
+   */
+    $layout_options = new_cmb2_box(
+        array(
+            'id'           => 'nm_front_page_layout_options_page',
+            'title'        => 'Layout',
+            'object_types' => array( 'options-page' ),
+            'option_key'   => 'nm_front_page_layout_options',
+            'parent_slug'  => 'nm_front_page_options',
+            'capability'   => 'edit_posts',
+        )
+    );
+
+    $layout_options->add_field(
+        array(
+            'name' => 'Front Page Layout',
+            'desc' => 'Order the sections shown between the Above the Fold area and the Mega Block. Drag to reorder, remove a row to hide that section. Leave empty to use the default order. Keep to a sensible number of sections (~12 max).',
+            'id'   => $prefix . 'front_page_layout_title',
+            'type' => 'title',
+        )
+    );
+
+    $layout_group_field_id = $layout_options->add_field(
+        array(
+            'id'      => $prefix . 'front_page_layout',
+            'type'    => 'group',
+            'options' => array(
+                'group_title'   => __( 'Section {#}', 'nm' ),
+                'add_button'    => __( 'Add Section', 'nm' ),
+                'remove_button' => __( 'Remove Section', 'nm' ),
+                'sortable'      => true,
+            ),
+        )
+    );
+
+    $layout_options->add_group_field(
+        $layout_group_field_id,
+        array(
+            'name'    => 'Section',
+            'id'      => 'block',
+            'type'    => 'select',
+            'options' => nm_get_front_page_layout_select_options(),
         )
     );
 

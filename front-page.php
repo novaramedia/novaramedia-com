@@ -1,12 +1,5 @@
 <?php
 get_header();
-
-$banners = array(
-  NM_get_option('nm_front_page_banner_option_1'),
-  NM_get_option('nm_front_page_banner_option_2'),
-  NM_get_option('nm_front_page_banner_option_3'),
-  NM_get_option('nm_front_page_banner_option_4')
-);
 ?>
 
 <!-- main content -->
@@ -28,23 +21,18 @@ $banners = array(
       'latest_news_posts_ids' => $latest_news_posts_ids,
     ));
 
-    render_front_page_banner($banners[0]);
-
+    // Highlight block stays pinned directly below the fold. It is excluded from
+    // the Layout editor because it takes args and dedupes against the
+    // above-the-fold posts. Disabled by default via its own settings page.
     get_template_part('partials/front-page/highlight-block', null, array(
       'excluded_posts_ids' => array_merge($featured_posts_ids, $latest_news_posts_ids),
     ));
 
-    get_template_part('partials/front-page/show-blocks/novara-live');
-
-    render_front_page_banner($banners[1]);
-
-    get_template_part('partials/front-page/show-blocks/audio');
-
-    render_front_page_banner($banners[2]);
-
-    get_template_part('partials/front-page/show-blocks/downstream');
-
-    render_front_page_banner($banners[3]);
+    // Editable layout: banners + product blocks, ordered in Front Page > Layout.
+    // Falls back to the historic order when no layout has been saved.
+    foreach (nm_get_front_page_layout() as $block_slug) {
+      nm_render_front_page_block($block_slug);
+    }
 
     get_template_part('partials/front-page/mega-block');
   ?>
