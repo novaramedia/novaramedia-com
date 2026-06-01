@@ -149,9 +149,18 @@ function nm_get_front_page_banner_options() {
  * Slugs are stable identifiers — saved layouts reference slugs, not labels or
  * indices, so relabelling or reordering the registry never corrupts a layout.
  *
+ * Cached per request — built once even though nm_render_front_page_block()
+ * calls it for every layout row during front-page rendering.
+ *
  * @return array<string, array{label:string, partial:string, type:string, key?:string}>
  */
 function nm_get_front_page_block_registry() {
+  static $cached = null;
+
+  if ( $cached !== null ) {
+    return $cached;
+  }
+
   $blocks = array(
     'highlight-block' => array(
       'label'   => 'Highlight section (configured on its own subpage)',
@@ -187,7 +196,9 @@ function nm_get_front_page_block_registry() {
     );
   }
 
-  return $blocks;
+  $cached = $blocks;
+
+  return $cached;
 }
 
 /**

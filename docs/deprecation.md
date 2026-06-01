@@ -47,6 +47,6 @@ No `@deprecated-tier` tag needed — the single rule covers all cases.
 
 ## Audit
 
-Run `/deprecation-audit` to produce a triage table: every `@deprecated` symbol, its removal version threshold, caller count, and verdict.
+If you use Claude Code, the `deprecation-audit` skill produces a triage table: every `@deprecated` symbol, its removal version threshold, caller count, and verdict. Without it, grep the codebase directly — e.g. `grep -rn "@deprecated" --include="*.php"` — and check each symbol's version against the removal rule above.
 
 Remove in a dedicated `Refactor:` PR — never bundle with feature work.
