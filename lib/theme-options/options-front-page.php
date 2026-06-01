@@ -219,6 +219,10 @@ function nm_get_front_page_layout() {
  *
  * Reads the legacy banner option values; banner slots set to None are skipped.
  *
+ * @deprecated 4.7.0 Transitional migration shim. Remove together with the
+ *   legacy banner selects once a layout has been saved in production; after
+ *   that, an empty layout should simply render nothing. Earliest removal
+ *   4.11.0 / 5.0.0 (see docs/deprecation.md).
  * @return string[]
  */
 function nm_get_front_page_default_layout() {
@@ -321,9 +325,19 @@ function nm_register_front_page_options_metabox() {
         )
     );
 
+    /**
+     * Legacy banner slots.
+     *
+     * @deprecated 4.7.0 Superseded by the Front Page > Layout editor. Retained
+     *   only as the source for nm_get_front_page_default_layout()'s seed until a
+     *   layout is saved in production. Earliest removal 4.11.0 / 5.0.0 (see
+     *   docs/deprecation.md). Removal must follow a one-time Save on the Layout
+     *   page in prod, alongside nm_get_front_page_default_layout().
+     */
     $main_options->add_field(
         array(
-            'name' => 'Adverts and banners',
+            'name' => 'Adverts and banners (legacy)',
+            'desc' => 'Deprecated — use the Layout page instead. These selects only seed the default Layout order until a layout is saved.',
             'id'   => $prefix . 'front_page_settings_banners_title',
             'type' => 'title',
         )
