@@ -23,31 +23,31 @@ if ( $acfm ) {
     $f_meta    = get_post_meta( $f_id );
     $recent    = array_slice( $latest, 1 );
     ?>
-    <section class="front-page__audio-products front-page__audio-products--acfm container mt-4 mb-4">
+    <section class="front-page__audio-products front-page__audio-products--acfm container mt-4 mb-3">
       <div class="grid-row">
         <div class="grid-item is-s-24 is-xxl-24 font-color-black ui-rounded-box">
-          <div class="front-page__audio-product front-page__audio-product--acfm background-light-blue pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
+          <div class="front-page__audio-product front-page__audio-product--acfm background-light-blue pt-3 pl-4 pr-4 pb-3 ui-rounded-box">
 
             <!-- Row 1: logo, blurb and featured episode all on one row -->
-            <div class="grid-row grid-row--align-center">
-              <div class="grid-item is-s-24 is-xxl-3">
+            <div class="grid-row grid--nested grid-row--align-center">
+              <div class="grid-item is-s-24 is-xxl-3 mb-s-3">
                 <div class="front-page__audio-product-logo">
                   <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
                     <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
                   </a>
                 </div>
               </div>
-              <div class="grid-item is-s-24 is-xxl-9">
+              <div class="grid-item is-s-24 is-xxl-9 mb-s-3">
                 <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
-                  <div class="font-size-11">
+                  <div class="font-size-11 text-wrap-pretty">
                     The home of the weird left. Nadia Idle, Jeremy Gilbert and Keir Milburn examine the links between left-wing politics, culture, music and experiences of collective joy.
                   </div>
                 </a>
               </div>
               <div class="grid-item is-s-24 is-xxl-12">
                 <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 ui-rounded-box ui-rounded-box--nested">
-                  <div class="grid-row grid--nested grid-row--align-center">
-                    <div class="grid-item is-xxl-7">
+                  <div class="grid-row grid--nested">
+                    <div class="grid-item is-s-24 is-xxl-7 is-l-10">
                       <div class="layout-thumbnail-frame">
                         <div class="layout-thumbnail-frame__inner mt-1 ml-1">
                           <?php render_post_ui_tags( $f_id, true, true, 'no-border' ); ?>
@@ -65,10 +65,10 @@ if ( $acfm ) {
                         </a>
                       </div>
                     </div>
-                    <div class="grid-item is-xxl-17">
+                    <div class="grid-item is-s-24 is-xxl-17 is-l-14">
                       <a href="<?php echo esc_url( get_the_permalink( $f_id ) ); ?>" class="ui-hover">
                         <h3 class="font-size-11 font-weight-bold mb-2"><?php echo esc_html( get_the_title( $f_id ) ); ?></h3>
-                        <div class="font-size-10 mb-3">
+                        <div class="font-size-10 mb-3 text-wrap-pretty">
                           <?php render_short_description( $f_id ); ?>
                         </div>
                       </a>
@@ -91,7 +91,7 @@ if ( $acfm ) {
             </div>
 
             <!-- Row 2: next 4 episodes, 4-up -->
-            <div class="ui-border-top ui-border--black pt-4 mt-4">
+            <div class="ui-border-top mt-3 pt-3">
               <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
                 <div class="grid-row grid--nested mb-2">
                   <div class="grid-item is-xxl-12">
@@ -107,7 +107,7 @@ if ( $acfm ) {
                 foreach ( $recent as $post ) {
                   $post_id = $post->ID;
                   ?>
-                  <div class="grid-item is-m-24 is-xxl-6 mt-2 mb-2">
+                  <div class="grid-item is-s-24 is-m-12 is-xxl-6 mt-2 mb-2">
                     <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover">
                       <div class="font-size-8 font-weight-bold mb-2">
                         <?php echo esc_html( get_the_time( NM_DATE_FORMAT_LONG, $post_id ) ); ?>
@@ -117,7 +117,7 @@ if ( $acfm ) {
                       <?php render_post_ui_tags( $post_id, false, true ); ?> <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover"><?php echo esc_html( get_the_title( $post_id ) ); ?></a>
                     </h4>
                     <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover">
-                      <div>
+                      <div class="text-wrap-pretty">
                         <?php render_short_description( $post_id ); ?>
                       </div>
                     </a>
