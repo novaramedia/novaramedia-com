@@ -81,8 +81,11 @@ blocks that don't need it simply ignore it. No per-block special-casing.
 
 ## The block registry (backbone)
 
-A single source of truth, PHP array, defined once. The layout editor builds its
-select options from it; rendering loops the saved order and calls each partial.
+A PHP array source of truth. The admin layout editor builds its select options
+from the full registry (product blocks + banners). At render time only the
+DB-free product half (`nm_get_front_page_product_blocks()`) is consulted, with
+banners routed by slug prefix — so the newsletter query stays off the front end
+(see the render snippet below).
 
 ```php
 /**
@@ -144,8 +147,9 @@ Notes:
 ## Data model
 
 Store the layout as an ordered CMB2 `group` (sortable), one row per section.
-v1 row has a single field: a `select` of registry slugs, grouped by `type` into
-optgroups (Product blocks / Banners).
+v1 row has a single field: a flat `select` of registry slugs (labels prefixed
+"Show block:" / "Banner:" for scannability — CMB2's select has no native
+optgroup support, so a flat list is what shipped).
 
 - Option key: dedicated `nm_front_page_layout_options` subpage ("Layout") — keeps
   the main Front Page page readable. **(decided)**
@@ -159,22 +163,30 @@ optgroups (Product blocks / Banners).
 Rendering in `front-page.php` (between the permanent bookends):
 
 ```php
-$registry = nm_get_front_page_block_registry();
-$layout   = NM_get_option( 'nm_front_page_layout', 'nm_front_page_layout_options', array() );
+// $block_context carries shared args (e.g. excluded_posts_ids) for product blocks.
+foreach ( nm_get_front_page_layout() as $block_slug ) {
+  nm_render_front_page_block( $block_slug, $block_context );
+}
+```
 
-foreach ( $layout as $row ) {
-  $slug = $row['block'] ?? '';
-  if ( ! isset( $registry[ $slug ] ) ) {
-    continue;
+`nm_get_front_page_layout()` returns the saved slug order (or the default seed),
+and `nm_render_front_page_block()` does the routing:
+
+```php
+function nm_render_front_page_block( $slug, $context = array() ) {
+  if ( ! is_string( $slug ) || $slug === '' ) {
+    return;
   }
-  $block = $registry[ $slug ];
-
-  if ( $block['type'] === 'banner' ) {
-    // Banners keep their existing render path — it handles newsletter-signup
-    // partials, retired-option no-ops, and a path-traversal security guard.
-    render_front_page_banner( $block['key'] );
-  } else {
-    get_template_part( $block['partial'] );
+  // Banner slugs route by prefix — no registry lookup, so the newsletter query
+  // never runs on the front end.
+  if ( strpos( $slug, 'banner:' ) === 0 ) {
+    render_front_page_banner( substr( $slug, strlen( 'banner:' ) ) );
+    return;
+  }
+  // Product blocks come from the DB-free product registry; context is forwarded.
+  $products = nm_get_front_page_product_blocks();
+  if ( isset( $products[ $slug ] ) ) {
+    get_template_part( $products[ $slug ]['partial'], null, $context );
   }
 }
 ```
@@ -183,9 +195,8 @@ foreach ( $layout as $row ) {
 wrapper — it special-cases `newsletter-signup-{id}` (loads `partials/email-signup`
 with the newsletter ID + mailchimp-key check), no-ops retired option slugs
 (`email-the-cortado`, `email-the-pick`), and enforces a `partials/`-only,
-no-`..` security guard. Banner registry entries therefore store the original
-banner **key** (partial path or `newsletter-signup-{id}`) in a `key` field, and
-the loop passes it straight to `render_front_page_banner`. **(decided)**
+no-`..` security guard. The banner key (partial path or `newsletter-signup-{id}`)
+is the layout slug minus its `banner:` prefix, passed straight to it. **(decided)**
 
 ## Migration
 

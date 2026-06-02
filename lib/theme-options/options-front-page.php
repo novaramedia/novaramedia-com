@@ -96,11 +96,14 @@ function get_newsletter_signup_options() {
  *
  * Includes the static banner partials plus the dynamic newsletter-signup
  * options. The `false => 'None'` entry is only meaningful for the legacy
- * single-banner selects; the registry skips it.
+ * single-banner selects; the full registry skips it.
  *
- * Cached per request — get_newsletter_signup_options() runs DB queries and this
- * is called repeatedly during front-page rendering (once per layout row via the
- * registry) and on admin screens.
+ * Called only on admin screens — by the legacy banner selects and by
+ * nm_get_front_page_block_registry() when building the Layout select options.
+ * The front-end render path routes banners by slug prefix and never calls this,
+ * so its get_newsletter_signup_options() DB query stays off front-page requests.
+ * Still cached per request since the admin select and legacy selects both build
+ * the list.
  *
  * @return array
  */
@@ -311,6 +314,10 @@ function nm_get_front_page_default_layout() {
  * @return void
  */
 function nm_render_front_page_block( $slug, $context = array() ) {
+  if ( ! is_string( $slug ) || $slug === '' ) {
+    return; // ignore empty or corrupted layout rows
+  }
+
   $banner_prefix = 'banner:';
 
   if ( strpos( $slug, $banner_prefix ) === 0 ) {
