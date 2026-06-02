@@ -244,7 +244,7 @@ function nm_get_front_page_layout() {
     $slugs = array();
 
     foreach ( $saved as $row ) {
-      if ( ! empty( $row['block'] ) ) {
+      if ( is_array( $row ) && ! empty( $row['block'] ) ) {
         $slugs[] = $row['block'];
       }
     }
@@ -266,9 +266,10 @@ function nm_get_front_page_layout() {
  * The highlight section is included in its historic position but stays hidden
  * until enabled on its own settings subpage.
  *
- * @deprecated 4.7.0 Transitional migration shim. Remove together with the
- *   legacy banner selects once a layout has been saved in production; after
- *   that, an empty layout should simply render nothing. Earliest removal
+ * @deprecated 4.7.0 No replacement — superseded by the saved layout
+ *   (nm_get_front_page_layout()). Transitional migration shim: remove together
+ *   with the legacy banner selects once a layout has been saved in production;
+ *   after that, an empty layout should simply render nothing. Earliest removal
  *   4.11.0 (4 minors; see docs/deprecation.md).
  * @return string[]
  */
