@@ -154,7 +154,7 @@ function nm_get_front_page_banner_options() {
 function nm_get_front_page_product_blocks() {
   return array(
     'highlight-block' => array(
-      'label'   => 'Highlight section (configured on its own subpage)',
+      'label'   => 'Show block: Highlight section (configured on its own subpage)',
       'partial' => 'partials/front-page/highlight-block',
       'type'    => 'product',
     ),
