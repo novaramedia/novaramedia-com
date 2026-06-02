@@ -2,18 +2,19 @@
 
 ## Rule
 
-**Remove after 4 minor releases, or the next major version, whichever is later.**
+**Remove after 4 minor releases, or at the next major version if that lands sooner — whichever comes first.**
 
-| Deprecated in | Earliest removal (later of 4 minors / next major) |
+| Deprecated in | Earliest removal |
 |---------------|-----------------|
-| 4.3.x | 5.0.0 (later of 4.7.0 and 5.0.0) |
-| 4.6.x | 5.0.0 (later of 4.10.0 and 5.0.0) |
-| 5.0.x | 6.0.0 (later of 5.4.0 and 6.0.0) |
+| 4.3.x | 4.7.0 (4 minors), or 5.0.0 if it ships first |
+| 4.6.x | 4.10.0 (4 minors), or 5.0.0 if it ships first |
+| 4.7.x | 4.11.0 (4 minors), or 5.0.0 if it ships first |
+| 5.0.x | 5.4.0 (4 minors), or 6.0.0 if it ships first |
 
 The 4-minor / next-major rule provides:
 - Enough deploy cycles for content migrations in the DB to have run
-- At least one planned release after the migration lands before the deprecated code is removed
-- A predictable removal window contributors can rely on
+- At least 4 minor releases of grace after a symbol is deprecated
+- A predictable removal window contributors can rely on, capped at the next major so deprecated code never lingers across a major boundary
 
 ## Annotation format
 

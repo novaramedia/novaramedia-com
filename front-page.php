@@ -25,8 +25,13 @@ get_header();
     // Falls back to the historic order when no layout has been saved. The shared
     // context is passed to every product block; only those that need it use it
     // (e.g. the highlight section dedupes against the above-the-fold posts).
+    // Normalise to arrays: get_above_the_fold_featured_post_ids() returns false
+    // when empty (low-content / staging), which would make array_merge throw.
     $block_context = array(
-      'excluded_posts_ids' => array_merge($featured_posts_ids, $latest_news_posts_ids),
+      'excluded_posts_ids' => array_merge(
+        is_array($featured_posts_ids) ? $featured_posts_ids : array(),
+        is_array($latest_news_posts_ids) ? $latest_news_posts_ids : array()
+      ),
     );
 
     foreach (nm_get_front_page_layout() as $block_slug) {

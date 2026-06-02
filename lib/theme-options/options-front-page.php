@@ -133,35 +133,23 @@ function nm_get_front_page_banner_options() {
 }
 
 /**
- * Returns the front-page block registry: every section that can be placed in
- * the Layout editor, keyed by a stable slug.
+ * Returns the product-block half of the registry, keyed by stable slug.
  *
- * Product blocks are singleton partials rendered via get_template_part. Most are
- * arg-less; the render loop passes a shared context array (see
- * nm_render_front_page_block()) so blocks that need it — e.g. the highlight
- * section, which dedupes against the above-the-fold posts — can read it. Their
- * own content config lives on their existing settings subpages.
+ * Singleton partials rendered via get_template_part. Most are arg-less; the
+ * render loop passes a shared context array (see nm_render_front_page_block())
+ * so blocks that need it — e.g. the highlight section, which dedupes against
+ * the above-the-fold posts — can read it. Their own content config lives on
+ * their existing settings subpages.
  *
- * Banners reuse the banner options map and carry the original banner `key`,
- * rendered via render_front_page_banner() (which handles newsletter signups,
- * retired-option no-ops and a path-traversal guard).
+ * This is intentionally DB-free and is the only registry half consulted on the
+ * front-end render path. Banners are routed by slug prefix at render time (see
+ * nm_render_front_page_block()), so the newsletter-options query never runs on
+ * a front-page request.
  *
- * Slugs are stable identifiers — saved layouts reference slugs, not labels or
- * indices, so relabelling or reordering the registry never corrupts a layout.
- *
- * Cached per request — built once even though nm_render_front_page_block()
- * calls it for every layout row during front-page rendering.
- *
- * @return array<string, array{label:string, partial:string, type:string, key?:string}>
+ * @return array<string, array{label:string, partial:string, type:string}>
  */
-function nm_get_front_page_block_registry() {
-  static $cached = null;
-
-  if ( $cached !== null ) {
-    return $cached;
-  }
-
-  $blocks = array(
+function nm_get_front_page_product_blocks() {
+  return array(
     'highlight-block' => array(
       'label'   => 'Highlight section (configured on its own subpage)',
       'partial' => 'partials/front-page/highlight-block',
@@ -183,6 +171,28 @@ function nm_get_front_page_block_registry() {
       'type'    => 'product',
     ),
   );
+}
+
+/**
+ * Returns the full block registry — product blocks plus every banner — keyed by
+ * stable slug. Used to build the Layout select options in admin.
+ *
+ * Banners reuse the banner options map and carry the original banner `key`,
+ * rendered via render_front_page_banner() (which handles newsletter signups,
+ * retired-option no-ops and a path-traversal guard).
+ *
+ * NOTE: this enumerates banners, which triggers the newsletter-options DB
+ * query. It is only called when building the admin select, never on the
+ * front-end render path. Rendering uses nm_get_front_page_product_blocks()
+ * plus prefix-based banner routing instead.
+ *
+ * Slugs are stable identifiers — saved layouts reference slugs, not labels or
+ * indices, so relabelling or reordering the registry never corrupts a layout.
+ *
+ * @return array<string, array{label:string, partial:string, type:string, key?:string}>
+ */
+function nm_get_front_page_block_registry() {
+  $blocks = nm_get_front_page_product_blocks();
 
   foreach ( nm_get_front_page_banner_options() as $key => $label ) {
     if ( ! $key ) {
@@ -196,14 +206,12 @@ function nm_get_front_page_block_registry() {
     );
   }
 
-  $cached = $blocks;
-
-  return $cached;
+  return $blocks;
 }
 
 /**
  * Builds the select options ( slug => label ) for a Layout editor row from the
- * block registry, prefixed with an empty placeholder.
+ * full block registry, prefixed with an empty placeholder. Admin-only.
  *
  * @return array
  */
@@ -258,7 +266,7 @@ function nm_get_front_page_layout() {
  * @deprecated 4.7.0 Transitional migration shim. Remove together with the
  *   legacy banner selects once a layout has been saved in production; after
  *   that, an empty layout should simply render nothing. Earliest removal
- *   4.11.0 / 5.0.0 (see docs/deprecation.md).
+ *   4.11.0 (4 minors; see docs/deprecation.md).
  * @return string[]
  */
 function nm_get_front_page_default_layout() {
@@ -287,32 +295,34 @@ function nm_get_front_page_default_layout() {
 }
 
 /**
- * Renders a single front-page block by its registry slug.
+ * Renders a single front-page block by its layout slug.
  *
- * Banner blocks route through render_front_page_banner(); product blocks render
- * their partial directly, receiving the shared $context array as template args
- * (blocks that don't need it simply ignore it). Unknown slugs are ignored.
+ * Banner slugs (`banner:<key>`) route through render_front_page_banner() using
+ * the key alone — no registry lookup, so the newsletter-options query is never
+ * triggered on the front end. render_front_page_banner() handles newsletter
+ * signups, retired-option no-ops and a path-traversal guard. Product blocks are
+ * looked up in the DB-free product registry and render their partial, receiving
+ * the shared $context array as template args (blocks that don't need it ignore
+ * it). Unknown slugs are ignored.
  *
- * @param string $slug    Registry slug.
+ * @param string $slug    Layout slug.
  * @param array  $context Shared render context passed to product partials
  *                        (e.g. 'excluded_posts_ids' for the highlight section).
  * @return void
  */
 function nm_render_front_page_block( $slug, $context = array() ) {
-  $registry = nm_get_front_page_block_registry();
+  $banner_prefix = 'banner:';
 
-  if ( ! isset( $registry[ $slug ] ) ) {
+  if ( strpos( $slug, $banner_prefix ) === 0 ) {
+    render_front_page_banner( substr( $slug, strlen( $banner_prefix ) ) );
     return;
   }
 
-  $block = $registry[ $slug ];
+  $products = nm_get_front_page_product_blocks();
 
-  if ( $block['type'] === 'banner' ) {
-    render_front_page_banner( $block['key'] );
-    return;
+  if ( isset( $products[ $slug ] ) ) {
+    get_template_part( $products[ $slug ]['partial'], null, $context );
   }
-
-  get_template_part( $block['partial'], null, $context );
 }
 
 /**
@@ -370,7 +380,7 @@ function nm_register_front_page_options_metabox() {
      *
      * @deprecated 4.7.0 Superseded by the Front Page > Layout editor. Retained
      *   only as the source for nm_get_front_page_default_layout()'s seed until a
-     *   layout is saved in production. Earliest removal 4.11.0 / 5.0.0 (see
+     *   layout is saved in production. Earliest removal 4.11.0 (4 minors; see
      *   docs/deprecation.md). Removal must follow a one-time Save on the Layout
      *   page in prod, alongside nm_get_front_page_default_layout().
      */
