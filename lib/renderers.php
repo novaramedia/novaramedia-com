@@ -569,29 +569,6 @@ function render_front_page_banner( $key ) {
   get_template_part( $key );
 }
 /**
- * Renders the title of a post.
- *
- * This function retrieves the title of the post with the given ID and echoes it.
- * If the post has a sub-category and the current page is not that sub-category,
- * it prepends the name of the sub-category to the title.
- *
- * @param int $post_id The ID of the post.
- *
- * @return void
- * @deprecated 3.9.0
- */
-function render_post_title( $post_id ) {
-  $title = get_the_title( $post_id );
-
-  $sub_category = get_the_sub_category( $post_id, true );
-
-  if ( ! empty( $sub_category ) && ! is_category( $sub_category->term_id ) ) {
-    $title = '<span class="font-size-8">' . $sub_category->name . ':</span> ' . $title;
-  }
-
-  echo $title;
-}
-/**
  * Renders a row of resources.
  *
  * This function takes an array of resources, each with a 'title' and 'link' property,
@@ -691,26 +668,6 @@ function render_share_link( string $platform, string $url, array $args = [] ): v
     esc_url( $href ),
     esc_html( $link_text )
   );
-}
-
-/** @deprecated Use render_share_link( 'twitter', $url, [ 'title' => $title, 'link_text' => $link_text, 'hashtag' => $hashtag ] ) */
-function render_tweet_link( $url, $title = null, $link_text = 'Tweet', $hashtag = null ) {
-  render_share_link( 'twitter', $url, compact( 'title', 'link_text', 'hashtag' ) );
-}
-
-/** @deprecated Use render_share_link( 'facebook', $url, [ 'link_text' => $link_text ] ) */
-function render_facebook_share_link( $url, $link_text = 'Facebook share' ) {
-  render_share_link( 'facebook', $url, compact( 'link_text' ) );
-}
-
-/** @deprecated Use render_share_link( 'email', $url, [ 'subject' => $subject, 'link_text' => $link_text ] ) */
-function render_email_share_link( $url, $subject = '', $link_text = 'Email' ) {
-  render_share_link( 'email', $url, compact( 'subject', 'link_text' ) );
-}
-
-/** @deprecated Use render_share_link( 'reddit', $url, [ 'title' => $title, 'link_text' => $link_text ] ) */
-function render_reddit_share_link( $url, $title = null, $link_text = 'Post to Reddit' ) {
-  render_share_link( 'reddit', $url, compact( 'title', 'link_text' ) );
 }
 
 /**
