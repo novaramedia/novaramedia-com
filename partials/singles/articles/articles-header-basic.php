@@ -15,7 +15,7 @@
   </div>
   <div class="grid-item is-s-24 is-m-8 is-xxl-10">
     <?php render_thumbnail($post->ID, 'col20', array(
-      'class' => 'ui-rounded-image',
+      'class' => 'ui-rounded-box',
       'data-no-lazysizes' => true,
       'loading' => 'eager'
     )); ?>

@@ -9,12 +9,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
 - DYOR front-page section — 50:50 layout with show hero, description, and map CTA left; latest episode embed right; row of 4 recent episodes below
 
 ### Changed
 
+- Consolidate rounded-corner CSS helpers: introduce `ui-rounded-box--nested` (4px) for nested inner colour-blocked elements; replace `ui-rounded-image` with `ui-rounded-box` throughout templates
+
 - Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
+- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function; old per-platform functions kept as deprecated wrappers
+
+### Deprecated
+
+- Legacy front-page banner selects — superseded by the Layout editor; retained only to seed the default order. Migration: after deploy, open Front Page > Layout and Save once
+
+### Fixed
+
+- XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
+- Share links missing `rel="noopener noreferrer"` (tabnabbing)
+- Reddit share URL used `http://`; corrected to `https://`
+- Facebook share URL had malformed query string (`?&u=`); corrected to `?u=`
+- Front-page banner switch used `switch(preg_match())` loose comparison; rewritten as explicit `if/elseif`
+- Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
+
+### Fixed
+
+- OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
+- Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
+- Favicon link used `rel="shortcut"` (invalid); corrected to `rel="shortcut icon"`
+- Schema.org `validThrough` on job posts emitted `1970-01-01` when no deadline was set; field now only added when a deadline exists
+- `render_show()` in audio partial declared at file scope without guard, causing fatal redeclare on second include
+- `font-size-S-10` CSS class typo (capital S) on Novara Live block; corrected to `font-size-s-10`
+- Path traversal: `_cmb_article_layout` post meta now validated against known layout values before use in `get_template_part()`
 
 ## [4.6.1] - 2026-05-13
 
@@ -57,6 +84,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
+<<<<<<< copilot/fix-empty-news-category-render
+- Empty News category no longer breaks front page above-the-fold render
+=======
 - YouTube embeds failing to load in Safari
 - YouTube embed iframes missing accessible `title` attribute
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
@@ -64,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove PayPal donation link section on Support page
+>>>>>>> development
 
 ## [4.5.3] - 2026-04-08
 

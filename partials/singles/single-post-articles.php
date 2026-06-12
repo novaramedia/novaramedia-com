@@ -1,7 +1,9 @@
 <?php
   $meta = get_post_meta( $post->ID );
 
-  $layout = ! empty( $meta['_cmb_article_layout'][0] ) ? $meta['_cmb_article_layout'][0] : 'basic';
+  $allowed_layouts = array( 'basic', 'basic-no-image', 'large-image' );
+  $raw_layout      = ! empty( $meta['_cmb_article_layout'][0] ) ? $meta['_cmb_article_layout'][0] : 'basic';
+  $layout          = in_array( $raw_layout, $allowed_layouts, true ) ? $raw_layout : 'basic';
 
   $articles_support_box_text = NM_get_option( 'nm_articles_support_box_text', 'nm_fundraising_options' );
   $support_box_override_text = ! empty( $meta['_cmb_support_box_override'][0] ) ? $meta['_cmb_support_box_override'][0] : false;
@@ -118,10 +120,10 @@ if ( $contributors_posts_array ) {
 ?>
     <div>
       <ul class="inline-action-list font-size-10">
-        <li><?php render_tweet_link( $share_url, $post->post_title, 'Tweet article' ); ?></li>
-        <li><?php render_facebook_share_link( $share_url, 'Share article on Facebook' ); ?></li>
-        <li><?php render_email_share_link( $share_url, $post->post_title, 'Email this article' ); ?></li>
-        <li><?php render_reddit_share_link( $share_url, $post->post_title, 'Post to Reddit' ); ?></li>
+        <li><?php render_share_link( 'twitter', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Tweet article' ) ); ?></li>
+        <li><?php render_share_link( 'facebook', $share_url, array( 'link_text' => 'Share article on Facebook' ) ); ?></li>
+        <li><?php render_share_link( 'email', $share_url, array( 'subject' => $post->post_title, 'link_text' => 'Email this article' ) ); ?></li>
+        <li><?php render_share_link( 'reddit', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Post to Reddit' ) ); ?></li>
       </ul>
     </div>
   </div>

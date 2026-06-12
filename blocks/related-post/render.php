@@ -97,7 +97,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 array( 600, 600 ),
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
             ?>
@@ -111,20 +111,20 @@ $wrapper_attributes = get_block_wrapper_attributes(
           if ( $timestamp ) {
             $time = new \Moment\Moment( '@' . $timestamp );
             ?>
-            <p class="font-size-10 font-weight-bold mt-1"><?php echo esc_html( $time->format( NM_DATE_FORMAT_LONG ) ); ?></p>
-            <?php
-            if ( ! empty( $venue_name ) ) {
-              ?>
-            <p class="font-size-10 font-weight-bold mt-1"><?php echo esc_html( $venue_name ); ?></p>
-              <?php
-            }
-            ?>
+            <p class="font-size-9 mt-1"><?php echo esc_html( $time->format( NM_DATE_FORMAT_LONG ) ); ?></p>
             <?php
           }
           ?>
           <div class="font-size-9 mt-1 text-wrap-balance">
             <?php render_short_description( $related_id ); ?>
           </div>
+          <?php
+          if ( ! empty( $venue_name ) ) {
+            ?>
+            <p class="font-size-9 mt-1"><?php echo esc_html( $venue_name ); ?></p>
+            <?php
+          }
+          ?>
         </a>
         <?php
         if ( $is_future_event && ! empty( $tickets_url ) ) {
@@ -138,7 +138,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
     <?php
   } else {
     // articles + audio share the same shell; only bylines differ.
-    ?>
+  ?>
     <div class="grid-row grid--nested">
       <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
@@ -151,10 +151,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 'col24-16to9',
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
-            ?>
+              ?>
           </a>
         </div>
       </div>
@@ -176,6 +176,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
           }
 
           ?>
+        </a>
         <?php
         if ( $layout === 'audio' ) {
           ?>
@@ -185,10 +186,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
           <?php
         }
         ?>
-        </a>
       </div>
     </div>
             <?php
-  }
-  ?>
+          }
+          ?>
 </div>

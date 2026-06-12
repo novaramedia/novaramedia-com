@@ -57,7 +57,7 @@ $title = esc_html( get_the_title( $article_post_id ) );
         $article_post_id,
         'col4-square',
         array(
-          'class'             => 'ui-rounded-image u-display-block',
+          'class'             => 'ui-rounded-box u-display-block',
           'data-no-lazysizes' => true,
           'loading'           => 'eager',
         )
@@ -82,7 +82,7 @@ $title = esc_html( get_the_title( $article_post_id ) );
         $article_post_id,
         'col12-16to9',
         array(
-          'class'             => 'ui-rounded-image u-display-block',
+          'class'             => 'ui-rounded-box u-display-block',
           'data-no-lazysizes' => true,
           'loading'           => 'eager',
         )
