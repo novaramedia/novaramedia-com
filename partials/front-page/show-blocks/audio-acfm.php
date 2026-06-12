@@ -27,13 +27,13 @@ if ( $acfm ) {
     $featured_meta = get_post_meta( $featured_id );
     $recent = array_slice( $latest, 1 );
     ?>
-    <section class="front-page__audio-products front-page__audio-products--acfm container mt-4 mb-3">
+    <section class="front-page__acfm container mt-4 mb-3">
       <div class="grid-row">
-        <div class="grid-item is-s-24 is-xxl-24 font-color-black ui-rounded-box">
-          <div class="front-page__audio-product front-page__audio-product--acfm background-light-blue pt-3 pl-4 pr-4 pb-3 ui-rounded-box">
+        <div class="grid-item is-s-24 is-xxl-24 font-color-black">
+          <div class="background-light-blue ui-rounded-box pt-3 pl-4 pr-4 pb-3">
             <div class="grid-row grid--nested grid-row--align-center">
               <div class="grid-item is-s-24 is-xxl-3 mb-s-3">
-                <div class="front-page__audio-product-logo">
+                <div class="front-page__acfm-logo">
                   <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
                     <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
                   </a>
@@ -47,7 +47,7 @@ if ( $acfm ) {
                 </a>
               </div>
               <div class="grid-item is-s-24 is-xxl-12">
-                <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 ui-rounded-box ui-rounded-box--nested">
+                <div class="background-white font-color-black ui-rounded-box ui-rounded-box--nested pt-4 pb-4 pl-4 pr-4">
                   <div class="grid-row grid--nested">
                     <div class="grid-item is-s-24 is-xxl-7 is-l-10">
                       <div class="layout-thumbnail-frame">
