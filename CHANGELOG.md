@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
+
 - XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
 - Share links missing `rel="noopener noreferrer"` (tabnabbing)
 - Reddit share URL used `http://`; corrected to `https://`
