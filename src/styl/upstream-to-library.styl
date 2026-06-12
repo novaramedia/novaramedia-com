@@ -65,3 +65,13 @@
 // Deprecated: ui-rounded-box--large has no semantic meaning.
 // Replaced by ui-rounded-box--nested which describes the actual use case.
 // Upstream: rename --large to --nested in nm-stylus-library ui-rounded-box block.
+
+// .ui-border-top uses the old grey. should be updated to the new grey color variable.
+// :not() guards prevent this override beating colour modifier classes (source order)
+.ui-border-top:not(.ui-border--black):not(.ui-border--gray-mid)
+  border-top-color: var(--color-gray-light)
+// same true for other border utilities?
+
+// Border colour modifiers (upstream: add to nm-stylus-library ui-border block)
+.ui-border--gray-mid
+  border-color: var(--color-gray-mid)
