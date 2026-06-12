@@ -67,6 +67,7 @@
 // Upstream: rename --large to --nested in nm-stylus-library ui-rounded-box block.
 
 // .ui-border-top uses the old grey. should be updated to the new grey color variable.
-.ui-border-top
-  border-top: 1px solid var(--color-gray-light)
+// :not(.ui-border--black) prevents this override beating the black-border modifier (source order)
+.ui-border-top:not(.ui-border--black)
+  border-top-color: var(--color-gray-light)
 // same true for other border utilities?
