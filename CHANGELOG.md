@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+- Short URL rewrite from `/dyor` to the Do Your Own Research show page
 
 ### Changed
 
