@@ -92,7 +92,7 @@ if ( $acfm ) {
               </div>
             </div>
 
-            <div class="ui-border-top mt-3 pt-3">
+            <div class="ui-border-top ui-border--gray-mid mt-3 pt-3">
               <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
                 <div class="grid-row grid--nested mb-2">
                   <div class="grid-item is-xxl-12">
