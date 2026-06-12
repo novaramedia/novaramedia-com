@@ -295,7 +295,6 @@ function nm_get_front_page_default_layout() {
     'novara-live',
     $banner_slug( 'nm_front_page_banner_option_2' ),
     'audio',
-    'audio-acfm',
     $banner_slug( 'nm_front_page_banner_option_3' ),
     'downstream',
     $banner_slug( 'nm_front_page_banner_option_4' ),
