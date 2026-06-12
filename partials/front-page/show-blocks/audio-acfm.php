@@ -18,6 +18,9 @@ if ( $acfm ) {
 
   if ( $latest ) {
     $term_link = get_term_link( $acfm );
+    if ( is_wp_error( $term_link ) ) {
+      return;
+    }
     $featured  = $latest[0];
     $f_id      = $featured->ID;
     $f_meta    = get_post_meta( $f_id );
@@ -104,8 +107,8 @@ if ( $acfm ) {
               </a>
               <div class="grid-row grid--nested">
                 <?php
-                foreach ( $recent as $post ) {
-                  $post_id = $post->ID;
+                foreach ( $recent as $episode ) {
+                  $post_id = $episode->ID;
                   ?>
                   <div class="grid-item is-s-24 is-m-12 is-xxl-6 mt-2 mb-2">
                     <a href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>" class="ui-hover">
