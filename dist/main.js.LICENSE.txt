@@ -9,7 +9,7 @@
  * Date: 2026-01-18T00:20Z
  */
 
-/*! js-cookie v3.0.5 | MIT */
+/*! js-cookie v3.0.8 | MIT */
 
 /**
  * @license
