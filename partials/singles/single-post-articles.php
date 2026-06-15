@@ -24,10 +24,11 @@ if ( ! empty( $meta['bitly_url'] ) ) {
     <a href="<?php echo home_url( 'support' ); ?>">
       <div id="single-article-support-box">
       <?php
+      $support_box_kses = array( 'em' => array(), 'strong' => array(), 'p' => array(), 'br' => array(), 'span' => array( 'class' => array() ) );
       if ( $support_box_override_text ) {
-        echo $support_box_override_text;
+        echo wp_kses( $support_box_override_text, $support_box_kses );
       } else {
-        echo $articles_support_box_text;
+        echo wp_kses( $articles_support_box_text, $support_box_kses );
       }
       ?>
       </div>

@@ -40,10 +40,10 @@
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
+      <li><a href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<li><a href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
+        echo '<li><a href="' . esc_url( $meta['_cmb_dl_mp3'][0] ) . '">Download mp3</a></li>';
       }
     ?>
     </ul>
@@ -77,7 +77,7 @@
       if ( ! empty( $meta['_cmb_is_resonance'] ) && $meta['_cmb_is_resonance'][0] ) {
         ?>
         <div class="font-mono font-size-8 mt-1">
-        	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
+        	<a target="_blank" rel="nofollow noopener noreferrer" href="https://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
         }

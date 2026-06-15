@@ -481,7 +481,7 @@ function render_video_title_and_standfirst( $post_id = null ) {
 
   $meta = get_post_meta( $post_id );
 
-  echo get_the_title( $post_id );
+  echo esc_html( get_the_title( $post_id ) );
 
   if ( isset( $meta['_cmb_standfirst'] ) && ! empty( $meta['_cmb_standfirst'] ) ) {
     if ( preg_match( '/[a-zA-Z0-9]$/', get_the_title( $post_id ) ) !== 0 ) {
@@ -761,7 +761,7 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyl
       data-height="<?php echo esc_attr( $height ); ?>"
       style="min-height: <?php echo esc_attr( $height ); ?>px;">
       <noscript>
-        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener">Listen on SoundCloud</a>
+        <a href="<?php echo esc_url( $soundcloud_url ); ?>" target="_blank" rel="noopener noreferrer">Listen on SoundCloud</a>
       </noscript>
     </div>
     <?php

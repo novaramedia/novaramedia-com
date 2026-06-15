@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for standfirst and quote copy (no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
+
 ### Added
 
 - Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
