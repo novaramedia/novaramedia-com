@@ -60,7 +60,7 @@ jobs:
              if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
                echo 'No .git in theme dir — re-cloning (repo appears to have been overwritten by a file copy)'; \
                cd public/wp-content/themes && \
-               ts=\$(date +%s) && \
+               ts=\$(date +%s)-\$RANDOM && \
                if [ -d novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=accept-new -i ~/.ssh/github_deploy_key' git clone git@github.com:novaramedia/novaramedia-com.git novaramedia-com && \
                cd ~; \
