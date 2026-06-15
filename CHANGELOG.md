@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for standfirst and quote copy (no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="noopener noreferrer"` on all `target="_blank"` external links including Resonance FM attribution
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for standfirst and quote copy (no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
 
 ### Added
 
