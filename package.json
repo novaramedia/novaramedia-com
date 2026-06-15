@@ -31,7 +31,7 @@
   "devDependencies": {
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.29.2",
-    "@release-it/keep-a-changelog": "^7.0.0",
+    "@release-it/keep-a-changelog": "^7.1.0",
     "@wordpress/scripts": "^32.2.0",
     "autoprefixer": "^10.5.0",
     "babel-loader": "^10.1.1",
@@ -61,7 +61,7 @@
     "postcss": "~8.5.3",
     "postcss-loader": "^8.2.1",
     "postcss-preset-env": "^11.0.0",
-    "release-it": "^19.0.3",
+    "release-it": "^20.2.0",
     "sharp": "^0.34.5",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
