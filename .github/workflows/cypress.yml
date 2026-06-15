@@ -78,7 +78,16 @@ jobs:
 
           ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
-            "cd public/wp-content/themes/novaramedia-com && \
+            "set -e; \
+             if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
+               echo 'No .git in theme dir — re-cloning (WP Pusher or a manual file copy likely clobbered the repo)'; \
+               cd public/wp-content/themes && \
+               ts=\$(date +%s) && \
+               if [ -d novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
+               GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=accept-new -i ~/.ssh/github_deploy_key' git clone git@github.com:novaramedia/novaramedia-com.git novaramedia-com && \
+               cd ~; \
+             fi; \
+             cd public/wp-content/themes/novaramedia-com && \
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \

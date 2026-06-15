@@ -198,8 +198,10 @@ This should return `403` or `404`. If it returns `200`, contact Kinsta support t
 
 **`fatal: not a git repository`** during CI:
 
-- The theme directory wasn't replaced with a git clone
-- SSH into the server and check: `cd ~/public/wp-content/themes/novaramedia-com && git status`
+- The theme directory's `.git` was clobbered — usually because WP Pusher (or a manual file copy) extracted theme files over the top of the server clone, deleting `.git`.
+- **Self-healing:** the deploy step in both `cypress.yml` and `deploy-staging.yml` now detects a missing `.git` and automatically re-clones `git@github.com:novaramedia/novaramedia-com.git` (using the server's `~/.ssh/github_deploy_key`), moving the clobbered directory to `~/novaramedia-com.broken.<timestamp>` first. No manual intervention needed — the next deploy recovers on its own.
+- If re-clone fails, the deploy key may be missing. SSH in and check: `cd ~/public/wp-content/themes/novaramedia-com && git status`, and re-run Steps 3–6 above.
+- Avoid using WP Pusher to deploy this theme — it bypasses git and breaks the clone. Use the git-based CI deploy instead.
 
 **CI deploy step hangs:**
 
