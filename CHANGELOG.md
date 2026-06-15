@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
 - ACFM standalone front-page full-width product block
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+- DYOR front-page section — 50:50 layout with show hero, description, and map CTA left; latest episode embed right; row of 4 recent episodes below
 - Short URL rewrite from `/dyor` to the Do Your Own Research show page
 
 ### Changed
@@ -88,9 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
-<<<<<<< copilot/fix-empty-news-category-render
 - Empty News category no longer breaks front page above-the-fold render
-=======
 - YouTube embeds failing to load in Safari
 - YouTube embed iframes missing accessible `title` attribute
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
@@ -98,7 +97,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove PayPal donation link section on Support page
->>>>>>> development
 
 ## [4.5.3] - 2026-04-08
 
