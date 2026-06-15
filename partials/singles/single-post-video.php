@@ -47,8 +47,10 @@
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
 
-        // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
-        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
+        // Soft check: if referer is from this host, enable autoplay (browser may still block it).
+        $referer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+        $host    = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+        if ( $referer && $host && strpos( $referer, $host ) !== false ) {
           $autoplay = true;
         }
     ?>

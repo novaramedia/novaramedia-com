@@ -41,7 +41,7 @@ if ( ! $newsletter_id ) {
 
 **File:** `src/blocks/newsletter-signup/edit.js:54`
 
-The block saves the full REST API post object into `attributes.newsletter`, which gets serialised as JSON in `post_content`. Should store only `newsletterId` (integer) and fetch/resolve server-side in `render.php`.
+**Resolved — intentional design.** Block stores `{ id, title }` (not the full post object — that was fixed). The `title` field is used solely for editor UI display (showing the selected newsletter name in the dropdown without an extra API call). `render.php` never reads the stored title — it fetches all data fresh server-side via `get_post_meta()` and `get_the_title()`. No staleness risk on the frontend. See comment in `edit.js`.
 
 ---
 
