@@ -77,6 +77,10 @@ function handle_internal_rewrites() {
       'category' => 'committed',
     ),
     array(
+      'pattern'  => '^dyor/?$',
+      'category' => 'do-your-own-research',
+    ),
+    array(
       'pattern'  => '^tyskysour/?$',
       'category' => 'novara-live',
     ),

@@ -173,6 +173,11 @@ function nm_get_front_page_product_blocks() {
       'partial' => 'partials/front-page/show-blocks/audio',
       'type'    => 'product',
     ),
+    'audio-acfm'      => array(
+      'label'   => 'Show block: ACFM (standalone)',
+      'partial' => 'partials/front-page/show-blocks/audio-acfm',
+      'type'    => 'product',
+    ),
     'downstream'      => array(
       'label'   => 'Show block: Downstream',
       'partial' => 'partials/front-page/show-blocks/downstream',
