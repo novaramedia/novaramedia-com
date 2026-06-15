@@ -47,10 +47,12 @@
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
 
-        // Soft check: if referer is from this host, enable autoplay (browser may still block it).
-        $referer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
-        $host    = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
-        if ( $referer && $host && strpos( $referer, $host ) !== false ) {
+        // Soft check: if referer host matches this host, enable autoplay (browser may still block it).
+        // parse_url() prevents spoofing via host name in query/path (e.g. evil.com/?next=novaramedia.com).
+        $referer      = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+        $host         = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+        $referer_host = $referer ? wp_parse_url( $referer, PHP_URL_HOST ) : '';
+        if ( $referer_host && $host && $referer_host === $host ) {
           $autoplay = true;
         }
     ?>
