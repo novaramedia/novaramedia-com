@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Facebook share URL had malformed query string (`?&u=`); corrected to `?u=`
 - Front-page banner switch used `switch(preg_match())` loose comparison; rewritten as explicit `if/elseif`
 - Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
+- CI deploy self-heals when the staging theme repo's `.git` is missing, re-cloning automatically instead of failing every run
 
 ### Fixed
 
