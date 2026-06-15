@@ -58,7 +58,7 @@ jobs:
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
             "set -e; \
              if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
-               echo 'No .git in theme dir — re-cloning (WP Pusher or a manual file copy likely clobbered the repo)'; \
+               echo 'No .git in theme dir — re-cloning (repo appears to have been overwritten by a file copy)'; \
                cd public/wp-content/themes && \
                ts=\$(date +%s) && \
                if [ -d novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
