@@ -35,9 +35,7 @@ function my_gallery_shortcode( $attr ) {
   }
 
   // Setup attributes from options reverting to default
-
-  extract(
-       shortcode_atts(
+  $atts = shortcode_atts(
     array(
       'order'      => 'ASC',
       'orderby'    => 'menu_order ID',
@@ -49,10 +47,20 @@ function my_gallery_shortcode( $attr ) {
       'size'       => 'gallery',
       'include'    => '',
       'exclude'    => '',
-       ),
-       $attr,
-  )
+    ),
+    $attr
   );
+
+  $order      = $atts['order'];
+  $orderby    = $atts['orderby'];
+  $id         = $atts['id'];
+  $itemtag    = $atts['itemtag'];
+  $icontag    = $atts['icontag'];
+  $captiontag = $atts['captiontag'];
+  $columns    = $atts['columns'];
+  $size       = $atts['size'];
+  $include    = $atts['include'];
+  $exclude    = $atts['exclude'];
 
   $id = intval( $id );
 

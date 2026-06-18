@@ -47,8 +47,14 @@
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
 
-        // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
-        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
+        // Soft check: if referer host matches this host, enable autoplay (browser may still block it).
+        // wp_parse_url() prevents spoofing via host name in query/path (e.g. evil.com/?next=novaramedia.com).
+        // Both hosts are parsed and lowercased so ports, case differences and IPv6 hosts still match.
+        $referer      = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+        $host_header  = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+        $host         = $host_header ? strtolower( (string) wp_parse_url( 'http://' . $host_header, PHP_URL_HOST ) ) : '';
+        $referer_host = $referer ? strtolower( (string) wp_parse_url( $referer, PHP_URL_HOST ) ) : '';
+        if ( $referer_host && $host && $referer_host === $host ) {
           $autoplay = true;
         }
     ?>
