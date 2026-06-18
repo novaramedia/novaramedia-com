@@ -49,9 +49,11 @@
 
         // Soft check: if referer host matches this host, enable autoplay (browser may still block it).
         // parse_url() prevents spoofing via host name in query/path (e.g. evil.com/?next=novaramedia.com).
+        // Host is normalised (port stripped, lowercased) so non-default ports and case differences still match.
         $referer      = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
         $host         = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
-        $referer_host = $referer ? wp_parse_url( $referer, PHP_URL_HOST ) : '';
+        $host         = strtolower( preg_replace( '/:\d+$/', '', $host ) );
+        $referer_host = $referer ? strtolower( (string) wp_parse_url( $referer, PHP_URL_HOST ) ) : '';
         if ( $referer_host && $host && $referer_host === $host ) {
           $autoplay = true;
         }
