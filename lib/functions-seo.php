@@ -138,3 +138,56 @@ function nm_noindex_search_headers( $headers ) {
   return $headers;
 }
 add_filter( 'wp_headers', 'nm_noindex_search_headers' );
+
+/**
+ * Set time-sensitive Cache-Control headers for job pages.
+ *
+ * The jobs archive dynamically filters listings based on deadlines, and single
+ * job pages display a closed notice once the deadline passes. Both change state
+ * at midnight on the relevant date. Setting a short shared-cache TTL (s-maxage)
+ * ensures CDN and proxy caches revalidate at the right time and never serve
+ * stale open/closed states after a deadline has passed.
+ *
+ * - Jobs archive: cache expires at midnight tonight so the listing is refreshed
+ *   each morning and expired jobs are no longer shown.
+ * - Single job (open): cache expires at midnight of the day after the deadline
+ *   so the closed notice appears as soon as the deadline passes.
+ * - Single job (already closed): deadline has already passed, so leave cache
+ *   headers at their WordPress defaults (the page is now static).
+ *
+ * @since 4.6.2
+ *
+ * @param array $headers Existing HTTP headers.
+ * @return array Modified HTTP headers.
+ */
+function nm_job_cache_headers( $headers ) {
+  if ( ! is_singular( 'job' ) && ! is_page( 'jobs' ) ) {
+    return $headers;
+  }
+
+  $now            = time();
+  $today_midnight = (int) strtotime( 'midnight' ); // 00:00 today
+  $expires        = $today_midnight + DAY_IN_SECONDS; // 00:00 tomorrow
+
+  if ( is_singular( 'job' ) ) {
+    $deadline = (int) get_post_meta( get_queried_object_id(), '_nm_deadline', true );
+
+    if ( $deadline <= 0 || $deadline < $today_midnight ) {
+      // No deadline stored, or deadline already passed — page is static now.
+      return $headers;
+    }
+
+    // Cache expires at the start of the day after the deadline so the closed
+    // notice appears on time without requiring a manual cache purge.
+    $deadline_midnight = (int) strtotime( 'midnight', $deadline );
+    $expires           = $deadline_midnight + DAY_IN_SECONDS;
+  }
+
+  $ttl = max( 0, $expires - $now );
+
+  $headers['Cache-Control'] = 'public, max-age=' . $ttl . ', s-maxage=' . $ttl;
+  $headers['Expires']       = gmdate( 'D, d M Y H:i:s', $expires ) . ' GMT';
+
+  return $headers;
+}
+add_filter( 'wp_headers', 'nm_job_cache_headers' );
