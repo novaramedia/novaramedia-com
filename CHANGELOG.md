@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Legacy front-page banner selects — superseded by the Layout editor; retained only to seed the default order. Migration: after deploy, open Front Page > Layout and Save once
 
+### Removed
+
+- Unused `job` post-type archive (`has_archive` now false) — the public jobs listing is the `/about/jobs` Page; the `/job/` archive was an unfiltered, stale duplicate. Requires a permalink flush after deploy (Settings > Permalinks > Save)
+
 ### Fixed
 
 - Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
