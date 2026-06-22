@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
+- Uneven spacing between product-bar cards — grey card shrank to its text width inside fixed 300px slides; card now fills the slide for consistent gaps
 
 - XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
 - Share links missing `rel="noopener noreferrer"` (tabnabbing)
