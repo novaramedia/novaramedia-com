@@ -155,7 +155,7 @@ add_filter( 'wp_headers', 'nm_noindex_search_headers' );
  * - Single job (already closed): deadline has already passed, so leave cache
  *   headers at their WordPress defaults (the page is now static).
  *
- * @since 4.6.2
+ * @since 4.7.0
  *
  * @param array $headers Existing HTTP headers.
  * @return array Modified HTTP headers.
