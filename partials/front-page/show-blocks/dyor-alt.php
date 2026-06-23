@@ -35,21 +35,6 @@ $featured         = $dyor_posts[0];
 $featured_youtube = get_post_meta( $featured->ID, '_cmb_utube', true );
 $recent           = array_slice( $dyor_posts, 1 );
 ?>
-<style>
-  .front-page-dyor-alt { overflow: hidden; }
-  /* Slim the banner to the overlay's content ratio: the exported PNG has a tall
-     transparent top margin, so anchor it to the bottom and crop that empty band. */
-  .front-page-dyor-alt__banner { position: relative; overflow: hidden; aspect-ratio: 1410 / 180; }
-  .front-page-dyor-alt__banner-overlay { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; display: block; }
-  .front-page-dyor-alt__recent-thumb { flex: none; width: 96px; }
-  .front-page-dyor-alt__cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: flex-end;
-  }
-  .front-page-dyor-alt__cta .ui-button { white-space: nowrap; }
-</style>
 <section class="container mt-4 mb-4">
   <div class="grid-item is-xxl-24">
     <div class="front-page-dyor-alt ui-rounded-box background-white">
@@ -76,7 +61,7 @@ $recent           = array_slice( $dyor_posts, 1 );
           </div>
           <div class="grid-item is-xxl-8 is-s-24">
             <div class="front-page-dyor-alt__cta">
-              <a class="ui-button ui-button--small ui-button--red" href="<?php echo esc_url( ! empty( $podcast_url ) ? $podcast_url : $category_link ); ?>"<?php echo ! empty( $podcast_url ) ? ' target="_blank" rel="nofollow noopener"' : ''; ?>>Subscribe to the podcast</a>
+              <a class="ui-button ui-button--small ui-button--red" href="<?php echo esc_url( ! empty( $podcast_url ) ? $podcast_url : $category_link ); ?>"<?php echo ! empty( $podcast_url ) ? ' target="_blank" rel="nofollow noopener noreferrer"' : ''; ?>>Subscribe to the podcast</a>
               <?php if ( ! empty( $figma_file_key ) ) { ?>
               <a class="ui-button ui-button--small ui-button--black" href="<?php echo esc_url( $category_link . '#map' ); ?>">Explore the map</a>
               <?php } ?>

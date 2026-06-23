@@ -42,6 +42,38 @@
 .front-page-dyor__top-row
   align-items: flex-end
 
+// DYOR ALT module (design-comparison block)
+.front-page-dyor-alt
+  overflow: hidden
+
+// Slim the banner to the overlay's content ratio: the exported PNG has a tall
+// transparent top margin, so anchor it to the bottom and crop that empty band.
+.front-page-dyor-alt__banner
+  position: relative
+  overflow: hidden
+  aspect-ratio: 1410 / 180
+
+.front-page-dyor-alt__banner-overlay
+  position: absolute
+  left: 0
+  bottom: 0
+  width: 100%
+  height: auto
+  display: block
+
+.front-page-dyor-alt__recent-thumb
+  flex: none
+  width: 96px
+
+.front-page-dyor-alt__cta
+  display: flex
+  flex-wrap: wrap
+  gap: 0.5rem
+  justify-content: flex-end
+
+  .ui-button
+    white-space: nowrap
+
 .front-page__audio-product--novarafm
   .front-page__audio-product-logo
     svg
