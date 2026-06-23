@@ -329,3 +329,44 @@ function nm_get_custom_metadata_for_datalayer() {
 
   return $data;
 }
+
+/**
+ * Cap the shared-cache TTL on job pages so CDN/proxy caches revalidate as a
+ * job's open/closed state flips at midnight on its deadline date, instead of
+ * serving an expired job as still open.
+ *
+ * - Jobs listing page (`/jobs`): expires at midnight tonight, refreshed nightly.
+ * - Open single job: expires at midnight after the deadline, matching the
+ *   `_nm_deadline` open/closed boundary used in single-job.php.
+ * - Closed single job (deadline passed): left at WordPress defaults — static.
+ *
+ * @param array $headers Existing HTTP headers.
+ * @return array Modified HTTP headers.
+ */
+function nm_job_cache_headers( $headers ) {
+  if ( ! is_singular( 'job' ) && ! is_page( 'jobs' ) ) {
+    return $headers;
+  }
+
+  $today_midnight = (int) strtotime( 'midnight' );
+  $expires = $today_midnight + DAY_IN_SECONDS;
+
+  if ( is_singular( 'job' ) ) {
+    $deadline = (int) get_post_meta( get_queried_object_id(), '_nm_deadline', true );
+
+    // No deadline, or it has already passed: page is static, leave WP defaults.
+    if ( $deadline <= 0 || $deadline < $today_midnight ) {
+      return $headers;
+    }
+
+    $expires = (int) strtotime( 'midnight', $deadline ) + DAY_IN_SECONDS;
+  }
+
+  $ttl = max( 0, $expires - time() );
+
+  $headers['Cache-Control'] = 'public, max-age=' . $ttl . ', s-maxage=' . $ttl;
+  $headers['Expires'] = gmdate( 'D, d M Y H:i:s', $expires ) . ' GMT';
+
+  return $headers;
+}
+add_filter( 'wp_headers', 'nm_job_cache_headers' );
