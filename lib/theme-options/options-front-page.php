@@ -168,6 +168,11 @@ function nm_get_front_page_product_blocks() {
       'partial' => 'partials/front-page/show-blocks/dyor',
       'type'    => 'product',
     ),
+    'dyor-alt'        => array(
+      'label'   => 'Show block: Do Your Own Research (ALT — design comparison)',
+      'partial' => 'partials/front-page/show-blocks/dyor-alt',
+      'type'    => 'product',
+    ),
     'audio'           => array(
       'label'   => 'Show block: Audio (Novara FM + ACFM)',
       'partial' => 'partials/front-page/show-blocks/audio',
@@ -300,6 +305,7 @@ function nm_get_front_page_default_layout() {
     'novara-live',
     $banner_slug( 'nm_front_page_banner_option_2' ),
     'dyor',
+    'dyor-alt',
     'audio',
     $banner_slug( 'nm_front_page_banner_option_3' ),
     'downstream',

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- DYOR front-page ALT section — alternative layout for design comparison: full-width hero banner, dual CTA, large featured episode with recent-episodes list; selectable in the Layout editor
 - Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
 - ACFM standalone front-page full-width product block
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
