@@ -112,10 +112,10 @@ $recent           = array_slice( $dyor_posts, 1 );
             </a>
             <?php foreach ( $recent as $recent_post ) { ?>
             <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="grid-row grid--nested-tight ui-hover mb-3">
-              <div class="grid-item is-xxl-6">
+              <div class="grid-item is-xxl-7">
                 <?php render_thumbnail( $recent_post->ID, 'col4-16to9', array( 'class' => 'ui-rounded-image u-display-block' ) ); ?>
               </div>
-              <div class="grid-item is-xxl-18">
+              <div class="grid-item is-xxl-17">
                 <h5 class="font-size-10 font-size-s-9 font-weight-bold text-wrap-pretty mb-0"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h5>
               </div>
             </a>
