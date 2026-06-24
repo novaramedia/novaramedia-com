@@ -50,9 +50,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Front-page banner switch used `switch(preg_match())` loose comparison; rewritten as explicit `if/elseif`
 - Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
 - CI deploy self-heals when the staging theme repo's `.git` is missing, re-cloning automatically instead of failing every run
-
-### Fixed
-
 - Job pages served stale open/closed states after deadlines passed; `Cache-Control` / `Expires` headers now cap the shared-cache TTL so caches revalidate at midnight on the deadline date for single job pages and nightly for the jobs archive (`lib/functions-hooks.php`)
 
 - OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
