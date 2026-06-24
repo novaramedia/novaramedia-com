@@ -3,10 +3,15 @@
  * ALT layout of the Do Your Own Research front-page show block.
  *
  * Built from Figma node 2184-4815 for side-by-side comparison against the
- * current `dyor.php`. Differences vs current: full-bleed decorative banner on
- * top; intro copy + dual CTA row (Subscribe / Explore map); a large horizontal
- * featured episode (image + title beside) with a narrow vertical recent-episode
- * list sidebar — instead of the current YouTube-embed feature + 2×2 grid.
+ * current `dyor.php`. Both render the featured episode as a YouTube embed
+ * (falling back to the thumbnail when no video is set) and pull from the same
+ * posts; only the layout differs.
+ *
+ * Differences vs current: full-width decorative banner hero on top (widescreen
+ * overlay on desktop, the taller standard overlay on mobile); intro copy + dual
+ * CTA row (Subscribe / Explore map); a large featured episode with its title
+ * beside the embed on XXL and below it on smaller screens; and the remaining
+ * episodes as a vertical sidebar list instead of the current 2×2 grid.
  */
 
 $dyor_category = get_term_by( 'slug', 'do-your-own-research', 'category' );
