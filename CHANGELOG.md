@@ -18,8 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
 - ACFM standalone front-page full-width product block
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
-- DYOR front-page section — 50:50 layout with show hero, description, and map CTA left; latest episode embed right; row of 4 recent episodes below
 - Short URL rewrite from `/dyor` to the Do Your Own Research show page
+- Environment gating for in-development front-page blocks via new `nm_is_production()` helper — show on local/development/staging, hide on production
 
 ### Changed
 

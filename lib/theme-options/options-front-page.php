@@ -152,7 +152,7 @@ function nm_get_front_page_banner_options() {
  * @return array<string, array{label:string, partial:string, type:string}>
  */
 function nm_get_front_page_product_blocks() {
-  return array(
+  $blocks = array(
     'highlight-block' => array(
       'label'   => 'Show block: Highlight section (configured on its own subpage)',
       'partial' => 'partials/front-page/highlight-block',
@@ -189,6 +189,17 @@ function nm_get_front_page_product_blocks() {
       'type'    => 'product',
     ),
   );
+
+  // Do Your Own Research is still in development. Keep both DYOR blocks
+  // available on local/development/staging but hide them on production — they
+  // disappear from the admin Layout options and, because the front-end render
+  // path looks blocks up in this same registry, never render even if a saved
+  // production layout references them. See nm_render_front_page_block().
+  if ( nm_is_production() ) {
+    unset( $blocks['dyor'], $blocks['dyor-alt'] );
+  }
+
+  return $blocks;
 }
 
 /**
@@ -304,7 +315,6 @@ function nm_get_front_page_default_layout() {
     'highlight-block',
     'novara-live',
     $banner_slug( 'nm_front_page_banner_option_2' ),
-    'dyor',
     'audio',
     $banner_slug( 'nm_front_page_banner_option_3' ),
     'downstream',
