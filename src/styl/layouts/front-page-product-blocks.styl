@@ -42,15 +42,15 @@
 .front-page-dyor__top-row
   align-items: flex-end
 
-// DYOR ALT module (design-comparison block)
-.front-page-dyor-alt
-  overflow: hidden
+// DYOR ALT module (design-comparison block).
+// Only properties with no library-helper equivalent live here; overflow,
+// position, display and button white-space are handled by utility classes in
+// the markup.
 
 // Slim the banner to the overlay's content ratio: the exported PNG has a tall
-// transparent top margin, so anchor it to the bottom and crop that empty band.
+// transparent top margin, so the overlay is anchored to the bottom and this
+// crops the empty band. No utility exists for aspect-ratio.
 .front-page-dyor-alt__banner
-  position: relative
-  overflow: hidden
   aspect-ratio: 1410 / 180
 
 .front-page-dyor-alt__banner-overlay
@@ -59,14 +59,18 @@
   bottom: 0
   width: 100%
   height: auto
-  display: block
 
+// flex-wrap + gap have no utility (layout-flex-justify-right covers only the
+// justify); keep the whole rule together so the mobile justify override is
+// same-selector and source-order reliable.
 .front-page-dyor-alt__cta
   display: flex
   flex-wrap: wrap
   gap: 0.5rem
   justify-content: flex-end
 
+  // .ui-button has a global white-space:nowrap, but it's overridden in this
+  // context — restate it so the button labels never wrap mid-text.
   .ui-button
     white-space: nowrap
 
