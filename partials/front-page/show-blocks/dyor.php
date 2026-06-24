@@ -91,7 +91,12 @@ $recent           = array_slice( $dyor_posts, 1 );
             <?php foreach ( $recent as $recent_post ) { ?>
             <div class="grid-item is-s-12 is-xxl-6 mt-3">
               <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="ui-hover">
-                <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image mb-2' ) ); ?>
+                <div class="layout-thumbnail-frame mb-2">
+                  <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+                    <?php render_post_ui_tags( $recent_post->ID, false, true, 'no-border' ); ?>
+                  </div>
+                  <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                </div>
                 <h4 class="font-size-10 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h4>
               </a>
             </div>
