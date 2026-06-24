@@ -39,9 +39,12 @@ $recent           = array_slice( $dyor_posts, 1 );
   <div class="grid-item is-xxl-24">
     <div class="front-page-dyor-alt ui-rounded-box background-white">
 
-      <?php // ── Hero banner: clouds background (reuses .front-page-dyor → dyor-background) + full-width transparent head/text overlay (widescreen header layer exported from Figma) ── ?>
+      <?php // ── Hero banner: clouds background (reuses .front-page-dyor → dyor-background) + transparent head/text overlay. Widescreen overlay on desktop; the taller standard dyor-hero overlay on mobile (the widescreen one is too skinny at narrow widths). ── ?>
       <div class="front-page-dyor-alt__banner front-page-dyor">
         <picture>
+          <source media="(max-width: 759px)" srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.avif' ); ?>" type="image/avif">
+          <source media="(max-width: 759px)" srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.webp' ); ?>" type="image/webp">
+          <source media="(max-width: 759px)" srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.png' ); ?>" type="image/png">
           <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero-wide.avif' ); ?>" type="image/avif">
           <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero-wide.webp' ); ?>" type="image/webp">
           <img class="front-page-dyor-alt__banner-overlay" src="<?php echo esc_url( $base_image_path . 'dyor-hero-wide.png' ); ?>" alt="Do Your Own Research" />
