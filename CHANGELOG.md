@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Legacy front-page banner selects — superseded by the Layout editor; retained only to seed the default order. Migration: after deploy, open Front Page > Layout and Save once
 
+### Removed
+
+- Unused `job` post-type archive (`has_archive` now false) — the public jobs listing is the `/about/jobs` Page; the `/job/` archive was an unfiltered, stale duplicate. Requires a permalink flush after deploy (Settings > Permalinks > Save)
+
 ### Fixed
 
 - Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
@@ -46,6 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI deploy self-heals when the staging theme repo's `.git` is missing, re-cloning automatically instead of failing every run
 
 ### Fixed
+
+- Job pages served stale open/closed states after deadlines passed; `Cache-Control` / `Expires` headers now cap the shared-cache TTL so caches revalidate at midnight on the deadline date for single job pages and nightly for the jobs archive (`lib/functions-hooks.php`)
 
 - OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
 - Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
