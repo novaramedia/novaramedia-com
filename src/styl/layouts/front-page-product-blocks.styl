@@ -61,10 +61,6 @@
   height: auto
   display: block
 
-.front-page-dyor-alt__recent-thumb
-  flex: none
-  width: 96px
-
 .front-page-dyor-alt__cta
   display: flex
   flex-wrap: wrap
@@ -73,6 +69,10 @@
 
   .ui-button
     white-space: nowrap
+
+@media screen and (max-width: $breakpoint-s)
+  .front-page-dyor-alt__cta
+    justify-content: flex-start
 
 .front-page__audio-product--novarafm
   .front-page__audio-product-logo

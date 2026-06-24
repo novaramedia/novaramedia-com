@@ -103,12 +103,12 @@ $recent           = array_slice( $dyor_posts, 1 );
               </div>
             </a>
             <?php foreach ( $recent as $recent_post ) { ?>
-            <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="ui-hover u-display-block mb-3">
-              <div class="layout-flex">
-                <div class="front-page-dyor-alt__recent-thumb mr-2">
-                  <?php render_thumbnail( $recent_post->ID, 'col4-16to9', array( 'class' => 'ui-rounded-image u-display-block' ) ); ?>
-                </div>
-                <h5 class="font-size-10 font-size-s-9 font-weight-bold text-wrap-pretty mb-1"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h5>
+            <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="grid-row grid--nested-tight ui-hover mb-3">
+              <div class="grid-item is-xxl-6">
+                <?php render_thumbnail( $recent_post->ID, 'col4-16to9', array( 'class' => 'ui-rounded-image u-display-block' ) ); ?>
+              </div>
+              <div class="grid-item is-xxl-18">
+                <h5 class="font-size-10 font-size-s-9 font-weight-bold text-wrap-pretty mb-0"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h5>
               </div>
             </a>
             <?php } ?>
