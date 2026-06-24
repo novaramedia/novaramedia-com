@@ -12,7 +12,7 @@ if ( $twitter ) {
 $fb_app_id = IGV_get_option( '_igv_og_fb_app_id' );
 
 if ( $fb_app_id ) {
-  echo '<meta name="fb:app_id" content="' . esc_attr( $fb_app_id ) . '">';
+  echo '<meta property="fb:app_id" content="' . esc_attr( $fb_app_id ) . '">';
 }
 
 ?>

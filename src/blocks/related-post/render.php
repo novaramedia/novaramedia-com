@@ -116,7 +116,14 @@ $wrapper_attributes = get_block_wrapper_attributes(
           }
           ?>
           <div class="font-size-9 mt-1 text-wrap-balance">
-            <?php render_short_description( $related_id ); ?>
+            <?php
+            // Plain text only: this tile is wrapped in an outer <a>, so the
+            // description must not emit its own anchors (render_short_description()
+            // can, via the_content/wp_kses_post — that would nest anchors).
+            $related_short_desc = get_post_meta( $related_id, '_cmb_short_desc', true );
+            $related_desc       = $related_short_desc ? $related_short_desc : get_the_excerpt( $related_id );
+            echo esc_html( wp_strip_all_tags( $related_desc ) );
+            ?>
           </div>
           <?php
           if ( ! empty( $venue_name ) ) {

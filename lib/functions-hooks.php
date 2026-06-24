@@ -348,6 +348,13 @@ function nm_job_cache_headers( $headers ) {
     return $headers;
   }
 
+  // Never emit shared-cache headers for logged-in or preview responses: a CDN
+  // configured to cache HTML despite cookies could otherwise leak admin-bar or
+  // preview content across users.
+  if ( is_user_logged_in() || is_preview() ) {
+    return $headers;
+  }
+
   $today_midnight = (int) strtotime( 'midnight' );
   $expires = $today_midnight + DAY_IN_SECONDS;
 
