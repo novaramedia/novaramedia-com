@@ -31,6 +31,20 @@ function url_get_contents( $url ) {
   return $output;
 }
 
+/**
+ * Whether the current site is the production environment.
+ *
+ * Wraps WordPress's native wp_get_environment_type(), which respects the
+ * WP_ENVIRONMENT_TYPE constant (set automatically by Kinsta for production and
+ * staging). Use `! nm_is_production()` to gate not-yet-ready features so they
+ * stay available on local/development/staging but never reach production.
+ *
+ * @return bool True on production, false on local/development/staging.
+ */
+function nm_is_production() {
+  return wp_get_environment_type() === 'production';
+}
+
 /**  A is_single for custom post type */
 function is_single_type( $type, $post ) {
   if ( get_post_type( $post->ID ) === $type ) {
