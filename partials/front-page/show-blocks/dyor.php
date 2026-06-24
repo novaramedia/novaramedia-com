@@ -54,13 +54,13 @@ $recent           = array_slice( $dyor_posts, 1 );
           <div class="grid-item is-s-24 is-xxl-12 mb-4">
             <div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
               <?php if ( ! empty( $featured_youtube ) ) { ?>
-              <div class="u-video-embed-container ui-rounded-image mb-3">
+              <div class="u-video-embed-container ui-rounded-box mb-3">
                 <?php echo render_youtube_embed_iframe( $featured_youtube, false, 'lazy', get_the_title( $featured->ID ) ); ?>
               </div>
               <?php } else { ?>
               <div class="mb-3">
                 <a href="<?php echo esc_url( get_the_permalink( $featured->ID ) ); ?>" class="ui-hover">
-                  <?php render_thumbnail( $featured->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                  <?php render_thumbnail( $featured->ID, 'col12-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
                 </a>
               </div>
               <?php } ?>
@@ -95,7 +95,7 @@ $recent           = array_slice( $dyor_posts, 1 );
                   <div class="layout-thumbnail-frame__inner mt-1 ml-1">
                     <?php render_post_ui_tags( $recent_post->ID, false, true, 'no-border' ); ?>
                   </div>
-                  <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                  <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
                 </div>
                 <h4 class="font-size-10 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h4>
               </a>

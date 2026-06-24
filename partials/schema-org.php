@@ -22,7 +22,9 @@ if (is_single() && get_post_type() === 'job') {
   );
 
   if ( $deadlline ) {
-    $json_ld['validThrough'] = date( 'c', strtotime( $deadlline ) );
+    // _nm_deadline is stored as a UNIX timestamp (see single-job.php / page-jobs.php),
+    // so format it directly in UTC rather than running it through strtotime().
+    $json_ld['validThrough'] = gmdate( 'c', (int) $deadlline );
   }
 
   $json_ld = array_merge( $json_ld, array(

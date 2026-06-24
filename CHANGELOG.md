@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [4.7.0] - 2026-06-24
 
 ### Security
@@ -26,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consolidate rounded-corner CSS helpers: introduce `ui-rounded-box--nested` (4px) for nested inner colour-blocked elements; replace `ui-rounded-image` with `ui-rounded-box` throughout templates
 
 - Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
-- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function; old per-platform functions kept as deprecated wrappers
+- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function, replacing the per-platform share helpers
 
 ### Deprecated
 

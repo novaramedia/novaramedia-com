@@ -33,7 +33,7 @@ phantom `/job/` archive route isn't removed until rules are flushed.
 
 ### 3. Verify job-page cache busting at the edge
 The `Cache-Control` / `Expires` headers set by `nm_job_cache_headers()`
-(`lib/functions-seo.php`) make the jobs listing and single job pages revalidate
+(`lib/functions-hooks.php`) make the jobs listing and single job pages revalidate
 at deadline midnight. **But those origin headers can be stripped or overridden
 by the caching stack in front of WP** — Kinsta's server-level full-page cache
 and/or Cloudflare. Confirm what the **edge** actually returns:

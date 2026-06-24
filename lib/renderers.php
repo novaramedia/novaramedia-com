@@ -525,8 +525,25 @@ function render_bylines( $post_id, $is_linked = false ) {
   $format = $is_linked ? 'html' : 'text';
   $authors = nm_get_post_authors( $post_id, $format );
 
-  // Display fallback if no authors found. Text format returns raw string — escape here.
-  echo $authors !== false ? esc_html( $authors ) : 'Novara Reporters';
+  // Text mode returns a raw string — escape it. HTML mode returns anchor markup
+  // already escaped inside nm_get_post_authors(), so pass it through wp_kses with
+  // an anchor allowlist rather than esc_html(), which would mangle the links.
+  if ( $authors === false ) {
+    echo 'Novara Reporters';
+  } elseif ( $is_linked ) {
+    echo wp_kses(
+      $authors,
+      array(
+        'a' => array(
+          'href'   => array(),
+          'target' => array(),
+          'rel'    => array(),
+        ),
+      )
+    );
+  } else {
+    echo esc_html( $authors );
+  }
 }
 
 /**
