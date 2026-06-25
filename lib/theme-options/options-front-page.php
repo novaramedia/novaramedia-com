@@ -91,20 +91,45 @@ function get_newsletter_signup_options() {
 }
 
 /**
- * Returns the banner options map ( banner key => label ) used by both the
- * legacy banner selects and the front-page block registry.
+ * The single source of truth for the static banner partials, keyed by stable,
+ * opaque slug ( `banner-<name>` => [ label, partial ] ).
  *
- * Includes the static banner partials plus the dynamic newsletter-signup
- * options. The `false => 'None'` entry is only meaningful for the legacy
- * single-banner selects; the full registry skips it.
+ * DB-free and trusted: the partial paths live here in code, never in saved data.
+ * Both the block registry (front-end render + admin select) and the deprecated
+ * legacy banner selects derive their banner entries from this one list.
  *
- * Called only on admin screens — by the legacy banner selects and by
- * nm_get_front_page_block_registry() when building the Layout select options.
- * The front-end render path routes banners by slug prefix and never calls this,
- * so its get_newsletter_signup_options() DB query stays off front-page requests.
- * Still cached per request since the admin select and legacy selects both build
- * the list.
+ * Newsletter signups are NOT here — they are dynamic posts, enumerated only for
+ * the admin select via get_newsletter_signup_options(), and rendered by ID.
  *
+ * @return array<string, array{label:string, partial:string}>
+ */
+function nm_get_front_page_static_banners() {
+  return array(
+    'banner-support-section'        => array( 'label' => 'Support section', 'partial' => 'partials/support-section' ),
+    'banner-support-video'          => array( 'label' => 'Support Video', 'partial' => 'partials/specials/banners/support-video' ),
+    'banner-podcast-death-in-westminster' => array( 'label' => 'Podcast: Death in Westminster', 'partial' => 'partials/specials/banners/podcast-death-in-westminster' ),
+    'banner-podcast-committed'      => array( 'label' => 'Podcast: Committed', 'partial' => 'partials/specials/banners/podcast-committed' ),
+    'banner-podcast-if-i-speak'     => array( 'label' => 'Podcast: If I Speak', 'partial' => 'partials/specials/banners/podcast-if-i-speak' ),
+    'banner-focus-pro-rev-soccer'   => array( 'label' => 'Focus: Pro Rev Soccer', 'partial' => 'partials/specials/banners/focus-pro-rev-soccer' ),
+    'banner-podcast-foreign-agent'  => array( 'label' => 'Podcast: Foreign Agent', 'partial' => 'partials/specials/banners/podcast-foreign-agent' ),
+    'banner-focus-doing-it-right-sex-on-the-left' => array( 'label' => 'Focus: Doing It Right: Sex On The Left', 'partial' => 'partials/specials/banners/focus-doing-it-right-sex-on-the-left' ),
+    'banner-focus-breaking-britain' => array( 'label' => 'Focus: Breaking Britain', 'partial' => 'partials/specials/banners/focus-breaking-britain' ),
+    'banner-focus-disability-its-political' => array( 'label' => 'Focus: Disability: It’s Political', 'partial' => 'partials/specials/banners/focus-disability-its-political' ),
+    'banner-podcast-planet-b'       => array( 'label' => 'Podcast: Planet B', 'partial' => 'partials/specials/banners/podcast-planet-b' ),
+    'banner-survey-link'            => array( 'label' => 'Audience Survey 2026', 'partial' => 'partials/specials/banners/survey-link' ),
+  );
+}
+
+/**
+ * Banner options map ( partial-path => label ) for the deprecated legacy banner
+ * selects only. Keyed by partial path (the historic stored value), derived from
+ * nm_get_front_page_static_banners() so there is one banner list to maintain.
+ * Prepends the `false => 'None'` entry and appends the dynamic newsletter
+ * signups. Admin-only.
+ *
+ * @deprecated 4.7.0 Used only by the legacy banner selects, which are superseded
+ *   by the Layout editor. Remove together with those selects (earliest 4.11.0).
+ *   New code routes through nm_get_front_page_block_registry().
  * @return array
  */
 function nm_get_front_page_banner_options() {
@@ -114,21 +139,11 @@ function nm_get_front_page_banner_options() {
     return $options;
   }
 
-  $banner_options = array(
-    false                                              => 'None',
-    'partials/support-section'                         => 'Support section',
-    'partials/specials/banners/support-video'          => 'Support Video',
-    'partials/specials/banners/podcast-death-in-westminster' => 'Podcast: Death in Westminster',
-    'partials/specials/banners/podcast-committed'      => 'Podcast: Committed',
-    'partials/specials/banners/podcast-if-i-speak'     => 'Podcast: If I Speak',
-    'partials/specials/banners/focus-pro-rev-soccer'   => 'Focus: Pro Rev Soccer',
-    'partials/specials/banners/podcast-foreign-agent'  => 'Podcast: Foreign Agent',
-    'partials/specials/banners/focus-doing-it-right-sex-on-the-left' => 'Focus: Doing It Right: Sex On The Left',
-    'partials/specials/banners/focus-breaking-britain' => 'Focus: Breaking Britain',
-    'partials/specials/banners/focus-disability-its-political' => 'Focus: Disability: It’s Political',
-    'partials/specials/banners/podcast-planet-b'       => 'Podcast: Planet B',
-    'partials/specials/banners/survey-link'            => 'Audience Survey 2026',
-  );
+  $banner_options = array( false => 'None' );
+
+  foreach ( nm_get_front_page_static_banners() as $banner ) {
+    $banner_options[ $banner['partial'] ] = $banner['label'];
+  }
 
   $options = array_merge( $banner_options, get_newsletter_signup_options() );
 
@@ -136,65 +151,57 @@ function nm_get_front_page_banner_options() {
 }
 
 /**
- * Returns the product-block half of the registry, keyed by stable slug.
+ * The front-page block registry: the single, DB-free source of truth for every
+ * statically-defined section, keyed by stable, opaque slug.
  *
- * Singleton partials rendered via get_template_part. Most are arg-less; the
- * render loop passes a shared context array (see nm_render_front_page_block())
- * so blocks that need it — e.g. the highlight section, which dedupes against
- * the above-the-fold posts — can read it. Their own content config lives on
- * their existing settings subpages.
+ * Each entry is [ type, label, partial ]:
+ *   - type 'product' — receives the shared render context (see
+ *     nm_render_front_page_block()); e.g. the highlight section dedupes against
+ *     the above-the-fold posts. Content config lives on its own settings subpage.
+ *   - type 'banner'  — arg-less partial, no render context.
  *
- * This is intentionally DB-free and is the only registry half consulted on the
- * front-end render path. Banners are routed by slug prefix at render time (see
- * nm_render_front_page_block()), so the newsletter-options query never runs on
- * a front-page request.
+ * Consumed by BOTH the front-end render path (resolve slug → type + partial) and
+ * the admin Layout select (labels). It is intentionally DB-free, so it is safe
+ * on every front-page request. Newsletter signups are not here — they are
+ * dynamic posts, listed only in the admin select (see
+ * nm_get_front_page_layout_select_options()) and rendered by ID at request time.
  *
- * @return array<string, array{label:string, partial:string, type:string}>
+ * Slugs are stable identifiers — saved layouts store slugs, not labels, paths or
+ * indices, so relabelling, re-pathing or reordering never corrupts a layout, and
+ * no path from saved data ever reaches get_template_part().
+ *
+ * @return array<string, array{type:string, label:string, partial:string}>
  */
-function nm_get_front_page_product_blocks() {
+function nm_get_front_page_block_registry() {
+  static $blocks = null;
+
+  if ( $blocks !== null ) {
+    return $blocks;
+  }
+
   $blocks = array(
-    'highlight-block' => array(
-      'label'   => 'Show block: Highlight section (configured on its own subpage)',
-      'partial' => 'partials/front-page/highlight-block',
-      'type'    => 'product',
-    ),
-    'novara-live'     => array(
-      'label'   => 'Show block: Novara Live',
-      'partial' => 'partials/front-page/show-blocks/novara-live',
-      'type'    => 'product',
-    ),
-    'dyor'            => array(
-      'label'   => 'Show block: Do Your Own Research',
-      'partial' => 'partials/front-page/show-blocks/dyor',
-      'type'    => 'product',
-    ),
-    'dyor-alt'        => array(
-      'label'   => 'Show block: Do Your Own Research (ALT — design comparison)',
-      'partial' => 'partials/front-page/show-blocks/dyor-alt',
-      'type'    => 'product',
-    ),
-    'audio'           => array(
-      'label'   => 'Show block: Audio (Novara FM + ACFM)',
-      'partial' => 'partials/front-page/show-blocks/audio',
-      'type'    => 'product',
-    ),
-    'audio-acfm'      => array(
-      'label'   => 'Show block: ACFM (standalone)',
-      'partial' => 'partials/front-page/show-blocks/audio-acfm',
-      'type'    => 'product',
-    ),
-    'downstream'      => array(
-      'label'   => 'Show block: Downstream',
-      'partial' => 'partials/front-page/show-blocks/downstream',
-      'type'    => 'product',
-    ),
+    'highlight-block' => array( 'type' => 'product', 'label' => 'Show block: Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
+    'novara-live'     => array( 'type' => 'product', 'label' => 'Show block: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
+    'dyor'            => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
+    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
+    'audio'           => array( 'type' => 'product', 'label' => 'Show block: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
+    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Show block: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
+    'downstream'      => array( 'type' => 'product', 'label' => 'Show block: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
   );
+
+  foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
+    $blocks[ $slug ] = array(
+      'type'    => 'banner',
+      'label'   => 'Banner: ' . $banner['label'],
+      'partial' => $banner['partial'],
+    );
+  }
 
   // Do Your Own Research is still in development. Keep both DYOR blocks
   // available on local/development/staging but hide them on production — they
   // disappear from the admin Layout options and, because the front-end render
-  // path looks blocks up in this same registry, never render even if a saved
-  // production layout references them. See nm_render_front_page_block().
+  // path resolves blocks against this same registry, never render even if a
+  // saved production layout references them. See nm_render_front_page_block().
   if ( nm_is_production() ) {
     unset( $blocks['dyor'], $blocks['dyor-alt'] );
   }
@@ -203,44 +210,14 @@ function nm_get_front_page_product_blocks() {
 }
 
 /**
- * Returns the full block registry — product blocks plus every banner — keyed by
- * stable slug. Used to build the Layout select options in admin.
+ * Builds the select options ( slug => label ) for a Layout editor row, prefixed
+ * with an empty placeholder. Admin-only.
  *
- * Banners reuse the banner options map and carry the original banner `key`,
- * rendered via render_front_page_banner() (which handles newsletter signups,
- * retired-option no-ops and a path-traversal guard).
- *
- * NOTE: this enumerates banners, which triggers the newsletter-options DB
- * query. It is only called when building the admin select, never on the
- * front-end render path. Rendering uses nm_get_front_page_product_blocks()
- * plus prefix-based banner routing instead.
- *
- * Slugs are stable identifiers — saved layouts reference slugs, not labels or
- * indices, so relabelling or reordering the registry never corrupts a layout.
- *
- * @return array<string, array{label:string, partial:string, type:string, key?:string}>
- */
-function nm_get_front_page_block_registry() {
-  $blocks = nm_get_front_page_product_blocks();
-
-  foreach ( nm_get_front_page_banner_options() as $key => $label ) {
-    if ( ! $key ) {
-      continue; // skip the 'None' entry
-    }
-    $blocks[ 'banner:' . $key ] = array(
-      'label'   => 'Banner: ' . $label,
-      'partial' => $key,
-      'key'     => $key,
-      'type'    => 'banner',
-    );
-  }
-
-  return $blocks;
-}
-
-/**
- * Builds the select options ( slug => label ) for a Layout editor row from the
- * full block registry, prefixed with an empty placeholder. Admin-only.
+ * The static registry supplies products and banners; the dynamic newsletter
+ * signups are appended here — this is the one place the newsletter-options DB
+ * query runs, and it never touches the front-end render path. Newsletter option
+ * keys ( `newsletter-signup-<id>` ) are themselves valid layout slugs, resolved
+ * by ID at render time (see nm_render_front_page_block()).
  *
  * @return array
  */
@@ -249,6 +226,10 @@ function nm_get_front_page_layout_select_options() {
 
   foreach ( nm_get_front_page_block_registry() as $slug => $block ) {
     $options[ $slug ] = $block['label'];
+  }
+
+  foreach ( get_newsletter_signup_options() as $slug => $label ) {
+    $options[ $slug ] = $label;
   }
 
   return $options;
@@ -284,13 +265,42 @@ function nm_get_front_page_layout() {
 }
 
 /**
+ * Translates a legacy banner-select stored value into a current layout slug.
+ *
+ * Legacy selects stored either a banner partial path or a `newsletter-signup-<id>`
+ * key. Partial paths are matched back to their opaque registry slug; newsletter
+ * keys pass through unchanged (already valid layout slugs). Retired or unknown
+ * values return null and are dropped from the seed.
+ *
+ * @deprecated 4.7.0 Transitional — remove with the legacy banner selects and
+ *   nm_get_front_page_default_layout() (earliest 4.11.0).
+ * @param string $value Legacy stored banner value.
+ * @return string|null Layout slug, or null if it maps to nothing renderable.
+ */
+function nm_legacy_banner_value_to_layout_slug( $value ) {
+  $value = (string) $value;
+
+  if ( str_starts_with( $value, 'newsletter-signup-' ) ) {
+    return $value;
+  }
+
+  foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
+    if ( $banner['partial'] === $value ) {
+      return $slug;
+    }
+  }
+
+  return null;
+}
+
+/**
  * Default layout seed reproducing the historic hardcoded order:
  * banner 1, highlight section, Novara Live, banner 2, Audio, banner 3,
  * Downstream, banner 4.
  *
- * Reads the legacy banner option values; banner slots set to None are skipped.
- * The highlight section is included in its historic position but stays hidden
- * until enabled on its own settings subpage.
+ * Reads the legacy banner option values; banner slots set to None, retired or
+ * unknown are skipped. The highlight section is included in its historic
+ * position but stays hidden until enabled on its own settings subpage.
  *
  * @deprecated 4.7.0 No replacement — superseded by the saved layout
  *   (nm_get_front_page_layout()). Transitional migration shim: remove together
@@ -307,7 +317,7 @@ function nm_get_front_page_default_layout() {
       return null;
     }
 
-    return 'banner:' . $value;
+    return nm_legacy_banner_value_to_layout_slug( $value );
   };
 
   $layout = array(
@@ -327,13 +337,17 @@ function nm_get_front_page_default_layout() {
 /**
  * Renders a single front-page block by its layout slug.
  *
- * Banner slugs (`banner:<key>`) route through render_front_page_banner() using
- * the key alone — no registry lookup, so the newsletter-options query is never
- * triggered on the front end. render_front_page_banner() handles newsletter
- * signups, retired-option no-ops and a path-traversal guard. Product blocks are
- * looked up in the DB-free product registry and render their partial, receiving
- * the shared $context array as template args (blocks that don't need it ignore
- * it). Unknown slugs are ignored.
+ * Statically-defined sections (products and banners) are resolved against the
+ * DB-free registry and dispatched on their `type`: products receive the shared
+ * $context as template args (blocks that don't need it ignore it); banners are
+ * arg-less. The partial path comes from the trusted registry, never from the
+ * saved slug, so no stored data reaches get_template_part() as a path.
+ *
+ * Newsletter signups are the one dynamic family: their slug
+ * (`newsletter-signup-<id>`) is not in the static registry, so it falls through
+ * to an ID-based lookup. No newsletter enumeration runs on the front end.
+ *
+ * Unknown slugs (retired, corrupted, or a production-gated block) are ignored.
  *
  * @param string $slug    Layout slug.
  * @param array  $context Shared render context passed to product partials
@@ -345,17 +359,23 @@ function nm_render_front_page_block( $slug, $context = array() ) {
     return; // ignore empty or corrupted layout rows
   }
 
-  $banner_prefix = 'banner:';
+  $registry = nm_get_front_page_block_registry();
 
-  if ( strpos( $slug, $banner_prefix ) === 0 ) {
-    render_front_page_banner( substr( $slug, strlen( $banner_prefix ) ) );
+  if ( isset( $registry[ $slug ] ) ) {
+    $block = $registry[ $slug ];
+
+    if ( $block['type'] === 'product' ) {
+      get_template_part( $block['partial'], null, $context );
+    } else {
+      get_template_part( $block['partial'] );
+    }
+
     return;
   }
 
-  $products = nm_get_front_page_product_blocks();
-
-  if ( isset( $products[ $slug ] ) ) {
-    get_template_part( $products[ $slug ]['partial'], null, $context );
+  // The sole dynamic family: a reference to a newsletter post, keyed by ID.
+  if ( str_starts_with( $slug, 'newsletter-signup-' ) ) {
+    nm_render_newsletter_signup( $slug );
   }
 }
 

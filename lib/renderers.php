@@ -547,43 +547,35 @@ function render_bylines( $post_id, $is_linked = false ) {
 }
 
 /**
- * Renders a banner from template parts according to value from meta field select. Has ability to custom render for template parts that require arguements like email signup
+ * Renders a newsletter signup form for a front-page layout slug.
  *
- * @param string $key A key from the meta select. Default is the path to a template part, otherwise the key needs to be unique but descriptive and used to hook custom logic.
+ * The slug ( `newsletter-signup-<id>` ) carries the newsletter post ID. Renders
+ * the email-signup partial only when the post exists, is a newsletter, and has a
+ * Mailchimp key. The ID is the only stored data — never a template path — so no
+ * path-traversal guard is required.
+ *
+ * @param string $slug Layout slug of the form `newsletter-signup-<id>`.
+ * @return void
  */
-function render_front_page_banner( $key ) {
-  if ( ! $key || $key === '0' ) {
+function nm_render_newsletter_signup( $slug ) {
+  $prefix = 'newsletter-signup-';
+
+  if ( ! str_starts_with( $slug, $prefix ) ) {
     return;
   }
 
-  if ( str_starts_with( $key, 'newsletter-signup-' ) ) {
-    $newsletter_id = (int) str_replace( 'newsletter-signup-', '', $key );
-    $newsletter    = get_post( $newsletter_id );
+  $newsletter_id = (int) substr( $slug, strlen( $prefix ) );
+  $newsletter    = get_post( $newsletter_id );
 
-    if ( ! $newsletter || $newsletter->post_type !== 'newsletter' ) {
-      return;
-    }
-
-    $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
-
-    if ( $mailchimp_key ) {
-      get_template_part( 'partials/email-signup', null, array( 'newsletter_post_id' => $newsletter->ID ) );
-    }
-
+  if ( ! $newsletter || $newsletter->post_type !== 'newsletter' ) {
     return;
   }
 
-  // Retired option values (deprecated in 3.9.0) — silently no-op; these slugs are no longer supported
-  if ( $key === 'email-the-cortado' || $key === 'email-the-pick' ) {
-    return;
-  }
+  $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
 
-  // Only allow template parts under partials/ with no path traversal
-  if ( ! str_starts_with( $key, 'partials/' ) || str_contains( $key, '..' ) ) {
-    return;
+  if ( $mailchimp_key ) {
+    get_template_part( 'partials/email-signup', null, array( 'newsletter_post_id' => $newsletter->ID ) );
   }
-
-  get_template_part( $key );
 }
 /**
  * Renders a row of resources.
