@@ -558,7 +558,13 @@ function render_bylines( $post_id, $is_linked = false ) {
  * @return void
  */
 function nm_render_newsletter_signup( $slug ) {
-  $newsletter_id = (int) str_replace( 'newsletter-signup-', '', $slug );
+  $prefix = 'newsletter-signup-';
+
+  if ( ! str_starts_with( $slug, $prefix ) ) {
+    return;
+  }
+
+  $newsletter_id = (int) substr( $slug, strlen( $prefix ) );
   $newsletter    = get_post( $newsletter_id );
 
   if ( ! $newsletter || $newsletter->post_type !== 'newsletter' ) {

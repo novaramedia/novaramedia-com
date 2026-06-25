@@ -173,6 +173,12 @@ function nm_get_front_page_banner_options() {
  * @return array<string, array{type:string, label:string, partial:string}>
  */
 function nm_get_front_page_block_registry() {
+  static $blocks = null;
+
+  if ( $blocks !== null ) {
+    return $blocks;
+  }
+
   $blocks = array(
     'highlight-block' => array( 'type' => 'product', 'label' => 'Show block: Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
     'novara-live'     => array( 'type' => 'product', 'label' => 'Show block: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
@@ -272,7 +278,9 @@ function nm_get_front_page_layout() {
  * @return string|null Layout slug, or null if it maps to nothing renderable.
  */
 function nm_legacy_banner_value_to_layout_slug( $value ) {
-  if ( str_starts_with( (string) $value, 'newsletter-signup-' ) ) {
+  $value = (string) $value;
+
+  if ( str_starts_with( $value, 'newsletter-signup-' ) ) {
     return $value;
   }
 
