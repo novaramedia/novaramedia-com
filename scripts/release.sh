@@ -89,7 +89,7 @@ if [ "$CREATE_PR" = true ]; then
   gh pr create \
     --base master \
     --head development \
-    --title "Release $VERSION" \
+    --title "Release: $VERSION" \
     --body "$(cat <<EOF
 ## Release $VERSION
 

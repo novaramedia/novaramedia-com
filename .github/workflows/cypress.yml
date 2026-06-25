@@ -78,7 +78,16 @@ jobs:
 
           ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
             "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
-            "cd public/wp-content/themes/novaramedia-com && \
+            "set -e; \
+             if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
+               echo 'No .git in theme dir — re-cloning (repo appears to have been overwritten by a file copy)'; \
+               cd public/wp-content/themes && \
+               ts=\$(date +%s)-\$RANDOM && \
+               if [ -e novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
+               GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=accept-new' git clone git@github.com:novaramedia/novaramedia-com.git novaramedia-com && \
+               cd ~; \
+             fi; \
+             cd public/wp-content/themes/novaramedia-com && \
              git fetch origin && \
              git reset --hard HEAD && \
              git clean -fd && \
@@ -191,7 +200,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies

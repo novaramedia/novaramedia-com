@@ -18,8 +18,16 @@ if (is_single() && get_post_type() === 'job') {
       "value" => get_the_ID(),
     ),
     "datePosted" => get_the_time('c'),
-    "validThrough" => date('c', $deadlline),
     "employmentType" => $type,
+  );
+
+  if ( $deadlline ) {
+    // _nm_deadline is stored as a UNIX timestamp (see single-job.php / page-jobs.php),
+    // so format it directly in UTC rather than running it through strtotime().
+    $json_ld['validThrough'] = gmdate( 'c', (int) $deadlline );
+  }
+
+  $json_ld = array_merge( $json_ld, array(
     "hiringOrganization" => array(
       "@type" => "Organization",
       "name" => "Novara Media",
@@ -34,7 +42,7 @@ if (is_single() && get_post_type() === 'job') {
         "unitText" => "HOUR",
       ),
     ),
-  );
+  ) );
 
   $address_london = array(
     "@type" => "Place",

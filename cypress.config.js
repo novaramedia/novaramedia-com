@@ -11,7 +11,6 @@ module.exports = defineConfig({
 
     // Video recording settings
     video: true,
-    videoCompression: 32,
 
     // Screenshot settings
     screenshotOnRunFailure: true,
@@ -35,6 +34,4 @@ module.exports = defineConfig({
     },
   },
 
-  // Chrome flags for better CI performance
-  chromeWebSecurity: false,
 });

@@ -32,6 +32,23 @@ function nm_cmb_posttype_event_metaboxes() {
 
   $event_meta_boxes->add_field(
     array(
+      'name' => __( 'Standfirst', 'cmb' ),
+      'id'   => $prefix . 'standfirst',
+      'type' => 'textarea_small',
+    )
+  );
+
+  $event_meta_boxes->add_field(
+    array(
+      'name'    => __( 'Short description', 'cmb' ),
+      'id'      => $prefix . 'short_desc',
+      'type'    => 'wysiwyg',
+      'options' => array( 'textarea_rows' => 5 ),
+    )
+  );
+
+  $event_meta_boxes->add_field(
+    array(
       'name' => __( 'Venue name', 'cmb' ),
       'id'   => $prefix . 'venue_name',
       'type' => 'text',

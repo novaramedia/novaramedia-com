@@ -199,7 +199,7 @@ function add_featured_image_to_feed( $content ) {
   global $post;
 
   if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ) {
-    return get_the_post_thumbnail( $post->ID, apply_filters( 'rss_featured_image_thumbnail_size', 'large' ), 'data-no-lazysizes' ) . $content;
+    return get_the_post_thumbnail( $post->ID, apply_filters( 'rss_featured_image_thumbnail_size', 'large' ), array( 'data-no-lazysizes' => 'true' ) ) . $content;
   }
   return $content;
 }

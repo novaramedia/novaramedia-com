@@ -68,7 +68,7 @@ if ( $has_embed ) {
       $featured_post_id,
       'col24-16to9',
       array(
-        'class'             => 'ui-rounded-image',
+        'class'             => 'ui-rounded-box',
         'data-no-lazysizes' => true,
         'loading'           => 'eager',
         )

@@ -52,7 +52,7 @@ if ( have_posts() ) {
           </div>
             <?php
           } else {
-            the_post_thumbnail( 'col8', array( 'class' => 'ui-rounded-image' ) );
+            the_post_thumbnail( 'col8', array( 'class' => 'ui-rounded-box' ) );
           }
           ?>
         </div>

@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.7.0] - 2026-06-24
+
+### Security
+
+- Compare parsed referer host to `$_SERVER['HTTP_HOST']` via `wp_parse_url()` for video autoplay check — prevents spoofing via host name in referer query/path (`partials/singles/single-post-video.php`)
+- Replace `extract()` with explicit variable assignments in custom gallery shortcode (`lib/custom-gallery.php`)
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for quote copy and standfirst (both plain-text fields, no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
+
+### Added
+
+- Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
+- ACFM standalone front-page full-width product block
+- Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+- Short URL rewrite from `/dyor` to the Do Your Own Research show page
+- Environment gating for in-development front-page blocks via new `nm_is_production()` helper — show on local/development/staging, hide on production
+
+### Changed
+
+- Consolidate rounded-corner CSS helpers: introduce `ui-rounded-box--nested` (4px) for nested inner colour-blocked elements; replace `ui-rounded-image` with `ui-rounded-box` throughout templates
+
+- Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
+- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function, replacing the per-platform share helpers
+
+### Deprecated
+
+- Legacy front-page banner selects — superseded by the Layout editor; retained only to seed the default order. Migration: after deploy, open Front Page > Layout and Save once
+
+### Removed
+
+- Unused `job` post-type archive (`has_archive` now false) — the public jobs listing is the `/about/jobs` Page; the `/job/` archive was an unfiltered, stale duplicate. Requires a permalink flush after deploy (Settings > Permalinks > Save)
+
+### Fixed
+
+- Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
+- XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
+- Share links missing `rel="noopener noreferrer"` (tabnabbing)
+- Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
+- CI deploy self-heals when the staging theme repo's `.git` is missing, re-cloning automatically instead of failing every run
+- Job pages served stale open/closed states after deadlines passed; `Cache-Control` / `Expires` headers now cap the shared-cache TTL so caches revalidate at midnight on the deadline date for single job pages and nightly for the jobs archive (`lib/functions-hooks.php`)
+- OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
+- Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
+- Schema.org `validThrough` on job posts emitted `1970-01-01` when no deadline was set; field now only added when a deadline exists
+- `render_show()` in audio partial declared at file scope without guard, causing fatal redeclare on second include
+- Path traversal: `_cmb_article_layout` post meta now validated against known layout values before use in `get_template_part()`
+- Code tidy and refactor: product-bar card spacing, Reddit/Facebook share-URL formatting, front-page banner `switch`→`if/elseif`, favicon `rel`, and Novara Live `font-size` class casing
+
 ## [4.6.1] - 2026-05-13
 
 ### Changed
@@ -48,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Header menu spacing on mobile
+- Empty News category no longer breaks front page above-the-fold render
 - YouTube embeds failing to load in Safari
 - YouTube embed iframes missing accessible `title` attribute
 - Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
