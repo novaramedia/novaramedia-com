@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Compare parsed referer host to `$_SERVER['HTTP_HOST']` via `wp_parse_url()` for video autoplay check — prevents spoofing via host name in referer query/path (`partials/singles/single-post-video.php`)
 - Replace `extract()` with explicit variable assignments in custom gallery shortcode (`lib/custom-gallery.php`)
-- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for quote copy (no HTML expected) and `wp_kses_post` for standfirst (preserves inline formatting); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for quote copy and standfirst (both plain-text fields, no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
 
 ### Added
 

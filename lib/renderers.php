@@ -462,7 +462,11 @@ function render_standfirst( $post_id = null ) {
   $meta = get_post_meta( $post_id );
 
   if ( isset( $meta['_cmb_standfirst'] ) && ! empty( $meta['_cmb_standfirst'] ) ) {
-    echo wp_kses_post( $meta['_cmb_standfirst'][0] );
+    // The standfirst field is a plain-text textarea (no rich-text/link UI), so
+    // render it as pure text. esc_html is stricter than wp_kses_post and also
+    // makes it safe inside linked-card tiles that wrap it in an outer <a> (no
+    // nested anchors possible). Covers render_video_title_and_standfirst too.
+    echo esc_html( $meta['_cmb_standfirst'][0] );
   } else {
     return;
   }
