@@ -26,9 +26,17 @@
     margin: 0 auto
     display: block
 
-// cover/center/repeat handled by the .background-cover-image library helper in
-// the markup; only the image source lives here.
-.front-page-dyor
+// Progressive enhancement: the build (sharp via image-minimizer) generates the
+// .webp/.avif from the source .jpg into dist; the .avif/.webp/.fallback classes
+// are set on <html> by the feature-detect script. cover/center/repeat are
+// handled by the .background-cover-image library helper in the markup.
+.avif .front-page-dyor
+  background-image: url('./img/products/dyor/dyor-background.avif')
+
+.webp .front-page-dyor
+  background-image: url('./img/products/dyor/dyor-background.webp')
+
+.fallback .front-page-dyor
   background-image: url('./img/products/dyor/dyor-background.jpg')
 
 // No library helper for flex-end alignment (only .layout-flex-align-center).
