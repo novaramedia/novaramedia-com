@@ -26,7 +26,7 @@ $recent           = array_slice( $dyor_posts, 1 );
 ?>
 <section class="container mt-4 mb-4">
   <div class="grid-item is-xxl-24">
-    <div class="grid-row front-page-dyor ui-rounded-box ui-backgrounded-box-padding">
+    <div class="grid-row front-page-dyor background-cover-image ui-rounded-box ui-backgrounded-box-padding">
 
       <?php // Top: 50:50 — hero/description/CTA left, embed+title right. Bottom-aligned so white boxes share a baseline. ?>
 

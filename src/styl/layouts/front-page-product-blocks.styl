@@ -26,19 +26,12 @@
     margin: 0 auto
     display: block
 
-.avif .front-page-dyor
-  background-image: url('./img/products/dyor/dyor-background.avif')
-
-.webp .front-page-dyor
-  background-image: url('./img/products/dyor/dyor-background.webp')
-
-.fallback .front-page-dyor
+// cover/center/repeat handled by the .background-cover-image library helper in
+// the markup; only the image source lives here.
+.front-page-dyor
   background-image: url('./img/products/dyor/dyor-background.jpg')
 
-.front-page-dyor
-  background-size: cover
-  background-position: center
-
+// No library helper for flex-end alignment (only .layout-flex-align-center).
 .front-page-dyor__top-row
   align-items: flex-end
 
