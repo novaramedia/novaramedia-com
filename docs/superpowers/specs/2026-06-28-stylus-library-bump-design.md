@@ -21,7 +21,7 @@ This cycle recurs every few releases and is currently un-codified.
 
 ## Context (as explored 2026-06-28)
 
-- Library local clone: `/Users/patrickbest/Sites/novaramedia/nm-stylus-library`
+- Library local clone: `~/Sites/novaramedia/nm-stylus-library`
   (separate repo, **not** vendored in the theme; npm pulls it from
   `github:novaramedia/nm-stylus-library#vX.Y.Z`).
 - Library state: clean, `main`, version `0.13.0`, tags `v0.11/12/13`.
@@ -102,6 +102,44 @@ Captured non-obvious knowledge:
   first.
 - Release flow + manual push/tag gate.
 - Order: release library → re-pin → install → build → clean staging → verify.
+
+## Future considerations (not this release — capture for the skill)
+
+### Library docblock convention
+
+Adopt a lightweight, consistent comment convention in `nm-stylus-library` for
+modules/mixins/classes:
+
+- One-line purpose above each block.
+- `@since vX.Y.Z` when introduced.
+- `@deprecated since vX.Y.Z → use <replacement>` on aliases scheduled for removal.
+
+Payoff beyond docs: deprecations become **machine-greppable**. The bump skill
+can `grep '@deprecated since'` to auto-list aliases due for removal in the next
+cycle, instead of relying on memory or staging breadcrumbs. The library already
+has loose header comments (e.g. the grid/ui module headers); this just
+formalises them. Defer any doc *generator* tooling — convention first.
+
+### Repo-agnostic skill design (donor repo is not always this theme)
+
+Upstream styles can originate from **any** consumer/"donor" repo — this
+WordPress theme today, but also a microservice or the Meteor app. The
+`stylus-library-bump` skill must not hardcode theme specifics. Parameterise /
+discover per run:
+
+- **Staging-file path** — here `src/styl/upstream-to-library.styl`; varies per
+  donor. Ask or detect.
+- **Dependency-pin mechanism** — here npm `github:novaramedia/nm-stylus-library#vX`
+  in `package.json`; another donor may pin differently (different manager,
+  submodule, etc.). Detect the pin location, don't assume `package.json`.
+- **Build + smoke targets** — delegated to `verify-dep-update`, which is already
+  project-aware; the skill passes the donor's build/smoke context through.
+- **Library clone path** — `~/Sites/novaramedia/nm-stylus-library` for this
+  user; ask/confirm, store as a per-machine setting rather than hardcoding.
+
+The invariant across donors: triage staging items against current lib → promote
+(additive / one-cycle alias for breaking) → release lib (manual push gate) →
+re-pin donor → migrate donor usages → clean staging → verify.
 
 ## Out of scope
 
