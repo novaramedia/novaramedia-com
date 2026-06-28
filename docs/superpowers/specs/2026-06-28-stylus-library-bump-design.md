@@ -25,8 +25,14 @@ This cycle recurs every few releases and is currently un-codified.
   (separate repo, **not** vendored in the theme; npm pulls it from
   `github:novaramedia/nm-stylus-library#vX.Y.Z`).
 - Library state: clean, `main`, version `0.13.0`, tags `v0.11/12/13`.
-  Release flow = bump `package.json` + update `CHANGELOG.md` + `[Release] x.y.z`
-  commit + `git tag vx.y.z`. (`main` is one unreleased commit ahead of `v0.13.0`.)
+  Release flow = **`release-it`** (`npm run release`, requires `main`): runs
+  `build:variables`, bumps version, moves `CHANGELOG.md` `[Unreleased]` → version
+  via the keep-a-changelog plugin, commits `[Release] x.y.z`, tags `vx.y.z`,
+  pushes, creates a **draft** GitHub release (published manually). Not hand-tagged.
+  (`main` is one unreleased commit ahead of `v0.13.0`.)
+- Library variables are generated: edit `variables.json` / `build-variables.js`,
+  never `variables.styl`/`variables.js` directly (`npm run build:variables`).
+  `npm test` validates the three stay in sync.
 - Theme pin: `package.json` → `nm-stylus-library: github:...#v0.13.0`.
 - Theme is the sole consumer.
 - Prior upstreaming branch convention: `upstream-nmcom-<theme-version>`
@@ -47,47 +53,55 @@ Library greys (`variables.styl`): `--color-gray-light-old: rgb(190,190,190)`,
 
 | # | Item | Decision | Library target | Theme migration |
 |---|---|---|---|---|
-| 1 | Container-width vars | **Add** `$container-xxl…$container-smax` Stylus vars mirroring existing `--container-*` custom-prop values; stem naming (`$container-xl`, not `-width-`). Custom props already exist; the `$` vars are the gap (usable in `@media`/`calc`). | `variables.styl` | — |
+| 1 | Container-width vars | **Add** `$container-xxl…$container-smax` Stylus vars. Container values already exist in `variables.json` (`layout.containerXxl…containerSMax`) and emit as `--container-*` custom props. `variables.styl` is **auto-generated** — extend `scripts/build-variables.js` to also emit `$container-*` Stylus vars from the layout container entries, then `npm run build:variables`. Validator (`validate-variables.js`) doesn't check layout vars, so `npm test` still passes. | `scripts/build-variables.js` (regenerates `variables.styl`/`.js`) | — |
 | 2 | `.ui-tag:before` dot | **Fix:** `width`/`height` `1cap` → `0.7em` (cap unit renders inconsistently across browsers). | `modules/ui.styl` | — |
-| 3 | `.text-overflow-ellipsis` | **Fix:** replace invalid `overflow: ellipsis` with `white-space:nowrap` + `overflow:hidden` + `text-overflow:ellipsis`. | `utility/helpers.styl` | — |
+| 3 | `.text-overflow-ellipsis` | **Fix:** replace invalid `overflow: ellipsis` with `white-space:nowrap` + `overflow:hidden` + `text-overflow:ellipsis`. (Currently broken at `modules/typography.styl:124-125`.) | `modules/typography.styl` | — |
 | 4 | `.ui-button--gray` | **Add** modifier (bg `--color-gray-mid`, text `--color-black-soft`, hover keeps gray border + black text). Confirmed not pre-existing (the other `--gray` rules are `.ui-dot` and a tag block). | `modules/ui.styl` (`.ui-button` block) | — |
-| 5 | Grid nesting name | **Rename + alias:** add canonical `.grid-row--nested` + `.grid-row--nested-tight`; keep `.grid--nested(-tight)` as deprecated aliases for one cycle. | `functions/grid-function-new.styl` | `src/blocks/related-post/render.php` (2×) → `grid-row--nested` |
-| 6 | Video embed container | **Generalise + modernise:** new base `.ui-embed-container` (default 16:9 via modern `aspect-ratio`) + ratio modifiers (`--4-3`, `--1-1`). Deprecate old `.u-video-embed-container` (`helpers.styl`) and `.ui-responsive-video-container` (`ui.styl`) as one-cycle aliases. | `modules/ui.styl` (new); deprecate in `helpers.styl` + `ui.styl` | all `.u-video-embed-container` usages (category.php, page-support.php ×2, category-novara-live.php, page-how-we-are-funded.php ×2, category-downstream.php, …) → `ui-embed-container` |
+| 5 | Grid nesting name | **Rename + alias:** add canonical `.grid-row--nested` + `.grid-row--nested-tight`; keep `.grid--nested(-tight)` as deprecated aliases for one cycle. | `functions/grid-function-new.styl` | ~33 `grid--nested(-tight)` usages across ~20 files → `grid-row--nested(-tight)`. Deferred to Phase 2 (alias bridges). |
+| 6 | Video embed container | **Generalise + modernise:** new base `.ui-embed-container` (default 16:9 via modern `aspect-ratio`) + ratio modifiers (`--4-3`, `--1-1`). Deprecate old `.u-video-embed-container` (`helpers.styl`, give it the new impl so existing usages upgrade) + the mis-nested `.ui-responsive-video-container` (`ui.styl`) as one-cycle aliases. | new `.ui-embed-container` in `modules/ui.styl`; deprecate in `utility/helpers.styl` + `modules/ui.styl` | 21 `.u-video-embed-container` usages across 18 files → `ui-embed-container`. Deferred to Phase 2 (alias bridges). |
 | 7/8/9 | Rounded-box consolidation | **Add + deprecate:** add `.ui-rounded-box--nested` (= `--corner-radius-large`); keep `--large` as alias one cycle; keep `.ui-rounded-image` one cycle with deprecation comment. | `modules/ui.styl` | — (theme already off these) |
 | 10 | Border greys | **Swap all four** base utils (`.ui-border`, `-top`, `-bottom`, `-left`) `--color-gray-light-old` → `--color-gray-light`. (Answers the note's "same for others?" = yes.) | `modules/ui.styl` | — |
 | 11 | `.ui-border--gray-mid` | **Add** modifier (`border-color: var(--color-gray-mid)`), placed after base utils so source order wins — no `:not()` hack (that hack was a theme-side workaround, unneeded in the lib). Keep `.ui-border--black`. | `modules/ui.styl` | — |
 
 ## Plan
 
-### Phase A — execute the bump (this session)
+**Workflow principle (from author):** complete ALL library updates first; theme
+migration is a distinct later stage done when updating the dep in the theme
+project. Aliases bridge the gap so the theme keeps working between the two.
 
-1. Library: branch `upstream-nmcom-4-7-0` off `main`.
-2. Apply items 1–11 to the target files (all additive or alias-deprecation;
-   no hard removals this release).
-3. Bump library `package.json` → `0.14.0`; prepend `CHANGELOG.md` entry
-   (note the deprecated aliases + their removal-next-cycle); `[Release] 0.14.0`
-   commit.
-4. **Manual gate:** user reviews, pushes branch/tag `v0.14.0` (outward action
-   stays with the user — no auto-push).
-5. Theme: re-pin `package.json` → `#v0.14.0`; `npm install`; `npm run build`.
-6. Theme migrations: `.u-video-embed-container` → `.ui-embed-container`
-   (several templates); `grid--nested` → `grid-row--nested`
-   (`related-post/render.php`).
-7. Theme: clear the promoted entries from `upstream-to-library.styl`. Replace
-   them with short "promoted to nm-stylus-library v0.14.0" breadcrumbs noting
-   the deprecated aliases scheduled for removal next cycle. Keep nothing that
-   was fully promoted.
-8. Verify regressions via the existing `verify-dep-update` skill
-   (bundle A/B + smoke). Smoke targets = item usages: any tag dot, a gray
-   button, nested grids (related-post block), every migrated video embed
-   (homepage YouTube, support page, novara-live, how-we-are-funded), bordered
-   elements.
-9. Commit theme changes on `chore/stylus-library-0.14.0`; open PR to
-   `development` (user merges).
+### Phase 1 — library (active)
 
-### Phase B — codify skill (after Phase A)
+1. Branch `upstream-nmcom-4-7-0` off `main` in `~/Sites/novaramedia/nm-stylus-library`.
+2. Apply items 1–11 to target files (all additive or alias-deprecation; no hard
+   removals). For item 1, edit `build-variables.js` then `npm run build:variables`.
+3. Run `npm test` (variables sync) — must pass.
+4. Add a `## [Unreleased]` block to `CHANGELOG.md` (Keep a Changelog format:
+   Added / Changed / Fixed / Deprecated) covering items 1–11, noting deprecated
+   aliases scheduled for removal next cycle. The existing "Corrected xxl
+   container size variable" entry stays.
+5. Commit on the branch; open PR to `main` (lib uses PRs).
+6. **Manual gate (user):** merge to `main`, then `npm run release` (release-it,
+   minor → `0.14.0`): builds variables, bumps, tags `v0.14.0`, pushes, creates a
+   **draft** GitHub release. User reviews + publishes the draft. (Outward action
+   stays with the user.)
 
-New skill `stylus-library-bump`, authored from the real Phase A steps via the
+### Phase 2 — theme (deferred; at theme dep-update stage)
+
+7. Re-pin theme `package.json` → `#v0.14.0`; `npm install`; `npm run build`.
+8. Migrate usages: `.u-video-embed-container` → `.ui-embed-container` (21 sites);
+   `grid--nested(-tight)` → `grid-row--nested(-tight)` (~33 sites).
+9. Clear promoted entries from `upstream-to-library.styl`; leave short
+   "promoted to nm-stylus-library v0.14.0" breadcrumbs noting aliases due for
+   removal next cycle.
+10. Verify regressions via the `verify-dep-update` skill (bundle A/B + smoke).
+    Smoke targets: any tag dot, a gray button, nested grids, every video embed
+    (homepage YouTube, support page, novara-live, how-we-are-funded), bordered
+    elements.
+11. Commit on `chore/stylus-library-0.14.0`; open PR to `development` (user merges).
+
+### Phase 3 — codify skill (after Phases 1–2)
+
+New skill `stylus-library-bump`, authored from the real Phase 1–2 steps via the
 superpowers `writing-skills` skill. It orchestrates the cycle and **delegates
 the regression tail to `verify-dep-update`** rather than duplicating it.
 
