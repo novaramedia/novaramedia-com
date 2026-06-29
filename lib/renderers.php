@@ -154,7 +154,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
     <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
-    <div class="grid-row grid--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
+    <div class="grid-row grid-row--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
@@ -193,7 +193,7 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
         You can log in and edit, or cancel your monthly donation at any time.
       </div>
     </div>
-    <div class="grid-row grid--nested-tight">
+    <div class="grid-row grid-row--nested-tight">
       <div class="grid-item grid-item--tight is-xxl-24">
         <input
           class="support-form__submit ui-button ui-button--white ui-button--fill-width"

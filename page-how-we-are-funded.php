@@ -43,7 +43,7 @@ if ( have_posts() ) {
             <div class="grid-row grid-row--nested background-white ui-rounded-box">
               <div class="grid-item is-xxl-12 is-m-24">
                 <div class="p-4 p-s-3 font-weight-bold">
-                  <div class="u-video-embed-container only-mobile mt-2 mb-4">
+                  <div class="ui-embed-container only-mobile mt-2 mb-4">
                     <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                   </div>
                   <div class="font-size-15 font-size-l-14 font-size-s-14 mb-4">
@@ -68,7 +68,7 @@ if ( have_posts() ) {
                 <?php
                 if ( $youtube_id ) {
                   ?>
-                  <div class="u-video-embed-container">
+                  <div class="ui-embed-container">
                     <?php echo render_youtube_embed_iframe( $youtube_id, false, 'eager', get_the_title() ); ?>
                   </div>
                   <?php

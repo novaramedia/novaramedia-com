@@ -126,7 +126,7 @@ if ( have_posts() ) {
               <?php if ( $youtube_short_id ) { ?>
               <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
                 <div class="pt-4 pl-2 pr-2">
-                  <div class="u-video-embed-container">
+                  <div class="ui-embed-container">
                     <?php echo render_youtube_embed_iframe( $youtube_short_id, false, 'eager', get_the_title() ); ?>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ if ( have_posts() ) {
             <div class="grid-row grid-row--nested background-black ui-rounded-box ui-rounded-box--top">
               <div class="grid-item is-xxl-24 ui-rounded-box ui-rounded-box--top">
                 <div class="pt-4 pl-2 pr-2">
-                  <div class="u-video-embed-container">
+                  <div class="ui-embed-container">
                     <?php echo render_youtube_embed_iframe( $youtube_long_id, false, 'lazy', get_the_title() ); ?>
                   </div>
                 </div>
@@ -336,7 +336,7 @@ if ( have_posts() ) {
           </div>
 
            <!-- GoCardless -->
-          <div class="grid-row grid--nested mb-5">
+          <div class="grid-row grid-row--nested mb-5">
             <div class="grid-item is-xxl-12 is-s-24 mb-3">
               <img class="support-page__direct-debit-logo mb-3" src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/dist/img/pages/support-page/support-logo-directdebit.svg" alt="Direct Debit logo" />
               <p>You can donate to us via a UK Direct Debit regular bank transfer using the GoCardless platform.</p>

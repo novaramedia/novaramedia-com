@@ -58,7 +58,7 @@
           $autoplay = true;
         }
     ?>
-      <div class="u-video-embed-container">
+      <div class="ui-embed-container">
         <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], $autoplay, 'eager', get_the_title() ); ?>
       </div>
     <?php
@@ -68,7 +68,7 @@
     ?>
   </div>
   <div class="grid-item is-s-24 is-xxl-4">
-    <div class="grid-row grid--nested font-size-9">
+    <div class="grid-row grid-row--nested font-size-9">
       <?php
         $related_video = get_related_posts(null, 'Video', 3);
 

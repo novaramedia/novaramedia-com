@@ -18,7 +18,7 @@ if ( $support_page !== null ) {
 <div class="container pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="grid-row font-size-11 font-size-s-10">
     <div class="grid-item is-m-24 is-xxl-12 mb-4">
-      <div class="u-video-embed-container background-black">
+      <div class="ui-embed-container background-black">
         <?php
         if ( ! empty( $custom_youtube_id ) ) {
           $video_id = $custom_youtube_id;

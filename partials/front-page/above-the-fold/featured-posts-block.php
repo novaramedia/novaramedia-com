@@ -17,7 +17,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
   }
 }
 ?>
-<div class="grid-row grid--nested<?php if ($args['block_number'] % 2 === 0) { echo " grid-row--reverse"; } ?>">
+<div class="grid-row grid-row--nested<?php if ($args['block_number'] % 2 === 0) { echo " grid-row--reverse"; } ?>">
   <div class="featured-posts__primary grid-item is-l-24 is-xxl-16 mb-4">
     <?php
     if (is_numeric($to_render[0])) {
@@ -32,7 +32,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
     ?>
   </div>
   <div class="grid-item is-l-24 is-xxl-8">
-    <div class="grid-row grid--nested">
+    <div class="grid-row grid-row--nested">
       <div class="grid-item is-l-12 is-xxl-24">
   <?php
     if (is_numeric($to_render[1])) {

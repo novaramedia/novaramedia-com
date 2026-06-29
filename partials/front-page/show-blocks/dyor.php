@@ -31,7 +31,7 @@ $recent           = array_slice( $dyor_posts, 1 );
       <?php // Top: 50:50 — hero/description/CTA left, embed+title right. Bottom-aligned so white boxes share a baseline. ?>
 
       <div class="grid-item is-xxl-24">
-        <div class="grid-row grid--nested front-page-dyor__top-row">
+        <div class="grid-row grid-row--nested front-page-dyor__top-row">
 
           <div class="grid-item is-s-24 is-xxl-12 mb-4">
             <div class="dyor-archive__hero">
@@ -54,7 +54,7 @@ $recent           = array_slice( $dyor_posts, 1 );
           <div class="grid-item is-s-24 is-xxl-12 mb-4">
             <div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
               <?php if ( ! empty( $featured_youtube ) ) { ?>
-              <div class="u-video-embed-container ui-rounded-box mb-3">
+              <div class="ui-embed-container ui-rounded-box mb-3">
                 <?php echo render_youtube_embed_iframe( $featured_youtube, false, 'lazy', get_the_title( $featured->ID ) ); ?>
               </div>
               <?php } else { ?>
@@ -79,7 +79,7 @@ $recent           = array_slice( $dyor_posts, 1 );
       <?php if ( ! empty( $recent ) ) { ?>
       <div class="grid-item is-xxl-24">
         <div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
-          <div class="grid-row grid--nested">
+          <div class="grid-row grid-row--nested">
             <div class="grid-item is-xxl-24">
               <a href="<?php echo esc_url( $category_link ); ?>" class="ui-hover">
                 <div class="layout-split-level font-size-8 font-weight-bold">

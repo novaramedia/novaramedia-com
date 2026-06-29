@@ -1,77 +1,23 @@
-// we need to implement container width variables here now:
+// Upstream staging for nm-stylus-library.
+// Shared styles are drafted/overridden here, then promoted into the library and
+// removed once a release ships them. Add new candidates below.
 
-// $container-width-xxl: 1400px
-// $container-width-xl: 1056px
-// $container-width-l: 888px
-// $container-width-m: 744px
-// $container-width-s: 98%
-// ******************************************************
-
-// Fix: ui-tag dot circles squeezed/distorted across browsers
-// The library uses `1cap` (CSS cap-height unit) for the dot's width/height,
-// but `cap` has inconsistent browser support — Chromium squeezes the circle,
-// Safari renders it too wide. Replace with 0.7em, which approximates cap-height
-// as a ratio of em-size (~72% for Helvetica Neue). This is stable everywhere.
-// Upstream fix: change `width`/`height` in .ui-tag:before to use em in nm-stylus-library.
-.ui-tag:before
-  width: 0.7em
-  height: 0.7em
-
-// Fix: text-overflow-ellipsis utility has invalid CSS (`overflow: ellipsis`).
-// Correct implementation needs white-space + overflow + text-overflow together.
-// Upstream fix: replace `overflow: ellipsis` with the three properties below in nm-stylus-library.
-.text-overflow-ellipsis
-  white-space: nowrap
-  overflow: hidden
-  text-overflow: ellipsis
-
-// button gray mode
-.ui-button--gray
-  background-color: var(--color-gray-mid)
-  color: var(--color-black-soft)
-  &:hover
-    border-color: var(--color-gray-mid)
-    color: var(--color-black-soft)
-
-// grid-row--nested should be the helper for nest grids, not grid--nested
-
-.grid-row.grid-row--nested
-  margin-left: unquote('calc(var(--grid-gutter) / 2 * -1)')
-  margin-right: unquote('calc(var(--grid-gutter) / 2 * -1)')
-
-
-// should be under ui prefix not u prefix, and should be a helper for video embeds, not just youtube embeds
-
-// .ui-16-9-embed-container
-
-// Rounded corner nesting rule:
-// Inner color-blocked boxes (ui-rounded-box inside another ui-rounded-box)
-// need a larger radius (4px) to look optically parallel with outer corners.
-// Visual rule: outer color-blocked box → ui-rounded-box (2px, default)
-//              inner color-blocked box → ui-rounded-box--nested (4px)
-// Images/thumbnails use ui-rounded-box too — same 2px as outer boxes.
-// Upstream: add --nested modifier to nm-stylus-library ui-rounded-box block.
-// Usage: always pair with base class — <div class="ui-rounded-box ui-rounded-box--nested">
-// The modifier overrides --ui-border-radius; ui-rounded-box applies border-radius.
-// This follows the library convention: modifier classes set variables, base class applies them.
-.ui-rounded-box--nested
-  --ui-border-radius: var(--corner-radius-large)
-
-// Deprecated: ui-rounded-image is CSS-identical to ui-rounded-box at default.
-// Element-type distinction is misleading — border-radius applies to all elements.
-// Replaced by ui-rounded-box throughout this theme.
-// Upstream: remove ui-rounded-image from nm-stylus-library, consolidate into ui-rounded-box.
-
-// Deprecated: ui-rounded-box--large has no semantic meaning.
-// Replaced by ui-rounded-box--nested which describes the actual use case.
-// Upstream: rename --large to --nested in nm-stylus-library ui-rounded-box block.
-
-// .ui-border-top uses the old grey. should be updated to the new grey color variable.
-// :not() guards prevent this override beating colour modifier classes (source order)
-.ui-border-top:not(.ui-border--black):not(.ui-border--gray-mid)
-  border-top-color: var(--color-gray-light)
-// same true for other border utilities?
-
-// Border colour modifiers (upstream: add to nm-stylus-library ui-border block)
-.ui-border--gray-mid
-  border-color: var(--color-gray-mid)
+// ── Promoted to nm-stylus-library v0.14.0 (2026-06) ──────────────────────────
+// Local overrides removed; the library now provides these:
+//   - $container-* Stylus vars
+//   - .ui-tag dot sized 0.7em (was 1cap)
+//   - .text-overflow-ellipsis (valid white-space/overflow/text-overflow)
+//   - .ui-button--gray
+//   - .grid-row--nested / .grid-row--nested-tight (canonical names)
+//   - .ui-embed-container (+ --4-3 / --1-1 ratio modifiers, aspect-ratio impl)
+//   - .ui-rounded-box--nested
+//   - .ui-border* on new --color-gray-light + .ui-border--gray-mid (via --ui-border-color)
+// (v0.14.1 patched a deprecation-comment leak that broke CSS minification.)
+//
+// Deprecated aliases still in the library, scheduled for removal in v0.15.0:
+//   .grid--nested(-tight) → .grid-row--nested(-tight)
+//   .u-video-embed-container / .ui-responsive-video-container → .ui-embed-container
+//   .ui-rounded-image → .ui-rounded-box
+//   .ui-rounded-box--large → .ui-rounded-box--nested
+// This theme's usages were migrated off all of the above in the 0.14.1 bump, so
+// the aliases are safe to delete next library cycle.
