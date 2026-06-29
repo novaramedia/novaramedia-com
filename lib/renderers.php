@@ -700,7 +700,7 @@ function render_about_group_field( $data ) {
       <?php
       foreach ( $person['name'] as $name ) {
         ?>
-        <div class="about-page__person"><?php echo esc_html( $name ); ?></div>
+        <div class="about-page__person"><?php echo wp_kses_post( $name ); ?></div>
         <?php
       }
       ?>
