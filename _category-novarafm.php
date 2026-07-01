@@ -132,7 +132,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
           <?php echo render_large_cross('green'); ?>
         </div>
         <div class="grid-item offset-xxl-1 is-xxl-18">
-          <div class="grid-row grid--nested">
+          <div class="grid-row grid-row--nested">
             <div class="grid-item is-s-24 is-xxl-12 mb-s-5">
               <h4 class="font-size-9 font-weight-bold text-uppercase mb-2">Latest Episode</h4>
               <h2 class="font-size-13 font-weight-bold mb-3"><?php echo get_the_title($post_id); ?></h2>

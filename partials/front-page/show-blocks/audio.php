@@ -42,7 +42,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
         $meta    = get_post_meta( $post_id );
         ?>
         <div class="background-white font-color-black pt-4 pb-4 pl-4 pr-4 mb-4 ui-rounded-box ui-rounded-box--nested">
-          <div class="grid-row grid--nested">
+          <div class="grid-row grid-row--nested">
             <div class="grid-item is-xxl-10">
               <div class="layout-thumbnail-frame">
                 <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -85,7 +85,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
         </div>
         <div class="ui-border-top ui-border--black pt-4">
           <a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="ui-hover">
-            <div class="grid-row grid--nested">
+            <div class="grid-row grid-row--nested">
               <div class="grid-item is-xxl-12">
                 <h4 class="font-size-9 font-weight-bold text-uppercase">Recent Episodes</h4>
               </div>
@@ -94,7 +94,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
               </div>
             </div>
           </a>
-          <div class="grid-row grid--nested">
+          <div class="grid-row grid-row--nested">
             <?php
             array_shift( $latest );
             foreach ( $latest as $post ) {

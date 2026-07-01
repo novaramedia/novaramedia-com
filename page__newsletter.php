@@ -44,7 +44,7 @@ if( have_posts() ) {
           <?php
             if ($youtube_id) {
           ?>
-          <div class="u-video-embed-container mb-4">
+          <div class="ui-embed-container mb-4">
             <?php echo render_youtube_embed_iframe( $youtube_id, true, 'eager', get_the_title() ); ?>
           </div>
           <?php

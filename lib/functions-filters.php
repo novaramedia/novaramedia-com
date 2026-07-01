@@ -130,11 +130,11 @@ function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
   if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
     // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
     $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
-    return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+    return '<div class="oembed-element"><div class="ui-embed-container">' . $html . '</div></div>';
   }
 
   if ( str_contains( $url, 'vimeo.com/' ) ) {
-    return '<div class="oembed-element"><div class="u-video-embed-container">' . $html . '</div></div>';
+    return '<div class="oembed-element"><div class="ui-embed-container">' . $html . '</div></div>';
   }
 
   return $html;
