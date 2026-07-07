@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
-- Embed consent gate — placeholder shown for third-party embeds (YouTube, SoundCloud) until visitor accepts; consent stored in `localStorage`; respects user preference across page loads
+- Embed consent gate — placeholder shown for third-party embeds (SoundCloud, Twitter/X, Vimeo, etc; YouTube exempt via nocookie domain) until visitor accepts; consent stored in the existing `cookie-approval` cookie shared with the cookie bar
 
 ### Changed
 

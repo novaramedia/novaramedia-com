@@ -2,6 +2,14 @@
 
 This document provides detailed information about the Cypress testing setup for the Novara Media WordPress theme.
 
+## Planned migration to Playwright
+
+The intention is to migrate this codebase's end-to-end testing from Cypress to Playwright, in line with other Novara Media codebases. The existing Cypress suite is minimal, so until the migration happens **no new Cypress tests are being written** — feature branches instead document their e2e coverage needs here for the future Playwright suite.
+
+### Deferred coverage backlog
+
+- **Embed consent gate** (PR #523): new visitor sees placeholder instead of third-party embed; no network requests to soundcloud.com / twitter.com / vimeo.com before consent; clicking a gate's accept button hydrates all gates and hides the cookie bar; accepting via the cookie bar hydrates gates; returning visitor with `cookie-approval` cookie gets embeds immediately with no placeholder flash; YouTube embeds load ungated via `youtube-nocookie.com`.
+
 ## Overview
 
 We use [Cypress](https://www.cypress.io/) for automated end-to-end testing of critical theme functionality. Tests run automatically on Pull Requests via GitHub Actions and must pass before code can be merged.

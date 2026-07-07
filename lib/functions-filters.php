@@ -137,35 +137,20 @@ function nm_consent_gate_wrap( $html, $platform ) {
   // Neutralise any </template sequences so adversarial oEmbed output cannot
   // prematurely close the wrapper and execute without consent.
   $html_safe = preg_replace( '/<\/\s*template\b/i', '&lt;/template', $html );
+  if ( null === $html_safe ) {
+    // PCRE failure (e.g. invalid UTF-8) — fail closed: placeholder without embed.
+    $html_safe = '';
+  }
 
+  // Single line: this runs before wpautop on classic-editor content, which would
+  // otherwise inject <br>/<p> around the newlines in the gate markup.
   return sprintf(
-    '<div class="embed-consent-gate">
-      <template class="embed-consent-gate__template">%s</template>
-      <div class="embed-consent-gate__placeholder">
-        <div class="embed-consent-gate__content">
-          <p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p>
-          <button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>
-          %s
-        </div>
-      </div>
-    </div>',
+    '<div class="embed-consent-gate"><template class="embed-consent-gate__template">%s</template><div class="embed-consent-gate__placeholder"><div class="embed-consent-gate__content"><p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p><button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>%s</div></div></div>',
     $html_safe,
     $platform_esc,
     $platform_esc,
     $privacy_link
   );
-}
-
-/**
- * Returns true for YouTube embeds (youtube.com/embed or youtube-nocookie.com).
- * These are exempt from the consent gate because callers swap them to the
- * privacy-enhanced youtube-nocookie.com URL before displaying.
- *
- * @param string $html Embed HTML.
- * @return bool
- */
-function nm_is_embed_exempt( $html ) {
-  return str_contains( $html, 'youtube-nocookie.com' ) || str_contains( $html, 'youtube.com/embed' );
 }
 
 /**
@@ -215,6 +200,12 @@ function nm_html_has_iframe_or_script( $html ) {
  * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
  * the original URL was youtube.com or youtu.be. The str_replace works for both
  * because it operates on the returned iframe HTML, not the original URL.
+ *
+ * Covers both classic-editor URLs and core/embed blocks: block embeds store a bare
+ * URL that WP_Embed::autoembed() (the_content priority 8, before do_blocks at 9)
+ * converts through this same filter, so no separate render_block gating is needed —
+ * a render_block wrap here would double-gate. Raw iframes pasted into core/html
+ * blocks bypass oEmbed entirely and are NOT gated (known gap, see PR #523).
  *
  * @param string $html    The oEmbed HTML.
  * @param string $url     The original URL that was embedded.
@@ -372,39 +363,3 @@ function nm_add_caption_class( $block_content, $block ) {
 }
 add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
 
-/**
- * Gate block editor embeds (core/embed blocks) behind the consent placeholder.
- * Runs at priority 11, after nm_add_caption_class at priority 10, so captions
- * inside embed blocks are styled before being wrapped in the consent gate template.
- * YouTube blocks get the nocookie switch applied but are not gated.
- *
- * @param string $block_content Rendered block HTML.
- * @param array  $block         Block data including name and attributes.
- * @return string Modified block HTML.
- */
-function nm_consent_gate_block_embeds( $block_content, $block ) {
-  if ( $block['blockName'] !== 'core/embed' ) {
-    return $block_content;
-  }
-  if ( is_admin() || empty( $block_content ) ) {
-    return $block_content;
-  }
-  if ( nm_is_embed_exempt( $block_content ) ) {
-    return str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $block_content );
-  }
-
-  $provider_slug = $block['attrs']['providerNameSlug'] ?? '';
-  $platform_map  = array(
-    'soundcloud' => 'SoundCloud',
-    'twitter'    => 'Twitter/X',
-    'vimeo'      => 'Vimeo',
-    'spotify'    => 'Spotify',
-    'instagram'  => 'Instagram',
-    'facebook'   => 'Facebook',
-    'tiktok'     => 'TikTok',
-  );
-  $platform = $platform_map[ $provider_slug ] ?? nm_detect_embed_platform( $block_content );
-
-  return nm_consent_gate_wrap( $block_content, $platform );
-}
-add_filter( 'render_block', 'nm_consent_gate_block_embeds', 11, 2 );
