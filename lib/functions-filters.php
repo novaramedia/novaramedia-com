@@ -160,9 +160,10 @@ function nm_consent_gate_wrap( $html, $platform ) {
  * @return string Platform name, or 'Third-party' if unrecognised.
  */
 function nm_detect_embed_platform( $html ) {
-  // x.com needs a domain-boundary check: str_contains('x.com') also matches box.com.
-  // Match ://x.com (bare domain) and .x.com (any subdomain like www/platform).
-  if ( preg_match( '/[.\\/]x\.com/', $html ) ) {
+  // x.com needs a host-boundary check: str_contains('x.com') also matches box.com,
+  // and a bare slash before x.com would match path segments like /x.com/ too.
+  // Match //x.com (bare domain after protocol) and .x.com (any subdomain like www/platform).
+  if ( preg_match( '/(\/\/|\.)x\.com/', $html ) ) {
     return 'Twitter/X';
   }
 
