@@ -115,11 +115,11 @@ get_header();
           ?>
           <div class="dyor-archive__latest-episode grid-row">
             <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
-              <div class="u-video-embed-container ui-rounded-image">
+              <div class="ui-embed-container ui-rounded-box">
                 <?php if ( ! empty( $latest_meta['_cmb_utube'][0] ) ) { ?>
                   <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], false, 'eager', get_the_title() ); ?>
                 <?php } else { ?>
-                  <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-image' ) ); ?>
+                  <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
                 <?php } ?>
               </div>
             </div>
@@ -156,10 +156,10 @@ get_header();
     }
     $map_src = 'https://embed.figma.com/board/' . rawurlencode( $figma_file_key ) . '/Do-Your-Own-Research-Map?' . http_build_query( $embed_params );
   ?>
-  <section class="container mb-5">
+  <section id="map" class="container mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
-        <div class="grid-row--nested background-white ui-rounded-box pt-4 pb-4">
+        <div class="grid-row grid-row--nested background-white ui-rounded-box pt-4 pb-4">
           <div class="grid-item is-xxl-24 mb-4 text-align-center">
             <h4 class="ui-boxed-title">Explore the Map</h4>
           </div>

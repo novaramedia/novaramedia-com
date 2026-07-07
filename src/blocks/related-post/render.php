@@ -72,7 +72,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
   if ( $layout === 'video' ) {
     // $youtube_id validated and set before wrapper div.
     ?>
-    <div class="u-video-embed-container">
+    <div class="ui-embed-container">
       <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', $related_title ); ?>
     </div>
     <a href="<?php echo esc_url( $permalink ); ?>" class="ui-hover">
@@ -85,7 +85,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
     $venue_name = get_post_meta( $related_id, '_cmb_venue_name', true );
     $is_future_event = $timestamp && $timestamp > time();
     ?>
-    <div class="grid-row grid--nested">
+    <div class="grid-row grid-row--nested">
       <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -97,7 +97,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 array( 600, 600 ),
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
             ?>
@@ -116,7 +116,14 @@ $wrapper_attributes = get_block_wrapper_attributes(
           }
           ?>
           <div class="font-size-9 mt-1 text-wrap-balance">
-            <?php render_short_description( $related_id ); ?>
+            <?php
+            // Plain text only: this tile is wrapped in an outer <a>, so the
+            // description must not emit its own anchors (render_short_description()
+            // can, via the_content/wp_kses_post — that would nest anchors).
+            $related_short_desc = get_post_meta( $related_id, '_cmb_short_desc', true );
+            $related_desc       = $related_short_desc ? $related_short_desc : get_the_excerpt( $related_id );
+            echo esc_html( wp_strip_all_tags( $related_desc ) );
+            ?>
           </div>
           <?php
           if ( ! empty( $venue_name ) ) {
@@ -139,7 +146,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
   } else {
     // articles + audio share the same shell; only bylines differ.
   ?>
-    <div class="grid-row grid--nested">
+    <div class="grid-row grid-row--nested">
       <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -151,7 +158,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $related_id,
                 'col24-16to9',
                 array(
-                  'class' => 'ui-rounded-image u-display-block',
+                  'class' => 'ui-rounded-box u-display-block',
                 )
               );
               ?>

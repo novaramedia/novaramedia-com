@@ -32,7 +32,7 @@ $title = esc_html( get_the_title( $article_post_id ) );
       <span class="js-time-since" data-timestamp="<?php echo $timestamp_attr; ?>"></span>
     </a>
   </div>
-  <div class="grid-row grid--nested">
+  <div class="grid-row grid-row--nested">
     <div class="grid-item is-xxl-16">
       <a href="<?php echo $permalink; ?>" class="ui-hover">
       <h4 class="post__title font-size-11 font-size-s-12 font-weight-bold font-condensed text-wrap-pretty" data-testid="post-title"><?php echo $title; ?></h4>
@@ -57,7 +57,7 @@ $title = esc_html( get_the_title( $article_post_id ) );
         $article_post_id,
         'col4-square',
         array(
-          'class'             => 'ui-rounded-image u-display-block',
+          'class'             => 'ui-rounded-box u-display-block',
           'data-no-lazysizes' => true,
           'loading'           => 'eager',
         )
@@ -82,7 +82,7 @@ $title = esc_html( get_the_title( $article_post_id ) );
         $article_post_id,
         'col12-16to9',
         array(
-          'class'             => 'ui-rounded-image u-display-block',
+          'class'             => 'ui-rounded-box u-display-block',
           'data-no-lazysizes' => true,
           'loading'           => 'eager',
         )

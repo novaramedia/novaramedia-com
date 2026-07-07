@@ -52,7 +52,7 @@ if ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) {
 
 if ( $has_embed ) {
   ?>
-<div class="u-video-embed-container background-black">
+<div class="ui-embed-container background-black">
   <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], false, 'eager', get_the_title() ); ?>
 </div>
   <?php
@@ -68,7 +68,7 @@ if ( $has_embed ) {
       $featured_post_id,
       'col24-16to9',
       array(
-        'class'             => 'ui-rounded-image',
+        'class'             => 'ui-rounded-box',
         'data-no-lazysizes' => true,
         'loading'           => 'eager',
         )
@@ -79,7 +79,7 @@ if ( $has_embed ) {
   <?php
 }
 ?>
-<div class="grid-row grid--nested mt-3">
+<div class="grid-row grid-row--nested mt-3">
   <div class="grid-item is-s-24 <?php echo ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
     <a href="<?php echo get_permalink( $featured_post_id ); ?>" class="ui-hover">
       <h2 class="post__title <?php echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold text-wrap-balance mb-3"><?php echo $the_title; ?></h2>

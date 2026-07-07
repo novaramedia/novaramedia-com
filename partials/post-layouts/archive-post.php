@@ -17,7 +17,7 @@ $youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', tr
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>">
   <?php if ( $youtube_id ) { ?>
-    <div class="u-video-embed-container ui-rounded-image">
+    <div class="ui-embed-container ui-rounded-box">
       <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', get_the_title( $this_post_id ) ); ?>
     </div>
   <?php } elseif ( $is_show_tags ) { ?>
@@ -31,7 +31,7 @@ $youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', tr
             $this_post_id,
             $image_size,
             array(
-          'class' => 'ui-rounded-image u-display-block',
+          'class' => 'ui-rounded-box u-display-block',
         )
             );
         ?>
@@ -44,7 +44,7 @@ $youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', tr
           $this_post_id,
           $image_size,
           array(
-        'class' => 'ui-rounded-image u-display-block',
+        'class' => 'ui-rounded-box u-display-block',
       )
           );
       ?>

@@ -55,6 +55,8 @@ export default function Edit({ attributes, setAttributes }) {
       setAttributes({ newsletter: null });
       return;
     }
+    // Store id + title for editor UI only. render.php fetches all data fresh
+    // server-side and never reads the stored title — this is intentional.
     setAttributes({ newsletter: { id: post.id, title: post.title.rendered } });
   };
 

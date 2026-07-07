@@ -48,7 +48,7 @@ export default function Edit({ attributes, setAttributes }) {
       apiFetch({
         path: addQueryArgs('/wp/v2/search', {
           search: query,
-          subtype: 'post,event',
+          subtype: ['post', 'event'],
           per_page: 25,
           _fields: 'id,title,subtype',
         }),

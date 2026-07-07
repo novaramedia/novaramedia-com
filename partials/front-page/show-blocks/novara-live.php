@@ -41,7 +41,7 @@ if ( $novara_live_category ) {
               $latest_video->the_post();
               $meta = get_post_meta( $post->ID );
             ?>
-            <div class="grid-row grid--nested">
+            <div class="grid-row grid-row--nested">
               <div class="grid-item is-l-24 is-xxl-16">
                 <div class="layout-thumbnail-frame">
                   <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -53,7 +53,7 @@ if ( $novara_live_category ) {
                       $post->ID,
                       'col24-16to9',
                       array(
-                        'class' => 'ui-rounded-image',
+                        'class' => 'ui-rounded-box',
                       )
                     );
                   ?>
@@ -108,7 +108,7 @@ if ( $novara_live_category ) {
                 $timestamp = get_post_time( 'c' );
                 ?>
               <div class="pb-3 mb-3 <?php echo ( $i < $posts_to_show - 1 ) ? 'ui-border-bottom' : ''; ?>">
-                <div class="grid-row grid--nested">
+                <div class="grid-row grid-row--nested">
                 <div class="grid-item is-s-10 is-xxl-8">
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
                   <?php
@@ -116,7 +116,7 @@ if ( $novara_live_category ) {
                     $post->ID,
                     'col24-16to9',
                     array(
-                    'class' => 'ui-rounded-image',
+                    'class' => 'ui-rounded-box',
                     )
                   );
                   ?>
@@ -130,7 +130,7 @@ if ( $novara_live_category ) {
                   </a>
                   </div>
                   <a href="<?php the_permalink(); ?>" class="ui-hover">
-                  <h4 class="post__title font-size-8 font-size-S-10 font-weight-bold text-wrap-pretty">
+                  <h4 class="post__title font-size-8 font-size-s-10 font-weight-bold text-wrap-pretty">
                     <?php the_title(); ?>
                   </h4>
                   </a>
