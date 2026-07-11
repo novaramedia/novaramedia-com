@@ -23,7 +23,7 @@ for each.
 Why: the Layout editor supersedes the legacy banner selects, which now only seed
 the default order. Until a layout is saved, the front page falls back to the
 historic order. Seed-then-deprecate migration — see
-`docs/plans/front-page-layout-editor.md`.
+`docs/plans/archive/front-page-layout-editor.md`.
 
 ### 2. Flush permalinks — drop the `/job/` archive route
 **Admin > Settings > Permalinks → Save** (no changes needed).
