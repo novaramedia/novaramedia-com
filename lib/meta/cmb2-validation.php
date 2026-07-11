@@ -16,7 +16,7 @@
  *
  * 'attributes' => array(
  *   'data-validation' => 'true',
- *   'data-validation-word-length' => 14
+ *   'data-validation-word-length' => 14,
  *   'data-validation-required' => 'true'
  * )
  *
