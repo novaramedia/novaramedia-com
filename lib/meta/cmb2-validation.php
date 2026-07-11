@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
- * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set to 'required'
+ * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
  * Version: 0.3.0
  *
  * Updated to also hook to our secondary options page form (Links Bar)
@@ -84,7 +84,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
 
       // Wysiwyg fields edited in Visual mode only sync to their underlying
       // textarea on save; force the sync so val() reads current content
-      if ( typeof tinyMCE !== 'undefined' ) {
+      if ( typeof tinyMCE !== 'undefined' && typeof tinyMCE.triggerSave === 'function' ) {
         tinyMCE.triggerSave();
       }
 
