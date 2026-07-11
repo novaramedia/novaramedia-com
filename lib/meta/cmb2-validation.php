@@ -2,13 +2,14 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
- * Version: 0.3.1
+ * Version: 0.3.2
  *
  * Updated to also hook to our secondary options page form (Links Bar)
  * Changed to take variable for validation via data attribute
  * Updated to also validate max words in field
  * Added tinyMCE.triggerSave() so wysiwyg fields validate current Visual-mode content
  * Required check now treats whitespace-only and markup-only (e.g. <p></p>) values as empty
+ * Added editor_class bridge so non-group wysiwyg fields can be marked required
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
@@ -17,6 +18,13 @@
  *   'data-validation' => 'true',
  *   'data-validation-word-length' => 14
  *   'data-validation-required' => 'true'
+ * )
+ *
+ * Non-group wysiwyg fields render via wp_editor(), which does not output the
+ * CMB2 'attributes' array — mark those with an editor class instead:
+ *
+ * 'options' => array(
+ *   'editor_class' => 'nm-validation-required'
  * )
  *
  * Reference documentation in the wiki:
@@ -54,6 +62,19 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     }
 
     const $htmlbody = $( 'html, body' );
+
+    // Non-group wysiwyg fields render via wp_editor() which drops CMB2
+    // 'attributes'; they are marked with editor_class instead. Copy the
+    // marker onto the data attributes the validator scans for.
+    const bridge_wysiwyg_markers = () => {
+      $( 'textarea.nm-validation-required' ).attr({
+        'data-validation': 'true',
+        'data-validation-required': 'true'
+      });
+    };
+
+    bridge_wysiwyg_markers();
+
     let $toValidate = $( '[data-validation]' );
 
     if ( ! $toValidate.length ) {
@@ -100,6 +121,8 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       if ( typeof tinyMCE !== 'undefined' && typeof tinyMCE.triggerSave === 'function' ) {
         tinyMCE.triggerSave();
       }
+
+      bridge_wysiwyg_markers();
 
       $toValidate = $( '[data-validation]' );
 
