@@ -2,11 +2,12 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set to 'required'
- * Version: 0.2.0
+ * Version: 0.3.0
  *
  * Updated to also hook to our secondary options page form (Links Bar)
  * Changed to take variable for validation via data attribute
  * Updated to also validate max words in field
+ * Added tinyMCE.triggerSave() so wysiwyg fields validate current Visual-mode content
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
@@ -80,6 +81,12 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       var labels = [];
       var $first_error_row = null;
       var $row = null;
+
+      // Wysiwyg fields edited in Visual mode only sync to their underlying
+      // textarea on save; force the sync so val() reads current content
+      if ( typeof tinyMCE !== 'undefined' ) {
+        tinyMCE.triggerSave();
+      }
 
       $toValidate = $( '[data-validation]' );
 

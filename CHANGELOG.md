@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Standfirst and short description post meta fields now enforce required validation in the editor
+
 ## [4.7.0] - 2026-06-24
 
 ### Security

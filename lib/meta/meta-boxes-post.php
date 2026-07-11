@@ -22,20 +22,28 @@ function nm_cmb_post_metaboxes() {
 
   $meta_boxes->add_field(
        array(
-    'name' => __( 'Standfirst', 'cmb' ),
-    'desc' => __( 'Required!', 'cmb' ),
-    'id'   => $prefix . 'standfirst',
-    'type' => 'textarea_small',
+    'name'       => __( 'Standfirst', 'cmb' ),
+    'desc'       => __( 'Required!', 'cmb' ),
+    'id'         => $prefix . 'standfirst',
+    'type'       => 'textarea_small',
+    'attributes' => array(
+      'data-validation'          => 'true',
+      'data-validation-required' => 'true',
+    ),
   )
       );
 
   $meta_boxes->add_field(
        array(
-    'name'    => __( 'Short description', 'cmb' ),
-    'desc'    => __( '...', 'cmb' ),
-    'id'      => $prefix . 'short_desc',
-    'type'    => 'wysiwyg',
-    'options' => array( 'textarea_rows' => 5 ),
+    'name'       => __( 'Short description', 'cmb' ),
+    'desc'       => __( 'Required!', 'cmb' ),
+    'id'         => $prefix . 'short_desc',
+    'type'       => 'wysiwyg',
+    'options'    => array( 'textarea_rows' => 5 ),
+    'attributes' => array(
+      'data-validation'          => 'true',
+      'data-validation-required' => 'true',
+    ),
   )
       );
 
