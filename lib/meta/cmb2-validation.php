@@ -2,12 +2,13 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
- * Version: 0.3.0
+ * Version: 0.3.1
  *
  * Updated to also hook to our secondary options page form (Links Bar)
  * Changed to take variable for validation via data attribute
  * Updated to also validate max words in field
  * Added tinyMCE.triggerSave() so wysiwyg fields validate current Visual-mode content
+ * Required check now treats whitespace-only and markup-only (e.g. <p></p>) values as empty
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
@@ -61,6 +62,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
 
     const countWords = (stringInput) => {
       return stringInput.length && stringInput.split(/\s+\b/).length || 0;
+    };
+
+    // Wysiwyg values arrive as HTML, so whitespace-only ("  ") or markup-only
+    // ("<p></p>") input must count as empty. DOMParser never executes scripts.
+    const is_empty_value = ( value ) => {
+      if ( ! value ) {
+        return true;
+      }
+
+      const text = new DOMParser().parseFromString( String( value ), 'text/html' ).body.textContent;
+
+      return ! text.trim();
     };
 
     const remove_failure = ( $row ) => {
@@ -137,7 +150,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
             }
 
           } else {
-            if ( ! val ) {
+            if ( is_empty_value( val ) ) {
               add_failure( $row, 'Meta field required' );
             } else {
               remove_failure( $row );
