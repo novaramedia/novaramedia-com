@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- About page names render editor-entered links instead of escaping them to literal text
+
 ## [4.7.0] - 2026-06-24
 
 ### Security
