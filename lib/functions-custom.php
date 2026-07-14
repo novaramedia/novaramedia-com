@@ -127,7 +127,7 @@ function nm_serial_podcast_redirect() {
   }
   global $post;
   // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed' );
+  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,
@@ -138,7 +138,7 @@ function nm_serial_podcast_redirect() {
   if ( ! empty( $match ) ) {
     $matched_category = array_values( $match )[0];
     $link = get_term_link( $matched_category );
-    if ( $link && isset( $post->post_name ) ) {
+    if ( ! is_wp_error( $link ) && isset( $post->post_name ) ) {
       wp_safe_redirect( $link . '#' . $post->post_name, 301 );
       exit;
     }
@@ -147,78 +147,58 @@ function nm_serial_podcast_redirect() {
 add_action( 'template_redirect', 'nm_serial_podcast_redirect' );
 
 /**
- * Check for apology notice and display it if it is in the future
- * This function will check if the apology notice is in the future and display it if it is
- * This is hardcoded for a specific apology notice related to an incident on 22 Sept 2024
- * But can be adapted for future use
+ * Get the latest News article IDs.
+ * Queries the 'news' category first, excluding the featured posts if set.
+ * If the News query returns no posts, falls back to recent posts from the
+ * 'articles' category so the latest-articles column still fills on
+ * low-content environments (staging, fresh installs).
+ * Always returns an array — empty only when both the News query and the
+ * 'articles' fallback yield no posts after exclusions.
  *
- * TODO: Deprecate and remove this apology_notice functionality
- * This is a temporary solution that should be removed. The hardcoded date logic
- * (8 weeks from Sept 22, 2024) means this feature has limited lifespan. Consider
- * removing this function and all its usages once the notice period expires.
- * Used in: partials/front-page/above-the-fold/latest-articles.php
- *          partials/front-page/products-bar.php
+ * @param int[]|false $featured_posts_ids Array of featured post ids to exclude, or false for none.
  *
- * @return array/Boolean Array of apology post or false if no apology post
- * @since 4.1.1
+ * @return int[] Array of latest News (or fallback) post IDs.
  */
-function check_for_apology_notice() {
-  $m = new \Moment\Moment( 1727035200 ); // Sun, 22 Sept 20:00:00 GMT
-  $m->addWeeks( 8 ); // Time for notice to show
-  $moment_from_vo = $m->fromNow();
+function get_latest_news_ids( $featured_posts_ids = false ) {
+  $exclusion_args = array();
 
-  if ( $moment_from_vo->getDirection() === 'future' ) {
-    $apology_post = get_posts(
-      array(
-        'name'      => 'gary-and-jack-lubner-apology',
-        'post_type' => 'notice',
-      )
-    );
-    if ( $apology_post ) {
-      return $apology_post;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-}
-/**
- * Get the latest articles ids
- * This function will get the latest articles ids, excluding the featured posts if set
- * If the featured posts are not set, it will return the latest articles ids
- * If the latest articles are already in the featured posts, it will skip them
- * If there are no latest articles, it will return false
- *
- * @param array $featured_posts_ids Array of featured post ids.
- *
- * @return array/Boolean Array of latest articles ids or false if no latest articles
- */
-function get_latest_articles_ids( $featured_posts_ids = false ) {
-  $query_args = array(
-      'category_name'  => 'articles',
-      'posts_per_page' => 7,
-      'fields'         => 'ids',
-      'post_status'    => 'publish',
-  );
-
-  if ( is_array( $featured_posts_ids ) && count( $featured_posts_ids ) > 0 ) {
-    // Filter out non-numeric values to ensure only valid post IDs are excluded
-    $valid_ids = array_filter( $featured_posts_ids, 'is_numeric' );
+  if ( is_array( $featured_posts_ids ) ) {
+    // Normalise to positive integer IDs — WP_Query post__not_in expects those.
+    $valid_ids = array_filter( array_map( 'absint', $featured_posts_ids ) );
     if ( ! empty( $valid_ids ) ) {
-      $query_args = array_merge( $query_args, array( 'post__not_in' => $valid_ids ) );
+      $exclusion_args = array( 'post__not_in' => $valid_ids );
     }
   }
 
-  $recent_articles = new WP_Query( $query_args );
+  // Builds query args for a category, sharing the common limit/fields/status
+  // and the featured-post exclusion.
+  $build_args = function( $category_name ) use ( $exclusion_args ) {
+    return array_merge(
+      array(
+        'category_name'  => $category_name,
+        'posts_per_page' => 7,
+        'fields'         => 'ids',
+        'post_status'    => 'publish',
+      ),
+      $exclusion_args
+    );
+  };
 
-  if ( ! $recent_articles->have_posts() ) {
-    return false;
+  $news_query = new WP_Query( $build_args( 'news' ) );
+
+  if ( $news_query->have_posts() ) {
+    return $news_query->posts;
   }
 
-  $latest_articles_ids = $recent_articles->posts;
+  // Fallback: News is empty (e.g. staging or fresh install) — return recent
+  // posts from the 'articles' category so the above-the-fold column still fills.
+  $fallback_query = new WP_Query( $build_args( 'articles' ) );
 
-  return $latest_articles_ids;
+  if ( ! $fallback_query->have_posts() ) {
+    return array();
+  }
+
+  return $fallback_query->posts;
 }
 /**
  * Get the featured post ids for the above the fold section
@@ -247,12 +227,13 @@ function get_above_the_fold_featured_post_ids() {
     $featured_posts_ids[ $i - 1 ] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
   }
 
-  // Normalize featured post IDs to integers for strict comparison
-  $featured_posts_ids = array_map( 'intval', $featured_posts_ids );
+  // Normalize all IDs to integers for strict comparison
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
+  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
 
   for ( $i = 0; $i < 8; $i++ ) {
-    if ( ! is_numeric( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
+
+    if ( empty( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
         while ( ! empty( $latest_featured_posts_ids ) && in_array( $latest_featured_posts_ids[0], $featured_posts_ids, true ) ) { // ensure fallback latest is not already in the theme options featured posts
           array_shift( $latest_featured_posts_ids );
@@ -506,50 +487,15 @@ function nm_is_article( $post_id = null ) {
     return false;
   }
 
+  // Resolve articles term ID once outside the closure to avoid N+1 DB calls per category.
+  $articles_term    = get_term_by( 'slug', 'articles', 'category' );
+  $articles_term_id = $articles_term ? $articles_term->term_id : 0;
+
   // check to see if any of the categories returned match the articles slug or have a parent with the articles id
   $found_in_categories = array_filter(
     $categories,
-    function ( $category ) {
-      if ( $category->slug === 'articles' || $category->parent === get_term_by( 'slug', 'articles', 'category' )->term_id ) {
-        return true;
-      }
-
-      return false;
-    }
-  ); // check to see if any of the categories returned match the articles slug
-
-  if ( count( $found_in_categories ) > 0 ) {
-    return true; // if articles slug was found return true
-  }
-
-  return false;
-}
-
-/**
- * @deprecated 4.0.0 Replaced by nm_is_article()
- * @see nm_is_article()
- *
- * Answer the question is this a single post in the articles category?
- *
- * @return Boolean
- */
-function nm_is_single_article() {
-  if ( ! is_single() ) { // if not single return straight away
-    return false;
-  }
-
-  global $post;
-
-  $categories = get_the_terms( $post->ID, 'category' ); // get the categories for the post
-
-  if ( ! $categories ) {
-    return false;
-  }
-
-  $found_in_categories = array_filter(
-    $categories,
-    function ( $category ) {
-      return $category->slug === 'articles';
+    function ( $category ) use ( $articles_term_id ) {
+      return $category->slug === 'articles' || ( $articles_term_id && $category->parent === $articles_term_id );
     }
   ); // check to see if any of the categories returned match the articles slug
 
@@ -625,10 +571,8 @@ function only_child_category_filter( $category ) {
 /**
  * Create youtube embed url with consistent parameters
  *
- * Note the option to use the lazysizes for lazyloading the iframe https://github.com/aFarkas/lazysizes
- *
  * @param string $id Youtube video ID.
- * @param boolean $autoplay Set true if the video autoplay function is required (only posible on internal website linking due to browser policy).
+ * @param boolean $autoplay Set true if the video autoplay function is required (only possible on internal website linking due to browser policy).
  *
  * @return string Valid youtube iframe src url
  */
@@ -640,6 +584,48 @@ function generate_youtube_embed_url( $id, $autoplay = false ) {
   }
 
   return $url;
+}
+
+/**
+ * Fuzzy whitelist of contexts where a YouTube embed is likely present.
+ *
+ * Used by header.php to decide between `preconnect` (when we're confident a
+ * YouTube iframe will load) and `dns-prefetch` (everywhere else). False
+ * negatives fall through to dns-prefetch, which is safe — the iframe still
+ * loads, just without an open TLS connection waiting for it.
+ *
+ * @return boolean True if the current request is likely to render a YouTube embed.
+ */
+function nm_known_video_page() {
+  if ( is_singular() ) {
+    $queried = get_queried_object();
+    if ( $queried ) {
+      if ( ! empty( get_post_meta( $queried->ID, '_cmb_utube', true ) ) ) {
+        return true;
+      }
+      if ( ! empty( get_post_meta( $queried->ID, '_nm_support_youtube', true ) ) ) {
+        return true;
+      }
+      // page-how-we-are-funded.php hardcodes a fallback video ID when meta is empty.
+      if ( is_page( 'how-we-are-funded' ) ) {
+        return true;
+      }
+    }
+  }
+
+  if ( is_category() ) {
+    $term       = get_queried_object();
+    $video_term = get_term_by( 'slug', 'video', 'category' );
+    if ( $term && $video_term && ( $term->term_id === $video_term->term_id || cat_is_ancestor_of( $video_term, $term ) ) ) {
+      return true;
+    }
+  }
+
+  if ( is_front_page() ) {
+    return true;
+  }
+
+  return false;
 }
 
 /**

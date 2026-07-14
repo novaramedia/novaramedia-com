@@ -12,13 +12,13 @@ $support_page = get_page_by_path( 'support' );
 $support_page_youtube_id = false;
 
 if ( $support_page !== null ) {
-  $support_page_youtube_id = get_post_meta( $support_page->ID, '_nm_support_youtube', true );
+  $support_page_youtube_id = get_post_meta( $support_page->ID, '_nm_support_youtube_short', true );
 }
 ?>
 <div class="container pt-6 pb-6 pt-s-5 pb-s-5">
   <div class="grid-row font-size-11 font-size-s-10">
     <div class="grid-item is-m-24 is-xxl-12 mb-4">
-      <div class="u-video-embed-container background-black">
+      <div class="ui-embed-container background-black">
         <?php
         if ( ! empty( $custom_youtube_id ) ) {
           $video_id = $custom_youtube_id;
@@ -27,7 +27,7 @@ if ( $support_page !== null ) {
         } else {
           $video_id = 'c6hfjBmzt5c';
         }
-        echo render_youtube_embed_iframe( $video_id, true );
+        echo render_youtube_embed_iframe( $video_id, false, 'eager', 'Support video' );
         ?>
       </div>
     </div>

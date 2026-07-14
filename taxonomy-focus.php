@@ -1,16 +1,16 @@
 <?php
 get_header();
 
-$term = $wp_query->get_queried_object();
+$this_term = $wp_query->get_queried_object();
 
-$splash_override_image_id = get_term_meta($term->term_id, '_nm_focus_splash_override_id', true);
-$splash_image_id = !empty($splash_override_image_id) ? $splash_override_image_id : get_term_meta($term->term_id, '_nm_focus_splash_id', true); // if there is an override us it, otherwise get the open graph & splash combo image
+$splash_override_image_id = get_term_meta( $this_term->term_id, '_nm_focus_splash_override_id', true );
+$splash_image_id = ! empty( $splash_override_image_id ) ? $splash_override_image_id : get_term_meta( $this_term->term_id, '_nm_focus_splash_id', true ); // if there is an override us it, otherwise get the open graph & splash combo image
 
-$splash_image_caption = !empty($splash_image_id) ? wp_get_attachment_caption($splash_image_id) : false;
+$splash_image_caption = ! empty( $splash_image_id ) ? wp_get_attachment_caption( $splash_image_id ) : false;
 
-$quotes = get_term_meta($term->term_id, '_nm_focus_quotes', true);
+$quotes = get_term_meta( $this_term->term_id, '_nm_focus_quotes', true );
 
-$credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
+$credits = get_term_meta( $this_term->term_id, '_nm_focus_credits', true );
 ?>
 <main id="main-content">
   <section id="posts" class="container">
@@ -26,17 +26,17 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
       </div>
       <div class="grid-item is-s-24 offset-l-0 is-l-12 offset-xxl-4 is-xxl-12">
         <?php
-          if ($splash_image_id) {
-            echo wp_get_attachment_image($splash_image_id, 'col18-16to9', false, array('class' => 'focus-archive__splash'));
+        if ( $splash_image_id ) {
+          echo wp_get_attachment_image( $splash_image_id, 'col18-16to9', false, array( 'class' => 'focus-archive__splash' ) );
 
-            if ($splash_image_caption) {
-          ?>
+          if ( $splash_image_caption ) {
+            ?>
           <div class="font-size-8 font-weight-bold">
             <?php echo $splash_image_caption; ?>
           </div>
-          <?php
-            }
+            <?php
           }
+        }
         ?>
         <div class="only-mobile">
           <h1 class="font-size-13 font-weight-bold mt-1 mb-1"><?php single_cat_title(); ?></h1>
@@ -49,51 +49,53 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
 
     <div class="grid-row mb-4">
 <?php
-if( have_posts() ) {
+if ( have_posts() ) {
   $i = 0;
   $post_grid_classes = 'grid-item is-s-24 is-xl-12 is-xxl-8 mb-4';
-  while( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
 
-    if ($i === 4 && isset($quotes[0])) { ?>
+    if ( $i === 4 && isset( $quotes[0] ) ) {
+      ?>
     <div class="<?php echo $post_grid_classes; ?>">
-      <?php get_template_part('partials/components/quote', null, $quotes[0]); ?>
+      <?php get_template_part( 'partials/components/quote', null, $quotes[0] ); ?>
     </div>
-<?php } else if ($i === 11 && isset($quotes[1])) { ?>
+<?php } elseif ( $i === 11 && isset( $quotes[1] ) ) { ?>
     <div class="<?php echo $post_grid_classes; ?>">
-      <?php get_template_part('partials/components/quote', null, $quotes[1]); ?>
+      <?php get_template_part( 'partials/components/quote', null, $quotes[1] ); ?>
     </div>
-<?php }
+      <?php
+}
 
-    $content_type = get_the_top_level_category(get_the_ID());
+    $content_type = get_the_top_level_category( get_the_ID() );
+    $is_video = ! empty( $content_type ) && $content_type->category_nicename === 'video';
 
-    switch ($content_type->category_nicename) {
-      case 'video':
-        get_template_part('partials/post-layouts/flex-video-embed-post', null, array(
-          'grid-item-classes' => $post_grid_classes
-        ));
-        break;
-      default:
-        get_template_part('partials/post-layouts/flex-post', null, array(
-          'grid-item-classes' => $post_grid_classes,
-          'image-size' => 'col12-16to9',
-        ));
-    }
+    get_template_part(
+      'partials/post-layouts/archive-post',
+      null,
+      array(
+        'grid-item-classes' => $post_grid_classes,
+        'image-size'        => 'col12-16to9',
+        'show-tags'         => true,
+        'show-video-embed'  => $is_video,
+      )
+    );
 
-    $i++;
+    ++$i;
   }
 } else {
+  ?>
+    <article class="grid-item is-s-24">Sorry, nothing matched your criteria :/</article>
+  <?php
+}
 ?>
-    <article class="grid-item is-s-24"><?php _e('Sorry, nothing matched your criteria :/'); ?></article>
-<?php
-} ?>
     </div>
     <div class="grid-row mt-6 mb-4 font-size-8 font-weight-bold text-paragraph-breaks">
       <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
-          if (!empty($credits)) {
-            echo apply_filters('the_content', $credits);
-          }
+        if ( ! empty( $credits ) ) {
+          echo apply_filters( 'the_content', $credits );
+        }
         ?>
       </div>
     </div>

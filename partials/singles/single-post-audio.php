@@ -34,26 +34,26 @@
 <div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-2">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('j F Y'); ?></li>
+      <li>Published <?php the_time(NM_DATE_FORMAT_LONG); ?></li>
       <?php
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
         }
       ?>
-      <li><a href="<?php echo $podcast_url; ?>" target="_blank" rel="nofollow">Subscribe to Podcast</a></li>
+      <li><a href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer">Subscribe to Podcast</a></li>
     <?php
       if (!empty($meta['_cmb_dl_mp3'])) {
-        echo '<li><a href="' . $meta['_cmb_dl_mp3'][0] . '">Download mp3</a></li>';
+        echo '<li><a href="' . esc_url( $meta['_cmb_dl_mp3'][0] ) . '">Download mp3</a></li>';
       }
     ?>
     </ul>
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
-      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet episode'); ?></li>
-      <li><?php render_facebook_share_link($share_url, 'Share this episode on Facebook'); ?></li>
-      <li><?php render_email_share_link($share_url, $post->post_title, 'Email this episode');?></li>
-      <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+      <li><?php render_share_link( 'twitter', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Tweet episode' ) ); ?></li>
+      <li><?php render_share_link( 'facebook', $share_url, array( 'link_text' => 'Share this episode on Facebook' ) ); ?></li>
+      <li><?php render_share_link( 'email', $share_url, array( 'subject' => $post->post_title, 'link_text' => 'Email this episode' ) ); ?></li>
+      <li><?php render_share_link( 'reddit', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Post to Reddit' ) ); ?></li>
     </ul>
   </div>
 </div>
@@ -77,7 +77,7 @@
       if ( ! empty( $meta['_cmb_is_resonance'] ) && $meta['_cmb_is_resonance'][0] ) {
         ?>
         <div class="font-mono font-size-8 mt-1">
-        	<a target=_blank href="http://resonancefm.com/">powered by: Resonance FM</a>
+        	<a target="_blank" rel="nofollow noopener noreferrer" href="https://resonancefm.com/">powered by: Resonance FM</a>
         </div>
       <?php
         }

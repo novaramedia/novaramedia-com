@@ -12,3 +12,6 @@ test*.log
 
 # Build artifacts
 dist/report.html
+
+# Claude Code local state
+.claude/

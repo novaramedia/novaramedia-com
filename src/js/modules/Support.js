@@ -72,7 +72,13 @@ export class Support {
           .val($firstValueBtn.data('value'));
       }
 
-      // Highlight correct schedule option
+      // Reset all schedule options then highlight the correct one
+      $form
+        .find('.support-form__schedule-option')
+        .removeClass('ui-button--active')
+        .attr('aria-checked', 'false')
+        .attr('tabindex', '-1');
+
       $form
         .find(`.support-form__schedule-option[data-value="${showFirst}"]`)
         .addClass('ui-button--active')

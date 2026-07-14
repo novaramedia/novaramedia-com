@@ -75,12 +75,12 @@ jobs:
           # Incoming webhooks only use the 'text' field, not 'blocks'
           MESSAGE="*New release deployed: novaramedia.com v${VERSION}*
 
-*Repository:* https://github.com/${REPO_URL}
-*Release PR:* ${PR_URL}
-*Commit:* https://github.com/${REPO_URL}/commit/${COMMIT_SHA}
+          *Repository:* https://github.com/${REPO_URL}
+          *Release PR:* ${PR_URL}
+          *Commit:* https://github.com/${REPO_URL}/commit/${COMMIT_SHA}
 
-*Release Notes:*
-${RELEASE_NOTES}"
+          *Release Notes:*
+          ${RELEASE_NOTES}"
 
           # Create JSON message using jq for proper escaping
           jq -n \
@@ -94,7 +94,7 @@ ${RELEASE_NOTES}"
 
       - name: Send Slack notification
         id: slack
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
         with:
           payload-file-path: slack_message.json
         env:

@@ -93,8 +93,8 @@ if ($category->slug === 'video') {
           $meta = get_post_meta($post->ID);
           if (!empty($meta['_cmb_utube'])) {
           ?>
-          <div class="u-video-embed-container">
-            <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true ); ?>
+          <div class="ui-embed-container">
+            <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], false, 'lazy', get_the_title() ); ?>
           </div>
           <a href="<?php the_permalink(); ?>">
             <h6 class="text-wrap-pretty mt-2 font-size-13 font-weight-bold"><?php the_title(); ?></h6>
@@ -109,7 +109,7 @@ if ($category->slug === 'video') {
           ?>
         </div>
         <div class="grid-item is-xxl-8">
-          <div class="grid-row grid--nested-tight">
+          <div class="grid-row grid-row--nested-tight">
           <?php
           if (have_posts()) {
             while(have_posts() && $i < 6) {
@@ -122,7 +122,7 @@ if ($category->slug === 'video') {
               </div>
               <a href="<?php the_permalink(); ?>" class="ui-hover">
                 <?php render_thumbnail($post->ID, 'col24-16to9', array(
-                  'class' => 'ui-rounded-image'
+                  'class' => 'ui-rounded-box'
                 )); ?>
               </a>
             </div>
@@ -153,9 +153,10 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 
-    get_template_part('partials/post-layouts/flex-post', null, array(
+    get_template_part('partials/post-layouts/archive-post', null, array(
       'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
       'image-size' => 'col12-16to9',
+      'show-tags' => true,
     ));
   }
 } else {

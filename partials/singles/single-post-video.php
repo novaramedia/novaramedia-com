@@ -19,7 +19,7 @@
 <div class="grid-row mb-4 font-size-9">
   <div class="grid-item is-s-24 is-m-10 is-xxl-12 mb-s-3">
     <ul class="inline-action-list">
-      <li>Published <?php the_time('j F Y'); ?></li>
+      <li>Published <?php the_time(NM_DATE_FORMAT_LONG); ?></li>
       <?php
         if (!empty($resources)) {
           echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
@@ -29,10 +29,10 @@
   </div>
   <div class="grid-item is-s-24 is-m-14 is-xxl-12">
     <ul class="inline-action-list">
-      <li><?php render_tweet_link($share_url, $post->post_title, 'Tweet video'); ?></li>
-      <li><?php render_facebook_share_link($share_url, 'Share this video on Facebook'); ?></li>
-      <li><?php render_email_share_link($share_url, $post->post_title, 'Email this video');?></li>
-      <li><?php render_reddit_share_link($share_url, $post->post_title, 'Post to Reddit');?></li>
+      <li><?php render_share_link( 'twitter', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Tweet video' ) ); ?></li>
+      <li><?php render_share_link( 'facebook', $share_url, array( 'link_text' => 'Share this video on Facebook' ) ); ?></li>
+      <li><?php render_share_link( 'email', $share_url, array( 'subject' => $post->post_title, 'link_text' => 'Email this video' ) ); ?></li>
+      <li><?php render_share_link( 'reddit', $share_url, array( 'title' => $post->post_title, 'link_text' => 'Post to Reddit' ) ); ?></li>
     </ul>
   </div>
 </div>
@@ -47,13 +47,19 @@
       if (!empty($meta['_cmb_utube'])) {
         $autoplay = false;
 
-        // soft check to see if the link was internal from another part of the website. if so enable autoplay possibility (will depend on browser and config)
-        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST'])) {
+        // Soft check: if referer host matches this host, enable autoplay (browser may still block it).
+        // wp_parse_url() prevents spoofing via host name in query/path (e.g. evil.com/?next=novaramedia.com).
+        // Both hosts are parsed and lowercased so ports, case differences and IPv6 hosts still match.
+        $referer      = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+        $host_header  = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+        $host         = $host_header ? strtolower( (string) wp_parse_url( 'http://' . $host_header, PHP_URL_HOST ) ) : '';
+        $referer_host = $referer ? strtolower( (string) wp_parse_url( $referer, PHP_URL_HOST ) ) : '';
+        if ( $referer_host && $host && $referer_host === $host ) {
           $autoplay = true;
         }
     ?>
-      <div class="u-video-embed-container">
-        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], true, $autoplay ); ?>
+      <div class="ui-embed-container">
+        <?php echo render_youtube_embed_iframe( $meta['_cmb_utube'][0], $autoplay, 'eager', get_the_title() ); ?>
       </div>
     <?php
       } else {
@@ -62,7 +68,7 @@
     ?>
   </div>
   <div class="grid-item is-s-24 is-xxl-4">
-    <div class="grid-row grid--nested font-size-9">
+    <div class="grid-row grid-row--nested font-size-9">
       <?php
         $related_video = get_related_posts(null, 'Video', 3);
 
@@ -78,7 +84,7 @@
           </div>
           <a href="<?php the_permalink(); ?>" class="ui-hover">
             <?php render_thumbnail($post->ID, 'col24-16to9', array(
-              'class' => 'ui-rounded-image'
+              'class' => 'ui-rounded-box'
             )); ?>
           </a>
         </div>

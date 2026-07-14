@@ -3,6 +3,7 @@
     $sections_to_render = array(
       'UK',
       'World',
+      'Green Party',
       'Labour Party',
       'Organised Labour',
       'Conservative Party',
@@ -51,7 +52,7 @@
             </div>
             <a href="<?php echo get_permalink($post->ID); ?>" class="ui-hover">
               <?php render_thumbnail($post->ID, 'col24-16to9', array(
-                'class' => 'ui-rounded-image',
+                'class' => 'ui-rounded-box',
                 'data-no-lazysizes' => true,
                 'loading' => 'eager'
               )); ?>

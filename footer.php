@@ -30,6 +30,7 @@
                 )
               );
             ?>
+            <a href="<?php echo site_url( 'complaints-and-corrections/' ); ?>" class="u-display-block mt-4" style="max-width: 50px;" aria-label="Complaints"><?php echo nm_get_file( '/dist/img/impress-footer-mark.svg' ); ?></a>
           </div>
           <div class="grid-item is-s-12 is-xxl-6 mb-5">
             <h6 class="mb-4">Podcasts</h6>
@@ -37,21 +38,21 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-podcasts',
-                  'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold mb-4'
+                  'fallback_cb'    => false,
+                  'menu_class'     => 'font-weight-bold mb-4',
                 )
               );
-            ?>
+              ?>
             <h6 class="mb-4">Focuses</h6>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-focuses',
-                  'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold'
+                  'fallback_cb'    => false,
+                  'menu_class'     => 'font-weight-bold',
                 )
               );
-            ?>
+              ?>
           </div>
           <div class="grid-item is-s-12 is-xxl-6 mb-5">
             <h6 class="mb-4">Articles</h6>
@@ -59,21 +60,21 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-articles',
-                  'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold mb-4'
+                  'fallback_cb'    => false,
+                  'menu_class'     => 'font-weight-bold mb-4',
                 )
               );
-            ?>
+              ?>
             <h6 class="mb-4">Shows</h6>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-shows',
-                  'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold'
+                  'fallback_cb'    => false,
+                  'menu_class'     => 'font-weight-bold',
                 )
               );
-            ?>
+              ?>
           </div>
           <div class="grid-item is-s-12 is-xxl-6 mb-5">
             <h6 class="mb-4">Social Media</h6>
@@ -81,11 +82,11 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-social-media',
-                  'fallback_cb' => false,
-                  'menu_class' => 'font-weight-bold'
+                  'fallback_cb'    => false,
+                  'menu_class'     => 'font-weight-bold',
                 )
               );
-            ?>
+              ?>
           </div>
         </div>
       </div>
@@ -94,9 +95,9 @@
   </section>
 
   <?php
-    get_template_part('partials/bottom-bar/bottom-bar');
-    get_template_part('partials/scripts');
-    get_template_part('partials/schema-org');
+    get_template_part( 'partials/bottom-bar/bottom-bar' );
+    get_template_part( 'partials/scripts' );
+    get_template_part( 'partials/schema-org' );
   ?>
 
   </body>

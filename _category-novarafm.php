@@ -44,21 +44,22 @@ function render_large_cross($color = 'black') {
 $episode_block_posts_number = 9; // how many episodes to show in the sidescroll blocks
 
 // renders a carousel of episodes
+// UNTESTED: markup updated to standard Swiper classes for v12 compatibility, but this template is stale/unused and needs design review
 function render_episode_block($posts) {
 ?>
-<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel ux-carousel--autoplay">
-  <div class="ux-carousel__wrapper">
-    <div class="ux-carousel__nav-left ux-carousel__nav-left--disabled ui-rounded-box"></div>
-    <div class="ux-carousel__nav-right ui-rounded-box"></div>
-    <div class="ux-carousel__inner ux-carousel__inner">
+<div class="novara-fm-archive__archive-block background-white ui-rounded-box ux-carousel">
+  <div class="swiper">
+    <div class="swiper-button-prev swiper-button-prev--disabled ui-rounded-box"></div>
+    <div class="swiper-button-next ui-rounded-box"></div>
+    <div class="swiper-wrapper">
       <?php
         foreach ($posts as $post) {
           $post_id = $post->ID;
       ?>
-        <div class="ux-carousel__item">
+        <div class="swiper-slide">
           <a href="<?php echo get_permalink($post_id); ?>">
             <?php render_thumbnail($post_id, 'col12-16to9', array(
-              'class' => 'ui-rounded-image'
+              'class' => 'ui-rounded-box'
             )); ?>
             <h2 class="font-size-9 font-weight-bold mb-1"><?php echo get_the_title($post_id); ?></h2>
             <p class="font-size-9"><?php render_short_description($post_id); ?></p>
@@ -131,7 +132,7 @@ function render_podcast_links($podcast_url, $button_color = 'white') {
           <?php echo render_large_cross('green'); ?>
         </div>
         <div class="grid-item offset-xxl-1 is-xxl-18">
-          <div class="grid-row grid--nested">
+          <div class="grid-row grid-row--nested">
             <div class="grid-item is-s-24 is-xxl-12 mb-s-5">
               <h4 class="font-size-9 font-weight-bold text-uppercase mb-2">Latest Episode</h4>
               <h2 class="font-size-13 font-weight-bold mb-3"><?php echo get_the_title($post_id); ?></h2>

@@ -1,73 +1,88 @@
 <?php
 get_header();
+
+// Extract the last path segment from the failed URL and convert slug to search terms
+$request_path = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+$parsed_path  = wp_parse_url( trim( $request_path, '/' ), PHP_URL_PATH );
+$last_segment = basename( $parsed_path ? $parsed_path : '' );
+$search_hint  = str_replace( array( '-', '_' ), ' ', rawurldecode( $last_segment ) );
 ?>
 
-<!-- main content -->
-
-<main id="main-content">
+<main id="main-content" data-testid="main-content">
 
   <div class="container">
-    <div class="row mt-8 mb-5">
-      <div class="col col4"></div>
-      <div class="col col16">
-        <h2 class="mb-5">404 !</h2>
-        <h2 class="mb-5">Sorry whatever you were looking for isn’t here</h2>
-        <h3 class="mb-5">Try a search above ↑</h3>
-        <h3 class="mb-5">Or view the latest posts below ↓</h3>
+    <div class="grid-row mt-4 mb-5">
+      <div class="grid-item is-xxl-16 is-xxl-offset-4 is-s-24">
+        <h1 class="font-size-20 font-weight-bold mb-4">404!</h1>
+        <h2>Sorry whatever you were looking for isn't here</h2>
       </div>
     </div>
   </div>
 
-  <!-- main posts loop -->
-  <section id="posts" class="container">
-    <div class="row mb-5">
-<?php
-query_posts('posts_per_page=9');
-if( have_posts() ) {
-  $i = 0;
-  while( have_posts() ) {
-    the_post();
-    $description = get_post_meta($post->ID, '_cmb_short_desc');
-
-    if ($i % 3 === 0 && $i !== 0) {
-      echo "</div>\n<div class=\"row mb-5\">";
-    }
-?>
-
-    <a href="<?php the_permalink() ?>">
-      <article <?php post_class('col col8'); ?> id="post-<?php the_ID(); ?>">
-
-        <?php the_post_thumbnail('col8-16to9', array('class' => 'index-post-thumbnail')); ?>
-
-        <h5 class="index-post-title mt-2 mb-2 text-wrap-pretty"><?php the_title(); ?></h5>
-
-        <div class="index-post-description">
-          <?php
-            if (!empty($description)) {
-              echo $description[0];
-            } else {
-              the_excerpt();
-            }
-          ?>
+  <div class="container mb-5">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24">
+        <div class="background-gray ui-rounded-box ui-backgrounded-box-padding font-color-white">
+          <form role="search" method="get" class="site-header-search__form font-size-11" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
+            <div class="grid-row">
+              <div class="grid-item is-xxl-24">
+                <h3 class="mb-4">Search for something</h3>
+                <label class="u-visuallyhidden" for="404-search-input">Search this site</label>
+              </div>
+              <div class="grid-item is-s-20 is-xxl-22">
+                <input id="404-search-input" class="site-header-search__input ui-input" type="text" placeholder="Search" value="<?php echo esc_attr( $search_hint ); ?>" name="s" required aria-required="true">
+              </div>
+              <div class="grid-item is-s-4 is-xxl-2">
+                <button type="submit" class="site-header-search__submit ui-button ui-button--fill-width" role="button" aria-label="Submit Search"><i class="icon-search"></i></button>
+              </div>
+            </div>
+          </form>
         </div>
-
-      </article>
-    </a>
-
-<?php
-    $i++;
-  }
-} else {
-?>
-    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
-} ?>
+      </div>
     </div>
+  </div>
 
-  <!-- end posts -->
+  <div class="container">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-16 is-xxl-offset-4 is-s-24">
+        <h3>Or view the latest</h3>
+      </div>
+    </div>
+  </div>
+
+  <section class="container mb-5">
+    <div class="grid-row">
+<?php
+$recent_posts = new WP_Query(
+  array(
+    'posts_per_page'   => 9,
+    'post_status'      => 'publish',
+    'no_found_rows'    => true,
+  )
+);
+if ( $recent_posts->have_posts() ) {
+  while ( $recent_posts->have_posts() ) {
+    $recent_posts->the_post();
+
+    get_template_part(
+      'partials/post-layouts/archive-post',
+      null,
+      array(
+        'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+        'image-size'        => 'col12-16to9',
+        'show-tags'         => true,
+      )
+    );
+  }
+  wp_reset_postdata();
+} else {
+  ?>
+    <p>Sorry, no posts matched your criteria :/</p>
+  <?php
+}
+?>
+    </div>
   </section>
-
-<!-- end main-content -->
 
 </main>
 

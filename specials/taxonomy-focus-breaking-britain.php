@@ -3,18 +3,18 @@ get_header();
 
 $term = $wp_query->get_queried_object();
 
-$quotes = get_term_meta($term->term_id, '_nm_focus_quotes', true);
-$credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
+$quotes = get_term_meta( $term->term_id, '_nm_focus_quotes', true );
+$credits = get_term_meta( $term->term_id, '_nm_focus_credits', true );
 ?>
 <div class="breaking-britain__bars-container" style="position: absolute; width: 100%; height: 100vh; overflow: hidden; z-index: 10; pointer-events: none; ">
   <div class="breaking-britain__bar-1">
-    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg'); ?>
+    <?php echo nm_get_file( '/dist/img/specials/breaking-britain/focus-breakingbritain-line-1.svg' ); ?>
   </div>
   <div class="breaking-britain__bar-2">
-    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg'); ?>
+    <?php echo nm_get_file( '/dist/img/specials/breaking-britain/focus-breakingbritain-line-2.svg' ); ?>
   </div>
   <div class="breaking-britain__bar-3">
-    <?php echo nm_get_file('/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg'); ?>
+    <?php echo nm_get_file( '/dist/img/specials/breaking-britain/focus-breakingbritain-line-3.svg' ); ?>
   </div>
 </div>
 <style type="text/css">
@@ -28,7 +28,7 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
     letter-spacing: -0.02em;
   }
   .breaking-britain__header {
-    background-image: url(<?php echo get_bloginfo('stylesheet_directory') . '/dist/img/specials/breaking-britain/focus-breakingbritain-background.png'; ?>);
+    background-image: url(<?php echo get_bloginfo( 'stylesheet_directory' ) . '/dist/img/specials/breaking-britain/focus-breakingbritain-background.png'; ?>);
   }
   .breaking-britain__bar-1 {
     position: absolute;
@@ -127,81 +127,96 @@ $credits = get_term_meta($term->term_id, '_nm_focus_credits', true);
   </div>
   <section id="posts" class="container">
 <?php
-if( have_posts() ) {
+if ( have_posts() ) {
   $i = 0;
-  while( have_posts() ) {
+  while ( have_posts() ) {
     the_post();
 
-    if ($i === 0) { ?>
+    if ( $i === 0 ) {
+      ?>
     <div class="grid-row">
-<?php }
+      <?php
+    }
 
-    if ($i === 1) { ?>
+    if ( $i === 1 ) {
+      ?>
       <div class="grid-item is-s-24 is-xxl-8 mb-4">
-<?php }
+      <?php
+    }
 
-    if ($i === 3) { ?>
+    if ( $i === 3 ) {
+      ?>
       </div>
     </div>
     <div class="grid-row ">
-<?php }
-
-  if ($i === 4) { ?>
-    <div class="grid-item is-s-24 is-xxl-8 mb-4 mt-s-5 mb-s-5 font-color-blue-neon">
       <?php
-        if(isset($quotes[0])) {
-          get_template_part('partials/components/quote', null, $quotes[0]);
-        }
-      ?>
-    </div>
-<?php }
+    }
 
-  if ($i === 13) { ?>
+    if ( $i === 4 ) {
+      ?>
     <div class="grid-item is-s-24 is-xxl-8 mb-4 mt-s-5 mb-s-5 font-color-blue-neon">
-      <?php
-        if(isset($quotes[1])) {
-          get_template_part('partials/components/quote', null, $quotes[1]);
+        <?php
+        if ( isset( $quotes[0] ) ) {
+          get_template_part( 'partials/components/quote', null, $quotes[0] );
         }
-      ?>
+        ?>
     </div>
-<?php }
+      <?php
+    }
 
-    if ($i === 5 || $i === 10) { ?>
+    if ( $i === 13 ) {
+      ?>
+    <div class="grid-item is-s-24 is-xxl-8 mb-4 mt-s-5 mb-s-5 font-color-blue-neon">
+        <?php
+        if ( isset( $quotes[1] ) ) {
+          get_template_part( 'partials/components/quote', null, $quotes[1] );
+        }
+        ?>
+    </div>
+      <?php
+    }
+
+    if ( $i === 5 || $i === 10 ) {
+      ?>
     </div>
     <div class="grid-row mt-6 mb-5 mt-s-0 mb-s-0" style="justify-content: center;">
-<?php }
+      <?php
+    }
 
-    if ($i === 7|| $i === 12) { ?>
+    if ( $i === 7 || $i === 12 ) {
+      ?>
     </div>
     <div class="grid-row">
-<?php }
+      <?php
+    }
 
-    if ($i === 0) {
+    if ( $i === 0 ) {
       $post_arguments = array(
         'grid-item-classes' => 'grid-item is-s-24 is-xxl-16 mb-4',
-        'text-size' => 'large',
-        'image-size' => 'col18-16to9',
+        'text-size'         => 'large',
+        'image-size'        => 'col18-16to9',
       );
-    } else if ($i === 1 || $i === 2) {
+    } elseif ( $i === 1 || $i === 2 ) {
       $post_arguments = array(
         'grid-item-classes' => 'mb-4',
-        'image-size' => 'col12-16to9',
+        'image-size'        => 'col12-16to9',
       );
-    } else if ($i === 5 || $i === 6) {
+    } elseif ( $i === 5 || $i === 6 ) {
       $post_arguments = array(
         'grid-item-classes' => 'grid-item is-s-24 is-l-10 is-xxl-8 mb-4',
-        'image-size' => 'col12-16to9',
+        'image-size'        => 'col12-16to9',
       );
     } else {
       $post_arguments = array(
         'grid-item-classes' => 'grid-item is-s-24 is-xxl-8 mb-4',
-        'image-size' => 'col12-16to9',
+        'image-size'        => 'col12-16to9',
       );
     }
 
-    get_template_part('partials/post-layouts/flex-post', null, $post_arguments);
+    $post_arguments['show-tags'] = true;
+    get_template_part( 'partials/post-layouts/archive-post', null, $post_arguments );
 
-    $i++;
+    ++$i;
   }
 }
 ?>
@@ -210,9 +225,9 @@ if( have_posts() ) {
     <div class="grid-row mt-5 mb-5 font-size-8">
       <div class="grid-item is-s-24 is-m-12 is-xxl-8">
         <?php
-          if (!empty($credits)) {
-            echo apply_filters('the_content', $credits);
-          }
+        if ( ! empty( $credits ) ) {
+          echo apply_filters( 'the_content', $credits );
+        }
         ?>
       </div>
     </div>

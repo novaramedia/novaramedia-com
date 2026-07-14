@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://donate.novaramedia.com" crossorigin />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <?php if ( nm_known_video_page() ) { ?>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin />
+  <?php } else { ?>
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
+  <?php } ?>
   <link rel="preload" as="style" href="https://use.typekit.net/aki7elm.css" />
   <?php
     get_template_part( 'partials/header/seo' );
@@ -31,16 +36,16 @@
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
         <div class="site-header__main container">
           <div class="grid-row">
-            <nav class="grid-item is-xxl-6 layout-flex-align-center" role="navigation" aria-label="Main" data-testid="site-nav">
+            <nav class="grid-item is-s-6 is-xxl-5 layout-flex-align-center" role="navigation" aria-label="Main" data-testid="site-nav">
               <ul class="site-header__navigation u-inline-list u-inline-block">
                 <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
                 <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
               </ul>
             </nav>
-            <div class="header-main__middle grid-item is-xxl-12 text-align-center">
+            <div class="header-main__middle grid-item is-s-12 is-xxl-14 text-align-center">
               <a href="<?php echo home_url(); ?>">
-                <nav class="site-header__logomark" class="u-inline-block"><?php echo nm_get_file( '/dist/img/logomark-white.svg' ); ?></nav>
-                <div class="site-header__scroll-reveal">
+                <nav class="site-header__logomark u-inline-block"><?php echo nm_get_file( '/dist/img/logomark-white.svg' ); ?></nav>
+                <div class="site-header__scroll-reveal font-size-9 font-size-s-8">
                   <span class="site-header__scroll-reveal-text text-overflow-ellipsis">
                   <?php
                   if ( is_single() ) {
@@ -53,7 +58,7 @@
                 </div>
               </a>
             </div>
-            <div class="grid-item is-xxl-6 layout-flex-align-center layout-flex-justify-right font-weight-bold">
+            <div class="grid-item is-xxl-5 layout-flex-align-center layout-flex-justify-right font-weight-bold">
               <a href="<?php echo home_url( 'support' ); ?>" class="only-desktop ui-button ui-button--red ui-button--slimline">Support Us</a>
             </div>
           </div>

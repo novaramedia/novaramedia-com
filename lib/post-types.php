@@ -257,7 +257,9 @@ function nm_register_post_type_job() {
     'show_in_rest'        => true,
     'capability_type'     => 'post',
     'hierarchical'        => false,
-    'has_archive'         => true,
+    // No CPT archive: the public jobs listing is the /about/jobs Page (page-jobs.php),
+    // which filters by deadline. A `/job/` archive would be an unfiltered, stale duplicate.
+    'has_archive'         => false,
     'query_var'           => true,
     'can_export'          => true,
     'rewrite_no_front'    => false,

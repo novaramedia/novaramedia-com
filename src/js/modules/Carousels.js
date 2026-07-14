@@ -22,6 +22,7 @@ export class Carousels {
         navigation: {
           nextEl: $navRight[0],
           prevEl: $navLeft[0],
+          addIcons: false,
         },
         autoplay: {
           delay: 4000,
@@ -31,7 +32,7 @@ export class Carousels {
           enabled: true,
           thresholdDelta: 4,
         },
-        freemode: {
+        freeMode: {
           enabled: true,
           sticky: true,
         },

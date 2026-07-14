@@ -37,14 +37,14 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
                 $post->ID,
                 'col24-16to9',
                 array(
-                  'class' => 'ui-rounded-image',
+                  'class' => 'ui-rounded-box',
                 )
               );
             ?>
           </a>
         </div>
 
-        <div class="grid-row grid--nested mt-4">
+        <div class="grid-row grid-row--nested mt-4">
           <?php
             $meta = get_post_meta( $post->ID );
 
@@ -90,7 +90,7 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
             <span>See All</span>
           </div>
         </a>
-        <div class="grid-row grid--nested">
+        <div class="grid-row grid-row--nested">
           <?php
           if ( $latest_video->have_posts() ) {
             while ( $latest_video->have_posts() ) {
@@ -108,7 +108,7 @@ $downstream_category = get_term_by( 'slug', 'downstream', 'category' );
                     $post->ID,
                     'col24-16to9',
                     array(
-                      'class' => 'ui-rounded-image',
+                      'class' => 'ui-rounded-box',
                     )
                   );
                 ?>

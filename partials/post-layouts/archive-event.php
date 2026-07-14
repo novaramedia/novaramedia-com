@@ -28,7 +28,7 @@ if ( $timestamp ) {
         array( 600, 400 ),
         array(
           'alt'   => get_the_title(),
-          'class' => 'ui-rounded-image',
+          'class' => 'ui-rounded-box',
         )
       );
       ?>
@@ -36,7 +36,7 @@ if ( $timestamp ) {
   </div>
   <div class="grid-item is-xxl-14 is-s-24">
     <a href="<?php the_permalink(); ?>" class="ui-hover">
-      <h3 class="font-weight-bold mb-2"><?php echo $time->format( 'j F Y' ); ?>:</h3>
+      <h3 class="font-weight-bold mb-2"><?php echo $time->format( NM_DATE_FORMAT_LONG ); ?>:</h3>
       <h2 class="font-size-13 font-weight-bold text-wrap-balance mb-3"><?php the_title(); ?></h2>
     </a>
     <?php
@@ -44,20 +44,20 @@ if ( $timestamp ) {
       if ( ! empty( $venue_google_maps_link ) ) {
         $venue_link = $venue_google_maps_link;
         ?>
-          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
-            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow noopener noreferrer">
+            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo esc_html( $venue_name ); ?></h3>
           </a>
             <?php
       } elseif ( ! empty( $venue_postcode ) ) {
         $venue_link = 'https://www.google.com/maps/search/' . rawurlencode( $venue_postcode );
         ?>
-          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow">
-            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+          <a href="<?php echo esc_url( $venue_link ); ?>" target="_blank" rel="nofollow noopener noreferrer">
+            <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo esc_html( $venue_name ); ?></h3>
           </a>
             <?php
       } else {
         ?>
-          <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo $venue_name; ?></h3>
+          <h3 class="font-size-11 font-weight-bold mb-3">At <?php echo esc_html( $venue_name ); ?></h3>
             <?php
       }
       ?>
@@ -78,7 +78,7 @@ if ( $timestamp ) {
         } elseif ( $i > 1 ) {
           echo ', ';
         }
-        echo $speaker;
+        echo esc_html( $speaker );
       }
       ?>
       </h3>
@@ -88,7 +88,7 @@ if ( $timestamp ) {
     <?php
     if ( $host ) {
       ?>
-      <h3 class="font-size-12 font-weight-bold">Hosted by <?php echo $host; ?></h3>
+      <h3 class="font-size-12 font-weight-bold">Hosted by <?php echo esc_html( $host ); ?></h3>
       <?php
     }
     ?>

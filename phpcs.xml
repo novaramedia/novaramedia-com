@@ -179,6 +179,9 @@
   <!-- Yoda, no! -->
   <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
 
+  <!-- Curly brackets only, no alternative syntax (endif, endwhile, etc.) -->
+  <rule ref="Universal.ControlStructures.DisallowAlternativeSyntax"/>
+
   <rule ref="WordPress">
     <!-- Ternarys are fine tbh -->
     <exclude name="WordPress.PHP.DisallowShortTernary.Found" />

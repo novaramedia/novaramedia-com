@@ -1,12 +1,5 @@
 <?php
 get_header();
-
-$banners = array(
-  NM_get_option('nm_front_page_banner_option_1'),
-  NM_get_option('nm_front_page_banner_option_2'),
-  NM_get_option('nm_front_page_banner_option_3'),
-  NM_get_option('nm_front_page_banner_option_4')
-);
 ?>
 
 <!-- main content -->
@@ -21,30 +14,29 @@ $banners = array(
     // **************
 
     $featured_posts_ids = get_above_the_fold_featured_post_ids();
-    $latest_articles_posts_ids = get_latest_articles_ids($featured_posts_ids);
+    $latest_news_posts_ids = get_latest_news_ids($featured_posts_ids);
 
     get_template_part('partials/front-page/above-the-fold', null, array(
       'featured_posts_ids' => $featured_posts_ids,
-      'latest_articles_posts_ids' => $latest_articles_posts_ids,
+      'latest_news_posts_ids' => $latest_news_posts_ids,
     ));
 
-    render_front_page_banner($banners[0]);
+    // Editable layout: banners + product blocks, ordered in Front Page > Layout.
+    // Falls back to the historic order when no layout has been saved. The shared
+    // context is passed to every product block; only those that need it use it
+    // (e.g. the highlight section dedupes against the above-the-fold posts).
+    // Normalise to arrays: get_above_the_fold_featured_post_ids() returns false
+    // when empty (low-content / staging), which would make array_merge throw.
+    $block_context = array(
+      'excluded_posts_ids' => array_merge(
+        is_array($featured_posts_ids) ? $featured_posts_ids : array(),
+        is_array($latest_news_posts_ids) ? $latest_news_posts_ids : array()
+      ),
+    );
 
-    get_template_part('partials/front-page/highlight-block', null, array(
-      'excluded_posts_ids' => array_merge($featured_posts_ids, $latest_articles_posts_ids),
-    ));
-
-    get_template_part('partials/front-page/show-blocks/novara-live');
-
-    render_front_page_banner($banners[1]);
-
-    get_template_part('partials/front-page/show-blocks/audio');
-
-    render_front_page_banner($banners[2]);
-
-    get_template_part('partials/front-page/show-blocks/downstream');
-
-    render_front_page_banner($banners[3]);
+    foreach (nm_get_front_page_layout() as $block_slug) {
+      nm_render_front_page_block($block_slug, $block_context);
+    }
 
     get_template_part('partials/front-page/mega-block');
   ?>

@@ -7,9 +7,167 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- About page names render editor-entered links instead of escaping them to literal text
+
+## [4.7.0] - 2026-06-24
+
+### Security
+
+- Compare parsed referer host to `$_SERVER['HTTP_HOST']` via `wp_parse_url()` for video autoplay check — prevents spoofing via host name in referer query/path (`partials/singles/single-post-video.php`)
+- Replace `extract()` with explicit variable assignments in custom gallery shortcode (`lib/custom-gallery.php`)
+- Output escaping hardening across article headers, audio post, event archive, quote component, and video title renderer: `esc_html`/`esc_url` for plain-text and URL fields; `esc_html` for quote copy and standfirst (both plain-text fields, no HTML expected); `wp_kses` without anchors for support box content (prevents nested `<a>`); `rel="nofollow noopener noreferrer"` on podcast subscribe, Google Maps, and Resonance FM external links
+
+### Added
+
+- Front page Layout editor — order banners and product blocks in one sortable admin list (Front Page > Layout); falls back to the historic order until a layout is saved
+- ACFM standalone front-page full-width product block
+- Related Post Gutenberg block — search for posts or events in editor; renders type-specific layout on frontend
+- Short URL rewrite from `/dyor` to the Do Your Own Research show page
+- Environment gating for in-development front-page blocks via new `nm_is_production()` helper — show on local/development/staging, hide on production
+
+### Changed
+
+- Consolidate rounded-corner CSS helpers: introduce `ui-rounded-box--nested` (4px) for nested inner colour-blocked elements; replace `ui-rounded-image` with `ui-rounded-box` throughout templates
+
+- Update frontend dependencies: jQuery 3→4, @wordpress/scripts 27→32, Cypress 13→15, cssnano 7→8, postcss-preset-env 10→11, webpack-cli 6→7
+- Share link rendering consolidated into single `render_share_link( $platform, $url, $args )` function, replacing the per-platform share helpers
+
+### Deprecated
+
+- Legacy front-page banner selects — superseded by the Layout editor; retained only to seed the default order. Migration: after deploy, open Front Page > Layout and Save once
+
+### Removed
+
+- Unused `job` post-type archive (`has_archive` now false) — the public jobs listing is the `/about/jobs` Page; the `/job/` archive was an unfiltered, stale duplicate. Requires a permalink flush after deploy (Settings > Permalinks > Save)
+
+### Fixed
+
+- Doubled navigation arrows in products bar carousel — Swiper v12 auto-injects SVG icons (`addIcons: true` default) alongside existing `.ui-chevron` spans; disabled via `addIcons: false`
+- XSS: escape standfirst, short description, post UI tag attributes, about-page group fields, resources row, and legacy author meta output
+- Share links missing `rel="noopener noreferrer"` (tabnabbing)
+- Fundraising options separator field had duplicate CMB2 id, preventing support-section heading from saving
+- CI deploy self-heals when the staging theme repo's `.git` is missing, re-cloning automatically instead of failing every run
+- Job pages served stale open/closed states after deadlines passed; `Cache-Control` / `Expires` headers now cap the shared-cache TTL so caches revalidate at midnight on the deadline date for single job pages and nightly for the jobs archive (`lib/functions-hooks.php`)
+- OG/Twitter meta tags used `value=` instead of `content=`, silently dropping Twitter cards and `fb:app_id`
+- Feature-detect script had `typo="text/javascript"` attribute; browsers ignored the AVIF/WebP detection entirely
+- Schema.org `validThrough` on job posts emitted `1970-01-01` when no deadline was set; field now only added when a deadline exists
+- `render_show()` in audio partial declared at file scope without guard, causing fatal redeclare on second include
+- Path traversal: `_cmb_article_layout` post meta now validated against known layout values before use in `get_template_part()`
+- Code tidy and refactor: product-bar card spacing, Reddit/Facebook share-URL formatting, front-page banner `switch`→`if/elseif`, favicon `rel`, and Novara Live `font-size` class casing
+
+## [4.6.1] - 2026-05-13
+
+### Changed
+
+- Update sticky support bar copy and layout for second round of May 2026 fundraiser campaign
+- Expand sticky support bar admin options with separate heading fields for mobile open state and desktop closed state
+
+### Fixed
+
+- Purge contributor pages from Kinsta and Cloudflare cache on post publish (including `?is_full_archive=true` variant)
+- Include contributor, event, and job post types in site search results
+
+## [4.6.0] - 2026-05-06
+
+### Changed
+
+- Reorganise developer docs into `docs/` directory structure; update AI coding guidelines and trim `CLAUDE.md`
+
+- Update support page copy and layout for May 2026 fundraiser campaign
+- Replace hard-coded `'j F Y'` date literals with `NM_DATE_FORMAT_LONG` constant (#499)
+- Update DIW podcast urls (except the plain RSS one)
+
+### Fixed
+
+- Fix schedule tab active state when pre-selected via URL parameter
+
+## [4.5.5] - 2026-04-27
+
+### Added
+
+- IMPRESS logomark to footer with link to complaints page
+
+## [4.5.4] - 2026-04-24
+
+### Added
+
+- `noindex, follow` on internal search result pages (meta tag + HTTP header)
+
+### Fixed
+
+- Header menu spacing on mobile
+- Empty News category no longer breaks front page above-the-fold render
+- YouTube embeds failing to load in Safari
+- YouTube embed iframes missing accessible `title` attribute
+- Release `after:release` hook failing on Linux CI (`sed` → `perl` for cross-platform in-place edit)
+
+### Removed
+
+- Remove PayPal donation link section on Support page
+
+## [4.5.3] - 2026-04-08
+
+### Changed
+
+- Front page latest articles column (above the fold) now shows only News posts
+
+### Fixed
+
+- Survey 2026 banner link pointing to wrong domain
+
+## [4.5.2] - 2026-03-26
+
+### Added
+
+- Per-post Figma node ID meta box for DYOR episodes
+- Audience Survey 2026 front page banner
+
+### Changed
+
+- DYOR map config replaced: old embed URL field removed, now uses Figma file key + default node ID
+
+### Fixed
+
+- Mobile on-scroll header title truncates with ellipsis when text overflows
+
+## [4.5.1] - 2026-03-17
+
+### Added
+
+- Do Your Own Research category archive template
+
+### Changed
+
+- Modernised 404 page with search form pre-filled from failed URL path
+- Refactor redirects and rewrites into single data-driven file (`lib/functions-rewrites.php`)
+- Use correct post layout (with UI tags) on Articles and other category archives and search/tag index (`category.php`, `index.php`)
+- Migrate all remaining category/taxonomy archives to archive-post layout (ACFM, If I Speak, Focus, Breaking Britain)
+- Consolidate video embed into archive-post via `show-video-embed` flag
+
+### Fixed
+
+- Archive post partial layout creep from non-block image and link elements
+
+### Removed
+
+- /asksophie redirect as it should be a Bitly
+- Legacy post layout partials (flex-post, flex-video-embed-post, post-col6, post-col8)
+
+## [4.5.0] - 2026-03-07
+
+### Added
+
+- Death in Westminster podcast support (archive, banner, rewrites)
+- Deploy to Staging GitHub Actions workflow for manually deploying any branch to Kinsta staging persistently
+- `paths-ignore` filter on Cypress workflow to skip test runs for non-frontend changes (docs, workflows, config files)
+
 ### Changed
 
 - Optimise inline newsletter WP block data flow
+- PHPCS config: added Claude hook for automated lint enforcement
+- Non-interactive release script (`scripts/release.sh`) for automated versioning and PR creation
 
 ## [4.4.0] - 2026-02-09
 
@@ -25,6 +183,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated ACFM archive page for better newsletter signup integration and newer header style
 - Updated the Downstream archive page for better newsletter signup integration and newer header style
 - Refactored stylus files for max DRY
+
+### Fixed
+
+- Fix duplicate featured posts appearing above the fold when theme option slots are empty — `intval()` normalisation converted unset values to `0` before the fallback loop could fill them
 
 ### Removed
 

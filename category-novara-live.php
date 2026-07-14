@@ -34,8 +34,8 @@ get_header();
     </div>
     <div class="novara-live-archive__liveplayer grid-row">
       <div class="grid-item is-xxl-24">
-        <div class="u-video-embed-container">
-          <?php echo render_youtube_embed_iframe( $embed_id, true, true ); ?>
+        <div class="ui-embed-container">
+          <?php echo render_youtube_embed_iframe( $embed_id, true, 'eager', 'Novara Live' ); ?>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ get_header();
         <div class="grid-item is-s-12 is-xxl-6 mb-4">
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('col6-16to9'); ?>
-            <h6 class="font-size-10 font-weight-semibold mt-1"><?php the_time('j F Y'); ?></h6>
+            <h6 class="font-size-10 font-weight-semibold mt-1"><?php the_time(NM_DATE_FORMAT_LONG); ?></h6>
             <h6 class="text-wrap-pretty font-size-11 font-size-s-10 font-weight-semibold mt-1"><?php the_title(); ?></h6>
           </a>
         </div>

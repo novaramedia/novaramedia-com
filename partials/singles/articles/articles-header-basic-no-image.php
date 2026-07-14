@@ -6,11 +6,11 @@
     <h1 id="single-articles-title" class="font-size-15 font-weight-bold mb-3" data-testid="post-title"><?php the_title(); ?></h1>
     <?php
       if (!empty($meta['_cmb_standfirst'])) {
-    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo $meta['_cmb_standfirst'][0]; ?></h2>
+    ?><h2 class="font-size-12 font-weight-bold mb-3 text-wrap-pretty"><?php echo esc_html( $meta['_cmb_standfirst'][0] ); ?></h2>
     <?php
       }
     ?>
     <h3 class="font-size-11 font-weight-bold">by <?php render_bylines($post->ID, true); ?></h3>
-    <h3 class="font-size-11 font-weight-bold"><?php the_time('j F Y'); ?></h3>
+    <h3 class="font-size-11 font-weight-bold"><?php the_time(NM_DATE_FORMAT_LONG); ?></h3>
   </div>
 </div>

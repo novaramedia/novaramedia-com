@@ -1,12 +1,12 @@
 <?php
-  if ( empty( $args['latest_articles_posts_ids'] ) ) {
+  if ( empty( $args['latest_news_posts_ids'] ) ) {
     return;
   }
-  $latest_articles_posts_ids = $args['latest_articles_posts_ids'];
+  $latest_news_posts_ids = $args['latest_news_posts_ids'];
 
   $recent_articles = new WP_Query(
     array(
-      'post__in' => $latest_articles_posts_ids,
+      'post__in' => $latest_news_posts_ids,
       'orderby' => 'post__in',
     )
   );
@@ -103,27 +103,6 @@
   }
 
   $i = 0;
-
-  // TODO: Deprecate and remove apology_notice functionality
-  // This is a hardcoded temporary solution for a specific incident from Sept 2024.
-  // The apology_notice injection causes index drift in the image_map, making image
-  // slots shift onto wrong posts. Consider removing this entirely or refactoring
-  // image_map to use post IDs as keys instead of numeric positions.
-  // Related: check_for_apology_notice() in lib/functions-custom.php
-  // Also used in: partials/front-page/products-bar.php
-  if ($apology_post = check_for_apology_notice()) { // Temporary fix for the apology notice
-    $post_id = $apology_post[0]->ID;
-  ?>
-  <div class="mb-4 pb-4 ui-border-bottom">
-    <div class="layout-split-level font-size-8 font-weight-bold mb-1">
-      <span class="ui-tag">Correction</span>
-    </div>
-    <a href="<?php echo get_permalink($post_id); ?>" class="ui-hover">
-      <h4 class="post__title font-size-11 font-size-s-12 font-condensed"><?php echo get_the_title($post_id); ?></h4>
-    </a>
-  </div>
-  <?php
-  }
 
   if ($recent_articles->have_posts()) {
     while ($recent_articles->have_posts()) {
