@@ -89,7 +89,7 @@ function nm_footer_legal_fallback( $args = array() ) {
 	$menu_class = isset( $args['menu_class'] ) ? $args['menu_class'] : 'font-weight-bold';
 	?>
 	<ul class="<?php echo esc_attr( $menu_class ); ?>">
-		<li><a href="<?php echo esc_url( site_url( 'terms-and-conditions/' ) ); ?>">Terms & Conditions</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'terms-and-conditions/' ) ); ?>">Terms &amp; Conditions</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'privacy-policy/' ) ); ?>">Privacy Policy</a></li>
 	</ul>
 	<?php

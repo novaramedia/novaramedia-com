@@ -7,29 +7,29 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-general',
-                  'fallback_cb' => 'nm_footer_general_fallback',
-                  'menu_class' => 'font-weight-bold mb-4'
+                  'fallback_cb'    => 'nm_footer_general_fallback',
+                  'menu_class'     => 'font-weight-bold mb-4',
                 )
               );
-            ?>
+              ?>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'manage-donation',
-                  'fallback_cb' => 'nm_manage_donation_fallback',
-                  'menu_class' => 'font-weight-bold mb-4'
+                  'fallback_cb'    => 'nm_manage_donation_fallback',
+                  'menu_class'     => 'font-weight-bold mb-4',
                 )
               );
-            ?>
+              ?>
             <?php
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-legal',
-                  'fallback_cb' => 'nm_footer_legal_fallback',
-                  'menu_class' => 'font-weight-bold'
+                  'fallback_cb'    => 'nm_footer_legal_fallback',
+                  'menu_class'     => 'font-weight-bold',
                 )
               );
-            ?>
+              ?>
             <a href="<?php echo site_url( 'complaints-and-corrections/' ); ?>" class="u-display-block mt-4" style="max-width: 50px;" aria-label="Complaints"><?php echo nm_get_file( '/dist/img/impress-footer-mark.svg' ); ?></a>
           </div>
           <div class="grid-item is-s-12 is-xxl-6 mb-5">
