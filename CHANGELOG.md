@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- All header and footer menus user-editable via Appearance → Menus, with fallbacks rendering the default links when no menu is assigned
+
 ### Fixed
 
 - About page names render editor-entered links instead of escaping them to literal text
