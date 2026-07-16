@@ -40,6 +40,17 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
   }
 
   $added = true;
+
+  // Slug-keyed map of category term IDs (self + descendants) so field
+  // markup can name categories by slug — term IDs drift across installs.
+  $category_map = array();
+
+  foreach ( get_categories( array( 'hide_empty' => false ) ) as $category ) {
+    $ids = array_map( 'intval', get_term_children( $category->term_id, 'category' ) );
+    array_unshift( $ids, (int) $category->term_id );
+
+    $category_map[ $category->slug ] = $ids;
+  }
   ?>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
@@ -62,6 +73,8 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     }
 
     const $htmlbody = $( 'html, body' );
+
+    const categoryMap = <?php echo wp_json_encode( $category_map ); ?>;
 
     // Non-group wysiwyg fields render via wp_editor() which drops CMB2
     // 'attributes'; they are marked with editor_class instead. Copy the
@@ -173,7 +186,23 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
           }
         }
 
-        if ( $this.data( 'validation-required' ) === true ) { // Validate required if variable set
+        // Required either unconditionally, or conditionally when the post is
+        // in the named category (or any of its descendants).
+        // .attr() not .data(): jQuery data() would coerce numeric-looking
+        // slugs (e.g. "2024") to numbers and break the map lookup.
+        const requiredCategorySlug = $this.attr( 'data-validation-required-category' );
+
+        let isRequired = $this.data( 'validation-required' ) === true;
+
+        if ( ! isRequired && typeof requiredCategorySlug !== 'undefined' ) {
+          const termIds = categoryMap[ requiredCategorySlug ] || [];
+
+          isRequired = termIds.some( function( id ) {
+            return $( '#in-category-' + id ).is( ':checked' );
+          });
+        }
+
+        if ( isRequired ) {
           if ( $row.is( '.cmb-type-file-list' ) ) {
 
             var has_LIs = $row.find( 'ul.cmb-attach-list li' ).length > 0;
@@ -191,6 +220,10 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
               remove_failure( $row );
             }
           }
+        } else if ( typeof requiredCategorySlug !== 'undefined' ) {
+          // Conditionally-required field whose category isn't ticked:
+          // clear any stale highlight from a previous failed attempt.
+          remove_failure( $row );
         }
 
       });
