@@ -137,7 +137,7 @@ with logic that computes a single `isRequired` flag first. Full replacement for 
           const termIds = categoryMap[ requiredCategorySlug ] || [];
 
           isRequired = termIds.some( function( id ) {
-            return $( '#in-category-' + id ).is( ':checked' );
+            return $( 'input[name="post_category[]"][value="' + id + '"]' ).is( ':checked' );
           });
         }
 

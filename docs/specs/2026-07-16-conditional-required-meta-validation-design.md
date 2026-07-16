@@ -51,7 +51,7 @@
 
 Category **slug** (e.g. `"video"`). Field is treated as required **only when**
 the named category — or any of its descendants — has a checked box in
-`#categorychecklist` (checkbox id pattern `in-category-{id}`).
+`#categorychecklist` (matched by `input[name="post_category[]"]` value, not element id — core suffixes checkbox ids via `wp_unique_prefixed_id()`).
 
 Set on fields via CMB2 `attributes` (both target fields are plain
 `text` / `text_url` types, which render `attributes` fine — no wysiwyg
@@ -103,8 +103,8 @@ if ( $( '#wp-preview' ).val() === 'dopreview' ) return;       // Preview
 **Conditional required check** inside the field loop:
 
 - If `validation-required-category` data present: look the slug up in
-  `categoryMap`; required ⇔ any mapped ID's `#in-category-{id}` checkbox is
-  checked. Slug not in map, or no category checklist in DOM (options pages) →
+  `categoryMap`; required ⇔ any checked `input[name="post_category[]"]`
+  whose value is a mapped ID. Slug not in map, or no category checklist in DOM (options pages) →
   not required.
 - Else: existing `validation-required === true` behaviour unchanged.
 - Reuses `is_empty_value()`, row highlight, alert, scroll-to-error.

@@ -222,8 +222,11 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
         if ( ! isRequired && typeof requiredCategorySlug !== 'undefined' ) {
           const termIds = categoryMap[ requiredCategorySlug ] || [];
 
+          // Match on name+value, not element id: core's Walker_Category_Checklist
+          // suffixes checkbox ids via wp_unique_prefixed_id() (in-category-828-2),
+          // so #in-category-{id} never matches.
           isRequired = termIds.some( function( id ) {
-            return $( '#in-category-' + id ).is( ':checked' );
+            return $( 'input[name="post_category[]"][value="' + id + '"]' ).is( ':checked' );
           });
         }
 
