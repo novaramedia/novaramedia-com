@@ -121,7 +121,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
 
     const remove_failure = ( $row ) => {
       $row.css({ 'background-color': '' });
-    }
+    };
 
     const clear_all_failures = () => {
       $( '[data-validation]' ).each( function() {
@@ -133,7 +133,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
 
         remove_failure( $row );
       });
-    }
+    };
 
     const generate_error_messages = (labels) => {
       let returnString = '';
@@ -143,7 +143,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       });
 
       return returnString;
-    }
+    };
 
     function checkValidation( event ) {
       var labels = [];
