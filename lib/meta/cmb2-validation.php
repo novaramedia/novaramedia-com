@@ -116,6 +116,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       var $first_error_row = null;
       var $row = null;
 
+      // Drafts and previews save freely; validation only gates
+      // Publish / Schedule / Update / Submit for Review.
+      const submitter = event.originalEvent && event.originalEvent.submitter;
+
+      if ( submitter && submitter.id === 'save-post' ) {
+        return;
+      }
+
+      if ( $( '#wp-preview' ).val() === 'dopreview' ) {
+        return;
+      }
+
       // Wysiwyg fields edited in Visual mode only sync to their underlying
       // textarea on save; force the sync so val() reads current content
       if ( typeof tinyMCE !== 'undefined' && typeof tinyMCE.triggerSave === 'function' ) {
