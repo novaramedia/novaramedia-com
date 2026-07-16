@@ -123,6 +123,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       $row.css({ 'background-color': '' });
     }
 
+    const clear_all_failures = () => {
+      $( '[data-validation]' ).each( function() {
+        let $row = $( this ).parents( '.cmb-row' );
+
+        if ( $row.length > 1 ) {
+          $row = $row.first();
+        }
+
+        remove_failure( $row );
+      });
+    }
+
     const generate_error_messages = (labels) => {
       let returnString = '';
 
@@ -139,14 +151,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       var $row = null;
 
       // Drafts and previews save freely; validation only gates
-      // Publish / Schedule / Update / Submit for Review.
+      // Publish / Schedule / Update / Submit for Review. Clear any
+      // highlights left by an earlier failed Publish attempt so the
+      // gated save doesn't look like it still has errors.
       const submitter = event.originalEvent && event.originalEvent.submitter;
 
       if ( submitter && submitter.id === 'save-post' ) {
+        clear_all_failures();
         return;
       }
 
       if ( $( '#wp-preview' ).val() === 'dopreview' ) {
+        clear_all_failures();
         return;
       }
 
