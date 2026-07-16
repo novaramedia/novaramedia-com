@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Standfirst and short description post meta fields now enforce required validation in the editor
+- Required meta validation only runs on publish — drafts and previews save freely
+- YouTube ID required on video posts, Soundcloud URL required on audio posts
 
 ## [4.7.0] - 2026-06-24
 

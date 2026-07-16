@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
- * Version: 0.3.2
+ * Version: 0.4.0
  *
  * Updated to also hook to our secondary options page form (Links Bar)
  * Changed to take variable for validation via data attribute
@@ -10,6 +10,8 @@
  * Added tinyMCE.triggerSave() so wysiwyg fields validate current Visual-mode content
  * Required check now treats whitespace-only and markup-only (e.g. <p></p>) values as empty
  * Added editor_class bridge so non-group wysiwyg fields can be marked required
+ * Validation now skipped on Save Draft and Preview submits; only publish-type submits validate
+ * Added data-validation-required-category="<slug>" for fields required only in a category (or its descendants)
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
@@ -17,7 +19,8 @@
  * 'attributes' => array(
  *   'data-validation' => 'true',
  *   'data-validation-word-length' => 14,
- *   'data-validation-required' => 'true'
+ *   'data-validation-required' => 'true',
+ *   'data-validation-required-category' => 'video',
  * )
  *
  * Non-group wysiwyg fields render via wp_editor(), which does not output the
