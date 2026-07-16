@@ -127,6 +127,16 @@ with the new attribute and the publish-only rule.
 | Term IDs differ on staging/local | Irrelevant — map built per-environment at render |
 | Browser without SubmitEvent.submitter | Validates on all submits (old behaviour) |
 
+## Out of scope (noted for a future rev)
+
+Required validation only checks *presence*, not *format*. The Soundcloud URL
+field accepts any non-empty string client-side; CMB2 `text_url` then runs
+`esc_url_raw` on save, so a non-URL value can pass validation yet be mangled
+or emptied server-side — publishing an audio post with a broken/missing embed
+and no error shown. A future rev could add format rules (e.g.
+`data-validation-pattern`): Soundcloud URL starts with
+`https://soundcloud.com/`, YouTube ID matches its 11-char pattern.
+
 ## Testing (manual, local)
 
 1. Draft save with everything empty → saves freely.
