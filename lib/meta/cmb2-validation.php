@@ -114,7 +114,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     };
 
     const remove_failure = ( $row ) => {
-      $row.css({ background: '' });
+      $row.css({ 'background-color': '' });
     }
 
     const generate_error_messages = (labels) => {

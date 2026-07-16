@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-16
 **Branch:** `fix/required-post-meta-validation`
-**Status:** Approved design, pre-implementation
+**Status:** Implemented (this branch)
 **Builds on:** required post meta validation feature (#567) already on this branch
 
 ## Problem
