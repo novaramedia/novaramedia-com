@@ -15,7 +15,7 @@
 - Branch: `fix/required-post-meta-validation` (continues existing feature, per user)
 - Production-quality code only; follow existing file style (2-space indent, snake_case helpers, jQuery idioms already in file)
 - No changes to Webpack/build system; no `dist/` commits (no source assets change here)
-- Fork version bumps 0.3.2 → 0.4.0 in the final task, with docblock updated in the same commit as the behaviour it documents (sync-docs rule)
+- Fork version bumps 0.3.2 → 0.4.0 in the final task (0.3.2 was the branch state when this plan was written; PR #568 overall moves the header 0.2.0 → 0.4.0), with docblock updated in the same commit as the behaviour it documents (sync-docs rule)
 - No automated test harness exists for this inline admin script — every task carries manual verification steps against the local DevKinsta site (`novaramediacom` local WP admin)
 - Options-page forms (Links Bar `#nm_secondary_options_page`, fundraising `#nm_fundraising_options`) must keep current always-validate behaviour
 

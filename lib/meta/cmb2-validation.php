@@ -46,13 +46,19 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
 
   // Slug-keyed map of category term IDs (self + descendants) so field
   // markup can name categories by slug — term IDs drift across installs.
+  // Only post edit screens can use category-conditional rules, so leave
+  // the map empty on options pages rather than query and print it there.
   $category_map = array();
 
-  foreach ( get_categories( array( 'hide_empty' => false ) ) as $category ) {
-    $ids = array_map( 'intval', get_term_children( $category->term_id, 'category' ) );
-    array_unshift( $ids, (int) $category->term_id );
+  $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
-    $category_map[ $category->slug ] = $ids;
+  if ( $screen && 'post' === $screen->base ) {
+    foreach ( get_categories( array( 'hide_empty' => false ) ) as $category ) {
+      $ids = array_map( 'intval', get_term_children( $category->term_id, 'category' ) );
+      array_unshift( $ids, (int) $category->term_id );
+
+      $category_map[ $category->slug ] = $ids;
+    }
   }
   ?>
 <script type="text/javascript">
