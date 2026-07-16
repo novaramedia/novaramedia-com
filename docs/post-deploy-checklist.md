@@ -16,6 +16,18 @@ for each.
 
 ---
 
+## Unreleased — required post meta validation
+
+### 1. Notify editorial before deploy — old posts may block on Update
+**Editorial heads-up before/at deploy.** Why: publish-type submits (including
+Update on already-published posts) now block if Standfirst or Short
+description is empty, and on video/audio posts if YouTube ID / Soundcloud URL
+is empty. Old posts missing those meta values will need them filled in before
+the next Update. Recommend running a count of affected published posts
+beforehand so editorial knows the scale of the backlog.
+
+---
+
 ## v4.7.0
 
 ### 1. Front Page Layout — seed the order (one-time)

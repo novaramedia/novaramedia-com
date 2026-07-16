@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
+### Added
 
 - Standfirst and short description post meta fields now enforce required validation in the editor
 - Required meta validation only runs on publish — drafts and previews save freely
