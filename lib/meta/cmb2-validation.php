@@ -4,14 +4,18 @@
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
  * Version: 0.4.0
  *
- * Updated to also hook to our secondary options page form (Links Bar)
- * Changed to take variable for validation via data attribute
- * Updated to also validate max words in field
- * Added tinyMCE.triggerSave() so wysiwyg fields validate current Visual-mode content
- * Required check now treats whitespace-only and markup-only (e.g. <p></p>) values as empty
- * Added editor_class bridge so non-group wysiwyg fields can be marked required
- * Validation now skipped on Save Draft and Preview submits; only publish-type submits validate
- * Added data-validation-required-category="<slug>" for fields required only in a category (or its descendants)
+ * Validates CMB2 meta fields in the editor: hooks the post edit form and our
+ * options page forms (Links Bar, Fundraising), and blocks submission with an
+ * alert plus row highlights when a rule fails. Only publish-type submits
+ * (Publish / Schedule / Update / Submit for Review) are validated — Save
+ * Draft and Preview always save freely.
+ *
+ * Rules, chosen per field via data attributes:
+ * - data-validation-required: value must not be empty. Whitespace-only and
+ *   markup-only values (e.g. an empty <p></p> from a wysiwyg) count as empty.
+ * - data-validation-required-category="<slug>": required only when the post
+ *   is in that category or any of its descendants.
+ * - data-validation-word-length: value must not exceed this many words.
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
@@ -88,6 +92,9 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     // Non-group wysiwyg fields render via wp_editor() which drops CMB2
     // 'attributes'; they are marked with editor_class instead. Copy the
     // marker onto the data attributes the validator scans for.
+    // The class is nm- prefixed (unlike the data-validation* attributes,
+    // inherited from the upstream fork) because classes share wp-admin's
+    // global namespace with core and other plugins.
     const bridge_wysiwyg_markers = () => {
       $( 'textarea.nm-validation-required' ).attr({
         'data-validation': 'true',
@@ -154,6 +161,9 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       // Publish / Schedule / Update / Submit for Review. Clear any
       // highlights left by an earlier failed Publish attempt so the
       // gated save doesn't look like it still has errors.
+      // SubmitEvent.submitter is the button that triggered this submit;
+      // in the classic editor Save Draft is id="save-post" (Publish and
+      // Update submit via id="publish", which falls through to validate).
       const submitter = event.originalEvent && event.originalEvent.submitter;
 
       if ( submitter && submitter.id === 'save-post' ) {
@@ -217,8 +227,11 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
         // slugs (e.g. "2024") to numbers and break the map lookup.
         const requiredCategorySlug = $this.attr( 'data-validation-required-category' );
 
+        // Globally required, regardless of category.
         let isRequired = $this.data( 'validation-required' ) === true;
 
+        // Not globally required but has a category rule: required only when
+        // one of that category's term IDs (itself or a descendant) is ticked.
         if ( ! isRequired && typeof requiredCategorySlug !== 'undefined' ) {
           const termIds = categoryMap[ requiredCategorySlug ] || [];
 
@@ -230,7 +243,10 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
           });
         }
 
+        // Required (globally or via ticked category): value must be non-empty.
         if ( isRequired ) {
+          // File-list fields have no text value — non-empty means at least
+          // one attached item in the list.
           if ( $row.is( '.cmb-type-file-list' ) ) {
 
             var has_LIs = $row.find( 'ul.cmb-attach-list li' ).length > 0;
