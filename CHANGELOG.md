@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Required validation on post meta fields before publish — standfirst and short description on all posts, YouTube ID on video, Soundcloud URL on audio
+- Required validation on post meta fields on publish and update — standfirst and short description on all posts, YouTube ID on video, Soundcloud URL on audio
 
 ## [4.7.0] - 2026-06-24
 
