@@ -20,4 +20,7 @@ module.exports = {
     ...defaultConfig.output,
     path: path.resolve(__dirname, 'dist/admin'),
   },
+  // The default config's CopyWebpackPlugin copies src/blocks block.json /
+  // render.php into the output dir; that belongs to the blocks build only.
+  plugins: defaultConfig.plugins.filter( ( plugin ) => plugin.constructor.name !== 'CopyPlugin' ),
 };
