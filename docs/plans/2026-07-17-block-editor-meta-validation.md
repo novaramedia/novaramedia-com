@@ -202,7 +202,7 @@ test( 'word length and required can both fail', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test src/admin/meta-validation/`
+Run: `node --test src/admin/meta-validation/core.test.js`
 Expected: FAIL — cannot find module `./core.js`.
 
 - [ ] **Step 3: Implement `src/admin/meta-validation/core.js`**
@@ -260,7 +260,7 @@ export const validateField = ( { value, text, rules }, activeCategoryIds, catego
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `node --test src/admin/meta-validation/`
+Run: `node --test src/admin/meta-validation/core.test.js`
 Expected: all 8 tests PASS.
 
 - [ ] **Step 5: Commit**

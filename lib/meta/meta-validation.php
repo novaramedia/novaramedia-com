@@ -121,6 +121,14 @@ add_action( 'cmb2_after_form', 'nm_meta_validation_enqueue_classic', 10, 2 );
  * editor screens, where the classic bundle is skipped.
  */
 function nm_meta_validation_enqueue_block_editor() {
+  // enqueue_block_editor_assets also fires for non-post block editors
+  // (e.g. the block widgets screen), where core/editor never registers.
+  $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+  if ( ! $screen || 'post' !== $screen->base ) {
+    return;
+  }
+
   nm_meta_validation_enqueue( 'nm-meta-validation-block-editor', 'meta-validation-block-editor' );
 }
 

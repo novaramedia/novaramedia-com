@@ -97,6 +97,12 @@ const revalidate = () => {
 const debouncedRevalidate = debounce( revalidate, 200 );
 
 const init = () => {
+  // Defence in depth: bail on block-editor screens without the post editor
+  // store (the PHP side already restricts enqueueing to post screens).
+  if ( ! select( 'core/editor' ) ) {
+    return;
+  }
+
   // Store churn is constant; only revalidate when the inputs the gate and
   // rules depend on actually change.
   let lastKey = '';
@@ -112,7 +118,17 @@ const init = () => {
 
     if ( key !== lastKey ) {
       lastKey = key;
-      debouncedRevalidate();
+
+      // "Switch to draft" calls editPost({status:'draft'}) + savePost()
+      // synchronously; if the lock is still held when savePost() runs
+      // (debounce hasn't fired yet), that save no-ops. When the gate goes
+      // inactive, unlock synchronously so the immediately-following save
+      // isn't swallowed. Otherwise keep the debounce to avoid thrashing.
+      if ( ! gateActive( state ) ) {
+        revalidate();
+      } else {
+        debouncedRevalidate();
+      }
     }
   } );
 
@@ -132,6 +148,11 @@ const init = () => {
   // textarea; bind editor events as editors register. If tinyMCE isn't
   // present yet, the subscribe path still covers the publish flow.
   if ( window.tinyMCE && typeof window.tinyMCE.on === 'function' ) {
+    // Editors initialised before this script ran never fire AddEditor.
+    ( window.tinyMCE.editors || [] ).forEach( ( editor ) => {
+      editor.on( 'input change', debouncedRevalidate );
+    } );
+
     window.tinyMCE.on( 'AddEditor', ( { editor } ) => {
       editor.on( 'input change', debouncedRevalidate );
     } );

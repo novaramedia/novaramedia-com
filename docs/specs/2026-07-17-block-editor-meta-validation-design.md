@@ -64,10 +64,13 @@ admin. **No changes to the existing `webpack.config.js`.**
 
 ### 2. Modules
 
-- **`core.js`** — no DOM, no `wp.*` globals. `isEmptyValue(value)` (current
-  DOMParser whitespace/markup-empty semantics), `countWords(value)`,
-  `validateField(value, rules, activeCategoryIds, categoryMap)` →
-  `{ valid, reason }`. `rules` = parsed `data-validation*` attribute set.
+- **`core.js`** — no DOM, no `wp.*` globals. `isEmptyText(text)` (whitespace
+  -empty check; markup stripping happens in `dom.js`, so `core.js` receives
+  pre-stripped text), `countWords(value)`,
+  `validateField(field, activeCategoryIds, categoryMap)` →
+  `{ valid, failures: string[] }`. `field` = `{ value, text, rules }` as
+  produced by `dom.js`'s `readField()`; `rules` = parsed `data-validation*`
+  attribute set.
 - **`dom.js`** — scan `[data-validation]` fields including the
   `nm-validation-required` wysiwyg `editor_class` bridge; read a field's
   current value (`tinyMCE.triggerSave()` first when present); row highlight
@@ -149,6 +152,7 @@ future layer — rejected for now in the parent spec and unchanged here.
 | Block editor: update published post, empty required field | Locked until fixed |
 | Block editor: switch published post to draft while locked | Unlocks, save proceeds |
 | Block editor: pre-publish checks disabled in prefs | First-publish race — documented limitation |
+| Block editor: autosave of a published post while locked | Blocked with the manual save (lockPostSaving gates autosave too) — divergence from classic, accepted |
 | Options pages (Links Bar, fundraising) | Classic adapter only, unchanged |
 
 ## Testing
