@@ -93,11 +93,12 @@ and shrinks to a loader (~50–70 lines):
 - Keeps the category slug → term-IDs map builder (unchanged, post edit
   screens only).
 - Drops all inline JS.
-- Enqueues `dist/admin/classic.js` on `admin_enqueue_scripts` when the screen
-  is a classic post edit screen or one of the two options pages; enqueues
-  `dist/admin/block-editor.js` on `enqueue_block_editor_assets`. Both read
-  deps/version from their `.asset.php` and get `categoryMap` via
-  `wp_localize_script`.
+- Enqueues `dist/admin/meta-validation-classic.js` for classic screens via
+  the `cmb2_after_form` hook (same only-where-a-CMB2-form-renders semantics
+  as the old inline print, and no need to enumerate options-page screen ids);
+  enqueues `dist/admin/meta-validation-block-editor.js` on
+  `enqueue_block_editor_assets`. Both read deps/version from their
+  `.asset.php` and get `categoryMap` via `wp_localize_script`.
 - `functions.php:130` include path updated
   (`get_template_part( 'lib/meta/meta-validation' )`).
 
