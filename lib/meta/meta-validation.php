@@ -115,3 +115,13 @@ function nm_meta_validation_enqueue_classic( $post_id, $cmb ) {
 }
 
 add_action( 'cmb2_after_form', 'nm_meta_validation_enqueue_classic', 10, 2 );
+
+/**
+ * Block editor bundle. enqueue_block_editor_assets fires only on block
+ * editor screens, where the classic bundle is skipped.
+ */
+function nm_meta_validation_enqueue_block_editor() {
+  nm_meta_validation_enqueue( 'nm-meta-validation-block-editor', 'meta-validation-block-editor' );
+}
+
+add_action( 'enqueue_block_editor_assets', 'nm_meta_validation_enqueue_block_editor' );
