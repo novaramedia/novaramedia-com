@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Required validation on post meta fields on publish and update — standfirst and short description on all posts, YouTube ID on video, Soundcloud URL on audio (classic editor only — block editor support to follow)
+
 ### Fixed
 
 - About page names render editor-entered links instead of escaping them to literal text
