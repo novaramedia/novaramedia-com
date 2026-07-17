@@ -41,7 +41,7 @@ function nm_cmb_post_metaboxes() {
     'type'       => 'wysiwyg',
     // Non-group wysiwyg fields render via wp_editor() which drops CMB2
     // 'attributes'; editor_class is the only marker that reaches the DOM.
-    // cmb2-validation.php bridges it onto the data-validation attributes.
+    // meta-validation.php bridges it onto the data-validation attributes.
     'options'    => array(
       'textarea_rows' => 5,
       'editor_class'  => 'nm-validation-required',

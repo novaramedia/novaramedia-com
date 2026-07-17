@@ -97,6 +97,13 @@ function nm_meta_validation_enqueue( $handle, $entry ) {
  * no #post form, but skip it there explicitly anyway.
  */
 function nm_meta_validation_enqueue_classic( $post_id, $cmb ) {
+  // cmb2_after_form fires once per metabox; only enqueue once per page.
+  static $enqueued = false;
+
+  if ( $enqueued ) {
+    return;
+  }
+
   $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
   if ( $screen && method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor() ) {
@@ -104,6 +111,7 @@ function nm_meta_validation_enqueue_classic( $post_id, $cmb ) {
   }
 
   nm_meta_validation_enqueue( 'nm-meta-validation-classic', 'meta-validation-classic' );
+  $enqueued = true;
 }
 
 add_action( 'cmb2_after_form', 'nm_meta_validation_enqueue_classic', 10, 2 );
