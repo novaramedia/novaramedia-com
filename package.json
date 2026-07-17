@@ -12,9 +12,11 @@
     "cy:verify": "cypress verify",
     "dev": "webpack --mode=development",
     "dev:blocks": "wp-scripts start --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
+    "dev:admin": "wp-scripts start --config webpack.admin.config.js",
     "build:theme": "webpack --mode=production",
     "build:blocks": "wp-scripts build --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
-    "build": "npm run build:theme && npm run build:blocks",
+    "build:admin": "wp-scripts build --config webpack.admin.config.js",
+    "build": "npm run build:theme && npm run build:blocks && npm run build:admin",
     "release": "release-it",
     "release:ci": "./scripts/release.sh"
   },
