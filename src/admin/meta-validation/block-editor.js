@@ -136,6 +136,13 @@ const init = () => {
       editor.on( 'input change', debouncedRevalidate );
     } );
   }
+
+  // subscribe() only fires on future store changes — run one initial pass
+  // so an already-published post that loads with an empty required field
+  // locks immediately. Gutenberg mounts metaboxes after DOMContentLoaded,
+  // so run again on window load once the metabox area is in the DOM.
+  debouncedRevalidate();
+  window.addEventListener( 'load', debouncedRevalidate );
 };
 
 if ( document.readyState === 'loading' ) {
