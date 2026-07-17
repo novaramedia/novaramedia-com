@@ -141,9 +141,9 @@ gate can't fix it alone: Gutenberg persists the post via REST *first* and
 POSTs legacy metabox values in a second request, so at REST-save time the
 incoming meta isn't visible.
 
-**A follow-up block editor validation path (wp.data-based, separate PR) is
-required before block editor use is sanctioned for post editing.** Until it
-ships, the mitigation is keeping editors on the classic editor.
+**Resolved:** the follow-up shipped — see
+`docs/specs/2026-07-17-block-editor-meta-validation-design.md` for the
+block editor validation path.
 
 ## Out of scope (noted for a future rev)
 

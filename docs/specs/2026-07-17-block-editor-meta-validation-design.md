@@ -1,7 +1,7 @@
 # Block editor meta validation — shared-core refactor
 
 **Date:** 2026-07-17
-**Status:** Designed, not implemented (follow-up to PR #568)
+**Status:** Implemented (this branch)
 **Builds on:** `docs/specs/2026-07-16-conditional-required-meta-validation-design.md`
 
 ## Problem
