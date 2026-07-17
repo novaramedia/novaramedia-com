@@ -127,6 +127,24 @@ with the new attribute and the publish-only rule.
 | Term IDs differ on staging/local | Irrelevant — map built per-environment at render |
 | Browser without SubmitEvent.submitter | Validates on all submits (old behaviour) |
 
+## Known limitation: classic editor only — follow-up REQUIRED
+
+**None of this validation runs in the block editor.** Gutenberg saves posts
+via the REST API and never fires a native form submit, so the validator's
+submit handler never binds/fires — posts publish there with no meta
+validation and no error. This is a silent bypass, not a degraded mode.
+
+This matters because the site's Classic Editor plugin runs with "allow users
+to switch editors" enabled (verified locally 2026-07-17), so the block editor
+is reachable today, and block editor usage is expected to grow. A server-side
+gate can't fix it alone: Gutenberg persists the post via REST *first* and
+POSTs legacy metabox values in a second request, so at REST-save time the
+incoming meta isn't visible.
+
+**A follow-up block editor validation path (wp.data-based, separate PR) is
+required before block editor use is sanctioned for post editing.** Until it
+ships, the mitigation is keeping editors on the classic editor.
+
 ## Out of scope (noted for a future rev)
 
 Required validation only checks *presence*, not *format*. The Soundcloud URL

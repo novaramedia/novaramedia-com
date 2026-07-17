@@ -10,6 +10,14 @@
  * (Publish / Schedule / Update / Submit for Review) are validated — Save
  * Draft and Preview always save freely.
  *
+ * CLASSIC EDITOR ONLY. The block editor saves posts via the REST API and
+ * never fires a native form submit, so nothing here runs there — posts
+ * publish with no meta validation at all. The site runs the Classic Editor
+ * plugin, but with "allow users to switch editors" enabled the block editor
+ * is reachable and silently bypasses these rules. Block editor support
+ * needs a separate wp.data-based path — planned follow-up, see
+ * docs/specs/2026-07-16-conditional-required-meta-validation-design.md.
+ *
  * Rules, chosen per field via data attributes:
  * - data-validation-required: value must not be empty. Whitespace-only and
  *   markup-only values (e.g. an empty <p></p> from a wysiwyg) count as empty.
