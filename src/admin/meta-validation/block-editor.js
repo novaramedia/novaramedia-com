@@ -13,6 +13,11 @@
  */
 
 import { select, dispatch, subscribe } from '@wordpress/data';
+// Registers the core/editor store and declares the wp-editor script
+// dependency, so WordPress loads wp-editor (and registers core/editor)
+// before this bundle runs. Without it the init() store guard can bail
+// permanently on a load-order miss, silently disabling validation.
+import '@wordpress/editor';
 // Registers the core/notices store and its wp-notices script dependency;
 // dispatch( 'core/notices' ) below only works reliably once this has run.
 import '@wordpress/notices';
