@@ -25,8 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nm_header_general_fallback( $args = array() ) {
 	$menu_class = isset( $args['menu_class'] ) ? $args['menu_class'] : 'font-weight-bold mb-3';
+	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
-	<ul class="<?php echo esc_attr( $menu_class ); ?>">
+	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
 		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About Us</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support Us</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>">Newsletters</a></li>
@@ -47,8 +48,9 @@ function nm_header_general_fallback( $args = array() ) {
  */
 function nm_footer_general_fallback( $args = array() ) {
 	$menu_class = isset( $args['menu_class'] ) ? $args['menu_class'] : 'font-weight-bold mb-4';
+	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
-	<ul class="<?php echo esc_attr( $menu_class ); ?>">
+	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
 		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About Us</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support Us</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>">Newsletters</a></li>
@@ -70,8 +72,9 @@ function nm_footer_general_fallback( $args = array() ) {
  */
 function nm_manage_donation_fallback( $args = array() ) {
 	$menu_class = isset( $args['menu_class'] ) ? $args['menu_class'] : 'font-weight-bold mb-4';
+	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
-	<ul class="<?php echo esc_attr( $menu_class ); ?>">
+	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
 		<li><a href="<?php echo esc_url( 'https://donate.novaramedia.com/profile' ); ?>">&#10142; Manage Donation</a></li>
 	</ul>
 	<?php
@@ -87,8 +90,9 @@ function nm_manage_donation_fallback( $args = array() ) {
  */
 function nm_footer_legal_fallback( $args = array() ) {
 	$menu_class = isset( $args['menu_class'] ) ? $args['menu_class'] : 'font-weight-bold';
+	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
-	<ul class="<?php echo esc_attr( $menu_class ); ?>">
+	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
 		<li><a href="<?php echo esc_url( site_url( 'terms-and-conditions/' ) ); ?>">Terms &amp; Conditions</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'privacy-policy/' ) ); ?>">Privacy Policy</a></li>
 	</ul>
