@@ -97,7 +97,7 @@ $recent           = array_slice( $dyor_posts, 1 );
                   </div>
                   <?php render_thumbnail( $recent_post->ID, 'col12-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
                 </div>
-                <h4 class="font-size-11 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h4>
+                <h4 class="font-size-11 font-size-l-10 font-size-s-11 font-weight-bold text-wrap-pretty"><?php echo esc_html( get_the_title( $recent_post->ID ) ); ?></h4>
               </a>
             </div>
             <?php } ?>
