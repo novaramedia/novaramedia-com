@@ -197,13 +197,25 @@ function nm_get_front_page_block_registry() {
     );
   }
 
-  // The primary DYOR block ships on production. The ALT block is a design
-  // comparison variant that stays dev-only: on production it disappears from
-  // the admin Layout options and, because the front-end render path resolves
-  // blocks against this same registry, never renders even if a saved production
-  // layout references it. See nm_render_front_page_block().
-  if ( nm_is_production() ) {
-    unset( $blocks['dyor-alt'] );
+  // Blocks still in development: hidden on production, visible on local / dev /
+  // staging. On production they are unset from the registry, so they vanish from
+  // the admin Layout options and — because the front-end render path resolves
+  // against this same registry — never render even if a saved layout references
+  // them (see nm_render_front_page_block()). Off production they stay selectable
+  // but get a [DEV ONLY] label marker so editors on staging know the block will
+  // not appear on the live site.
+  $dev_only_blocks = array( 'dyor-alt' );
+
+  foreach ( $dev_only_blocks as $slug ) {
+    if ( ! isset( $blocks[ $slug ] ) ) {
+      continue;
+    }
+
+    if ( nm_is_production() ) {
+      unset( $blocks[ $slug ] );
+    } else {
+      $blocks[ $slug ]['label'] .= ' [DEV ONLY]';
+    }
   }
 
   return $blocks;
