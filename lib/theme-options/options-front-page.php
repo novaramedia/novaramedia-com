@@ -197,13 +197,13 @@ function nm_get_front_page_block_registry() {
     );
   }
 
-  // Do Your Own Research is still in development. Keep both DYOR blocks
-  // available on local/development/staging but hide them on production — they
-  // disappear from the admin Layout options and, because the front-end render
-  // path resolves blocks against this same registry, never render even if a
-  // saved production layout references them. See nm_render_front_page_block().
+  // The primary DYOR block ships on production. The ALT block is a design
+  // comparison variant that stays dev-only: on production it disappears from
+  // the admin Layout options and, because the front-end render path resolves
+  // blocks against this same registry, never renders even if a saved production
+  // layout references it. See nm_render_front_page_block().
   if ( nm_is_production() ) {
-    unset( $blocks['dyor'], $blocks['dyor-alt'] );
+    unset( $blocks['dyor-alt'] );
   }
 
   return $blocks;
