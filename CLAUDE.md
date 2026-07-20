@@ -18,7 +18,7 @@ WordPress theme for novaramedia.com. PHP + modular JS (Webpack) + Stylus (nm-sty
 ## Docs
 
 - `docs/architecture/` — block rendering, oEmbed privacy
-- `docs/plans/` — active plans (embed consent gate, multi-newsletter signup); shipped plans move to `docs/plans/archive/`
+- `docs/plans/` — active plans; shipped plans move to `docs/plans/archive/`
 - `docs/specs/` — latest articles news category
 - `docs/testing/` — Cypress testing, workflow notes, testing overview
 - `docs/security.md` — security notes

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - All header and footer menus user-editable via Appearance → Menus, with fallbacks rendering the default links when no menu is assigned
+- Required validation on post meta fields on publish and update — standfirst and short description on all posts, YouTube ID on video, Soundcloud URL on audio (classic editor only — block editor support to follow)
+- Do Your Own Research product block available in the front-page Layout editor on production
+- In-development front-page blocks flagged "[DEV ONLY]" in the Layout editor dropdown
 
 ### Fixed
 

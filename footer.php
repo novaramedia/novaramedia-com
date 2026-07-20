@@ -16,6 +16,7 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'manage-donation',
+                  'menu_id'        => 'menu-manage-donation-footer',
                   'fallback_cb'    => 'nm_manage_donation_fallback',
                   'menu_class'     => 'font-weight-bold mb-4',
                 )
