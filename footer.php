@@ -34,7 +34,7 @@
                 )
               );
               ?>
-            <a href="<?php echo site_url( 'complaints-and-corrections/' ); ?>" class="u-display-block mt-4" style="max-width: 50px;" aria-label="Complaints"><?php echo nm_get_file( '/dist/img/impress-footer-mark.svg' ); ?></a>
+            <a href="<?php echo esc_url( site_url( 'complaints-and-corrections/' ) ); ?>" class="u-display-block mt-4" style="max-width: 50px;" aria-label="Complaints"><?php echo nm_get_file( '/dist/img/impress-footer-mark.svg' ); ?></a>
           </div>
           <div class="grid-item is-s-12 is-xxl-6 mb-5">
             <h6 class="mb-4">Podcasts</h6>
