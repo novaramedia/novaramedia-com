@@ -4,12 +4,14 @@
  * required metabox fields are invalid AND the post is (or is becoming)
  * published, saving is locked and an error notice lists the failures.
  *
- * Drafts save and preview freely: the lock only engages when the saved or
- * edited status is publish-type or the publish sidebar is open. "Switch to
- * draft" changes the edited status, so it unlocks and proceeds.
+ * Drafts save and preview freely: the lock only engages when the edited
+ * status is publish-type (publish/future/private/pending) or the publish
+ * sidebar is open. "Switch to draft" changes the edited status, so it unlocks
+ * and the save proceeds.
  *
- * Known limitation (see spec §5): with the "Enable pre-publish checks"
- * preference turned off, a draft's first publish may race the subscriber.
+ * The gate subscriber locks synchronously on the status change — before the
+ * paired savePost() runs in the same tick — so even a first publish with the
+ * "Enable pre-publish checks" preference off is caught (see spec §5).
  */
 
 import { select, dispatch, subscribe } from '@wordpress/data';
@@ -33,7 +35,10 @@ import {
 
 const LOCK_ID = 'nm-meta-validation';
 const NOTICE_ID = 'nm-meta-validation';
-const PUBLISH_STATUSES = [ 'publish', 'future', 'private' ];
+// Statuses that engage the gate. Includes 'pending' so block-editor "Submit
+// for Review" is validated, matching the classic adapter (#568), where the
+// Submit-for-Review button submits through the same validated path.
+const GATED_STATUSES = [ 'publish', 'future', 'private', 'pending' ];
 
 const getCategoryMap = () =>
   ( window.nmMetaValidation && window.nmMetaValidation.categoryMap ) || {};
@@ -58,10 +63,12 @@ const gatherEditorState = () => {
   };
 };
 
+// Gate on where the post is *heading* (editedStatus), not where it was last
+// saved: reverting a published post to draft sets editedStatus 'draft' and
+// must unlock so the save proceeds. An unedited published post still gates —
+// editedStatus falls back to the saved 'publish' status when nothing changed.
 const gateActive = ( state ) =>
-  PUBLISH_STATUSES.includes( state.savedStatus ) ||
-  PUBLISH_STATUSES.includes( state.editedStatus ) ||
-  state.sidebarOpen;
+  GATED_STATUSES.includes( state.editedStatus ) || state.sidebarOpen;
 
 const revalidate = () => {
   const state = gatherEditorState();
@@ -124,16 +131,15 @@ const init = () => {
     if ( key !== lastKey ) {
       lastKey = key;
 
-      // "Switch to draft" calls editPost({status:'draft'}) + savePost()
-      // synchronously; if the lock is still held when savePost() runs
-      // (debounce hasn't fired yet), that save no-ops. When the gate goes
-      // inactive, unlock synchronously so the immediately-following save
-      // isn't swallowed. Otherwise keep the debounce to avoid thrashing.
-      if ( ! gateActive( state ) ) {
-        revalidate();
-      } else {
-        debouncedRevalidate();
-      }
+      // Revalidate synchronously on gate-input changes. Publish / Update /
+      // "Switch to draft" each dispatch editPost({status}) then savePost() in
+      // one tick, and @wordpress/data notifies this subscriber synchronously
+      // between the two — so locking (or unlocking) here, before savePost()
+      // runs, is what makes the gate actually catch that save. Debouncing this
+      // path would reopen a window where the save slips through unlocked. The
+      // subscriber only fires when gate inputs change (not per keystroke), so
+      // the synchronous cost is negligible.
+      revalidate();
     }
   } );
 

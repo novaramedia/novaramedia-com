@@ -131,14 +131,16 @@ attributes and `editor_class` marker drive both paths.
   the failing metabox rows.
 - **On valid:** `unlockPostSaving`, remove the notice, clear highlights.
 
-### 5. Known limitation
+### 5. First-publish race (resolved)
 
-If a user has disabled pre-publish checks in their editor preferences, the
-first publish of a draft skips the pre-publish sidebar, and the
-status-change → subscriber → lock sequence may fire too late to stop that
-save. Prefs-dependent and rare; documented, not solved client-side.
-Server-side hardening (revert-to-draft + admin notice) remains a possible
-future layer — rejected for now in the parent spec and unchanged here.
+An earlier revision debounced the lock, so a first publish with pre-publish
+checks disabled — which skips the sidebar step — could beat the 200ms timer
+and save before the lock applied. The gate subscriber now revalidates
+*synchronously* on the status change: `editPost({status})` and `savePost()`
+run in one tick and `@wordpress/data` notifies the subscriber synchronously
+between them, so the lock is in place before `savePost()` runs. Server-side
+hardening (revert-to-draft + admin notice) remains a possible future layer
+but is not required to close this path.
 
 ## Edge cases
 
@@ -150,16 +152,18 @@ future layer — rejected for now in the parent spec and unchanged here.
 | Block editor: fix the field while locked | Unlocks live, notice clears |
 | Block editor: untick conditional category while locked | Unlocks live (categories from wp.data) |
 | Block editor: update published post, empty required field | Locked until fixed |
-| Block editor: switch published post to draft while locked | Unlocks, save proceeds |
-| Block editor: pre-publish checks disabled in prefs | First-publish race — documented limitation |
+| Block editor: Submit for Review (pending), empty required field | Locked until fixed — parity with classic |
+| Block editor: switch published post to draft while locked | Unlocks, save proceeds (gate reads editedStatus) |
+| Block editor: pre-publish checks disabled in prefs | Caught — subscriber locks synchronously before the paired save |
 | Block editor: autosave of a published post while locked | Blocked with the manual save (lockPostSaving gates autosave too) — divergence from classic, accepted |
 | Options pages (Links Bar, fundraising) | Classic adapter only, unchanged |
 
 ## Testing
 
-Manual matrix above, both editors, local. `core.js` is pure and
-unit-testable, but the theme has no JS unit runner (Cypress only) — adding
-one is out of scope; the module boundary keeps the option open.
+Manual matrix above, both editors, local. `core.js` is pure and unit-tested
+under `node --test` (`src/admin/meta-validation/core.test.js`, 8 cases) — the
+theme's first JS unit tests, made possible by the pure-rules split. The DOM
+adapters remain manual / Cypress-only.
 
 Build verification: `npm run build`, commit `dist/admin/` (repo dist rule).
 
