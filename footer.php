@@ -7,6 +7,7 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-general',
+                  'container'      => false,
                   'fallback_cb'    => 'nm_footer_general_fallback',
                   'menu_class'     => 'font-weight-bold mb-4',
                 )
@@ -17,6 +18,7 @@
                 array(
                   'theme_location' => 'manage-donation',
                   'menu_id'        => 'menu-manage-donation-footer',
+                  'container'      => false,
                   'fallback_cb'    => 'nm_manage_donation_fallback',
                   'menu_class'     => 'font-weight-bold mb-4',
                 )
@@ -26,6 +28,7 @@
               wp_nav_menu(
                 array(
                   'theme_location' => 'footer-legal',
+                  'container'      => false,
                   'fallback_cb'    => 'nm_footer_legal_fallback',
                   'menu_class'     => 'font-weight-bold',
                 )
