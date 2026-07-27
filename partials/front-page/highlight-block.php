@@ -71,7 +71,7 @@ $latest_others_args          = array(
   <div class="container container--padded">
     <div class="highlight-block layout-grid">
       <div class="highlight-block__featured-1">
-        <div class="grid-row grid--nested">
+        <div class="grid-row grid-row--nested">
           <div class="grid-item is-s-24 is-xxl-16">
             <div class="ui-border-bottom pb-4 mb-4">
               <?php
@@ -88,7 +88,7 @@ $latest_others_args          = array(
               }
               ?>
             </div>
-            <div class="grid-row grid--nested">
+            <div class="grid-row grid-row--nested">
               <div class="grid-item is-xxl-12">
                 <?php
                 if ( is_numeric( $latest_featured_posts_ids[2] ) ) {

@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.8.0] - 2026-07-27
+
+### Added
+
+- All header and footer menus user-editable via Appearance → Menus, with fallbacks rendering the default links when no menu is assigned
+- Required validation on post meta fields on publish and update — standfirst and short description on all posts, YouTube ID on video, Soundcloud URL on audio (classic editor only — block editor support to follow)
+- Do Your Own Research product block available in the front-page Layout editor on production
+- In-development front-page blocks flagged "[DEV ONLY]" in the Layout editor dropdown
+
+### Fixed
+
+- About page names render editor-entered links instead of escaping them to literal text
 
 ## [4.7.0] - 2026-06-24
 

@@ -31,7 +31,7 @@ if ( $acfm ) {
       <div class="grid-row">
         <div class="grid-item is-s-24 is-xxl-24 font-color-black">
           <div class="background-light-blue ui-rounded-box pt-3 pl-4 pr-4 pb-3">
-            <div class="grid-row grid--nested grid-row--align-center">
+            <div class="grid-row grid-row--nested grid-row--align-center">
               <div class="grid-item is-s-24 is-xxl-3 mb-s-3">
                 <div class="front-page__acfm-logo">
                   <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
@@ -48,7 +48,7 @@ if ( $acfm ) {
               </div>
               <div class="grid-item is-s-24 is-xxl-12">
                 <div class="background-white font-color-black ui-rounded-box ui-rounded-box--nested pt-4 pb-4 pl-4 pr-4">
-                  <div class="grid-row grid--nested">
+                  <div class="grid-row grid-row--nested">
                     <div class="grid-item is-s-24 is-xxl-7 is-l-10">
                       <div class="layout-thumbnail-frame">
                         <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -94,7 +94,7 @@ if ( $acfm ) {
 
             <div class="ui-border-top ui-border--gray-mid mt-3 pt-3">
               <a href="<?php echo esc_url( $term_link ); ?>" class="ui-hover">
-                <div class="grid-row grid--nested mb-2">
+                <div class="grid-row grid-row--nested mb-2">
                   <div class="grid-item is-xxl-12">
                     <h4 class="font-size-9 font-weight-bold text-uppercase">Recent Episodes</h4>
                   </div>
@@ -103,7 +103,7 @@ if ( $acfm ) {
                   </div>
                 </div>
               </a>
-              <div class="grid-row grid--nested">
+              <div class="grid-row grid-row--nested">
                 <?php
                 foreach ( $recent as $episode ) {
                   $episode_id = $episode->ID;

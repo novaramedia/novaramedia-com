@@ -59,7 +59,7 @@ $recent           = array_slice( $dyor_posts, 1 );
       <div class="pt-4 pb-4">
 
         <?php // ── Intro copy + dual CTA buttons ── ?>
-        <div class="grid-row grid--nested mb-4">
+        <div class="grid-row grid-row--nested mb-4">
           <div class="grid-item is-xxl-16 is-s-24 mb-s-3">
             <?php if ( $dyor_category->description ) { ?>
             <p class="font-size-12 font-size-s-11 text-wrap-pretty mb-0">
@@ -78,13 +78,13 @@ $recent           = array_slice( $dyor_posts, 1 );
         </div>
 
         <?php // ── Featured episode (large, horizontal) + recent list sidebar ── ?>
-        <div class="grid-row grid--nested">
+        <div class="grid-row grid-row--nested">
 
           <div class="grid-item is-xxl-16 is-s-24 mb-s-4">
-            <div class="grid-row grid--nested">
+            <div class="grid-row grid-row--nested">
               <div class="grid-item is-xxl-15 is-xl-24 mb-xl-3">
                 <?php if ( ! empty( $featured_youtube ) ) { ?>
-                <div class="u-video-embed-container ui-rounded-box">
+                <div class="ui-embed-container ui-rounded-box">
                   <?php echo render_youtube_embed_iframe( $featured_youtube, false, 'lazy', get_the_title( $featured->ID ) ); ?>
                 </div>
                 <?php } else { ?>
@@ -111,7 +111,7 @@ $recent           = array_slice( $dyor_posts, 1 );
               </div>
             </a>
             <?php foreach ( $recent as $recent_post ) { ?>
-            <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="grid-row grid--nested-tight ui-hover mb-3">
+            <a href="<?php echo esc_url( get_the_permalink( $recent_post->ID ) ); ?>" class="grid-row grid-row--nested-tight ui-hover mb-3">
               <div class="grid-item is-xxl-8 is-xl-10 is-s-6">
                 <?php render_thumbnail( $recent_post->ID, 'col4-16to9', array( 'class' => 'ui-rounded-box u-display-block' ) ); ?>
               </div>

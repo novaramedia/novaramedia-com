@@ -16,6 +16,38 @@ for each.
 
 ---
 
+## v4.8.0
+
+### 1. Notify editorial before deploy — old posts may block on Update
+**Editorial heads-up before/at deploy.** Why: publish-type submits (including
+Update on already-published posts) now block if Standfirst or Short
+description is empty, and on video/audio posts if YouTube ID / Soundcloud URL
+is empty. Old posts missing those meta values will need them filled in before
+the next Update. Recommend running a count of affected published posts
+beforehand so editorial knows the scale of the backlog.
+
+### 2. Confirm the Do Your Own Research category has posts
+**Admin > Posts > Categories.** Why: the block self-hides rather than erroring.
+`partials/front-page/show-blocks/dyor.php` returns early if the
+`do-your-own-research` category term is missing or has no posts, so an empty
+category looks identical to the block never having shipped. The block renders a
+featured post plus up to four recents, so ≥2 posts gives the intended layout.
+
+### 3. Front Page Layout — add the DYOR block
+**Admin > Front Page > Layout → add "Show block: Do Your Own Research" → Save.**
+Why: this release makes the block *selectable* on production; it does not place
+it. Nothing changes on the front page until it is added to a saved layout. If
+the v4.7.0 seed-save (below) was never done, this save covers it.
+
+### 4. Optional — set the Figma file key for the "Explore the Map" CTA
+**Admin > Posts > Categories > Do Your Own Research → "Figma file key".**
+Why: the CTA linking to the category map is gated on the
+`_nm_dyor_figma_file_key` term meta (`dyor.php:47`). Without it the block
+renders correctly, just without the button. "Figma default node ID" on the same
+screen controls the map's default zoom.
+
+---
+
 ## v4.7.0
 
 ### 1. Front Page Layout — seed the order (one-time)

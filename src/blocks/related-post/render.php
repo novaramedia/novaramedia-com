@@ -72,7 +72,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
   if ( $layout === 'video' ) {
     // $youtube_id validated and set before wrapper div.
     ?>
-    <div class="u-video-embed-container">
+    <div class="ui-embed-container">
       <?php echo render_youtube_embed_iframe( $youtube_id, false, 'lazy', $related_title ); ?>
     </div>
     <a href="<?php echo esc_url( $permalink ); ?>" class="ui-hover">
@@ -85,7 +85,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
     $venue_name = get_post_meta( $related_id, '_cmb_venue_name', true );
     $is_future_event = $timestamp && $timestamp > time();
     ?>
-    <div class="grid-row grid--nested">
+    <div class="grid-row grid-row--nested">
       <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
@@ -146,7 +146,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
   } else {
     // articles + audio share the same shell; only bylines differ.
   ?>
-    <div class="grid-row grid--nested">
+    <div class="grid-row grid-row--nested">
       <div class="grid-item is-xxl-8 is-s-10">
         <div class="layout-thumbnail-frame">
           <div class="layout-thumbnail-frame__inner mt-1 ml-1">
