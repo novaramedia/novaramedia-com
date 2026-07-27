@@ -18,7 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fallback for header general menu.
  *
- * Displays default navigation links for the main header menu.
+ * Displays default navigation links for the main header menu. Mirrors the
+ * menu currently assigned to this location in production, so the fallback
+ * and the assigned menu render the same list.
  *
  * @param array $args wp_nav_menu() arguments passed to the fallback.
  * @return void
@@ -28,9 +30,10 @@ function nm_header_general_fallback( $args = array() ) {
 	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
 	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
-		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About Us</a></li>
-		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support Us</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>">Newsletters</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'events/' ) ); ?>">Events</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'about/how-we-are-funded/' ) ); ?>">How We Are Funded</a></li>
 		<li><a href="<?php echo esc_url( 'https://shop.novaramedia.com' ); ?>">Merch Shop</a></li>
 	</ul>
@@ -40,8 +43,9 @@ function nm_header_general_fallback( $args = array() ) {
 /**
  * Fallback for footer general menu.
  *
- * Displays default navigation links for the footer general section.
- * Uses the same links as header general, plus Pitching and Jobs.
+ * Displays default navigation links for the footer general section: the
+ * header general list verbatim, with the footer-only Pitching and Jobs
+ * links appended.
  *
  * @param array $args wp_nav_menu() arguments passed to the fallback.
  * @return void
@@ -51,9 +55,10 @@ function nm_footer_general_fallback( $args = array() ) {
 	$menu_id    = isset( $args['menu_id'] ) ? $args['menu_id'] : '';
 	?>
 	<ul class="<?php echo esc_attr( $menu_class ); ?>"<?php echo $menu_id ? ' id="' . esc_attr( $menu_id ) . '"' : ''; ?>>
-		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About Us</a></li>
-		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support Us</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'about/' ) ); ?>">About</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'support/' ) ); ?>">Support</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>">Newsletters</a></li>
+		<li><a href="<?php echo esc_url( site_url( 'events/' ) ); ?>">Events</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'about/how-we-are-funded/' ) ); ?>">How We Are Funded</a></li>
 		<li><a href="<?php echo esc_url( 'https://shop.novaramedia.com' ); ?>">Merch Shop</a></li>
 		<li><a href="<?php echo esc_url( site_url( 'pitching/' ) ); ?>">Pitching</a></li>
