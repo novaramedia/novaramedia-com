@@ -765,6 +765,8 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyl
   $height = get_soundcloud_player_height( $size );
   $url = generate_soundcloud_embed_url( $soundcloud_url, $params );
 
+  ob_start();
+
   if ( $lazyload ) {
     // Lazy loading placeholder with fallback
     ?>
@@ -786,4 +788,7 @@ function render_soundcloud_embed_iframe( $soundcloud_url, $size = 'full', $lazyl
       allow="autoplay"></iframe>
     <?php
   }
+
+  $embed_html = ob_get_clean();
+  echo nm_consent_gate_wrap( $embed_html, 'SoundCloud' );
 }

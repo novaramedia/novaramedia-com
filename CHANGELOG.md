@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - About page names render editor-entered links instead of escaping them to literal text
 
+### Added
+
+- Embed consent gate — placeholder shown for third-party embeds (SoundCloud, Twitter/X, Vimeo, etc; YouTube exempt via nocookie domain) until visitor accepts; consent stored in the existing `cookie-approval` cookie shared with the cookie bar
+
 ## [4.7.0] - 2026-06-24
 
 ### Security

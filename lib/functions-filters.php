@@ -114,11 +114,99 @@ function nm_category_id_class( $classes ) {
 add_filter( 'body_class', 'nm_category_id_class' );
 
 /**
+ * Wraps embed HTML in a consent gate placeholder.
+ * Returns raw HTML in RSS feeds so feed readers get working embeds.
+ *
+ * @param string $html     The embed HTML to gate.
+ * @param string $platform Human-readable platform name shown in the placeholder.
+ * @return string Consent gate wrapper HTML, or raw $html in feeds.
+ */
+function nm_consent_gate_wrap( $html, $platform ) {
+  if ( is_feed() ) {
+    return $html;
+  }
+
+  $platform_esc = esc_html( $platform );
+  $privacy_url  = esc_url( get_privacy_policy_url() );
+  $privacy_link = $privacy_url
+    ? sprintf( '<a href="%s" class="embed-consent-gate__privacy-link font-size-8">Privacy policy</a>', $privacy_url )
+    : '';
+
+  // Embed HTML is placed inside <template> — an inert element whose content is
+  // browser-parsed but never rendered or executed until explicitly cloned by JS.
+  // Neutralise any </template sequences so adversarial oEmbed output cannot
+  // prematurely close the wrapper and execute without consent.
+  $html_safe = preg_replace( '/<\/\s*template\b/i', '&lt;/template', $html );
+  if ( null === $html_safe ) {
+    // PCRE failure (e.g. invalid UTF-8) — fail closed: placeholder without embed.
+    $html_safe = '';
+  }
+
+  // Single line: this runs before wpautop on classic-editor content, which would
+  // otherwise inject <br>/<p> around the newlines in the gate markup.
+  return sprintf(
+    '<div class="embed-consent-gate"><template class="embed-consent-gate__template">%s</template><div class="embed-consent-gate__placeholder"><div class="embed-consent-gate__content"><p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p><button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>%s</div></div></div>',
+    $html_safe,
+    $platform_esc,
+    $platform_esc,
+    $privacy_link
+  );
+}
+
+/**
+ * Maps embed HTML to a human-readable platform name.
+ *
+ * @param string $html Embed HTML.
+ * @return string Platform name, or 'Third-party' if unrecognised.
+ */
+function nm_detect_embed_platform( $html ) {
+  // x.com needs a host-boundary check: str_contains('x.com') also matches box.com,
+  // and a bare slash before x.com would match path segments like /x.com/ too.
+  // Match //x.com (bare domain after protocol) and .x.com (any subdomain like www/platform).
+  if ( preg_match( '/(\/\/|\.)x\.com/', $html ) ) {
+    return 'Twitter/X';
+  }
+
+  $platforms = array(
+    'soundcloud.com' => 'SoundCloud',
+    'twitter.com'    => 'Twitter/X',
+    'vimeo.com'      => 'Vimeo',
+    'spotify.com'    => 'Spotify',
+    'instagram.com'  => 'Instagram',
+    'facebook.com'   => 'Facebook',
+    'tiktok.com'     => 'TikTok',
+  );
+  foreach ( $platforms as $domain => $name ) {
+    if ( str_contains( $html, $domain ) ) {
+      return $name;
+    }
+  }
+  return 'Third-party';
+}
+
+/**
+ * Returns true if HTML contains an iframe or script tag.
+ * Used to avoid gating plain-text oEmbed responses (e.g. link cards).
+ *
+ * @param string $html Embed HTML.
+ * @return bool
+ */
+function nm_html_has_iframe_or_script( $html ) {
+  return str_contains( $html, '<iframe' ) || str_contains( $html, '<script' );
+}
+
+/**
  * Add wrapper classes to oEmbed elements and use privacy-enhanced YouTube embeds.
  *
  * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
  * the original URL was youtube.com or youtu.be. The str_replace works for both
  * because it operates on the returned iframe HTML, not the original URL.
+ *
+ * Covers both classic-editor URLs and core/embed blocks: block embeds store a bare
+ * URL that WP_Embed::autoembed() (the_content priority 8, before do_blocks at 9)
+ * converts through this same filter, so no separate render_block gating is needed —
+ * a render_block wrap here would double-gate. Raw iframes pasted into core/html
+ * blocks bypass oEmbed entirely and are NOT gated (known gap, see PR #523).
  *
  * @param string $html    The oEmbed HTML.
  * @param string $url     The original URL that was embedded.
@@ -127,6 +215,10 @@ add_filter( 'body_class', 'nm_category_id_class' );
  * @return string Modified HTML with wrapper classes and privacy-enhanced URLs.
  */
 function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
+  if ( is_admin() ) {
+    return $html;
+  }
+
   if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
     // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
     $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
@@ -134,7 +226,12 @@ function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
   }
 
   if ( str_contains( $url, 'vimeo.com/' ) ) {
-    return '<div class="oembed-element"><div class="ui-embed-container">' . $html . '</div></div>';
+    $wrapped = '<div class="oembed-element"><div class="ui-embed-container">' . $html . '</div></div>';
+    return nm_consent_gate_wrap( $wrapped, 'Vimeo' );
+  }
+
+  if ( nm_html_has_iframe_or_script( $html ) ) {
+    return nm_consent_gate_wrap( $html, nm_detect_embed_platform( $html ) );
   }
 
   return $html;
@@ -266,3 +363,4 @@ function nm_add_caption_class( $block_content, $block ) {
   return $block_content;
 }
 add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
+

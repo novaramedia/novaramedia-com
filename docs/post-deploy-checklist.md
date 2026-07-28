@@ -100,6 +100,26 @@ Interpret:
 
 ---
 
+## vNext (unreleased) — embed consent gate (PR #523)
+
+### 1. Verify block editor embed previews are NOT consent-gated
+**Admin > edit any post with an embed block (or add a SoundCloud/Twitter URL embed block to a draft).**
+The editor preview should show the normal embed, not the "content is blocked" placeholder.
+Why: the gate relies on an `is_admin()` guard in `nm_embed_oembed_html()`; editor
+previews also arrive via the REST oEmbed proxy, which wasn't exercisable in local
+smoke tests (2026-07-08 — DevKinsta container couldn't fetch YouTube/Twitter oEmbed).
+A gated preview means the guard isn't covering the editor's fetch path — front-end
+is unaffected, but editors would see placeholders while writing.
+
+### 2. Front-end consent smoke (2 min, incognito)
+Open an audio post in a private window: placeholder shown, no soundcloud.com
+requests in the Network tab → accept → player loads. Reload: player immediate.
+Why: consent checking is client-side only (Kinsta page cache doesn't vary on the
+consent cookie) — a stale cached page from before the deploy can serve embeds
+without gate markup until the cache is purged.
+
+---
+
 ## Template for future releases
 
 ```

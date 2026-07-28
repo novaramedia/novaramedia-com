@@ -8,13 +8,16 @@ Because Kinsta page caching doesn't vary by the `cookie-approval` cookie, **all 
 
 ## Approach
 
-PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the real embed HTML base64-encoded in a `data-embed-html` attribute. A new `EmbedConsent` JS module checks the cookie on page load and either immediately hydrates all gates (returning user) or shows placeholder UI with accept buttons (new user). Custom events coordinate between the embed gates, the existing cookie bar, and the SoundCloud lazy loader.
+PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the real embed HTML held in an inert `<template>` element (implemented this way instead of the originally planned base64 `data-embed-html` attribute — browser-parsed, never executed until cloned, no string→HTML step). A new `EmbedConsent` JS module checks the cookie on page load and either immediately hydrates all gates (returning user) or shows placeholder UI with accept buttons (new user). Custom events coordinate between the embed gates, the existing cookie bar, and the SoundCloud lazy loader.
 
-### Three embed pathways covered
+### Two embed pathways covered
 
-1. **Classic editor embeds** - URLs auto-embedded via WordPress oEmbed, intercepted by `embed_oembed_html` filter at display time
-2. **Block editor embeds** - `core/embed` Gutenberg blocks with oEmbed HTML baked at save time, intercepted by `render_block` filter at render time
-3. **Hardcoded template embeds** - SoundCloud via `render_soundcloud_embed_iframe()` in PHP templates (YouTube already exempt via nocookie)
+> **Revised 2026-07-07 (review finding):** the original plan assumed `core/embed` blocks have oEmbed HTML baked at save time and needed a separate `render_block` filter. Wrong — `core/embed` stores a bare URL that `WP_Embed::autoembed()` (`the_content` priority 8, before `do_blocks` at 9) converts through the same `embed_oembed_html` filter as classic embeds. The planned `render_block` filter therefore **double-gated** every block embed (nested gates, with the inner gate's `</template>` neutralised by the outer wrap — embed never loaded after consent). The filter was removed; pathway 1 covers block embeds too.
+
+1. **Editor embeds (classic + block)** - URLs auto-embedded via WordPress oEmbed, intercepted by `embed_oembed_html` filter at display time; covers `core/embed` blocks via `autoembed()`
+2. **Hardcoded template embeds** - SoundCloud via `render_soundcloud_embed_iframe()` in PHP templates (YouTube already exempt via nocookie)
+
+**Known gap:** raw iframes pasted into `core/html` blocks bypass oEmbed and are not gated. Deferred to a future embed audit (see Future Work in PR #523).
 
 ### Platform classification
 
@@ -45,7 +48,7 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 
 | File                             | Change                                                                                                                                                                                                   |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `lib/functions-filters.php`      | Add `nm_consent_gate_wrap()` helper + detection helpers. Modify `nm_embed_oembed_html()` to gate non-YouTube oEmbeds. Add `nm_consent_gate_block_embeds()` `render_block` filter for block editor embeds |
+| `lib/functions-filters.php`      | Add `nm_consent_gate_wrap()` helper + detection helpers. Modify `nm_embed_oembed_html()` to gate non-YouTube oEmbeds (covers block embeds too — see revision note above)                                 |
 | `lib/renderers.php`              | Modify `render_soundcloud_embed_iframe()` to wrap output in consent gate                                                                                                                                 |
 | `src/js/modules/Utilities.js`    | Dispatch `cookie-consent-granted` event on accept; listen for same event to hide bar                                                                                                                     |
 | `src/js/modules/AudioPlayers.js` | Extract `findAndLoadPlayers()` method; listen for `embed-consent-hydrated` event to re-scan                                                                                                              |
@@ -61,13 +64,12 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 
 **`lib/functions-filters.php`** - Add these new functions (no existing code modified yet):
 
-- `nm_consent_gate_wrap($html, $platform)` - Wraps embed HTML in a `.embed-consent-gate` div with the original HTML base64-encoded in `data-embed-html`. Outputs a placeholder with:
+- `nm_consent_gate_wrap($html, $platform)` - Wraps embed HTML in a `.embed-consent-gate` div with the original HTML inside an inert `<template>` element (`</template` sequences neutralised). Outputs a placeholder with:
   - Platform name in the message
   - Explanatory text: "[Platform] content is blocked because you have not accepted cookies."
   - Accept button using existing `ui-button ui-button--small ui-button--white` classes
   - Privacy policy link
   - `is_feed()` guard to skip gating in RSS feeds
-- `nm_is_embed_exempt($html)` - Returns true for YouTube/nocookie embeds
 - `nm_detect_embed_platform($html)` - Maps domains to human-readable names (SoundCloud, Twitter/X, Vimeo, Spotify, Instagram, Facebook, TikTok, or "Third-party" fallback)
 - `nm_html_has_iframe_or_script($html)` - Returns true if HTML contains `<iframe` or `<script` tags (avoids gating plain text oEmbed responses)
 
@@ -95,8 +97,8 @@ PHP wraps all non-YouTube embeds in a `.embed-consent-gate` container, with the 
 Key methods:
 
 - `onReady()` - Checks `cookie-approval` cookie via js-cookie. If consented: calls `hydrateAllGates()` immediately. If not: binds click handlers on `.embed-consent-gate__accept` buttons and listens for `cookie-consent-granted` event
-- `hydrateAllGates()` - Finds all `.embed-consent-gate` elements, decodes base64 `data-embed-html`, replaces gate with real HTML. After all gates hydrated, dispatches `embed-consent-hydrated` event (for AudioPlayers). **Script re-execution**: scripts injected via `innerHTML` don't auto-execute, so any `<script>` elements are recreated as new DOM nodes to trigger browser execution (critical for Twitter/X `widgets.js`)
-- `hydrateGate(gate)` - Single gate hydration with base64 decode, DOM replacement, and script re-creation
+- `hydrateAllGates()` - Finds all `.embed-consent-gate` elements and hydrates each. After all gates hydrated, dispatches `embed-consent-hydrated` event (for AudioPlayers)
+- `hydrateGate(gate)` - Clones the inert `<template>` content into the gate. **Script re-execution**: scripts inside `<template>` don't auto-execute when cloned, so any `<script>` elements are recreated as new DOM nodes to trigger browser execution (critical for Twitter/X `widgets.js`)
 - `handleAccept()` - Sets `cookie-approval` cookie (365 days), dispatches `cookie-consent-granted`, calls `hydrateAllGates()`
 - `bindGateButtons()` - Attaches click handlers to all accept buttons
 
@@ -129,15 +131,9 @@ Key methods:
 
 This catches classic editor embeds processed at display time via `the_content` filter.
 
-### Step 6: Activate consent gating - block editor filter
+### Step 6: ~~Activate consent gating - block editor filter~~ (dropped)
 
-**`lib/functions-filters.php`** - New function `nm_consent_gate_block_embeds($block_content, $block)`:
-
-- Hooked to `render_block` filter at priority 5 (before existing `nm_add_caption_class` at priority 10)
-- Only processes blocks where `$block['blockName'] === 'core/embed'`
-- Guards: `is_admin()` returns early (no gating in block editor preview), empty content returns early
-- YouTube check: if `nm_is_embed_exempt()`, applies nocookie switch as safety net for old posts but no consent gate
-- Other providers: reads `$block['attrs']['providerNameSlug']` for platform identification (WordPress stores this in block attributes, e.g. `"twitter"`, `"vimeo"`, `"soundcloud"`), falls back to `nm_detect_embed_platform()`, wraps in consent gate
+**Dropped per the 2026-07-07 revision above** — block embeds are already covered by Step 5's `embed_oembed_html` filter via `autoembed()`; a `render_block` wrap double-gates. No separate block filter exists.
 
 ### Step 7: Activate consent gating - hardcoded SoundCloud
 

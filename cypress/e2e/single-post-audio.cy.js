@@ -24,6 +24,9 @@ describe('Single Post (Audio Category)', () => {
       this.skip();
     }
 
+    // Pre-consent so the embed consent gate does not block SoundCloud iframes.
+    cy.setCookie('cookie-approval', 'true');
+
     // Audio posts load many third-party resources (SoundCloud, analytics, social
     // widgets) that delay the browser's load event. Use a long timeout to allow
     // the page to fully load in CI where network is slower.
