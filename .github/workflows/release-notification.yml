@@ -5,11 +5,12 @@ on:
     types: [closed]
     branches:
       - master
-      - main
 
 jobs:
   notify-release:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Version')
+    # scripts/release.sh titles release PRs "Release: x.y.z"; "Version x.y.z"
+    # kept for the pre-script convention (last used on 4.5.2).
+    if: github.event.pull_request.merged == true && (startsWith(github.event.pull_request.title, 'Version') || startsWith(github.event.pull_request.title, 'Release'))
     permissions:
       contents: read
     runs-on: ubuntu-latest

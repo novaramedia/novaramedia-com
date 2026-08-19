@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+
 ## [4.8.0] - 2026-07-27
 
 ### Added
