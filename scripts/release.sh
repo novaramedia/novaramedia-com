@@ -8,25 +8,31 @@
 #   4. Optionally creates PR to master
 #
 # Usage:
-#   ./scripts/release.sh [increment] [--pr]
+#   ./scripts/release.sh [increment] [--pr] [--hotfix]
 #
 #   increment: major | minor | patch (default: minor)
 #   --pr:      create PR to master without prompting
+#   --hotfix:  release from a hotfix/* branch cut from master instead of
+#              development; forces a patch increment. See docs/releases.md
+#              for the full hotfix flow including the back-merge step.
 #
 # Examples:
 #   ./scripts/release.sh                # minor bump, prompt for PR
 #   ./scripts/release.sh patch          # patch bump, prompt for PR
 #   ./scripts/release.sh minor --pr     # minor bump, auto-create PR
 #   ./scripts/release.sh --pr           # minor bump, auto-create PR
+#   ./scripts/release.sh --hotfix --pr  # patch release from hotfix/* branch
 
 set -euo pipefail
 
 INCREMENT="minor"
 AUTO_PR=false
+HOTFIX=false
 
 for arg in "$@"; do
   case "$arg" in
     --pr) AUTO_PR=true ;;
+    --hotfix) HOTFIX=true ;;
     major|minor|patch) INCREMENT="$arg" ;;
     *) echo "Unknown argument: $arg"; exit 1 ;;
   esac
@@ -35,7 +41,17 @@ BRANCH=$(git branch --show-current)
 
 # --- Preflight checks ---
 
-if [ "$BRANCH" != "development" ]; then
+if [ "$HOTFIX" = true ]; then
+  if [[ "$BRANCH" != hotfix/* ]]; then
+    echo "Error: --hotfix must run from a 'hotfix/*' branch cut from master (currently on '$BRANCH')"
+    exit 1
+  fi
+
+  if [ "$INCREMENT" != "patch" ]; then
+    echo "Note: --hotfix forces a patch increment"
+    INCREMENT="patch"
+  fi
+elif [ "$BRANCH" != "development" ]; then
   echo "Error: Must be on 'development' branch (currently on '$BRANCH')"
   exit 1
 fi
@@ -45,8 +61,23 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   exit 1
 fi
 
-echo "Pulling latest development..."
-git pull --ff-only origin development
+# 'git add -A' below sweeps untracked files into the Build commit, so refuse
+# to run while any exist.
+if git status --porcelain | grep -q '^??'; then
+  echo "Error: Untracked files present. 'git add -A' would commit them. Remove or gitignore them first:"
+  git status --porcelain | grep '^??'
+  exit 1
+fi
+
+if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
+  echo "Pulling latest $BRANCH..."
+  git pull --ff-only origin "$BRANCH"
+else
+  # release-it refuses to run without an upstream; fresh hotfix branches
+  # don't have one yet, so push to create it.
+  echo "No upstream set — pushing $BRANCH to origin..."
+  git push -u origin "$BRANCH"
+fi
 
 # --- Run release-it ---
 
@@ -69,8 +100,8 @@ git add -A
 git commit -m "Build: $VERSION"
 
 echo ""
-echo "Pushing development..."
-git push origin development
+echo "Pushing $BRANCH..."
+git push -u origin "$BRANCH"
 
 # --- Create PR ---
 
@@ -86,10 +117,13 @@ fi
 if [ "$CREATE_PR" = true ]; then
   CHANGELOG_ENTRY=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d')
 
+  TITLE="Release: $VERSION"
+  [ "$HOTFIX" = true ] && TITLE="Release: $VERSION (hotfix)"
+
   gh pr create \
     --base master \
-    --head development \
-    --title "Release: $VERSION" \
+    --head "$BRANCH" \
+    --title "$TITLE" \
     --body "$(cat <<EOF
 ## Release $VERSION
 
@@ -105,7 +139,15 @@ EOF
 else
   echo ""
   echo "Skipped PR creation. To create manually:"
-  echo "  gh pr create --base master --head development --title 'Release $VERSION'"
+  echo "  gh pr create --base master --head $BRANCH --title 'Release: $VERSION'"
+fi
+
+if [ "$HOTFIX" = true ]; then
+  echo ""
+  echo "After the PR is merged and deployed, back-merge into development:"
+  echo "  git fetch origin"
+  echo "  git checkout development && git pull --ff-only origin development"
+  echo "  git merge origin/master && git push origin development"
 fi
 
 echo ""
