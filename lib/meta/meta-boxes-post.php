@@ -23,12 +23,13 @@ function nm_cmb_post_metaboxes() {
   $meta_boxes->add_field(
        array(
     'name'       => __( 'Standfirst', 'cmb' ),
-    'desc'       => __( 'Required!', 'cmb' ),
+    'desc'       => __( 'Required! (not Novara Live)', 'cmb' ),
     'id'         => $prefix . 'standfirst',
     'type'       => 'textarea_small',
     'attributes' => array(
-      'data-validation'          => 'true',
-      'data-validation-required' => 'true',
+      'data-validation'                       => 'true',
+      'data-validation-required'              => 'true',
+      'data-validation-not-required-category' => 'novara-live',
     ),
   )
       );
