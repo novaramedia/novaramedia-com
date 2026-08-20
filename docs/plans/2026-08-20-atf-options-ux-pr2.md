@@ -18,8 +18,8 @@
 - Colour grammar is EDIT-STATE, not post-status (spec table): page load = neutral (no colour); green = value changed since page load; dashed grey = empty zone; red = broken (ID unresolvable OR resolved post status ≠ `publish`); amber = collision (same ID in two zones), both zones + a note strip naming them. Precedence red > amber > green.
 - Zone visual grammar: primary + 2nd zones of each block show thumbnail + title; 3rd/4th are title-only lines. Latest-articles column is static grey ("automatic — latest News posts"), never editable.
 - Display-string contract (matches the PR 1 hint renderers — keep in sync with `title_hint_html()` in `lib/meta/cmb2-post-search-field.php` and `renderHint()` in `lib/admin/js/post-resolve.js`): not found → `No post with ID {n}`; found non-publish → `{title} — {status_label}, won't display publicly` (em dash U+2014, curly apostrophe in "won't").
-- Field IDs are fixed: `_cmb_above_the_fold_featured_1..4` = block 1 (1 = primary), `_cmb_above_the_fold_featured_5..8` = block 2 (5 = primary). CMB2 renders each field's row with class `cmb2-id-` + the field id with underscores replaced by dashes → `.cmb2-id--cmb-above-the-fold-featured-1` (note the double dash).
-- Badge fields — block 1: `_cmb_above_the_fold_featured_1_show_related` (checkbox, "See Also"), `_cmb_above_the_fold_featured_1_more_on_section` (select, "More On: {selected label}", suppressed when value is `none` or empty), `_cmb_above_the_fold_featured_1_is_product_linked` (checkbox, "Product-linked"), `_cmb_above_the_fold_featured_1_has_embed` (checkbox, "Video embed"). Block 2: same pattern on `_5_` but NO `has_embed` field.
+- Field IDs are fixed: `nm_above_the_fold_featured_1..4` = block 1 (1 = primary), `nm_above_the_fold_featured_5..8` = block 2 (5 = primary). CMB2 renders each field's row with class `cmb2-id-` + the field id with underscores replaced by dashes → `.cmb2-id-nm-above-the-fold-featured-1`.
+- Badge fields — block 1: `nm_above_the_fold_featured_1_show_related` (checkbox, "See Also"), `nm_above_the_fold_featured_1_more_on_section` (select, "More On: {selected label}", suppressed when value is `none` or empty), `nm_above_the_fold_featured_1_is_product_linked` (checkbox, "Product-linked"), `nm_above_the_fold_featured_1_has_embed` (checkbox, "Video embed"). Block 2: same pattern on `_5_` but NO `has_embed` field.
 - `cmb2_before_form` fires as `do_action( 'cmb2_before_form', $cmb_id, $object_id, $object_type, $cmb )`; the ATF box id is `nm_above_the_fold_featured_options_page`. Saved values live in one option: `get_option( 'nm_front_page_above_the_fold_featured_options' )` → array keyed by field id.
 - `nmPostResolve` (endpoint URL + nonce) is localized onto the `nm-post-resolve` script handle by the forked field; `nm-atf-preview` depends on that handle. If the global is missing, the preview stays static (server-rendered) — no errors.
 - No i18n wrappers on new strings. Verification = `php -l` / `node --check` / logged-out curl smokes; manual wp-admin QA is controller/user-level.
@@ -66,14 +66,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nm_atf_preview_zones() {
   return array(
-    'b1-primary' => array( 'field' => '_cmb_above_the_fold_featured_1', 'block' => 1, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 1 — main' ),
-    'b1-second'  => array( 'field' => '_cmb_above_the_fold_featured_2', 'block' => 1, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 1 — 2nd' ),
-    'b1-third'   => array( 'field' => '_cmb_above_the_fold_featured_3', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 3rd' ),
-    'b1-fourth'  => array( 'field' => '_cmb_above_the_fold_featured_4', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 4th' ),
-    'b2-primary' => array( 'field' => '_cmb_above_the_fold_featured_5', 'block' => 2, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 2 — main' ),
-    'b2-second'  => array( 'field' => '_cmb_above_the_fold_featured_6', 'block' => 2, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 2 — 2nd' ),
-    'b2-third'   => array( 'field' => '_cmb_above_the_fold_featured_7', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 3rd' ),
-    'b2-fourth'  => array( 'field' => '_cmb_above_the_fold_featured_8', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 4th' ),
+    'b1-primary' => array( 'field' => 'nm_above_the_fold_featured_1', 'block' => 1, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 1 — main' ),
+    'b1-second'  => array( 'field' => 'nm_above_the_fold_featured_2', 'block' => 1, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 1 — 2nd' ),
+    'b1-third'   => array( 'field' => 'nm_above_the_fold_featured_3', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 3rd' ),
+    'b1-fourth'  => array( 'field' => 'nm_above_the_fold_featured_4', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 4th' ),
+    'b2-primary' => array( 'field' => 'nm_above_the_fold_featured_5', 'block' => 2, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 2 — main' ),
+    'b2-second'  => array( 'field' => 'nm_above_the_fold_featured_6', 'block' => 2, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 2 — 2nd' ),
+    'b2-third'   => array( 'field' => 'nm_above_the_fold_featured_7', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 3rd' ),
+    'b2-fourth'  => array( 'field' => 'nm_above_the_fold_featured_8', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 4th' ),
   );
 }
 
@@ -466,15 +466,15 @@ jQuery(function ($) {
 
   var BADGE_FIELDS = {
     1: [
-      { field: '_cmb_above_the_fold_featured_1_show_related', type: 'checkbox', label: 'See Also ✓' },
-      { field: '_cmb_above_the_fold_featured_1_more_on_section', type: 'select', label: 'More On: ' },
-      { field: '_cmb_above_the_fold_featured_1_is_product_linked', type: 'checkbox', label: 'Product-linked ✓' },
-      { field: '_cmb_above_the_fold_featured_1_has_embed', type: 'checkbox', label: 'Video embed ✓' }
+      { field: 'nm_above_the_fold_featured_1_show_related', type: 'checkbox', label: 'See Also ✓' },
+      { field: 'nm_above_the_fold_featured_1_more_on_section', type: 'select', label: 'More On: ' },
+      { field: 'nm_above_the_fold_featured_1_is_product_linked', type: 'checkbox', label: 'Product-linked ✓' },
+      { field: 'nm_above_the_fold_featured_1_has_embed', type: 'checkbox', label: 'Video embed ✓' }
     ],
     2: [
-      { field: '_cmb_above_the_fold_featured_5_show_related', type: 'checkbox', label: 'See Also ✓' },
-      { field: '_cmb_above_the_fold_featured_5_more_on_section', type: 'select', label: 'More On: ' },
-      { field: '_cmb_above_the_fold_featured_5_is_product_linked', type: 'checkbox', label: 'Product-linked ✓' }
+      { field: 'nm_above_the_fold_featured_5_show_related', type: 'checkbox', label: 'See Also ✓' },
+      { field: 'nm_above_the_fold_featured_5_more_on_section', type: 'select', label: 'More On: ' },
+      { field: 'nm_above_the_fold_featured_5_is_product_linked', type: 'checkbox', label: 'Product-linked ✓' }
     ]
   };
 

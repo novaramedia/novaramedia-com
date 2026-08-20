@@ -25,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nm_atf_preview_zones() {
   return array(
-    'b1-primary' => array( 'field' => '_cmb_above_the_fold_featured_1', 'block' => 1, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 1 — main' ),
-    'b1-second'  => array( 'field' => '_cmb_above_the_fold_featured_2', 'block' => 1, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 1 — 2nd' ),
-    'b1-third'   => array( 'field' => '_cmb_above_the_fold_featured_3', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 3rd' ),
-    'b1-fourth'  => array( 'field' => '_cmb_above_the_fold_featured_4', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 4th' ),
-    'b2-primary' => array( 'field' => '_cmb_above_the_fold_featured_5', 'block' => 2, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 2 — main' ),
-    'b2-second'  => array( 'field' => '_cmb_above_the_fold_featured_6', 'block' => 2, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 2 — 2nd' ),
-    'b2-third'   => array( 'field' => '_cmb_above_the_fold_featured_7', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 3rd' ),
-    'b2-fourth'  => array( 'field' => '_cmb_above_the_fold_featured_8', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 4th' ),
+    'b1-primary' => array( 'field' => 'nm_above_the_fold_featured_1', 'block' => 1, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 1 — main' ),
+    'b1-second'  => array( 'field' => 'nm_above_the_fold_featured_2', 'block' => 1, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 1 — 2nd' ),
+    'b1-third'   => array( 'field' => 'nm_above_the_fold_featured_3', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 3rd' ),
+    'b1-fourth'  => array( 'field' => 'nm_above_the_fold_featured_4', 'block' => 1, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 1 — 4th' ),
+    'b2-primary' => array( 'field' => 'nm_above_the_fold_featured_5', 'block' => 2, 'style' => 'primary', 'thumb' => true, 'label' => 'Featured 2 — main' ),
+    'b2-second'  => array( 'field' => 'nm_above_the_fold_featured_6', 'block' => 2, 'style' => 'secondary', 'thumb' => true, 'label' => 'Featured 2 — 2nd' ),
+    'b2-third'   => array( 'field' => 'nm_above_the_fold_featured_7', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 3rd' ),
+    'b2-fourth'  => array( 'field' => 'nm_above_the_fold_featured_8', 'block' => 2, 'style' => 'line', 'thumb' => false, 'label' => 'Featured 2 — 4th' ),
   );
 }
 
