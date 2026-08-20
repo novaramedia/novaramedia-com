@@ -129,6 +129,7 @@ get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
 get_template_part( 'lib/admin/post-resolve' );
+get_template_part( 'lib/admin/atf-preview' );
 
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
