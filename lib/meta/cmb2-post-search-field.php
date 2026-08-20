@@ -107,6 +107,22 @@ class CMB2_Post_Search_field {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'wp-backbone' );
 
+		wp_enqueue_script(
+			'nm-post-resolve',
+			get_template_directory_uri() . '/lib/admin/js/post-resolve.js',
+			array( 'jquery' ),
+			'1.0.0',
+			true
+		);
+		wp_localize_script(
+			'nm-post-resolve',
+			'nmPostResolve',
+			array(
+				'endpoint' => esc_url_raw( rest_url( 'nm/v1/resolve-posts' ) ),
+				'nonce'    => wp_create_nonce( 'wp_rest' ),
+			)
+		);
+
 		if ( ! is_admin() ) {
 			// Will need custom styling!
 			// @todo add styles for front-end
