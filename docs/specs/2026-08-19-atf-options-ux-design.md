@@ -73,7 +73,7 @@ section ordering; this design does the same for the featured-post zones.
   otherwise it comes back as the `found: false` shape. This mirrors what the
   user can already see in wp-admin (e.g. a Contributor can't see another
   user's draft there either), so the endpoint never reveals more than that.
-- Registered from a new `lib/admin/resolve-posts-endpoint.php`. Response is
+- Registered from a new `lib/admin/post-resolve.php`. Response is
   read-only metadata about posts the user can already see in the admin — no
   content bodies.
 
