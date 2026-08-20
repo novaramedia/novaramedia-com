@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
+- Above the Fold options page shows a clickable mock layout of the section — zones display the chosen posts, colour-code unsaved/broken/duplicate choices, and jump to the matching field on click
 
 ### Security
 
