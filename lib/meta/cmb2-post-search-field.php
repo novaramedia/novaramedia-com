@@ -48,6 +48,39 @@ class CMB2_Post_Search_field {
 				'findtxt'    => esc_attr( $field_type->_text( 'find_text', __( 'Find Posts or Pages' ) ) ),
 			) ),
 		) );
+		echo $this->title_hint_html( $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped parts.
+	}
+
+	/**
+	 * Server-rendered title hint for a field value (comma list of post IDs).
+	 *
+	 * Mirrors the client-side renderer in lib/admin/js/post-resolve.js —
+	 * keep the markup contract (classes, ' · ' separator) in sync with it.
+	 * Red rule per docs/specs/2026-08-19-atf-options-ux-design.md: broken =
+	 * no post with that ID, or status !== publish (front end has no status
+	 * guard, so a non-published ID renders publicly and 404s for visitors).
+	 */
+	protected function title_hint_html( $value ) {
+		$ids   = array_filter( array_map( 'absint', explode( ',', (string) $value ) ) );
+		$parts = array();
+
+		foreach ( $ids as $id ) {
+			if ( ! function_exists( 'nm_resolve_post' ) ) {
+				break;
+			}
+
+			$info = nm_resolve_post( $id );
+
+			if ( ! $info['found'] ) {
+				$parts[] = '<span class="nm-post-search-title--broken">No post with ID ' . $id . '</span>';
+			} elseif ( 'publish' !== $info['status'] ) {
+				$parts[] = '<span class="nm-post-search-title--broken">' . esc_html( $info['title'] ) . ' — ' . esc_html( $info['status'] ) . ', won&#8217;t display publicly</span>';
+			} else {
+				$parts[] = esc_html( $info['title'] );
+			}
+		}
+
+		return '<span class="nm-post-search-title">' . implode( ' · ', $parts ) . '</span>';
 	}
 
 	public function render_js(  $cmb_id, $object_id, $object_type, $cmb ) {
@@ -257,6 +290,17 @@ class CMB2_Post_Search_field {
 				color: #999;
 				margin: .3em 0 0 2px;
 				cursor: pointer;
+			}
+			.nm-post-search-title {
+				display: block;
+				margin-top: 4px;
+				font-style: italic;
+				color: #646970;
+			}
+			.nm-post-search-title .nm-post-search-title--broken {
+				color: #b32d2e;
+				font-style: normal;
+				font-weight: 600;
 			}
 		</style>
 		<?php
