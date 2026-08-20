@@ -67,7 +67,12 @@ section ordering; this design does the same for the featured-post zones.
   show images.
 - `permission_callback`: `current_user_can( 'edit_posts' )`. Standard
   `X-WP-Nonce` cookie auth (`wp_create_nonce( 'wp_rest' )` localized alongside
-  the script).
+  the script). That gate only decides who can hit the endpoint at all —
+  per-post visibility is narrower: a resolved post's metadata is returned only
+  if it's published, or the current user can `edit_post` that specific post;
+  otherwise it comes back as the `found: false` shape. This mirrors what the
+  user can already see in wp-admin (e.g. a Contributor can't see another
+  user's draft there either), so the endpoint never reveals more than that.
 - Registered from a new `lib/admin/resolve-posts-endpoint.php`. Response is
   read-only metadata about posts the user can already see in the admin — no
   content bodies.

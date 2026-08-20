@@ -5,7 +5,10 @@
  * Resolves post IDs to the display metadata the admin UI needs (title,
  * status, date, thumbnail). Shared by the post-search field's title hints
  * (server render + live JS updates) and the ATF options preview module.
- * Read-only; returns nothing an editor cannot already see in wp-admin.
+ * Read-only; gated so it never returns more than the current user can
+ * already see in wp-admin: published posts resolve for anyone who can hit
+ * the endpoint, non-published posts (draft/private/trash/etc) only resolve
+ * for users who can edit that specific post.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,9 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Resolve one post ID to hint/preview metadata.
  *
- * 'found' is false only when no post object exists for the ID. A trashed
- * or draft post is found — its status tells the caller it won't display
- * publicly (spec: red = unresolvable OR status !== publish).
+ * 'found' is false when no post object exists for the ID, or when the post
+ * exists but isn't published and the current user can't edit it — in either
+ * case there is nothing here the caller couldn't already see in wp-admin.
+ * A trashed or draft post the user CAN edit is still found — its status
+ * tells the caller it won't display publicly (spec: red = unresolvable OR
+ * status !== publish).
  *
  * @param int $post_id Post ID.
  * @return array{id:int, found:bool, title:?string, status:?string, date:?string, thumbnail:?string}
@@ -26,15 +32,23 @@ function nm_resolve_post( $post_id ) {
   $post_id = absint( $post_id );
   $post    = get_post( $post_id );
 
+  $not_found = array(
+    'id'        => $post_id,
+    'found'     => false,
+    'title'     => null,
+    'status'    => null,
+    'date'      => null,
+    'thumbnail' => null,
+  );
+
   if ( ! $post ) {
-    return array(
-      'id'        => $post_id,
-      'found'     => false,
-      'title'     => null,
-      'status'    => null,
-      'date'      => null,
-      'thumbnail' => null,
-    );
+    return $not_found;
+  }
+
+  // Mirror what this user can already see in wp-admin: published posts are
+  // visible to everyone there; anything else only if they can edit that post.
+  if ( 'publish' !== get_post_status( $post ) && ! current_user_can( 'edit_post', $post_id ) ) {
+    return $not_found;
   }
 
   return array(
@@ -54,7 +68,10 @@ function nm_resolve_post( $post_id ) {
  * @return WP_REST_Response|WP_Error
  */
 function nm_resolve_posts_rest( $request ) {
-  $ids = array_filter( array_map( 'absint', explode( ',', (string) $request->get_param( 'ids' ) ) ) );
+  $raw = $request->get_param( 'ids' );
+  $raw = is_string( $raw ) ? $raw : '';
+
+  $ids = array_filter( array_map( 'absint', explode( ',', $raw ) ) );
   $ids = array_slice( array_values( array_unique( $ids ) ), 0, 20 );
 
   if ( ! $ids ) {
