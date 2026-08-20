@@ -128,6 +128,8 @@ get_template_part( 'lib/custom-gallery' );
 get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
+get_template_part( 'lib/admin/post-resolve' );
+
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
