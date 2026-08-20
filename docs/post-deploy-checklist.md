@@ -16,6 +16,18 @@ for each.
 
 ---
 
+## v4.8.1
+
+### 1. Verify the Novara Live standfirst exemption
+**Edit a Novara Live post in the classic editor → Update with an empty
+Standfirst.** Why: this release exempts posts in the `novara-live` category
+(and its descendants) from the required-standfirst rule. The post should save
+without the validation alert; a post in any other category should still block.
+Tell editorial they no longer need to copy the Short description into the
+Standfirst on Novara Live posts.
+
+---
+
 ## v4.8.0
 
 ### 1. Notify editorial before deploy — old posts may block on Update
