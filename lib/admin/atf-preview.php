@@ -64,14 +64,14 @@ function nm_atf_preview_zone_display( $value ) {
 
   if ( 'publish' !== $info['status'] ) {
     return array(
-      'text'      => $info['title'] . ' — ' . $info['status_label'] . ', won’t display publicly',
+      'text'      => ( '' !== $info['title'] ? $info['title'] : '(no title)' ) . ' — ' . $info['status_label'] . ', won’t display publicly',
       'broken'    => true,
       'empty'     => false,
       'thumbnail' => $info['thumbnail'],
     );
   }
 
-  return array( 'text' => $info['title'], 'broken' => false, 'empty' => false, 'thumbnail' => $info['thumbnail'] );
+  return array( 'text' => ( '' !== $info['title'] ? $info['title'] : '(no title)' ), 'broken' => false, 'empty' => false, 'thumbnail' => $info['thumbnail'] );
 }
 
 /**
@@ -123,7 +123,7 @@ function nm_atf_preview_render( $cmb_id, $object_id, $object_type, $cmb ) {
     }
 
     $thumb_style = ( $zone['thumb'] && $display['thumbnail'] )
-      ? ' style="background-image:url(' . esc_url( $display['thumbnail'] ) . ')"'
+      ? ' style="background-image:url(&quot;' . esc_url( $display['thumbnail'] ) . '&quot;)"'
       : '';
 
     echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-nm-zone data-field="' . esc_attr( $zone['field'] ) . '" data-thumb="' . ( $zone['thumb'] ? '1' : '0' ) . '" data-label="' . esc_attr( $zone['label'] ) . '" role="button" tabindex="0" title="Click to edit ' . esc_attr( $zone['label'] ) . '">';

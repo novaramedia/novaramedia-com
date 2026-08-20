@@ -60,7 +60,6 @@
 .nm-atf-preview__zone:hover,
 .nm-atf-preview__zone:focus {
   border-color: #2271b1;
-  outline: none;
 }
 
 .nm-atf-preview__zone--primary .nm-atf-preview__zone-title {
@@ -162,8 +161,20 @@
   color: #8a2424;
 }
 
+.nm-atf-preview__zone:focus,
+.nm-atf-preview__zone:focus-visible {
+  outline: 2px solid #2271b1;
+  outline-offset: 1px;
+}
+
 /* Flash applied to the CMB2 field row after click-to-field. */
 .cmb-row.nm-atf-flash {
   background-color: #fff8c5;
   transition: background-color 1.2s ease-out;
+}
+
+@media (max-width: 782px) {
+  .nm-atf-preview__grid {
+    grid-template-columns: 1fr;
+  }
 }
