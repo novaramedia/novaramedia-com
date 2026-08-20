@@ -1,18 +1,18 @@
 <?php
 /**
- * CMB2 Post Search field
+ * Plugin Name: NM Fork: CMB2 Post Search field
+ * Description: Custom CMB2 field type `post_search_text` — a text input of post IDs with a find-posts search modal. Forked so we own it: upstream is unmaintained (last commit 2019, latest tag v0.2.5).
+ * Version: 1.0.0
  *
- * Custom field for CMB2 which adds a post-search dialog for
- * searching/attaching other post IDs
+ * Fork of webdevstudios/cmb2-post-search-field v0.2.5.
  *
- * @category WordPressLibrary
- * @package  CMB2_Post_Search_field
- * @author   WebDevstudios <contact@webdevstudios.com>
- * @license  GPL-2.0+
- * @version  0.2.5
- * @link     https://github.com/WebDevStudios/CMB2-Post-Search-field
- * @since    0.2.4
+ * @link https://github.com/WebDevStudios/CMB2-Post-Search-field
  */
+
+if ( class_exists( 'CMB2_Post_Search_field' ) ) {
+  return; // Another copy already loaded (belt and braces; the vendor copy is removed).
+}
+
 class CMB2_Post_Search_field {
 
 	protected static $single_instance = null;
@@ -316,26 +316,3 @@ class CMB2_Post_Search_field {
 
 }
 CMB2_Post_Search_field::get_instance();
-
-// preserve a couple functions for back-compat.
-
-
-if ( ! function_exists( 'cmb2_post_search_render_field' ) ) {
-	function cmb2_post_search_render_field( $field, $escaped_value, $object_id, $object_type, $field_type ) {
-		_deprecated_function( __FUNCTION__, '0.2.4', 'Please access these methods through the CMB2_Post_Search_field::get_instance() object.' );
-
-		return CMB2_Post_Search_field::get_instance()->render_field( $field, $escaped_value, $object_id, $object_type, $field_type );
-	}
-}
-
-// Remove old versions.
-remove_action( 'cmb2_render_post_search_text', 'cmb2_post_search_render_field', 10, 5 );
-remove_action( 'cmb2_after_form', 'cmb2_post_search_render_js', 10, 4 );
-
-if ( ! function_exists( 'cmb2_has_post_search_text_field' ) ) {
-	function cmb2_has_post_search_text_field( $fields ) {
-		_deprecated_function( __FUNCTION__, '0.2.4', 'Please access these methods through the CMB2_Post_Search_field::get_instance() object.' );
-
-		return CMB2_Post_Search_field::get_instance()->has_post_search_text_field( $fields );
-	}
-}
