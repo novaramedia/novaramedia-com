@@ -51,9 +51,10 @@ section ordering; this design does the same for the featured-post zones.
   option keys. No data migration.
 - Fork improvements in scope now:
   - Render a title-hint element as part of the field markup (component 3).
-  - Fire a proper `change` event on the input when the find-posts modal
-    writes a selection (upstream sets `.val()` silently, which no listener
-    can observe).
+- The find-posts modal already fires `change` on the input after writing a
+  selection (`handleSelected()` ends with `.val( checked ).trigger( 'change' )`
+  — verified against source 2026-08-20), so the resolver simply listens for
+  it; no fork surgery needed there.
 - Anything else stays as-is until a need arises.
 
 ### 2. REST endpoint: `nm/v1/resolve-posts`
