@@ -3,7 +3,7 @@
  * Post-resolve helper + REST endpoint.
  *
  * Resolves post IDs to the display metadata the admin UI needs (title,
- * status, date, thumbnail). Shared by the post-search field's title hints
+ * status, status_label, date, thumbnail). Shared by the post-search field's title hints
  * (server render + live JS updates) and the ATF options preview module.
  * Read-only; gated so it never returns more than the current user can
  * already see in wp-admin: published posts resolve for anyone who can hit
@@ -26,19 +26,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * status !== publish).
  *
  * @param int $post_id Post ID.
- * @return array{id:int, found:bool, title:?string, status:?string, date:?string, thumbnail:?string}
+ * @return array{id:int, found:bool, title:?string, status:?string, status_label:?string, date:?string, thumbnail:?string}
  */
 function nm_resolve_post( $post_id ) {
   $post_id = absint( $post_id );
   $post    = get_post( $post_id );
 
   $not_found = array(
-    'id'        => $post_id,
-    'found'     => false,
-    'title'     => null,
-    'status'    => null,
-    'date'      => null,
-    'thumbnail' => null,
+    'id'           => $post_id,
+    'found'        => false,
+    'title'        => null,
+    'status'       => null,
+    'status_label' => null,
+    'date'         => null,
+    'thumbnail'    => null,
   );
 
   if ( ! $post ) {
@@ -51,13 +52,18 @@ function nm_resolve_post( $post_id ) {
     return $not_found;
   }
 
+  $status        = get_post_status( $post );
+  $status_object = get_post_status_object( $status );
+  $status_label  = ( $status_object && ! empty( $status_object->label ) ) ? $status_object->label : $status;
+
   return array(
-    'id'        => $post_id,
-    'found'     => true,
-    'title'     => get_the_title( $post ),
-    'status'    => get_post_status( $post ),
-    'date'      => get_the_date( 'j M Y', $post ),
-    'thumbnail' => get_the_post_thumbnail_url( $post, 'thumbnail' ) ?: null,
+    'id'           => $post_id,
+    'found'        => true,
+    'title'        => get_the_title( $post ),
+    'status'       => $status,
+    'status_label' => $status_label,
+    'date'         => get_the_date( 'j M Y', $post ),
+    'thumbnail'    => get_the_post_thumbnail_url( $post, 'thumbnail' ) ?: null,
   );
 }
 
@@ -81,6 +87,9 @@ function nm_resolve_posts_rest( $request ) {
   return rest_ensure_response( array_map( 'nm_resolve_post', $ids ) );
 }
 
+/**
+ * Register the `GET nm/v1/resolve-posts` REST route.
+ */
 function nm_register_resolve_posts_route() {
   register_rest_route(
     'nm/v1',

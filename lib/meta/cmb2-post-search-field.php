@@ -47,8 +47,10 @@ class CMB2_Post_Search_field {
 				'errortxt'   => esc_attr( $field_type->_text( 'error_text', __( 'An error has occurred. Please reload the page and try again.' ) ) ),
 				'findtxt'    => esc_attr( $field_type->_text( 'find_text', __( 'Find Posts or Pages' ) ) ),
 			) ),
+			'desc'        => '',
 		) );
 		echo $this->title_hint_html( $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped parts.
+		echo $field_type->_desc( true );
 	}
 
 	/**
@@ -61,20 +63,22 @@ class CMB2_Post_Search_field {
 	 * guard, so a non-published ID renders publicly and 404s for visitors).
 	 */
 	protected function title_hint_html( $value ) {
-		$ids   = array_filter( array_map( 'absint', explode( ',', (string) $value ) ) );
+		if ( ! function_exists( 'nm_resolve_post' ) ) {
+			return '<span class="nm-post-search-title"></span>';
+		}
+
+		$value = is_scalar( $value ) ? (string) $value : '';
+		$ids   = array_filter( array_map( 'absint', explode( ',', $value ) ) );
+		$ids   = array_slice( array_values( array_unique( $ids ) ), 0, 20 );
 		$parts = array();
 
 		foreach ( $ids as $id ) {
-			if ( ! function_exists( 'nm_resolve_post' ) ) {
-				break;
-			}
-
 			$info = nm_resolve_post( $id );
 
 			if ( ! $info['found'] ) {
 				$parts[] = '<span class="nm-post-search-title--broken">No post with ID ' . $id . '</span>';
 			} elseif ( 'publish' !== $info['status'] ) {
-				$parts[] = '<span class="nm-post-search-title--broken">' . esc_html( $info['title'] ) . ' — ' . esc_html( $info['status'] ) . ', won&#8217;t display publicly</span>';
+				$parts[] = '<span class="nm-post-search-title--broken">' . esc_html( $info['title'] ) . ' — ' . esc_html( $info['status_label'] ) . ', won&#8217;t display publicly</span>';
 			} else {
 				$parts[] = esc_html( $info['title'] );
 			}
@@ -111,7 +115,7 @@ class CMB2_Post_Search_field {
 			'nm-post-resolve',
 			get_template_directory_uri() . '/lib/admin/js/post-resolve.js',
 			array( 'jquery' ),
-			'1.0.0',
+			wp_get_theme()->get( 'Version' ),
 			true
 		);
 		wp_localize_script(
