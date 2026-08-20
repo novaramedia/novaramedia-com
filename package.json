@@ -2,6 +2,9 @@
   "name": "novaramedia-com",
   "version": "4.8.0",
   "description": "No Future, Utopia Now",
+  "engines": {
+    "node": ">=20.9"
+  },
   "main": "gulpfile.js",
   "scripts": {
     "test": "cypress run",
