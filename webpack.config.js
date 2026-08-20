@@ -207,13 +207,12 @@ module.exports = (env, argv) => {
 
     // Enhanced image optimization with format conversion
     config.optimization.minimizer.push(
-      // PNG only. Quantized output is kept only when smaller than the source
-      // bytes — busy textural images can quantize LARGER than a losslessly
-      // optimized source. JPEGs ship untouched: re-encoding is lossy and the
-      // sources are already losslessly optimized; modern browsers get the
-      // webp/avif variants anyway.
+      // Output is kept only when smaller than the source bytes — busy
+      // textural PNGs can quantize LARGER than a losslessly optimized
+      // source. Note the guard is size-only: JPEG re-encoding is lossy and
+      // nearly always smaller, so JPEGs effectively always re-encode.
       new ImageMinimizerPlugin({
-        test: /\.png$/i,
+        test: /\.(jpe?g|png)$/i,
         minimizer: {
           implementation: async (original, options) => {
             const result = await ImageMinimizerPlugin.sharpMinify(
@@ -226,6 +225,7 @@ module.exports = (env, argv) => {
           },
           options: {
             encodeOptions: {
+              jpeg: { quality: 85, progressive: false, mozjpeg: true },
               png: {
                 palette: true,
                 quality: 90,
