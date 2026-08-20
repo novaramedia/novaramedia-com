@@ -114,11 +114,11 @@ elif [ -t 0 ]; then
   [[ "$REPLY" =~ ^[Yy]$ ]] && CREATE_PR=true
 fi
 
+TITLE="Release: $VERSION"
+[ "$HOTFIX" = true ] && TITLE="Release: $VERSION (hotfix)"
+
 if [ "$CREATE_PR" = true ]; then
   CHANGELOG_ENTRY=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d')
-
-  TITLE="Release: $VERSION"
-  [ "$HOTFIX" = true ] && TITLE="Release: $VERSION (hotfix)"
 
   gh pr create \
     --base master \
@@ -139,7 +139,7 @@ EOF
 else
   echo ""
   echo "Skipped PR creation. To create manually:"
-  echo "  gh pr create --base master --head $BRANCH --title 'Release: $VERSION'"
+  echo "  gh pr create --base master --head $BRANCH --title '$TITLE'"
 fi
 
 if [ "$HOTFIX" = true ]; then
