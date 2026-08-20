@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
+
 ### Security
 
 - Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
@@ -14,18 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
+- CMB2 Post Search field addon forked into the theme (`lib/meta/`) — upstream unmaintained since 2019; composer dependency removed
 
 ### Removed
 
 - Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
-
-### Added
-
-- Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
-
-### Changed
-
-- CMB2 Post Search field addon forked into the theme (`lib/meta/`) — upstream unmaintained since 2019; composer dependency removed
 
 ## [4.8.0] - 2026-07-27
 
