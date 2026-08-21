@@ -1,0 +1,180 @@
+/**
+ * ATF options preview module (lib/admin/atf-preview.php).
+ * State classes are toggled by lib/admin/js/atf-preview.js:
+ * neutral (no class) = saved & untouched; is-changed = edited this
+ * session; is-empty = no value; is-broken = won't work publicly;
+ * is-collision = same post in two zones. Precedence (later rules win):
+ * green < amber < red.
+ */
+
+.nm-atf-preview {
+  margin: 12px 0 20px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+}
+
+.nm-atf-preview__heading {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.nm-atf-preview__banner {
+  margin: 0 0 8px;
+  padding: 6px 8px;
+  background: #fcf9e8;
+  border-left: 4px solid #dba617;
+}
+
+.nm-atf-preview__collisions {
+  margin: 0 0 8px;
+  padding: 6px 8px;
+  background: #fcf0e8;
+  border-left: 4px solid #d63638;
+  color: #8a2424;
+}
+
+.nm-atf-preview__grid {
+  display: grid;
+  grid-template-columns: 5fr 3fr 5fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.nm-atf-preview__block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nm-atf-preview__zone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #dcdcde;
+  background: #f6f7f7;
+  cursor: pointer;
+}
+
+.nm-atf-preview__zone:hover,
+.nm-atf-preview__zone:focus {
+  border-color: #2271b1;
+}
+
+.nm-atf-preview__zone--primary .nm-atf-preview__zone-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nm-atf-preview__zone--secondary .nm-atf-preview__zone-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nm-atf-preview__zone--line {
+  padding: 5px 8px;
+}
+
+.nm-atf-preview__zone--line .nm-atf-preview__zone-title {
+  font-size: 12px;
+}
+
+.nm-atf-preview__thumb {
+  flex: 0 0 44px;
+  height: 33px;
+  background: #dcdcde center / cover no-repeat;
+}
+
+.nm-atf-preview__zone--primary .nm-atf-preview__thumb {
+  flex-basis: 66px;
+  height: 44px;
+}
+
+.nm-atf-preview__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 14px;
+  margin: -2px 0 2px;
+}
+
+.nm-atf-preview__badge {
+  padding: 1px 6px;
+  background: #f0f0f1;
+  border: 1px solid #dcdcde;
+  border-radius: 9px;
+  font-size: 11px;
+  color: #50575e;
+}
+
+.nm-atf-preview__latest {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-self: stretch;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid #dcdcde;
+  background: #f0f0f1;
+  color: #787c82;
+  text-align: center;
+}
+
+.nm-atf-preview__latest-title {
+  font-weight: 600;
+}
+
+.nm-atf-preview__latest-note {
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* --- Edit-state grammar (order = precedence: green < amber < red) --- */
+
+.nm-atf-preview__zone.is-empty {
+  border-style: dashed;
+  border-color: #a7aaad;
+  background: #fff;
+  color: #787c82;
+  font-style: italic;
+}
+
+.nm-atf-preview__zone.is-changed {
+  border-color: #00a32a;
+  box-shadow: inset 3px 0 0 #00a32a;
+}
+
+.nm-atf-preview__zone.is-collision {
+  border-color: #dba617;
+  box-shadow: inset 3px 0 0 #dba617;
+  background: #fcf9e8;
+}
+
+.nm-atf-preview__zone.is-broken {
+  border-color: #d63638;
+  box-shadow: inset 3px 0 0 #d63638;
+  background: #fcf0f1;
+}
+
+.nm-atf-preview__zone.is-broken .nm-atf-preview__zone-title {
+  color: #8a2424;
+}
+
+.nm-atf-preview__zone:focus,
+.nm-atf-preview__zone:focus-visible {
+  outline: 2px solid #2271b1;
+  outline-offset: 1px;
+}
+
+/* Flash applied to the CMB2 field row after click-to-field. */
+.cmb-row.nm-atf-flash {
+  background-color: #fff8c5;
+  transition: background-color 1.2s ease-out;
+}
+
+@media (max-width: 782px) {
+  .nm-atf-preview__grid {
+    grid-template-columns: 1fr;
+  }
+}
