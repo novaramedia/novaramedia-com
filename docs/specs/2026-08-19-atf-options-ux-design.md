@@ -82,9 +82,10 @@ section ordering; this design does the same for the featured-post zones.
 - The forked field renders `<span class="nm-post-search-title">` after the
   input. Server-fills it for the saved value at render time (no flash of
   unresolved IDs on load).
-- Shared admin JS (`lib/admin/js/post-resolve.js`, plain enqueued file — no
-  webpack) updates the hint on input change / modal pick, debounced ~300ms,
-  batched through the endpoint.
+- The fork's own hint JS (`lib/meta/js/cmb2-post-search-field-hints.js`,
+  plain enqueued file — no webpack) updates the hint on input change / modal
+  pick, debounced ~300ms, batched through the shared endpoint client
+  (`lib/admin/js/post-resolve.js`, registered by `post-resolve.php`).
 - States: resolved → title text; unresolvable or non-published → red text
   (e.g. "No published post with this ID").
 - Enqueued only on screens that contain the field (the fork knows when it

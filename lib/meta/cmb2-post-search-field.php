@@ -56,7 +56,7 @@ class CMB2_Post_Search_field {
 	/**
 	 * Server-rendered title hint for a field value (comma list of post IDs).
 	 *
-	 * Mirrors the client-side renderer in lib/admin/js/post-resolve.js —
+	 * Mirrors renderHint() in lib/meta/js/cmb2-post-search-field-hints.js —
 	 * keep the markup contract (classes, ' · ' separator) in sync with it.
 	 * Red rule per docs/specs/2026-08-19-atf-options-ux-design.md: broken =
 	 * no post with that ID, or status !== publish (front end has no status
@@ -111,20 +111,17 @@ class CMB2_Post_Search_field {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'wp-backbone' );
 
+		// Title hints: this field's own UI, implemented against the
+		// nm-post-resolve client (registered by lib/admin/post-resolve.php).
+		// If that utility is absent the handle is unregistered, this enqueue
+		// silently drops out, and the field degrades to the server-rendered
+		// hint (title_hint_html() has its own function_exists guard).
 		wp_enqueue_script(
-			'nm-post-resolve',
-			get_template_directory_uri() . '/lib/admin/js/post-resolve.js',
-			array( 'jquery' ),
+			'nm-post-search-field-hints',
+			get_template_directory_uri() . '/lib/meta/js/cmb2-post-search-field-hints.js',
+			array( 'jquery', 'nm-post-resolve' ),
 			wp_get_theme()->get( 'Version' ),
 			true
-		);
-		wp_localize_script(
-			'nm-post-resolve',
-			'nmPostResolve',
-			array(
-				'endpoint' => esc_url_raw( rest_url( 'nm/v1/resolve-posts' ) ),
-				'nonce'    => wp_create_nonce( 'wp_rest' ),
-			)
 		);
 
 		if ( ! is_admin() ) {
