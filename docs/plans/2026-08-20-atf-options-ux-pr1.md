@@ -4,7 +4,7 @@
 
 **Goal:** Own the CMB2 post-search picker as an NM fork and make every picker show the resolved post title (red when the ID won't work publicly), backed by a new `nm/v1/resolve-posts` REST endpoint.
 
-**Architecture:** Three units. (1) `lib/meta/cmb2-post-search-field.php` — verbatim fork of the dead vendored addon, plus a server-rendered title hint in the field markup and enqueueing of the shared resolver JS. (2) `lib/admin/post-resolve.php` — `nm_resolve_post()` helper + REST route, shared by the hint (server side) and later by the PR 2 preview. (3) `lib/admin/js/post-resolve.js` — plain enqueued file (NO webpack) that re-resolves a field's hint when its value changes.
+**Architecture:** Three units. (1) `lib/meta/cmb2-post-search-field.php` — verbatim fork of the dead vendored addon, plus a server-rendered title hint in the field markup and its own hint UI in `lib/meta/js/cmb2-post-search-field-hints.js`. (2) `lib/admin/post-resolve.php` — standalone utility: `nm_resolve_post()` helper + REST route + the registered `nm-post-resolve` browser client (`lib/admin/js/post-resolve.js`, plain enqueued file, NO webpack). (3) Consumers implement against the utility: the field's hints JS here, the PR 2 preview later. *(Restructured post-review — see addendum at the end; the executed steps below predate it and name the original file layout.)*
 
 **Tech Stack:** WordPress/CMB2 (classic admin), jQuery (already enqueued by the field), WP REST API, Composer (dependency removal only).
 
@@ -563,3 +563,14 @@ PR body should summarise the three units and link the spec, `#591` (related fron
 - **Spec coverage:** spec components 1–3 fully covered (fork, endpoint, hints); component 4 (preview) is PR 2 by design; failure handling covered in Task 4 JS catch + global constraint; rollout matches spec's PR split. Spec's "change event" fork improvement dropped — the spec was corrected in the docs PR after reading the source (the modal already fires `change`).
 - **Type consistency:** `nm_resolve_post()` return shape identical in Task 2 definition, Task 3 consumption, Task 4 JS field names (`found`, `status`, `title`, `id`). Class names `nm-post-search-title` / `--broken` consistent across Tasks 3 and 4.
 - **Placeholder scan:** clean — all steps carry runnable code or exact commands.
+
+---
+
+## Addendum: post-review restructure (2026-08-21)
+
+Structural review found `lib/admin/js/post-resolve.js` was the field type's hint UI (CMB2 selectors, `cmb2_add_row` handling, `title_hint_html()` markup mirror) wearing the utility's name, while the field type also owned registration of the shared script handle. Restructured so the utility is truly standalone and consumers implement against it:
+
+- `lib/admin/post-resolve.php` now also registers the `nm-post-resolve` script handle (endpoint + nonce on the `nmPostResolve` global) on both enqueue hooks — the utility owns its client.
+- `lib/admin/js/post-resolve.js` rewritten as that client: `nmPostResolveClient.parseIds()` / `.resolve(ids)` / `.track(key)` (stale-response guard). UI-agnostic, no jQuery dependency.
+- Hint UI moved to `lib/meta/js/cmb2-post-search-field-hints.js`, owned by the fork, enqueued with a dependency on `nm-post-resolve`; degrades silently to the server-rendered hint if the utility is absent.
+- PR 2's `atf-preview.js` consumes the same client instead of duplicating fetch/nonce/stale-guard code.

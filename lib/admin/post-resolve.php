@@ -1,11 +1,17 @@
 <?php
 /**
- * Post-resolve helper + REST endpoint.
+ * Post-resolve utility: post IDs -> admin display metadata.
  *
- * Resolves post IDs to the display metadata the admin UI needs (title,
- * status, status_label, date, thumbnail). Shared by the post-search field's title hints
- * (server render + live JS updates) and the ATF options preview module.
- * Read-only; gated so it never returns more than the current user can
+ * Standalone service in three parts:
+ *  - nm_resolve_post() resolves one post ID to {id, found, title, status,
+ *    status_label, date, thumbnail} for PHP callers
+ *  - `GET nm/v1/resolve-posts` serves the same data over REST
+ *  - the `nm-post-resolve` script handle (lib/admin/js/post-resolve.js) is
+ *    the browser client for that endpoint, registered here with its
+ *    endpoint+nonce global; consumers enqueue the handle or list it as a
+ *    script dependency and render the results themselves
+ *
+ * Read-only, and gated so it never returns more than the current user can
  * already see in wp-admin: published posts resolve for anyone who can hit
  * the endpoint, non-published posts (draft/private/trash/etc) only resolve
  * for users who can edit that specific post.
@@ -111,3 +117,30 @@ function nm_register_resolve_posts_route() {
   );
 }
 add_action( 'rest_api_init', 'nm_register_resolve_posts_route' );
+
+/**
+ * Register (not enqueue) the browser client for the resolve endpoint.
+ *
+ * Registered early on both enqueue hooks so any consumer can enqueue the
+ * `nm-post-resolve` handle or depend on it. The endpoint URL and nonce ride
+ * along on the nmPostResolve global.
+ */
+function nm_register_post_resolve_client() {
+  wp_register_script(
+    'nm-post-resolve',
+    get_template_directory_uri() . '/lib/admin/js/post-resolve.js',
+    array(),
+    wp_get_theme()->get( 'Version' ),
+    true
+  );
+  wp_localize_script(
+    'nm-post-resolve',
+    'nmPostResolve',
+    array(
+      'endpoint' => esc_url_raw( rest_url( 'nm/v1/resolve-posts' ) ),
+      'nonce'    => wp_create_nonce( 'wp_rest' ),
+    )
+  );
+}
+add_action( 'admin_enqueue_scripts', 'nm_register_post_resolve_client', 1 );
+add_action( 'wp_enqueue_scripts', 'nm_register_post_resolve_client', 1 );
