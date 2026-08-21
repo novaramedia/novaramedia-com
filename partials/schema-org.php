@@ -75,7 +75,7 @@ if (is_single() && get_post_type() === 'job') {
     case 'remote':
       $json_ld['applicantLocationRequirements']= array(
         "@type" => "Country",
-        "name" => "UK",
+        "name" => "GB",
       );
       $json_ld['jobLocationType']= "TELECOMMUTE";
       break;
