@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
+
+### Removed
+
+- Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
+
 ### Fixed
 
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+
+### Security
+
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
 
 ## [4.8.0] - 2026-07-27
 
