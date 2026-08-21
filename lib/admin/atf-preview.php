@@ -39,8 +39,9 @@ function nm_atf_preview_zones() {
 /**
  * Display state for one zone value.
  *
- * String contract shared with title_hint_html() (PHP hints) and
- * renderHint()/paintZone() (JS) — keep the three in sync.
+ * String contract shared with title_hint_html() (PHP hints), renderHint()
+ * (lib/meta/js/cmb2-post-search-field-hints.js) and zoneText()
+ * (lib/admin/js/atf-preview.js) — keep them in sync.
  *
  * @param string $value Raw saved field value (single post ID for ATF zones).
  * @return array{text:string, broken:bool, empty:bool, thumbnail:?string}
@@ -94,10 +95,9 @@ function nm_atf_preview_render( $cmb_id, $object_id, $object_type, $cmb ) {
     $theme_version
   );
 
-  // nm-post-resolve is registered later in this same request (the forked
-  // field enqueues it from cmb2_after_form); WP resolves dependencies at
-  // print time, so depending on it here is safe. It carries the
-  // nmPostResolve endpoint+nonce global the preview JS reuses.
+  // nm-post-resolve is the shared endpoint client registered by
+  // lib/admin/post-resolve.php (early on admin_enqueue_scripts); it carries
+  // the nmPostResolveClient API the preview JS resolves post data through.
   wp_enqueue_script(
     'nm-atf-preview',
     get_template_directory_uri() . '/lib/admin/js/atf-preview.js',

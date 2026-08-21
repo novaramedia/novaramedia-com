@@ -17,11 +17,11 @@
 - Display-only: the preview is a map, not a second form. No editing inside it; the CMB2 save path stays untouched; JS/endpoint failure must never block form interaction or saving.
 - Colour grammar is EDIT-STATE, not post-status (spec table): page load = neutral (no colour); green = value changed since page load; dashed grey = empty zone; red = broken (ID unresolvable OR resolved post status ≠ `publish`); amber = collision (same ID in two zones), both zones + a note strip naming them. Precedence red > amber > green.
 - Zone visual grammar: primary + 2nd zones of each block show thumbnail + title; 3rd/4th are title-only lines. Latest-articles column is static grey ("automatic — latest News posts"), never editable.
-- Display-string contract (matches the PR 1 hint renderers — keep in sync with `title_hint_html()` in `lib/meta/cmb2-post-search-field.php` and `renderHint()` in `lib/admin/js/post-resolve.js`): not found → `No post with ID {n}`; found non-publish → `{title} — {status_label}, won't display publicly` (em dash U+2014, curly apostrophe in "won't").
+- Display-string contract (matches the PR 1 hint renderers — keep in sync with `title_hint_html()` in `lib/meta/cmb2-post-search-field.php` and `renderHint()` in `lib/meta/js/cmb2-post-search-field-hints.js`): not found → `No post with ID {n}`; found non-publish → `{title} — {status_label}, won't display publicly` (em dash U+2014, curly apostrophe in "won't").
 - Field IDs are fixed: `nm_above_the_fold_featured_1..4` = block 1 (1 = primary), `nm_above_the_fold_featured_5..8` = block 2 (5 = primary). CMB2 renders each field's row with class `cmb2-id-` + the field id with underscores replaced by dashes → `.cmb2-id-nm-above-the-fold-featured-1`.
 - Badge fields — block 1: `nm_above_the_fold_featured_1_show_related` (checkbox, "See Also"), `nm_above_the_fold_featured_1_more_on_section` (select, "More On: {selected label}", suppressed when value is `none` or empty), `nm_above_the_fold_featured_1_is_product_linked` (checkbox, "Product-linked"), `nm_above_the_fold_featured_1_has_embed` (checkbox, "Video embed"). Block 2: same pattern on `_5_` but NO `has_embed` field.
 - `cmb2_before_form` fires as `do_action( 'cmb2_before_form', $cmb_id, $object_id, $object_type, $cmb )`; the ATF box id is `nm_above_the_fold_featured_options_page`. Saved values live in one option: `get_option( 'nm_front_page_above_the_fold_featured_options' )` → array keyed by field id.
-- `nmPostResolve` (endpoint URL + nonce) is localized onto the `nm-post-resolve` script handle by the forked field; `nm-atf-preview` depends on that handle. If the global is missing, the preview stays static (server-rendered) — no errors.
+- Post data comes through the shared `nm-post-resolve` client (`nmPostResolveClient.resolve()/track()`, registered with its endpoint+nonce by `lib/admin/post-resolve.php`); `nm-atf-preview` depends on that handle. If the client is missing, the preview stays static (server-rendered) — no errors. *(Restructured post-review — see addendum; executed steps below name the original layout, where the forked field localized `nmPostResolve` itself.)*
 - No i18n wrappers on new strings. Verification = `php -l` / `node --check` / logged-out curl smokes; manual wp-admin QA is controller/user-level.
 
 ---
@@ -777,3 +777,9 @@ git commit -m "docs: changelog for ATF preview module"
 - **Type consistency:** field ids, row selector derivation, state class names, and the display-string contract are identical across Tasks 1-3; `nm_atf_preview_zone_display()` (PHP) and `zoneText()` (JS) implement the same three branches.
 - **Placeholder scan:** clean — every step carries runnable code or exact commands.
 - Known accepted duplication: the display-string contract now exists in four renderers (hint PHP/JS, preview PHP/JS); each file's docblock names the others.
+
+---
+
+## Addendum: post-review restructure (2026-08-21)
+
+PR 1's structural review made `lib/admin/post-resolve.php` a true standalone utility: it now registers the `nm-post-resolve` script handle itself (endpoint + nonce global), and `lib/admin/js/post-resolve.js` is a UI-free client exposing `nmPostResolveClient.parseIds()/.resolve(ids)/.track(key)`. The hint UI moved to `lib/meta/js/cmb2-post-search-field-hints.js` (fork-owned). On this branch, `atf-preview.js` was refactored onto that client — its hand-rolled fetch/nonce/URL/stale-guard code replaced by `nmPostResolveClient.resolve()` + `track('atf-preview')`, with identical semantics (results always cached and painted; only the banner is staleness-guarded).
