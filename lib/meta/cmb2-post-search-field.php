@@ -1,18 +1,18 @@
 <?php
 /**
- * CMB2 Post Search field
+ * Plugin Name: NM Fork: CMB2 Post Search field
+ * Description: Custom CMB2 field type `post_search_text` — a text input of post IDs with a find-posts search modal. Forked so we own it: upstream is unmaintained (last commit 2019, latest tag v0.2.5).
+ * Version: 1.0.0
  *
- * Custom field for CMB2 which adds a post-search dialog for
- * searching/attaching other post IDs
+ * Fork of webdevstudios/cmb2-post-search-field v0.2.5.
  *
- * @category WordPressLibrary
- * @package  CMB2_Post_Search_field
- * @author   WebDevstudios <contact@webdevstudios.com>
- * @license  GPL-2.0+
- * @version  0.2.5
- * @link     https://github.com/WebDevStudios/CMB2-Post-Search-field
- * @since    0.2.4
+ * @link https://github.com/WebDevStudios/CMB2-Post-Search-field
  */
+
+if ( class_exists( 'CMB2_Post_Search_field' ) ) {
+  return; // Another copy already loaded (belt and braces; the vendor copy is removed).
+}
+
 class CMB2_Post_Search_field {
 
 	protected static $single_instance = null;
@@ -47,7 +47,44 @@ class CMB2_Post_Search_field {
 				'errortxt'   => esc_attr( $field_type->_text( 'error_text', __( 'An error has occurred. Please reload the page and try again.' ) ) ),
 				'findtxt'    => esc_attr( $field_type->_text( 'find_text', __( 'Find Posts or Pages' ) ) ),
 			) ),
+			'desc'        => '',
 		) );
+		echo $this->title_hint_html( $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped parts.
+		echo $field_type->_desc( true );
+	}
+
+	/**
+	 * Server-rendered title hint for a field value (comma list of post IDs).
+	 *
+	 * Mirrors renderHint() in lib/meta/js/cmb2-post-search-field-hints.js —
+	 * keep the markup contract (classes, ' · ' separator) in sync with it.
+	 * Red rule per docs/specs/2026-08-19-atf-options-ux-design.md: broken =
+	 * no post with that ID, or status !== publish (front end has no status
+	 * guard, so a non-published ID renders publicly and 404s for visitors).
+	 */
+	protected function title_hint_html( $value ) {
+		if ( ! function_exists( 'nm_resolve_post' ) ) {
+			return '<span class="nm-post-search-title"></span>';
+		}
+
+		$value = is_scalar( $value ) ? (string) $value : '';
+		$ids   = array_filter( array_map( 'absint', explode( ',', $value ) ) );
+		$ids   = array_slice( array_values( array_unique( $ids ) ), 0, 20 );
+		$parts = array();
+
+		foreach ( $ids as $id ) {
+			$info = nm_resolve_post( $id );
+
+			if ( ! $info['found'] ) {
+				$parts[] = '<span class="nm-post-search-title--broken">No post with ID ' . $id . '</span>';
+			} elseif ( 'publish' !== $info['status'] ) {
+				$parts[] = '<span class="nm-post-search-title--broken">' . esc_html( $info['title'] ) . ' — ' . esc_html( $info['status_label'] ) . ', won&#8217;t display publicly</span>';
+			} else {
+				$parts[] = esc_html( $info['title'] );
+			}
+		}
+
+		return '<span class="nm-post-search-title">' . implode( ' · ', $parts ) . '</span>';
 	}
 
 	public function render_js(  $cmb_id, $object_id, $object_type, $cmb ) {
@@ -73,6 +110,19 @@ class CMB2_Post_Search_field {
 		// wp_enqueue_media();
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'wp-backbone' );
+
+		// Title hints: this field's own UI, implemented against the
+		// nm-post-resolve client (registered by lib/admin/post-resolve.php).
+		// If that utility is absent the handle is unregistered, this enqueue
+		// silently drops out, and the field degrades to the server-rendered
+		// hint (title_hint_html() has its own function_exists guard).
+		wp_enqueue_script(
+			'nm-post-search-field-hints',
+			get_template_directory_uri() . '/lib/meta/js/cmb2-post-search-field-hints.js',
+			array( 'jquery', 'nm-post-resolve' ),
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
 
 		if ( ! is_admin() ) {
 			// Will need custom styling!
@@ -258,6 +308,17 @@ class CMB2_Post_Search_field {
 				margin: .3em 0 0 2px;
 				cursor: pointer;
 			}
+			.nm-post-search-title {
+				display: block;
+				margin-top: 4px;
+				font-style: italic;
+				color: #646970;
+			}
+			.nm-post-search-title .nm-post-search-title--broken {
+				color: #b32d2e;
+				font-style: normal;
+				font-weight: 600;
+			}
 		</style>
 		<?php
 
@@ -316,26 +377,3 @@ class CMB2_Post_Search_field {
 
 }
 CMB2_Post_Search_field::get_instance();
-
-// preserve a couple functions for back-compat.
-
-
-if ( ! function_exists( 'cmb2_post_search_render_field' ) ) {
-	function cmb2_post_search_render_field( $field, $escaped_value, $object_id, $object_type, $field_type ) {
-		_deprecated_function( __FUNCTION__, '0.2.4', 'Please access these methods through the CMB2_Post_Search_field::get_instance() object.' );
-
-		return CMB2_Post_Search_field::get_instance()->render_field( $field, $escaped_value, $object_id, $object_type, $field_type );
-	}
-}
-
-// Remove old versions.
-remove_action( 'cmb2_render_post_search_text', 'cmb2_post_search_render_field', 10, 5 );
-remove_action( 'cmb2_after_form', 'cmb2_post_search_render_js', 10, 4 );
-
-if ( ! function_exists( 'cmb2_has_post_search_text_field' ) ) {
-	function cmb2_has_post_search_text_field( $fields ) {
-		_deprecated_function( __FUNCTION__, '0.2.4', 'Please access these methods through the CMB2_Post_Search_field::get_instance() object.' );
-
-		return CMB2_Post_Search_field::get_instance()->has_post_search_text_field( $fields );
-	}
-}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c306a63c46a858804d50e8fb69ce326",
+    "content-hash": "d37c572ff3ada7398f0ea7a4130b432c",
     "packages": [
         {
             "name": "cmb2/cmb2",
@@ -121,63 +121,15 @@
                 "source": "https://github.com/fightbulc/moment.php/tree/1.34"
             },
             "time": "2023-01-26T21:18:59+00:00"
-        },
-        {
-            "name": "webdevstudios/cmb2-post-search-field",
-            "version": "v0.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WebDevStudios/CMB2-Post-Search-field.git",
-                "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WebDevStudios/CMB2-Post-Search-field/zipball/f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
-                "reference": "f1c0422a3de6e95f5b5597fe734f86ae51990ce8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.2.4"
-            },
-            "suggest": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "WebDevStudios",
-                    "email": "contact@webdevstudios.com",
-                    "homepage": "https://github.com/WebDevStudios",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Custom field for CMB2 which adds a post-search dialog for searching/attaching other post IDs.",
-            "homepage": "https://github.com/WebDevStudios/CMB2",
-            "keywords": [
-                "field",
-                "metabox",
-                "plugin",
-                "search",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/WebDevStudios/CMB2-Post-Search-field/issues",
-                "source": "https://github.com/WebDevStudios/CMB2-Post-Search-field"
-            },
-            "time": "2016-05-30T06:58:49+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
