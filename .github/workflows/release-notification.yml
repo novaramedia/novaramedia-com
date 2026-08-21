@@ -8,9 +8,9 @@ on:
 
 jobs:
   notify-release:
-    # scripts/release.sh titles release PRs "Release: x.y.z"; "Version x.y.z"
-    # kept for the pre-script convention (last used on 4.5.2).
-    if: github.event.pull_request.merged == true && (startsWith(github.event.pull_request.title, 'Version') || startsWith(github.event.pull_request.title, 'Release'))
+    # Release PRs are titled "Release: x.y.z" by scripts/release.sh — the single
+    # canonical prefix. Keep the two in sync if either changes.
+    if: "github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'Release: ')"
     permissions:
       contents: read
     runs-on: ubuntu-latest
