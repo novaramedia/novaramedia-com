@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Playwright test harness with the homepage suite converted from Cypress, running alongside the Cypress suite in CI
+- Playwright test harness with the homepage, about, jobs, support, Novara Live archive, single post and single video post suites converted from Cypress, running alongside the Cypress suite in CI
 
 ### Changed
 
