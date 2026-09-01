@@ -207,42 +207,54 @@ module.exports = (env, argv) => {
 
     // Enhanced image optimization with format conversion
     config.optimization.minimizer.push(
+      // Output is kept only when smaller than the source bytes — busy
+      // textural PNGs can quantize LARGER than a losslessly optimized
+      // source. Note the guard is size-only: JPEG re-encoding is lossy and
+      // nearly always smaller, so JPEGs effectively always re-encode.
       new ImageMinimizerPlugin({
+        test: /\.(jpe?g|png)$/i,
         minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
+          implementation: async (original, options) => {
+            const result = await ImageMinimizerPlugin.sharpMinify(
+              original,
+              options
+            );
+            return result.data.length < original.data.length
+              ? result
+              : original;
+          },
           options: {
-            plugins: [
-              [
-                'imagemin-gifsicle',
-                { interlaced: false, optimizationLevel: 1 },
-              ],
-              ['imagemin-jpegtran', { progressive: false, arithmetic: false }],
-              [
-                'imagemin-optipng',
+            encodeOptions: {
+              jpeg: { quality: 85, progressive: false, mozjpeg: true },
+              png: {
+                palette: true,
+                quality: 90,
+                effort: 8,
+                compressionLevel: 9,
+                adaptiveFiltering: true,
+              },
+            },
+          },
+        },
+      }),
+      new ImageMinimizerPlugin({
+        test: /\.svg$/i,
+        minimizer: {
+          implementation: ImageMinimizerPlugin.svgoMinify,
+          options: {
+            encodeOptions: {
+              multipass: true,
+              plugins: [
                 {
-                  optimizationLevel: 4,
-                  bitDepthReduction: true,
-                  colorTypeReduction: true,
-                  paletteReduction: true,
-                },
-              ],
-              [
-                'imagemin-svgo',
-                {
-                  plugins: [
-                    {
-                      name: 'preset-default',
-                      params: {
-                        overrides: {
-                          cleanupIds: false,
-                          removeViewBox: false,
-                        },
-                      },
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      cleanupIds: false,
                     },
-                  ],
+                  },
                 },
               ],
-            ],
+            },
           },
         },
       })
