@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
 
 ### Security
 
