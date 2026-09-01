@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Playwright test harness with the homepage suite converted from Cypress, running alongside the Cypress suite in CI
+
 ### Changed
 
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies

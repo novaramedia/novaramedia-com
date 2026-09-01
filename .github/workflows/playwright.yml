@@ -1,0 +1,262 @@
+# Playwright Tests with Staging Deployment
+#
+# This workflow:
+# 1. Deploys the PR branch to Kinsta staging via git pull over SSH
+# 2. Activates the theme via WP-CLI over SSH
+# 3. Clears Kinsta cache
+# 4. Verifies staging is accessible
+# 5. Runs Playwright tests against staging
+# 6. Resets staging back to development branch (cleanup)
+#
+# Runs alongside cypress.yml until the migration completes
+# (see docs/plans/cypress-to-playwright.md).
+#
+# Required GitHub Secrets:
+# - KINSTA_SSH_KEY: SSH private key for server access
+# - KINSTA_SSH_USER: SSH username (main Kinsta user)
+# - KINSTA_SFTP_HOST: SSH hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+#     NOTE: This secret is named KINSTA_SFTP_HOST for legacy reasons. On a fresh
+#     setup, name it KINSTA_SSH_HOST and update the references below to match.
+# - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
+# - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
+# - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
+# - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
+#
+# One-time server setup required — see .docs/ci-speedup-plan.md
+
+name: Playwright Tests (Staging)
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - development
+    paths-ignore:
+      - '.github/**'
+      - '.docs/**'
+      - '*.md'
+      - '.editorconfig'
+      - '.gitignore'
+  # Allow manual triggering
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Ensure only one workflow interacts with staging at a time
+concurrency:
+  group: kinsta-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy-and-test:
+    # Skip fork PRs — secrets are not available and the job would fail
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ========================================
+      # DEPLOY TO STAGING VIA GIT PULL
+      # ========================================
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
+          chmod 600 ~/.ssh/kinsta_key
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Deploy PR commit to staging
+        run: |
+          echo "Deploying commit ${COMMIT_SHA} to staging via git..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "set -e; \
+             if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
+               echo 'No .git in theme dir — re-cloning (repo appears to have been overwritten by a file copy)'; \
+               cd public/wp-content/themes && \
+               ts=\$(date +%s)-\$RANDOM && \
+               if [ -e novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
+               GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=accept-new' git clone git@github.com:novaramedia/novaramedia-com.git novaramedia-com && \
+               cd ~; \
+             fi; \
+             cd public/wp-content/themes/novaramedia-com && \
+             git fetch origin && \
+             git reset --hard HEAD && \
+             git clean -fd && \
+             git checkout ${COMMIT_SHA}"
+
+          echo "Deployment complete"
+        env:
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Activate theme via WP-CLI
+        run: |
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+          echo "Theme activated"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      # Cache clear is best-effort - the gotoFresh() helper in
+      # tests/e2e/helpers/ appends a unique cache-bust query string to every
+      # navigation so tests always fetch fresh HTML even if this step fails.
+      # Warnings here are surfaced via ::warning:: annotations so issues are
+      # visible in the GitHub UI without blocking the workflow.
+      #
+      # Endpoint reference: https://api-docs.kinsta.com/api-reference/wordpress-site-tools/clear-site-cache
+      - name: Clear Kinsta cache
+        continue-on-error: true
+        run: |
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+            echo "::warning::Kinsta API secrets not configured - skipping cache clear (test cache-bust will handle freshness)"
+            exit 0
+          fi
+
+          echo "Clearing Kinsta cache..."
+          if ! response=$(curl -sS --connect-timeout 10 --max-time 30 -w "\n%{http_code}" -X POST \
+            "https://api.kinsta.com/v2/sites/tools/clear-cache" \
+            -H "Authorization: Bearer ${KINSTA_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
+            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; test cache-bust will handle freshness"
+            exit 0
+          fi
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Cache clear response: $http_code"
+          echo "$body"
+
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "::warning::Kinsta cache clear returned HTTP $http_code - check KINSTA_STAGING_ENV_ID and KINSTA_API_KEY secrets / endpoint path"
+            exit 0
+          fi
+
+          sleep 10
+        env:
+          KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
+          KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
+
+      - name: Verify staging is accessible
+        run: |
+          echo "Checking if staging site is accessible..."
+          max_attempts=12
+          attempt=1
+
+          while [ $attempt -le $max_attempts ]; do
+            http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
+
+            if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
+              echo "Staging site is accessible (HTTP $http_code)"
+
+              # Diagnostic: list data-testid values present on the homepage.
+              # Helps debug cases where a test asserts a testid but the
+              # template branch that emits it is skipped (e.g. above-the-fold
+              # returns early when no featured posts are configured).
+              echo "--- data-testid values on staging homepage ---"
+              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cache_bust=$(date +%s)"); then
+                echo "::warning::testid diagnostic curl failed (network/timeout) - skipping"
+              else
+                testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
+                if [ -n "$testid_matches" ]; then
+                  printf '%s\n' "$testid_matches"
+                else
+                  echo "(no data-testid attributes found)"
+                fi
+              fi
+              echo "--- end testid diagnostic ---"
+              exit 0
+            fi
+
+            echo "Attempt $attempt/$max_attempts: HTTP $http_code - waiting..."
+            sleep 10
+            attempt=$((attempt + 1))
+          done
+
+          echo "Staging site not accessible after $max_attempts attempts"
+          exit 1
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+      # ========================================
+      # RUN PLAYWRIGHT TESTS
+      # ========================================
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests against staging
+        run: npx playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ secrets.STAGING_URL }}
+
+      # ========================================
+      # UPLOAD ARTIFACTS
+      # ========================================
+
+      - name: Upload Playwright report on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-artifacts-${{ github.run_id }}
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
+
+      # ========================================
+      # CLEANUP: Reset staging to development
+      # ========================================
+
+      - name: Reset staging to development branch
+        if: always()
+        continue-on-error: true
+        run: |
+          echo "Resetting staging back to development branch..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git checkout development && \
+             git reset --hard origin/development"
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+
+          echo "Staging reset to development branch"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Cleanup SSH keys
+        if: always()
+        run: rm -f ~/.ssh/kinsta_key
