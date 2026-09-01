@@ -62,6 +62,7 @@ function nm_contributor_purge_post_id( $set = null ) {
  * Kinsta only purges the post itself, home, and taxonomy/date archives. It has no
  * awareness of the _cmb_contributors post meta relation, so contributor pages go stale.
  * This filter adds each linked contributor's permalink to the immediate purge batch.
+ * Runs on publish (tracked above) and permanent delete (tracked below).
  *
  * @param array $purge_request Kinsta immediate purge request (keys: 'group|*' / 'single|*', values: protocol-stripped URLs).
  * @return array
@@ -101,7 +102,7 @@ add_filter( 'KinstaCache/purgeImmediate', 'nm_purge_contributor_pages_on_post_pu
  *
  * The Cloudflare plugin purges taxonomies, WP author, and the post itself but has no
  * awareness of _cmb_contributors. This filter injects the linked contributor permalinks
- * so Cloudflare serves fresh pages after a post is published or updated.
+ * so Cloudflare serves fresh pages after a post is published, updated, or deleted.
  *
  * @param array $urls   URLs already queued for Cloudflare purge.
  * @param int   $post_id Post ID triggering the purge.
@@ -128,6 +129,56 @@ function nm_purge_contributor_pages_cloudflare( $urls, $post_id ) {
   return $urls;
 }
 add_filter( 'cloudflare_purge_by_url', 'nm_purge_contributor_pages_cloudflare', 10, 2 );
+
+/**
+ * Purge Kinsta page cache when a post is permanently deleted.
+ *
+ * Kinsta's mu-plugin purges on publish, update, and trash, but registers no hook
+ * for permanent deletion, so a force-deleted post stays cached until its TTL
+ * expires. before_delete_post fires while the post row still exists, so the
+ * permalink can still be resolved. Posts deleted from the trash carry the
+ * __trashed permalink suffix — their live URL was already purged at trash time.
+ *
+ * Also stores the post ID for the KinstaCache/purgeImmediate filter above, so
+ * linked contributor pages are purged on delete as they are on publish.
+ *
+ * @param int     $post_id Post ID being deleted.
+ * @param WP_Post $post    Post object.
+ */
+function nm_purge_kinsta_cache_on_post_delete( $post_id, $post ) {
+  global $kinsta_muplugin;
+
+  if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+    return;
+  }
+
+  if ( empty( $kinsta_muplugin->kinsta_cache_purge ) ) {
+    return;
+  }
+
+  nm_contributor_purge_post_id( $post_id );
+  $kinsta_muplugin->kinsta_cache_purge->initiate_purge( $post_id );
+}
+add_action( 'before_delete_post', 'nm_purge_kinsta_cache_on_post_delete', 10, 2 );
+
+/**
+ * Run the Cloudflare plugin's per-post URL purge while the post row still exists.
+ *
+ * The plugin hooks deleted_post, which fires after WP core removes the row; its
+ * handler bails when get_post() returns null, so permanent deletes never reach
+ * Cloudflare (trashing is unaffected — that purge fires while the row exists).
+ * Registering before_delete_post lets the same handler resolve the post and its
+ * related URLs. The handler itself skips revisions, autosaves, and non-viewable
+ * post types.
+ *
+ * @param array $actions Hook names the Cloudflare plugin purges URLs on.
+ * @return array
+ */
+function nm_cloudflare_purge_before_delete( $actions ) {
+  $actions[] = 'before_delete_post';
+  return $actions;
+}
+add_filter( 'cloudflare_purge_url_actions', 'nm_cloudflare_purge_before_delete' );
 
 /**
  * Hook template_redirect to 301 redirect author pages to the homepage
