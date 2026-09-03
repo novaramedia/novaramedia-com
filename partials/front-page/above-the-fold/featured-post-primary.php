@@ -1,6 +1,6 @@
 <?php
-if ( ! is_numeric( $args['post_id'] ) ) {
-  return;
+if ( ! is_numeric( $args['post_id'] ) || ! nm_is_published( $args['post_id'] ) ) {
+  return; // never render a featured slot pointing at an unpublished, scheduled or trashed post
 }
 
 if ( ! isset( $args['has_huge_headline'] ) ) {
@@ -34,6 +34,7 @@ if ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) {
   $related_args = array(
     'posts_per_page' => 1,
     'post__in'       => explode( ', ', $meta['_cmb_related_posts'][0] ),
+    'post_status'    => 'publish', // explicit: a logged-in editor would otherwise pull readable private posts
   );
 
   $related_posts = new WP_Query( $related_args );

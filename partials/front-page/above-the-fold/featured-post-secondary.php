@@ -1,6 +1,6 @@
 <?php
-if ( ! is_numeric( $args['post_id'] ) ) {
-  return;
+if ( ! is_numeric( $args['post_id'] ) || ! nm_is_published( $args['post_id'] ) ) {
+  return; // never render a featured slot pointing at an unpublished, scheduled or trashed post
 }
 
 $featured_post_id = $args['post_id'];
