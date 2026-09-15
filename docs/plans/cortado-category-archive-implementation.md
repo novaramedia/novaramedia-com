@@ -1,0 +1,495 @@
+# The Cortado Category Archive — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Ship a branded category archive for The Cortado at a canonical URL, with a vanity slug and a 301 from the newsletter CPT permalink, plus a shared thumbnail-less post layout that the If I Speak archive work will reuse.
+
+**Architecture:** WordPress template hierarchy does the routing — `category-the-cortado.php` is picked up automatically for the `the-cortado` term. The vanity slug is an `add_rewrite_rule` entry; the newsletter 301 is a config-array-driven `template_redirect` hook. The page assembles existing partials (`email-signup`, `pagination`, the Downstream featured-post pattern) plus one new post layout partial.
+
+**Tech Stack:** PHP 8 / WordPress, Stylus via nm-stylus-library, Webpack build, phpcs ("NM PHP Standard"). No automated tests in this plan — see Global Constraints.
+
+**Spec:** `docs/plans/cortado-category-archive.md`
+
+## Global Constraints
+
+- Brand name is **The Cortado** in all copy and the wordmark. Category slug is `the-cortado`.
+- **No CSS colour treatment on imagery.** Halftone/duotone and the cut-out hero photo are artworked and supplied finished. Templates render what is uploaded.
+- **Do not modify the build system.** Webpack and release config need team approval (CLAUDE.md).
+- `dist/` is committed only when source files actually changed — run `npm run build` to verify.
+- **Do not write Cypress specs.** The suite is being replaced by Playwright (`feature/playwright-phase-0`, `feature/playwright-phase-1`, plan at `docs/plans/cypress-to-playwright.md`), whose first goal is 1:1 parity before anything is deleted — a new Cypress spec only adds to the conversion backlog.
+- **Do not write Playwright specs on this branch either.** The harness and helpers live on the phase branches and are not on `development` yet, so they cannot run here. A Cortado spec is a follow-up once phase-1 lands; see Follow-ups.
+- There is **no PHP unit test framework** in this repo. Verification for this work is phpcs + `curl` status checks + visual comparison against Figma in DevKinsta.
+- Keep `data-testid` attributes on structural elements regardless. Playwright's `testIdAttribute` defaults to `data-testid`, so they carry over unchanged.
+- PR target is `development`. Never commit to `development` directly.
+- Consult the `nm-design-system` skill before writing any markup — utility classes, grid, spacing and type scale come from nm-stylus-library, not from invention.
+
+## Execution note
+
+The user has explicitly asked to review each markup stage before it is committed. Tasks 4–8 each end with **presenting markup for approval**, not with an unattended commit. Do not batch them.
+
+---
+
+### Task 0: Prerequisites gate
+
+Nothing below works until these exist. Neither is reachable from the repo; both are done by the user in WP admin.
+
+**Files:** none
+
+- [ ] **Step 1: Confirm the category exists**
+
+In WP admin → Posts → Categories, confirm a category named **The Cortado**, slug `the-cortado`, parent **Articles**. Create it if absent.
+
+- [ ] **Step 2: Capture the real canonical URL**
+
+Visit the category from the admin list ("View"). Record the actual URL. It may be `/category/articles/the-cortado/` or `/category/the-cortado/` depending on how the parent term resolves — the existing Novara Live archive spec visits `/category/novara-live` with no parent segment, while `redirect_committed_custom_url()` uses `category/audio/committed/` with one. **Every later task uses the URL recorded here, not an assumed one.**
+
+- [ ] **Step 3: Confirm the newsletter record**
+
+In WP admin → Newsletters, confirm a newsletter post with slug `the-cortado` exists and has `_nm_mailchimp_key` set. Without the key, `partials/email-signup.php` returns early and the signup band renders nothing.
+
+- [ ] **Step 4: Record findings in the spec**
+
+Append the confirmed canonical URL and newsletter slug to `docs/plans/cortado-category-archive.md` under Prerequisites, then commit:
+
+```bash
+git add docs/plans/cortado-category-archive.md
+git commit -m "docs: record confirmed Cortado category URL and newsletter slug"
+```
+
+---
+
+### Task 1: Routing — vanity slug and newsletter redirect
+
+**Files:**
+- Modify: `lib/functions-rewrites.php`
+
+**Interfaces:**
+- Produces: `$nm_newsletter_category_redirects` config array and `handle_newsletter_category_redirects()`. No later task consumes these.
+
+- [ ] **Step 1: Record the baseline**
+
+Capture current behaviour before changing anything, so the change is provable. `CANONICAL` is the URL from Task 0 Step 2.
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramediacom.local/the-cortado
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramediacom.local/newsletters/the-cortado
+```
+
+Expected now: the first returns `404`. The second returns `200` with no redirect — the newsletter single renders in place.
+
+- [ ] **Step 2: Add the vanity slug**
+
+In `lib/functions-rewrites.php`, add to the `$internal_rewrites` array inside `handle_internal_rewrites()`:
+
+```php
+    array(
+      'pattern'  => '^the-cortado/?$',
+      'category' => 'the-cortado',
+    ),
+```
+
+- [ ] **Step 3: Add the newsletter redirect section**
+
+Append to `lib/functions-rewrites.php`:
+
+```php
+/** NEWSLETTER → CATEGORY REDIRECTS
+ * -------------------------------------------------------------
+ */
+
+// Newsletter CPT permalinks that should 301 to a category archive.
+// The newsletter record stays as the source of signup metadata; the
+// category archive is the canonical destination for readers.
+// Format: 'newsletter-slug' => 'category-slug'
+$nm_newsletter_category_redirects = array(
+  'the-cortado' => 'the-cortado',
+);
+
+add_action(
+  'template_redirect',
+  function () use ( $nm_newsletter_category_redirects ) {
+    handle_newsletter_category_redirects( $nm_newsletter_category_redirects );
+  }
+);
+
+/**
+ * Redirects newsletter CPT singles to their category archive.
+ *
+ * @param array $redirects Associative array of newsletter slug => category slug.
+ * @return void Exits script execution after issuing a redirect.
+ */
+function handle_newsletter_category_redirects( $redirects ) {
+  if ( ! is_singular( 'newsletter' ) ) {
+    return;
+  }
+
+  $newsletter = get_queried_object();
+
+  if ( ! $newsletter || empty( $newsletter->post_name ) ) {
+    return;
+  }
+
+  if ( ! isset( $redirects[ $newsletter->post_name ] ) ) {
+    return;
+  }
+
+  $category = get_category_by_slug( $redirects[ $newsletter->post_name ] );
+
+  if ( ! $category ) {
+    return; // Category not created yet — leave the newsletter page reachable.
+  }
+
+  $link = get_term_link( $category );
+
+  if ( is_wp_error( $link ) ) {
+    return;
+  }
+
+  wp_safe_redirect( $link, 301 );
+  exit;
+}
+```
+
+- [ ] **Step 4: Flush rewrite rules**
+
+Rewrite rules are cached. In WP admin, go to Settings → Permalinks and click Save (no changes needed). The new rule will not match until this is done.
+
+- [ ] **Step 5: Verify both URLs**
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramediacom.local/the-cortado
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramediacom.local/newsletters/the-cortado
+```
+
+Expected: the vanity slug returns `200` with no redirect URL — it serves the archive in place, matching how `/downstream/` and `/acfm/` behave. The newsletter permalink returns `301` with the canonical archive as `redirect_url`.
+
+Then open `/the-cortado` in a browser and confirm it renders the archive (via the `category.php` fallback at this stage — the bespoke template arrives in Task 4), not a 404.
+
+- [ ] **Step 6: Lint**
+
+```bash
+phpcs --standard=phpcs.xml lib/functions-rewrites.php
+```
+
+Expected: no errors. Fix any reported.
+
+- [ ] **Step 7: Add the post-deploy step**
+
+In `docs/post-deploy-checklist.md`, add a rewrite-flush entry for this release, matching the file's existing format. Without it the vanity slug 404s in production after deploy.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add lib/functions-rewrites.php docs/post-deploy-checklist.md
+git commit -m "feat: route The Cortado vanity slug and redirect newsletter permalink"
+```
+
+---
+
+### Task 2: Shared thumbnail-less post layout
+
+The "Past issues" card: author avatar, headline, byline, date, excerpt, no image. Built as a general partial because the If I Speak archive card needs the same component.
+
+**Files:**
+- Create: `partials/post-layouts/archive-post-no-thumbnail.php`
+
+**Interfaces:**
+- Produces: a partial loaded via `get_template_part( 'partials/post-layouts/archive-post-no-thumbnail', null, $args )`, taking `grid-item-classes` (string, required — returns early if absent, matching its siblings) and `text-size` (string, optional, `regular` default).
+- Consumed by: Task 7.
+
+- [ ] **Step 1: Read the sibling partials**
+
+Read `partials/post-layouts/archive-post.php` and `partials/post-layouts/list-post.php` in full. The new partial must match their conventions: the early return on missing `grid-item-classes`, `post_class()` on the wrapper, `$args`-driven sizing, and the existing `render_bylines()` / `render_standfirst()` / `render_short_description()` helpers rather than raw `the_excerpt()`.
+
+- [ ] **Step 2: Identify the avatar helper**
+
+The card shows a round author avatar. Find how author images are rendered elsewhere:
+
+```bash
+grep -rn "get_avatar\|contributor.*thumbnail\|render_.*author" lib/renderers.php partials/ | head -20
+```
+
+Use the existing helper. Contributors are a CPT (`single-contributor.php`), so the avatar likely comes from a contributor post's thumbnail rather than `get_avatar()`. Do not invent a new avatar path.
+
+- [ ] **Step 3: Consult the design system**
+
+Invoke the `nm-design-system` skill. Take grid, spacing, type-scale and colour classes from it. Do not invent class names.
+
+- [ ] **Step 4: Write the partial**
+
+Follow `archive-post.php`'s structure, minus every thumbnail branch, plus the avatar. Include a `data-testid="cortado-past-issue"` hook on the article element, for the Playwright spec that follows later.
+
+- [ ] **Step 5: Present the markup for approval**
+
+Show the file to the user before committing. Do not proceed to Task 3 until approved.
+
+- [ ] **Step 6: Lint**
+
+```bash
+phpcs --standard=phpcs.xml partials/post-layouts/archive-post-no-thumbnail.php
+```
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add partials/post-layouts/archive-post-no-thumbnail.php
+git commit -m "feat: add thumbnail-less archive post layout partial"
+```
+
+---
+
+### Task 3: Configurable signup button label
+
+**Files:**
+- Modify: `lib/renderers.php:37` (`render_mailchimp_signup_form`)
+- Modify: `partials/email-signup.php`
+
+**Interfaces:**
+- Produces: `render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red', $button_label = 'Sign up' )`. The `email-signup.php` partial accepts a `button-label` arg and passes it through.
+- Consumed by: Task 5.
+
+- [ ] **Step 1: Add the parameter**
+
+In `lib/renderers.php`, change the signature to add a fourth parameter defaulting to `'Sign up'`, and update the submit input to use it:
+
+```php
+  <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="<?php echo esc_attr( $button_label ); ?>" />
+```
+
+Update the function docblock to document the new parameter.
+
+- [ ] **Step 2: Pass it through the partial**
+
+In `partials/email-signup.php`, read an optional `button-label` arg alongside the existing colour overrides, and pass it as the fourth argument to `render_mailchimp_signup_form()`.
+
+- [ ] **Step 3: Verify nothing else broke**
+
+```bash
+grep -rn "render_mailchimp_signup_form" --include="*.php" .
+```
+
+Confirm every existing call site passes three or fewer arguments and therefore keeps the `Sign up` default. Load an existing newsletter page in DevKinsta and confirm the button still reads "Sign up".
+
+- [ ] **Step 4: Lint**
+
+```bash
+phpcs --standard=phpcs.xml lib/renderers.php partials/email-signup.php
+```
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add lib/renderers.php partials/email-signup.php
+git commit -m "feat: allow newsletter signup button label to be overridden"
+```
+
+---
+
+### Task 4: Template skeleton and hero
+
+**Files:**
+- Create: `category-the-cortado.php`
+- Create: source raster for the hero photo under `src/img/specials/banners/`
+
+**Interfaces:**
+- Produces: `category-the-cortado.php`, picked up automatically by the WordPress template hierarchy for the `the-cortado` term. Tasks 5–8 add sections to this same file.
+
+- [ ] **Step 1: Read the precedent**
+
+Read `category-if-i-speak.php` in full. It is the closest existing pattern: oversized wordmark, brand colour, inline `<style>` block scoped by a `category-archive__<slug>` class, banner asset referenced from `dist/img/specials/banners/` with `.avif`/`.webp` variants selected by a body class.
+
+- [ ] **Step 2: Export the hero asset from Figma**
+
+The cut-out presenter photo on the black circle. Export from node `5172-2472` at 2x. Place the source raster in `src/img/specials/banners/`. The build generates the avif/webp variants into `dist/` — do not hand-place files in `dist/`.
+
+- [ ] **Step 3: Build and confirm the variants**
+
+```bash
+npm run build
+ls -la dist/img/specials/banners/ | grep -i cortado
+```
+
+Expected: avif and webp variants present.
+
+- [ ] **Step 4: Consult the design system**
+
+Invoke the `nm-design-system` skill for the type scale, container and grid classes the hero needs.
+
+- [ ] **Step 5: Write the skeleton and hero**
+
+`get_header()`, `$category = get_category( get_query_var( 'cat' ) );`, a `<main id="main-content" class="category-archive category-archive__the-cortado" data-testid="main-content">`, the inline `<style>` block, the hero markup (eyebrow `NEWSLETTER`, "THE CORTADO" wordmark, photo), then `get_footer()`. No post loop yet.
+
+Add `data-testid="cortado-hero"` to the hero element, and `data-testid="main-content"` to the `<main>`. Note that `category-downstream.php` and `category-if-i-speak.php` both omit the `main-content` testid while `category.php` and `category-novara-live.php` carry it — follow the ones that have it, since Task 9's spec depends on it.
+
+- [ ] **Step 6: Present the markup for approval**
+
+Show the file and a browser screenshot next to the Figma frame. Do not proceed until approved.
+
+- [ ] **Step 7: Lint and commit**
+
+```bash
+phpcs --standard=phpcs.xml category-the-cortado.php
+git add category-the-cortado.php src/img/specials/banners/ dist/
+git commit -m "feat: add The Cortado category archive template and hero"
+```
+
+---
+
+### Task 5: Signup band
+
+**Files:**
+- Modify: `category-the-cortado.php`
+
+**Interfaces:**
+- Consumes: `button-label` arg from Task 3.
+
+- [ ] **Step 1: Fetch the newsletter record**
+
+Use the `category-downstream.php` pattern — `get_posts()` with `post_type => 'newsletter'`, `name => 'the-cortado'`, `posts_per_page => 1` — and guard on the result being non-empty before rendering.
+
+- [ ] **Step 2: Render the band**
+
+```php
+get_template_part(
+  'partials/email-signup',
+  null,
+  array(
+    'newsletter_post_id' => $newsletter_post_id,
+    'background-color'   => 'white',
+    'hide-discover'      => true,
+    'button-label'       => 'Get The Cortado',
+  )
+);
+```
+
+- [ ] **Step 3: Verify against the design**
+
+Load the page in DevKinsta. Confirm: white background, strapline left, form right, grey-bordered inputs, "Get The Cortado" on the button, and **no** "Discover all our newsletters" link inside the band — that moves to the footer row in Task 8.
+
+- [ ] **Step 4: Present for approval, then lint and commit**
+
+```bash
+phpcs --standard=phpcs.xml category-the-cortado.php
+git add category-the-cortado.php
+git commit -m "feat: add signup band to The Cortado archive"
+```
+
+---
+
+### Task 6: Latest Cortado featured block
+
+**Files:**
+- Modify: `category-the-cortado.php`
+
+- [ ] **Step 1: Read the precedent**
+
+Read the featured-post block in `category-downstream.php` (the `$is_first_page` branch). It calls `the_post()` once before the main loop, renders a large image left and title/standfirst right, then a rule.
+
+- [ ] **Step 2: Implement**
+
+Same shape, with the `LATEST CORTADO` eyebrow. The featured image is the post's own featured image, rendered through `render_thumbnail()` — **no CSS colour treatment**, per the Global Constraints. Add `data-testid="cortado-latest"`.
+
+- [ ] **Step 3: Verify the pagination interaction**
+
+Confirm the featured post is only pulled out on page 1, and that page 2 onwards does not skip or duplicate it. `category-downstream.php` handles this with `$is_first_page` and an incremented `$display_newsletter_after` — read how before implementing.
+
+- [ ] **Step 4: Present for approval, then lint and commit**
+
+```bash
+phpcs --standard=phpcs.xml category-the-cortado.php
+git add category-the-cortado.php
+git commit -m "feat: add latest issue block to The Cortado archive"
+```
+
+---
+
+### Task 7: Past issues grid
+
+**Files:**
+- Modify: `category-the-cortado.php`
+
+**Interfaces:**
+- Consumes: `partials/post-layouts/archive-post-no-thumbnail.php` from Task 2.
+
+- [ ] **Step 1: Implement the loop**
+
+`PAST ISSUES` heading, then the remaining posts in a three-column grid:
+
+```php
+get_template_part(
+  'partials/post-layouts/archive-post-no-thumbnail',
+  null,
+  array(
+    'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+    'text-size'         => 'regular',
+  )
+);
+```
+
+Confirm the grid classes against the `nm-design-system` skill — the values above mirror `category-downstream.php` and may need adjusting for this design.
+
+- [ ] **Step 2: Settle pagination count**
+
+The Figma frame shows 12 cards. Decide with the user whether to set `posts_per_page` for this archive or accept the site default, and record the decision in the spec's Open section.
+
+- [ ] **Step 3: Present for approval, then lint and commit**
+
+```bash
+phpcs --standard=phpcs.xml category-the-cortado.php
+git add category-the-cortado.php docs/plans/cortado-category-archive.md
+git commit -m "feat: add past issues grid to The Cortado archive"
+```
+
+---
+
+### Task 8: Footer row
+
+**Files:**
+- Modify: `category-the-cortado.php`
+
+- [ ] **Step 1: Implement**
+
+A row with `get_template_part( 'partials/pagination' )` on the left and the "Discover all our newsletters" link on the right. Lift that link's markup from `partials/email-signup.php`:
+
+```php
+<a href="<?php echo site_url( 'newsletters/' ); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
+```
+
+Check the dot colour against the design — the Figma frame may not use red on this page.
+
+- [ ] **Step 2: Present for approval, then lint and commit**
+
+```bash
+phpcs --standard=phpcs.xml category-the-cortado.php
+git add category-the-cortado.php
+git commit -m "feat: add pagination and newsletters link to The Cortado archive"
+```
+
+---
+
+### Task 9: Changelog and PR
+
+- [ ] **Step 1: Update the changelog**
+
+Invoke the `changelog` skill. One line per feature, no implementation detail.
+
+- [ ] **Step 2: Confirm the build is clean**
+
+```bash
+npm run build
+git status --short
+```
+
+Only commit `dist/` if source files actually changed.
+
+- [ ] **Step 3: Open the PR**
+
+Target `development`. Link the Notion card, the spec, and issue #606 as related-but-out-of-scope. **Do not merge** — the user merges.
+
+---
+
+## Follow-ups
+
+- Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.
+- **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `cortado-past-issue`, the newsletters link present, and both routing behaviours from Task 1.
+- Issue #606 — the `/committed` rewrite/redirect conflict. Out of scope here.
