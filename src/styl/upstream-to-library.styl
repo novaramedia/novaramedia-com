@@ -1,3 +1,16 @@
 // Upstream staging for nm-stylus-library.
 // Shared styles are drafted/overridden here, then promoted into the library and
 // removed once a release ships them. Add new candidates below.
+
+// .ui-circle-image — a square image rendered as a circle.
+// Size via --ui-circle-image-size so consumers can scale it; ring colour comes from
+// pairing with .ui-border, whose --ui-border-color the consumer can override.
+// Candidate for modules/ui.styl alongside .ui-rounded-box.
+.ui-circle-image
+  --ui-circle-image-size: 3.25rem // 52px
+  display: block
+  box-sizing: border-box
+  width: var(--ui-circle-image-size)
+  height: var(--ui-circle-image-size)
+  border-radius: 50%
+  object-fit: cover

@@ -217,7 +217,9 @@ Invoke the `nm-design-system` skill. Take grid, spacing, type-scale and colour c
 
 - [ ] **Step 4: Write the partial**
 
-Follow `archive-post.php`'s structure, minus every thumbnail branch, plus the avatar. Include a `data-testid="cortado-past-issue"` hook on the article element, for the Playwright spec that follows later.
+Follow `archive-post.php`'s structure, minus every thumbnail branch, plus the avatar. Include a generic `data-testid="archive-post-no-thumbnail"` hook on the article element — this is a shared partial, so no brand-specific testid here; the Cortado grid wrapper gets its own in Task 7.
+
+Decisions taken at review (2026-09-16): date uses `NM_DATE_FORMAT_LONG`, not the `dd/mm/yyyy` in the Figma frame, which was a design error; a post with no contributor thumbnail renders text only, no placeholder ring; the whole card is one anchor.
 
 - [ ] **Step 5: Present the markup for approval**
 
@@ -428,6 +430,8 @@ get_template_part(
 
 Confirm the grid classes against the `nm-design-system` skill — the values above mirror `category-downstream.php` and may need adjusting for this design.
 
+Put `data-testid="cortado-past-issues"` on the grid's wrapping element, and set the ochre rule/ring colour in the template's scoped `<style>` by overriding `--ui-border-color` on the cards — the partial itself carries no brand colour.
+
 - [ ] **Step 2: Settle pagination count**
 
 The Figma frame shows 12 cards. Decide with the user whether to set `posts_per_page` for this archive or accept the site default, and record the decision in the spec's Open section.
@@ -491,5 +495,6 @@ Target `development`. Link the Notion card, the spec, and issue #606 as related-
 ## Follow-ups
 
 - Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.
-- **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `cortado-past-issue`, the newsletters link present, and both routing behaviours from Task 1.
+- **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `archive-post-no-thumbnail` inside `cortado-past-issues`, the newsletters link present, and both routing behaviours from Task 1.
+- **Add the Cortado ochre (`#B37400`, Figma token "Standard/Novara -3") to the shared palette** — nm-stylus-library colours plus `background-`/`font-color-` utilities — rather than leaving it scoped in the template. Check the other Cortado design views for further tints first so the whole ramp lands together. Patrick will link the views; next phase, not this archive page.
 - Issue #606 — the `/committed` rewrite/redirect conflict. Out of scope here.
