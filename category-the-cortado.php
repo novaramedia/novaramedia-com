@@ -36,6 +36,12 @@ get_header();
       max-width: 678px;
       margin: 0 auto;
     }
+
+    /* The shared card partial supplies the rules; the brand picks their colour. */
+    .category-archive__the-cortado__past-issues .ui-border-top,
+    .category-archive__the-cortado__past-issues .ui-border {
+      --ui-border-color: var(--color-ochre);
+    }
   </style>
 
   <?php // ── Section 1: Hero ── ?>
@@ -114,6 +120,42 @@ get_header();
     <?php
   }
   ?>
+
+  <?php // ── Section 4: Past issues ── ?>
+  <?php if ( have_posts() ) { ?>
+  <section class="container category-archive__the-cortado__past-issues mt-5 mb-5" data-testid="cortado-past-issues">
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24 mb-4">
+        <h2 class="font-size-8 font-weight-bold text-uppercase">Past Issues</h2>
+      </div>
+      <?php
+      while ( have_posts() ) {
+        the_post();
+
+        get_template_part(
+          'partials/post-layouts/archive-post-no-thumbnail',
+          null,
+          array(
+            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5',
+          )
+        );
+      }
+      ?>
+    </div>
+  </section>
+  <?php } ?>
+
+  <?php // ── Section 5: Footer row ── ?>
+  <section class="container mb-5" data-testid="cortado-footer-row">
+    <div class="grid-row">
+      <div class="grid-item is-s-12 is-xxl-12 font-size-10 font-weight-bold">
+        <?php get_template_part( 'partials/pagination' ); ?>
+      </div>
+      <div class="grid-item is-s-12 is-xxl-12 text-align-right">
+        <a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>" class="ui-action-link">Discover all our newsletters</a>
+      </div>
+    </div>
+  </section>
 
 </main>
 <?php

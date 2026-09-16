@@ -479,6 +479,22 @@ git add category-the-cortado.php docs/plans/cortado-category-archive.md
 git commit -m "feat: add past issues grid to The Cortado archive"
 ```
 
+**As built (2026-09-16), approved:** 3-up (`is-s-24 is-l-12 is-xxl-8 mb-5`) using the shared
+partial. Ochre card rules and avatar rings come from three lines of scoped CSS overriding
+`--ui-border-color` — the partial supplies the rules, the consuming template picks the
+colour, so If I Speak can differ. Card title dropped from `font-size-13` (Figma's NM 32) to
+`font-size-11` (20px): at 3-up with real titles rather than the design's short dummy text,
+32px was unreadable. Card rhythm is `mt-2`, matching the featured block. The `dd/mm/yyyy`
+date in the frame is a known design error, built as specified pending design review.
+
+`posts_per_page` stays at the site default of 18 (Patrick's call) — no `pre_get_posts` hook
+in the shipped code. A temporary 2-per-page filter was used locally to exercise pagination.
+
+**Vanity-slug pagination is broken and NOT fixed here** — issue #607. `handle_internal_rewrites()`
+registers only `^slug/?$`, so `/the-cortado/page/2/` (and the nine existing brands) falls
+through to WordPress's 404 guessing and 301s to an unrelated post. The footer row's Older
+link therefore works on the canonical URL but not the vanity one.
+
 ---
 
 ### Task 8: Footer row
@@ -503,6 +519,17 @@ phpcs --standard=phpcs.xml category-the-cortado.php
 git add category-the-cortado.php
 git commit -m "feat: add pagination and newsletters link to The Cortado archive"
 ```
+
+**As built (2026-09-16), approved:** two grid items rather than `layout-split-level` — with
+`space-between` and a single child the link falls left, and the pagination partial renders
+nothing when there is no next or previous page. The newsletters link uses `ui-action-link`
+(gradient underline, clears on hover); `lib/functions-filters.php` already applies the same
+class to next/prev links, so the row is consistent without further work. The red `ui-dot`
+that `email-signup.php` puts before this link was dropped — the frame shows plain text.
+
+`partials/pagination.php` separated Newer and Older with a bare space, which reads as one
+run-on word; changed to a spaced em dash in its own commit, as it affects every paginated
+archive.
 
 ---
 

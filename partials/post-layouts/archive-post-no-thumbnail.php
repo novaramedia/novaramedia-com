@@ -48,12 +48,12 @@ switch ( $text_size ) {
   case 'regular':
   default:
     ?>
-      <h5 class="index-post-title font-size-13 font-weight-bold text-wrap-pretty"><?php the_title(); ?></h5>
-      <h6 class="font-size-8 font-weight-bold text-uppercase mt-3">
+      <h5 class="index-post-title font-size-11 font-weight-bold text-wrap-pretty"><?php the_title(); ?></h5>
+      <h6 class="font-size-8 font-weight-bold text-uppercase mt-2">
         <?php render_bylines( $this_post_id ); ?>
         <span class="ml-3"><?php echo esc_html( get_the_date( NM_DATE_FORMAT_LONG ) ); ?></span>
       </h6>
-      <div class="font-size-10 mt-3">
+      <div class="font-size-10 mt-2">
         <?php
         if ( $is_article ) {
           render_standfirst( $this_post_id );
