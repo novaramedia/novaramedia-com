@@ -118,8 +118,9 @@ markup into the footer row.
 
 Both block the work and neither can be done from the repo.
 
-1. **The `the-cortado` category must exist**, as a child of `articles`, on local and on
-   production. `handle_internal_rewrites()` calls `get_category_by_slug()` and silently
+1. **The `the-cortado` category must exist** on local and on production. Its parent is an
+   open editorial question — inside Opinion, or beside it under Articles? The two give
+   different canonical URLs; see `docs/post-deploy-checklist.md` v4.9.0 step 1. `handle_internal_rewrites()` calls `get_category_by_slug()` and silently
    skips when the term is missing, so the vanity slug fails quietly rather than loudly.
 2. **The Cortado newsletter CPT record must exist and carry `_nm_mailchimp_key`.**
    `email-signup.php` returns early without it, so the signup band renders nothing.

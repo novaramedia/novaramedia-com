@@ -19,8 +19,19 @@ for each.
 ## v4.9.0
 
 ### 1. Create The Cortado category — before flushing permalinks
-**Admin > Posts > Categories → add "The Cortado", slug `the-cortado`, parent
-"Articles".** Why: the `/the-cortado/` vanity slug is registered by
+**Admin > Posts > Categories → add "The Cortado", slug `the-cortado`.**
+
+**Open question for editorial — confirm the parent before creating it.** Does The
+Cortado sit *inside* Opinion, or *beside* it as its own child of Articles? The design
+work assumed a direct child of Articles (`/category/articles/the-cortado/`); the local
+database currently nests it under Opinion (`/category/articles/opinion/the-cortado/`).
+This is an editorial taxonomy decision, not a technical one — the code derives the URL
+from the term, so either works: the newsletter redirect resolves through
+`get_term_link()`, the template hierarchy keys on the slug, and the vanity slug is
+unaffected. But the two produce different canonical URLs, so pick one before launch
+rather than moving the term afterwards and stranding links.
+
+Why this step comes first: the `/the-cortado/` vanity slug is registered by
 `handle_internal_rewrites()` (`lib/functions-rewrites.php`), which calls
 `get_category_by_slug()` and silently skips the rule when the term is missing.
 The newsletter→category 301 also bails without it, leaving
