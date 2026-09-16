@@ -25,8 +25,13 @@ for each.
 Cortado sit *inside* Opinion, or *beside* it as its own child of Articles? The design
 work assumed a direct child of Articles (`/category/articles/the-cortado/`); the local
 database currently nests it under Opinion (`/category/articles/opinion/the-cortado/`).
-This is an editorial taxonomy decision, not a technical one — the code derives the URL
-from the term, so either works: the newsletter redirect resolves through
+One knock-on worth knowing before choosing: `nm_is_article()` treats the `articles` term or
+a *direct* child of it as an article, so a post filed only under a grandchild category would
+be classified as a non-article and render its short description rather than its standfirst.
+Cortado posts currently carry `articles` directly as well, so they are unaffected either way.
+
+Otherwise this is an editorial taxonomy decision, not a technical one — the code derives the
+URL from the term, so either works: the newsletter redirect resolves through
 `get_term_link()`, the template hierarchy keys on the slug, and the vanity slug is
 unaffected. But the two produce different canonical URLs, so pick one before launch
 rather than moving the term afterwards and stranding links.
@@ -52,8 +57,11 @@ curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.co
 # Newsletter permalink — expect 301 to the category archive
 curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/newsletters/the-cortado/
 
-# Canonical archive — expect 200
-curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/category/articles/the-cortado/
+# Canonical archive — expect 200. Use the URL the term actually resolves to, which
+# depends on the parent chosen in step 1: /category/articles/the-cortado/ if it sits
+# directly under Articles, /category/articles/opinion/the-cortado/ if nested in Opinion.
+# The redirect above targets whichever it is, so read the destination it reports.
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" "<canonical URL from step 1>"
 ```
 
 If the vanity slug 404s, step 1 or 2 was skipped. If the newsletter permalink

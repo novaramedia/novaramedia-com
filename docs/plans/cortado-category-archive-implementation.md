@@ -303,15 +303,17 @@ Read `category-if-i-speak.php` in full. It is the closest existing pattern: over
 
 - [ ] **Step 2: Export the hero asset from Figma**
 
-The cut-out presenter photo on the black circle. Export from node `5172-2472` at 2x. Place the source raster in `src/img/specials/banners/`. The build generates the avif/webp variants into `dist/` — do not hand-place files in `dist/`.
+The cut-out presenter photo on the black circle. Export from node `5172-2472` at 2x. Place the source raster in `src/img/products/the-cortado/` (see the note below — this is where they ended up). The build generates the avif/webp variants into `dist/` — do not hand-place files in `dist/`.
 
-**As built (2026-09-16):** two assets, both under `src/img/products/the-cortado/` (the newer convention — `acfm`, `dyor`, `novara-fm` live there), not `specials/banners/`. The wordmark is vector art in Figma, exported as `the-cortado-wordmark.svg` (single path, fill `#F8F5F5`, Figma export cruft stripped); the presenters are Figma's own 2× render of the composed group via `download_assets` with `defaultScale: 2` → `the-cortado-presenters.png` 1357×720. `get_screenshot` only renders at 1× and is not suitable for hero rasters.
+**As built (2026-09-16):** two assets, both under `src/img/products/the-cortado/` (the newer convention — `acfm`, `dyor`, `novara-fm` live there), not `specials/banners/`. The wordmark is vector art in Figma, exported as `the-cortado-wordmark.svg` (single path, fill `#F8F5F5`, Figma export cruft stripped); the presenters are Figma's own 2× render of the composed group via `download_assets` with `defaultScale: 2` → `the-cortado-presenters.png`. `get_screenshot` only renders at 1× and is not suitable for hero rasters.
+
+**Asset replaced 2026-09-16:** Figma bakes the containing frame's background into an export as opaque pixels, so the first render carried the hero's ochre and could not sit on the front page's light background. Patrick supplied a transparent replacement, **1195×762**, flush to its bottom edge. The `width`/`height` attributes in both templates track that, not the original export. See `docs/architecture/image-assets.md` — a source replaced under the same filename does **not** regenerate its avif/webp, so delete the variants before rebuilding.
 
 - [ ] **Step 3: Build and confirm the variants**
 
 ```bash
 npm run build
-ls -la dist/img/specials/banners/ | grep -i cortado
+ls -la dist/img/products/the-cortado/
 ```
 
 Expected: avif and webp variants present.

@@ -20,8 +20,14 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
 
 $this_post_id = get_the_ID();
 
-$text_size    = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular';
-$is_article   = nm_is_article( $this_post_id );
+$text_size = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular';
+
+// nm_is_article() matches the `articles` term or a direct child of it, so a post filed only
+// under a grandchild category would fall to render_short_description() instead of its
+// standfirst. Cortado posts also carry `articles` directly, so they classify correctly
+// whichever parent the category ends up under — but the two branches below are only
+// equivalent while that stays true.
+$is_article = nm_is_article( $this_post_id );
 $hide_excerpt = ! empty( $args['hide-excerpt'] );
 
 // The avatar is the first contributor's featured image. Posts without one — legacy

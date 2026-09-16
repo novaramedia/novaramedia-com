@@ -61,12 +61,13 @@ is version-controlled and greppable; post meta is invisible DB state.
 
 ## Page structure
 
-Modelled on `category-if-i-speak.php`, which is the closest existing precedent
-(oversized wordmark, brand colour, inline `<style>`, banner asset in
-`dist/img/specials/banners/`).
+The oversized wordmark and inline `<style>` follow `category-if-i-speak.php`, but the hero
+uses the **front-page box pattern**, not a full-bleed band — see
+`docs/architecture/boxed-sections.md`. Assets live in `src/img/products/the-cortado/`.
 
-1. **Hero** — full-bleed ochre band, `NEWSLETTER` eyebrow, oversized "THE CORTADO"
-   wordmark, cut-out presenter photo on a black circle
+1. **Hero** — ochre box inside the container (`ui-rounded-box`), `NEWSLETTER` eyebrow,
+   oversized "THE CORTADO" wordmark inlined as SVG, presenters flush to the box's bottom
+   edge via `ui-backgrounded-box-padding--flush-bottom`
 2. **Signup band** — strapline left, Mailchimp form right, white background
 3. **`LATEST CORTADO`** — featured post, image left, headline / byline / standfirst right
 4. **`PAST ISSUES`** — three-column grid of thumbnail-less cards

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- The Cortado category archive — branded hero, newsletter signup, latest issue and a grid of past issues, at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block, selectable in Front Page → Layout — signup banner, latest issue and recent issues
 - The Cortado gets its own inline newsletter signup design in the Gutenberg block — ochre panel, wordmark, serif copy and the form alongside it, stacking on narrow screens. Other newsletters are unchanged
 
 ### Changed
