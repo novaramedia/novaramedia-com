@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block — ochre panel, wordmark, serif copy and the form alongside it, stacking on narrow screens. Other newsletters are unchanged
+
 ### Changed
 
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies

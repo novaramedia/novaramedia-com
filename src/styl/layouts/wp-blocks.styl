@@ -1,1 +1,20 @@
 // .wp-block-nm-wp-newsletter-signup
+
+// The Cortado variant of the inline newsletter signup block. The wordmark is
+// inlined (see docs/architecture/inline-svg.md) so its currentColor fill can be
+// set here; the brand sets the body copy in the serif face but keeps the
+// presenter names in the sans one, which no utility covers.
+// Sized by height, not width: the wordmark sits beside body copy, so keying it to a
+// rem height lets it track the type scale. The viewBox supplies the width.
+.newsletter-signup-cortado__wordmark
+  color: var(--color-gray-base)
+  display: block
+
+  svg
+    display: block
+    height: 1.75rem
+    width: auto
+    max-width: 100% // never let a wide mark overflow a narrow column
+
+.newsletter-signup-cortado__copy strong
+  font-family: var(--font-family-sans)

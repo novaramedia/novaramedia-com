@@ -50,6 +50,37 @@ $wrapper_attributes = get_block_wrapper_attributes(
     'class' => 'mb-4',
   )
 );
+
+// The Cortado carries its own inline-signup design: ochre box, wordmark instead of a
+// headline, and the form beside the copy rather than beneath it.
+$is_cortado = get_post_field( 'post_name', $newsletter_id ) === 'the-cortado';
+
+if ( $is_cortado ) {
+  ?>
+<div <?php echo $wrapper_attributes; ?>>
+  <div class="background-ochre ui-rounded-box ui-backgrounded-box-padding">
+    <div class="grid-row grid-row--nested">
+      <div class="grid-item is-l-24 is-xxl-12 mb-l-4">
+        <span class="newsletter-signup-cortado__wordmark">
+          <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
+        </span>
+        <p class="newsletter-signup-cortado__copy font-serif font-size-11 font-size-s-10 mt-2 text-wrap-pretty">
+          Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven,</strong> every Monday and Friday morning.
+        </p>
+      </div>
+      <div class="grid-item is-l-24 is-xxl-12">
+        <?php
+        if ( function_exists( 'render_mailchimp_signup_form' ) ) {
+          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', 'Get The Cortado' );
+        }
+        ?>
+      </div>
+    </div>
+  </div>
+</div>
+  <?php
+  return;
+}
 ?>
 <div <?php echo $wrapper_attributes; ?>>
   <div class="background-gray-base ui-rounded-box p-4">
