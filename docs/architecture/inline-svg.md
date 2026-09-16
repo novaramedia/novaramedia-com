@@ -87,15 +87,24 @@ wordmark acting as a heading, for instance — put a `<title>` in the source fil
 it:
 
 ```svg
-<svg role="img" aria-labelledby="the-cortado-wordmark-title" viewBox="0 0 1383.98 165.538">
-  <title id="the-cortado-wordmark-title">The Cortado</title>
+<svg role="img" viewBox="0 0 1383.98 165.538">
+  <title>The Cortado</title>
 ```
 
-That title becomes the accessible name, so an `<h1>` wrapping the SVG still has one. Purely
-decorative vectors should instead be hidden with `aria-hidden="true"`.
+A `<title>` as the first child of `<svg>` is itself the accessible name, so an `<h1>`
+wrapping the SVG still has one. Purely decorative vectors should instead be hidden with
+`aria-hidden="true"`.
 
-Note that svgo strips `role="img"` during the build while keeping `<title>` and
-`aria-labelledby`. The accessible name survives; the role does not.
+**Do not give the title an `id` and point at it with `aria-labelledby`.** That pairing is a
+legacy technique for assistive tech that did not support `<title>`, and it breaks the moment
+a mark is inlined more than once on a page: the ids collide, which is invalid HTML, and
+`aria-labelledby` resolves to the first match, so every later instance is named after the
+first one's element. The Cortado wordmark is inlined from three call sites and the signup
+block can be inserted repeatedly in a single post, so this was reachable. A bare `<title>`
+has no id to collide.
+
+Note that svgo strips `role="img"` during the build while keeping `<title>`. The accessible
+name survives; the role does not.
 
 ## Preparing a Figma export
 
