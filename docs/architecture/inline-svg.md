@@ -46,18 +46,39 @@ baked and inlining buys nothing but the saved request.
 
 ## Sizing
 
-An inlined `<svg>` has no intrinsic box the way an `<img>` does, so give it one:
+An inlined `<svg>` has no intrinsic box the way an `<img>` does, so give it one. Which
+dimension you drive depends on what the mark is doing.
+
+**Beside type — drive the height.** A wordmark sitting next to body copy should key off the
+same scale as the type around it, so set a rem height and let the `viewBox` supply the width:
 
 ```css
-.front-page-cortado__wordmark svg {
+.newsletter-signup-cortado__wordmark svg {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+  max-width: 100%; /* never let a wide mark overflow a narrow column */
+}
+```
+
+This is the preferred form. A rem height is a meaningful number — it can be read against the
+type scale — whereas a width is arbitrary and has to be re-guessed whenever the column
+changes. Always pair it with `max-width: 100%`: a wide mark at a fixed height will otherwise
+overflow a narrow column.
+
+**As a display element — drive the width.** Where the mark *is* the layout, spanning its
+column like a heading, width is the point and a rem height would cap it:
+
+```css
+.category-archive__the-cortado__wordmark svg {
   display: block;
   width: 100%;
   height: auto;
 }
 ```
 
-The `viewBox` preserves the aspect ratio, so `height: auto` is enough. Keep `viewBox` in the
-source — svgo retains it, but a hand-edited file can lose it.
+Either way the `viewBox` preserves the aspect ratio, so the other dimension is `auto`. Keep
+`viewBox` in the source — svgo retains it, but a hand-edited file can lose it.
 
 ## Accessibility
 

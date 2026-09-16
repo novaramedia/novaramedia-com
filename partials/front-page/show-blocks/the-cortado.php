@@ -51,17 +51,18 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
 ?>
 <section class="container front-page-cortado mt-5 mb-5" data-testid="front-page-cortado">
   <style type="text/css">
-    /* Wordmark is inlined so its currentColor fill can be set here. */
+    /* Wordmark is inlined so its currentColor fill can be set here. Sized by height so
+       it tracks the type scale rather than an arbitrary width; the viewBox gives the width. */
     .front-page-cortado__wordmark {
       color: var(--color-ochre);
       display: block;
-      max-width: 355px;
     }
 
     .front-page-cortado__wordmark svg {
       display: block;
-      width: 100%;
-      height: auto;
+      height: 2.75rem;
+      width: auto;
+      max-width: 100%;
     }
 
     /* Everything in the banner hangs from the top; only the presenters sit on the
