@@ -27,8 +27,15 @@ get_header();
 
 <main id="main-content" class="category-archive category-archive__the-cortado" data-testid="main-content">
   <style type="text/css">
-    .category-archive__the-cortado__wordmark img {
+    /* Wordmark is inlined (nm_get_file) so its currentColor fill is CSS-driven. */
+    .category-archive__the-cortado__wordmark {
+      color: var(--color-gray-base);
+    }
+
+    .category-archive__the-cortado__wordmark svg {
+      display: block;
       width: 100%;
+      height: auto;
     }
 
     .category-archive__the-cortado__presenters {
@@ -52,12 +59,12 @@ get_header();
         <div class="grid-item is-xxl-24">
           <p class="font-size-10 font-weight-bold text-uppercase mb-1">Newsletter</p>
           <h1 class="category-archive__the-cortado__wordmark m-0">
-            <img class="u-display-block" src="<?php echo esc_url( $base_image_path . 'the-cortado-wordmark.svg' ); ?>" alt="The Cortado" width="1384" height="166" />
+            <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
           </h1>
           <picture>
             <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.avif' ); ?>" type="image/avif">
             <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.webp' ); ?>" type="image/webp">
-            <img class="category-archive__the-cortado__presenters u-display-block" src="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.png' ); ?>" alt="Ash Sarkar and Steven Methven" width="1357" height="720" loading="eager" fetchpriority="high" />
+            <img class="category-archive__the-cortado__presenters u-display-block" src="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.png' ); ?>" alt="Ash Sarkar and Steven Methven" width="1195" height="762" loading="eager" fetchpriority="high" />
           </picture>
         </div>
 

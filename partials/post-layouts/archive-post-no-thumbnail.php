@@ -10,6 +10,8 @@
  *   grid-item-classes  (string, required) Classes for the wrapping article. Returns early if empty.
  *   text-size          (string, optional) 'regular' (default). Structured like archive-post.php
  *                      so further sizes can be added alongside.
+ *   hide-excerpt       (bool, optional) Omit the standfirst / short description. The front-page
+ *                      Cortado block shows title and byline only.
  */
 
 if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item don't render
@@ -18,8 +20,9 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
 
 $this_post_id = get_the_ID();
 
-$text_size  = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular';
-$is_article = nm_is_article( $this_post_id );
+$text_size    = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular';
+$is_article   = nm_is_article( $this_post_id );
+$hide_excerpt = ! empty( $args['hide-excerpt'] );
 
 // The avatar is the first contributor's featured image. Posts without one — legacy
 // _cmb_author posts, or a contributor with no thumbnail — render text only.
@@ -53,6 +56,7 @@ switch ( $text_size ) {
         <?php render_bylines( $this_post_id ); ?>
         <span class="ml-3"><?php echo esc_html( get_the_date( NM_DATE_FORMAT_LONG ) ); ?></span>
       </h6>
+      <?php if ( ! $hide_excerpt ) { ?>
       <div class="font-size-10 mt-2">
         <?php
         if ( $is_article ) {
@@ -62,6 +66,7 @@ switch ( $text_size ) {
         }
         ?>
       </div>
+      <?php } ?>
     <?php
       break;
 }

@@ -187,6 +187,7 @@ function nm_get_front_page_block_registry() {
     'audio'           => array( 'type' => 'product', 'label' => 'Show block: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
     'audio-acfm'      => array( 'type' => 'product', 'label' => 'Show block: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
     'downstream'      => array( 'type' => 'product', 'label' => 'Show block: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
+    'the-cortado'     => array( 'type' => 'product', 'label' => 'Show block: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
   );
 
   foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {

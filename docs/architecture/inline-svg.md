@@ -1,0 +1,102 @@
+# Inline SVG
+
+Logos, wordmarks and decorative vectors are **inlined into the markup**, not referenced with
+`<img src>`. Use the existing helper; do not write another one.
+
+```php
+<?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
+```
+
+`nm_get_file()` lives in `lib/functions-utility.php`. It takes a path relative to the theme
+root, reads the file with `file_get_contents()`, and falls back to a cURL fetch if that
+function is disabled. It returns the file's contents as a string — for an SVG that is the
+`<svg>` element itself, which lands in the page as real DOM.
+
+## Why
+
+- **The fill becomes CSS-controllable.** An `<img>` is opaque to the page's styles; an inline
+  `<svg>` is not. This is the main reason.
+- **One fewer network request**, and the markup gzips well alongside the rest of the HTML.
+- It lets the same asset serve more than one brand colour.
+
+The trade-off: an inlined SVG cannot be cached separately from the page, and it is repeated
+in every response that renders it. That is the right trade for a small wordmark or logo; it
+is the wrong one for a large illustration, which should stay an `<img>`.
+
+## Make the fill controllable
+
+Set the path fill to `currentColor` in the **source** file, then set `color` on an ancestor:
+
+```svg
+<path fill="currentColor" d="…" />
+```
+
+```css
+.front-page-cortado__wordmark {
+  color: var(--color-ochre);
+}
+
+.category-archive__the-cortado__wordmark {
+  color: var(--color-gray-base);
+}
+```
+
+Both of those render the same file at different colours. Without `currentColor` the fill is
+baked and inlining buys nothing but the saved request.
+
+## Sizing
+
+An inlined `<svg>` has no intrinsic box the way an `<img>` does, so give it one:
+
+```css
+.front-page-cortado__wordmark svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+```
+
+The `viewBox` preserves the aspect ratio, so `height: auto` is enough. Keep `viewBox` in the
+source — svgo retains it, but a hand-edited file can lose it.
+
+## Accessibility
+
+An `<img>` has `alt`; an inlined `<svg>` does not. When the graphic carries meaning — a
+wordmark acting as a heading, for instance — put a `<title>` in the source file and point at
+it:
+
+```svg
+<svg role="img" aria-labelledby="the-cortado-wordmark-title" viewBox="0 0 1383.98 165.538">
+  <title id="the-cortado-wordmark-title">The Cortado</title>
+```
+
+That title becomes the accessible name, so an `<h1>` wrapping the SVG still has one. Purely
+decorative vectors should instead be hidden with `aria-hidden="true"`.
+
+Note that svgo strips `role="img"` during the build while keeping `<title>` and
+`aria-labelledby`. The accessible name survives; the role does not.
+
+## Preparing a Figma export
+
+Figma's SVG export carries attributes that fight CSS sizing. Strip them from the file placed
+in `src/`:
+
+- `preserveAspectRatio="none"` — breaks scaling
+- inline `style="display: block;"` — overrides the stylesheet
+- fixed `width` / `height` — prevents fluid sizing (keep `viewBox`)
+- generated layer ids such as `id="Union"`
+
+Then swap the exported hex fill for `currentColor`.
+
+## Where files live
+
+`src/img/products/<brand>/` for brand assets, `src/img/specials/` for one-offs. The build
+copies them to `dist/img/…` and runs svgo. `nm_get_file()` is always pointed at the **dist**
+path, never `src`.
+
+## Existing usage
+
+- `partials/front-page/show-blocks/audio-acfm.php` and `audio.php` — product logos
+- `partials/specials/banners/focus-breaking-britain.php`, `survey-link.php` — decorative vectors
+- `category-the-cortado.php` and `partials/front-page/show-blocks/the-cortado.php` — the
+  Cortado wordmark, one file rendered cream on ochre and ochre on the page background
