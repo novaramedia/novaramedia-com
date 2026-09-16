@@ -22,6 +22,7 @@
 - Keep `data-testid` attributes on structural elements regardless. Playwright's `testIdAttribute` defaults to `data-testid`, so they carry over unchanged.
 - PR target is `development`. Never commit to `development` directly.
 - Consult the `nm-design-system` skill before writing any markup — utility classes, grid, spacing and type scale come from nm-stylus-library, not from invention.
+- **Coloured sections use the front-page box pattern.** `section.container.mt-4.mb-4 > div.grid-item.is-xxl-24 > div.grid-row.background-{x}.ui-rounded-box.ui-backgrounded-box-padding`. Reference `partials/front-page/show-blocks/dyor.php`; rules in `docs/architecture/boxed-sections.md`. Not full-bleed, not the `--top`/`--bottom` split.
 
 ## Execution note
 
@@ -304,6 +305,8 @@ Read `category-if-i-speak.php` in full. It is the closest existing pattern: over
 
 The cut-out presenter photo on the black circle. Export from node `5172-2472` at 2x. Place the source raster in `src/img/specials/banners/`. The build generates the avif/webp variants into `dist/` — do not hand-place files in `dist/`.
 
+**As built (2026-09-16):** two assets, both under `src/img/products/the-cortado/` (the newer convention — `acfm`, `dyor`, `novara-fm` live there), not `specials/banners/`. The wordmark is vector art in Figma, exported as `the-cortado-wordmark.svg` (single path, fill `#F8F5F5`, Figma export cruft stripped); the presenters are Figma's own 2× render of the composed group via `download_assets` with `defaultScale: 2` → `the-cortado-presenters.png` 1357×720. `get_screenshot` only renders at 1× and is not suitable for hero rasters.
+
 - [ ] **Step 3: Build and confirm the variants**
 
 ```bash
@@ -320,6 +323,8 @@ Invoke the `nm-design-system` skill for the type scale, container and grid class
 - [ ] **Step 5: Write the skeleton and hero**
 
 `get_header()`, `$category = get_category( get_query_var( 'cat' ) );`, a `<main id="main-content" class="category-archive category-archive__the-cortado" data-testid="main-content">`, the inline `<style>` block, the hero markup (eyebrow `NEWSLETTER`, "THE CORTADO" wordmark, photo), then `get_footer()`. No post loop yet.
+
+**As built (2026-09-16):** the hero is the front-page box — `section.container.mt-4.mb-4 > .grid-item.is-xxl-24 > .grid-row.background-ochre.ui-rounded-box.ui-backgrounded-box-padding.ui-backgrounded-box-padding--flush-bottom`. Wordmark is an `<img>` of the SVG inside the `<h1>` (alt gives the accessible name); presenters via `<picture>` avif/webp/png, flush to the box's bottom edge per the design. Two scoped CSS rules only. `--color-ochre` + `.background-ochre` + the `--flush-bottom` modifier are staged in `src/styl/upstream-to-library.styl` for library promotion; `pb-0` cannot do the flush because utilities compile before the UI module. Took three passes (full-bleed → `--top`/`--bottom` split → correct) — hence `docs/architecture/boxed-sections.md`. The xxl container is 1400px, not the 1200px the design-system skill claimed.
 
 Add `data-testid="cortado-hero"` to the hero element, and `data-testid="main-content"` to the `<main>`. Note that `category-downstream.php` and `category-if-i-speak.php` both omit the `main-content` testid while `category.php` and `category-novara-live.php` carry it — follow the ones that have it, since Task 9's spec depends on it.
 
@@ -365,6 +370,8 @@ get_template_part(
 ```
 
 - [ ] **Step 3: Verify against the design**
+
+Patrick, 2026-09-16: the band is a **separate full-width section beneath the hero**, using the partial's white mode — not a white card inside the ochre box. Follow the Figma from here on, with flexibility.
 
 Load the page in DevKinsta. Confirm: white background, strapline left, form right, grey-bordered inputs, "Get The Cortado" on the button, and **no** "Discover all our newsletters" link inside the band — that moves to the footer row in Task 8.
 
