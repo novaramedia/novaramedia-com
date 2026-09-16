@@ -16,6 +16,41 @@ for each.
 
 ---
 
+## v4.9.0
+
+### 1. Create The Cortado category — before flushing permalinks
+**Admin > Posts > Categories → add "The Cortado", slug `the-cortado`, parent
+"Articles".** Why: the `/the-cortado/` vanity slug is registered by
+`handle_internal_rewrites()` (`lib/functions-rewrites.php`), which calls
+`get_category_by_slug()` and silently skips the rule when the term is missing.
+The newsletter→category 301 also bails without it, leaving
+`/newsletters/the-cortado/` reachable as before. Do this step first or the flush
+below registers nothing.
+
+### 2. Flush permalinks — register the `/the-cortado/` route
+**Admin > Settings > Permalinks → Save** (no changes needed). Why: rewrite
+rules are cached in the DB; the new `^the-cortado/?$` rule doesn't match until
+they're rebuilt.
+
+### 3. Verify the three Cortado URLs at the edge
+
+```sh
+# Vanity slug — expect 200, served in place, no redirect
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/the-cortado/
+
+# Newsletter permalink — expect 301 to the category archive
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/newsletters/the-cortado/
+
+# Canonical archive — expect 200
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/category/articles/the-cortado/
+```
+
+If the vanity slug 404s, step 1 or 2 was skipped. If the newsletter permalink
+still returns 200, the category is missing (step 1). Kinsta full-page cache may
+serve a stale 404 for `/the-cortado/` briefly after the flush — purge if so.
+
+---
+
 ## v4.8.0
 
 ### 1. Notify editorial before deploy — old posts may block on Update

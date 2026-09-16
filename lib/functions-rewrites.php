@@ -104,6 +104,10 @@ function handle_internal_rewrites() {
       'pattern'  => '^death-in-westminster/?$',
       'category' => 'death-in-westminster',
     ),
+    array(
+      'pattern'  => '^the-cortado/?$',
+      'category' => 'the-cortado',
+    ),
   );
 
   foreach ( $internal_rewrites as $rewrite ) {
@@ -118,4 +122,60 @@ function handle_internal_rewrites() {
       );
     }
   }
+}
+
+/** NEWSLETTER → CATEGORY REDIRECTS
+ * -------------------------------------------------------------
+ */
+
+// Newsletter CPT permalinks that should 301 to a category archive.
+// The newsletter record stays as the source of signup metadata; the
+// category archive is the canonical destination for readers.
+// Format: 'newsletter-slug' => 'category-slug'
+$nm_newsletter_category_redirects = array(
+  'the-cortado' => 'the-cortado',
+);
+
+add_action(
+  'template_redirect',
+  function () use ( $nm_newsletter_category_redirects ) {
+    handle_newsletter_category_redirects( $nm_newsletter_category_redirects );
+  }
+);
+
+/**
+ * Redirects newsletter CPT singles to their category archive.
+ *
+ * @param array $redirects Associative array of newsletter slug => category slug.
+ * @return void Exits script execution after issuing a redirect.
+ */
+function handle_newsletter_category_redirects( $redirects ) {
+  if ( ! is_singular( 'newsletter' ) ) {
+    return;
+  }
+
+  $newsletter = get_queried_object();
+
+  if ( ! $newsletter || empty( $newsletter->post_name ) ) {
+    return;
+  }
+
+  if ( ! isset( $redirects[ $newsletter->post_name ] ) ) {
+    return;
+  }
+
+  $category = get_category_by_slug( $redirects[ $newsletter->post_name ] );
+
+  if ( ! $category ) {
+    return; // Category not created yet — leave the newsletter page reachable.
+  }
+
+  $link = get_term_link( $category );
+
+  if ( is_wp_error( $link ) ) {
+    return;
+  }
+
+  wp_safe_redirect( $link, 301 );
+  exit;
 }
