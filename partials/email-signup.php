@@ -55,6 +55,16 @@ $hide_discover = false;
 if ( ! empty( $args['hide-discover'] ) ) {
   $hide_discover = $args['hide-discover'];
 }
+
+$hide_headline = false;
+
+if ( ! empty( $args['hide-headline'] ) ) {
+  $hide_headline = $args['hide-headline'];
+}
+
+if ( ! empty( $args['hide-image'] ) ) {
+  $image_id = false; // also widens the form column, which keys off $image_id below
+}
 ?>
 <div class="email-signup mt-4 mb-4">
   <div class="container">
@@ -68,7 +78,9 @@ if ( ! empty( $args['hide-discover'] ) ) {
       }
       ?>
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
+            <?php if ( ! $hide_headline ) { ?>
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
+            <?php } ?>
             <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
               <?php echo wp_kses_post( $copy ); ?>
             </p>
@@ -78,7 +90,8 @@ if ( ! empty( $args['hide-discover'] ) ) {
               </div>
             <?php } ?>
           </div>
-          <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
+          <?php // Without an image the form takes the image column's width too, so the row fills 24. ?>
+          <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-12 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
             <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color, $button_label ); ?>
           </div>
           <?php if ( $image_id ) { ?>

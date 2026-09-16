@@ -373,6 +373,8 @@ get_template_part(
 
 Patrick, 2026-09-16: the band is a **separate full-width section beneath the hero**, using the partial's white mode — not a white card inside the ochre box. Follow the Figma from here on, with flexibility.
 
+**As built (2026-09-16), approved:** newsletter record fetched in the header block (Downstream pattern), rendered with `background-color: white`, `button-color: black`, `button-label: 'Get The Cortado'`, `hide-discover`, `hide-headline`, `hide-image`. The last two are new args on the partial, same shape as `hide-discover`, because record 51230 carries a headline, image and red button the Figma band does not have (they stay for `/newsletters/`). The partial's image-less form column was also widened from `is-l-10 is-xxl-8` to `is-l-12 is-xxl-12` so the row fills 24 and the form reaches the container edge as designed — this also closes the same 4-column gap for Downstream, Novara Live and The Pick on `/newsletters/` (reviewed, accepted). Strapline copy on the record is stale (Ash-only, weekly) — editorial fix in WP admin. Pre-existing, not fixed: `archive-newsletter.php` forces the Cortado block black but leaves the button on the alternating logic, giving a black button on black.
+
 Load the page in DevKinsta. Confirm: white background, strapline left, form right, grey-bordered inputs, "Get The Cortado" on the button, and **no** "Discover all our newsletters" link inside the band — that moves to the footer row in Task 8.
 
 - [ ] **Step 4: Present for approval, then lint and commit**

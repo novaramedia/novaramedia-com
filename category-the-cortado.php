@@ -7,6 +7,16 @@ $category = get_category( get_query_var( 'cat' ) );
 
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/the-cortado/';
 
+// The newsletter record supplies the Mailchimp key and signup copy (Downstream pattern).
+$newsletter = get_posts(
+  array(
+    'post_type'      => 'newsletter',
+    'name'           => 'the-cortado',
+    'posts_per_page' => 1,
+  )
+);
+$newsletter_post_id = ! empty( $newsletter ) ? $newsletter[0]->ID : false;
+
 get_header();
 ?>
 
@@ -43,6 +53,25 @@ get_header();
       </div>
     </div>
   </section>
+
+  <?php // ── Section 2: Signup ── ?>
+  <?php
+  if ( $newsletter_post_id ) {
+    get_template_part(
+      'partials/email-signup',
+      null,
+      array(
+        'newsletter_post_id' => $newsletter_post_id,
+        'background-color'   => 'white',
+        'button-color'       => 'black',
+        'button-label'       => 'Get The Cortado',
+        'hide-discover'      => true,
+        'hide-headline'      => true,
+        'hide-image'         => true,
+      )
+    );
+  }
+  ?>
 
 </main>
 <?php
