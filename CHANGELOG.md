@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
 - Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
 
