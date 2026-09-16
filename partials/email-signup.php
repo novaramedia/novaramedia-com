@@ -44,6 +44,12 @@ if ( ! empty( $args['button-color'] ) ) {
   $button_color = $args['button-color'];
 }
 
+$button_label = 'Sign up';
+
+if ( ! empty( $args['button-label'] ) ) {
+  $button_label = $args['button-label'];
+}
+
 $hide_discover = false;
 
 if ( ! empty( $args['hide-discover'] ) ) {
@@ -73,7 +79,7 @@ if ( ! empty( $args['hide-discover'] ) ) {
             <?php } ?>
           </div>
           <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
-            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color ); ?>
+            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color, $button_label ); ?>
           </div>
           <?php if ( $image_id ) { ?>
             <div class="grid-item is-s-8 is-xxl-4">
