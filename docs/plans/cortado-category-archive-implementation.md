@@ -412,6 +412,32 @@ git add category-the-cortado.php
 git commit -m "feat: add latest issue block to The Cortado archive"
 ```
 
+**As built (2026-09-16), approved:** 12/12 grid, `col24-16to9` in `ui-rounded-box`, eyebrow
+`font-size-8`, title `font-size-15` (NM 48 exact), byline and standfirst `font-size-10`.
+Internal gaps are `mt-2` — Figma specifies 20-24px but the render was too loose at both
+`mt-4` and `mt-3` (Patrick's call, two rounds).
+
+One divider only, below the signup band, and it belongs to **this layout**, not the shared
+partial (an earlier `show-border-bottom` arg on `partials/email-signup.php` was reverted —
+the partial is unchanged). Critical detail, and the reason it took three attempts:
+
+```php
+<div class="grid-item is-xxl-24">
+  <div class="ui-border-bottom ui-border--gray-mid"></div>
+</div>
+```
+
+**The border must sit on an inner element, never on the `grid-item` itself.** Every
+`.grid-item` carries `padding-left/right: calc(var(--grid-gutter)/2)` (8px), and a border on
+it draws across the border box — overhanging the content columns by 8px each side. On an
+inner element it spans the content box (1384px at xxl), aligning exactly with the strapline's
+left edge, the form's right edge and the hero box. `ui-border--gray-mid` is `#D4D4D4`, matching
+the Figma signup frame's `border-b` exactly. Figma shows no rule under the Latest block; a
+second one was tried and removed.
+
+The Figma applies the ochre to the featured image as `mix-blend-multiply`. Not reproduced —
+treated imagery is artworked. Post 69500's thumbnail is now the design's own `Rectangle-910.png`.
+
 ---
 
 ### Task 7: Past issues grid
