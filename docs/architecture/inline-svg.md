@@ -106,6 +106,25 @@ has no id to collide.
 Note that svgo strips `role="img"` during the build while keeping `<title>`. The accessible
 name survives; the role does not.
 
+**When the SVG is the only content of a link, button or heading, name the container.** Put
+`aria-label` on the wrapping element rather than relying on the `<svg>` title propagating
+outward:
+
+```php
+<a href="<?php echo esc_url( $category_link ); ?>" class="front-page-cortado__wordmark" aria-label="The Cortado">
+  <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
+</a>
+```
+
+Name-from-content does reach the `<title>` in current browsers, so this is hardening rather
+than a fix for a broken state — but the container's name is then explicit and does not depend
+on how a given AT treats an `<svg>` that has lost its `role`. It also states the name at the
+call site, where the person reading the template can see it.
+
+The alternative — keeping `role="img"` by overriding svgo's `removeUnknownsAndDefaults`
+(`keepRoleAttr`) in `webpack.config.js` — was considered and rejected: the build config
+requires team approval, and the gain is robustness only.
+
 ## Preparing a Figma export
 
 Figma's SVG export carries attributes that fight CSS sizing. Strip them from the file placed

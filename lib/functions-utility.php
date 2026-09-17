@@ -53,7 +53,7 @@ function nm_is_production() {
  * file's modification time is used instead, so a rebuild is picked up immediately
  * rather than being masked by a stale stylesheet until the next version bump.
  *
- * @param string $path          Asset path relative to the theme root, e.g. '/dist/main.css'.
+ * @param string $path          Asset path relative to the template directory, e.g. '/dist/main.css'.
  * @param string $theme_version Fallback version, used on production or if the file is missing.
  *
  * @return string Version string for wp_enqueue_*.
@@ -63,7 +63,10 @@ function nm_asset_version( $path, $theme_version ) {
     return $theme_version;
   }
 
-  $file = get_stylesheet_directory() . $path;
+  // Must match the directory the assets are enqueued from in functions.php
+  // (get_template_directory_uri()), or a child theme would version the parent's file
+  // by the child's mtime.
+  $file = get_template_directory() . $path;
 
   if ( ! file_exists( $file ) ) {
     return $theme_version;

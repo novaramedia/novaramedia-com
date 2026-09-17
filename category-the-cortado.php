@@ -3,8 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit;
 }
 
-$category = get_category( get_query_var( 'cat' ) );
-
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/the-cortado/';
 
 // The newsletter record supplies the Mailchimp key and signup copy (Downstream pattern).
@@ -58,7 +56,7 @@ get_header();
 
         <div class="grid-item is-xxl-24">
           <p class="font-size-10 font-weight-bold text-uppercase mb-1">Newsletter</p>
-          <h1 class="category-archive__the-cortado__wordmark m-0">
+          <h1 class="category-archive__the-cortado__wordmark m-0" aria-label="The Cortado">
             <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
           </h1>
           <picture>
@@ -111,7 +109,7 @@ get_header();
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
         <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
-          <?php render_thumbnail( $featured_post_id, 'col24-16to9', array( 'class' => 'ui-rounded-box u-display-block' ) ); ?>
+          <?php render_thumbnail( $featured_post_id, 'col12-16to9', array( 'class' => 'ui-rounded-box u-display-block' ) ); ?>
         </a>
       </div>
       <div class="grid-item is-s-24 is-xxl-12">
@@ -155,10 +153,10 @@ get_header();
   <?php // ── Section 5: Footer row ── ?>
   <section class="container mb-5" data-testid="cortado-footer-row">
     <div class="grid-row">
-      <div class="grid-item is-s-12 is-xxl-12 font-size-10 font-weight-bold">
+      <div class="grid-item is-s-24 is-xxl-12 font-size-10 font-weight-bold mb-s-3">
         <?php get_template_part( 'partials/pagination' ); ?>
       </div>
-      <div class="grid-item is-s-12 is-xxl-12 text-align-right">
+      <div class="grid-item is-s-24 is-xxl-12 text-align-right">
         <a href="<?php echo esc_url( site_url( 'newsletters/' ) ); ?>" class="ui-action-link">Discover all our newsletters</a>
       </div>
     </div>

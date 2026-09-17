@@ -48,6 +48,10 @@ below registers nothing.
 rules are cached in the DB; the new `^the-cortado/?$` rule doesn't match until
 they're rebuilt.
 
+This flush also registers the paginated vanity rules (`^<path>/page/([0-9]{1,})/?$`)
+for **every** branded path, not just Cortado — see #607. Until it runs,
+`/downstream/page/2/` and its equivalents keep 404ing as they do today.
+
 ### 3. Verify the three Cortado URLs at the edge
 
 ```sh
@@ -56,6 +60,9 @@ curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.co
 
 # Newsletter permalink — expect 301 to the category archive
 curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/newsletters/the-cortado/
+
+# Vanity pagination on an existing brand — expect 200 in place, not a 404 or a redirect
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/downstream/page/2/
 
 # Canonical archive — expect 200. Use the URL the term actually resolves to, which
 # depends on the parent chosen in step 1: /category/articles/the-cortado/ if it sits

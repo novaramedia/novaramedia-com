@@ -49,7 +49,7 @@ function scripts_and_styles_method() {
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
   wp_enqueue_script( 'site-js' ); // Version and footer placement come from the registration above.
 
-  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, nm_asset_version( '/dist/main.css', $theme_version ) );
+  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version( '/dist/main.css', $theme_version ) );
 
   wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 

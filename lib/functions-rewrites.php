@@ -67,60 +67,38 @@ add_action( 'init', 'handle_internal_rewrites' );
  * Add more redirects to the array as needed.
  */
 function handle_internal_rewrites() {
+  // Vanity paths that serve a category archive in place. Format: path => category slug.
+  // The path is stored bare rather than as a regex so both the page-1 and the paginated
+  // rule can be derived from one entry — see the loop below.
   $internal_rewrites = array(
-    array(
-      'pattern'  => '^red-flags/?$',
-      'category' => 'red-flags',
-    ),
-    array(
-      'pattern'  => '^committed/?$',
-      'category' => 'committed',
-    ),
-    array(
-      'pattern'  => '^dyor/?$',
-      'category' => 'do-your-own-research',
-    ),
-    array(
-      'pattern'  => '^tyskysour/?$',
-      'category' => 'novara-live',
-    ),
-    array(
-      'pattern'  => '^novara-live/?$',
-      'category' => 'novara-live',
-    ),
-    array(
-      'pattern'  => '^downstream/?$',
-      'category' => 'downstream',
-    ),
-    array(
-      'pattern'  => '^if-i-speak/?$',
-      'category' => 'if-i-speak',
-    ),
-    array(
-      'pattern'  => '^acfm/?$',
-      'category' => 'acfm',
-    ),
-    array(
-      'pattern'  => '^death-in-westminster/?$',
-      'category' => 'death-in-westminster',
-    ),
-    array(
-      'pattern'  => '^the-cortado/?$',
-      'category' => 'the-cortado',
-    ),
+    'red-flags'            => 'red-flags',
+    'committed'            => 'committed',
+    'dyor'                 => 'do-your-own-research',
+    'tyskysour'            => 'novara-live',
+    'novara-live'          => 'novara-live',
+    'downstream'           => 'downstream',
+    'if-i-speak'           => 'if-i-speak',
+    'acfm'                 => 'acfm',
+    'death-in-westminster' => 'death-in-westminster',
+    'the-cortado'          => 'the-cortado',
   );
 
-  foreach ( $internal_rewrites as $rewrite ) {
-    $cat = get_category_by_slug( $rewrite['category'] );
+  foreach ( $internal_rewrites as $path => $category_slug ) {
+    $cat = get_category_by_slug( $category_slug );
 
-    // Add rewrite rule if category exists
-    if ( $cat ) {
-      add_rewrite_rule(
-        $rewrite['pattern'],
-        'index.php?cat=' . $cat->term_id,
-        'top'
-      );
+    // Add rewrite rules if category exists.
+    if ( ! $cat ) {
+      continue;
     }
+
+    $query = 'index.php?cat=' . $cat->term_id;
+
+    add_rewrite_rule( '^' . $path . '/?$', $query, 'top' );
+
+    // Without this, pagination links rendered on the archive (partials/pagination.php
+    // builds them from REQUEST_URI) fall through to WP's generic page rule, resolve to
+    // pagename=<path>, find no page and 404.
+    add_rewrite_rule( '^' . $path . '/page/([0-9]{1,})/?$', $query . '&paged=$matches[1]', 'top' );
   }
 }
 

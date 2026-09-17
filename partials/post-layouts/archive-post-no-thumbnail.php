@@ -4,12 +4,10 @@
  *
  * Author avatar, headline, byline with date, then standfirst. For archive grids whose
  * design carries no post image — first used on The Cortado category archive. Sibling of
- * archive-post.php with the same args contract, minus image-size.
+ * archive-post.php, minus the image-size and text-size args.
  *
  * Args:
  *   grid-item-classes  (string, required) Classes for the wrapping article. Returns early if empty.
- *   text-size          (string, optional) 'regular' (default). Structured like archive-post.php
- *                      so further sizes can be added alongside.
  *   hide-excerpt       (bool, optional) Omit the standfirst / short description. The front-page
  *                      Cortado block shows title and byline only.
  */
@@ -20,14 +18,6 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
 
 $this_post_id = get_the_ID();
 
-$text_size = ! empty( $args['text-size'] ) ? $args['text-size'] : 'regular';
-
-// nm_is_article() matches the `articles` term or a direct child of it, so a post filed only
-// under a grandchild category would fall to render_short_description() instead of its
-// standfirst. Cortado posts also carry `articles` directly, so they classify correctly
-// whichever parent the category ends up under — but the two branches below are only
-// equivalent while that stays true.
-$is_article = nm_is_article( $this_post_id );
 $hide_excerpt = ! empty( $args['hide-excerpt'] );
 
 // The avatar is the first contributor's featured image. Posts without one — legacy
@@ -52,31 +42,32 @@ $avatar_post_id = ( ! empty( $contributors ) && has_post_thumbnail( $contributor
     </div>
     <?php } ?>
     <div class="layout-flex-grow">
-<?php
-switch ( $text_size ) {
-  case 'regular':
-  default:
-    ?>
       <h5 class="index-post-title font-size-11 font-weight-bold text-wrap-pretty"><?php the_title(); ?></h5>
       <h6 class="font-size-8 font-weight-bold text-uppercase mt-2">
         <?php render_bylines( $this_post_id ); ?>
         <span class="ml-3"><?php echo esc_html( get_the_date( NM_DATE_FORMAT_LONG ) ); ?></span>
       </h6>
-      <?php if ( ! $hide_excerpt ) { ?>
+      <?php
+      if ( ! $hide_excerpt ) {
+        // nm_is_article() matches the `articles` term or a direct child of it, so a post filed
+        // only under a grandchild category would fall to render_short_description() instead of
+        // its standfirst. Cortado posts also carry `articles` directly, so they classify
+        // correctly whichever parent the category ends up under — but the two branches are only
+        // equivalent while that stays true. Resolved here rather than above so the term lookups
+        // are skipped entirely when the excerpt is hidden.
+        ?>
       <div class="font-size-10 mt-2">
         <?php
-        if ( $is_article ) {
+        if ( nm_is_article( $this_post_id ) ) {
           render_standfirst( $this_post_id );
         } else {
           render_short_description( $this_post_id );
         }
         ?>
       </div>
-      <?php } ?>
-    <?php
-      break;
-}
-?>
+        <?php
+      }
+      ?>
     </div>
   </a>
 </article>

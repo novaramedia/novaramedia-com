@@ -91,8 +91,8 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
 
   <?php // ── Sign-up banner ── ?>
   <div class="grid-row">
-    <div class="grid-item is-s-24 is-xxl-8 mb-s-4">
-      <a href="<?php echo esc_url( $category_link ); ?>" class="front-page-cortado__wordmark ui-hover">
+    <div class="grid-item is-s-24 is-l-12 is-xxl-8 mb-s-4 mb-l-4">
+      <a href="<?php echo esc_url( $category_link ); ?>" class="front-page-cortado__wordmark ui-hover" aria-label="The Cortado">
         <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
       </a>
       <p class="font-size-11 mt-3 text-wrap-pretty">
@@ -100,7 +100,7 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
       </p>
     </div>
 
-    <div class="grid-item is-s-24 is-xxl-8 mb-s-4 front-page-cortado__presenters-col">
+    <div class="grid-item is-s-24 is-l-12 is-xxl-8 mb-s-4 mb-l-4 front-page-cortado__presenters-col">
       <picture>
         <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.avif' ); ?>" type="image/avif">
         <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.webp' ); ?>" type="image/webp">
@@ -109,7 +109,7 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
     </div>
 
     <?php if ( $mailchimp_key ) { ?>
-    <div class="grid-item is-s-24 is-xxl-8">
+    <div class="grid-item is-s-24 is-l-24 is-xxl-8">
       <?php render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', 'Get The Cortado' ); ?>
     </div>
     <?php } ?>
