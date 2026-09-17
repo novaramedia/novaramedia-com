@@ -97,8 +97,8 @@ markup into the footer row.
 ### New
 
 - **`partials/post-layouts/archive-post-no-thumbnail.php`** — author avatar, headline,
-  byline, date, excerpt. Built as a general component taking `grid-item-classes` and a
-  text-size arg, matching the conventions of the sibling layouts.
+  byline, date, excerpt. Built as a general component taking `grid-item-classes` and an
+  optional `hide-excerpt`, matching the conventions of the sibling layouts.
 
   `archive-post.php` renders a thumbnail in all three of its branches and `list-post.php`
   is date plus title only, so neither can be adapted without changing existing pages.
@@ -144,8 +144,9 @@ not something the template can enforce or fall back from.
 
 ## Open
 
-- Whether "PAST ISSUES" paginates at 12 per page, matching the Figma frame, or follows
-  the site default
+- None outstanding. "PAST ISSUES" follows the site default of 18 per page rather than the
+  Figma frame's 12 — Patrick's call, recorded in the implementation plan. No
+  `pre_get_posts` hook ships.
 
 ## Out of scope
 

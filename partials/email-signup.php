@@ -82,9 +82,11 @@ if ( ! empty( $args['hide-image'] ) ) {
             <?php if ( ! $hide_headline ) { ?>
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
             <?php } ?>
+            <?php if ( ! empty( $copy ) ) { ?>
             <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
               <?php echo wp_kses_post( $copy ); ?>
             </p>
+            <?php } ?>
             <?php if ( ! $hide_discover ) { ?>
               <div class="mt-3 font-size-8 font-weight-bold">
                 <a href="<?php echo site_url( 'newsletters/' ); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>

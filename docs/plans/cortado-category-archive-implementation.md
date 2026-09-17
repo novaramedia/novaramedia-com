@@ -195,7 +195,7 @@ The "Past issues" card: author avatar, headline, byline, date, excerpt, no image
 - Create: `partials/post-layouts/archive-post-no-thumbnail.php`
 
 **Interfaces:**
-- Produces: a partial loaded via `get_template_part( 'partials/post-layouts/archive-post-no-thumbnail', null, $args )`, taking `grid-item-classes` (string, required — returns early if absent, matching its siblings) and `text-size` (string, optional, `regular` default).
+- Produces: a partial loaded via `get_template_part( 'partials/post-layouts/archive-post-no-thumbnail', null, $args )`, taking `grid-item-classes` (string, required — returns early if absent, matching its siblings) and `hide-excerpt` (bool, optional, off by default). An earlier draft carried a `text-size` arg copied from `archive-post.php`; it had only one reachable branch and was removed during review, so do not pass it.
 - Consumed by: Task 7.
 
 - [ ] **Step 1: Read the sibling partials**
@@ -460,7 +460,6 @@ get_template_part(
   null,
   array(
     'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
-    'text-size'         => 'regular',
   )
 );
 ```
@@ -492,10 +491,14 @@ date in the frame is a known design error, built as specified pending design rev
 `posts_per_page` stays at the site default of 18 (Patrick's call) — no `pre_get_posts` hook
 in the shipped code. A temporary 2-per-page filter was used locally to exercise pagination.
 
-**Vanity-slug pagination is broken and NOT fixed here** — issue #607. `handle_internal_rewrites()`
-registers only `^slug/?$`, so `/the-cortado/page/2/` (and the nine existing brands) falls
-through to WordPress's 404 guessing and 301s to an unrelated post. The footer row's Older
-link therefore works on the canonical URL but not the vanity one.
+**Vanity-slug pagination — #607, fixed during review.** `handle_internal_rewrites()` had
+registered only `^slug/?$`, so `/the-cortado/page/2/` (and the nine existing brands) fell
+through to WordPress's generic page rule, resolved to a non-existent `pagename` and 404'd.
+The rewrite array now holds bare paths and derives both the page-1 and the
+`^<path>/page/([0-9]{1,})/?$` rule from each entry, so every branded path is covered.
+Verified locally on `/downstream/page/2/` and `/page/3/` (distinct posts, served in place)
+with `/page/99/` still 404ing. The rules are cached in the DB, so the post-deploy permalink
+flush is still required before they take effect.
 
 ---
 
