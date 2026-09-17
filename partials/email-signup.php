@@ -44,7 +44,8 @@ if ( ! empty( $args['button-color'] ) ) {
   $button_color = $args['button-color'];
 }
 
-$button_label = 'Sign up';
+// Partial arg wins, then the newsletter's own label, then the generic default.
+$button_label = ! empty( $meta['_nm_banner_button_label'] ) ? $meta['_nm_banner_button_label'][0] : 'Sign up';
 
 if ( ! empty( $args['button-label'] ) ) {
   $button_label = $args['button-label'];

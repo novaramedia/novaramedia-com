@@ -40,6 +40,13 @@ if ( ! empty( $attributes['customText'] ) ) {
   $description = $attributes['customText'];
 }
 
+// The newsletter's own button label, falling back to the generic default.
+$button_label = get_post_meta( $newsletter_id, '_nm_banner_button_label', true );
+
+if ( empty( $button_label ) ) {
+  $button_label = 'Sign up';
+}
+
 // If no mailchimp key, don't render anything
 if ( empty( $mailchimp_key ) ) {
   return;
@@ -52,7 +59,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 
 // The Cortado carries its own inline-signup design: ochre box, wordmark instead of a
-// headline, and the form beside the copy rather than beneath it.
+// headline, and the form beside the copy rather than beneath it. The copy itself is the
+// shared _nm_banner_text (or the block's customText override) — only the layout differs.
+// Its bold spans render in the sans face via .newsletter-signup-cortado__copy strong.
 $is_cortado = get_post_field( 'post_name', $newsletter_id ) === 'the-cortado';
 
 if ( $is_cortado ) {
@@ -64,14 +73,16 @@ if ( $is_cortado ) {
         <span class="newsletter-signup-cortado__wordmark">
           <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
         </span>
+        <?php if ( ! empty( $description ) ) { ?>
         <p class="newsletter-signup-cortado__copy font-serif font-size-11 font-size-s-10 mt-2 text-wrap-pretty">
-          Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven,</strong> every Monday and Friday morning.
+          <?php echo wp_kses_post( $description ); ?>
         </p>
+        <?php } ?>
       </div>
       <div class="grid-item is-l-24 is-xxl-12">
         <?php
         if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', 'Get The Cortado' );
+          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', $button_label );
         }
         ?>
       </div>
@@ -86,12 +97,12 @@ if ( $is_cortado ) {
   <div class="background-gray-base ui-rounded-box p-4">
     <h3 class="font-size-12 font-weight-bold mb-2 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
     <?php if ( ! empty( $description ) ) { ?>
-      <p class="font-size-10 mb-3 text-wrap-balance"><?php echo esc_html( $description ); ?></p>
+      <p class="font-size-10 mb-3 text-wrap-balance"><?php echo wp_kses_post( $description ); ?></p>
       <?php
     }
 
     if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black' );
+      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label );
     }
     ?>
   </div>

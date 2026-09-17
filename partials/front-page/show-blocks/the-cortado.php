@@ -48,6 +48,16 @@ $newsletter         = get_posts(
 );
 $newsletter_post_id = ! empty( $newsletter ) ? $newsletter[0]->ID : false;
 $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_mailchimp_key', true ) : false;
+
+// Signup copy and button label come off the same record, so a cadence or presenter change
+// is an edit rather than a deploy. The bold spans stay in the default face here — the sans
+// treatment is scoped to the inline block's copy class, not this one.
+$signup_copy  = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_banner_text', true ) : '';
+$button_label = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_banner_button_label', true ) : '';
+
+if ( empty( $button_label ) ) {
+  $button_label = 'Sign up';
+}
 ?>
 <section class="container front-page-cortado mt-5 mb-5" data-testid="front-page-cortado">
   <style type="text/css">
@@ -95,9 +105,9 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
       <a href="<?php echo esc_url( $category_link ); ?>" class="front-page-cortado__wordmark ui-hover" aria-label="The Cortado">
         <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
       </a>
-      <p class="font-size-11 mt-3 text-wrap-pretty">
-        Your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven</strong>. Brewed on Monday and Friday mornings.
-      </p>
+      <?php if ( ! empty( $signup_copy ) ) { ?>
+      <p class="font-size-11 mt-3 text-wrap-pretty"><?php echo wp_kses_post( $signup_copy ); ?></p>
+      <?php } ?>
     </div>
 
     <div class="grid-item is-s-24 is-l-12 is-xxl-8 mb-s-4 mb-l-4 front-page-cortado__presenters-col">
@@ -110,7 +120,7 @@ $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, 
 
     <?php if ( $mailchimp_key ) { ?>
     <div class="grid-item is-s-24 is-l-24 is-xxl-8">
-      <?php render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', 'Get The Cortado' ); ?>
+      <?php render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label ); ?>
     </div>
     <?php } ?>
 

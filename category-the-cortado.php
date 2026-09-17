@@ -80,7 +80,6 @@ get_header();
         'newsletter_post_id' => $newsletter_post_id,
         'background-color'   => 'white',
         'button-color'       => 'black',
-        'button-label'       => 'Get The Cortado',
         'hide-discover'      => true,
         'hide-headline'      => true,
         'hide-image'         => true,

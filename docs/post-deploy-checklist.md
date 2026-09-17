@@ -52,7 +52,27 @@ This flush also registers the paginated vanity rules (`^<path>/page/([0-9]{1,})/
 for **every** branded path, not just Cortado — see #607. Until it runs,
 `/downstream/page/2/` and its equivalents keep 404ing as they do today.
 
-### 3. Verify the three Cortado URLs at the edge
+### 3. Fill the newsletter record — copy, button label and Mailchimp key
+
+**Admin > Newsletters > The Cortado.** Three fields drive all three Cortado
+surfaces (archive signup, front page block, inline signup block):
+
+| Field | Consequence if empty |
+| --- | --- |
+| Mailchimp Newsletter name (`_nm_mailchimp_key`) | No signup form renders anywhere |
+| Banner text (`_nm_banner_text`) | Surfaces render with no copy under the wordmark |
+| Signup button label (`_nm_banner_button_label`) | Button reads "Sign up" instead of "Get The Cortado" |
+
+Banner text accepts `<strong>` and `<em>`. The launch copy is:
+
+```html
+Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven</strong>, every Monday and Friday morning.
+```
+
+On the inline signup block those bold spans render in the sans face; elsewhere they
+are ordinary bold. That is deliberate — the treatment is scoped per surface in CSS.
+
+### 4. Verify the three Cortado URLs at the edge
 
 ```sh
 # Vanity slug — expect 200, served in place, no redirect
