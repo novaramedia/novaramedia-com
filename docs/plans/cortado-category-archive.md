@@ -112,8 +112,9 @@ markup into the footer row.
 - **`category-the-cortado.php`** — hero markup, inline `<style>` for the brand
   treatment, and assembly of the above.
 
-- **Hero asset** — cut-out presenter photo. Source raster into `src`, build generates the
-  avif/webp variants into `dist/img/specials/banners/`.
+- **Hero asset** — cut-out presenter photo. Source raster into
+  `src/img/products/the-cortado/`, build generates the avif/webp variants into
+  `dist/img/products/the-cortado/`.
 
 ## Prerequisites
 

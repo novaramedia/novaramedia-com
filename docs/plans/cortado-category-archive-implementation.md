@@ -292,7 +292,9 @@ git commit -m "feat: allow newsletter signup button label to be overridden"
 
 **Files:**
 - Create: `category-the-cortado.php`
-- Create: source raster for the hero photo under `src/img/specials/banners/`
+- Create: source raster for the hero photo under `src/img/products/the-cortado/` — the
+  newer convention, alongside `acfm`, `dyor` and `novara-fm`. Not `specials/banners/`, which
+  is where the older If I Speak banner lives; see the As built note below.
 
 **Interfaces:**
 - Produces: `category-the-cortado.php`, picked up automatically by the WordPress template hierarchy for the `the-cortado` term. Tasks 5–8 add sections to this same file.
@@ -338,7 +340,7 @@ Show the file and a browser screenshot next to the Figma frame. Do not proceed u
 
 ```bash
 phpcs --standard=phpcs.xml category-the-cortado.php
-git add category-the-cortado.php src/img/specials/banners/ dist/
+git add category-the-cortado.php src/img/products/the-cortado/ dist/
 git commit -m "feat: add The Cortado category archive template and hero"
 ```
 
