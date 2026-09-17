@@ -144,9 +144,16 @@ not something the template can enforce or fall back from.
 
 ## Open
 
-- None outstanding. "PAST ISSUES" follows the site default of 18 per page rather than the
-  Figma frame's 12 — Patrick's call, recorded in the implementation plan. No
-  `pre_get_posts` hook ships.
+- **The category's parent — editorial decision, blocks launch.** Inside Opinion, or beside
+  it under Articles? Both work technically, since the URL derives from the term, but they
+  produce different canonical URLs, so it must be settled before the term is created rather
+  than moved afterwards and stranding links. Mirrored in Prerequisites above and in
+  `docs/post-deploy-checklist.md` v4.9.0 step 1. Patrick cannot answer this; editorial must.
+
+Settled during the work, recorded so they are not reopened:
+
+- "PAST ISSUES" follows the site default of 18 per page rather than the Figma frame's 12 —
+  Patrick's call, recorded in the implementation plan. No `pre_get_posts` hook ships.
 
 ## Out of scope
 
