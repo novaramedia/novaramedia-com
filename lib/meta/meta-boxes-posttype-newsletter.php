@@ -48,9 +48,18 @@ function nm_cmb_posttype_newsletters_metaboxes() {
   $cmb_term->add_field(
     array(
       'name' => esc_html__( 'Banner text', 'cmb2' ),
-      'desc' => esc_html__( 'Copy for the banner version of the newsletter signup form (optional)', 'cmb2' ),
+      'desc' => esc_html__( 'Copy for the banner version of the newsletter signup form (optional). Basic formatting is allowed — wrap words in <strong> to bold them, <em> to italicise.', 'cmb2' ),
       'id'   => $prefix . 'banner_text',
       'type' => 'textarea_small',
+    )
+  );
+
+  $cmb_term->add_field(
+    array(
+      'name' => esc_html__( 'Signup button label', 'cmb2' ),
+      'desc' => esc_html__( 'Text on the signup button (optional—defaults to "Sign up")', 'cmb2' ),
+      'id'   => $prefix . 'banner_button_label',
+      'type' => 'text',
     )
   );
 

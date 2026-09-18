@@ -1,0 +1,25 @@
+// THE CORTADO category archive (category-the-cortado.php). Brand rules for the front-page
+// block live in layouts/front-page-product-blocks.styl and for the inline signup block in
+// layouts/wp-blocks.styl. Only properties with no utility equivalent are here — the ochre
+// box, grid and spacing are utility classes in the markup.
+
+// Wordmark is inlined (nm_get_file) so its currentColor fill is set here. As the hero's
+// display element it is sized by width, not height — see docs/architecture/inline-svg.md.
+.category-archive__the-cortado__wordmark
+  color: var(--color-gray-base)
+
+  svg
+    display: block
+    width: 100%
+    height: auto
+
+.category-archive__the-cortado__presenters
+  width: 100%
+  max-width: 678px
+  margin: 0 auto
+
+// The shared card partial supplies the rules and avatar rings; the brand picks their
+// colour. .ui-border is the class that draws the ring, so that is the hook.
+.category-archive__the-cortado__past-issues
+  .ui-border-top, .ui-border
+    --ui-border-color: var(--color-ochre)
