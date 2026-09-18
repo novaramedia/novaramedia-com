@@ -60,44 +60,6 @@ if ( empty( $button_label ) ) {
 }
 ?>
 <section class="container front-page-cortado mt-5 mb-5" data-testid="front-page-cortado">
-  <style type="text/css">
-    /* Wordmark is inlined so its currentColor fill can be set here. Sized by height so
-       it tracks the type scale rather than an arbitrary width; the viewBox gives the width. */
-    .front-page-cortado__wordmark {
-      color: var(--color-ochre);
-      display: block;
-    }
-
-    .front-page-cortado__wordmark svg {
-      display: block;
-      height: 2.75rem;
-      width: auto;
-      max-width: 100%;
-    }
-
-    /* Everything in the banner hangs from the top; only the presenters sit on the
-       bottom edge, as drawn. No utility exists for per-item flex-end. */
-    .front-page-cortado__presenters-col {
-      align-self: flex-end;
-    }
-
-    .front-page-cortado__presenters {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    /* Eyebrows and the archive link carry the brand colour. */
-    .front-page-cortado__label {
-      color: var(--color-ochre);
-    }
-
-    /* Card rules and avatar rings are black here, unlike the ochre on the archive. */
-    .front-page-cortado .ui-border-top,
-    .front-page-cortado .ui-circle-image {
-      --ui-border-color: var(--color-black-soft);
-    }
-  </style>
 
   <?php // ── Sign-up banner ── ?>
   <div class="grid-row">
