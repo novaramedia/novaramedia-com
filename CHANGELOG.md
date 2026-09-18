@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- The Cortado category archive — branded hero, newsletter signup, latest issue and a grid of past issues, at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
-- The Cortado front page product block, selectable in Front Page → Layout — signup banner, latest issue and recent issues
-- The Cortado gets its own inline newsletter signup design in the Gutenberg block — ochre panel, wordmark, serif copy and the form alongside it, stacking on narrow screens. Other newsletters are unchanged
-
+- The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block
+  
 ### Changed
 
-- Newsletter signup copy and button label are set on the newsletter record — The Cortado's presenter names and cadence are editable without a deploy, and banner copy accepts bold and italic
+- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
+- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
 - Job posting structured data locations reduced to city and postcode-district level, and Leeds office moved to Mabgate Mills
 
@@ -25,8 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
-- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right — visible on Downstream, Novara Live and The Pick
 - Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
 - Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
