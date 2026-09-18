@@ -180,14 +180,14 @@ function nm_get_front_page_block_registry() {
   }
 
   $blocks = array(
-    'highlight-block' => array( 'type' => 'product', 'label' => 'Show block: Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
-    'novara-live'     => array( 'type' => 'product', 'label' => 'Show block: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
-    'dyor'            => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
-    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
-    'audio'           => array( 'type' => 'product', 'label' => 'Show block: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
-    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Show block: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
-    'downstream'      => array( 'type' => 'product', 'label' => 'Show block: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
-    'the-cortado'     => array( 'type' => 'product', 'label' => 'Show block: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
+    'highlight-block' => array( 'type' => 'product', 'label' => 'Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
+    'novara-live'     => array( 'type' => 'product', 'label' => 'Product: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
+    'dyor'            => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
+    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
+    'audio'           => array( 'type' => 'product', 'label' => 'Product: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
+    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
+    'downstream'      => array( 'type' => 'product', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
+    'the-cortado'     => array( 'type' => 'product', 'label' => 'Product: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
   );
 
   foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
