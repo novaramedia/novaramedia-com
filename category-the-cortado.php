@@ -24,31 +24,6 @@ get_header();
 ?>
 
 <main id="main-content" class="category-archive category-archive__the-cortado" data-testid="main-content">
-  <style type="text/css">
-    /* Wordmark is inlined (nm_get_file) so its currentColor fill is CSS-driven. */
-    .category-archive__the-cortado__wordmark {
-      color: var(--color-gray-base);
-    }
-
-    .category-archive__the-cortado__wordmark svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .category-archive__the-cortado__presenters {
-      width: 100%;
-      max-width: 678px;
-      margin: 0 auto;
-    }
-
-    /* The shared card partial supplies the rules; the brand picks their colour. */
-    .category-archive__the-cortado__past-issues .ui-border-top,
-    .category-archive__the-cortado__past-issues .ui-border {
-      --ui-border-color: var(--color-ochre);
-    }
-  </style>
-
   <?php // ── Section 1: Hero ── ?>
   <section class="container mt-4 mb-4" data-testid="cortado-hero">
     <div class="grid-item is-xxl-24">

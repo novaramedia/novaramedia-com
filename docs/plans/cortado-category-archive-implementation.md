@@ -330,6 +330,8 @@ Invoke the `nm-design-system` skill for the type scale, container and grid class
 
 **As built (2026-09-16):** the hero is the front-page box — `section.container.mt-4.mb-4 > .grid-item.is-xxl-24 > .grid-row.background-ochre.ui-rounded-box.ui-backgrounded-box-padding.ui-backgrounded-box-padding--flush-bottom`. Wordmark is an `<img>` of the SVG inside the `<h1>` (alt gives the accessible name); presenters via `<picture>` avif/webp/png, flush to the box's bottom edge per the design. Two scoped CSS rules only. `--color-ochre` + `.background-ochre` + the `--flush-bottom` modifier are staged in `src/styl/upstream-to-library.styl` for library promotion; `pb-0` cannot do the flush because utilities compile before the UI module. Took three passes (full-bleed → `--top`/`--bottom` split → correct) — hence `docs/architecture/boxed-sections.md`. The xxl container is 1400px, not the 1200px the design-system skill claimed.
 
+**As built (2026-09-18):** the template's inline `<style>` is gone. Its four rules moved to `src/styl/pages/the-cortado-archive.styl`, imported from `site.styl` after the other `pages/` files, following `dyor-archive.styl` and `novara-fm-archive.styl`. Static CSS belongs in the build, not the template; the five other category templates that still inline theirs (ACFM, Committed, Death in Westminster, Foreign Agent, If I Speak) are a separate cleanup. The front-page block's ring-colour override now targets `.ui-border` rather than `.ui-circle-image`, matching the archive — `.ui-border` is the class that draws the ring.
+
 Add `data-testid="cortado-hero"` to the hero element, and `data-testid="main-content"` to the `<main>`. Note that `category-downstream.php` and `category-if-i-speak.php` both omit the `main-content` testid while `category.php` and `category-novara-live.php` carry it — follow the ones that have it, since Task 9's spec depends on it.
 
 - [ ] **Step 6: Present the markup for approval**
@@ -468,7 +470,7 @@ get_template_part(
 
 Confirm the grid classes against the `nm-design-system` skill — the values above mirror `category-downstream.php` and may need adjusting for this design.
 
-Put `data-testid="cortado-past-issues"` on the grid's wrapping element, and set the ochre rule/ring colour in the template's scoped `<style>` by overriding `--ui-border-color` on the cards — the partial itself carries no brand colour.
+Put `data-testid="cortado-past-issues"` on the grid's wrapping element, and set the ochre rule/ring colour in `src/styl/pages/the-cortado-archive.styl` by overriding `--ui-border-color` on the cards — the partial itself carries no brand colour.
 
 - [ ] **Step 2: Settle pagination count**
 

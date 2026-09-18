@@ -61,9 +61,10 @@ is version-controlled and greppable; post meta is invisible DB state.
 
 ## Page structure
 
-The oversized wordmark and inline `<style>` follow `category-if-i-speak.php`, but the hero
-uses the **front-page box pattern**, not a full-bleed band — see
-`docs/architecture/boxed-sections.md`. Assets live in `src/img/products/the-cortado/`.
+The oversized wordmark follows `category-if-i-speak.php`, but the hero uses the
+**front-page box pattern**, not a full-bleed band — see `docs/architecture/boxed-sections.md`.
+Brand CSS lives in `src/styl/pages/the-cortado-archive.styl`, following `dyor-archive.styl`,
+not in an inline `<style>`. Assets live in `src/img/products/the-cortado/`.
 
 1. **Hero** — ochre box inside the container (`ui-rounded-box`), `NEWSLETTER` eyebrow,
    oversized "THE CORTADO" wordmark inlined as SVG, presenters flush to the box's bottom
@@ -109,8 +110,8 @@ markup into the footer row.
   rather than build a second one. *The Notion MCP server was unreachable when this was
   written, so the note has not been added to that card — do it when the server is back.*
 
-- **`category-the-cortado.php`** — hero markup, inline `<style>` for the brand
-  treatment, and assembly of the above.
+- **`category-the-cortado.php`** — hero markup and assembly of the above. Brand CSS in
+  `src/styl/pages/the-cortado-archive.styl`.
 
 - **Hero asset** — cut-out presenter photo. Source raster into
   `src/img/products/the-cortado/`, build generates the avif/webp variants into
