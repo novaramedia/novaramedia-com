@@ -33,8 +33,9 @@ function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $loading =
  * @param string $mailchimp_key The Mailchimp key.
  * @param string $background_color The background color. Default is 'black'.
  * @param string $button_color The button color. Default is 'red'.
+ * @param string $button_label The submit button label. Default is 'Sign up'.
  */
-function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red' ) {
+function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red', $button_label = 'Sign up' ) {
   if ( ! $mailchimp_key ) {
     return;
   }
@@ -61,7 +62,7 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
       <input name="gdpr" id="<?php echo esc_attr( $form_unique_id ); ?>-gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php echo $background_color === 'white' ? 'ui-checkbox--border-gray' : ''; ?> ml-2" type="checkbox" value="accepted" required/>
     </div>
 
-    <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="Sign up" />
+    <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="<?php echo esc_attr( $button_label ); ?>" />
   </div>
   <div class="email-signup__feedback-processing email-signup__overlay ui-rounded-box">
     <div class="spinner spinner--black">

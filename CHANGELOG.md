@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block
 - Playwright test harness with the homepage, about, jobs, support, Novara Live archive, single post and single video post suites converted from Cypress, running alongside the Cypress suite in CI
 
 ### Changed
 
+- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
+- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
 - Job posting structured data locations reduced to city and postcode-district level, and Leeds office moved to Mabgate Mills
 
@@ -22,7 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+- Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
+- Pagination on product vanity URLs — `/downstream/page/2/` and the equivalent on every other branded path 404'd instead of serving page two (#607)
 
 ### Security
 
