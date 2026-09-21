@@ -8,9 +8,6 @@
 # 5. Runs Playwright tests against staging
 # 6. Resets staging back to development branch (cleanup)
 #
-# Runs alongside cypress.yml until the migration completes
-# (see docs/plans/cypress-to-playwright.md).
-#
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
 # - KINSTA_SSH_USER: SSH username (main Kinsta user)
@@ -22,7 +19,7 @@
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
 #
-# One-time server setup required — see .docs/ci-speedup-plan.md
+# One-time server setup required — see docs/plans/archive/ci-speedup.md
 
 name: Playwright Tests (Staging)
 

@@ -1,8 +1,8 @@
 // ***********************************************
 // Playwright fixtures for Novara Media theme tests
 //
-// Replaces the global setup that lived in
-// cypress/support/e2e.js: a console error collector
+// Replaces the global setup of the former Cypress
+// suite (support/e2e.js): a console error collector
 // and third-party noise handling.
 // ***********************************************
 
@@ -34,8 +34,8 @@ const EMBED_HOSTS = [
 
 /**
  * Console messages we cannot control, filtered out of the collector.
- * Union of the filter lists in cypress/support/commands.js
- * (verifyNoConsoleErrors) and cypress/support/e2e.js (uncaught:exception).
+ * Union of the filter lists the former Cypress suite used in
+ * verifyNoConsoleErrors and its uncaught:exception handler.
  */
 const IGNORED_ERROR_PATTERNS = [
   'ResizeObserver',

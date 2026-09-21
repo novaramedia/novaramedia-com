@@ -12,10 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
 - The Cortado front page product block
 - The Cortado gets its own inline newsletter signup design in the Gutenberg block
-- Playwright test harness with the homepage, about, jobs, support, Novara Live archive, single post and single video post suites converted from Cypress, running alongside the Cypress suite in CI
 
 ### Changed
 
+- End-to-end tests run on Playwright instead of Cypress, with third-party embeds blocked during tests so page loads no longer wait on SoundCloud or YouTube
 - Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
 - Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Cypress test runner, specs and CI workflow
 - Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
 
 ### Fixed
