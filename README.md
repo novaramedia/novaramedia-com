@@ -24,7 +24,7 @@ Without `PLAYWRIGHT_BASE_URL` the suite runs against production.
 
 #### CI
 
-Every pull request deploys its commit to Kinsta staging and runs the suite there (`.github/workflows/playwright.yml`). On failure the HTML report and traces are attached to the run as an artifact: download it and open with `npx playwright show-report <dir>`.
+Pull requests to `development`, `master` or `main` deploy their commit to Kinsta staging and run the suite there (`.github/workflows/playwright.yml`). Fork PRs are skipped, as are PRs that only touch Markdown or `.github/`. On failure the HTML report and traces are attached to the run as an artifact: download it and open with `npx playwright show-report <dir>`.
 
 #### Coverage
 
