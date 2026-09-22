@@ -23,8 +23,10 @@
   display: block
   margin: 0 auto 0.75rem
 
-.embed-consent-gate__privacy-link
+// Nested under the gate so this outranks `.text-copy a` (blue) when the gate
+// sits inside post content. Solid black-soft on the grey placeholder: the
+// previous faded link fell below AA contrast at this size.
+.embed-consent-gate .embed-consent-gate__privacy-link
   display: block
   text-decoration: underline
-  color: inherit
-  opacity: 0.6
+  color: var(--color-black-soft)

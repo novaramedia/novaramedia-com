@@ -184,11 +184,11 @@ User clicks embed "Accept"     User clicks cookie bar "Accept"
 | Case                                         | Solution                                                                                                                                             |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **RSS feeds**                                | `nm_consent_gate_wrap()` returns raw HTML when `is_feed()` is true                                                                                   |
-| **Admin/editor preview**         | `nm_embed_oembed_html()` returns raw HTML when `is_admin()` is true, so block-editor previews (served via the REST oEmbed proxy) are never gated                                                         |
+| **Admin/editor preview**                     | `nm_embed_oembed_html()` returns raw HTML when `is_admin()` is true, so block-editor previews (via the REST oEmbed proxy) are never gated            |
 | **Script execution**                         | Twitter/X embeds include `<script>` tags that won't execute via `innerHTML` - `hydrateGate()` recreates script elements to trigger browser execution |
 | **Flash of placeholder for consented users** | Minimal - `EmbedConsent.onReady()` hydrates synchronously at DOM ready before meaningful paint. Acceptable trade-off for cache compatibility         |
 | **Multiple embeds on one page**              | Clicking accept on any one gate loads ALL embeds on the page                                                                                         |
-| **Old YouTube block embeds**     | Same `nm_embed_oembed_html()` nocookie swap: `core/embed` stores only the URL and converts at render time via `autoembed()`, whatever the save date                                                      |
+| **Old YouTube block embeds**                 | Same `nm_embed_oembed_html()` nocookie swap: `core/embed` stores only the URL and converts at render time via `autoembed()`, so save date is moot    |
 | **Page caching**                             | HTML is always the same (consent gate wrapper). JS handles dynamic behaviour client-side. No cache invalidation needed                               |
 | **SoundCloud two-step loading**              | Consent gate hydration reveals `.soundcloud-lazy` placeholder, then AudioPlayers hydrates to iframe. Both happen near-instantly for consented users  |
 
