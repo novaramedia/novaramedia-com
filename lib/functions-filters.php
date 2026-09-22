@@ -196,6 +196,29 @@ function nm_html_has_iframe_or_script( $html ) {
 }
 
 /**
+ * True when a URL's host is YouTube: youtube.com, any of its subdomains, or youtu.be.
+ *
+ * Host-parsed rather than substring-matched because the result decides whether
+ * the embed skips the consent gate: a URL that merely carries "youtube.com/" in
+ * its path or query (https://evil.example/youtube.com/item) must not qualify.
+ *
+ * @param string $url The URL that was embedded.
+ * @return bool
+ */
+function nm_is_youtube_url( $url ) {
+  $host = wp_parse_url( $url, PHP_URL_HOST );
+  if ( ! is_string( $host ) || '' === $host ) {
+    return false;
+  }
+  $host = strtolower( $host );
+
+  return 'youtube.com' === $host
+    || str_ends_with( $host, '.youtube.com' )
+    || 'youtu.be' === $host
+    || str_ends_with( $host, '.youtu.be' );
+}
+
+/**
  * Add wrapper classes to oEmbed elements and use privacy-enhanced YouTube embeds.
  *
  * YouTube oEmbed returns iframes with youtube.com/embed URLs regardless of whether
@@ -219,7 +242,7 @@ function nm_embed_oembed_html( $html, $url, $attr, $post_id ) {
     return $html;
   }
 
-  if ( str_contains( $url, 'youtube.com/' ) || str_contains( $url, 'youtu.be/' ) ) {
+  if ( nm_is_youtube_url( $url ) ) {
     // Replace youtube.com with youtube-nocookie.com in iframe src for reduced tracking
     $html = str_replace( 'youtube.com/embed', 'youtube-nocookie.com/embed', $html );
     return '<div class="oembed-element"><div class="ui-embed-container">' . $html . '</div></div>';

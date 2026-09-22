@@ -99,7 +99,7 @@ Key methods:
 - `onReady()` - Checks `cookie-approval` cookie via js-cookie. If consented: calls `hydrateAllGates()` immediately. If not: binds click handlers on `.embed-consent-gate__accept` buttons and listens for `cookie-consent-granted` event
 - `hydrateAllGates()` - Finds all `.embed-consent-gate` elements and hydrates each. After all gates hydrated, dispatches `embed-consent-hydrated` event (for AudioPlayers)
 - `hydrateGate(gate)` - Clones the inert `<template>` content into the gate. **Script re-execution**: scripts inside `<template>` don't auto-execute when cloned, so any `<script>` elements are recreated as new DOM nodes to trigger browser execution (critical for Twitter/X `widgets.js`)
-- `handleAccept()` - Sets `cookie-approval` cookie (365 days), dispatches `cookie-consent-granted`, calls `hydrateAllGates()`
+- `handleAccept()` - Sets `cookie-approval` cookie (365 days) and dispatches `cookie-consent-granted`. Hydration runs once, through the `onReady()` listener, so accepting on a gate and accepting on the cookie bar take the same path
 - `bindGateButtons()` - Attaches click handlers to all accept buttons
 
 ### Step 4: Modify existing JS modules
@@ -184,11 +184,11 @@ User clicks embed "Accept"     User clicks cookie bar "Accept"
 | Case                                         | Solution                                                                                                                                             |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **RSS feeds**                                | `nm_consent_gate_wrap()` returns raw HTML when `is_feed()` is true                                                                                   |
-| **Admin/editor preview**                     | `nm_consent_gate_block_embeds()` returns raw HTML when `is_admin()` is true                                                                          |
+| **Admin/editor preview**         | `nm_embed_oembed_html()` returns raw HTML when `is_admin()` is true, so block-editor previews (served via the REST oEmbed proxy) are never gated                                                         |
 | **Script execution**                         | Twitter/X embeds include `<script>` tags that won't execute via `innerHTML` - `hydrateGate()` recreates script elements to trigger browser execution |
 | **Flash of placeholder for consented users** | Minimal - `EmbedConsent.onReady()` hydrates synchronously at DOM ready before meaningful paint. Acceptable trade-off for cache compatibility         |
 | **Multiple embeds on one page**              | Clicking accept on any one gate loads ALL embeds on the page                                                                                         |
-| **Old YouTube block embeds**                 | `nm_consent_gate_block_embeds()` applies nocookie switch as safety net for posts saved before the oEmbed filter existed                              |
+| **Old YouTube block embeds**     | Same `nm_embed_oembed_html()` nocookie swap: `core/embed` stores only the URL and converts at render time via `autoembed()`, whatever the save date                                                      |
 | **Page caching**                             | HTML is always the same (consent gate wrapper). JS handles dynamic behaviour client-side. No cache invalidation needed                               |
 | **SoundCloud two-step loading**              | Consent gate hydration reveals `.soundcloud-lazy` placeholder, then AudioPlayers hydrates to iframe. Both happen near-instantly for consented users  |
 
