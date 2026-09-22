@@ -30,7 +30,7 @@ function scripts_and_styles_method() {
     'site-js',
     $site_js,
     array(),
-    $theme_version,
+    nm_asset_version( '/dist/main.js', $theme_version ),
     array(
       'in_footer' => true,
     )
@@ -47,9 +47,9 @@ function scripts_and_styles_method() {
   );
 
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
-  wp_enqueue_script( 'site-js', $site_js, array(), $theme_version, true );
+  wp_enqueue_script( 'site-js' ); // Version and footer placement come from the registration above.
 
-  wp_enqueue_style( 'site', get_stylesheet_directory_uri() . '/dist/main.css', null, $theme_version );
+  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version( '/dist/main.css', $theme_version ) );
 
   wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 
@@ -107,9 +107,12 @@ function nm_register_menus() {
       'header-shows'          => __( 'Header: Shows' ),
       'header-series'         => __( 'Header: Series' ),
       'header-submenu'        => __( 'Header: Submenu' ),
+      'footer-general'        => __( 'Footer: General' ),
+      'manage-donation'       => __( 'Header + Footer: Manage Donation' ),
+      'footer-legal'          => __( 'Footer: Legal' ),
       'footer-podcasts'       => __( 'Footer: Podcasts' ),
       'footer-focuses'        => __( 'Footer: Focuses' ),
-      'footer-articles'       => __( 'Footer: Articles' ),
+      'footer-articles'       => __( 'Header + Footer: Articles' ),
       'footer-shows'          => __( 'Footer: Shows' ),
       'footer-social-media'   => __( 'Footer: Social Media' ),
       'articles-archive-menu' => __( 'Articles archive' ),
@@ -194,6 +197,7 @@ get_template_part( 'lib/renderers' );
 get_template_part( 'lib/functions-rewrites' );
 get_template_part( 'lib/functions-misc' );
 get_template_part( 'lib/functions-custom' );
+get_template_part( 'lib/functions-menu-fallbacks' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );

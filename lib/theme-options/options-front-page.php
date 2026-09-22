@@ -180,13 +180,14 @@ function nm_get_front_page_block_registry() {
   }
 
   $blocks = array(
-    'highlight-block' => array( 'type' => 'product', 'label' => 'Show block: Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
-    'novara-live'     => array( 'type' => 'product', 'label' => 'Show block: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
-    'dyor'            => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
-    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Show block: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
-    'audio'           => array( 'type' => 'product', 'label' => 'Show block: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
-    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Show block: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
-    'downstream'      => array( 'type' => 'product', 'label' => 'Show block: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
+    'highlight-block' => array( 'type' => 'product', 'label' => 'Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
+    'novara-live'     => array( 'type' => 'product', 'label' => 'Product: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
+    'dyor'            => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
+    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
+    'audio'           => array( 'type' => 'product', 'label' => 'Product: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
+    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
+    'downstream'      => array( 'type' => 'product', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
+    'the-cortado'     => array( 'type' => 'product', 'label' => 'Product: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
   );
 
   foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
@@ -197,13 +198,25 @@ function nm_get_front_page_block_registry() {
     );
   }
 
-  // Do Your Own Research is still in development. Keep both DYOR blocks
-  // available on local/development/staging but hide them on production — they
-  // disappear from the admin Layout options and, because the front-end render
-  // path resolves blocks against this same registry, never render even if a
-  // saved production layout references them. See nm_render_front_page_block().
-  if ( nm_is_production() ) {
-    unset( $blocks['dyor'], $blocks['dyor-alt'] );
+  // Blocks still in development: hidden on production, visible on local / dev /
+  // staging. On production they are unset from the registry, so they vanish from
+  // the admin Layout options and — because the front-end render path resolves
+  // against this same registry — never render even if a saved layout references
+  // them (see nm_render_front_page_block()). Off production they stay selectable
+  // but get a [DEV ONLY] label marker so editors on staging know the block will
+  // not appear on the live site.
+  $dev_only_blocks = array( 'dyor-alt' );
+
+  foreach ( $dev_only_blocks as $slug ) {
+    if ( ! isset( $blocks[ $slug ] ) ) {
+      continue;
+    }
+
+    if ( nm_is_production() ) {
+      unset( $blocks[ $slug ] );
+    } else {
+      $blocks[ $slug ]['label'] .= ' [DEV ONLY]';
+    }
   }
 
   return $blocks;

@@ -1,20 +1,45 @@
 <?php
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
- * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set to 'required'
- * Version: 0.2.0
+ * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
+ * Version: 0.4.0
  *
- * Updated to also hook to our secondary options page form (Links Bar)
- * Changed to take variable for validation via data attribute
- * Updated to also validate max words in field
+ * Validates CMB2 meta fields in the editor: hooks the post edit form and our
+ * options page forms (Links Bar, Fundraising), and blocks submission with an
+ * alert plus row highlights when a rule fails. Only publish-type submits
+ * (Publish / Schedule / Update / Submit for Review) are validated — Save
+ * Draft and Preview always save freely.
+ *
+ * CLASSIC EDITOR ONLY. The block editor saves posts via the REST API and
+ * never fires a native form submit, so nothing here runs there — posts
+ * publish with no meta validation at all. The site runs the Classic Editor
+ * plugin, but with "allow users to switch editors" enabled the block editor
+ * is reachable and silently bypasses these rules. Block editor support
+ * needs a separate wp.data-based path — planned follow-up, see
+ * docs/specs/2026-07-16-conditional-required-meta-validation-design.md.
+ *
+ * Rules, chosen per field via data attributes:
+ * - data-validation-required: value must not be empty. Whitespace-only and
+ *   markup-only values (e.g. an empty <p></p> from a wysiwyg) count as empty.
+ * - data-validation-required-category="<slug>": required only when the post
+ *   is in that category or any of its descendants.
+ * - data-validation-word-length: value must not exceed this many words.
  *
  * To enable on a CMB2 meta field set the attributes parameters
  * [note that booleans must be strings]
  *
  * 'attributes' => array(
  *   'data-validation' => 'true',
- *   'data-validation-word-length' => 14
- *   'data-validation-required' => 'true'
+ *   'data-validation-word-length' => 14,
+ *   'data-validation-required' => 'true',
+ *   'data-validation-required-category' => 'video',
+ * )
+ *
+ * Non-group wysiwyg fields render via wp_editor(), which does not output the
+ * CMB2 'attributes' array — mark those with an editor class instead:
+ *
+ * 'options' => array(
+ *   'editor_class' => 'nm-validation-required'
  * )
  *
  * Reference documentation in the wiki:
@@ -30,6 +55,23 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
   }
 
   $added = true;
+
+  // Slug-keyed map of category term IDs (self + descendants) so field
+  // markup can name categories by slug — term IDs drift across installs.
+  // Only post edit screens can use category-conditional rules, so leave
+  // the map empty on options pages rather than query and print it there.
+  $category_map = array();
+
+  $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+  if ( $screen && 'post' === $screen->base ) {
+    foreach ( get_categories( array( 'hide_empty' => false ) ) as $category ) {
+      $ids = array_map( 'intval', get_term_children( $category->term_id, 'category' ) );
+      array_unshift( $ids, (int) $category->term_id );
+
+      $category_map[ $category->slug ] = $ids;
+    }
+  }
   ?>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
@@ -52,6 +94,24 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     }
 
     const $htmlbody = $( 'html, body' );
+
+    const categoryMap = <?php echo wp_json_encode( $category_map ); ?>;
+
+    // Non-group wysiwyg fields render via wp_editor() which drops CMB2
+    // 'attributes'; they are marked with editor_class instead. Copy the
+    // marker onto the data attributes the validator scans for.
+    // The class is nm- prefixed (unlike the data-validation* attributes,
+    // inherited from the upstream fork) because classes share wp-admin's
+    // global namespace with core and other plugins.
+    const bridge_wysiwyg_markers = () => {
+      $( 'textarea.nm-validation-required' ).attr({
+        'data-validation': 'true',
+        'data-validation-required': 'true'
+      });
+    };
+
+    bridge_wysiwyg_markers();
+
     let $toValidate = $( '[data-validation]' );
 
     if ( ! $toValidate.length ) {
@@ -62,9 +122,33 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       return stringInput.length && stringInput.split(/\s+\b/).length || 0;
     };
 
+    // Wysiwyg values arrive as HTML, so whitespace-only ("  ") or markup-only
+    // ("<p></p>") input must count as empty. DOMParser never executes scripts.
+    const is_empty_value = ( value ) => {
+      if ( ! value ) {
+        return true;
+      }
+
+      const text = new DOMParser().parseFromString( String( value ), 'text/html' ).body.textContent;
+
+      return ! text.trim();
+    };
+
     const remove_failure = ( $row ) => {
-      $row.css({ background: '' });
-    }
+      $row.css({ 'background-color': '' });
+    };
+
+    const clear_all_failures = () => {
+      $( '[data-validation]' ).each( function() {
+        let $row = $( this ).parents( '.cmb-row' );
+
+        if ( $row.length > 1 ) {
+          $row = $row.first();
+        }
+
+        remove_failure( $row );
+      });
+    };
 
     const generate_error_messages = (labels) => {
       let returnString = '';
@@ -74,12 +158,39 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
       });
 
       return returnString;
-    }
+    };
 
     function checkValidation( event ) {
       var labels = [];
       var $first_error_row = null;
       var $row = null;
+
+      // Drafts and previews save freely; validation only gates
+      // Publish / Schedule / Update / Submit for Review. Clear any
+      // highlights left by an earlier failed Publish attempt so the
+      // gated save doesn't look like it still has errors.
+      // SubmitEvent.submitter is the button that triggered this submit;
+      // in the classic editor Save Draft is id="save-post" (Publish and
+      // Update submit via id="publish", which falls through to validate).
+      const submitter = event.originalEvent && event.originalEvent.submitter;
+
+      if ( submitter && submitter.id === 'save-post' ) {
+        clear_all_failures();
+        return;
+      }
+
+      if ( $( '#wp-preview' ).val() === 'dopreview' ) {
+        clear_all_failures();
+        return;
+      }
+
+      // Wysiwyg fields edited in Visual mode only sync to their underlying
+      // textarea on save; force the sync so val() reads current content
+      if ( typeof tinyMCE !== 'undefined' && typeof tinyMCE.triggerSave === 'function' ) {
+        tinyMCE.triggerSave();
+      }
+
+      bridge_wysiwyg_markers();
 
       $toValidate = $( '[data-validation]' );
 
@@ -118,7 +229,32 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
           }
         }
 
-        if ( $this.data( 'validation-required' ) === true ) { // Validate required if variable set
+        // Required either unconditionally, or conditionally when the post is
+        // in the named category (or any of its descendants).
+        // .attr() not .data(): jQuery data() would coerce numeric-looking
+        // slugs (e.g. "2024") to numbers and break the map lookup.
+        const requiredCategorySlug = $this.attr( 'data-validation-required-category' );
+
+        // Globally required, regardless of category.
+        let isRequired = $this.data( 'validation-required' ) === true;
+
+        // Not globally required but has a category rule: required only when
+        // one of that category's term IDs (itself or a descendant) is ticked.
+        if ( ! isRequired && typeof requiredCategorySlug !== 'undefined' ) {
+          const termIds = categoryMap[ requiredCategorySlug ] || [];
+
+          // Match on name+value, not element id: core's Walker_Category_Checklist
+          // suffixes checkbox ids via wp_unique_prefixed_id() (in-category-828-2),
+          // so #in-category-{id} never matches.
+          isRequired = termIds.some( function( id ) {
+            return $( 'input[name="post_category[]"][value="' + id + '"]' ).is( ':checked' );
+          });
+        }
+
+        // Required (globally or via ticked category): value must be non-empty.
+        if ( isRequired ) {
+          // File-list fields have no text value — non-empty means at least
+          // one attached item in the list.
           if ( $row.is( '.cmb-type-file-list' ) ) {
 
             var has_LIs = $row.find( 'ul.cmb-attach-list li' ).length > 0;
@@ -130,12 +266,16 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
             }
 
           } else {
-            if ( ! val ) {
+            if ( is_empty_value( val ) ) {
               add_failure( $row, 'Meta field required' );
             } else {
               remove_failure( $row );
             }
           }
+        } else if ( typeof requiredCategorySlug !== 'undefined' ) {
+          // Conditionally-required field whose category isn't ticked:
+          // clear any stale highlight from a previous failed attempt.
+          remove_failure( $row );
         }
 
       });

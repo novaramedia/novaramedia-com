@@ -22,20 +22,30 @@ function nm_cmb_post_metaboxes() {
 
   $meta_boxes->add_field(
        array(
-    'name' => __( 'Standfirst', 'cmb' ),
-    'desc' => __( 'Required!', 'cmb' ),
-    'id'   => $prefix . 'standfirst',
-    'type' => 'textarea_small',
+    'name'       => __( 'Standfirst', 'cmb' ),
+    'desc'       => __( 'Required!', 'cmb' ),
+    'id'         => $prefix . 'standfirst',
+    'type'       => 'textarea_small',
+    'attributes' => array(
+      'data-validation'          => 'true',
+      'data-validation-required' => 'true',
+    ),
   )
       );
 
   $meta_boxes->add_field(
        array(
-    'name'    => __( 'Short description', 'cmb' ),
-    'desc'    => __( '...', 'cmb' ),
-    'id'      => $prefix . 'short_desc',
-    'type'    => 'wysiwyg',
-    'options' => array( 'textarea_rows' => 5 ),
+    'name'       => __( 'Short description', 'cmb' ),
+    'desc'       => __( 'Required!', 'cmb' ),
+    'id'         => $prefix . 'short_desc',
+    'type'       => 'wysiwyg',
+    // Non-group wysiwyg fields render via wp_editor() which drops CMB2
+    // 'attributes'; editor_class is the only marker that reaches the DOM.
+    // cmb2-validation.php bridges it onto the data-validation attributes.
+    'options'    => array(
+      'textarea_rows' => 5,
+      'editor_class'  => 'nm-validation-required',
+    ),
   )
       );
 
@@ -127,10 +137,14 @@ function nm_cmb_post_metaboxes() {
 
   $audio_metabox->add_field(
        array(
-    'name' => __( 'Soundcloud URL', 'cmb' ),
-    'desc' => __( 'Required! Enter a full URL.', 'cmb' ),
-    'id'   => $prefix . 'sc',
-    'type' => 'text_url',
+    'name'       => __( 'Soundcloud URL', 'cmb' ),
+    'desc'       => __( 'Required on audio posts! Enter a full URL.', 'cmb' ),
+    'id'         => $prefix . 'sc',
+    'type'       => 'text_url',
+    'attributes' => array(
+      'data-validation'                   => 'true',
+      'data-validation-required-category' => 'audio',
+    ),
   )
       );
 
@@ -177,10 +191,14 @@ function nm_cmb_post_metaboxes() {
 
   $video_metabox->add_field(
        array(
-    'name' => __( 'YouTube ID', 'cmb' ),
-    'desc' => __( 'Required! ID of YouTube video. For example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the ID is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
-    'id'   => $prefix . 'utube',
-    'type' => 'text',
+    'name'       => __( 'YouTube ID', 'cmb' ),
+    'desc'       => __( 'Required on video posts! ID of YouTube video. For example if this is the url https://www.youtube.com/watch?v=CmuDcXfBqTg&feature=c4-overview&list=UUOzMAa6IhV6uwYQATYG_2kg then the ID is the value after the ?v= and before the &, for this link CmuDcXfBqTg', 'cmb' ),
+    'id'         => $prefix . 'utube',
+    'type'       => 'text',
+    'attributes' => array(
+      'data-validation'                   => 'true',
+      'data-validation-required-category' => 'video',
+    ),
   )
       );
 

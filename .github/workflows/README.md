@@ -1,29 +1,30 @@
 # GitHub Actions Workflows
 
-## Cypress Tests
+## Playwright Tests
 
-The `cypress.yml` workflow runs automated end-to-end tests for the WordPress theme using Cypress.
+The `playwright.yml` workflow runs the end-to-end smoke tests for the WordPress theme using Playwright.
 
 ### How it works
 
 1. **Trigger**: Runs on Pull Requests to `master`, `main`, or `development` branches, and on manual `workflow_dispatch`
 2. **Deploy**: Deploys the PR commit to Kinsta staging via SSH + git
-3. **Test**: Runs all Cypress tests in headless Chrome against staging
+3. **Test**: Installs Chromium and runs all Playwright tests against staging
 4. **Cleanup**: Resets staging back to the `development` branch
-5. **Artifacts**: Uploads test videos and screenshots (especially on failure)
+5. **Artifacts**: Uploads the HTML report and traces when tests fail
 
 ### Test Configuration
 
-- **Base URL**: Tests run against Kinsta staging (set via `STAGING_URL` secret)
+- **Base URL**: Tests run against Kinsta staging (set via `STAGING_URL` secret, passed as `PLAYWRIGHT_BASE_URL`)
 - **Timeout**: 10-minute maximum per job
-- **Retries**: Failed tests automatically retry 2 times
+- **Retries**: Failed tests automatically retry 2 times, recording a trace on the first retry
+- **Concurrency**: The `kinsta-staging` group serialises runs so only one workflow touches staging at a time
 - **Fork PRs**: Skipped automatically (secrets not available)
 
 ### Success Criteria
 
 For a PR to be mergeable:
-- ✅ All Cypress tests must pass
-- ✅ No critical console errors
+- ✅ All Playwright tests must pass
+- ✅ No theme-owned console errors
 - ✅ All priority pages load successfully
 
 ### Viewing Test Results
@@ -31,19 +32,19 @@ For a PR to be mergeable:
 When tests fail:
 1. Click on the failed GitHub Actions run
 2. Go to "Summary" tab
-3. Download "cypress-artifacts" or "cypress-results"
-4. Videos show full test execution
-5. Screenshots capture failure state
+3. Download `playwright-artifacts-<run id>`
+4. Unzip, then `npx playwright show-report playwright-report` for the HTML report
+5. `npx playwright show-trace test-results/<test>/trace.zip` replays a failed test step by step
 
 ### Local Testing
 
-Before pushing, run tests locally:
+Before pushing, run tests against your DevKinsta site:
 ```bash
-npm test              # Run all tests
-npm run cy:open       # Interactive debugging
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm test         # Run all tests
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:ui  # Interactive debugging
 ```
 
-See the main [README.md](../../README.md#howto-testing) and [TESTING.md](../../TESTING.md) for detailed testing documentation.
+See [docs/testing/testing.md](../../docs/testing/testing.md) for the full testing guide.
 
 ## Release Notification to Slack
 

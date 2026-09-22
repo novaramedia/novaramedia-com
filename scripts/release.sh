@@ -105,7 +105,7 @@ EOF
 else
   echo ""
   echo "Skipped PR creation. To create manually:"
-  echo "  gh pr create --base master --head development --title 'Release $VERSION'"
+  echo "  gh pr create --base master --head development --title 'Release: $VERSION'"
 fi
 
 echo ""
