@@ -35,7 +35,11 @@ test.describe('Single Post (Article)', () => {
   });
 
   test('should load successfully', async ({ page, baseURL }) => {
-    expect(page.url()).not.toBe(`${baseURL}/`);
+    // Compare pathnames: gotoFresh appends a cache-bust query, so a raw URL
+    // comparison could never detect a redirect back to the home page.
+    expect(new URL(page.url()).pathname).toBe(
+      new URL(articleUrl, baseURL).pathname
+    );
     await expect(page).toHaveTitle(/.+/);
   });
 

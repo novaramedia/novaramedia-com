@@ -82,7 +82,7 @@ Import `test` and `expect` from here, not from `@playwright/test`. It adds:
 
 ### `gotoFresh(page, path)`
 
-Use instead of `page.goto`. Appends a unique `playwright_cache_bust` query string so Kinsta's full-page cache is bypassed even when the CI cache clear fails, and waits on `domcontentloaded`.
+Use instead of `page.goto`. Appends a unique `playwright_cache_bust` query string so Kinsta's full-page cache is bypassed even when the CI cache clear fails, and waits on `domcontentloaded`. Throws on a non-2xx response, as `cy.visit` did, so a broken deployment fails instead of skipping; pass `{ failOnStatusCode: false }` to visit an error page on purpose.
 
 ### `findPostUrlFromArchive(page, archiveUrl)`
 

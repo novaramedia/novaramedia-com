@@ -18,15 +18,35 @@ const appendCacheBust = (url) => {
  * Waits on `domcontentloaded` rather than full load so third-party embeds
  * never gate page readiness.
  *
+ * Throws on a non-2xx response, matching the former cy.visit() default.
+ * page.goto() itself resolves on a 404 or 500, which would let a broken
+ * deployment skip the single-post specs (archive lookup returns null) or run
+ * page specs against an error page. Pass { failOnStatusCode: false } to visit
+ * an error page deliberately.
+ *
  * @param {import('@playwright/test').Page} page
  * @param {string} path - Path or URL to visit (e.g. '/', '/category/audio')
- * @param {object} [options] - Extra page.goto() options
+ * @param {object} [options] - Extra page.goto() options, plus failOnStatusCode
+ * @param {boolean} [options.failOnStatusCode=true]
  * @returns {Promise<import('@playwright/test').Response|null>}
  */
-const gotoFresh = (page, path, options = {}) =>
-  page.goto(appendCacheBust(path), {
+const gotoFresh = async (
+  page,
+  path,
+  { failOnStatusCode = true, ...options } = {}
+) => {
+  const response = await page.goto(appendCacheBust(path), {
     waitUntil: 'domcontentloaded',
     ...options,
   });
+
+  if (failOnStatusCode && response && !response.ok()) {
+    throw new Error(
+      `gotoFresh: HTTP ${response.status()} for ${response.url()}`
+    );
+  }
+
+  return response;
+};
 
 module.exports = gotoFresh;
