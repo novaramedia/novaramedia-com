@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+- Dev dependency bumps clearing the open Dependabot alerts for sharp, svgo, js-yaml, fast-uri and adm-zip. The remaining extract-zip alerts have no patched release and only reach `@wordpress/scripts` test tooling
 - Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
 
 ## [4.8.0] - 2026-07-27
