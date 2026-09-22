@@ -11,6 +11,11 @@ export class AudioPlayers {
   }
 
   onReady() {
+    this.findAndLoadPlayers();
+    document.addEventListener('embed-consent-hydrated', () => this.findAndLoadPlayers());
+  }
+
+  findAndLoadPlayers() {
     this.findPlayers();
     this.loadPlayersWithThrottling();
   }

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
 - The Cortado front page product block
 - The Cortado gets its own inline newsletter signup design in the Gutenberg block
+- Embed consent gate — placeholder shown for third-party embeds (SoundCloud, Twitter/X, Vimeo, etc; YouTube exempt via nocookie domain) until visitor accepts; consent stored in the existing `cookie-approval` cookie shared with the cookie bar
 
 ### Changed
 

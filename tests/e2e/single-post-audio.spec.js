@@ -9,11 +9,17 @@
  * placeholder for an iframe element on DOMContentLoaded, and that element is
  * attached whether or not SoundCloud ever responds. The Cypress spec needed a
  * 120s visit timeout only because the unblocked embed gated page load.
+ *
+ * The consent cookie is pre-set before each navigation: the player sits behind
+ * the embed consent gate, which only hands the .soundcloud-lazy placeholder to
+ * AudioPlayers.js once `cookie-approval` is present. The gate itself is
+ * covered by embed-consent-gate.spec.js.
  */
 
 const { test, expect } = require('./helpers/fixtures');
 const findPostUrlFromArchive = require('./helpers/findPostUrlFromArchive');
 const gotoFresh = require('./helpers/gotoFresh');
+const grantCookieConsent = require('./helpers/grantCookieConsent');
 const testResponsive = require('./helpers/testResponsive');
 const verifyCriticalPageStructure = require('./helpers/verifyCriticalPageStructure');
 
@@ -32,9 +38,10 @@ test.describe('Single Post (Audio Category)', () => {
     await page.close();
   });
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context, baseURL }) => {
     test.skip(!audioPostUrl, 'No audio posts found on /category/audio');
 
+    await grantCookieConsent(context, baseURL);
     await gotoFresh(page, audioPostUrl);
   });
 

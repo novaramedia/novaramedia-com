@@ -72,7 +72,12 @@ export class Utilities {
       $('#obligation-accept').on('click', () => {
         Cookies.set('cookie-approval', 'true', { expires: 365 });
         $bar.hide();
+        document.dispatchEvent(new CustomEvent('cookie-consent-granted'));
       });
     }
+
+    document.addEventListener('cookie-consent-granted', () => {
+      $('#obligation-bar').hide();
+    });
   }
 }
