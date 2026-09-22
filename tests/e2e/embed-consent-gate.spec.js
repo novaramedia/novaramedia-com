@@ -250,9 +250,11 @@ test.describe('Embed Consent Gate', () => {
       const iframe = player.locator('iframe').first();
 
       await expect(iframe).toBeAttached();
+      // Anchored to the origin generate_youtube_embed_url() produces, so a
+      // youtube.com src (or any other host carrying the path) fails.
       await expect(iframe).toHaveAttribute(
         'src',
-        /youtube-nocookie\.com\/embed\//
+        /^https:\/\/www\.youtube-nocookie\.com\/embed\//
       );
       await expect(player.getByTestId('embed-consent-gate')).toHaveCount(0);
     });
