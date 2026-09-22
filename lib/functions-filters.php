@@ -145,7 +145,7 @@ function nm_consent_gate_wrap( $html, $platform ) {
   // Single line: this runs before wpautop on classic-editor content, which would
   // otherwise inject <br>/<p> around the newlines in the gate markup.
   return sprintf(
-    '<div class="embed-consent-gate"><template class="embed-consent-gate__template">%s</template><div class="embed-consent-gate__placeholder"><div class="embed-consent-gate__content"><p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p><button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white">Accept cookies &amp; load %s</button>%s</div></div></div>',
+    '<div class="embed-consent-gate" data-testid="embed-consent-gate"><template class="embed-consent-gate__template">%s</template><div class="embed-consent-gate__placeholder" data-testid="embed-consent-placeholder"><div class="embed-consent-gate__content"><p class="embed-consent-gate__message font-size-9">%s content is blocked because you have not accepted cookies.</p><button type="button" class="embed-consent-gate__accept ui-button ui-button--small ui-button--white" data-testid="embed-consent-accept">Accept cookies &amp; load %s</button>%s</div></div></div>',
     $html_safe,
     $platform_esc,
     $platform_esc,

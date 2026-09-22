@@ -14,6 +14,8 @@ A smoke-test layer, not a behaviour suite. Each spec checks that a page type:
 
 Deliberately out of scope: visual regression, complex interaction flows, unit tests (see the appendix of `docs/plans/archive/cypress-to-playwright.md` for the trigger to revisit) and the third-party services themselves.
 
+The one behaviour spec is `embed-consent-gate.spec.js`. The gate exists to keep third-party embed requests off the page until the visitor accepts cookies, and only a browser can show whether that holds, so it is tested end to end. See [Embed consent gate](#embed-consent-gate) below.
+
 ## Layout
 
 ```
@@ -27,10 +29,12 @@ tests/e2e/
 ├── single-post.spec.js         # articles
 ├── single-post-audio.spec.js   # audio / podcast
 ├── single-post-video.spec.js
+├── embed-consent-gate.spec.js  # third-party embed consent flow
 └── helpers/
     ├── fixtures.js             # test/expect with embed blocking + console-error collector
     ├── gotoFresh.js            # cache-busting navigation
     ├── findPostUrlFromArchive.js
+    ├── grantCookieConsent.js   # pre-sets the cookie-approval cookie
     ├── checkImages.js
     ├── testResponsive.js
     └── verifyCriticalPageStructure.js
@@ -102,6 +106,10 @@ Sets mobile (375×667), tablet (768×1024) and desktop (1280×720) viewports in 
 
 Header visible, main content attached, footer visible.
 
+### `grantCookieConsent(context, baseURL)`
+
+Pre-sets the `cookie-approval` cookie that the cookie bar writes on Accept, scoped to `baseURL`. Call before the first navigation to load a page as a returning, consented visitor: gated embeds hydrate on load and the cookie bar stays hidden. `single-post-audio.spec.js` uses it so the SoundCloud player assertions see the player rather than the gate.
+
 ## Writing a spec
 
 ```js
@@ -142,6 +150,23 @@ Guidelines:
 - Let `expect` auto-wait. No `waitForTimeout`.
 - A bare `getByTestId('x')` is strict and fails if two elements match. Use `.first()` only where multiple matches are legitimate.
 
+## Embed consent gate
+
+`embed-consent-gate.spec.js` covers the consent gate around third-party embeds (`nm_consent_gate_wrap` in `lib/functions-filters.php`, `src/js/modules/EmbedConsent.js`). It targets an audio post, whose SoundCloud player is always gated, and a video post for the YouTube exemption. Embed hosts stay blocked by the fixture: the assertions are on the theme's markup and on which requests the browser issues, both of which are observable when the request is aborted.
+
+| State                    | Checks                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| New visitor              | placeholder and accept button render, embed markup stays in the inert `<template>`, no request to SoundCloud hosts, cookie bar visible          |
+| Accept on the gate       | player iframe appears, every placeholder on the page goes, `cookie-approval` cookie set, cookie bar hidden, SoundCloud request follows           |
+| Accept on the cookie bar | same hydration, driven from the bar                                                                                                              |
+| Returning visitor        | player iframe present with no placeholder, SoundCloud requested on load, cookie bar hidden                                                       |
+| YouTube                  | video-post iframe on `youtube-nocookie.com` with no gate around it                                                                               |
+| RSS                      | category feed carries no gate markup                                                                                                             |
+
+Test ids: `embed-consent-gate`, `embed-consent-placeholder` and `embed-consent-accept` on the gate, `cookie-bar` and `cookie-bar-accept` on the bar. Several gates can share a page, so scope gate lookups (for example inside `audio-player`) rather than relying on strictness.
+
+Two limits. The network assertion covers SoundCloud hosts only: posts can carry baked Twitter widget markup that bypasses the gate (a known gap tracked in PR #523), so a blanket third-party assertion would fail on content rather than on the gate. And "no placeholder flash" for returning visitors is not asserted: consent is client-side, so the placeholder is in the server HTML until the script runs, and the spec checks the settled state only.
+
 ## CI
 
 `.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. Its `paths-ignore` skips PRs that only change Markdown, `.github/`, `.editorconfig` or `.gitignore`. Each run:
@@ -173,10 +198,9 @@ Ranked by regression risk, carried over from `docs/plans/archive/cypress-to-play
 
 1. Front page layout editor rendering: assert section order matches the saved layout
 2. Category archives for articles, audio and video (only Novara Live is covered today)
-3. Embed consent gate, once #523 ships: placeholder renders, consent click loads the iframe (needs `test.use({ blockEmbeds: false })`)
-4. Newsletter signup block: presence and validation states
-5. Support page donation amount selection, without submitting a payment
-6. Nav interactions: hamburger open and close across viewports
-7. Article page details: share link hrefs correctly encoded, related posts render when set
-8. Search results, 404 and pagination smoke coverage
-9. Accessibility smoke with `@axe-core/playwright` on the homepage and one single post
+3. Newsletter signup block: presence and validation states
+4. Support page donation amount selection, without submitting a payment
+5. Nav interactions: hamburger open and close across viewports
+6. Article page details: share link hrefs correctly encoded, related posts render when set
+7. Search results, 404 and pagination smoke coverage
+8. Accessibility smoke with `@axe-core/playwright` on the homepage and one single post
