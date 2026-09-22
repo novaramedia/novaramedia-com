@@ -30,7 +30,6 @@ get_header();
       <div class="grid-row background-ochre ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
 
         <div class="grid-item is-xxl-24">
-          <p class="font-size-10 font-weight-bold text-uppercase mb-1">Newsletter</p>
           <h1 class="category-archive__the-cortado__wordmark m-0" aria-label="The Cortado">
             <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
           </h1>
@@ -58,6 +57,8 @@ get_header();
         'hide-discover'      => true,
         'hide-headline'      => true,
         'hide-image'         => true,
+        // Serif copy, presenter names in sans — as on the inline signup block and front page.
+        'copy-classes'       => 'category-archive__the-cortado__copy font-serif font-size-12 font-size-s-10 mr-5 text-wrap-balance',
       )
     );
     ?>
@@ -65,7 +66,7 @@ get_header();
     <div class="grid-row">
       <?php // Border sits on an inner element: .grid-item carries half-gutter padding, so a border on it would overhang the content columns by 8px each side. ?>
       <div class="grid-item is-xxl-24">
-        <div class="ui-border-bottom ui-border--gray-mid"></div>
+        <div class="ui-border-bottom ui-border--ochre"></div>
       </div>
     </div>
   </div>
@@ -100,12 +101,12 @@ get_header();
   }
   ?>
 
-  <?php // ── Section 4: Past issues ── ?>
+  <?php // ── Section 4: Past Cortados ── ?>
   <?php if ( have_posts() ) { ?>
   <section class="container category-archive__the-cortado__past-issues mt-5 mb-5" data-testid="cortado-past-issues">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-4">
-        <h2 class="font-size-8 font-weight-bold text-uppercase">Past Issues</h2>
+        <h2 class="font-size-8 font-weight-bold text-uppercase">Past Cortados</h2>
       </div>
       <?php
       while ( have_posts() ) {

@@ -332,6 +332,8 @@ Invoke the `nm-design-system` skill for the type scale, container and grid class
 
 **As built (2026-09-18):** the template's inline `<style>` is gone. Its four rules moved to `src/styl/pages/the-cortado-archive.styl`, imported from `site.styl` after the other `pages/` files, following `dyor-archive.styl` and `novara-fm-archive.styl`. Static CSS belongs in the build, not the template; the five other category templates that still inline theirs (ACFM, Committed, Death in Westminster, Foreign Agent, If I Speak) are a separate cleanup. The front-page block's ring-colour override now targets `.ui-border` rather than `.ui-circle-image`, matching the archive — `.ui-border` is the class that draws the ring.
 
+**Revised (2026-09-22):** the `NEWSLETTER` eyebrow above the wordmark was removed on design feedback. The hero now opens with the `<h1>` wordmark.
+
 Add `data-testid="cortado-hero"` to the hero element, and `data-testid="main-content"` to the `<main>`. Note that `category-downstream.php` and `category-if-i-speak.php` both omit the `main-content` testid while `category.php` and `category-novara-live.php` carry it — follow the ones that have it, since Task 9's spec depends on it.
 
 - [ ] **Step 6: Present the markup for approval**
@@ -447,6 +449,8 @@ treated imagery is artworked. Post 69500's thumbnail is now the design's own `Re
 ---
 
 ### Task 7: Past issues grid
+
+**Revised (2026-09-22):** heading copy is now `PAST CORTADOS`, and the front-page block's eyebrows are `LATEST CORTADO` / `PAST CORTADOS` (were `LATEST ISSUE` / `RECENT ISSUES`). Test ids and class names keep `past-issues`.
 
 **Files:**
 - Modify: `category-the-cortado.php`

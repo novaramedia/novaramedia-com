@@ -10,6 +10,10 @@
  *   grid-item-classes  (string, required) Classes for the wrapping article. Returns early if empty.
  *   hide-excerpt       (bool, optional) Omit the standfirst / short description. The front-page
  *                      Cortado block shows title and byline only.
+ *   boxed              (bool, optional) Render as a white inner card (the boxed-sections inner
+ *                      card, see docs/architecture/boxed-sections.md) instead of a ruled row.
+ *                      The top rule is dropped — the card edge does that job. For cards
+ *                      sitting inside a coloured box, as on the front-page Cortado block.
  */
 
 if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item don't render
@@ -19,6 +23,7 @@ if ( empty( $args['grid-item-classes'] ) ) { // if no classes set for grid item 
 $this_post_id = get_the_ID();
 
 $hide_excerpt = ! empty( $args['hide-excerpt'] );
+$boxed        = ! empty( $args['boxed'] );
 
 // The avatar is the first contributor's featured image. Posts without one — legacy
 // _cmb_author posts, or a contributor with no thumbnail — render text only.
@@ -26,7 +31,10 @@ $contributors   = get_contributors_array( $this_post_id );
 $avatar_post_id = ( ! empty( $contributors ) && has_post_thumbnail( $contributors[0]->ID ) ) ? $contributors[0]->ID : false;
 ?>
 <article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>" data-testid="archive-post-no-thumbnail">
-  <a href="<?php the_permalink(); ?>" class="layout-flex ui-hover ui-border-top pt-4">
+  <?php if ( $boxed ) { ?>
+  <div class="archive-post-no-thumbnail__box background-white ui-rounded-box ui-rounded-box--nested pt-3 pb-3 pl-4 pr-4">
+  <?php } ?>
+  <a href="<?php the_permalink(); ?>" class="layout-flex ui-hover <?php echo $boxed ? '' : 'ui-border-top pt-4'; ?>">
     <?php if ( $avatar_post_id ) { ?>
     <div class="layout-flex-no-shrink mr-3">
       <?php
@@ -70,4 +78,7 @@ $avatar_post_id = ( ! empty( $contributors ) && has_post_thumbnail( $contributor
       ?>
     </div>
   </a>
+  <?php if ( $boxed ) { ?>
+  </div>
+  <?php } ?>
 </article>

@@ -12,6 +12,11 @@ html
 .background-ochre
   background-color: var(--color-ochre)
 
+// Border colour modifier in the .ui-border--black / --gray-mid pattern; goes to modules/ui.styl
+// with the palette entry.
+.ui-border--ochre
+  --ui-border-color: var(--color-ochre)
+
 // .ui-circle-image — a square image rendered as a circle.
 // Size via --ui-circle-image-size so consumers can scale it; ring colour comes from
 // pairing with .ui-border, whose --ui-border-color the consumer can override.

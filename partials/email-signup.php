@@ -66,6 +66,14 @@ if ( ! empty( $args['hide-headline'] ) ) {
 if ( ! empty( $args['hide-image'] ) ) {
   $image_id = false; // also widens the form column, which keys off $image_id below
 }
+
+// Class list for the copy paragraph. Default is the generic band's bold sans; a brand can
+// pass its own treatment (The Cortado: serif copy with the bold spans in sans).
+$copy_classes = 'font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance';
+
+if ( ! empty( $args['copy-classes'] ) ) {
+  $copy_classes = $args['copy-classes'];
+}
 ?>
 <div class="email-signup mt-4 mb-4">
   <div class="container">
@@ -83,7 +91,7 @@ if ( ! empty( $args['hide-image'] ) ) {
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
             <?php } ?>
             <?php if ( ! empty( $copy ) ) { ?>
-            <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
+            <p class="<?php echo esc_attr( $copy_classes ); ?>">
               <?php echo wp_kses_post( $copy ); ?>
             </p>
             <?php } ?>
