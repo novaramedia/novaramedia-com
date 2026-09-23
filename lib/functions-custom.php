@@ -473,6 +473,27 @@ function get_the_top_level_category( $post_id = null ) {
 }
 
 /**
+ * Font-size classes for a lead headline, scaled by title length.
+ *
+ * The cadence of the front page's primary above-the-fold slot, shared so other lead
+ * headlines (the Cortado front-page block and archive) scale the same way: a title of up
+ * to 14 words gets the huge size, stepping down at the m breakpoint; a longer one stays at
+ * the smaller size throughout.
+ *
+ * @param string  $title      Post title.
+ * @param boolean $allow_huge False to force the smaller size whatever the length.
+ *
+ * @return string Space-separated font-size classes.
+ */
+function nm_get_lead_headline_size_classes( $title, $allow_huge = true ) {
+  if ( $allow_huge && str_word_count( $title ) <= 14 ) {
+    return 'font-size-15 font-size-m-13';
+  }
+
+  return 'font-size-13';
+}
+
+/**
  * Does the post have set the Articles category? or is it a child of the Articles category?
  * Defaults to current $post context
  *

@@ -94,7 +94,7 @@ get_header();
       <div class="grid-item is-s-24 is-xxl-12">
         <p class="font-size-8 font-weight-bold text-uppercase">Latest Cortado</p>
         <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
-          <h2 class="font-size-15 font-weight-bold text-wrap-pretty mt-2"><?php the_title(); ?></h2>
+          <h2 class="<?php echo esc_attr( nm_get_lead_headline_size_classes( get_the_title() ) ); ?> font-weight-bold text-wrap-pretty mt-2"><?php the_title(); ?></h2>
           <p class="font-size-10 font-weight-bold text-uppercase mt-2"><?php render_bylines( $featured_post_id ); ?></p>
           <div class="font-size-10 mt-2"><?php render_standfirst( $featured_post_id ); ?></div>
         </a>

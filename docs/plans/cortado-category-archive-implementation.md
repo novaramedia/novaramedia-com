@@ -576,6 +576,18 @@ the site's direction of travel, and against off-white the Cortado block could si
 box instead of the full ochre, which is the option under evaluation. Playwright coverage for
 the archive, the newsletter 301 and the front-page block landed as `tests/e2e/the-cortado.spec.js`.
 
+**Decided (2026-09-23):** white box. Pietro's Figma revision (Newsletters file, node
+`5268:11231`) puts the front-page block in a `background-white` box with an ochre wordmark;
+the Latest Cortado sits directly on the box rather than in an inner card, and the Past
+Cortados are ruled rows again. The `boxed` arg on `archive-post-no-thumbnail.php`, added for
+the ochre version, had no other consumer and is removed.
+Latest Cortado headlines on the block and the archive scale with title length on the same
+cadence as the front page's primary above-the-fold slot, via the shared
+`nm_get_lead_headline_size_classes()` (lib/functions-custom.php). Stopgap until the design
+has a mobile pass — the Figma is desktop-only.
+The date is dropped from `archive-post-no-thumbnail.php` cards (block and archive) — not
+shown on small post cards elsewhere on the site.
+
 
 - Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.
 - **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `archive-post-no-thumbnail` inside `cortado-past-issues`, the newsletters link present, and both routing behaviours from Task 1.
