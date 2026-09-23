@@ -47,6 +47,9 @@ get_header();
   <?php // ── Section 2: Signup ── ?>
   <?php
   if ( $newsletter_post_id ) {
+    ?>
+  <div data-testid="cortado-signup">
+    <?php
     get_template_part(
       'partials/email-signup',
       null,
@@ -69,6 +72,7 @@ get_header();
         <div class="ui-border-bottom ui-border--ochre"></div>
       </div>
     </div>
+  </div>
   </div>
     <?php
   }
