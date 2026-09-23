@@ -569,6 +569,14 @@ Target `development`. Link the Notion card, the spec, and issue #606 as related-
 
 ## Follow-ups
 
+**Revised (2026-09-23):** the front page takes the off-white `--color-gray-base` background
+(`src/styl/pages/front-page.styl`, the DYOR archive pattern) on this branch, from Pietro's
+2026-09-22 list. Two reasons to do it here rather than wait for the section-joins work: it is
+the site's direction of travel, and against off-white the Cortado block could sit in a white
+box instead of the full ochre, which is the option under evaluation. Playwright coverage for
+the archive, the newsletter 301 and the front-page block landed as `tests/e2e/the-cortado.spec.js`.
+
+
 - Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.
 - **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `archive-post-no-thumbnail` inside `cortado-past-issues`, the newsletters link present, and both routing behaviours from Task 1.
 - **Add the Cortado ochre (`#B37400`, Figma token "Standard/Novara -3") to the shared palette** — nm-stylus-library colours plus `background-`/`font-color-` utilities — rather than leaving it scoped in the template. Check the other Cortado design views for further tints first so the whole ramp lands together. Patrick will link the views; next phase, not this archive page.
