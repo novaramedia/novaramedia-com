@@ -16,7 +16,7 @@
 - **No CSS colour treatment on imagery.** Halftone/duotone and the cut-out hero photo are artworked and supplied finished. Templates render what is uploaded.
 - **Do not modify the build system.** Webpack and release config need team approval (CLAUDE.md).
 - `dist/` is committed only when source files actually changed — run `npm run build` to verify.
-- **Do not write Cypress specs.** The suite is being replaced by Playwright (`feature/playwright-phase-0`, `feature/playwright-phase-1`, plan at `docs/plans/cypress-to-playwright.md`), whose first goal is 1:1 parity before anything is deleted — a new Cypress spec only adds to the conversion backlog.
+- **Write Playwright specs, not Cypress.** The Cypress suite was removed in #600; specs live in `tests/e2e/` and the guide is `docs/testing/testing.md`.
 - **Do not write Playwright specs on this branch either.** The harness and helpers live on the phase branches and are not on `development` yet, so they cannot run here. A Cortado spec is a follow-up once phase-1 lands; see Follow-ups.
 - There is **no PHP unit test framework** in this repo. Verification for this work is phpcs + `curl` status checks + visual comparison against Figma in DevKinsta.
 - Keep `data-testid` attributes on structural elements regardless. Playwright's `testIdAttribute` defaults to `data-testid`, so they carry over unchanged.

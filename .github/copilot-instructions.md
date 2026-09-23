@@ -148,7 +148,9 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 
 ## Testing
 
-Run `npm run build` to verify JS/CSS changes compile without errors. See `docs/testing/` for full Cypress testing guide.
+Run `npm run build` to verify JS/CSS changes compile without errors.
+
+End-to-end smoke tests use Playwright: specs in `tests/e2e/`, run with `npm test` against `PLAYWRIGHT_BASE_URL`. Import `test`/`expect` from `tests/e2e/helpers/fixtures.js` (embed blocking + console-error collector) and navigate with `gotoFresh`. Select elements by `data-testid`. Full guide in `docs/testing/testing.md`.
 
 ## Development Notes
 
