@@ -84,7 +84,7 @@ get_header();
     the_post();
     $featured_post_id = get_the_ID();
     ?>
-  <section class="container mt-5 mb-5" data-testid="cortado-latest">
+  <section class="container mt-5 mt-s-4 mb-5" data-testid="cortado-latest">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
         <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
@@ -120,7 +120,7 @@ get_header();
           'partials/post-layouts/archive-post-no-thumbnail',
           null,
           array(
-            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5',
+            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5 mb-s-4',
           )
         );
       }
@@ -130,7 +130,8 @@ get_header();
   <?php } ?>
 
   <?php // ── Section 5: Footer row ── ?>
-  <section class="container mb-5" data-testid="cortado-footer-row">
+  <?php // Split left/right; stacks and centres on mobile (the-cortado-archive.styl) so full pagination and the action link cannot collide. The pagination partial renders nothing when there is one page. ?>
+  <section class="container category-archive__the-cortado__footer-row mb-5" data-testid="cortado-footer-row">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 font-size-10 font-weight-bold mb-s-3">
         <?php get_template_part( 'partials/pagination' ); ?>

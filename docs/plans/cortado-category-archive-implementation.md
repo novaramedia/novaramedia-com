@@ -587,6 +587,13 @@ cadence as the front page's primary above-the-fold slot, via the shared
 has a mobile pass — the Figma is desktop-only.
 The date is dropped from `archive-post-no-thumbnail.php` cards (block and archive) — not
 shown on small post cards elsewhere on the site.
+Rules and avatar rings are ochre in both contexts; the front-page block previously used black.
+Mobile spacing pass: on the archive, Latest takes `mt-s-4` so the signup divider has 1rem
+either side, and past cards take `mb-s-4` to match the `pt-4` under each rule. On the block,
+the last past card drops its bottom margin so the box's bottom padding stands alone.
+On mobile the archive footer row stacks pagination over the newsletters link, centred, so
+full pagination can't collide with the link; desktop keeps the left/right split. On mobile the block's presenters drop to
+two thirds width, centred.
 
 
 - Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.

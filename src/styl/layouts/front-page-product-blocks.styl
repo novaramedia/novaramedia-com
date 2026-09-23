@@ -116,11 +116,18 @@
   width: 100%
   height: auto
 
-// Card rules and avatar rings are black here, unlike the ochre on the archive.
+// Stacked on mobile the presenters would otherwise fill the column and dominate the
+// block, so they drop to two thirds, centred.
+@media screen and (max-width: $breakpoint-s)
+  .front-page-cortado__presenters
+    width: 66.667%
+    margin: 0 auto
+
+// Card rules and avatar rings take the brand ochre, as on the archive.
 // .ui-border is the class that draws the ring, so that is the hook.
 .front-page-cortado
   .ui-border-top, .ui-border
-    --ui-border-color: var(--color-black-soft)
+    --ui-border-color: var(--color-ochre)
 
 // Signup copy is serif with the presenter names (the bold spans) in sans, as on the
 // inline signup block. No utility covers a descendant face switch.

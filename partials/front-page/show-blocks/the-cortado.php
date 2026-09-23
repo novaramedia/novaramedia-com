@@ -90,7 +90,7 @@ if ( empty( $button_label ) ) {
 
           <?php // No top margin: the rule sits directly under the presenters, which are flush to it. ?>
           <div class="grid-item is-xxl-24">
-            <div class="ui-border-bottom ui-border--black"></div>
+            <div class="ui-border-bottom ui-border--ochre"></div>
           </div>
         </div>
       </div>
@@ -133,11 +133,15 @@ if ( empty( $button_label ) ) {
           while ( $cortado_query->have_posts() ) {
             $cortado_query->the_post();
 
+            // Stacked cards need a gap below each one except the last, whose margin would add
+            // to the box's own bottom padding.
+            $is_last_card = $cortado_query->current_post === $cortado_query->post_count - 1;
+
             get_template_part(
               'partials/post-layouts/archive-post-no-thumbnail',
               null,
               array(
-                'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-s-4 mb-l-4',
+                'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8' . ( $is_last_card ? '' : ' mb-s-4 mb-l-4' ),
                 'hide-excerpt'      => true,
               )
             );

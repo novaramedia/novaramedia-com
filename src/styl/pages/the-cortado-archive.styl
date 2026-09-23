@@ -28,3 +28,9 @@
 // inline signup block and the front-page block. No utility covers a descendant face switch.
 .category-archive__the-cortado__copy strong
   font-family: var(--font-family-sans)
+
+// Footer row: pagination left, newsletters link right; on mobile both stack centred.
+// No responsive text-align utility exists.
+@media screen and (max-width: $breakpoint-s)
+  .category-archive__the-cortado__footer-row .grid-item
+    text-align: center
