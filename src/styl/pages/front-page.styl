@@ -3,5 +3,9 @@
 // white boxed sections read as boxes against it, and it gives a boxed product block the
 // option of a white box rather than a brand colour. Under evaluation on the Cortado
 // revisions; front-page section joins (#613) assume it but do not set it.
+//
+// --page-background is for components that fade into the page (the products bar's edge
+// gradients); they fall back to white-soft where it is unset.
 body.home
-  background-color: var(--color-gray-base)
+  --page-background: var(--color-gray-base)
+  background-color: var(--page-background)
