@@ -74,6 +74,10 @@ if ( ! empty( $args['hide-headline'] ) ) {
   $hide_headline = $args['hide-headline'];
 }
 
+// Signups are boxed by default. A caller that wants the signup bare on the page (a brand
+// archive with its own layout) passes 'unboxed' => true.
+$is_boxed = empty( $args['unboxed'] );
+
 if ( ! empty( $args['hide-image'] ) ) {
   $image_id = false; // also widens the form column, which keys off $image_id below
 }
@@ -81,9 +85,14 @@ if ( ! empty( $args['hide-image'] ) ) {
 <div class="email-signup mt-4 mb-4">
   <div class="container">
     <div class="grid-row">
-      <?php // Always boxed: on the off-white page a white signup is a white box, not bare copy. ?>
+      <?php
+      if ( $is_boxed ) { // on the off-white page a white signup is a white box, not bare copy
+        ?>
       <div class="grid-item is-xxl-24">
         <div class="grid-row <?php echo esc_attr( 'background-' . $background_color . ' font-color-' . $text_color ); ?> ui-rounded-box ui-backgrounded-box-padding">
+        <?php
+      }
+      ?>
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
             <?php if ( ! $hide_headline ) { ?>
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
@@ -109,7 +118,13 @@ if ( ! empty( $args['hide-image'] ) ) {
             </div>
           <?php } ?>
         </div>
+        <?php
+        if ( $is_boxed ) { // close the box divs if we opened them
+          ?>
       </div>
     </div>
+          <?php
+        }
+        ?>
   </div>
 </div>
