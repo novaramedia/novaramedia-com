@@ -11,3 +11,4 @@ the release version below.
 |------|------------|
 | `ci-speedup.md` | 4.7.0 — git checkout deploy replaced SFTP in `cypress.yml` |
 | `front-page-layout-editor.md` | 4.7.0 — Front Page > Layout sortable list |
+| `cypress-to-playwright.md` | Unreleased (#600) — Playwright replaced Cypress at 1:1 coverage; Phase 3 backlog lives in `docs/testing/testing.md` |

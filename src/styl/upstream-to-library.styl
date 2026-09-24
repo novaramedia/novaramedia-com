@@ -1,3 +1,47 @@
 // Upstream staging for nm-stylus-library.
 // Shared styles are drafted/overridden here, then promoted into the library and
 // removed once a release ships them. Add new candidates below.
+
+// Cortado brand ochre — Figma token "Standard/Novara -3". Palette candidate for
+// variables.styl (html { --color-ochre }) and modules/backgrounds.styl. Further
+// tints are expected from the other Cortado design views; add them here as a
+// --color-ochre-{n} ramp when known, following the --color-red-{n} pattern.
+html
+  --color-ochre: #B37400
+
+.background-ochre
+  background-color: var(--color-ochre)
+
+// .ui-circle-image — a square image rendered as a circle.
+// Size via --ui-circle-image-size so consumers can scale it; ring colour comes from
+// pairing with .ui-border, whose --ui-border-color the consumer can override.
+// Candidate for modules/ui.styl alongside .ui-rounded-box.
+.ui-circle-image
+  --ui-circle-image-size: 3.25rem // 52px
+  display: block
+  box-sizing: border-box
+  width: var(--ui-circle-image-size)
+  height: var(--ui-circle-image-size)
+  border-radius: 50%
+  object-fit: cover
+
+// .ui-backgrounded-box-padding--flush-bottom — lets media meet the box's bottom edge
+// while keeping the standard 1.5rem 1rem inset on the other three sides. A plain
+// .pb-0 cannot do this: spacing utilities compile before modules/ui.styl, so the
+// component's padding shorthand wins the cascade. Candidate modifier for
+// modules/ui.styl; longer term, utilities should compile after components.
+.ui-backgrounded-box-padding--flush-bottom
+  padding-bottom: 0
+
+// --page-background — the page colour, named for its job rather than its value. The site
+// default is the off-white gray-base; a template that wants its own page colour overrides
+// the variable on its body class rather than setting background-color. Components that
+// fade or blend into the page (the products bar's edge gradients) read the variable, so
+// they follow an override without knowing about it. Candidate for variables.styl and
+// modules/base.styl, replacing the library's hard-coded html white-soft.
+html
+  --page-background: var(--color-gray-base)
+  background-color: var(--page-background)
+
+body
+  background-color: var(--page-background)

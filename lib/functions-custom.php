@@ -231,6 +231,12 @@ function get_above_the_fold_featured_post_ids() {
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
   $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
 
+  // A saved id can outlive the published post it pointed at: unpublished, scheduled back
+  // into the future, or trashed after being featured. Treat those slots as unset so the
+  // fallback below fills them, rather than putting non-public content on the front page
+  // behind a dead link.
+  $featured_posts_ids = array_map( function( $id ) { return nm_is_published( $id ) ? $id : 0; }, $featured_posts_ids );
+
   for ( $i = 0; $i < 8; $i++ ) {
 
     if ( empty( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
@@ -504,6 +510,24 @@ function nm_is_article( $post_id = null ) {
   }
 
   return false;
+}
+
+/**
+ * Is the post live and publicly visible?
+ * Guards ID-driven renderers, where a saved post id can outlive the published post it
+ * pointed at — unpublished, scheduled back into the future, or trashed. Returns false
+ * for a missing or deleted post too, since get_post_status() gives false for those.
+ *
+ * @param integer $post_id Post ID.
+ *
+ * @return Boolean
+ */
+function nm_is_published( $post_id ) {
+  if ( empty( $post_id ) ) {
+    return false;
+  }
+
+  return get_post_status( $post_id ) === 'publish';
 }
 
 /**
