@@ -55,6 +55,7 @@ get_header();
         'newsletter_post_id' => $newsletter_post_id,
         'background-color'   => 'white',
         'button-color'       => 'black',
+        'unboxed'            => true, // sits bare on the page under the hero, not in a box
         'hide-discover'      => true,
         'hide-headline'      => true,
         'hide-image'         => true,

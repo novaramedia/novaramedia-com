@@ -94,7 +94,7 @@ if ( $is_cortado ) {
 }
 ?>
 <div <?php echo $wrapper_attributes; ?>>
-  <div class="background-gray-base ui-rounded-box p-4">
+  <div class="background-white ui-rounded-box p-4">
     <h3 class="font-size-12 font-weight-bold mb-2 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
     <?php if ( ! empty( $description ) ) { ?>
       <p class="font-size-10 mb-3 text-wrap-balance"><?php echo wp_kses_post( $description ); ?></p>

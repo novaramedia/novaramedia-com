@@ -97,6 +97,13 @@ serve a stale 404 for `/the-cortado/` briefly after the flush — purge if so.
 
 ---
 
+### 5. Re-pick any newsletter banner set to Gray Base
+
+**Admin > Newsletters → each newsletter → Banner background color.** Gray Base is now the
+page colour, so it has been removed from the dropdown and a banner still saved with it
+renders as an invisible box on the grey page. Newsletters saved with it show no option
+selected; choose White, Gray Mid or a brand colour and Update. Locally this was The Pick.
+
 ## v4.8.0
 
 ### 1. Notify editorial before deploy — old posts may block on Update
