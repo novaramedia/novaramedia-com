@@ -152,7 +152,8 @@ function nm_purge_kinsta_cache_on_post_delete( $post_id, $post ) {
     return;
   }
 
-  if ( empty( $kinsta_muplugin->kinsta_cache_purge ) ) {
+  // Kinsta auto-updates its mu-plugin; bail rather than fatal if this API ever moves.
+  if ( empty( $kinsta_muplugin->kinsta_cache_purge ) || ! is_callable( array( $kinsta_muplugin->kinsta_cache_purge, 'initiate_purge' ) ) ) {
     return;
   }
 
@@ -167,18 +168,35 @@ add_action( 'before_delete_post', 'nm_purge_kinsta_cache_on_post_delete', 10, 2 
  * The plugin hooks deleted_post, which fires after WP core removes the row; its
  * handler bails when get_post() returns null, so permanent deletes never reach
  * Cloudflare (trashing is unaffected — that purge fires while the row exists).
- * Registering before_delete_post lets the same handler resolve the post and its
- * related URLs. The handler itself skips revisions, autosaves, and non-viewable
- * post types.
+ * Registering the same handler on before_delete_post lets it resolve the post and
+ * its related URLs. The handler itself skips revisions, autosaves, and non-viewable
+ * post types; its later deleted_post run still bails harmlessly.
  *
- * @param array $actions Hook names the Cloudflare plugin purges URLs on.
- * @return array
+ * The plugin's own cloudflare_purge_url_actions filter cannot be used for this: the
+ * plugin applies it while plugins load, before the theme's functions.php runs, so a
+ * theme filter is never seen. Instead the handler instance is taken from the plugin's
+ * existing deleted_post registration — the instance it configured itself — and added
+ * to before_delete_post. Does nothing if the plugin is inactive or changes its hooks.
  */
-function nm_cloudflare_purge_before_delete( $actions ) {
-  $actions[] = 'before_delete_post';
-  return $actions;
+function nm_cloudflare_purge_before_delete() {
+  global $wp_filter;
+
+  if ( empty( $wp_filter['deleted_post'] ) ) {
+    return;
+  }
+
+  foreach ( $wp_filter['deleted_post']->callbacks as $callbacks ) {
+    foreach ( $callbacks as $callback ) {
+      $function = $callback['function'];
+
+      if ( is_array( $function ) && $function[0] instanceof \Cloudflare\APO\WordPress\Hooks && 'purgeCacheByRelevantURLs' === $function[1] ) {
+        add_action( 'before_delete_post', $function, PHP_INT_MAX );
+        return;
+      }
+    }
+  }
 }
-add_filter( 'cloudflare_purge_url_actions', 'nm_cloudflare_purge_before_delete' );
+add_action( 'init', 'nm_cloudflare_purge_before_delete' );
 
 /**
  * Hook template_redirect to 301 redirect author pages to the homepage
