@@ -82,7 +82,7 @@ function nm_cmb_posttype_newsletters_metaboxes() {
     'options'          => array(
         'black'      => __( 'Black', 'cmb2' ),
         'white'      => __( 'White', 'cmb2' ),
-        'gray-base'  => __( 'Gray Base', 'cmb2' ),
+        'gray-mid'   => __( 'Gray Mid', 'cmb2' ), // gray-base is the page colour, so not offered
         'acfm-pink'  => __( 'ACFM Pink', 'cmb2' ),
         'yellow'     => __( 'Yellow', 'cmb2' ),
         'green'      => __( 'Green', 'cmb2' ),

@@ -59,8 +59,9 @@
 // The inactive schedule tab has to contrast with whatever the form sits on: white on the
 // gray-base page, gray-base inside a white box (the support page's desktop form). The
 // colour is --support-form-tab-background, flipped by the context rule below. Top corners
-// follow the form's own radius (--ui-border-radius, from .ui-rounded-box): a larger radius
-// left the red form showing at the outer corners.
+// follow the form's own radius (--ui-border-radius): the form is a nested box
+// (.ui-rounded-box--nested, the large radius), and matching it keeps the red form from
+// showing at the tabs' outer corners.
 .background-white .support-form
   --support-form-tab-background: var(--color-gray-base)
 

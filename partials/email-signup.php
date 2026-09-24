@@ -36,12 +36,6 @@ if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
 }
 
-// gray-base is the page colour, so a gray-base box would vanish into the page. Newsletters
-// still configured with it render as a white box instead.
-if ( $background_color === 'gray-base' ) {
-  $background_color = 'white';
-}
-
 if ( ! empty( $args['text-color'] ) ) {
   $text_color = $args['text-color'];
 }
