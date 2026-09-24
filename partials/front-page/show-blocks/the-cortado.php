@@ -45,10 +45,16 @@ $newsletter         = get_posts(
 $newsletter_post_id = ! empty( $newsletter ) ? $newsletter[0]->ID : false;
 $mailchimp_key      = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_mailchimp_key', true ) : false;
 
-// Signup copy and button label come off the same record, so a cadence or presenter change
-// is an edit rather than a deploy. Copy is serif with the presenter names (the bold spans)
-// in sans, as on the inline signup block — .front-page-cortado__copy carries the face switch.
-$signup_copy  = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_banner_text', true ) : '';
+// Signup copy is the category's formatted description, as on the archive; the newsletter's
+// short banner text (the inline Gutenberg block's copy) is the fallback. Either way it's an
+// edit rather than a deploy. Copy is serif with the presenter names (the bold spans) in
+// sans — .front-page-cortado__copy carries the face switch.
+$signup_copy = get_term_meta( $cortado_category->term_id, '_nm_category_formatted_description', true );
+
+if ( empty( $signup_copy ) && $newsletter_post_id ) {
+  $signup_copy = get_post_meta( $newsletter_post_id, '_nm_banner_text', true );
+}
+
 $button_label = $newsletter_post_id ? get_post_meta( $newsletter_post_id, '_nm_banner_button_label', true ) : '';
 
 if ( empty( $button_label ) ) {
@@ -99,9 +105,15 @@ if ( empty( $button_label ) ) {
       <div class="grid-item is-xxl-24 mt-4">
         <div class="grid-row grid-row--nested">
           <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
-            <a href="<?php echo esc_url( get_the_permalink( $featured_post_id ) ); ?>" class="ui-hover u-display-block">
-              <?php render_thumbnail( $featured_post_id, 'col12-16to9', array( 'class' => 'ui-rounded-box u-display-block' ) ); ?>
-            </a>
+            <?php // Tag overlay as on the other front-page thumbnails. The tag is its own link, so it sits beside the thumbnail link rather than inside it. ?>
+            <div class="layout-thumbnail-frame">
+              <div class="layout-thumbnail-frame__inner mt-1 ml-1">
+                <?php render_post_ui_tags( $featured_post_id, true, true, 'no-border' ); ?>
+              </div>
+              <a href="<?php echo esc_url( get_the_permalink( $featured_post_id ) ); ?>" class="ui-hover u-display-block">
+                <?php render_thumbnail( $featured_post_id, 'col12-16to9', array( 'class' => 'ui-rounded-box u-display-block' ) ); ?>
+              </a>
+            </div>
           </div>
           <div class="grid-item is-s-24 is-xxl-12">
             <p class="font-size-8 font-weight-bold text-uppercase">Latest Cortado</p>

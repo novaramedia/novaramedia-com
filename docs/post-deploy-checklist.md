@@ -25,6 +25,9 @@ for each.
 Cortado sit *inside* Opinion, or *beside* it as its own child of Articles? The design
 work assumed a direct child of Articles (`/category/articles/the-cortado/`); the local
 database currently nests it under Opinion (`/category/articles/opinion/the-cortado/`).
+The digital team's recommendation is the sibling option: nested, Cortado posts would dominate
+Opinion, and their UI tag reads "Opinion" (the tag shows the post's first
+sub-category) rather than "The Cortado".
 One knock-on worth knowing before choosing: `nm_is_article()` treats the `articles` term or
 a *direct* child of it as an article, so a post filed only under a grandchild category would
 be classified as a non-article and render its short description rather than its standfirst.
@@ -52,9 +55,9 @@ This flush also registers the paginated vanity rules (`^<path>/page/([0-9]{1,})/
 for **every** branded path, not just Cortado — see #607. Until it runs,
 `/downstream/page/2/` and its equivalents keep 404ing as they do today.
 
-### 3. Fill the newsletter record — copy, button label and Mailchimp key
+### 3. Fill the newsletter record and category copy
 
-**Admin > Newsletters > The Cortado.** Three fields drive all three Cortado
+**Admin > Newsletters > The Cortado.** Three fields drive the Cortado signup
 surfaces (archive signup, front page block, inline signup block):
 
 | Field | Consequence if empty |
@@ -69,8 +72,19 @@ Banner text accepts `<strong>` and `<em>`. The launch copy is:
 Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven</strong>, every Monday and Friday morning.
 ```
 
-On the inline signup block those bold spans render in the sans face; elsewhere they
-are ordinary bold. That is deliberate — the treatment is scoped per surface in CSS.
+That is the short copy, used by the inline signup block. The archive signup and the
+front page block use the longer copy from the category instead:
+
+**Admin > Posts > Categories > The Cortado → Formatted description**
+(`_nm_category_formatted_description`). Empty falls back to the banner text above. Keep
+the core Description field plain text — it feeds Open Graph and meta descriptions. Launch copy:
+
+```html
+Your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven.</strong> Brewed on Monday and Friday mornings.
+```
+
+On all three Cortado surfaces the bold spans render in the sans face against serif
+body copy — the treatment is scoped per surface in CSS.
 
 ### 4. Verify the three Cortado URLs at the edge
 

@@ -15,6 +15,10 @@ $newsletter = get_posts(
 );
 $newsletter_post_id = ! empty( $newsletter ) ? $newsletter[0]->ID : false;
 
+// Signup copy is the category's formatted description; the newsletter's short banner
+// text is kept for the inline Gutenberg block. Empty falls through to the banner text.
+$signup_copy = get_term_meta( get_queried_object_id(), '_nm_category_formatted_description', true );
+
 // Page 1 pulls the first post out as the featured "Latest" block; the grid that
 // follows continues the same loop, so pagination counts stay honest (Downstream pattern).
 $query_var_paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
@@ -55,6 +59,7 @@ get_header();
       null,
       array(
         'newsletter_post_id' => $newsletter_post_id,
+        'copy'               => $signup_copy,
         'background-color'   => 'white',
         'button-color'       => 'black',
         'hide-discover'      => true,

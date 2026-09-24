@@ -31,6 +31,11 @@ $headline = ! empty( $meta['_nm_banner_headline'] ) ? $meta['_nm_banner_headline
 $copy = ! empty( $meta['_nm_banner_text'] ) ? $meta['_nm_banner_text'][0] : false;
 $image_id = ! empty( $meta['_nm_banner_image_id'] ) ? $meta['_nm_banner_image_id'][0] : false;
 
+// A caller with its own copy source (e.g. a category's formatted description) passes it in.
+if ( ! empty( $args['copy'] ) ) {
+  $copy = $args['copy'];
+}
+
 // override colours if set on the partial $args
 if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
