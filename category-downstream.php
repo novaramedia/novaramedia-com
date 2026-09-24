@@ -39,7 +39,7 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
   <div class="container">
     <div class="grid-row mt-4 mb-4">
       <div class="grid-item is-xxl-24">
-        <div class="grid-row grid-row--nested background-gray-base ui-rounded-box ui-backgrounded-box-padding">
+        <div class="grid-row grid-row--nested background-white ui-rounded-box ui-backgrounded-box-padding">
           <div class="grid-item is-xxl-24">
             <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
             <?php if ( $podcast_url ) { ?>

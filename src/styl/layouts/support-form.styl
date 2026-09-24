@@ -56,19 +56,21 @@
   background-color: var(--color-red)
   color: var(--color-white-soft)
 
+// The mobile schedule tabs sit on the page above the red form; white, not gray-base,
+// so the inactive tab still reads as a tab now that gray-base is the page colour.
 .support-form__schedule-mobile
   display: none
-  background-color: var(--color-gray-base)
+  background-color: var(--color-white-soft)
   border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
   flex-direction: row
   justify-content: center
 
   .support-form__button
-    background-color: var(--color-gray-base)
+    background-color: var(--color-white-soft)
     color: var(--color-black-soft)
 
     &:hover:not(:focus):not(.ui-button--active)
-      background-color: var(--color-gray-base)
+      background-color: var(--color-white-soft)
       color: var(--color-gray-mid)
 
     &.ui-button--active

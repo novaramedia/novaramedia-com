@@ -36,8 +36,19 @@ if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
 }
 
+// gray-base is the page colour, so a gray-base box would vanish into the page. Newsletters
+// still configured with it render as a white box instead.
+if ( $background_color === 'gray-base' ) {
+  $background_color = 'white';
+}
+
 if ( ! empty( $args['text-color'] ) ) {
   $text_color = $args['text-color'];
+}
+
+// White text (the default) would vanish on a white box.
+if ( $background_color === 'white' && $text_color === 'white' ) {
+  $text_color = 'black';
 }
 
 if ( ! empty( $args['button-color'] ) ) {
@@ -70,14 +81,9 @@ if ( ! empty( $args['hide-image'] ) ) {
 <div class="email-signup mt-4 mb-4">
   <div class="container">
     <div class="grid-row">
-      <?php
-      if ( $background_color !== 'white' ) { // if the background color is not white, wrap in a box
-        ?>
+      <?php // Always boxed: on the off-white page a white signup is a white box, not bare copy. ?>
       <div class="grid-item is-xxl-24">
-        <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box ui-backgrounded-box-padding">
-        <?php
-      }
-      ?>
+        <div class="grid-row <?php echo esc_attr( 'background-' . $background_color . ' font-color-' . $text_color ); ?> ui-rounded-box ui-backgrounded-box-padding">
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
             <?php if ( ! $hide_headline ) { ?>
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
@@ -103,13 +109,7 @@ if ( ! empty( $args['hide-image'] ) ) {
             </div>
           <?php } ?>
         </div>
-        <?php
-        if ( $background_color !== 'white' ) { // close the box divs if we opened them
-          ?>
       </div>
     </div>
-          <?php
-        }
-        ?>
   </div>
 </div>
