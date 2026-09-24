@@ -45,6 +45,11 @@ if ( ! empty( $args['text-color'] ) ) {
   $text_color = $args['text-color'];
 }
 
+// White text (the default) would vanish on a white box.
+if ( $background_color === 'white' && $text_color === 'white' ) {
+  $text_color = 'black';
+}
+
 if ( ! empty( $args['button-color'] ) ) {
   $button_color = $args['button-color'];
 }
@@ -68,6 +73,10 @@ if ( ! empty( $args['hide-headline'] ) ) {
   $hide_headline = $args['hide-headline'];
 }
 
+// Signups are boxed by default. A caller that wants the signup bare on the page (a brand
+// archive with its own layout) passes 'unboxed' => true.
+$is_boxed = empty( $args['unboxed'] );
+
 if ( ! empty( $args['hide-image'] ) ) {
   $image_id = false; // also widens the form column, which keys off $image_id below
 }
@@ -84,10 +93,10 @@ if ( ! empty( $args['copy-classes'] ) ) {
   <div class="container">
     <div class="grid-row">
       <?php
-      if ( $background_color !== 'white' ) { // if the background color is not white, wrap in a box
+      if ( $is_boxed ) { // on the off-white page a white signup is a white box, not bare copy
         ?>
       <div class="grid-item is-xxl-24">
-        <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box ui-backgrounded-box-padding">
+        <div class="grid-row <?php echo esc_attr( 'background-' . $background_color . ' font-color-' . $text_color ); ?> ui-rounded-box ui-backgrounded-box-padding">
         <?php
       }
       ?>
@@ -117,7 +126,7 @@ if ( ! empty( $args['copy-classes'] ) ) {
           <?php } ?>
         </div>
         <?php
-        if ( $background_color !== 'white' ) { // close the box divs if we opened them
+        if ( $is_boxed ) { // close the box divs if we opened them
           ?>
       </div>
     </div>

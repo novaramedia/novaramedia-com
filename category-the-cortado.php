@@ -62,6 +62,7 @@ get_header();
         'copy'               => $signup_copy,
         'background-color'   => 'white',
         'button-color'       => 'black',
+        'unboxed'            => true, // sits bare on the page under the hero, not in a box
         'hide-discover'      => true,
         'hide-headline'      => true,
         'hide-image'         => true,
