@@ -305,7 +305,7 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">

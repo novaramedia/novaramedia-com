@@ -47,7 +47,7 @@ if ( have_posts() ) {
     $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
   }
   ?>
-  <article id="page" class="support-page background-gray-base support-page__background-cover-image" data-testid="support-page">
+  <article id="page" class="support-page support-page__background-cover-image" data-testid="support-page">
     <div class="container">
       <div class="grid-item">
         <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
