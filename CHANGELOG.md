@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Downstream front page block sits in a white box, matching the other product blocks
 - Off-white page background across the whole site; newsletter signups on it are always boxed, white ones included
 - End-to-end tests run on Playwright instead of Cypress, with third-party embeds blocked during tests so page loads no longer wait on SoundCloud or YouTube
 - Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
