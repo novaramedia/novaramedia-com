@@ -60,6 +60,37 @@ test.describe('Support Page', () => {
     ).toBeAttached();
   });
 
+  test('should render support forms with unique IDs', async ({ page }) => {
+    // Each form renders a mobile and a desktop set of controls, one hidden by CSS. Their
+    // IDs must still be unique, or aria-labelledby and label[for] resolve to the first match.
+    const ids = await page
+      .locator('.support-form [id]')
+      .evaluateAll((elements) => elements.map((el) => el.id));
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+
+    expect(ids.length).toBeGreaterThan(0);
+    expect(duplicates).toEqual([]);
+  });
+
+  test('should label each donation radiogroup from within its own set', async ({
+    page,
+  }) => {
+    const unresolved = await page
+      .locator('.support-form [role="radiogroup"][aria-labelledby]')
+      .evaluateAll((groups) =>
+        groups
+          .filter((group) => {
+            const label = document.getElementById(
+              group.getAttribute('aria-labelledby')
+            );
+            return !label || label.parentElement !== group.parentElement;
+          })
+          .map((group) => group.getAttribute('aria-labelledby'))
+      );
+
+    expect(unresolved).toEqual([]);
+  });
+
   test('should load without console errors', async ({ consoleErrors }) => {
     expect(consoleErrors).toEqual([]);
   });
