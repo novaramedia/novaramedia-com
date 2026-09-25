@@ -10,10 +10,9 @@ const { test, expect } = require('./helpers/fixtures');
 
 test.describe('Brand vanity URLs', () => {
   test('should serve /committed/ in place', async ({ request }) => {
-    const response = await request.get(
-      `/committed/?playwright_cache_bust=${Date.now()}`,
-      { maxRedirects: 0 }
-    );
+    // No cache-bust query: the removed redirect compared the whole REQUEST_URI, query
+    // included, so a query string would hide a regression.
+    const response = await request.get('/committed/', { maxRedirects: 0 });
 
     expect(response.status()).toBe(200);
   });
