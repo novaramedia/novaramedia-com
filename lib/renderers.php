@@ -126,12 +126,16 @@ function render_ui_tag( $label, $url, $variants = array() ) {
  *
  * This function outputs the schedule buttons for the support form.
  *
+ * @param string $instance Unique ID prefix for this set of buttons. The form renders a mobile
+ *                         and a desktop set, so each needs its own to keep element IDs unique.
+ * @param string $schedule_classes Additional CSS classes for the radiogroup.
+ *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_schedule_buttons( $schedule_classes = '' ) {
+function render_support_form_schedule_buttons( $instance, $schedule_classes = '' ) {
   ?>
-    <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
-    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?> font-weight-bold" role="radiogroup" aria-labelledby="donation-frequency-label">
+    <p class="u-visuallyhidden" id="<?php echo esc_attr( $instance ); ?>__frequency-label">Choose donation frequency</p>
+    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?> font-weight-bold" role="radiogroup" aria-labelledby="<?php echo esc_attr( $instance ); ?>__frequency-label">
       <div class="is-xxl-12">
         <button class="support-form__button ui-button ui-button--fill-width ui-button--active support-form__schedule-option support-form__schedule-option-left grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
       </div>
@@ -147,15 +151,16 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  * This function outputs the amount and submit buttons for the support form.
  *
  * @param object $values The values object containing the donation amounts.
- * @param int $instance The unique instance identifier for the form.
+ * @param string $instance Unique ID prefix for this set of buttons. The form renders a mobile
+ *                         and a desktop set, so each needs its own to keep element IDs unique.
  *
  * @return void Outputs the HTML form directly.
  */
 function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
-    <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
-    <div class="grid-row grid-row--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
+    <p class="u-visuallyhidden" id="<?php echo esc_attr( $instance ); ?>__amount-label">Choose your donation amount</p>
+    <div class="grid-row grid-row--nested-tight mb-4" role="radiogroup" aria-labelledby="<?php echo esc_attr( $instance ); ?>__amount-label">
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
@@ -307,7 +312,7 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
     <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-      <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
+      <?php render_support_form_schedule_buttons( $instance . '-mobile', 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
         <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
         <div class="support-form__desktop-container grid-row">
@@ -316,11 +321,11 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
             <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
           <div class="grid-item is-xxl-12 support-form__right-column-desktop">
-            <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
+            <?php render_support_form_schedule_buttons( $instance . '-desktop', 'support-form__schedule-desktop' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance . '-desktop', 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
-        <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
+        <?php render_support_form_amount_buttons( $active_values, $instance . '-mobile', 'support-form__buttons-mobile' ); ?>
         <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>

@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
 - Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
 - Pagination on product vanity URLs — `/downstream/page/2/` and the equivalent on every other branded path 404'd instead of serving page two (#607)
+- Support form's frequency and amount controls are announced with their own labels by screen readers; duplicate IDs had pointed them at the wrong ones (#609)
 
 ### Security
 
