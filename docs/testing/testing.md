@@ -27,6 +27,7 @@ tests/e2e/
 ├── single-post.spec.js         # articles
 ├── single-post-audio.spec.js   # audio / podcast
 ├── single-post-video.spec.js
+├── the-cortado.spec.js         # Cortado archive, newsletter 301, front-page block
 └── helpers/
     ├── fixtures.js             # test/expect with embed blocking + console-error collector
     ├── gotoFresh.js            # cache-busting navigation
@@ -172,7 +173,7 @@ Common causes:
 Ranked by regression risk, carried over from `docs/plans/archive/cypress-to-playwright.md`:
 
 1. Front page layout editor rendering: assert section order matches the saved layout
-2. Category archives for articles, audio and video (only Novara Live is covered today)
+2. Category archives for articles, audio and video (Novara Live and The Cortado are covered today)
 3. Embed consent gate, once #523 ships: placeholder renders, consent click loads the iframe (needs `test.use({ blockEmbeds: false })`)
 4. Newsletter signup block: presence and validation states
 5. Support page donation amount selection, without submitting a payment

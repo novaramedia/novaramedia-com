@@ -91,10 +91,11 @@
         fill: var(--color-black-soft) !important
 
 // THE CORTADO product block. Only properties with no library-helper equivalent
-// live here; the ochre box, grid and spacing are utility classes in the markup.
+// live here; the white box, grid and spacing are utility classes in the markup.
 
-// Wordmark is inlined so its currentColor fill can be set here. Sized by height so
-// it tracks the type scale rather than an arbitrary width; the viewBox gives the width.
+// Wordmark is inlined so its currentColor fill can be set here. Brand ochre on the white
+// box. Sized by height so it tracks the type scale rather than an arbitrary width; the
+// viewBox gives the width.
 .front-page-cortado__wordmark
   color: var(--color-ochre)
   display: block
@@ -115,12 +116,20 @@
   width: 100%
   height: auto
 
-// Eyebrows and the archive link carry the brand colour.
-.front-page-cortado__label
-  color: var(--color-ochre)
+// Stacked on mobile the presenters would otherwise fill the column and dominate the
+// block, so they drop to two thirds, centred.
+@media screen and (max-width: $breakpoint-s)
+  .front-page-cortado__presenters
+    width: 66.667%
+    margin: 0 auto
 
-// Card rules and avatar rings are black here, unlike the ochre on the archive.
+// Card rules and avatar rings take the brand ochre, as on the archive.
 // .ui-border is the class that draws the ring, so that is the hook.
 .front-page-cortado
   .ui-border-top, .ui-border
-    --ui-border-color: var(--color-black-soft)
+    --ui-border-color: var(--color-ochre)
+
+// Signup copy is serif with the presenter names (the bold spans) in sans, as on the
+// inline signup block. No utility covers a descendant face switch.
+.front-page-cortado__copy strong
+  font-family: var(--font-family-sans)

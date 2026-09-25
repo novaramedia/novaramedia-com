@@ -66,19 +66,23 @@ The oversized wordmark follows `category-if-i-speak.php`, but the hero uses the
 Brand CSS lives in `src/styl/pages/the-cortado-archive.styl`, following `dyor-archive.styl`,
 not in an inline `<style>`. Assets live in `src/img/products/the-cortado/`.
 
-1. **Hero** — ochre box inside the container (`ui-rounded-box`), `NEWSLETTER` eyebrow,
-   oversized "THE CORTADO" wordmark inlined as SVG, presenters flush to the box's bottom
-   edge via `ui-backgrounded-box-padding--flush-bottom`
+1. **Hero** — ochre box inside the container (`ui-rounded-box`), oversized "THE CORTADO"
+   wordmark inlined as SVG, presenters flush to the box's bottom edge via
+   `ui-backgrounded-box-padding--flush-bottom`. The `NEWSLETTER` eyebrow above the wordmark
+   was removed 2026-09-22 on design feedback
 2. **Signup band** — strapline left, Mailchimp form right, white background
 3. **`LATEST CORTADO`** — featured post, image left, headline / byline / standfirst right
-4. **`PAST ISSUES`** — three-column grid of thumbnail-less cards
+4. **`PAST CORTADOS`** — three-column grid of thumbnail-less cards (heading was `PAST ISSUES`
+   until 2026-09-22; the front-page block uses the same `LATEST CORTADO` / `PAST CORTADOS` pair)
 5. **Footer row** — "Older" pagination left, "Discover all our newsletters" right
 
 ## Components
 
 ### Reused unchanged
 
-- `partials/email-signup.php` with `background-color: white` and `hide-discover: true`
+- `partials/email-signup.php` with `background-color: white` and `hide-discover: true`.
+  Revised 2026-09-22: the partial gained a `copy-classes` arg so the band's copy can take
+  the brand treatment (serif, presenter names in sans) used by the inline signup block
 - `render_mailchimp_signup_form()` — first name, email and the Privacy Policy checkbox
   already match the design, including the `ui-input--border-gray` variant that applies
   on a white background
@@ -154,7 +158,7 @@ not something the template can enforce or fall back from.
 
 Settled during the work, recorded so they are not reopened:
 
-- "PAST ISSUES" follows the site default of 18 per page rather than the Figma frame's 12 —
+- "PAST CORTADOS" follows the site default of 18 per page rather than the Figma frame's 12 —
   Patrick's call, recorded in the implementation plan. No `pre_get_posts` hook ships.
 
 ## Out of scope

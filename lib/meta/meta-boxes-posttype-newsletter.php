@@ -48,7 +48,7 @@ function nm_cmb_posttype_newsletters_metaboxes() {
   $cmb_term->add_field(
     array(
       'name' => esc_html__( 'Banner text', 'cmb2' ),
-      'desc' => esc_html__( 'Copy for the banner version of the newsletter signup form (optional). Basic formatting is allowed — wrap words in <strong> to bold them, <em> to italicise.', 'cmb2' ),
+      'desc' => esc_html__( 'Short copy for the banner version of the newsletter signup form, e.g. the inline signup block in posts (optional). Brand archives may use the category\'s Formatted description instead. Basic formatting is allowed — wrap words in <strong> to bold them, <em> to italicise.', 'cmb2' ),
       'id'   => $prefix . 'banner_text',
       'type' => 'textarea_small',
     )

@@ -15,6 +15,10 @@ $newsletter = get_posts(
 );
 $newsletter_post_id = ! empty( $newsletter ) ? $newsletter[0]->ID : false;
 
+// Signup copy is the category's formatted description; the newsletter's short banner
+// text is kept for the inline Gutenberg block. Empty falls through to the banner text.
+$signup_copy = get_term_meta( get_queried_object_id(), '_nm_category_formatted_description', true );
+
 // Page 1 pulls the first post out as the featured "Latest" block; the grid that
 // follows continues the same loop, so pagination counts stay honest (Downstream pattern).
 $query_var_paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
@@ -30,7 +34,6 @@ get_header();
       <div class="grid-row background-ochre ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
 
         <div class="grid-item is-xxl-24">
-          <p class="font-size-10 font-weight-bold text-uppercase mb-1">Newsletter</p>
           <h1 class="category-archive__the-cortado__wordmark m-0" aria-label="The Cortado">
             <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
           </h1>
@@ -53,12 +56,16 @@ get_header();
       null,
       array(
         'newsletter_post_id' => $newsletter_post_id,
+        'testid'             => 'cortado-signup',
+        'copy'               => $signup_copy,
         'background-color'   => 'white',
         'button-color'       => 'black',
         'unboxed'            => true, // sits bare on the page under the hero, not in a box
         'hide-discover'      => true,
         'hide-headline'      => true,
         'hide-image'         => true,
+        // Serif copy, presenter names in sans — as on the inline signup block and front page.
+        'copy-classes'       => 'category-archive__the-cortado__copy font-serif font-size-12 font-size-s-10 mr-5 text-wrap-balance',
       )
     );
     ?>
@@ -66,7 +73,7 @@ get_header();
     <div class="grid-row">
       <?php // Border sits on an inner element: .grid-item carries half-gutter padding, so a border on it would overhang the content columns by 8px each side. ?>
       <div class="grid-item is-xxl-24">
-        <div class="ui-border-bottom ui-border--gray-mid"></div>
+        <div class="ui-border-bottom ui-border--ochre"></div>
       </div>
     </div>
   </div>
@@ -80,7 +87,7 @@ get_header();
     the_post();
     $featured_post_id = get_the_ID();
     ?>
-  <section class="container mt-5 mb-5" data-testid="cortado-latest">
+  <section class="container mt-5 mt-s-4 mb-5" data-testid="cortado-latest">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 mb-s-4">
         <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
@@ -90,7 +97,7 @@ get_header();
       <div class="grid-item is-s-24 is-xxl-12">
         <p class="font-size-8 font-weight-bold text-uppercase">Latest Cortado</p>
         <a href="<?php the_permalink(); ?>" class="ui-hover u-display-block">
-          <h2 class="font-size-15 font-weight-bold text-wrap-pretty mt-2"><?php the_title(); ?></h2>
+          <h2 class="<?php echo esc_attr( nm_get_lead_headline_size_classes( get_the_title() ) ); ?> font-weight-bold text-wrap-pretty mt-2"><?php the_title(); ?></h2>
           <p class="font-size-10 font-weight-bold text-uppercase mt-2"><?php render_bylines( $featured_post_id ); ?></p>
           <div class="font-size-10 mt-2"><?php render_standfirst( $featured_post_id ); ?></div>
         </a>
@@ -101,12 +108,12 @@ get_header();
   }
   ?>
 
-  <?php // ── Section 4: Past issues ── ?>
+  <?php // ── Section 4: Past Cortados ── ?>
   <?php if ( have_posts() ) { ?>
   <section class="container category-archive__the-cortado__past-issues mt-5 mb-5" data-testid="cortado-past-issues">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-4">
-        <h2 class="font-size-8 font-weight-bold text-uppercase">Past Issues</h2>
+        <h2 class="font-size-8 font-weight-bold text-uppercase">Past Cortados</h2>
       </div>
       <?php
       while ( have_posts() ) {
@@ -116,7 +123,7 @@ get_header();
           'partials/post-layouts/archive-post-no-thumbnail',
           null,
           array(
-            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5',
+            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5 mb-s-4',
           )
         );
       }
@@ -126,7 +133,8 @@ get_header();
   <?php } ?>
 
   <?php // ── Section 5: Footer row ── ?>
-  <section class="container mb-5" data-testid="cortado-footer-row">
+  <?php // Split left/right; stacks and centres on mobile (the-cortado-archive.styl) so full pagination and the action link cannot collide. The pagination partial renders nothing when there is one page. ?>
+  <section class="container category-archive__the-cortado__footer-row mb-5" data-testid="cortado-footer-row">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 font-size-10 font-weight-bold mb-s-3">
         <?php get_template_part( 'partials/pagination' ); ?>

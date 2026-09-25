@@ -31,6 +31,11 @@ $headline = ! empty( $meta['_nm_banner_headline'] ) ? $meta['_nm_banner_headline
 $copy = ! empty( $meta['_nm_banner_text'] ) ? $meta['_nm_banner_text'][0] : false;
 $image_id = ! empty( $meta['_nm_banner_image_id'] ) ? $meta['_nm_banner_image_id'][0] : false;
 
+// A caller with its own copy source (e.g. a category's formatted description) passes it in.
+if ( ! empty( $args['copy'] ) ) {
+  $copy = $args['copy'];
+}
+
 // override colours if set on the partial $args
 if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
@@ -75,8 +80,19 @@ $is_boxed = empty( $args['unboxed'] );
 if ( ! empty( $args['hide-image'] ) ) {
   $image_id = false; // also widens the form column, which keys off $image_id below
 }
+
+// Class list for the copy paragraph. Default is the generic band's bold sans; a brand can
+// pass its own treatment (The Cortado: serif copy with the bold spans in sans).
+$copy_classes = 'font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance';
+
+if ( ! empty( $args['copy-classes'] ) ) {
+  $copy_classes = $args['copy-classes'];
+}
+
+// Optional Playwright hook for a caller that needs to target its own signup.
+$testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
 ?>
-<div class="email-signup mt-4 mb-4">
+<div class="email-signup mt-4 mb-4"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
   <div class="container">
     <div class="grid-row">
       <?php
@@ -92,7 +108,7 @@ if ( ! empty( $args['hide-image'] ) ) {
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
             <?php } ?>
             <?php if ( ! empty( $copy ) ) { ?>
-            <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
+            <p class="<?php echo esc_attr( $copy_classes ); ?>">
               <?php echo wp_kses_post( $copy ); ?>
             </p>
             <?php } ?>

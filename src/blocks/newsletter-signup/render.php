@@ -59,8 +59,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 
 // The Cortado carries its own inline-signup design: ochre box, wordmark instead of a
-// headline, and the form beside the copy rather than beneath it. The copy itself is the
-// shared _nm_banner_text (or the block's customText override) — only the layout differs.
+// headline, and the form beside the copy rather than beneath it. The copy is the short
+// _nm_banner_text (or the block's customText override); the archive and front page use the
+// category's longer _nm_category_formatted_description instead.
 // Its bold spans render in the sans face via .newsletter-signup-cortado__copy strong.
 $is_cortado = get_post_field( 'post_name', $newsletter_id ) === 'the-cortado';
 

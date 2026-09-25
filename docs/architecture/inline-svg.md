@@ -148,4 +148,5 @@ path, never `src`.
 - `partials/front-page/show-blocks/audio-acfm.php` and `audio.php` — product logos
 - `partials/specials/banners/focus-breaking-britain.php`, `survey-link.php` — decorative vectors
 - `category-the-cortado.php` and `partials/front-page/show-blocks/the-cortado.php` — the
-  Cortado wordmark, one file rendered cream on ochre and ochre on the page background
+  Cortado wordmark, one file in two treatments: cream on the ochre category hero, ochre on
+  the white front-page box

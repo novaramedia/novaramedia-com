@@ -2,7 +2,7 @@
 /**
  * Thumbnail-less archive post layout.
  *
- * Author avatar, headline, byline with date, then standfirst. For archive grids whose
+ * Author avatar, headline, byline, then standfirst. For archive grids whose
  * design carries no post image — first used on The Cortado category archive. Sibling of
  * archive-post.php, minus the image-size and text-size args.
  *
@@ -45,7 +45,6 @@ $avatar_post_id = ( ! empty( $contributors ) && has_post_thumbnail( $contributor
       <h5 class="index-post-title font-size-11 font-weight-bold text-wrap-pretty"><?php the_title(); ?></h5>
       <h6 class="font-size-8 font-weight-bold text-uppercase mt-2">
         <?php render_bylines( $this_post_id ); ?>
-        <span class="ml-3"><?php echo esc_html( get_the_date( NM_DATE_FORMAT_LONG ) ); ?></span>
       </h6>
       <?php
       if ( ! $hide_excerpt ) {

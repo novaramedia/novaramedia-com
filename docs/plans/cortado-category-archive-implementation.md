@@ -332,6 +332,8 @@ Invoke the `nm-design-system` skill for the type scale, container and grid class
 
 **As built (2026-09-18):** the template's inline `<style>` is gone. Its four rules moved to `src/styl/pages/the-cortado-archive.styl`, imported from `site.styl` after the other `pages/` files, following `dyor-archive.styl` and `novara-fm-archive.styl`. Static CSS belongs in the build, not the template; the five other category templates that still inline theirs (ACFM, Committed, Death in Westminster, Foreign Agent, If I Speak) are a separate cleanup. The front-page block's ring-colour override now targets `.ui-border` rather than `.ui-circle-image`, matching the archive — `.ui-border` is the class that draws the ring.
 
+**Revised (2026-09-22):** the `NEWSLETTER` eyebrow above the wordmark was removed on design feedback. The hero now opens with the `<h1>` wordmark.
+
 Add `data-testid="cortado-hero"` to the hero element, and `data-testid="main-content"` to the `<main>`. Note that `category-downstream.php` and `category-if-i-speak.php` both omit the `main-content` testid while `category.php` and `category-novara-live.php` carry it — follow the ones that have it, since Task 9's spec depends on it.
 
 - [ ] **Step 6: Present the markup for approval**
@@ -447,6 +449,8 @@ treated imagery is artworked. Post 69500's thumbnail is now the design's own `Re
 ---
 
 ### Task 7: Past issues grid
+
+**Revised (2026-09-22):** heading copy is now `PAST CORTADOS`, and the front-page block's eyebrows are `LATEST CORTADO` / `PAST CORTADOS` (were `LATEST ISSUE` / `RECENT ISSUES`). Test ids and class names keep `past-issues`.
 
 **Files:**
 - Modify: `category-the-cortado.php`
@@ -564,6 +568,33 @@ Target `development`. Link the Notion card, the spec, and issue #606 as related-
 ---
 
 ## Follow-ups
+
+**Revised (2026-09-23):** the front page takes the off-white `--color-gray-base` background
+(`src/styl/pages/front-page.styl`, the DYOR archive pattern) on this branch, from Pietro's
+2026-09-22 list. Two reasons to do it here rather than wait for the section-joins work: it is
+the site's direction of travel, and against off-white the Cortado block could sit in a white
+box instead of the full ochre, which is the option under evaluation. Playwright coverage for
+the archive, the newsletter 301 and the front-page block landed as `tests/e2e/the-cortado.spec.js`.
+
+**Decided (2026-09-23):** white box. Pietro's Figma revision (Newsletters file, node
+`5268:11231`) puts the front-page block in a `background-white` box with an ochre wordmark;
+the Latest Cortado sits directly on the box rather than in an inner card, and the Past
+Cortados are ruled rows again. The `boxed` arg on `archive-post-no-thumbnail.php`, added for
+the ochre version, had no other consumer and is removed.
+Latest Cortado headlines on the block and the archive scale with title length on the same
+cadence as the front page's primary above-the-fold slot, via the shared
+`nm_get_lead_headline_size_classes()` (lib/functions-custom.php). Stopgap until the design
+has a mobile pass — the Figma is desktop-only.
+The date is dropped from `archive-post-no-thumbnail.php` cards (block and archive) — not
+shown on small post cards elsewhere on the site.
+Rules and avatar rings are ochre in both contexts; the front-page block previously used black.
+Mobile spacing pass: on the archive, Latest takes `mt-s-4` so the signup divider has 1rem
+either side, and past cards take `mb-s-4` to match the `pt-4` under each rule. On the block,
+the last past card drops its bottom margin so the box's bottom padding stands alone.
+On mobile the archive footer row stacks pagination over the newsletters link, centred, so
+full pagination can't collide with the link; desktop keeps the left/right split. On mobile the block's presenters drop to
+two thirds width, centred.
+
 
 - Add a note to the If I Speak thumbnail-less card that `partials/post-layouts/archive-post-no-thumbnail.php` already exists and should be consumed rather than rebuilt. The `notion-novara` MCP server was unreachable when this plan was written.
 - **Playwright spec for the Cortado archive**, once `feature/playwright-phase-1` lands on `development`. Model it on `tests/e2e/novara-live-archive.spec.js` from that branch and use the existing helpers (`gotoFresh`, `verifyCriticalPageStructure`, `checkImages`, `testResponsive`). Cover: the canonical URL renders, `cortado-hero` visible, signup form present with the "Get The Cortado" button, `cortado-latest` present on page 1, at least one `archive-post-no-thumbnail` inside `cortado-past-issues`, the newsletters link present, and both routing behaviours from Task 1.
