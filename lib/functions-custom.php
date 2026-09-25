@@ -99,23 +99,6 @@ function nm_get_netlify_url() {
 }
 
 /**
- * Redirects /committed to /category/committed for SEO purposes.
- *
- * @return void
- * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
- */
-function redirect_committed_custom_url() {
-  if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-        $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-    if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
-            exit;
-    }
-  }
-}
-add_action( 'template_redirect', 'redirect_committed_custom_url' );
-
-/**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
  * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  *
