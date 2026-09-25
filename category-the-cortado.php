@@ -51,14 +51,12 @@ get_header();
   <?php // ── Section 2: Signup ── ?>
   <?php
   if ( $newsletter_post_id ) {
-    ?>
-  <div data-testid="cortado-signup">
-    <?php
     get_template_part(
       'partials/email-signup',
       null,
       array(
         'newsletter_post_id' => $newsletter_post_id,
+        'testid'             => 'cortado-signup',
         'copy'               => $signup_copy,
         'background-color'   => 'white',
         'button-color'       => 'black',
@@ -78,7 +76,6 @@ get_header();
         <div class="ui-border-bottom ui-border--ochre"></div>
       </div>
     </div>
-  </div>
   </div>
     <?php
   }

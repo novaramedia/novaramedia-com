@@ -88,8 +88,11 @@ $copy_classes = 'font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-bal
 if ( ! empty( $args['copy-classes'] ) ) {
   $copy_classes = $args['copy-classes'];
 }
+
+// Optional Playwright hook for a caller that needs to target its own signup.
+$testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
 ?>
-<div class="email-signup mt-4 mb-4">
+<div class="email-signup mt-4 mb-4"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
   <div class="container">
     <div class="grid-row">
       <?php
