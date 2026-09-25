@@ -163,6 +163,7 @@ Settled during the work, recorded so they are not reopened:
 
 ## Out of scope
 
-`/committed` has a rewrite and a 301 registered for the same path, and the 301 wins,
+`/committed` had a rewrite and a 301 registered for the same path, and the 301 won,
 making the rewrite entry dead. Raised as issue #606 rather than fixed here — changing
-live redirect behaviour for another brand does not belong in this PR.
+live redirect behaviour for another brand did not belong in this PR. Fixed separately in
+4.9.0 by #617, which removed the redirect so the rewrite serves `/committed` in place.

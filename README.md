@@ -28,15 +28,11 @@ Pull requests to `development`, `master` or `main` deploy their commit to Kinsta
 
 #### Coverage
 
-Eight specs: homepage, support, about and jobs pages, the Novara Live archive, and single article, audio and video posts. Each checks that the page loads, the critical `data-testid` landmarks render, the layout holds at mobile, tablet and desktop widths, and no theme-owned console errors fire. Third-party embeds are blocked during tests so no run waits on SoundCloud or YouTube.
+Ten specs: homepage, support, about and jobs pages, the Novara Live archive, single article, audio and video posts, The Cortado (archive, newsletter redirect and front page block), and brand vanity URLs. Each page spec checks that the page loads, the critical `data-testid` landmarks render, the layout holds at mobile, tablet and desktop widths, and no theme-owned console errors fire. Third-party embeds are blocked during tests so no run waits on SoundCloud or YouTube.
 
 ### Howto: release
 
-- Pull `development`
-- `npm run release`
-- Don't commit, tag or push in release-it process
-- After post release-it scripts are run commit in format `Build: x.x.x`
-- Create PR to master branch in format `Version x.x.x` with changelog entries as description
+Run `./scripts/release.sh [major|minor|patch] --pr` from a clean `development`. It bumps the version, converts `[Unreleased]` in the changelog, builds, commits `Build: x.y.z` and opens a `Release: x.y.z` PR to `master`; merging that PR deploys. Hotfixes and the required back-merge are covered in [`docs/releases.md`](docs/releases.md).
 
 ### Semver
 
