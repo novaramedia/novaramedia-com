@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
- * Version: 0.4.0
+ * Version: 0.5.0
  *
  * Validates CMB2 meta fields in the editor: hooks the post edit form and our
  * options page forms (Links Bar, Fundraising), and blocks submission with an
@@ -23,6 +23,8 @@
  *   markup-only values (e.g. an empty <p></p> from a wysiwyg) count as empty.
  * - data-validation-required-category="<slug>": required only when the post
  *   is in that category or any of its descendants.
+ * - data-validation-not-required-category="<slug>": suppresses the required
+ *   rules above when the post is in that category or any of its descendants.
  * - data-validation-word-length: value must not exceed this many words.
  *
  * To enable on a CMB2 meta field set the attributes parameters
@@ -96,6 +98,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
     const $htmlbody = $( 'html, body' );
 
     const categoryMap = <?php echo wp_json_encode( $category_map ); ?>;
+
+    // Whether any of the slug's term IDs (itself or a descendant) is ticked.
+    // Match on name+value, not element id: core's Walker_Category_Checklist
+    // suffixes checkbox ids via wp_unique_prefixed_id() (in-category-828-2),
+    // so #in-category-{id} never matches.
+    const has_checked_category = ( slug ) => {
+      const termIds = categoryMap[ slug ] || [];
+
+      return termIds.some( function( id ) {
+        return $( 'input[name="post_category[]"][value="' + id + '"]' ).is( ':checked' );
+      });
+    };
 
     // Non-group wysiwyg fields render via wp_editor() which drops CMB2
     // 'attributes'; they are marked with editor_class instead. Copy the
@@ -234,6 +248,7 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
         // .attr() not .data(): jQuery data() would coerce numeric-looking
         // slugs (e.g. "2024") to numbers and break the map lookup.
         const requiredCategorySlug = $this.attr( 'data-validation-required-category' );
+        const exemptCategorySlug   = $this.attr( 'data-validation-not-required-category' );
 
         // Globally required, regardless of category.
         let isRequired = $this.data( 'validation-required' ) === true;
@@ -241,14 +256,13 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
         // Not globally required but has a category rule: required only when
         // one of that category's term IDs (itself or a descendant) is ticked.
         if ( ! isRequired && typeof requiredCategorySlug !== 'undefined' ) {
-          const termIds = categoryMap[ requiredCategorySlug ] || [];
+          isRequired = has_checked_category( requiredCategorySlug );
+        }
 
-          // Match on name+value, not element id: core's Walker_Category_Checklist
-          // suffixes checkbox ids via wp_unique_prefixed_id() (in-category-828-2),
-          // so #in-category-{id} never matches.
-          isRequired = termIds.some( function( id ) {
-            return $( 'input[name="post_category[]"][value="' + id + '"]' ).is( ':checked' );
-          });
+        // An exempt category overrides both rules above: a ticked exempt
+        // category (or descendant) means the field is not required.
+        if ( isRequired && typeof exemptCategorySlug !== 'undefined' && has_checked_category( exemptCategorySlug ) ) {
+          isRequired = false;
         }
 
         // Required (globally or via ticked category): value must be non-empty.
@@ -272,9 +286,10 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
               remove_failure( $row );
             }
           }
-        } else if ( typeof requiredCategorySlug !== 'undefined' ) {
-          // Conditionally-required field whose category isn't ticked:
-          // clear any stale highlight from a previous failed attempt.
+        } else if ( typeof requiredCategorySlug !== 'undefined' || typeof exemptCategorySlug !== 'undefined' ) {
+          // Conditionally-required field whose category isn't ticked, or a
+          // field exempted by a ticked exempt category: clear any stale
+          // highlight from a previous failed attempt.
           remove_failure( $row );
         }
 
