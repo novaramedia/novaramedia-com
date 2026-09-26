@@ -52,7 +52,7 @@ The `release-notification.yml` workflow automatically sends structured notificat
 
 ### How it works
 
-1. **Trigger**: Activates when a Pull Request with title starting with "Version " is merged into the `master` or `main` branch
+1. **Trigger**: Activates when a Pull Request with title starting with "Release: " (as created by `scripts/release.sh`) is merged into the `master` or `main` branch
 2. **Version Extraction**: Extracts the version number from `package.json` in the merged code
 3. **Release Notes**: Parses `CHANGELOG.md` to extract the release notes for that specific version
 4. **Slack Notification**: Sends a structured message with:
@@ -86,6 +86,6 @@ The Slack notification includes:
 
 ### Troubleshooting
 
-- Ensure PR titles start with "Version " to trigger the workflow
+- Ensure PR titles start with "Release: " to trigger the workflow
 - Verify the version exists in CHANGELOG.md with format: `## [X.Y.Z] - DATE`
 - Check that the `SLACK_WEBHOOK_URL` secret is properly configured
