@@ -44,6 +44,7 @@ get_header();
               'text-color'         => $text_color,
               'button-color'       => $button_color,
               'hide-discover'      => true,
+              'placement'          => 'newsletters-archive',
             )
           );
         }

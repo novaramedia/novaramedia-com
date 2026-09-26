@@ -57,6 +57,7 @@ get_header();
       array(
         'newsletter_post_id' => $newsletter_post_id,
         'testid'             => 'cortado-signup',
+        'placement'          => 'category-the-cortado-archive',
         'copy'               => $signup_copy,
         'background-color'   => 'white',
         'button-color'       => 'black',

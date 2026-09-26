@@ -83,7 +83,7 @@ if ( $is_cortado ) {
       <div class="grid-item is-l-24 is-xxl-12">
         <?php
         if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', $button_label );
+          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', $button_label, 'article-block-cortado' );
         }
         ?>
       </div>
@@ -103,7 +103,7 @@ if ( $is_cortado ) {
     }
 
     if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label );
+      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label, 'article-block' );
     }
     ?>
   </div>
