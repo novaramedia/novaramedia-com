@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
+
 ## [4.9.0] - 2026-09-25
 
 ### Added

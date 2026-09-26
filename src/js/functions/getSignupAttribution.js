@@ -23,8 +23,9 @@ function getReferrerHostname() {
 }
 
 /**
- * Collects attribution context for a signup form submission: the current page
- * path, the referring hostname and any utm_* params on the current URL.
+ * Collects attribution context for a newsletter signup or donation form
+ * submission: the current page path, the referring hostname and any utm_*
+ * params on the current URL.
  *
  * Reads only the page the visitor is on right now. Nothing is read from or
  * written to storage, so this needs no cookie consent. Fields are prefixed
