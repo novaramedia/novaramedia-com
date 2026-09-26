@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.9.0] - 2026-09-25
+
+### Added
+
+- The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block
+- Newsletter signups now send which form was used, the page, the referring site and any campaign tags, so we can start recording where subscribers come from
+
+### Changed
+
+- Downstream front page block sits in a white box, matching the other product blocks
+- Off-white page background across the whole site; newsletter signups on it are always boxed, white ones included
+- End-to-end tests run on Playwright instead of Cypress, with third-party embeds blocked during tests so page loads no longer wait on SoundCloud or YouTube
+- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
+- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
+- Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
+- Job posting structured data locations reduced to city and postcode-district level, and Leeds office moved to Mabgate Mills
+- `/committed` serves the Committed archive in place, like the other branded URLs, instead of redirecting to its category URL (#606)
+
+### Removed
+
+- Cypress test runner, specs and CI workflow
+- Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
+
+### Fixed
+
+- Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
+- Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+- Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
+- Pagination on product vanity URLs — `/downstream/page/2/` and the equivalent on every other branded path 404'd instead of serving page two (#607)
+- Support form's frequency and amount controls are announced with their own labels by screen readers; duplicate IDs had pointed them at the wrong ones (#609)
+
+### Security
+
+- Dev dependency bumps clearing the open Dependabot alerts for sharp, svgo, js-yaml, fast-uri and adm-zip. The remaining extract-zip alerts have no patched release and only reach `@wordpress/scripts` test tooling
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
+
 ## [4.8.1] - 2026-08-19
 
 ### Added

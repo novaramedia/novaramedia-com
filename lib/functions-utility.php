@@ -45,6 +45,36 @@ function nm_is_production() {
   return wp_get_environment_type() === 'production';
 }
 
+/**
+ * Cache-busting version string for a theme asset.
+ *
+ * On production the theme version is used, so a release busts the cache once and the
+ * asset stays cached between releases. Everywhere else — local, dev and staging — the
+ * file's modification time is used instead, so a rebuild is picked up immediately
+ * rather than being masked by a stale stylesheet until the next version bump.
+ *
+ * @param string $path          Asset path relative to the template directory, e.g. '/dist/main.css'.
+ * @param string $theme_version Fallback version, used on production or if the file is missing.
+ *
+ * @return string Version string for wp_enqueue_*.
+ */
+function nm_asset_version( $path, $theme_version ) {
+  if ( nm_is_production() ) {
+    return $theme_version;
+  }
+
+  // Must match the directory the assets are enqueued from in functions.php
+  // (get_template_directory_uri()), or a child theme would version the parent's file
+  // by the child's mtime.
+  $file = get_template_directory() . $path;
+
+  if ( ! file_exists( $file ) ) {
+    return $theme_version;
+  }
+
+  return (string) filemtime( $file );
+}
+
 /**  A is_single for custom post type */
 function is_single_type( $type, $post ) {
   if ( get_post_type( $post->ID ) === $type ) {

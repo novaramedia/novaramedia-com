@@ -48,9 +48,18 @@ function nm_cmb_posttype_newsletters_metaboxes() {
   $cmb_term->add_field(
     array(
       'name' => esc_html__( 'Banner text', 'cmb2' ),
-      'desc' => esc_html__( 'Copy for the banner version of the newsletter signup form (optional)', 'cmb2' ),
+      'desc' => esc_html__( 'Short copy for the banner version of the newsletter signup form, e.g. the inline signup block in posts (optional). Brand archives may use the category\'s Formatted description instead. Basic formatting is allowed — wrap words in <strong> to bold them, <em> to italicise.', 'cmb2' ),
       'id'   => $prefix . 'banner_text',
       'type' => 'textarea_small',
+    )
+  );
+
+  $cmb_term->add_field(
+    array(
+      'name' => esc_html__( 'Signup button label', 'cmb2' ),
+      'desc' => esc_html__( 'Text on the signup button (optional—defaults to "Sign up")', 'cmb2' ),
+      'id'   => $prefix . 'banner_button_label',
+      'type' => 'text',
     )
   );
 
@@ -73,7 +82,7 @@ function nm_cmb_posttype_newsletters_metaboxes() {
     'options'          => array(
         'black'      => __( 'Black', 'cmb2' ),
         'white'      => __( 'White', 'cmb2' ),
-        'gray-base'  => __( 'Gray Base', 'cmb2' ),
+        'gray-mid'   => __( 'Gray Mid', 'cmb2' ), // gray-base is the page colour, so not offered
         'acfm-pink'  => __( 'ACFM Pink', 'cmb2' ),
         'yellow'     => __( 'Yellow', 'cmb2' ),
         'green'      => __( 'Green', 'cmb2' ),

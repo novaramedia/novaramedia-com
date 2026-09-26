@@ -110,6 +110,7 @@ if ( have_posts() ) {
         null,
         array(
           'newsletter_post_id' => $newsletter_post_id,
+          'placement'          => 'category-acfm-archive',
         )
       );
 
@@ -137,6 +138,7 @@ if ( have_posts() ) {
       null,
       array(
       'newsletter_post_id' => $newsletter_post_id,
+      'placement'          => 'category-acfm-archive',
       )
     );
 

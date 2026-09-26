@@ -16,6 +16,110 @@ for each.
 
 ---
 
+## v4.9.0
+
+### 1. Create The Cortado category — before flushing permalinks
+**Admin > Posts > Categories → add "The Cortado", slug `the-cortado`.**
+
+**Open question for editorial — confirm the parent before creating it.** Does The
+Cortado sit *inside* Opinion, or *beside* it as its own child of Articles? The design
+work assumed a direct child of Articles (`/category/articles/the-cortado/`); the local
+database currently nests it under Opinion (`/category/articles/opinion/the-cortado/`).
+The digital team's recommendation is the sibling option: nested, Cortado posts would dominate
+Opinion, and their UI tag reads "Opinion" (the tag shows the post's first
+sub-category) rather than "The Cortado".
+One knock-on worth knowing before choosing: `nm_is_article()` treats the `articles` term or
+a *direct* child of it as an article, so a post filed only under a grandchild category would
+be classified as a non-article and render its short description rather than its standfirst.
+Cortado posts currently carry `articles` directly as well, so they are unaffected either way.
+
+Otherwise this is an editorial taxonomy decision, not a technical one — the code derives the
+URL from the term, so either works: the newsletter redirect resolves through
+`get_term_link()`, the template hierarchy keys on the slug, and the vanity slug is
+unaffected. But the two produce different canonical URLs, so pick one before launch
+rather than moving the term afterwards and stranding links.
+
+Why this step comes first: the `/the-cortado/` vanity slug is registered by
+`handle_internal_rewrites()` (`lib/functions-rewrites.php`), which calls
+`get_category_by_slug()` and silently skips the rule when the term is missing.
+The newsletter→category 301 also bails without it, leaving
+`/newsletters/the-cortado/` reachable as before. Do this step first or the flush
+below registers nothing.
+
+### 2. Flush permalinks — register the `/the-cortado/` route
+**Admin > Settings > Permalinks → Save** (no changes needed). Why: rewrite
+rules are cached in the DB; the new `^the-cortado/?$` rule doesn't match until
+they're rebuilt.
+
+This flush also registers the paginated vanity rules (`^<path>/page/([0-9]{1,})/?$`)
+for **every** branded path, not just Cortado — see #607. Until it runs,
+`/downstream/page/2/` and its equivalents keep 404ing as they do today.
+
+### 3. Fill the newsletter record and category copy
+
+**Admin > Newsletters > The Cortado.** Three fields drive the Cortado signup
+surfaces (archive signup, front page block, inline signup block):
+
+| Field | Consequence if empty |
+| --- | --- |
+| Mailchimp Newsletter name (`_nm_mailchimp_key`) | No signup form renders anywhere |
+| Banner text (`_nm_banner_text`) | Surfaces render with no copy under the wordmark |
+| Signup button label (`_nm_banner_button_label`) | Button reads "Sign up" instead of "Get The Cortado" |
+
+Banner text accepts `<strong>` and `<em>`. The launch copy is:
+
+```html
+Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven</strong>, every Monday and Friday morning.
+```
+
+That is the short copy, used by the inline signup block. The archive signup and the
+front page block use the longer copy from the category instead:
+
+**Admin > Posts > Categories > The Cortado → Formatted description**
+(`_nm_category_formatted_description`). Empty falls back to the banner text above. Keep
+the core Description field plain text — it feeds Open Graph and meta descriptions. Launch copy:
+
+```html
+Your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven.</strong> Brewed on Monday and Friday mornings.
+```
+
+On all three Cortado surfaces the bold spans render in the sans face against serif
+body copy — the treatment is scoped per surface in CSS.
+
+### 4. Verify the three Cortado URLs at the edge
+
+```sh
+# Vanity slug — expect 200, served in place, no redirect
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/the-cortado/
+
+# Newsletter permalink — expect 301 to the category archive
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/newsletters/the-cortado/
+
+# Vanity pagination on an existing brand — expect 200 in place, not a 404 or a redirect
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://novaramedia.com/downstream/page/2/
+
+# Canonical archive — expect 200. Use the URL the term actually resolves to, which
+# depends on the parent chosen in step 1: /category/articles/the-cortado/ if it sits
+# directly under Articles, /category/articles/opinion/the-cortado/ if nested in Opinion.
+# The redirect above targets whichever it is, so read the destination it reports.
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" "<canonical URL from step 1>"
+```
+
+If the vanity slug 404s, step 1 or 2 was skipped. If the newsletter permalink
+still returns 200, the category is missing (step 1). Kinsta full-page cache may
+serve a stale 404 for `/the-cortado/` briefly after the flush — purge if so.
+
+---
+
+### 5. Re-pick any newsletter banner set to Gray Base
+
+**Admin > Newsletters → each newsletter → Banner background color.** Gray Base is now the
+page colour, so it has been removed from the dropdown and a banner still saved with it
+renders as an invisible box on the grey page. Newsletters saved with it show no option
+selected; choose White, Gray Mid or a brand colour and Update. Locally this was The Pick.
+
+---
+
 ## v4.8.1
 
 ### 1. Verify the Novara Live standfirst exemption

@@ -44,15 +44,18 @@ if (is_single() && get_post_type() === 'job') {
     ),
   ) );
 
+  // Job locations are deliberately imprecise: this structured data exists so jobseekers
+  // see the right region, not so anyone can find the office door. No unit or street
+  // number, and postalCode carries the outward code only (the district, shared with
+  // thousands of addresses) — enough for Google to geolocate the listing.
   $address_london = array(
     "@type" => "Place",
     "address" => array(
       "@type" => "PostalAddress",
-      "streetAddress" => "100 Drummond Rd",
-      "addressLocality" => "Bermondsey",
-      "addressRegion" => "London",
-      "postalCode" => "SE16 4DG",
-      "addressCountry" => "UK",
+      "addressLocality" => "London",
+      "addressRegion" => "Greater London",
+      "postalCode" => "SE16",
+      "addressCountry" => "GB",
     ),
   );
 
@@ -60,11 +63,11 @@ if (is_single() && get_post_type() === 'job') {
     "@type" => "Place",
     "address" => array(
       "@type" => "PostalAddress",
-      "streetAddress" => "The Leeming Building",
-      "addressLocality" => "Ludgate Hill",
-      "addressRegion" => "Leeds",
-      "postalCode" => "LS2 7HZ",
-      "addressCountry" => "UK",
+      "streetAddress" => "Mabgate Mills",
+      "addressLocality" => "Leeds",
+      "addressRegion" => "West Yorkshire",
+      "postalCode" => "LS9",
+      "addressCountry" => "GB",
     ),
   );
 
@@ -72,7 +75,7 @@ if (is_single() && get_post_type() === 'job') {
     case 'remote':
       $json_ld['applicantLocationRequirements']= array(
         "@type" => "Country",
-        "name" => "UK",
+        "name" => "GB",
       );
       $json_ld['jobLocationType']= "TELECOMMUTE";
       break;

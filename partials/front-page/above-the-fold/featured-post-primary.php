@@ -1,10 +1,11 @@
 <?php
-if ( ! is_numeric( $args['post_id'] ) ) {
-  return;
+if ( ! is_numeric( $args['post_id'] ) || ! nm_is_published( $args['post_id'] ) ) {
+  return; // never render a featured slot pointing at an unpublished, scheduled or trashed post
 }
 
-if ( ! isset( $args['has_huge_headline'] ) ) {
-  $args['has_huge_headline'] = true;
+// False forces the smaller headline whatever the title length.
+if ( ! isset( $args['allow_huge_headline'] ) ) {
+  $args['allow_huge_headline'] = true;
 }
 
 if ( ! isset( $args['has_embed'] ) ) {
@@ -12,14 +13,9 @@ if ( ! isset( $args['has_embed'] ) ) {
 }
 
   $featured_post_id = $args['post_id'];
-  $has_huge_headline = $args['has_huge_headline'];
   $has_embed = $args['has_embed'];
 
   $the_title = get_the_title( $featured_post_id );
-
-if ( str_word_count( $the_title ) > 14 ) { // if the title if long then no huge headline
-  $has_huge_headline = false;
-}
 
   $meta = get_post_meta( $featured_post_id );
   $is_article = nm_is_article( $featured_post_id );
@@ -34,6 +30,7 @@ if ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) {
   $related_args = array(
     'posts_per_page' => 1,
     'post__in'       => explode( ', ', $meta['_cmb_related_posts'][0] ),
+    'post_status'    => 'publish', // explicit: a logged-in editor would otherwise pull readable private posts
   );
 
   $related_posts = new WP_Query( $related_args );
@@ -82,7 +79,7 @@ if ( $has_embed ) {
 <div class="grid-row grid-row--nested mt-3">
   <div class="grid-item is-s-24 <?php echo ( $show_related && ! empty( $meta['_cmb_related_posts'] ) ) ? 'is-l-16 is-xxl-18' : 'is-xl-24 is-xxl-22'; ?>">
     <a href="<?php echo get_permalink( $featured_post_id ); ?>" class="ui-hover">
-      <h2 class="post__title <?php echo $has_huge_headline ? 'font-size-15 font-size-m-13' : 'font-size-13'; ?> font-weight-bold text-wrap-balance mb-3"><?php echo $the_title; ?></h2>
+      <h2 class="post__title <?php echo esc_attr( nm_get_lead_headline_size_classes( $the_title, $args['allow_huge_headline'] ) ); ?> font-weight-bold text-wrap-balance mb-3"><?php echo $the_title; ?></h2>
 <?php
 if ( ! $has_related ) {
   // surprizing conditional here: this is so that the title can either have it's own wider box or not depending on the display of related posts

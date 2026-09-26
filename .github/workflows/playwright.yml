@@ -1,11 +1,11 @@
-# Cypress Tests with Staging Deployment
+# Playwright Tests with Staging Deployment
 #
 # This workflow:
 # 1. Deploys the PR branch to Kinsta staging via git pull over SSH
 # 2. Activates the theme via WP-CLI over SSH
 # 3. Clears Kinsta cache
 # 4. Verifies staging is accessible
-# 5. Runs Cypress tests against staging
+# 5. Runs Playwright tests against staging
 # 6. Resets staging back to development branch (cleanup)
 #
 # Required GitHub Secrets:
@@ -19,9 +19,9 @@
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
 #
-# One-time server setup required — see .docs/ci-speedup-plan.md
+# One-time server setup required — see docs/plans/archive/ci-speedup.md
 
-name: Cypress Tests (Staging)
+name: Playwright Tests (Staging)
 
 on:
   pull_request:
@@ -111,18 +111,18 @@ jobs:
           KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
           KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
 
-      # Cache clear is best-effort - cypress/support/e2e.js appends a
-      # ?cypress_cache_bust=... query string to every cy.visit() so tests
-      # always fetch fresh HTML even if this step fails. Warnings here are
-      # surfaced via ::warning:: annotations so issues are visible in the
-      # GitHub UI without blocking the workflow.
+      # Cache clear is best-effort - the gotoFresh() helper in
+      # tests/e2e/helpers/ appends a unique cache-bust query string to every
+      # navigation so tests always fetch fresh HTML even if this step fails.
+      # Warnings here are surfaced via ::warning:: annotations so issues are
+      # visible in the GitHub UI without blocking the workflow.
       #
       # Endpoint reference: https://api-docs.kinsta.com/api-reference/wordpress-site-tools/clear-site-cache
       - name: Clear Kinsta cache
         continue-on-error: true
         run: |
           if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
-            echo "::warning::Kinsta API secrets not configured - skipping cache clear (cypress cache-bust will handle freshness)"
+            echo "::warning::Kinsta API secrets not configured - skipping cache clear (test cache-bust will handle freshness)"
             exit 0
           fi
 
@@ -132,7 +132,7 @@ jobs:
             -H "Authorization: Bearer ${KINSTA_API_KEY}" \
             -H "Content-Type: application/json" \
             -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
-            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; cypress cache-bust will handle freshness"
+            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; test cache-bust will handle freshness"
             exit 0
           fi
 
@@ -169,7 +169,7 @@ jobs:
               # template branch that emits it is skipped (e.g. above-the-fold
               # returns early when no featured posts are configured).
               echo "--- data-testid values on staging homepage ---"
-              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cypress_cache_bust=$(date +%s)"); then
+              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cache_bust=$(date +%s)"); then
                 echo "::warning::testid diagnostic curl failed (network/timeout) - skipping"
               else
                 testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
@@ -194,7 +194,7 @@ jobs:
           STAGING_URL: ${{ secrets.STAGING_URL }}
 
       # ========================================
-      # RUN CYPRESS TESTS
+      # RUN PLAYWRIGHT TESTS
       # ========================================
 
       - name: Setup Node.js
@@ -206,43 +206,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify Cypress installation
-        run: npx cypress verify
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
 
-      - name: Run Cypress tests against staging
-        uses: cypress-io/github-action@f790eee7a50d9505912f50c2095510be7de06aa7 # v6.10.9
-        with:
-          browser: chrome
-          headed: false
-          install: false
-          config: video=true,screenshotOnRunFailure=true
+      - name: Run Playwright tests against staging
+        run: npx playwright test
         env:
-          CYPRESS_BASE_URL: ${{ secrets.STAGING_URL }}
-          CYPRESS_VIDEO: true
-          CYPRESS_SCREENSHOT_ON_FAILURE: true
+          PLAYWRIGHT_BASE_URL: ${{ secrets.STAGING_URL }}
 
       # ========================================
       # UPLOAD ARTIFACTS
       # ========================================
 
-      - name: Upload test artifacts on failure
+      - name: Upload Playwright report on failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-artifacts-${{ github.run_id }}
+          name: playwright-artifacts-${{ github.run_id }}
           path: |
-            cypress/videos
-            cypress/screenshots
-          retention-days: 7
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-results-${{ github.run_id }}
-          path: |
-            cypress/videos
-            cypress/screenshots
+            playwright-report
+            test-results
           retention-days: 7
 
       # ========================================

@@ -31,6 +31,18 @@ function nm_cmb_taxonomy_metaboxes() {
     )
   );
 
+  // The core category description stays plain text: it feeds Open Graph and meta
+  // descriptions, which can't carry markup. This is the on-page version, where bold and
+  // italics survive (wp_kses_post on output).
+  $cmb_term->add_field(
+    array(
+      'name' => esc_html__( 'Formatted description', 'cmb2' ),
+      'desc' => esc_html__( 'On-page description where the design supports formatting (optional—falls back per template). Wrap words in <strong> to bold them, <em> to italicise. Keep the core Description field above as plain text: it is used for social sharing.', 'cmb2' ),
+      'id'   => $prefix . 'category_formatted_description',
+      'type' => 'textarea_small',
+    )
+  );
+
   $cmb_term->add_field(
     array(
       'name' => esc_html__( 'Microbrand Logo', 'cmb2' ),
