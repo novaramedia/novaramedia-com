@@ -588,7 +588,14 @@ function nm_render_newsletter_signup( $slug ) {
   $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
 
   if ( $mailchimp_key ) {
-    get_template_part( 'partials/email-signup', null, array( 'newsletter_post_id' => $newsletter->ID ) );
+    get_template_part(
+      'partials/email-signup',
+      null,
+      array(
+        'newsletter_post_id' => $newsletter->ID,
+        'placement'          => 'front-page-slot',
+      )
+    );
   }
 }
 /**

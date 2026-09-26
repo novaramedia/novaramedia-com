@@ -152,6 +152,7 @@ if ( have_posts() ) {
         null,
         array(
           'newsletter_post_id' => $newsletter_post_id,
+          'placement'          => 'category-downstream-archive',
         )
       );
 
@@ -179,6 +180,7 @@ if ( have_posts() ) {
       null,
       array(
       'newsletter_post_id' => $newsletter_post_id,
+      'placement'          => 'category-downstream-archive',
       )
     );
 
