@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import isNonEmptyString from '../functions/isNonEmptyString.js';
+import getSignupAttribution from '../functions/getSignupAttribution.js';
 import {
   getLocalStorageItem,
   setLocalStorageItem,
@@ -200,6 +201,32 @@ export class Support {
           }
         },
       });
+
+      $form.on('submit', () => {
+        _this.setAttributionInputs($form);
+      });
+    });
+  }
+
+  /**
+   * Adds the current page's attribution context (page path, referrer hostname,
+   * utm_* params) as hidden inputs, so the native GET submit carries them to
+   * the donation app as nm_* query params. Replaces any set by an earlier submit.
+   *
+   * @param {Object} $form jQuery object of the form being submitted.
+   */
+  setAttributionInputs($form) {
+    const attribution = getSignupAttribution();
+
+    $form.find('.support-form__attribution-input').remove();
+
+    Object.keys(attribution).forEach((name) => {
+      $('<input>', {
+        type: 'hidden',
+        class: 'support-form__attribution-input',
+        name,
+        value: attribution[name],
+      }).appendTo($form);
     });
   }
 
