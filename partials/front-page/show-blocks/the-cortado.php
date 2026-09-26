@@ -90,7 +90,7 @@ if ( empty( $button_label ) ) {
 
           <?php if ( $mailchimp_key ) { ?>
           <div class="grid-item is-s-24 is-l-24 is-xxl-8 mb-s-4 mb-l-4">
-            <?php render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label ); ?>
+            <?php render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label, 'front-page-cortado' ); ?>
           </div>
           <?php } ?>
 

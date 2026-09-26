@@ -34,8 +34,9 @@ function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $loading =
  * @param string $background_color The background color. Default is 'black'.
  * @param string $button_color The button color. Default is 'red'.
  * @param string $button_label The submit button label. Default is 'Sign up'.
+ * @param string $placement Slug naming where this form sits (e.g. 'article-block'), sent as `nm_form` so the signup service can record which form a signup came from. Default is none.
  */
-function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red', $button_label = 'Sign up' ) {
+function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red', $button_label = 'Sign up', $placement = '' ) {
   if ( ! $mailchimp_key ) {
     return;
   }
@@ -45,6 +46,9 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
   ?>
 <form id="<?php echo esc_attr( $form_unique_id ); ?>" class="email-signup__form" action="<?php echo esc_url( $netlify_url ); ?>" method="post" target="_blank">
   <input type="hidden" name="newsletter" value="<?php echo esc_attr( $mailchimp_key ); ?>" />
+  <?php if ( $placement ) { ?>
+  <input type="hidden" name="nm_form" value="<?php echo esc_attr( $placement ); ?>" />
+  <?php } ?>
 
   <div class="email-signup__inputs">
     <div class="form-group mb-2">

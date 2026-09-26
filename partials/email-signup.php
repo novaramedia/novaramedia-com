@@ -91,6 +91,9 @@ if ( ! empty( $args['copy-classes'] ) ) {
 
 // Optional Playwright hook for a caller that needs to target its own signup.
 $testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
+
+// Which form a signup came from, sent to the signup service as `nm_form`. The page path is sent separately, so templates using this partial share one slug unless they pass their own.
+$placement = ! empty( $args['placement'] ) ? $args['placement'] : 'signup-section';
 ?>
 <div class="email-signup mt-4 mb-4"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
   <div class="container">
@@ -120,7 +123,7 @@ $testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
           </div>
           <?php // Without an image the form takes the image column's width too, so the row fills 24. ?>
           <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-12 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
-            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color, $button_label ); ?>
+            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color, $button_label, $placement ); ?>
           </div>
           <?php if ( $image_id ) { ?>
             <div class="grid-item is-s-8 is-xxl-4">

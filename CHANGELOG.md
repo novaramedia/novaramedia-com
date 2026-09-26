@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
 - The Cortado front page product block
 - The Cortado gets its own inline newsletter signup design in the Gutenberg block
+- Newsletter signups now send which form was used, the page, the referring site and any campaign tags, so we can start recording where subscribers come from
 
 ### Changed
 
