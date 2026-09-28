@@ -64,9 +64,11 @@ test.describe('If I Speak archive', () => {
   test('should link the subscribe button out to the podcast', async ({
     page,
   }) => {
+    // Located by testid, not label: the button text is editable per category
+    // (_nm_podcast_text), so a name match would skip on custom copy.
     const button = page
       .getByTestId('if-i-speak-hero')
-      .getByRole('link', { name: /subscribe/i });
+      .getByTestId('if-i-speak-subscribe');
 
     test.skip(
       (await button.count()) === 0,

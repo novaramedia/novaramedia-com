@@ -27,7 +27,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
             <?php echo ! empty( $formatted_description ) ? wp_kses_post( wpautop( $formatted_description ) ) : category_description(); ?>
           </div>
           <?php if ( $podcast_url ) { ?>
-          <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
+          <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" data-testid="if-i-speak-subscribe" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
         <div class="category-archive__if-i-speak__presenters grid-item is-s-24 is-xxl-12">

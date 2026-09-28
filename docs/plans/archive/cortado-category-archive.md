@@ -1,5 +1,7 @@
 # The Cortado — category archive page
 
+> **Archived — shipped in 4.9.0.** Since renamed: `partials/post-layouts/archive-post-no-thumbnail.php` is now `archive-post-opinion.php` (testid `archive-post-opinion`). References below are kept as written.
+
 Notion task: "Website category archive page" (Digital Tasks).
 Figma: <https://www.figma.com/design/RRZF4PFZPuSsgfzafuOhlq/Newsletters?node-id=5172-2472>
 (the task card's journal links an older node, `4505-37`).
