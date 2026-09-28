@@ -9,6 +9,10 @@ $podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', tr
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 
 $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe to the podcast';
+
+// Hero blurb is the category's formatted description (bold/italic allowed); empty falls back
+// to the core description, which stays plain text for Open Graph and meta descriptions.
+$formatted_description = get_term_meta( $category->term_id, '_nm_category_formatted_description', true );
 ?>
 <main id="main-content" class="category-archive category-archive__if-i-speak" data-testid="main-content">
   <?php // ── Section 1: Hero ── ?>
@@ -19,8 +23,8 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
           <h1 class="category-archive__if-i-speak__wordmark mt-4 mb-5 mb-s-4" aria-label="If I Speak">
             <?php echo nm_get_file( '/dist/img/products/if-i-speak/if-i-speak-wordmark.svg' ); ?>
           </h1>
-          <div class="category-archive__if-i-speak__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4">
-            <?php echo category_description(); ?>
+          <div class="category-archive__if-i-speak__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4" data-testid="if-i-speak-blurb">
+            <?php echo ! empty( $formatted_description ) ? wp_kses_post( wpautop( $formatted_description ) ) : category_description(); ?>
           </div>
           <?php if ( $podcast_url ) { ?>
           <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>

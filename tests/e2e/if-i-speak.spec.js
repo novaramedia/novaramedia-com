@@ -51,6 +51,16 @@ test.describe('If I Speak archive', () => {
     await checkImages(page, { scope: hero });
   });
 
+  test('should show the hero blurb', async ({ page }) => {
+    // Formatted description if set, else the core category description.
+    const blurb = page
+      .getByTestId('if-i-speak-hero')
+      .getByTestId('if-i-speak-blurb');
+
+    await expect(blurb).toBeVisible();
+    await expect(blurb).not.toHaveText(/^\s*$/);
+  });
+
   test('should link the subscribe button out to the podcast', async ({
     page,
   }) => {
