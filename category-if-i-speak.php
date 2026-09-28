@@ -31,10 +31,16 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
           <?php } ?>
         </div>
         <div class="category-archive__if-i-speak__presenters grid-item is-s-24 is-xxl-12">
+          <?php
+          // 1080w for phones and tablets (photo is ~90% of the box below 759px, up to 3x);
+          // 1717w for the half-width desktop column. The browser picks by width; avif/webp
+          // keep the cut-out's alpha.
+          $presenters_sizes = '(max-width: 759px) calc(90vw - 3rem), (max-width: 1400px) 50vw, 700px';
+          ?>
           <picture>
-            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.avif' ); ?>" type="image/avif" />
-            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.webp' ); ?>" type="image/webp" />
-            <img class="u-display-block" src="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.png' ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1717" height="1468" loading="eager" fetchpriority="high" />
+            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters-1080.avif' ); ?> 1080w, <?php echo esc_url( $base_image_path . 'if-i-speak-presenters.avif' ); ?> 1717w" sizes="<?php echo esc_attr( $presenters_sizes ); ?>" type="image/avif" />
+            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters-1080.webp' ); ?> 1080w, <?php echo esc_url( $base_image_path . 'if-i-speak-presenters.webp' ); ?> 1717w" sizes="<?php echo esc_attr( $presenters_sizes ); ?>" type="image/webp" />
+            <img class="u-display-block" src="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.png' ); ?>" srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters-1080.png' ); ?> 1080w, <?php echo esc_url( $base_image_path . 'if-i-speak-presenters.png' ); ?> 1717w" sizes="<?php echo esc_attr( $presenters_sizes ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1717" height="1468" loading="eager" fetchpriority="high" />
           </picture>
         </div>
       </div>
