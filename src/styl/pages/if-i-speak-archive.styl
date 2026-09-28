@@ -1,0 +1,50 @@
+// IF I SPEAK category archive (category-if-i-speak.php). Only properties with no utility
+// equivalent are here — the white box, grid and spacing are utility classes in the markup.
+
+// Wordmark is inlined (nm_get_file) so its currentColor fill is set here. Sized by width,
+// not height — see docs/architecture/inline-svg.md.
+.category-archive__if-i-speak__wordmark
+  color: var(--color-red)
+  max-width: 592px
+
+  svg
+    display: block
+    width: 100%
+    height: auto
+
+.category-archive__if-i-speak__copy p
+  margin: 0
+
+// The photo sits flush on the box's bottom edge (--flush-bottom) whatever the text column's
+// height. No align-self utility exists.
+.category-archive__if-i-speak__presenters
+  align-self: flex-end
+
+  img
+    width: 100%
+    height: auto
+
+@media screen and (max-width: $breakpoint-s)
+  // Full-width button for the bigger hit area. No responsive fill-width utility.
+  .category-archive__if-i-speak__cta
+    display: block
+    width: 100%
+    text-align: center
+
+  // Wordmark and photo step down to 90% so neither fills the box edge to edge.
+  .category-archive__if-i-speak__wordmark svg
+    width: 90%
+    margin: 0 auto
+
+  .category-archive__if-i-speak__presenters img
+    width: 90%
+    margin: 0 auto
+
+// Episode grid: the shared pure-text card leaves colour to the page. Brand red for the
+// rule and the headline, per the design.
+.category-archive__if-i-speak__episodes
+  .ui-border-top
+    --ui-border-color: var(--color-red)
+
+  .index-post-title
+    color: var(--color-red)
