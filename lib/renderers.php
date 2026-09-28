@@ -33,8 +33,10 @@ function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $loading =
  * @param string $mailchimp_key The Mailchimp key.
  * @param string $background_color The background color. Default is 'black'.
  * @param string $button_color The button color. Default is 'red'.
+ * @param string $button_label The submit button label. Default is 'Sign up'.
+ * @param string $placement Slug naming where this form sits (e.g. 'article-block'), sent as `nm_form` so the signup service can record which form a signup came from. Default is none.
  */
-function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red' ) {
+function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'black', $button_color = 'red', $button_label = 'Sign up', $placement = '' ) {
   if ( ! $mailchimp_key ) {
     return;
   }
@@ -44,6 +46,9 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
   ?>
 <form id="<?php echo esc_attr( $form_unique_id ); ?>" class="email-signup__form" action="<?php echo esc_url( $netlify_url ); ?>" method="post" target="_blank">
   <input type="hidden" name="newsletter" value="<?php echo esc_attr( $mailchimp_key ); ?>" />
+  <?php if ( $placement ) { ?>
+  <input type="hidden" name="nm_form" value="<?php echo esc_attr( $placement ); ?>" />
+  <?php } ?>
 
   <div class="email-signup__inputs">
     <div class="form-group mb-2">
@@ -61,7 +66,7 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
       <input name="gdpr" id="<?php echo esc_attr( $form_unique_id ); ?>-gdpr" class="email-signup__email-gdpr-input ui-checkbox <?php echo $background_color === 'white' ? 'ui-checkbox--border-gray' : ''; ?> ml-2" type="checkbox" value="accepted" required/>
     </div>
 
-    <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="Sign up" />
+    <input class="email-signup__submit ui-button ui-button--<?php echo esc_attr( $button_color ); ?> fs-6" type="submit" value="<?php echo esc_attr( $button_label ); ?>" />
   </div>
   <div class="email-signup__feedback-processing email-signup__overlay ui-rounded-box">
     <div class="spinner spinner--black">
@@ -125,12 +130,16 @@ function render_ui_tag( $label, $url, $variants = array() ) {
  *
  * This function outputs the schedule buttons for the support form.
  *
+ * @param string $instance Unique ID prefix for this set of buttons. The form renders a mobile
+ *                         and a desktop set, so each needs its own to keep element IDs unique.
+ * @param string $schedule_classes Additional CSS classes for the radiogroup.
+ *
  * @return void Outputs the HTML form directly.
  */
-function render_support_form_schedule_buttons( $schedule_classes = '' ) {
+function render_support_form_schedule_buttons( $instance, $schedule_classes = '' ) {
   ?>
-    <p class="u-visuallyhidden" id="donation-frequency-label">Choose donation frequency</p>
-    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?> font-weight-bold" role="radiogroup" aria-labelledby="donation-frequency-label">
+    <p class="u-visuallyhidden" id="<?php echo esc_attr( $instance ); ?>__frequency-label">Choose donation frequency</p>
+    <div class="grid-row mb-3 <?php echo esc_attr( $schedule_classes ); ?> font-weight-bold" role="radiogroup" aria-labelledby="<?php echo esc_attr( $instance ); ?>__frequency-label">
       <div class="is-xxl-12">
         <button class="support-form__button ui-button ui-button--fill-width ui-button--active support-form__schedule-option support-form__schedule-option-left grid-item--tight" data-action="set-type" data-value="regular" role="radio" tabindex="0">Monthly</button>
       </div>
@@ -146,15 +155,16 @@ function render_support_form_schedule_buttons( $schedule_classes = '' ) {
  * This function outputs the amount and submit buttons for the support form.
  *
  * @param object $values The values object containing the donation amounts.
- * @param int $instance The unique instance identifier for the form.
+ * @param string $instance Unique ID prefix for this set of buttons. The form renders a mobile
+ *                         and a desktop set, so each needs its own to keep element IDs unique.
  *
  * @return void Outputs the HTML form directly.
  */
 function render_support_form_amount_buttons( $values, $instance, $button_classes = '' ) {
   ?>
   <div class="<?php echo esc_attr( $button_classes ); ?>">
-    <p class="u-visuallyhidden" id="donation-amount-label">Choose your donation amount</p>
-    <div class="grid-row grid-row--nested-tight mb-4" role="radiogroup" aria-labelledby="donation-amount-label">
+    <p class="u-visuallyhidden" id="<?php echo esc_attr( $instance ); ?>__amount-label">Choose your donation amount</p>
+    <div class="grid-row grid-row--nested-tight mb-4" role="radiogroup" aria-labelledby="<?php echo esc_attr( $instance ); ?>__amount-label">
       <?php
       foreach ( array( 'low', 'medium', 'high' ) as $tier ) {
         ?>
@@ -304,9 +314,9 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
-      <?php render_support_form_schedule_buttons( 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
+      <?php render_support_form_schedule_buttons( $instance . '-mobile', 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
         <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
         <div class="support-form__desktop-container grid-row">
@@ -315,11 +325,11 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
             <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
           <div class="grid-item is-xxl-12 support-form__right-column-desktop">
-            <?php render_support_form_schedule_buttons( 'support-form__schedule-desktop' ); ?>
-            <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-desktop' ); ?>
+            <?php render_support_form_schedule_buttons( $instance . '-desktop', 'support-form__schedule-desktop' ); ?>
+            <?php render_support_form_amount_buttons( $active_values, $instance . '-desktop', 'support-form__buttons-desktop' ); ?>
           </div>
         </div>
-        <?php render_support_form_amount_buttons( $active_values, $instance, 'support-form__buttons-mobile' ); ?>
+        <?php render_support_form_amount_buttons( $active_values, $instance . '-mobile', 'support-form__buttons-mobile' ); ?>
         <?php render_payment_icons( 'support-form__payment-type-mobile mt-3' ); ?>
       </div>
     </form>
@@ -578,7 +588,14 @@ function nm_render_newsletter_signup( $slug ) {
   $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
 
   if ( $mailchimp_key ) {
-    get_template_part( 'partials/email-signup', null, array( 'newsletter_post_id' => $newsletter->ID ) );
+    get_template_part(
+      'partials/email-signup',
+      null,
+      array(
+        'newsletter_post_id' => $newsletter->ID,
+        'placement'          => 'front-page-slot',
+      )
+    );
   }
 }
 /**

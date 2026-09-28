@@ -56,19 +56,28 @@
   background-color: var(--color-red)
   color: var(--color-white-soft)
 
+// The inactive schedule tab has to contrast with whatever the form sits on: white on the
+// gray-base page, gray-base inside a white box (the support page's desktop form). The
+// colour is --support-form-tab-background, flipped by the context rule below. Top corners
+// follow the form's own radius (--ui-border-radius): the form is a nested box
+// (.ui-rounded-box--nested, the large radius), and matching it keeps the red form from
+// showing at the tabs' outer corners.
+.background-white .support-form
+  --support-form-tab-background: var(--color-gray-base)
+
 .support-form__schedule-mobile
   display: none
-  background-color: var(--color-gray-base)
-  border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
+  background-color: var(--support-form-tab-background, var(--color-white-soft))
+  border-radius: var(--ui-border-radius, var(--corner-radius)) var(--ui-border-radius, var(--corner-radius)) 0 0
   flex-direction: row
   justify-content: center
 
   .support-form__button
-    background-color: var(--color-gray-base)
+    background-color: var(--support-form-tab-background, var(--color-white-soft))
     color: var(--color-black-soft)
 
     &:hover:not(:focus):not(.ui-button--active)
-      background-color: var(--color-gray-base)
+      background-color: var(--support-form-tab-background, var(--color-white-soft))
       color: var(--color-gray-mid)
 
     &.ui-button--active
@@ -81,7 +90,7 @@
 
   .support-form__schedule-option
     border: none !important
-    border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0
+    border-radius: var(--ui-border-radius, var(--corner-radius)) var(--ui-border-radius, var(--corner-radius)) 0 0
 
   @media (max-width: $breakpoint-s)
     display: flex

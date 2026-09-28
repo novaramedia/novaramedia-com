@@ -36,25 +36,24 @@ if ( ! empty( $newsletter ) ) {
 $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
 ?>
 <main id="main-content" class="category-archive category-archive__downstream">
-  <div class="container">
-    <div class="grid-row mt-4 mb-4">
-      <div class="grid-item is-xxl-24">
-        <div class="grid-row grid-row--nested background-gray-base ui-rounded-box ui-backgrounded-box-padding">
-          <div class="grid-item is-xxl-24">
-            <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
-            <?php if ( $podcast_url ) { ?>
-            <a class="only-desktop ui-button ui-button--black ui-button--small mt-3" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
-            <?php } ?>
-          </div>
-          <div class="grid-item is-xxl-24 only-mobile">
+  <?php // Intro box: boxed-section structure (docs/architecture/boxed-sections.md) — the container is the row, the box is the one grid-row. ?>
+  <section class="container mt-4 mb-4">
+    <div class="grid-item is-xxl-24">
+      <div class="grid-row background-white ui-rounded-box ui-backgrounded-box-padding">
+        <div class="grid-item is-xxl-24">
+          <h4 class="font-size-13"><strong>Downstream</strong> is an in-depth interview show featuring conversations with activists, authors, economists, politicians, scientists, philosophers and thinkers of all stripes.</h4>
           <?php if ( $podcast_url ) { ?>
-            <a class="ui-button ui-button--black ui-button--small" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
+          <a class="only-desktop ui-button ui-button--black ui-button--small mt-3" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
+        <?php if ( $podcast_url ) { ?>
+        <div class="grid-item is-xxl-24 only-mobile mt-3">
+          <a class="ui-button ui-button--black ui-button--small" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
         </div>
+        <?php } ?>
       </div>
     </div>
-  </div>
+  </section>
 
 <?php
 $newsletter_inserted = false;
@@ -153,6 +152,7 @@ if ( have_posts() ) {
         null,
         array(
           'newsletter_post_id' => $newsletter_post_id,
+          'placement'          => 'category-downstream-archive',
         )
       );
 
@@ -180,6 +180,7 @@ if ( have_posts() ) {
       null,
       array(
       'newsletter_post_id' => $newsletter_post_id,
+      'placement'          => 'category-downstream-archive',
       )
     );
 

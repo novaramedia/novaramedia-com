@@ -1,5 +1,7 @@
 # Cypress → Playwright Migration Plan
 
+> **Status (2026-09-21):** Phases 0–2 shipped in PR #600. Playwright replaced Cypress at 1:1 coverage (81 tests across 8 specs) and the Cypress suite, config and workflow were removed. Phase 3 (expansion) is tracked as the backlog in `docs/testing/testing.md`. The required-check switch in Phase 2 turned out to be moot: `development` has no required status checks.
+
 ## Context
 
 The theme's only automated testing is a Cypress e2e suite: 8 specs (~81 tests) in `cypress/e2e/`, run in CI via `.github/workflows/cypress.yml` against Kinsta staging (git-checkout deploy, whole job ~4 min). The suite is a smoke-test layer — page loads, critical `data-testid` elements, responsive viewports, image integrity, console errors.

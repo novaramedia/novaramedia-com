@@ -24,7 +24,9 @@ get_header();
         $mailchimp_key = ! empty( $meta['_nm_mailchimp_key'] ) ? $meta['_nm_mailchimp_key'][0] : false;
 
         if ( $mailchimp_key ) {
-          $background_color = $index % 2 === 0 ? 'gray-base' : null; // this is to alternate the background colors
+          // Alternate white boxes with each newsletter's own colours. gray-base was the
+          // alternate on the old white page; it is now the page colour itself.
+          $background_color = $index % 2 === 0 ? 'white' : null;
           $text_color = $index % 2 === 0 ? 'black' : null;
           $button_color = $index % 2 === 0 ? 'black' : null;
 
@@ -42,6 +44,7 @@ get_header();
               'text-color'         => $text_color,
               'button-color'       => $button_color,
               'hide-discover'      => true,
+              'placement'          => 'newsletters-archive',
             )
           );
         }
