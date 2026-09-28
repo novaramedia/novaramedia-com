@@ -77,7 +77,7 @@ test.describe('The Cortado archive', () => {
       past.getByRole('heading', { level: 2, name: /past cortados/i })
     ).toBeVisible();
 
-    const cards = past.getByTestId('archive-post-no-thumbnail');
+    const cards = past.getByTestId('archive-post-opinion');
     expect(await cards.count()).toBeGreaterThan(0);
     await expect(cards.first().locator('a').first()).toHaveAttribute(
       'href',
@@ -170,7 +170,7 @@ test.describe('The Cortado front-page block', () => {
       block.getByRole('heading', { level: 3, name: /past cortados/i })
     ).toBeVisible();
 
-    const cards = block.getByTestId('archive-post-no-thumbnail');
+    const cards = block.getByTestId('archive-post-opinion');
     expect(await cards.count()).toBeGreaterThan(0);
     await expect(cards.first().locator('a').first()).toHaveAttribute(
       'href',

@@ -91,6 +91,7 @@ For features that are unique to the project and not needed in the library, we cr
 - **Template hierarchy**: Custom post types (contributor, event, job, notice) with dedicated templates
 - **Module imports**: Layout-specific Stylus files in `layouts/` directory
 - **Custom Functions**: Organized in `lib/functions-*.php` files
+- **Dates**: always render with the global `NM_DATE_FORMAT_LONG` (`j F Y`, e.g. "12 June 2010", defined in `functions.php`). Designs regularly show other formats (`20/01/26` and the like) — do not copy them. Flag the mismatch and ask why the design isn't using the house date style before building anything else.
 
 ## WordPress Customizations
 

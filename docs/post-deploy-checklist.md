@@ -16,6 +16,20 @@ for each.
 
 ---
 
+## Unreleased
+
+### 1. Set the If I Speak hero blurb
+**Admin > Posts > Categories > If I Speak → Formatted description.** The redesigned hero
+shows this field if set, otherwise the core Description. Launch copy from the design:
+
+```html
+A podcast from Moya Lothian-McLean and Ash Sarkar where the personal meets the political. Every week they tackle social dilemmas, cultural phenomena and the frustrations of modern life.
+```
+
+Leave the core Description as it is — it feeds Open Graph and meta descriptions.
+
+---
+
 ## v4.9.0
 
 ### 1. Create The Cortado category — before flushing permalinks
