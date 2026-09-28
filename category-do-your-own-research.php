@@ -61,7 +61,7 @@ get_header();
   <section class="container mt-4 mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
-        <div class="grid-row--nested dyor-archive__hero-background ui-rounded-box ui-rounded-box--top">
+        <div class="grid-row dyor-archive__hero-background ui-rounded-box ui-rounded-box--top">
           <div class="grid-item is-xxl-24">
             <div class="dyor-archive__hero">
               <picture>
@@ -159,7 +159,7 @@ get_header();
   <section id="map" class="container mb-5">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
-        <div class="grid-row grid-row--nested background-white ui-rounded-box pt-4 pb-4">
+        <div class="grid-row background-white ui-rounded-box pt-4 pb-4">
           <div class="grid-item is-xxl-24 mb-4 text-align-center">
             <h4 class="ui-boxed-title">Explore the Map</h4>
           </div>
