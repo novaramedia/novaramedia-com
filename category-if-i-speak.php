@@ -3,6 +3,8 @@ get_header();
 
 $category = get_category( get_query_var( 'cat' ) );
 
+$base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/if-i-speak/';
+
 $podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
 $podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
 
@@ -26,9 +28,9 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
         </div>
         <div class="category-archive__if-i-speak__presenters grid-item is-s-24 is-xxl-12">
           <picture>
-            <source srcset="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.avif' ); ?>" type="image/avif" />
-            <source srcset="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.webp' ); ?>" type="image/webp" />
-            <img class="u-display-block" src="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.png' ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1717" height="1468" loading="eager" fetchpriority="high" />
+            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.avif' ); ?>" type="image/avif" />
+            <source srcset="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.webp' ); ?>" type="image/webp" />
+            <img class="u-display-block" src="<?php echo esc_url( $base_image_path . 'if-i-speak-presenters.png' ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1717" height="1468" loading="eager" fetchpriority="high" />
           </picture>
         </div>
       </div>
