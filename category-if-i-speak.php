@@ -16,7 +16,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
     <div class="grid-item is-xxl-24">
       <div class="grid-row background-white ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
         <div class="grid-item is-s-24 is-xxl-12 pb-4">
-          <h1 class="category-archive__if-i-speak__wordmark mt-4 mb-5 mb-s-4">
+          <h1 class="category-archive__if-i-speak__wordmark mt-4 mb-5 mb-s-4" aria-label="If I Speak">
             <?php echo nm_get_file( '/dist/img/products/if-i-speak/if-i-speak-wordmark.svg' ); ?>
           </h1>
           <div class="category-archive__if-i-speak__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4">
