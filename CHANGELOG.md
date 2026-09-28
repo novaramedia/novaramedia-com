@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - If I Speak category archive redesign: new hero and a text-only episode grid
+- `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
 
 ## [4.9.0] - 2026-09-25
 

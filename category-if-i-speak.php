@@ -28,7 +28,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
           <picture>
             <source srcset="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.avif' ); ?>" type="image/avif" />
             <source srcset="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.webp' ); ?>" type="image/webp" />
-            <img class="u-display-block" src="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.jpg' ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1380" height="1180" loading="eager" fetchpriority="high" />
+            <img class="u-display-block" src="<?php echo esc_url( get_template_directory_uri() . '/dist/img/products/if-i-speak/if-i-speak-presenters.png' ); ?>" alt="Ash Sarkar and Moya Lothian-McLean" width="1717" height="1468" loading="eager" fetchpriority="high" />
           </picture>
         </div>
       </div>
