@@ -23,7 +23,7 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
             <?php echo category_description(); ?>
           </div>
           <?php if ( $podcast_url ) { ?>
-          <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
+          <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
         <div class="category-archive__if-i-speak__presenters grid-item is-s-24 is-xxl-12">
