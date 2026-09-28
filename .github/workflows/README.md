@@ -52,7 +52,7 @@ The `release-notification.yml` workflow automatically sends structured notificat
 
 ### How it works
 
-1. **Trigger**: Activates when a Pull Request with title starting with "Release: " (as created by `scripts/release.sh`) is merged into the `master` or `main` branch
+1. **Trigger**: Activates when a Pull Request with title starting with "Release: " (as created by `scripts/release.sh`) is merged into the `master` branch
 2. **Version Extraction**: Extracts the version number from `package.json` in the merged code
 3. **Release Notes**: Parses `CHANGELOG.md` to extract the release notes for that specific version
 4. **Slack Notification**: Sends a structured message with:
