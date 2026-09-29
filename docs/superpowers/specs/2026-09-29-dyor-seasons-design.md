@@ -53,10 +53,10 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 
 Top to bottom:
 
-1. **Hero:** #626's margins fix, with a 1rem (`mb-4`) gap to Latest Episode. A grey `hr` (`grid-item is-xxl-24 mt-4 mb-4`, as on Downstream) separates Latest Episode from the first season.
+1. **Hero:** #626's margins fix, with a 1rem (`mb-4`) gap to Latest Episode. A grey `hr` (`grid-item is-xxl-24 mt-5 mb-5`, the Downstream markup with 2rem each side) separates Latest Episode from the first season.
 2. **Latest Episode**. The "The Latest Episode" tag sits inside the text column, above a line over the title: `Season {n} Episode {m}` from the post's meta. It shows `Season {n}` alone when there's no episode number, and nothing when there's no season.
 3. **One block per season**, for seasons that have at least one published DYOR post, in descending season number. Each block has:
-   - the season `title` tag (falling back to `Season {n}`), centred, then the `description` if set: left-aligned text in a grid-centred item (`offset-xxl-6 is-xxl-12`, `offset-l-4 is-l-16`, `is-s-24`) to keep line length readable, `font-size-11`, `text-paragraph-breaks`.
+   - the season `title` tag (falling back to `Season {n}`), centred, then the `description` if set: left-aligned text in a grid-centred item (`offset-xxl-5 is-xxl-14`, `offset-l-3 is-l-18`, `is-s-24`) to keep line length readable, `font-size-12` (`font-size-s-11`), `text-paragraph-breaks`.
    - the click-to-load map (component 4), if the season has a `figma_file_key`
    - the season's episodes, newest first, in the existing grid (`partials/post-layouts/archive-post`, `is-s-24 is-l-12 is-xxl-8`)
    A support section (`partials/support-section`) sits between consecutive season blocks as a divider. It carries DYOR's own heading and copy (`support_heading` / `support_text` on the Products DYOR page, via `nm_get_dyor_support_copy()`), using `render_support_form()`'s context copy argument (#377). Blank or unsaved fields fall back to the site-wide support copy.

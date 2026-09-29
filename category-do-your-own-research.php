@@ -151,7 +151,7 @@ get_header();
       </div>
     </div>
     <div class="grid-row">
-      <div class="grid-item is-xxl-24 mt-4 mb-4">
+      <div class="grid-item is-xxl-24 mt-5 mb-5">
         <hr />
       </div>
     </div>
@@ -201,8 +201,8 @@ get_header();
       </div>
       <?php if ( '' !== $season['description'] ) { ?>
       <?php // Centred on the grid but left-aligned, to keep the line length readable. ?>
-      <div class="grid-item offset-xxl-6 is-xxl-12 offset-l-4 is-l-16 offset-s-0 is-s-24 mt-4">
-        <div class="dyor-archive__season-description font-size-11 text-paragraph-breaks">
+      <div class="grid-item offset-xxl-5 is-xxl-14 offset-l-3 is-l-18 offset-s-0 is-s-24 mt-4">
+        <div class="dyor-archive__season-description font-size-12 font-size-s-11 text-paragraph-breaks">
           <?php echo wp_kses_post( wpautop( $season['description'] ) ); ?>
         </div>
       </div>
@@ -212,19 +212,17 @@ get_header();
     <?php if ( '' !== $season['figma_file_key'] ) { ?>
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <div class="grid-row background-white ui-rounded-box pt-4 pb-4">
-          <div class="grid-item is-xxl-24">
-            <div
-              class="dyor-archive__map ui-rounded-box"
-              data-testid="dyor-season-map"
-              data-click-to-load
-              data-click-to-load-src="<?php echo esc_url( $dyor_map_src( $season, $season_posts ) ); ?>"
-              data-click-to-load-title="<?php echo esc_attr( 'Do Your Own Research – ' . $season_title . ' map' ); ?>"
-            >
-              <button type="button" class="ui-button ui-button--black dyor-archive__map-button" data-click-to-load-button>
-                <?php echo esc_html( 'Load the ' . $season_title . ' map' ); ?>
-              </button>
-            </div>
+        <div class="grid-row background-white ui-rounded-box p-4">
+          <div
+            class="dyor-archive__map ui-rounded-box"
+            data-testid="dyor-season-map"
+            data-click-to-load
+            data-click-to-load-src="<?php echo esc_url( $dyor_map_src( $season, $season_posts ) ); ?>"
+            data-click-to-load-title="<?php echo esc_attr( 'Do Your Own Research – ' . $season_title . ' map' ); ?>"
+          >
+            <button type="button" class="ui-button ui-button--black dyor-archive__map-button" data-click-to-load-button>
+              <?php echo esc_html( 'Load the ' . $season_title . ' map' ); ?>
+            </button>
           </div>
         </div>
       </div>
