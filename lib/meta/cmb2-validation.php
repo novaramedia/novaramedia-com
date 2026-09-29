@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NM Fork: CMB2 js validation for "required" fields
  * Description: Uses js to validate CMB2 fields that have the 'data-validation' attribute set, with rules chosen by data-validation-required / data-validation-word-length
- * Version: 0.5.0
+ * Version: 0.6.0
  *
  * Validates CMB2 meta fields in the editor: hooks the post edit form and our
  * options page forms (Links Bar, Fundraising), and blocks submission with an
@@ -25,6 +25,9 @@
  *   is in that category or any of its descendants.
  * - data-validation-not-required-category="<slug>": suppresses the required
  *   rules above when the post is in that category or any of its descendants.
+ * - data-validation-required-with="<id>[,<id>…]": required when any of the
+ *   named fields (by element id — CMB2 uses the field id) has a value.
+ *   Combines with the category rules: the exempt category still wins.
  * - data-validation-word-length: value must not exceed this many words.
  *
  * To enable on a CMB2 meta field set the attributes parameters
@@ -259,6 +262,18 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
           isRequired = has_checked_category( requiredCategorySlug );
         }
 
+        // Required when any named sibling field has a value, e.g. season is
+        // required once an episode number or label is filled in.
+        const requiredWith = $this.attr( 'data-validation-required-with' );
+
+        if ( ! isRequired && typeof requiredWith !== 'undefined' ) {
+          isRequired = requiredWith.split( ',' ).some( function( id ) {
+            const el = document.getElementById( id.trim() );
+
+            return el !== null && ! is_empty_value( $( el ).val() );
+          });
+        }
+
         // An exempt category overrides both rules above: a ticked exempt
         // category (or descendant) means the field is not required.
         if ( isRequired && typeof exemptCategorySlug !== 'undefined' && has_checked_category( exemptCategorySlug ) ) {
@@ -286,10 +301,11 @@ function cmb2_after_form_do_js_validation( $post_id, $cmb ) {
               remove_failure( $row );
             }
           }
-        } else if ( typeof requiredCategorySlug !== 'undefined' || typeof exemptCategorySlug !== 'undefined' ) {
-          // Conditionally-required field whose category isn't ticked, or a
-          // field exempted by a ticked exempt category: clear any stale
-          // highlight from a previous failed attempt.
+        } else if ( typeof requiredCategorySlug !== 'undefined' || typeof exemptCategorySlug !== 'undefined' || typeof requiredWith !== 'undefined' ) {
+          // Conditionally-required field whose condition isn't met (category
+          // not ticked, sibling fields empty), or a field exempted by a ticked
+          // exempt category: clear any stale highlight from a previous failed
+          // attempt.
           remove_failure( $row );
         }
 

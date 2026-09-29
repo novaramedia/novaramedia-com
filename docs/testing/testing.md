@@ -166,6 +166,7 @@ Common causes:
 
 - A `data-testid` was removed or renamed in a template. The verify-staging step prints the ids present on the homepage.
 - A template branch did not render on staging (for example no featured posts configured), so the id never appeared.
+- Staging data a spec depends on is missing. `capsule-podcast-archives.spec.js` needs the season/episode backfill and the Death in Westminster redate on the staging DB (`scripts/one-off/2026-09-season-episode-backfill.php`). A staging refresh from production before production has had both wipes them; re-run the script on staging.
 - A new third-party script logs errors. Add its host to the ignore list in `fixtures.js` only if the theme genuinely cannot control it.
 
 ## Expansion backlog
