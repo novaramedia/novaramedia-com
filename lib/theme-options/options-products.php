@@ -35,6 +35,25 @@ function nm_register_products_options_metabox() {
     )
   );
 
+  $dyor_options->add_field(
+    array(
+      'name'    => 'Support box heading',
+      'desc'    => 'Heading for the support box between seasons on the archive. Leave blank for the site-wide support copy.',
+      'id'      => 'support_heading',
+      'type'    => 'text',
+      'default' => 'Help us keep digging',
+    )
+  );
+
+  $dyor_options->add_field(
+    array(
+      'name'    => 'Support box copy',
+      'id'      => 'support_text',
+      'type'    => 'textarea_small',
+      'default' => 'Deep research doesn\'t please the algorithm. Supporters keep Do Your Own Research going. Join from £1 a month.',
+    )
+  );
+
   $seasons_group = $dyor_options->add_field(
     array(
       'id'          => 'seasons',
@@ -145,6 +164,25 @@ function nm_get_dyor_seasons() {
   krsort( $seasons );
 
   return $seasons;
+}
+
+/**
+ * Context copy for the DYOR archive's between-seasons support box, the same
+ * for both donation modes. Empty until saved on Products → Do Your Own
+ * Research, so the site-wide copy shows.
+ *
+ * @return array Shape accepted by render_support_form()'s $copy.
+ */
+function nm_get_dyor_support_copy() {
+  $copy = array(
+    'heading' => (string) NM_get_option( 'support_heading', 'nm_products_dyor_options', '' ),
+    'text'    => (string) NM_get_option( 'support_text', 'nm_products_dyor_options', '' ),
+  );
+
+  return array(
+    'regular' => $copy,
+    'oneoff'  => $copy,
+  );
 }
 
 /**

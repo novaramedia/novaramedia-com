@@ -271,13 +271,20 @@ export class Support {
   updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
+    // Context copy rendered on this form (data-support-copy) wins over the
+    // global Fundraising copy; jQuery parses the JSON attribute.
+    const formCopy = $form.data('supportCopy');
+    const contextCopy =
+      formCopy && typeof formCopy === 'object' ? formCopy[data.value] : null;
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
     let headingText = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+    if (contextCopy && isNonEmptyString(contextCopy.heading)) {
+      headingText = contextCopy.heading;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
     } else if (
       defaultSectionCopy &&
@@ -287,7 +294,9 @@ export class Support {
     }
 
     let textCopy = '';
-    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+    if (contextCopy && isNonEmptyString(contextCopy.text)) {
+      textCopy = contextCopy.text;
+    } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
       textCopy = overrideCopy.text;
     } else if (
       defaultSectionCopy &&

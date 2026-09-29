@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
 - Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Support boxes can carry their own heading and copy per placement; the one between Do Your Own Research seasons uses copy set on its Products page
 
 ### Changed
 

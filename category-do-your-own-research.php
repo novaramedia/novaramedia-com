@@ -170,14 +170,15 @@ get_header();
   $season_index = 0;
 
   foreach ( $posts_by_season as $season_number => $season_posts ) {
-    // A support box divides consecutive seasons.
+    // A support box, with DYOR's own copy, divides consecutive seasons.
     if ( $season_index++ > 0 ) {
       get_template_part(
         'partials/support-section',
         null,
         array(
-          'container_classes'     => 'mb-5',
+          'container_classes'     => 'mb-5 dyor-archive__season-support',
           'on_colored_background' => false,
+          'copy'                  => nm_get_dyor_support_copy(),
         )
       );
     }
