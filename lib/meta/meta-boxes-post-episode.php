@@ -64,7 +64,7 @@ function nm_cmb_post_episode_metaboxes() {
 
   $cmb_episode->add_field( array(
     'name'            => esc_html__( 'Episode label', 'cmb2' ),
-    'desc'            => esc_html__( 'For posts that are not a numbered episode, e.g. "Bonus 1", "Trailer", "Credits". Shown instead of the number when set.', 'cmb2' ),
+    'desc'            => esc_html__( 'For posts that are not a numbered episode, e.g. "Bonus 1", "Trailer". Shown instead of the number when set.', 'cmb2' ),
     'id'              => $prefix . 'episode_label',
     'type'            => 'text',
     'sanitization_cb' => 'sanitize_text_field',

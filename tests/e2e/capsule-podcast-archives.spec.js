@@ -19,7 +19,7 @@ const ARCHIVES = [
     path: '/category/foreign-agent/',
     labels: [
       'Episode 1', 'Episode 2', 'Episode 3', 'Bonus 1', 'Episode 4',
-      'Episode 5', 'Bonus 2', 'Episode 6', 'The producers', 'Credits',
+      'Episode 5', 'Bonus 2', 'Episode 6',
     ],
   },
   {

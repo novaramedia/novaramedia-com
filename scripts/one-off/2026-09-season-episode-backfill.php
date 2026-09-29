@@ -4,7 +4,7 @@
  *
  * Capsule podcasts (Committed, Foreign Agent, Death in Westminster) put their
  * episode label in the standfirst. "Episode N" becomes _nm_episode = N; any
- * other standfirst ("Bonus 1", "Credits") becomes _nm_episode_label. Every
+ * other standfirst ("Bonus 1", "Bonus 2") becomes _nm_episode_label. Every
  * post gets _nm_season = 1. Standfirsts are NOT modified — editorial rewrites
  * them after deploy (docs/post-deploy-checklist.md).
  *
