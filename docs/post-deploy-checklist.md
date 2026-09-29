@@ -16,6 +16,45 @@ for each.
 
 ---
 
+## Unreleased
+
+### 1. Set the If I Speak hero blurb
+**Admin > Posts > Categories > If I Speak → Formatted description.** The redesigned hero
+shows this field if set, otherwise the core Description. Launch copy from the design:
+
+```html
+A podcast from Moya Lothian-McLean and Ash Sarkar where the personal meets the political. Every week they tackle social dilemmas, cultural phenomena and the frustrations of modern life.
+```
+
+Leave the core Description as it is — it feeds Open Graph and meta descriptions.
+
+### 2. Backfill season/episode meta — BEFORE deploying
+Plain post meta, so it can run before the new templates ship; they then find it on first render. Staging needs this and step 3 too, before the PR's Playwright run can pass (`capsule-podcast-archives.spec.js`); on staging run step 3 straight after this one.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php        # dry run, check output
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
+```
+
+Before `apply`, read the dry run's Do Your Own Research list: every title must be a season 1 episode. Put the ID of anything else (trailer, clip, season 2) in `$nm_dyor_skip_ids` at the top of the script, re-run the dry run, and set that post's Season / Episode box by hand in wp-admin. Posts that already have a season are skipped, so re-running is safe.
+
+Verify after deploy: `/category/committed/`, `/category/foreign-agent/` and `/category/death-in-westminster/` show the same episode labels as before.
+
+### 3. Re-date Death in Westminster — straight after deploying
+Its dates were set in reverse so the old newest-first archive showed Episode 1 on top. The archive now lists oldest first, so until this runs it shows Episode 6 → 1. Needs step 2 done first.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate          # dry run, check episode → date mapping
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate apply
+```
+
+Verify: `/category/death-in-westminster/` lists Episode 1 → 6, and a single episode URL still 301s to its archive anchor.
+
+### 4. Rewrite capsule podcast standfirsts
+The standfirst on each Committed, Foreign Agent and Death in Westminster post still reads "Episode 1", "Bonus 1" etc. Archives no longer use it. Replace each with a real standfirst (editorial), since it shows on single posts, in search results and in related posts.
+
+---
+
 ## v4.9.0
 
 ### 1. Create The Cortado category — before flushing permalinks

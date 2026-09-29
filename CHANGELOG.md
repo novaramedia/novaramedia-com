@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+
+### Changed
+
+- If I Speak category archive redesign: new hero and a text-only episode grid
+- `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
 ### Fixed
 
 - Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page

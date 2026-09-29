@@ -99,6 +99,17 @@ function nm_get_netlify_url() {
 }
 
 /**
+ * Category slugs of serial (capsule) podcasts. Their archives list every
+ * episode oldest first, and their single posts redirect to the archive
+ * anchor. Order stays by date: bonus posts have no episode number.
+ *
+ * @return string[]
+ */
+function nm_get_serial_podcast_slugs() {
+  return array( 'foreign-agent', 'committed', 'death-in-westminster' );
+}
+
+/**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
  * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  *
@@ -109,8 +120,7 @@ function nm_serial_podcast_redirect() {
     return;
   }
   global $post;
-  // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
+  $serial_slugs = nm_get_serial_podcast_slugs();
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,

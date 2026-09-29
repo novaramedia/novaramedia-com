@@ -1,10 +1,10 @@
 <?php
 /**
- * Thumbnail-less archive post layout.
+ * Opinion archive post layout.
  *
- * Author avatar, headline, byline, then standfirst. For archive grids whose
- * design carries no post image — first used on The Cortado category archive. Sibling of
- * archive-post.php, minus the image-size and text-size args.
+ * Author avatar (in a circle), headline, byline, then standfirst — for grids where the writer
+ * leads rather than a post image. First used on The Cortado category archive. Sibling of
+ * archive-post.php (image-led) and archive-post-pure-text.php (date, title, excerpt only).
  *
  * Args:
  *   grid-item-classes  (string, required) Classes for the wrapping article. Returns early if empty.
@@ -25,7 +25,7 @@ $hide_excerpt = ! empty( $args['hide-excerpt'] );
 $contributors   = get_contributors_array( $this_post_id );
 $avatar_post_id = ( ! empty( $contributors ) && has_post_thumbnail( $contributors[0]->ID ) ) ? $contributors[0]->ID : false;
 ?>
-<article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>" data-testid="archive-post-no-thumbnail">
+<article <?php post_class( $args['grid-item-classes'] ); ?> id="post-<?php the_ID(); ?>" data-testid="archive-post-opinion">
   <a href="<?php the_permalink(); ?>" class="layout-flex ui-hover ui-border-top pt-4">
     <?php if ( $avatar_post_id ) { ?>
     <div class="layout-flex-no-shrink mr-3">

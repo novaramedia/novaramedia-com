@@ -48,7 +48,9 @@ See [docs/testing/testing.md](../../docs/testing/testing.md) for the full testin
 
 ## Release Notification to Slack
 
-The `release-notification.yml` workflow automatically sends structured notifications to the public digital team Slack channel when a new version is released.
+The `release-notification.yml` workflow automatically sends structured notifications to the private digital team Slack channel when a release PR is merged into `master`.
+
+It reports the **merge**, not a deploy — production is still updated manually afterwards (see [docs/releases.md](../../docs/releases.md#deploying)). The channel is set by whichever incoming webhook the `SLACK_WEBHOOK_URL` secret holds. Once production deploys run from CI, the notification should fire after a successful deploy and move to the public digital team channel — see [docs/plans/production-ci-deploy.md](../../docs/plans/production-ci-deploy.md).
 
 ### How it works
 
