@@ -154,7 +154,7 @@ function podcast_series_pre_get_posts( $query ) {
     return;
   }
 
-  $serial_categories = array( 'foreign-agent', 'committed' ); // Add more slugs as needed
+  $serial_categories = nm_get_serial_podcast_slugs();
 
   if ( $query->is_archive() && $query->is_category( $serial_categories ) ) {
     if ( isset( $query->query_vars['posts_per_page'] ) && $query->query_vars['posts_per_page'] === 1 ) {

@@ -71,9 +71,12 @@ Two hardcoded slug lists exist and have drifted:
 - `lib/functions-hooks.php:157` `podcast_series_pre_get_posts`: `foreign-agent`, `committed`. Makes the archive show every post, oldest first.
 - `lib/functions-custom.php:113` `nm_serial_podcast_redirect`: the same two plus `death-in-westminster`. 301s single posts to the archive anchor.
 
-So Death in Westminster's archive runs the default query (newest first, paged) while its single posts redirect to the archive. At minimum:
+So Death in Westminster's archive runs the default query (newest first, paged) while its single posts redirect to the archive. Its six posts were dated in reverse (Episode 1 newest) so that default order reads 1 → 6.
 
-- Put both lists behind one source of truth, e.g. `nm_get_serial_podcast_slugs()`, and include `death-in-westminster` in the query hook if its archive is meant to list every episode oldest first. Confirm the intended order against the live page before changing it.
+Decided 2026-09-29:
+
+- Both lists read `nm_get_serial_podcast_slugs()`, which includes `death-in-westminster`, so its archive lists every episode oldest first like the others.
+- Fix the data, not the code: a `redate` mode in the backfill script reassigns Death in Westminster's existing publish dates in episode order. It runs straight after deploy (post-deploy checklist).
 - Keep the hook's date ordering (decision 7).
 
 ## Out of scope

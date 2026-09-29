@@ -38,7 +38,17 @@ wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
 
 Verify after deploy: `/category/committed/`, `/category/foreign-agent/` and `/category/death-in-westminster/` show the same episode labels as before.
 
-### 3. Rewrite capsule podcast standfirsts
+### 3. Re-date Death in Westminster — straight after deploying
+Its dates were set in reverse so the old newest-first archive showed Episode 1 on top. The archive now lists oldest first, so until this runs it shows Episode 6 → 1. Needs step 2 done first.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate          # dry run, check episode → date mapping
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate apply
+```
+
+Verify: `/category/death-in-westminster/` lists Episode 1 → 6, and a single episode URL still 301s to its archive anchor.
+
+### 4. Rewrite capsule podcast standfirsts
 The standfirst on each Committed, Foreign Agent and Death in Westminster post still reads "Episode 1", "Bonus 1" etc. Archives no longer use it. Replace each with a real standfirst (editorial), since it shows on single posts, in search results and in related posts.
 
 ---

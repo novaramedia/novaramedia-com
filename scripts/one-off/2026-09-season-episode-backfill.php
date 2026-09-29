@@ -10,13 +10,56 @@
  *
  * Do Your Own Research season 1: episode numbers follow publish order.
  *
+ * Death in Westminster's dates were set in reverse so the default newest-
+ * first archive showed Episode 1 at the top. It now lists oldest first like
+ * the other serial podcasts, so the "redate" mode reassigns its existing
+ * publish dates in episode order (Episode 1 gets the earliest). Run it right
+ * after the deploy; until then the archive shows 6 → 1.
+ *
  * Usage (dry run, prints the plan):  wp eval-file scripts/one-off/2026-09-season-episode-backfill.php
  * Apply:                            wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
+ * Redate dry run / apply:           wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate [apply]
  *
- * Safe to re-run: it overwrites the same keys with the same values.
+ * Safe to re-run: meta mode overwrites the same keys with the same values;
+ * redate mode sorts the same set of dates the same way.
  */
 
-$nm_apply = isset( $args[0] ) && 'apply' === $args[0];
+$nm_redate = isset( $args[0] ) && 'redate' === $args[0];
+$nm_apply  = in_array( 'apply', $args, true );
+
+if ( $nm_redate ) {
+  $nm_posts = get_posts( array(
+    'category_name'  => 'death-in-westminster',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'orderby'        => 'date',
+    'order'          => 'ASC',
+    'meta_key'       => '_nm_episode', // Only numbered episodes; run the meta backfill first.
+  ) );
+
+  $nm_dates = wp_list_pluck( $nm_posts, 'post_date' ); // Already ascending.
+
+  usort( $nm_posts, function ( $a, $b ) {
+    return (int) get_post_meta( $a->ID, '_nm_episode', true ) <=> (int) get_post_meta( $b->ID, '_nm_episode', true );
+  } );
+
+  foreach ( $nm_posts as $index => $post ) {
+    WP_CLI::log( sprintf( '  #%d  episode %d  %s -> %s', $post->ID, (int) get_post_meta( $post->ID, '_nm_episode', true ), $post->post_date, $nm_dates[ $index ] ) );
+
+    if ( $nm_apply && $post->post_date !== $nm_dates[ $index ] ) {
+      wp_update_post( array(
+        'ID'            => $post->ID,
+        'post_date'     => $nm_dates[ $index ],
+        'post_date_gmt' => get_gmt_from_date( $nm_dates[ $index ] ),
+        'edit_date'     => true,
+      ) );
+    }
+  }
+
+  WP_CLI::success( $nm_apply ? 'Redated.' : 'Redate dry run only. Re-run with "redate apply" to write.' );
+
+  return;
+}
 
 $nm_capsule_slugs = array( 'committed', 'foreign-agent', 'death-in-westminster' );
 $nm_dyor_slug     = 'do-your-own-research';
