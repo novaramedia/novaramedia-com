@@ -51,15 +51,28 @@ test.describe('Do Your Own Research archive', () => {
     // The copy fields are optional; blank means the site-wide copy, with no attribute.
     test.skip(!(await seasonForm.getAttribute('data-support-copy')), 'no DYOR support copy saved');
 
+    // Each field is optional per mode; check whichever are saved.
+    const copy = JSON.parse(await seasonForm.getAttribute('data-support-copy'));
     const heading = seasonForm.locator('.support-form__text-desktop .support-form__dynamic-heading');
-    const contextHeading = (await heading.textContent()).trim();
-    const siteHeading = (await page.locator('form.support-form').last().locator('.support-form__text-desktop .support-form__dynamic-heading').textContent()).trim();
+    const text = seasonForm.locator('.support-form__text-desktop .support-form__dynamic-text');
 
-    await expect(seasonForm).toHaveAttribute('data-support-copy', /heading/);
-    expect(contextHeading).not.toBe(siteHeading);
+    const expectModeCopy = async (mode) => {
+      if (copy[mode] && copy[mode].heading) {
+        await expect(heading).toHaveText(copy[mode].heading);
+      }
+      if (copy[mode] && copy[mode].text) {
+        await expect(text).toHaveText(copy[mode].text);
+      }
+    };
 
-    await seasonForm.locator('.support-form__schedule-desktop [data-value="oneoff"]').click();
-    await expect(heading).toHaveText(contextHeading);
+    // Rendered state first, then each mode after the toggle rewrites the copy.
+    const activeMode = await seasonForm.locator('.support-form__schedule-desktop .ui-button--active').getAttribute('data-value');
+    await expectModeCopy(activeMode);
+
+    for (const mode of ['oneoff', 'regular']) {
+      await seasonForm.locator(`.support-form__schedule-desktop [data-value="${mode}"]`).click();
+      await expectModeCopy(mode);
+    }
   });
 
   test('paged archive URLs redirect to the archive', async ({ page }) => {
