@@ -17,6 +17,7 @@ import { Scrollers } from './modules/Scrollers.js';
 import { Utilities } from './modules/Utilities.js';
 import { Highlighters } from './modules/Highlighters.js';
 import { AudioPlayers } from './modules/AudioPlayers.js';
+import { ClickToLoad } from './modules/ClickToLoad.js';
 
 class Site {
   constructor() {
@@ -32,6 +33,7 @@ class Site {
     this.utilties = new Utilities();
     this.highlighters = new Highlighters();
     this.audioPlayers = new AudioPlayers();
+    this.clickToLoad = new ClickToLoad();
 
     $(document).ready(this.onReady.bind(this));
   }
@@ -49,6 +51,7 @@ class Site {
     this.utilties.onReady();
     this.highlighters.onReady();
     this.audioPlayers.onReady();
+    this.clickToLoad.onReady();
   }
 }
 
