@@ -1,8 +1,4 @@
 <?php
-// Placeholder support-box copy for the DYOR archive, used until real copy is saved.
-define( 'NM_DYOR_SUPPORT_HEADING_DEFAULT', 'Help us keep digging' );
-define( 'NM_DYOR_SUPPORT_TEXT_DEFAULT', 'Deep research doesn\'t please the algorithm. Supporters keep Do Your Own Research going. Join from £1 a month.' );
-
 /**
  * Products options: per-product settings that don't belong on every
  * category. Top-level "Products" menu; each product is a sub-page.
@@ -42,10 +38,9 @@ function nm_register_products_options_metabox() {
   $dyor_options->add_field(
     array(
       'name'    => 'Support box heading',
-      'desc'    => 'Heading for the support box between seasons on the archive. Left blank, the default below is used.',
+      'desc'    => 'Heading for the support box between seasons on the archive. Leave blank for the site-wide support copy.',
       'id'      => 'support_heading',
       'type'    => 'text',
-      'default' => NM_DYOR_SUPPORT_HEADING_DEFAULT,
     )
   );
 
@@ -53,8 +48,8 @@ function nm_register_products_options_metabox() {
     array(
       'name'    => 'Support box copy',
       'id'      => 'support_text',
+      'desc'    => 'Leave blank for the site-wide support copy.',
       'type'    => 'textarea_small',
-      'default' => NM_DYOR_SUPPORT_TEXT_DEFAULT,
     )
   );
 
@@ -172,8 +167,8 @@ function nm_get_dyor_seasons() {
 
 /**
  * Context copy for the DYOR archive's between-seasons support box, the same
- * for both donation modes. Falls back to the NM_DYOR_SUPPORT_*_DEFAULT
- * placeholder copy when a field is blank or unsaved.
+ * for both donation modes. A blank field is dropped by render_support_form(),
+ * so the site-wide support copy shows for it.
  *
  * @return array Shape accepted by render_support_form()'s $copy.
  */
@@ -182,14 +177,6 @@ function nm_get_dyor_support_copy() {
     'heading' => trim( (string) NM_get_option( 'support_heading', 'nm_products_dyor_options', '' ) ),
     'text'    => trim( (string) NM_get_option( 'support_text', 'nm_products_dyor_options', '' ) ),
   );
-
-  if ( '' === $copy['heading'] ) {
-    $copy['heading'] = NM_DYOR_SUPPORT_HEADING_DEFAULT;
-  }
-
-  if ( '' === $copy['text'] ) {
-    $copy['text'] = NM_DYOR_SUPPORT_TEXT_DEFAULT;
-  }
 
   return array(
     'regular' => $copy,
