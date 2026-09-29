@@ -1,7 +1,7 @@
 # Do Your Own Research: seasons on the archive page
 
 **Date:** 2026-09-29
-**Status:** Agreed design, pre-implementation
+**Status:** Implemented (this branch)
 **Branch:** `fix/dyor-archive-box-margins` (PR #626), with `development` merged in so the season/episode meta from #629 is present.
 
 ## Problem
@@ -88,7 +88,7 @@ The `TODO` comment on the map in the template is replaced with a pointer to the 
 - One `get_posts` gets every published DYOR post (`posts_per_page => -1`, date DESC), grouped in PHP by `(int) _nm_season`. 0 means unseasoned.
 - Latest Episode is the first post of that list. That removes the separate `WP_Query`.
 - Each season's map node: the newest post **in that season** with a non-empty `_nm_dyor_figma_node_id`, else the season's `figma_default_node_id`, else none.
-- The page is no longer paginated. A `template_redirect` hook 301s `is_category( 'do-your-own-research' ) && is_paged()` to the category link. The pagination partial is removed from the template.
+- The page is no longer paginated. A `template_redirect` hook 301s paged DYOR requests to page 1 (`get_pagenum_link( 1 )`). It matches on the `cat` / `category_name` query vars rather than `is_category()`, because a page number past the last page is already a 404 by then. The pagination partial is removed from the template.
 
 ## Local test data
 

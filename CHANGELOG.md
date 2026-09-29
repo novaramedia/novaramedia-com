@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
 
 ### Changed
 
@@ -19,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by Products → Do Your Own Research. Migration: open that page and Save once after deploy
 
 ## [4.9.0] - 2026-09-25
 
