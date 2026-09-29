@@ -1,0 +1,171 @@
+<?php
+/**
+ * Products options: per-product settings that don't belong on every
+ * category. Top-level "Products" menu; each product is a sub-page.
+ */
+function nm_register_products_options_metabox() {
+  $products_options = new_cmb2_box(
+    array(
+      'id'           => 'nm_products_options',
+      'title'        => 'Products',
+      'object_types' => array( 'options-page' ),
+      'option_key'   => 'nm_products_options',
+      'icon_url'     => 'dashicons-products',
+      'capability'   => 'edit_posts',
+    )
+  );
+
+  $products_options->add_field(
+    array(
+      'name' => 'Product settings',
+      'desc' => 'Settings for individual products live in the sub-pages of this menu.',
+      'id'   => 'products_intro',
+      'type' => 'title',
+    )
+  );
+
+  $dyor_options = new_cmb2_box(
+    array(
+      'id'           => 'nm_products_dyor_options',
+      'title'        => 'Do Your Own Research',
+      'object_types' => array( 'options-page' ),
+      'option_key'   => 'nm_products_dyor_options',
+      'parent_slug'  => 'nm_products_options',
+      'capability'   => 'edit_posts',
+    )
+  );
+
+  $seasons_group = $dyor_options->add_field(
+    array(
+      'id'          => 'seasons',
+      'type'        => 'group',
+      'description' => 'One entry per season. The archive shows a block for each season that has published episodes, newest season first. Set each episode\'s season in its Season / Episode box.',
+      'options'     => array(
+        'group_title'   => 'Season entry {#}',
+        'add_button'    => 'Add another season',
+        'remove_button' => 'Remove season',
+        'sortable'      => true,
+        'closed'        => true,
+      ),
+    )
+  );
+
+  $dyor_options->add_group_field(
+    $seasons_group,
+    array(
+      'name'            => 'Season number',
+      'id'              => 'number',
+      'type'            => 'text_small',
+      'sanitization_cb' => 'nm_sanitize_positive_int_meta',
+      'attributes'      => array(
+        'type' => 'number',
+        'min'  => '1',
+        'step' => '1',
+      ),
+    )
+  );
+
+  $dyor_options->add_group_field(
+    $seasons_group,
+    array(
+      'name' => 'Title',
+      'desc' => 'Heading for this season\'s block. Defaults to "Season N".',
+      'id'   => 'title',
+      'type' => 'text',
+    )
+  );
+
+  $dyor_options->add_group_field(
+    $seasons_group,
+    array(
+      'name' => 'Description',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+    )
+  );
+
+  $dyor_options->add_group_field(
+    $seasons_group,
+    array(
+      'name' => 'Figma file key',
+      'desc' => 'The file key from this season\'s FigJam board URL (e.g. Twc9z7w8yaEzaO6m0PM1Kj). The map only shows when set.',
+      'id'   => 'figma_file_key',
+      'type' => 'text',
+    )
+  );
+
+  $dyor_options->add_group_field(
+    $seasons_group,
+    array(
+      'name' => 'Default map node ID',
+      'desc' => 'Node the map opens on when no episode in this season has its own node ID. Use an invisible bounding rectangle to control the zoom level.',
+      'id'   => 'figma_default_node_id',
+      'type' => 'text',
+    )
+  );
+}
+add_action( 'cmb2_admin_init', 'nm_register_products_options_metabox' );
+
+/**
+ * DYOR seasons from Products → Do Your Own Research, keyed by season number,
+ * newest first. Entries without a season number are dropped. Falls back to
+ * nm_get_dyor_seasons_seed() until the page has been saved once.
+ *
+ * @return array[] { number, title, description, figma_file_key, figma_default_node_id }
+ */
+function nm_get_dyor_seasons() {
+  $saved   = NM_get_option( 'seasons', 'nm_products_dyor_options', array() );
+  $seasons = array();
+
+  if ( is_array( $saved ) ) {
+    foreach ( $saved as $entry ) {
+      $number = isset( $entry['number'] ) ? (int) $entry['number'] : 0;
+
+      if ( $number < 1 ) {
+        continue;
+      }
+
+      $seasons[ $number ] = array(
+        'number'                => $number,
+        'title'                 => isset( $entry['title'] ) ? trim( $entry['title'] ) : '',
+        'description'           => isset( $entry['description'] ) ? trim( $entry['description'] ) : '',
+        'figma_file_key'        => isset( $entry['figma_file_key'] ) ? trim( $entry['figma_file_key'] ) : '',
+        'figma_default_node_id' => isset( $entry['figma_default_node_id'] ) ? trim( $entry['figma_default_node_id'] ) : '',
+      );
+    }
+  }
+
+  if ( empty( $seasons ) ) {
+    $seasons = nm_get_dyor_seasons_seed();
+  }
+
+  krsort( $seasons );
+
+  return $seasons;
+}
+
+/**
+ * Season 1 built from the legacy DYOR category map fields, so the archive
+ * keeps today's map until Products → Do Your Own Research is saved once.
+ * Computed on read, never written.
+ *
+ * @deprecated 4.11.0 Remove with the category map fields once production has saved the Products page.
+ * @return array[]
+ */
+function nm_get_dyor_seasons_seed() {
+  $term = get_category_by_slug( 'do-your-own-research' );
+
+  if ( ! $term ) {
+    return array();
+  }
+
+  return array(
+    1 => array(
+      'number'                => 1,
+      'title'                 => 'Season 1',
+      'description'           => '',
+      'figma_file_key'        => (string) get_term_meta( $term->term_id, '_nm_dyor_figma_file_key', true ),
+      'figma_default_node_id' => (string) get_term_meta( $term->term_id, '_nm_dyor_figma_default_node_id', true ),
+    ),
+  );
+}

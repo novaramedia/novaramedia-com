@@ -153,6 +153,7 @@ get_template_part( 'lib/meta/meta-boxes-posttype-event' );
 get_template_part( 'lib/theme-options/theme-options' );
 get_template_part( 'lib/theme-options/options-front-page' );
 get_template_part( 'lib/theme-options/options-fundraising' );
+get_template_part( 'lib/theme-options/options-products' );
 
 /**
  * Initialize CMB2 meta boxes.
