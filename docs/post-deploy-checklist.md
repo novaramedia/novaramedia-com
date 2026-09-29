@@ -28,6 +28,19 @@ A podcast from Moya Lothian-McLean and Ash Sarkar where the personal meets the p
 
 Leave the core Description as it is — it feeds Open Graph and meta descriptions.
 
+### 2. Backfill season/episode meta — BEFORE deploying
+Plain post meta, so it can run before the new templates ship; they then find it on first render.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php        # dry run, check output
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
+```
+
+Verify after deploy: `/category/committed/`, `/category/foreign-agent/` and `/category/death-in-westminster/` show the same episode labels as before.
+
+### 3. Rewrite capsule podcast standfirsts
+The standfirst on each Committed, Foreign Agent and Death in Westminster post still reads "Episode 1", "Bonus 1" etc. Archives no longer use it. Replace each with a real standfirst (editorial), since it shows on single posts, in search results and in related posts.
+
 ---
 
 ## v4.9.0

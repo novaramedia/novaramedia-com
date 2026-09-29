@@ -1,7 +1,7 @@
 # Season / episode post meta
 
 **Date:** 2026-09-29
-**Status:** Agreed design, pre-implementation
+**Status:** Implemented (this branch)
 **Branch:** `feature/season-episode-meta` (one PR against `development`)
 
 ## Problem
