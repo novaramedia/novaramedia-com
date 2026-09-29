@@ -78,7 +78,7 @@ get_header();
 <main id="main-content" class="dyor-archive" data-testid="main-content">
 
   <?php // ── Section 1: Hero ── ?>
-  <section class="container mt-4 mb-5">
+  <section class="container mt-4 mb-4">
     <div class="grid-row">
       <div class="grid-item is-xxl-24">
         <div class="grid-row dyor-archive__hero-background ui-rounded-box ui-rounded-box--top">
@@ -123,7 +123,7 @@ get_header();
     $latest_season      = (int) get_post_meta( get_the_ID(), '_nm_season', true );
     $latest_episode     = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
     ?>
-  <section class="container mb-5">
+  <section class="container">
     <div class="dyor-archive__latest-episode grid-row">
       <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
         <div class="ui-embed-container ui-rounded-box">
@@ -148,6 +148,11 @@ get_header();
         <div class="font-size-10 mt-3 mt-s-2 text-wrap-pretty">
           <?php echo wp_kses_post( $latest_description ); ?>
         </div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-item is-xxl-24 mt-4 mb-4">
+        <hr />
       </div>
     </div>
   </section>
@@ -191,11 +196,12 @@ get_header();
     ?>
   <section class="container mb-5 dyor-archive__season" data-testid="dyor-season" data-season="<?php echo esc_attr( $season_number ); ?>">
     <div class="grid-row mb-4">
-      <div class="grid-item is-xxl-6 is-s-24 mb-s-3">
+      <div class="grid-item is-xxl-24 text-align-center">
         <h4 class="ui-boxed-title"><?php echo esc_html( $season_title ); ?></h4>
       </div>
       <?php if ( '' !== $season['description'] ) { ?>
-      <div class="grid-item is-xxl-18 is-s-24">
+      <?php // Centred on the grid but left-aligned, to keep the line length readable. ?>
+      <div class="grid-item offset-xxl-6 is-xxl-12 offset-l-4 is-l-16 offset-s-0 is-s-24 mt-4">
         <div class="dyor-archive__season-description font-size-11 text-paragraph-breaks">
           <?php echo wp_kses_post( wpautop( $season['description'] ) ); ?>
         </div>

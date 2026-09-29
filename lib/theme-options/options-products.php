@@ -53,6 +53,19 @@ function nm_register_products_options_metabox() {
     )
   );
 
+  $dyor_category      = get_category_by_slug( 'do-your-own-research' );
+  $dyor_category_link = $dyor_category ? get_edit_term_link( $dyor_category->term_id, 'category' ) : '';
+
+  $dyor_options->add_field(
+    array(
+      'name' => 'Do Your Own Research',
+      'desc' => 'Settings only this product needs. Everything a category holds for any show (description, formatted description, podcast and YouTube links, logo, Open Graph image) stays on the category.'
+        . ( $dyor_category_link ? ' <a href="' . esc_url( $dyor_category_link ) . '">Edit the Do Your Own Research category →</a>' : '' ),
+      'id'   => 'dyor_intro',
+      'type' => 'title',
+    )
+  );
+
   $seasons_group = $dyor_options->add_field(
     array(
       'id'          => 'seasons',
