@@ -240,7 +240,7 @@ get_header();
           'partials/post-layouts/archive-post',
           null,
           array(
-            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+            'grid-item-classes' => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
             'image-size'        => 'col12-16to9',
             'text-size'         => 'large',
           )
@@ -270,7 +270,7 @@ get_header();
           'partials/post-layouts/archive-post',
           null,
           array(
-            'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-4',
+            'grid-item-classes' => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
             'image-size'        => 'col12-16to9',
             'text-size'         => 'large',
           )

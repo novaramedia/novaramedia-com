@@ -231,6 +231,10 @@ function nm_sanitize_support_copy( $copy ) {
   }
 
   foreach ( array( 'regular', 'oneoff' ) as $mode ) {
+    if ( ! isset( $copy[ $mode ] ) || ! is_array( $copy[ $mode ] ) ) {
+      continue;
+    }
+
     foreach ( array( 'heading', 'text' ) as $field ) {
       if ( isset( $copy[ $mode ][ $field ] ) && is_string( $copy[ $mode ][ $field ] ) && '' !== trim( $copy[ $mode ][ $field ] ) ) {
         $clean[ $mode ][ $field ] = trim( $copy[ $mode ][ $field ] );

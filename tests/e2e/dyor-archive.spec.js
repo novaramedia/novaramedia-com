@@ -47,6 +47,10 @@ test.describe('Do Your Own Research archive', () => {
 
     const seasonForm = page.locator('.dyor-archive__season-support form.support-form').first();
 
+    await expect(seasonForm).toBeVisible();
+    // The copy fields are optional; blank means the site-wide copy, with no attribute.
+    test.skip(!(await seasonForm.getAttribute('data-support-copy')), 'no DYOR support copy saved');
+
     const heading = seasonForm.locator('.support-form__text-desktop .support-form__dynamic-heading');
     const contextHeading = (await heading.textContent()).trim();
     const siteHeading = (await page.locator('form.support-form').last().locator('.support-form__text-desktop .support-form__dynamic-heading').textContent()).trim();

@@ -5,7 +5,7 @@
 **Goal:** The Do Your Own Research archive shows one block per season (newest first), each with its own click-to-load FigJam map and its episodes. Season config lives on a new Products options page.
 
 **Architecture:**
-- **Config:** a CMB2 options page (`lib/theme-options/options-products.php`) stores a repeatable Seasons group. `nm_get_dyor_seasons()` reads it, and seeds season 1 from the legacy category meta when it's empty.
+- **Config:** a CMB2 options page (`lib/theme-options/options-products.php`) stores a repeatable Seasons group. `nm_get_dyor_seasons()` reads it, and seeds season 1 from the legacy category meta whenever season 1 has no saved entry (including when only season 2 is saved).
 - **Template:** `category-do-your-own-research.php` makes one query for every DYOR post and groups the posts by `_nm_season`.
 - **Maps:** a generic `ClickToLoad` JS module inserts each map iframe on click. It fires a cancelable `nm:click-to-load` event first, which is the hook the cookie consent gate will use later.
 
@@ -232,8 +232,10 @@ function nm_get_dyor_seasons() {
     }
   }
 
-  if ( empty( $seasons ) ) {
-    $seasons = nm_get_dyor_seasons_seed();
+  // Until season 1 has its own entry it keeps the legacy category map, so
+  // saving only a new season can't drop season 1's map.
+  if ( ! isset( $seasons[1] ) ) {
+    $seasons += nm_get_dyor_seasons_seed();
   }
 
   krsort( $seasons );
