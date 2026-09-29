@@ -39,7 +39,7 @@ function nm_register_products_options_metabox() {
     array(
       'id'          => 'seasons',
       'type'        => 'group',
-      'description' => 'One entry per season. The archive shows a block for each season that has published episodes, newest season first. Set each episode\'s season in its Season / Episode box.',
+      'description' => 'One entry per season. The archive shows a block for each season that has published episodes, newest season first. Set each episode\'s season in its Season / Episode box. Until season 1 has an entry here it uses the map fields on the Do Your Own Research category. Use each season number once.',
       'options'     => array(
         'group_title'   => 'Season entry {#}',
         'add_button'    => 'Add another season',
@@ -108,8 +108,9 @@ add_action( 'cmb2_admin_init', 'nm_register_products_options_metabox' );
 
 /**
  * DYOR seasons from Products → Do Your Own Research, keyed by season number,
- * newest first. Entries without a season number are dropped. Falls back to
- * nm_get_dyor_seasons_seed() until the page has been saved once.
+ * newest first. Entries without a season number are dropped. Season 1 comes
+ * from nm_get_dyor_seasons_seed() until it has a saved entry of its own.
+ * Two entries with the same number: the later one in the list wins.
  *
  * @return array[] { number, title, description, figma_file_key, figma_default_node_id }
  */
@@ -135,8 +136,10 @@ function nm_get_dyor_seasons() {
     }
   }
 
-  if ( empty( $seasons ) ) {
-    $seasons = nm_get_dyor_seasons_seed();
+  // Until season 1 has its own entry it keeps the legacy category map, so
+  // saving only a new season can't drop season 1's map.
+  if ( ! isset( $seasons[1] ) ) {
+    $seasons += nm_get_dyor_seasons_seed();
   }
 
   krsort( $seasons );
@@ -146,7 +149,8 @@ function nm_get_dyor_seasons() {
 
 /**
  * Season 1 built from the legacy DYOR category map fields, so the archive
- * keeps today's map until Products → Do Your Own Research is saved once.
+ * keeps today's map until season 1 has an entry on Products → Do Your Own
+ * Research.
  * Computed on read, never written.
  *
  * @deprecated 4.11.0 Remove with the category map fields once production has saved the Products page.

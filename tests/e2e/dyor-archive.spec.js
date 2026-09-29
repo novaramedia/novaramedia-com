@@ -35,6 +35,9 @@ test.describe('Do Your Own Research archive', () => {
     await map.locator('[data-click-to-load-button]').click();
 
     await expect(map.locator('iframe')).toHaveAttribute('src', /^https:\/\/embed\.figma\.com\/board\//);
+
+    // The button hides once loaded; keyboard focus moves to the map, not <body>.
+    expect(await page.evaluate(() => document.activeElement && document.activeElement.tagName)).toBe('IFRAME');
   });
 
   test('paged archive URLs redirect to the archive', async ({ page }) => {

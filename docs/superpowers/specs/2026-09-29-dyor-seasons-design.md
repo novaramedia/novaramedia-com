@@ -38,7 +38,7 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 `nm_get_dyor_seasons(): array`
 
 - Returns entries keyed by season number, sorted descending, with blank entries (no number) dropped.
-- **Seed:** when the saved group is empty, it returns season 1 built from the legacy category term meta (`_nm_dyor_figma_file_key`, `_nm_dyor_figma_default_node_id`). The title is "Season 1" and the description is empty. This is computed on read, never written.
+- **Seed:** until season 1 has a saved entry of its own, it comes from the legacy category term meta (`_nm_dyor_figma_file_key`, `_nm_dyor_figma_default_node_id`), with title "Season 1" and an empty description. This applies even when other seasons are saved, so saving only season 2 can't drop season 1's map. It is computed on read, never written.
 
 ### 2. Deprecation of the category map fields
 
@@ -46,7 +46,7 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 
 - Field descriptions say "Deprecated: set per season under Products → Do Your Own Research".
 - CHANGELOG `### Deprecated` entry.
-- Post-deploy checklist step: open Products → Do Your Own Research and Save once, so the seeded season 1 persists. Then add season 2's file key.
+- Post-deploy checklist step: add season 2's entry, plus a season 1 entry copying the category's file key and default node, so the category fields can go in 4.11.0. The admin page doesn't prefill season 1: the seed is read-only.
 
 ### 3. Archive page layout
 

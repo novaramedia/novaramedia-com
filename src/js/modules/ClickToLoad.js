@@ -43,5 +43,9 @@ export class ClickToLoad {
 
     container.appendChild(iframe);
     container.classList.add('is-loaded');
+
+    // The button hides once loaded; keep keyboard focus on the embed rather
+    // than dropping it to <body>.
+    iframe.focus();
   }
 }

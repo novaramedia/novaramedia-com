@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-- Do Your Own Research category map fields, replaced by Products → Do Your Own Research. Migration: open that page and Save once after deploy
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
 
 ## [4.9.0] - 2026-09-25
 
