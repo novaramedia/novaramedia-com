@@ -20,9 +20,17 @@
  * Apply:                            wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
  * Redate dry run / apply:           wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate [apply]
  *
- * Safe to re-run: meta mode overwrites the same keys with the same values;
- * redate mode sorts the same set of dates the same way.
+ * Safe to re-run: meta mode skips any post that already has _nm_season
+ * (so a re-run after editorial rewrites the standfirsts can't turn them into
+ * labels); redate mode sorts the same set of dates the same way.
+ *
+ * DYOR: read the dry run's titles. Anything that is not a season 1 episode
+ * (trailer, clip, season 2) goes in $nm_dyor_skip_ids and gets its meta set
+ * by hand in wp-admin.
  */
+
+$nm_dyor_skip_ids = array(); // Post IDs, e.g. array( 70123, 70456 ).
+
 
 $nm_redate = isset( $args[0] ) && 'redate' === $args[0];
 $nm_apply  = in_array( 'apply', $args, true );
@@ -75,6 +83,12 @@ $nm_get_posts_in_date_order = function ( $slug ) {
 };
 
 $nm_write = function ( $post_id, $season, $episode, $label ) use ( $nm_apply ) {
+  if ( '' !== get_post_meta( $post_id, '_nm_season', true ) ) {
+    WP_CLI::log( sprintf( '  #%d  skipped, season already set', $post_id ) );
+
+    return;
+  }
+
   WP_CLI::log( sprintf( '  #%d  season=%d  episode=%s  label=%s', $post_id, $season, $episode ? $episode : '-', '' !== $label ? $label : '-' ) );
 
   if ( ! $nm_apply ) {
@@ -110,8 +124,16 @@ foreach ( $nm_capsule_slugs as $slug ) {
 
 WP_CLI::log( $nm_dyor_slug . ' (season 1, publish order — check for non-episode posts)' );
 
-foreach ( $nm_get_posts_in_date_order( $nm_dyor_slug ) as $index => $post ) {
-  $nm_write( $post->ID, 1, $index + 1, '' );
+$nm_dyor_episode = 0;
+
+foreach ( $nm_get_posts_in_date_order( $nm_dyor_slug ) as $post ) {
+  if ( in_array( $post->ID, $nm_dyor_skip_ids, true ) ) {
+    WP_CLI::log( sprintf( '  #%d  skipped (skip list)  %s', $post->ID, $post->post_title ) );
+    continue;
+  }
+
+  $nm_dyor_episode++;
+  $nm_write( $post->ID, 1, $nm_dyor_episode, '' );
   WP_CLI::log( '      ' . $post->post_title );
 }
 

@@ -29,12 +29,14 @@ A podcast from Moya Lothian-McLean and Ash Sarkar where the personal meets the p
 Leave the core Description as it is — it feeds Open Graph and meta descriptions.
 
 ### 2. Backfill season/episode meta — BEFORE deploying
-Plain post meta, so it can run before the new templates ship; they then find it on first render.
+Plain post meta, so it can run before the new templates ship; they then find it on first render. Staging needs this and step 3 too, before the PR's Playwright run can pass (`capsule-podcast-archives.spec.js`); on staging run step 3 straight after this one.
 
 ```bash
 wp eval-file scripts/one-off/2026-09-season-episode-backfill.php        # dry run, check output
 wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
 ```
+
+Before `apply`, read the dry run's Do Your Own Research list: every title must be a season 1 episode. Put the ID of anything else (trailer, clip, season 2) in `$nm_dyor_skip_ids` at the top of the script, re-run the dry run, and set that post's Season / Episode box by hand in wp-admin. Posts that already have a season are skipped, so re-running is safe.
 
 Verify after deploy: `/category/committed/`, `/category/foreign-agent/` and `/category/death-in-westminster/` show the same episode labels as before.
 
