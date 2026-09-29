@@ -72,7 +72,7 @@ The map is rendered inline in the season loop. There's no partial: it's used onc
 Markup, per season:
 
 - Container `.dyor-archive__map` with `data-click-to-load` and `data-click-to-load-src="<figma embed url>"`, plus `data-click-to-load-title`.
-- Collapsed state: a short widescreen banner (fixed height, about 160px desktop, 120px mobile) with a centred `ui-button`, "Load the Season {n} map". No iframe in the DOM.
+- Collapsed state: the hero's clouds background (`dyor-background` avif/webp/jpg via the `.avif`/`.webp`/`.fallback` classes; per-season backgrounds may come later). A short widescreen banner (fixed height, about 160px desktop, 120px mobile) with a centred `ui-button`, "Load the Season {n} map". No iframe in the DOM.
 - The embed URL is built as today: `embed.figma.com/board/{file_key}/…` with `embed-host=share`, `footer=false`, `page-selector=false`, and `node-id` when set.
 
 JS: new module `src/js/modules/ClickToLoad.js`, instantiated in `src/js/main.js` like the other modules. There is no webpack config change.

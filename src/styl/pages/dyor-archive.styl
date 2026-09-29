@@ -59,6 +59,8 @@
   justify-content: center
   height: 160px
   background-color: var(--color-gray-light)
+  background-size: cover
+  background-position: center
   overflow: hidden
   transition: height 0.4s ease
 
@@ -74,6 +76,17 @@
 
     .dyor-archive__map-button
       display: none
+
+// Same clouds asset as the hero until the map loads over it. Seasons may get
+// their own map backgrounds later.
+.avif .dyor-archive__map
+  background-image: url('./img/products/dyor/dyor-background.avif')
+
+.webp .dyor-archive__map
+  background-image: url('./img/products/dyor/dyor-background.webp')
+
+.fallback .dyor-archive__map
+  background-image: url('./img/products/dyor/dyor-background.jpg')
 
 @media screen and (max-width: $breakpoint-m)
   .dyor-archive__map
