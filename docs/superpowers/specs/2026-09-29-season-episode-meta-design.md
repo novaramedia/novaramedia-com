@@ -96,7 +96,7 @@ Decided 2026-09-29:
   - Label without season blocks Publish.
   - `0`, `-1` and `abc` never store in the number fields.
 - Playwright:
-  - Capsule archives render one label per post, matching today's strings (Committed: Episode 1–4; Death in Westminster: Episode 1–6; Foreign Agent: Episode 1, 2, 3, Bonus 1, Episode 4, 5, Bonus 2, Episode 6).
+  - Capsule archives render at least one label, none empty, with "Episode N" labels in ascending order. Structural only: no hardcoded episode lists, since editors may change content and staging lags production.
   - Death in Westminster lists all episodes if the hook change lands.
   - Existing smoke tests stay green.
 - Post-deploy checklist step verified on production after the data fix.
