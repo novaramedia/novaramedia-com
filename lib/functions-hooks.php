@@ -377,3 +377,30 @@ function nm_job_cache_headers( $headers ) {
   return $headers;
 }
 add_filter( 'wp_headers', 'nm_job_cache_headers' );
+
+/**
+ * The DYOR archive lists every episode on one page, grouped by season, so
+ * paged URLs 301 to page 1 rather than repeating it. Matches on query vars,
+ * not is_category(): a page number past the last page is already a 404 by
+ * template_redirect, and old links still deserve the redirect.
+ * get_pagenum_link( 1 ) keeps the requested path, so /dyor/page/2/ lands on /dyor/.
+ */
+function nm_dyor_unpaged_redirect() {
+  if ( (int) get_query_var( 'paged' ) < 2 ) {
+    return;
+  }
+
+  $dyor = get_category_by_slug( 'do-your-own-research' );
+
+  if ( ! $dyor ) {
+    return;
+  }
+
+  $category_name = (string) get_query_var( 'category_name' );
+
+  if ( (int) get_query_var( 'cat' ) === $dyor->term_id || 'do-your-own-research' === basename( $category_name ) ) {
+    wp_safe_redirect( get_pagenum_link( 1 ), 301 );
+    exit;
+  }
+}
+add_action( 'template_redirect', 'nm_dyor_unpaged_redirect' );
