@@ -96,9 +96,15 @@ function nm_register_products_options_metabox() {
   $dyor_options->add_group_field(
     $seasons_group,
     array(
-      'name' => 'Description',
-      'id'   => 'description',
-      'type' => 'textarea_small',
+      'name'    => 'Description',
+      'desc'    => 'Optional. Shown beside the season heading; nothing renders when blank.',
+      'id'      => 'description',
+      'type'    => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false,
+        'teeny'         => true,
+        'textarea_rows' => 6,
+      ),
     )
   );
 

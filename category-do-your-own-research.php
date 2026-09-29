@@ -124,11 +124,6 @@ get_header();
     $latest_episode     = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
     ?>
   <section class="container mb-5">
-    <div class="grid-row">
-      <div class="grid-item is-xxl-24 text-align-center mb-4">
-        <h4 class="ui-boxed-title">The Latest Episode</h4>
-      </div>
-    </div>
     <div class="dyor-archive__latest-episode grid-row">
       <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
         <div class="ui-embed-container ui-rounded-box">
@@ -140,6 +135,7 @@ get_header();
         </div>
       </div>
       <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
+        <h4 class="ui-boxed-title mb-3">The Latest Episode</h4>
         <?php if ( $latest_season > 0 ) { ?>
         <h4 class="font-size-9 text-uppercase font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ' Episode ' . $latest_episode : '' ) ); ?></h4>
         <?php } ?>
@@ -194,15 +190,17 @@ get_header();
     $season_title = '' !== $season['title'] ? $season['title'] : 'Season ' . $season_number;
     ?>
   <section class="container mb-5 dyor-archive__season" data-testid="dyor-season" data-season="<?php echo esc_attr( $season_number ); ?>">
-    <div class="grid-row">
-      <div class="grid-item is-xxl-24 text-align-center mb-4">
+    <div class="grid-row mb-4">
+      <div class="grid-item is-xxl-6 is-s-24 mb-s-3">
         <h4 class="ui-boxed-title"><?php echo esc_html( $season_title ); ?></h4>
-        <?php if ( '' !== $season['description'] ) { ?>
-        <div class="dyor-archive__season-description font-size-11 mt-4">
+      </div>
+      <?php if ( '' !== $season['description'] ) { ?>
+      <div class="grid-item is-xxl-18 is-s-24">
+        <div class="dyor-archive__season-description font-size-11 text-paragraph-breaks">
           <?php echo wp_kses_post( wpautop( $season['description'] ) ); ?>
         </div>
-        <?php } ?>
       </div>
+      <?php } ?>
     </div>
 
     <?php if ( '' !== $season['figma_file_key'] ) { ?>
