@@ -141,7 +141,7 @@ get_header();
       </div>
       <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
         <?php if ( $latest_season > 0 ) { ?>
-        <h4 class="font-size-9 text-uppercase font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ', Episode ' . $latest_episode : '' ) ); ?></h4>
+        <h4 class="font-size-9 text-uppercase font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ' Episode ' . $latest_episode : '' ) ); ?></h4>
         <?php } ?>
         <h2 class="font-size-14 font-size-s-13 font-weight-bold text-wrap-pretty">
           <?php the_title(); ?>
@@ -167,7 +167,21 @@ get_header();
   // Maps load on click (ClickToLoad.js). Before loading it fires a cancelable
   // nm:click-to-load event on the container — the hook for the cookie
   // consent gate when it lands.
+  $season_index = 0;
+
   foreach ( $posts_by_season as $season_number => $season_posts ) {
+    // A support box divides consecutive seasons.
+    if ( $season_index++ > 0 ) {
+      get_template_part(
+        'partials/support-section',
+        null,
+        array(
+          'container_classes'     => 'mb-5',
+          'on_colored_background' => false,
+        )
+      );
+    }
+
     $season = isset( $dyor_seasons[ $season_number ] ) ? $dyor_seasons[ $season_number ] : array(
       'number'                => $season_number,
       'title'                 => '',
@@ -191,18 +205,22 @@ get_header();
     </div>
 
     <?php if ( '' !== $season['figma_file_key'] ) { ?>
-    <div class="grid-row background-white ui-rounded-box pt-4 pb-4 mb-4">
+    <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24">
-        <div
-          class="dyor-archive__map ui-rounded-box"
-          data-testid="dyor-season-map"
-          data-click-to-load
-          data-click-to-load-src="<?php echo esc_url( $dyor_map_src( $season, $season_posts ) ); ?>"
-          data-click-to-load-title="<?php echo esc_attr( 'Do Your Own Research – ' . $season_title . ' map' ); ?>"
-        >
-          <button type="button" class="ui-button ui-button--black dyor-archive__map-button" data-click-to-load-button>
-            <?php echo esc_html( 'Load the ' . $season_title . ' map' ); ?>
-          </button>
+        <div class="grid-row background-white ui-rounded-box pt-4 pb-4">
+          <div class="grid-item is-xxl-24">
+            <div
+              class="dyor-archive__map ui-rounded-box"
+              data-testid="dyor-season-map"
+              data-click-to-load
+              data-click-to-load-src="<?php echo esc_url( $dyor_map_src( $season, $season_posts ) ); ?>"
+              data-click-to-load-title="<?php echo esc_attr( 'Do Your Own Research – ' . $season_title . ' map' ); ?>"
+            >
+              <button type="button" class="ui-button ui-button--black dyor-archive__map-button" data-click-to-load-button>
+                <?php echo esc_html( 'Load the ' . $season_title . ' map' ); ?>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

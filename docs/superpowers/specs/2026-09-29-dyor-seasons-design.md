@@ -53,11 +53,12 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 Top to bottom:
 
 1. **Hero:** unchanged, including #626's margins fix.
-2. **Latest Episode** (page 1 only today; see Queries). Adds a line above the title: `Season {n}, Episode {m}` from the post's meta. It shows `Season {n}` alone when there's no episode number, and nothing when there's no season.
+2. **Latest Episode** (page 1 only today; see Queries). Adds a line above the title: `Season {n} Episode {m}` from the post's meta. It shows `Season {n}` alone when there's no episode number, and nothing when there's no season.
 3. **One block per season**, for seasons that have at least one published DYOR post, in descending season number. Each block has:
    - a heading: the season `title`, falling back to `Season {n}`. Plus the `description` if set.
    - the click-to-load map (component 4), if the season has a `figma_file_key`
    - the season's episodes, newest first, in the existing grid (`partials/post-layouts/archive-post`, `is-s-24 is-l-12 is-xxl-8`)
+   A support section (`partials/support-section`) sits between consecutive season blocks as a divider.
 4. **Unseasoned posts:** DYOR posts with no `_nm_season`, in a final block headed "More from Do Your Own Research", only when any exist.
 5. Support module, unchanged.
 
