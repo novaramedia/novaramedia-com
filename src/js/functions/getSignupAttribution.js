@@ -24,12 +24,18 @@ function getReferrerHostname() {
 
 /**
  * Collects attribution context for a newsletter signup or donation form
- * submission: the current page path, the referring hostname and any utm_*
- * params on the current URL.
+ * submission: the current page path, the referring hostname, any utm_*
+ * params on the current URL, and Mailchimp's campaign ID (mc_cid) when the
+ * visitor arrived from a Mailchimp email. Mailchimp's subscriber ID (mc_eid)
+ * is deliberately never read: it identifies a person, not a campaign.
  *
  * Reads only the page the visitor is on right now. Nothing is read from or
- * written to storage, so this needs no cookie consent. Fields are prefixed
- * nm_ so they never pass as real utm_* params if forwarded to another site.
+ * written to storage, so this needs no cookie consent. Carrying this context
+ * from one page to the next would need storage, so it is left to a future,
+ * consent-aware version.
+ *
+ * Fields are prefixed nm_ so they never pass as real utm_* params if
+ * forwarded to another site.
  *
  * @returns {Object} - Non-empty nm_* fields, ready for $.param()
  */
@@ -43,6 +49,8 @@ export default function getSignupAttribution() {
   UTM_KEYS.forEach((key) => {
     fields[`nm_utm_${key}`] = params.get(`utm_${key}`) || '';
   });
+
+  fields.nm_mc_cid = params.get('mc_cid') || '';
 
   return Object.keys(fields).reduce((result, key) => {
     if (isNonEmptyString(fields[key])) {
