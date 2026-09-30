@@ -177,7 +177,7 @@ get_header();
         'partials/support-section',
         null,
         array(
-          'container_classes'     => 'mb-5 dyor-archive__season-support',
+          'container_classes'     => 'mb-6 dyor-archive__season-support',
           'on_colored_background' => false,
           'copy'                  => nm_get_dyor_support_copy(),
         )
