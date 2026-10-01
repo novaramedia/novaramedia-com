@@ -59,6 +59,9 @@ export class Support {
       // A ?sv= config can open on the other mode than the server rendered,
       // so match the copy to it too.
       _this.updateSupportSectionCopy({ value: showFirst }, $form);
+      // The server renders the /regular action; follow the opening mode so a
+      // one-off ?sv= config never submits to the regular flow.
+      $form.attr('action', _this.donationAppUrl + showFirst);
 
       // Ensure the first value button is also selected and active
       const $firstValueBtn = $form

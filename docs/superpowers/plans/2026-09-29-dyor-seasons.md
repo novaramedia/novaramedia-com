@@ -22,7 +22,7 @@
 - No Figma request until the reader clicks. There is no iframe in the DOM before that.
 - No cookie-consent code. The only consent seam is the cancelable `nm:click-to-load` event.
 - Map markup stays inline in the season loop. No partial.
-- Legacy category fields `_nm_dyor_figma_file_key` / `_nm_dyor_figma_default_node_id` are marked `@deprecated 4.11.0` and stay in place as the seed source.
+- Legacy category fields `_nm_dyor_figma_file_key` / `_nm_dyor_figma_default_node_id` are marked `@deprecated 4.10.0` (removal in 4.11.0) and stay in place as the seed source.
 - WordPress coding standards: two-space indent, `esc_*` on output. Static CSS lives in `src/styl/pages/`, never inline.
 - E2E specs are structural: no hardcoded episode lists or counts.
 - Local data changes run via `docker exec devkinsta_fpm wp --allow-root …` from `/www/kinsta/public/novaramediacom`. Local DB only.
@@ -248,7 +248,7 @@ function nm_get_dyor_seasons() {
  * keeps today's map until Products → Do Your Own Research is saved once.
  * Computed on read, never written.
  *
- * @deprecated 4.11.0 Remove with the category map fields once production has saved the Products page.
+ * @deprecated 4.10.0 Remove in 4.11.0 with the category map fields, once production has saved the Products page.
  * @return array[]
  */
 function nm_get_dyor_seasons_seed() {
@@ -279,7 +279,7 @@ get_template_part( 'lib/theme-options/options-products' );
 ```
 
 In `lib/meta/meta-boxes-category-dyor.php`:
-- Add ` * @deprecated 4.11.0 Map settings moved to Products → Do Your Own Research (per season). Kept as the seed source for nm_get_dyor_seasons_seed().` to the docblock of `nm_cmb_dyor_metaboxes`.
+- Add ` * @deprecated 4.10.0 Map settings moved to Products → Do Your Own Research (per season). Kept as the seed source for nm_get_dyor_seasons_seed(); remove in 4.11.0.` to the docblock of `nm_cmb_dyor_metaboxes`.
 - Prefix both field `desc` strings with `Deprecated: set per season under Products → Do Your Own Research. `
 
 - [ ] **Step 5: Run the test to see it pass**

@@ -43,7 +43,7 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 
 ### 2. Deprecation of the category map fields
 
-`lib/meta/meta-boxes-category-dyor.php` fields become `@deprecated 4.11.0`. The seed reads them, so they stay for this release.
+`lib/meta/meta-boxes-category-dyor.php` fields become `@deprecated 4.10.0`, for removal in 4.11.0. The seed reads them, so they stay for this release.
 
 - Field descriptions say "Deprecated: set per season under Products → Do Your Own Research".
 - CHANGELOG `### Deprecated` entry.
