@@ -3,17 +3,23 @@
  * -------------------------------------------------------------
  */
 
-// for redirects that send users to an external URL.
-// Add more path => URL pairs to the array as needed.
-// Format: 'path' => 'https://example.com/redirect-url'
-$nm_external_redirects = array(
-  'shop' => 'https://shop.novaramedia.com',
-);
+/**
+ * Paths that 301 to an external URL.
+ * Add more path => URL pairs to the array as needed.
+ * Format: 'path' => 'https://example.com/redirect-url'
+ *
+ * @return string[]
+ */
+function nm_get_external_redirects() {
+  return array(
+    'shop' => 'https://shop.novaramedia.com',
+  );
+}
 
 add_action(
   'template_redirect',
-  function () use ( $nm_external_redirects ) {
-    handle_external_redirects( $nm_external_redirects );
+  function () {
+    handle_external_redirects( nm_get_external_redirects() );
   },
   1
 );
@@ -24,13 +30,13 @@ add_action(
  */
 add_filter(
   'allowed_redirect_hosts',
-  function ( $hosts ) use ( $nm_external_redirects ) {
+  function ( $hosts ) {
     $external_hosts = array_unique(
       array_map(
         function ( $url ) {
           return wp_parse_url( $url, PHP_URL_HOST );
         },
-        array_values( $nm_external_redirects )
+        array_values( nm_get_external_redirects() )
       )
     );
     return array_merge( $hosts, $external_hosts );
@@ -106,18 +112,24 @@ function handle_internal_rewrites() {
  * -------------------------------------------------------------
  */
 
-// Newsletter CPT permalinks that should 301 to a category archive.
-// The newsletter record stays as the source of signup metadata; the
-// category archive is the canonical destination for readers.
-// Format: 'newsletter-slug' => 'category-slug'
-$nm_newsletter_category_redirects = array(
-  'the-cortado' => 'the-cortado',
-);
+/**
+ * Newsletter CPT permalinks that should 301 to a category archive.
+ * The newsletter record stays as the source of signup metadata; the
+ * category archive is the canonical destination for readers.
+ * Format: 'newsletter-slug' => 'category-slug'
+ *
+ * @return string[]
+ */
+function nm_get_newsletter_category_redirects() {
+  return array(
+    'the-cortado' => 'the-cortado',
+  );
+}
 
 add_action(
   'template_redirect',
-  function () use ( $nm_newsletter_category_redirects ) {
-    handle_newsletter_category_redirects( $nm_newsletter_category_redirects );
+  function () {
+    handle_newsletter_category_redirects( nm_get_newsletter_category_redirects() );
   }
 );
 
@@ -156,4 +168,39 @@ function handle_newsletter_category_redirects( $redirects ) {
 
   wp_safe_redirect( $link, 301 );
   exit;
+}
+
+/**
+ * Resolves a URL to where the theme's redirects actually send it.
+ *
+ * Applies the external and newsletter → category maps above, so callers that
+ * list links (search suggestions) can de-duplicate by final destination.
+ * Returns the input unchanged when no redirect applies or its target is
+ * missing.
+ *
+ * @param string $url Absolute URL.
+ * @return string
+ */
+function nm_resolve_canonical_url( $url ) {
+  $path = trim( (string) wp_parse_url( $url, PHP_URL_PATH ), '/' );
+
+  $external = nm_get_external_redirects();
+  if ( isset( $external[ $path ] ) ) {
+    return $external[ $path ];
+  }
+
+  foreach ( nm_get_newsletter_category_redirects() as $newsletter_slug => $category_slug ) {
+    $newsletter = get_page_by_path( $newsletter_slug, OBJECT, 'newsletter' );
+
+    if ( ! $newsletter || get_permalink( $newsletter ) !== $url ) {
+      continue;
+    }
+
+    $category = get_category_by_slug( $category_slug );
+    $link     = $category ? get_term_link( $category ) : '';
+
+    return ( $link && ! is_wp_error( $link ) ) ? $link : $url;
+  }
+
+  return $url;
 }
