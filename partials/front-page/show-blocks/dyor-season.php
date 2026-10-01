@@ -82,7 +82,7 @@ $top_right_spacing = empty( $recent ) ? 'mb-0' : 'mb-4';
       <div class="grid-item is-xxl-24">
         <div class="grid-row grid-row--nested front-page-dyor__top-row">
 
-          <div class="grid-item is-s-24 is-xxl-12 <?php echo esc_attr( $top_left_spacing ); ?>">
+          <div class="grid-item is-xxl-12 is-s-24 <?php echo esc_attr( $top_left_spacing ); ?>">
             <div class="dyor-archive__hero">
               <picture>
                 <source srcset="<?php echo esc_url( $base_image_path . 'dyor-hero.avif' ); ?>" type="image/avif">
@@ -102,7 +102,7 @@ $top_right_spacing = empty( $recent ) ? 'mb-0' : 'mb-4';
             <?php } ?>
           </div>
 
-          <div class="grid-item is-s-24 is-xxl-12 <?php echo esc_attr( $top_right_spacing ); ?>">
+          <div class="grid-item is-xxl-12 is-s-24 <?php echo esc_attr( $top_right_spacing ); ?>">
             <div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
               <?php if ( ! empty( $featured_youtube ) ) { ?>
               <div class="ui-embed-container ui-rounded-box mb-3">
@@ -143,7 +143,7 @@ $top_right_spacing = empty( $recent ) ? 'mb-0' : 'mb-4';
               </a>
             </div>
             <?php foreach ( $recent as $recent_post ) { ?>
-            <div class="grid-item is-s-12 is-xxl-6 mt-3">
+            <div class="grid-item is-xxl-6 is-s-12 mt-3">
               <a href="<?php echo esc_url( $category_link ); ?>" class="ui-hover">
                 <div class="layout-thumbnail-frame mb-2">
                   <div class="layout-thumbnail-frame__inner mt-1 ml-1">

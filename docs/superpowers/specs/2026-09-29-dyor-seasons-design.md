@@ -100,7 +100,7 @@ Local only, via `docker exec devkinsta_fpm wp --allow-root …`: set the last th
 
 - Cookie consent gating (#523 hooks in later).
 - Season 3+ specifics.
-- Per-season hero art.
+- Hero and map art for seasons after 2 (season 2's background ships here; later seasons add a `--season-N` rule).
 - Removing the deprecated category fields (4.11.0).
 - Other products on the Products page.
 

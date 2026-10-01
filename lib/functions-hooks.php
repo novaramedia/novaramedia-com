@@ -386,7 +386,9 @@ add_filter( 'wp_headers', 'nm_job_cache_headers' );
  * get_pagenum_link( 1 ) keeps the requested path, so /dyor/page/2/ lands on /dyor/.
  */
 function nm_dyor_unpaged_redirect() {
-  if ( (int) get_query_var( 'paged' ) < 2 ) {
+  // A search filtered to the DYOR category (?s=…&cat=…) is search results,
+  // not the archive, so it stays pageable.
+  if ( (int) get_query_var( 'paged' ) < 2 || get_query_var( 's' ) !== '' ) {
     return;
   }
 
@@ -398,8 +400,9 @@ function nm_dyor_unpaged_redirect() {
 
   $category_name = (string) get_query_var( 'category_name' );
 
-  if ( (int) get_query_var( 'cat' ) === $dyor->term_id || 'do-your-own-research' === basename( $category_name ) ) {
-    wp_safe_redirect( get_pagenum_link( 1 ), 301 );
+  if ( (int) get_query_var( 'cat' ) === $dyor->term_id || basename( $category_name ) === 'do-your-own-research' ) {
+    // Unescaped: get_pagenum_link() HTML-escapes by default (&#038;).
+    wp_safe_redirect( get_pagenum_link( 1, false ), 301 );
     exit;
   }
 }
