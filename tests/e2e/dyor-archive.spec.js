@@ -84,9 +84,13 @@ test.describe('Do Your Own Research archive', () => {
     }
   });
 
-  test('paged archive URLs redirect to the archive', async ({ page }) => {
-    await gotoFresh(page, `${ARCHIVE}page/2/`, { failOnStatusCode: false });
+  // The category URL and the /dyor/ vanity rewrite resolve through different
+  // query vars (category_name vs cat), so each needs its own check.
+  for (const archivePath of [ARCHIVE, '/dyor/']) {
+    test(`paged archive URLs redirect to the archive: ${archivePath}`, async ({ page }) => {
+      await gotoFresh(page, `${archivePath}page/2/`, { failOnStatusCode: false });
 
-    expect(new URL(page.url()).pathname).toBe(ARCHIVE);
-  });
+      expect(new URL(page.url()).pathname).toBe(archivePath);
+    });
+  }
 });

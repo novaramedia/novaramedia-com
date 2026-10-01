@@ -56,6 +56,9 @@ export class Support {
       // Always call setAutoValues with the preferred initial type
       const showFirst = this.autovalues['show_first'];
       _this.setAutoValues($form, showFirst);
+      // A ?sv= config can open on the other mode than the server rendered,
+      // so match the copy to it too.
+      _this.updateSupportSectionCopy({ value: showFirst }, $form);
 
       // Ensure the first value button is also selected and active
       const $firstValueBtn = $form
