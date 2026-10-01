@@ -1,15 +1,15 @@
 .dyor-archive
   --dyor-green: #10E920
 
-// Hero
+// Hero: season 2 background. The front-page module keeps the clouds asset.
 .avif .dyor-archive__hero-background
-  background-image: url('./img/products/dyor/dyor-background.avif')
+  background-image: url('./img/products/dyor/dyor-background-season-2.avif')
 
 .webp .dyor-archive__hero-background
-  background-image: url('./img/products/dyor/dyor-background.webp')
+  background-image: url('./img/products/dyor/dyor-background-season-2.webp')
 
 .fallback .dyor-archive__hero-background
-  background-image: url('./img/products/dyor/dyor-background.jpg')
+  background-image: url('./img/products/dyor/dyor-background-season-2.jpg')
 
 .dyor-archive__hero
   position: relative
@@ -77,8 +77,8 @@
     .dyor-archive__map-button
       display: none
 
-// Same clouds asset as the hero until the map loads over it. Seasons may get
-// their own map backgrounds later.
+// Clouds asset until the map loads over it. A season with its own
+// background adds a --season-N modifier below.
 .avif .dyor-archive__map
   background-image: url('./img/products/dyor/dyor-background.avif')
 
@@ -87,6 +87,15 @@
 
 .fallback .dyor-archive__map
   background-image: url('./img/products/dyor/dyor-background.jpg')
+
+.avif .dyor-archive__map--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.avif')
+
+.webp .dyor-archive__map--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.webp')
+
+.fallback .dyor-archive__map--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.jpg')
 
 @media screen and (max-width: $breakpoint-m)
   .dyor-archive__map
