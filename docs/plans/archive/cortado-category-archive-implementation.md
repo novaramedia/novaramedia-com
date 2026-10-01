@@ -1,5 +1,7 @@
 # The Cortado Category Archive — Implementation Plan
 
+> **Archived — shipped in 4.9.0.** Since renamed: `partials/post-layouts/archive-post-no-thumbnail.php` is now `archive-post-opinion.php` (testid `archive-post-opinion`). References below are kept as written.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship a branded category archive for The Cortado at a canonical URL, with a vanity slug and a 301 from the newsletter CPT permalink, plus a shared thumbnail-less post layout that the If I Speak archive work will reuse.
@@ -8,7 +10,7 @@
 
 **Tech Stack:** PHP 8 / WordPress, Stylus via nm-stylus-library, Webpack build, phpcs ("NM PHP Standard"). No automated tests in this plan — see Global Constraints.
 
-**Spec:** `docs/plans/cortado-category-archive.md`
+**Spec:** `docs/plans/archive/cortado-category-archive.md`
 
 ## Global Constraints
 
