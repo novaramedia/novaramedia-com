@@ -10,11 +10,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
 
 ### Changed
 
 - If I Speak category archive redesign: new hero and a text-only episode grid
 - `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
+### Fixed
+
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
 
 ## [4.9.0] - 2026-09-25
 
