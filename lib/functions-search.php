@@ -273,3 +273,91 @@ function nm_get_search_destination_matches( $query ) {
 
   return array_slice( array_values( $results ), 0, NM_SEARCH_DESTINATIONS_LIMIT );
 }
+
+/**
+ * Pick the image for a search suggestion card.
+ *
+ * Product logo tile, then the item's own image, then the newest post's
+ * thumbnail (categories only), then a branded tile.
+ *
+ * @since 4.11.0
+ *
+ * @param array $destination Destination match from nm_get_search_destination_matches().
+ * @return array 'kind' (logo|image|tile) and 'attachment_id'.
+ */
+function nm_get_search_destination_image( $destination ) {
+  $id = (int) $destination['object_id'];
+
+  if ( $destination['type'] === 'category' ) {
+    $logo_id = (int) get_term_meta( $id, '_nm_category_logo_id', true );
+    if ( $logo_id ) {
+      return array(
+        'kind'          => 'logo',
+        'attachment_id' => $logo_id,
+      );
+    }
+
+    $og_id = (int) get_term_meta( $id, '_nm_category_og_image_id', true );
+    if ( $og_id ) {
+      return array(
+        'kind'          => 'image',
+        'attachment_id' => $og_id,
+      );
+    }
+
+    $latest = get_posts(
+      array(
+        'cat'            => $id,
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+        'no_found_rows'  => true,
+      )
+    );
+
+    if ( $latest ) {
+      // Same preference as render_thumbnail(): alt thumbnail over featured image.
+      $alt_id   = (int) get_post_meta( $latest[0], '_cmb_alt_thumb_id', true );
+      $thumb_id = $alt_id ? $alt_id : (int) get_post_thumbnail_id( $latest[0] );
+
+      if ( $thumb_id ) {
+        return array(
+          'kind'          => 'image',
+          'attachment_id' => $thumb_id,
+        );
+      }
+    }
+  }
+
+  if ( $destination['type'] === 'newsletter' ) {
+    $thumb_id = (int) get_post_thumbnail_id( $id );
+    if ( $thumb_id ) {
+      return array(
+        'kind'          => 'image',
+        'attachment_id' => $thumb_id,
+      );
+    }
+  }
+
+  return array(
+    'kind'          => 'tile',
+    'attachment_id' => 0,
+  );
+}
+
+/**
+ * Corner tag for a search suggestion card.
+ *
+ * @since 4.11.0
+ *
+ * @param array $destination Destination match from nm_get_search_destination_matches().
+ * @return string
+ */
+function nm_get_search_destination_tag( $destination ) {
+  $tags = array(
+    'category'    => 'Show',
+    'newsletter'  => 'Newsletter',
+    'destination' => 'Section',
+  );
+
+  return $tags[ $destination['type'] ] ?? 'Section';
+}
