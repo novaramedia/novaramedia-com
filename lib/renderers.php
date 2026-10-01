@@ -216,12 +216,47 @@ function render_support_form_amount_buttons( $values, $instance, $button_classes
   <?php
 }
 /**
+ * Keep only well-formed context copy for a support form: per donation mode
+ * ('regular', 'oneoff'), non-empty string 'heading' / 'text'. Anything else
+ * is dropped, so the global copy shows for it.
+ *
+ * @param mixed $copy e.g. array( 'regular' => array( 'heading' => '…', 'text' => '…' ), 'oneoff' => … ).
+ * @return array
+ */
+function nm_sanitize_support_copy( $copy ) {
+  $clean = array();
+
+  if ( ! is_array( $copy ) ) {
+    return $clean;
+  }
+
+  foreach ( array( 'regular', 'oneoff' ) as $mode ) {
+    if ( ! isset( $copy[ $mode ] ) || ! is_array( $copy[ $mode ] ) ) {
+      continue;
+    }
+
+    foreach ( array( 'heading', 'text' ) as $field ) {
+      if ( isset( $copy[ $mode ][ $field ] ) && is_string( $copy[ $mode ][ $field ] ) && '' !== trim( $copy[ $mode ][ $field ] ) ) {
+        $clean[ $mode ][ $field ] = trim( $copy[ $mode ][ $field ] );
+      }
+    }
+  }
+
+  return $clean;
+}
+
+/**
  * Render the support section heading and text based on the donation mode.
+ *
+ * Priority per field: context copy for this form, then the global
+ * Fundraising copy for the mode, then the global default, then the
+ * hardcoded fallback.
  *
  * @param string $donation_mode The donation mode, either 'regular' or 'oneoff'.
  * @param string $text_classes Optional additional classes for the text container.
+ * @param array  $context_copy Optional output of nm_sanitize_support_copy().
  */
-function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
+function render_support_heading_and_text( $donation_mode, $text_classes = '', $context_copy = array() ) {
   $data = nm_get_support_heading_text_data();
 
   // Set standard defaults
@@ -229,7 +264,9 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   $text = 'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
 
   // Check for heading override in donation mode data
-  if ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
+  if ( isset( $context_copy[ $donation_mode ]['heading'] ) ) {
+    $heading = $context_copy[ $donation_mode ]['heading'];
+  } elseif ( isset( $data[ $donation_mode ]['heading'] ) && ! empty( $data[ $donation_mode ]['heading'] ) ) {
     $heading = $data[ $donation_mode ]['heading'];
   } elseif ( isset( $data['default']['heading'] ) && ! empty( $data['default']['heading'] ) ) {
     // Fall back to default array heading if available
@@ -237,7 +274,9 @@ function render_support_heading_and_text( $donation_mode, $text_classes = '' ) {
   }
 
   // Check for text override in donation mode data
-  if ( isset( $data[ $donation_mode ]['text'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
+  if ( isset( $context_copy[ $donation_mode ]['text'] ) ) {
+    $text = $context_copy[ $donation_mode ]['text'];
+  } elseif ( isset( $data[ $donation_mode ]['text'] ) && ! empty( $data[ $donation_mode ]['text'] ) ) {
     $text = $data[ $donation_mode ]['text'];
   } elseif ( isset( $data['default']['text'] ) && ! empty( $data['default']['text'] ) ) {
     // Fall back to default array text if available
@@ -288,9 +327,14 @@ function render_payment_icons( $payment_classes = '' ) {
  * @param string $variant Form display variant ('banner' or 'condensed').
  * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
  * @param string $container_classes Additional CSS classes for the container element.
+ * @param array $copy Optional context copy per donation mode, taking priority over the global
+ *                    Fundraising copy: array( 'regular' => array( 'heading' => '…', 'text' => '…' ), 'oneoff' => … ).
+ *                    Invalid entries are ignored. Support.js reads it back from data-support-copy.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '' ) {
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '', $copy = array() ) {
+  $context_copy = nm_sanitize_support_copy( $copy );
+
   // Generate unique instance ID
   $instance = uniqid( 'support-form-' );
 
@@ -314,14 +358,14 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   $support_section_classes = $variant_classes . ' ' . $container_classes;
   ?>
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
-    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
+    <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>"<?php echo $context_copy ? ' data-support-copy="' . esc_attr( wp_json_encode( $context_copy ) ) . '"' : ''; ?>>
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
       <?php render_support_form_schedule_buttons( $instance . '-mobile', 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
-        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
+        <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile', $context_copy ); ?>
         <div class="support-form__desktop-container grid-row">
           <div class="grid-item is-xxl-12 support-form__left-column-desktop">
-            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6' ); ?>
+            <?php render_support_heading_and_text( $donation_mode, 'support-form__text-desktop pr-6', $context_copy ); ?>
             <?php render_payment_icons( 'support-form__payment-type-desktop' ); ?>
           </div>
           <div class="grid-item is-xxl-12 support-form__right-column-desktop">
