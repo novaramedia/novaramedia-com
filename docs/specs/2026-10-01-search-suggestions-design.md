@@ -41,11 +41,12 @@ heading. Reviewed on DevKinsta, it has four problems:
 
 ### Search form on the results page
 
-- Extend `searchform.php` to read `get_search_form( $args )` arguments: a
-  pre-filled value and an id prefix. The header overlay keeps its existing
-  ids (`search-form`, `search-input`, `search-submit`); the results-page form
-  uses a distinct prefix so the page never has duplicate ids.
-- One template, two call sites. The 404 page's inline form is out of scope.
+- New partial `partials/search-results-form.php`, pre-filled with the current
+  query. It is separate from `searchform.php` (header overlay) because
+  `Header.js` binds every `.site-header-search__input` and `Search.js` writes
+  to `#search-input`; reusing those classes or ids would wire the results form
+  into the overlay toggle.
+- The 404 page's inline form is out of scope.
 
 ### Suggestion cards
 
