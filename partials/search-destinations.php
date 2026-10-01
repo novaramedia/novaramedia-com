@@ -3,10 +3,13 @@
  * Search suggestions: category archives, newsletters and site sections
  * matching the current search, shown as cards above the post results.
  *
+ * $args['destinations'] Matches from nm_get_search_destination_matches(),
+ *                       computed once in index.php.
+ *
  * @since 4.11.0
  */
 
-$destinations = nm_get_search_destination_matches( get_search_query( false ) );
+$destinations = $args['destinations'] ?? array();
 
 if ( empty( $destinations ) ) {
   return;

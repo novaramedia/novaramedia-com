@@ -277,8 +277,9 @@ function nm_get_search_destination_matches( $query ) {
 /**
  * Pick the image for a search suggestion card.
  *
- * Product logo tile, then the item's own image, then the newest post's
- * thumbnail (categories only), then a branded tile.
+ * Product logo tile, then the item's own image, then a branded tile. The
+ * newest post's thumbnail is deliberately not used: it reads as an advert
+ * for that post, not as the destination.
  *
  * @since 4.11.0
  *
@@ -304,28 +305,6 @@ function nm_get_search_destination_image( $destination ) {
         'attachment_id' => $og_id,
       );
     }
-
-    $latest = get_posts(
-      array(
-        'cat'            => $id,
-        'posts_per_page' => 1,
-        'fields'         => 'ids',
-        'no_found_rows'  => true,
-      )
-    );
-
-    if ( $latest ) {
-      // Same preference as render_thumbnail(): alt thumbnail over featured image.
-      $alt_id   = (int) get_post_meta( $latest[0], '_cmb_alt_thumb_id', true );
-      $thumb_id = $alt_id ? $alt_id : (int) get_post_thumbnail_id( $latest[0] );
-
-      if ( $thumb_id ) {
-        return array(
-          'kind'          => 'image',
-          'attachment_id' => $thumb_id,
-        );
-      }
-    }
   }
 
   if ( $destination['type'] === 'newsletter' ) {
@@ -347,17 +326,26 @@ function nm_get_search_destination_image( $destination ) {
 /**
  * Corner tag for a search suggestion card.
  *
+ * Categories show their top-level category (Video, Audio, Articles), the same
+ * vocabulary post cards use, so a reader knows what kind of archive they are
+ * going to. A top-level category shows its own name.
+ *
  * @since 4.11.0
  *
  * @param array $destination Destination match from nm_get_search_destination_matches().
  * @return string
  */
 function nm_get_search_destination_tag( $destination ) {
-  $tags = array(
-    'category'    => 'Show',
-    'newsletter'  => 'Newsletter',
-    'destination' => 'Section',
-  );
+  if ( $destination['type'] === 'category' ) {
+    $ancestors = get_ancestors( (int) $destination['object_id'], 'category', 'taxonomy' );
+    $top_level = $ancestors ? get_category( end( $ancestors ) ) : null;
 
-  return $tags[ $destination['type'] ] ?? 'Section';
+    return ( $top_level && ! is_wp_error( $top_level ) ) ? $top_level->name : $destination['label'];
+  }
+
+  if ( $destination['type'] === 'newsletter' ) {
+    return 'Newsletter';
+  }
+
+  return 'Section';
 }

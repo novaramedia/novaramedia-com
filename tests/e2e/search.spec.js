@@ -108,6 +108,29 @@ test.describe('Search Results', () => {
     ).toHaveCount(1);
   });
 
+  test('should not say nothing matched when there are suggestions', async ({
+    page,
+  }) => {
+    await gotoFresh(page, '/?s=dyor');
+
+    await expect(page.locator(CARDS).first()).toBeVisible();
+    await expect(page.getByTestId('no-results')).toHaveCount(0);
+  });
+
+  test('should tag a category suggestion with its top-level category', async ({
+    page,
+  }) => {
+    await gotoFresh(page, '/?s=dyor');
+
+    // Do Your Own Research sits under Video
+    await expect(
+      page
+        .locator(`${CARDS}[data-destination-type="category"]`)
+        .first()
+        .locator('.ui-tag')
+    ).toHaveText(/video/i);
+  });
+
   test('should link to the shop when searching for merch', async ({ page }) => {
     await gotoFresh(page, '/?s=merch');
 

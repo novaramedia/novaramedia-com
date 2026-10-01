@@ -36,7 +36,10 @@ heading. Reviewed on DevKinsta, it has four problems:
   1. Search form pre-filled with the current query (replaces the
      "Search Results for: X" heading).
   2. "Suggested" heading + suggestion cards. Page 1 only, as now.
-  3. "Results" heading + the existing post grid, unchanged.
+  3. "Results" heading + the existing post grid, unchanged. When there are
+     suggestions but no post results, the heading and the "Sorry, nothing
+     matched" message are both omitted; the message shows only when there
+     are neither.
 - Limit stays at **6** suggestions (`NM_SEARCH_DESTINATIONS_LIMIT`).
 
 ### Search form on the results page
@@ -56,9 +59,12 @@ heading. Reviewed on DevKinsta, it has four problems:
   a post: same grid classes (`is-s-24 is-l-12 is-xxl-8 mb-4`), same rounded
   16:9 thumbnail frame, same `index-post-title` heading.
 - Differences from a post card:
-  - **Tag** in the thumbnail corner (where posts show category tags):
-    "Show" for categories, "Newsletter" for newsletters, "Section" for fixed
-    site sections.
+  - **Tag** in the thumbnail corner (where posts show category tags): for
+    categories, the top-level category (Video, Audio, Articles) — the same
+    vocabulary post cards use, so Do Your Own Research reads "Video". A
+    top-level category shows its own name. "Newsletter" for newsletters,
+    "Section" for fixed site sections. "Show" and "product" are not used:
+    the site never says "show", and "product" is internal terminology.
   - **Title:** the category or newsletter name, or the section label.
   - **Description:** category description or newsletter excerpt, trimmed.
     Omitted when empty.
@@ -79,10 +85,12 @@ Each destination resolves an image in this order; the first hit wins:
      The splash image field belongs to the `focus` taxonomy, not categories.
    - Newsletter: featured image.
    - Fixed section: none.
-3. **Newest post thumbnail** in the category (categories only; one
-   `posts_per_page => 1` query with `fields => 'ids'`).
-4. **Branded tile:** 16:9 rounded block in brand red with the name in large
+3. **Branded tile:** 16:9 rounded block in brand red with the name in large
    bold white type.
+
+The newest post's thumbnail was tried as a fallback and dropped: it reads
+as an advert for that post (often the same image as the top result), not as
+the destination. A logo-led treatment is the direction for the design phase.
 
 Both tiles are static CSS in `src/styl/` (not inline), built to `dist/`.
 Existing own-images may turn out to be poor; the two tiles are built first
