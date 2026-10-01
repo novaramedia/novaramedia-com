@@ -2,7 +2,9 @@
 
 **Date:** 2026-10-01
 **Branch:** `feature/search-destinations`
-**Status:** Design approved, not yet implemented
+**Status:** Prototype scope approved, not yet implemented. Build stops at a
+working prototype on DevKinsta; a design thinking phase follows before any
+release work. No release target.
 **Builds on:** uncommitted "Jump to" destinations work on this branch
 (`lib/functions-search.php`, `partials/search-destinations.php`)
 
@@ -66,20 +68,31 @@ heading. Reviewed on DevKinsta, it has four problems:
 
 Each destination resolves an image in this order; the first hit wins:
 
-1. **Own image.**
+1. **Product logo tile** (categories only). The category's product logo
+   (`_nm_category_logo` term meta, normally an SVG) centred inside a 16:9
+   rounded box with a flat mid-grey background. Easy to maintain: one logo
+   per product, no photo upkeep. Box colour is a placeholder for the design
+   phase (fixed grey vs a colour assigned per product).
+2. **Own image.**
    - Category: Open Graph share image (`_nm_category_og_image_id` term meta).
-     The microbrand logo (`_nm_category_logo`) is not used — it is a logo,
-     not a 16:9 image. The splash image field belongs to the `focus`
-     taxonomy, not categories.
+     The splash image field belongs to the `focus` taxonomy, not categories.
    - Newsletter: featured image.
    - Fixed section: none.
-2. **Newest post thumbnail** in the category (categories only; one
+3. **Newest post thumbnail** in the category (categories only; one
    `posts_per_page => 1` query with `fields => 'ids'`).
-3. **Branded tile:** 16:9 rounded block in brand red with the name in large
-   bold white type. Static CSS in `src/styl/` (not inline), built to `dist/`.
+4. **Branded tile:** 16:9 rounded block in brand red with the name in large
+   bold white type.
 
-Existing own-images may turn out to be poor; the tile is built first so it
-can be judged on DevKinsta before the chain is tuned.
+Both tiles are static CSS in `src/styl/` (not inline), built to `dist/`.
+Existing own-images may turn out to be poor; the two tiles are built first
+so they can be judged on DevKinsta before the chain is tuned.
+
+### "Microbrand" → "Product" terminology
+
+Rename the category edit-screen field label from "Microbrand Logo" to
+"Product Logo", and its description to match
+(`lib/meta/meta-boxes-taxonomy.php`). Label and description only: the meta
+key `_nm_category_logo` is unchanged, so no stored data moves.
 
 ### Redirect-aware de-duplication
 
@@ -133,9 +146,10 @@ Manual on DevKinsta:
 
 ## Rollout
 
-- No admin data, no post-deploy checklist step (keywords live in code).
-- CHANGELOG: one line — search suggests shows, newsletters and site sections
-  above results, with a pre-filled search form.
+- Prototype only: local DevKinsta, no push, no PR, no release target.
+- After the design thinking phase, revisit this section. Known so far: no
+  admin data and no post-deploy checklist step (keywords live in code);
+  CHANGELOG line to be written then.
 
 ## Out of scope
 
