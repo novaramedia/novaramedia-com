@@ -771,7 +771,7 @@ Expected: the build completes with no errors, and all 3 dyor-archive tests PASS.
 
 On the local site, `/dyor/`:
 - Season 2's block sits above season 1's.
-- The Latest Episode label reads "Season 2, Episode 3".
+- The Latest Episode label reads "Season 2 Episode 3".
 - Each banner shows its button. Clicking one animates it open and loads the map; clicking the other loads the second map.
 - With JS disabled (Chrome DevTools → disable JavaScript), the banners still show their buttons at banner height, with no empty full-height box.
 

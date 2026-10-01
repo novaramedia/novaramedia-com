@@ -281,7 +281,9 @@ export class Support {
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
-    let headingText = '';
+    // Same hardcoded defaults as render_support_heading_and_text(), so a mode
+    // with no copy at any level never keeps the previous mode's text.
+    let headingText = 'Help build people-powered media';
     if (contextCopy && isNonEmptyString(contextCopy.heading)) {
       headingText = contextCopy.heading;
     } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
@@ -293,7 +295,8 @@ export class Support {
       headingText = defaultSectionCopy.heading;
     }
 
-    let textCopy = '';
+    let textCopy =
+      'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
     if (contextCopy && isNonEmptyString(contextCopy.text)) {
       textCopy = contextCopy.text;
     } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {

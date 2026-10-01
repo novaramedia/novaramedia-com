@@ -115,7 +115,7 @@ Local only, via `docker exec devkinsta_fpm wp --allow-root …`: set the last th
   - `/category/do-your-own-research/page/2/` 301s to `/category/do-your-own-research/`. `/dyor/` is the vanity route to the same archive.
 - Manual, local with fake season 2 data:
   - Season 2 above season 1.
-  - The Latest Episode line reads "Season 2, Episode 3".
+  - The Latest Episode line reads "Season 2 Episode 3".
   - Both maps load on click, and the height animates.
   - Products page Save persists the seeded season 1.
 
