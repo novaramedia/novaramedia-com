@@ -87,10 +87,13 @@ test.describe('Do Your Own Research archive', () => {
   // The category URL and the /dyor/ vanity rewrite resolve through different
   // query vars (category_name vs cat), so each needs its own check.
   for (const archivePath of [ARCHIVE, '/dyor/']) {
-    test(`paged archive URLs redirect to the archive: ${archivePath}`, async ({ page }) => {
-      await gotoFresh(page, `${archivePath}page/2/`, { failOnStatusCode: false });
+    test(`paged archive URLs redirect to the archive: ${archivePath}`, async ({ request }) => {
+      const response = await request.get(`${archivePath}page/2/?playwright_cache_bust=${Date.now()}`, {
+        maxRedirects: 0,
+      });
 
-      expect(new URL(page.url()).pathname).toBe(archivePath);
+      expect(response.status()).toBe(301);
+      expect(new URL(response.headers()['location']).pathname).toBe(archivePath);
     });
   }
 });

@@ -209,7 +209,7 @@ function nm_get_dyor_support_copy() {
  * Research.
  * Computed on read, never written.
  *
- * @deprecated 4.11.0 Remove with the category map fields once production has saved the Products page.
+ * @deprecated 4.10.0 Remove in 4.11.0 with the category map fields, once production has saved the Products page.
  * @return array[]
  */
 function nm_get_dyor_seasons_seed() {

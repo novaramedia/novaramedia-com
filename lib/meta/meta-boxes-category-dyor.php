@@ -19,7 +19,7 @@ function nm_cmb_is_category_dyor( $cmb ) {
 /**
  * Declares CMB2 metaboxes for the Do Your Own Research category
  *
- * @deprecated 4.11.0 Map settings moved to Products → Do Your Own Research (per season). Kept as the seed source for nm_get_dyor_seasons_seed().
+ * @deprecated 4.10.0 Map settings moved to Products → Do Your Own Research (per season). Kept as the seed source for nm_get_dyor_seasons_seed(); remove in 4.11.0.
  */
 function nm_cmb_dyor_metaboxes() {
   $prefix = '_nm_';

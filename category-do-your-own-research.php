@@ -169,6 +169,9 @@ get_header();
   // nm:click-to-load event on the container — the hook for the cookie
   // consent gate when it lands.
   $season_index = 0;
+  // The newest season's map also answers #map, which older front-page DYOR
+  // blocks (show-blocks/dyor.php, dyor-alt.php) still link to.
+  $map_anchor_placed = false;
 
   foreach ( $posts_by_season as $season_number => $season_posts ) {
     // A support box, with DYOR's own copy, divides consecutive seasons.
@@ -214,6 +217,12 @@ get_header();
       <div class="grid-item is-xxl-24">
         <div class="grid-row background-white ui-rounded-box p-4">
           <div
+            <?php
+            if ( ! $map_anchor_placed ) {
+              $map_anchor_placed = true;
+              echo 'id="map"';
+            }
+            ?>
             class="dyor-archive__map dyor-archive__map--season-<?php echo esc_attr( $season_number ); ?> ui-rounded-box"
             data-testid="dyor-season-map"
             data-click-to-load
