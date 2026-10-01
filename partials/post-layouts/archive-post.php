@@ -12,14 +12,6 @@ $is_show_tags = ! empty( $args['show-tags'] ) ? $args['show-tags'] : false;
 $is_article = nm_is_article( $this_post_id ); // check if post is article
 
 $show_video_embed = ! empty( $args['show-video-embed'] ) ? $args['show-video-embed'] : false;
-
-// Season/episode label above the title (episodic archives such as DYOR).
-$episode_label = ! empty( $args['show-episode-label'] ) ? nm_get_season_episode_label( $this_post_id ) : '';
-
-// Classes for the large variant's title and byline/standfirst lines, so a
-// template can resize them without changing every large card.
-$large_title_classes    = ! empty( $args['large-title-classes'] ) ? $args['large-title-classes'] : 'font-size-10 font-weight-bold mt-2';
-$large_subtitle_classes = ! empty( $args['large-subtitle-classes'] ) ? $args['large-subtitle-classes'] : 'font-size-9 font-weight-bold';
 $youtube_id = $show_video_embed ? get_post_meta( $this_post_id, '_cmb_utube', true ) : false;
 
 ?>
@@ -85,14 +77,9 @@ switch ( $text_size ) {
     <?php
       break;
   case 'large':
-    if ( $episode_label !== '' ) {
-      ?>
-    <h4 class="font-size-8 font-weight-bold mt-2" data-testid="episode-label"><?php echo esc_html( $episode_label ); ?></h4>
-      <?php
-    }
     ?>
-    <h3 class="<?php echo esc_attr( $large_title_classes ); ?> text-wrap-pretty"><?php the_title(); ?></h3>
-    <h3 class="<?php echo esc_attr( $large_subtitle_classes ); ?> text-wrap-pretty">
+    <h3 class="font-size-10 font-weight-bold mt-2 text-wrap-pretty"><?php the_title(); ?></h3>
+    <h3 class="font-size-9 font-weight-bold text-wrap-pretty">
       <?php
       if ( $is_article ) {
         render_bylines( $this_post_id );

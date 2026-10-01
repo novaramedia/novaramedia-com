@@ -59,7 +59,7 @@ Top to bottom:
    - the season `title` tag (falling back to `Season {n}`), centred, then the `description` if set: left-aligned text in a grid-centred item (`offset-xxl-5 is-xxl-14`, `offset-l-3 is-l-18`, `is-s-24`) to keep line length readable, `font-size-12` (`font-size-s-11`), `text-paragraph-breaks`.
    - the click-to-load map (component 4), if the season has a `figma_file_key`
    - the season's episodes, newest first, in the existing grid (`partials/post-layouts/archive-post`, `is-s-24 is-l-12 is-xxl-8`)
-   A support section (`partials/support-section`) sits between consecutive season blocks as a divider. It carries DYOR's own heading and copy (`support_heading` / `support_text` on the Products DYOR page, via `nm_get_dyor_support_copy()`), using `render_support_form()`'s context copy argument (#377). Blank or unsaved fields fall back to the site-wide support copy.
+   A support section (`partials/support-section`) sits between consecutive season blocks as a divider. For this release it shows the site-wide support copy. DYOR's own heading and copy (`support_heading` / `support_text` on the Products DYOR page) are saved but not applied yet; #633 adds `render_support_form()`'s context copy argument (#377) and passes them here.
 4. **Unseasoned posts:** DYOR posts with no `_nm_season`, in a final block headed "More from Do Your Own Research", only when any exist.
 5. Support module, unchanged.
 

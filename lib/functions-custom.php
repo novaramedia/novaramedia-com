@@ -112,27 +112,25 @@ function nm_get_serial_podcast_slugs() {
 /**
  * Season and episode label for a post, e.g. "Season 2 Episode 3".
  *
- * The episode label override (bonus, trailer, credits) wins; otherwise the
- * season and episode numbers that are set. Empty when neither is set.
+ * The episode label override (bonus, trailer, credits) replaces the episode
+ * part only, so the season stays: "Season 2 Trailer". Empty when nothing is
+ * set.
  *
  * @param int $post_id Post ID.
  * @return string
  */
 function nm_get_season_episode_label( $post_id ) {
-  $label = (string) get_post_meta( $post_id, '_nm_episode_label', true );
-
-  if ( $label !== '' ) {
-    return $label;
-  }
-
-  $season  = (int) get_post_meta( $post_id, '_nm_season', true );
-  $episode = (int) get_post_meta( $post_id, '_nm_episode', true );
+  $season        = (int) get_post_meta( $post_id, '_nm_season', true );
+  $episode       = (int) get_post_meta( $post_id, '_nm_episode', true );
+  $episode_label = trim( (string) get_post_meta( $post_id, '_nm_episode_label', true ) );
 
   $parts = array();
   if ( $season > 0 ) {
     $parts[] = 'Season ' . $season;
   }
-  if ( $episode > 0 ) {
+  if ( $episode_label !== '' ) {
+    $parts[] = $episode_label;
+  } elseif ( $episode > 0 ) {
     $parts[] = 'Episode ' . $episode;
   }
 

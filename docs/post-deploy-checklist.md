@@ -59,15 +59,6 @@ The standfirst on each Committed, Foreign Agent and Death in Westminster post st
 1. Add season 2: number 2, title, description, and its FigJam file key. Save.
 2. Add season 1: number 1, title "Season 1", and the file key and default node copied from the category's Do Your Own Research box. Save. This is what lets those category fields be removed in 4.11.0.
 
-3. Optional: **Support box heading** / **Support box copy** give the support box between seasons its own copy. Left blank, it shows the site-wide support copy.
-
-   Suggested copy to try on staging when showing people the page (a starting point, not approved copy):
-
-   > **Help us keep digging**
-   > Deep research doesn't please the algorithm. Supporters keep Do Your Own Research going. Join from £1 a month.
-
-   Other heading ideas: "Keep the research going", "Fund the deep dive".
-
 Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
 
 ---

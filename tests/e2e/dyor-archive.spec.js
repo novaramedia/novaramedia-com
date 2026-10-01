@@ -49,41 +49,6 @@ test.describe('Do Your Own Research archive', () => {
     expect(await page.evaluate(() => document.activeElement && document.activeElement.tagName)).toBe('IFRAME');
   });
 
-  test('support box between seasons keeps its own copy across donation modes', async ({ page }) => {
-    await gotoFresh(page, ARCHIVE);
-
-    test.skip((await page.getByTestId('dyor-season').count()) < 2, 'needs two or more seasons with posts');
-
-    const seasonForm = page.locator('.dyor-archive__season-support form.support-form').first();
-
-    await expect(seasonForm).toBeVisible();
-    // The copy fields are optional; blank means the site-wide copy, with no attribute.
-    test.skip(!(await seasonForm.getAttribute('data-support-copy')), 'no DYOR support copy saved');
-
-    // Each field is optional per mode; check whichever are saved.
-    const copy = JSON.parse(await seasonForm.getAttribute('data-support-copy'));
-    const heading = seasonForm.locator('.support-form__text-desktop .support-form__dynamic-heading');
-    const text = seasonForm.locator('.support-form__text-desktop .support-form__dynamic-text');
-
-    const expectModeCopy = async (mode) => {
-      if (copy[mode] && copy[mode].heading) {
-        await expect(heading).toHaveText(copy[mode].heading);
-      }
-      if (copy[mode] && copy[mode].text) {
-        await expect(text).toHaveText(copy[mode].text);
-      }
-    };
-
-    // Rendered state first, then each mode after the toggle rewrites the copy.
-    const activeMode = await seasonForm.locator('.support-form__schedule-desktop .ui-button--active').getAttribute('data-value');
-    await expectModeCopy(activeMode);
-
-    for (const mode of ['oneoff', 'regular']) {
-      await seasonForm.locator(`.support-form__schedule-desktop [data-value="${mode}"]`).click();
-      await expectModeCopy(mode);
-    }
-  });
-
   // The category URL and the /dyor/ vanity rewrite resolve through different
   // query vars (category_name vs cat), so each needs its own check.
   for (const archivePath of [ARCHIVE, '/dyor/']) {

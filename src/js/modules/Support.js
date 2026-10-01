@@ -56,12 +56,6 @@ export class Support {
       // Always call setAutoValues with the preferred initial type
       const showFirst = this.autovalues['show_first'];
       _this.setAutoValues($form, showFirst);
-      // A ?sv= config can open on the other mode than the server rendered,
-      // so match the copy to it too.
-      _this.updateSupportSectionCopy({ value: showFirst }, $form);
-      // The server renders the /regular action; follow the opening mode so a
-      // one-off ?sv= config never submits to the regular flow.
-      $form.attr('action', _this.donationAppUrl + showFirst);
 
       // Ensure the first value button is also selected and active
       const $firstValueBtn = $form
@@ -277,22 +271,13 @@ export class Support {
   updateSupportSectionCopy(data, $form) {
     const $heading = $form.find('.support-form__dynamic-heading');
     const $text = $form.find('.support-form__dynamic-text');
-    // Context copy rendered on this form (data-support-copy) wins over the
-    // global Fundraising copy; jQuery parses the JSON attribute.
-    const formCopy = $form.data('supportCopy');
-    const contextCopy =
-      formCopy && typeof formCopy === 'object' ? formCopy[data.value] : null;
     const overrideCopy =
       WP.supportSectionCopy && WP.supportSectionCopy[data.value];
     const defaultSectionCopy =
       WP.supportSectionCopy && WP.supportSectionCopy['default'];
 
-    // Same hardcoded defaults as render_support_heading_and_text(), so a mode
-    // with no copy at any level never keeps the previous mode's text.
-    let headingText = 'Help build people-powered media';
-    if (contextCopy && isNonEmptyString(contextCopy.heading)) {
-      headingText = contextCopy.heading;
-    } else if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
+    let headingText = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.heading)) {
       headingText = overrideCopy.heading;
     } else if (
       defaultSectionCopy &&
@@ -301,11 +286,8 @@ export class Support {
       headingText = defaultSectionCopy.heading;
     }
 
-    let textCopy =
-      'Fund truthful, independent journalism. Join our supporters from just £1 per month, or whatever you can afford today.';
-    if (contextCopy && isNonEmptyString(contextCopy.text)) {
-      textCopy = contextCopy.text;
-    } else if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
+    let textCopy = '';
+    if (overrideCopy && isNonEmptyString(overrideCopy.text)) {
       textCopy = overrideCopy.text;
     } else if (
       defaultSectionCopy &&

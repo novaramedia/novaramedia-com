@@ -38,7 +38,7 @@ function nm_register_products_options_metabox() {
   $dyor_options->add_field(
     array(
       'name'    => 'Support box heading',
-      'desc'    => 'Heading for the support box between seasons on the archive. Leave blank for the site-wide support copy.',
+      'desc'    => 'Not used yet. Applied to the support box between seasons in a later release (#633).',
       'id'      => 'support_heading',
       'type'    => 'text',
     )
@@ -48,7 +48,7 @@ function nm_register_products_options_metabox() {
     array(
       'name'    => 'Support box copy',
       'id'      => 'support_text',
-      'desc'    => 'Leave blank for the site-wide support copy.',
+      'desc'    => 'Not used yet. Applied to the support box between seasons in a later release (#633).',
       'type'    => 'textarea_small',
     )
   );
@@ -174,7 +174,8 @@ function nm_get_dyor_seasons() {
   }
 
   // Until season 1 has its own entry it keeps the legacy category map, so
-  // saving only a new season can't drop season 1's map.
+  // saving only a new season can't drop season 1's map. Migration only:
+  // remove with nm_get_dyor_seasons_seed() in 4.11.0.
   if ( ! isset( $seasons[1] ) ) {
     $seasons += nm_get_dyor_seasons_seed();
   }
@@ -182,25 +183,6 @@ function nm_get_dyor_seasons() {
   krsort( $seasons );
 
   return $seasons;
-}
-
-/**
- * Context copy for the DYOR archive's between-seasons support box, the same
- * for both donation modes. A blank field is dropped by render_support_form(),
- * so the site-wide support copy shows for it.
- *
- * @return array Shape accepted by render_support_form()'s $copy.
- */
-function nm_get_dyor_support_copy() {
-  $copy = array(
-    'heading' => trim( (string) NM_get_option( 'support_heading', 'nm_products_dyor_options', '' ) ),
-    'text'    => trim( (string) NM_get_option( 'support_text', 'nm_products_dyor_options', '' ) ),
-  );
-
-  return array(
-    'regular' => $copy,
-    'oneoff'  => $copy,
-  );
 }
 
 /**

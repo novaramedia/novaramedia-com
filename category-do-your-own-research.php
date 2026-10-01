@@ -114,36 +114,33 @@ get_header();
   <?php // ── Latest Episode ── ?>
   <?php
   if ( $latest_post ) {
-    global $post;
-    $post = $latest_post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- restored by wp_reset_postdata() below.
-    setup_postdata( $post );
-
-    $latest_meta        = get_post_meta( get_the_ID() );
-    $latest_description = ! empty( $latest_meta['_cmb_short_desc'][0] ) ? $latest_meta['_cmb_short_desc'][0] : get_the_excerpt();
-    $latest_season      = (int) get_post_meta( get_the_ID(), '_nm_season', true );
-    $latest_episode     = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
+    // ID-based calls throughout, so the global $post is never swapped.
+    $latest_id          = $latest_post->ID;
+    $latest_meta        = get_post_meta( $latest_id );
+    $latest_description = ! empty( $latest_meta['_cmb_short_desc'][0] ) ? $latest_meta['_cmb_short_desc'][0] : get_the_excerpt( $latest_post );
+    $latest_label       = nm_get_season_episode_label( $latest_id );
     ?>
   <section class="container">
     <div class="dyor-archive__latest-episode grid-row">
       <div class="dyor-archive__latest-episode-image grid-item is-xxl-16 is-s-24 mb-s-4">
         <div class="ui-embed-container ui-rounded-box">
           <?php if ( ! empty( $latest_meta['_cmb_utube'][0] ) ) { ?>
-            <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], false, 'eager', get_the_title() ); ?>
+            <?php echo render_youtube_embed_iframe( $latest_meta['_cmb_utube'][0], false, 'eager', get_the_title( $latest_id ) ); ?>
           <?php } else { ?>
-            <?php render_thumbnail( get_the_ID(), 'col16-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
+            <?php render_thumbnail( $latest_id, 'col16-16to9', array( 'class' => 'ui-rounded-box' ) ); ?>
           <?php } ?>
         </div>
       </div>
       <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
         <h4 class="ui-boxed-title mb-3">The Latest Episode</h4>
-        <?php if ( $latest_season > 0 ) { ?>
-        <h4 class="font-size-9 font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ' Episode ' . $latest_episode : '' ) ); ?></h4>
+        <?php if ( $latest_label !== '' ) { ?>
+        <h4 class="font-size-9 font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( $latest_label ); ?></h4>
         <?php } ?>
         <h2 class="font-size-14 font-size-s-13 font-weight-bold text-wrap-pretty">
-          <?php the_title(); ?>
+          <?php echo esc_html( get_the_title( $latest_id ) ); ?>
         </h2>
         <h3 class="font-size-12 font-size-s-11 font-weight-bold mt-3 mt-s-2 text-wrap-pretty">
-          <?php render_standfirst( get_the_ID() ); ?>
+          <?php render_standfirst( $latest_id ); ?>
         </h3>
         <div class="font-size-10 mt-3 mt-s-2 text-wrap-pretty">
           <?php echo wp_kses_post( $latest_description ); ?>
@@ -157,7 +154,6 @@ get_header();
     </div>
   </section>
     <?php
-    wp_reset_postdata();
   }
   ?>
 
@@ -174,7 +170,8 @@ get_header();
   $map_anchor_placed = false;
 
   foreach ( $posts_by_season as $season_number => $season_posts ) {
-    // A support box, with DYOR's own copy, divides consecutive seasons.
+    // A support box divides consecutive seasons. It shows the site-wide
+    // support copy for now; #633 passes DYOR's own copy from Products here.
     if ( $season_index++ > 0 ) {
       get_template_part(
         'partials/support-section',
@@ -182,7 +179,6 @@ get_header();
         array(
           'container_classes'     => 'mb-6 dyor-archive__season-support',
           'on_colored_background' => false,
-          'copy'                  => nm_get_dyor_support_copy(),
         )
       );
     }
@@ -241,24 +237,15 @@ get_header();
     <div class="grid-row">
       <?php
       foreach ( $season_posts as $season_post ) {
-        global $post;
-        $post = $season_post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- restored by wp_reset_postdata() below.
-        setup_postdata( $post );
-
         get_template_part(
-          'partials/post-layouts/archive-post',
+          'partials/post-layouts/archive-post-dyor',
           null,
           array(
-            'grid-item-classes'      => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
-            'image-size'             => 'col12-16to9',
-            'text-size'              => 'large',
-            'show-episode-label'     => true,
-            'large-title-classes'    => 'font-size-11 font-weight-bold mt-1',
-            'large-subtitle-classes' => 'font-size-10 font-weight-bold mt-1',
+            'post-id'           => $season_post->ID,
+            'grid-item-classes' => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
           )
         );
       }
-      wp_reset_postdata();
       ?>
     </div>
   </section>
@@ -274,24 +261,15 @@ get_header();
       </div>
       <?php
       foreach ( $unseasoned_posts as $unseasoned_post ) {
-        global $post;
-        $post = $unseasoned_post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- restored by wp_reset_postdata() below.
-        setup_postdata( $post );
-
         get_template_part(
-          'partials/post-layouts/archive-post',
+          'partials/post-layouts/archive-post-dyor',
           null,
           array(
-            'grid-item-classes'      => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
-            'image-size'             => 'col12-16to9',
-            'text-size'              => 'large',
-            'show-episode-label'     => true,
-            'large-title-classes'    => 'font-size-11 font-weight-bold mt-1',
-            'large-subtitle-classes' => 'font-size-10 font-weight-bold mt-1',
+            'post-id'           => $unseasoned_post->ID,
+            'grid-item-classes' => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-4',
           )
         );
       }
-      wp_reset_postdata();
       ?>
     </div>
   </section>
