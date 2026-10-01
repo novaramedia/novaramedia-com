@@ -2,9 +2,9 @@
 
 **Date:** 2026-10-01
 **Branch:** `feature/search-destinations`
-**Status:** Prototype scope approved, not yet implemented. Build stops at a
-working prototype on DevKinsta; a design thinking phase follows before any
-release work. No release target.
+**Status:** Design approved, not yet implemented. First phase is a prototype
+reviewed on staging; a design thinking phase follows before it is finalised.
+Release target v4.11.0.
 **Builds on:** uncommitted "Jump to" destinations work on this branch
 (`lib/functions-search.php`, `partials/search-destinations.php`)
 
@@ -146,10 +146,9 @@ Manual on DevKinsta:
 
 ## Rollout
 
-- Prototype only: local DevKinsta, no push, no PR, no release target.
-- After the design thinking phase, revisit this section. Known so far: no
-  admin data and no post-deploy checklist step (keywords live in code);
-  CHANGELOG line to be written then.
+- No admin data, no post-deploy checklist step (keywords live in code).
+- CHANGELOG: one line — search suggests shows, newsletters and site sections
+  above results, with a pre-filled search form.
 
 ## Out of scope
 
