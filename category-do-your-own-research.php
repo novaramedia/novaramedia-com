@@ -194,7 +194,7 @@ get_header();
 
     $season_title = '' !== $season['title'] ? $season['title'] : 'Season ' . $season_number;
     ?>
-  <section class="container mb-5 dyor-archive__season" data-testid="dyor-season" data-season="<?php echo esc_attr( $season_number ); ?>">
+  <section class="container mb-5 dyor-archive__season" id="<?php echo esc_attr( 'season-' . $season_number ); ?>" data-testid="dyor-season" data-season="<?php echo esc_attr( $season_number ); ?>">
     <div class="grid-row mb-4">
       <div class="grid-item is-xxl-24 text-align-center">
         <h4 class="ui-boxed-title"><?php echo esc_html( $season_title ); ?></h4>

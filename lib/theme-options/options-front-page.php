@@ -184,6 +184,7 @@ function nm_get_front_page_block_registry() {
     'novara-live'     => array( 'type' => 'product', 'label' => 'Product: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
     'dyor'            => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
     'dyor-alt'        => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
+    'dyor-season'     => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (current season only)', 'partial' => 'partials/front-page/show-blocks/dyor-season' ),
     'audio'           => array( 'type' => 'product', 'label' => 'Product: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
     'audio-acfm'      => array( 'type' => 'product', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
     'downstream'      => array( 'type' => 'product', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),

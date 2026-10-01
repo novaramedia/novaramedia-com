@@ -39,6 +39,17 @@
 .fallback .front-page-dyor
   background-image: url('./img/products/dyor/dyor-background.jpg')
 
+// Current-season block (show-blocks/dyor-season.php): a season with its own
+// background adds a --season-N rule. Without one it keeps the clouds.
+.avif .front-page-dyor--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.avif')
+
+.webp .front-page-dyor--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.webp')
+
+.fallback .front-page-dyor--season-2
+  background-image: url('./img/products/dyor/dyor-background-season-2.jpg')
+
 // No library helper for flex-end alignment (only .layout-flex-align-center).
 .front-page-dyor__top-row
   align-items: flex-end
