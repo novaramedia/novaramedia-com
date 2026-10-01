@@ -205,8 +205,9 @@ add_action( 'cmb2_admin_init', 'nm_register_products_options_metabox' );
 
 /**
  * DYOR seasons from Products → Do Your Own Research, keyed by season number,
- * newest first. Entries without a season number are dropped. Falls back to
- * nm_get_dyor_seasons_seed() until the page has been saved once.
+ * newest first. Entries without a season number are dropped. Season 1 comes
+ * from nm_get_dyor_seasons_seed() whenever there is no saved season 1 entry,
+ * even after other seasons are saved.
  *
  * @return array[] { number, title, description, figma_file_key, figma_default_node_id }
  */
@@ -245,7 +246,8 @@ function nm_get_dyor_seasons() {
 
 /**
  * Season 1 built from the legacy DYOR category map fields, so the archive
- * keeps today's map until Products → Do Your Own Research is saved once.
+ * keeps today's map until season 1 has its own entry on Products → Do Your
+ * Own Research.
  * Computed on read, never written.
  *
  * @deprecated 4.10.0 Remove in 4.11.0 with the category map fields, once production has saved the Products page.
@@ -494,7 +496,7 @@ Replace the Latest Episode section (from `<?php // ── Section 3: Latest Epis
       </div>
       <div class="dyor-archive__latest-episode-text grid-item is-xxl-8 is-s-24">
         <?php if ( $latest_season > 0 ) { ?>
-        <h4 class="font-size-9 text-uppercase font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ', Episode ' . $latest_episode : '' ) ); ?></h4>
+        <h4 class="font-size-9 font-weight-bold mb-2" data-testid="latest-episode-label"><?php echo esc_html( 'Season ' . $latest_season . ( $latest_episode > 0 ? ' Episode ' . $latest_episode : '' ) ); ?></h4>
         <?php } ?>
         <h2 class="font-size-14 font-size-s-13 font-weight-bold text-wrap-pretty">
           <?php the_title(); ?>

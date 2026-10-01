@@ -11,6 +11,10 @@
  */
 export class ClickToLoad {
   onReady() {
+    this.bind();
+  }
+
+  bind() {
     document.querySelectorAll('[data-click-to-load]').forEach((container) => {
       const button = container.querySelector('[data-click-to-load-button]');
 
