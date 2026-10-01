@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Search suggests matching shows, newsletters and site sections above results, with a pre-filled search form
 
 ### Changed
 
