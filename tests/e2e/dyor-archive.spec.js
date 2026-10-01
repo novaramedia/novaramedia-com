@@ -32,6 +32,15 @@ test.describe('Do Your Own Research archive', () => {
     await expect(map).toBeVisible();
     await expect(page.locator('[data-testid="dyor-season-map"] iframe')).toHaveCount(0);
 
+    // Consent contract: a listener that cancels nm:click-to-load stops the load.
+    await page.evaluate(() => {
+      document.addEventListener('nm:click-to-load', (event) => event.preventDefault(), { once: true });
+    });
+    await map.locator('[data-click-to-load-button]').click();
+
+    await expect(map.locator('iframe')).toHaveCount(0);
+    await expect(map).not.toHaveClass(/is-loaded/);
+
     await map.locator('[data-click-to-load-button]').click();
 
     await expect(map.locator('iframe')).toHaveAttribute('src', /^https:\/\/embed\.figma\.com\/board\//);

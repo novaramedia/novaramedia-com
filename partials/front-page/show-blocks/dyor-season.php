@@ -40,8 +40,15 @@ $dyor_seasons    = nm_get_dyor_seasons();
 $season       = isset( $dyor_seasons[ $season_number ] ) ? $dyor_seasons[ $season_number ] : array();
 $season_title = ! empty( $season['title'] ) ? $season['title'] : 'Season ' . $season_number;
 
-// First paragraph only: the archive shows the full season description.
-$season_intro = ! empty( $season['description'] ) ? trim( preg_split( '/\R\s*\R/', $season['description'] )[0] ) : '';
+// First paragraph only: the archive shows the full season description. The
+// field is WYSIWYG, so it may hold blank-line paragraphs or <p> markup;
+// wpautop() normalises both to <p> before the first one is taken.
+$season_intro = '';
+if ( ! empty( $season['description'] ) ) {
+  $season_intro_html = wpautop( $season['description'] );
+  $season_intro      = preg_match( '#<p[^>]*>(.*?)</p>#s', $season_intro_html, $season_intro_match ) ? $season_intro_match[1] : $season_intro_html;
+  $season_intro      = trim( wp_strip_all_tags( $season_intro ) );
+}
 
 $category_link   = get_category_link( $dyor_category->term_id );
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/dyor/';
