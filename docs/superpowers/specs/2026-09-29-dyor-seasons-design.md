@@ -54,11 +54,11 @@ New file `lib/theme-options/options-products.php`, loaded after `options-fundrai
 Top to bottom:
 
 1. **Hero:** #626's margins fix, with a 1rem (`mb-4`) gap to Latest Episode. A grey `hr` (`grid-item is-xxl-24 mt-5 mb-5`, the Downstream markup with 2rem each side) separates Latest Episode from the first season.
-2. **Latest Episode**. The "The Latest Episode" tag sits inside the text column, above a line over the title: `Season {n} Episode {m}` from the post's meta. It shows `Season {n}` alone when there's no episode number, and nothing when there's no season.
+2. **Latest Episode**. The "The Latest Episode" tag sits inside the text column, above a line over the title: `Season {n} Episode {m}` from the post's meta. It shows `Season {n}` alone when there's no episode number, an episode label override in place of the episode part (`Season {n} Trailer`), and nothing when none are set.
 3. **One block per season**, for seasons that have at least one published DYOR post, in descending season number. Each block has:
    - the season `title` tag (falling back to `Season {n}`), centred, then the `description` if set: left-aligned text in a grid-centred item (`offset-xxl-5 is-xxl-14`, `offset-l-3 is-l-18`, `is-s-24`) to keep line length readable, `font-size-12` (`font-size-s-11`), `text-paragraph-breaks`.
    - the click-to-load map (component 4), if the season has a `figma_file_key`
-   - the season's episodes, newest first, in the existing grid (`partials/post-layouts/archive-post`, `is-s-24 is-l-12 is-xxl-8`)
+   - the season's episodes, newest first, as DYOR-only cards (`partials/post-layouts/archive-post-dyor`, `is-xxl-8 is-l-12 is-s-24`): the season/episode label above the title, then title and standfirst. The card takes the post ID (`post-id` arg), so the archive never swaps the global `$post`; the shared `archive-post` partial is unchanged.
    A support section (`partials/support-section`) sits between consecutive season blocks as a divider. For this release it shows the site-wide support copy. DYOR's own heading and copy (`support_heading` / `support_text` on the Products DYOR page) are saved but not applied yet; #633 adds `render_support_form()`'s context copy argument (#377) and passes them here.
 4. **Unseasoned posts:** DYOR posts with no `_nm_season`, in a final block headed "More from Do Your Own Research", only when any exist.
 5. Support module, unchanged.
