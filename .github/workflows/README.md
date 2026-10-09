@@ -8,7 +8,7 @@ The `playwright.yml` workflow runs the end-to-end smoke tests for the WordPress 
 
 1. **Trigger**: Runs on Pull Requests to `master`, `main`, or `development` branches, and on manual `workflow_dispatch`
 2. **Deploy**: Deploys the PR commit to Kinsta staging via SSH + git
-3. **Test**: Installs Chromium and runs all Playwright tests against staging
+3. **Test**: Runs all Playwright tests against staging inside the official `mcr.microsoft.com/playwright` image, tagged from the lockfile's `@playwright/test` version, so Chromium and its system libraries are preinstalled (a first `playwright-version` job reads the version)
 4. **Cleanup**: Resets staging back to the `development` branch
 5. **Artifacts**: Uploads the HTML report and traces when tests fail
 

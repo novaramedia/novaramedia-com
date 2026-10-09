@@ -1,6 +1,9 @@
 # Playwright Tests with Staging Deployment
 #
 # This workflow:
+# 0. Reads the installed @playwright/test version, so the test job runs in the
+#    matching official Playwright image (browser + system deps preinstalled;
+#    installing them per run took ~330s)
 # 1. Deploys the PR branch to Kinsta staging via git pull over SSH
 # 2. Activates the theme via WP-CLI over SSH
 # 3. Clears Kinsta cache
@@ -47,13 +50,42 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # The Playwright image tag must match @playwright/test exactly, or the
+  # bundled browser build is missing. Read it from the lockfile so Dependabot
+  # bumps never need a workflow edit.
+  playwright-version:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      version: ${{ steps.read.outputs.version }}
+
+    steps:
+      - name: Checkout lockfile
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: package-lock.json
+          sparse-checkout-cone-mode: false
+
+      - name: Read @playwright/test version
+        id: read
+        run: echo "version=$(jq -r '.packages["node_modules/@playwright/test"].version' package-lock.json)" >> "$GITHUB_OUTPUT"
+
   deploy-and-test:
+    needs: playwright-version
     # Skip fork PRs — secrets are not available and the job would fail
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    container:
+      image: mcr.microsoft.com/playwright:v${{ needs.playwright-version.outputs.version }}-noble
 
     steps:
+      # The image carries the browser and its libraries, not the tools the
+      # deploy steps use.
+      - name: Install SSH, git and curl
+        run: apt-get update -qq && apt-get install -y -qq --no-install-recommends openssh-client git curl ca-certificates
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -205,9 +237,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests against staging
         run: npx playwright test
