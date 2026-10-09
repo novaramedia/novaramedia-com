@@ -32,7 +32,7 @@ if ( $support_page !== null ) {
       </div>
     </div>
     <?php
-      render_support_form( 'condensed', false, 'grid-item is-m-24 is-xxl-12' );
+      render_support_form( 'condensed', false, 'grid-item is-m-24 is-xxl-12', 'support-video-banner' );
     ?>
   </div>
 </div>
