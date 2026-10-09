@@ -9,8 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
 - Support boxes can carry their own heading and copy per placement
+
+### Fixed
+
+- Support links that open on one-off donations now submit to the one-off flow and show the one-off copy
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+
+## [4.10.0] - 2026-10-01
+
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Do Your Own Research front page block that shows only the current season
 
 ### Changed
 
@@ -19,7 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Support links that open on one-off donations now submit to the one-off flow and show the one-off copy
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
 
 ## [4.9.0] - 2026-09-25
 
