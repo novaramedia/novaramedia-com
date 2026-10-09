@@ -11,6 +11,8 @@
 # 5. Runs Playwright tests against staging
 # 6. Resets staging back to development branch (cleanup)
 #
+# Dependabot PRs are skipped; dependabot-build.yml covers them.
+#
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
 # - KINSTA_SSH_USER: SSH username (main Kinsta user)
@@ -54,7 +56,7 @@ jobs:
   # bundled browser build is missing. Read it from the lockfile so Dependabot
   # bumps never need a workflow edit.
   playwright-version:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 2
     outputs:
@@ -73,8 +75,11 @@ jobs:
 
   deploy-and-test:
     needs: playwright-version
-    # Skip fork PRs — secrets are not available and the job would fail
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    # Skip fork PRs — secrets are not available and the job would fail.
+    # Skip Dependabot PRs too: they only get Dependabot secrets (no SSH key),
+    # and staging serves committed dist/, which a lockfile bump never changes.
+    # dependabot-build.yml checks those PRs instead.
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
