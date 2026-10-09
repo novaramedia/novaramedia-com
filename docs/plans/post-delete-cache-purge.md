@@ -88,15 +88,31 @@ worked. Remaining candidates, none yet checked against prod:
    `age` / `x-kinsta-cache`, then compare against using the manual "Purge
    Individual File" button on a second test post. Isolates whether the
    automatic trash-time purge is firing at all vs. firing but ineffective.
-4. Fix the two confirmed-independent bugs regardless of the outcome above —
-   both are real bugs in their own right:
-   - Add a `before_delete_post` hook in `lib/functions-hooks.php` that forces
-     a purge (via whichever mechanism step 3 proves actually works) before the
-     post row is removed. Closes the Kinsta permanent-delete gap and the
-     Cloudflare `deleted_post`-fires-too-late bug in one place.
-   - Reuse the existing `_cmb_contributors` purge pattern already in that file
-     (currently wired only for the publish transition) so contributor pages
-     also purge on delete.
+4. ~~Fix the two confirmed-independent bugs regardless of the outcome above~~
+   **DONE 2026-09-01** (branch `fix/post-delete-cache-purge`), implemented in
+   `lib/functions-hooks.php`:
+   - `before_delete_post` → `Cache_Purge::initiate_purge()` via the
+     `$kinsta_muplugin` global closes the Kinsta permanent-delete gap; the
+     `_cmb_contributors` purge pattern is reused via the existing
+     `KinstaCache/purgeImmediate` filter so contributor pages purge on delete.
+   - The Cloudflare plugin's own `purgeCacheByRelevantURLs` handler is added to
+     `before_delete_post`, so it runs while the post row still exists (fixes the
+     `deleted_post`-fires-too-late bug); the existing `cloudflare_purge_by_url`
+     contributor filter applies unchanged. The first attempt used the plugin's
+     `cloudflare_purge_url_actions` filter, which is a no-op from a theme: the
+     plugin applies it at the top level of `cloudflare.loader.php`, while plugins
+     load, before `functions.php` runs. The handler instance is instead taken
+     from the plugin's `deleted_post` registration on `init`.
+   - The Kinsta call is guarded with `is_callable`, so a change to Kinsta's
+     auto-updated mu-plugin skips the purge rather than making deletion fatal.
+   - Local run (2026-09-24): force-delete and delete-from-trash each trigger one
+     Kinsta purge; the post's revisions and non-viewable types (`nav_menu_item`)
+     trigger none; both handlers listed on `before_delete_post`.
+   - Known limitation, acceptable: a post deleted *from trash* purges its
+     `__trashed`-suffixed permalink — its live URL was already purged at trash
+     time. The fix fully covers direct force-deletes.
+   - Runtime verification still prod-only (see step 3); local verification was
+     `php -l` plus static reading of both plugins' purge paths.
 5. Leave `wp_trash_post` alone for now — code inspection shows it fires
    correctly at the right time with the gate open. The mystery is why its
    effect isn't reaching the edge, not a missing or misfiring hook. Fix that
