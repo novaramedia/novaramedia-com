@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
 
+### Removed
+
+- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
+
 ## [4.10.0] - 2026-10-01
 
 ### Added
