@@ -170,8 +170,7 @@ get_header();
   $map_anchor_placed = false;
 
   foreach ( $posts_by_season as $season_number => $season_posts ) {
-    // A support box divides consecutive seasons. It shows the site-wide
-    // support copy for now; #633 passes DYOR's own copy from Products here.
+    // A support box, with DYOR's own copy, divides consecutive seasons.
     if ( $season_index++ > 0 ) {
       get_template_part(
         'partials/support-section',
@@ -179,6 +178,7 @@ get_header();
         array(
           'container_classes'     => 'mb-6 dyor-archive__season-support',
           'on_colored_background' => false,
+          'copy'                  => nm_get_dyor_support_copy(),
         )
       );
     }

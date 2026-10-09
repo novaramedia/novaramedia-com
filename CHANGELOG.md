@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support boxes can carry their own heading and copy per placement
+
 ### Fixed
 
+- Support links that open on one-off donations now submit to the one-off flow and show the one-off copy
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
 
 ## [4.10.0] - 2026-10-01
