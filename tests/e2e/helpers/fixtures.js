@@ -30,6 +30,7 @@ const EMBED_HOSTS = [
   'instagram.com',
   'tiktok.com',
   'spotify.com',
+  'figma.com',
 ];
 
 /**

@@ -11,6 +11,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
+### Fixed
+
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+
+## [4.10.0] - 2026-10-01
+
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Do Your Own Research front page block that shows only the current season
+
+### Changed
+
+- If I Speak category archive redesign: new hero and a text-only episode grid
+- `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
+### Fixed
+
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
+
 ## [4.9.0] - 2026-09-25
 
 ### Added

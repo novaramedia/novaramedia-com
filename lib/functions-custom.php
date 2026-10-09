@@ -99,6 +99,45 @@ function nm_get_netlify_url() {
 }
 
 /**
+ * Category slugs of serial (capsule) podcasts. Their archives list every
+ * episode oldest first, and their single posts redirect to the archive
+ * anchor. Order stays by date: bonus posts have no episode number.
+ *
+ * @return string[]
+ */
+function nm_get_serial_podcast_slugs() {
+  return array( 'foreign-agent', 'committed', 'death-in-westminster' );
+}
+
+/**
+ * Season and episode label for a post, e.g. "Season 2 Episode 3".
+ *
+ * The episode label override (bonus, trailer, credits) replaces the episode
+ * part only, so the season stays: "Season 2 Trailer". Empty when nothing is
+ * set.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function nm_get_season_episode_label( $post_id ) {
+  $season        = (int) get_post_meta( $post_id, '_nm_season', true );
+  $episode       = (int) get_post_meta( $post_id, '_nm_episode', true );
+  $episode_label = trim( (string) get_post_meta( $post_id, '_nm_episode_label', true ) );
+
+  $parts = array();
+  if ( $season > 0 ) {
+    $parts[] = 'Season ' . $season;
+  }
+  if ( $episode_label !== '' ) {
+    $parts[] = $episode_label;
+  } elseif ( $episode > 0 ) {
+    $parts[] = 'Episode ' . $episode;
+  }
+
+  return implode( ' ', $parts );
+}
+
+/**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
  * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
  *
@@ -109,8 +148,7 @@ function nm_serial_podcast_redirect() {
     return;
   }
   global $post;
-  // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
+  $serial_slugs = nm_get_serial_podcast_slugs();
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,

@@ -150,7 +150,7 @@ if ( empty( $button_label ) ) {
             $is_last_card = $cortado_query->current_post === $cortado_query->post_count - 1;
 
             get_template_part(
-              'partials/post-layouts/archive-post-no-thumbnail',
+              'partials/post-layouts/archive-post-opinion',
               null,
               array(
                 'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8' . ( $is_last_card ? '' : ' mb-s-4 mb-l-4' ),

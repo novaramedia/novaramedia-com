@@ -58,7 +58,7 @@ function nm_is_production() {
  *
  * @return string Version string for wp_enqueue_*.
  */
-function nm_asset_version( $path, $theme_version ) {
+function nm_asset_version_for_environment( $path, $theme_version ) {
   if ( nm_is_production() ) {
     return $theme_version;
   }

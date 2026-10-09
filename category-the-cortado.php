@@ -121,7 +121,7 @@ get_header();
         the_post();
 
         get_template_part(
-          'partials/post-layouts/archive-post-no-thumbnail',
+          'partials/post-layouts/archive-post-opinion',
           null,
           array(
             'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5 mb-s-4',

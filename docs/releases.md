@@ -1,7 +1,8 @@
 # Release Flows
 
-Two ways code reaches production. Both end in a PR to `master`; merging that PR
-is the deploy trigger. A human always merges — scripts only create PRs.
+Two ways code reaches production. Both end in a PR to `master`. A human always
+merges — scripts only create PRs. Merging does **not** deploy: production is
+updated by a separate manual step (see [Deploying](#deploying)).
 
 Versioning is semver. `scripts/release.sh` wraps `release-it`, which bumps
 `package.json`, converts the `[Unreleased]` section of `CHANGELOG.md` into the
@@ -19,7 +20,8 @@ git checkout development
 
 - Must run from a clean `development` (no uncommitted or untracked files).
 - Creates PR `development` → `master` titled `Release: x.y.z`.
-- Merge the PR to deploy, then work through `docs/post-deploy-checklist.md`.
+- Merge the PR, [deploy to production](#deploying), then work through
+  `docs/post-deploy-checklist.md`.
 
 ## Hotfix release (patch)
 
@@ -36,7 +38,8 @@ git commit ...
 
 - `--hotfix` requires a `hotfix/*` branch and forces a patch increment.
 - Creates PR `hotfix/<short-name>` → `master` titled `Release: x.y.z (hotfix)`.
-- Merge the PR to deploy, then work through `docs/post-deploy-checklist.md`.
+- Merge the PR, [deploy to production](#deploying), then work through
+  `docs/post-deploy-checklist.md`.
 
 ### Back-merge (required, do not skip)
 
@@ -58,3 +61,34 @@ If `development` has nothing unreleased (check with
 `git log origin/master..origin/development`), the normal flow ships the same
 code with less ceremony — a hotfix branch buys nothing. Hotfixes exist for when
 `development` is ahead with work you don't want to ship yet.
+
+## Deploying
+
+### Production — manual
+
+Production is updated by hand with the WP Pusher plugin on the production site.
+After the release PR merges, open WP Pusher in the production WP admin and update
+the theme, which pulls `master`. Nothing deploys production automatically, so a
+merged release is not live until this step runs.
+
+`dist/` is committed, so the pull ships built assets as-is — there is no build on
+the server.
+
+### Staging — GitHub Actions
+
+Staging is deployed only by GitHub Actions, over SSH + git checkout on the Kinsta
+staging environment. WP Pusher is not used on staging.
+
+- `deploy-staging.yml` — manual `workflow_dispatch`; deploys any branch or SHA and
+  leaves it in place.
+- `playwright.yml` — deploys each PR commit to staging to run the e2e tests.
+
+Both share the `kinsta-staging` concurrency group. See
+[`.github/workflows/README.md`](../.github/workflows/README.md).
+
+### Planned
+
+Production deploys move to the same GitHub Actions approach as staging, triggered
+by pushes to `master`, and the release notification moves to the public channel
+once it reports a deploy rather than a merge. See
+[`docs/plans/production-ci-deploy.md`](plans/production-ci-deploy.md).

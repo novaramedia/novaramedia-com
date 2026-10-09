@@ -30,7 +30,7 @@ function scripts_and_styles_method() {
     'site-js',
     $site_js,
     array(),
-    nm_asset_version( '/dist/main.js', $theme_version ),
+    nm_asset_version_for_environment( '/dist/main.js', $theme_version ),
     array(
       'in_footer' => true,
     )
@@ -49,7 +49,7 @@ function scripts_and_styles_method() {
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
   wp_enqueue_script( 'site-js' ); // Version and footer placement come from the registration above.
 
-  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version( '/dist/main.css', $theme_version ) );
+  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version_for_environment( '/dist/main.css', $theme_version ) );
 
   wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 
@@ -144,6 +144,7 @@ get_template_part( 'lib/meta/meta-boxes-category-novara-live' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
 get_template_part( 'lib/meta/meta-boxes-category-dyor' );
 get_template_part( 'lib/meta/meta-boxes-post-dyor' );
+get_template_part( 'lib/meta/meta-boxes-post-episode' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-newsletter' );
@@ -152,6 +153,7 @@ get_template_part( 'lib/meta/meta-boxes-posttype-event' );
 get_template_part( 'lib/theme-options/theme-options' );
 get_template_part( 'lib/theme-options/options-front-page' );
 get_template_part( 'lib/theme-options/options-fundraising' );
+get_template_part( 'lib/theme-options/options-products' );
 
 /**
  * Initialize CMB2 meta boxes.
