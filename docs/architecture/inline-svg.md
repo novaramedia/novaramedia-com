@@ -36,7 +36,7 @@ Set the path fill to `currentColor` in the **source** file, then set `color` on 
   color: var(--color-ochre);
 }
 
-.category-archive__the-cortado__wordmark {
+.category-archive--the-cortado .category-archive__wordmark {
   color: var(--color-gray-base);
 }
 ```
@@ -70,7 +70,7 @@ overflow a narrow column.
 column like a heading, width is the point and a rem height would cap it:
 
 ```css
-.category-archive__the-cortado__wordmark svg {
+.category-archive--the-cortado .category-archive__wordmark svg {
   display: block;
   width: 100%;
   height: auto;

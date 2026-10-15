@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Branded category archive classes follow BEM: `category-archive--<brand>` modifier on the archive plus flat elements (`category-archive__wordmark`, `__presenters`, `__copy`…) replace the nested `category-archive__<brand>__<element>` names on the acfm, If I Speak, The Cortado and Downstream archives. Naming only, no visual change
+
 ### Fixed
 
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry

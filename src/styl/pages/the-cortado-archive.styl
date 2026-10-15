@@ -5,7 +5,7 @@
 
 // Wordmark is inlined (nm_get_file) so its currentColor fill is set here. As the hero's
 // display element it is sized by width, not height — see docs/architecture/inline-svg.md.
-.category-archive__the-cortado__wordmark
+.category-archive--the-cortado .category-archive__wordmark
   color: var(--color-gray-base)
 
   svg
@@ -13,24 +13,24 @@
     width: 100%
     height: auto
 
-.category-archive__the-cortado__presenters
+.category-archive--the-cortado .category-archive__presenters
   width: 100%
   max-width: 678px
   margin: 0 auto
 
 // The shared card partial supplies the rules and avatar rings; the brand picks their
 // colour. .ui-border is the class that draws the ring, so that is the hook.
-.category-archive__the-cortado__past-issues
+.category-archive--the-cortado .category-archive__past-issues
   .ui-border-top, .ui-border
     --ui-border-color: var(--color-ochre)
 
 // Signup-band copy is serif with the presenter names (the bold spans) in sans, as on the
 // inline signup block and the front-page block. No utility covers a descendant face switch.
-.category-archive__the-cortado__copy strong
+.category-archive--the-cortado .category-archive__copy strong
   font-family: var(--font-family-sans)
 
 // Footer row: pagination left, newsletters link right; on mobile both stack centred.
 // No responsive text-align utility exists.
 @media screen and (max-width: $breakpoint-s)
-  .category-archive__the-cortado__footer-row .grid-item
+  .category-archive--the-cortado .category-archive__footer-row .grid-item
     text-align: center
