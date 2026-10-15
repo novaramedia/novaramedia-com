@@ -4,6 +4,11 @@
 # WordPress install or database is needed). Test tooling is a separate Composer
 # project under tests/unit/ on purpose: the theme's own vendor/ is committed
 # and deployed by git pull, and must never receive dev dependencies.
+#
+# That split is a stopgap for the current deploy mechanism. Once production
+# deploys from CI with a `composer install --no-dev` step
+# (docs/plans/production-ci-deploy.md), vendor/ can stop being committed and
+# the test tooling can move to require-dev in the root composer.json.
 
 name: PHP unit tests
 
@@ -30,7 +35,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # 8.2 is the floor PHPUnit 11 supports; 8.4 matches local DevKinsta.
+        # 8.2 is what Kinsta runs in production (nm-kinsta-ops runbook);
+        # 8.4 matches local DevKinsta and previews the next PHP cycle.
+        # Drop 8.2 once production moves off it.
         php: ['8.2', '8.4']
 
     steps:

@@ -2,7 +2,7 @@
 
 ## PHP Unit Tests
 
-The `php-unit.yml` workflow runs the PHPUnit suite in `tests/unit/` on pull requests and pushes to `development` that touch PHP files or the suite. It needs no secrets and no WordPress install: Brain Monkey stubs WordPress functions. Test tooling is installed into `tests/unit/vendor/` only; the theme's committed `vendor/` is never touched. Runs on PHP 8.2 and 8.4. See `docs/testing/testing.md`.
+The `php-unit.yml` workflow runs the PHPUnit suite in `tests/unit/` on pull requests and pushes to `development` that touch PHP files or the suite. It needs no secrets and no WordPress install: Brain Monkey stubs WordPress functions. Test tooling is installed into `tests/unit/vendor/` only; the theme's committed `vendor/` is never touched. That split is a stopgap for the git-pull deploy: once production deploys from CI with a `composer install --no-dev` step (`docs/plans/production-ci-deploy.md`), the tooling moves to the root `composer.json`. Runs on PHP 8.2 (production) and 8.4 (local DevKinsta, next PHP cycle). See `docs/testing/testing.md`.
 
 ## Playwright Tests
 

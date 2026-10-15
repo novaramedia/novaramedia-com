@@ -203,9 +203,11 @@ Run locally:
 npm run test:php
 ```
 
-That installs the tooling into `tests/unit/vendor/` (ignored) on first run and then runs the suite. CI runs the same on PHP 8.2 and 8.4 (`.github/workflows/php-unit.yml`).
+That installs the tooling into `tests/unit/vendor/` (ignored) on first run and then runs the suite. CI runs the same on PHP 8.2 (production) and 8.4 (local DevKinsta, next PHP cycle) in `.github/workflows/php-unit.yml`; drop 8.2 from the matrix once production moves off it.
 
-**Why a separate Composer project.** The theme's root `vendor/` and `composer.lock` are committed and deployed by `git pull`; a root `composer install` rewrites the committed autoloader files, and dev dependencies there would ship to Kinsta. `tests/unit/composer.json` keeps PHPUnit and Brain Monkey out of that tree entirely. Never add test tooling to the root `composer.json`.
+**Why a separate Composer project.** The theme's root `vendor/` and `composer.lock` are committed and deployed by `git pull`; a root `composer install` rewrites the committed autoloader files, and dev dependencies there would ship to Kinsta. `tests/unit/composer.json` keeps PHPUnit and Brain Monkey out of that tree entirely. Never add test tooling to the root `composer.json` while `vendor/` is committed.
+
+This is a stopgap for the git-pull deploy, not the end state. When production deploys from CI with a `composer install --no-dev` step ([plan](../plans/production-ci-deploy.md)), `vendor/` stops being committed, PHPUnit and Brain Monkey move to `require-dev` in the root `composer.json`, and `tests/unit/` keeps only the suite.
 
 **Writing a test.** Extend `NM\Tests\TestCase`, load the file under test once in `setUpBeforeClass()` with `self::requireThemeFile( 'lib/whatever.php' )`, and stub what the code calls:
 
