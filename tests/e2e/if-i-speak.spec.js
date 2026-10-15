@@ -45,8 +45,8 @@ test.describe('If I Speak archive', () => {
     await expect(
       hero.getByRole('heading', { level: 1, name: 'If I Speak' })
     ).toBeVisible();
-    // The presenters photo is the hero's only <img>; the wordmark SVG also
-    // exposes the img role, so the element type is what disambiguates.
+    // The presenters photo is the hero's only <img> element; the wordmark is
+    // an inline <svg>, so an element locator picks the photo alone.
     await expect(hero.locator('img')).toBeVisible();
     await checkImages(page, { scope: hero });
   });

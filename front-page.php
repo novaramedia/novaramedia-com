@@ -22,7 +22,7 @@ get_header();
     ));
 
     // Editable layout: banners + product blocks, ordered in Front Page > Layout.
-    // Falls back to the historic order when no layout has been saved. The shared
+    // Renders no sections when no layout has been saved. The shared
     // context is passed to every product block; only those that need it use it
     // (e.g. the highlight section dedupes against the above-the-fold posts).
     // Normalise to arrays: get_above_the_fold_featured_post_ids() returns false
