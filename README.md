@@ -6,111 +6,33 @@ novaramedia.com
 
 ### How to: Testing
 
-This project uses [Cypress](https://www.cypress.io/) for end-to-end testing of the WordPress theme.
+End-to-end smoke tests run on [Playwright](https://playwright.dev/). Full guide: [docs/testing/testing.md](docs/testing/testing.md).
 
-#### Running Tests Locally
+#### Running tests locally
 
-1. **Install dependencies** (if not already done):
-
-   ```bash
-   npm install
-   ```
-
-2. **Run tests in headless mode** (same as CI):
-
-   ```bash
-   npm test
-   ```
-
-3. **Run tests with interactive UI**:
-
-   ```bash
-   npm run cy:open
-   ```
-
-   This opens the Cypress Test Runner where you can:
-   - See tests run in a real browser
-   - Debug failing tests
-   - Time-travel through test steps
-
-4. **Run tests in specific browsers**:
-   ```bash
-   npm run test:chrome    # Run in Chrome
-   npm run test:firefox   # Run in Firefox
-   npm run test:headed    # Run with browser visible
-   ```
-
-#### Test Configuration
-
-- Tests run against production (`https://novaramedia.com`) by default
-- To test against a different URL, set the `CYPRESS_BASE_URL` environment variable:
-  ```bash
-  CYPRESS_BASE_URL=https://staging.novaramedia.com npm test
-  ```
-
-#### CI/CD Integration
-
-- Tests run automatically on all Pull Requests via GitHub Actions
-- PRs **cannot be merged** if tests fail
-- Test results and videos are available as artifacts in the GitHub Actions run
-- See `.github/workflows/cypress.yml` for CI configuration
-
-#### Test Coverage
-
-Current test suites cover:
-
-**Priority 1 (Core Tests):**
-
-- **Homepage** - Main landing page loads with key elements
-- **Support Page** - Donation/support page functionality
-- **Single Post (Article)** - Individual article display and navigation
-
-**Priority 2 (Secondary Views):**
-
-- **Single Post (Video)** - Video category posts with media player
-- **Single Post (Audio)** - Audio/podcast posts with audio player
-- **About Page** - Organizational information and content
-- **Jobs Page** - Job listings and career information
-- **Novara Live Archive** - Category archive with post listings
-
-Each test validates:
-
-- Page loads without errors
-- Critical DOM elements are present
-- Responsive behavior across mobile/tablet/desktop
-- No broken images in main content
-- No console errors (excluding third-party scripts)
-
-#### Troubleshooting
-
-**Cypress binary not found:**
+Tests need a site running this theme's templates, so point them at your DevKinsta site (or staging):
 
 ```bash
-npx cypress install
-npm run cy:verify
+npm install
+npx playwright install chromium                                    # first run only
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm test           # headless, same as CI
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:headed
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:ui    # interactive UI mode
 ```
 
-**Tests timeout:**
+Without `PLAYWRIGHT_BASE_URL` the suite runs against production.
 
-- Check your internet connection
-- Verify the base URL is accessible
-- Increase timeout in `cypress.config.js` if needed
+#### CI
 
-**Test failures:**
+Pull requests to `development`, `master` or `main` deploy their commit to Kinsta staging and run the suite there (`.github/workflows/playwright.yml`). Fork PRs are skipped, as are PRs that only touch Markdown or `.github/`. On failure the HTML report and traces are attached to the run as an artifact: download it and open with `npx playwright show-report <dir>`.
 
-- Review screenshots in `cypress/screenshots/`
-- Watch videos in `cypress/videos/`
-- Run tests with `npm run cy:open` for interactive debugging
+#### Coverage
 
-For more information, see the [Cypress documentation](https://docs.cypress.io/).
+Ten specs: homepage, support, about and jobs pages, the Novara Live archive, single article, audio and video posts, The Cortado (archive, newsletter redirect and front page block), and brand vanity URLs. Each page spec checks that the page loads, the critical `data-testid` landmarks render, the layout holds at mobile, tablet and desktop widths, and no theme-owned console errors fire. Third-party embeds are blocked during tests so no run waits on SoundCloud or YouTube.
 
 ### Howto: release
 
-- Pull `development`
-- `npm run release`
-- Don't commit, tag or push in release-it process
-- After post release-it scripts are run commit in format `Build: x.x.x`
-- Create PR to master branch in format `Version x.x.x` with changelog entries as description
+Run `./scripts/release.sh [major|minor|patch] --pr` from a clean `development`. It bumps the version, converts `[Unreleased]` in the changelog, builds, commits `Build: x.y.z` and opens a `Release: x.y.z` PR to `master`; merging that PR deploys. Hotfixes and the required back-merge are covered in [`docs/releases.md`](docs/releases.md).
 
 ### Semver
 

@@ -82,7 +82,7 @@ $latest_others_args          = array(
                   array(
                     'post_id'           => $latest_featured_posts_ids[0],
                     'show_related'      => false,
-                    'has_huge_headline' => false,
+                    'allow_huge_headline' => false,
                   )
                 );
               }

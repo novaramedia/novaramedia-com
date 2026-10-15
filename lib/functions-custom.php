@@ -99,21 +99,43 @@ function nm_get_netlify_url() {
 }
 
 /**
- * Redirects /committed to /category/committed for SEO purposes.
+ * Category slugs of serial (capsule) podcasts. Their archives list every
+ * episode oldest first, and their single posts redirect to the archive
+ * anchor. Order stays by date: bonus posts have no episode number.
  *
- * @return void
- * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
+ * @return string[]
  */
-function redirect_committed_custom_url() {
-  if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-        $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-    if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
-            exit;
-    }
-  }
+function nm_get_serial_podcast_slugs() {
+  return array( 'foreign-agent', 'committed', 'death-in-westminster' );
 }
-add_action( 'template_redirect', 'redirect_committed_custom_url' );
+
+/**
+ * Season and episode label for a post, e.g. "Season 2 Episode 3".
+ *
+ * The episode label override (bonus, trailer, credits) replaces the episode
+ * part only, so the season stays: "Season 2 Trailer". Empty when nothing is
+ * set.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function nm_get_season_episode_label( $post_id ) {
+  $season        = (int) get_post_meta( $post_id, '_nm_season', true );
+  $episode       = (int) get_post_meta( $post_id, '_nm_episode', true );
+  $episode_label = trim( (string) get_post_meta( $post_id, '_nm_episode_label', true ) );
+
+  $parts = array();
+  if ( $season > 0 ) {
+    $parts[] = 'Season ' . $season;
+  }
+  if ( $episode_label !== '' ) {
+    $parts[] = $episode_label;
+  } elseif ( $episode > 0 ) {
+    $parts[] = 'Episode ' . $episode;
+  }
+
+  return implode( ' ', $parts );
+}
 
 /**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
@@ -126,8 +148,7 @@ function nm_serial_podcast_redirect() {
     return;
   }
   global $post;
-  // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
+  $serial_slugs = nm_get_serial_podcast_slugs();
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,
@@ -230,6 +251,12 @@ function get_above_the_fold_featured_post_ids() {
   // Normalize all IDs to integers for strict comparison
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
   $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
+
+  // A saved id can outlive the published post it pointed at: unpublished, scheduled back
+  // into the future, or trashed after being featured. Treat those slots as unset so the
+  // fallback below fills them, rather than putting non-public content on the front page
+  // behind a dead link.
+  $featured_posts_ids = array_map( function( $id ) { return nm_is_published( $id ) ? $id : 0; }, $featured_posts_ids );
 
   for ( $i = 0; $i < 8; $i++ ) {
 
@@ -467,6 +494,27 @@ function get_the_top_level_category( $post_id = null ) {
 }
 
 /**
+ * Font-size classes for a lead headline, scaled by title length.
+ *
+ * The cadence of the front page's primary above-the-fold slot, shared so other lead
+ * headlines (the Cortado front-page block and archive) scale the same way: a title of up
+ * to 14 words gets the huge size, stepping down at the m breakpoint; a longer one stays at
+ * the smaller size throughout.
+ *
+ * @param string  $title      Post title.
+ * @param boolean $allow_huge False to force the smaller size whatever the length.
+ *
+ * @return string Space-separated font-size classes.
+ */
+function nm_get_lead_headline_size_classes( $title, $allow_huge = true ) {
+  if ( $allow_huge && str_word_count( $title ) <= 14 ) {
+    return 'font-size-15 font-size-m-13';
+  }
+
+  return 'font-size-13';
+}
+
+/**
  * Does the post have set the Articles category? or is it a child of the Articles category?
  * Defaults to current $post context
  *
@@ -504,6 +552,24 @@ function nm_is_article( $post_id = null ) {
   }
 
   return false;
+}
+
+/**
+ * Is the post live and publicly visible?
+ * Guards ID-driven renderers, where a saved post id can outlive the published post it
+ * pointed at — unpublished, scheduled back into the future, or trashed. Returns false
+ * for a missing or deleted post too, since get_post_status() gives false for those.
+ *
+ * @param integer $post_id Post ID.
+ *
+ * @return Boolean
+ */
+function nm_is_published( $post_id ) {
+  if ( empty( $post_id ) ) {
+    return false;
+  }
+
+  return get_post_status( $post_id ) === 'publish';
 }
 
 /**

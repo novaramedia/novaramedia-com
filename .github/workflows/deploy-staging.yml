@@ -1,10 +1,10 @@
 # Deploy Ref to Staging
 #
 # Manually deploy a branch or commit SHA to Kinsta staging for review.
-# Unlike the Cypress workflow, this does NOT reset staging afterwards —
+# Unlike the Playwright workflow, this does NOT reset staging afterwards —
 # the deployed revision persists until another deploy replaces it.
 #
-# Uses the same secrets as the Cypress workflow — no additional setup needed.
+# Uses the same secrets as the Playwright workflow — no additional setup needed.
 
 name: Deploy to Staging
 

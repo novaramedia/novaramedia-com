@@ -11,22 +11,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Required post meta validation now covers the block editor (was classic editor only)
 
+### Fixed
+
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+
+## [4.10.0] - 2026-10-01
+
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Do Your Own Research front page block that shows only the current season
+
 ### Changed
 
+- If I Speak category archive redesign: new hero and a text-only episode grid
+- `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
+### Fixed
+
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
+
+## [4.9.0] - 2026-09-25
+
+### Added
+
+- The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block
+- Newsletter signups now send which form was used, the page, the referring site and any campaign tags, so we can start recording where subscribers come from
+
+### Changed
+
+- Downstream front page block sits in a white box, matching the other product blocks
+- Off-white page background across the whole site; newsletter signups on it are always boxed, white ones included
+- End-to-end tests run on Playwright instead of Cypress, with third-party embeds blocked during tests so page loads no longer wait on SoundCloud or YouTube
+- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
+- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
 - Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
 - Job posting structured data locations reduced to city and postcode-district level, and Leeds office moved to Mabgate Mills
+- `/committed` serves the Committed archive in place, like the other branded URLs, instead of redirecting to its category URL (#606)
 
 ### Removed
 
+- Cypress test runner, specs and CI workflow
 - Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
 
 ### Fixed
 
+- Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
 - Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+- Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
+- Pagination on product vanity URLs — `/downstream/page/2/` and the equivalent on every other branded path 404'd instead of serving page two (#607)
+- Support form's frequency and amount controls are announced with their own labels by screen readers; duplicate IDs had pointed them at the wrong ones (#609)
 
 ### Security
 
+- Dev dependency bumps clearing the open Dependabot alerts for sharp, svgo, js-yaml, fast-uri and adm-zip. The remaining extract-zip alerts have no patched release and only reach `@wordpress/scripts` test tooling
 - Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
+
+## [4.8.1] - 2026-08-19
+
+### Added
+
+- Hotfix release flow: `./scripts/release.sh --hotfix` releases a patch from a `hotfix/*` branch cut from master (documented in `docs/releases.md`)
+
+### Fixed
+
+- Standfirst no longer required on Novara Live posts
 
 ## [4.8.0] - 2026-07-27
 

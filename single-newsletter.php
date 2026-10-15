@@ -62,7 +62,7 @@ if ( have_posts() ) {
           </div>
           <?php
           if ( $mailchimp_key ) {
-            render_mailchimp_signup_form( $mailchimp_key, 'white', 'black' );
+            render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', 'Sign up', 'newsletter-page' );
           }
           ?>
         </div>

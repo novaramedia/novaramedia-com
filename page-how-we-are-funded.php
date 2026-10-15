@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content" class="background-gray-base pb-5">
+<main id="main-content" class="pb-5">
 <?php
 if ( have_posts() ) {
   while ( have_posts() ) {

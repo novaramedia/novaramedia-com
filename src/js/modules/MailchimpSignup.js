@@ -2,6 +2,7 @@
 /* global */
 
 import $ from 'jquery';
+import getSignupAttribution from '../functions/getSignupAttribution.js';
 
 /**
  * MailchimpSignup class follows convention of module classes.
@@ -32,7 +33,9 @@ export class MailchimpSignup {
       $form.on('submit', (event) => {
         event.preventDefault();
 
-        const data = $form.serialize();
+        const data = [$form.serialize(), $.param(getSignupAttribution())]
+          .filter(Boolean)
+          .join('&');
 
         $form.addClass('email-signup__form--processing');
         $formInputs.prop('disabled', true);
