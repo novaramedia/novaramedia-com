@@ -32,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
+    "@jsquash/oxipng": "^2.3.0",
     "@playwright/test": "^1.62.1",
     "@release-it/keep-a-changelog": "^8.0.0",
     "@wordpress/scripts": "^35.0.0",
