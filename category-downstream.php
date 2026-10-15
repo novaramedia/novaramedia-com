@@ -35,7 +35,7 @@ if ( ! empty( $newsletter ) ) {
 
 $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
 ?>
-<main id="main-content" class="category-archive category-archive__downstream">
+<main id="main-content" class="category-archive category-archive--downstream">
   <?php // Intro box: boxed-section structure (docs/architecture/boxed-sections.md) — the container is the row, the box is the one grid-row. ?>
   <section class="container mt-4 mb-4">
     <div class="grid-item is-xxl-24">
