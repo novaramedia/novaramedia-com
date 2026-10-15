@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Production image build runs a lossless oxipng pass (WebAssembly, no binary download) on every PNG and ships the smallest of quantised, lossless and source bytes, so a PNG that quantises larger than its source no longer ships unoptimised. `src/img/` holds the original files again (32 pre-optimised copies restored from history); every shipped raster is the same size or smaller than before, 133 KB less in total
+
 ### Fixed
 
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
