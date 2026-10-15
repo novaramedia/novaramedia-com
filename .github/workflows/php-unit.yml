@@ -1,0 +1,51 @@
+# PHP unit tests
+#
+# Runs the PHPUnit suite in tests/unit/ (Brain Monkey stubs WordPress, so no
+# WordPress install or database is needed). Test tooling is a separate Composer
+# project under tests/unit/ on purpose: the theme's own vendor/ is committed
+# and deployed by git pull, and must never receive dev dependencies.
+
+name: PHP unit tests
+
+on:
+  pull_request:
+    paths:
+      - '**.php'
+      - 'tests/unit/**'
+      - '.github/workflows/php-unit.yml'
+  push:
+    branches:
+      - development
+    paths:
+      - '**.php'
+      - 'tests/unit/**'
+      - '.github/workflows/php-unit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 8.2 is the floor PHPUnit 11 supports; 8.4 matches local DevKinsta.
+        php: ['8.2', '8.4']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer
+
+      - name: Install test tooling (tests/unit only)
+        run: composer --working-dir=tests/unit install --no-interaction --prefer-dist --no-progress
+
+      - name: Run PHPUnit
+        run: tests/unit/vendor/bin/phpunit -c tests/unit/phpunit.xml

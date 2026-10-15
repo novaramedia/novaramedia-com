@@ -8,6 +8,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "playwright test",
+    "test:php": "composer --working-dir=tests/unit install --no-interaction --quiet && tests/unit/vendor/bin/phpunit -c tests/unit/phpunit.xml",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "dev": "webpack --mode=development",

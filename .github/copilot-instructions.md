@@ -151,6 +151,8 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 
 Run `npm run build` to verify JS/CSS changes compile without errors.
 
+PHP logic in `lib/` has a PHPUnit suite in `tests/unit/` (`npm run test:php`; Brain Monkey stubs WordPress, no install needed). A change to a `lib/` function should come with a test in `tests/unit/lib/`. Never add test tooling to the root `composer.json`: the theme's `vendor/` is committed and deployed.
+
 End-to-end smoke tests use Playwright: specs in `tests/e2e/`, run with `npm test` against `PLAYWRIGHT_BASE_URL`. Import `test`/`expect` from `tests/e2e/helpers/fixtures.js` (embed blocking + console-error collector) and navigate with `gotoFresh`. Select elements by `data-testid`. Full guide in `docs/testing/testing.md`.
 
 ## Development Notes

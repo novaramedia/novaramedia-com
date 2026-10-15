@@ -12,7 +12,7 @@ A smoke-test layer, not a behaviour suite. Each spec checks that a page type:
 - has no broken images in the main content (where checked)
 - logs no console errors the theme is responsible for
 
-Deliberately out of scope: visual regression, complex interaction flows, unit tests (see the appendix of `docs/plans/archive/cypress-to-playwright.md` for the trigger to revisit) and the third-party services themselves.
+Deliberately out of scope: visual regression, complex interaction flows and the third-party services themselves. PHP logic has its own unit suite; see [PHP unit tests](#php-unit-tests) below.
 
 ## Layout
 
@@ -182,3 +182,39 @@ Ranked by regression risk, carried over from `docs/plans/archive/cypress-to-play
 7. Article page details: share link hrefs correctly encoded, related posts render when set
 8. Search results, 404 and pagination smoke coverage
 9. Accessibility smoke with `@axe-core/playwright` on the homepage and one single post
+
+## PHP unit tests
+
+A PHPUnit suite for the theme's PHP logic, mainly the helpers in `lib/`. No WordPress install or database: [Brain Monkey](https://giuseppe-mazzapica.gitbook.io/brain-monkey/) stubs WordPress functions and hooks per test, so a test runs in well under a second and in CI without secrets.
+
+```
+tests/unit/
+├── composer.json        # test tooling: phpunit, brain/monkey (separate project, see below)
+├── phpunit.xml          # bootstrap + suite config
+├── bootstrap.php        # defines NM_THEME_ROOT, loads the tooling autoloader
+├── TestCase.php         # base class: Brain Monkey setUp/tearDown, requireThemeFile()
+└── lib/
+    └── FunctionsUtilityTest.php
+```
+
+Run locally:
+
+```bash
+npm run test:php
+```
+
+That installs the tooling into `tests/unit/vendor/` (ignored) on first run and then runs the suite. CI runs the same on PHP 8.2 and 8.4 (`.github/workflows/php-unit.yml`).
+
+**Why a separate Composer project.** The theme's root `vendor/` and `composer.lock` are committed and deployed by `git pull`; a root `composer install` rewrites the committed autoloader files, and dev dependencies there would ship to Kinsta. `tests/unit/composer.json` keeps PHPUnit and Brain Monkey out of that tree entirely. Never add test tooling to the root `composer.json`.
+
+**Writing a test.** Extend `NM\Tests\TestCase`, load the file under test once in `setUpBeforeClass()` with `self::requireThemeFile( 'lib/whatever.php' )`, and stub what the code calls:
+
+```php
+Functions\when( 'wp_get_environment_type' )->justReturn( 'production' );   // stub a return
+Functions\expect( 'get_template_directory' )->never();                     // assert not called
+Actions\expectAdded( 'init' );                                             // hook registered at load
+```
+
+Good targets: pure helpers, option/meta formatting, rewrite and query logic, anything with branches. Not targets: template files and markup (Playwright covers those against staging), and code whose only job is to call WordPress.
+
+Mirror `lib/<file>.php` as `tests/unit/lib/<File>Test.php`. The repo's phpcs standard applies to tests; where a test must touch the filesystem, disable `WordPress.WP.AlternativeFunctions` at the top of that file with a one-line reason, as `FunctionsUtilityTest.php` does.

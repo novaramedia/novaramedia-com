@@ -1,5 +1,9 @@
 # GitHub Actions Workflows
 
+## PHP Unit Tests
+
+The `php-unit.yml` workflow runs the PHPUnit suite in `tests/unit/` on pull requests and pushes to `development` that touch PHP files or the suite. It needs no secrets and no WordPress install: Brain Monkey stubs WordPress functions. Test tooling is installed into `tests/unit/vendor/` only; the theme's committed `vendor/` is never touched. Runs on PHP 8.2 and 8.4. See `docs/testing/testing.md`.
+
 ## Playwright Tests
 
 The `playwright.yml` workflow runs the end-to-end smoke tests for the WordPress theme using Playwright.
