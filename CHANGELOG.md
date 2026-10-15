@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Required post meta validation now covers the block editor (was classic editor only), including the Novara Live exemption (4.8.1) and required-alongside (4.10.0) rules, which now run from one shared rule set in both editors
+
 ### Fixed
 
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
