@@ -27,6 +27,8 @@ import { validateField } from './core.js';
 import {
   scanFields,
   readField,
+  readSiblingTexts,
+  siblingIds,
   syncTinyMce,
   getLabel,
   addFailureHighlight,
@@ -79,7 +81,12 @@ const revalidate = () => {
 
   scanFields().forEach( ( el ) => {
     const field = readField( el );
-    const result = validateField( field, state.categories, getCategoryMap() );
+    const result = validateField(
+      field,
+      state.categories,
+      getCategoryMap(),
+      readSiblingTexts( field.rules.requiredWith )
+    );
 
     if ( result.valid || ! active ) {
       removeFailureHighlight( field.row );
@@ -143,12 +150,23 @@ const init = () => {
     }
   } );
 
-  // Live re-validation while typing in metabox fields. Capture phase so
-  // events inside the metabox area are seen regardless of jQuery handlers.
+  // Live re-validation while typing in metabox fields, or in a field that a
+  // required-with rule depends on (e.g. episode number for season). Capture
+  // phase so events inside the metabox area are seen regardless of jQuery
+  // handlers.
   document.addEventListener(
     'input',
     ( event ) => {
-      if ( event.target.matches && event.target.matches( '[data-validation], textarea.nm-validation-required' ) ) {
+      const target = event.target;
+
+      if ( ! target || ! target.matches ) {
+        return;
+      }
+
+      if (
+        target.matches( '[data-validation], textarea.nm-validation-required' ) ||
+        ( target.id && siblingIds().has( target.id ) )
+      ) {
         debouncedRevalidate();
       }
     },

@@ -60,3 +60,56 @@ test( 'word length and required can both fail', () => {
   );
   assert.equal( result.failures.length, 2 );
 } );
+
+// Rules added on development after this branch was cut (4.8.1 Novara Live
+// exemption, 4.10.0 required-with) and ported into the shared core here.
+
+test( 'exempt category: a required field is not required when an exempt term is active', () => {
+  const map = { 'novara-live': [ 7, 8 ] };
+  const rules = { required: true, notRequiredCategory: 'novara-live' };
+
+  const exempt = validateField( { value: '', text: '', rules }, [ 8 ], map );
+  assert.equal( exempt.valid, true );
+
+  const notExempt = validateField( { value: '', text: '', rules }, [ 1 ], map );
+  assert.equal( notExempt.valid, false );
+} );
+
+test( 'exempt category also overrides a category-conditional requirement', () => {
+  const map = { video: [ 12 ], 'novara-live': [ 8 ] };
+  const rules = { requiredCategory: 'video', notRequiredCategory: 'novara-live' };
+
+  const result = validateField( { value: '', text: '', rules }, [ 12, 8 ], map );
+  assert.equal( result.valid, true );
+} );
+
+test( 'required-with: required only when a named sibling field has a value', () => {
+  const rules = { requiredWith: [ 'nm_episode_number', 'nm_episode_label' ] };
+
+  const siblingFilled = validateField(
+    { value: '', text: '', rules }, [], {}, { nm_episode_number: '3', nm_episode_label: '' }
+  );
+  assert.equal( siblingFilled.valid, false );
+  assert.deepEqual( siblingFilled.failures, [ 'Meta field required' ] );
+
+  const siblingsEmpty = validateField(
+    { value: '', text: '', rules }, [], {}, { nm_episode_number: '   ', nm_episode_label: '' }
+  );
+  assert.equal( siblingsEmpty.valid, true );
+
+  const siblingsUnknown = validateField( { value: '', text: '', rules }, [], {} );
+  assert.equal( siblingsUnknown.valid, true );
+
+  const hasOwnValue = validateField(
+    { value: 'S2', text: 'S2', rules }, [], {}, { nm_episode_number: '3' }
+  );
+  assert.equal( hasOwnValue.valid, true );
+} );
+
+test( 'exempt category overrides required-with too', () => {
+  const map = { 'novara-live': [ 8 ] };
+  const rules = { requiredWith: [ 'nm_episode_number' ], notRequiredCategory: 'novara-live' };
+
+  const result = validateField( { value: '', text: '', rules }, [ 8 ], map, { nm_episode_number: '3' } );
+  assert.equal( result.valid, true );
+} );

@@ -15,6 +15,8 @@
  *   'data-validation-word-length' => 14,
  *   'data-validation-required' => 'true',
  *   'data-validation-required-category' => 'video',
+ *   'data-validation-not-required-category' => 'novara-live',
+ *   'data-validation-required-with' => 'nm_episode_number,nm_episode_label',
  * )
  *
  * Non-group wysiwyg fields render via wp_editor(), which does not output the
@@ -27,8 +29,12 @@
  * Rules: data-validation-required = must be non-empty (whitespace-only and
  * markup-only count as empty); data-validation-required-category = required
  * only when the post is in that category slug or a descendant;
- * data-validation-word-length = maximum word count. Drafts and previews
- * save freely; only publish-type saves validate.
+ * data-validation-required-with = required when any of the named fields (by
+ * element id, comma-separated) has a value; data-validation-not-required-
+ * category = never required when the post is in that category slug or a
+ * descendant, overriding the rules above; data-validation-word-length =
+ * maximum word count. Drafts and previews save freely; only publish-type
+ * saves validate. The rules run in src/admin/meta-validation/core.js.
  */
 
 /**

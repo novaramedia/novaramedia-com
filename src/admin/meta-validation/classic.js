@@ -12,6 +12,7 @@ import { validateField } from './core.js';
 import {
   scanFields,
   readField,
+  readSiblingTexts,
   syncTinyMce,
   getLabel,
   addFailureHighlight,
@@ -66,7 +67,12 @@ const checkValidation = ( event ) => {
 
   fields.forEach( ( el ) => {
     const field = readField( el );
-    const { valid, failures } = validateField( field, activeCategoryIds, categoryMap );
+    const { valid, failures } = validateField(
+      field,
+      activeCategoryIds,
+      categoryMap,
+      readSiblingTexts( field.rules.requiredWith )
+    );
 
     if ( valid ) {
       removeFailureHighlight( field.row );

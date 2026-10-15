@@ -72,12 +72,42 @@ export const readField = ( el ) => {
     rules.requiredCategory = el.dataset.validationRequiredCategory;
   }
 
+  if ( typeof el.dataset.validationNotRequiredCategory !== 'undefined' ) {
+    rules.notRequiredCategory = el.dataset.validationNotRequiredCategory;
+  }
+
+  // Comma-separated element ids (CMB2 uses the field id as the element id).
+  if ( typeof el.dataset.validationRequiredWith !== 'undefined' ) {
+    rules.requiredWith = el.dataset.validationRequiredWith
+      .split( ',' )
+      .map( ( id ) => id.trim() )
+      .filter( Boolean );
+  }
+
   if ( typeof el.dataset.validationWordLength !== 'undefined' ) {
     rules.wordLength = parseInt( el.dataset.validationWordLength, 10 );
   }
 
   return { el, row, value, text, rules };
 };
+
+/**
+ * Markup-stripped text of the fields a requiredWith rule names, keyed by
+ * element id. A missing element reads as empty, so a typo in the attribute
+ * fails safe (field not required) rather than blocking saves.
+ */
+export const readSiblingTexts = ( ids = [] ) =>
+  ids.reduce( ( texts, id ) => {
+    const el = document.getElementById( id );
+
+    texts[ id ] = el ? toText( el.value ) : '';
+
+    return texts;
+  }, {} );
+
+/** Every element id referenced by a requiredWith rule on the page. */
+export const siblingIds = ( root = document ) =>
+  new Set( scanFields( root ).flatMap( ( el ) => readField( el ).rules.requiredWith || [] ) );
 
 export const addFailureHighlight = ( row ) => {
   if ( row ) {
