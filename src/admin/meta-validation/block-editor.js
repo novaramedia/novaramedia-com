@@ -165,7 +165,7 @@ const init = () => {
 
       if (
         target.matches( '[data-validation], textarea.nm-validation-required' ) ||
-        ( target.id && siblingIds().has( target.id ) )
+        ( target.id && siblingIds().includes( target.id ) )
       ) {
         debouncedRevalidate();
       }

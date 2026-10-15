@@ -107,7 +107,7 @@ export const readSiblingTexts = ( ids = [] ) =>
 
 /** Every element id referenced by a requiredWith rule on the page. */
 export const siblingIds = ( root = document ) =>
-  new Set( scanFields( root ).flatMap( ( el ) => readField( el ).rules.requiredWith || [] ) );
+  scanFields( root ).flatMap( ( el ) => readField( el ).rules.requiredWith || [] );
 
 export const addFailureHighlight = ( row ) => {
   if ( row ) {
