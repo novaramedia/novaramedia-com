@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+- Make Links External editor button now applies to every link in the post when nothing is selected, and no longer skips links that already carry a `rel` such as nofollow
 
 ### Removed
 
