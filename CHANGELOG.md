@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- PHPUnit suite for theme PHP logic (`tests/unit/`, `npm run test:php`, CI on PHP 8.2 and 8.4): Brain Monkey stubs WordPress so tests need no install or database; tooling lives in a separate Composer project so the committed `vendor/` is untouched. First tests cover `nm_is_production` and `nm_asset_version_for_environment`
+- PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 
 ### Fixed
 
