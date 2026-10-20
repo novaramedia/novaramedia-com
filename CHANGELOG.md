@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
 - Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
 
+### Security
+
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals, with @wordpress/scripts 34→35. Dev-only; built theme and block assets unchanged
+
 ## [4.10.0] - 2026-10-01
 
 ### Added
