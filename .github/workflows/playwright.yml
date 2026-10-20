@@ -31,8 +31,9 @@ on:
       - development
     paths-ignore:
       - '.github/**'
-      - '.docs/**'
-      - '*.md'
+      - 'docs/**'
+      - '**/*.md'
+      - '.claude/**'
       - '.editorconfig'
       - '.gitignore'
   # Allow manual triggering
