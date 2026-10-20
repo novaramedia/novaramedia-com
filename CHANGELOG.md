@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
+### Changed
+
+- Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
+- Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
+
 ### Fixed
 
 - Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
