@@ -1,6 +1,6 @@
 # Testing
 
-End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on pull requests that touch theme code (Markdown-only and `.github/`-only changes are skipped, and fork PRs have no secrets) and can be run locally against any deployment of the theme.
+End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on non-draft pull requests that change what staging serves (see [CI](#ci)) and can be run locally against any deployment of the theme.
 
 ## Philosophy
 
@@ -89,7 +89,7 @@ Use instead of `page.goto`. Appends a unique `playwright_cache_bust` query strin
 
 Returns the first single-post permalink (`/YYYY/MM/DD/…`) from a category archive, or `null`. Excludes the serial-podcast categories (`foreign-agent`, `committed`) whose cards link to show pages rather than single posts. Keep that exclusion list in sync with `$serial_categories` in `lib/functions-hooks.php`.
 
-The single-post specs call it once per worker in `beforeAll` on a throwaway page, then every test navigates to the post itself with `gotoFresh`. If it returns `null` the spec skips.
+The single-post specs call it once per worker in `beforeAll` on a throwaway page, then the test navigates to the post itself with `gotoFresh`. If it returns `null` the spec skips.
 
 ### `checkImages(page, { scope, limit })`
 
@@ -112,32 +112,44 @@ const testResponsive = require('./helpers/testResponsive');
 const verifyCriticalPageStructure = require('./helpers/verifyCriticalPageStructure');
 
 test.describe('Page name', () => {
-  test.beforeEach(async ({ page }) => {
+  test('renders the page', async ({ page, consoleErrors }) => {
     await gotoFresh(page, '/page-url/');
-  });
 
-  test('should load successfully', async ({ page }) => {
-    expect(new URL(page.url()).pathname).toBe('/page-url/');
-    await expect(page).toHaveTitle(/.+/);
-  });
+    await test.step('loads successfully', async () => {
+      expect(new URL(page.url()).pathname).toBe('/page-url/');
+      await expect(page).toHaveTitle(/.+/);
+    });
 
-  test('should display critical page elements', async ({ page }) => {
-    await verifyCriticalPageStructure(page);
-  });
+    await test.step('displays critical page elements', async () => {
+      await verifyCriticalPageStructure(page);
+    });
 
-  test('should load without console errors', async ({ consoleErrors }) => {
-    expect(consoleErrors).toEqual([]);
-  });
+    await test.step('is responsive at different viewports', async () => {
+      await testResponsive(page);
+    });
 
-  test('should be responsive at different viewports', async ({ page }) => {
-    await testResponsive(page);
+    await test.step('loads without console errors', async () => {
+      expect(consoleErrors).toEqual([]);
+    });
   });
 });
 ```
 
+### One load per page
+
+Load each page once and run every check against it as a `test.step()`. Don't `gotoFresh` in `beforeEach` with one check per test.
+
+Each `gotoFresh` is an uncached WordPress render on staging and costs 3–4s; the checks themselves cost almost nothing. One test per check multiplied page loads by ten for the same coverage (audit in `docs/plans/playwright-speed.md`). Steps keep the report specific: a failure names the step that failed.
+
+- One `test()` per distinct URL. A spec covering several URLs (an archive plus a redirect, several categories) has one test each.
+- Read-only steps first, then interactions (clicks, toggles), then `testResponsive` (it changes the viewport), then the console-error step last so it covers the whole visit.
+- A failing step stops the rest of that test. That's accepted: fix the first failure, re-run.
+- A step that only applies when optional content is present calls `step.skip(condition, reason)` (the step callback's argument), not `test.skip()`, which would skip the whole page.
+- A check that needs its own setup before navigation (`test.use(...)`, `page.route(...)`) stays a separate test.
+
 Guidelines:
 
-- Tests are independent. Playwright runs them in parallel and in any order, so no test may rely on state another test left behind.
+- Tests are independent. Playwright runs them in parallel and in any order, so no test may rely on state another test left behind. Steps within one test share the page, in order.
 - Select with `data-testid` attributes added to the templates, not CSS classes. List the ids currently in the templates with `git grep -oh 'data-testid="[^"]*"' -- '*.php' | sort -u`.
 - Content changes daily. Assert shape (present, non-empty, matches a pattern) rather than specific text.
 - Let `expect` auto-wait. No `waitForTimeout`.
@@ -145,7 +157,13 @@ Guidelines:
 
 ## CI
 
-`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. Its `paths-ignore` skips PRs that only change Markdown, `.github/`, `.editorconfig` or `.gitignore`. Each run:
+`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. It only runs when the PR changes something that can affect the result: PHP, `style.css`, `dist/`, `blocks/`, `vendor/`, `tests/e2e/`, `playwright.config.js`, `package-lock.json` or the workflow itself. Staging serves committed `dist/`, so a `src/` change without a rebuild can't change the outcome.
+
+- **Drafts are skipped.** Marking a PR ready for review runs it.
+- **A new push cancels the PR's previous run.** The cancelled run's `always()` cleanup still resets staging to `development`, and the new run waits for that before deploying.
+- **Dependabot PRs are skipped**; `dependabot-build.yml` checks they build.
+
+Each run:
 
 1. Deploy the PR commit to Kinsta staging via SSH and `git checkout`
 2. Activate the theme with WP-CLI and clear the Kinsta cache (best-effort; `gotoFresh` covers a failed clear)
@@ -154,7 +172,7 @@ Guidelines:
 5. Upload `playwright-report/` and `test-results/` as an artifact on failure
 6. Reset staging to `development`
 
-The `kinsta-staging` concurrency group serialises runs so only one workflow touches staging at a time. Fork PRs are skipped because the secrets are unavailable. Deploy dominates the runtime (about three minutes); the test phase is parallelised.
+The job-level `kinsta-staging` concurrency group serialises runs so only one PR touches staging at a time; it never cancels. Fork PRs are skipped because the secrets are unavailable. The test phase dominates the runtime, not the deploy (a few seconds); see [One load per page](#one-load-per-page).
 
 ## Debugging a failure
 
