@@ -27,6 +27,15 @@ over SSH + git; production should work the same way.
    as a repository secret, not a code change to a channel ID.
 3. **Retire WP Pusher on production** once the workflow has shipped a release
    cleanly. Remove the plugin and any GitHub webhook pointing at it.
+4. **Run `composer install --no-dev` in the deploy and stop committing
+   `vendor/`.** Today `vendor/` and `composer.lock` are tracked because git
+   pull is the deploy. That is also why the PHPUnit tooling lives in a nested
+   Composer project under `tests/unit/` instead of the root `composer.json`
+   (see [`docs/testing/testing.md`](../testing/testing.md)). Once the workflow
+   installs dependencies on the server for both staging and production, drop
+   `vendor/` from git, move PHPUnit and Brain Monkey to root `require-dev`, and
+   keep `tests/unit/` for the suite only. Do this after the first clean CI
+   deploy, as its own change.
 
 ## Open questions
 
@@ -38,6 +47,8 @@ over SSH + git; production should work the same way.
 - The first run needs the production theme directory to be a git checkout (the
   staging workflow re-clones if `.git` is missing — confirm what WP Pusher leaves
   behind).
+- Composer on the Kinsta box: confirm `composer` is on the path over SSH and that
+  the CLI PHP version matches the site's, before target 4.
 
 ## Housekeeping found while documenting (2026-09-28)
 
