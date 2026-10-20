@@ -98,12 +98,15 @@ jobs:
       # DEPLOY TO STAGING VIA GIT PULL
       # ========================================
 
+      # In the container $HOME is /github/home, but OpenSSH reads the user
+      # known_hosts from the account's passwd home (/root), so host keys go in
+      # the system file instead. The key path is shell-expanded, so ~ is fine.
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
           chmod 600 ~/.ssh/kinsta_key
-          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> /etc/ssh/ssh_known_hosts 2>/dev/null
         env:
           KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
           KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
