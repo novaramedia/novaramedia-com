@@ -19,7 +19,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
   <section class="container mt-4 mb-4" data-testid="if-i-speak-hero">
     <div class="grid-item is-xxl-24">
       <div class="grid-row background-white ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
-        <div class="grid-item is-s-24 is-xxl-12 pb-4">
+        <div class="grid-item is-xxl-12 is-s-24 pb-4">
           <h1 class="category-archive__if-i-speak__wordmark mt-4 mb-5 mb-s-4" aria-label="If I Speak">
             <?php echo nm_get_file( '/dist/img/products/if-i-speak/if-i-speak-wordmark.svg' ); ?>
           </h1>
@@ -30,7 +30,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
           <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" data-testid="if-i-speak-subscribe" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
-        <div class="category-archive__if-i-speak__presenters grid-item is-s-24 is-xxl-12">
+        <div class="category-archive__if-i-speak__presenters grid-item is-xxl-12 is-s-24">
           <?php
           // 1080w for phones and tablets (photo is ~90% of the box below 759px, up to 3x);
           // 1717w for the half-width desktop column. The browser picks by width; avif/webp
@@ -59,7 +59,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
             'partials/post-layouts/archive-post-pure-text',
             null,
             array(
-              'grid-item-classes' => 'grid-item is-s-24 is-l-12 is-xxl-8 mb-5 mb-s-4',
+              'grid-item-classes' => 'grid-item is-xxl-8 is-l-12 is-s-24 mb-5 mb-s-4',
             )
           );
         }

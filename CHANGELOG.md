@@ -10,10 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
+- Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
 ### Fixed
 
+- Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+
+### Removed
+
+- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
 
 ## [4.10.0] - 2026-10-01
 

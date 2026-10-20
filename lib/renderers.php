@@ -288,9 +288,10 @@ function render_payment_icons( $payment_classes = '' ) {
  * @param string $variant Form display variant ('banner' or 'condensed').
  * @param bool $white_mobile_schedule Whether to use white background for mobile schedule buttons.
  * @param string $container_classes Additional CSS classes for the container element.
+ * @param string $placement Slug naming where this form sits (e.g. 'support-page-top'), passed to the donation app as `nm_form` so donations can be attributed to the form. Default is none.
  * @return void Outputs the HTML form directly.
  */
-function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '' ) {
+function render_support_form( $variant = 'banner', $white_mobile_schedule = false, $container_classes = '', $placement = '' ) {
   // Generate unique instance ID
   $instance = uniqid( 'support-form-' );
 
@@ -316,6 +317,9 @@ function render_support_form( $variant = 'banner', $white_mobile_schedule = fals
   <div class="support-section <?php echo esc_attr( $support_section_classes ); ?>">
     <form class="support-form background-red font-color-white ui-rounded-box ui-rounded-box--nested" action="https://donate.novaramedia.com/regular" id="<?php echo esc_attr( $instance ); ?>">
       <input type="hidden" name="amount" class="support-form__value-input" value="<?php echo esc_attr( $active_values->regular_low ); ?>" />
+      <?php if ( $placement ) { ?>
+      <input type="hidden" name="nm_form" value="<?php echo esc_attr( $placement ); ?>" />
+      <?php } ?>
       <?php render_support_form_schedule_buttons( $instance . '-mobile', 'support-form__schedule-mobile support-form__tab-schedule-buttons' ); ?>
       <div class="support-form__padding-container">
         <?php render_support_heading_and_text( $donation_mode, 'support-form__text-mobile' ); ?>
