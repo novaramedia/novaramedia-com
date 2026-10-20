@@ -1,6 +1,6 @@
 # Playwright CI speed
 
-Audit of where the staging Playwright job spends its time, and what to change. Nothing here is built yet beyond the Dependabot skip (below).
+Audit of where the staging Playwright job spends its time, and what to change. Sections 1 and 3 are built (see Done); section 2 is open.
 
 ## Where the time goes
 
@@ -56,8 +56,10 @@ Note: GitHub keeps only one *pending* run per concurrency group. With several PR
 
 ## Done
 
+- **Section 1**: every spec loads each page once, checks as `test.step()`. 116 tests became 21 with the same assertions; a local run against staging went from 270s to 48s (2 workers). The rule lives in `docs/testing/testing.md` under "One load per page".
+- **Section 3**: draft PRs skipped, superseded runs cancelled per PR (staging lock kept at job level), `paths` allowlist replaces `paths-ignore`.
 - Dependabot PRs skip the staging job (they get no SSH key, and a lockfile bump never changes committed `dist/`); `dependabot-build.yml` checks they still build instead.
 
 ## Order
 
-1 first (biggest win, no CI change). Then 2 and 3 together after discussion, since both change when CI runs.
+1 first (biggest win, no CI change), then 3. 2 only if the full suite is still too slow for routine pushes after 1; at ~21 page loads it may not be worth the split.

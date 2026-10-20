@@ -1,6 +1,6 @@
 # Testing
 
-End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on pull requests that touch theme code (Markdown-only and `.github/`-only changes are skipped, and fork PRs have no secrets) and can be run locally against any deployment of the theme.
+End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on non-draft pull requests that change what staging serves (see [CI](#ci)) and can be run locally against any deployment of the theme.
 
 ## Philosophy
 
@@ -157,7 +157,13 @@ Guidelines:
 
 ## CI
 
-`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. Its `paths-ignore` skips PRs that only change Markdown, `.github/`, `.editorconfig` or `.gitignore`. Each run:
+`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. It only runs when the PR changes something that can affect the result: PHP, `style.css`, `dist/`, `blocks/`, `vendor/`, `tests/e2e/`, `playwright.config.js`, `package-lock.json` or the workflow itself. Staging serves committed `dist/`, so a `src/` change without a rebuild can't change the outcome.
+
+- **Drafts are skipped.** Marking a PR ready for review runs it.
+- **A new push cancels the PR's previous run.** The cancelled run's `always()` cleanup still resets staging to `development`, and the new run waits for that before deploying.
+- **Dependabot PRs are skipped**; `dependabot-build.yml` checks they build.
+
+Each run:
 
 1. Deploy the PR commit to Kinsta staging via SSH and `git checkout`
 2. Activate the theme with WP-CLI and clear the Kinsta cache (best-effort; `gotoFresh` covers a failed clear)
@@ -166,7 +172,7 @@ Guidelines:
 5. Upload `playwright-report/` and `test-results/` as an artifact on failure
 6. Reset staging to `development`
 
-The `kinsta-staging` concurrency group serialises runs so only one workflow touches staging at a time. Fork PRs are skipped because the secrets are unavailable. Deploy dominates the runtime (about three minutes); the test phase is parallelised.
+The job-level `kinsta-staging` concurrency group serialises runs so only one PR touches staging at a time; it never cancels. Fork PRs are skipped because the secrets are unavailable. The test phase dominates the runtime, not the deploy (a few seconds); see [One load per page](#one-load-per-page).
 
 ## Debugging a failure
 
