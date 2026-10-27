@@ -45,8 +45,8 @@ function nm_cmb_taxonomy_metaboxes() {
 
   $cmb_term->add_field(
     array(
-      'name' => esc_html__( 'Microbrand Logo', 'cmb2' ),
-      'desc' => esc_html__( 'if this category is for a microbrand with a logo set it here (optional)', 'cmb2' ),
+      'name' => esc_html__( 'Product Logo', 'cmb2' ),
+      'desc' => esc_html__( 'if this category is for a product with a logo set it here (optional)', 'cmb2' ),
       'id'   => $prefix . 'category_logo',
       'type' => 'file',
     )

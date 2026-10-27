@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Search suggests matching shows, newsletters and site sections above results, with a pre-filled search form
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
