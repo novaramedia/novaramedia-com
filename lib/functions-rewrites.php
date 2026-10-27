@@ -189,18 +189,23 @@ function nm_resolve_canonical_url( $url ) {
     return $external[ $path ];
   }
 
-  foreach ( nm_get_newsletter_category_redirects() as $newsletter_slug => $category_slug ) {
-    $newsletter = get_page_by_path( $newsletter_slug, OBJECT, 'newsletter' );
+  // Newsletter permalink => category link, built once per request: search
+  // suggestions call this for every match.
+  static $newsletter_targets = null;
 
-    if ( ! $newsletter || get_permalink( $newsletter ) !== $url ) {
-      continue;
+  if ( $newsletter_targets === null ) {
+    $newsletter_targets = array();
+
+    foreach ( nm_get_newsletter_category_redirects() as $newsletter_slug => $category_slug ) {
+      $newsletter = get_page_by_path( $newsletter_slug, OBJECT, 'newsletter' );
+      $category   = get_category_by_slug( $category_slug );
+      $link       = $category ? get_term_link( $category ) : '';
+
+      if ( $newsletter && $link && ! is_wp_error( $link ) ) {
+        $newsletter_targets[ get_permalink( $newsletter ) ] = $link;
+      }
     }
-
-    $category = get_category_by_slug( $category_slug );
-    $link     = $category ? get_term_link( $category ) : '';
-
-    return ( $link && ! is_wp_error( $link ) ) ? $link : $url;
   }
 
-  return $url;
+  return $newsletter_targets[ $url ] ?? $url;
 }
