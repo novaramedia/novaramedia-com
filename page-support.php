@@ -81,7 +81,7 @@ if ( have_posts() ) {
       <div class="grid-row u-relative">
         <div class="grid-item is-xxl-24 ">
           <div class="mb-4 only-mobile">
-            <?php render_support_form( 'condensed' ); ?>
+            <?php render_support_form( 'condensed', false, '', 'support-page-top' ); ?>
           </div>
           <div class="grid-row grid-row--nested only-mobile background-white ui-rounded-box">
             <div class="grid-item is-xxl-24">
@@ -109,7 +109,7 @@ if ( have_posts() ) {
             </div>
             <div class="grid-item is-xxl-12 is-m-24">
               <div class="support-page__donation-form-sticky ui-backgrounded-box-padding">
-                <?php render_support_form( 'condensed' ); ?>
+                <?php render_support_form( 'condensed', false, '', 'support-page-top' ); ?>
               </div>
             </div>
           </div>
@@ -213,7 +213,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-          <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true, '', 'support-page-mid' ); ?>
           </div>
         </div>
       </div>
@@ -314,7 +314,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-          <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true, '', 'support-page-bottom' ); ?>
           </div>
         </div>
       </div>

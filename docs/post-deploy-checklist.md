@@ -53,6 +53,14 @@ Verify: `/category/death-in-westminster/` lists Episode 1 → 6, and a single ep
 ### 4. Rewrite capsule podcast standfirsts
 The standfirst on each Committed, Foreign Agent and Death in Westminster post still reads "Episode 1", "Bonus 1" etc. Archives no longer use it. Replace each with a real standfirst (editorial), since it shows on single posts, in search results and in related posts.
 
+### 5. Save the Do Your Own Research seasons
+**Admin > Products > Do Your Own Research.** The page starts empty. Season 1 keeps using the old map fields on the Do Your Own Research category until it has its own entry here, so nothing breaks in the meantime.
+
+1. Add season 2: number 2, title, description, and its FigJam file key. Save.
+2. Add season 1: number 1, title "Season 1", and the file key and default node copied from the category's Do Your Own Research box. Save. This is what lets those category fields be removed in 4.11.0.
+
+Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
+
 ---
 
 ## v4.9.0

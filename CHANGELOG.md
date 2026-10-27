@@ -9,13 +9,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
 - Search suggests matching shows, newsletters and site sections above results, with a pre-filled search form
+- PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
+- Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
+
+### Changed
+
+- Playwright staging tests skip a push to an open PR that only changes docs
+- Branded category archives use a block per brand (`if-i-speak-archive__wordmark`) instead of nested `category-archive__<brand>__<element>` classes
+- BEM naming rules added to the AI coding guidelines
+- Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
+- Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
+- Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
+
+### Fixed
+
+- Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+
+### Removed
+
+- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
+
+### Security
+
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals, with @wordpress/scripts 34→35. Dev-only; built theme and block assets unchanged
+
+## [4.10.0] - 2026-10-01
+
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Do Your Own Research front page block that shows only the current season
 
 ### Changed
 
 - If I Speak category archive redesign: new hero and a text-only episode grid
 - `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
+### Fixed
+
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
 
 ## [4.9.0] - 2026-09-25
 

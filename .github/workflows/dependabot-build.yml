@@ -1,0 +1,72 @@
+# Dependabot Build Check
+#
+# Runs on Dependabot PRs instead of the staging Playwright workflow, which
+# skips them (no SSH secrets for Dependabot, and staging serves committed
+# dist/, which a lockfile bump never changes).
+#
+# 1. Installs and builds the PR head — a broken lockfile or build fails here
+# 2. Checks the Playwright CLI still runs after a @playwright/test bump
+# 3. Installs and builds the base commit, then compares the built files in
+#    dist/ and blocks/. Any difference fails the check: the bump changes what
+#    ships, so dist/ needs rebuilding and committing by hand after a review.
+#
+# Comparing two fresh builds, not the committed dist/, keeps the result
+# independent of whether the committed bundle is current.
+#
+# No secrets, no staging, so no kinsta-staging concurrency lock.
+
+name: Dependabot Build Check
+
+on:
+  pull_request:
+    branches:
+      - development
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install and build PR head
+        run: |
+          npm ci
+          npm run build
+
+      - name: Check the Playwright CLI runs
+        run: npx playwright --version
+
+      - name: Hash built output (PR head)
+        run: find dist blocks -type f \( -name '*.js' -o -name '*.css' -o -name '*.php' \) -exec sha256sum {} + | sort -k2 > "$RUNNER_TEMP/head.sha"
+
+      - name: Install and build base
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          git checkout --force "$BASE_SHA"
+          npm ci
+          npm run build
+
+      - name: Compare built output
+        run: |
+          find dist blocks -type f \( -name '*.js' -o -name '*.css' -o -name '*.php' \) -exec sha256sum {} + | sort -k2 > "$RUNNER_TEMP/base.sha"
+          if diff "$RUNNER_TEMP/base.sha" "$RUNNER_TEMP/head.sha"; then
+            echo "Built output is identical to the base branch."
+          else
+            echo "::error::This bump changes the built output. Rebuild and commit dist/, and review the change before merging."
+            exit 1
+          fi

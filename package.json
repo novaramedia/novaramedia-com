@@ -1,6 +1,6 @@
 {
   "name": "novaramedia-com",
-  "version": "4.9.0",
+  "version": "4.10.0",
   "description": "No Future, Utopia Now",
   "engines": {
     "node": ">=20.9"
@@ -8,6 +8,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "playwright test",
+    "test:php": "composer --working-dir=tests/unit install --no-interaction --quiet && tests/unit/vendor/bin/phpunit -c tests/unit/phpunit.xml",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "dev": "webpack --mode=development",
@@ -31,9 +32,10 @@
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
+    "@jsquash/oxipng": "^2.3.0",
     "@playwright/test": "^1.62.1",
     "@release-it/keep-a-changelog": "^8.0.0",
-    "@wordpress/scripts": "^34.2.0",
+    "@wordpress/scripts": "^35.0.0",
     "autoprefixer": "^10.5.0",
     "babel-loader": "^10.1.1",
     "chalk": "^4.0.0",
@@ -52,7 +54,7 @@
     "postcss": "~8.5.3",
     "postcss-loader": "^8.2.1",
     "postcss-preset-env": "^11.5.0",
-    "release-it": "^21.0.2",
+    "release-it": "^21.1.1",
     "sharp": "^0.35.4",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
@@ -65,11 +67,10 @@
     "webpack-notifier": "~1.15.0"
   },
   "overrides": {
-    "adm-zip": "^0.6.0",
     "markdown-it": "^14.1.2",
-    "linkify-it": "^5.0.2",
     "uuid": "^11.1.1",
     "minimatch@3": "^3.1.5",
+    "postcss-selector-parser@6": "^7.1.6",
     "serialize-javascript": "^7.1.0"
   },
   "dependencies": {

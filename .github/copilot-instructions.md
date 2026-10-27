@@ -63,6 +63,18 @@ The basis of the design system is a library of utility classes uses across all o
 - **Responsive offsets**: Utility classes for controlling offsets (e.g., `.offset-xxl-*`)
 - **Class ordering for grid items**: First `.grid-item` then the grid size classes in descending order from xxl downwards. Any offsets should come before the grid size classes for that breakpoint.
 
+### Class naming (BEM)
+
+Classes follow BEM: `block__element--modifier`.
+
+- **Block** names a component or page section: `support-form`, `site-header`, `the-cortado-archive`. Each branded category archive is its own block (`acfm-archive`, `dyor-archive`), named after its file in `src/styl/pages/`.
+- **Element** is `block__element`, one `__` only. An element belongs to its block, never to another element, so flatten: `if-i-speak-archive__episode-title`, not `if-i-speak-archive__episodes__title`. `category-archive__if-i-speak__wordmark` is the shape to avoid.
+- **Modifier** is `--name` on a block or an element, for a variant of the same thing: `ui-rounded-box--top`, `dyor-archive__map--season-2`. It always sits beside the unmodified class.
+- **Block or modifier?** The same elements with a different skin is a modifier. A different set of elements is a new block. The branded archives share no elements, so each is a block rather than `category-archive--<brand>`.
+- **Mix**: one node may carry two blocks when a generic hook and a specific block both apply, e.g. `<main class="category-archive acfm-archive">`. Each stylesheet targets its own block; never write a selector that needs both.
+- **Selectors**: one class per rule, `.if-i-speak-archive__wordmark`. No descendant chains to specialise a generic element (`.category-archive--acfm .category-archive__logo`), no element or id selectors. Stylus `&` nesting is fine when it compiles to a single class. The one descendant case is markup the template does not control, such as an inlined SVG: `.acfm-archive__logo svg`.
+- **Utilities** from nm-stylus-library (`grid-item`, `mb-4`, `font-weight-bold`) sit beside the BEM class on the node and are never targeted from a block's stylesheet: `.acfm-archive .grid-item` is wrong, the property belongs on the element's own class.
+
 ### Class ordering
 
 Follow a consistent order for class properties.
@@ -79,7 +91,7 @@ Sometimes the library is missing features, or sometimes designs add new features
 
 ### Project specific styles
 
-For features that are unique to the project and not needed in the library, we create specific styles for the layout in development in the `src/styl/layouts` directory in a new file.
+For features that are unique to the project and not needed in the library, we write one Stylus file per block, named after it and imported from `site.styl`: reusable components in `src/styl/layouts/`, a single page or archive in `src/styl/pages/`. Static CSS never lives in a `<style>` tag in a template.
 
 ### Stylus and compilation specific details
 
@@ -123,11 +135,11 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 ### File Organization
 - **Modules**: Feature-based classes in `src/js/modules/`
 - **Functions**: Utility functions in `src/js/functions/`
-- **Styles**: Component styles in `layouts/` imported by `site.styl`
+- **Styles**: component styles in `src/styl/layouts/`, page styles in `src/styl/pages/`, both imported by `site.styl`
 - **Templates**: WordPress template files in theme root, partials in `partials/`
 
 ### Code Standards
-- **CSS**: BEM-like naming with component prefixes (e.g., `support-form__button`)
+- **CSS**: BEM, one `__` per class; see "Class naming (BEM)" above
 - **PHP**: WordPress coding standards with PHPCS configuration
 
 ### Dependencies
@@ -151,7 +163,9 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 
 Run `npm run build` to verify JS/CSS changes compile without errors.
 
-End-to-end smoke tests use Playwright: specs in `tests/e2e/`, run with `npm test` against `PLAYWRIGHT_BASE_URL`. Import `test`/`expect` from `tests/e2e/helpers/fixtures.js` (embed blocking + console-error collector) and navigate with `gotoFresh`. Select elements by `data-testid`. Full guide in `docs/testing/testing.md`.
+PHP logic in `lib/` has a PHPUnit suite in `tests/unit/` (`npm run test:php`; Brain Monkey stubs WordPress, no install needed). A change to a `lib/` function should come with a test in `tests/unit/lib/`. Never add test tooling to the root `composer.json`: the theme's `vendor/` is committed and deployed.
+
+End-to-end smoke tests use Playwright: specs in `tests/e2e/`, run with `npm test` against `PLAYWRIGHT_BASE_URL`. Import `test`/`expect` from `tests/e2e/helpers/fixtures.js` (embed blocking + console-error collector) and navigate with `gotoFresh`. Load each page once per test and run its checks as `test.step()`s, never one `gotoFresh` per check in `beforeEach`. Select elements by `data-testid`. Full guide in `docs/testing/testing.md`.
 
 ## Development Notes
 

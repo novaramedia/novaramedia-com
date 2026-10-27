@@ -20,8 +20,9 @@ WordPress theme for novaramedia.com. PHP + modular JS (Webpack) + Stylus (nm-sty
 - `docs/architecture/` — block rendering, oEmbed privacy
 - `docs/plans/` — active plans; shipped plans move to `docs/plans/archive/`
 - `docs/specs/` — latest articles news category
-- `docs/testing/` — Playwright e2e smoke tests: running, helpers, CI, debugging, expansion backlog
+- `docs/testing/` — Playwright e2e smoke tests and the PHPUnit suite (`tests/unit/`, `npm run test:php`): running, helpers, CI, debugging, expansion backlog
 - `docs/security.md` — security notes
+- `docs/dependency-overrides.md` — why each npm `overrides` entry exists and when to drop it; review on every dependency update
 - `docs/releases.md` — normal + hotfix release flows (`scripts/release.sh`)
 - `docs/post-deploy-checklist.md` — manual steps after each release (rewrite flushes, one-time admin saves, cache/CDN verification)
 - `docs/extended-changelogs/` — verbose PR changelogs

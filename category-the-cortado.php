@@ -27,20 +27,20 @@ $is_first_page   = ( $query_var_paged === 1 );
 get_header();
 ?>
 
-<main id="main-content" class="category-archive category-archive__the-cortado" data-testid="main-content">
+<main id="main-content" class="category-archive the-cortado-archive" data-testid="main-content">
   <?php // ── Section 1: Hero ── ?>
   <section class="container mt-4 mb-4" data-testid="cortado-hero">
     <div class="grid-item is-xxl-24">
       <div class="grid-row background-ochre ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
 
         <div class="grid-item is-xxl-24">
-          <h1 class="category-archive__the-cortado__wordmark m-0" aria-label="The Cortado">
+          <h1 class="the-cortado-archive__wordmark m-0" aria-label="The Cortado">
             <?php echo nm_get_file( '/dist/img/products/the-cortado/the-cortado-wordmark.svg' ); ?>
           </h1>
           <picture>
             <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.avif' ); ?>" type="image/avif">
             <source srcset="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.webp' ); ?>" type="image/webp">
-            <img class="category-archive__the-cortado__presenters u-display-block" src="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.png' ); ?>" alt="Ash Sarkar and Steven Methven" width="1195" height="762" loading="eager" fetchpriority="high" />
+            <img class="the-cortado-archive__presenters u-display-block" src="<?php echo esc_url( $base_image_path . 'the-cortado-presenters.png' ); ?>" alt="Ash Sarkar and Steven Methven" width="1195" height="762" loading="eager" fetchpriority="high" />
           </picture>
         </div>
 
@@ -66,7 +66,7 @@ get_header();
         'hide-headline'      => true,
         'hide-image'         => true,
         // Serif copy, presenter names in sans — as on the inline signup block and front page.
-        'copy-classes'       => 'category-archive__the-cortado__copy font-serif font-size-12 font-size-s-10 mr-5 text-wrap-balance',
+        'copy-classes'       => 'the-cortado-archive__copy font-serif font-size-12 font-size-s-10 mr-5 text-wrap-balance',
       )
     );
     ?>
@@ -111,7 +111,7 @@ get_header();
 
   <?php // ── Section 4: Past Cortados ── ?>
   <?php if ( have_posts() ) { ?>
-  <section class="container category-archive__the-cortado__past-issues mt-5 mb-5" data-testid="cortado-past-issues">
+  <section class="container the-cortado-archive__past-issues mt-5 mb-5" data-testid="cortado-past-issues">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-4">
         <h2 class="font-size-8 font-weight-bold text-uppercase">Past Cortados</h2>
@@ -135,7 +135,7 @@ get_header();
 
   <?php // ── Section 5: Footer row ── ?>
   <?php // Split left/right; stacks and centres on mobile (the-cortado-archive.styl) so full pagination and the action link cannot collide. The pagination partial renders nothing when there is one page. ?>
-  <section class="container category-archive__the-cortado__footer-row mb-5" data-testid="cortado-footer-row">
+  <section class="container the-cortado-archive__footer-row mb-5" data-testid="cortado-footer-row">
     <div class="grid-row">
       <div class="grid-item is-s-24 is-xxl-12 font-size-10 font-weight-bold mb-s-3">
         <?php get_template_part( 'partials/pagination' ); ?>
