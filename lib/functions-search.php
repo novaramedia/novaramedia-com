@@ -44,16 +44,15 @@ const NM_SEARCH_DESTINATIONS_LIMIT = 6;
 /**
  * Fixed site sections that can be matched by keyword.
  *
- * Each entry is an array with 'label', 'url' and 'keywords'. A destination
- * matches when the query contains one of its keywords, or a keyword contains
- * the query. Filterable via `nm_search_destinations`.
+ * Each entry is an array with 'label', 'url' and 'keywords'. Matching rules
+ * are in nm_search_query_matches_keywords().
  *
  * @since 4.11.0
  *
  * @return array[] List of destinations.
  */
 function nm_get_search_destinations() {
-  $destinations = array(
+  return array(
     array(
       'label'    => 'Merch Shop',
       'url'      => 'https://shop.novaramedia.com',
@@ -71,7 +70,7 @@ function nm_get_search_destinations() {
     ),
     array(
       'label'    => 'Jobs',
-      'url'      => home_url( '/jobs/' ),
+      'url'      => home_url( '/about/jobs/' ),
       'keywords' => array( 'job', 'jobs', 'careers', 'vacancies', 'work for us' ),
     ),
     array(
@@ -80,31 +79,35 @@ function nm_get_search_destinations() {
       'keywords' => array( 'support', 'donate', 'donation', 'subscribe', 'membership' ),
     ),
   );
-
-  return apply_filters( 'nm_search_destinations', $destinations );
 }
 
 /**
  * Extra search keywords for categories and newsletters, keyed by slug.
  *
  * Short names and aliases a reader might type that are not in the name.
- * Filterable via `nm_search_destination_keywords`.
+ * Add new aliases here.
  *
  * @since 4.11.0
  *
  * @return array<string, string[]> Slug => keywords.
  */
 function nm_get_search_destination_keywords() {
-  $keywords = array(
+  return array(
     'do-your-own-research' => array( 'dyor' ),
   );
-
-  return apply_filters( 'nm_search_destination_keywords', $keywords );
 }
 
 /**
- * Whether a query matches any keyword: the query contains the keyword, or
- * the keyword contains the query.
+ * Whether a query matches any keyword.
+ *
+ * Two ways to match:
+ * - The query contains the keyword as whole words, optionally plural:
+ *   "novara live gaza" matches "Novara Live", "interviews" matches
+ *   "Interview". A keyword inside a longer word does not count, so
+ *   "prevent" does not match "event" and "workshop" does not match "shop".
+ * - The keyword contains the query anywhere, for a reader still typing a
+ *   name or typing part of one: "nov" matches "Novara Live", "bastani"
+ *   matches "IMOBastani".
  *
  * @param string   $query    Lowercased search query.
  * @param string[] $keywords Keywords.
@@ -114,7 +117,12 @@ function nm_search_query_matches_keywords( $query, $keywords ) {
   foreach ( $keywords as $keyword ) {
     $keyword = mb_strtolower( $keyword );
 
-    if ( str_contains( $query, $keyword ) || str_contains( $keyword, $query ) ) {
+    if ( str_contains( $keyword, $query ) ) {
+      return true;
+    }
+
+    // Letters and digits on either side mean the keyword sits inside another word.
+    if ( preg_match( '/(?<![\p{L}\p{N}])' . preg_quote( $keyword, '/' ) . 's?(?![\p{L}\p{N}])/u', $query ) ) {
       return true;
     }
   }
@@ -275,9 +283,23 @@ function nm_get_search_destination_matches( $query ) {
 }
 
 /**
+ * Whether an attachment ID saved in meta still points at a file.
+ *
+ * Term and post meta keep the ID after the attachment is deleted, which
+ * would render an empty tile.
+ *
+ * @param int $attachment_id Attachment ID, 0 when unset.
+ * @return bool
+ */
+function nm_search_destination_attachment_exists( $attachment_id ) {
+  return $attachment_id > 0 && (bool) wp_get_attachment_url( $attachment_id );
+}
+
+/**
  * Pick the image for a search suggestion card.
  *
- * Product logo tile, then the item's own image, then a branded tile. The
+ * Product logo tile, then the item's own image, then a branded tile. Missing
+ * attachments are skipped. The
  * newest post's thumbnail is deliberately not used: it reads as an advert
  * for that post, not as the destination.
  *
@@ -291,7 +313,7 @@ function nm_get_search_destination_image( $destination ) {
 
   if ( $destination['type'] === 'category' ) {
     $logo_id = (int) get_term_meta( $id, '_nm_category_logo_id', true );
-    if ( $logo_id ) {
+    if ( nm_search_destination_attachment_exists( $logo_id ) ) {
       return array(
         'kind'          => 'logo',
         'attachment_id' => $logo_id,
@@ -299,7 +321,7 @@ function nm_get_search_destination_image( $destination ) {
     }
 
     $og_id = (int) get_term_meta( $id, '_nm_category_og_image_id', true );
-    if ( $og_id ) {
+    if ( nm_search_destination_attachment_exists( $og_id ) ) {
       return array(
         'kind'          => 'image',
         'attachment_id' => $og_id,
@@ -309,7 +331,7 @@ function nm_get_search_destination_image( $destination ) {
 
   if ( $destination['type'] === 'newsletter' ) {
     $thumb_id = (int) get_post_thumbnail_id( $id );
-    if ( $thumb_id ) {
+    if ( nm_search_destination_attachment_exists( $thumb_id ) ) {
       return array(
         'kind'          => 'image',
         'attachment_id' => $thumb_id,

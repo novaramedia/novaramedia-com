@@ -125,7 +125,7 @@ key `_nm_category_logo` is unchanged, so no stored data moves.
 ### Search keywords (aliases)
 
 - Code-level map in `lib/functions-search.php`: category or newsletter slug
-  → list of keywords, filterable via `nm_search_destination_keywords`.
+  → list of keywords. No filter: nothing outside the theme adds aliases.
   Seeded with `do-your-own-research` => `dyor`; further aliases are added by
   release.
 - Categories and newsletters match on name **or** any keyword, using the same

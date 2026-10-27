@@ -20,7 +20,7 @@
 - Logo tile background: mid grey (`--color-gray-mid`). Branded tile: brand red (`--color-red`), white bold name.
 - Static CSS never inline; lives in `src/styl/`, built to `dist/`.
 - Meta key `_nm_category_logo` unchanged; only label/description renamed to "Product Logo".
-- Keywords live in code, filterable via `nm_search_destination_keywords`. Seed: `do-your-own-research` => `dyor`.
+- Keywords live in code (no filter; edit the map). Seed: `do-your-own-research` => `dyor`.
 - Playwright assertions structural only; never exact editorial content.
 - Do not modify build config (webpack/release).
 - No push without asking (push runs Playwright CI against staging).
@@ -188,18 +188,16 @@ git commit -m "refactor: redirect maps as getters, add canonical URL resolver"
  * Extra search keywords for categories and newsletters, keyed by slug.
  *
  * Short names and aliases a reader might type that are not in the name.
- * Filterable via `nm_search_destination_keywords`.
+ * Add new aliases here.
  *
  * @since 4.11.0
  *
  * @return array<string, string[]>
  */
 function nm_get_search_destination_keywords() {
-  $keywords = array(
+  return array(
     'do-your-own-research' => array( 'dyor' ),
   );
-
-  return apply_filters( 'nm_search_destination_keywords', $keywords );
 }
 
 /**
