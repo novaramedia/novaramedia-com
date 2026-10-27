@@ -1,0 +1,14 @@
+// acfm category archive (category-acfm.php).
+
+// The logo is inlined (nm_get_file) and sized by height to fit the hero box.
+.acfm-archive__logo svg
+  width: auto
+  max-height: 180px
+
+@media screen and (max-width: $breakpoint-l)
+  .acfm-archive__logo svg
+    max-height: 160px
+
+@media screen and (max-width: $breakpoint-m)
+  .acfm-archive__logo svg
+    max-height: 120px

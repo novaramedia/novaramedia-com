@@ -28,31 +28,7 @@ if ( ! empty( $newsletter ) ) {
 
 $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
 ?>
-<main id="main-content" class="category-archive category-archive__acfm">
-  <style type="text/css">
-    .category-archive__acfm__logo svg {
-      width: auto;
-      max-height: 180px;
-    }
-
-    @media screen and (max-width: 1104px) {
-      .category-archive__acfm__logo svg {
-        max-height: 160px;
-      }
-    }
-
-    @media screen and (max-width: 910px) {
-      .category-archive__acfm__logo svg {
-        max-height: 120px;
-      }
-    }
-
-    @media screen and (max-width: 759px) {
-      .category-archive__acfm__logo svg {
-        max-height: 120px;
-      }
-    }
-  </style>
+<main id="main-content" class="category-archive acfm-archive">
   <div class="container">
     <div class="grid-row mt-4 mb-4">
       <div class="grid-item is-xxl-24">
@@ -63,7 +39,7 @@ $should_render_newsletter = $newsletter_post_id && $newsletter_mailchimp_key;
             <a class="only-desktop ui-button ui-button--white ui-button--small mb-3" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow"><?php echo esc_html( $podcast_copy ); ?></a>
             <?php } ?>
           </div>
-          <div class="category-archive__acfm__logo grid-item is-s-8 is-l-10 is-xxl-14 text-align-right">
+          <div class="acfm-archive__logo grid-item is-xxl-14 is-l-10 is-s-8 text-align-right">
             <?php echo nm_get_file( '/dist/img/products/acfm/acfm-logo.svg' ); ?>
           </div>
           <div class="grid-item is-xxl-24 only-mobile">
