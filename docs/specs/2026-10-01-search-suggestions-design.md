@@ -2,11 +2,9 @@
 
 **Date:** 2026-10-01
 **Branch:** `feature/search-destinations`
-**Status:** Design approved, not yet implemented. First phase is a prototype
-reviewed on staging; a design thinking phase follows before it is finalised.
-Release target v4.11.0.
-**Builds on:** uncommitted "Jump to" destinations work on this branch
-(`lib/functions-search.php`, `partials/search-destinations.php`)
+**Status:** Prototype built (PR #632). Waiting on a design pass: see
+[search-suggestions-design-questions.md](search-suggestions-design-questions.md). Release target v4.11.0.
+**Builds on:** the earlier "Jump to" destinations prototype on this branch
 
 ## Problem
 
@@ -132,6 +130,11 @@ key `_nm_category_logo` is unchanged, so no stored data moves.
   matching rules as fixed sections (query contains keyword, or keyword
   contains query; minimum query length 3).
 - No admin field. Keyword changes are code-reviewed and versioned.
+
+## Open design questions
+
+Moved to [search-suggestions-design-questions.md](search-suggestions-design-questions.md),
+a short standalone page to share with designers.
 
 ## Testing
 
