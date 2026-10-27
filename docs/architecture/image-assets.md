@@ -21,7 +21,8 @@ SVGs pass through svgo instead; see `inline-svg.md`.
 Commit sources as exported, unoptimised. The production build owns optimisation: JPEGs
 re-encode through mozjpeg; PNGs are quantised with sharp and also run through a lossless
 oxipng pass (`@jsquash/oxipng`, WebAssembly, no binary download), and the smallest of
-quantised / lossless / source ships. Never pre-optimise a source or copy deployed bytes back
+quantised / lossless / source ships. Text metadata chunks (`tEXt`, `iTXt`, `zTXt`, `tIME`)
+are dropped before the lossless pass; colour chunks stay. Never pre-optimise a source or copy deployed bytes back
 into `src/`: it masks what the build does and took a cycle to undo (#625).
 
 ## Replacing an asset in place
