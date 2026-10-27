@@ -162,6 +162,7 @@ Guidelines:
 - **Drafts are skipped.** Marking a PR ready for review runs it.
 - **A new push cancels the PR's previous run.** The cancelled run's `always()` cleanup still resets staging to `development`, and the new run waits for that before deploying.
 - **Dependabot PRs are skipped**; `dependabot-build.yml` checks they build.
+- **A push that only changes docs is skipped** (`docs/`, `.claude/`, any `*.md`), provided the previous push's run passed. GitHub evaluates the `paths` filter against the whole PR, not the push, so the `changes` job compares the pushed commits itself and fails open.
 
 Each run:
 

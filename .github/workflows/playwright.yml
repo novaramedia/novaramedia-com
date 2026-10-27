@@ -11,6 +11,7 @@
 # Dependabot PRs are skipped; dependabot-build.yml covers them. Draft PRs are
 # skipped until marked ready for review. A new push cancels the PR's previous
 # run; its always() cleanup still resets staging before the next run deploys.
+# A push that only changes docs skips the deploy (see the `changes` job).
 #
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
@@ -51,6 +52,7 @@ on:
 
 permissions:
   contents: read
+  actions: read # the `changes` job reads the previous run's conclusion
 
 # A new push to a PR cancels that PR's run still in progress.
 concurrency:
@@ -58,13 +60,59 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The `paths` filter above is evaluated against the whole PR on pull_request
+  # events, so it cannot skip a push that only changes docs on a PR that also
+  # changes code. Compare the pushed commits here instead. Fails open: anything
+  # unexpected runs the suite. Skips only when the previous push's run passed,
+  # because this push's run has already cancelled any in-progress one.
+  changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      skip: ${{ steps.push.outputs.skip }}
+    steps:
+      - name: Check whether this push changed anything staging serves
+        id: push
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTION: ${{ github.event.action }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          skip=false
+          if [ "$ACTION" = "synchronize" ]; then
+            # The compare API needs no checkout. A force-push leaves `before`
+            # outside `after`'s history and reports anything but "ahead". The
+            # file list is capped at 300, so a bigger push always runs.
+            if compare=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${BEFORE}...${AFTER}" 2>/dev/null) \
+              && [ "$(jq -r '.status' <<<"$compare")" = "ahead" ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -gt 0 ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -lt 300 ]; then
+              files=$(jq -r '.files[].filename' <<<"$compare")
+              if ! grep -v -E '^(docs/|\.claude/)|\.md$' <<<"$files" >/dev/null; then
+                previous=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/playwright.yml/runs?event=pull_request&head_sha=${BEFORE}&per_page=1" \
+                  --jq '.workflow_runs[0].conclusion' 2>/dev/null || true)
+                if [ "$previous" = "success" ]; then
+                  skip=true
+                  echo "Only documentation changed in this push and the previous run passed; skipping staging:"
+                  echo "$files"
+                else
+                  echo "Only documentation changed, but the previous run's conclusion is '${previous:-none}'; running"
+                fi
+              fi
+            fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
   deploy-and-test:
+    needs: changes
+    # Skip pushes that only changed docs (see `changes` above).
     # Skip fork PRs — secrets are not available and the job would fail.
     # Skip Dependabot PRs too: they only get Dependabot secrets (no SSH key),
     # and staging serves committed dist/, which a lockfile bump never changes.
     # dependabot-build.yml checks those PRs instead.
     # Skip drafts: marking the PR ready for review runs it.
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' && !github.event.pull_request.draft)
+    if: needs.changes.outputs.skip != 'true' && (github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' && !github.event.pull_request.draft))
     # Only one run touches staging at a time, across all PRs. Never cancelled
     # from here: a run waits for the previous one's cleanup to finish.
     concurrency:
