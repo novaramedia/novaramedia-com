@@ -40,8 +40,8 @@ const losslessPng = async (buffer) => {
     })();
   }
   const optimise = await oxipngReady;
-  // Level 3 recovers nearly all of what level 6 does in a third of the time
-  // (measured on the support-page textures: <0.2% apart, ~5s vs ~6s each).
+  // Level 3: level 6 shaves a further 0.2% for 1.7x the time (six large
+  // sources, 2026-10-27).
   return Buffer.from(await optimise(buffer, { level: 3, interlace: false }));
 };
 
