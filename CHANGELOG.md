@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Lossless PNG pass in the production build; shipped PNGs are 133 KB smaller and `src/img` holds the original files again
+- Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
 - Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
 - Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
 
