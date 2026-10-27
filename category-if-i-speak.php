@@ -14,23 +14,23 @@ $podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Su
 // to the core description, which stays plain text for Open Graph and meta descriptions.
 $formatted_description = get_term_meta( $category->term_id, '_nm_category_formatted_description', true );
 ?>
-<main id="main-content" class="category-archive category-archive__if-i-speak" data-testid="main-content">
+<main id="main-content" class="category-archive if-i-speak-archive" data-testid="main-content">
   <?php // ── Section 1: Hero ── ?>
   <section class="container mt-4 mb-4" data-testid="if-i-speak-hero">
     <div class="grid-item is-xxl-24">
       <div class="grid-row background-white ui-rounded-box ui-backgrounded-box-padding ui-backgrounded-box-padding--flush-bottom">
         <div class="grid-item is-xxl-12 is-s-24 pb-4">
-          <h1 class="category-archive__if-i-speak__wordmark mt-4 mb-5 mb-s-4" aria-label="If I Speak">
+          <h1 class="if-i-speak-archive__wordmark mt-4 mb-5 mb-s-4" aria-label="If I Speak">
             <?php echo nm_get_file( '/dist/img/products/if-i-speak/if-i-speak-wordmark.svg' ); ?>
           </h1>
-          <div class="category-archive__if-i-speak__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4" data-testid="if-i-speak-blurb">
+          <div class="if-i-speak-archive__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4" data-testid="if-i-speak-blurb">
             <?php echo ! empty( $formatted_description ) ? wp_kses_post( wpautop( $formatted_description ) ) : category_description(); ?>
           </div>
           <?php if ( $podcast_url ) { ?>
-          <a class="category-archive__if-i-speak__cta ui-button ui-button--red ui-button--auto-height" data-testid="if-i-speak-subscribe" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
+          <a class="if-i-speak-archive__cta ui-button ui-button--red ui-button--auto-height" data-testid="if-i-speak-subscribe" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
           <?php } ?>
         </div>
-        <div class="category-archive__if-i-speak__presenters grid-item is-xxl-12 is-s-24">
+        <div class="if-i-speak-archive__presenters grid-item is-xxl-12 is-s-24">
           <?php
           // 1080w for phones and tablets (photo is ~90% of the box below 759px, up to 3x);
           // 1717w for the half-width desktop column. The browser picks by width; avif/webp
@@ -48,7 +48,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
   </section>
 
   <?php // ── Section 2: Episodes ── ?>
-  <section class="container category-archive__if-i-speak__episodes mt-5 mb-5" data-testid="if-i-speak-episodes">
+  <section class="container if-i-speak-archive__episodes mt-5 mb-5" data-testid="if-i-speak-episodes">
     <div class="grid-row">
       <?php
       if ( have_posts() ) {
