@@ -120,3 +120,81 @@ if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
     echo ' -->' . D4P_EOL;
   }
 }
+
+/**
+ * Strip empty paragraphs and blank lines that editors leave by pressing Enter.
+ *
+ * Blank means nothing but whitespace, &nbsp; (and its numeric forms or the
+ * raw U+00A0 character) and <br>. Spacing between content is the stylesheet's
+ * job, so blank lines are removed anywhere, not just at the end.
+ *
+ * Classic content (TinyMCE saves paragraphs as plain lines, wpautop adds the
+ * <p> tags on render):
+ * - removes lines and <p> elements that are blank
+ * - removes <br> at the end of a paragraph or of the value
+ * - collapses the gaps left behind to one paragraph break
+ *
+ * Kept: <br> inside a paragraph with text (soft line breaks), &nbsp; within a
+ * line of text, markup such as <td>&nbsp;</td> that shares its line with
+ * other tags, and everything inside <pre>, <script>, <style> and <textarea>.
+ *
+ * Block content: only whole empty paragraph blocks are removed, including ones
+ * nested in groups or columns. No other block's markup is changed, as that
+ * makes the block editor report the block as invalid.
+ *
+ * Safe on slashed input (wp_insert_post_data) and stable on its own output.
+ *
+ * @param string $value Field or post content as stored.
+ *
+ * @return string The value without empty paragraphs. Unchanged if it is not valid UTF-8.
+ */
+function nm_strip_empty_paragraphs( $value ) {
+  $space = '(?:&nbsp;|&#160;|&#xA0;|\x{00A0}|<br\s*\/?>)';
+  $blank = '(?:\s|' . $space . ')';
+
+  if ( false !== strpos( $value, '<!-- wp:' ) ) {
+    $stripped = preg_replace( '/<!-- wp:paragraph(?: [^>]*?)? -->\s*<p(?:\s[^>]*)?>' . $blank . '*<\/p>\s*<!-- \/wp:paragraph -->\s*/iu', '', $value );
+
+    return null === $stripped ? $value : trim( $stripped );
+  }
+
+  $empty_p  = '<p(?:\s[^>]*)?>' . $blank . '*<\/p>';
+  $patterns = array(
+    // Whole lines holding nothing but blank tokens or empty paragraphs.
+    '/^[ \t]*(?:(?:' . $space . '|' . $empty_p . ')[ \t]*)+(?:\r?\n|\z)/imu' => '',
+    // Empty paragraphs sharing a line with other markup.
+    '/' . $empty_p . '/iu'                                                   => '',
+    // <br> closing a paragraph, followed by a blank line, or ending the value.
+    '/(?:\s*<br\s*\/?>)+(?=\s*(?:<\/p>|\r?\n[ \t]*\r?\n|\z))/iu'             => '',
+    // Gaps left behind collapse to one paragraph break, in the value's own line endings.
+    '/(\r?\n)(?:[ \t]*\r?\n){2,}/u'                                          => '$1$1',
+    // Blank content at either end.
+    '/\A' . $blank . '+|' . $blank . '+\z/iu'                                => '',
+  );
+
+  // Whitespace in <pre>, <script>, <style> and <textarea> is content: swap
+  // those regions for placeholders (never blank, so their lines are kept)
+  // while the patterns run, then put them back.
+  $protected = array();
+  $masked    = preg_replace_callback(
+    '/<(pre|script|style|textarea)\b.*?<\/\1\s*>/isu',
+    function ( $match ) use ( &$protected ) {
+      $protected[] = $match[0];
+      return "\x00" . ( count( $protected ) - 1 ) . "\x00";
+    },
+    $value
+  );
+  $stripped  = null === $masked ? null : preg_replace( array_keys( $patterns ), array_values( $patterns ), $masked );
+
+  if ( null === $stripped ) {
+    return $value;
+  }
+
+  return preg_replace_callback(
+    '/\x00(\d+)\x00/',
+    function ( $match ) use ( $protected ) {
+      return $protected[ (int) $match[1] ];
+    },
+    $stripped
+  );
+}
