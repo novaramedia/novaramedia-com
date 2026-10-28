@@ -112,17 +112,25 @@ do {
     foreach ( array( 'post_content', 'post_excerpt' ) as $nm_column ) {
       $nm_clean = nm_strip_empty_paragraphs( $nm_row->$nm_column );
       if ( $nm_clean !== $nm_row->$nm_column ) {
-        $nm_update[ $nm_column ]  = $nm_clean;
-        $nm_counts[ $nm_column ] = ( $nm_counts[ $nm_column ] ?? 0 ) + 1;
+        $nm_update[ $nm_column ] = $nm_clean;
       }
     }
 
-    if ( $nm_update ) {
-      $nm_changed[ $nm_last_id ] = "{$nm_row->post_type}\t{$nm_row->post_title}";
-      if ( $nm_apply ) {
-        $wpdb->update( $wpdb->posts, $nm_update, array( 'ID' => $nm_last_id ) );
-        clean_post_cache( $nm_last_id );
+    if ( ! $nm_update ) {
+      continue;
+    }
+
+    if ( $nm_apply ) {
+      if ( false === $wpdb->update( $wpdb->posts, $nm_update, array( 'ID' => $nm_last_id ) ) ) {
+        WP_CLI::warning( "Post {$nm_last_id} not updated: {$wpdb->last_error}" );
+        continue;
       }
+      clean_post_cache( $nm_last_id );
+    }
+
+    $nm_changed[ $nm_last_id ] = "{$nm_row->post_type}\t{$nm_row->post_title}";
+    foreach ( array_keys( $nm_update ) as $nm_column ) {
+      $nm_counts[ $nm_column ] = ( $nm_counts[ $nm_column ] ?? 0 ) + 1;
     }
   }
 } while ( $nm_rows );
@@ -147,12 +155,14 @@ foreach ( $nm_meta_fields as $nm_object_type => $nm_fields ) {
       continue;
     }
 
+    if ( $nm_apply && ! update_metadata_by_mid( $nm_object_type, $nm_meta->meta_id, $nm_clean ) ) {
+      WP_CLI::warning( "{$nm_object_type} meta {$nm_meta->meta_id} ({$nm_meta->meta_key}) not updated." );
+      continue;
+    }
+
     $nm_counts[ "{$nm_object_type} meta {$nm_meta->meta_key}" ] = ( $nm_counts[ "{$nm_object_type} meta {$nm_meta->meta_key}" ] ?? 0 ) + 1;
     if ( 'post' === $nm_object_type ) {
       $nm_changed[ (int) $nm_meta->object_id ] = $nm_changed[ (int) $nm_meta->object_id ] ?? get_post_type( $nm_meta->object_id ) . "\t" . get_the_title( $nm_meta->object_id );
-    }
-    if ( $nm_apply ) {
-      update_metadata_by_mid( $nm_object_type, $nm_meta->meta_id, $nm_clean );
     }
   }
 }
@@ -172,10 +182,11 @@ foreach ( $nm_option_fields as $nm_option_key => $nm_fields ) {
   }
 
   if ( $nm_clean !== $nm_option ) {
-    $nm_counts[ "option {$nm_option_key}" ] = 1;
-    if ( $nm_apply ) {
-      update_option( $nm_option_key, $nm_clean );
+    if ( $nm_apply && ! update_option( $nm_option_key, $nm_clean ) ) {
+      WP_CLI::warning( "Option {$nm_option_key} not updated." );
+      continue;
     }
+    $nm_counts[ "option {$nm_option_key}" ] = 1;
   }
 }
 
@@ -188,4 +199,4 @@ foreach ( $nm_changed as $nm_id => $nm_label ) {
   WP_CLI::log( "{$nm_id}\t{$nm_label}" );
 }
 
-WP_CLI::success( count( $nm_changed ) . ' posts and ' . count( $nm_counts ) . ' fields/options ' . ( $nm_apply ? 'updated.' : 'would change (dry run).' ) );
+WP_CLI::success( count( $nm_changed ) . ' posts and ' . array_sum( $nm_counts ) . ' values ' . ( $nm_apply ? 'updated.' : 'would change (dry run).' ) );
