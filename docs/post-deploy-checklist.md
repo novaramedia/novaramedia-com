@@ -61,6 +61,18 @@ The standfirst on each Committed, Foreign Agent and Death in Westminster post st
 
 Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
 
+### 6. Strip empty paragraphs from existing content — after deploying
+New saves are cleaned automatically; this cleans everything saved before. It does not change any post's modified date.
+
+```bash
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php        # dry run: counts per field, then changed post IDs
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
+```
+
+Before `apply`, open about 10 of the listed posts on the front end and check the spacing. A post that looks too tight after the run means its layout leaned on blank lines: fix it in the stylesheet, not the content. Re-running is safe.
+
+Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
+
 ---
 
 ## v4.9.0
