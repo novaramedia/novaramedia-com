@@ -81,7 +81,7 @@ One filter per field type, covering post meta, term meta and the CMB2 options pa
 
 ## 6. Testing
 
-- **Unit (`tests/unit/lib/FunctionsUtilityTest.php`)** — the helper is pure, so no WordPress stubs needed beyond what the file already uses. Cases: trailing/leading/mid-content `&nbsp;` lines and empty `<p>`; `<p>` with attributes, slashed attributes; trailing `<br>`; soft `<br>` inside text kept; inline `&nbsp;` kept; oEmbed URL lines kept; empty paragraph blocks removed and other blocks byte-identical; Spacer block kept; idempotence (`f(f(x)) === f(x)`); empty string.
+- **Unit (`tests/unit/lib/StripEmptyParagraphsTest.php`, hooks in `FunctionsFiltersTest.php`)** — the helper is pure, so no WordPress stubs needed beyond what the file already uses. Cases: trailing/leading/mid-content `&nbsp;` lines and empty `<p>`; `<p>` with attributes, slashed attributes; trailing `<br>`; soft `<br>` inside text kept; inline `&nbsp;` kept; oEmbed URL lines kept; empty paragraph blocks removed and other blocks byte-identical; Spacer block kept; idempotence (`f(f(x)) === f(x)`); empty string.
 - **Manual on staging** — save a post in the classic editor with blank lines between and after paragraphs, and in the short description; confirm the saved value and the rendered page. Same in the block editor. Re-save a Links Bar options page.
 - **Backfill** — dry run on staging after a fresh DB pull, spot-check ~10 changed posts on the front end before `apply`.
 - No Playwright spec: the behaviour is save-side and the e2e suite runs read-only against staging.
