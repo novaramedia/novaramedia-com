@@ -266,3 +266,30 @@ function nm_add_caption_class( $block_content, $block ) {
   return $block_content;
 }
 add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
+
+/**
+ * Strip empty paragraphs from post content and excerpts on save.
+ *
+ * Runs on every save path (classic editor, block editor, quick edit, imports)
+ * for any post type that uses the editor, so new post types are covered
+ * without a list. Core's storage types (oEmbed cache, customizer changesets,
+ * global styles) don't support the editor and are left alone.
+ *
+ * $data is slashed here. The patterns in nm_strip_empty_paragraphs() never
+ * match quotes or backslashes, so working on the slashed string is safe.
+ *
+ * @param array $data Slashed, sanitised post data about to be saved.
+ *
+ * @return array The post data with empty paragraphs removed.
+ */
+function nm_strip_empty_paragraphs_on_post_save( $data ) {
+  if ( ! post_type_supports( $data['post_type'], 'editor' ) ) {
+    return $data;
+  }
+
+  $data['post_content'] = nm_strip_empty_paragraphs( $data['post_content'] );
+  $data['post_excerpt'] = nm_strip_empty_paragraphs( $data['post_excerpt'] );
+
+  return $data;
+}
+add_filter( 'wp_insert_post_data', 'nm_strip_empty_paragraphs_on_post_save' );
