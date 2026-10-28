@@ -272,8 +272,9 @@ add_filter( 'render_block', 'nm_add_caption_class', 10, 2 );
  *
  * Runs on every save path (classic editor, block editor, quick edit, imports)
  * for any post type that uses the editor, so new post types are covered
- * without a list. Core's storage types (oEmbed cache, customizer changesets,
- * global styles) don't support the editor and are left alone.
+ * without a list. Core's oEmbed cache and customizer changesets don't support
+ * the editor and are left alone; global styles and templates do, which is
+ * harmless as their JSON and block markup hold no blank lines to strip.
  *
  * $data is slashed here. The patterns in nm_strip_empty_paragraphs() never
  * match quotes or backslashes, so working on the slashed string is safe.

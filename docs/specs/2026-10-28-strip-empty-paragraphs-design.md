@@ -51,7 +51,7 @@ The site runs the Classic Editor plugin, so block content is the minority case; 
 
 Hooked in `lib/functions-filters.php`. Runs on every insert/update path (classic editor, block editor via REST, quick edit, imports), applied to `post_content` and `post_excerpt`.
 
-- Post types: every type that supports `editor` (`post_type_supports( $type, 'editor' )`), so new CPTs are covered automatically. This skips core's internal storage types — `oembed_cache` (provider embed HTML), `customize_changeset` and `wp_global_styles` (JSON) — which hold no editor-written content.
+- Post types: every type that supports `editor` (`post_type_supports( $type, 'editor' )`), so new CPTs are covered automatically. This skips `oembed_cache` (provider embed HTML) and `customize_changeset` (JSON). `wp_global_styles` and the template types do support the editor; harmless, as their content has no blank lines.
 - `$data` is slashed at this point. The patterns match no quotes or backslashes, so working on the slashed string is safe; tests cover a slashed attribute (`<p class=\"x\">`).
 
 ### CMB2 fields — `cmb2_sanitize_{$type}`
@@ -96,4 +96,4 @@ One filter per field type, covering post meta, term meta and the CMB2 options pa
 
 - **Posts that relied on blank lines for spacing will tighten up.** Accepted by design (decision 4). Fix the layout in CSS if any are reported.
 - **Editor state after save (block editor).** The classic editor reloads after saving and shows the cleaned value. The block editor may keep showing its local copy, trailing empty block included, until the page is reloaded. Harmless; to be confirmed during build.
-- **`<pre>` content** with blank lines made of `&nbsp;` would lose them. No current usage of `<pre>` in post content is expected; the backfill dry run will show it if there is any.
+- **`<pre>`, `<script>`, `<style>` and `<textarea>`** are left untouched: their whitespace is content.

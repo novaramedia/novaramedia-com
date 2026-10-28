@@ -80,6 +80,18 @@ final class StripEmptyParagraphsTest extends TestCase {
     $this->assertSame( $value, nm_strip_empty_paragraphs( $value ) );
   }
 
+  public function test_preformatted_and_raw_text_regions_are_untouched(): void {
+    $pre      = "<pre>\na\n   \n   \n   \nb\n&nbsp;\n<p></p>\n</pre>";
+    $script   = "<script>\nvar b = '<p></p>';\n\n\n\nvar c = 1;\n</script>";
+    $style    = "<STYLE>\n.a{}\n\n\n\n.b{}\n</STYLE>";
+    $textarea = "<textarea name=\\\"x\\\">\n&nbsp;\n</textarea>";
+
+    $this->assertSame(
+      $pre . "\n\n" . $script . "\n\nText.\n\n" . $style . "\n\n" . $textarea,
+      nm_strip_empty_paragraphs( "&nbsp;\n\n" . $pre . "\n\n&nbsp;\n\n" . $script . "\n\nText.\n\n<p></p>\n\n" . $style . "\n\n" . $textarea . "\n\n&nbsp;" )
+    );
+  }
+
   public function test_empty_paragraph_blocks_are_removed(): void {
     $one   = "<!-- wp:paragraph -->\n<p>One.</p>\n<!-- /wp:paragraph -->";
     $two   = "<!-- wp:paragraph {\"align\":\"left\"} -->\n<p class=\"has-text-align-left\">Two.</p>\n<!-- /wp:paragraph -->";
@@ -116,6 +128,7 @@ final class StripEmptyParagraphsTest extends TestCase {
       'entities'      => array( "One.\n\n&#160;\n\n<P>&#xA0;</P>\n\n\u{00A0}<BR/>" ),
       'crlf'          => array( "One.\r\n\r\n&nbsp;\r\n\r\nTwo." ),
       'table'         => array( '<table><tr><td>&nbsp;</td></tr></table>' ),
+      'pre'           => array( "&nbsp;\n\n<pre>a\n\n\n\nb</pre>\n\n&nbsp;" ),
     );
   }
 }
