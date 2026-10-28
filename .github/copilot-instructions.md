@@ -116,6 +116,9 @@ For features that are unique to the project and not needed in the library, we wr
 ### Meta
 - **CMB2**: Meta box framework for custom fields (`lib/meta/`)
 - **Theme Options**: ACF-style options in `lib/theme-options/`
+- **Empty paragraphs are stripped on save**: post content, excerpts and CMB2 text fields (`text`, `text_small`, `textarea`, `textarea_small`, `wysiwyg`) pass through `nm_strip_empty_paragraphs()` when saved (`lib/functions-filters.php`). Never trim blank lines in templates, and never rely on editor-inserted blank lines for spacing — spacing is CSS.
+  - Wrong: `echo wpautop( trim( preg_replace( '/(&nbsp;\s*)+$/', '', $short_desc ) ) );`
+  - Right: `echo wpautop( $short_desc );` — the stored value is already clean; add margin in the stylesheet if a layout needs space.
 
 ### Data Flow
 

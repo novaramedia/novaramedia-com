@@ -293,3 +293,51 @@ function nm_strip_empty_paragraphs_on_post_save( $data ) {
   return $data;
 }
 add_filter( 'wp_insert_post_data', 'nm_strip_empty_paragraphs_on_post_save' );
+
+/**
+ * Strip empty paragraphs from CMB2 text fields on save.
+ *
+ * Covers post meta, term meta, options pages and group sub-fields alike, as
+ * CMB2 sanitises every field through this filter. Returning a value from
+ * cmb2_sanitize_{$type} replaces CMB2's own sanitiser, so this runs that
+ * default first and strips its result. An override another filter already
+ * returned is passed through untouched.
+ *
+ * textarea_code is left out: it holds embed code that must be saved as typed.
+ *
+ * @param mixed          $override_value Override from an earlier filter, or null.
+ * @param mixed          $value          Unsanitised value.
+ * @param int            $object_id      Object being saved.
+ * @param array          $field_args     The field's arguments.
+ * @param CMB2_Sanitize  $sanitizer      CMB2's sanitiser for this field.
+ *
+ * @return mixed The sanitised value without empty paragraphs.
+ */
+function nm_cmb2_strip_empty_paragraphs( $override_value, $value, $object_id, $field_args, $sanitizer ) {
+  if ( null !== $override_value ) {
+    return $override_value;
+  }
+
+  return nm_strip_empty_paragraphs_deep( $sanitizer->{ $field_args['type'] }() );
+}
+
+foreach ( array( 'text', 'text_small', 'textarea', 'textarea_small', 'wysiwyg' ) as $nm_cmb2_type ) {
+  add_filter( "cmb2_sanitize_{$nm_cmb2_type}", 'nm_cmb2_strip_empty_paragraphs', 10, 5 );
+}
+
+/**
+ * Apply nm_strip_empty_paragraphs() to every string in a value, at any depth.
+ *
+ * Repeatable fields arrive as arrays; anything that isn't a string is kept.
+ *
+ * @param mixed $value String, array or other value.
+ *
+ * @return mixed The value with every string stripped.
+ */
+function nm_strip_empty_paragraphs_deep( $value ) {
+  if ( is_array( $value ) ) {
+    return array_map( 'nm_strip_empty_paragraphs_deep', $value );
+  }
+
+  return is_string( $value ) ? nm_strip_empty_paragraphs( $value ) : $value;
+}
