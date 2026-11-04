@@ -117,6 +117,19 @@ For features that are unique to the project and not needed in the library, we wr
 - **CMB2**: Meta box framework for custom fields (`lib/meta/`)
 - **Theme Options**: ACF-style options in `lib/theme-options/`
 
+### Page cache
+
+Logged-out pages are served from Kinsta and Cloudflare APO page caches (`docs/architecture/page-cache.md`). `wp_cache_flush()` clears only the object cache — never use it to fix stale pages.
+
+- New CMB2 options pages are purged automatically by `nm_purge_caches_on_options_save()`; don't add per-page flush hooks.
+- Post or term meta that renders on pages other than its own must add those URLs to the `KinstaCache/purgeImmediate` and `cloudflare_purge_by_url` filters, as the contributor purge in `lib/functions-hooks.php` does.
+
+Anti-example — clears Redis, readers still see the old page:
+
+```php
+add_action( 'cmb2_save_options-page_fields', function () { wp_cache_flush(); } );
+```
+
 ### Data Flow
 
 Access PHP data via `WP` global object.
