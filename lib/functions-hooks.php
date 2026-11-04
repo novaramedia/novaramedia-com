@@ -1,29 +1,5 @@
 <?php
 /**
- * Hook cmb2_save_options-page_fields to flush the cache when theme options are saved
- * This is necessary because the front page is cached and the cache needs to be flushed when the front page options are saved
- *
- * @param int $object_id
- * @param array $updated
- * @param CMB2 $cmb
- * @param string $object_type
- */
-function nm_flush_cache_on_theme_options_save( $object_id, $updated, $cmb, $object_type ) {
-  $matches = array(
-      'nm_front_page_options',
-      'nm_front_page_above_the_fold_featured_options',
-      'nm_front_page_links_bar_options',
-      'nm_front_page_highlight_section_options',
-  );
-
-  if ( in_array( $object_id, $matches ) ) {
-    // flushes the whole cache. would be better to flush only the cache for the front page but that functionality doest not seem to be available
-    wp_cache_flush();
-  }
-}
-add_action( 'cmb2_save_options-page_fields', 'nm_flush_cache_on_theme_options_save', 10, 4 );
-
-/**
  * Track the post being published so we can purge its contributor pages via the Kinsta cache filter.
  * Must run at priority 9 — before Kinsta's transition_post_status callback at priority 10.
  *
@@ -175,25 +151,15 @@ add_action( 'before_delete_post', 'nm_purge_kinsta_cache_on_post_delete', 10, 2 
  * The plugin's own cloudflare_purge_url_actions filter cannot be used for this: the
  * plugin applies it while plugins load, before the theme's functions.php runs, so a
  * theme filter is never seen. Instead the handler instance is taken from the plugin's
- * existing deleted_post registration — the instance it configured itself — and added
- * to before_delete_post. Does nothing if the plugin is inactive or changes its hooks.
+ * existing deleted_post registration (nm_get_cloudflare_hooks()) — the instance it
+ * configured itself — and added to before_delete_post. Does nothing if the plugin is
+ * inactive or changes its hooks.
  */
 function nm_cloudflare_purge_before_delete() {
-  global $wp_filter;
+  $cloudflare = nm_get_cloudflare_hooks();
 
-  if ( empty( $wp_filter['deleted_post'] ) ) {
-    return;
-  }
-
-  foreach ( $wp_filter['deleted_post']->callbacks as $callbacks ) {
-    foreach ( $callbacks as $callback ) {
-      $function = $callback['function'];
-
-      if ( is_array( $function ) && $function[0] instanceof \Cloudflare\APO\WordPress\Hooks && 'purgeCacheByRelevantURLs' === $function[1] ) {
-        add_action( 'before_delete_post', $function, PHP_INT_MAX );
-        return;
-      }
-    }
+  if ( $cloudflare ) {
+    add_action( 'before_delete_post', array( $cloudflare, 'purgeCacheByRelevantURLs' ), PHP_INT_MAX );
   }
 }
 add_action( 'init', 'nm_cloudflare_purge_before_delete' );

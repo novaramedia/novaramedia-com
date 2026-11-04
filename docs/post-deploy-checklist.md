@@ -61,6 +61,21 @@ The standfirst on each Committed, Foreign Agent and Death in Westminster post st
 
 Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
 
+### 6. Verify options saves purge the page cache
+**Admin > Front Page > Above the fold featured.** Save without changes, then from a logged-out shell:
+
+```bash
+curl -sI https://novaramedia.com/ | grep -iE 'x-kinsta-cache|cf-cache-status|^age'
+```
+
+Expect `x-kinsta-cache: MISS` and/or a low `age` on the first request after the save. Then check the save was logged:
+
+```bash
+wp option get nm_cache_purge_log --format=json
+```
+
+Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_above_the_fold_featured_options`. No `cloudflare` entry means the plugin's Hooks instance was not found — see `docs/architecture/page-cache.md`.
+
 ---
 
 ## v4.9.0
