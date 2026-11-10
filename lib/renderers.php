@@ -28,6 +28,22 @@ function render_youtube_embed_iframe( $youtube_id, $autoplay = false, $loading =
 }
 
 /**
+ * Renders the hidden honeypot field for Mailchimp signup forms.
+ *
+ * The signup service (novaramedia/novara-media-mailchimp-signup) rejects any
+ * submission where `nm_hp` is filled. Real visitors never see or reach the field;
+ * naive bots fill every input. It is hidden from screen readers and the tab order
+ * so assistive tech users can't fill it by accident.
+ */
+function render_signup_honeypot_field() {
+  ?>
+  <div class="u-visuallyhidden" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="nm_hp" value="" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <?php
+}
+
+/**
  * Renders a Mailchimp signup form.
  *
  * @param string $mailchimp_key The Mailchimp key.
@@ -49,6 +65,7 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
   <?php if ( $placement ) { ?>
   <input type="hidden" name="nm_form" value="<?php echo esc_attr( $placement ); ?>" />
   <?php } ?>
+  <?php render_signup_honeypot_field(); ?>
 
   <div class="email-signup__inputs">
     <div class="form-group mb-2">
