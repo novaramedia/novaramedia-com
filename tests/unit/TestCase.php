@@ -35,6 +35,14 @@ abstract class TestCase extends PHPUnitTestCase {
    * @param string $relative Path from the theme root, e.g. 'lib/functions-utility.php'.
    */
   protected static function requireThemeFile( string $relative ): void {
-    require_once NM_THEME_ROOT . '/' . ltrim( $relative, '/' );
+    // Brain Monkey only defines add_action() and friends once it is set up,
+    // and setUpBeforeClass() runs before the first setUp().
+    Monkey\setUp();
+
+    try {
+      require_once NM_THEME_ROOT . '/' . ltrim( $relative, '/' );
+    } finally {
+      Monkey\tearDown();
+    }
   }
 }

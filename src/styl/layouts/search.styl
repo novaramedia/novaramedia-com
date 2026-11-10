@@ -1,0 +1,32 @@
+// Search suggestion cards (partials/post-layouts/archive-destination.php).
+// Tiles stand in for a 16:9 thumbnail when a destination has no photo.
+
+.search-destination-tile
+  display: flex
+  align-items: center
+  justify-content: center
+  aspect-ratio: 16 / 9
+  width: 100%
+  overflow: hidden
+
+// Placeholder colour until the design phase picks fixed grey vs per-product.
+.search-destination-tile--logo
+  background-color: var(--color-gray-mid)
+  padding: 12%
+
+.search-destination-tile__logo
+  display: block
+  max-width: 100%
+  max-height: 100%
+  width: auto
+  height: auto
+
+.search-destination-tile--brand
+  background-color: var(--color-red)
+  color: var(--color-white-soft)
+  padding: 1.5rem
+  text-align: center
+
+.search-destination-tile__name
+  font-size: 2rem
+  line-height: 1.1
