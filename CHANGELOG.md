@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
+- Full page-cache purges are logged in the `nm_cache_purge_log` option
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
 ### Changed
@@ -25,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+- Saving any theme options page (front page, fundraising, products, theme options) now purges the Kinsta and Cloudflare page caches; it previously flushed only the object cache, so logged-out readers kept seeing the old homepage and site-wide copy
+- Menu and term edits now purge Cloudflare APO as well as Kinsta
+- Renaming a contributor, or changing a Mailchimp newsletter key, now purges all page caches so bylines and signup forms update site-wide
 
 ### Removed
 
