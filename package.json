@@ -54,7 +54,7 @@
     "postcss": "~8.5.3",
     "postcss-loader": "^8.2.1",
     "postcss-preset-env": "^11.5.0",
-    "release-it": "^21.1.1",
+    "release-it": "^21.1.2",
     "sharp": "^0.35.4",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
