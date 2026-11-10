@@ -68,6 +68,7 @@ if( have_posts() ) {
           ?>
           <form class="email-signup__form newsletter-page-email-signup__form" action="<?php echo $netlify_url; ?>" method="post" target="_blank">
             <input type="hidden" name="newsletter" value="<?php echo $mailchimp_key; ?>" />
+            <?php render_signup_honeypot_field(); ?>
 
             <div class="newsletter-page-email-signup__inputs">
               <div class="form-group mb-2">
