@@ -61,6 +61,22 @@ The standfirst on each Committed, Foreign Agent and Death in Westminster post st
 
 Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
 
+### 6. Strip empty paragraphs from existing content — after deploying
+New saves are cleaned automatically; this cleans everything saved before. It does not change any post's modified date.
+
+```bash
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php        # dry run: counts per field, then changed post IDs
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
+```
+
+1. Run the dry run. Open about 10 of the listed posts on the front end and note how they look now.
+2. **Take a manual Kinsta backup.** `apply` overwrites content in place, and there is no undo besides restoring it.
+3. Run `apply`. Any `Warning:` line is a value that failed to save; it is not counted as changed.
+4. Clear the Kinsta site cache so pages show the cleaned content.
+5. Re-check the same posts. A post that looks too tight means its layout leaned on blank lines: fix it in the stylesheet, not the content. Re-running is safe.
+
+Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
+
 ---
 
 ## v4.9.0
