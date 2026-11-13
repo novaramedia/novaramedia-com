@@ -137,7 +137,6 @@ get_template_part( 'lib/meta/meta-boxes-page' );
 get_template_part( 'lib/meta/meta-boxes-page-about' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-how-we-are-funded' );
-get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-novara-live' );

@@ -17,9 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Playwright staging tests skip a push to an open PR that only changes docs
 - Branded category archives use a block per brand (`if-i-speak-archive__wordmark`) instead of nested `category-archive__<brand>__<element>` classes
 - BEM naming rules added to the AI coding guidelines
+- Deprecation policy: remove deprecated code once verified unused in the repo and the production database; the 4-minor window is now a deadline, not a wait
 - Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
 - Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
 - Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
+
+### Removed
+
+- Legacy newsletter page templates (`page-newsletters.php`, `page__newsletter.php` "Newsletter" template) and their page meta box, deprecated since 4.2.0
 
 ### Fixed
 
