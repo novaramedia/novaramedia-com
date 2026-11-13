@@ -141,6 +141,9 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 ### Code Standards
 - **CSS**: BEM, one `__` per class; see "Class naming (BEM)" above
 - **PHP**: WordPress coding standards with PHPCS configuration
+- **Deprecation**: tag with `@deprecated X.Y.Z <replacement note>` in a docblock, on functions, classes and whole files alike. Remove as soon as there are no repo callers and no production DB use; overdue after 4 minors or the next major, whichever comes first. Full rule: `docs/deprecation.md`
+  - Wrong: `/* DEPRECATED @ VERSION 4.2.0 TO BE REMOVED AFTER MIGRATION */` (free-text marker, invisible to the audit)
+  - Right: `/** @deprecated 4.2.0 No replacement. */`
 
 ### Dependencies
 - **Frontend**: jQuery, Lodash (partial imports), Luxon, Lazysizes, Swiper
