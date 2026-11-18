@@ -35,13 +35,19 @@
       display: flex
     .email-signup__inputs
       opacity: 0
+      // Also out of the tab order while the overlay covers them
+      visibility: hidden
   &--failed
     .email-signup__feedback-failed
       display: flex
     .email-signup__inputs
       opacity: 0
+      // Also out of the tab order while the overlay covers them
+      visibility: hidden
   &--completed
     .email-signup__feedback-completed
       display: inline-flex
     .email-signup__inputs
       opacity: 0
+      // Also out of the tab order while the overlay covers them
+      visibility: hidden

@@ -5,8 +5,8 @@
 ?>
 <section class="front-page__products-bar ux-carousel container container--padded mt-4 mb-4 mt-s-3 mb-s-3">
   <div class="swiper">
-    <div class="swiper-button-prev swiper-button-prev--disabled"><span class="only-desktop ui-chevron ui-chevron--left"></span></div>
-    <div class="swiper-button-next"><span class="only-desktop ui-chevron ui-chevron--right"></span></div>
+    <button type="button" class="swiper-button-prev swiper-button-prev--disabled" aria-label="Previous products" tabindex="-1"><span class="only-desktop ui-chevron ui-chevron--left" aria-hidden="true"></span></button>
+    <button type="button" class="swiper-button-next" aria-label="Next products"><span class="only-desktop ui-chevron ui-chevron--right" aria-hidden="true"></span></button>
     <div class="swiper-wrapper">
       <?php
         foreach ($signups as $index => $signup) {

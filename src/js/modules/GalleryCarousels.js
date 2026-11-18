@@ -66,6 +66,12 @@ export class GalleryCarousels {
           clickable: true,
           bulletClass: 'swiper-pagination-bullet',
           bulletActiveClass: 'swiper-pagination-bullet-active',
+          // Real buttons, so the dots are reachable and operable from the keyboard
+          // (Swiper's default <span> bullets are mouse/touch only).
+          renderBullet: (bulletIndex, className) =>
+            `<button type="button" class="${className}" aria-label="Go to slide ${
+              bulletIndex + 1
+            }"></button>`,
         },
 
         // Autoplay - configurable via data-autoplay boolean attribute
@@ -90,7 +96,8 @@ export class GalleryCarousels {
         // Auto width - slides sized by CSS (e.g., 500px quote cards)
         slidesPerView: 'auto',
 
-        // Infinite loop navigation
+        // Infinite loop navigation. Both arrows always have somewhere to go, so
+        // neither ever needs to leave the tab order (unlike Carousels.js).
         loop: true,
 
         // Center active slide for better visual hierarchy

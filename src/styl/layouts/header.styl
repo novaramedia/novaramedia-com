@@ -18,8 +18,36 @@ html
   display: flex
   align-items: center;
 
+// Skip link: first focusable element on every page. Sits above the viewport
+// until keyboard focus, then drops in over the fixed header.
+.skip-link
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1001
+  padding: .75rem 1rem
+  background-color: var(--color-white-soft)
+  color: var(--color-black-soft)
+  transform: translateY(-100%)
+
+  &:focus
+    transform: none
+
+// Skip link targets other than <main> (which already pads for the header) need
+// room above them so the fixed header doesn't cover the content jumped to.
+#above-the-fold
+  scroll-margin-top: var(--header-height)
+
+// Toggles are <button>s for keyboard access; strip browser button chrome so
+// they render the same as the plain list items they replaced.
 .site-header__toggle
-  padding-right: .25rem
+  margin: 0
+  padding: 0 .25rem 0 0
+  border: 0
+  background: none
+  color: inherit
+  font: inherit
+  line-height: inherit
 
 @media screen and (max-width: $breakpoint-m)
   .site-header__toggle

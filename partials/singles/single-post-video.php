@@ -22,7 +22,7 @@
       <li>Published <?php the_time(NM_DATE_FORMAT_LONG); ?></li>
       <?php
         if (!empty($resources)) {
-          echo '<li><a class="u-pointer" id="js-resources-toggle">Resources</a></li>';
+          echo '<li><button type="button" class="u-button-reset" id="js-resources-toggle" aria-controls="single-resources-section" aria-expanded="false">Resources</button></li>';
         }
       ?>
     </ul>

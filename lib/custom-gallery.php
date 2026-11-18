@@ -195,8 +195,8 @@ function my_gallery_shortcode( $attr ) {
   $output .= "
       </div>
     </div>
-    <div class='swiper-button-prev'></div>
-    <div class='swiper-button-next'></div>
+    <button type='button' class='swiper-button-prev' aria-label='Previous image'></button>
+    <button type='button' class='swiper-button-next' aria-label='Next image'></button>
     <div class='swiper-pagination'></div>
   </div>\n";
 

@@ -25,35 +25,37 @@ export class Header {
   bind() {
     const _this = this;
 
+    // Toggles are native <button>s, so Enter and Space fire click for keyboard users.
+    // aria-expanded mirrors panel visibility for screen readers.
     _this.$navToggle.on('click', () => {
       _this.$headerNav.toggle();
 
-      if (_this.$headerNav.is(':visible')) {
+      const isNavOpen = _this.$headerNav.is(':visible');
+      _this.$navToggle.attr('aria-expanded', isNavOpen);
+
+      if (isNavOpen) {
         _this.$headerNav.find('a').first().trigger('focus'); // focus on first link for accessibility
       }
 
-      $(this).attr('aria-pressed', function (index, attr) {
-        return attr === 'true' ? false : true;
-      });
-
       if (_this.$headerSearch.is(':visible')) {
         _this.$headerSearch.hide();
-        _this.$searchToggle.attr('aria-pressed', false);
+        _this.$searchToggle.attr('aria-expanded', false);
       }
     });
 
     _this.$searchToggle.on('click', () => {
       _this.$headerSearch.toggle();
 
-      $(this).attr('aria-pressed', function (index, attr) {
-        return attr === 'true' ? false : true;
-      });
+      const isSearchOpen = _this.$headerSearch.is(':visible');
+      _this.$searchToggle.attr('aria-expanded', isSearchOpen);
 
-      _this.$searchInput.trigger('focus');
+      if (isSearchOpen) {
+        _this.$searchInput.trigger('focus');
+      }
 
       if (_this.$headerNav.is(':visible')) {
         _this.$headerNav.hide();
-        _this.$navToggle.attr('aria-pressed', false);
+        _this.$navToggle.attr('aria-expanded', false);
       }
     });
 

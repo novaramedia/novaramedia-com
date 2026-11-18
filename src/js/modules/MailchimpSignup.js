@@ -77,7 +77,17 @@ export class MailchimpSignup {
       const $element = $(element);
 
       $element.on('click', () => {
-        _this.forms[index].removeClass('email-signup__form--failed');
+        const $form = _this.forms[index];
+
+        // A keyboard user dismissing via the button would otherwise lose focus
+        // when the overlay hides; send them back to the email field to retry.
+        const hadFocus = $.contains(element, document.activeElement);
+
+        $form.removeClass('email-signup__form--failed');
+
+        if (hadFocus) {
+          $form.find('.email-signup__email-input').trigger('focus');
+        }
       });
     });
   }
