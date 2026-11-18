@@ -157,10 +157,14 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 - **Dynamic display values**: Configurable via `supportSectionAutovalues` and other Site Meta settings
 - **Form behavior**: `Support.js` handles value selection, custom inputs, accessibility
 
-### Accessibility Features
-- **ARIA states**: `aria-checked`, `aria-pressed` for custom form controls
-- **Keyboard navigation**: Arrow keys for form controls, focus management
-- **Screen readers**: Proper labeling and state announcements
+### Accessibility
+Full practice in `docs/accessibility.md`; follow it for every template, script and style change. Key rules:
+- **Don't change the default experience**: accessibility fixes should be invisible to mouse/touch users. Gate features on user preferences (`prefers-reduced-motion`) or hide duplicates from assistive tech; never remove a feature to satisfy a criterion
+- **Native controls**: actions are `<button type="button">`, navigation is `<a href>`. Never `<li role="button">`, `<div>` click targets or `<a>` without `href`
+- **Show/hide toggles**: `aria-expanded` + `aria-controls` pointing at a real `id`; not `aria-pressed`, not `aria-haspopup="menu"`
+- **Custom radios**: `role="radiogroup"` / `role="radio"` + `aria-checked`, roving `tabindex`, arrow keys scoped to the closest radiogroup
+- **Hidden = unfocusable**: anything visually hidden leaves the tab order (`tabindex="-1"` or `disabled`)
+- **Headings are structure**: bylines and dates are not headings; no empty heading tags; every `<main>` is `<main id="main-content">` for the skip link
 
 ## Testing
 
