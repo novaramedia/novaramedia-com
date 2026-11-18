@@ -83,12 +83,12 @@ test.describe('Homepage', () => {
       await expect(searchToggle).toHaveAttribute('aria-expanded', 'true');
     });
 
-    await test.step('has a skip link to the main content', async () => {
+    await test.step('has a skip link past the header and products bar', async () => {
       await expect(page.getByTestId('skip-link')).toHaveAttribute(
         'href',
-        '#main-content'
+        '#above-the-fold'
       );
-      await expect(page.locator('#main-content')).toBeAttached();
+      await expect(page.locator('#above-the-fold')).toBeAttached();
     });
 
     await test.step('is responsive at different viewports', async () => {

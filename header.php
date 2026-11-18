@@ -31,7 +31,12 @@
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-  <a class="skip-link font-size-9 font-weight-bold" href="#main-content" data-testid="skip-link">Skip to main content</a>
+  <?php
+  // On the front page the submenu and products carousel sit inside <main>, so skip
+  // past them to the above-the-fold posts. Everywhere else <main> starts the content.
+  $skip_link_target = is_front_page() ? 'above-the-fold' : 'main-content';
+  ?>
+  <a class="skip-link font-size-9 font-weight-bold" href="#<?php echo esc_attr( $skip_link_target ); ?>" data-testid="skip-link">Skip to main content</a>
   <section id="main-container">
     <header class="site-header background-black mb-4" data-testid="site-header">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">

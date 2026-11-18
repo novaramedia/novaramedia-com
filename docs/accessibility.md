@@ -58,6 +58,7 @@ How we build accessible templates, scripts and styles in this theme. Target is W
 
 - `header.php` renders a "Skip to main content" link as the first focusable element. It's off-screen until focused.
 - Every template's `<main>` must be `<main id="main-content">`, or the skip link breaks.
+- Point the skip link at where the page's own content starts. If a template opens `<main>` with navigation-like content (the front page's submenu and products carousel), give the real starting section an `id` and target that from `header.php`. The front page targets `#above-the-fold`.
 
 ## Motion
 

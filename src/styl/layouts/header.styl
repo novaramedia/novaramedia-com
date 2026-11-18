@@ -33,6 +33,11 @@ html
   &:focus
     transform: none
 
+// Skip link targets other than <main> (which already pads for the header) need
+// room above them so the fixed header doesn't cover the content jumped to.
+#above-the-fold
+  scroll-margin-top: var(--header-height)
+
 // Toggles are <button>s for keyboard access; strip browser button chrome so
 // they render the same as the plain list items they replaced.
 .site-header__toggle
