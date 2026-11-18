@@ -353,7 +353,17 @@ export class Support {
     $barOpen.on({
       click(event) {
         event.preventDefault();
+
+        // The clicked button is about to be hidden; hand focus to its counterpart
+        // so keyboard users aren't dropped back to the top of the page. Only when
+        // the button had focus: Safari doesn't focus buttons on mouse click, and
+        // moving focus there could show a ring to mouse users.
+        const hadFocus = document.activeElement === this;
         $bar.removeClass('support-bar--closed').addClass('support-bar--open');
+
+        if (hadFocus) {
+          $barClose.trigger('focus');
+        }
 
         // Save open state to localStorage
         setLocalStorageItem(
@@ -367,7 +377,13 @@ export class Support {
     $barClose.on({
       click(event) {
         event.preventDefault();
+
+        const hadFocus = document.activeElement === this;
         $bar.removeClass('support-bar--open').addClass('support-bar--closed');
+
+        if (hadFocus) {
+          $barOpen.trigger('focus');
+        }
 
         // Save closed state to localStorage
         setLocalStorageItem(

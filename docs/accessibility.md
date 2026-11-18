@@ -11,7 +11,7 @@ How we build accessible templates, scripts and styles in this theme. Target is W
 ## Interactive controls
 
 - Actions are `<button type="button">`. Navigation is `<a href="…">`. Nothing else is clickable.
-- Restyle buttons by resetting browser chrome (`margin`, `padding`, `border`, `background`, `color`, `font`, `line-height`) in Stylus so they render the same as the element they replace. See `.site-header__toggle` in `src/styl/layouts/header.styl`.
+- Add `u-button-reset` to a `<button>` so it renders like the text or icon it replaces. It strips browser chrome at zero specificity, so spacing utilities (`pl-3`) and component classes (`ui-hit-area`) still apply on top.
 - Icon-only controls carry an `aria-label`; the icon itself gets `aria-hidden="true"`.
 
 ```html
@@ -30,6 +30,7 @@ How we build accessible templates, scripts and styles in this theme. Target is W
 - Don't use `aria-pressed` (that's for on/off toggle buttons) or `aria-haspopup="menu"` (that's for `role="menu"` widgets) on a disclosure.
 - Set `aria-expanded` from the panel's actual visibility after toggling. Don't flip it blindly, and don't rely on `$(this)` inside an arrow function: it won't be the element.
 - Moving focus into a panel when it opens is fine (the header nav moves focus to its first link).
+- If a control hides itself when used (the support banner's expand and minimise buttons), move focus to whatever replaces it. Do it only when the control had focus, so mouse users never see a focus ring appear.
 
 ## Custom radio groups
 
@@ -40,7 +41,7 @@ How we build accessible templates, scripts and styles in this theme. Target is W
 
 ## Hidden and duplicate elements
 
-- Anything visually hidden but still in the DOM (opacity 0, translated off-screen, carousel arrows at the end of their range) must also leave the tab order: `tabindex="-1"`, or `disabled` on a button.
+- Anything visually hidden but still in the DOM (opacity 0, translated off-screen, carousel arrows at the end of their range, form fields under an overlay) must also leave the tab order: `tabindex="-1"`, `disabled` on a button, or `visibility: hidden` alongside the opacity.
 - One tab stop per card. When an image, title and byline all link to the same post, keep the title link. Give the others `tabindex="-1"` and `aria-hidden="true"`. They stay clickable for mouse users.
 - Links need an accessible name. An image-only link needs `alt` text, or must be hidden from assistive tech as a duplicate.
 - Link text should make sense out of context. When it can't ("Listen now"), add `aria-describedby` pointing at the text that names the destination.

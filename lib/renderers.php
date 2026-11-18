@@ -94,10 +94,12 @@ function render_mailchimp_signup_form( $mailchimp_key, $background_color = 'blac
 
   <div class="email-signup__feedback-failed email-signup__overlay ui-rounded-box font-weight-bold text-align-center">
     <div class="text-wrap-pretty">
-      <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0" y="0" version="1.1" viewBox="0 0 51 51" class="email-signup__icon mb-2 u-pointer" >
-        <path d="M25.5 51C11.4 51 0 39.6 0 25.5S11.4 0 25.5 0 51 11.4 51 25.5 39.6 51 25.5 51zm0-50C12 1 1 12 1 25.5S12 50 25.5 50 50 39 50 25.5 39 1 25.5 1z"/>
-        <path d="M36.9 14.4c-.2-.2-.5-.2-.7 0L25.5 25 14.9 14.4c-.2-.2-.5-.2-.7 0s-.2.5 0 .7l10.6 10.6-9.9 9.9c-.2.2-.2.5 0 .7.1.1.2.1.4.1s.3 0 .4-.1l9.9-9.9 9.9 9.9c.1.1.2.1.4.1s.3 0 .4-.1c.2-.2.2-.5 0-.7l-9.9-9.9L37 15.1c0-.2 0-.6-.1-.7z"/>
-      </svg>
+      <button type="button" class="email-signup__dismiss u-button-reset mb-2" aria-label="Dismiss error">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0" y="0" version="1.1" viewBox="0 0 51 51" class="email-signup__icon" aria-hidden="true" focusable="false">
+          <path d="M25.5 51C11.4 51 0 39.6 0 25.5S11.4 0 25.5 0 51 11.4 51 25.5 39.6 51 25.5 51zm0-50C12 1 1 12 1 25.5S12 50 25.5 50 50 39 50 25.5 39 1 25.5 1z"/>
+          <path d="M36.9 14.4c-.2-.2-.5-.2-.7 0L25.5 25 14.9 14.4c-.2-.2-.5-.2-.7 0s-.2.5 0 .7l10.6 10.6-9.9 9.9c-.2.2-.2.5 0 .7.1.1.2.1.4.1s.3 0 .4-.1l9.9-9.9 9.9 9.9c.1.1.2.1.4.1s.3 0 .4-.1c.2-.2.2-.5 0-.7l-9.9-9.9L37 15.1c0-.2 0-.6-.1-.7z"/>
+        </svg>
+      </button>
       <br />
       Sign up error: <span class="email-signup__feedback-message"></span>. Try again later.
     </div>

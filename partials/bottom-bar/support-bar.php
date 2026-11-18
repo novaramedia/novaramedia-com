@@ -30,9 +30,9 @@
       </div>
       <div class="support-bar__open-actions-column grid-item is-s-4 is-xxl-8">
         <div class="support-bar__open-actions-wrapper">
-          <nav class="support-bar__close-trigger ui-hit-area ui-hit-area--top-right">
-            <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white"></span>
-          </nav>
+          <button type="button" class="support-bar__close-trigger u-button-reset ui-hit-area ui-hit-area--top-right" aria-label="Minimise support banner">
+            <span class="ui-chevron ui-chevron--down ui-chevron--white font-color-white" aria-hidden="true"></span>
+          </button>
           <a href="<?php echo site_url( 'support/' ); ?>" class="ui-button ui-button--white ui-button--small only-desktop">
             <?php echo esc_html( $open_button ? $open_button : 'Join our supporters' ); ?>
           </a>
@@ -63,9 +63,9 @@
         <a href="<?php echo site_url( 'support/' ); ?>" class="ui-action-link only-desktop">
           <?php echo esc_html( $desktop_closed_cta ? $desktop_closed_cta : 'Fund something better' ); ?>
         </a>
-        <span class="support-bar__open-trigger ux-pointer pl-3">
-          <span class="ui-chevron ui-chevron--up ui-chevron--white"></span>
-        </span>
+        <button type="button" class="support-bar__open-trigger u-button-reset pl-3" aria-label="Expand support banner">
+          <span class="ui-chevron ui-chevron--up ui-chevron--white" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </div>

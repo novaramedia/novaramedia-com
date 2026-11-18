@@ -61,3 +61,30 @@ button.swiper-button-prev, button.swiper-button-next
   background-color: transparent
   color: inherit
   font: inherit
+
+// Pagination dots as <button>s so keyboard users can reach them (GalleryCarousels
+// renders them via renderBullet). Strips browser button chrome but leaves margin,
+// size and colour to the .swiper-pagination-bullet rules above.
+// Goes to modules/carousel.styl alongside .swiper-pagination-bullet.
+button.swiper-pagination-bullet
+  padding: 0
+  border: 0
+  cursor: pointer
+
+// Strips browser button chrome so a <button> renders like the inline text or
+// icon it replaces (links here are color: inherit, no decoration). The class
+// sits in :where() so the selector weighs the same as a bare `button`: it beats
+// browser and normalize button rules (it comes later), while any utility or
+// component class (.pl-3, .ui-hit-area) still sets padding and the rest.
+// Goes to modules/utility.styl.
+button:where(.u-button-reset)
+  margin: 0
+  padding: 0
+  border: 0
+  background: none
+  color: inherit
+  font: inherit
+  line-height: inherit
+  letter-spacing: inherit
+  text-align: inherit
+  cursor: pointer

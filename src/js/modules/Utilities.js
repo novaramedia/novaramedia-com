@@ -38,8 +38,12 @@ export class Utilities {
   bindResourcesToggle() {
     const $resources = $('#single-resources-section');
 
-    $('#js-resources-toggle').click(() => {
+    $('#js-resources-toggle').on('click', (event) => {
       $resources.toggle();
+      $(event.currentTarget).attr(
+        'aria-expanded',
+        $resources.is(':visible') ? 'true' : 'false'
+      );
     });
   }
 

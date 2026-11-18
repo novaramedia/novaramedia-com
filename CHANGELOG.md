@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Header menu and search toggles open from the keyboard and tell screen readers whether they are open
 - Support form arrow keys stay within the frequency or amount group instead of jumping between them
 - Homepage products carousel arrows can be reached and used from the keyboard
+- Gallery and supporter quote carousel arrows and dots can be reached and used from the keyboard
+- Support banner expand and minimise controls, the audio and video post Resources toggle, and the newsletter signup error dismiss work from the keyboard
 
 ### Removed
 
