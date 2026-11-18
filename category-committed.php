@@ -236,7 +236,7 @@ function nm_render_committed_credit( $credit ) {
             <a href="https://podcasts.apple.com/podcast/id1816687503">Apple Podcasts</a>,<br/>
             <?php // Committed has no Spotify show of its own; its episodes are published in the main Novara Media show. ?>
             <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N">Spotify</a>,
-            <a href="https://podcast.novaramedia.com/category/committed/feed/podcast/">RSS</a>
+            <a href="https://feeds.novaramedia.com/podcasts/committed">RSS</a>
           </div>
         </div>
       </div>
