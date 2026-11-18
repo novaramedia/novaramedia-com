@@ -134,8 +134,10 @@ export class Support {
           }
         },
         keydown(event) {
+          // Arrow keys move within this button's own radiogroup only — the form
+          // has separate frequency and amount groups, and Tab moves between them.
           const $buttons = $(this)
-            .closest('.support-form')
+            .closest('[role="radiogroup"]')
             .find('.support-form__button');
           let index = $buttons.index(this);
 

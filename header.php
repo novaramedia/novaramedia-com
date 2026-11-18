@@ -31,6 +31,7 @@
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
+  <a class="skip-link font-size-9 font-weight-bold" href="#main-content" data-testid="skip-link">Skip to main content</a>
   <section id="main-container">
     <header class="site-header background-black mb-4" data-testid="site-header">
       <div class="site-header__wrapper font-color-white font-size-10 font-size-s-8 font-weight-bold">
@@ -38,8 +39,8 @@
           <div class="grid-row">
             <nav class="grid-item is-s-6 is-xxl-5 layout-flex-align-center" role="navigation" aria-label="Main" data-testid="site-nav">
               <ul class="site-header__navigation u-inline-list u-inline-block">
-                <li class="site-header__toggle site-header__nav-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-sub" aria-label="Site Navigation" aria-haspopup="menu" aria-pressed="false"><i class="icon-menu icon-large"></i></li>
-                <li class="site-header__toggle site-header__search-toggle ux-pointer" role="button" tabindex="0" aria-controls="header-search" aria-label="Search" aria-haspopup="dialog" aria-pressed="false"><i class="icon-search icon-large"></i></li>
+                <li><button type="button" class="site-header__toggle site-header__nav-toggle ux-pointer" aria-controls="header-sub" aria-label="Site Navigation" aria-expanded="false"><i class="icon-menu icon-large" aria-hidden="true"></i></button></li>
+                <li><button type="button" class="site-header__toggle site-header__search-toggle ux-pointer" aria-controls="header-search" aria-label="Search" aria-expanded="false"><i class="icon-search icon-large" aria-hidden="true"></i></button></li>
               </ul>
             </nav>
             <div class="header-main__middle grid-item is-s-12 is-xxl-14 text-align-center">
@@ -64,7 +65,7 @@
           </div>
         </div>
       </div>
-      <nav class="site-header-nav" role="navigation" aria-label="Sections" data-testid="site-nav-panel">
+      <nav id="header-sub" class="site-header-nav" role="navigation" aria-label="Sections" data-testid="site-nav-panel">
         <div class="container font-size-12 font-size-s-13 font-weight-bold font-color-white pt-3 pb-3 pt-s-0 ui-hover-links-inside">
           <div class="grid-row">
             <div class="grid-item is-s-24 is-m-12 is-xxl-6 mb-4">
@@ -130,7 +131,7 @@
           </div>
         </div>
       </nav>
-      <section class="site-header-search" role="dialog" aria-label="Search">
+      <section id="header-search" class="site-header-search" role="dialog" aria-label="Search">
         <?php get_search_form(); ?>
       </section>
     </header>

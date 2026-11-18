@@ -40,18 +40,17 @@ export class Carousels {
         rewind: true,
       });
 
+      // The --disabled classes hide an arrow at either end of the carousel. A hidden
+      // arrow also leaves the tab order so keyboard users never land on an
+      // invisible button (rewind mode means Swiper never disables them itself).
       swiper.on('slideChange', (event) => {
-        if (event.isBeginning) {
-          $navLeft.addClass('swiper-button-prev--disabled');
-        } else {
-          $navLeft.removeClass('swiper-button-prev--disabled');
-        }
+        $navLeft
+          .toggleClass('swiper-button-prev--disabled', event.isBeginning)
+          .attr('tabindex', event.isBeginning ? '-1' : null);
 
-        if (event.isEnd) {
-          $navRight.addClass('swiper-button-next--disabled');
-        } else {
-          $navRight.removeClass('swiper-button-next--disabled');
-        }
+        $navRight
+          .toggleClass('swiper-button-next--disabled', event.isEnd)
+          .attr('tabindex', event.isEnd ? '-1' : null);
       });
 
       this.swipers.push(swiper);

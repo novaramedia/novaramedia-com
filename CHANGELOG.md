@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
+- Skip to main content link on every page, shown on keyboard focus
 
 ### Changed
 
@@ -32,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
 - Make Links External editor button now applies to every link in the post when nothing is selected, and no longer skips links that already carry a `rel` such as nofollow
+- Header menu and search toggles open from the keyboard and tell screen readers whether they are open
+- Support form arrow keys stay within the frequency or amount group instead of jumping between them
+- Homepage products carousel arrows can be reached and used from the keyboard
 
 ### Removed
 

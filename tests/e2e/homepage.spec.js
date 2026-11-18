@@ -63,6 +63,34 @@ test.describe('Homepage', () => {
       ).toHaveAttribute('href', /.+/);
     });
 
+    await test.step('header toggles work from the keyboard', async () => {
+      const navToggle = page
+        .getByTestId('site-nav')
+        .locator('.site-header__nav-toggle');
+      const searchToggle = page
+        .getByTestId('site-nav')
+        .locator('.site-header__search-toggle');
+
+      // Nav was opened by the previous step; Enter closes it again.
+      await navToggle.focus();
+      await page.keyboard.press('Enter');
+      await expect(page.getByTestId('site-nav-panel')).toBeHidden();
+      await expect(navToggle).toHaveAttribute('aria-expanded', 'false');
+
+      await searchToggle.focus();
+      await page.keyboard.press('Space');
+      await expect(page.locator('#header-search')).toBeVisible();
+      await expect(searchToggle).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await test.step('has a skip link to the main content', async () => {
+      await expect(page.getByTestId('skip-link')).toHaveAttribute(
+        'href',
+        '#main-content'
+      );
+      await expect(page.locator('#main-content')).toBeAttached();
+    });
+
     await test.step('is responsive at different viewports', async () => {
       await testResponsive(page);
     });

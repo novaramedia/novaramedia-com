@@ -50,3 +50,14 @@ html
 
 body
   background-color: var(--page-background)
+
+// Carousel arrows as <button>s so keyboard users can reach them. Strips browser
+// button chrome; scoped to button so existing <div> arrows are untouched.
+// Goes to modules/carousel.styl alongside .swiper-button-prev / -next.
+button.swiper-button-prev, button.swiper-button-next
+  margin: 0
+  padding: 0
+  border: 0
+  background-color: transparent
+  color: inherit
+  font: inherit
