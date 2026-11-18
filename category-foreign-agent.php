@@ -165,7 +165,7 @@ function nm_render_foreign_agent_credit( $credit ) {
     <div class="grid-row mb-6">
       <div class="grid-item is-s-12 is-xxl-24 text-align-center font-size-13 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
-          Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,<br/><a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
+          Listen now on:<br/><a href="https://podcasts.apple.com/podcast/id1624937065">Apple Podcasts</a>,<br/><a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>, <a href="https://podcast.novaramedia.com/category/foreign-agent/feed/podcast/">RSS</a>
         </div>
       </div>
     </div>
