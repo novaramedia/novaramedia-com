@@ -306,6 +306,11 @@ add_filter( 'wp_insert_post_data', 'nm_strip_empty_paragraphs_on_post_save' );
  *
  * textarea_code is left out: it holds embed code that must be saved as typed.
  *
+ * CMB2 drops empty repeatable entries before sanitising, so an entry that
+ * only becomes empty here (e.g. a row holding just &nbsp;) would be stored
+ * as '' and render as an empty element. Those entries are dropped with the
+ * same rule CMB2 uses (0 and '0' are kept) and the list is reindexed.
+ *
  * @param mixed          $override_value Override from an earlier filter, or null.
  * @param mixed          $value          Unsanitised value.
  * @param int            $object_id      Object being saved.
@@ -319,7 +324,20 @@ function nm_cmb2_strip_empty_paragraphs( $override_value, $value, $object_id, $f
     return $override_value;
   }
 
-  return nm_strip_empty_paragraphs_deep( $sanitizer->{ $field_args['type'] }() );
+  $stripped = nm_strip_empty_paragraphs_deep( $sanitizer->{ $field_args['type'] }() );
+
+  if ( ! empty( $field_args['repeatable'] ) && is_array( $stripped ) ) {
+    $stripped = array_values(
+      array_filter(
+        $stripped,
+        function ( $entry ) {
+          return null !== $entry && '' !== $entry && false !== $entry && array() !== $entry;
+        }
+      )
+    );
+  }
+
+  return $stripped;
 }
 
 foreach ( array( 'text', 'text_small', 'textarea', 'textarea_small', 'wysiwyg' ) as $nm_cmb2_type ) {

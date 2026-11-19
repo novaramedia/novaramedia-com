@@ -67,6 +67,24 @@ final class FunctionsFiltersTest extends TestCase {
     );
   }
 
+  public function test_cmb2_repeatable_entries_left_empty_by_stripping_are_dropped(): void {
+    $sanitizer = $this->sanitizer_returning( array( 'Yara Eid&nbsp;', '&nbsp;', '0', 'Tareq Baconi' ) );
+
+    $this->assertSame(
+      array( 'Yara Eid', '0', 'Tareq Baconi' ),
+      nm_cmb2_strip_empty_paragraphs( null, array(), 1, array( 'type' => 'text', 'repeatable' => true ), $sanitizer )
+    );
+  }
+
+  public function test_cmb2_non_repeatable_array_keeps_entries_left_empty(): void {
+    $sanitizer = $this->sanitizer_returning( array( 'a' => 'A.', 'b' => '&nbsp;' ) );
+
+    $this->assertSame(
+      array( 'a' => 'A.', 'b' => '' ),
+      nm_cmb2_strip_empty_paragraphs( null, array(), 1, array( 'type' => 'text' ), $sanitizer )
+    );
+  }
+
   /**
    * Stand-in for CMB2_Sanitize: any type method returns $result, as CMB2's
    * default sanitiser for that type would.
