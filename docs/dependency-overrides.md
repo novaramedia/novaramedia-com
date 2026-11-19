@@ -15,7 +15,8 @@ reason hides the real dependency tree and can block legitimate upgrades.
 | `uuid`                      | `^11.1.1` | `@wordpress/scripts` → `webpack-dev-server` → `sockjs` (`^8.3.2`); `webpack-notifier` → `node-notifier` (`^8.3.0`)                                 | Neither `sockjs` nor `node-notifier` asks for `uuid` 8                                                 |
 | `minimatch@3`               | `^3.1.5`  | `@wordpress/scripts` → `markdownlint-cli@0.31`, which pins `minimatch` `~3.0.5`                                                                    | `@wordpress/scripts` moves to a `markdownlint-cli` that drops the `~3.0` pin                           |
 | `postcss-selector-parser@6` | `^7.1.6`  | `@wordpress/scripts` → `cssnano@6` → `postcss-calc@9`, `postcss-merge-rules`, `postcss-minify-selectors`, `postcss-unique-selectors`, `stylehacks` | `@wordpress/scripts` moves to cssnano 7+                                                               |
-| `serialize-javascript`      | `^7.1.0`  | `@wordpress/scripts` → `copy-webpack-plugin@10` (`^6.0.0`)                                                                                         | `@wordpress/scripts` moves to a `copy-webpack-plugin` that asks for `serialize-javascript` 7           |
+| `serialize-javascript`      | `^7.1.3`  | `@wordpress/scripts` → `copy-webpack-plugin@10` (`^6.0.0`)                                                                                         | `@wordpress/scripts` moves to a `copy-webpack-plugin` that asks for `serialize-javascript` ≥7.1.3      |
+| `proxy-agent`               | `^8.0.3`  | `release-it` pins `proxy-agent` 8.0.2 → `pac-proxy-agent` 9.1.0 → `get-uri` 8.0.1 (all exact), which asks for `basic-ftp` `^5.3.1`                 | `release-it` asks for `proxy-agent` ≥8.0.3                                                             |
 
 Most rows depend on `@wordpress/scripts`, so check them whenever it gets a major bump.
 
