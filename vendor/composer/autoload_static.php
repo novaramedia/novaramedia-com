@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit98ace3775a8e3aa9b99bb90834ea3776
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'M' =>
         array (
             'Moment\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Moment\\' => 
+        'Moment\\' =>
         array (
             0 => __DIR__ . '/..' . '/fightbulc/moment/src',
         ),
