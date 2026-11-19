@@ -9,16 +9,19 @@ reason hides the real dependency tree and can block legitimate upgrades.
 
 ## Current overrides
 
-| Override                    | Forces    | Pulled in by                                                                                                                                       | Remove when                                                                                            |
-| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `markdown-it`               | `^14.1.2` | `@wordpress/scripts` → `markdownlint-cli@0.31` → `markdownlint@0.25`, which pins `markdown-it` 12.3.2                                              | `@wordpress/scripts` moves to a `markdownlint-cli` whose `markdownlint` asks for `markdown-it` ≥14.1.2 |
-| `uuid`                      | `^11.1.1` | `@wordpress/scripts` → `webpack-dev-server` → `sockjs` (`^8.3.2`); `webpack-notifier` → `node-notifier` (`^8.3.0`)                                 | Neither `sockjs` nor `node-notifier` asks for `uuid` 8                                                 |
-| `minimatch@3`               | `^3.1.5`  | `@wordpress/scripts` → `markdownlint-cli@0.31`, which pins `minimatch` `~3.0.5`                                                                    | `@wordpress/scripts` moves to a `markdownlint-cli` that drops the `~3.0` pin                           |
-| `postcss-selector-parser@6` | `^7.1.6`  | `@wordpress/scripts` → `cssnano@6` → `postcss-calc@9`, `postcss-merge-rules`, `postcss-minify-selectors`, `postcss-unique-selectors`, `stylehacks` | `@wordpress/scripts` moves to cssnano 7+                                                               |
-| `serialize-javascript`      | `^7.1.3`  | `@wordpress/scripts` → `copy-webpack-plugin@10` (`^6.0.0`)                                                                                         | `@wordpress/scripts` moves to a `copy-webpack-plugin` that asks for `serialize-javascript` ≥7.1.3      |
-| `proxy-agent`               | `^8.0.3`  | `release-it` pins `proxy-agent` 8.0.2 → `pac-proxy-agent` 9.1.0 → `get-uri` 8.0.1 (all exact), which asks for `basic-ftp` `^5.3.1`                 | `release-it` asks for `proxy-agent` ≥8.0.3                                                             |
+| Override                    | Forces    | Pulled in by                                                                                                                                       | Remove when                                                                                       |
+| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `uuid`                      | `^11.1.1` | `webpack-notifier` → `node-notifier@9` (`^8.3.0`)                                                                                                  | `node-notifier` asks for `uuid` ≥11.1.1                                                           |
+| `postcss-selector-parser@6` | `^7.1.6`  | `@wordpress/scripts` → `cssnano@6` → `postcss-calc@9`, `postcss-merge-rules`, `postcss-minify-selectors`, `postcss-unique-selectors`, `stylehacks` | `@wordpress/scripts` moves to cssnano 7+                                                          |
+| `serialize-javascript`      | `^7.1.3`  | `@wordpress/scripts` → `copy-webpack-plugin@10` (`^6.0.0`)                                                                                         | `@wordpress/scripts` moves to a `copy-webpack-plugin` that asks for `serialize-javascript` ≥7.1.3 |
+| `proxy-agent`               | `^8.0.3`  | `release-it` pins `proxy-agent` 8.0.2 → `pac-proxy-agent` 9.1.0 → `get-uri` 8.0.1 (all exact), which asks for `basic-ftp` `^5.3.1`                 | `release-it` asks for `proxy-agent` ≥8.0.3                                                        |
+| `glob@10`                   | `^14.0.2` | `stylus@0.64` (`^10.4.5`); glob 10 also pulls `minimatch@9`                                                                                        | `stylus` asks for `glob` ≥14.0.2. Stylus only calls `glob.sync`, which glob 14 keeps              |
+| `minimatch@10`              | `^11.0.1` | `markdownlint-cli` (`~10.2.6`)                                                                                                                     | `markdownlint-cli` asks for `minimatch` ≥11.0.1                                                   |
+| `markdownlint-cli`          | `^0.50.0` | `@wordpress/scripts@37` (`^0.49.1`), whose 0.49 pins vulnerable `js-yaml` and `smol-toml`                                                          | `@wordpress/scripts` asks for `markdownlint-cli` ≥0.50                                            |
 
-Most rows depend on `@wordpress/scripts`, so check them whenever it gets a major bump.
+Several rows depend on `@wordpress/scripts`, so check them whenever it gets a major bump.
+
+Known and accepted: `katex` <0.18.2 (low) via `markdownlint` → `micromark-extension-math` (`^0.16.0`). It only renders math in Markdown linting, which the theme does not run, and the fix is a breaking `katex` 0.x bump. Drop this note when `micromark-extension-math` asks for `katex` ≥0.18.2.
 
 ## Checking a row
 

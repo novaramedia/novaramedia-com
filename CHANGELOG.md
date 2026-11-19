@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Batch dependency update clearing all fixable Dependabot alerts, including both criticals, with @wordpress/scripts 34→35. Dev-only; built theme and block assets unchanged
 - CMB2 2.11.0 → 2.13.5, picking up upstream escaping fixes for stored field values and REST object validation
 - In-range dev dependency refresh clearing the follow-redirects, basic-ftp and serialize-javascript alerts; jQuery 4.0.0 → 4.1.0
+- @wordpress/scripts 35→37 and npm overrides for the glob, minimatch and markdownlint-cli chains. Dev-only; built theme and block assets unchanged. Local development now needs Node 22.22.2+ or 24.15+
 
 ## [4.10.0] - 2026-10-01
 
