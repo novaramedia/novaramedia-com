@@ -69,7 +69,7 @@ function nm_resolve_post( $post_id ) {
   return array(
     'id'           => $post_id,
     'found'        => true,
-    'title'        => get_the_title( $post ),
+    'title'        => html_entity_decode( get_the_title( $post ), ENT_QUOTES, 'UTF-8' ), // plain text: consumers render it as a text node
     'status'       => $status,
     'status_label' => $status_label,
     'date'         => get_the_date( 'j M Y', $post ),

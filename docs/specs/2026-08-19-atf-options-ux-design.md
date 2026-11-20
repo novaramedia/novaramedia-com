@@ -98,56 +98,68 @@ section ordering; this design does the same for the featured-post zones.
 
 ### 4. ATF preview module (phase 2 UX)
 
+> Revised 2026-11-20 after a review on DevKinsta: the first build used a
+> three-column skeleton that didn't match the front page, a static Latest
+> column, and showed unset slots as empty when the front page auto-fills them.
+
 **Injection.** `cmb2_before_form` hook filtered to the
-`nm_above_the_fold_featured_options_page` box (mechanism family as the
-validator's `cmb2_after_form`). PHP renders the skeleton + saved-state data
-inline; page-specific JS (`lib/admin/js/atf-preview.js`) keeps it live.
+`nm_above_the_fold_featured_options_page` box. PHP renders the preview from
+the saved option; `lib/admin/js/atf-preview.js` keeps it live.
 
-**Structure** mirrors `partials/front-page/above-the-fold.php`'s real grid:
+**One renderer.** `nm_atf_preview_render_grid( $slot_values )` builds the
+markup for both page load and live updates. On a slot change the JS sends the
+8 current values to `GET nm/v1/atf-preview` (`edit_posts`, same as the
+options page) and swaps in the returned grid, because one slot can change the
+auto-fill and the Latest column everywhere.
+
+**What it shows is what the front page shows.** Slots go through
+`nm_fill_above_the_fold_post_ids()`, the function the front page uses (split
+out of `get_above_the_fold_featured_post_ids()`), and Latest comes from
+`get_latest_news_ids()` with the filled slots excluded.
+
+**Structure** mirrors the desktop front page (`above-the-fold.styl`,
+`featured-posts-block.php`):
 
 ```
-┌─ ABOVE THE FOLD (click a zone to edit it) ───────────────────┐
-│ Featured block 1        │ Latest      │ Featured block 2     │
-│ ▓ thumb + title (large) │ (greyed:    │ ▓ thumb + title      │
-│ ▓ thumb + title (med)   │ automatic — │ ▓ thumb + title      │
-│ · title line            │ latest News)│ · title line         │
-│ · title line            │             │ · title line         │
-└──────────────────────────────────────────────────────────────┘
+┌─ Block 1 ─────────────────────────────┬─ Latest ───┐
+│ ▓ main (2/3)            │ ▓ 2nd       │ trail      │
+│                         │ · 3rd       │ title      │
+│                         │ · 4th       │ ... (7)    │
+├─ Block 2 (mirrored) ────┴─────────────┤            │
+│ ▓ 2nd   │ ▓ main (2/3)                │            │
+│ · 3rd   │                             │            │
+│ · 4th   │                             │            │
+└─────────────────────────────────────────┴────────────┘
 ```
 
-- Primary and 2nd zones show thumbnail + title (they render thumbnails on the
-  front end); 3rd/4th zones are title-only lines (they don't).
-- Latest-articles column is static grey — it is query-driven, not editable
-  here.
-- Small text badges under each block's primary zone reflect its option fields:
-  "See Also ✓", "More On: <section>", "Product-linked ✓", "Video embed ✓".
+- Every post carries its category trail, top level / sub-category (e.g.
+  "Video / Downstream", "Articles / Opinion"), with a type marker colour, so
+  the content mix is visible at a glance.
+- Thumbnails use the alternative thumbnail when set, as `render_thumbnail()`
+  does.
+- Badges under each main post reflect its option fields: "See Also ✓",
+  "More On: <section>", "Product-linked ✓", "Video embed ✓".
 
-**Colour grammar (edit-state):**
+**States:**
 
-| State | Rendering |
-|---|---|
-| Saved value, untouched this session | Neutral — page load shows no colour at all |
-| Value changed since page load (unsaved) | Green |
-| Empty zone | Dashed grey outline |
-| Broken — ID unresolvable, deleted, or not published | Red |
-| Collision — same ID in two zones | Both zones amber + note strip naming them ("Same post in Featured 1 primary and Featured 2 4th") |
+| State | Source | Rendering |
+|---|---|---|
+| Saved, untouched | — | Neutral |
+| Auto-filled (unset slot) | server | Dashed, "Auto-filled · trail" |
+| Nothing to fill with | server | Dashed grey "Empty — click to set" |
+| Saved post can't show (missing/unpublished) | server | Red, reason, then the post that fills in |
+| Changed since page load | browser | Green |
+| Same post in two slots | browser | Both amber + note strip naming them |
 
-Precedence when states overlap: red > amber > green. (A changed-but-broken
-zone is red; a changed-and-colliding pair is amber; green only when the new
-value is valid and unique.)
+Precedence: red > amber > green.
 
-**Interaction.** Click a zone → smooth-scroll to its field row, focus the
-input, flash-highlight the row. No editing inside the preview — it is a map,
-not a second form.
-
-**Liveness.** Any watched field change (pickers, checkboxes, selects)
-re-renders the affected zones from the same debounced batch resolve. Baseline
-values are captured at page load for the changed/unchanged comparison.
+**Interaction.** Click a post → scroll to its field row, focus the input,
+flash the row. The preview is a map, not a second form.
 
 ## Failure handling
 
-- Endpoint unreachable/error: hints render nothing; preview shows a single
-  "Couldn't load post data — preview may be stale" banner. Never blocks form
+- Endpoint unreachable/error: hints render nothing; preview keeps its last
+  good grid and shows "Couldn't update the preview — it may be out of date". Never blocks form
   interaction or saving.
 - Everything is display-only. The CMB2 save path is untouched; the feature can
   fail completely with zero risk to stored options.

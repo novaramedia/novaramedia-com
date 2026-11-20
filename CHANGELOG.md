@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
-- Above the Fold options page shows a clickable mock layout of the section — zones display the chosen posts, colour-code unsaved/broken/duplicate choices, and jump to the matching field on click
+- Above the Fold options page shows a preview of the section as the front page lays it out, including auto-filled slots, the Latest column and each post's category (e.g. Video / Downstream); click a post to jump to its field
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
