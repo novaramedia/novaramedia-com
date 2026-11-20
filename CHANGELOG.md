@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Empty paragraphs and blank lines are stripped from post content, excerpts and text meta fields on save
 - Playwright staging tests skip a push to an open PR that only changes docs
 - Branded category archives use a block per brand (`if-i-speak-archive__wordmark`) instead of nested `category-archive__<brand>__<element>` classes
 - BEM naming rules added to the AI coding guidelines
