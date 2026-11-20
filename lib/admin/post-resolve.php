@@ -12,9 +12,9 @@
  *    script dependency and render the results themselves
  *
  * Read-only, and gated so it never returns more than the current user can
- * already see in wp-admin: published posts resolve for anyone who can hit
- * the endpoint, non-published posts (draft/private/trash/etc) only resolve
- * for users who can edit that specific post.
+ * already see: published posts of a viewable type resolve for anyone who
+ * can hit the endpoint; anything else (draft/private/trash, or a published
+ * post of an internal type) only for users who can edit that specific post.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,7 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Resolve one post ID to hint/preview metadata.
  *
  * 'found' is false when no post object exists for the ID, or when the post
- * exists but isn't published and the current user can't edit it — in either
+ * isn't public (not published, or an internal post type) and the current
+ * user can't edit it — in either
  * case there is nothing here the caller couldn't already see in wp-admin.
  * A trashed or draft post the user CAN edit is still found — its status
  * tells the caller it won't display publicly (spec: red = unresolvable OR
@@ -52,9 +53,12 @@ function nm_resolve_post( $post_id ) {
     return $not_found;
   }
 
-  // Mirror what this user can already see in wp-admin: published posts are
-  // visible to everyone there; anything else only if they can edit that post.
-  if ( 'publish' !== get_post_status( $post ) && ! current_user_can( 'edit_post', $post_id ) ) {
+  // Mirror what this user can already see: a published post of a viewable
+  // type (posts, pages, public custom types) is public anyway; anything else
+  // (drafts, trash, or internal types such as reusable blocks and nav menu
+  // items, which also use 'publish') only if they can edit that post.
+  $is_public = 'publish' === get_post_status( $post ) && is_post_type_viewable( $post->post_type );
+  if ( ! $is_public && ! current_user_can( 'edit_post', $post_id ) ) {
     return $not_found;
   }
 
@@ -121,9 +125,10 @@ add_action( 'rest_api_init', 'nm_register_resolve_posts_route' );
 /**
  * Register (not enqueue) the browser client for the resolve endpoint.
  *
- * Registered early on both enqueue hooks so any consumer can enqueue the
- * `nm-post-resolve` handle or depend on it. The endpoint URL and nonce ride
- * along on the nmPostResolve global.
+ * Registered early on admin_enqueue_scripts so any admin consumer can enqueue
+ * the `nm-post-resolve` handle or depend on it. The endpoint URL and nonce
+ * ride along on the nmPostResolve global. Not registered on the front end:
+ * every consumer is a wp-admin screen, and the endpoint needs edit_posts.
  */
 function nm_register_post_resolve_client() {
   wp_register_script(
@@ -143,4 +148,3 @@ function nm_register_post_resolve_client() {
   );
 }
 add_action( 'admin_enqueue_scripts', 'nm_register_post_resolve_client', 1 );
-add_action( 'wp_enqueue_scripts', 'nm_register_post_resolve_client', 1 );

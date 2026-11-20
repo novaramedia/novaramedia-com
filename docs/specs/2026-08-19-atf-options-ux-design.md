@@ -69,7 +69,9 @@ section ordering; this design does the same for the featured-post zones.
   `X-WP-Nonce` cookie auth (`wp_create_nonce( 'wp_rest' )` localized alongside
   the script). That gate only decides who can hit the endpoint at all —
   per-post visibility is narrower: a resolved post's metadata is returned only
-  if it's published, or the current user can `edit_post` that specific post;
+  if it's published and of a viewable post type (`is_post_type_viewable()`,
+  so internal types like `wp_block` that also use `publish` don't count), or
+  the current user can `edit_post` that specific post;
   otherwise it comes back as the `found: false` shape. This mirrors what the
   user can already see in wp-admin (e.g. a Contributor can't see another
   user's draft there either), so the endpoint never reveals more than that.
