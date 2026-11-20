@@ -9,10 +9,6 @@
  * @link https://github.com/WebDevStudios/CMB2-Post-Search-field
  */
 
-if ( class_exists( 'CMB2_Post_Search_field' ) ) {
-  return; // Another copy already loaded (belt and braces; the vendor copy is removed).
-}
-
 class CMB2_Post_Search_field {
 
 	protected static $single_instance = null;
