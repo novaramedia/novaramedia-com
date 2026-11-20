@@ -134,37 +134,13 @@
   font-size: 13px;
 }
 
-/* Category trail, e.g. "Video / Downstream", with a type marker. */
+/* Category trail, e.g. "Video / Downstream". */
 .nm-atf-preview__trail {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #50575e;
-}
-
-.is-type-articles .nm-atf-preview__trail::before,
-.is-type-video .nm-atf-preview__trail::before,
-.is-type-audio .nm-atf-preview__trail::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 5px;
-  border-radius: 50%;
-  vertical-align: 0;
-}
-
-.is-type-articles .nm-atf-preview__trail::before {
-  background: #2271b1;
-}
-
-.is-type-video .nm-atf-preview__trail::before {
-  background: #d63638;
-}
-
-.is-type-audio .nm-atf-preview__trail::before {
-  background: #8c5fc7;
 }
 
 .nm-atf-preview__problem {

@@ -133,8 +133,9 @@ out of `get_above_the_fold_featured_post_ids()`), and Latest comes from
 ```
 
 - Every post carries its category trail, top level / sub-category (e.g.
-  "Video / Downstream", "Articles / Opinion"), with a type marker colour, so
-  the content mix is visible at a glance.
+  "Video / Downstream", "Articles / Opinion"), so the content mix is visible
+  at a glance. Plain text only: no invented colours outside the WordPress
+  admin palette.
 - Thumbnails use the alternative thumbnail when set, as `render_thumbnail()`
   does.
 - Badges under each main post reflect its option fields: "See Also ✓",

@@ -52,7 +52,7 @@ function nm_atf_preview_zones() {
  * tags posts with (render_post_ui_tags()).
  *
  * @param int $post_id Post ID.
- * @return array{trail:string, type:string} type is the top-level slug (articles, video, audio) or ''.
+ * @return array{trail:string}
  */
 function nm_atf_preview_category_trail( $post_id ) {
   $top = get_the_top_level_category( $post_id );
@@ -66,10 +66,7 @@ function nm_atf_preview_category_trail( $post_id ) {
     $parts[] = $sub->name;
   }
 
-  return array(
-    'trail' => implode( ' / ', $parts ),
-    'type'  => $top ? $top->slug : '',
-  );
+  return array( 'trail' => implode( ' / ', $parts ) );
 }
 
 /**
@@ -128,7 +125,7 @@ function nm_atf_preview_state( $saved_ids ) {
 
     $slot['title']     = $shown_id ? get_the_title( $shown_id ) : '';
     $slot['thumbnail'] = $shown_id ? nm_atf_preview_thumbnail_url( $shown_id ) : '';
-    $slot              = array_merge( $slot, $shown_id ? nm_atf_preview_category_trail( $shown_id ) : array( 'trail' => '', 'type' => '' ) );
+    $slot              = array_merge( $slot, $shown_id ? nm_atf_preview_category_trail( $shown_id ) : array( 'trail' => '' ) );
 
     $slots[ $i ] = $slot;
   }
@@ -164,10 +161,6 @@ function nm_atf_preview_zone_html( $zone, $slot ) {
     $classes[] = 'is-auto';
   } elseif ( ! $slot['shown_id'] ) {
     $classes[] = 'is-empty';
-  }
-
-  if ( $slot['type'] ) {
-    $classes[] = 'is-type-' . sanitize_html_class( $slot['type'] );
   }
 
   $html  = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-nm-zone data-field="' . esc_attr( $zone['field'] ) . '" data-saved-id="' . esc_attr( $slot['saved_id'] ) . '" data-label="' . esc_attr( $zone['label'] ) . '" role="button" tabindex="0" title="Click to edit ' . esc_attr( $zone['label'] ) . '">';
@@ -225,7 +218,7 @@ function nm_atf_preview_render_grid( $saved_ids ) {
   if ( $state['latest'] ) {
     $latest .= '<ol class="nm-atf-preview__latest-list">';
     foreach ( $state['latest'] as $item ) {
-      $latest .= '<li class="nm-atf-preview__latest-item' . ( $item['type'] ? ' is-type-' . sanitize_html_class( $item['type'] ) : '' ) . '">';
+      $latest .= '<li class="nm-atf-preview__latest-item">';
       if ( $item['trail'] ) {
         $latest .= '<span class="nm-atf-preview__trail">' . esc_html( $item['trail'] ) . '</span>';
       }
