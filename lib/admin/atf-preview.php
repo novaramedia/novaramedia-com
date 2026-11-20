@@ -90,6 +90,26 @@ function nm_atf_preview_thumbnail_url( $post_id ) {
 }
 
 /**
+ * Slot ids with any the current user may not see replaced by 0 (unset).
+ *
+ * The preview route takes arbitrary ids, so they pass the same visibility
+ * gate as the title lookup (nm_resolve_post()) before anything about them
+ * is rendered. A hidden id is then auto-filled like an unset slot and shown
+ * as "No post with ID …".
+ *
+ * @param int[] $saved_ids Slot ids in slot order (0 = unset).
+ * @return int[]
+ */
+function nm_atf_preview_visible_ids( $saved_ids ) {
+  return array_map(
+    function ( $id ) {
+      return ( $id && nm_resolve_post( $id )['found'] ) ? $id : 0;
+    },
+    $saved_ids
+  );
+}
+
+/**
  * Display state for every slot plus the Latest column, for a set of slot
  * values (saved or still being edited).
  *
@@ -98,7 +118,7 @@ function nm_atf_preview_thumbnail_url( $post_id ) {
  */
 function nm_atf_preview_state( $saved_ids ) {
   $saved_ids = array_map( 'absint', array_pad( array_slice( array_values( $saved_ids ), 0, 8 ), 8, 0 ) );
-  $effective = nm_fill_above_the_fold_post_ids( $saved_ids, nm_get_latest_featurable_post_ids() );
+  $effective = nm_fill_above_the_fold_post_ids( nm_atf_preview_visible_ids( $saved_ids ), nm_get_latest_featurable_post_ids() );
   $effective = is_array( $effective ) ? $effective : array_fill( 0, 8, 0 );
 
   $slots = array();
