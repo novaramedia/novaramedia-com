@@ -1,0 +1,327 @@
+# Playwright Tests with Staging Deployment
+#
+# This workflow:
+# 1. Deploys the PR branch to Kinsta staging via git pull over SSH
+# 2. Activates the theme via WP-CLI over SSH
+# 3. Clears Kinsta cache
+# 4. Verifies staging is accessible
+# 5. Runs Playwright tests against staging
+# 6. Resets staging back to development branch (cleanup)
+#
+# Dependabot PRs are skipped; dependabot-build.yml covers them. Draft PRs are
+# skipped until marked ready for review. A new push cancels the PR's previous
+# run; its always() cleanup still resets staging before the next run deploys.
+# A push that only changes docs skips the deploy (see the `changes` job).
+#
+# Required GitHub Secrets:
+# - KINSTA_SSH_KEY: SSH private key for server access
+# - KINSTA_SSH_USER: SSH username (main Kinsta user)
+# - KINSTA_SFTP_HOST: SSH hostname (from MyKinsta → Sites → Info → SFTP/SSH)
+#     NOTE: This secret is named KINSTA_SFTP_HOST for legacy reasons. On a fresh
+#     setup, name it KINSTA_SSH_HOST and update the references below to match.
+# - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
+# - STAGING_URL: Full URL of staging site (e.g., https://stg-novaramediacom-staging.kinsta.cloud)
+# - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
+# - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
+#
+# One-time server setup required — see docs/plans/archive/ci-speedup.md
+
+name: Playwright Tests (Staging)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - master
+      - main
+      - development
+    # Only files that change what staging serves or how the tests run.
+    # Staging serves committed dist/ and blocks/, so src/ alone changes nothing.
+    paths:
+      - '**.php'
+      - 'style.css'
+      - 'dist/**'
+      - 'blocks/**'
+      - 'vendor/**'
+      - 'tests/e2e/**'
+      - 'playwright.config.js'
+      - 'package-lock.json'
+      - '.github/workflows/playwright.yml'
+  # Allow manual triggering
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read # the `changes` job reads the previous run's conclusion
+
+# A new push to a PR cancels that PR's run still in progress.
+concurrency:
+  group: playwright-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The `paths` filter above is evaluated against the whole PR on pull_request
+  # events, so it cannot skip a push that only changes docs on a PR that also
+  # changes code. Compare the pushed commits here instead. Fails open: anything
+  # unexpected runs the suite. Skips only when the previous push's run passed,
+  # because this push's run has already cancelled any in-progress one.
+  changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      skip: ${{ steps.push.outputs.skip }}
+    steps:
+      - name: Check whether this push changed anything staging serves
+        id: push
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTION: ${{ github.event.action }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          skip=false
+          if [ "$ACTION" = "synchronize" ]; then
+            # The compare API needs no checkout. A force-push leaves `before`
+            # outside `after`'s history and reports anything but "ahead". The
+            # file list is capped at 300, so a bigger push always runs.
+            if compare=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${BEFORE}...${AFTER}" 2>/dev/null) \
+              && [ "$(jq -r '.status' <<<"$compare")" = "ahead" ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -gt 0 ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -lt 300 ]; then
+              files=$(jq -r '.files[].filename' <<<"$compare")
+              if ! grep -v -E '^(docs/|\.claude/)|\.md$' <<<"$files" >/dev/null; then
+                previous=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/playwright.yml/runs?event=pull_request&head_sha=${BEFORE}&per_page=1" \
+                  --jq '.workflow_runs[0].conclusion' 2>/dev/null || true)
+                if [ "$previous" = "success" ]; then
+                  skip=true
+                  echo "Only documentation changed in this push and the previous run passed; skipping staging:"
+                  echo "$files"
+                else
+                  echo "Only documentation changed, but the previous run's conclusion is '${previous:-none}'; running"
+                fi
+              fi
+            fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
+  deploy-and-test:
+    needs: changes
+    # Skip pushes that only changed docs (see `changes` above).
+    # Skip fork PRs — secrets are not available and the job would fail.
+    # Skip Dependabot PRs too: they only get Dependabot secrets (no SSH key),
+    # and staging serves committed dist/, which a lockfile bump never changes.
+    # dependabot-build.yml checks those PRs instead.
+    # Skip drafts: marking the PR ready for review runs it.
+    if: needs.changes.outputs.skip != 'true' && (github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' && !github.event.pull_request.draft))
+    # Only one run touches staging at a time, across all PRs. Never cancelled
+    # from here: a run waits for the previous one's cleanup to finish.
+    concurrency:
+      group: kinsta-staging
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ========================================
+      # DEPLOY TO STAGING VIA GIT PULL
+      # ========================================
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KINSTA_SSH_KEY" > ~/.ssh/kinsta_key
+          chmod 600 ~/.ssh/kinsta_key
+          ssh-keyscan -p "$KINSTA_SSH_PORT" "$KINSTA_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          KINSTA_SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Deploy PR commit to staging
+        run: |
+          echo "Deploying commit ${COMMIT_SHA} to staging via git..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "set -e; \
+             if [ ! -d public/wp-content/themes/novaramedia-com/.git ]; then \
+               echo 'No .git in theme dir — re-cloning (repo appears to have been overwritten by a file copy)'; \
+               cd public/wp-content/themes && \
+               ts=\$(date +%s)-\$RANDOM && \
+               if [ -e novaramedia-com ]; then mv novaramedia-com ~/novaramedia-com.broken.\$ts; fi && \
+               GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=accept-new' git clone git@github.com:novaramedia/novaramedia-com.git novaramedia-com && \
+               cd ~; \
+             fi; \
+             cd public/wp-content/themes/novaramedia-com && \
+             git fetch origin && \
+             git reset --hard HEAD && \
+             git clean -fd && \
+             git checkout ${COMMIT_SHA}"
+
+          echo "Deployment complete"
+        env:
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Activate theme via WP-CLI
+        run: |
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+          echo "Theme activated"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      # Cache clear is best-effort - the gotoFresh() helper in
+      # tests/e2e/helpers/ appends a unique cache-bust query string to every
+      # navigation so tests always fetch fresh HTML even if this step fails.
+      # Warnings here are surfaced via ::warning:: annotations so issues are
+      # visible in the GitHub UI without blocking the workflow.
+      #
+      # Endpoint reference: https://api-docs.kinsta.com/api-reference/wordpress-site-tools/clear-site-cache
+      - name: Clear Kinsta cache
+        continue-on-error: true
+        run: |
+          if [ -z "$KINSTA_API_KEY" ] || [ -z "$KINSTA_STAGING_ENV_ID" ]; then
+            echo "::warning::Kinsta API secrets not configured - skipping cache clear (test cache-bust will handle freshness)"
+            exit 0
+          fi
+
+          echo "Clearing Kinsta cache..."
+          if ! response=$(curl -sS --connect-timeout 10 --max-time 30 -w "\n%{http_code}" -X POST \
+            "https://api.kinsta.com/v2/sites/tools/clear-cache" \
+            -H "Authorization: Bearer ${KINSTA_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{\"environment_id\": \"${KINSTA_STAGING_ENV_ID}\"}"); then
+            echo "::warning::Kinsta cache clear curl failed (network/DNS/timeout) - check KINSTA_API_KEY and endpoint reachability; test cache-bust will handle freshness"
+            exit 0
+          fi
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Cache clear response: $http_code"
+          echo "$body"
+
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "::warning::Kinsta cache clear returned HTTP $http_code - check KINSTA_STAGING_ENV_ID and KINSTA_API_KEY secrets / endpoint path"
+            exit 0
+          fi
+
+          sleep 10
+        env:
+          KINSTA_API_KEY: ${{ secrets.KINSTA_API_KEY }}
+          KINSTA_STAGING_ENV_ID: ${{ secrets.KINSTA_STAGING_ENV_ID }}
+
+      - name: Verify staging is accessible
+        run: |
+          echo "Checking if staging site is accessible..."
+          max_attempts=12
+          attempt=1
+
+          while [ $attempt -le $max_attempts ]; do
+            http_code=$(curl -L -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
+
+            if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 400 ]; then
+              echo "Staging site is accessible (HTTP $http_code)"
+
+              # Diagnostic: list data-testid values present on the homepage.
+              # Helps debug cases where a test asserts a testid but the
+              # template branch that emits it is skipped (e.g. above-the-fold
+              # returns early when no featured posts are configured).
+              echo "--- data-testid values on staging homepage ---"
+              if ! testid_html=$(curl -L -sS --connect-timeout 10 --max-time 30 "${STAGING_URL}/?cache_bust=$(date +%s)"); then
+                echo "::warning::testid diagnostic curl failed (network/timeout) - skipping"
+              else
+                testid_matches=$(printf '%s' "$testid_html" | grep -oE 'data-testid="[^"]+"' | sort -u || true)
+                if [ -n "$testid_matches" ]; then
+                  printf '%s\n' "$testid_matches"
+                else
+                  echo "(no data-testid attributes found)"
+                fi
+              fi
+              echo "--- end testid diagnostic ---"
+              exit 0
+            fi
+
+            echo "Attempt $attempt/$max_attempts: HTTP $http_code - waiting..."
+            sleep 10
+            attempt=$((attempt + 1))
+          done
+
+          echo "Staging site not accessible after $max_attempts attempts"
+          exit 1
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+      # ========================================
+      # RUN PLAYWRIGHT TESTS
+      # ========================================
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests against staging
+        run: npx playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ secrets.STAGING_URL }}
+
+      # ========================================
+      # UPLOAD ARTIFACTS
+      # ========================================
+
+      - name: Upload Playwright report on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-artifacts-${{ github.run_id }}
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
+
+      # ========================================
+      # CLEANUP: Reset staging to development
+      # ========================================
+
+      - name: Reset staging to development branch
+        if: always()
+        continue-on-error: true
+        run: |
+          echo "Resetting staging back to development branch..."
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public/wp-content/themes/novaramedia-com && \
+             git checkout development && \
+             git reset --hard origin/development"
+
+          ssh -i ~/.ssh/kinsta_key -p "$KINSTA_SSH_PORT" \
+            "${KINSTA_SSH_USER}@${KINSTA_SSH_HOST}" \
+            "cd public && wp theme activate novaramedia-com"
+
+          echo "Staging reset to development branch"
+        env:
+          KINSTA_SSH_PORT: ${{ secrets.KINSTA_SSH_PORT }}
+          KINSTA_SSH_USER: ${{ secrets.KINSTA_SSH_USER }}
+          KINSTA_SSH_HOST: ${{ secrets.KINSTA_SFTP_HOST }}
+
+      - name: Cleanup SSH keys
+        if: always()
+        run: rm -f ~/.ssh/kinsta_key

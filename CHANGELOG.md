@@ -11,19 +11,113 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
 - Above the Fold options page shows a clickable mock layout of the section — zones display the chosen posts, colour-code unsaved/broken/duplicate choices, and jump to the matching field on click
-
-### Security
-
-- Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
+- PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
+- Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
 ### Changed
 
-- Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
+- Empty paragraphs and blank lines are stripped from post content, excerpts and text meta fields on save
+- Playwright staging tests skip a push to an open PR that only changes docs
+- Branded category archives use a block per brand (`if-i-speak-archive__wordmark`) instead of nested `category-archive__<brand>__<element>` classes
+- BEM naming rules added to the AI coding guidelines
+- Deprecation policy: remove deprecated code once verified unused in the repo and the production database; the 4-minor window is now a deadline, not a wait
+- Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
+- Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
+- Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
 - CMB2 Post Search field addon forked into the theme (`lib/meta/`) — upstream unmaintained since 2019; composer dependency removed
 
 ### Removed
 
+- Legacy newsletter page templates (`page-newsletters.php`, `page__newsletter.php` "Newsletter" template) and their page meta box, deprecated since 4.2.0
+
+### Fixed
+
+- Newsletter signup forms now include the hidden `nm_hp` honeypot field the signup service checks, so its bot filter actually catches form-filling bots. Until now the field was never sent, so the filter did nothing
+- Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
+- Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+- Make Links External editor button now applies to every link in the post when nothing is selected, and no longer skips links that already carry a `rel` such as nofollow
+- Committed, Foreign Agent and Death in Westminster archive listen links now point at each show's own Apple Podcasts page and RSS feed (the feeds.novaramedia.com worker feed, or the show's Spotify for Creators feed for Death in Westminster), instead of the master Novara Media pages, the Podfollow chooser or the Blubrry mirror
+
+### Removed
+
+- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
+
+### Security
+
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals, with @wordpress/scripts 34→35. Dev-only; built theme and block assets unchanged
+- CMB2 2.11.0 → 2.13.5, picking up upstream escaping fixes for stored field values and REST object validation
+- In-range dev dependency refresh clearing the follow-redirects, basic-ftp and serialize-javascript alerts; jQuery 4.0.0 → 4.1.0
+- @wordpress/scripts 35→37 and npm overrides for the glob, minimatch and markdownlint-cli chains. Dev-only; built theme and block assets unchanged. Local development now needs Node 22.22.2+ or 24.15+
+
+## [4.10.0] - 2026-10-01
+
+### Added
+
+- Season and episode numbers can be set on any post; capsule podcast archives now take their episode labels from them
+- Do Your Own Research archive splits episodes by season, each with its own map that loads on click
+- Do Your Own Research front page block that shows only the current season
+
+### Changed
+
+- If I Speak category archive redesign: new hero and a text-only episode grid
+- `archive-post-no-thumbnail` partial renamed `archive-post-opinion`
+
+### Fixed
+
+- Do Your Own Research archive: the hero and map boxes no longer overhang the rest of the page
+
+### Deprecated
+
+- Do Your Own Research category map fields, replaced by per-season entries under Products → Do Your Own Research. Migration: add a season 1 entry there with the category's file key before 4.11.0; until then season 1 keeps using the category fields
+
+## [4.9.0] - 2026-09-25
+
+### Added
+
+- The Cortado category archive at `/the-cortado/` as well as its category URL. The newsletter's own permalink now redirects to it
+- The Cortado front page product block
+- The Cortado gets its own inline newsletter signup design in the Gutenberg block
+- Newsletter signups now send which form was used, the page, the referring site and any campaign tags, so we can start recording where subscribers come from
+
+### Changed
+
+- Downstream front page block sits in a white box, matching the other product blocks
+- Off-white page background across the whole site; newsletter signups on it are always boxed, white ones included
+- End-to-end tests run on Playwright instead of Cypress, with third-party embeds blocked during tests so page loads no longer wait on SoundCloud or YouTube
+- Newer and Older pagination links are separated by an em dash instead of a bare space, which ran the two words together. Affects every paginated archive
+- Newsletter signup blocks without a banner image now fill the row, closing a four-column gap on the right
+- Image minification uses sharp (JPEG q85, PNG quantization — output kept only when smaller than source) and svgo (SVG) directly, replacing the imagemin plugin chain and its vulnerable binary-download dependencies
+- Job posting structured data locations reduced to city and postcode-district level, and Leeds office moved to Mabgate Mills
+- `/committed` serves the Committed archive in place, like the other branded URLs, instead of redirecting to its category URL (#606)
+
+### Removed
+
+- Cypress test runner, specs and CI workflow
 - Unused dev dependencies: jshint toolchain, kouto-swiss, imagemin-gifsicle
+
+### Fixed
+
+- Stylesheet and script caching off production — assets are versioned by file modification time on local, dev and staging, so a rebuild is picked up without a hard refresh instead of being masked until the next release
+- Slack release notification fires again — workflow now matches the `Release: x.y.z` PR titles created by `scripts/release.sh` (#588)
+- Front page featured zones skip non-published posts, falling back to the latest featured post instead of linking to a dead page (#591)
+- Pagination on product vanity URLs — `/downstream/page/2/` and the equivalent on every other branded path 404'd instead of serving page two (#607)
+- Support form's frequency and amount controls are announced with their own labels by screen readers; duplicate IDs had pointed them at the wrong ones (#609)
+
+### Security
+
+- Dev dependency bumps clearing the open Dependabot alerts for sharp, svgo, js-yaml, fast-uri and adm-zip. The remaining extract-zip alerts have no patched release and only reach `@wordpress/scripts` test tooling
+- Batch dependency update clearing all fixable Dependabot alerts, including both criticals — dev-only; production dependencies audit clean
+
+## [4.8.1] - 2026-08-19
+
+### Added
+
+- Hotfix release flow: `./scripts/release.sh --hotfix` releases a patch from a `hotfix/*` branch cut from master (documented in `docs/releases.md`)
+
+### Fixed
+
+- Standfirst no longer required on Novara Live posts
 
 ## [4.8.0] - 2026-07-27
 

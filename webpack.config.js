@@ -19,6 +19,55 @@ const postcssPresetEnv = require('postcss-preset-env');
 const sharp = require('sharp');
 const fs = require('fs').promises;
 
+// PNG text and time chunks (tEXt, iTXt, zTXt, tIME) carry authoring metadata
+// such as Photoshop XMP packets that browsers never read. Drop them before the
+// lossless pass; colour chunks (gAMA, sRGB, iCCP) stay because they affect
+// rendering.
+const PNG_METADATA_CHUNKS = new Set(['tEXt', 'iTXt', 'zTXt', 'tIME']);
+const stripPngChunks = (buffer) => {
+  const kept = [buffer.subarray(0, 8)];
+  let offset = 8;
+  while (offset + 12 <= buffer.length) {
+    const length = buffer.readUInt32BE(offset);
+    const type = buffer.toString('ascii', offset + 4, offset + 8);
+    const end = offset + 12 + length;
+    if (!PNG_METADATA_CHUNKS.has(type)) {
+      kept.push(buffer.subarray(offset, end));
+    }
+    offset = end;
+    if (type === 'IEND') break;
+  }
+  return Buffer.concat(kept);
+};
+
+// Lossless PNG optimisation with oxipng, as WebAssembly (@jsquash/oxipng):
+// no binary download, runs anywhere Node does. ESM package, so it is
+// imported lazily from this CommonJS config and initialised once; the
+// wasm is read from the package because the loader's fetch() path does
+// not work under Node.
+let oxipngReady;
+const losslessPng = async (buffer) => {
+  if (!oxipngReady) {
+    oxipngReady = (async () => {
+      const mod = await import('@jsquash/oxipng/optimise.js');
+      const pkgDir = path.dirname(
+        require.resolve('@jsquash/oxipng/package.json')
+      );
+      const wasm = await fs.readFile(
+        path.join(pkgDir, 'codec', 'pkg', 'squoosh_oxipng_bg.wasm')
+      );
+      await mod.init(await WebAssembly.compile(wasm));
+      return mod.default;
+    })();
+  }
+  const optimise = await oxipngReady;
+  // Level 3: level 6 shaves a further 0.2% for 1.7x the time (six large
+  // sources, 2026-10-27).
+  return Buffer.from(
+    await optimise(stripPngChunks(buffer), { level: 3, interlace: false })
+  );
+};
+
 var config = {
   entry: './src/js/main.js',
 
@@ -211,6 +260,10 @@ module.exports = (env, argv) => {
       // textural PNGs can quantize LARGER than a losslessly optimized
       // source. Note the guard is size-only: JPEG re-encoding is lossy and
       // nearly always smaller, so JPEGs effectively always re-encode.
+      //
+      // Every PNG also gets a lossless oxipng pass, so an unoptimized source
+      // never ships as-is: src/img holds originals, the build owns
+      // optimization. Smallest of quantized / lossless / original wins (#625).
       new ImageMinimizerPlugin({
         test: /\.(jpe?g|png)$/i,
         minimizer: {
@@ -219,9 +272,18 @@ module.exports = (env, argv) => {
               original,
               options
             );
-            return result.data.length < original.data.length
-              ? result
-              : original;
+            let best =
+              result.data.length < original.data.length ? result : original;
+
+            if (/\.png$/i.test(original.filename)) {
+              const lossless = await losslessPng(original.data);
+
+              if (lossless.length < best.data.length) {
+                best = { ...original, data: lossless };
+              }
+            }
+
+            return best;
           },
           options: {
             encodeOptions: {

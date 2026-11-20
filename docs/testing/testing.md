@@ -1,297 +1,241 @@
-# Testing Documentation
+# Testing
 
-This document provides detailed information about the Cypress testing setup for the Novara Media WordPress theme.
+End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on non-draft pull requests that change what staging serves (see [CI](#ci)) and can be run locally against any deployment of the theme.
 
-## Overview
+## Philosophy
 
-We use [Cypress](https://www.cypress.io/) for automated end-to-end testing of critical theme functionality. Tests run automatically on Pull Requests via GitHub Actions and must pass before code can be merged.
+A smoke-test layer, not a behaviour suite. Each spec checks that a page type:
 
-## Test Philosophy
+- loads and has a title
+- renders the critical `data-testid` landmarks (`site-header`, `main-content`, `site-footer`)
+- holds up across mobile, tablet and desktop viewports
+- has no broken images in the main content (where checked)
+- logs no console errors the theme is responsible for
 
-Our tests follow a **smoke testing** approach, focusing on:
+Deliberately out of scope: visual regression, complex interaction flows and the third-party services themselves. PHP logic has its own unit suite; see [PHP unit tests](#php-unit-tests) below.
 
-- **Page loading** - Verify pages load without errors
-- **Critical elements** - Ensure key DOM elements are present
-- **Responsive design** - Test across mobile, tablet, and desktop viewports
-- **Asset integrity** - Check for broken images in main content
-- **JavaScript errors** - Catch console errors (excluding third-party scripts)
-
-We **intentionally avoid**:
-
-- Visual regression testing (planned for Phase 2)
-- Complex user interaction flows (planned for Phase 2)
-- Backend/PHP unit tests (separate concern)
-- Testing third-party integrations (e.g., payment processors)
-
-## Test Structure
-
-### Directory Layout
+## Layout
 
 ```
-cypress/
-├── e2e/                          # Test files
-│   ├── homepage.cy.js
-│   ├── support-page.cy.js
-│   ├── about-page.cy.js
-│   ├── jobs-page.cy.js
-│   ├── single-post.cy.js        # Article single posts
-│   ├── single-post-audio.cy.js  # Audio/podcast single posts
-│   ├── single-post-video.cy.js  # Video single posts
-│   └── novara-live-archive.cy.js
-├── support/                      # Helper files
-│   ├── commands.js               # Custom Cypress commands
-│   └── e2e.js                   # Global configuration
-├── fixtures/                     # Test data (currently unused)
-├── videos/                       # Test recordings (git-ignored)
-└── screenshots/                  # Failure screenshots (git-ignored)
+playwright.config.js           # runner config
+tests/e2e/
+├── homepage.spec.js
+├── about-page.spec.js
+├── jobs-page.spec.js
+├── support-page.spec.js
+├── novara-live-archive.spec.js
+├── single-post.spec.js         # articles
+├── single-post-audio.spec.js   # audio / podcast
+├── single-post-video.spec.js
+├── the-cortado.spec.js         # Cortado archive, newsletter 301, front-page block
+└── helpers/
+    ├── fixtures.js             # test/expect with embed blocking + console-error collector
+    ├── gotoFresh.js            # cache-busting navigation
+    ├── findPostUrlFromArchive.js
+    ├── checkImages.js
+    ├── testResponsive.js
+    └── verifyCriticalPageStructure.js
 ```
 
-### Configuration
+Failure artefacts land in `test-results/` (traces, videos, screenshots) and `playwright-report/`. Both are git-ignored.
 
-See `cypress.config.js` for:
+## Configuration
 
-- Base URL configuration
-- Viewport settings
-- Timeout values
-- Retry logic for flaky tests
-- Video/screenshot settings
+`playwright.config.js`:
 
-## Running Tests
+| Setting             | Value                                                 | Notes                                                                       |
+| ------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| `baseURL`           | `PLAYWRIGHT_BASE_URL`, else `https://novaramedia.com` | CI passes the `STAGING_URL` secret                                          |
+| viewport            | 1280×720                                              | `testResponsive` overrides per breakpoint                                   |
+| `fullyParallel`     | on                                                    | tests are read-only, so parallel workers are safe                           |
+| `retries`           | 2 in CI, 0 locally                                    |                                                                             |
+| `expect.timeout`    | 10s                                                   |                                                                             |
+| `navigationTimeout` | 30s                                                   | navigations wait on `domcontentloaded`, so embeds never gate page readiness |
+| artefacts           | video and screenshot on failure, trace on first retry |                                                                             |
+| browser             | Chromium only                                         | matches CI; add projects if cross-browser coverage is wanted                |
 
-### Locally
+`data-testid` is Playwright's default test-id attribute, so `page.getByTestId('site-header')` needs no configuration.
 
-Tests must run against a site with the branch's `data-testid` template attributes deployed. Use your local DevKinsta instance or the CI staging site.
+## Running locally
 
-**Quick Start:**
+Tests need a site running the branch's templates (the `data-testid` attributes live in PHP). Point them at DevKinsta or at staging:
 
 ```bash
-# Run against local DevKinsta (recommended)
-CYPRESS_BASE_URL=https://novaramediacom.local npm test
-
-# Open Cypress UI for interactive debugging
-CYPRESS_BASE_URL=https://novaramediacom.local npm run cy:open
-
-# Run a single spec
-CYPRESS_BASE_URL=https://novaramediacom.local npx cypress run --spec cypress/e2e/single-post-audio.cy.js
+npx playwright install chromium                                          # first run on a machine
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm test                 # headless, same as CI
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:headed      # watch the browser
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:ui          # Playwright UI mode
+PLAYWRIGHT_BASE_URL=https://novaramediacom.local npx playwright test single-post-audio   # one spec
 ```
 
-**Advanced Options:**
+Without `PLAYWRIGHT_BASE_URL` the suite runs against production.
+
+Playwright's bundled Chromium refuses to start on older macOS releases. Workaround: a local-only config (outside the repo) that spreads `playwright.config.js` and sets `channel: 'chrome'` on the project's `use`, passed with `--config`.
+
+## Helpers and fixtures
+
+### `fixtures.js`
+
+Import `test` and `expect` from here, not from `@playwright/test`. It adds:
+
+- **Embed blocking.** Requests to third-party embed hosts (YouTube, SoundCloud, Vimeo, X, Instagram, TikTok, Spotify and their CDNs) are aborted at the browser context, so pages render their embed markup without waiting on a third party. This is the structural fix for the page-load flake that the Cypress suite papered over with long timeouts and retries. Opt out per test or describe block with `test.use({ blockEmbeds: false })`.
+- **`consoleErrors`.** An auto fixture collecting `console.error` calls and uncaught page exceptions, filtered to errors the theme owns: analytics, social widgets and blocked embed hosts are ignored, matched on the message text and on the source URL's hostname. Assert with `expect(consoleErrors).toEqual([])`.
+
+### `gotoFresh(page, path)`
+
+Use instead of `page.goto`. Appends a unique `playwright_cache_bust` query string so Kinsta's full-page cache is bypassed even when the CI cache clear fails, and waits on `domcontentloaded`. Throws on a non-2xx response, as `cy.visit` did, so a broken deployment fails instead of skipping; pass `{ failOnStatusCode: false }` to visit an error page on purpose.
+
+### `findPostUrlFromArchive(page, archiveUrl)`
+
+Returns the first single-post permalink (`/YYYY/MM/DD/…`) from a category archive, or `null`. Excludes the serial-podcast categories (`foreign-agent`, `committed`) whose cards link to show pages rather than single posts. Keep that exclusion list in sync with `$serial_categories` in `lib/functions-hooks.php`.
+
+The single-post specs call it once per worker in `beforeAll` on a throwaway page, then the test navigates to the post itself with `gotoFresh`. If it returns `null` the spec skips.
+
+### `checkImages(page, { scope, limit })`
+
+Asserts rendered images decoded to a non-zero width, skipping lazysizes data-URI placeholders. Polls, because navigation only waits for `domcontentloaded`.
+
+### `testResponsive(page, callback)`
+
+Sets mobile (375×667), tablet (768×1024) and desktop (1280×720) viewports in turn, asserts the three landmarks at each, then runs the optional callback.
+
+### `verifyCriticalPageStructure(page)`
+
+Header visible, main content attached, footer visible.
+
+## Writing a spec
+
+```js
+const { test, expect } = require('./helpers/fixtures');
+const gotoFresh = require('./helpers/gotoFresh');
+const testResponsive = require('./helpers/testResponsive');
+const verifyCriticalPageStructure = require('./helpers/verifyCriticalPageStructure');
+
+test.describe('Page name', () => {
+  test('renders the page', async ({ page, consoleErrors }) => {
+    await gotoFresh(page, '/page-url/');
+
+    await test.step('loads successfully', async () => {
+      expect(new URL(page.url()).pathname).toBe('/page-url/');
+      await expect(page).toHaveTitle(/.+/);
+    });
+
+    await test.step('displays critical page elements', async () => {
+      await verifyCriticalPageStructure(page);
+    });
+
+    await test.step('is responsive at different viewports', async () => {
+      await testResponsive(page);
+    });
+
+    await test.step('loads without console errors', async () => {
+      expect(consoleErrors).toEqual([]);
+    });
+  });
+});
+```
+
+### One load per page
+
+Load each page once and run every check against it as a `test.step()`. Don't `gotoFresh` in `beforeEach` with one check per test.
+
+Each `gotoFresh` is an uncached WordPress render on staging and costs 3–4s; the checks themselves cost almost nothing. One test per check multiplied page loads by ten for the same coverage (audit in `docs/plans/playwright-speed.md`). Steps keep the report specific: a failure names the step that failed.
+
+- One `test()` per distinct URL. A spec covering several URLs (an archive plus a redirect, several categories) has one test each.
+- Read-only steps first, then interactions (clicks, toggles), then `testResponsive` (it changes the viewport), then the console-error step last so it covers the whole visit.
+- A failing step stops the rest of that test. That's accepted: fix the first failure, re-run.
+- A step that only applies when optional content is present calls `step.skip(condition, reason)` (the step callback's argument), not `test.skip()`, which would skip the whole page.
+- A check that needs its own setup before navigation (`test.use(...)`, `page.route(...)`) stays a separate test.
+
+Guidelines:
+
+- Tests are independent. Playwright runs them in parallel and in any order, so no test may rely on state another test left behind. Steps within one test share the page, in order.
+- Select with `data-testid` attributes added to the templates, not CSS classes. List the ids currently in the templates with `git grep -oh 'data-testid="[^"]*"' -- '*.php' | sort -u`.
+- Content changes daily. Assert shape (present, non-empty, matches a pattern) rather than specific text.
+- Let `expect` auto-wait. No `waitForTimeout`.
+- A bare `getByTestId('x')` is strict and fails if two elements match. Use `.first()` only where multiple matches are legitimate.
+
+## CI
+
+`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. It only runs when the PR changes something that can affect the result: PHP, `style.css`, `dist/`, `blocks/`, `vendor/`, `tests/e2e/`, `playwright.config.js`, `package-lock.json` or the workflow itself. Staging serves committed `dist/`, so a `src/` change without a rebuild can't change the outcome.
+
+- **Drafts are skipped.** Marking a PR ready for review runs it.
+- **A new push cancels the PR's previous run.** The cancelled run's `always()` cleanup still resets staging to `development`, and the new run waits for that before deploying.
+- **Dependabot PRs are skipped**; `dependabot-build.yml` checks they build.
+- **A push that only changes docs is skipped** (`docs/`, `.claude/`, any `*.md`), provided the previous push's run passed. GitHub evaluates the `paths` filter against the whole PR, not the push, so the `changes` job compares the pushed commits itself and fails open.
+
+Each run:
+
+1. Deploy the PR commit to Kinsta staging via SSH and `git checkout`
+2. Activate the theme with WP-CLI and clear the Kinsta cache (best-effort; `gotoFresh` covers a failed clear)
+3. Verify staging responds and print the `data-testid` values found on the homepage
+4. `npm ci`, install Chromium, `npx playwright test` with `PLAYWRIGHT_BASE_URL` set from the `STAGING_URL` secret
+5. Upload `playwright-report/` and `test-results/` as an artifact on failure
+6. Reset staging to `development`
+
+The job-level `kinsta-staging` concurrency group serialises runs so only one PR touches staging at a time; it never cancels. Fork PRs are skipped because the secrets are unavailable. The test phase dominates the runtime, not the deploy (a few seconds); see [One load per page](#one-load-per-page).
+
+## Debugging a failure
+
+**Locally:** `npm run test:ui`, or `npx playwright test --debug` to step through. `npx playwright show-report` opens the last HTML report; `npx playwright show-trace test-results/<test>/trace.zip` replays a trace step by step.
+
+**In CI:** download the `playwright-artifacts-<run id>` artifact from the failed run, unzip it, then `npx playwright show-report playwright-report` or open a trace with `show-trace`. Traces record on the first retry, so any test that failed twice has one.
+
+Common causes:
+
+- A `data-testid` was removed or renamed in a template. The verify-staging step prints the ids present on the homepage.
+- A template branch did not render on staging (for example no featured posts configured), so the id never appeared.
+- Staging data a spec depends on is missing. `capsule-podcast-archives.spec.js` needs the season/episode backfill and the Death in Westminster redate on the staging DB (`scripts/one-off/2026-09-season-episode-backfill.php`). A staging refresh from production before production has had both wipes them; re-run the script on staging.
+- A new third-party script logs errors. Add its host to the ignore list in `fixtures.js` only if the theme genuinely cannot control it.
+
+## Expansion backlog
+
+Ranked by regression risk, carried over from `docs/plans/archive/cypress-to-playwright.md`:
+
+1. Front page layout editor rendering: assert section order matches the saved layout
+2. Category archives for articles, audio and video (Novara Live and The Cortado are covered today)
+3. Embed consent gate, once #523 ships: placeholder renders, consent click loads the iframe (needs `test.use({ blockEmbeds: false })`)
+4. Newsletter signup block: presence and validation states
+5. Support page donation amount selection, without submitting a payment
+6. Nav interactions: hamburger open and close across viewports
+7. Article page details: share link hrefs correctly encoded, related posts render when set
+8. Search results, 404 and pagination smoke coverage
+9. Accessibility smoke with `@axe-core/playwright` on the homepage and one single post
+
+## PHP unit tests
+
+A PHPUnit suite for the theme's PHP logic, mainly the helpers in `lib/`. No WordPress install or database: [Brain Monkey](https://giuseppe-mazzapica.gitbook.io/brain-monkey/) stubs WordPress functions and hooks per test, so a test runs in well under a second and in CI without secrets.
+
+```
+tests/unit/
+├── composer.json        # test tooling: phpunit, brain/monkey (separate project, see below)
+├── phpunit.xml          # bootstrap + suite config
+├── bootstrap.php        # defines NM_THEME_ROOT, loads the tooling autoloader
+├── TestCase.php         # base class: Brain Monkey setUp/tearDown, requireThemeFile()
+└── lib/
+    └── FunctionsUtilityTest.php
+```
+
+Run locally:
 
 ```bash
-npm run test:chrome      # Run in Chrome
-npm run test:firefox     # Run in Firefox
-npm run test:headed      # See browser while running
+npm run test:php
 ```
 
-### In CI (GitHub Actions)
+That installs the tooling into `tests/unit/vendor/` (ignored) on first run and then runs the suite. CI runs the same on PHP 8.2 (production) and 8.4 (local DevKinsta, next PHP cycle) in `.github/workflows/php-unit.yml`; drop 8.2 from the matrix once production moves off it.
 
-Tests run automatically on:
+**Why a separate Composer project.** The theme's root `vendor/` and `composer.lock` are committed and deployed by `git pull`; a root `composer install` rewrites the committed autoloader files, and dev dependencies there would ship to Kinsta. `tests/unit/composer.json` keeps PHPUnit and Brain Monkey out of that tree entirely. Never add test tooling to the root `composer.json` while `vendor/` is committed.
 
-- Pull requests to `master`, `main`, or `development` branches
-- Manual trigger via `workflow_dispatch`
+This is a stopgap for the git-pull deploy, not the end state. When production deploys from CI with a `composer install --no-dev` step ([plan](../plans/production-ci-deploy.md)), `vendor/` stops being committed, PHPUnit and Brain Monkey move to `require-dev` in the root `composer.json`, and `tests/unit/` keeps only the suite.
 
-**Workflow configuration:** `.github/workflows/cypress.yml`
+**Writing a test.** Extend `NM\Tests\TestCase`, load the file under test once in `setUpBeforeClass()` with `self::requireThemeFile( 'lib/whatever.php' )`, and stub what the code calls:
 
-**Key features:**
-
-- Deploys PR branch to Kinsta staging via SSH + git, then runs tests
-- Runs in Ubuntu with Chrome browser
-- 10-minute timeout per job
-- Uploads videos/screenshots on failure
-- Uses npm caching for faster runs
-- Skips fork PRs (secrets not available)
-
-## Custom Commands
-
-We've created several helper commands to make tests more maintainable:
-
-### `cy.verifyNoConsoleErrors()`
-
-Verifies no relevant console errors occurred (filters out third-party script errors).
-Console error monitoring is set up automatically via a global `beforeEach` in `e2e.js`.
-
-```javascript
-cy.visit('/some-page');
-cy.verifyNoConsoleErrors();
+```php
+Functions\when( 'wp_get_environment_type' )->justReturn( 'production' );   // stub a return
+Functions\expect( 'get_template_directory' )->never();                     // assert not called
+Actions\expectAdded( 'init' );                                             // hook registered at load
 ```
 
-### `cy.checkImages()`
+Good targets: pure helpers, option/meta formatting, rewrite and query logic, anything with branches. Not targets: template files and markup (Playwright covers those against staging), and code whose only job is to call WordPress.
 
-Validates that images loaded successfully (skips lazy-loaded placeholders).
-
-```javascript
-cy.checkImages();
-```
-
-### `cy.testResponsive(callback)`
-
-Tests behavior across mobile, tablet, and desktop viewports.
-
-```javascript
-cy.testResponsive((viewport) => {
-  cy.get('.menu').should('be.visible');
-});
-```
-
-### `cy.waitForWordPress()`
-
-Waits for WordPress-specific elements to be ready.
-
-```javascript
-cy.waitForWordPress();
-```
-
-### `cy.findPostUrlFromArchive(archiveUrl)`
-
-Visits a category archive page and finds the first single post URL from the post cards. Excludes serial podcast categories that redirect to show pages.
-
-```javascript
-cy.findPostUrlFromArchive('/category/audio').then((url) => {
-  // url is a string like '/2026/01/27/episode-title/' or null if none found
-});
-```
-
-## Writing New Tests
-
-### Test File Template
-
-```javascript
-describe('Page Name', () => {
-  beforeEach(() => {
-    cy.visit('/page-url');
-  });
-
-  it('should load successfully', () => {
-    cy.url().should('include', '/page-url');
-    cy.title().should('not.be.empty');
-  });
-
-  it('should display critical elements', () => {
-    cy.verifyCriticalPageStructure();
-  });
-
-  it('should load without console errors', () => {
-    cy.verifyNoConsoleErrors();
-  });
-
-  it('should be responsive', () => {
-    cy.testResponsive();
-  });
-});
-```
-
-### Best Practices
-
-1. **Keep tests simple** - Focus on critical path, not edge cases
-2. **Use data attributes** - Add `data-testid="element-name"` for stable selectors
-3. **Avoid hard-coded delays** - Use `cy.wait()` with aliases, not arbitrary timeouts
-4. **Be resilient** - Tests should work against live content that changes
-5. **Filter third-party errors** - Don't fail on Google Analytics, social media widgets, etc.
-
-## Debugging Failed Tests
-
-### Local Debugging
-
-1. **Run with Test Runner:**
-
-   ```bash
-   npm run cy:open
-   ```
-
-   - Click on failed test
-   - Use time-travel debugging
-   - Inspect DOM at failure point
-
-2. **View screenshots:**
-
-   ```bash
-   open cypress/screenshots/
-   ```
-
-3. **Watch videos:**
-   ```bash
-   open cypress/videos/
-   ```
-
-### CI Debugging
-
-1. Go to failed GitHub Actions run
-2. Click "Summary" tab
-3. Download "cypress-artifacts" or "cypress-results"
-4. Extract and view videos/screenshots
-
-### Common Issues
-
-**"Timed out retrying" errors:**
-
-- Element selector changed - update test
-- Page loads slowly - increase timeout in config
-- Element is hidden - check CSS/responsive behavior
-
-**"ResizeObserver" or analytics errors:**
-
-- These are filtered automatically - if test fails, it's something else
-
-**Flaky tests:**
-
-- Tests retry 2x in CI automatically
-- Consider adding explicit waits: `cy.get('.element').should('be.visible')`
-- Check for race conditions in page load
-
-## Environment Configuration
-
-### Environment Variables
-
-- `CYPRESS_BASE_URL` - Override base URL (default: https://novaramedia.com)
-- `CYPRESS_VIDEO` - Enable/disable video recording
-- `CYPRESS_SCREENSHOT_ON_FAILURE` - Enable/disable failure screenshots
-
-### GitHub Secrets
-
-For CI, you can configure:
-
-- `CYPRESS_BASE_URL` - Test against staging instead of production
-- Add as repository secret in Settings → Secrets and variables → Actions
-
-## Test Coverage Roadmap
-
-### Phase 1: Core Tests ✅ (Complete)
-
-- [x] Homepage
-- [x] Support page
-- [x] Single post (article)
-- [x] GitHub Actions CI
-
-### Phase 2: Secondary Views ✅ (Complete)
-
-- [x] Single post (video category)
-- [x] Single post (audio category)
-- [x] About page
-- [x] Jobs page
-- [x] Novara Live category archive
-
-### Phase 3: Future Enhancements (Planned)
-
-- [ ] Visual regression testing
-- [ ] Accessibility testing (pa11y, axe)
-- [ ] Performance benchmarks
-- [ ] User interaction flows (comments, search)
-- [ ] Backend PHP unit tests (PHPUnit)
-
-## Contributing
-
-When adding new tests:
-
-1. Follow the existing test structure
-2. Add tests to `cypress/e2e/` directory
-3. Use descriptive test names
-4. Update this documentation if adding new patterns
-5. Ensure tests pass locally before pushing
-6. Tests must pass in CI before PR can merge
-
-## Resources
-
-- [Cypress Documentation](https://docs.cypress.io/)
-- [Cypress Best Practices](https://docs.cypress.io/guides/references/best-practices)
-- [WordPress Testing Best Practices](https://make.wordpress.org/core/handbook/testing/)
-- [Our Workflow Documentation](.github/workflows/README.md)
+Mirror `lib/<file>.php` as `tests/unit/lib/<File>Test.php`. The repo's phpcs standard applies to tests; where a test must touch the filesystem, disable `WordPress.WP.AlternativeFunctions` at the top of that file with a one-line reason, as `FunctionsUtilityTest.php` does.

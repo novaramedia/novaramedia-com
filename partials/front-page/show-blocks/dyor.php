@@ -7,7 +7,10 @@ if ( ! $dyor_category ) {
 
 $category_link   = get_category_link( $dyor_category->term_id );
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/dyor/';
-$figma_file_key  = get_term_meta( $dyor_category->term_id, '_nm_dyor_figma_file_key', true );
+// The newest season's map; the archive's #map anchor points at it.
+$dyor_seasons   = nm_get_dyor_seasons();
+$newest_season  = reset( $dyor_seasons );
+$figma_file_key = $newest_season ? $newest_season['figma_file_key'] : '';
 
 $dyor_posts = get_posts(
   array(

@@ -1,0 +1,13 @@
+{
+  "name": "novaramedia/novaramedia-com-php-unit-tests",
+  "description": "PHPUnit harness for the theme's lib/ functions. A separate Composer project on purpose: the theme's own vendor/ is committed and deployed by git pull, so test tooling must never be installed there.",
+  "type": "project",
+  "license": "proprietary",
+  "require-dev": {
+    "brain/monkey": "^2.6",
+    "phpunit/phpunit": "^11.5"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

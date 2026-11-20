@@ -10,7 +10,7 @@ if ($previous) {
   echo $previous;
 }
 if ($previous && $next) {
-  echo ' ';
+  echo ' &mdash; '; // spaced em dash: a bare space reads as one run-on word
 }
 if ($next) {
   echo $next;

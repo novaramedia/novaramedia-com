@@ -31,6 +31,11 @@ $headline = ! empty( $meta['_nm_banner_headline'] ) ? $meta['_nm_banner_headline
 $copy = ! empty( $meta['_nm_banner_text'] ) ? $meta['_nm_banner_text'][0] : false;
 $image_id = ! empty( $meta['_nm_banner_image_id'] ) ? $meta['_nm_banner_image_id'][0] : false;
 
+// A caller with its own copy source (e.g. a category's formatted description) passes it in.
+if ( ! empty( $args['copy'] ) ) {
+  $copy = $args['copy'];
+}
+
 // override colours if set on the partial $args
 if ( ! empty( $args['background-color'] ) ) {
   $background_color = $args['background-color'];
@@ -40,8 +45,20 @@ if ( ! empty( $args['text-color'] ) ) {
   $text_color = $args['text-color'];
 }
 
+// White text (the default) would vanish on a white box.
+if ( $background_color === 'white' && $text_color === 'white' ) {
+  $text_color = 'black';
+}
+
 if ( ! empty( $args['button-color'] ) ) {
   $button_color = $args['button-color'];
+}
+
+// Partial arg wins, then the newsletter's own label, then the generic default.
+$button_label = ! empty( $meta['_nm_banner_button_label'] ) ? $meta['_nm_banner_button_label'][0] : 'Sign up';
+
+if ( ! empty( $args['button-label'] ) ) {
+  $button_label = $args['button-label'];
 }
 
 $hide_discover = false;
@@ -49,31 +66,64 @@ $hide_discover = false;
 if ( ! empty( $args['hide-discover'] ) ) {
   $hide_discover = $args['hide-discover'];
 }
+
+$hide_headline = false;
+
+if ( ! empty( $args['hide-headline'] ) ) {
+  $hide_headline = $args['hide-headline'];
+}
+
+// Signups are boxed by default. A caller that wants the signup bare on the page (a brand
+// archive with its own layout) passes 'unboxed' => true.
+$is_boxed = empty( $args['unboxed'] );
+
+if ( ! empty( $args['hide-image'] ) ) {
+  $image_id = false; // also widens the form column, which keys off $image_id below
+}
+
+// Class list for the copy paragraph. Default is the generic band's bold sans; a brand can
+// pass its own treatment (The Cortado: serif copy with the bold spans in sans).
+$copy_classes = 'font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance';
+
+if ( ! empty( $args['copy-classes'] ) ) {
+  $copy_classes = $args['copy-classes'];
+}
+
+// Optional Playwright hook for a caller that needs to target its own signup.
+$testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
+
+// Which form a signup came from, sent to the signup service as `nm_form`. The page path is sent separately, so templates using this partial share one slug unless they pass their own.
+$placement = ! empty( $args['placement'] ) ? $args['placement'] : 'signup-section';
 ?>
-<div class="email-signup mt-4 mb-4">
+<div class="email-signup mt-4 mb-4"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
   <div class="container">
     <div class="grid-row">
       <?php
-      if ( $background_color !== 'white' ) { // if the background color is not white, wrap in a box
+      if ( $is_boxed ) { // on the off-white page a white signup is a white box, not bare copy
         ?>
       <div class="grid-item is-xxl-24">
-        <div class="grid-row <?php echo 'background-' . $background_color . ' font-color-' . $text_color; ?> ui-rounded-box ui-backgrounded-box-padding">
+        <div class="grid-row <?php echo esc_attr( 'background-' . $background_color . ' font-color-' . $text_color ); ?> ui-rounded-box ui-backgrounded-box-padding">
         <?php
       }
       ?>
           <div class="grid-item is-s-24 is-l-12 is-xxl-10 mb-s-4">
+            <?php if ( ! $hide_headline ) { ?>
             <h3 class="font-size-14 font-size-s-12 font-weight-bold mb-4 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
-            <p class="font-size-12 font-size-s-10 font-weight-bold mr-5 text-wrap-balance">
+            <?php } ?>
+            <?php if ( ! empty( $copy ) ) { ?>
+            <p class="<?php echo esc_attr( $copy_classes ); ?>">
               <?php echo wp_kses_post( $copy ); ?>
             </p>
+            <?php } ?>
             <?php if ( ! $hide_discover ) { ?>
               <div class="mt-3 font-size-8 font-weight-bold">
                 <a href="<?php echo site_url( 'newsletters/' ); ?>" class="ui-hover"><span class="ui-dot ui-dot--red"></span>Discover all our newsletters</a>
               </div>
             <?php } ?>
           </div>
-          <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-10 is-xxl-8' : 'is-s-16 is-xxl-8'; ?>">
-            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color ); ?>
+          <?php // Without an image the form takes the image column's width too, so the row fills 24. ?>
+          <div class="grid-item offset-l-0 offset-xxl-2 <?php echo $image_id === false ? 'is-s-24 is-m-12 is-l-12 is-xxl-12' : 'is-s-16 is-xxl-8'; ?>">
+            <?php render_mailchimp_signup_form( $mailchimp_key, $background_color, $button_color, $button_label, $placement ); ?>
           </div>
           <?php if ( $image_id ) { ?>
             <div class="grid-item is-s-8 is-xxl-4">
@@ -82,7 +132,7 @@ if ( ! empty( $args['hide-discover'] ) ) {
           <?php } ?>
         </div>
         <?php
-        if ( $background_color !== 'white' ) { // close the box divs if we opened them
+        if ( $is_boxed ) { // close the box divs if we opened them
           ?>
       </div>
     </div>
