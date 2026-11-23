@@ -116,6 +116,9 @@ For features that are unique to the project and not needed in the library, we wr
 ### Meta
 - **CMB2**: Meta box framework for custom fields (`lib/meta/`)
 - **Theme Options**: ACF-style options in `lib/theme-options/`
+- **Empty paragraphs are stripped on save**: post content, excerpts and CMB2 text fields (`text`, `text_small`, `textarea`, `textarea_small`, `wysiwyg`) pass through `nm_strip_empty_paragraphs()` when saved (`lib/functions-filters.php`). Never trim blank lines in templates, and never rely on editor-inserted blank lines for spacing — spacing is CSS.
+  - Wrong: `echo wpautop( trim( preg_replace( '/(&nbsp;\s*)+$/', '', $short_desc ) ) );`
+  - Right: `echo wpautop( $short_desc );` — the stored value is already clean; add margin in the stylesheet if a layout needs space.
 
 ### Page cache
 
@@ -154,6 +157,9 @@ wp_localize_script('site-js', 'WP', $global_javascript_variables);
 ### Code Standards
 - **CSS**: BEM, one `__` per class; see "Class naming (BEM)" above
 - **PHP**: WordPress coding standards with PHPCS configuration
+- **Deprecation**: tag with `@deprecated X.Y.Z <replacement note>` in a docblock, on functions, classes and whole files alike. Remove as soon as there are no repo callers and no production DB use; overdue after 4 minors or the next major, whichever comes first. Full rule: `docs/deprecation.md`
+  - Wrong: `/* DEPRECATED @ VERSION 4.2.0 TO BE REMOVED AFTER MIGRATION */` (free-text marker, invisible to the audit)
+  - Right: `/** @deprecated 4.2.0 No replacement. */`
 
 ### Dependencies
 - **Frontend**: jQuery, Lodash (partial imports), Luxon, Lazysizes, Swiper

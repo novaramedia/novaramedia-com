@@ -9,23 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
+- Above the Fold options page shows a preview of the section as the front page lays it out, including auto-filled slots, the Latest column and each post's category (e.g. Video / Downstream); click a post to jump to its field
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Full page-cache purges are logged in the `nm_cache_purge_log` option
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
 ### Changed
 
+- Empty paragraphs and blank lines are stripped from post content, excerpts and text meta fields on save
 - Playwright staging tests skip a push to an open PR that only changes docs
 - Branded category archives use a block per brand (`if-i-speak-archive__wordmark`) instead of nested `category-archive__<brand>__<element>` classes
 - BEM naming rules added to the AI coding guidelines
+- Deprecation policy: remove deprecated code once verified unused in the repo and the production database; the 4-minor window is now a deadline, not a wait
 - Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
 - Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
 - Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
+- CMB2 Post Search field addon forked into the theme (`lib/meta/`) — upstream unmaintained since 2019; composer dependency removed
+
+### Removed
+
+- Legacy newsletter page templates (`page-newsletters.php`, `page__newsletter.php` "Newsletter" template) and their page meta box, deprecated since 4.2.0
 
 ### Fixed
 
+- Newsletter signup forms now include the hidden `nm_hp` honeypot field the signup service checks, so its bot filter actually catches form-filling bots. Until now the field was never sent, so the filter did nothing
 - Playwright staging tests no longer deploy and run for PRs that only change `docs/`, markdown or `.claude/` files — the ignore list pointed at a nonexistent `.docs/` folder and only matched root-level markdown
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
+- Make Links External editor button now applies to every link in the post when nothing is selected, and no longer skips links that already carry a `rel` such as nofollow
+- Committed, Foreign Agent and Death in Westminster archive listen links now point at each show's own Apple Podcasts page and RSS feed (the feeds.novaramedia.com worker feed, or the show's Spotify for Creators feed for Death in Westminster), instead of the master Novara Media pages, the Podfollow chooser or the Blubrry mirror
 - Saving any theme options page (front page, fundraising, products, theme options) now purges the Kinsta and Cloudflare page caches; it previously flushed only the object cache, so logged-out readers kept seeing the old homepage and site-wide copy
 - Menu and term edits now purge Cloudflare APO as well as Kinsta
 - Renaming a contributor, or changing a Mailchimp newsletter key, now purges all page caches so bylines and signup forms update site-wide
@@ -38,6 +50,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - Batch dependency update clearing all fixable Dependabot alerts, including both criticals, with @wordpress/scripts 34→35. Dev-only; built theme and block assets unchanged
+- CMB2 2.11.0 → 2.13.5, picking up upstream escaping fixes for stored field values and REST object validation
+- In-range dev dependency refresh clearing the follow-redirects, basic-ftp and serialize-javascript alerts; jQuery 4.0.0 → 4.1.0
+- @wordpress/scripts 35→37 and npm overrides for the glob, minimatch and markdownlint-cli chains. Dev-only; built theme and block assets unchanged. Local development now needs Node 22.22.2+ or 24.15+
 
 ## [4.10.0] - 2026-10-01
 
