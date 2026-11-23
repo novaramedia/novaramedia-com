@@ -104,6 +104,17 @@ final class StripEmptyParagraphsTest extends TestCase {
     );
   }
 
+  public function test_bound_paragraph_blocks_are_kept(): void {
+    $bound = '<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-meta","args":{"key":"x"}}}}} -->' . "\n<p></p>\n<!-- /wp:paragraph -->";
+
+    $this->assertSame( $bound, nm_strip_empty_paragraphs( $bound ) );
+    $this->assertSame( addslashes( $bound ), nm_strip_empty_paragraphs( addslashes( $bound ) ) );
+  }
+
+  public function test_br_alone_on_a_line_is_a_blank_line(): void {
+    $this->assertSame( "One.\nTwo.", nm_strip_empty_paragraphs( "One.\n<br />\nTwo." ) );
+  }
+
   public function test_other_blocks_are_untouched(): void {
     $value = "<!-- wp:group -->\n<div class=\"wp-block-group\"><!-- wp:html -->\n<p></p>\n<!-- /wp:html --></div>\n<!-- /wp:group -->\n\n"
       . "<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n\n"
