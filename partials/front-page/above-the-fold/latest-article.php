@@ -23,8 +23,11 @@ $is_news = has_category( 'news', $article_post_id );
 $permalink = esc_url( get_permalink( $article_post_id ) );
 $timestamp_attr = esc_attr( $timestamp );
 $title = esc_html( get_the_title( $article_post_id ) );
+
+// The last item has no trailing gap, except on small screens where the second featured block stacks beneath it.
+$container_classes = $has_bottom_border ? 'mb-4 pb-4 ui-border-bottom' : 'mb-s-4 pb-s-4';
 ?>
-<div class="<?php echo $has_bottom_border ? 'mb-4 pb-4 ui-border-bottom' : ''; ?>">
+<div class="<?php echo esc_attr( $container_classes ); ?>">
 <?php if ( $show_image === 'small' ) : ?>
   <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags( $article_post_id ); ?>
