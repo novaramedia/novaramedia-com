@@ -6,7 +6,8 @@ updated by a separate manual step (see [Deploying](#deploying)).
 
 Versioning is semver. `scripts/release.sh` wraps `release-it`, which bumps
 `package.json`, converts the `[Unreleased]` section of `CHANGELOG.md` into the
-new version, runs `npm run build`, and stamps `style.css`. The script then
+new version and leaves a fresh empty `[Unreleased]` above it (`addUnreleased`),
+runs `npm run build`, and stamps `style.css`. The script then
 commits everything as `Build: x.y.z` and pushes.
 
 ## Normal release (minor/major)

@@ -16,7 +16,71 @@ for each.
 
 ---
 
-## Unreleased
+## v4.11.0
+
+### 1. Confirm a front page layout is saved — BEFORE deploying
+The legacy banner selects are gone, so the front page renders only what **Admin > Front Page > Layout** lists. With nothing saved there, the front page shows no sections below the fold.
+
+```bash
+wp option get nm_front_page_layout_options --format=json
+```
+
+Expect a non-empty `nm_front_page_layout` list. If it is empty, open the Layout page, set the order and save before deploying.
+
+### 2. Confirm both Do Your Own Research seasons are saved — BEFORE deploying
+The map fields on the Do Your Own Research category are removed. Season 1's map now comes only from its entry under **Admin > Products > Do Your Own Research** (v4.10.0 step 5).
+
+```bash
+wp option get nm_products_dyor_options --format=json
+```
+
+Expect a `seasons` entry for season 1 and season 2, each with a file key. Verify after deploy: `/dyor/` loads both maps on click.
+
+### 3. Strip empty paragraphs from existing content — after deploying
+New saves are cleaned automatically; this cleans everything saved before. It does not change any post's modified date.
+
+```bash
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php        # dry run: counts per field, then changed post IDs
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
+```
+
+1. Run the dry run. Open about 10 of the listed posts on the front end and note how they look now.
+2. **Take a manual Kinsta backup.** `apply` overwrites content in place, and there is no undo besides restoring it.
+3. Run `apply`. Any `Warning:` line is a value that failed to save; it is not counted as changed.
+4. Clear the Kinsta site cache so pages show the cleaned content.
+5. Re-check the same posts. A post that looks too tight means its layout leaned on blank lines: fix it in the stylesheet, not the content. Re-running is safe.
+
+Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
+
+### 4. Verify options saves purge the page cache
+**Admin > Front Page > Above the fold featured.** Save without changes, then from a logged-out shell:
+
+```bash
+curl -sI https://novaramedia.com/ | grep -iE 'x-kinsta-cache|cf-cache-status|^age'
+```
+
+Expect `x-kinsta-cache: MISS` and/or a low `age` on the first request after the save. Then check the save was logged:
+
+```bash
+wp option get nm_cache_purge_log --format=json
+```
+
+Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_above_the_fold_featured_options`. No `cloudflare` entry means the plugin's Hooks instance was not found — see `docs/architecture/page-cache.md`.
+
+While on that page, check the new preview: change one slot, confirm the preview and the title hint update, save, and confirm the homepage matches the preview.
+
+### 5. Verify a permanent delete purges at the edge
+Publish a throwaway post, load its URL logged out twice (second response should be a cache hit), then delete it permanently from the trash screen (**Delete Permanently**, not Trash) — or `wp post delete <id> --force`.
+
+```bash
+curl -sI <post-url> | grep -iE '^HTTP|x-kinsta-cache|cf-cache-status'
+```
+
+Expect a 404 straight away, not a cached 200.
+
+---
+
+## v4.10.0
 
 ### 1. Set the If I Speak hero blurb
 **Admin > Posts > Categories > If I Speak → Formatted description.** The redesigned hero
@@ -60,37 +124,6 @@ The standfirst on each Committed, Foreign Agent and Death in Westminster post st
 2. Add season 1: number 1, title "Season 1", and the file key and default node copied from the category's Do Your Own Research box. Save. This is what lets those category fields be removed in 4.11.0.
 
 Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
-
-### 6. Strip empty paragraphs from existing content — after deploying
-New saves are cleaned automatically; this cleans everything saved before. It does not change any post's modified date.
-
-```bash
-wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php        # dry run: counts per field, then changed post IDs
-wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
-```
-
-1. Run the dry run. Open about 10 of the listed posts on the front end and note how they look now.
-2. **Take a manual Kinsta backup.** `apply` overwrites content in place, and there is no undo besides restoring it.
-3. Run `apply`. Any `Warning:` line is a value that failed to save; it is not counted as changed.
-4. Clear the Kinsta site cache so pages show the cleaned content.
-5. Re-check the same posts. A post that looks too tight means its layout leaned on blank lines: fix it in the stylesheet, not the content. Re-running is safe.
-
-Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
-
-### 7. Verify options saves purge the page cache
-**Admin > Front Page > Above the fold featured.** Save without changes, then from a logged-out shell:
-
-```bash
-curl -sI https://novaramedia.com/ | grep -iE 'x-kinsta-cache|cf-cache-status|^age'
-```
-
-Expect `x-kinsta-cache: MISS` and/or a low `age` on the first request after the save. Then check the save was logged:
-
-```bash
-wp option get nm_cache_purge_log --format=json
-```
-
-Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_above_the_fold_featured_options`. No `cloudflare` entry means the plugin's Hooks instance was not found — see `docs/architecture/page-cache.md`.
 
 ---
 
