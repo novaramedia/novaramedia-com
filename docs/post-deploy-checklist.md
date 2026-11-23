@@ -77,6 +77,21 @@ wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
 
 Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
 
+### 7. Verify options saves purge the page cache
+**Admin > Front Page > Above the fold featured.** Save without changes, then from a logged-out shell:
+
+```bash
+curl -sI https://novaramedia.com/ | grep -iE 'x-kinsta-cache|cf-cache-status|^age'
+```
+
+Expect `x-kinsta-cache: MISS` and/or a low `age` on the first request after the save. Then check the save was logged:
+
+```bash
+wp option get nm_cache_purge_log --format=json
+```
+
+Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_above_the_fold_featured_options`. No `cloudflare` entry means the plugin's Hooks instance was not found — see `docs/architecture/page-cache.md`.
+
 ---
 
 ## v4.9.0

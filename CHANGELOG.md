@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
 - Above the Fold options page shows a preview of the section as the front page lays it out, including auto-filled slots, the Latest column and each post's category (e.g. Video / Downstream); click a post to jump to its field
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
+- Full page-cache purges are logged in the `nm_cache_purge_log` option
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
 ### Changed
@@ -37,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Permanently deleting a post now purges Kinsta and Cloudflare caches — deleted pages previously stayed live at the edge until TTL expiry
 - Make Links External editor button now applies to every link in the post when nothing is selected, and no longer skips links that already carry a `rel` such as nofollow
 - Committed, Foreign Agent and Death in Westminster archive listen links now point at each show's own Apple Podcasts page and RSS feed (the feeds.novaramedia.com worker feed, or the show's Spotify for Creators feed for Death in Westminster), instead of the master Novara Media pages, the Podfollow chooser or the Blubrry mirror
+- Saving any theme options page (front page, fundraising, products, theme options) now purges the Kinsta and Cloudflare page caches; it previously flushed only the object cache, so logged-out readers kept seeing the old homepage and site-wide copy
+- Menu and term edits now purge Cloudflare APO as well as Kinsta
+- Renaming a contributor, or changing a Mailchimp newsletter key, now purges all page caches so bylines and signup forms update site-wide
 
 ### Removed
 

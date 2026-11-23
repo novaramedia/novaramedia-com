@@ -17,7 +17,7 @@ WordPress theme for novaramedia.com. PHP + modular JS (Webpack) + Stylus (nm-sty
 
 ## Docs
 
-- `docs/architecture/` — block rendering, oEmbed privacy
+- `docs/architecture/` — block rendering, oEmbed privacy, page cache purging
 - `docs/plans/` — active plans; shipped plans move to `docs/plans/archive/`
 - `docs/specs/` — latest articles news category
 - `docs/testing/` — Playwright e2e smoke tests and the PHPUnit suite (`tests/unit/`, `npm run test:php`): running, helpers, CI, debugging, expansion backlog

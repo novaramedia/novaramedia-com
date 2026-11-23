@@ -208,5 +208,6 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-menu-fallbacks' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
+get_template_part( 'lib/functions-cache-purge' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-seo' );
