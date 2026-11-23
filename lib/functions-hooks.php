@@ -1,135 +1,5 @@
 <?php
 /**
- * Hook cmb2_save_options-page_fields to flush the cache when theme options are saved
- * This is necessary because the front page is cached and the cache needs to be flushed when the front page options are saved
- *
- * @param int $object_id
- * @param array $updated
- * @param CMB2 $cmb
- * @param string $object_type
- */
-function nm_flush_cache_on_theme_options_save( $object_id, $updated, $cmb, $object_type ) {
-  $matches = array(
-      'nm_front_page_options',
-      'nm_front_page_above_the_fold_featured_options',
-      'nm_front_page_links_bar_options',
-      'nm_front_page_highlight_section_options',
-  );
-
-  if ( in_array( $object_id, $matches ) ) {
-    // flushes the whole cache. would be better to flush only the cache for the front page but that functionality doest not seem to be available
-    wp_cache_flush();
-  }
-}
-add_action( 'cmb2_save_options-page_fields', 'nm_flush_cache_on_theme_options_save', 10, 4 );
-
-/**
- * Track the post being published so we can purge its contributor pages via the Kinsta cache filter.
- * Must run at priority 9 — before Kinsta's transition_post_status callback at priority 10.
- *
- * @param string  $new_status New post status.
- * @param string  $old_status Old post status.
- * @param WP_Post $post       Post object.
- */
-function nm_track_post_for_contributor_purge( $new_status, $old_status, $post ) {
-  if ( 'publish' !== $new_status ) {
-    return;
-  }
-  if ( wp_is_post_revision( $post->ID ) || wp_is_post_autosave( $post->ID ) ) {
-    return;
-  }
-  nm_contributor_purge_post_id( $post->ID );
-}
-add_action( 'transition_post_status', 'nm_track_post_for_contributor_purge', 9, 3 );
-
-/**
- * Static store for the post ID currently being cache-purged.
- *
- * @param int|null $set Post ID to store, or null to retrieve.
- * @return int|null
- */
-function nm_contributor_purge_post_id( $set = null ) {
-  static $post_id = null;
-  if ( null !== $set ) {
-    $post_id = $set;
-  }
-  return $post_id;
-}
-
-/**
- * Inject contributor page URLs into Kinsta's immediate cache purge list.
- *
- * Kinsta only purges the post itself, home, and taxonomy/date archives. It has no
- * awareness of the _cmb_contributors post meta relation, so contributor pages go stale.
- * This filter adds each linked contributor's permalink to the immediate purge batch.
- *
- * @param array $purge_request Kinsta immediate purge request (keys: 'group|*' / 'single|*', values: protocol-stripped URLs).
- * @return array
- */
-function nm_purge_contributor_pages_on_post_publish( $purge_request ) {
-  $post_id = nm_contributor_purge_post_id();
-  if ( ! $post_id ) {
-    return $purge_request;
-  }
-
-  $contributors_meta = get_post_meta( $post_id, '_cmb_contributors', true );
-  if ( empty( $contributors_meta ) ) {
-    return $purge_request;
-  }
-
-  foreach ( explode( ',', $contributors_meta ) as $contributor_id ) {
-    $contributor_id = (int) trim( $contributor_id );
-    if ( ! $contributor_id ) {
-      continue;
-    }
-    $url = get_permalink( $contributor_id );
-    if ( ! $url ) {
-      continue;
-    }
-    // group| purges the contributor URL and all sub-paths beneath it.
-    $purge_request[ 'group|contributor_' . $contributor_id ] = str_replace( array( 'http://', 'https://' ), '', $url );
-    // single| purges the query string variant not covered by prefix purge.
-    $purge_request[ 'single|contributor_' . $contributor_id . '_full_archive' ] = str_replace( array( 'http://', 'https://' ), '', add_query_arg( 'is_full_archive', 'true', $url ) );
-  }
-
-  return $purge_request;
-}
-add_filter( 'KinstaCache/purgeImmediate', 'nm_purge_contributor_pages_on_post_publish' );
-
-/**
- * Add contributor page URLs to Cloudflare's per-post cache purge list.
- *
- * The Cloudflare plugin purges taxonomies, WP author, and the post itself but has no
- * awareness of _cmb_contributors. This filter injects the linked contributor permalinks
- * so Cloudflare serves fresh pages after a post is published or updated.
- *
- * @param array $urls   URLs already queued for Cloudflare purge.
- * @param int   $post_id Post ID triggering the purge.
- * @return array
- */
-function nm_purge_contributor_pages_cloudflare( $urls, $post_id ) {
-  $contributors_meta = get_post_meta( $post_id, '_cmb_contributors', true );
-  if ( empty( $contributors_meta ) ) {
-    return $urls;
-  }
-
-  foreach ( explode( ',', $contributors_meta ) as $contributor_id ) {
-    $contributor_id = (int) trim( $contributor_id );
-    if ( ! $contributor_id ) {
-      continue;
-    }
-    $url = get_permalink( $contributor_id );
-    if ( $url ) {
-      $urls[] = $url;
-      $urls[] = add_query_arg( 'is_full_archive', 'true', $url );
-    }
-  }
-
-  return $urls;
-}
-add_filter( 'cloudflare_purge_by_url', 'nm_purge_contributor_pages_cloudflare', 10, 2 );
-
-/**
  * Hook template_redirect to 301 redirect author pages to the homepage
  * Author pages are those created for WP users and thus do not relate to any real content
  */
@@ -154,7 +24,7 @@ function podcast_series_pre_get_posts( $query ) {
     return;
   }
 
-  $serial_categories = array( 'foreign-agent', 'committed' ); // Add more slugs as needed
+  $serial_categories = nm_get_serial_podcast_slugs();
 
   if ( $query->is_archive() && $query->is_category( $serial_categories ) ) {
     if ( isset( $query->query_vars['posts_per_page'] ) && $query->query_vars['posts_per_page'] === 1 ) {
@@ -377,3 +247,33 @@ function nm_job_cache_headers( $headers ) {
   return $headers;
 }
 add_filter( 'wp_headers', 'nm_job_cache_headers' );
+
+/**
+ * The DYOR archive lists every episode on one page, grouped by season, so
+ * paged URLs 301 to page 1 rather than repeating it. Matches on query vars,
+ * not is_category(): a page number past the last page is already a 404 by
+ * template_redirect, and old links still deserve the redirect.
+ * get_pagenum_link( 1 ) keeps the requested path, so /dyor/page/2/ lands on /dyor/.
+ */
+function nm_dyor_unpaged_redirect() {
+  // A search filtered to the DYOR category (?s=…&cat=…) is search results,
+  // not the archive, so it stays pageable.
+  if ( (int) get_query_var( 'paged' ) < 2 || get_query_var( 's' ) !== '' ) {
+    return;
+  }
+
+  $dyor = get_category_by_slug( 'do-your-own-research' );
+
+  if ( ! $dyor ) {
+    return;
+  }
+
+  $category_name = (string) get_query_var( 'category_name' );
+
+  if ( (int) get_query_var( 'cat' ) === $dyor->term_id || basename( $category_name ) === 'do-your-own-research' ) {
+    // Unescaped: get_pagenum_link() HTML-escapes by default (&#038;).
+    wp_safe_redirect( get_pagenum_link( 1, false ), 301 );
+    exit;
+  }
+}
+add_action( 'template_redirect', 'nm_dyor_unpaged_redirect' );

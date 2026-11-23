@@ -16,6 +16,117 @@ for each.
 
 ---
 
+## v4.11.0
+
+### 1. Confirm a front page layout is saved — BEFORE deploying
+The legacy banner selects are gone, so the front page renders only what **Admin > Front Page > Layout** lists. With nothing saved there, the front page shows no sections below the fold.
+
+```bash
+wp option get nm_front_page_layout_options --format=json
+```
+
+Expect a non-empty `nm_front_page_layout` list. If it is empty, open the Layout page, set the order and save before deploying.
+
+### 2. Confirm both Do Your Own Research seasons are saved — BEFORE deploying
+The map fields on the Do Your Own Research category are removed. Season 1's map now comes only from its entry under **Admin > Products > Do Your Own Research** (v4.10.0 step 5).
+
+```bash
+wp option get nm_products_dyor_options --format=json
+```
+
+Expect a `seasons` entry for season 1 and season 2, each with a file key. Verify after deploy: `/dyor/` loads both maps on click.
+
+### 3. Strip empty paragraphs from existing content — after deploying
+New saves are cleaned automatically; this cleans everything saved before. It does not change any post's modified date.
+
+```bash
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php        # dry run: counts per field, then changed post IDs
+wp eval-file scripts/one-off/2026-10-strip-empty-paragraphs.php apply
+```
+
+1. Run the dry run. Open about 10 of the listed posts on the front end and note how they look now.
+2. **Take a manual Kinsta backup.** `apply` overwrites content in place, and there is no undo besides restoring it.
+3. Run `apply`. Any `Warning:` line is a value that failed to save; it is not counted as changed.
+4. Clear the Kinsta site cache so pages show the cleaned content.
+5. Re-check the same posts. A post that looks too tight means its layout leaned on blank lines: fix it in the stylesheet, not the content. Re-running is safe.
+
+Then watch the QA bot's trailing-blank-lines checks for a week: any new hit means a save path the filters don't cover.
+
+### 4. Verify options saves purge the page cache
+**Admin > Front Page > Above the fold featured.** Save without changes, then from a logged-out shell:
+
+```bash
+curl -sI https://novaramedia.com/ | grep -iE 'x-kinsta-cache|cf-cache-status|^age'
+```
+
+Expect `x-kinsta-cache: MISS` and/or a low `age` on the first request after the save. Then check the save was logged:
+
+```bash
+wp option get nm_cache_purge_log --format=json
+```
+
+Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_above_the_fold_featured_options`. No `cloudflare` entry means the plugin's Hooks instance was not found — see `docs/architecture/page-cache.md`.
+
+While on that page, check the new preview: change one slot, confirm the preview and the title hint update, save, and confirm the homepage matches the preview.
+
+### 5. Verify a permanent delete purges at the edge
+Publish a throwaway post, load its URL logged out twice (second response should be a cache hit), then delete it permanently from the trash screen (**Delete Permanently**, not Trash) — or `wp post delete <id> --force`.
+
+```bash
+curl -sI <post-url> | grep -iE '^HTTP|x-kinsta-cache|cf-cache-status'
+```
+
+Expect a 404 straight away, not a cached 200.
+
+---
+
+## v4.10.0
+
+### 1. Set the If I Speak hero blurb
+**Admin > Posts > Categories > If I Speak → Formatted description.** The redesigned hero
+shows this field if set, otherwise the core Description. Launch copy from the design:
+
+```html
+A podcast from Moya Lothian-McLean and Ash Sarkar where the personal meets the political. Every week they tackle social dilemmas, cultural phenomena and the frustrations of modern life.
+```
+
+Leave the core Description as it is — it feeds Open Graph and meta descriptions.
+
+### 2. Backfill season/episode meta — BEFORE deploying
+Plain post meta, so it can run before the new templates ship; they then find it on first render. Staging needs this and step 3 too, before the PR's Playwright run can pass (`capsule-podcast-archives.spec.js`); on staging run step 3 straight after this one.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php        # dry run, check output
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php apply
+```
+
+Before `apply`, read the dry run's Do Your Own Research list: every title must be a season 1 episode. Put the ID of anything else (trailer, clip, season 2) in `$nm_dyor_skip_ids` at the top of the script, re-run the dry run, and set that post's Season / Episode box by hand in wp-admin. Posts that already have a season are skipped, so re-running is safe.
+
+Verify after deploy: `/category/committed/`, `/category/foreign-agent/` and `/category/death-in-westminster/` show the same episode labels as before.
+
+### 3. Re-date Death in Westminster — straight after deploying
+Its dates were set in reverse so the old newest-first archive showed Episode 1 on top. The archive now lists oldest first, so until this runs it shows Episode 6 → 1. Needs step 2 done first.
+
+```bash
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate          # dry run, check episode → date mapping
+wp eval-file scripts/one-off/2026-09-season-episode-backfill.php redate apply
+```
+
+Verify: `/category/death-in-westminster/` lists Episode 1 → 6, and a single episode URL still 301s to its archive anchor.
+
+### 4. Rewrite capsule podcast standfirsts
+The standfirst on each Committed, Foreign Agent and Death in Westminster post still reads "Episode 1", "Bonus 1" etc. Archives no longer use it. Replace each with a real standfirst (editorial), since it shows on single posts, in search results and in related posts.
+
+### 5. Save the Do Your Own Research seasons
+**Admin > Products > Do Your Own Research.** The page starts empty. Season 1 keeps using the old map fields on the Do Your Own Research category until it has its own entry here, so nothing breaks in the meantime.
+
+1. Add season 2: number 2, title, description, and its FigJam file key. Save.
+2. Add season 1: number 1, title "Season 1", and the file key and default node copied from the category's Do Your Own Research box. Save. This is what lets those category fields be removed in 4.11.0.
+
+Verify: `/dyor/` shows a Season 2 block above Season 1 once season 2 episodes have their Season / Episode box set, and each map loads on click. `/dyor/page/2/` 301s to `/dyor/`.
+
+---
+
 ## v4.9.0
 
 ### 1. Create The Cortado category — before flushing permalinks
@@ -25,6 +136,9 @@ for each.
 Cortado sit *inside* Opinion, or *beside* it as its own child of Articles? The design
 work assumed a direct child of Articles (`/category/articles/the-cortado/`); the local
 database currently nests it under Opinion (`/category/articles/opinion/the-cortado/`).
+The digital team's recommendation is the sibling option: nested, Cortado posts would dominate
+Opinion, and their UI tag reads "Opinion" (the tag shows the post's first
+sub-category) rather than "The Cortado".
 One knock-on worth knowing before choosing: `nm_is_article()` treats the `articles` term or
 a *direct* child of it as an article, so a post filed only under a grandchild category would
 be classified as a non-article and render its short description rather than its standfirst.
@@ -52,9 +166,9 @@ This flush also registers the paginated vanity rules (`^<path>/page/([0-9]{1,})/
 for **every** branded path, not just Cortado — see #607. Until it runs,
 `/downstream/page/2/` and its equivalents keep 404ing as they do today.
 
-### 3. Fill the newsletter record — copy, button label and Mailchimp key
+### 3. Fill the newsletter record and category copy
 
-**Admin > Newsletters > The Cortado.** Three fields drive all three Cortado
+**Admin > Newsletters > The Cortado.** Three fields drive the Cortado signup
 surfaces (archive signup, front page block, inline signup block):
 
 | Field | Consequence if empty |
@@ -69,8 +183,19 @@ Banner text accepts `<strong>` and `<em>`. The launch copy is:
 Get your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven</strong>, every Monday and Friday morning.
 ```
 
-On the inline signup block those bold spans render in the sans face; elsewhere they
-are ordinary bold. That is deliberate — the treatment is scoped per surface in CSS.
+That is the short copy, used by the inline signup block. The archive signup and the
+front page block use the longer copy from the category instead:
+
+**Admin > Posts > Categories > The Cortado → Formatted description**
+(`_nm_category_formatted_description`). Empty falls back to the banner text above. Keep
+the core Description field plain text — it feeds Open Graph and meta descriptions. Launch copy:
+
+```html
+Your shot of political analysis from <strong>Ash Sarkar</strong> and <strong>Steven Methven.</strong> Brewed on Monday and Friday mornings.
+```
+
+On all three Cortado surfaces the bold spans render in the sans face against serif
+body copy — the treatment is scoped per surface in CSS.
 
 ### 4. Verify the three Cortado URLs at the edge
 
@@ -94,6 +219,27 @@ curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" "<canonical URL from s
 If the vanity slug 404s, step 1 or 2 was skipped. If the newsletter permalink
 still returns 200, the category is missing (step 1). Kinsta full-page cache may
 serve a stale 404 for `/the-cortado/` briefly after the flush — purge if so.
+
+---
+
+### 5. Re-pick any newsletter banner set to Gray Base
+
+**Admin > Newsletters → each newsletter → Banner background color.** Gray Base is now the
+page colour, so it has been removed from the dropdown and a banner still saved with it
+renders as an invisible box on the grey page. Newsletters saved with it show no option
+selected; choose White, Gray Mid or a brand colour and Update. Locally this was The Pick.
+
+---
+
+## v4.8.1
+
+### 1. Verify the Novara Live standfirst exemption
+**Edit a Novara Live post in the classic editor → Update with an empty
+Standfirst.** Why: this release exempts posts in the `novara-live` category
+(and its descendants) from the required-standfirst rule. The post should save
+without the validation alert; a post in any other category should still block.
+Tell editorial they no longer need to copy the Short description into the
+Standfirst on Novara Live posts.
 
 ---
 

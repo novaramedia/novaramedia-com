@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content" class="background-gray-base pb-5">
+<main id="main-content" class="pb-5">
 <?php
 if ( have_posts() ) {
   while ( have_posts() ) {
@@ -108,7 +108,7 @@ if ( have_posts() ) {
     <div class="container mb-5">
       <div class="grid-row">
         <div class="grid-item is-xxl-24">
-          <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true, '', 'how-we-are-funded-page' ); ?>
         </div>
       </div>
     </div>

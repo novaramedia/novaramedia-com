@@ -1,18 +1,16 @@
 {
   "name": "novaramedia-com",
-  "version": "4.8.0",
+  "version": "4.11.0",
   "description": "No Future, Utopia Now",
   "engines": {
-    "node": ">=20.9"
+    "node": "^22.22.2 || >=24.15.0"
   },
   "main": "gulpfile.js",
   "scripts": {
-    "test": "cypress run",
-    "test:headed": "cypress run --headed",
-    "test:chrome": "cypress run --browser chrome",
-    "test:firefox": "cypress run --browser firefox",
-    "cy:open": "cypress open",
-    "cy:verify": "cypress verify",
+    "test": "playwright test",
+    "test:php": "composer --working-dir=tests/unit install --no-interaction --quiet && tests/unit/vendor/bin/phpunit -c tests/unit/phpunit.xml",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
     "dev": "webpack --mode=development",
     "dev:blocks": "wp-scripts start --config webpack.blocks.config.js --webpack-src-dir=src/blocks --output-path=blocks",
     "build:theme": "webpack --mode=production",
@@ -34,8 +32,10 @@
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
+    "@jsquash/oxipng": "^2.3.0",
+    "@playwright/test": "^1.62.1",
     "@release-it/keep-a-changelog": "^8.0.0",
-    "@wordpress/scripts": "^34.2.0",
+    "@wordpress/scripts": "^37.2.0",
     "autoprefixer": "^10.5.0",
     "babel-loader": "^10.1.1",
     "chalk": "^4.0.0",
@@ -44,7 +44,6 @@
     "css-loader": "^7.1.5",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "cssnano": "^8.0.10",
-    "cypress": "^15.21.1",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.5",
     "eslint-webpack-plugin": "^5.0.2",
@@ -55,7 +54,7 @@
     "postcss": "~8.5.3",
     "postcss-loader": "^8.2.1",
     "postcss-preset-env": "^11.5.0",
-    "release-it": "^21.0.2",
+    "release-it": "^21.1.2",
     "sharp": "^0.35.4",
     "style-loader": "~4.0.0",
     "stylus": "^0.64.0",
@@ -68,12 +67,13 @@
     "webpack-notifier": "~1.15.0"
   },
   "overrides": {
-    "adm-zip": "^0.6.0",
-    "markdown-it": "^14.1.2",
-    "linkify-it": "^5.0.2",
     "uuid": "^11.1.1",
-    "minimatch@3": "^3.1.5",
-    "serialize-javascript": "^7.1.0"
+    "postcss-selector-parser@6": "^7.1.6",
+    "serialize-javascript": "^7.1.3",
+    "proxy-agent": "^8.0.3",
+    "glob@10": "^14.0.2",
+    "minimatch@10": "^11.0.1",
+    "markdownlint-cli": "^0.50.0"
   },
   "dependencies": {
     "jquery": "^4.0.0",
@@ -95,7 +95,8 @@
     },
     "plugins": {
       "@release-it/keep-a-changelog": {
-        "filename": "CHANGELOG.md"
+        "filename": "CHANGELOG.md",
+        "addUnreleased": true
       }
     },
     "hooks": {

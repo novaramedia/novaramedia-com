@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="bootstrap.php"
+         cacheDirectory=".phpunit.cache"
+         colors="true"
+         failOnWarning="true"
+         failOnDeprecation="true"
+         displayDetailsOnTestsThatTriggerWarnings="true">
+  <testsuites>
+    <testsuite name="theme">
+      <directory>lib</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

@@ -12,6 +12,11 @@ html
 .background-ochre
   background-color: var(--color-ochre)
 
+// Border colour modifier in the .ui-border--black / --gray-mid pattern; goes to modules/ui.styl
+// with the palette entry.
+.ui-border--ochre
+  --ui-border-color: var(--color-ochre)
+
 // .ui-circle-image — a square image rendered as a circle.
 // Size via --ui-circle-image-size so consumers can scale it; ring colour comes from
 // pairing with .ui-border, whose --ui-border-color the consumer can override.
@@ -32,3 +37,16 @@ html
 // modules/ui.styl; longer term, utilities should compile after components.
 .ui-backgrounded-box-padding--flush-bottom
   padding-bottom: 0
+
+// --page-background — the page colour, named for its job rather than its value. The site
+// default is the off-white gray-base; a template that wants its own page colour overrides
+// the variable on its body class rather than setting background-color. Components that
+// fade or blend into the page (the products bar's edge gradients) read the variable, so
+// they follow an override without knowing about it. Candidate for variables.styl and
+// modules/base.styl, replacing the library's hard-coded html white-soft.
+html
+  --page-background: var(--color-gray-base)
+  background-color: var(--page-background)
+
+body
+  background-color: var(--page-background)

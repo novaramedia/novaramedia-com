@@ -233,9 +233,10 @@ function nm_render_committed_credit( $credit ) {
         <div class="committed-archive__box">
           <div class="committed-listen-now-title mb-1"></div>
           <div class="font-weight-bold committed-listen-now__links font-size-13 font-size-s-12">
-            <a href="https://podcasts.apple.com/us/channel/novara-media/id6742787656">Apple Podcasts</a>,<br/>
-            <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N?si=a95692ce1d75432d">Spotify</a>,
-            <a href="https://feeds.podcastmirror.com/novara-media">RSS</a>
+            <a href="https://podcasts.apple.com/podcast/id1816687503">Apple Podcasts</a>,<br/>
+            <?php // Committed has no Spotify show of its own; its episodes are published in the main Novara Media show. ?>
+            <a href="https://open.spotify.com/show/3KtmyPhvQ2FvhwdRNo5I1N">Spotify</a>,
+            <a href="https://feeds.novaramedia.com/podcasts/committed">RSS</a>
           </div>
         </div>
       </div>
@@ -251,7 +252,21 @@ if ( have_posts() ) {
     ?>
       <article class="grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mobile-mb-4">
-          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
+          <?php
+          // Label override (bonus, credits) wins; else the episode number.
+          $episode_label  = get_post_meta( get_the_ID(), '_nm_episode_label', true );
+          $episode_number = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
+
+          if ( '' === $episode_label && $episode_number > 0 ) {
+            $episode_label = 'Episode ' . $episode_number;
+          }
+
+          if ( '' !== $episode_label ) {
+            ?>
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0" data-testid="episode-label"><?php echo esc_html( $episode_label ); ?></h4>
+            <?php
+          }
+          ?>
           <h3 class="font-size-13 font-weight-semibold mb-2"><?php the_title(); ?></h3>
         </div>
         <div class="grid-item offset-s-0 is-s-24 is-xxl-12">

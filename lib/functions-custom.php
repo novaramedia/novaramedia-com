@@ -99,21 +99,43 @@ function nm_get_netlify_url() {
 }
 
 /**
- * Redirects /committed to /category/committed for SEO purposes.
+ * Category slugs of serial (capsule) podcasts. Their archives list every
+ * episode oldest first, and their single posts redirect to the archive
+ * anchor. Order stays by date: bonus posts have no episode number.
  *
- * @return void
- * TODO: REMOVE THIS AND ADD TO REWRITES.PHP CONFIG
+ * @return string[]
  */
-function redirect_committed_custom_url() {
-  if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-        $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-    if ( trim( $request_uri, '/' ) === 'committed' ) {
-            wp_safe_redirect( home_url( 'category/audio/committed/' ), 301 );
-            exit;
-    }
-  }
+function nm_get_serial_podcast_slugs() {
+  return array( 'foreign-agent', 'committed', 'death-in-westminster' );
 }
-add_action( 'template_redirect', 'redirect_committed_custom_url' );
+
+/**
+ * Season and episode label for a post, e.g. "Season 2 Episode 3".
+ *
+ * The episode label override (bonus, trailer, credits) replaces the episode
+ * part only, so the season stays: "Season 2 Trailer". Empty when nothing is
+ * set.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function nm_get_season_episode_label( $post_id ) {
+  $season        = (int) get_post_meta( $post_id, '_nm_season', true );
+  $episode       = (int) get_post_meta( $post_id, '_nm_episode', true );
+  $episode_label = trim( (string) get_post_meta( $post_id, '_nm_episode_label', true ) );
+
+  $parts = array();
+  if ( $season > 0 ) {
+    $parts[] = 'Season ' . $season;
+  }
+  if ( $episode_label !== '' ) {
+    $parts[] = $episode_label;
+  } elseif ( $episode > 0 ) {
+    $parts[] = 'Episode ' . $episode;
+  }
+
+  return implode( ' ', $parts );
+}
 
 /**
  * Redirects single posts in a serial podcast category to the category archive with an anchor.
@@ -126,8 +148,7 @@ function nm_serial_podcast_redirect() {
     return;
   }
   global $post;
-  // Slugs of serial podcasts you want this redirect behavior for:
-  $serial_slugs = array( 'foreign-agent', 'committed', 'death-in-westminster' );
+  $serial_slugs = nm_get_serial_podcast_slugs();
   $categories = get_the_category( $post->ID );
     $match = array_filter(
         $categories,
@@ -209,27 +230,49 @@ function get_latest_news_ids( $featured_posts_ids = false ) {
  * @return array Array of featured post ids
  */
 function get_above_the_fold_featured_post_ids() {
-  $latest_args = array(
+  $saved_ids = array();
+
+  for ( $i = 1; $i <= 8; $i++ ) { // get the featured posts ids from the theme options if set and in position
+    $saved_ids[] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
+  }
+
+  return nm_fill_above_the_fold_post_ids( $saved_ids, nm_get_latest_featurable_post_ids() );
+}
+
+/**
+ * Latest featurable posts, the pool that fills unset above-the-fold slots.
+ *
+ * @return int[] Up to 16 published post IDs, newest first.
+ */
+function nm_get_latest_featurable_post_ids() {
+  $latest_featured_posts = new WP_Query(
+    array(
       'posts_per_page' => 16,
       'fields'         => 'ids',
       'category_name'  => 'articles,video,audio',
       'meta_key'       => '_cmb_featurable',
       'meta_value'     => 'on',
       'post_status'    => 'publish',
+    )
   );
 
-  $latest_featured_posts = new WP_Query( $latest_args );
-  $latest_featured_posts_ids = $latest_featured_posts->posts;
+  return array_map( 'intval', $latest_featured_posts->posts );
+}
 
-  $featured_posts_ids = array();
-
-  for ( $i = 1; $i <= 8; $i++ ) { // get the featured posts ids from the theme options if set and in position
-    $featured_posts_ids[ $i - 1 ] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
-  }
-
+/**
+ * Resolve the 8 above-the-fold slots from saved option values.
+ *
+ * Shared by the front page and the admin preview (lib/admin/atf-preview.php),
+ * so the preview shows exactly what the front page will.
+ *
+ * @param array $saved_ids                 8 saved slot values, in slot order (empty = unset).
+ * @param int[] $latest_featured_posts_ids Fallback pool, newest first.
+ * @return array|false 8 post IDs (0 where nothing could fill the slot), or false.
+ */
+function nm_fill_above_the_fold_post_ids( $saved_ids, $latest_featured_posts_ids ) {
   // Normalize all IDs to integers for strict comparison
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
-  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
+  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, array_values( $saved_ids ) );
 
   // A saved id can outlive the published post it pointed at: unpublished, scheduled back
   // into the future, or trashed after being featured. Treat those slots as unset so the
@@ -238,6 +281,9 @@ function get_above_the_fold_featured_post_ids() {
   $featured_posts_ids = array_map( function( $id ) { return nm_is_published( $id ) ? $id : 0; }, $featured_posts_ids );
 
   for ( $i = 0; $i < 8; $i++ ) {
+    if ( ! isset( $featured_posts_ids[ $i ] ) ) {
+      $featured_posts_ids[ $i ] = 0;
+    }
 
     if ( empty( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {
@@ -470,6 +516,27 @@ function get_the_top_level_category( $post_id = null ) {
   } else {
     return false;
   }
+}
+
+/**
+ * Font-size classes for a lead headline, scaled by title length.
+ *
+ * The cadence of the front page's primary above-the-fold slot, shared so other lead
+ * headlines (the Cortado front-page block and archive) scale the same way: a title of up
+ * to 14 words gets the huge size, stepping down at the m breakpoint; a longer one stays at
+ * the smaller size throughout.
+ *
+ * @param string  $title      Post title.
+ * @param boolean $allow_huge False to force the smaller size whatever the length.
+ *
+ * @return string Space-separated font-size classes.
+ */
+function nm_get_lead_headline_size_classes( $title, $allow_huge = true ) {
+  if ( $allow_huge && str_word_count( $title ) <= 14 ) {
+    return 'font-size-15 font-size-m-13';
+  }
+
+  return 'font-size-13';
 }
 
 /**

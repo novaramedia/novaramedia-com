@@ -47,7 +47,7 @@ if ( have_posts() ) {
     $how_we_spend_our_funds_lines = is_array( $how_we_spend_our_funds_lines ) ? array_filter( $how_we_spend_our_funds_lines ) : array();
   }
   ?>
-  <article id="page" class="support-page background-gray-base support-page__background-cover-image" data-testid="support-page">
+  <article id="page" class="support-page support-page__background-cover-image" data-testid="support-page">
     <div class="container">
       <div class="grid-item">
         <h4 class="font-size-9 font-weight-bold pt-4 pb-3 ui-border-bottom ui-border--black">
@@ -81,7 +81,7 @@ if ( have_posts() ) {
       <div class="grid-row u-relative">
         <div class="grid-item is-xxl-24 ">
           <div class="mb-4 only-mobile">
-            <?php render_support_form( 'condensed' ); ?>
+            <?php render_support_form( 'condensed', false, '', 'support-page-top' ); ?>
           </div>
           <div class="grid-row grid-row--nested only-mobile background-white ui-rounded-box">
             <div class="grid-item is-xxl-24">
@@ -109,7 +109,7 @@ if ( have_posts() ) {
             </div>
             <div class="grid-item is-xxl-12 is-m-24">
               <div class="support-page__donation-form-sticky ui-backgrounded-box-padding">
-                <?php render_support_form( 'condensed' ); ?>
+                <?php render_support_form( 'condensed', false, '', 'support-page-top' ); ?>
               </div>
             </div>
           </div>
@@ -213,7 +213,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-          <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true, '', 'support-page-mid' ); ?>
           </div>
         </div>
       </div>
@@ -314,7 +314,7 @@ if ( have_posts() ) {
       <div class="container mb-5">
         <div class="grid-row">
           <div class="grid-item is-xxl-24">
-          <?php render_support_form( 'banner', true ); ?>
+          <?php render_support_form( 'banner', true, '', 'support-page-bottom' ); ?>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ Set the path fill to `currentColor` in the **source** file, then set `color` on 
   color: var(--color-ochre);
 }
 
-.category-archive__the-cortado__wordmark {
+.the-cortado-archive__wordmark {
   color: var(--color-gray-base);
 }
 ```
@@ -70,7 +70,7 @@ overflow a narrow column.
 column like a heading, width is the point and a rem height would cap it:
 
 ```css
-.category-archive__the-cortado__wordmark svg {
+.the-cortado-archive__wordmark svg {
   display: block;
   width: 100%;
   height: auto;
@@ -148,4 +148,5 @@ path, never `src`.
 - `partials/front-page/show-blocks/audio-acfm.php` and `audio.php` — product logos
 - `partials/specials/banners/focus-breaking-britain.php`, `survey-link.php` — decorative vectors
 - `category-the-cortado.php` and `partials/front-page/show-blocks/the-cortado.php` — the
-  Cortado wordmark, one file rendered cream on ochre and ochre on the page background
+  Cortado wordmark, one file in two treatments: cream on the ochre category hero, ochre on
+  the white front-page box

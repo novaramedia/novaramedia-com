@@ -59,8 +59,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 
 // The Cortado carries its own inline-signup design: ochre box, wordmark instead of a
-// headline, and the form beside the copy rather than beneath it. The copy itself is the
-// shared _nm_banner_text (or the block's customText override) — only the layout differs.
+// headline, and the form beside the copy rather than beneath it. The copy is the short
+// _nm_banner_text (or the block's customText override); the archive and front page use the
+// category's longer _nm_category_formatted_description instead.
 // Its bold spans render in the sans face via .newsletter-signup-cortado__copy strong.
 $is_cortado = get_post_field( 'post_name', $newsletter_id ) === 'the-cortado';
 
@@ -82,7 +83,7 @@ if ( $is_cortado ) {
       <div class="grid-item is-l-24 is-xxl-12">
         <?php
         if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', $button_label );
+          render_mailchimp_signup_form( $mailchimp_key, 'white', 'white', $button_label, 'article-block-cortado' );
         }
         ?>
       </div>
@@ -94,7 +95,7 @@ if ( $is_cortado ) {
 }
 ?>
 <div <?php echo $wrapper_attributes; ?>>
-  <div class="background-gray-base ui-rounded-box p-4">
+  <div class="background-white ui-rounded-box p-4">
     <h3 class="font-size-12 font-weight-bold mb-2 text-wrap-pretty"><?php echo esc_html( $headline ); ?></h3>
     <?php if ( ! empty( $description ) ) { ?>
       <p class="font-size-10 mb-3 text-wrap-balance"><?php echo wp_kses_post( $description ); ?></p>
@@ -102,7 +103,7 @@ if ( $is_cortado ) {
     }
 
     if ( function_exists( 'render_mailchimp_signup_form' ) ) {
-      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label );
+      render_mailchimp_signup_form( $mailchimp_key, 'white', 'black', $button_label, 'article-block' );
     }
     ?>
   </div>

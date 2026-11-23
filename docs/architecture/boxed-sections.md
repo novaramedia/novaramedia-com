@@ -24,7 +24,7 @@ implementation is `partials/front-page/show-blocks/dyor.php`.
 Inner white cards inside the box:
 
 ```php
-<div class="background-white ui-rounded-box pt-3 pb-3 pl-4 pr-4">
+<div class="background-white ui-rounded-box ui-rounded-box--nested pt-3 pb-3 pl-4 pr-4">
   …
 </div>
 ```
@@ -43,6 +43,10 @@ Inner white cards inside the box:
   around it. At `xxl` the container is 1400px.
 - **Nested layouts** inside the box are `grid-row grid-row--nested` (both classes),
   containing `grid-item is-*` children.
+- **Nested corners are rounder.** A colour-blocked box inside another takes
+  `ui-rounded-box ui-rounded-box--nested` (4px, `--corner-radius-large`); the outer box and
+  any images or thumbnails keep plain `ui-rounded-box` (2px). The larger inner radius reads
+  as optically parallel to the outer corner. Applies to the white inner cards above.
 - **Spacing between sections** is the section's own `mt-4 mb-4`, not wrapper divs.
 - **Media that must meet a box edge** (a hero graphic sitting on the bottom of the box)
   keeps `ui-backgrounded-box-padding` and adds `ui-backgrounded-box-padding--flush-bottom`.

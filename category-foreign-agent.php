@@ -165,7 +165,7 @@ function nm_render_foreign_agent_credit( $credit ) {
     <div class="grid-row mb-6">
       <div class="grid-item is-s-12 is-xxl-24 text-align-center font-size-13 text-links-underlined">
         <div class="foreign-agent-archive__box" style="display: inline-block; transform: rotate(1deg);">
-          Listen now on:<br/><a href="https://podcasts.apple.com/us/podcast/foreign-agent-the-iras-american-connection/id1624937065?uo=4">Apple Podcasts</a>,<br/><a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>, <a href="https://feeds.podcastmirror.com/foreign-agent">RSS</a>
+          Listen now on:<br/><a href="https://podcasts.apple.com/podcast/id1624937065">Apple Podcasts</a>,<br/><a href="https://open.spotify.com/show/4bc1ix28XO6XdJhqWpBBeZ">Spotify</a>, <a href="https://feeds.novaramedia.com/podcasts/foreign-agent">RSS</a>
         </div>
       </div>
     </div>
@@ -180,7 +180,21 @@ if ( have_posts() ) {
     ?>
       <article class="foreign-agent-archive__episode grid-row pt-6 pt-s-4" id="<?php echo $post->post_name; ?>">
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mobile-mb-4">
-          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0"><?php echo $meta['_cmb_standfirst'][0]; ?></h4>
+          <?php
+          // Label override (bonus, credits) wins; else the episode number.
+          $episode_label  = get_post_meta( get_the_ID(), '_nm_episode_label', true );
+          $episode_number = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
+
+          if ( '' === $episode_label && $episode_number > 0 ) {
+            $episode_label = 'Episode ' . $episode_number;
+          }
+
+          if ( '' !== $episode_label ) {
+            ?>
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-0" data-testid="episode-label"><?php echo esc_html( $episode_label ); ?></h4>
+            <?php
+          }
+          ?>
           <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
         <div class="grid-item offset-s-0 is-s-24 is-xxl-12">

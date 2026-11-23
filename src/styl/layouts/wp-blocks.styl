@@ -5,14 +5,15 @@
 // set here; the brand sets the body copy in the serif face but keeps the
 // presenter names in the sans one, which no utility covers.
 // Sized by height, not width: the wordmark sits beside body copy, so keying it to a
-// rem height lets it track the type scale. The viewBox supplies the width.
+// rem height lets it track the type scale. The viewBox supplies the width. 1.25rem is the
+// font-size-11 step, the copy's own size — the design keeps the mark small beside it.
 .newsletter-signup-cortado__wordmark
   color: var(--color-gray-base)
   display: block
 
   svg
     display: block
-    height: 1.75rem
+    height: 1.25rem
     width: auto
     max-width: 100% // never let a wide mark overflow a narrow column
 

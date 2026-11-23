@@ -248,9 +248,9 @@ $base_image_path = get_stylesheet_directory_uri() . '/dist/img/specials/death-in
     <div class="grid-row mb-6">
       <div class="grid-item is-s-24 is-xxl-24 text-align-center font-size-13 text-links-underlined">
         Listen now on:<br/>
-        <a href="https://podcasts.apple.com/gb/podcast/death-in-westminster/id1884434680">Apple Podcasts</a>,
+        <a href="https://podcasts.apple.com/podcast/id1884434680">Apple Podcasts</a>,
         <a href="https://open.spotify.com/show/59ofghgIWjZ5VDcYE3loaD">Spotify</a>,
-        <a href="https://podfollow.com/novaramedia/view">RSS</a>
+        <a href="https://anchor.fm/s/110042ee4/podcast/rss">RSS</a>
       </div>
     </div>
   </section>
@@ -264,7 +264,21 @@ if ( have_posts() ) {
     ?>
       <article class="diw-archive__episode grid-row pt-6 pt-s-4" id="<?php echo esc_attr( $post->post_name ); ?>">
         <div class="grid-item offset-s-0 is-s-24 offset-xxl-2 is-xxl-8 mb-s-4">
-          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-1"><?php echo esc_html( get_post_meta( get_the_ID(), '_cmb_standfirst', true ) ); ?></h4>
+          <?php
+          // Label override (bonus, credits) wins; else the episode number.
+          $episode_label  = get_post_meta( get_the_ID(), '_nm_episode_label', true );
+          $episode_number = (int) get_post_meta( get_the_ID(), '_nm_episode', true );
+
+          if ( '' === $episode_label && $episode_number > 0 ) {
+            $episode_label = 'Episode ' . $episode_number;
+          }
+
+          if ( '' !== $episode_label ) {
+            ?>
+          <h4 class="font-size-9 text-uppercase font-weight-bold mb-2 mb-s-1" data-testid="episode-label"><?php echo esc_html( $episode_label ); ?></h4>
+            <?php
+          }
+          ?>
           <h3 class="font-size-13 font-weight-semibold text-wrap-pretty"><?php the_title(); ?></h3>
         </div>
         <div class="grid-item offset-s-0 is-s-24 is-xxl-12">

@@ -30,7 +30,7 @@ function scripts_and_styles_method() {
     'site-js',
     $site_js,
     array(),
-    nm_asset_version( '/dist/main.js', $theme_version ),
+    nm_asset_version_for_environment( '/dist/main.js', $theme_version ),
     array(
       'in_footer' => true,
     )
@@ -49,7 +49,7 @@ function scripts_and_styles_method() {
   wp_localize_script( 'site-js', 'WP', $global_javascript_variables );
   wp_enqueue_script( 'site-js' ); // Version and footer placement come from the registration above.
 
-  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version( '/dist/main.css', $theme_version ) );
+  wp_enqueue_style( 'site', get_template_directory_uri() . '/dist/main.css', null, nm_asset_version_for_environment( '/dist/main.css', $theme_version ) );
 
   wp_enqueue_style( 'typekit-font', 'https://use.typekit.net/aki7elm.css', array(), null );
 
@@ -128,22 +128,30 @@ get_template_part( 'lib/custom-gallery' );
 get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
+get_template_part( 'lib/admin/post-resolve' );
+get_template_part( 'lib/admin/atf-preview' );
+
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
+// Skip the fork if a plugin already ships the class it was forked from. The
+// check lives here, not in the file: PHP declares a top-level class before any
+// guard inside that file can run.
+if ( ! class_exists( 'CMB2_Post_Search_field' ) ) {
+  get_template_part( 'lib/meta/cmb2-post-search-field' );
+}
 get_template_part( 'lib/meta/meta-boxes-seo' );
 get_template_part( 'lib/meta/meta-boxes-post' );
 get_template_part( 'lib/meta/meta-boxes-page' );
 get_template_part( 'lib/meta/meta-boxes-page-about' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-how-we-are-funded' );
-get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-novara-live' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
-get_template_part( 'lib/meta/meta-boxes-category-dyor' );
 get_template_part( 'lib/meta/meta-boxes-post-dyor' );
+get_template_part( 'lib/meta/meta-boxes-post-episode' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
 get_template_part( 'lib/meta/meta-boxes-posttype-job' );
 get_template_part( 'lib/meta/meta-boxes-posttype-newsletter' );
@@ -152,6 +160,7 @@ get_template_part( 'lib/meta/meta-boxes-posttype-event' );
 get_template_part( 'lib/theme-options/theme-options' );
 get_template_part( 'lib/theme-options/options-front-page' );
 get_template_part( 'lib/theme-options/options-fundraising' );
+get_template_part( 'lib/theme-options/options-products' );
 
 /**
  * Initialize CMB2 meta boxes.
@@ -159,7 +168,6 @@ get_template_part( 'lib/theme-options/options-fundraising' );
 function cmb_initialize_cmb_meta_boxes() {
   if ( ! class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/cmb2/cmb2/init.php';
-    require_once 'vendor/webdevstudios/cmb2-post-search-field/lib/init.php';
   }
 }
 add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 11 );
@@ -200,5 +208,6 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-menu-fallbacks' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
+get_template_part( 'lib/functions-cache-purge' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-seo' );
