@@ -17,8 +17,8 @@ any page cache, so it never fixes stale pages for readers.
 | Change | Kinsta | Cloudflare APO | Where |
 |---|---|---|---|
 | Post publish, update, trash | Post, home, its archives | Post and related URLs | Plugins |
-| Post permanent delete | Same | Same | `lib/functions-hooks.php` |
-| Contributor pages of a changed post | Added to the purge | Added to the purge | `lib/functions-hooks.php` |
+| Post permanent delete | Same | Same | `lib/functions-cache-purge.php` |
+| Contributor pages of a changed post | Added to the purge | Added to the purge | `lib/functions-cache-purge.php` |
 | Menu edit, term edit, term delete | Full purge | Full purge | Kinsta built-in, Cloudflare in `lib/functions-cache-purge.php` |
 | Any CMB2 options page save | Full purge | Full purge | `lib/functions-cache-purge.php` |
 | Published contributor's name or slug changes (bylines site-wide) | Full purge | Full purge | `lib/functions-cache-purge.php` |
