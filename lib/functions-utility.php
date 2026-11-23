@@ -134,13 +134,15 @@ if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
  * - removes <br> at the end of a paragraph or of the value
  * - collapses the gaps left behind to one paragraph break
  *
- * Kept: <br> inside a paragraph with text (soft line breaks), &nbsp; within a
- * line of text, markup such as <td>&nbsp;</td> that shares its line with
+ * Kept: <br> on a line with text (soft line breaks; a <br> alone on its line
+ * is a blank line and is removed), &nbsp; within a line of text, markup such as <td>&nbsp;</td> that shares its line with
  * other tags, and everything inside <pre>, <script>, <style> and <textarea>.
  *
  * Block content: only whole empty paragraph blocks are removed, including ones
- * nested in groups or columns. No other block's markup is changed, as that
- * makes the block editor report the block as invalid.
+ * nested in groups or columns. A paragraph with block bindings is kept: its
+ * markup is empty because the content is supplied at render time. No other
+ * block's markup is changed, as that makes the block editor report the block
+ * as invalid.
  *
  * Safe on slashed input (wp_insert_post_data) and stable on its own output.
  *
@@ -153,7 +155,7 @@ function nm_strip_empty_paragraphs( $value ) {
   $blank = '(?:\s|' . $space . ')';
 
   if ( false !== strpos( $value, '<!-- wp:' ) ) {
-    $stripped = preg_replace( '/<!-- wp:paragraph(?: [^>]*?)? -->\s*<p(?:\s[^>]*)?>' . $blank . '*<\/p>\s*<!-- \/wp:paragraph -->\s*/iu', '', $value );
+    $stripped = preg_replace( '/<!-- wp:paragraph(?: (?![^>]*"bindings)[^>]*?)? -->\s*<p(?:\s[^>]*)?>' . $blank . '*<\/p>\s*<!-- \/wp:paragraph -->\s*/iu', '', $value );
 
     return null === $stripped ? $value : trim( $stripped );
   }
