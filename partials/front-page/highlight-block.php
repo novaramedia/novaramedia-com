@@ -60,7 +60,7 @@ $latest_others_args          = array(
   ),
 );
 ?>
-<section class="front-page-highlight-block mt-5 mb-5">
+<section class="front-page-highlight-block">
   <div class="container">
     <div class="grid-row">
       <div class="grid-item is-xxl-24 mb-5">
@@ -159,7 +159,7 @@ $latest_others_args          = array(
                 null,
                 array(
                   'post_id'               => $latest_featured_posts_ids[6],
-                  'container_classes'     => 'mb-4',
+                  'container_classes'     => 'mb-s-4',
                   'show_descriptive_text' => false,
                 )
               );
@@ -185,7 +185,7 @@ $latest_others_args          = array(
             $meta      = get_post_meta( $post->ID );
             $timestamp = get_post_time( 'c' );
             ?>
-            <div class="pb-3 mb-3 <?php echo ( $i < $latest_others_posts_to_show ) ? 'ui-border-bottom' : ''; ?>">
+            <div class="<?php echo ( $i < $latest_others_posts_to_show ) ? 'pb-3 mb-3 ui-border-bottom' : ''; ?>">
               <div class="mb-1">
               <?php render_post_ui_tags( $post->ID, true, true ); ?>
               </div>

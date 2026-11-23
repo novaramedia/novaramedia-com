@@ -24,7 +24,7 @@ $permalink = esc_url( get_permalink( $article_post_id ) );
 $timestamp_attr = esc_attr( $timestamp );
 $title = esc_html( get_the_title( $article_post_id ) );
 ?>
-<div class="mb-4 pb-4 <?php if ($has_bottom_border) {echo 'ui-border-bottom';} ?>">
+<div class="<?php echo $has_bottom_border ? 'mb-4 pb-4 ui-border-bottom' : ''; ?>">
 <?php if ( $show_image === 'small' ) : ?>
   <div class="layout-split-level font-size-8 font-weight-bold mb-1">
     <?php render_post_ui_tags( $article_post_id ); ?>

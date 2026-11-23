@@ -61,7 +61,7 @@ if ( empty( $button_label ) ) {
   $button_label = 'Sign up';
 }
 ?>
-<section class="container mt-4 mb-4" data-testid="front-page-cortado">
+<section class="container" data-testid="front-page-cortado">
   <div class="grid-item is-xxl-24">
     <div class="grid-row front-page-cortado background-white ui-rounded-box ui-backgrounded-box-padding">
 

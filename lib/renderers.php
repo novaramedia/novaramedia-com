@@ -609,12 +609,16 @@ function nm_render_newsletter_signup( $slug ) {
   $mailchimp_key = get_post_meta( $newsletter->ID, '_nm_mailchimp_key', true );
 
   if ( $mailchimp_key ) {
+    // The front-page sequence renders the gap between sections, so the signup's
+    // own outer margins are suppressed here. Other templates call the partial
+    // without this arg and keep them.
     get_template_part(
       'partials/email-signup',
       null,
       array(
         'newsletter_post_id' => $newsletter->ID,
         'placement'          => 'front-page-slot',
+        'container-classes'  => '',
       )
     );
   }

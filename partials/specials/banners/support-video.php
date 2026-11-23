@@ -15,9 +15,9 @@ if ( $support_page !== null ) {
   $support_page_youtube_id = get_post_meta( $support_page->ID, '_nm_support_youtube_short', true );
 }
 ?>
-<div class="container pt-6 pb-6 pt-s-5 pb-s-5">
+<div class="container">
   <div class="grid-row font-size-11 font-size-s-10">
-    <div class="grid-item is-m-24 is-xxl-12 mb-4">
+    <div class="grid-item is-m-24 is-xxl-12 mb-m-4">
       <div class="ui-embed-container background-black">
         <?php
         if ( ! empty( $custom_youtube_id ) ) {

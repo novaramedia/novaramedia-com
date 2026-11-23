@@ -43,7 +43,7 @@ $featured         = $dyor_posts[0];
 $featured_youtube = get_post_meta( $featured->ID, '_cmb_utube', true );
 $recent           = array_slice( $dyor_posts, 1 );
 ?>
-<section class="container mt-4 mb-4">
+<section class="container">
   <div class="grid-item is-xxl-24">
     <div class="front-page-dyor-alt ui-rounded-box background-white layout-overflow-hidden">
 
