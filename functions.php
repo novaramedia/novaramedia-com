@@ -134,7 +134,12 @@ get_template_part( 'lib/admin/atf-preview' );
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
-get_template_part( 'lib/meta/cmb2-post-search-field' );
+// Skip the fork if a plugin already ships the class it was forked from. The
+// check lives here, not in the file: PHP declares a top-level class before any
+// guard inside that file can run.
+if ( ! class_exists( 'CMB2_Post_Search_field' ) ) {
+  get_template_part( 'lib/meta/cmb2-post-search-field' );
+}
 get_template_part( 'lib/meta/meta-boxes-seo' );
 get_template_part( 'lib/meta/meta-boxes-post' );
 get_template_part( 'lib/meta/meta-boxes-page' );

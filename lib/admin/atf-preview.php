@@ -95,7 +95,7 @@ function nm_atf_preview_thumbnail_url( $post_id ) {
  * The preview route takes arbitrary ids, so they pass the same visibility
  * gate as the title lookup (nm_resolve_post()) before anything about them
  * is rendered. A hidden id is then auto-filled like an unset slot and shown
- * as "No post with ID …".
+ * as "No post you can view with ID …".
  *
  * @param int[] $saved_ids Slot ids in slot order (0 = unset).
  * @return int[]
@@ -137,13 +137,13 @@ function nm_atf_preview_state( $saved_ids ) {
       $info = nm_resolve_post( $saved_id );
 
       if ( ! $info['found'] ) {
-        $slot['problem'] = 'No post with ID ' . $saved_id;
+        $slot['problem'] = 'No post you can view with ID ' . $saved_id;
       } else {
         $slot['problem'] = ( '' !== $info['title'] ? $info['title'] : '(no title)' ) . ' is ' . strtolower( $info['status_label'] ) . ', so it won’t show';
       }
     }
 
-    $slot['title']     = $shown_id ? get_the_title( $shown_id ) : '';
+    $slot['title']     = $shown_id ? wp_strip_all_tags( get_the_title( $shown_id ) ) : '';
     $slot['thumbnail'] = $shown_id ? nm_atf_preview_thumbnail_url( $shown_id ) : '';
     $slot              = array_merge( $slot, $shown_id ? nm_atf_preview_category_trail( $shown_id ) : array( 'trail' => '' ) );
 
@@ -154,7 +154,7 @@ function nm_atf_preview_state( $saved_ids ) {
 
   foreach ( (array) get_latest_news_ids( $effective ) as $latest_id ) {
     $latest[] = array_merge(
-      array( 'title' => get_the_title( $latest_id ) ),
+      array( 'title' => wp_strip_all_tags( get_the_title( $latest_id ) ) ),
       nm_atf_preview_category_trail( $latest_id )
     );
   }

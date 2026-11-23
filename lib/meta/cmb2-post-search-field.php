@@ -65,14 +65,14 @@ class CMB2_Post_Search_field {
 
 		$value = is_scalar( $value ) ? (string) $value : '';
 		$ids   = array_filter( array_map( 'absint', explode( ',', $value ) ) );
-		$ids   = array_slice( array_values( array_unique( $ids ) ), 0, 20 );
+		$ids   = array_values( array_unique( $ids ) );
 		$parts = array();
 
 		foreach ( $ids as $id ) {
 			$info = nm_resolve_post( $id );
 
 			if ( ! $info['found'] ) {
-				$parts[] = '<span class="nm-post-search-title--broken">No post with ID ' . $id . '</span>';
+				$parts[] = '<span class="nm-post-search-title--broken">No post you can view with ID ' . $id . '</span>';
 			} elseif ( 'publish' !== $info['status'] ) {
 				$parts[] = '<span class="nm-post-search-title--broken">' . esc_html( $info['title'] ) . ' — ' . esc_html( $info['status_label'] ) . ', won&#8217;t display publicly</span>';
 			} else {

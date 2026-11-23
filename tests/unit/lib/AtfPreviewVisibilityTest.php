@@ -25,6 +25,7 @@ final class AtfPreviewVisibilityTest extends TestCase {
     Functions\when( 'absint' )->alias( fn( $v ) => abs( (int) $v ) );
     Functions\when( 'get_post_status_object' )->justReturn( (object) array( 'label' => 'Published' ) );
     Functions\when( 'get_the_title' )->justReturn( 'Title' );
+    Functions\when( 'wp_strip_all_tags' )->alias( 'strip_tags' );
     Functions\when( 'get_the_date' )->justReturn( '1 Jan 2026' );
     Functions\when( 'get_the_post_thumbnail_url' )->justReturn( false );
     Functions\when( 'get_post_status' )->justReturn( 'publish' );

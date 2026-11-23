@@ -22,6 +22,7 @@ final class PostResolveTest extends TestCase {
     Functions\when( 'absint' )->alias( fn( $v ) => abs( (int) $v ) );
     Functions\when( 'get_post_status_object' )->justReturn( (object) array( 'label' => 'Published' ) );
     Functions\when( 'get_the_title' )->justReturn( 'Title' );
+    Functions\when( 'wp_strip_all_tags' )->alias( 'strip_tags' );
     Functions\when( 'get_the_date' )->justReturn( '1 Jan 2026' );
     Functions\when( 'get_the_post_thumbnail_url' )->justReturn( false );
   }
@@ -30,6 +31,19 @@ final class PostResolveTest extends TestCase {
     Functions\when( 'get_post' )->justReturn( null );
 
     $this->assertFalse( nm_resolve_post( 5 )['found'] );
+  }
+
+  public function test_zero_id_is_not_found_without_reading_the_global_post(): void {
+    Functions\expect( 'get_post' )->never();
+
+    $this->assertFalse( nm_resolve_post( 0 )['found'] );
+  }
+
+  public function test_title_markup_is_stripped(): void {
+    $this->stub_post( 'post', 'publish', true, false );
+    Functions\when( 'get_the_title' )->justReturn( 'Review: <em>Capital</em> at 150' );
+
+    $this->assertSame( 'Review: Capital at 150', nm_resolve_post( 5 )['title'] );
   }
 
   public function test_published_viewable_post_resolves_without_edit_rights(): void {
