@@ -1136,6 +1136,21 @@ Update the classes table in `docs/architecture/front-page-joins.md` in the same 
 
 ---
 
+## Implementation notes (2026-11-23)
+
+The plan was written against `development` at `751574c5`. It was implemented two months later, after the off-white page background, the boxed Downstream block, the DYOR season block, the Playwright migration and the PHPUnit suite had all landed. Where the code had moved, the implementation follows the Design section rather than the task text:
+
+- **Downstream is `contained`.** It is now a white box with no rule of its own, so only its root margins were removed. The rewrite in Task 5 step 4 no longer applies.
+- **`dyor-season` is `contained`.** The block did not exist when the plan was written.
+- **No `force-box` arg.** `partials/email-signup.php` now draws its box by default (callers opt out with `unboxed`), so Task 2 only adds `container-classes`.
+- **Tests.** Task 3's `php -r` smoke test became `tests/unit/lib/FrontPageSequenceTest.php`; Task 7's Cypress assertions became a step in `tests/e2e/homepage.spec.js`.
+- **Task 6 was not blocked.** The Cortado revisions had merged.
+- **Changelog entry** drops the mention of the Downstream rule, which had already gone.
+
+Task 9 (tuning the three values on staging) is still open.
+
+---
+
 ## Self-review
 
 - **Spec coverage.** Frame attribute → Task 1. Join matrix, padding-not-margin, `hr` from the library, one tuning point → Task 3. Bookends in the sequence, lead-in/lead-out → Task 4. Empty-output rule → Task 3 (buffering) + Task 5 (Downstream, Audio early returns). Flush-ending sections → Tasks 4, 5, 6. Downstream `<hr>` removal → Task 5. Newsletter box forced from the front-page path only, other callers byte-identical → Task 2. Docs correction of `boxed-sections.md` → Task 8. Tests → Task 7. Tuning → Task 9. Cortado coordination → Task 6.
