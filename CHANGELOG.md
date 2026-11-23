@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Legacy newsletter page templates (`page-newsletters.php`, `page__newsletter.php` "Newsletter" template) and their page meta box, deprecated since 4.2.0
+- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
 
 ### Fixed
 
@@ -41,11 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Saving any theme options page (front page, fundraising, products, theme options) now purges the Kinsta and Cloudflare page caches; it previously flushed only the object cache, so logged-out readers kept seeing the old homepage and site-wide copy
 - Menu and term edits now purge Cloudflare APO as well as Kinsta
 - Renaming a contributor, or changing a Mailchimp newsletter key, now purges all page caches so bylines and signup forms update site-wide
-
-### Removed
-
-- Legacy front page banner selects, replaced by the Front Page → Layout page in 4.7.0. The front page shows no sections until a layout is saved
-- Do Your Own Research category map fields, replaced by per-season maps under Products → Do Your Own Research in 4.10.0
 
 ### Security
 
