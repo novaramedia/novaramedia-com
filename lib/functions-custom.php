@@ -230,27 +230,49 @@ function get_latest_news_ids( $featured_posts_ids = false ) {
  * @return array Array of featured post ids
  */
 function get_above_the_fold_featured_post_ids() {
-  $latest_args = array(
+  $saved_ids = array();
+
+  for ( $i = 1; $i <= 8; $i++ ) { // get the featured posts ids from the theme options if set and in position
+    $saved_ids[] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
+  }
+
+  return nm_fill_above_the_fold_post_ids( $saved_ids, nm_get_latest_featurable_post_ids() );
+}
+
+/**
+ * Latest featurable posts, the pool that fills unset above-the-fold slots.
+ *
+ * @return int[] Up to 16 published post IDs, newest first.
+ */
+function nm_get_latest_featurable_post_ids() {
+  $latest_featured_posts = new WP_Query(
+    array(
       'posts_per_page' => 16,
       'fields'         => 'ids',
       'category_name'  => 'articles,video,audio',
       'meta_key'       => '_cmb_featurable',
       'meta_value'     => 'on',
       'post_status'    => 'publish',
+    )
   );
 
-  $latest_featured_posts = new WP_Query( $latest_args );
-  $latest_featured_posts_ids = $latest_featured_posts->posts;
+  return array_map( 'intval', $latest_featured_posts->posts );
+}
 
-  $featured_posts_ids = array();
-
-  for ( $i = 1; $i <= 8; $i++ ) { // get the featured posts ids from the theme options if set and in position
-    $featured_posts_ids[ $i - 1 ] = NM_get_option( 'nm_above_the_fold_featured_' . $i, 'nm_front_page_above_the_fold_featured_options' );
-  }
-
+/**
+ * Resolve the 8 above-the-fold slots from saved option values.
+ *
+ * Shared by the front page and the admin preview (lib/admin/atf-preview.php),
+ * so the preview shows exactly what the front page will.
+ *
+ * @param array $saved_ids                 8 saved slot values, in slot order (empty = unset).
+ * @param int[] $latest_featured_posts_ids Fallback pool, newest first.
+ * @return array|false 8 post IDs (0 where nothing could fill the slot), or false.
+ */
+function nm_fill_above_the_fold_post_ids( $saved_ids, $latest_featured_posts_ids ) {
   // Normalize all IDs to integers for strict comparison
   $latest_featured_posts_ids = array_map( 'intval', $latest_featured_posts_ids );
-  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, $featured_posts_ids );
+  $featured_posts_ids = array_map( function( $id ) { return empty( $id ) ? 0 : intval( $id ); }, array_values( $saved_ids ) );
 
   // A saved id can outlive the published post it pointed at: unpublished, scheduled back
   // into the future, or trashed after being featured. Treat those slots as unset so the
@@ -259,6 +281,9 @@ function get_above_the_fold_featured_post_ids() {
   $featured_posts_ids = array_map( function( $id ) { return nm_is_published( $id ) ? $id : 0; }, $featured_posts_ids );
 
   for ( $i = 0; $i < 8; $i++ ) {
+    if ( ! isset( $featured_posts_ids[ $i ] ) ) {
+      $featured_posts_ids[ $i ] = 0;
+    }
 
     if ( empty( $featured_posts_ids[ $i ] ) ) { // if the featured post id is not set in the theme options, use the latest featured post
       if ( ! empty( $latest_featured_posts_ids ) ) {

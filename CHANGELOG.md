@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Post pickers in admin meta boxes and options pages show the resolved post title beneath the ID, live as the value changes — red warning when the ID is missing or the post isn't published
+- Above the Fold options page shows a preview of the section as the front page lays it out, including auto-filled slots, the Latest column and each post's category (e.g. Video / Downstream); click a post to jump to its field
 - PHPUnit suite for theme PHP logic: Brain Monkey stubs WordPress
 - Donation forms now pass which form was used, the page, the referring site and any campaign tags on to the donation app, so we can start recording what leads people to donate
 
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Webpack production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
 - Playwright staging tests load each page once instead of once per check, cutting the CI job from about 4 minutes to under 2
 - Playwright staging tests skip draft and Dependabot PRs, and a new push cancels the PR's previous run
+- CMB2 Post Search field addon forked into the theme (`lib/meta/`) — upstream unmaintained since 2019; composer dependency removed
 
 ### Removed
 
