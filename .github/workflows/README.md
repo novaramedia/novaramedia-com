@@ -66,46 +66,29 @@ Comparing two fresh builds rather than the committed `dist/` keeps the check ind
 
 ## Release Notification to Slack
 
-The `release-notification.yml` workflow automatically sends structured notifications to the private digital team Slack channel when a release PR is merged into `master`.
+The `release-notification.yml` workflow posts to Slack when a release PR is merged into `master`. It calls the shared [`slack-post.yml`](https://github.com/novaramedia/nm-shared-workflows) workflow, which follows the Slack Messages rules in [nm-agents-shared/conventions.md](https://github.com/novaramedia/nm-agents-shared/blob/main/conventions.md#slack-messages).
 
-It reports the **merge**, not a deploy — production is still updated manually afterwards (see [docs/releases.md](../../docs/releases.md#deploying)). The channel is set by whichever incoming webhook the `SLACK_WEBHOOK_URL` secret holds. Once production deploys run from CI, the notification should fire after a successful deploy and move to the public digital team channel — see [docs/plans/production-ci-deploy.md](../../docs/plans/production-ci-deploy.md).
+It reports the **merge**, not a deploy — production is still updated manually afterwards (see [docs/releases.md](../../docs/releases.md#deploying)). Once production deploys run from CI, the notification should fire after a successful deploy and move to the public digital team channel — see [docs/plans/production-ci-deploy.md](../../docs/plans/production-ci-deploy.md).
 
 ### How it works
 
-1. **Trigger**: Activates when a Pull Request with title starting with "Release: " (as created by `scripts/release.sh`) is merged into the `master` branch
-2. **Version Extraction**: Extracts the version number from `package.json` in the merged code
-3. **Release Notes**: Parses `CHANGELOG.md` to extract the release notes for that specific version
-4. **Slack Notification**: Sends a structured message with:
-   - Release version and repository info
-   - Link to the merged PR
-   - Complete release notes from changelog
-   - Commit SHA for deployment tracking
+1. **Trigger**: a merged PR into `master` whose title starts with "Release: " (as created by `scripts/release.sh`)
+2. **Version**: read from `package.json` in the merged code
+3. **Post**: the shared workflow pulls the `## [X.Y.Z]` section from `CHANGELOG.md` and posts it with:
+   - a header with the version
+   - the release notes, rendered as markdown (headings, lists, links)
+   - buttons: View site, Release PR, Commit
+   - a footer linking the workflow run
 
-### Setup Requirements
+### Setup
 
-To enable Slack notifications, you need to:
-
-1. **Create a Slack Webhook URL**:
-   - Go to your Slack workspace settings
-   - Navigate to "Incoming Webhooks" 
-   - Create a new webhook for the target channel
-   - Copy the webhook URL
-
-2. **Add the webhook as a GitHub secret**:
-   - Go to repository Settings → Secrets and variables → Actions
-   - Add a new repository secret named `SLACK_WEBHOOK_URL`
-   - Paste the webhook URL as the value
-
-### Message Format
-
-The Slack notification includes:
-- Header with release version
-- Repository and PR links
-- Full release notes from CHANGELOG.md
-- Deployment commit information
+- **Secret `SLACK_BOT_TOKEN`**: the Novara Slack bot token (`xoxb-…`, `chat:write`). Settings → Secrets and variables → Actions → Secrets.
+- **Variable `SLACK_RELEASE_CHANNEL`**: channel name or ID. Settings → Secrets and variables → Actions → Variables. Changing channel needs no code change.
+- **Invite the bot** to that channel, or Slack rejects the post with `not_in_channel`.
 
 ### Troubleshooting
 
-- Ensure PR titles start with "Release: " to trigger the workflow
-- Verify the version exists in CHANGELOG.md with format: `## [X.Y.Z] - DATE`
-- Check that the `SLACK_WEBHOOK_URL` secret is properly configured
+- PR titles must start with "Release: " to trigger the workflow
+- The version must exist in CHANGELOG.md as `## [X.Y.Z] - DATE`; if not, the post goes out without notes and the run shows a warning
+- A failed Slack post shows as a warning on the run (with Slack's error, e.g. `not_in_channel`, `invalid_auth`) rather than a failure
+
