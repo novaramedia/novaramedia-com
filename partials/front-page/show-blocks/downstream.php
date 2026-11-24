@@ -27,7 +27,7 @@ if ( ! $latest_video->have_posts() ) {
 
 $category_link = get_category_link( $downstream_category->term_id );
 ?>
-<section class="container mt-4 mb-4" data-testid="front-page-downstream">
+<section class="container" data-testid="front-page-downstream">
   <div class="grid-item is-xxl-24">
     <div class="grid-row background-white ui-rounded-box ui-backgrounded-box-padding">
 

@@ -101,22 +101,25 @@ function get_newsletter_signup_options() {
  * Newsletter signups are NOT here — they are dynamic posts, enumerated only for
  * the admin select via get_newsletter_signup_options(), and rendered by ID.
  *
- * @return array<string, array{label:string, partial:string}>
+ * frame is 'contained' (visible edge: box or full-bleed band) or 'open' (content
+ * on the page background); see lib/front-page-sequence.php.
+ *
+ * @return array<string, array{label:string, frame:string, partial:string}>
  */
 function nm_get_front_page_static_banners() {
   return array(
-    'banner-support-section'        => array( 'label' => 'Support section', 'partial' => 'partials/support-section' ),
-    'banner-support-video'          => array( 'label' => 'Support Video', 'partial' => 'partials/specials/banners/support-video' ),
-    'banner-podcast-death-in-westminster' => array( 'label' => 'Podcast: Death in Westminster', 'partial' => 'partials/specials/banners/podcast-death-in-westminster' ),
-    'banner-podcast-committed'      => array( 'label' => 'Podcast: Committed', 'partial' => 'partials/specials/banners/podcast-committed' ),
-    'banner-podcast-if-i-speak'     => array( 'label' => 'Podcast: If I Speak', 'partial' => 'partials/specials/banners/podcast-if-i-speak' ),
-    'banner-focus-pro-rev-soccer'   => array( 'label' => 'Focus: Pro Rev Soccer', 'partial' => 'partials/specials/banners/focus-pro-rev-soccer' ),
-    'banner-podcast-foreign-agent'  => array( 'label' => 'Podcast: Foreign Agent', 'partial' => 'partials/specials/banners/podcast-foreign-agent' ),
-    'banner-focus-doing-it-right-sex-on-the-left' => array( 'label' => 'Focus: Doing It Right: Sex On The Left', 'partial' => 'partials/specials/banners/focus-doing-it-right-sex-on-the-left' ),
-    'banner-focus-breaking-britain' => array( 'label' => 'Focus: Breaking Britain', 'partial' => 'partials/specials/banners/focus-breaking-britain' ),
-    'banner-focus-disability-its-political' => array( 'label' => 'Focus: Disability: It’s Political', 'partial' => 'partials/specials/banners/focus-disability-its-political' ),
-    'banner-podcast-planet-b'       => array( 'label' => 'Podcast: Planet B', 'partial' => 'partials/specials/banners/podcast-planet-b' ),
-    'banner-survey-link'            => array( 'label' => 'Audience Survey 2026', 'partial' => 'partials/specials/banners/survey-link' ),
+    'banner-support-section'        => array( 'label' => 'Support section', 'frame' => 'contained', 'partial' => 'partials/support-section' ),
+    'banner-support-video'          => array( 'label' => 'Support Video', 'frame' => 'open', 'partial' => 'partials/specials/banners/support-video' ),
+    'banner-podcast-death-in-westminster' => array( 'label' => 'Podcast: Death in Westminster', 'frame' => 'contained', 'partial' => 'partials/specials/banners/podcast-death-in-westminster' ),
+    'banner-podcast-committed'      => array( 'label' => 'Podcast: Committed', 'frame' => 'contained', 'partial' => 'partials/specials/banners/podcast-committed' ),
+    'banner-podcast-if-i-speak'     => array( 'label' => 'Podcast: If I Speak', 'frame' => 'contained', 'partial' => 'partials/specials/banners/podcast-if-i-speak' ),
+    'banner-focus-pro-rev-soccer'   => array( 'label' => 'Focus: Pro Rev Soccer', 'frame' => 'contained', 'partial' => 'partials/specials/banners/focus-pro-rev-soccer' ),
+    'banner-podcast-foreign-agent'  => array( 'label' => 'Podcast: Foreign Agent', 'frame' => 'contained', 'partial' => 'partials/specials/banners/podcast-foreign-agent' ),
+    'banner-focus-doing-it-right-sex-on-the-left' => array( 'label' => 'Focus: Doing It Right: Sex On The Left', 'frame' => 'contained', 'partial' => 'partials/specials/banners/focus-doing-it-right-sex-on-the-left' ),
+    'banner-focus-breaking-britain' => array( 'label' => 'Focus: Breaking Britain', 'frame' => 'contained', 'partial' => 'partials/specials/banners/focus-breaking-britain' ),
+    'banner-focus-disability-its-political' => array( 'label' => 'Focus: Disability: It’s Political', 'frame' => 'contained', 'partial' => 'partials/specials/banners/focus-disability-its-political' ),
+    'banner-podcast-planet-b'       => array( 'label' => 'Podcast: Planet B', 'frame' => 'contained', 'partial' => 'partials/specials/banners/podcast-planet-b' ),
+    'banner-survey-link'            => array( 'label' => 'Audience Survey 2026', 'frame' => 'contained', 'partial' => 'partials/specials/banners/survey-link' ),
   );
 }
 
@@ -124,11 +127,15 @@ function nm_get_front_page_static_banners() {
  * The front-page block registry: the single, DB-free source of truth for every
  * statically-defined section, keyed by stable, opaque slug.
  *
- * Each entry is [ type, label, partial ]:
+ * Each entry is [ type, frame, label, partial ]:
  *   - type 'product' — receives the shared render context (see
  *     nm_render_front_page_block()); e.g. the highlight section dedupes against
  *     the above-the-fold posts. Content config lives on its own settings subpage.
  *   - type 'banner'  — arg-less partial, no render context.
+ *   - frame 'contained' | 'open' — whether the section has a visible edge of its
+ *     own (coloured box or full-bleed band) or sits open on the page background.
+ *     Read by the front-page sequence to choose the join between neighbours
+ *     (see lib/front-page-sequence.php). Required on every entry.
  *
  * Consumed by BOTH the front-end render path (resolve slug → type + partial) and
  * the admin Layout select (labels). It is intentionally DB-free, so it is safe
@@ -140,7 +147,7 @@ function nm_get_front_page_static_banners() {
  * indices, so relabelling, re-pathing or reordering never corrupts a layout, and
  * no path from saved data ever reaches get_template_part().
  *
- * @return array<string, array{type:string, label:string, partial:string}>
+ * @return array<string, array{type:string, frame:string, label:string, partial:string}>
  */
 function nm_get_front_page_block_registry() {
   static $blocks = null;
@@ -150,20 +157,21 @@ function nm_get_front_page_block_registry() {
   }
 
   $blocks = array(
-    'highlight-block' => array( 'type' => 'product', 'label' => 'Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
-    'novara-live'     => array( 'type' => 'product', 'label' => 'Product: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
-    'dyor'            => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
-    'dyor-alt'        => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
-    'dyor-season'     => array( 'type' => 'product', 'label' => 'Product: Do Your Own Research (current season only)', 'partial' => 'partials/front-page/show-blocks/dyor-season' ),
-    'audio'           => array( 'type' => 'product', 'label' => 'Product: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
-    'audio-acfm'      => array( 'type' => 'product', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
-    'downstream'      => array( 'type' => 'product', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
-    'the-cortado'     => array( 'type' => 'product', 'label' => 'Product: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
+    'highlight-block' => array( 'type' => 'product', 'frame' => 'open', 'label' => 'Highlight section (configured on its own subpage)', 'partial' => 'partials/front-page/highlight-block' ),
+    'novara-live'     => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Novara Live', 'partial' => 'partials/front-page/show-blocks/novara-live' ),
+    'dyor'            => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Do Your Own Research', 'partial' => 'partials/front-page/show-blocks/dyor' ),
+    'dyor-alt'        => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Do Your Own Research (ALT — design comparison)', 'partial' => 'partials/front-page/show-blocks/dyor-alt' ),
+    'dyor-season'     => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Do Your Own Research (current season only)', 'partial' => 'partials/front-page/show-blocks/dyor-season' ),
+    'audio'           => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Audio (Novara FM + ACFM)', 'partial' => 'partials/front-page/show-blocks/audio' ),
+    'audio-acfm'      => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
+    'downstream'      => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
+    'the-cortado'     => array( 'type' => 'product', 'frame' => 'contained', 'label' => 'Product: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
   );
 
   foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
     $blocks[ $slug ] = array(
       'type'    => 'banner',
+      'frame'   => $banner['frame'],
       'label'   => 'Banner: ' . $banner['label'],
       'partial' => $banner['partial'],
     );

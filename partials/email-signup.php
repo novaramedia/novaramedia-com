@@ -92,10 +92,18 @@ if ( ! empty( $args['copy-classes'] ) ) {
 // Optional Playwright hook for a caller that needs to target its own signup.
 $testid = ! empty( $args['testid'] ) ? $args['testid'] : false;
 
+// Outer vertical spacing. Every caller keeps mt-4 mb-4 unless it passes its own
+// (the front-page sequence passes '' because it renders the gap between sections itself).
+$container_classes = 'mt-4 mb-4';
+
+if ( isset( $args['container-classes'] ) && is_string( $args['container-classes'] ) ) {
+  $container_classes = $args['container-classes'];
+}
+
 // Which form a signup came from, sent to the signup service as `nm_form`. The page path is sent separately, so templates using this partial share one slug unless they pass their own.
 $placement = ! empty( $args['placement'] ) ? $args['placement'] : 'signup-section';
 ?>
-<div class="email-signup mt-4 mb-4"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
+<div class="<?php echo esc_attr( trim( 'email-signup ' . $container_classes ) ); ?>"<?php echo $testid ? ' data-testid="' . esc_attr( $testid ) . '"' : ''; ?>>
   <div class="container">
     <div class="grid-row">
       <?php

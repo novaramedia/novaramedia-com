@@ -1,4 +1,5 @@
-<section id="front-page__mega-block" class="container mt-6 mb-5">
+<?php // The Mega Block is the permanent tail: its mb-5 is the page's lead-out to the footer. Every other section has no outer margin (see lib/front-page-sequence.php). ?>
+<section id="front-page__mega-block" class="container mb-5">
   <?php
     $sections_to_render = array(
       'UK',

@@ -27,7 +27,7 @@ if ( $acfm ) {
     $featured_meta = get_post_meta( $featured_id );
     $recent = array_slice( $latest, 1 );
     ?>
-    <section class="front-page__acfm container mt-4 mb-3">
+    <section class="front-page__acfm container">
       <div class="grid-row">
         <div class="grid-item is-s-24 is-xxl-24 font-color-black">
           <div class="background-light-blue ui-rounded-box pt-3 pl-4 pr-4 pb-3">

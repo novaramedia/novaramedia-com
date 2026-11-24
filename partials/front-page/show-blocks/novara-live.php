@@ -16,7 +16,7 @@ if ( $novara_live_category ) {
 
   $latest_video = new WP_Query( $args );
   ?>
-<section class="front-page-novara-live container mt-4 mb-4">
+<section class="front-page-novara-live container">
   <div class="grid-item is-xxl-24">
     <div class="grid-row background-black font-color-white ui-rounded-box ui-backgrounded-box-padding">
         <div class="grid-item is-xxl-24 mb-4">

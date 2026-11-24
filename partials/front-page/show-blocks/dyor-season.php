@@ -73,7 +73,7 @@ $recent = count( $season_posts ) === 5 ? array_slice( $season_posts, 1 ) : array
 $top_left_spacing  = empty( $recent ) ? 'mb-0 mb-s-4' : 'mb-4';
 $top_right_spacing = empty( $recent ) ? 'mb-0' : 'mb-4';
 ?>
-<section class="container mt-4 mb-4" data-testid="front-page-dyor-season">
+<section class="container" data-testid="front-page-dyor-season">
   <div class="grid-item is-xxl-24">
     <div class="grid-row front-page-dyor front-page-dyor--season-<?php echo esc_attr( $season_number ); ?> background-cover-image ui-rounded-box ui-backgrounded-box-padding">
 

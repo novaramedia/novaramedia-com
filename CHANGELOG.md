@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Front page spacing between sections is now set by how each pair joins (boxed or open), with a divider only between two open sections
+
 ## [4.11.0] - 2026-11-23
 
 ### Added

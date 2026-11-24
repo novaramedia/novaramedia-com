@@ -21,7 +21,7 @@ for ($i = 0; $i < 4; $i++) { // depending on which block number, get the feature
 }
 ?>
 <div class="grid-row grid-row--nested<?php if ($args['block_number'] % 2 === 0) { echo " grid-row--reverse"; } ?>">
-  <div class="featured-posts__primary grid-item is-l-24 is-xxl-16 mb-4">
+  <div class="featured-posts__primary grid-item is-l-24 is-xxl-16 mb-l-4">
     <?php
     if (!empty($to_render[0])) {
       get_template_part('partials/front-page/above-the-fold/featured-post-primary', null, array(

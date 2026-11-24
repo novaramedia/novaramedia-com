@@ -13,7 +13,7 @@ if ( $args['featured_posts_ids'] ) {
 
 $latest_news_posts_ids = ! empty( $args['latest_news_posts_ids'] ) ? $args['latest_news_posts_ids'] : array();
 ?>
-<section class="front-page__above-the-fold container container--padded mt-2 mb-6 mb-s-5" data-testid="post-list">
+<section class="front-page__above-the-fold container container--padded" data-testid="post-list">
   <div class="above-the-fold layout-grid">
     <div class="above-the-fold__featured-1 ui-border-bottom pb-4 mb-4">
       <?php

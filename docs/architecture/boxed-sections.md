@@ -8,7 +8,7 @@ implementation is `partials/front-page/show-blocks/dyor.php`.
 
 ```php
 <?php // ── Section: <name> ── ?>
-<section class="container mt-4 mb-4">
+<section class="container">
   <div class="grid-item is-xxl-24">
     <div class="grid-row background-{colour} ui-rounded-box ui-backgrounded-box-padding">
 
@@ -31,7 +31,9 @@ Inner white cards inside the box:
 
 ## Rules
 
-- **The `<section>` is the container.** `container mt-4 mb-4` on the section itself.
+- **The `<section>` is the container.** `container` on the section itself, with no
+  outer margins: the front-page sequence renders the gap to each neighbour
+  (see `front-page-joins.md`).
   There is no `grid-row` between the section and the first `grid-item is-xxl-24`.
 - **Colour, radius and padding all sit on the one `grid-row` box:**
   `background-{colour} ui-rounded-box ui-backgrounded-box-padding`.
@@ -47,7 +49,9 @@ Inner white cards inside the box:
   `ui-rounded-box ui-rounded-box--nested` (4px, `--corner-radius-large`); the outer box and
   any images or thumbnails keep plain `ui-rounded-box` (2px). The larger inner radius reads
   as optically parallel to the outer corner. Applies to the white inner cards above.
-- **Spacing between sections** is the section's own `mt-4 mb-4`, not wrapper divs.
+- **Spacing between sections** comes from the front-page join, never from the
+  section. A boxed section's internal margins stay inside `ui-backgrounded-box-padding`,
+  so they do not affect the seam.
 - **Media that must meet a box edge** (a hero graphic sitting on the bottom of the box)
   keeps `ui-backgrounded-box-padding` and adds `ui-backgrounded-box-padding--flush-bottom`.
   Do not use `pb-0` — spacing utilities compile before the UI module, so the component's

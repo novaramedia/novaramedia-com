@@ -7,9 +7,10 @@
  * @param string|null $logo_url Optional logo URL.
  * @param string $background_color Background color class.
  * @param string $font_color Font color class.
+ * @param string $grid_item_classes Extra classes for the card's grid-item (e.g. a stack-only gap).
  */
 if ( ! function_exists( 'render_show' ) ) {
-function render_show( $slug, $description, $logo_url = null, $background_color = 'black', $font_color = 'white' ) {
+function render_show( $slug, $description, $logo_url = null, $background_color = 'black', $font_color = 'white', $grid_item_classes = '' ) {
   $category = get_term_by( 'slug', $slug, 'category' );
 
   if ( ! $category ) {
@@ -25,7 +26,7 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
 
   if ( $latest ) {
     ?>
-    <div class="grid-item is-s-24 is-xxl-12 mb-4 font-color-<?php echo esc_attr( $font_color ); ?> ui-rounded-box">
+    <div class="<?php echo esc_attr( trim( 'grid-item is-s-24 is-xxl-12 ' . $grid_item_classes ) ); ?> font-color-<?php echo esc_attr( $font_color ); ?> ui-rounded-box">
       <div class="front-page__audio-product front-page__audio-product--<?php echo esc_attr( $slug ); ?> background-<?php echo esc_attr( $background_color ); ?> pt-4 pl-4 pr-4 pb-4 ui-rounded-box">
         <a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="ui-hover">
           <?php if ( $logo_url ) { ?>
@@ -126,24 +127,35 @@ function render_show( $slug, $description, $logo_url = null, $background_color =
   }
 }
 }
+
+// Both cards must be known before the shell is emitted: a section with no
+// cards would still earn a join from the front-page sequence.
+ob_start();
+
+render_show(
+  'novarafm',
+  'Novara Media\'s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.',
+  '/dist/img/products/novara-fm/novarafm-wordmark.svg',
+  'green',
+  'black',
+  'mb-s-4'
+);
+render_show(
+  'acfm',
+  'The home of the weird left. Nadia Idle, Jeremy Gilbert and Keir Milburn examine the links between left-wing politics, culture, music and experiences of collective joy.',
+  '/dist/img/products/acfm/acfm-logo.svg',
+  'light-blue',
+  'black'
+);
+
+$cards = ob_get_clean();
+
+if ( trim( $cards ) === '' ) {
+  return;
+}
 ?>
-<section class="front-page__audio-products container mt-4 mb-4">
+<section class="front-page__audio-products container">
   <div class="grid-row">
-    <?php
-    render_show(
-      'novarafm',
-      'Novara Media\'s flagship podcast is about the ideas that shape our past, present and future. With a desire to change the world—and ourselves along the way—Novara FM interrogates the people, ideologies and movements that wield power in our lives, from politics and culture to technology and the environment.',
-      '/dist/img/products/novara-fm/novarafm-wordmark.svg',
-      'green',
-      'black'
-    );
-    render_show(
-      'acfm',
-      'The home of the weird left. Nadia Idle, Jeremy Gilbert and Keir Milburn examine the links between left-wing politics, culture, music and experiences of collective joy.',
-      '/dist/img/products/acfm/acfm-logo.svg',
-      'light-blue',
-      'black'
-    );
-    ?>
+    <?php echo $cards; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered template output, escaped at source. ?>
   </div>
 </section>

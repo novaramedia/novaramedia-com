@@ -35,6 +35,60 @@ test.describe('Homepage', () => {
       await expect(firstPostTitle).not.toHaveText('');
     });
 
+    await test.step('joins every pair of front-page sections by their frames', async () => {
+      // Structure only: the layout is editable, so which sections render is
+      // not asserted — only that each gap matches the two sections around it.
+      const report = await page.getByTestId('main-content').evaluate((main) => {
+        const isSection = (el) =>
+          Boolean(el) && el.dataset.testid === 'front-page-section';
+        const expectedJoin = (previous, next) => {
+          if (previous === 'open' && next === 'open') return 'divided';
+          if (previous === 'contained' && next === 'contained') return 'tight';
+          return 'loose';
+        };
+        const sections = [
+          ...main.querySelectorAll('[data-testid="front-page-section"]'),
+        ];
+        const joins = [
+          ...main.querySelectorAll('[data-testid="front-page-join"]'),
+        ];
+
+        return {
+          sections: sections.length,
+          joins: joins.length,
+          emptySections: sections.filter(
+            (section) =>
+              section.textContent.trim() === '' &&
+              !section.querySelector('img, svg, iframe')
+          ).length,
+          badJoins: joins.filter((join) => {
+            const previous = join.previousElementSibling;
+            const next = join.nextElementSibling;
+
+            if (!isSection(previous) || !isSection(next)) {
+              return true;
+            }
+
+            const kind = expectedJoin(
+              previous.dataset.frame,
+              next.dataset.frame
+            );
+            const rules = join.querySelectorAll('hr').length;
+
+            return (
+              join.dataset.join !== kind ||
+              rules !== (kind === 'divided' ? 1 : 0)
+            );
+          }).length,
+        };
+      });
+
+      expect(report.sections).toBeGreaterThan(1);
+      expect(report.joins).toBe(report.sections - 1);
+      expect(report.emptySections).toBe(0);
+      expect(report.badJoins).toBe(0);
+    });
+
     await test.step('has no broken images in critical content', async () => {
       await checkImages(page, {
         scope: page.getByTestId('main-content'),
