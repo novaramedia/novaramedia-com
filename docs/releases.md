@@ -90,6 +90,6 @@ Both share the `kinsta-staging` concurrency group. See
 ### Planned
 
 Production deploys move to the same GitHub Actions approach as staging, triggered
-by pushes to `master`, and the release notification moves to the public channel
-once it reports a deploy rather than a merge. See
+by pushes to `master`, and the release notification (already in `#team-digital-public`)
+fires after the deploy rather than on the merge. See
 [`docs/plans/production-ci-deploy.md`](plans/production-ci-deploy.md).

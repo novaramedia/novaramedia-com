@@ -68,7 +68,7 @@ Comparing two fresh builds rather than the committed `dist/` keeps the check ind
 
 The `release-notification.yml` workflow posts to Slack when a release PR is merged into `master`. It calls the shared [`slack-post.yml`](https://github.com/novaramedia/nm-shared-workflows) workflow, which follows the Slack Messages rules in [nm-agents-shared/conventions.md](https://github.com/novaramedia/nm-agents-shared/blob/main/conventions.md#slack-messages).
 
-It reports the **merge**, not a deploy — production is still updated manually afterwards (see [docs/releases.md](../../docs/releases.md#deploying)). Once production deploys run from CI, the notification should fire after a successful deploy and move to the public digital team channel — see [docs/plans/production-ci-deploy.md](../../docs/plans/production-ci-deploy.md).
+It reports the **merge**, not a deploy — production is still updated manually afterwards (see [docs/releases.md](../../docs/releases.md#deploying)). It posts to `#team-digital-public`. Once production deploys run from CI, the notification should fire after a successful deploy instead — see [docs/plans/production-ci-deploy.md](../../docs/plans/production-ci-deploy.md).
 
 ### How it works
 
