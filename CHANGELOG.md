@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [4.11.0] - 2026-11-23
+
+### Added
+
+- Post pickers show the post's title beneath the ID, with a warning when the ID is missing or the post isn't published
+- Above the Fold options page previews the section as the front page will show it
+- Donation forms pass the form used, the page, the referring site and any campaign tags to the donation app
+- PHPUnit suite for theme PHP logic
+- Log of full page-cache purges (`nm_cache_purge_log` option)
+
+### Changed
+
+- Empty paragraphs and blank lines are stripped from post content, excerpts and text meta fields on save
+- Branded category archives use a block per brand instead of nested `category-archive__<brand>__<element>` classes
+- BEM naming rules added to the AI coding guidelines
+- Deprecation policy: deprecated code is removed once verified unused in the repo and the production database
+- Production build runs PNGs through a lossless optimisation pass (oxipng); `src/img` holds the unoptimised originals again
+- Playwright staging tests load each page once, skip docs-only, draft and Dependabot PRs, and a new push cancels the PR's previous run
+- CMB2 Post Search field addon forked into the theme; composer dependency removed
+- Local development needs Node 22.22.2+ or 24.15+
+
+### Removed
+
+- Legacy newsletter page templates and their page meta box, deprecated since 4.2.0
+- Legacy front page banner selects, replaced by the Front Page Layout page in 4.7.0. The front page shows no sections until a layout is saved
+- Do Your Own Research category map fields, replaced by per-season maps in 4.10.0
+
+### Fixed
+
+- Saving a theme options page now clears the page caches, so homepage and site-wide changes reach logged-out readers straight away
+- Menu and term edits, contributor renames and Mailchimp key changes clear the page caches too
+- Permanently deleted posts are cleared from the page caches instead of staying live until the cache expired
+- Newsletter signup forms now send the honeypot field the signup service's bot filter checks
+- Make Links External button applies to every link in the post when nothing is selected, and no longer skips links that already have a `rel`
+- Committed, Foreign Agent and Death in Westminster archive listen links point at each show's own Apple Podcasts page and RSS feed
+
+### Security
+
+- Dependency updates clearing all fixable Dependabot alerts, including both criticals: @wordpress/scripts 34→37, CMB2 2.11.0→2.13.5, jQuery 4.0.0→4.1.0
+
 ## [4.10.0] - 2026-10-01
 
 ### Added

@@ -145,8 +145,7 @@ add_action( 'cmb2_admin_init', 'nm_register_products_options_metabox' );
 
 /**
  * DYOR seasons from Products → Do Your Own Research, keyed by season number,
- * newest first. Entries without a season number are dropped. Season 1 comes
- * from nm_get_dyor_seasons_seed() until it has a saved entry of its own.
+ * newest first. Entries without a season number are dropped.
  * Two entries with the same number: the later one in the list wins.
  *
  * @return array[] { number, title, description, figma_file_key, figma_default_node_id }
@@ -173,41 +172,7 @@ function nm_get_dyor_seasons() {
     }
   }
 
-  // Until season 1 has its own entry it keeps the legacy category map, so
-  // saving only a new season can't drop season 1's map. Migration only:
-  // remove with nm_get_dyor_seasons_seed() in 4.11.0.
-  if ( ! isset( $seasons[1] ) ) {
-    $seasons += nm_get_dyor_seasons_seed();
-  }
-
   krsort( $seasons );
 
   return $seasons;
-}
-
-/**
- * Season 1 built from the legacy DYOR category map fields, so the archive
- * keeps today's map until season 1 has an entry on Products → Do Your Own
- * Research.
- * Computed on read, never written.
- *
- * @deprecated 4.10.0 Remove in 4.11.0 with the category map fields, once production has saved the Products page.
- * @return array[]
- */
-function nm_get_dyor_seasons_seed() {
-  $term = get_category_by_slug( 'do-your-own-research' );
-
-  if ( ! $term ) {
-    return array();
-  }
-
-  return array(
-    1 => array(
-      'number'                => 1,
-      'title'                 => 'Season 1',
-      'description'           => '',
-      'figma_file_key'        => (string) get_term_meta( $term->term_id, '_nm_dyor_figma_file_key', true ),
-      'figma_default_node_id' => (string) get_term_meta( $term->term_id, '_nm_dyor_figma_default_node_id', true ),
-    ),
-  );
 }

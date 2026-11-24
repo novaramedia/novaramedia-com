@@ -18,92 +18,92 @@ const POST_LINKS =
   '[data-testid="post-list"] a, [data-testid="main-content"] a';
 
 test.describe('Novara Live Category Archive', () => {
-  test.beforeEach(async ({ page }) => {
+  // One page load, checks as steps: see "One load per page" in
+  // docs/testing/testing.md.
+  test('renders the Novara Live archive', async ({ page, consoleErrors }) => {
     await gotoFresh(page, '/category/novara-live');
-  });
 
-  test('should load successfully', async ({ page }) => {
-    expect(page.url()).toContain('/category/novara-live');
-    await expect(page).toHaveTitle(/.+/);
-  });
+    await test.step('loads successfully', async () => {
+      expect(page.url()).toContain('/category/novara-live');
+      await expect(page).toHaveTitle(/.+/);
+    });
 
-  test('should display critical page elements', async ({ page }) => {
-    await verifyCriticalPageStructure(page);
-  });
+    await test.step('displays critical page elements', async () => {
+      await verifyCriticalPageStructure(page);
+    });
 
-  test('should display category heading', async ({ page }) => {
-    // Category archive should have a heading or title
-    const headings = page.locator(
-      '[data-testid="main-content"] h1, [data-testid="main-content"] h2, [data-testid="main-content"] h4'
-    );
+    await test.step('displays category heading', async () => {
+      // Category archive should have a heading or title
+      const headings = page.locator(
+        '[data-testid="main-content"] h1, [data-testid="main-content"] h2, [data-testid="main-content"] h4'
+      );
 
-    expect(await headings.count()).toBeGreaterThan(0);
-    await expect(headings.first()).toBeVisible();
-  });
+      expect(await headings.count()).toBeGreaterThan(0);
+      await expect(headings.first()).toBeVisible();
+    });
 
-  test('should display Novara Live posts', async ({ page }) => {
-    // Should have post listings
-    await expect(page.getByTestId('post-list')).toBeAttached();
+    await test.step('displays Novara Live posts', async () => {
+      // Should have post listings
+      await expect(page.getByTestId('post-list')).toBeAttached();
 
-    // Posts should have titles
-    const postTitles = page.locator(
-      '[data-testid="main-content"] h1, [data-testid="main-content"] h2, [data-testid="main-content"] h4, [data-testid="main-content"] h6'
-    );
+      // Posts should have titles
+      const postTitles = page.locator(
+        '[data-testid="main-content"] h1, [data-testid="main-content"] h2, [data-testid="main-content"] h4, [data-testid="main-content"] h6'
+      );
 
-    expect(await postTitles.count()).toBeGreaterThan(0);
-    await expect(postTitles.first()).toBeVisible();
-  });
+      expect(await postTitles.count()).toBeGreaterThan(0);
+      await expect(postTitles.first()).toBeVisible();
+    });
 
-  test('should have post links', async ({ page }) => {
-    // Each post should link to its single page
-    const links = page.locator(POST_LINKS);
+    await test.step('has post links', async () => {
+      // Each post should link to its single page
+      const links = page.locator(POST_LINKS);
 
-    expect(await links.count()).toBeGreaterThan(0);
+      expect(await links.count()).toBeGreaterThan(0);
 
-    // At least one link should have an href
-    await expect(links.first()).toHaveAttribute('href', /.+/);
-  });
+      // At least one link should have an href
+      await expect(links.first()).toHaveAttribute('href', /.+/);
+    });
 
-  test('should display Novara Live branding or content', async ({ page }) => {
-    // Page should indicate it's the Novara Live category
-    const text = (await page.locator('body').textContent()).toLowerCase();
-    const hasNovaraLive =
-      text.includes('novara live') || text.includes('novara-live');
+    await test.step('displays Novara Live branding or content', async () => {
+      // Page should indicate it's the Novara Live category
+      const text = (await page.locator('body').textContent()).toLowerCase();
+      const hasNovaraLive =
+        text.includes('novara live') || text.includes('novara-live');
 
-    expect(hasNovaraLive).toBe(true);
-  });
+      expect(hasNovaraLive).toBe(true);
+    });
 
-  test('should have category description or intro', async ({ page }) => {
-    // Check if there's substantial content beyond just post listings
-    const bodyText = await page.locator('body').textContent();
-    expect(bodyText.length).toBeGreaterThan(100);
-  });
+    await test.step('has category description or intro', async () => {
+      // Check if there's substantial content beyond just post listings
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText.length).toBeGreaterThan(100);
+    });
 
-  test('should load without console errors', async ({ consoleErrors }) => {
-    expect(consoleErrors).toEqual([]);
-  });
+    await test.step('has navigation elements', async () => {
+      await expect(page.getByTestId('site-header')).toBeVisible();
+      await expect(page.getByTestId('site-nav')).toBeVisible();
+    });
 
-  test('should be responsive at different viewports', async ({ page }) => {
-    await testResponsive(page);
-  });
+    await test.step('displays post metadata', async () => {
+      // Verify posts are present
+      await expect(page.getByTestId('main-content')).toBeAttached();
 
-  test('should have navigation elements', async ({ page }) => {
-    await expect(page.getByTestId('site-header')).toBeVisible();
-    await expect(page.getByTestId('site-nav')).toBeVisible();
-  });
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText.length).toBeGreaterThan(100);
+    });
 
-  test('should display post metadata', async ({ page }) => {
-    // Verify posts are present
-    await expect(page.getByTestId('main-content')).toBeAttached();
+    await test.step('has pagination or load more if many posts', async () => {
+      // Verify the page structure is intact
+      await expect(page.getByTestId('main-content')).toBeAttached();
+    });
 
-    const bodyText = await page.locator('body').textContent();
-    expect(bodyText.length).toBeGreaterThan(100);
-  });
+    await test.step('is responsive at different viewports', async () => {
+      await testResponsive(page);
+    });
 
-  test('should have pagination or load more if many posts', async ({
-    page,
-  }) => {
-    // Verify the page structure is intact
-    await expect(page.getByTestId('main-content')).toBeAttached();
+    await test.step('loads without console errors', async () => {
+      expect(consoleErrors).toEqual([]);
+    });
   });
 });

@@ -1,5 +1,9 @@
 # GitHub Actions Workflows
 
+## PHP Unit Tests
+
+The `php-unit.yml` workflow runs the PHPUnit suite in `tests/unit/` on pull requests and pushes to `development` that touch PHP files or the suite. It needs no secrets and no WordPress install: Brain Monkey stubs WordPress functions. Test tooling is installed into `tests/unit/vendor/` only; the theme's committed `vendor/` is never touched. That split is a stopgap for the git-pull deploy: once production deploys from CI with a `composer install --no-dev` step (`docs/plans/production-ci-deploy.md`), the tooling moves to the root `composer.json`. Runs on PHP 8.2 (production) and 8.4 (local DevKinsta, next PHP cycle). See `docs/testing/testing.md`.
+
 ## Playwright Tests
 
 The `playwright.yml` workflow runs the end-to-end smoke tests for the WordPress theme using Playwright.
@@ -19,6 +23,7 @@ The `playwright.yml` workflow runs the end-to-end smoke tests for the WordPress 
 - **Retries**: Failed tests automatically retry 2 times, recording a trace on the first retry
 - **Concurrency**: The `kinsta-staging` group serialises runs so only one workflow touches staging at a time
 - **Fork PRs**: Skipped automatically (secrets not available)
+- **Dependabot PRs**: Skipped. They can't read the SSH secrets, and a lockfile-only bump doesn't change what staging serves. `dependabot-build.yml` checks them instead
 
 ### Success Criteria
 
@@ -45,6 +50,19 @@ PLAYWRIGHT_BASE_URL=https://novaramediacom.local npm run test:ui  # Interactive 
 ```
 
 See [docs/testing/testing.md](../../docs/testing/testing.md) for the full testing guide.
+
+## Dependabot Build Check
+
+The `dependabot-build.yml` workflow runs on Dependabot PRs in place of the staging Playwright run. It needs no secrets and doesn't touch staging.
+
+### How it works
+
+1. Installs and builds the PR head (`npm ci && npm run build`), so a broken lockfile or build fails the check
+2. Confirms the Playwright CLI still runs, so a broken `@playwright/test` bump shows up before merge
+3. Installs and builds the base commit the same way, then compares the hashes of the built files in `dist/` and `blocks/`
+4. Fails if the built output differs. A lockfile bump that changes the bundle (usually a runtime dependency) needs `dist/` rebuilt and committed by hand, and a look before merging
+
+Comparing two fresh builds rather than the committed `dist/` keeps the check independent of whether the committed bundle is current.
 
 ## Release Notification to Slack
 

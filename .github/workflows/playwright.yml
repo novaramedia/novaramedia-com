@@ -8,6 +8,11 @@
 # 5. Runs Playwright tests against staging
 # 6. Resets staging back to development branch (cleanup)
 #
+# Dependabot PRs are skipped; dependabot-build.yml covers them. Draft PRs are
+# skipped until marked ready for review. A new push cancels the PR's previous
+# run; its always() cleanup still resets staging before the next run deploys.
+# A push that only changes docs skips the deploy (see the `changes` job).
+#
 # Required GitHub Secrets:
 # - KINSTA_SSH_KEY: SSH private key for server access
 # - KINSTA_SSH_USER: SSH username (main Kinsta user)
@@ -15,7 +20,7 @@
 #     NOTE: This secret is named KINSTA_SFTP_HOST for legacy reasons. On a fresh
 #     setup, name it KINSTA_SSH_HOST and update the references below to match.
 # - KINSTA_SSH_PORT: SSH port (Kinsta uses non-standard ports)
-# - STAGING_URL: Full URL of staging site (e.g., https://staging-novaramedia.kinsta.cloud)
+# - STAGING_URL: Full URL of staging site (e.g., https://stg-novaramediacom-staging.kinsta.cloud)
 # - KINSTA_API_KEY: Kinsta API key for cache clearing (optional but recommended)
 # - KINSTA_STAGING_ENV_ID: Kinsta staging environment ID (optional, for cache clearing)
 #
@@ -25,31 +30,94 @@ name: Playwright Tests (Staging)
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     branches:
       - master
       - main
       - development
-    paths-ignore:
-      - '.github/**'
-      - '.docs/**'
-      - '*.md'
-      - '.editorconfig'
-      - '.gitignore'
+    # Only files that change what staging serves or how the tests run.
+    # Staging serves committed dist/ and blocks/, so src/ alone changes nothing.
+    paths:
+      - '**.php'
+      - 'style.css'
+      - 'dist/**'
+      - 'blocks/**'
+      - 'vendor/**'
+      - 'tests/e2e/**'
+      - 'playwright.config.js'
+      - 'package-lock.json'
+      - '.github/workflows/playwright.yml'
   # Allow manual triggering
   workflow_dispatch:
 
 permissions:
   contents: read
+  actions: read # the `changes` job reads the previous run's conclusion
 
-# Ensure only one workflow interacts with staging at a time
+# A new push to a PR cancels that PR's run still in progress.
 concurrency:
-  group: kinsta-staging
-  cancel-in-progress: false
+  group: playwright-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  # The `paths` filter above is evaluated against the whole PR on pull_request
+  # events, so it cannot skip a push that only changes docs on a PR that also
+  # changes code. Compare the pushed commits here instead. Fails open: anything
+  # unexpected runs the suite. Skips only when the previous push's run passed,
+  # because this push's run has already cancelled any in-progress one.
+  changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      skip: ${{ steps.push.outputs.skip }}
+    steps:
+      - name: Check whether this push changed anything staging serves
+        id: push
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTION: ${{ github.event.action }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          skip=false
+          if [ "$ACTION" = "synchronize" ]; then
+            # The compare API needs no checkout. A force-push leaves `before`
+            # outside `after`'s history and reports anything but "ahead". The
+            # file list is capped at 300, so a bigger push always runs.
+            if compare=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${BEFORE}...${AFTER}" 2>/dev/null) \
+              && [ "$(jq -r '.status' <<<"$compare")" = "ahead" ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -gt 0 ] \
+              && [ "$(jq -r '.files | length' <<<"$compare")" -lt 300 ]; then
+              files=$(jq -r '.files[].filename' <<<"$compare")
+              if ! grep -v -E '^(docs/|\.claude/)|\.md$' <<<"$files" >/dev/null; then
+                previous=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/playwright.yml/runs?event=pull_request&head_sha=${BEFORE}&per_page=1" \
+                  --jq '.workflow_runs[0].conclusion' 2>/dev/null || true)
+                if [ "$previous" = "success" ]; then
+                  skip=true
+                  echo "Only documentation changed in this push and the previous run passed; skipping staging:"
+                  echo "$files"
+                else
+                  echo "Only documentation changed, but the previous run's conclusion is '${previous:-none}'; running"
+                fi
+              fi
+            fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
   deploy-and-test:
-    # Skip fork PRs — secrets are not available and the job would fail
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    needs: changes
+    # Skip pushes that only changed docs (see `changes` above).
+    # Skip fork PRs — secrets are not available and the job would fail.
+    # Skip Dependabot PRs too: they only get Dependabot secrets (no SSH key),
+    # and staging serves committed dist/, which a lockfile bump never changes.
+    # dependabot-build.yml checks those PRs instead.
+    # Skip drafts: marking the PR ready for review runs it.
+    if: needs.changes.outputs.skip != 'true' && (github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' && !github.event.pull_request.draft))
+    # Only one run touches staging at a time, across all PRs. Never cancelled
+    # from here: a run waits for the previous one's cleanup to finish.
+    concurrency:
+      group: kinsta-staging
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

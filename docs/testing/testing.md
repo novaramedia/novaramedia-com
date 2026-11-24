@@ -1,6 +1,6 @@
 # Testing
 
-End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on pull requests that touch theme code (Markdown-only and `.github/`-only changes are skipped, and fork PRs have no secrets) and can be run locally against any deployment of the theme.
+End-to-end smoke tests for the theme, written with [Playwright](https://playwright.dev/). They run in CI against Kinsta staging on non-draft pull requests that change what staging serves (see [CI](#ci)) and can be run locally against any deployment of the theme.
 
 ## Philosophy
 
@@ -12,7 +12,7 @@ A smoke-test layer, not a behaviour suite. Each spec checks that a page type:
 - has no broken images in the main content (where checked)
 - logs no console errors the theme is responsible for
 
-Deliberately out of scope: visual regression, complex interaction flows, unit tests (see the appendix of `docs/plans/archive/cypress-to-playwright.md` for the trigger to revisit) and the third-party services themselves.
+Deliberately out of scope: visual regression, complex interaction flows and the third-party services themselves. PHP logic has its own unit suite; see [PHP unit tests](#php-unit-tests) below.
 
 ## Layout
 
@@ -89,7 +89,7 @@ Use instead of `page.goto`. Appends a unique `playwright_cache_bust` query strin
 
 Returns the first single-post permalink (`/YYYY/MM/DD/…`) from a category archive, or `null`. Excludes the serial-podcast categories (`foreign-agent`, `committed`) whose cards link to show pages rather than single posts. Keep that exclusion list in sync with `$serial_categories` in `lib/functions-hooks.php`.
 
-The single-post specs call it once per worker in `beforeAll` on a throwaway page, then every test navigates to the post itself with `gotoFresh`. If it returns `null` the spec skips.
+The single-post specs call it once per worker in `beforeAll` on a throwaway page, then the test navigates to the post itself with `gotoFresh`. If it returns `null` the spec skips.
 
 ### `checkImages(page, { scope, limit })`
 
@@ -112,32 +112,44 @@ const testResponsive = require('./helpers/testResponsive');
 const verifyCriticalPageStructure = require('./helpers/verifyCriticalPageStructure');
 
 test.describe('Page name', () => {
-  test.beforeEach(async ({ page }) => {
+  test('renders the page', async ({ page, consoleErrors }) => {
     await gotoFresh(page, '/page-url/');
-  });
 
-  test('should load successfully', async ({ page }) => {
-    expect(new URL(page.url()).pathname).toBe('/page-url/');
-    await expect(page).toHaveTitle(/.+/);
-  });
+    await test.step('loads successfully', async () => {
+      expect(new URL(page.url()).pathname).toBe('/page-url/');
+      await expect(page).toHaveTitle(/.+/);
+    });
 
-  test('should display critical page elements', async ({ page }) => {
-    await verifyCriticalPageStructure(page);
-  });
+    await test.step('displays critical page elements', async () => {
+      await verifyCriticalPageStructure(page);
+    });
 
-  test('should load without console errors', async ({ consoleErrors }) => {
-    expect(consoleErrors).toEqual([]);
-  });
+    await test.step('is responsive at different viewports', async () => {
+      await testResponsive(page);
+    });
 
-  test('should be responsive at different viewports', async ({ page }) => {
-    await testResponsive(page);
+    await test.step('loads without console errors', async () => {
+      expect(consoleErrors).toEqual([]);
+    });
   });
 });
 ```
 
+### One load per page
+
+Load each page once and run every check against it as a `test.step()`. Don't `gotoFresh` in `beforeEach` with one check per test.
+
+Each `gotoFresh` is an uncached WordPress render on staging and costs 3–4s; the checks themselves cost almost nothing. One test per check multiplied page loads by ten for the same coverage (audit in `docs/plans/playwright-speed.md`). Steps keep the report specific: a failure names the step that failed.
+
+- One `test()` per distinct URL. A spec covering several URLs (an archive plus a redirect, several categories) has one test each.
+- Read-only steps first, then interactions (clicks, toggles), then `testResponsive` (it changes the viewport), then the console-error step last so it covers the whole visit.
+- A failing step stops the rest of that test. That's accepted: fix the first failure, re-run.
+- A step that only applies when optional content is present calls `step.skip(condition, reason)` (the step callback's argument), not `test.skip()`, which would skip the whole page.
+- A check that needs its own setup before navigation (`test.use(...)`, `page.route(...)`) stays a separate test.
+
 Guidelines:
 
-- Tests are independent. Playwright runs them in parallel and in any order, so no test may rely on state another test left behind.
+- Tests are independent. Playwright runs them in parallel and in any order, so no test may rely on state another test left behind. Steps within one test share the page, in order.
 - Select with `data-testid` attributes added to the templates, not CSS classes. List the ids currently in the templates with `git grep -oh 'data-testid="[^"]*"' -- '*.php' | sort -u`.
 - Content changes daily. Assert shape (present, non-empty, matches a pattern) rather than specific text.
 - Let `expect` auto-wait. No `waitForTimeout`.
@@ -145,7 +157,14 @@ Guidelines:
 
 ## CI
 
-`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. Its `paths-ignore` skips PRs that only change Markdown, `.github/`, `.editorconfig` or `.gitignore`. Each run:
+`.github/workflows/playwright.yml` runs on pull requests to `development`, `master` or `main`, and on `workflow_dispatch`. It only runs when the PR changes something that can affect the result: PHP, `style.css`, `dist/`, `blocks/`, `vendor/`, `tests/e2e/`, `playwright.config.js`, `package-lock.json` or the workflow itself. Staging serves committed `dist/`, so a `src/` change without a rebuild can't change the outcome.
+
+- **Drafts are skipped.** Marking a PR ready for review runs it.
+- **A new push cancels the PR's previous run.** The cancelled run's `always()` cleanup still resets staging to `development`, and the new run waits for that before deploying.
+- **Dependabot PRs are skipped**; `dependabot-build.yml` checks they build.
+- **A push that only changes docs is skipped** (`docs/`, `.claude/`, any `*.md`), provided the previous push's run passed. GitHub evaluates the `paths` filter against the whole PR, not the push, so the `changes` job compares the pushed commits itself and fails open.
+
+Each run:
 
 1. Deploy the PR commit to Kinsta staging via SSH and `git checkout`
 2. Activate the theme with WP-CLI and clear the Kinsta cache (best-effort; `gotoFresh` covers a failed clear)
@@ -154,7 +173,7 @@ Guidelines:
 5. Upload `playwright-report/` and `test-results/` as an artifact on failure
 6. Reset staging to `development`
 
-The `kinsta-staging` concurrency group serialises runs so only one workflow touches staging at a time. Fork PRs are skipped because the secrets are unavailable. Deploy dominates the runtime (about three minutes); the test phase is parallelised.
+The job-level `kinsta-staging` concurrency group serialises runs so only one PR touches staging at a time; it never cancels. Fork PRs are skipped because the secrets are unavailable. The test phase dominates the runtime, not the deploy (a few seconds); see [One load per page](#one-load-per-page).
 
 ## Debugging a failure
 
@@ -182,3 +201,41 @@ Ranked by regression risk, carried over from `docs/plans/archive/cypress-to-play
 7. Article page details: share link hrefs correctly encoded, related posts render when set
 8. Search results, 404 and pagination smoke coverage
 9. Accessibility smoke with `@axe-core/playwright` on the homepage and one single post
+
+## PHP unit tests
+
+A PHPUnit suite for the theme's PHP logic, mainly the helpers in `lib/`. No WordPress install or database: [Brain Monkey](https://giuseppe-mazzapica.gitbook.io/brain-monkey/) stubs WordPress functions and hooks per test, so a test runs in well under a second and in CI without secrets.
+
+```
+tests/unit/
+├── composer.json        # test tooling: phpunit, brain/monkey (separate project, see below)
+├── phpunit.xml          # bootstrap + suite config
+├── bootstrap.php        # defines NM_THEME_ROOT, loads the tooling autoloader
+├── TestCase.php         # base class: Brain Monkey setUp/tearDown, requireThemeFile()
+└── lib/
+    └── FunctionsUtilityTest.php
+```
+
+Run locally:
+
+```bash
+npm run test:php
+```
+
+That installs the tooling into `tests/unit/vendor/` (ignored) on first run and then runs the suite. CI runs the same on PHP 8.2 (production) and 8.4 (local DevKinsta, next PHP cycle) in `.github/workflows/php-unit.yml`; drop 8.2 from the matrix once production moves off it.
+
+**Why a separate Composer project.** The theme's root `vendor/` and `composer.lock` are committed and deployed by `git pull`; a root `composer install` rewrites the committed autoloader files, and dev dependencies there would ship to Kinsta. `tests/unit/composer.json` keeps PHPUnit and Brain Monkey out of that tree entirely. Never add test tooling to the root `composer.json` while `vendor/` is committed.
+
+This is a stopgap for the git-pull deploy, not the end state. When production deploys from CI with a `composer install --no-dev` step ([plan](../plans/production-ci-deploy.md)), `vendor/` stops being committed, PHPUnit and Brain Monkey move to `require-dev` in the root `composer.json`, and `tests/unit/` keeps only the suite.
+
+**Writing a test.** Extend `NM\Tests\TestCase`, load the file under test once in `setUpBeforeClass()` with `self::requireThemeFile( 'lib/whatever.php' )`, and stub what the code calls:
+
+```php
+Functions\when( 'wp_get_environment_type' )->justReturn( 'production' );   // stub a return
+Functions\expect( 'get_template_directory' )->never();                     // assert not called
+Actions\expectAdded( 'init' );                                             // hook registered at load
+```
+
+Good targets: pure helpers, option/meta formatting, rewrite and query logic, anything with branches. Not targets: template files and markup (Playwright covers those against staging), and code whose only job is to call WordPress.
+
+Mirror `lib/<file>.php` as `tests/unit/lib/<File>Test.php`. The repo's phpcs standard applies to tests; where a test must touch the filesystem, disable `WordPress.WP.AlternativeFunctions` at the top of that file with a one-line reason, as `FunctionsUtilityTest.php` does.

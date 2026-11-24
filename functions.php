@@ -128,21 +128,28 @@ get_template_part( 'lib/custom-gallery' );
 get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 
+get_template_part( 'lib/admin/post-resolve' );
+get_template_part( 'lib/admin/atf-preview' );
+
 get_template_part( 'lib/meta/meta-boxes-instructions' );
 get_template_part( 'lib/meta/meta-boxes' );
 get_template_part( 'lib/meta/cmb2-validation' );
+// Skip the fork if a plugin already ships the class it was forked from. The
+// check lives here, not in the file: PHP declares a top-level class before any
+// guard inside that file can run.
+if ( ! class_exists( 'CMB2_Post_Search_field' ) ) {
+  get_template_part( 'lib/meta/cmb2-post-search-field' );
+}
 get_template_part( 'lib/meta/meta-boxes-seo' );
 get_template_part( 'lib/meta/meta-boxes-post' );
 get_template_part( 'lib/meta/meta-boxes-page' );
 get_template_part( 'lib/meta/meta-boxes-page-about' );
 get_template_part( 'lib/meta/meta-boxes-page-support' );
 get_template_part( 'lib/meta/meta-boxes-page-how-we-are-funded' );
-get_template_part( 'lib/meta/meta-boxes-page-newsletters' );
 get_template_part( 'lib/meta/meta-boxes-text-copy-page-template' );
 get_template_part( 'lib/meta/meta-boxes-taxonomy' );
 get_template_part( 'lib/meta/meta-boxes-category-novara-live' );
 get_template_part( 'lib/meta/meta-boxes-category-tyskysour' );
-get_template_part( 'lib/meta/meta-boxes-category-dyor' );
 get_template_part( 'lib/meta/meta-boxes-post-dyor' );
 get_template_part( 'lib/meta/meta-boxes-post-episode' );
 get_template_part( 'lib/meta/meta-boxes-posttype-contributor' );
@@ -161,7 +168,6 @@ get_template_part( 'lib/theme-options/options-products' );
 function cmb_initialize_cmb_meta_boxes() {
   if ( ! class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/cmb2/cmb2/init.php';
-    require_once 'vendor/webdevstudios/cmb2-post-search-field/lib/init.php';
   }
 }
 add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 11 );
@@ -202,5 +208,6 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-menu-fallbacks' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
+get_template_part( 'lib/functions-cache-purge' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-seo' );
