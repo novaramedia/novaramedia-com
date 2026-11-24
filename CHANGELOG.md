@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Newsletter sign-up forms post to the sign-up service's new rate-limited address (`/api/newsletter-signup`). Someone who hits the limit, or whose request doesn't get through, sees "Couldn't send. If you've tried a few times, wait a few minutes and try again" instead of "General error"
+
 ## [4.11.0] - 2026-11-23
 
 ### Added
