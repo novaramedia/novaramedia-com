@@ -9,6 +9,9 @@ for each.
 ## How to use
 
 - After deploying `vX.Y.Z`, work through that version's section top-to-bottom.
+- Checks on production are read-only: never publish, edit or delete content there to
+  test something. Use logs, `wp eval` checks and existing URLs; anything that needs a
+  write is tested on staging.
 - Add a new section each release. Keep finished sections for history — they
   document what was required and how to verify it again if something regresses.
 - Anything in the CHANGELOG worded "after deploy…" / "Migration:" / "Requires a
@@ -70,7 +73,15 @@ Expect a `kinsta` and a `cloudflare` entry with trigger `options:nm_front_page_a
 While on that page, check the new preview: change one slot, confirm the preview and the title hint update, save, and confirm the homepage matches the preview.
 
 ### 5. Verify a permanent delete purges at the edge
-Publish a throwaway post, load its URL logged out twice (second response should be a cache hit), then delete it permanently from the trash screen (**Delete Permanently**, not Trash) — or `wp post delete <id> --force`.
+Do not publish a test post on production. Deletes are not written to the purge log, so on production confirm the handlers are registered instead:
+
+```bash
+wp eval 'global $wp_filter; foreach ( $wp_filter["before_delete_post"]->callbacks as $prio => $cbs ) { foreach ( $cbs as $cb ) { $f = $cb["function"]; echo $prio, " ", is_array( $f ) ? ( is_object( $f[0] ) ? get_class( $f[0] ) : $f[0] ) . "::" . $f[1] : $f, "\n"; } } var_dump( (bool) nm_get_kinsta_cache_purge( "initiate_purge" ) );'
+```
+
+Expect `nm_purge_kinsta_cache_on_post_delete`, `Cloudflare\APO\WordPress\Hooks::purgeCacheByRelevantURLs` at priority `9223372036854775807`, and `bool(true)`.
+
+To see the 404 itself, use staging: publish a post, load its URL logged out twice, delete it permanently (`wp post delete <id> --force`), then:
 
 ```bash
 curl -sI <post-url> | grep -iE '^HTTP|x-kinsta-cache|cf-cache-status'
