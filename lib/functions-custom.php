@@ -77,9 +77,9 @@ function nm_get_post_authors( $post_id, $format = 'text' ) {
  * @return string The Netlify function URL.
  */
 function nm_get_netlify_url() {
-  $production_url = 'https://novara-media-mailchimp-signup.netlify.app/.netlify/functions/mailchimp-signup';
-  $staging_url = 'https://fake.com/.netlify/functions/mailchimp-signup';
-  $local_dev_url = 'http://localhost:65208/.netlify/functions/mailchimp-signup';
+  $production_url = 'https://novara-media-mailchimp-signup.netlify.app/api/newsletter-signup';
+  $staging_url = 'https://fake.com/api/newsletter-signup';
+  $local_dev_url = 'http://localhost:65208/api/newsletter-signup';
 
   $environment = wp_get_environment_type();
 

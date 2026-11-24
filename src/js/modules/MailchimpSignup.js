@@ -3,6 +3,7 @@
 
 import $ from 'jquery';
 import getSignupAttribution from '../functions/getSignupAttribution.js';
+import getSignupErrorMessage from '../functions/getSignupErrorMessage.js';
 
 /**
  * MailchimpSignup class follows convention of module classes.
@@ -52,18 +53,7 @@ export class MailchimpSignup {
 
             $form.addClass('email-signup__form--failed');
 
-            if (jqXHR.statusText === 'error') {
-              $feedbackMessageSpan.text('General error');
-            }
-
-            try {
-              const response = JSON.parse(jqXHR.responseText);
-
-              $feedbackMessageSpan.text(response.message);
-            } catch (error) {
-              $feedbackMessageSpan.text('General error');
-              console.error('Error parsing response:', error);
-            }
+            $feedbackMessageSpan.text(getSignupErrorMessage(jqXHR));
 
             $formInputs.prop('disabled', false);
           })
