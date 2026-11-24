@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Release notification posts through the shared `nm-shared-workflows` Slack workflow: changelog headings render as markdown instead of raw `###`, with View site / Release PR / Commit buttons. Uses a bot token (`SLACK_BOT_TOKEN` secret, `SLACK_RELEASE_CHANNEL` variable) instead of the incoming webhook
+
 ## [4.11.0] - 2026-11-23
 
 ### Added
