@@ -5,11 +5,6 @@ $category = get_category( get_query_var( 'cat' ) );
 
 $base_image_path = get_stylesheet_directory_uri() . '/dist/img/products/if-i-speak/';
 
-$podcast_url = ! empty( get_term_meta( $category->term_id, '_nm_podcast_url', true ) ) ? get_term_meta( $category->term_id, '_nm_podcast_url', true ) : false;
-$podcast_copy_override = get_term_meta( $category->term_id, '_nm_podcast_text', true );
-
-$podcast_copy = ! empty( $podcast_copy_override ) ? $podcast_copy_override : 'Subscribe to the podcast';
-
 // Hero blurb is the category's formatted description (bold/italic allowed); empty falls back
 // to the core description, which stays plain text for Open Graph and meta descriptions.
 $formatted_description = get_term_meta( $category->term_id, '_nm_category_formatted_description', true );
@@ -26,9 +21,7 @@ $formatted_description = get_term_meta( $category->term_id, '_nm_category_format
           <div class="if-i-speak-archive__copy font-size-12 font-size-s-11 font-weight-bold mb-5 mb-s-4" data-testid="if-i-speak-blurb">
             <?php echo ! empty( $formatted_description ) ? wp_kses_post( wpautop( $formatted_description ) ) : category_description(); ?>
           </div>
-          <?php if ( $podcast_url ) { ?>
-          <a class="if-i-speak-archive__cta ui-button ui-button--red ui-button--auto-height" data-testid="if-i-speak-subscribe" href="<?php echo esc_url( $podcast_url ); ?>" target="_blank" rel="nofollow noopener noreferrer"><?php echo esc_html( $podcast_copy ); ?></a>
-          <?php } ?>
+          <?php get_template_part( 'partials/specials/if-i-speak-follow-links' ); ?>
         </div>
         <div class="if-i-speak-archive__presenters grid-item is-xxl-12 is-s-24">
           <?php

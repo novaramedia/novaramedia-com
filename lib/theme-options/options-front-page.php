@@ -159,6 +159,7 @@ function nm_get_front_page_block_registry() {
     'audio-acfm'      => array( 'type' => 'product', 'label' => 'Product: ACFM (standalone)', 'partial' => 'partials/front-page/show-blocks/audio-acfm' ),
     'downstream'      => array( 'type' => 'product', 'label' => 'Product: Downstream', 'partial' => 'partials/front-page/show-blocks/downstream' ),
     'the-cortado'     => array( 'type' => 'product', 'label' => 'Product: The Cortado', 'partial' => 'partials/front-page/show-blocks/the-cortado' ),
+    'if-i-speak'      => array( 'type' => 'product', 'label' => 'Product: If I Speak', 'partial' => 'partials/front-page/show-blocks/if-i-speak' ),
   );
 
   foreach ( nm_get_front_page_static_banners() as $slug => $banner ) {
