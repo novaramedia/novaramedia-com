@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- If I Speak front-page product block
+
+### Changed
+
+- If I Speak subscribe button replaced with direct Spotify, Apple Podcasts and RSS buttons
+
+### Fixed
+
+- Scroller fades follow the scroll position and stay hidden when a list doesn't need scrolling
+
 ## [4.11.0] - 2026-11-23
 
 ### Added

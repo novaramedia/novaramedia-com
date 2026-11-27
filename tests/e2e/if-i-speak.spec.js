@@ -60,20 +60,19 @@ test.describe('If I Speak archive', () => {
       await expect(blurb).not.toHaveText(/^\s*$/);
     });
 
-    await test.step('links the subscribe button out to the podcast', async (step) => {
-      // Located by testid, not label: the button text is editable per category
-      // (_nm_podcast_text), so a name match would skip on custom copy.
-      const button = page
+    await test.step('links straight to the podcast platforms', async () => {
+      // Direct platform links, never an intermediate like Podfollow.
+      const links = page
         .getByTestId('if-i-speak-hero')
-        .getByTestId('if-i-speak-subscribe');
+        .getByTestId('if-i-speak-follow-links')
+        .getByRole('link');
 
-      step.skip(
-        (await button.count()) === 0,
-        'No podcast URL set on the If I Speak category'
-      );
+      await expect(links).toHaveCount(3);
 
-      await expect(button).toHaveAttribute('href', /^https?:\/\//);
-      await expect(button).toHaveAttribute('target', '_blank');
+      for (const link of await links.all()) {
+        await expect(link).toHaveAttribute('href', /^https:\/\//);
+        await expect(link).not.toHaveAttribute('href', /podfollow\.com/);
+      }
     });
 
     await test.step('lists episodes as pure-text cards', async () => {
